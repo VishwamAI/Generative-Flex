@@ -50,7 +50,7 @@ def main():
     )
 
     # Initialize with same structure as training
-    init_params = model.init(key, input_tokens)
+    _ = model.init(key, input_tokens)
 
     # Load trained parameters
     with open("model_params.json", "r") as f:

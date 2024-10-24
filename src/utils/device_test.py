@@ -26,7 +26,7 @@ def test_device_configuration():
     z = jnp.matmul(x, y)
     end_time = time.time()
 
-    print(f"\nMatrix multiplication test:")
+    print("\nMatrix multiplication test:")
     print(f"Time taken: {end_time - start_time:.4f} seconds")
     print(f"Output shape: {z.shape}")
 

@@ -4,7 +4,6 @@ Demonstrates how to achieve maximum benchmark performance
 """
 
 import torch
-import torch.distributed as dist
 import logging
 import argparse
 from pathlib import Path
@@ -14,7 +13,6 @@ from transformers import AutoTokenizer
 from model import AdvancedGenerativeFlexModel
 from training.trainer import AdvancedTrainer
 from data.dataloader import AdvancedDataset, DataConfig, create_dataloader
-from evaluation.metrics import CoreEvaluator
 from configs.model_config import GenerativeFlexConfig, create_default_config
 
 
@@ -83,11 +81,10 @@ def main():
         eval_dataset, data_config, args.local_rank != -1
     )
 
-    # Initialize trainer and evaluator
+    # Initialize trainer
     trainer = AdvancedTrainer(
         model, vars(config.training), args.local_rank, str(output_dir)
     )
-    evaluator = CoreEvaluator(device)
 
     # Train model
     trainer.train(

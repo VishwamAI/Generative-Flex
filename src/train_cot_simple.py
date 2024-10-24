@@ -30,7 +30,11 @@ def main():
         "conversations": [
             {
                 "input": "hi",
-                "response": "Step 1: Acknowledge greeting. Step 2: Offer help. Hello! How can I assist you today?",
+                "response": (
+                    "Step 1: Acknowledge greeting. "
+                    "Step 2: Offer help. "
+                    "Hello! How can I assist you today?"
+                ),
             }
         ]
     }

@@ -1,10 +1,9 @@
 """Base model classes for different types of generative models."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional, Tuple
+from typing import Tuple
 
 import flax.linen as nn
-import jax
 import jax.numpy as jnp
 
 

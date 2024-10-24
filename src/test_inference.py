@@ -2,7 +2,6 @@ import jax
 import jax.numpy as jnp
 import json
 from flax import linen as nn
-import optax
 import numpy as np
 from typing import Dict, Any
 
@@ -60,7 +59,7 @@ def main():
     model = SimpleGreetingModel(vocab_size=len(word_to_id))
     key = jax.random.PRNGKey(0)
     dummy_input = jnp.zeros((1,), dtype=jnp.int32)
-    params = model.init(key, dummy_input)
+    _ = model.init(key, dummy_input)
 
     # Load trained parameters
     trained_params = load_params("model_params_minimal.json")

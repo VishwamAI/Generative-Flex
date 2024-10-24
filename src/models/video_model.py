@@ -1,6 +1,6 @@
 """Video generation model implementation using JAX and Flax."""
 
-from typing import Any, Callable, Optional, Tuple
+from typing import Any, Optional, Tuple
 import jax
 import jax.numpy as jnp
 import flax.linen as nn

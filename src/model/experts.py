@@ -6,7 +6,7 @@ Implements conditional computation paths for specialized processing
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Optional, List, Tuple
+from typing import Optional, Tuple
 
 
 class ExpertLayer(nn.Module):

@@ -1,7 +1,6 @@
 """Audio generation model implementation using JAX and Flax."""
 
 from typing import Any, Optional
-import jax
 import jax.numpy as jnp
 import flax.linen as nn
 

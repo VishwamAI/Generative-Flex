@@ -12,7 +12,12 @@ def create_minimal_training_data():
         "conversations": [
             {
                 "input": "hello",
-                "response": "Let me think about how to respond: 1) First, I should acknowledge the greeting 2) Then, I should offer assistance. Hello! How can I assist you today?",
+                "response": (
+                    "Let me think about how to respond: "
+                    "1) First, I should acknowledge the greeting "
+                    "2) Then, I should offer assistance. "
+                    "Hello! How can I assist you today?"
+                ),
             }
         ]
     }
