@@ -1,0 +1,14 @@
+jax[cuda]
+flax
+optax
+tensorflow-datasets
+numpy
+tensorboard
+pytest
+black
+isort
+pylint
+wandb  # for experiment tracking
+datasets  # for huggingface datasets
+transformers  # for model architectures reference
+einops  # for tensor operations
