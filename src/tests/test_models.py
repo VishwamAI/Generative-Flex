@@ -1,7 +1,6 @@
 import pytest
 import jax
 import jax.numpy as jnp
-import flax.linen as nn
 from src.models.language_model import LanguageModel
 from src.models.image_model import ImageGenerationModel
 from src.models.audio_model import AudioGenerationModel

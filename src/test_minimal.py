@@ -1,9 +1,6 @@
 import json
-import jax
 import jax.numpy as jnp
 from flax import linen as nn
-from flax.training import train_state
-import optax
 
 
 # Simple model definition

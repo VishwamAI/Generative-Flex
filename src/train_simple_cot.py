@@ -1,7 +1,6 @@
 import json
 import jax
 import jax.numpy as jnp
-import numpy as np
 from flax import linen as nn
 from flax.training import train_state
 import optax

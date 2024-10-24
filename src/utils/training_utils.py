@@ -10,7 +10,6 @@ import optax
 from flax.training import train_state
 from flax.training import checkpoints
 import tensorflow as tf
-import numpy as np
 
 
 class TrainState(train_state.TrainState):

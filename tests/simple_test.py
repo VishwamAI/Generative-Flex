@@ -1,14 +1,11 @@
 """Tests for the simple language model implementation using Flax."""
 
 import json
-from pathlib import Path
-
 import jax
 import jax.numpy as jnp
 import numpy as np
 import pytest
 from flax import linen as nn
-from flax.training import train_state
 
 
 class SimpleModel(nn.Module):

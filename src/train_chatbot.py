@@ -6,7 +6,6 @@ from flax.training import train_state
 from src.models.language_model import LanguageModel
 import numpy as np
 from typing import Dict, List
-import tensorflow as tf
 
 
 def load_data(

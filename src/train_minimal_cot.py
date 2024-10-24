@@ -3,7 +3,6 @@ import jax
 import jax.numpy as jnp
 import optax
 from flax import linen as nn
-from typing import Any
 
 
 class SimpleGreetingModel(nn.Module):

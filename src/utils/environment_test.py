@@ -6,10 +6,7 @@ import flax
 import optax
 import tensorflow_datasets as tfds
 import numpy as np
-import wandb
-from datasets import load_dataset
 import transformers
-import einops
 
 
 def test_environment():
