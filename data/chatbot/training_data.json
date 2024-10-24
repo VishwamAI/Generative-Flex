@@ -1,0 +1,24 @@
+{
+    "conversations": [
+        {
+            "input": "hello",
+            "response": "Hello! How can I assist you today?"
+        },
+        {
+            "input": "hi",
+            "response": "Hi there! How may I help you?"
+        },
+        {
+            "input": "good morning",
+            "response": "Good morning! How can I be of assistance today?"
+        },
+        {
+            "input": "hey",
+            "response": "Hey! What can I do for you today?"
+        },
+        {
+            "input": "greetings",
+            "response": "Greetings! How may I help you today?"
+        }
+    ]
+}

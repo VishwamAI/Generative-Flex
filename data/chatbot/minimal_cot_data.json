@@ -1,0 +1,9 @@
+{
+  "conversations": [
+    {
+      "input": "hi",
+      "thought": "1. Recognize greeting\n2. Prepare polite response\n3. Offer assistance",
+      "response": "Hello! How can I assist you today?"
+    }
+  ]
+}
