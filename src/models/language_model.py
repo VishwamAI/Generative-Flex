@@ -1,13 +1,11 @@
 """Language model implementation using JAX and Flax."""
 
-from typing import Any, Callable, Optional, Tuple
+from typing import Any
 import jax
 import jax.numpy as jnp
 import flax.linen as nn
-from flax import struct
 
 from src.models.transformer import TransformerBlock
-from src.utils.device_config import get_compute_dtype
 
 
 class PositionalEncoding(nn.Module):
@@ -99,7 +97,6 @@ class LanguageModel(nn.Module):
         self, rng: Any, prompt: jnp.ndarray, max_length: int, temperature: float = 1.0
     ):
         """Generate text autoregressively."""
-        batch_size = prompt.shape[0]
         generated = prompt
 
         for _ in range(max_length - prompt.shape[1]):
@@ -108,7 +105,6 @@ class LanguageModel(nn.Module):
 
             # Sample from the distribution
             next_token_logits = logits[:, -1, :] / temperature
-            next_token_probs = jax.nn.softmax(next_token_logits, axis=-1)
             rng, sample_rng = jax.random.split(rng)
             next_token = jax.random.categorical(sample_rng, next_token_logits, axis=-1)
 

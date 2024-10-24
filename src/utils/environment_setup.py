@@ -2,7 +2,6 @@
 
 import os
 import sys
-import time
 from typing import Dict, Any
 
 import jax
@@ -12,7 +11,7 @@ from flax import __version__ as flax_version
 import optax
 from tensorboardX import SummaryWriter
 
-from src.utils.device_config import setup_device_config, get_compute_dtype
+from src.utils.device_config import setup_device_config
 
 # Set up device configuration
 device_config = setup_device_config()
@@ -33,7 +32,7 @@ def test_jax_installation() -> Dict[str, Any]:
     import time
 
     start_time = time.time()
-    result = jnp.dot(x, y)
+    jnp.dot(x, y)  # Perform matrix multiplication without storing result
     end_time = time.time()
 
     return {
@@ -75,7 +74,6 @@ def test_optax_installation() -> Dict[str, Any]:
 
     # Create optimizer
     learning_rate = 1e-4
-    optimizer = optax.adamw(learning_rate=learning_rate, weight_decay=0.01)
 
     # Test scheduler
     schedule_fn = optax.linear_schedule(
@@ -122,15 +120,15 @@ def main():
         print("TensorBoard test completed successfully")
 
         print("\n=== Environment Test Results ===")
-        print(f"JAX Configuration:")
+        print("JAX Configuration:")
         for k, v in jax_results.items():
             print(f"  {k}: {v}")
 
-        print(f"\nFlax Configuration:")
+        print("\nFlax Configuration:")
         for k, v in flax_results.items():
             print(f"  {k}: {v}")
 
-        print(f"\nOptax Configuration:")
+        print("\nOptax Configuration:")
         for k, v in optax_results.items():
             print(f"  {k}: {v}")
 

@@ -1,13 +1,11 @@
 """Audio generation model implementation using JAX and Flax."""
 
-from typing import Any, Callable, Optional, Tuple
+from typing import Any, Optional
 import jax
 import jax.numpy as jnp
 import flax.linen as nn
-from flax import struct
 
 from src.models.transformer import TransformerBlock
-from src.utils.device_config import get_compute_dtype
 
 
 class AudioEmbedding(nn.Module):

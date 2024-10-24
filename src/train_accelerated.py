@@ -1,12 +1,11 @@
 """
-Training script using AcceleratedTrainer for efficient distributed training with Hugging Face Accelerate
+Training script using AcceleratedTrainer for efficient distributed training
+with Hugging Face Accelerate.
 """
 
-import os
 import json
 import logging
 from pathlib import Path
-import torch
 from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import set_seed

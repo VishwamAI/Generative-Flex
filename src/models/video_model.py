@@ -6,7 +6,6 @@ import jax.numpy as jnp
 import flax.linen as nn
 
 from src.models.transformer import TransformerBlock
-from src.utils.device_config import get_compute_dtype
 
 
 class VideoEmbedding(nn.Module):

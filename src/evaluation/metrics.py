@@ -4,8 +4,7 @@ Implements essential metrics for model evaluation and benchmarking
 """
 
 import torch
-from typing import Dict, List, Optional, Union
-import numpy as np
+from typing import Dict, List, Optional
 from dataclasses import dataclass
 from torchmetrics.text import BLEUScore, ROUGEScore
 from torchmetrics import Perplexity

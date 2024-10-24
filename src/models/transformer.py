@@ -1,11 +1,9 @@
 """Core transformer architecture implementation using JAX and Flax."""
 
-from typing import Any, Callable, Optional, Tuple
+from typing import Any
 import jax
 import jax.numpy as jnp
 import flax.linen as nn
-from flax import struct
-from src.utils.device_config import get_compute_dtype
 
 
 class MultiHeadAttention(nn.Module):

@@ -1,7 +1,7 @@
 """Configuration Management for Generative-Flex"""
 
 from dataclasses import dataclass, field
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 import json
 from pathlib import Path
 import yaml

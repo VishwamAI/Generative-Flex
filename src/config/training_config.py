@@ -1,8 +1,7 @@
 """Configuration for model training."""
 
 from dataclasses import dataclass
-from typing import Optional, Union, List, Dict, Any
-import jax.numpy as jnp
+from typing import Optional, Dict, Any
 
 
 @dataclass

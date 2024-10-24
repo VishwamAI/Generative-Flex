@@ -59,7 +59,8 @@ class AcceleratedTrainer:
         """Setup integration with Hugging Face Hub"""
         if not HfFolder.get_token():
             raise ValueError(
-                "No Hugging Face token found. Please login using `huggingface-cli login`"
+                "No Hugging Face token found. "
+                "Please login using `huggingface-cli login`"
             )
 
         self.repo = Repository(
