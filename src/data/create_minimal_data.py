@@ -1,6 +1,7 @@
 import json
 import os
 
+
 def create_minimal_training_data():
     """Create minimal training data with chain-of-thought reasoning."""
     # Ensure directory exists
@@ -11,7 +12,7 @@ def create_minimal_training_data():
         "conversations": [
             {
                 "input": "hello",
-                "response": "Let me think about how to respond: 1) First, I should acknowledge the greeting 2) Then, I should offer assistance. Hello! How can I assist you today?"
+                "response": "Let me think about how to respond: 1) First, I should acknowledge the greeting 2) Then, I should offer assistance. Hello! How can I assist you today?",
             }
         ]
     }
@@ -22,6 +23,7 @@ def create_minimal_training_data():
         json.dump(training_data, f, indent=2)
 
     print(f"Created minimal training data file: {output_file}")
+
 
 if __name__ == "__main__":
     create_minimal_training_data()

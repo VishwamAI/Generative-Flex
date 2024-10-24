@@ -1,4 +1,5 @@
 """Test script to verify JAX/Flax/Optax installation."""
+
 import jax
 import jax.numpy as jnp
 import flax
@@ -9,6 +10,7 @@ import wandb
 from datasets import load_dataset
 import transformers
 import einops
+
 
 def test_environment():
     """Verify JAX installation and GPU availability."""
@@ -37,6 +39,7 @@ def test_environment():
     print(f"Transformers version: {transformers.__version__}")
 
     print("\nAll environment tests passed successfully!")
+
 
 if __name__ == "__main__":
     test_environment()

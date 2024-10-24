@@ -1,8 +1,10 @@
 """Test script to verify JAX device configuration and GPU support."""
+
 import jax
 import jax.numpy as jnp
 import flax
 import optax
+
 
 def test_device_configuration():
     """Test and print device configuration information."""
@@ -19,6 +21,7 @@ def test_device_configuration():
 
     # Time matrix multiplication to test performance
     import time
+
     start_time = time.time()
     z = jnp.matmul(x, y)
     end_time = time.time()
@@ -35,6 +38,7 @@ def test_device_configuration():
     print("\nMemory allocation test:")
     x = jnp.ones((10000, 10000))  # Allocate larger array
     print(f"Successfully allocated {x.nbytes / 1e9:.2f} GB array")
+
 
 if __name__ == "__main__":
     test_device_configuration()

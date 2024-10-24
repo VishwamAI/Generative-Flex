@@ -8,10 +8,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 from typing import Optional, List, Tuple
 
+
 class ExpertLayer(nn.Module):
     """
     Individual expert network implementing a specialized computation path
     """
+
     def __init__(self, d_model: int, d_ff: int, dropout: float = 0.1):
         super().__init__()
         self.w1 = nn.Linear(d_model, d_ff)
@@ -22,10 +24,12 @@ class ExpertLayer(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.w2(self.dropout(self.activation(self.w1(x))))
 
+
 class MixtureOfExperts(nn.Module):
     """
     Mixture of Experts layer with load balancing and capacity factor
     """
+
     def __init__(
         self,
         d_model: int,
@@ -33,7 +37,7 @@ class MixtureOfExperts(nn.Module):
         num_experts: int = 8,
         k: int = 2,  # Top-k experts to route to
         capacity_factor: float = 1.25,
-        dropout: float = 0.1
+        dropout: float = 0.1,
     ):
         super().__init__()
         self.d_model = d_model
@@ -42,32 +46,29 @@ class MixtureOfExperts(nn.Module):
         self.capacity_factor = capacity_factor
 
         # Create experts
-        self.experts = nn.ModuleList([
-            ExpertLayer(d_model, d_ff, dropout)
-            for _ in range(num_experts)
-        ])
+        self.experts = nn.ModuleList(
+            [ExpertLayer(d_model, d_ff, dropout) for _ in range(num_experts)]
+        )
 
         # Router network
         self.router = nn.Linear(d_model, num_experts)
         self.dropout = nn.Dropout(dropout)
 
     def _compute_routing_weights(
-        self,
-        x: torch.Tensor,
-        mask: Optional[torch.Tensor] = None
+        self, x: torch.Tensor, mask: Optional[torch.Tensor] = None
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """Compute routing probabilities and expert assignments"""
         # Shape: [batch_size, seq_len, num_experts]
         router_logits = self.router(x)
 
         if mask is not None:
-            router_logits = router_logits.masked_fill(~mask.unsqueeze(-1), float('-inf'))
+            router_logits = router_logits.masked_fill(
+                ~mask.unsqueeze(-1), float("-inf")
+            )
 
         # Get top-k experts
         routing_weights, selected_experts = torch.topk(
-            F.softmax(router_logits, dim=-1),
-            self.k,
-            dim=-1
+            F.softmax(router_logits, dim=-1), self.k, dim=-1
         )
 
         # Normalize weights
@@ -76,9 +77,7 @@ class MixtureOfExperts(nn.Module):
         return routing_weights, selected_experts
 
     def forward(
-        self,
-        x: torch.Tensor,
-        mask: Optional[torch.Tensor] = None
+        self, x: torch.Tensor, mask: Optional[torch.Tensor] = None
     ) -> torch.Tensor:
         batch_size, seq_len, d_model = x.shape
 
@@ -100,7 +99,7 @@ class MixtureOfExperts(nn.Module):
             # Process each expert
             for expert_idx in range(self.num_experts):
                 # Find tokens routed to this expert
-                expert_mask = (expert_indices == expert_idx)
+                expert_mask = expert_indices == expert_idx
                 if not expert_mask.any():
                     continue
 

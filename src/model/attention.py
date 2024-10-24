@@ -9,11 +9,13 @@ import torch.nn.functional as F
 import math
 from typing import Optional, Tuple
 
+
 class FlashAttention(nn.Module):
     """
     Flash Attention implementation with optimized memory usage and computation
     Based on "Flash Attention: Fast and Memory-Efficient Exact Attention"
     """
+
     def __init__(
         self,
         d_model: int,
@@ -73,8 +75,10 @@ class FlashAttention(nn.Module):
             scores = torch.matmul(q_block, k.transpose(-2, -1)) * self.scale
 
             if mask is not None:
-                mask_block = mask[:, i:j_end, :] if mask.dim() == 3 else mask[i:j_end, :]
-                scores = scores.masked_fill(~mask_block.unsqueeze(1), float('-inf'))
+                mask_block = (
+                    mask[:, i:j_end, :] if mask.dim() == 3 else mask[i:j_end, :]
+                )
+                scores = scores.masked_fill(~mask_block.unsqueeze(1), float("-inf"))
 
             attn_weights = F.softmax(scores, dim=-1)
             attn_weights = self.dropout(attn_weights)

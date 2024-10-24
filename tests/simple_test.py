@@ -39,7 +39,7 @@ def init_model_state(model, rng, vocab_size):
 def load_params(file_path):
     """Load and process saved parameters."""
     try:
-        with open(file_path, 'r') as f:
+        with open(file_path, "r") as f:
             saved_params = json.load(f)
     except FileNotFoundError:
         pytest.fail(f"Parameter file not found: {file_path}")
@@ -53,6 +53,7 @@ def load_params(file_path):
         elif isinstance(x, dict):
             return {k: process_value(v) for k, v in x.items()}
         return x
+
     return process_value(saved_params)
 
 
@@ -60,8 +61,17 @@ def load_params(file_path):
 def vocab_list():
     """Fixture providing test vocabulary."""
     return [
-        '<unk>', '<pad>', 'hi', 'hello', 'how', 'are', 'you',
-        'good', 'morning', 'thanks', 'bye'
+        "<unk>",
+        "<pad>",
+        "hi",
+        "hello",
+        "how",
+        "are",
+        "you",
+        "good",
+        "morning",
+        "thanks",
+        "bye",
     ]
 
 
@@ -77,26 +87,18 @@ def word_mappings(vocab_list):
 def model_params(tmp_path, vocab_list):
     """Fixture providing test model parameters."""
     params_dict = {
-        'params': {
-            'embedding': {
-                'embedding': [[0.1] * 64] * len(vocab_list)
+        "params": {
+            "embedding": {"embedding": [[0.1] * 64] * len(vocab_list)},
+            "dense1": {"kernel": [[0.1] * 64] * 64, "bias": [0.1] * 64},
+            "dense2": {"kernel": [[0.1] * 64] * 64, "bias": [0.1] * 64},
+            "output": {
+                "kernel": [[0.1] * len(vocab_list)] * 64,
+                "bias": [0.1] * len(vocab_list),
             },
-            'dense1': {
-                'kernel': [[0.1] * 64] * 64,
-                'bias': [0.1] * 64
-            },
-            'dense2': {
-                'kernel': [[0.1] * 64] * 64,
-                'bias': [0.1] * 64
-            },
-            'output': {
-                'kernel': [[0.1] * len(vocab_list)] * 64,
-                'bias': [0.1] * len(vocab_list)
-            }
         }
     }
     params_path = tmp_path / "model_params_minimal.json"
-    with open(params_path, 'w') as f:
+    with open(params_path, "w") as f:
         json.dump(params_dict, f)
     return load_params(params_path)
 
@@ -118,10 +120,10 @@ def test_init_model_state(simple_model, vocab_list):
     """Test model state initialization."""
     rng = jax.random.PRNGKey(0)
     params = init_model_state(simple_model, rng, len(vocab_list))
-    assert 'params' in params
+    assert "params" in params
     assert all(
-        layer in params['params']
-        for layer in ['embedding', 'dense1', 'dense2', 'output']
+        layer in params["params"]
+        for layer in ["embedding", "dense1", "dense2", "output"]
     )
 
 
@@ -129,9 +131,7 @@ def test_model_forward_pass(simple_model, model_params, word_mappings):
     """Test model forward pass with test input."""
     word_to_id, _ = word_mappings
     test_input = "hi"
-    input_token = jnp.array([
-        word_to_id.get(test_input.lower(), word_to_id['<unk>'])
-    ])
+    input_token = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])])
 
     # Get model output
     logits = simple_model.apply(model_params, input_token)
@@ -146,16 +146,14 @@ def test_end_to_end_inference(simple_model, model_params, word_mappings):
     """Test end-to-end inference pipeline."""
     word_to_id, id_to_word = word_mappings
     test_input = "hi"
-    input_token = jnp.array([
-        word_to_id.get(test_input.lower(), word_to_id['<unk>'])
-    ])
+    input_token = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])])
 
     # Get model output
     logits = simple_model.apply(model_params, input_token)
     predicted_token = jnp.argmax(logits, axis=-1)
 
     # Convert prediction to words
-    response = ' '.join([id_to_word[int(idx)] for idx in predicted_token])
+    response = " ".join([id_to_word[int(idx)] for idx in predicted_token])
 
     # Verify response
     assert isinstance(response, str)

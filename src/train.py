@@ -17,36 +17,40 @@ from data.dataloader import AdvancedDataset, DataConfig, create_dataloader
 from evaluation.metrics import CoreEvaluator
 from configs.model_config import GenerativeFlexConfig, create_default_config
 
+
 def setup_logging(output_dir: Path):
     """Setup logging configuration"""
     logging.basicConfig(
-        format='%(asctime)s - %(levelname)s - %(message)s',
+        format="%(asctime)s - %(levelname)s - %(message)s",
         level=logging.INFO,
         handlers=[
-            logging.FileHandler(output_dir / 'training.log'),
-            logging.StreamHandler()
-        ]
+            logging.FileHandler(output_dir / "training.log"),
+            logging.StreamHandler(),
+        ],
     )
+
 
 def main():
     """Main training function"""
     # Parse arguments and load config
-    parser = argparse.ArgumentParser(description='Train Generative-Flex Model')
-    parser.add_argument('--config', type=str, default='configs/default_config.json')
-    parser.add_argument('--local_rank', type=int, default=-1)
+    parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
+    parser.add_argument("--config", type=str, default="configs/default_config.json")
+    parser.add_argument("--local_rank", type=int, default=-1)
     args = parser.parse_args()
 
     # Load configuration and setup
-    config = (GenerativeFlexConfig.from_file(args.config)
-             if Path(args.config).exists()
-             else create_default_config())
+    config = (
+        GenerativeFlexConfig.from_file(args.config)
+        if Path(args.config).exists()
+        else create_default_config()
+    )
     output_dir = Path(config.training.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     setup_logging(output_dir)
 
     # Setup device and initialize components
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    tokenizer = AutoTokenizer.from_pretrained('gpt2')
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
     # Initialize model with advanced features
     model = AdvancedGenerativeFlexModel(
@@ -59,24 +63,30 @@ def main():
         max_seq_length=config.model.max_seq_length,
         num_experts=config.model.num_experts,
         expert_capacity_factor=config.model.expert_capacity_factor,
-        attention_block_size=config.model.attention_block_size
+        attention_block_size=config.model.attention_block_size,
     ).to(device)
 
     # Create datasets and dataloaders
     data_config = DataConfig(
         max_seq_length=config.model.max_seq_length,
         batch_size=config.training.batch_size,
-        cache_dir=config.training.cache_dir
+        cache_dir=config.training.cache_dir,
     )
 
-    train_dataset = AdvancedDataset('data/train.json', tokenizer, data_config, True)
-    eval_dataset = AdvancedDataset('data/eval.json', tokenizer, data_config, False)
+    train_dataset = AdvancedDataset("data/train.json", tokenizer, data_config, True)
+    eval_dataset = AdvancedDataset("data/eval.json", tokenizer, data_config, False)
 
-    train_dataloader = create_dataloader(train_dataset, data_config, args.local_rank != -1)
-    eval_dataloader = create_dataloader(eval_dataset, data_config, args.local_rank != -1)
+    train_dataloader = create_dataloader(
+        train_dataset, data_config, args.local_rank != -1
+    )
+    eval_dataloader = create_dataloader(
+        eval_dataset, data_config, args.local_rank != -1
+    )
 
     # Initialize trainer and evaluator
-    trainer = AdvancedTrainer(model, vars(config.training), args.local_rank, str(output_dir))
+    trainer = AdvancedTrainer(
+        model, vars(config.training), args.local_rank, str(output_dir)
+    )
     evaluator = CoreEvaluator(device)
 
     # Train model
@@ -85,8 +95,9 @@ def main():
         num_epochs=config.training.num_epochs,
         eval_dataloader=eval_dataloader,
         eval_steps=config.training.eval_steps,
-        save_steps=config.training.save_steps
+        save_steps=config.training.save_steps,
     )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

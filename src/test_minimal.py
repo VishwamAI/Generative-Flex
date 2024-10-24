@@ -5,6 +5,7 @@ from flax import linen as nn
 from flax.training import train_state
 import optax
 
+
 # Simple model definition
 class SimpleLanguageModel(nn.Module):
     vocab_size: int
@@ -22,14 +23,17 @@ class SimpleLanguageModel(nn.Module):
         x = self.output(x)
         return x
 
+
 def load_vocab():
-    with open('data/chatbot/vocab.json', 'r') as f:
+    with open("data/chatbot/vocab.json", "r") as f:
         return json.load(f)
 
+
 def load_params():
-    with open('model_params.json', 'r') as f:
+    with open("model_params.json", "r") as f:
         params = json.load(f)
     return params
+
 
 def main():
     print("\nTesting model responses:")
@@ -51,7 +55,9 @@ def main():
     print(f"Input: {test_input}")
 
     # Tokenize input
-    input_tokens = [word_to_id.get(word, word_to_id['<unk>']) for word in test_input.split()]
+    input_tokens = [
+        word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
+    ]
     input_array = jnp.array([input_tokens])
 
     # Generate response
@@ -59,9 +65,10 @@ def main():
     output_tokens = jnp.argmax(output_logits, axis=-1)
 
     # Convert tokens back to words
-    response = ' '.join([id_to_word[int(token)] for token in output_tokens[0]])
+    response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
     print(f"Response: {response}")
     print("-" * 40)
+
 
 if __name__ == "__main__":
     main()

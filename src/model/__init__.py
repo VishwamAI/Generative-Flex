@@ -10,6 +10,7 @@ from typing import Optional, Tuple
 
 from .transformer import TransformerLayer
 
+
 class AdvancedGenerativeFlexModel(nn.Module):
     """
     Advanced transformer-based model with optimized architecture featuring:
@@ -29,6 +30,7 @@ class AdvancedGenerativeFlexModel(nn.Module):
         expert_capacity_factor: Capacity factor for expert routing (default: 1.25)
         attention_block_size: Block size for flash attention (default: 1024)
     """
+
     def __init__(
         self,
         vocab_size: int,
@@ -40,7 +42,7 @@ class AdvancedGenerativeFlexModel(nn.Module):
         max_seq_length: int = 2048,
         num_experts: int = 8,
         expert_capacity_factor: float = 1.25,
-        attention_block_size: int = 1024
+        attention_block_size: int = 1024,
     ):
         super().__init__()
         self.d_model = d_model
@@ -50,18 +52,20 @@ class AdvancedGenerativeFlexModel(nn.Module):
         self.pos_encoder = nn.Embedding(max_seq_length, d_model)
 
         # Advanced transformer layers with Flash Attention and MoE
-        self.transformer_layers = nn.ModuleList([
-            TransformerLayer(
-                d_model=d_model,
-                nhead=nhead,
-                dim_feedforward=dim_feedforward,
-                dropout=dropout,
-                num_experts=num_experts,
-                expert_capacity_factor=expert_capacity_factor,
-                block_size=attention_block_size
-            )
-            for _ in range(num_layers)
-        ])
+        self.transformer_layers = nn.ModuleList(
+            [
+                TransformerLayer(
+                    d_model=d_model,
+                    nhead=nhead,
+                    dim_feedforward=dim_feedforward,
+                    dropout=dropout,
+                    num_experts=num_experts,
+                    expert_capacity_factor=expert_capacity_factor,
+                    block_size=attention_block_size,
+                )
+                for _ in range(num_layers)
+            ]
+        )
 
         # Output layers
         self.norm = nn.LayerNorm(d_model)
@@ -75,15 +79,14 @@ class AdvancedGenerativeFlexModel(nn.Module):
         for p in self.parameters():
             if p.dim() > 1:
                 nn.init.xavier_uniform_(
-                    p,
-                    gain=1/math.sqrt(2)  # Scale for better gradient flow
+                    p, gain=1 / math.sqrt(2)  # Scale for better gradient flow
                 )
 
     def forward(
         self,
         x: torch.Tensor,
         mask: Optional[torch.Tensor] = None,
-        return_attention_weights: bool = False
+        return_attention_weights: bool = False,
     ) -> torch.Tensor:
         """
         Forward pass through the model

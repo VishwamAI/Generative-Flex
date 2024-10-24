@@ -13,24 +13,24 @@ def tokenize(text: str, vocab: Dict[str, int]) -> List[int]:
     """Convert text to tokens using vocabulary."""
     # Simple whitespace tokenization for demonstration
     words = text.lower().split()
-    return [vocab.get(word, vocab['<unk>']) for word in words]
+    return [vocab.get(word, vocab["<unk>"]) for word in words]
 
 
 @pytest.fixture
 def vocab() -> Dict[str, int]:
     """Fixture providing a minimal test vocabulary."""
     return {
-        '<unk>': 0,
-        '<pad>': 1,
-        'hello': 2,
-        'hi': 3,
-        'good': 4,
-        'morning': 5,
-        'hey': 6,
-        'greetings': 7,
-        'how': 8,
-        'are': 9,
-        'you': 10
+        "<unk>": 0,
+        "<pad>": 1,
+        "hello": 2,
+        "hi": 3,
+        "good": 4,
+        "morning": 5,
+        "hey": 6,
+        "greetings": 7,
+        "how": 8,
+        "are": 9,
+        "you": 10,
     }
 
 
@@ -38,13 +38,13 @@ def vocab() -> Dict[str, int]:
 def model_params():
     """Fixture providing standard test parameters for the model."""
     return {
-        'max_length': 32,
-        'hidden_dim': 64,
-        'num_heads': 4,
-        'head_dim': 16,
-        'mlp_dim': 256,
-        'num_layers': 2,
-        'dropout_rate': 0.1
+        "max_length": 32,
+        "hidden_dim": 64,
+        "num_heads": 4,
+        "head_dim": 16,
+        "mlp_dim": 256,
+        "num_layers": 2,
+        "dropout_rate": 0.1,
     }
 
 
@@ -53,13 +53,13 @@ def model(vocab, model_params):
     """Fixture providing initialized LanguageModel instance."""
     return LanguageModel(
         vocab_size=len(vocab),
-        hidden_dim=model_params['hidden_dim'],
-        num_heads=model_params['num_heads'],
-        head_dim=model_params['head_dim'],
-        mlp_dim=model_params['mlp_dim'],
-        num_layers=model_params['num_layers'],
-        dropout_rate=model_params['dropout_rate'],
-        max_seq_len=model_params['max_length']
+        hidden_dim=model_params["hidden_dim"],
+        num_heads=model_params["num_heads"],
+        head_dim=model_params["head_dim"],
+        mlp_dim=model_params["mlp_dim"],
+        num_layers=model_params["num_layers"],
+        dropout_rate=model_params["dropout_rate"],
+        max_seq_len=model_params["max_length"],
     )
 
 
@@ -92,13 +92,16 @@ def test_tokenization(vocab):
     assert tokens[2] == 0  # '<unk>'
 
 
-@pytest.mark.parametrize("input_text,expected_tokens", [
-    ("hello", [2]),
-    ("hi", [3]),
-    ("good morning", [4, 5]),
-    ("hey", [6]),
-    ("greetings", [7])
-])
+@pytest.mark.parametrize(
+    "input_text,expected_tokens",
+    [
+        ("hello", [2]),
+        ("hi", [3]),
+        ("good morning", [4, 5]),
+        ("hey", [6]),
+        ("greetings", [7]),
+    ],
+)
 def test_model_response(model, vocab, input_text, expected_tokens):
     """Test model responses for various input phrases."""
     # Initialize random parameters for testing
@@ -110,11 +113,7 @@ def test_model_response(model, vocab, input_text, expected_tokens):
     input_array = jnp.array([tokens])
 
     # Generate response
-    output = model.apply(
-        params,
-        input_array,
-        training=False
-    )
+    output = model.apply(params, input_array, training=False)
 
     # Verify output shape and type
     assert output.shape[0] == 1  # Batch size

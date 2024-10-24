@@ -10,10 +10,12 @@ from typing import Optional
 from .attention import FlashAttention
 from .experts import MixtureOfExperts
 
+
 class TransformerLayer(nn.Module):
     """
     Advanced transformer layer combining Flash Attention and Mixture of Experts
     """
+
     def __init__(
         self,
         d_model: int,
@@ -28,10 +30,7 @@ class TransformerLayer(nn.Module):
 
         # Flash Attention for efficient self-attention
         self.self_attn = FlashAttention(
-            d_model=d_model,
-            n_heads=nhead,
-            dropout=dropout,
-            block_size=block_size
+            d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size
         )
 
         # Mixture of Experts for specialized computation
@@ -40,7 +39,7 @@ class TransformerLayer(nn.Module):
             d_ff=dim_feedforward,
             num_experts=num_experts,
             capacity_factor=expert_capacity_factor,
-            dropout=dropout
+            dropout=dropout,
         )
 
         # Layer normalization and dropout
@@ -49,9 +48,7 @@ class TransformerLayer(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(
-        self,
-        x: torch.Tensor,
-        mask: Optional[torch.Tensor] = None
+        self, x: torch.Tensor, mask: Optional[torch.Tensor] = None
     ) -> torch.Tensor:
         """
         Forward pass combining attention and expert computation

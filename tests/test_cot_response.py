@@ -12,8 +12,7 @@ class SimpleChatModel(nn.Module):
 
     def setup(self):
         self.embedding = nn.Embed(
-            num_embeddings=self.vocab_size,
-            features=self.hidden_size
+            num_embeddings=self.vocab_size, features=self.hidden_size
         )
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.hidden_size)
@@ -32,8 +31,17 @@ class SimpleChatModel(nn.Module):
 def vocab():
     """Fixture providing test vocabulary."""
     return [
-        '<unk>', '<pad>', 'hi', 'hello', 'how', 'are', 'you',
-        'good', 'morning', 'thanks', 'bye'
+        "<unk>",
+        "<pad>",
+        "hi",
+        "hello",
+        "how",
+        "are",
+        "you",
+        "good",
+        "morning",
+        "thanks",
+        "bye",
     ]
 
 
@@ -52,7 +60,7 @@ def model_params(vocab, chat_model):
     key = jax.random.PRNGKey(0)
     dummy_input = jnp.ones((1,), dtype=jnp.int32)
     variables = chat_model.init(key, dummy_input)
-    return variables['params']
+    return variables["params"]
 
 
 @pytest.fixture
@@ -74,13 +82,12 @@ def test_model_forward_pass(chat_model, model_params, word_mappings):
 
     # Test input
     test_input = "hi"
-    input_tokens = jnp.array([
-        word_to_id.get(w, word_to_id['<unk>'])
-        for w in test_input.split()
-    ])
+    input_tokens = jnp.array(
+        [word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()]
+    )
 
     # Generate response
-    logits = chat_model.apply({'params': model_params}, input_tokens)
+    logits = chat_model.apply({"params": model_params}, input_tokens)
 
     # Verify output shape and type
     assert logits.shape == (len(word_to_id),)
@@ -94,18 +101,17 @@ def test_response_generation(chat_model, model_params, word_mappings):
 
     # Test input
     test_input = "hi"
-    input_tokens = jnp.array([
-        word_to_id.get(w, word_to_id['<unk>'])
-        for w in test_input.split()
-    ])
+    input_tokens = jnp.array(
+        [word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()]
+    )
 
     # Generate response
-    logits = chat_model.apply({'params': model_params}, input_tokens)
+    logits = chat_model.apply({"params": model_params}, input_tokens)
     predicted_tokens = jnp.argsort(logits)[-10:][::-1]
 
     # Convert tokens back to words
     response_words = [id_to_word[int(token)] for token in predicted_tokens]
-    response = ' '.join(response_words)
+    response = " ".join(response_words)
 
     # Verify response
     assert isinstance(response, str)
@@ -119,14 +125,13 @@ def test_unknown_token_handling(chat_model, model_params, word_mappings):
 
     # Test input with unknown word
     test_input = "unknown_word"
-    input_tokens = jnp.array([
-        word_to_id.get(w, word_to_id['<unk>'])
-        for w in test_input.split()
-    ])
+    input_tokens = jnp.array(
+        [word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()]
+    )
 
     # Verify unknown token is handled
-    assert input_tokens[0] == word_to_id['<unk>']
+    assert input_tokens[0] == word_to_id["<unk>"]
 
     # Generate response
-    logits = chat_model.apply({'params': model_params}, input_tokens)
+    logits = chat_model.apply({"params": model_params}, input_tokens)
     assert not jnp.any(jnp.isnan(logits))

@@ -13,14 +13,16 @@ from typing import Optional, Dict, Any
 import logging
 from pathlib import Path
 
+
 class AdvancedTrainer:
     """Advanced trainer with distributed training and mixed precision"""
+
     def __init__(
         self,
         model: nn.Module,
         config: Dict[str, Any],
         local_rank: int = -1,
-        output_dir: Optional[str] = None
+        output_dir: Optional[str] = None,
     ):
         self.model = model
         self.config = config
@@ -33,9 +35,7 @@ class AdvancedTrainer:
             if not dist.is_initialized():
                 dist.init_process_group(backend="nccl")
             self.model = DistributedDataParallel(
-                self.model,
-                device_ids=[self.local_rank],
-                output_device=self.local_rank
+                self.model, device_ids=[self.local_rank], output_device=self.local_rank
             )
 
         # Enable gradient checkpointing
@@ -58,10 +58,16 @@ class AdvancedTrainer:
                 decay_params.append(param)
 
         # Create optimizer with weight decay
-        self.optimizer = optim.AdamW([
-            {"params": decay_params, "weight_decay": self.config.get("weight_decay", 0.01)},
-            {"params": no_decay_params, "weight_decay": 0.0}
-        ], lr=self.config.get("learning_rate", 1e-4))
+        self.optimizer = optim.AdamW(
+            [
+                {
+                    "params": decay_params,
+                    "weight_decay": self.config.get("weight_decay", 0.01),
+                },
+                {"params": no_decay_params, "weight_decay": 0.0},
+            ],
+            lr=self.config.get("learning_rate", 1e-4),
+        )
 
         # Create scheduler with warmup
         num_steps = self.config.get("num_training_steps", 100000)
@@ -70,7 +76,7 @@ class AdvancedTrainer:
             self.optimizer,
             max_lr=self.config.get("learning_rate", 1e-4),
             total_steps=num_steps,
-            pct_start=num_warmup/num_steps
+            pct_start=num_warmup / num_steps,
         )
 
     def train_step(self, batch: Dict[str, torch.Tensor]) -> float:
@@ -98,11 +104,11 @@ class AdvancedTrainer:
         eval_dataloader: Optional[torch.utils.data.DataLoader] = None,
         eval_steps: int = 1000,
         save_steps: int = 1000,
-        log_steps: int = 100
+        log_steps: int = 100,
     ):
         """Full training loop with evaluation"""
         global_step = 0
-        best_eval_loss = float('inf')
+        best_eval_loss = float("inf")
 
         for epoch in range(num_epochs):
             epoch_loss = 0
@@ -174,7 +180,9 @@ class AdvancedTrainer:
             save_path.mkdir(parents=True, exist_ok=True)
 
             # Save model
-            model_to_save = self.model.module if hasattr(self.model, "module") else self.model
+            model_to_save = (
+                self.model.module if hasattr(self.model, "module") else self.model
+            )
             torch.save(model_to_save.state_dict(), save_path / "model.pt")
 
             # Save optimizer
@@ -196,7 +204,9 @@ class AdvancedTrainer:
         model_path = load_path / "model.pt"
         if model_path.exists():
             state_dict = torch.load(model_path, map_location="cpu")
-            model_to_load = self.model.module if hasattr(self.model, "module") else self.model
+            model_to_load = (
+                self.model.module if hasattr(self.model, "module") else self.model
+            )
             model_to_load.load_state_dict(state_dict)
             logging.info(f"Model loaded from {model_path}")
 

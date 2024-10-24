@@ -14,14 +14,16 @@ from accelerate.utils import GradientAccumulationPlugin
 from huggingface_hub import HfFolder, Repository
 from transformers import get_linear_schedule_with_warmup
 
+
 class AcceleratedTrainer:
     """Advanced trainer using Hugging Face Accelerate for efficient training"""
+
     def __init__(
         self,
         model: nn.Module,
         config: Dict[str, Any],
         output_dir: Optional[str] = None,
-        hub_model_id: Optional[str] = None
+        hub_model_id: Optional[str] = None,
     ):
         self.config = config
         self.output_dir = Path(output_dir) if output_dir else Path("outputs")
@@ -34,7 +36,7 @@ class AcceleratedTrainer:
         )
         self.accelerator = Accelerator(
             gradient_accumulation_plugin=gradient_accumulation,
-            mixed_precision=self.config.get("mixed_precision", "fp16")
+            mixed_precision=self.config.get("mixed_precision", "fp16"),
         )
 
         # Setup model and optimization
@@ -61,31 +63,35 @@ class AcceleratedTrainer:
             )
 
         self.repo = Repository(
-            local_dir=self.output_dir,
-            clone_from=self.hub_model_id,
-            use_auth_token=True
+            local_dir=self.output_dir, clone_from=self.hub_model_id, use_auth_token=True
         )
 
     def setup_optimization(self):
         """Setup optimizer and scheduler with weight decay"""
         params = [
             {
-                "params": [p for n, p in self.model.named_parameters()
-                          if not any(nd in n for nd in ["bias", "LayerNorm.weight"])],
-                "weight_decay": self.config.get("weight_decay", 0.01)
+                "params": [
+                    p
+                    for n, p in self.model.named_parameters()
+                    if not any(nd in n for nd in ["bias", "LayerNorm.weight"])
+                ],
+                "weight_decay": self.config.get("weight_decay", 0.01),
             },
             {
-                "params": [p for n, p in self.model.named_parameters()
-                          if any(nd in n for nd in ["bias", "LayerNorm.weight"])],
-                "weight_decay": 0.0
-            }
+                "params": [
+                    p
+                    for n, p in self.model.named_parameters()
+                    if any(nd in n for nd in ["bias", "LayerNorm.weight"])
+                ],
+                "weight_decay": 0.0,
+            },
         ]
 
         self.optimizer = optim.AdamW(params, lr=self.config.get("learning_rate", 1e-4))
         self.scheduler = get_linear_schedule_with_warmup(
             self.optimizer,
             num_warmup_steps=self.config.get("num_warmup_steps", 10000),
-            num_training_steps=self.config.get("num_training_steps", 100000)
+            num_training_steps=self.config.get("num_training_steps", 100000),
         )
 
     def train_step(self, batch: Dict[str, torch.Tensor]) -> float:
@@ -113,7 +119,7 @@ class AcceleratedTrainer:
         eval_dataloader: Optional[torch.utils.data.DataLoader] = None,
         eval_steps: int = 1000,
         save_steps: int = 1000,
-        log_steps: int = 100
+        log_steps: int = 100,
     ):
         """Full training loop with Accelerate integration"""
         # Prepare dataloaders
@@ -122,7 +128,7 @@ class AcceleratedTrainer:
         )
 
         global_step = 0
-        best_eval_loss = float('inf')
+        best_eval_loss = float("inf")
 
         for epoch in range(num_epochs):
             epoch_loss = 0
@@ -154,7 +160,9 @@ class AcceleratedTrainer:
                     self.save_checkpoint(f"checkpoint-{global_step}")
 
             avg_epoch_loss = epoch_loss / num_steps
-            self.accelerator.print(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")
+            self.accelerator.print(
+                f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}"
+            )
             self.save_checkpoint(f"epoch-{epoch}")
 
     def evaluate(self, eval_dataloader: torch.utils.data.DataLoader) -> float:
@@ -191,8 +199,7 @@ class AcceleratedTrainer:
             # Push to Hub if configured
             if self.hub_model_id:
                 self.repo.push_to_hub(
-                    commit_message=f"Training checkpoint {name}",
-                    blocking=False
+                    commit_message=f"Training checkpoint {name}", blocking=False
                 )
 
             logging.info(f"Model saved to {save_path}")
