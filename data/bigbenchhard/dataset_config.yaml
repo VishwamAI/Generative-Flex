@@ -1,0 +1,9 @@
+dataset:
+  name: maveriq/bigbenchhard
+  repository_files:
+  - .gitattributes
+  - README.md
+  - bigbenchhard.py
+  needs_download: true
+  verified: false
+  verification_timestamp: '2024-10-25 07:53:52'

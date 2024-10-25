@@ -1,0 +1,18 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''video_id'': Value(dtype=''string'', id=None), ''duration'': Value(dtype=''string'',
+    id=None), ''domain'': Value(dtype=''string'', id=None), ''sub_category'': Value(dtype=''string'',
+    id=None), ''url'': Value(dtype=''string'', id=None), ''videoID'': Value(dtype=''string'',
+    id=None), ''question_id'': Value(dtype=''string'', id=None), ''task_type'': Value(dtype=''string'',
+    id=None), ''question'': Value(dtype=''string'', id=None), ''options'': Sequence(feature=Value(dtype=''string'',
+    id=None), length=-1, id=None), ''answer'': Value(dtype=''string'', id=None)}'
+  format: qa
+  name: lmms-lab/Video-MME
+  size_gb: unknown
+  splits: '{''test'': SplitInfo(name=''test'', num_bytes=1003241.0, num_examples=2700,
+    shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/lmms-lab/Video-MME
+  verification_timestamp: '2024-10-25 07:06:23'
+  verified: true

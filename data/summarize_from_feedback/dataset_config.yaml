@@ -1,0 +1,9 @@
+dataset:
+  name: openai/summarize_from_feedback
+  repository_files:
+  - .gitattributes
+  - README.md
+  - summarize_from_feedback.py
+  needs_download: true
+  verified: false
+  verification_timestamp: '2024-10-25 07:53:53'

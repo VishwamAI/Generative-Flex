@@ -1,0 +1,18 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''context'': Value(dtype=''string'', id=None), ''speaker'': Value(dtype=''string'',
+    id=None), ''turns'': Sequence(feature=Value(dtype=''string'', id=None), length=-1,
+    id=None)}'
+  format: text
+  name: gretelai/commonsense-dialogues
+  size_gb: '0.01'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=3862935, num_examples=9058,
+    shard_lengths=None, dataset_name=''commonsense-dialogues''), ''validation'': SplitInfo(name=''validation'',
+    num_bytes=492673, num_examples=1157, shard_lengths=None, dataset_name=''commonsense-dialogues''),
+    ''test'': SplitInfo(name=''test'', num_bytes=485309, num_examples=1158, shard_lengths=None,
+    dataset_name=''commonsense-dialogues'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/gretelai/commonsense-dialogues
+  verification_timestamp: '2024-10-25 07:06:24'
+  verified: true

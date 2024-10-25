@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''answer'': Value(dtype=''string'',
+    id=None)}'
+  format: qa
+  name: glaiveai/glaive-code-assistant-v2
+  size_gb: '0.74'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=386902687, num_examples=215166,
+    shard_lengths=None, dataset_name=''glaive-code-assistant-v2'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/glaiveai/glaive-code-assistant-v2
+  verification_timestamp: '2024-10-25 07:05:58'
+  verified: true

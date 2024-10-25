@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''task_id'': Value(dtype=''string'', id=None), ''prompt'': Value(dtype=''string'',
+    id=None), ''canonical_solution'': Value(dtype=''string'', id=None), ''test'':
+    Value(dtype=''string'', id=None), ''entry_point'': Value(dtype=''string'', id=None)}'
+  format: unknown
+  name: openai/openai_humaneval
+  size_gb: '0.00'
+  splits: '{''test'': SplitInfo(name=''test'', num_bytes=194394, num_examples=164,
+    shard_lengths=None, dataset_name=''openai_humaneval'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/openai/openai_humaneval
+  verification_timestamp: '2024-10-25 07:06:02'
+  verified: true

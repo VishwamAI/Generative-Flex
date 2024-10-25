@@ -1,0 +1,16 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''answer'': Value(dtype=''string'',
+    id=None), ''answer_only'': Value(dtype=''string'', id=None), ''split'': Value(dtype=''string'',
+    id=None), ''question_zh'': Value(dtype=''string'', id=None), ''answer_zh'': Value(dtype=''string'',
+    id=None)}'
+  format: qa
+  name: meta-math/GSM8K_zh
+  size_gb: '0.02'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=8572790, num_examples=8792,
+    shard_lengths=None, dataset_name=''gsm8_k_zh'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/meta-math/GSM8K_zh
+  verification_timestamp: '2024-10-25 07:06:29'
+  verified: true

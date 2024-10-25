@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''answer'': Value(dtype=''string'',
+    id=None), ''original_question'': Value(dtype=''string'', id=None), ''original_answer'':
+    Value(dtype=''string'', id=None)}'
+  format: qa
+  name: meta-math/GSM8K_Backward
+  size_gb: '0.00'
+  splits: '{''test'': SplitInfo(name=''test'', num_bytes=729531, num_examples=1270,
+    shard_lengths=None, dataset_name=''gsm8_k_backward'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/meta-math/GSM8K_Backward
+  verification_timestamp: '2024-10-25 07:06:29'
+  verified: true

@@ -1,0 +1,10 @@
+dataset:
+  available_splits:
+  - train
+  config: economics-corpus
+  features: dict_keys(['text'])
+  name: cais/wmdp-mmlu-auxiliary-corpora
+  split_used: !!python/object:datasets.splits.NamedSplit
+    _name: train
+  verification_timestamp: '2024-10-25 07:43:23'
+  verified: true

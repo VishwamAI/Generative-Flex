@@ -1,0 +1,14 @@
+dataset:
+  name: ucinlp/unstereo-eval
+  repository_files:
+  - .gitattributes
+  - README.md
+  - USE-10-no-maxpmi-constraint.csv.gz
+  - USE-20-no-maxpmi-constraint.csv.gz
+  - USE-5-no-maxpmi-constraint.csv.gz
+  - Winobias-dev-no-maxpmi-constraint.csv.gz
+  - Winobias-test-no-maxpmi-constraint.csv.gz
+  - Winogender-no-maxpmi-constraint.csv.gz
+  needs_download: true
+  verified: false
+  verification_timestamp: '2024-10-25 07:53:53'

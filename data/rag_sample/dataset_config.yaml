@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''response'': Value(dtype=''string'', id=None), ''prompt'': Value(dtype=''string'',
+    id=None)}'
+  format: unknown
+  name: glaiveai/rag_sample
+  size_gb: '0.00'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=1596876, num_examples=186,
+    shard_lengths=None, dataset_name=''rag_sample'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/glaiveai/rag_sample
+  verification_timestamp: '2024-10-25 07:06:00'
+  verified: true

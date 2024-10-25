@@ -1,0 +1,7 @@
+dataset:
+  authentication: required
+  last_modified: '2024-09-09T05:39:09.000Z'
+  name: nvidia/ChatQA2-Long-SFT-data
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/ChatQA2-Long-SFT-data
+  verified: false

@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''prompt'': Value(dtype=''string'', id=None), ''response'': Value(dtype=''string'',
+    id=None)}'
+  format: unknown
+  name: glaiveai/godot_4_docs
+  size_gb: '0.01'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=5098527, num_examples=3494,
+    shard_lengths=None, dataset_name=''godot_4_docs'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/glaiveai/godot_4_docs
+  verification_timestamp: '2024-10-25 07:05:58'
+  verified: true

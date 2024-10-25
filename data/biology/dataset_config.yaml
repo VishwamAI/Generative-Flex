@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''role_1'': Value(dtype=''string'', id=None), ''topic;'': Value(dtype=''string'',
+    id=None), ''sub_topic'': Value(dtype=''string'', id=None), ''message_1'': Value(dtype=''string'',
+    id=None), ''message_2'': Value(dtype=''string'', id=None)}'
+  format: unknown
+  name: camel-ai/biology
+  size_gb: '0.08'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=61275986, num_examples=20000,
+    shard_lengths=None, dataset_name=''biology'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/camel-ai/biology
+  verification_timestamp: '2024-10-25 07:06:09'
+  verified: true

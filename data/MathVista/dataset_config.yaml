@@ -1,0 +1,26 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''pid'': Value(dtype=''string'', id=None), ''question'': Value(dtype=''string'',
+    id=None), ''image'': Value(dtype=''string'', id=None), ''decoded_image'': Image(mode=None,
+    decode=True, id=None), ''choices'': Sequence(feature=Value(dtype=''string'', id=None),
+    length=-1, id=None), ''unit'': Value(dtype=''string'', id=None), ''precision'':
+    Value(dtype=''float64'', id=None), ''answer'': Value(dtype=''string'', id=None),
+    ''question_type'': Value(dtype=''string'', id=None), ''answer_type'': Value(dtype=''string'',
+    id=None), ''metadata'': {''category'': Value(dtype=''string'', id=None), ''context'':
+    Value(dtype=''string'', id=None), ''grade'': Value(dtype=''string'', id=None),
+    ''img_height'': Value(dtype=''int64'', id=None), ''img_width'': Value(dtype=''int64'',
+    id=None), ''language'': Value(dtype=''string'', id=None), ''skills'': Sequence(feature=Value(dtype=''string'',
+    id=None), length=-1, id=None), ''source'': Value(dtype=''string'', id=None), ''split'':
+    Value(dtype=''string'', id=None), ''task'': Value(dtype=''string'', id=None)},
+    ''query'': Value(dtype=''string'', id=None)}'
+  format: qa
+  name: AI4Math/MathVista
+  size_gb: unknown
+  splits: '{''testmini'': SplitInfo(name=''testmini'', num_bytes=142635198.0, num_examples=1000,
+    shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'', num_bytes=648291350.22,
+    num_examples=5141, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/AI4Math/MathVista
+  verification_timestamp: '2024-10-25 07:06:15'
+  verified: true

@@ -1,0 +1,10 @@
+dataset:
+  available_splits:
+  - train
+  config: ai2d
+  features: dict_keys(['images', 'texts'])
+  name: HuggingFaceM4/the_cauldron
+  split_used: !!python/object:datasets.splits.NamedSplit
+    _name: train
+  verification_timestamp: '2024-10-25 07:37:18'
+  verified: true

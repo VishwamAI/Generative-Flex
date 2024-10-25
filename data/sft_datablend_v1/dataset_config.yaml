@@ -1,0 +1,17 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''conversations'': [{''value'': Value(dtype=''string'', id=None), ''from'':
+    Value(dtype=''string'', id=None), ''canonical_form'': Value(dtype=''string'',
+    id=None), ''label'': Value(dtype=''null'', id=None)}], ''mask'': Value(dtype=''string'',
+    id=None), ''system'': Value(dtype=''string'', id=None), ''dataset'': Value(dtype=''string'',
+    id=None)}'
+  format: unknown
+  name: nvidia/sft_datablend_v1
+  size_gb: '0.47'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=238566719, num_examples=128013,
+    shard_lengths=None, dataset_name=''sft_datablend_v1'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/sft_datablend_v1
+  verification_timestamp: '2024-10-25 07:06:31'
+  verified: true

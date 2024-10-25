@@ -1,0 +1,12 @@
+dataset:
+  authentication: required
+  description: ''
+  features: None
+  format: unknown
+  name: camel-ai/ai_society_translated
+  size_gb: unknown
+  splits: None
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/camel-ai/ai_society_translated
+  verification_timestamp: '2024-10-25 07:06:21'
+  verified: true

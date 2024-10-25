@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''image'': Image(mode=None, decode=True, id=None), ''question'': Value(dtype=''string'',
+    id=None), ''answer'': Value(dtype=''string'', id=None)}'
+  format: qa
+  name: xai-org/RealworldQA
+  size_gb: unknown
+  splits: '{''test'': SplitInfo(name=''test'', num_bytes=678377246.0, num_examples=765,
+    shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/xai-org/RealworldQA
+  verification_timestamp: '2024-10-25 07:06:22'
+  verified: true

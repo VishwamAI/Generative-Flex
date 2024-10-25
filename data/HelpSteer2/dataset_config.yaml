@@ -1,0 +1,17 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''prompt'': Value(dtype=''string'', id=None), ''response'': Value(dtype=''string'',
+    id=None), ''helpfulness'': Value(dtype=''int64'', id=None), ''correctness'': Value(dtype=''int64'',
+    id=None), ''coherence'': Value(dtype=''int64'', id=None), ''complexity'': Value(dtype=''int64'',
+    id=None), ''verbosity'': Value(dtype=''int64'', id=None)}'
+  format: unknown
+  name: nvidia/HelpSteer2
+  size_gb: '0.06'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=45878971, num_examples=20324,
+    shard_lengths=None, dataset_name=''help_steer2''), ''validation'': SplitInfo(name=''validation'',
+    num_bytes=2335351, num_examples=1038, shard_lengths=None, dataset_name=''help_steer2'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/HelpSteer2
+  verification_timestamp: '2024-10-25 07:06:33'
+  verified: true

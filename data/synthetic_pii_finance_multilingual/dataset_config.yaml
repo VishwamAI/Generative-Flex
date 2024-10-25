@@ -1,0 +1,23 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''level_0'': Value(dtype=''int64'', id=None), ''index'': Value(dtype=''int64'',
+    id=None), ''document_type'': Value(dtype=''string'', id=None), ''document_description'':
+    Value(dtype=''string'', id=None), ''expanded_type'': Value(dtype=''string'', id=None),
+    ''expanded_description'': Value(dtype=''string'', id=None), ''language'': Value(dtype=''string'',
+    id=None), ''language_description'': Value(dtype=''string'', id=None), ''domain'':
+    Value(dtype=''string'', id=None), ''generated_text'': Value(dtype=''string'',
+    id=None), ''pii_spans'': Value(dtype=''string'', id=None), ''conformance_score'':
+    Value(dtype=''int64'', id=None), ''quality_score'': Value(dtype=''int64'', id=None),
+    ''toxicity_score'': Value(dtype=''int64'', id=None), ''bias_score'': Value(dtype=''int64'',
+    id=None), ''groundedness_score'': Value(dtype=''int64'', id=None)}'
+  format: text
+  name: gretelai/synthetic_pii_finance_multilingual
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=106395754, num_examples=50346,
+    shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'', num_bytes=11921618,
+    num_examples=5594, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/gretelai/synthetic_pii_finance_multilingual
+  verification_timestamp: '2024-10-25 07:06:26'
+  verified: true

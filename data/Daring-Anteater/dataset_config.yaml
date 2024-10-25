@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''system'': Value(dtype=''string'', id=None), ''mask'': Value(dtype=''string'',
+    id=None), ''dataset'': Value(dtype=''string'', id=None), ''conversations'': [{''from'':
+    Value(dtype=''string'', id=None), ''value'': Value(dtype=''string'', id=None)}]}'
+  format: unknown
+  name: nvidia/Daring-Anteater
+  size_gb: '1.83'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=968945353, num_examples=99532,
+    shard_lengths=[49388, 50144], dataset_name=''daring-anteater'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/Daring-Anteater
+  verification_timestamp: '2024-10-25 07:06:32'
+  verified: true

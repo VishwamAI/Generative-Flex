@@ -1,0 +1,20 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''subject_name'': Value(dtype=''string'', id=None), ''data'': {''Correct
+    Answer'': Value(dtype=''string'', id=None), ''Correct Option'': Value(dtype=''string'',
+    id=None), ''Options'': {''A'': Value(dtype=''string'', id=None), ''B'': Value(dtype=''string'',
+    id=None), ''C'': Value(dtype=''string'', id=None), ''D'': Value(dtype=''string'',
+    id=None)}, ''Question'': Value(dtype=''string'', id=None)}, ''id'': Value(dtype=''string'',
+    id=None)}'
+  format: unknown
+  name: openlifescienceai/mmlu_medical_genetics
+  size_gb: unknown
+  splits: '{''test'': SplitInfo(name=''test'', num_bytes=29282, num_examples=100,
+    shard_lengths=None, dataset_name=None), ''validation'': SplitInfo(name=''validation'',
+    num_bytes=4101, num_examples=11, shard_lengths=None, dataset_name=None), ''dev'':
+    SplitInfo(name=''dev'', num_bytes=1521, num_examples=5, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/openlifescienceai/mmlu_medical_genetics
+  verification_timestamp: '2024-10-25 07:06:12'
+  verified: true

@@ -1,0 +1,17 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''level'': Value(dtype=''string'', id=None), ''type'': Value(dtype=''string'',
+    id=None), ''question'': Value(dtype=''string'', id=None), ''id'': Value(dtype=''string'',
+    id=None), ''masked_reference_solution'': Value(dtype=''string'', id=None), ''reference_solution'':
+    Value(dtype=''string'', id=None), ''expected_answer'': Value(dtype=''string'',
+    id=None)}'
+  format: qa
+  name: nvidia/OpenMath-MATH-masked
+  size_gb: '0.02'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=10063369, num_examples=7500,
+    shard_lengths=None, dataset_name=''open_math-math-masked'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/OpenMath-MATH-masked
+  verification_timestamp: '2024-10-25 07:06:30'
+  verified: true

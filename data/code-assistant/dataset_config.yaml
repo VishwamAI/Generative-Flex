@@ -1,0 +1,16 @@
+name: glaive-code-assistant-v3
+source: glaiveai/glaive-code-assistant-v3
+description: Latest version of code assistant dataset
+type: code
+format: huggingface_dataset
+version: 3.0.0
+split:
+  train: true
+  validation: true
+  test: true
+preprocessing:
+  - code_tokenization
+  - text_cleaning
+cache:
+  enabled: true
+  location: ./cache

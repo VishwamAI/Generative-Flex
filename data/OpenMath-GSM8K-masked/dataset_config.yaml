@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''masked_reference_solution'':
+    Value(dtype=''string'', id=None), ''reference_solution'': Value(dtype=''string'',
+    id=None), ''expected_answer'': Value(dtype=''string'', id=None)}'
+  format: qa
+  name: nvidia/OpenMath-GSM8K-masked
+  size_gb: '0.01'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=5407453, num_examples=7473,
+    shard_lengths=None, dataset_name=''open_math-gsm8_k-masked'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/OpenMath-GSM8K-masked
+  verification_timestamp: '2024-10-25 07:06:30'
+  verified: true

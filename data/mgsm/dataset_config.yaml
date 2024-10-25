@@ -1,0 +1,22 @@
+dataset:
+  name: juletxara/mgsm
+  repository_files:
+  - .gitattributes
+  - .gitignore
+  - README.md
+  - exemplars.py
+  - mgsm.py
+  - mgsm_bn.tsv
+  - mgsm_de.tsv
+  - mgsm_en.tsv
+  - mgsm_es.tsv
+  - mgsm_fr.tsv
+  - mgsm_ja.tsv
+  - mgsm_ru.tsv
+  - mgsm_sw.tsv
+  - mgsm_te.tsv
+  - mgsm_th.tsv
+  - mgsm_zh.tsv
+  needs_download: true
+  verified: false
+  verification_timestamp: '2024-10-25 07:53:52'

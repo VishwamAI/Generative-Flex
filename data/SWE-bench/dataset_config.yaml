@@ -1,0 +1,22 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''repo'': Value(dtype=''string'', id=None), ''instance_id'': Value(dtype=''string'',
+    id=None), ''base_commit'': Value(dtype=''string'', id=None), ''patch'': Value(dtype=''string'',
+    id=None), ''test_patch'': Value(dtype=''string'', id=None), ''problem_statement'':
+    Value(dtype=''string'', id=None), ''hints_text'': Value(dtype=''string'', id=None),
+    ''created_at'': Value(dtype=''string'', id=None), ''version'': Value(dtype=''string'',
+    id=None), ''FAIL_TO_PASS'': Value(dtype=''string'', id=None), ''PASS_TO_PASS'':
+    Value(dtype=''string'', id=None), ''environment_setup_commit'': Value(dtype=''string'',
+    id=None)}'
+  format: text
+  name: princeton-nlp/SWE-bench
+  size_gb: unknown
+  splits: '{''dev'': SplitInfo(name=''dev'', num_bytes=4783179, num_examples=225,
+    shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'', num_bytes=44127008,
+    num_examples=2294, shard_lengths=None, dataset_name=None), ''train'': SplitInfo(name=''train'',
+    num_bytes=367610377, num_examples=19008, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/princeton-nlp/SWE-bench
+  verification_timestamp: '2024-10-25 07:06:22'
+  verified: true

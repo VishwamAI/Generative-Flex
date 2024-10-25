@@ -1,0 +1,7 @@
+dataset:
+  authentication: required
+  last_modified: '2023-08-10T15:27:31.000Z'
+  name: openlifescienceai/Med-HALT
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/openlifescienceai/Med-HALT
+  verified: false

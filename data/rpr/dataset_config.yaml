@@ -1,0 +1,21 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''prompt'': Value(dtype=''string'', id=None), ''response_a'': Value(dtype=''string'',
+    id=None), ''response_b'': Value(dtype=''string'', id=None), ''criteria_x'': Value(dtype=''string'',
+    id=None), ''criteria_y'': Value(dtype=''string'', id=None), ''category_x'': Value(dtype=''string'',
+    id=None), ''category_y'': Value(dtype=''string'', id=None), ''id'': Value(dtype=''int64'',
+    id=None), ''scenario_x'': Value(dtype=''string'', id=None), ''scenario_y'': Value(dtype=''string'',
+    id=None), ''profile_0'': Value(dtype=''string'', id=None), ''profile_1'': Value(dtype=''string'',
+    id=None), ''profile_2'': Value(dtype=''string'', id=None), ''profile_3'': Value(dtype=''string'',
+    id=None), ''profile_4'': Value(dtype=''string'', id=None)}'
+  format: unknown
+  name: microsoft/rpr
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=22281359, num_examples=10167,
+    shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'', num_bytes=2228352,
+    num_examples=1000, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/microsoft/rpr
+  verification_timestamp: '2024-10-25 07:06:36'
+  verified: true
