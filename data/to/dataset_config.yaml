@@ -1,0 +1,15 @@
+dataset:
+  name: to
+  config: Art_Theory
+  verified: false
+  verification_timestamp: '2024-10-25 08:07:34'
+  skipped_splits:
+  - split: train
+    reason: No (supported) data files found in to
+  - split: validation
+    reason: No (supported) data files found in to
+  - split: test
+    reason: No (supported) data files found in to
+  - split: dev
+    reason: No (supported) data files found in to
+  error: All splits failed

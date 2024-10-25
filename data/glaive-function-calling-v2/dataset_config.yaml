@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''system'': Value(dtype=''string'', id=None), ''chat'': Value(dtype=''string'',
+    id=None)}'
+  format: unknown
+  name: glaiveai/glaive-function-calling-v2
+  size_gb: '0.49'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=254485835, num_examples=112960,
+    shard_lengths=None, dataset_name=''glaive-function-calling-v2'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/glaiveai/glaive-function-calling-v2
+  verification_timestamp: '2024-10-25 07:06:00'
+  verified: true

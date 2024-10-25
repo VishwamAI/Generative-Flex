@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''documents'': Value(dtype=''string'',
+    id=None), ''system_prompt'': Value(dtype=''string'', id=None), ''answer'': Value(dtype=''string'',
+    id=None), ''answer_mode'': Value(dtype=''string'', id=None)}'
+  format: qa
+  name: glaiveai/RAG-v1
+  size_gb: '0.50'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=262682142, num_examples=51354,
+    shard_lengths=None, dataset_name=''rag-v1'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/glaiveai/RAG-v1
+  verification_timestamp: '2024-10-25 07:05:58'
+  verified: true

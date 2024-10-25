@@ -1,0 +1,7 @@
+dataset:
+  authentication: required
+  last_modified: '2024-05-24T17:33:56.000Z'
+  name: nvidia/ChatRAG-Bench
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/ChatRAG-Bench
+  verified: false

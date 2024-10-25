@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''role_1'': Value(dtype=''string'', id=None), ''topic;'': Value(dtype=''string'',
+    id=None), ''sub_topic'': Value(dtype=''string'', id=None), ''message_1'': Value(dtype=''string'',
+    id=None), ''message_2'': Value(dtype=''string'', id=None)}'
+  format: unknown
+  name: camel-ai/chemistry
+  size_gb: '0.06'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=47000178, num_examples=20000,
+    shard_lengths=None, dataset_name=''chemistry'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/camel-ai/chemistry
+  verification_timestamp: '2024-10-25 07:06:06'
+  verified: true

@@ -1,0 +1,21 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''difficulty'': Value(dtype=''string'', id=None), ''difficulty_description'':
+    Value(dtype=''string'', id=None), ''topic'': Value(dtype=''string'', id=None),
+    ''topic_description'': Value(dtype=''string'', id=None), ''context'': Value(dtype=''string'',
+    id=None), ''context_description'': Value(dtype=''string'', id=None), ''steps'':
+    Value(dtype=''int64'', id=None), ''steps_description'': Value(dtype=''string'',
+    id=None), ''age_group'': Value(dtype=''string'', id=None), ''culture'': Value(dtype=''string'',
+    id=None), ''question'': Value(dtype=''string'', id=None), ''answer'': Value(dtype=''string'',
+    id=None), ''__index_level_0__'': Value(dtype=''int64'', id=None)}'
+  format: qa
+  name: gretelai/gretel-math-gsm8k-v0
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=572322, num_examples=370,
+    shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'', num_bytes=483059,
+    num_examples=300, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/gretelai/gretel-math-gsm8k-v0
+  verification_timestamp: '2024-10-25 07:06:25'
+  verified: true

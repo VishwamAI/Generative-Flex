@@ -1,0 +1,11 @@
+dataset:
+  available_splits:
+  - train
+  config: testmini_text_only
+  features: dict_keys(['sample_index', 'problem_index', 'problem_version', 'question',
+    'image', 'answer', 'question_type', 'metadata', 'query_wo', 'query_cot', 'question_for_eval'])
+  name: AI4Math/MathVerse
+  split_used: !!python/object:datasets.splits.NamedSplit
+    _name: testmini_text_only
+  verification_timestamp: '2024-10-25 07:36:52'
+  verified: true

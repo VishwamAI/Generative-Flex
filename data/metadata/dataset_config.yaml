@@ -1,0 +1,13 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''text'': Value(dtype=''string'', id=None)}'
+  format: text
+  name: camel-ai/metadata
+  size_gb: '0.01'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=5396303, num_examples=75000,
+    shard_lengths=None, dataset_name=''metadata'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/camel-ai/metadata
+  verification_timestamp: '2024-10-25 07:06:07'
+  verified: true

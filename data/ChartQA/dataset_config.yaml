@@ -1,0 +1,17 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''imgname'': Value(dtype=''string'', id=None), ''query'': Value(dtype=''string'',
+    id=None), ''label'': Value(dtype=''string'', id=None), ''type'': Value(dtype=''string'',
+    id=None), ''image'': Value(dtype=''binary'', id=None)}'
+  format: unknown
+  name: ahmed-masry/ChartQA
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=1257038553, num_examples=28299,
+    shard_lengths=None, dataset_name=None), ''val'': SplitInfo(name=''val'', num_bytes=84243017,
+    num_examples=1920, shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'',
+    num_bytes=107100539, num_examples=2500, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/ahmed-masry/ChartQA
+  verification_timestamp: '2024-10-25 07:06:20'
+  verified: true

@@ -1,0 +1,17 @@
+glaive-code-assistant: glaiveai/glaive-code-assistant
+drop: drop
+godot_4_docs: glaiveai/godot_4_docs
+gsm8k: openai/gsm8k
+medmcqa: medmcqa
+glaive-function-calling: glaiveai/glaive-function-calling
+glaive-function-calling-v2: glaiveai/glaive-function-calling-v2
+glaive-code-assistant-v2: glaiveai/glaive-code-assistant-v2
+summarize_from_feedback: openai/summarize_from_feedback
+MMMU: MMMU/MMMU
+webgpt_comparisons: openai/webgpt_comparisons
+textvqa: textvqa
+rag_sample: glaiveai/rag_sample
+glaive-code-assistant-v3: glaiveai/glaive-code-assistant-v3
+RAG-v1: glaiveai/RAG-v1
+OpenMath-GSM8K-masked: VishwamAI/OpenMath-GSM8K-masked
+hellaswag: hellaswag

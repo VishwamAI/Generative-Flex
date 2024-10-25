@@ -1,0 +1,12 @@
+dataset:
+  authentication: required
+  description: ''
+  features: None
+  format: unknown
+  name: google/IndicGenBench_xorqa_in
+  size_gb: unknown
+  splits: None
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/google/IndicGenBench_xorqa_in
+  verification_timestamp: '2024-10-25 07:06:14'
+  verified: true

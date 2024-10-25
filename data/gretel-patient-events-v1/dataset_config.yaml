@@ -1,0 +1,22 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''patient_id'': Value(dtype=''string'', id=None), ''first_name'': Value(dtype=''string'',
+    id=None), ''last_name'': Value(dtype=''string'', id=None), ''date_of_birth'':
+    Value(dtype=''string'', id=None), ''sex'': Value(dtype=''string'', id=None), ''race'':
+    Value(dtype=''string'', id=None), ''weight'': Value(dtype=''float64'', id=None),
+    ''height'': Value(dtype=''float64'', id=None), ''event_id'': Value(dtype=''int64'',
+    id=None), ''event_type'': Value(dtype=''string'', id=None), ''event_date'': Value(dtype=''string'',
+    id=None), ''event_name'': Value(dtype=''string'', id=None), ''provider_name'':
+    Value(dtype=''string'', id=None), ''reason'': Value(dtype=''string'', id=None),
+    ''result'': Value(dtype=''string'', id=None), ''details'': Value(dtype=''string'',
+    id=None), ''notes'': Value(dtype=''string'', id=None)}'
+  format: unknown
+  name: gretelai/gretel-patient-events-v1
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=2721281, num_examples=7348,
+    shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/gretelai/gretel-patient-events-v1
+  verification_timestamp: '2024-10-25 07:06:26'
+  verified: true

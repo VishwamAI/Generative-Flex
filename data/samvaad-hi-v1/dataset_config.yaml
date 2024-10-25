@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''messages'': [{''content'': Value(dtype=''string'', id=None), ''role'':
+    Value(dtype=''string'', id=None)}]}'
+  format: unknown
+  name: sarvamai/samvaad-hi-v1
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=467980614.0, num_examples=101476,
+    shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/sarvamai/samvaad-hi-v1
+  verification_timestamp: '2024-10-25 07:06:34'
+  verified: true

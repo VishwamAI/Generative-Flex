@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''type'': Value(dtype=''string'', id=None), ''query'': Value(dtype=''string'',
+    id=None), ''original_question'': Value(dtype=''string'', id=None), ''response'':
+    Value(dtype=''string'', id=None)}'
+  format: unknown
+  name: meta-math/MetaMathQA
+  size_gb: '0.71'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=369474919, num_examples=395000,
+    shard_lengths=None, dataset_name=''meta_math_qa'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/meta-math/MetaMathQA
+  verification_timestamp: '2024-10-25 07:06:29'
+  verified: true

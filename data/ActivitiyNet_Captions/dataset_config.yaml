@@ -1,0 +1,9 @@
+dataset:
+  name: HuggingFaceM4/ActivitiyNet_Captions
+  repository_files:
+  - .gitattributes
+  - ActivityNet_Captions.py
+  - README.md
+  needs_download: true
+  verified: false
+  verification_timestamp: '2024-10-25 07:53:52'

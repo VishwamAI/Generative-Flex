@@ -1,0 +1,7 @@
+dataset:
+  authentication: required
+  last_modified: '2024-08-21T18:59:55.000Z'
+  name: microsoft/Taskbench
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/microsoft/Taskbench
+  verified: false

@@ -1,0 +1,16 @@
+name: RAG-v1
+source: glaiveai/RAG-v1
+description: RAG dataset for information retrieval
+type: text
+format: huggingface_dataset
+version: 1.0.0
+split:
+  train: true
+  validation: true
+  test: true
+preprocessing:
+  - tokenization
+  - text_cleaning
+cache:
+  enabled: true
+  location: ./cache

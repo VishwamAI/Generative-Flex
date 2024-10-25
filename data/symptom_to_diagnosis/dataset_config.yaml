@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''output_text'': Value(dtype=''string'', id=None), ''input_text'': Value(dtype=''string'',
+    id=None)}'
+  format: text
+  name: gretelai/symptom_to_diagnosis
+  size_gb: '0.00'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=145401, num_examples=853,
+    shard_lengths=None, dataset_name=''symptom_to_diagnosis''), ''test'': SplitInfo(name=''test'',
+    num_bytes=36142, num_examples=212, shard_lengths=None, dataset_name=''symptom_to_diagnosis'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/gretelai/symptom_to_diagnosis
+  verification_timestamp: '2024-10-25 07:06:28'
+  verified: true

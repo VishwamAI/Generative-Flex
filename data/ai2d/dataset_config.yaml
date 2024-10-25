@@ -1,0 +1,15 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''options'': Sequence(feature=Value(dtype=''string'',
+    id=None), length=-1, id=None), ''answer'': Value(dtype=''string'', id=None), ''image'':
+    Image(mode=None, decode=True, id=None)}'
+  format: qa
+  name: lmms-lab/ai2d
+  size_gb: unknown
+  splits: '{''test'': SplitInfo(name=''test'', num_bytes=537663370.328, num_examples=3088,
+    shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/lmms-lab/ai2d
+  verification_timestamp: '2024-10-25 07:06:19'
+  verified: true

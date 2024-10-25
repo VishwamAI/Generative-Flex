@@ -1,0 +1,20 @@
+dataset:
+  dataset_id: MMMU/MMMU
+  config_name: Electronics
+  timestamp: '2024-10-25 08:45:59'
+  status: failed
+  errors:
+  - All loading attempts failed
+  warnings:
+  - 'streaming parquet loading failed: ''train'''
+  - 'non-streaming parquet loading failed: {''dev''}'
+  - 'streaming_small_batch parquet loading failed: ''train'''
+  file_types:
+  - parquet
+  splits: []
+  features: null
+  size: 0
+  attempted_methods:
+  - streaming
+  - non-streaming
+  - streaming_small_batch

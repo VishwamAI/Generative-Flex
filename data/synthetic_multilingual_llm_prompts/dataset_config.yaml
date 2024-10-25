@@ -1,0 +1,11 @@
+dataset:
+  available_splits:
+  - train
+  config: main
+  features: dict_keys(['id', 'act', 'prompt', 'prompt_nl_NL', 'prompt_fr_FR', 'prompt_es_ES',
+    'prompt_de_DE', 'prompt_pt_BR', 'prompt_zh_CN'])
+  name: gretelai/synthetic_multilingual_llm_prompts
+  split_used: !!python/object:datasets.splits.NamedSplit
+    _name: train
+  verification_timestamp: '2024-10-25 07:43:26'
+  verified: true

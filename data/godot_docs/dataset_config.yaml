@@ -1,0 +1,17 @@
+dataset:
+  name: "glaiveai/godot_4_docs"
+  description: "Godot 4 documentation dataset"
+  format: "json"
+  split: "train"
+  size: "1K-10K"
+  version: "1.0.0"
+  
+paths:
+  raw: "raw"
+  processed: "processed"
+  cache: "cache"
+  checkpoints: "checkpoints"
+
+processing:
+  batch_size: 100
+  save_interval: 500

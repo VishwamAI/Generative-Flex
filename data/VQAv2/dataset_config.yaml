@@ -1,0 +1,7 @@
+dataset:
+  name: HuggingFaceM4/VQAv2
+  trust_remote_code: true
+  verified: false
+  error: Loading a streaming dataset in parallel with `num_proc` is not implemented.
+    To parallelize streaming
+  verification_timestamp: '2024-10-25 08:22:40'

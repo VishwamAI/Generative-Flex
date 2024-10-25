@@ -1,0 +1,18 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''num_annotations'': Value(dtype=''int64'', id=None), ''id'': Value(dtype=''string'',
+    id=None), ''text'': Value(dtype=''string'', id=None), ''text_type'': Value(dtype=''string'',
+    id=None), ''labels_0'': Value(dtype=''string'', id=None), ''labels_1'': Value(dtype=''string'',
+    id=None), ''labels_2'': Value(dtype=''string'', id=None), ''labels_3'': Value(dtype=''string'',
+    id=None), ''labels_4'': Value(dtype=''string'', id=None)}'
+  format: text
+  name: nvidia/Aegis-AI-Content-Safety-Dataset-1.0
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=8952281, num_examples=10798,
+    shard_lengths=None, dataset_name=None), ''test'': SplitInfo(name=''test'', num_bytes=1008560,
+    num_examples=1199, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-1.0
+  verification_timestamp: '2024-10-25 07:06:32'
+  verified: true

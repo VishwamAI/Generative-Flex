@@ -1,0 +1,7 @@
+dataset:
+  authentication: required
+  last_modified: '2024-04-06T14:57:59.000Z'
+  name: lmms-lab/egoschema
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/lmms-lab/egoschema
+  verified: false

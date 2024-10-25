@@ -1,0 +1,19 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''problem'': Value(dtype=''string'', id=None), ''generated_solution'':
+    Value(dtype=''string'', id=None), ''expected_answer'': Value(dtype=''string'',
+    id=None), ''problem_source'': Value(dtype=''string'', id=None)}'
+  format: code
+  name: nvidia/OpenMathInstruct-2
+  size_gb: unknown
+  splits: '{''train_1M'': SplitInfo(name=''train_1M'', num_bytes=1350383003, num_examples=1000000,
+    shard_lengths=None, dataset_name=None), ''train_2M'': SplitInfo(name=''train_2M'',
+    num_bytes=2760009675, num_examples=2000000, shard_lengths=None, dataset_name=None),
+    ''train_5M'': SplitInfo(name=''train_5M'', num_bytes=6546496157, num_examples=5000000,
+    shard_lengths=None, dataset_name=None), ''train'': SplitInfo(name=''train'', num_bytes=15558412976,
+    num_examples=13972791, shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/OpenMathInstruct-2
+  verification_timestamp: '2024-10-25 07:06:34'
+  verified: true

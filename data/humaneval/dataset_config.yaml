@@ -1,0 +1,71 @@
+name: "openai_humaneval"
+huggingface_id: "openai/openai_humaneval"
+description: "Python programming problems for code generation evaluation"
+version: "1.0.0"
+split: "test"
+
+processing:
+  batch_size: 32
+  max_retries: 3
+  validate_code: true
+  timeout_seconds: 30  # timeout for test execution
+  memory_limit_mb: 1024  # memory limit for test execution
+
+output:
+  processed_dir: "/home/ubuntu/Generative-Flex/data/processed/humaneval"
+  checkpoint_interval: 10
+  log_level: "INFO"
+
+schema:
+  expected_fields:
+    - name: "task_id"
+      type: "string"
+      required: true
+    - name: "prompt"
+      type: "string"
+      required: true
+    - name: "canonical_solution"
+      type: "string"
+      required: true
+    - name: "test"
+      type: "string"
+      required: true
+    - name: "entry_point"
+      type: "string"
+      required: true
+
+validation:
+  code_safety:
+    forbidden_imports: [
+      "os.system",
+      "subprocess",
+      "eval",
+      "exec",
+      "pty",
+      "pdb",
+      "system",
+      "commands",
+      "pickle",
+      "__import__",
+      "importlib.import_module"
+    ]
+    allowed_modules: [
+      "math",
+      "random",
+      "string",
+      "collections",
+      "itertools",
+      "functools",
+      "re",
+      "copy",
+      "datetime",
+      "time",
+      "json",
+      "typing"
+    ]
+    max_execution_time: 10  # seconds per test
+    max_memory_usage: 512  # MB per test
+  test_requirements:
+    must_have_assertion: true
+    must_have_entry_point: true
+    allow_standard_imports: true

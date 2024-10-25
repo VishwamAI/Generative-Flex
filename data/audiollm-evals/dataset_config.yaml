@@ -1,0 +1,14 @@
+dataset:
+  authentication: required
+  description: ''
+  features: '{''question'': Value(dtype=''string'', id=None), ''lang'': Value(dtype=''string'',
+    id=None), ''audio'': Audio(sampling_rate=None, mono=True, decode=True, id=None)}'
+  format: code
+  name: sarvamai/audiollm-evals
+  size_gb: unknown
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=218348705, num_examples=980,
+    shard_lengths=None, dataset_name=None)}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/sarvamai/audiollm-evals
+  verification_timestamp: '2024-10-25 07:06:34'
+  verified: true

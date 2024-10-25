@@ -1,0 +1,27 @@
+dataset:
+  authentication: required
+  description: 'WebGPT Comparisons contains all of the comparisons marked as suitable
+    for reward modelling from the WebGPT paper.
+
+    '
+  features: '{''question'': {''dataset'': Value(dtype=''string'', id=None), ''id'':
+    Value(dtype=''string'', id=None), ''full_text'': Value(dtype=''string'', id=None)},
+    ''quotes_0'': Sequence(feature={''title'': Value(dtype=''string'', id=None), ''extract'':
+    Value(dtype=''string'', id=None)}, length=-1, id=None), ''answer_0'': Value(dtype=''string'',
+    id=None), ''tokens_0'': {''prefix'': Sequence(feature=Value(dtype=''int32'', id=None),
+    length=-1, id=None), ''completion'': Sequence(feature=Value(dtype=''int32'', id=None),
+    length=-1, id=None)}, ''score_0'': Value(dtype=''float32'', id=None), ''quotes_1'':
+    Sequence(feature={''title'': Value(dtype=''string'', id=None), ''extract'': Value(dtype=''string'',
+    id=None)}, length=-1, id=None), ''answer_1'': Value(dtype=''string'', id=None),
+    ''tokens_1'': {''prefix'': Sequence(feature=Value(dtype=''int32'', id=None), length=-1,
+    id=None), ''completion'': Sequence(feature=Value(dtype=''int32'', id=None), length=-1,
+    id=None)}, ''score_1'': Value(dtype=''float32'', id=None)}'
+  format: qa
+  name: openai/webgpt_comparisons
+  size_gb: '0.47'
+  splits: '{''train'': SplitInfo(name=''train'', num_bytes=226898211, num_examples=19578,
+    shard_lengths=None, dataset_name=''webgpt_comparisons'')}'
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/openai/webgpt_comparisons
+  verification_timestamp: '2024-10-25 07:06:02'
+  verified: true

@@ -1,0 +1,10 @@
+dataset:
+  available_splits:
+  - train
+  config: drop
+  features: dict_keys(['document', 'messages', 'answers'])
+  name: nvidia/ChatQA-Training-Data
+  split_used: !!python/object:datasets.splits.NamedSplit
+    _name: train
+  verification_timestamp: '2024-10-25 07:45:12'
+  verified: true

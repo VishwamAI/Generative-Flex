@@ -1,0 +1,12 @@
+dataset:
+  authentication: required
+  description: ''
+  features: None
+  format: unknown
+  name: nvidia/OpenMathInstruct-1
+  size_gb: unknown
+  splits: None
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/nvidia/OpenMathInstruct-1
+  verification_timestamp: '2024-10-25 07:06:30'
+  verified: true

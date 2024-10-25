@@ -1,0 +1,7 @@
+dataset:
+  authentication: required
+  last_modified: '2024-10-20T23:26:47.000Z'
+  name: MMMU/MMMU_Pro
+  token_env_var: Hugging_Face_Hugging_Face
+  url: https://huggingface.co/datasets/MMMU/MMMU_Pro
+  verified: false
