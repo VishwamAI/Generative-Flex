@@ -3,7 +3,7 @@ import jax
 import jax.numpy as jnp
 import optax
 from flax import linen as nn
-from typing import Any
+
 
 class SimpleGreetingModel(nn.Module):
     vocab_size: int
@@ -11,8 +11,7 @@ class SimpleGreetingModel(nn.Module):
 
     def setup(self):
         self.embedding = nn.Embed(
-            num_embeddings=self.vocab_size,
-            features=self.hidden_size
+            num_embeddings=self.vocab_size, features=self.hidden_size
         )
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.hidden_size)
@@ -26,37 +25,43 @@ class SimpleGreetingModel(nn.Module):
         x = self.output(x)
         return x
 
+
 def create_minimal_data():
     """Create minimal training data with chain-of-thought reasoning."""
     data = {
         "conversations": [
             {
                 "input": "hi",
-                "thought": "1. Recognize greeting\n2. Prepare polite response\n3. Offer assistance",
-                "response": "Hello! How can I assist you today?"
+                "thought": (
+                    "1. Recognize greeting\n"
+                    "2. Prepare polite response\n"
+                    "3. Offer assistance"
+                ),
+                "response": "Hello! How can I assist you today?",
             }
         ]
     }
 
     # Save the training data
-    with open('data/chatbot/minimal_cot_data.json', 'w') as f:
+    with open("data/chatbot/minimal_cot_data.json", "w") as f:
         json.dump(data, f, indent=2)
 
     # Create vocabulary from the data
     vocab = set()
-    for conv in data['conversations']:
-        vocab.update(conv['input'].split())
-        vocab.update(conv['thought'].split())
-        vocab.update(conv['response'].split())
+    for conv in data["conversations"]:
+        vocab.update(conv["input"].split())
+        vocab.update(conv["thought"].split())
+        vocab.update(conv["response"].split())
 
     # Add special tokens
-    vocab = ['<pad>', '<unk>'] + sorted(list(vocab))
+    vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
 
     # Save vocabulary
-    with open('data/chatbot/minimal_vocab.json', 'w') as f:
+    with open("data/chatbot/minimal_vocab.json", "w") as f:
         json.dump(vocab, f, indent=2)
 
     return data, vocab
+
 
 def main():
     print("\nCreating minimal training data with chain-of-thought...")
@@ -79,11 +84,16 @@ def main():
     print("\nStarting training...")
     for epoch in range(100):
         # Convert input to tokens
-        for conv in data['conversations']:
-            input_tokens = jnp.array([word_to_id.get(w, word_to_id['<unk>'])
-                                    for w in conv['input'].split()])
-            target_tokens = jnp.array([word_to_id.get(w, word_to_id['<unk>'])
-                                     for w in conv['response'].split()])
+        for conv in data["conversations"]:
+            input_tokens = jnp.array(
+                [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
+            )
+            target_tokens = jnp.array(
+                [
+                    word_to_id.get(w, word_to_id["<unk>"])
+                    for w in conv["response"].split()
+                ]
+            )
 
             # Define loss function for gradient computation
             def loss_fn(params):
@@ -106,10 +116,11 @@ def main():
 
     # Save the trained parameters
     params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), params)
-    with open('model_params_minimal.json', 'w') as f:
+    with open("model_params_minimal.json", "w") as f:
         json.dump(params_dict, f)
 
     print("Model parameters saved to 'model_params_minimal.json'")
+
 
 if __name__ == "__main__":
     main()

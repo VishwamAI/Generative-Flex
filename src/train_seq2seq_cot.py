@@ -7,7 +7,8 @@ import optax
 import os
 
 # Ensure data directory exists
-os.makedirs('data/chatbot', exist_ok=True)
+os.makedirs("data/chatbot", exist_ok=True)
+
 
 class SimpleSeq2SeqModel(nn.Module):
     vocab_size: int
@@ -18,7 +19,7 @@ class SimpleSeq2SeqModel(nn.Module):
         self.embedding = nn.Embed(
             num_embeddings=self.vocab_size,
             features=self.hidden_size,
-            embedding_init=nn.initializers.normal(stddev=0.1)
+            embedding_init=nn.initializers.normal(stddev=0.1),
         )
         self.encoder = nn.Dense(self.hidden_size)
         self.decoder = nn.Dense(self.vocab_size)
@@ -41,41 +42,49 @@ class SimpleSeq2SeqModel(nn.Module):
         logits = self.decoder(x)
         return logits
 
+
 def create_training_data():
     return {
         "conversations": [
             {
                 "input": "hi",
-                "response": "Step 1: Acknowledge greeting. Step 2: Offer help. Hello! How can I assist you today?"
+                "response": (
+                    "Step 1: Acknowledge greeting. "
+                    "Step 2: Offer help. "
+                    "Hello! How can I assist you today?"
+                ),
             }
         ]
     }
 
+
 def main():
     # Create and save training data
     training_data = create_training_data()
-    with open('data/chatbot/training_data_cot.json', 'w') as f:
+    with open("data/chatbot/training_data_cot.json", "w") as f:
         json.dump(training_data, f, indent=2)
 
     # Create vocabulary
-    words = set(['<pad>', '<unk>', '<start>', '<end>'])
-    for conv in training_data['conversations']:
-        words.update(conv['input'].split())
-        words.update(conv['response'].split())
+    words = set(["<pad>", "<unk>", "<start>", "<end>"])
+    for conv in training_data["conversations"]:
+        words.update(conv["input"].split())
+        words.update(conv["response"].split())
     vocab = sorted(list(words))
 
-    with open('data/chatbot/vocab.json', 'w') as f:
+    with open("data/chatbot/vocab.json", "w") as f:
         json.dump(vocab, f, indent=2)
 
     # Create token mappings
     word_to_id = {word: i for i, word in enumerate(vocab)}
 
     # Prepare training data
-    input_text = training_data['conversations'][0]['input']
-    output_text = training_data['conversations'][0]['response']
+    input_text = training_data["conversations"][0]["input"]
+    output_text = training_data["conversations"][0]["response"]
 
-    input_tokens = [word_to_id.get(w, word_to_id['<unk>']) for w in input_text.split()]
-    output_tokens = [word_to_id.get(w, word_to_id['<unk>']) for w in output_text.split()]
+    input_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()]
+    output_tokens = [
+        word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
+    ]
 
     # Initialize model
     model = SimpleSeq2SeqModel(vocab_size=len(vocab))
@@ -88,7 +97,7 @@ def main():
     optimizer = optax.adam(learning_rate=0.01)
     state = train_state.TrainState.create(
         apply_fn=model.apply,
-        params=variables['params'],
+        params=variables["params"],
         tx=optimizer,
     )
 
@@ -99,10 +108,9 @@ def main():
         y = jnp.array(output_tokens)
 
         def loss_fn(params):
-            logits = model.apply({'params': params}, x)
+            logits = model.apply({"params": params}, x)
             return optax.softmax_cross_entropy_with_integer_labels(
-                logits=logits[:, :y.shape[0]],
-                labels=y
+                logits=logits[:, : y.shape[0]], labels=y
             ).mean()
 
         loss, grads = jax.value_and_grad(loss_fn)(state.params)
@@ -113,9 +121,10 @@ def main():
 
     # Save model parameters
     params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), state.params)
-    with open('model_params.json', 'w') as f:
+    with open("model_params.json", "w") as f:
         json.dump(params_dict, f)
     print("\nTraining completed! Model saved.")
+
 
 if __name__ == "__main__":
     main()

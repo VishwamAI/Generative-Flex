@@ -1,10 +1,11 @@
 """Base model classes for different types of generative models."""
+
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Optional, Tuple
+from typing import Tuple
 
 import flax.linen as nn
-import jax
 import jax.numpy as jnp
+
 
 class BaseModel(nn.Module, ABC):
     """Abstract base class for all generative models."""
@@ -23,8 +24,10 @@ class BaseModel(nn.Module, ABC):
         """Initialize model weights."""
         pass
 
+
 class TransformerBlock(nn.Module):
     """Basic Transformer block for reuse across different model types."""
+
     hidden_size: int
     num_heads: int
     dropout_rate: float = 0.1
@@ -33,23 +36,26 @@ class TransformerBlock(nn.Module):
     def __call__(self, x, training: bool = False):
         # Multi-head attention
         attention_output = nn.MultiHeadDotProductAttention(
-            num_heads=self.num_heads,
-            dropout_rate=self.dropout_rate
+            num_heads=self.num_heads, dropout_rate=self.dropout_rate
         )(x, x)
         x = nn.LayerNorm()(x + attention_output)
 
         # Feed-forward network
-        dense_output = nn.Sequential([
-            nn.Dense(features=4 * self.hidden_size),
-            nn.gelu,
-            nn.Dense(features=self.hidden_size),
-            nn.Dropout(rate=self.dropout_rate, deterministic=not training),
-        ])(x)
+        dense_output = nn.Sequential(
+            [
+                nn.Dense(features=4 * self.hidden_size),
+                nn.gelu,
+                nn.Dense(features=self.hidden_size),
+                nn.Dropout(rate=self.dropout_rate, deterministic=not training),
+            ]
+        )(x)
 
         return nn.LayerNorm()(x + dense_output)
 
+
 class PositionalEncoding(nn.Module):
     """Positional encoding for sequence models."""
+
     max_len: int
     hidden_size: int
 
@@ -64,10 +70,12 @@ class PositionalEncoding(nn.Module):
         self.pe = pe[None, :, :]
 
     def __call__(self, x):
-        return x + self.pe[:, :x.shape[1], :]
+        return x + self.pe[:, : x.shape[1], :]
+
 
 class BaseLanguageModel(BaseModel):
     """Base class for language models."""
+
     vocab_size: int
     hidden_size: int
     num_layers: int
@@ -77,18 +85,16 @@ class BaseLanguageModel(BaseModel):
 
     def setup(self):
         self.embedding = nn.Embed(
-            num_embeddings=self.vocab_size,
-            features=self.hidden_size
+            num_embeddings=self.vocab_size, features=self.hidden_size
         )
         self.pos_encoding = PositionalEncoding(
-            max_len=self.max_sequence_length,
-            hidden_size=self.hidden_size
+            max_len=self.max_sequence_length, hidden_size=self.hidden_size
         )
         self.transformer_blocks = [
             TransformerBlock(
                 hidden_size=self.hidden_size,
                 num_heads=self.num_heads,
-                dropout_rate=self.dropout_rate
+                dropout_rate=self.dropout_rate,
             )
             for _ in range(self.num_layers)
         ]
@@ -103,8 +109,10 @@ class BaseLanguageModel(BaseModel):
 
         return self.output(x)
 
+
 class BaseImageModel(BaseModel):
     """Base class for image generation models."""
+
     image_size: Tuple[int, int]
     hidden_size: int
     num_layers: int
@@ -119,8 +127,10 @@ class BaseImageModel(BaseModel):
     def __call__(self, x, training: bool = False):
         pass
 
+
 class BaseAudioModel(BaseModel):
     """Base class for audio generation models."""
+
     sample_rate: int
     hidden_size: int
     num_layers: int
@@ -135,8 +145,10 @@ class BaseAudioModel(BaseModel):
     def __call__(self, x, training: bool = False):
         pass
 
+
 class BaseVideoModel(BaseModel):
     """Base class for video generation models."""
+
     num_frames: int
     frame_size: Tuple[int, int]
     hidden_size: int

@@ -1,7 +1,7 @@
 """Environment setup and verification script."""
+
 import os
 import sys
-import time
 from typing import Dict, Any
 
 import jax
@@ -11,10 +11,11 @@ from flax import __version__ as flax_version
 import optax
 from tensorboardX import SummaryWriter
 
-from src.utils.device_config import setup_device_config, get_compute_dtype
+from src.utils.device_config import setup_device_config
 
 # Set up device configuration
 device_config = setup_device_config()
+
 
 def test_jax_installation() -> Dict[str, Any]:
     """Test JAX installation and device configuration."""
@@ -29,16 +30,18 @@ def test_jax_installation() -> Dict[str, Any]:
 
     # Time matrix multiplication
     import time
+
     start_time = time.time()
-    result = jnp.dot(x, y)
+    jnp.dot(x, y)  # Perform matrix multiplication without storing result
     end_time = time.time()
 
     return {
         "jax_version": jax.__version__,
         "devices": str(jax.devices()),
         "backend": jax.default_backend(),
-        "matrix_mult_time": end_time - start_time
+        "matrix_mult_time": end_time - start_time,
     }
+
 
 def test_flax_installation() -> Dict[str, Any]:
     """Test Flax installation with a simple model."""
@@ -61,8 +64,9 @@ def test_flax_installation() -> Dict[str, Any]:
 
     return {
         "flax_version": flax_version,
-        "model_params": sum(x.size for x in jax.tree_util.tree_leaves(variables))
+        "model_params": sum(x.size for x in jax.tree_util.tree_leaves(variables)),
     }
+
 
 def test_optax_installation() -> Dict[str, Any]:
     """Test Optax installation with optimizer creation."""
@@ -70,22 +74,17 @@ def test_optax_installation() -> Dict[str, Any]:
 
     # Create optimizer
     learning_rate = 1e-4
-    optimizer = optax.adamw(
-        learning_rate=learning_rate,
-        weight_decay=0.01
-    )
 
     # Test scheduler
     schedule_fn = optax.linear_schedule(
-        init_value=learning_rate,
-        end_value=0.0,
-        transition_steps=1000
+        init_value=learning_rate, end_value=0.0, transition_steps=1000
     )
 
     return {
         "optax_version": optax.__version__,
-        "scheduler_type": str(type(schedule_fn))
+        "scheduler_type": str(type(schedule_fn)),
     }
+
 
 def test_tensorboard_logging():
     """Test TensorBoard logging setup."""
@@ -99,6 +98,7 @@ def test_tensorboard_logging():
     writer.close()
 
     return os.path.exists(log_dir)
+
 
 def main():
     """Run all environment tests."""
@@ -120,15 +120,15 @@ def main():
         print("TensorBoard test completed successfully")
 
         print("\n=== Environment Test Results ===")
-        print(f"JAX Configuration:")
+        print("JAX Configuration:")
         for k, v in jax_results.items():
             print(f"  {k}: {v}")
 
-        print(f"\nFlax Configuration:")
+        print("\nFlax Configuration:")
         for k, v in flax_results.items():
             print(f"  {k}: {v}")
 
-        print(f"\nOptax Configuration:")
+        print("\nOptax Configuration:")
         for k, v in optax_results.items():
             print(f"  {k}: {v}")
 
@@ -140,6 +140,7 @@ def main():
     except Exception as e:
         print(f"Environment setup failed: {str(e)}")
         return False
+
 
 if __name__ == "__main__":
     success = main()

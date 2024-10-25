@@ -1,15 +1,15 @@
 """Audio generation model implementation using JAX and Flax."""
-from typing import Any, Callable, Optional, Tuple
-import jax
+
+from typing import Any, Optional
 import jax.numpy as jnp
 import flax.linen as nn
-from flax import struct
 
 from src.models.transformer import TransformerBlock
-from src.utils.device_config import get_compute_dtype
+
 
 class AudioEmbedding(nn.Module):
     """Audio signal to embedding."""
+
     hidden_dim: int
     frame_size: int = 1024
     hop_length: int = 256
@@ -22,8 +22,10 @@ class AudioEmbedding(nn.Module):
 
         # Frame the audio signal
         num_frames = (signal_length - self.frame_size) // self.hop_length + 1
-        indices = jnp.arange(self.frame_size)[None, :] + \
-                 jnp.arange(num_frames)[:, None] * self.hop_length
+        indices = (
+            jnp.arange(self.frame_size)[None, :]
+            + jnp.arange(num_frames)[:, None] * self.hop_length
+        )
         frames = audio[:, indices]
 
         # Apply windowing
@@ -33,8 +35,10 @@ class AudioEmbedding(nn.Module):
         # Project to hidden dimension
         return nn.Dense(self.hidden_dim, dtype=self.dtype)(frames)
 
+
 class AudioGenerationModel(nn.Module):
     """Transformer-based audio generation model."""
+
     hidden_dim: int
     num_layers: int
     num_heads: int
@@ -50,22 +54,24 @@ class AudioGenerationModel(nn.Module):
     def __call__(self, inputs, training: bool = True):
         """Forward pass of the audio generation model."""
         batch_size, signal_length = inputs.shape
-        assert signal_length <= self.max_length, f"Audio length {signal_length} exceeds maximum {self.max_length}"
+        assert (
+            signal_length <= self.max_length
+        ), f"Audio length {signal_length} exceeds maximum {self.max_length}"
 
         # Convert audio to embeddings
         x = AudioEmbedding(
             hidden_dim=self.hidden_dim,
             frame_size=self.frame_size,
             hop_length=self.hop_length,
-            dtype=self.dtype
+            dtype=self.dtype,
         )(inputs)
 
         # Add positional embeddings
         num_frames = x.shape[1]
         pos_embedding = self.param(
-            'pos_embedding',
+            "pos_embedding",
             nn.initializers.normal(stddev=0.02),
-            (1, num_frames, self.hidden_dim)
+            (1, num_frames, self.hidden_dim),
         )
         x = x + pos_embedding
 
@@ -76,7 +82,7 @@ class AudioGenerationModel(nn.Module):
                 head_dim=self.head_dim,
                 mlp_dim=self.mlp_dim,
                 dropout_rate=self.dropout_rate,
-                dtype=self.dtype
+                dtype=self.dtype,
             )(x, deterministic=not training)
 
         # Project back to audio frame space
@@ -84,12 +90,16 @@ class AudioGenerationModel(nn.Module):
 
         # Overlap-add synthesis
         # Calculate output length to match input frames
-        output_length = ((signal_length - self.frame_size) // self.hop_length + 1) * self.hop_length
+        output_length = (
+            (signal_length - self.frame_size) // self.hop_length + 1
+        ) * self.hop_length
         output = jnp.zeros((batch_size, output_length))
 
         window = jnp.hanning(self.frame_size)
-        indices = jnp.arange(self.frame_size)[None, :] + \
-                 jnp.arange(num_frames)[:, None] * self.hop_length
+        indices = (
+            jnp.arange(self.frame_size)[None, :]
+            + jnp.arange(num_frames)[:, None] * self.hop_length
+        )
 
         # Apply windowing and overlap-add
         output = output.at[:, indices].add(x * window[None, None, :])
@@ -101,8 +111,9 @@ class AudioGenerationModel(nn.Module):
 
         return output
 
-    def generate(self, rng: Any, prompt: Optional[jnp.ndarray] = None,
-                length: int = 16000):  # Default 1 second at 16kHz
+    def generate(
+        self, rng: Any, prompt: Optional[jnp.ndarray] = None, length: int = 16000
+    ):  # Default 1 second at 16kHz
         """Generate audio."""
         if prompt is None:
             # Start with silence
@@ -112,13 +123,13 @@ class AudioGenerationModel(nn.Module):
         while generated.shape[1] < length:
             # Generate next segment
             next_segment = self.apply(
-                {'params': self.params},
-                generated,
-                training=False
+                {"params": self.params}, generated, training=False
             )
 
             # Append new segment
-            generated = jnp.concatenate([generated, next_segment[:, -self.hop_length:]], axis=1)
+            generated = jnp.concatenate(
+                [generated, next_segment[:, -self.hop_length :]], axis=1
+            )
 
             # Trim if exceeded desired length
             if generated.shape[1] > length:
