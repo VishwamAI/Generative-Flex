@@ -58,7 +58,8 @@ class SimpleLanguageModel(nn.Module):
                     output_tokens = jnp.argmax(output_logits, axis=-1)
 
                     # Convert tokens back to words
-                    response = " ".join([id_to_word[int(token)] for token in output_tokens[0]]
+                    response = " ".join(
+                        [id_to_word[int(token)] for token in output_tokens[0]]
                     )
                     print(f"Response: {response}")
                     print("-" * 40)

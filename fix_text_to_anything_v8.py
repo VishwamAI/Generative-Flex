@@ -33,7 +33,7 @@ def fix_text_to_anything():
                 # Skip original imports
                 if any(imp.strip() in line for imp in imports):
                     i += 1
-                continue
+                    continue
 
                 # Handle class definitions
                 if line.strip().startswith("class "):
@@ -42,7 +42,7 @@ def fix_text_to_anything():
                     current_class = line.split()[1].split("(")[0]
                     fixed_content.append(line + "\n")
                     i += 1
-                continue
+                    continue
 
                 # Handle method definitions
                 if in_class and line.strip().startswith("def "):
@@ -51,7 +51,7 @@ def fix_text_to_anything():
                     if current_class == "TextTokenizer":
                         if "def __init__" in line:
                             fixed_content.extend([
-                            f"{class_indent}def __init__(self, max_length: int, vocab_size: int): -> None:\n",
+                            f"{class_indent}def def __init__(self, max_length: int, vocab_size: int): -> None:\n",
 
                             )
                             f'{method_indent}"""Initialize the tokenizer.\n',
@@ -69,9 +69,9 @@ def fix_text_to_anything():
                             i
                             ].strip().startswith("def"):
                             i += 1
-                        continue                 elif "def encode" in line:
+                                continue                 elif "def encode" in line:
                         fixed_content.extend([
-                        f"{class_indent}def encode(self, text: str): -> jnp.ndarray:\n",
+                        f"{class_indent}def def encode(self, text: str): -> jnp.ndarray:\n",
 
                         )
                         f'{method_indent}"""Convert text to token IDs.\n',
@@ -105,9 +105,9 @@ def fix_text_to_anything():
                         i
                         ].strip().startswith("def"):
                         i += 1
-                    continue                 elif "def decode" in line:
+                            continue                 elif "def decode" in line:
                     fixed_content.extend([
-                    f"{class_indent}def decode(self, tokens: jnp.ndarray): -> str:\n",
+                    f"{class_indent}def def decode(self, tokens: jnp.ndarray): -> str:\n",
 
                     )
                     f'{method_indent}"""Convert token IDs back to text.\n',
@@ -130,21 +130,21 @@ def fix_text_to_anything():
                     i
                     ].strip().startswith("def"):
                     i += 1
-                continue
+                        continue
                 # Handle __call__ method             elif "def __call__" in line:
                 fixed_content.extend([
-                f"{class_indent}def __call__(\n", f"{method_indent}self, \n", f"{method_indent}inputs: Union[str, Dict[str, Any]], \n", f"{method_indent}target_modality: str, \n", f"{method_indent}context: Optional[Dict[str, Any]] = None, \n", f"{method_indent}training: bool = False, \n", f"{class_indent}) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n",
+                f"{class_indent}def __call__(\n", f"{method_indent}self, \n", f"{method_indent}inputs: Union[str, Dict[str, Any]], \n", f"{method_indent}target_modality: str, \n", f"{method_indent}context: Optional[Dict[str, Any]] = None, \n", f"{method_indent}training: bool = False, \n", f"{class_indent}):\n",
                 ]
                 )
                 # Skip the original method signature
                 while i < len(content) and not content[i].strip().endswith(":"):
                     i += 1
                     i += 1
-                continue
+                    continue
                 else:
                     fixed_content.append(f"{class_indent}{line.lstrip()}\n")
                     i += 1
-                continue
+                    continue
 
                 # Handle method content
                 if in_method:
@@ -155,11 +155,11 @@ def fix_text_to_anything():
                             if "# Initialize with default value" not in stripped:
                                 fixed_content.append(f"{method_inden
                                 # Initialize with default value\n")
-                                else:
+                            else:
                                     fixed_content.append(f"{method_indent}{stripped}\n")
-                                    elif "curr_batch_size = " in stripped:
+                            elif "curr_batch_size = " in stripped:
                                         fixed_content.append(f"{method_indent}{stripped}\n")
-                                        elif "_adjust_sequence_length" in stripped:
+                            elif "_adjust_sequence_length" in stripped:
                                             if "embedded = self._adjust_sequence_length(" in stripped:
                                                 fixed_content.extend(
                                                 [
@@ -173,28 +173,28 @@ def fix_text_to_anything():
                                                     = 1
                                                     i +
                                                     = 1
-                                                continue
+                                                    continue
                                                 else:
                                                     fixed_content.append(f"{method_indent}{stripped}\n")
-                                                    else:
+                                                else:
                                                         fixed_content.append(f"{method_indent}{stripped}\n")
-                                                        else:
+                                                else:
                                                             fixed_content.append("\n")
 
                                                             # Handle class content
-                                                            elif in_class:
+                                                elif in_class:
                                                                 stripped = line.strip()
                                                                 if stripped:
                                                                     fixed_content.append(f"{class_indent}{stripped}\n")
-                                                                    else:
+                                                                else:
                                                                         fixed_content.append("\n")
 
                                                                         # Handle top-level content
-                                                                        else:
+                                                                else:
                                                                             if line.strip():
                                                                                 fixed_content.append(line +
                                                                                 "\n")
-                                                                                else:
+                                                                            else:
                                                                                     fixed_content.append("\n")
                                                                                     i +
                                                                                     = 1

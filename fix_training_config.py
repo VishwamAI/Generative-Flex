@@ -19,32 +19,32 @@ def fix_training_config():
         # Skip empty lines
         if not stripped:
             fixed_lines.append("")
-        continue
+            continue
 
         # Handle imports
         if stripped.startswith(("import ", "from ")):
             fixed_lines.append(stripped)
-        continue
+            continue
 
         # Handle class definition
         if stripped.startswith("class "):
             in_class = True
             class_indent = 0
             fixed_lines.append(line)
-        continue
+            continue
 
         # Handle class body
         if in_class:
             if stripped.startswith(("def ", "@", "class ")):
                 # Method or decorator
                 fixed_lines.append("    " + stripped)
-                elif stripped.startswith('"""'):
+            elif stripped.startswith('"""'):
                     # Docstring
                     fixed_lines.append("    " + stripped)
-                    else:
+            else:
                         # Class attributes or other statements
                         fixed_lines.append("    " + stripped)
-                        else:
+            else:
                             fixed_lines.append(line)
 
                             # Join lines and ensure final newline

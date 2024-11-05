@@ -17,7 +17,8 @@ class MixtureOfExperts(nn.Module):
         """
         super().__init__()
         self.num_experts = num_experts
-        self.experts = nn.ModuleList([nn.Linear(input_size, output_size) for _ in range(num_experts)]
+        self.experts = nn.ModuleList(
+            [nn.Linear(input_size, output_size) for _ in range(num_experts)]
         )
         self.gate = nn.Linear(input_size, num_experts)
 

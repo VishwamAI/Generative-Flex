@@ -48,7 +48,8 @@ def model_params():
 @pytest.fixture
 def model(vocab, model_params) -> None:
     """Fixture providing initialized LanguageModel instance."""
-    return LanguageModel(vocab_size=len(vocab),
+    return LanguageModel(
+        vocab_size=len(vocab),
         hidden_dim=model_params["hidden_dim"],
         num_heads=model_params["num_heads"],
         head_dim=model_params["head_dim"],
@@ -86,7 +87,8 @@ def test_model_initialization(model) -> None:
         assert tokens[1] == 0  # '<unk>'
         assert tokens[2] == 0  # '<unk>'
 
-        @pytest.mark.parametrize("input_text, expected_tokens",
+        @pytest.mark.parametrize(
+            "input_text, expected_tokens",
             [
                 ("hello", [2]),
                 ("hi", [3]),

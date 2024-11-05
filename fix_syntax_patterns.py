@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 
-def fix_function_definitions(content: str) -> str:
+def fix_function_definitions(content: str):
     """Fix function definitions with return type annotations."""
     # Fix empty parameter lists with return type
     content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*\)\s*->\s*None:',
@@ -23,10 +23,10 @@ def fix_function_definitions(content: str) -> str:
     content
     )
 
-return content
+    return content
 
 
-def fix_try_except_blocks(content: str) -> str:
+    def fix_try_except_blocks(content: str):
     """Fix try-except block formatting."""
     # Fix try-except-finally blocks
     content = re.sub(r'(\s*)try\s*:\s*\n(.*?)(\s*)except\s+([^\n]+)\s*:\s*\n',
@@ -42,10 +42,10 @@ def fix_try_except_blocks(content: str) -> str:
     flags=re.DOTALL
     )
 
-return content
+        return content
 
 
-def fix_fstring_formatting(content: str) -> str:
+        def fix_fstring_formatting(content: str):
     """Fix f-string formatting issues."""
     # Replace problematic f-string patterns
     content = content.replace('"""', '"""')
@@ -57,10 +57,10 @@ def fix_fstring_formatting(content: str) -> str:
     content
     )
 
-return content
+            return content
 
 
-def fix_list_comprehensions(content: str) -> str:
+            def fix_list_comprehensions(content: str):
     """Fix list comprehension syntax."""
     # Fix list comprehensions with multiple lines
     content = re.sub(r'\[\s*([^\n\]]+)\s+for\s+([^\n\]]+)\s+in\s+([^\n\]]+)\s*\]',
@@ -68,10 +68,10 @@ def fix_list_comprehensions(content: str) -> str:
     content
     )
 
-return content
+                return content
 
 
-def fix_method_calls(content: str) -> str:
+                def fix_method_calls(content: str):
     """Fix method call formatting."""
     # Fix method calls with multiple parameters
     content = re.sub(r'(\w+)\s*\(\s*([^)]+)\s*\)',
@@ -79,10 +79,10 @@ def fix_method_calls(content: str) -> str:
     content
     )
 
-return content
+                    return content
 
 
-def process_file(file_path: Path) -> None:
+                    def process_file(file_path: Path):
     """Process a single file to fix syntax patterns."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:

@@ -2,7 +2,7 @@ import re
 
 
 
-def fix_imports_and_dataclass(content) -> None:
+def fix_imports_and_dataclass(content):
     """Fix imports and dataclass field definitions."""
     # Split content into lines
     lines = content.split("\n")
@@ -15,9 +15,9 @@ def fix_imports_and_dataclass(content) -> None:
         if line.startswith(("from", "import")):
             if "dataclasses import dataclass" in line:
                 imports.append("from dataclasses import dataclass, field")
-                else:
+            else:
                     imports.append(line)
-                    else:
+            else:
                         other_lines.append(line)
 
                         # Ensure we have the field import
@@ -33,11 +33,11 @@ def fix_imports_and_dataclass(content) -> None:
                                 if "@dataclass" in line:
                                     in_config = True
                                     fixed_lines.append(line)
-                                continue
+                                    continue
 
                                 if in_config and line.strip().startswith("class GenerationConfig"):
                                     fixed_lines.append(line)
-                                continue
+                                    continue
 
                                 if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
                                     # Skip empty lines and comments in config
@@ -61,14 +61,14 @@ def fix_imports_and_dataclass(content) -> None:
                                                         if match:
                                                             actual_default = match.group(1).strip()
                                                             fixed_line = f"    {field_name}: {field_type} = field(default_factory={actual_default})"
-                                                            else:
+                                                        else:
                                                                 match = re.search(r"default=([^, \)]+)", default_value)
                                                                 if match:
                                                                     actual_default = match.group(1).strip()
                                                                     fixed_line = f"    {field_name}: {field_type} = field(default={actual_default})"
                                                                     if "fixed_line" in locals():
                                                                         fixed_lines.append(fixed_line)
-                                                                    continue
+                                                                        continue
 
                                                                     # Default case - simple field with default value
                                                                     fixed_line = f"    {field_name}: {field_type} = field(default={default_value})"
@@ -76,22 +76,22 @@ def fix_imports_and_dataclass(content) -> None:
                                                                     else:
                                                                         # Field without default value
                                                                         fixed_lines.append(f"    {stripped}")
-                                                                        else:
+                                                                    else:
                                                                             # Field without default value
                                                                             fixed_lines.append(f"    {stripped}")
-                                                                            else:
+                                                                    else:
                                                                                 fixed_lines.append(line)
-                                                                                else:
+                                                                    else:
                                                                                     # If we hit a blank line after fields, we're done with config
                                                                                     if in_config and not line.strip() and fixed_lines[-1].strip():
                                                                                         in_config = False
                                                                                         fixed_lines.append(line)
 
                                                                                         # Combine everything back together
-                                                                                    return "\n".join(imports + [""] + fixed_lines)
+                                                                                        return "\n".join(imports + [""] + fixed_lines)
 
 
-                                                                                    def main():
+                                                                                        def main():
                                                                                         # Read the original file
                                                                                         with open("src/models/text_to_anything.py", "r") as f:
                                                                                         content = f.read()

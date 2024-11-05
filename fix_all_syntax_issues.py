@@ -17,7 +17,7 @@ def write_fixed_string_formatting():
     content = """"""Fix string formatting issues in Python files."""
 
 
-    def fix_multiline_fstrings(filename: str) -> None:
+    def fix_multiline_fstrings(filename: str):
         """Fix multiline f-strings formatting."""
         with open(filename, "r") as f:
         content = f.read()
@@ -49,14 +49,14 @@ def write_fixed_string_formatting():
             elif in_fstring:
                 current_fstring.append(line)
                 # Regular line
-                else:
+            else:
                     fixed_lines.append(line)
 
                     with open(filename, "w") as f:
                     f.write("\\n".join(fixed_lines))
 
 
-                    def format_fstring(lines: list) -> list:
+                        def format_fstring(lines: list):
                         """Format a multiline f-string."""
                         indent = len(lines[0]) - len(lines[0].lstrip())
                         base_indent = " " * indent
@@ -71,10 +71,10 @@ def write_fixed_string_formatting():
 
                             # Split back into lines
                             formatted_lines = joined.split("\\n")
-                        return [(base_indent + line) if i > 0 else line for i, line in enumerate(formatted_lines)]
+                            return [(base_indent + line) if i > 0 else line for i, line in enumerate(formatted_lines)]
 
 
-                        def main():
+                            def main():
                             """Process all Python files in the project."""
                             root_dir = Path(".")
                             for file_path in root_dir.rglob("*.py"):
@@ -90,12 +90,12 @@ def write_fixed_string_formatting():
                                         f.write(content)
 
 
-                                        def write_text_to_anything_fixes():
+                                            def write_text_to_anything_fixes():
                                             """Create text to anything fix scripts."""
                                             base_content = """"""Fix text to anything conversion utilities."""
 
 
-                                            def fix_text_to_anything():
+                                                def fix_text_to_anything():
                                                 """Fix text to anything conversion code."""
                                                 files_to_process = [
                                                 "src/models/text_to_anything.py",
@@ -106,7 +106,7 @@ def write_fixed_string_formatting():
                                                 for file_path in files_to_process:
                                                     if not Path(file_path).exists():
                                                         print(f"Skipping {file_path} - file not found")
-                                                    continue
+                                                        continue
 
                                                     print(f"Processing {file_path}")
                                                     with open(file_path, "r") as f:
@@ -125,30 +125,28 @@ def write_fixed_string_formatting():
                                                     f.write(content)
 
 
-                                                    def fix_syntax_issues(content: str) -> str:
+                                                        def fix_syntax_issues(content: str):
                                                         """Fix common syntax issues."""
                                                         # Fix trailing commas
                                                         content = re.sub(r", \\s*\\)", ")", content)
 
                                                         # Fix multiple blank lines
-                                                        content = re.sub(r"\\n{3, }", "\\n\\n", content)
+                                                        content = re.sub(r"\\n{3,}", "\\n\\n", content)
 
                                                         # Fix spaces around operators
                                                         content = re.sub(r"\\s*([+\\-*/=])\\s*", r" \\1 ", content)
 
-                                                    return content
+                                                            return content
 
 
-                                                    def fix_imports(content: str) -> str:
+                                                            def fix_imports(content: str):
                                                         """Fix import statements."""
                                                         lines = content.split("\\n")
                                                         import_lines = []
-                                                        other_lines = []
-
-                                                        for line in lines:
+                                                        other_lines = [] for line in lines:
                                                             if line.startswith(("import ", "from ")):
                                                                 import_lines.append(line)
-                                                                else:
+                                                            else:
                                                                     other_lines.append(line)
 
                                                                     # Sort imports
@@ -158,24 +156,24 @@ def write_fixed_string_formatting():
                                                                 return "\\n".join(import_lines + [""] + other_lines)
 
 
-                                                                def fix_function_definitions(content: str) -> str:
+                                                                def fix_function_definitions(content: str):
                                                                     """Fix function definitions."""
                                                                     try:
                                                                         tree = ast.parse(content)
-                                                                        except SyntaxError:
+                                                                    except SyntaxError:
                                                                         return content
 
                                                                         class FunctionVisitor(ast.NodeTransformer):
-                                                                            def visit_FunctionDef(self, node): -> None:
+                                                                            def def visit_FunctionDef(self, node): -> None:
                                                                                 # Add return type hints if missing
                                                                                 if node.returns is None:
                                                                                     node.returns = ast.Name(id="None", ctx=ast.Load())
-                                                                                return node
+                                                                                    return node
 
                                                                                 visitor = FunctionVisitor()
                                                                                 new_tree = visitor.visit(tree)
 
-                                                                            return ast.unparse(new_tree)
+                                                                                    return ast.unparse(new_tree)
 
 
                                                                             if __name__ == "__main__":
@@ -195,11 +193,11 @@ def write_fixed_string_formatting():
                                                                                     ))
 
 
-                                                                                    def write_syntax_structure_fix(): """Create syntax structure fix script."""
+                                                                                        def write_syntax_structure_fix(): """Create syntax structure fix script."""
                                                                                         content = """"""Fix syntax structure in Python files."""
 
 
-                                                                                        def fix_syntax_structure(filename: str) -> None:
+                                                                                            def fix_syntax_structure(filename: str):
                                                                                             """Fix syntax structure issues in a Python file."""
                                                                                             with open(filename, "r") as f:
                                                                                             content = f.read()
@@ -214,52 +212,50 @@ def write_fixed_string_formatting():
                                                                                             f.write(content)
 
 
-                                                                                            def fix_basic_syntax(content: str) -> str:
+                                                                                                def fix_basic_syntax(content: str):
                                                                                                 """Fix basic syntax issues."""
                                                                                                 # Fix indentation
                                                                                                 lines = content.split("\\n")
                                                                                                 fixed_lines = []
-                                                                                                indent_level = 0
-
-                                                                                                for line in lines:
+                                                                                                indent_level = 0 for line in lines:
                                                                                                     stripped = line.strip()
                                                                                                     if stripped:
                                                                                                         if stripped.startswith(("def ", "class ", "if ", "elif ", "else:", "try:", "except", "finally:", "with ")):
                                                                                                             fixed_lines.append("    " * indent_level + stripped)
                                                                                                             if not stripped.endswith(":"):
                                                                                                                 indent_level += 1
-                                                                                                                else:
+                                                                                                            else:
                                                                                                                     fixed_lines.append("    " * indent_level + stripped)
-                                                                                                                    else:
+                                                                                                            else:
                                                                                                                         fixed_lines.append("")
 
-                                                                                                                    return "\\n".join(fixed_lines)
+                                                                                                                return "\\n".join(fixed_lines)
 
 
-                                                                                                                    def fix_advanced_syntax(content: str) -> str:
+                                                                                                                def fix_advanced_syntax(content: str):
                                                                                                                         """Fix advanced syntax issues."""
                                                                                                                         try:
                                                                                                                             tree = ast.parse(content)
-                                                                                                                            except SyntaxError:
+                                                                                                                        except SyntaxError:
                                                                                                                             return content
 
                                                                                                                             class SyntaxFixer(ast.NodeTransformer):
-                                                                                                                                def visit_FunctionDef(self, node): -> None:
+                                                                                                                                def def visit_FunctionDef(self, node): -> None:
                                                                                                                                     # Ensure function has docstring
                                                                                                                                     if not(node.body and isinstance(node.body[0], ast.Expr) and
                                                                                                                                     isinstance(node.body[0].value, ast.Str)):
                                                                                                                                     node.body.insert(0, ast.Expr(
                                                                                                                                     value=ast.Str(s=f"{node.name} function.")
                                                                                                                                     ))
-                                                                                                                                return node
+                                                                                                                                        return node
 
                                                                                                                                 fixer = SyntaxFixer()
                                                                                                                                 new_tree = fixer.visit(tree)
 
-                                                                                                                            return ast.unparse(new_tree)
+                                                                                                                                        return ast.unparse(new_tree)
 
 
-                                                                                                                            def main():
+                                                                                                                                    def main():
                                                                                                                                 """Process all Python files in the project."""
                                                                                                                                 root_dir = Path(".")
                                                                                                                                 for file_path in root_dir.rglob("*.py"):
@@ -275,7 +271,7 @@ def write_fixed_string_formatting():
                                                                                                                                             f.write(content)
 
 
-                                                                                                                                            def main():
+                                                                                                                                                def main():
                                                                                                                                                 """Fix all syntax issues in the codebase."""
                                                                                                                                                 write_fixed_string_formatting()
                                                                                                                                                 write_text_to_anything_fixes()

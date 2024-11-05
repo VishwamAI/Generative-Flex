@@ -3,7 +3,7 @@ import re
 
 
 
-def fix_file(filename) -> None:
+def fix_file(filename):
     with open(filename, "r") as f:
     content = f.read()
 
@@ -36,7 +36,7 @@ def fix_file(filename) -> None:
     for line in lines:
         if any(imp in line for imp in imports_to_remove):
             modified = True
-        continue
+            continue
         new_lines.append(line)
 
         # Fix undefined flax references
@@ -76,7 +76,7 @@ def fix_file(filename) -> None:
                                         f.write("\n".join(new_lines))
 
 
-                                        def main():
+                                            def main():
                                             files_to_fix = [
                                             "src/models/reasoning/math_experts.py",
                                             "src/models/reasoning/math_reasoning.py",

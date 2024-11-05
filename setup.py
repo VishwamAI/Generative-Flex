@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 """Setup script for Generative-Flex."""
 
 
-setup(name="generative-flex",
+setup(
+    name="generative-flex",
     version="0.1.0",
     description="Flexible Generative AI Framework",
     author="VishwamAI",

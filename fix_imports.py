@@ -22,7 +22,7 @@ def fix_imports():
                 for imp in imports[1:]:
                     if imp in content:
                         content = content.replace(imp, "")
-                        else:
+                    else:
                             # Add new imports after existing imports
                             first_non_import = content.find("\n\n")
                             if first_non_import == -1:
@@ -41,9 +41,9 @@ def fix_imports():
                                 subprocess.run(["black", file_path])
                                 except Exception as e:
                                     print(f"Error processing {file_path}: {e}")
-                                return False
+                                    return False
 
-                            return True
+                                    return True
 
 
                             if __name__ == "__main__":

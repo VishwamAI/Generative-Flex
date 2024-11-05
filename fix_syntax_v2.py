@@ -2,7 +2,7 @@ import os
 
 
 
-def fix_file_syntax(filename) -> None:
+def fix_file_syntax(filename):
     with open(filename, "r") as f:
     content = f.read()
 
@@ -22,27 +22,27 @@ def fix_file_syntax(filename) -> None:
             new_lines.append(" " * indent + "max_position_embeddings = (")
             new_lines.append(" " * (indent + 4) + "config.max_position_embeddings")
             new_lines.append(" " * indent + ")")
-            elif "self.config.max_sequence_length" in line:
+        elif "self.config.max_sequence_length" in line:
                 modified = True
                 indent = len(line) - len(line.lstrip())
                 new_lines.append(" " * indent + "sequence_length = (")
                 new_lines.append(" " * (indent + 4) + "self.config.max_sequence_length")
                 new_lines.append(" " * indent + ")")
-                elif "config.hidden_size, 256" in line:
+        elif "config.hidden_size, 256" in line:
                     modified = True
                     indent = len(line) - len(line.lstrip())
                     new_lines.append(" " * indent + "dimensions = (")
                     new_lines.append(" " * (indent + 4) + "config.hidden_size,")
                     new_lines.append(" " * (indent + 4) + "256")
                     new_lines.append(" " * indent + ")")
-                    elif "generation_config.num_attention_heads * 8" in line:
+        elif "generation_config.num_attention_heads * 8" in line:
                         modified = True
                         indent = len(line) - len(line.lstrip())
                         new_lines.append(" " * indent + "head_dim = (")
                         new_lines.append(" " * (indent + 4) + "generation_config.num_attention_heads * 8"
                         )
                         new_lines.append(" " * indent + ")")
-                        else:
+        else:
                             # Handle other potential line continuation issues
                             if(line.strip().endswith(", ") or line.strip().endswith("(")
                             ) and i + 1 < len(lines):
@@ -60,7 +60,7 @@ def fix_file_syntax(filename) -> None:
                                     )
                                     new_lines.append(" " * current_indent + ")")
                                     i += 2
-                                continue
+                                    continue
 
                                 new_lines.append(line)
                                 i += 1
@@ -71,7 +71,7 @@ def fix_file_syntax(filename) -> None:
                                     f.write("\n".join(new_lines))
 
 
-                                    def main():
+                                        def main():
                                         files_to_fix = [
                                         "src/models/reasoning/math_reasoning.py",
                                         "src/models/text_to_anything.py",

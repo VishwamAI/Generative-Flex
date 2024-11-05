@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 
-def fix_function_parameters(content: str) -> str:
+def fix_function_parameters(content: str):
     """Fix function parameter formatting."""
     # Fix self parameter definitions
     content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*self\s*,\s*\)',
@@ -23,10 +23,10 @@ def fix_function_parameters(content: str) -> str:
     content
     )
 
-return content
+    return content
 
 
-def fix_method_calls(content: str) -> str:
+    def fix_method_calls(content: str):
     """Fix method call formatting."""
     # Fix TransformerBlock calls
     content = re.sub(r'x\s*=\s*TransformerBlock\([^)]+\)\s*\(\s*x\s*,\s*[^)]+\)',
@@ -40,20 +40,18 @@ def fix_method_calls(content: str) -> str:
     content
     )
 
-return content
+        return content
 
 
-def fix_indentation(content: str) -> str:
+        def fix_indentation(content: str):
     """Fix indentation issues."""
     lines = content.split('\n')
     fixed_lines = []
-    current_indent = 0
-
-    for line in lines:
+    current_indent = 0 for line in lines:
         stripped = line.lstrip()
         if not stripped:  # Empty line
         fixed_lines.append('')
-    continue
+        continue
 
     # Adjust indentation for blocks
     if stripped.startswith(('def ', 'class ', 'if ', 'else:', 'elif ', 'try:', 'except ', 'finally:', 'for ', 'while ')):
@@ -61,19 +59,19 @@ def fix_indentation(content: str) -> str:
             indent = '    ' * current_indent
             fixed_lines.append(indent + stripped)
             current_indent += 1
-            else:
+        else:
                 indent = '    ' * current_indent
                 fixed_lines.append(indent + stripped)
-                else:
+        else:
                     if stripped.startswith(('return ', 'raise ', 'break', 'continue', 'pass')):
                         current_indent = max(0, current_indent - 1)
                         indent = '    ' * current_indent
                         fixed_lines.append(indent + stripped)
 
-                    return '\n'.join(fixed_lines)
+                        return '\n'.join(fixed_lines)
 
 
-                    def fix_dict_formatting(content: str) -> str:
+                        def fix_dict_formatting(content: str):
                         """Fix dictionary formatting."""
                         # Fix dictionary comprehensions
                         content = re.sub(r'\{\s*([^:]+)\s*:\s*([^}]+)\s+for\s+([^}]+)\s*\}',
@@ -87,10 +85,10 @@ def fix_indentation(content: str) -> str:
                         content
                         )
 
-                    return content
+                            return content
 
 
-                    def process_file(file_path: Path) -> None:
+                            def process_file(file_path: Path):
                         """Process a single file to fix syntax patterns."""
                         try:
                             with open(file_path, 'r', encoding='utf-8') as f:

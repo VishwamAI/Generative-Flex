@@ -4,7 +4,7 @@ import re
 
 
 
-def fix_indentation(content) -> None:
+def fix_indentation(content):
     """Fix indentation issues while preserving Python syntax."""
     lines = content.split("\n")
     fixed_lines = []
@@ -18,7 +18,7 @@ def fix_indentation(content) -> None:
         # Skip empty lines
         if not stripped:
             fixed_lines.append("")
-        continue
+            continue
 
         # Handle indentation for class definitions
         if re.match(r"^class\s+\w+.*:", stripped):
@@ -26,13 +26,13 @@ def fix_indentation(content) -> None:
             in_class = True
             fixed_lines.append(line.lstrip())
             indent_level += 1
-        continue
+            continue
 
         # Handle indentation for function definitions
         if re.match(r"^def\s+\w+.*:", stripped):
             if in_class:
                 indent_level = 1
-                else:
+            else:
                     indent_level = 0
                     in_function = True
                     fixed_lines.append("    " * indent_level + stripped)
@@ -43,33 +43,33 @@ def fix_indentation(content) -> None:
                 if re.match(r"^(if|elif|else|for|while|try|except|with)\s*.*:", stripped):
                     fixed_lines.append("    " * indent_level + stripped)
                     indent_level += 1
-                continue
+                    continue
 
                 # Handle return statements
                 if stripped.startswith("return "):
                     fixed_lines.append("    " * indent_level + stripped)
-                continue
+                    continue
 
                 # Handle closing brackets/braces
                 if stripped in [")", "]", "}"]:
                     indent_level = max(0, indent_level - 1)
                     fixed_lines.append("    " * indent_level + stripped)
-                continue
+                    continue
 
                 # Handle function/class body
                 if in_function or in_class:
                     fixed_lines.append("    " * indent_level + stripped)
-                    else:
+                else:
                         fixed_lines.append(stripped)
 
                         # Reset indentation after return statements
                         if stripped.startswith("return "):
                             indent_level = max(0, indent_level - 1)
 
-                        return "\n".join(fixed_lines)
+                            return "\n".join(fixed_lines)
 
 
-                        def process_file(filename) -> None:
+                            def process_file(filename):
                             """Process a single file to fix indentation."""
                             print(f"Fixing indentation in {filename}")
                             with open(filename, "r", encoding="utf-8") as f:
@@ -83,7 +83,7 @@ def fix_indentation(content) -> None:
                             f.write(fixed_content)
 
 
-                            def main():
+                                def main():
                                 """Fix indentation in files with E999 errors."""
                                 files_to_fix = [
                                 "src/training/train_mmmu.py",

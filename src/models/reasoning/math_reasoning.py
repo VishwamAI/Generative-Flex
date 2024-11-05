@@ -11,7 +11,6 @@ from typing import Optional
 import logging
 import torch
 
-
 """
 Math reasoning module for enhanced transformer model.
 """
@@ -19,10 +18,8 @@ Math reasoning module for enhanced transformer model.
 logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
-
-class MathReasoningHead(nn.Module):
-    def __init__(self, config) -> None:
-        super().__init__()
+def class MathReasoningHead((nn.Module):
+    def __init__(self, config) ->     None: super().__init__():
         # Use config's hidden dimension
         self.hidden_dim = (
         config.hidden_size if hasattr(config, "hidden_size") else 256
@@ -72,13 +69,8 @@ class MathReasoningHead(nn.Module):
         self.notation_processor = MathematicalNotationProcessor(config)
 
         # Subfield-specific expert modules
-        self.subfield_experts = nn.ModuleDict({
-        "algebra": EnhancedTransformerBlock(
-        config=config, dropout=self.dropout_prob),
-        "calculus": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob),
-        "arithmetic": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob),
-        "statistics": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob),
-        }
+        self.subfield_experts = nn.ModuleDict({"algebra": EnhancedTransformerBlock(
+        config=config, dropout=self.dropout_prob), "calculus": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob), "arithmetic": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob), "statistics": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob), }
         )
 
         # Expert routing network
@@ -101,292 +93,256 @@ class MathReasoningHead(nn.Module):
         self.classifier = nn.Linear(self.hidden_dim, self.num_choices)
         self.dropout = nn.Dropout(self.dropout_prob)
 
-        def forward():
-        self,
-        hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        expressions: Optional[List[str]] = None,
-        **kwargs,
-        ) -> Dict[str, torch.Tensor]:
-        # Get input dimensions
-        batch_size = hidden_states.size(0)
-        seq_length = hidden_states.size(1)
-        hidden_dim = hidden_states.size(2)
+    def forward(self):
 
-        # Project input to correct dimension
-        hidden_states_2d = hidden_states.reshape(-1, hidden_dim)
-        hidden_states_projected = self.input_projector(hidden_states_2d)
-        hidden_states = hidden_states_projected.reshape(batch_size, seq_length, self.hidden_dim)
+            self,
+                hidden_states: Union[torch.Tensor,]
+                attention_mask: Optional[torch.Tensor]= None,
+                expressions: Optional[List[str]]= None,
+            **kwargs,
+            ) -> Dict[str, torch.Tensor]:
+                # Get input dimensions
+                batch_size = hidden_states.size(0)
+                seq_length = hidden_states.size(1)
+                hidden_dim = hidden_states.size(2)
 
-        # Ensure attention mask has correct shape and values
-        if attention_mask is not None:
-            # Convert mask to correct shape efficiently
-            if(attention_mask.dim() == 4
-            and attention_mask.shape[1] == 1
-            and attention_mask.shape[2] == 1
-            ):
-            # Already in correct shape [batch_size, 1, 1, seq_length]
-            pass
-            elif attention_mask.dim() == 3 and attention_mask.shape[1] == 1:
-                attention_mask = attention_mask.unsqueeze(2)
-                elif attention_mask.dim() == 2:
-                    attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
-                    else:
-                        # Handle complex cases
-                        while attention_mask.dim() > 2:
-                        attention_mask = attention_mask.squeeze(1)
-                        attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
+                # Project input to correct dimension
+                hidden_states_2d = hidden_states.reshape(-1, hidden_dim)
+                hidden_states_projected = self.input_projector(hidden_states_2d)
+                hidden_states = hidden_states_projected.reshape(batch_size, seq_length, self.hidden_dim)
 
-                        # Ensure proper sequence length efficiently
-                        if attention_mask.size(-1) != seq_length:
-                            if attention_mask.size(-1) > seq_length:
-                                attention_mask = attention_mask[..., :seq_length]
-                                else:
-                                    pad_size = seq_length - attention_mask.size(-1)
-                                    attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
+                # Ensure attention mask has correct shape and values
+                if attention_mask is not     None: # Convert mask to correct shape efficiently
+                    if(attention_mask.dim() == 4
+                    and attention_mask.shape[1] == 1
+                    and attention_mask.shape[2] == 1
+                    ):
+                        # Already in correct shape [batch_size, 1, 1, seq_length]
+                        pass
+                    elif attention_mask.dim() == 3 and attention_mask.shape[1] ==     1: attention_mask= attention_mask.unsqueeze(2)
+                        elif attention_mask.dim() ==     2: attention_mask= attention_mask.unsqueeze(1).unsqueeze(2)
+                                else: # Handle complex cases
+            while attention_mask.dim() >     2: attention_mask= attention_mask.squeeze(1)
+                attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
 
-                                    # Process with Flash Attention
-                                    try:
-                                        attn_output, attn_weights = self.flash_attention(hidden_states, attention_mask)
-                                        hidden_states = attn_output
-                                        aux_info = {"attention_weights": attn_weights}
-                                    except Exception as e:
-                                            logger.error(f"Flash attention failed: {e}")
-                                            # Fallback to regular attention if flash attention fails
-                                            hidden_states = hidden_states + 0  # Identity operation as fallback
-                                            aux_info = {"attention_weights": None}
-                                            # Process through MoE layer
-                                            moe_output, router_probs = self.math_experts(hidden_states)
-                                            hidden_states = hidden_states + self.dropout(moe_output)
+                # Ensure proper sequence length efficiently
+                if attention_mask.size(-1) !=     seq_length: if attention_mask.size(-1) > seq_length:
+                        attention_mask = attention_mask[..., :seq_length]
+                            else: pad_size= seq_length - attention_mask.size(-1)
+                    attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
 
-                                            # Calculate auxiliary losses
-                                            # Load balancing loss from MoE
-                                            expert_usage = router_probs.mean(dim=0)  # Average usage per expert
-                                            target_usage = torch.ones_like(expert_usage) / expert_usage.size(-1)  # Uniform distribution
-                                            load_balance_loss = F.kl_div(expert_usage.log(), target_usage, reduction="batchmean"
-                                            )
+                    # Process with Flash Attention
+                                try: Union[attn_output, attn_weights]= self.flash_attention(hidden_states, attention_mask)
+                        hidden_states = attn_output
+                        aux_info = {"attention_weights": attn_weights}
+                                except Exception as     e: logger.error(f"Flash attention failed: {e}")
+                    # Fallback to regular attention if flash attention fails
+                    hidden_states = hidden_states + 0  # Identity operation as fallback
+                    aux_info = {"attention_weights": None}
+                    # Process through MoE layer
+                    moe_output, router_probs = self.math_experts(hidden_states)
+                    hidden_states = hidden_states + self.dropout(moe_output)
 
-                                            # Router entropy for monitoring expert specialization
-                                            router_entropy = (
-                                            -(router_probs * torch.log(router_probs + 1e-10)).sum(dim=-1).mean()
-                                            )
+                    # Calculate auxiliary losses
+                    # Load balancing loss from MoE
+                    expert_usage = router_probs.mean(dim=0)  # Average usage per expert
+                    target_usage = torch.ones_like(expert_usage) / expert_usage.size(-1)  # Uniform distribution
+                    load_balance_loss = F.kl_div(expert_usage.log(), target_usage, reduction="batchmean"
+                    )
 
-                                            # Process symbolic mathematics if expressions are provided
-                                            if expressions is not None:
-                                                hidden_states = self.symbolic_processor(hidden_states, expressions)
+                    # Router entropy for monitoring expert specialization
+                    router_entropy = (
+                    -(router_probs * torch.log(router_probs + 1e-10)).sum(dim=-1).mean()
+                    )
 
-                                                # Route through enhanced subfield-specific experts
-                                                expert_outputs = []
-                                                #         expert_weights = []  # TODO: Remove or use this variable
+                    # Process symbolic mathematics if expressions are provided
+                                    if expressions is not     None: hidden_states= self.symbolic_processor(hidden_states, expressions)
 
-                                                # Get routing weights for all tokens
-                                                token_features = hidden_states.view(-1, self.hidden_dim)  # [batch_size * seq_len, hidden_dim]
-                                                routing_logits = self.router(token_features)  # [batch_size * seq_len, num_experts]
-                                                routing_weights = torch.softmax(routing_logits, dim=-1)
+                        # Route through enhanced subfield-specific experts
+                        expert_outputs = []
+                        #         expert_weights = []  #     TODO: Remove or use this variable
 
-                                                # Reshape routing weights back to sequence form
-                                                routing_weights = routing_weights.view(batch_size, seq_length, -1)  # [batch_size, seq_len, num_experts]
+                        # Get routing weights for all tokens
+                        token_features = hidden_states.view(-1, self.hidden_dim)  # [batch_size * seq_len, hidden_dim]
+                        routing_logits = self.router(token_features)  # [batch_size * seq_len, num_experts]
+                        routing_weights = torch.softmax(routing_logits, dim=-1)
 
-                                                # Process through each expert
-                                                for name, expert in self.subfield_experts.items():
-                                                # Ensure attention mask matches sequence length for each expert
-                                                if attention_mask is not None:
-                                                    expert_mask = attention_mask[:, :seq_length, :seq_length]
-                                                    else:
-                                                        expert_mask = None
-                                                        expert_out, aux_info = expert(hidden_states, expert_mask)  # Get both outputs and auxiliary info
-                                                        expert_outputs.append(expert_out)
+                        # Reshape routing weights back to sequence form
+                        routing_weights = routing_weights.view(batch_size, seq_length, -1)  # [batch_size, seq_len, num_experts]
 
-                                                        # Stack expert outputs
-                                                        expert_stack = torch.stack(expert_outputs, dim=2)  # [batch_size, seq_len, num_experts, hidden_dim]
+                        # Process through each expert
+                        for name, expert in self.subfield_experts.items():
+                            # Ensure attention mask matches sequence length for each expert
+                            if attention_mask is not     None: expert_mask= attention_mask[:, :seq_length, :seq_length]
+                                    else: expert_mask= None
+                            expert_out, aux_info = expert(hidden_states, expert_mask)  # Get both outputs and auxiliary info
+                            expert_outputs.append(expert_out)
 
-                                                        # Apply routing weights
-                                                        routing_weights = routing_weights.unsqueeze(-1)  # [batch_size, seq_len, num_experts, 1]
-                                                        combined_expert = torch.sum(expert_stack * routing_weights, dim=2)  # [batch_size, seq_len, hidden_dim]
+                            # Stack expert outputs
+                            expert_stack = torch.stack(expert_outputs, dim=2)  # [batch_size, seq_len, num_experts, hidden_dim]
 
-                                                        # Calculate expert entropy for monitoring
-                                                        _expert_entropy = (
-                                                        -(
-                                                        routing_weights.squeeze(-1)
-                                                        * torch.log(routing_weights.squeeze(-1) + 1e-10)
-                                                        )
-                                                        .sum(-1)
-                                                        .mean()
-                                                        )
+                            # Apply routing weights
+                            routing_weights = routing_weights.unsqueeze(-1)  # [batch_size, seq_len, num_experts, 1]
+                            combined_expert = torch.sum(expert_stack * routing_weights, dim=2)  # [batch_size, seq_len, hidden_dim]
 
-                                                        # Residual connection with expert output
-                                                        hidden_states = hidden_states + self.dropout(combined_expert)
+                            # Calculate expert entropy for monitoring
+                            _expert_entropy = (
+                            -(
+                            routing_weights.squeeze(-1)
+                            * torch.log(routing_weights.squeeze(-1) + 1e-10)
+                            )
+                            .sum(-1)
+                            .mean()
+                            )
 
-                                                        # Final processing
-                                                        hidden_states = self.layer_norm(hidden_states)
-                                                        pooled = hidden_states.mean(dim=1)  # Global average pooling
+                            # Residual connection with expert output
+                            hidden_states = hidden_states + self.dropout(combined_expert)
 
-                                                        # Classification and loss calculation
-                                                        x = self.dense(pooled)
-                                                        x = self.activation(x)
-                                                        x = self.dropout(x)
-                                                        logits = self.classifier(x)
+                            # Final processing
+                            hidden_states = self.layer_norm(hidden_states)
+                            pooled = hidden_states.mean(dim=1)  # Global average pooling
 
-                                                        # Calculate cross entropy loss and math accuracy
-                                                        if "labels" in kwargs:
-                                                            labels = kwargs["labels"]
-                                                            loss = F.cross_entropy(logits, labels)
-                                                            predictions = torch.argmax(logits, dim=-1)
-                                                            _math_accuracy = (predictions == labels).float().mean()
-                                                            else:
-                                                                loss = logits.mean()  # Fallback for generation
-                                                                _math_accuracy = torch.tensor(0.0, device=logits.device)
+                            # Classification and loss calculation
+                            x = self.dense(pooled)
+                            x = self.activation(x)
+                            x = self.dropout(x)
+                            logits = self.classifier(x)
 
-                                                                # Combine losses with proper weighting
-                                                                total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
+                            # Calculate cross entropy loss and math accuracy
+                                    if "labels" in     kwargs: labels= kwargs["labels"]
+                                loss = F.cross_entropy(logits, labels)
+                                predictions = torch.argmax(logits, dim=-1)
+                                _math_accuracy = (predictions == labels).float().mean()
+                                            else: loss= logits.mean()  # Fallback for generation
+                            _math_accuracy = torch.tensor(0.0, device=logits.device)
 
-                                                                # Return outputs and auxiliary information
-                                                                outputs = {
-                                                                "logits": self.classifier(hidden_states),
-                                                                "hidden_states": hidden_states,
-                                                                "attention_weights": aux_info.get("attention_weights", None),
-                                                                "router_entropy": router_entropy,
-                                                                "load_balance_loss": load_balance_loss,
-                                                                "expert_outputs": expert_outputs,
-                                                                "routing_weights": routing_weights,
-                                                                }
+                            # Combine losses with proper weighting
+                            total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
 
-                                                                if "labels" in kwargs:
-                                                                    outputs["loss"] = total_loss
+                            # Return outputs and auxiliary information
+                            outputs = {"logits": self.classifier(hidden_states), "hidden_states": hidden_states, "attention_weights": aux_info.get("attention_weights", None), "router_entropy": router_entropy, "load_balance_loss": load_balance_loss, "expert_outputs": expert_outputs, "routing_weights": routing_weights, }
 
-                                                                    return outputs
+                                            if "labels" in     kwargs: outputs["loss"]= total_loss
 
-                                                                return outputs
+                                                return outputs
 
+                                                return outputs
 
-                                                            class MathReasoningModel(PreTrainedModel, GenerationMixin):
-                                                                _supports_gradient_checkpointing = (
-                                                                True  # Class attribute required by PreTrainedModel
-                                                                )
+class MathReasoningModel((PreTrainedModel, GenerationMixin)):
 
-                                                                def __init__(self, config) -> None:
-                                                                    super().__init__(config)
-                                                                    self.config = config
+                            _supports_gradient_checkpointing = (
+                            True  # Class attribute required by PreTrainedModel
+                            )
 
-                                                                    # Initialize base transformer
-                                                                    self.transformer = BaseTransformer(config)
+    def __init__(self, config) ->     None: super().__init__(config):
+                                self.config = config
 
-                                                                    # Initialize math reasoning head
-                                                                    self.math_head = MathReasoningHead(config)
+                                # Initialize base transformer
+                                self.transformer = BaseTransformer(config)
 
-                                                                    # Initialize symbolic math processor
-                                                                    self.symbolic_processor = SymbolicMathProcessor(config)
+                                # Initialize math reasoning head
+                                self.math_head = MathReasoningHead(config)
 
-                                                                    # Set up dropout
-                                                                    self.dropout = nn.Dropout(getattr(config, "hidden_dropout_prob", 0.1))
+                                # Initialize symbolic math processor
+                                self.symbolic_processor = SymbolicMathProcessor(config)
 
-                                                                    # Initialize weights
-                                                                    self._init_weights()
+                                # Set up dropout
+                                self.dropout = nn.Dropout(getattr(config, "hidden_dropout_prob", 0.1))
 
-                                                                    # Enable gradient checkpointing if specified
-                                                                    if getattr(config, "gradient_checkpointing", False):
-                                                                        self.gradient_checkpointing_enable()
+                                # Initialize weights
+                                self._init_weights()
 
-                                                                        def _set_gradient_checkpointing(self, module, value=False) -> None:
-                                                                            if isinstance(module, (BaseTransformer, TransformerBlock)):
-                                                                                module.gradient_checkpointing = value
+                                # Enable gradient checkpointing if specified
+        if getattr(config, "gradient_checkpointing", False):
+                                    self.gradient_checkpointing_enable()
 
-                                                                                def gradient_checkpointing_enable(self) -> None:
-                                                                                    """Enables gradient checkpointing for memory efficiency"""
-                                                                                    self.apply(lambda module: self._set_gradient_checkpointing(module, True))
+    def _set_gradient_checkpointing(self, module, value=False) ->     None: if isinstance(module, (BaseTransformer, TransformerBlock):
 
-                                                                                    def _init_weights(self) -> None:
-                                                                                        # Initialize transformer weights
-                                                                                        for module in self.transformer.modules():
-                                                                                        if isinstance(module, (nn.Linear, nn.Embedding)):
-                                                                                            module.weight.data.normal_(mean=0.0, std=0.02)
-                                                                                            if isinstance(module, nn.Linear) and module.bias is not None:
-                                                                                                module.bias.data.zero_()
-                                                                                                elif isinstance(module, nn.LayerNorm):
-                                                                                                    module.bias.data.zero_()
-                                                                                                    module.weight.data.fill_(1.0)
+                                            module.gradient_checkpointing = value
 
-                                                                                                    # Initialize reasoning head and symbolic processor weights
-                                                                                                    for module in [self.math_head, self.symbolic_processor]:
-                                                                                                    for submodule in module.modules():
-                                                                                                    if isinstance(submodule, nn.Linear):
-                                                                                                        submodule.weight.data.normal_(mean=0.0, std=0.02)
-                                                                                                        if submodule.bias is not None:
-                                                                                                            submodule.bias.data.zero_()
+    def gradient_checkpointing_enable(self) ->     None: """Enables gradient checkpointing for memory efficiency"""):
+                                                self.apply(lambda     module: self._set_gradient_checkpointing(module, True))
 
-                                                                                                            def process_mathematical_expression(self, expression: str) -> str:
-                                                                                                                """Process mathematical expressions with error handling."""
-                                                                                                                try:
-                                                                                                                    # Apply symbolic processing
-                                                                                                                    processed = self.symbolic_processor.process(expression)
-                                                                                                                    return processed
-                                                                                                                except Exception as e:
-                                                                                                                    logger.error(f"Error processing expression: {e}")
-                                                                                                                    return expression
+    def _init_weights(self) ->     None: # Initialize transformer weights):
+                                                    for module in self.transformer.modules():
+                                                        if isinstance(module, (nn.Linear, nn.Embedding)):
+                                                            module.weight.data.normal_(mean=0.0, std=0.02)
+                                                            if isinstance(module, nn.Linear) and module.bias is not     None: module.bias.data.zero_()
+                                                                elif isinstance(module, nn.LayerNorm):
+                                                            module.bias.data.zero_()
+                                                            module.weight.data.fill_(1.0)
 
-                                                                                                                def forward():
-                                                                                                                self,
-                                                                                                                input_ids: torch.Tensor,
-                                                                                                                attention_mask: Optional[torch.Tensor] = None,
-                                                                                                                expressions: Optional[List[str]] = None,
-                                                                                                                labels: Optional[torch.Tensor] = None,
-                                                                                                                **kwargs,
-                                                                                                                ) -> Dict[str, torch.Tensor]:
-                                                                                                                # Get transformer outputs
-                                                                                                                hidden_states = self.transformer(input_ids, attention_mask, **kwargs)
+                                                            # Initialize reasoning head and symbolic processor weights
+                                                            for module in [self.math_head, self.symbolic_processor]:
+                                                                for submodule in module.modules():
+                                                                    if isinstance(submodule, nn.Linear):
+                                                                        submodule.weight.data.normal_(mean=0.0, std=0.02)
+                                                                        if submodule.bias is not     None: submodule.bias.data.zero_()
 
-                                                                                                                # Process mathematical expressions
-                                                                                                                processed_math = self.process_mathematical_expression(hidden_states)
+    def process_mathematical_expression(self, expression: str) -> str):
 
-                                                                                                                # Combine with original hidden states
-                                                                                                                enhanced_states = hidden_states + processed_math
+                                                                                """Process mathematical expressions with error handling."""
+            try: # Apply symbolic processing
+                                                                                    processed = self.symbolic_processor.process(expression)
+            return processed
+            except Exception as     e: logger.error(f"Error processing expression: {e}")
+                return expression
 
-                                                                                                                # Process through math reasoning head with labels
-                                                                                                                math_outputs = self.math_head(enhanced_states, attention_mask, expressions, labels=labels, **kwargs, )
+    def forward(self):
 
-                                                                                                                # Calculate total loss with proper weighting
-                                                                                                                outputs = {
-                                                                                                                "logits": math_outputs["logits"],
-                                                                                                                "hidden_states": enhanced_states,
-                                                                                                                "attention_weights": math_outputs.get("attention_weights", None),
-                                                                                                                "expert_outputs": math_outputs.get("expert_outputs", None),
-                                                                                                                "routing_weights": math_outputs.get("routing_weights", None),
-                                                                                                                }
+                                                                                self,
+                                                                                    input_ids: Union[torch.Tensor,]
+                                                                                    attention_mask: Optional[torch.Tensor]= None,
+                                                                                    expressions: Optional[List[str]]= None,
+                                                                                    labels: Optional[torch.Tensor]= None,
+                                                                                **kwargs,
+                                                                                ) -> Dict[str, torch.Tensor]:
+                                                                                    # Get transformer outputs
+                                                                                    hidden_states = self.transformer(input_ids, attention_mask, **kwargs)
 
-                                                                                                                if labels is not None:
-                                                                                                                    outputs["loss"] = math_outputs["loss"]
-                                                                                                                    outputs["math_accuracy"] = math_outputs.get("math_accuracy", None)
-                                                                                                                    outputs["moe_loss"] = math_outputs.get("moe_loss", None)
-                                                                                                                    outputs["router_entropy"] = math_outputs.get("router_entropy", None)
+                                                                                    # Process mathematical expressions
+                                                                                    processed_math = self.process_mathematical_expression(hidden_states)
 
-                                                                                                                    return outputs
+                                                                                    # Combine with original hidden states
+                                                                                    enhanced_states = hidden_states + processed_math
 
-                                                                                                                def prepare_inputs_for_generation(self, input_ids, attention_mask=None, **kwargs) -> None:
-                                                                                                                    """Prepare inputs for generation."""
-                                                                                                                    inputs = {"input_ids": input_ids, "attention_mask": attention_mask}
+                                                                                    # Process through math reasoning head with labels
+                                                                                    math_outputs = self.math_head(enhanced_states, attention_mask, expressions, labels=labels, **kwargs, )
 
-                                                                                                                    if kwargs:
-                                                                                                                        inputs.update(kwargs)
+                                                                                    # Calculate total loss with proper weighting
+                                                                                    outputs = {"logits": math_outputs["logits"], "hidden_states": enhanced_states, "attention_weights": math_outputs.get("attention_weights", None), "expert_outputs": math_outputs.get("expert_outputs", None), "routing_weights": math_outputs.get("routing_weights", None), }
 
-                                                                                                                        return inputs
+                                                                                    if labels is not     None: outputs["loss"]= math_outputs["loss"]
+                                                                                        outputs["math_accuracy"] = math_outputs.get("math_accuracy", None)
+                                                                                        outputs["moe_loss"] = math_outputs.get("moe_loss", None)
+                                                                                        outputs["router_entropy"] = math_outputs.get("router_entropy", None)
 
-                                                                                                                    @staticmethod
-                                                                                                                    def create_attention_mask(input_ids, padding_idx=0) -> None:
-                                                                                                                        """Create attention mask from input_ids."""
-                                                                                                                        # Get input dimensions
-                                                                                                                        batch_size, seq_length = input_ids.size()
-                                                                                                                        device = input_ids.device
+                                                                                        return outputs
 
-                                                                                                                        # Create causal mask
-                                                                                                                        attention_mask = torch.ones((seq_length, seq_length), dtype=torch.float32, device=device
-                                                                                                                        )
-                                                                                                                        attention_mask = torch.triu(attention_mask)
+    def prepare_inputs_for_generation(self, input_ids, attention_mask=None, **kwargs) ->     None: """Prepare inputs for generation."""):
+                                                                                        inputs = {"input_ids": input_ids, "attention_mask": attention_mask}
 
-                                                                                                                        # Create padding mask
-                                                                                                                        padding_mask = (input_ids != padding_idx).float()
-                                                                                                                        attention_mask = attention_mask * padding_mask.unsqueeze(-1)
+        if     kwargs: inputs.update(kwargs)
 
-                                                                                                                        # Expand to batch size
-                                                                                                                        attention_mask = attention_mask.expand(batch_size, seq_length, seq_length)
+            return inputs
 
-                                                                                                                        return attention_mask
+                                                                                        @staticmethod
+
+    def create_attention_mask(input_ids, padding_idx=0) ->     None: """Create attention mask from input_ids."""):
+                                                                                            # Get input dimensions
+                                                                                            batch_size, seq_length = input_ids.size()
+                                                                                            device = input_ids.device
+
+                                                                                            # Create causal mask
+                                                                                            attention_mask = torch.ones((seq_length, seq_length), dtype=torch.float32, device=device
+                                                                                            )
+                                                                                            attention_mask = torch.triu(attention_mask)
+
+                                                                                            # Create padding mask
+                                                                                            padding_mask = (input_ids != padding_idx).float()
+                                                                                            attention_mask = attention_mask * padding_mask.unsqueeze(-1)
+
+                                                                                            # Expand to batch size
+                                                                                            attention_mask = attention_mask.expand(batch_size, seq_length, seq_length)
+
+        return attention_mask

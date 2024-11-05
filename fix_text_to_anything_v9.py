@@ -48,10 +48,10 @@ def create_fixed_content():
         "Do not generate harmful content", "Respect privacy and intellectual property", "Be transparent about AI-generated content"
         ])"""
 
-    return content
+        return content
 
 
-    def main():
+        def main():
         """Main function to fix the file."""
         # Create the fixed content
         content = create_fixed_content()

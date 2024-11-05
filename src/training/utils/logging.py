@@ -8,7 +8,8 @@ class TrainingLogger:
     def __init__(self, log_dir: str = "logs") -> None:
         self.log_dir = log_dir
         os.makedirs(log_dir, exist_ok=True)
-        self.log_file = os.path.join(log_dir,
+        self.log_file = os.path.join(
+            log_dir,
             f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl",
         )
         self.metrics_history = []
@@ -34,7 +35,9 @@ class TrainingLogger:
 
                         def get_latest_metrics(self) -> Dict[str, Any]:
                             """Get the most recent metrics"""
-                            return(self.metrics_history[-1] if self.metrics_history else {})
+                            return (
+                                self.metrics_history[-1] if self.metrics_history else {}
+                            )
 
                         def save_summary(self) -> None:
                             """Save a summary of the training run"""
@@ -53,6 +56,8 @@ class TrainingLogger:
                                 "final_metrics": self.get_latest_metrics(),
                             }
 
-                            summary_file = os.path.join(self.log_dir, "training_summary.json")
+                            summary_file = os.path.join(
+                                self.log_dir, "training_summary.json"
+                            )
                             with open(summary_file, "w") as f:
                                 json.dump(summary, f, indent=2)

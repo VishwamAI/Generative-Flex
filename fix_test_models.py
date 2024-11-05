@@ -2,7 +2,7 @@ import re
 
 
 
-def fix_file_content(content) -> None:
+def fix_file_content(content):
     """Fix formatting issues in test_models.py."""
     # Split content into lines
     lines = content.split("\n")
@@ -13,7 +13,7 @@ def fix_file_content(content) -> None:
     for line in lines:
         if line.startswith(("from", "import")):
             imports.append(line)
-            else:
+        else:
                 other_lines.append(line)
 
                 # Process the rest of the file
@@ -25,7 +25,7 @@ def fix_file_content(content) -> None:
                     # Handle empty lines
                     if not line.strip():
                         fixed_lines.append("")
-                    continue
+                        continue
 
                     # Fix docstring formatting
                     if line.strip().startswith('"""'):
@@ -33,33 +33,33 @@ def fix_file_content(content) -> None:
                         if line.strip().endswith('"""') and len(line.strip()) > 3:
                             fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:-3].strip() + '"""'
                             )
-                            else:
+                        else:
                                 # Multi-line docstring
                                 if not line.strip()[3:].strip():  # Empty first line
                                 fixed_lines.append(" " * current_indent + '"""')
-                                else:
+                        else:
                                     fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
                                     )
-                                continue
+                            continue
 
                                 # Handle function definitions
                                 if line.strip().startswith("def "):
                                     in_function = True
                                     current_indent = len(line) - len(line.lstrip())
                                     fixed_lines.append(line)
-                                continue
+                                    continue
 
                                 # Handle class definitions
                                 if line.strip().startswith("class "):
                                     in_function = False
                                     current_indent = 0
                                     fixed_lines.append(line)
-                                continue
+                                    continue
 
                                 # Handle decorators
                                 if line.strip().startswith("@"):
                                     fixed_lines.append(line)
-                                continue
+                                    continue
 
                                 # Handle normal lines
                                 if line.strip():
@@ -67,7 +67,7 @@ def fix_file_content(content) -> None:
                                     if in_function and indent == 0:
                                         # This is likely a line that should be indented
                                         fixed_lines.append(" " * 4 + line.lstrip())
-                                        else:
+                                    else:
                                             fixed_lines.append(line)
 
                                             # Combine all sections

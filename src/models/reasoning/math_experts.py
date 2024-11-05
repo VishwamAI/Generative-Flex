@@ -18,7 +18,9 @@ class MathematicalExpert(nn.Module):
         self.intermediate_act_fn = nn.GELU()
         self.dense_output = nn.Linear(self.intermediate_size, self.hidden_size)
 
-        def forward(self, hidden_states: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        def forward(
+            self, hidden_states: torch.Tensor
+        ) -> Tuple[torch.Tensor, torch.Tensor]:
             """Forward pass through the mathematical expert."""
             intermediate_output = self.dense(hidden_states)
             intermediate_output = self.intermediate_act_fn(intermediate_output)

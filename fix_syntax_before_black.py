@@ -4,7 +4,7 @@ import re
 """Fix basic syntax issues before applying black formatting."""
 
 
-def fix_indentation(content: str) -> str:
+def fix_indentation(content: str):
     """Fix basic indentation issues."""
     lines = content.split('\n')
     fixed_lines = []
@@ -16,7 +16,7 @@ def fix_indentation(content: str) -> str:
         # Skip empty lines
         if not stripped:
             fixed_lines.append('')
-        continue
+            continue
 
         # Determine if this line should change indentation
         if any(stripped.startswith(keyword) for keyword in ['def ', 'class ', 'if ', 'elif ', 'else:', 'try:', 'except', 'finally:', 'with ']):
@@ -25,22 +25,22 @@ def fix_indentation(content: str) -> str:
             # Increase indent if line ends with colon
             if stripped.endswith(':'):
                 current_indent += 1
-                elif stripped in ['else:', 'except:', 'finally:', 'except Exception as e:']:
+            elif stripped in ['else:', 'except:', 'finally:', 'except Exception as e:']:
                     # These should be at the same level as their corresponding if/try
                     current_indent = max(0, current_indent - 1)
                     fixed_lines.append('    ' * current_indent + stripped)
                     current_indent += 1
-                    else:
+            else:
                         fixed_lines.append('    ' * current_indent + stripped)
 
                         # Decrease indent after return/break/continue statements
                         if stripped.startswith(('return ', 'break', 'continue')):
                             current_indent = max(0, current_indent - 1)
 
-                        return '\n'.join(fixed_lines)
+                            return '\n'.join(fixed_lines)
 
 
-                        def fix_function_definitions(content: str) -> str:
+                            def fix_function_definitions(content: str):
                             """Fix common function definition issues."""
                             lines = content.split('\n')
                             fixed_lines = []
@@ -63,20 +63,18 @@ def fix_indentation(content: str) -> str:
                                     return '\n'.join(fixed_lines)
 
 
-                                    def fix_imports(content: str) -> str:
+                                    def fix_imports(content: str):
                                         """Fix import statements."""
                                         lines = content.split('\n')
                                         import_lines = []
-                                        other_lines = []
-
-                                        for line in lines:
+                                        other_lines = [] for line in lines:
                                             if line.strip().startswith(('import ', 'from ')):
                                                 # Remove extra spaces and fix relative imports
                                                 line = re.sub(r'\s+', ' ', line.strip())
                                                 if line.startswith('from .'):
                                                     line = line.replace('from .', 'from ')
                                                     import_lines.append(line)
-                                                    else:
+                                                else:
                                                         other_lines.append(line)
 
                                                         # Sort imports
@@ -86,10 +84,10 @@ def fix_indentation(content: str) -> str:
                                                         if import_lines and other_lines:
                                                             import_lines.append('')
 
-                                                        return '\n'.join(import_lines + other_lines)
+                                                            return '\n'.join(import_lines + other_lines)
 
 
-                                                        def fix_string_literals(content: str) -> str:
+                                                            def fix_string_literals(content: str):
                                                             """Fix string literal syntax."""
                                                             # Replace problematic f-string patterns
                                                             content = re.sub(r""""", '"""', content)
@@ -99,10 +97,10 @@ def fix_indentation(content: str) -> str:
                                                             content = re.sub(r'"\s*\+\s*"', '', content)
                                                             content = re.sub(r"'\s*\+\s*'", '', content)
 
-                                                        return content
+                                                                return content
 
 
-                                                        def process_file(file_path: Path) -> None:
+                                                                def process_file(file_path: Path):
                                                             """Process a single file to fix syntax issues."""
                                                             try:
                                                                 with open(file_path, 'r', encoding='utf-8') as f:

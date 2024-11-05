@@ -8,15 +8,18 @@ class SimpleGreetingModel(nn.Module):
 
     def setup(self) -> None:
         # Define layers in setup for parameter loading
-        self.embedding = nn.Embed(num_embeddings=self.vocab_size,
+        self.embedding = nn.Embed(
+            num_embeddings=self.vocab_size,
             features=self.hidden_size,
             embedding_init=nn.initializers.normal(stddev=0.1),
         )
-        self.dense1 = nn.Dense(features=self.hidden_size,
+        self.dense1 = nn.Dense(
+            features=self.hidden_size,
             kernel_init=nn.initializers.normal(stddev=0.1),
             bias_init=nn.initializers.zeros,
         )
-        self.dense2 = nn.Dense(features=self.vocab_size,
+        self.dense2 = nn.Dense(
+            features=self.vocab_size,
             kernel_init=nn.initializers.normal(stddev=0.1),
             bias_init=nn.initializers.zeros,
         )
@@ -32,7 +35,8 @@ class SimpleGreetingModel(nn.Module):
             with open(file_path, "r") as f:
                 params = json.load(f)
                 # Convert nested dictionaries to arrays
-                return jax.tree_util.tree_map(lambda x: np.array(x) if isinstance(x, list) else x, params
+                return jax.tree_util.tree_map(
+                    lambda x: np.array(x) if isinstance(x, list) else x, params
                 )
 
             def main():
@@ -55,7 +59,8 @@ class SimpleGreetingModel(nn.Module):
 
                     # Test input
                     test_input = "hi"
-                    input_tokens = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
+                    input_tokens = jnp.array(
+                        [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
                     )
 
                     # Get model output
@@ -63,7 +68,9 @@ class SimpleGreetingModel(nn.Module):
                     predicted_tokens = jnp.argmax(logits, axis=-1)
 
                     # Convert predictions to words
-                    predicted_words = [id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens]
+                    predicted_words = [
+                        id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens
+                    ]
                     response = " ".join(predicted_words)
 
                     # Demonstrate chain-of-thought reasoning
