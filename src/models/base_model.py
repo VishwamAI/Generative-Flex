@@ -2,147 +2,172 @@ from abc import ABC, abstractmethod
 from typing import Tuple
 
 
-"""Base model classes for different types of generative models."""
+"""
+Base model classes for different types of generative models.
+"""
 
 
 class BaseModel(nn.Module, ABC):
-    """Abstract base class for all generative models."""
+    """
+    Abstract base class for all generative models.
+    """
 
     @abstractmethod
-    def setup(self) -> None:
-        """Setup model architecture."""
+    def setup(self) -> None: None:
+        """
+        Setup model architecture.
+        """
         pass
 
         @abstractmethod
-        def __call__(self, x, training: bool = False) -> None:
-            """Forward pass of the model."""
-            pass
+    def __call__(self, x, training: bool = False) -> None: None:
+        """
+        Forward pass of the model.
+        """
+        pass
 
-            def init_weights(self, rng: jnp.ndarray) -> None:
-                """Initialize model weights."""
-                pass
-
-
-                class TransformerBlock(nn.Module):
-                    """Basic Transformer block for reuse across different model types."""
-
-                    hidden_size: int
-                    num_heads: int
-                    dropout_rate: float = 0.1
-
-                    @nn.compact
-                    def __call__(self, x, training: bool = False) -> None:
-                        # Multi-head attention
-                        attention_output = nn.MultiHeadDotProductAttention(_num_heads=self.num_heads, _dropout_rate=self.dropout_rate)(x, x)
-                        x = nn.LayerNorm()(x + attention_output)
-
-                        # Feed-forward network
-                        dense_output = nn.Sequential([
-                        nn.Dense(features=4 * self.hidden_size),
-                        nn.gelu,
-                        nn.Dense(features=self.hidden_size),
-                        nn.Dropout(rate=self.dropout_rate, deterministic=not training),
-                        ]
-                        )(x)
-
-                        return nn.LayerNorm()(x + dense_output)
+    def init_weights(self, rng: jnp.ndarray) -> None: None:
+        """
+        Initialize model weights.
+        """
+        pass
 
 
-                    class PositionalEncoding(nn.Module):
-                        """Positional encoding for sequence models."""
+class TransformerBlock(nn.Module):
+    """
+    Basic Transformer block for reuse across different model types.
+    """
 
-                        max_len: int
-                        hidden_size: int
+    hidden_size: int
+    num_heads: int
+    dropout_rate: float = 0.1
 
-                        def setup(self) -> None:
-                            position = jnp.arange(self.max_len)[:, None]
-                            div_term = jnp.exp(jnp.arange(0, self.hidden_size, 2) * (-jnp.log(10000.0) / self.hidden_size)
-                            )
-                            pe = jnp.zeros((self.max_len, self.hidden_size))
-                            pe = pe.at[:, 0::2].set(jnp.sin(position * div_term))
-                            pe = pe.at[:, 1::2].set(jnp.cos(position * div_term))
-                            self.pe = pe[None, :, :]
+    @nn.compact
+    def __call__(self, x, training: bool = False) -> None: None:
+        # Multi-head attention
+        attention_output = nn.MultiHeadDotProductAttention(_num_heads=self.num_heads, _dropout_rate=self.dropout_rate)(x, x)
+        x = nn.LayerNorm()(x + attention_output)
 
-                            def __call__(self, x) -> None:
-                                return x + self.pe[:, : x.shape[1], :]
+        # Feed-forward network
+        dense_output = nn.Sequential([
+        nn.Dense(features=4 * self.hidden_size),
+        nn.gelu,
+        nn.Dense(features=self.hidden_size),
+        nn.Dropout(rate=self.dropout_rate, deterministic=not training),
+        ]
+        )(x)
 
-
-                            class BaseLanguageModel(BaseModel):
-                                """Base class for language models."""
-
-                                vocab_size: int
-                                hidden_size: int
-                                num_layers: int
-                                num_heads: int
-                                max_sequence_length: int
-                                dropout_rate: float = 0.1
-
-                                def setup(self) -> None:
-                                    self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size)
-                                    self.pos_encoding = PositionalEncoding(_max_len=self.max_sequence_length, _hidden_size=self.hidden_size)
-                                    self.transformer_blocks = [TransformerBlock(_hidden_size=self.hidden_size, _num_heads=self.num_heads, _dropout_rate=self.dropout_rate, ) for _ in range(self.num_layers)]
-                                    self.output = nn.Dense(features=self.vocab_size)
-
-                                    def __call__(self, x, training: bool = False) -> None:
-                                        x = self.embedding(x)
-                                        x = self.pos_encoding(x)
-
-                                        for block in self.transformer_blocks:
-                                        x = block(x, training=training)
-
-                                        return self.output(x)
+        return nn.LayerNorm()(x + dense_output)
 
 
-                                    class BaseImageModel(BaseModel):
-                                        """Base class for image generation models."""
+class PositionalEncoding(nn.Module):
+    """
+    Positional encoding for sequence models.
+    """
 
-                                        image_size: Tuple[int, int]
-                                        hidden_size: int
-                                        num_layers: int
-                                        num_heads: int
-                                        dropout_rate: float = 0.1
+    max_len: int
+    hidden_size: int
 
-                                        @abstractmethod
-                                        def setup(self) -> None:
-                                            pass
+    def setup(self) -> None: None:
+        position = jnp.arange(self.max_len)[:, None]
+        div_term = jnp.exp(jnp.arange(0, self.hidden_size, 2) * (-jnp.log(10000.0) / self.hidden_size)
+        )
+        pe = jnp.zeros((self.max_len, self.hidden_size))
+        pe = pe.at[:, 0::2].set(jnp.sin(position * div_term))
+        pe = pe.at[:, 1::2].set(jnp.cos(position * div_term))
+        self.pe = pe[None, :, :]
 
-                                            @abstractmethod
-                                            def __call__(self, x, training: bool = False) -> None:
-                                                pass
-
-
-                                                class BaseAudioModel(BaseModel):
-                                                    """Base class for audio generation models."""
-
-                                                    sample_rate: int
-                                                    hidden_size: int
-                                                    num_layers: int
-                                                    num_heads: int
-                                                    dropout_rate: float = 0.1
-
-                                                    @abstractmethod
-                                                    def setup(self) -> None:
-                                                        pass
-
-                                                        @abstractmethod
-                                                        def __call__(self, x, training: bool = False) -> None:
-                                                            pass
+    def __call__(self, x) -> None: None:
+        return x + self.pe[:, : x.shape[1], :]
 
 
-                                                            class BaseVideoModel(BaseModel):
-                                                                """Base class for video generation models."""
+class BaseLanguageModel(BaseModel):
 
-                                                                num_frames: int
-                                                                frame_size: Tuple[int, int]
-                                                                hidden_size: int
-                                                                num_layers: int
-                                                                num_heads: int
-                                                                dropout_rate: float = 0.1
+    """
+    Base class for language models.
+    """
 
-                                                                @abstractmethod
-                                                                def setup(self) -> None:
-                                                                    pass
+    vocab_size: int
+    hidden_size: int
+    num_layers: int
+    num_heads: int
+    max_sequence_length: int
+    dropout_rate: float = 0.1
 
-                                                                    @abstractmethod
-                                                                    def __call__(self, x, training: bool = False) -> None:
-                                                                        pass
+    def setup(self) -> None: None:
+        self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size)
+        self.pos_encoding = PositionalEncoding(_max_len=self.max_sequence_length, _hidden_size=self.hidden_size)
+        self.transformer_blocks = [TransformerBlock(_hidden_size=self.hidden_size, _num_heads=self.num_heads, _dropout_rate=self.dropout_rate, ) for _ in range(self.num_layers)]
+        self.output = nn.Dense(features=self.vocab_size)
+
+    def __call__(self, x, training: bool = False) -> None: None:
+        x = self.embedding(x)
+        x = self.pos_encoding(x)
+
+            for block in self.transformer_blocks:
+                x = block(x, training=training)
+
+                return self.output(x)
+
+
+class BaseImageModel(BaseModel):
+
+    """
+    Base class for image generation models.
+    """
+
+    image_size: Tuple[int, int]
+    hidden_size: int
+    num_layers: int
+    num_heads: int
+    dropout_rate: float = 0.1
+
+    @abstractmethod
+    def setup(self) -> None: None:
+        pass
+
+        @abstractmethod
+    def __call__(self, x, training: bool = False) -> None: None:
+        pass
+
+
+class BaseAudioModel(BaseModel):
+
+    """
+    Base class for audio generation models.
+    """
+
+    sample_rate: int
+    hidden_size: int
+    num_layers: int
+    num_heads: int
+    dropout_rate: float = 0.1
+
+    @abstractmethod
+    def setup(self) -> None: None:
+        pass
+
+        @abstractmethod
+    def __call__(self, x, training: bool = False) -> None: None:
+        pass
+
+
+class BaseVideoModel(BaseModel):
+
+    """
+    Base class for video generation models.
+    """
+
+    num_frames: int
+    frame_size: Tuple[int, int]
+    hidden_size: int
+    num_layers: int
+    num_heads: int
+    dropout_rate: float = 0.1
+
+    @abstractmethod
+    def setup(self) -> None: None:
+        pass
+
+        @abstractmethod
+    def __call__(self, x, training: bool = False) -> None: None: pass,

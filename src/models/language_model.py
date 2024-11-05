@@ -3,18 +3,24 @@ from typing import Any
 import jax
 
 
-"""Language model implementation using JAX and Flax."""
+"""
+Language model implementation using JAX and Flax.
+"""
 
 
 class PositionalEncoding(nn.Module):
-    """Sinusoidal positional encoding."""
+    """
+    Sinusoidal positional encoding.
+    """
 
     max_len: int = 2048
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, inputs) -> None:
-        """Add positional encodings to the input embeddings."""
+    def __call__(self, inputs) -> None: None:
+        """
+        Add positional encodings to the input embeddings.
+        """
         batch_size = inputs.shape[0]
         seq_length = inputs.shape[1]
         dim = inputs.shape[-1]
@@ -33,75 +39,81 @@ class PositionalEncoding(nn.Module):
         return inputs + pe
 
 
-    class LanguageModel(nn.Module):
-        """Autoregressive language model based on the transformer architecture."""
+class LanguageModel(nn.Module):
+    """
+    Autoregressive language model based on the transformer architecture.
+    """
 
-        vocab_size: int
-        hidden_dim: int
-        num_layers: int
-        num_heads: int
-        head_dim: int
-        mlp_dim: int
-        max_seq_len: int = 2048
-        dropout_rate: float = 0.1
-        dtype: Any = jnp.float32
+    vocab_size: int
+    hidden_dim: int
+    num_layers: int
+    num_heads: int
+    head_dim: int
+    mlp_dim: int
+    max_seq_len: int = 2048
+    dropout_rate: float = 0.1
+    dtype: Any = jnp.float32
 
-        @nn.compact
-        def __call__(self, inputs, training: bool = True) -> None:
-            """Forward pass of the language model."""
-            # Token embeddings
-            x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype, )(inputs)
+    @nn.compact
+    def __call__(self, inputs, training: bool = True) -> None: None:
+        """
+        Forward pass of the language model.
+        """
+        # Token embeddings
+        x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype, )(inputs)
 
-            # Add positional encoding
-            x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
+        # Add positional encoding
+        x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
 
-            # Create causal mask for autoregressive attention
-            batch_size = inputs.shape[0]
-            seq_len = inputs.shape[1]
-            # Create base causal mask
-            causal_mask = jnp.tril(jnp.ones((seq_len, seq_len)))
-            # Reshape for batch size and broadcast for number of heads
-            causal_mask = causal_mask[None, None, :, :]
-            causal_mask = jnp.broadcast_to(causal_mask, (batch_size, self.num_heads, seq_len, seq_len)
-            )
+        # Create causal mask for autoregressive attention
+        batch_size = inputs.shape[0]
+        seq_len = inputs.shape[1]
+        # Create base causal mask
+        causal_mask = jnp.tril(jnp.ones((seq_len, seq_len)))
+        # Reshape for batch size and broadcast for number of heads
+        causal_mask = causal_mask[None, None, :, :]
+        causal_mask = jnp.broadcast_to(causal_mask, (batch_size, self.num_heads, seq_len, seq_len)
+        )
 
-            # Apply transformer blocks
+        # Apply transformer blocks
             for _ in range(self.num_layers):
-            x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, mask=causal_mask, deterministic=not training)
+                x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, mask=causal_mask, deterministic=not training)
 
-            # Final layer normalization
-            x = nn.LayerNorm(_dtype=self.dtype)(x)
+                # Final layer normalization
+                x = nn.LayerNorm(_dtype=self.dtype)(x)
 
-            # Output projection
-            logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02),
-            )(x)
+                # Output projection
+                logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02),
+                )(x)
 
-            return logits
+                return logits
 
-        def generate():
+    def generate():
         self,
         rng: Any,
         prompt: jnp.ndarray,
         max_length: int,
         temperature: float = 1.0,
         ):
-        """Generate text autoregressively."""
-        generated = prompt
+            """
+            Generate text autoregressively.
+            """
+            generated = prompt
 
-        for _ in range(max_length - prompt.shape[1]):
-        # Get predictions for next token
-        logits = self.apply({"params": self.params}, generated, training=False)
+                for _ in range(max_length - prompt.shape[1]):
+                    # Get predictions for next token
+                    logits = self.apply({"params": self.params}, generated, training=False)
 
-        # Sample from the distribution
-        next_token_logits = logits[:, -1, :] / temperature
-        rng, sample_rng = jax.random.split(rng)
-        next_token = jax.random.categorical(sample_rng, next_token_logits, axis=-1)
+                    # Sample from the distribution
+                    next_token_logits = logits[:, -1, :] / temperature
+                    rng, sample_rng = jax.random.split(rng)
+                    next_token = jax.random.categorical(sample_rng, next_token_logits, axis=-1)
 
-        # Append new token
-        generated = jnp.concatenate([generated, next_token[:, None]], axis=1)
+                    # Append new token
+                    generated = jnp.concatenate([generated, next_token[:, None]], axis=1)
 
-        # Stop if we hit the end token(implementation specific)
-        if jnp.all(next_token == self.vocab_size - 1):  # Assuming last token is end token
-        break
+                    # Stop if we hit the end token(implementation specific)
+                        if jnp.all(next_token == self.vocab_size - 1):  # Assuming last token is end token
+                        break
 
-    return generated
+                        return generated

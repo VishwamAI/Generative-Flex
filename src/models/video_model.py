@@ -4,20 +4,23 @@ from typing import Tuple
 import jax
 
 
-"""Video generation model implementation using JAX and Flax."""
+"""
+Video generation model implementation using JAX and Flax.
+"""
 
 
 class VideoEmbedding(nn.Module):
 
-    """Video to embedding conversion."""
+    """
+    Video to embedding conversion.
+    """
 
     hidden_dim: int
     patch_size: Tuple[int, int, int]  # (time, height, width)
     dtype: Any = jnp.float32
 
     @nn.compact
-def __call__(self, video) -> None:
-    b, t, h, w, c = video.shape
+    def __call__(self, video) -> None: None: b, t, h, w, c = video.shape
     patches = jnp.reshape(video, (
     b, t // self.patch_size[0], h // self.patch_size[1], w // self.patch_size[2], *self.patch_size, c, ),
     )
@@ -29,7 +32,9 @@ def __call__(self, video) -> None:
 
 class VideoGenerationModel(nn.Module):
 
-    """Transformer-based video generation model."""
+    """
+    Transformer-based video generation model.
+    """
 
     video_size: Tuple[int, int, int]  # (frames, height, width)
     patch_size: Tuple[int, int, int]  # (time, height, width)
@@ -43,8 +48,7 @@ class VideoGenerationModel(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-def __call__(self, inputs, training: bool = True) -> None:
-    b, t, h, w, c = inputs.shape
+    def __call__(self, inputs, training: bool = True) -> None: None: b, t, h, w, c = inputs.shape
     assert(t == self.video_size[0]
     and h == self.video_size[1]
     and w == self.video_size[2]
@@ -72,15 +76,16 @@ def __call__(self, inputs, training: bool = True) -> None:
             x = jnp.reshape(x, (b, t, h, w, c))
             return x
 
-def generate():
-    self,
-    rng: Any,
-    prompt: Optional[jnp.ndarray] = None,
-    num_frames: int = 16,
-    ):
-        """Generate video frames."""
-            if prompt is None:
-                rng, init_rng = jax.random.split(rng)
+    def generate():
+        self,
+        rng: Any,
+        prompt: Optional[jnp.ndarray] = None,
+        num_frames: int = 16,
+        ):
+            """
+            Generate video frames.
+            """
+                if prompt is None: rng, init_rng = jax.random.split(rng)
                 prompt = jax.random.normal(init_rng, (1, 1, self.video_size[1], self.video_size[2], self.channels),
                 )
 

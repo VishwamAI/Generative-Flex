@@ -2,11 +2,15 @@ from src.models.transformer import TransformerBlock
 from typing import Any, Optional
 
 
-"""Audio generation model implementation using JAX and Flax."""
+"""
+Audio generation model implementation using JAX and Flax.
+"""
 
 
 class AudioEmbedding(nn.Module):
-    """Audio signal to embedding."""
+    """
+    Audio signal to embedding.
+    """
 
     hidden_dim: int
     frame_size: int = 1024
@@ -14,8 +18,10 @@ class AudioEmbedding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, audio) -> None:
-        """Convert audio signal to embeddings."""
+    def __call__(self, audio) -> None: None:
+        """
+        Convert audio signal to embeddings.
+        """
         batch_size, signal_length = audio.shape
 
         # Frame the audio signal
@@ -34,87 +40,93 @@ class AudioEmbedding(nn.Module):
         return nn.Dense(self.hidden_dim, _dtype=self.dtype)(frames)
 
 
-    class AudioGenerationModel(nn.Module):
-        """Transformer-based audio generation model."""
+class AudioGenerationModel(nn.Module):
+    """
+    Transformer-based audio generation model.
+    """
 
-        hidden_dim: int
-        num_layers: int
-        num_heads: int
-        head_dim: int
-        mlp_dim: int
-        frame_size: int = 1024
-        hop_length: int = 256
-        max_length: int = 65536  # Maximum audio length in samples
-        dropout_rate: float = 0.1
-        dtype: Any = jnp.float32
+    hidden_dim: int
+    num_layers: int
+    num_heads: int
+    head_dim: int
+    mlp_dim: int
+    frame_size: int = 1024
+    hop_length: int = 256
+    max_length: int = 65536  # Maximum audio length in samples
+    dropout_rate: float = 0.1
+    dtype: Any = jnp.float32
 
-        @nn.compact
-        def __call__(self, inputs, training: bool = True) -> None:
-            """Forward pass of the audio generation model."""
-            batch_size, signal_length = inputs.shape
-            assert(signal_length <= self.max_length), f"Audio length {signal_length} exceeds maximum {self.max_length}"
+    @nn.compact
+    def __call__(self, inputs, training: bool = True) -> None: None:
+        """
+        Forward pass of the audio generation model.
+        """
+        batch_size, signal_length = inputs.shape
+        assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"
 
-            # Convert audio to embeddings
-            x = AudioEmbedding(_hidden_dim=self.hidden_dim, _frame_size=self.frame_size, _hop_length=self.hop_length, _dtype=self.dtype, )(inputs)
+        # Convert audio to embeddings
+        x = AudioEmbedding(_hidden_dim=self.hidden_dim, _frame_size=self.frame_size, _hop_length=self.hop_length, _dtype=self.dtype, )(inputs)
 
-            # Add positional embeddings
-            num_frames = x.shape[1]
-            pos_embedding = self.param("pos_embedding", nn.initializers.normal(stddev=0.02),
-            (1, num_frames, self.hidden_dim),
-            )
-            x = x + pos_embedding
+        # Add positional embeddings
+        num_frames = x.shape[1]
+        pos_embedding = self.param("pos_embedding", nn.initializers.normal(stddev=0.02),
+        (1, num_frames, self.hidden_dim),
+        )
+        x = x + pos_embedding
 
-            # Apply transformer blocks
+        # Apply transformer blocks
             for _ in range(self.num_layers):
-            x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, deterministic=not training)
+                x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, deterministic=not training)
 
-            # Project back to audio frame space
-            x = nn.Dense(self.frame_size, _dtype=self.dtype)(x)
+                # Project back to audio frame space
+                x = nn.Dense(self.frame_size, _dtype=self.dtype)(x)
 
-            # Overlap-add synthesis
-            # Calculate output length to match input frames
-            output_length = (
-            (signal_length - self.frame_size) // self.hop_length + 1
-            ) * self.hop_length
-            output = jnp.zeros((batch_size, output_length))
+                # Overlap-add synthesis
+                # Calculate output length to match input frames
+                output_length = (
+                (signal_length - self.frame_size) // self.hop_length + 1
+                ) * self.hop_length
+                output = jnp.zeros((batch_size, output_length))
 
-            window = jnp.hanning(self.frame_size)
-            indices = (
-            jnp.arange(self.frame_size)[None, :]
-            + jnp.arange(num_frames)[:, None] * self.hop_length
-            )
+                window = jnp.hanning(self.frame_size)
+                indices = (
+                jnp.arange(self.frame_size)[None, :]
+                + jnp.arange(num_frames)[:, None] * self.hop_length
+                )
 
-            # Apply windowing and overlap-add
-            output = output.at[:, indices].add(x * window[None, None, :])
+                # Apply windowing and overlap-add
+                output = output.at[:, indices].add(x * window[None, None, :])
 
-            # Normalize by window overlap
-            divisor = jnp.zeros_like(output)
-            divisor = divisor.at[:, indices].add(window[None, None, :] ** 2)
-            output = jnp.where(divisor > 1e-8, output / divisor, output)
+                # Normalize by window overlap
+                divisor = jnp.zeros_like(output)
+                divisor = divisor.at[:, indices].add(window[None, None, :] ** 2)
+                output = jnp.where(divisor > 1e-8, output / divisor, output)
 
-            return output
+                return output
 
-        def generate():
+    def generate():
         self,
         rng: Any,
         prompt: Optional[jnp.ndarray] = None,
         length: int = 16000,
         ):  # Default 1 second at 16kHz
-        """Generate audio."""
-        if prompt is None:
-            # Start with silence
-            prompt = jnp.zeros((1, self.frame_size))
+        """
+        Generate audio.
+        """
+            if prompt is None:
+                # Start with silence
+                prompt = jnp.zeros((1, self.frame_size))
 
-            generated = prompt
-            while generated.shape[1] < length:
-            # Generate next segment
-            next_segment = self.apply({"params": self.params}, generated, training=False)
+                generated = prompt
+                    while generated.shape[1] < length:
+                        # Generate next segment
+                        next_segment = self.apply({"params": self.params}, generated, training=False)
 
-            # Append new segment
-            generated = jnp.concatenate([generated, next_segment[:, -self.hop_length :]], axis=1)
+                        # Append new segment
+                        generated = jnp.concatenate([generated, next_segment[:, -self.hop_length :]], axis=1)
 
-            # Trim if exceeded desired length
-            if generated.shape[1] > length:
-                generated = generated[:, :length]
+                        # Trim if exceeded desired length
+                            if generated.shape[1] > length:
+                                generated = generated[:, :length]
 
-                return generated
+                                return generated
