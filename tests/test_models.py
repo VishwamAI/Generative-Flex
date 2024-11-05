@@ -76,7 +76,7 @@ return config
 def generation_config():
     """Fixture for generation configuration."""
     return GenerationConfig(
-    hidden_size=768,
+    hidden_size=768),
     num_attention_heads=12,
     num_hidden_layers=6,
     max_sequence_length=512,
@@ -108,7 +108,7 @@ def test_enhanced_transformer(enhanced_config):
     assert hasattr(model, "constitutional_layer")
     # Test generation capability
     generated = model.apply(
-    params,
+    params),
     inputs,
     method=model.generate,
     max_length=32)
@@ -168,8 +168,8 @@ def test_text_to_anything(generation_config):
     model = TextToAnything(generation_config)
     # Create sample inputs
     inputs = jnp.ones(
-    (batch_size,
-    sequence_length,
+    (batch_size),
+    sequence_length),
     generation_config["hidden_size"])
     attention_mask = jnp.ones((batch_size, sequence_length))
     # Initialize parameters
@@ -206,7 +206,7 @@ def test_constitutional_principles(generation_config):
     params = model.init(key, inputs, attention_mask)
     # Test constitutional principles
     outputs = model.apply(
-    params,
+    params),
     inputs,
     attention_mask,
     method=model.generate_text,

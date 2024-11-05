@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 # Default subjects for MMMU dataset
 DEFAULT_SUBJECTS = ["Math", "Computer_Science"]
 def log_metrics(
-metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int]:
+metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] = None:
 None
 ):
 """Log training metrics to console and file"""
@@ -177,7 +177,7 @@ class EnhancedMMUModel(PreTrainedModel):
                         chunk_size = 1  # Process one image at a time if memory is limited
                         # Process images if provided
                         if images is not None:
-                            logger.info(f"Starting image processing with batch size {
+                            logger.info(f"Starting image processing with batch size {")
                             batch_size}")}
                             try:
                                 # Try processing all images at once
