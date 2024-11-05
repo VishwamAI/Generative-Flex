@@ -7,20 +7,14 @@ Incorporates features from:
 - X (Grok-1): Real-time data integration
 - Google (Gemini): Multi-modal fusion
 """
-
 from flax import struct
-
 from .enhanced_transformer import EnhancedTransformer
 from .knowledge_retrieval import KnowledgeIntegrator
 from .apple_optimizations import AppleOptimizedTransformer
-
 # Add vocabulary size to support tokenization
 VOCAB_SIZE = 256  # Character-level tokenization
-
-
 class TextTokenizer:
     """Simple character-level tokenizer for text input."""
-
     def __init__(
         self, max_length: int = 512, vocab_size: int = 50257
     ):  # Added vocab_size parameter
@@ -28,7 +22,6 @@ class TextTokenizer:
         self.vocab_size = vocab_size
         self.pad_token = 0
         self.eos_token = 1
-
     def encode(self, text: str) -> jnp.ndarray:
         """Convert text to token indices."""
         # Convert to character-level tokens
@@ -43,16 +36,12 @@ class TextTokenizer:
         # Convert to JAX array
         tokens = jnp.array(tokens, dtype=jnp.int32)
         return tokens
-
     def decode(self, tokens: jnp.ndarray) -> str:
         """Convert token indices back to text."""
         return "".join(chr(t - 2) for t in tokens if t > 1)  # Skip pad and eos tokens
-
-
 @struct.dataclass
 class GenerationConfig:
     """Configuration for text-to-anything generation."""
-
     # Model configuration
     hidden_size: int = struct.field(default=2048)
     num_attention_heads: int = struct.field(default=32)
@@ -66,20 +55,17 @@ class GenerationConfig:
         default=2048
     )  # Added to match max_sequence_length
     type_vocab_size: int = struct.field(default=2)  # Added for token type embeddings
-
     # Sequence configuration
     max_sequence_length: int = struct.field(
         default=2048
     )  # Added for position embeddings
     min_sequence_length: int = struct.field(default=1)
     default_sequence_length: int = struct.field(default=512)
-
     # Generation parameters
     max_length: int = struct.field(default=2048)
     temperature: float = struct.field(default=0.7)
     top_k: int = struct.field(default=50)
     top_p: float = struct.field(default=0.95)
-
     # Multi-modal settings
     supported_modalities: List[str] = struct.field(
         default_factory=lambda: ["text", "image", "audio", "video", "code"]
@@ -87,7 +73,6 @@ class GenerationConfig:
     image_size: Tuple[int, int] = struct.field(default=(256, 256))
     audio_sample_rate: int = struct.field(default=16000)
     video_frames: int = struct.field(default=32)
-
     # Constitutional AI settings
     use_constitutional_ai: bool = struct.field(default=True)
     safety_threshold: float = struct.field(default=0.9)
@@ -100,7 +85,6 @@ class GenerationConfig:
                 )
                 ]
     )
-
     # Optimization settings
     use_int4_quantization: bool = struct.field(default=True)
     use_kv_cache: bool = struct.field(default=True)
@@ -120,20 +104,14 @@ class GenerationConfig:
     l2_norm_clip: float = struct.field(
         default=1.0
     )  # Added for privacy gradient clipping
-
     # Cache settings
     cache_dtype: str = struct.field(default="float16")
     cache_size_multiplier: float = struct.field(default=1.5)
-
     # Runtime state (mutable)
     original_shape: Optional[Tuple[int, ...]] = struct.field(default=None)
-
-
 class ModalityEncoder(nn.Module):
     """Encodes different modalities into a unified representation."""
-
     config: GenerationConfig
-
     def setup(self):
         self.tokenizer = TextTokenizer(max_length=self.config.max_length)
         self.embedding = nn.Embed(
@@ -150,7 +128,6 @@ class ModalityEncoder(nn.Module):
             features=self.config.hidden_size, kernel_size=(3, 3, 3), padding="SAME"
         )
         self.code_encoder = nn.Dense(self.config.hidden_size)
-
     def _adjust_sequence_length(
         self, tensor: jnp.ndarray, target_length: int
     ) -> jnp.ndarray:
@@ -164,17 +141,7 @@ class ModalityEncoder(nn.Module):
             )
             return jnp.concatenate([tensor, padding], axis=1)
         return tensor
-
-    def __call__(self, inputs: Dict[str, Union[str, jnp.ndarray]]) -> jnp.ndarray:
-        """Encode inputs into a unified representation."""
-        encodings = {}
-        batch_size = 1  # Initialize with default value
-        batch_size = 1  # Initialize with default value
-        curr_batch_size = 1  # Initialize with default value
-#         batch_size = None  # TODO: Remove or use this variable
-        # Calculate proper sequence length (ensure it's a multiple of attention heads)
-        sequence_length = min(
-            self.config.max_sequence_length,
+    def __call__(        self,        inputs: Union[str, Dict[str, Any]],        target_modality: str,        context: Optional[Dict[str, Any]] = None,        training: bool = False    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
             ((self.config.default_sequence_length + self.config.num_attention_heads - 1)
              // self.config.num_attention_heads * self.config.num_attention_heads)
         )
@@ -184,25 +151,22 @@ class ModalityEncoder(nn.Module):
                 tokens = self.tokenizer.encode(inputs["text"])
                 tokens = tokens.reshape(1, -1)  # Add batch dimension
                 embedded = self.embedding(tokens)
-                 curr_batch_size = 1   
+        batch_size = 1  # Initialize with default value
             else:
                 # Handle pre-tokenized input
                 input_tensor = inputs["text"]
                 if len(input_tensor.shape) == 2:
                     embedded = self.embedding(input_tensor)
-                     curr_batch_size = embedded.shape[0]   
+        curr_batch_size = embedded.shape[0]   
                 else:
                     embedded = input_tensor
-                     curr_batch_size = input_tensor.shape[0]   
+        curr_batch_size = input_tensor.shape[0]   
             # Update global batch size
             if batch_size is None:
-                batch_size = curr_batch_size
-                 batch_size = curr_batch_size   
+        batch_size = curr_batch_size
+        batch_size = curr_batch_size   
             # Ensure proper sequence length
             embedded = self._adjust_sequence_length(
-                embedded,
-                sequence_length
-            )
                 embedded,
                 sequence_length
             )
@@ -210,35 +174,35 @@ class ModalityEncoder(nn.Module):
         if "image" in inputs:
             img = inputs["image"]
             if len(img.shape) == 4:  # (batch_size, height, width, channels)
-                 curr_batch_size = img.shape[0]   
+        curr_batch_size = img.shape[0]   
                 if batch_size is None:
-                batch_size = curr_batch_size
-                     batch_size = curr_batch_size   
+        batch_size = curr_batch_size
+        batch_size = curr_batch_size   
                 # Flatten spatial dimensions
                 height, width = img.shape[1:3]
-                img_flat = img.reshape(curr_batch_size, height * width, img.shape[-1])
+        img_flat = img.reshape(curr_batch_size, height * width, img.shape[-1])
                 img_flat = self._adjust_sequence_length(img_flat, sequence_length)
                 encodings["image"] = self.image_encoder(img_flat)
         if "audio" in inputs:
             audio = inputs["audio"]
             if len(audio.shape) == 3:  # (batch_size, time, features)
-                 curr_batch_size = audio.shape[0]   
+        curr_batch_size = audio.shape[0]   
                 if batch_size is None:
-                batch_size = curr_batch_size
-                     batch_size = curr_batch_size   
-                audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
+        batch_size = curr_batch_size
+        batch_size = curr_batch_size   
+        audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
                 audio_flat = self._adjust_sequence_length(audio_flat, sequence_length)
                 encodings["audio"] = self.audio_encoder(audio_flat)
         if "video" in inputs:
             video = inputs["video"]
             if len(video.shape) == 5:  # (batch_size, frames, height, width, channels)
-                 curr_batch_size = video.shape[0]   
+        curr_batch_size = video.shape[0]   
                 if batch_size is None:
-                batch_size = curr_batch_size
-                     batch_size = curr_batch_size   
+        batch_size = curr_batch_size
+        batch_size = curr_batch_size   
                 frames, height, width = video.shape[1:4]
                 video_flat = video.reshape(
-                    curr_batch_size, frames * height * width, video.shape[-1]
+        curr_batch_size, frames * height * width, video.shape[-1]
                 )
                 video_flat = self._adjust_sequence_length(video_flat, sequence_length)
                 encodings["video"] = self.video_encoder(video_flat)
@@ -247,17 +211,13 @@ class ModalityEncoder(nn.Module):
                 tokens = self.tokenizer.encode(inputs["code"])
                 tokens = tokens.reshape(1, -1)
                 embedded = self.embedding(tokens)
-                 curr_batch_size = 1   
             else:
                 embedded = inputs["code"]
-                 curr_batch_size = embedded.shape[0]   
+        curr_batch_size = embedded.shape[0]   
             if batch_size is None:
-                batch_size = curr_batch_size
-                 batch_size = curr_batch_size   
+        batch_size = curr_batch_size
+        batch_size = curr_batch_size   
             embedded = self._adjust_sequence_length(
-                embedded,
-                sequence_length
-            )
                 embedded,
                 sequence_length
             )
@@ -298,16 +258,7 @@ class ModalityDecoder(nn.Module):
             features=3, kernel_size=(3, 3, 3), padding="SAME"  # RGB channels
         )
         self.code_decoder = nn.Dense(self.config.hidden_size)
-    def __call__(self, hidden_states: jnp.ndarray, target_modality: str) -> jnp.ndarray:
-        if target_modality == "text":
-            return self.text_decoder(hidden_states)
-        elif target_modality == "image":
-            return self.image_decoder(hidden_states)
-        elif target_modality == "audio":
-            return self.audio_decoder(hidden_states)
-        elif target_modality == "video":
-            return self.video_decoder(hidden_states)
-        elif target_modality == "code":
+    def __call__(        self,        inputs: Union[str, Dict[str, Any]],        target_modality: str,        context: Optional[Dict[str, Any]] = None,        training: bool = False    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
             return self.code_decoder(hidden_states)
         else:
             raise ValueError(f"Unsupported target modality: {target_modality}")
@@ -321,16 +272,7 @@ class ConstitutionalChecker(nn.Module):
         self.safety_scorer = nn.Dense(1)
         self.alignment_layer = nn.Dense(self.config.hidden_size)
     @nn.compact
-    def __call__(
-        self, content: jnp.ndarray, training: bool = False
-    ) -> Tuple[jnp.ndarray, bool]:
-        """Check content against constitutional principles."""
-        # Analyze content for safety
-        safety_features = self.content_filter(content)
-        safety_score = self.safety_scorer(safety_features)
-        # Apply safety threshold
-        is_safe = safety_score > self.safety_threshold
-        # If unsafe, apply alignment transformation
+    def __call__(        self,        inputs: Union[str, Dict[str, Any]],        target_modality: str,        context: Optional[Dict[str, Any]] = None,        training: bool = False    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         aligned_content = jnp.where(
             is_safe[:, None], content, self.alignment_layer(content)
         )
@@ -389,16 +331,7 @@ class TextToAnything(nn.Module):
             hidden_states = self.input_projection(hidden_states)
         return hidden_states
     @nn.compact
-    def __call__(
-        self,
-            (
-                inputs: Union[str, Dict[str, Any]],
-                target_modality: str,
-            )
-            (
-                context: Optional[Dict[str, Any]] = None,
-                training: bool = False,
-            )
+    def __call__(        self,        inputs: Union[str, Dict[str, Any]],        target_modality: str,        context: Optional[Dict[str, Any]] = None,        training: bool = False    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
             ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         # Validate target modality
         if target_modality not in self.config.supported_modalities:
