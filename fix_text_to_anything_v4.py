@@ -2,8 +2,7 @@ import re
 
 
 def fix_text_to_anything(self):
-    with open("src/models/text_to_anything.py", "r") as f:
-        content = f.readlines()
+    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
 
         # Add missing imports if not present
         imports = [
@@ -26,8 +25,7 @@ def fix_text_to_anything(self):
 
                 for i, line in enumerate(content):
                     # Skip lines if needed
-                    if skip_next_lines > 0:
-                        skip_next_lines -= 1
+                    if skip_next_lines > 0: skip_next_lines-= 1
                         continue
 
                         # Skip duplicate imports
@@ -42,8 +40,7 @@ def fix_text_to_anything(self):
                             continue
 
                             # Track when we're in __call__ method
-                            if "def __call__" in line:
-                                in_call_method = True
+                            if "def __call__" in line: in_call_method = True
                                 # Fix the method signature
                                 fixed_content.append("    def __call__(")
                                 fixed_content.append("        self, ")
@@ -64,10 +61,7 @@ def fix_text_to_anything(self):
                                 continue
 
                                 # Remove duplicate batch_size initialization
-                                if "batch_size = 1" in line and batch_size_initialized:
-                                    continue
-
-                                    if (
+                                if "batch_size = 1" in line and batch_size_initialized: continueif(
                                         "batch_size = 1" in line
                                         and not batch_size_initialized
                                     ):
@@ -94,8 +88,7 @@ def fix_text_to_anything(self):
                                                 continue
 
                                                 # Fix duplicate _adjust_sequence_length calls
-                                                if "_adjust_sequence_length" in line:
-                                                    if (
+                                                if "_adjust_sequence_length" in line: if(
                                                         "embedded = self._adjust_sequence_length("
                                                         in line
                                                     ):
@@ -122,8 +115,7 @@ def fix_text_to_anything(self):
                                                             with open(
                                                                 "src/models/text_to_anything.py",
                                                                 "w",
-                                                            ) as f:
-                                                                f.writelines(
+                                                            ) as f: f.writelines(
                                                                     fixed_content
                                                                 )
 

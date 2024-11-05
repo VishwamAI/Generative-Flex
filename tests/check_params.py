@@ -1,13 +1,11 @@
 from pathlib import Path
 import json
 import pytest
-
-
     """Tests for model parameter loading and validation functionality."""
-
-
-@pytest.fixture
-def test_params(self):
+        
+        
+        @pytest.fixture
+        def test_params(self):
     """Fixture providing minimal test parameters for validation."""
 return {
 "encoder": {"weights": [[1.0, 2.0], [3.0, 4.0]], "bias": [0.1, 0.2]},
@@ -27,9 +25,8 @@ with open(params_path, "w") as f: json.dump(test_params, f)
 return params_path
 
 
-def load_params(self):file_path: Path
-): -> dict: """Helper function to load parameters from file."""
-try: with open(file_path, "r") as f: return json.load(f)
+def load_params(self):file_path: Path): -> dict: """Helper function to load parameters from file."""
+try: withopen(file_path, "r") as f: returnjson.load(f)
 except FileNotFoundError: pytest.fail(f"Parameter file not found: {file_path}")
 except json.JSONDecodeError: pytest.fail(f"Invalid JSON in parameter file: {file_path}")
 

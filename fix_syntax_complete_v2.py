@@ -6,30 +6,24 @@ import re
 
 def read_file(filepath) -> None:
     """Read file content safely."""
-try:
-    with open(filepath, "r") as f:
-        return f.readlines()
-        except Exception as e:
-            print(f"Error reading {filepath}: {str(e)}")
-            return None
-
-
-def write_file(filepath, lines) -> None:
+        try: withopen(filepath, "r") as f: returnf.readlines()
+        except Exception as e: print(f"Error reading {filepath}: {str(e)}")
+        return None
+        
+        
+        def write_file(filepath, lines) -> None:
     """Write content to file safely."""
-try:
-    with open(filepath, "w") as f:
-        f.writelines(lines)
+try: withopen(filepath, "w") as f: f.writelines(lines)
         print(f"Successfully fixed {filepath}")
-        except Exception as e:
-            print(f"Error writing {filepath}: {str(e)}")
+        except Exception as e: print(f"Error writing {filepath}: {str(e)}")
 
 
 def get_indent_level(line) -> None:
     """Get the indentation level of a line."""
-return len(line) - len(line.lstrip())
-
-
-def fix_indentation(lines) -> None:
+        return len(line) - len(line.lstrip())
+        
+        
+        def fix_indentation(lines) -> None:
     """Fix indentation while preserving structure."""
 fixed_lines = []
 indent_stack = [0]  # Start with base level indentation
@@ -49,24 +43,20 @@ for i, line in enumerate(lines):
         # Handle dedents
         if stripped.startswith(("return", "break", "continue", "pass", "raise", ")", "]", "}")
         ):
-            if len(indent_stack) > 1:
-                indent_stack.pop()
+            if len(indent_stack) > 1: indent_stack.pop()
                 current_indent = indent_stack[-1]
 
                 # Handle class and function definitions
                 elif stripped.startswith(("class ", "def ")):
-                    while len(indent_stack) > 1:
-                        indent_stack.pop()
+                    while len(indent_stack) > 1: indent_stack.pop()
                         current_indent = indent_stack[-1]
 
                         # Handle control flow statements
                         elif stripped.startswith(("elif ", "else:", "except", "finally:")):
-                            if len(indent_stack) > 1:
-                                current_indent = indent_stack[-2]
+                            if len(indent_stack) > 1: current_indent = indent_stack[-2]
 
                                 # Handle indentation after colons
-                                elif lines[i - 1].rstrip().endswith(":") if i > 0 else False:
-                                    current_indent = indent_stack[-1] + 4
+                                elif lines[i - 1].rstrip().endswith(":") if i > 0 else False: current_indent = indent_stack[-1] + 4
                                     indent_stack.append(current_indent)
 
                                     # Add the line with proper indentation
@@ -77,28 +67,24 @@ for i, line in enumerate(lines):
 
 def fix_imports(lines) -> None:
     """Fix import statements and their order."""
-import_lines = []
-other_lines = []
-in_imports = False
-
-for line in lines:
-    stripped = line.strip()
-    if stripped.startswith(("import ", "from ")):
-        if not in_imports and import_lines:
-            import_lines.append("\n")
-            in_imports = True
-            import_lines.append(line)
-            else:
-                if in_imports and stripped:
-                    in_imports = False
-                    if not line.isspace():
-                        other_lines.append("\n")
-                        other_lines.append(line)
-
-                        return import_lines + other_lines
-
-
-def fix_docstrings(lines) -> None:
+        import_lines = []
+        other_lines = []
+        in_imports = False
+        
+        for line in lines: stripped = line.strip()
+        if stripped.startswith(("import ", "from ")):
+        if not in_imports and import_lines: import_lines.append("\n")
+        in_imports = True
+        import_lines.append(line)
+        else: ifin_importsand, stripped: in_imports = False
+        if not line.isspace():
+        other_lines.append("\n")
+        other_lines.append(line)
+        
+        return import_lines + other_lines
+        
+        
+        def fix_docstrings(lines) -> None:
     """Fix docstring formatting."""
 fixed_lines = []
 in_docstring = False
@@ -115,9 +101,7 @@ for i, line in enumerate(lines):
             # Calculate proper indentation
             if i > 0 and lines[i - 1].rstrip().endswith(":"):
                 docstring_indent = get_indent_level(lines[i - 1]) + 4
-                else:
-                    docstring_indent = get_indent_level(line)
-                    else:
+                else: docstring_indent = get_indent_level(line), else:
                         # End of docstring
                         in_docstring = False
                         fixed_lines.append(" " * docstring_indent + stripped)
@@ -126,32 +110,28 @@ for i, line in enumerate(lines):
                         if in_docstring:
                             # Maintain docstring indentation
                             fixed_lines.append(" " * docstring_indent + stripped)
-                            else:
-                                fixed_lines.append(line)
+                            else: fixed_lines.append(line)
 
                                 return fixed_lines
 
 
 def fix_file(filepath) -> None:
     """Apply all fixes to a file."""
-print(f"Processing {filepath}")
-lines = read_file(filepath)
-if not lines:
-    return
-
-    # Apply fixes in order
-    lines = fix_imports(lines)
-    lines = fix_docstrings(lines)
-    lines = fix_indentation(lines)
-
-    # Ensure final newline
-    if lines and not lines[-1].endswith("\n"):
+        print(f"Processing {filepath}")
+        lines = read_file(filepath)
+        if not lines: return# Apply fixes in order
+        lines = fix_imports(lines)
+        lines = fix_docstrings(lines)
+        lines = fix_indentation(lines)
+        
+        # Ensure final newline
+        if lines and not lines[-1].endswith("\n"):
         lines[-1] += "\n"
-
+        
         write_file(filepath, lines)
-
-
-def main(self):
+        
+        
+        def main(self):
     """Fix syntax issues in all problematic files."""
 problem_files = [
 "fix_flake8_comprehensive.py",
@@ -170,8 +150,7 @@ problem_files = [
 ]
 
 print("Applying complete syntax fixes...")
-for filepath in problem_files:
-    fix_file(filepath)
+for filepath in problem_files: fix_file(filepath)
     print("Completed applying syntax fixes.")
 
 

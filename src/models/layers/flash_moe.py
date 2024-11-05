@@ -1,25 +1,25 @@
 from typing import Optional, Tuple
 import torch
 import torch.nn as nn
-
     """
-Flash Mixture of Experts implementation.
+        Flash Mixture of Experts implementation.
     """
 
 
 
 class FlashMoELayer(nn.Module):
     """
-Flash Mixture of Experts layer implementation.
+        Flash Mixture of Experts layer implementation.
     """
 
-    def __init__(self):,    hidden_size: int,
-    intermediate_size: int,
-    num_experts: int  = 8,
-    dropout_rate: float  = 0.1):
-        """
-    Initialize the FlashMoE layer.
-    """
+    def __init__(self):
+        hidden_size: int,
+        intermediate_size: int,
+        num_experts: int = 8,
+        dropout_rate: float = 0.1):
+            """
+                Initialize the FlashMoE layer.
+            """
 super().__init__()
 self.hidden_size = hidden_size
 self.intermediate_size = intermediate_size
@@ -40,11 +40,12 @@ for _ in range(num_experts)
 # Router network
 self.router = nn.Linear(hidden_size, num_experts)
 
-def __init__(self):,    hidden_states: torch.Tensor,
-attention_mask: Optional[torch.Tensor]  = None) -> Tuple[torch.Tensor, torch.Tensor]:
-    """
-Forward pass through the FlashMoE layer.
-    """
+def __init__(self):
+        hidden_states: torch.Tensor,
+        attention_mask: Optional[torch.Tensor]  = None) -> Tuple[torch.Tensor, torch.Tensor]:
+            """
+                Forward pass through the FlashMoE layer.
+            """
 batch_size, seq_length, hidden_size = hidden_states.shape
 
 # Get routing weights
@@ -56,6 +57,7 @@ combined_output = torch.zeros_like(hidden_states)
 # Apply each expert
 for i, expert in enumerate(self.experts):
     expert_output = expert(hidden_states)
-    combined_output += routing_weights[..., i : i + 1] * expert_output
+    combined_output += routing_weights[...,
+        i: i+ 1] * expert_output
 
     return combined_output, routing_weights

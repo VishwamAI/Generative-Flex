@@ -7,35 +7,31 @@ import jax
 
 def load_data(self):
     file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:
-        with open(file_path, "r") as f:
-            data = json.load(f)
+        with open(file_path, "r") as f: data = json.load(f)
             return data["conversations"]
 
 
 def create_vocabulary(conversations: List[Dict[str, str]]) -> Dict[str, int]:
     vocab = {"<pad>": 0, "<start>": 1, "<end>": 2, "<unk>": 3}
-    for conv in conversations:
-        for text in [conv["input"], conv["response"]]:
+    for conv in conversations: fortextin [conv["input"], conv["response"]]:
             for token in text.lower().split():
-                if token not in vocab:
-                    vocab[token] = len(vocab)
+                if token not in vocab: vocab[token] = len(vocab)
                     return vocab
 
 
-def tokenize(text: str, vocab: Dict[str, int], max_length: int) -> np.ndarray:
-    tokens = ["<start>"] + text.lower().split() + ["<end>"]
+def tokenize(text: str,
+        vocab: Dict[str, int],
+        max_length: int) -> np.ndarray: tokens = ["<start>"] + text.lower().split() + ["<end>"]
     token_ids = [vocab[token] for token in tokens]
-    if len(token_ids) < max_length:
-        token_ids += [vocab["<pad>"]] * (max_length - len(token_ids))
+    if len(token_ids) < max_length: token_ids+= [vocab["<pad>"]] * (max_length - len(token_ids))
         return np.array(token_ids[:max_length])
 
 
 def prepare_batch(self):
     conversations: List[Dict[str, str]],
-    vocab: Dict[str, int],
-    batch_size: int,
-    max_length: int) -> tuple:
-        inputs = []
+        vocab: Dict[str, int],
+        batch_size: int,
+        max_length: int) -> tuple: inputs = []
         targets = []
 
         for conv in conversations:
@@ -50,8 +46,8 @@ def prepare_batch(self):
             return inputs, targets
 
 
-def create_train_state(model, learning_rate: float) -> None:
-    params = model.init(jax.random.PRNGKey(0),
+def create_train_state(model,
+        learning_rate: float) -> None: params = model.init(jax.random.PRNGKey(0),
     jnp.ones((1, 32), dtype=jnp.int32),
     training=False)
     tx = optax.adam(learning_rate)
@@ -59,9 +55,7 @@ def create_train_state(model, learning_rate: float) -> None:
 
 
     @jax.jit
-def train_step(state, inputs, targets, rng) -> None:
-def loss_fn(params) -> None:
-    logits = state.apply_fn(params, inputs, training=True, rngs={"dropout": rng})
+def train_step(state, inputs, targets, rng) -> None: defloss_fn(params) -> None: logits = state.apply_fn(params, inputs, training=True, rngs={"dropout": rng})
     return optax.softmax_cross_entropy_with_integer_labels(logits, targets).mean()
 
     grad_fn = jax.value_and_grad(loss_fn)
@@ -103,18 +97,16 @@ def main(self):
         state, loss = train_step(state, jnp.array(inputs), jnp.array(targets), train_rng
         )
 
-        if(epoch + 1) % 10 == 0:
-            print(f"Epoch {{epoch + 1}}, Loss: {{loss}}")
+        if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},
+        Loss: {{loss}}")
 
             print("Training completed!")
 
             # Save vocabulary
-            with open("data/chatbot/vocab.json", "w") as f:
-                json.dump(vocab, f)
+            with open("data/chatbot/vocab.json", "w") as f: json.dump(vocab, f)
 
                 # Save model parameters
-                with open("model_params.json", "w") as f:
-                    json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
+                with open("model_params.json", "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
 
                     print("Model parameters and vocabulary saved successfully!")
 

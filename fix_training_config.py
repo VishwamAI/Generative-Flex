@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
     """Script to fix training config formatting."""
-
-
-def fix_training_config(self):
+        
+        
+        def fix_training_config(self):
     """Fix the training config file formatting."""
-with open("src/config/training_config.py", "r", encoding="utf-8") as f:
-    content = f.read()
+with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()
 
     # Split into sections
     lines = content.split("\n")
@@ -13,12 +12,10 @@ with open("src/config/training_config.py", "r", encoding="utf-8") as f:
     in_class = False
     class_indent = 0
 
-    for line in lines:
-        stripped = line.strip()
+    for line in lines: stripped = line.strip()
 
         # Skip empty lines
-        if not stripped:
-            fixed_lines.append("")
+        if not stripped: fixed_lines.append("")
             continue
 
             # Handle imports
@@ -34,8 +31,7 @@ with open("src/config/training_config.py", "r", encoding="utf-8") as f:
                     continue
 
                     # Handle class body
-                    if in_class:
-                        if stripped.startswith(("def ", "@", "class ")):
+                    if in_class: ifstripped.startswith(("def ", "@", "class ")):
                             # Method or decorator
                             fixed_lines.append("    " + stripped)
                             elif stripped.startswith('"""'):
@@ -44,8 +40,7 @@ with open("src/config/training_config.py", "r", encoding="utf-8") as f:
                                 else:
                                     # Class attributes or other statements
                                     fixed_lines.append("    " + stripped)
-                                    else:
-                                        fixed_lines.append(line)
+                                    else: fixed_lines.append(line)
 
                                         # Join lines and ensure final newline
                                         fixed_content = "\n".join(fixed_lines)
@@ -53,8 +48,7 @@ with open("src/config/training_config.py", "r", encoding="utf-8") as f:
                                             fixed_content += "\n"
 
                                             # Write back
-                                            with open("src/config/training_config.py", "w", encoding="utf-8") as f:
-                                                f.write(fixed_content)
+                                            with open("src/config/training_config.py", "w", encoding="utf-8") as f: f.write(fixed_content)
 
 
                                                 if __name__ == "__main__":

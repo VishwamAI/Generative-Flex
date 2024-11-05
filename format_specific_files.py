@@ -40,14 +40,12 @@ files_to_format = [
 
 def format_files(self):
     # First convert line endings
-    for file in files_to_format:
-        if os.path.exists(file):
+    for file in files_to_format: ifos.path.exists(file):
             print(f"Converting line endings for {file}")
             subprocess.run(["dos2unix", file], check=True)
 
             # Then format with black
-            for file in files_to_format:
-                if os.path.exists(file):
+            for file in files_to_format: ifos.path.exists(file):
                     print(f"Formatting {file}")
                     subprocess.run(
                         [

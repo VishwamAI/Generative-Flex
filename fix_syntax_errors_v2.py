@@ -5,27 +5,26 @@ import re
 
 def fix_fstring_syntax(content) -> None:
     """Fix f-string syntax errors."""
-# Fix multiline f-strings
-content = re.sub(r'f"([^"]*)\n([^"]*)"',
-lambda m: f'f"{m.group(1)} {m.group(2)}"',
-content)
-
-# Fix indentation in f-strings with parentheses
-content = re.sub(r'f"([^"]*)\{([^}]*)\}([^"]*)"',
-lambda m: f'f"{m.group(1)}{{{m.group(2)}}}{m.group(3)}"',
-content)
-
-return content
-
-
-def fix_indentation_issues(content) -> None:
+        # Fix multiline f-strings
+        content = re.sub(r'f"([^"]*)\n([^"]*)"',
+        lambda m: f'f"{m.group(1)} {m.group(2)}"',
+        content)
+        
+        # Fix indentation in f-strings with parentheses
+        content = re.sub(r'f"([^"]*)\{([^}]*)\}([^"]*)"',
+        lambda m: f'f"{m.group(1)}{{{m.group(2)}}}{m.group(3)}"',
+        content)
+        
+        return content
+        
+        
+        def fix_indentation_issues(content) -> None:
     """Fix indentation issues."""
 lines = content.split("\n")
 fixed_lines = []
 current_indent = 0
 
-for line in lines:
-    stripped = line.lstrip()
+for line in lines: stripped = line.lstrip()
     if stripped:
         # Calculate proper indentation
         if stripped.startswith(("def ", "class ")):
@@ -47,24 +46,20 @@ for line in lines:
 
 def fix_file(filepath) -> None:
     """Fix syntax errors in a single file."""
-print(f"Fixing {filepath}")
-try:
-    with open(filepath, "r") as f:
-        content = f.read()
-
+        print(f"Fixing {filepath}")
+        try: withopen(filepath, "r") as f: content = f.read()
+        
         # Apply fixes
         content = fix_fstring_syntax(content)
         content = fix_indentation_issues(content)
-
-        with open(filepath, "w") as f:
-            f.write(content)
-
-            print(f"Successfully fixed {filepath}")
-            except Exception as e:
-                print(f"Error fixing {filepath}: {str(e)}")
-
-
-def main(self):
+        
+        with open(filepath, "w") as f: f.write(content)
+        
+        print(f"Successfully fixed {filepath}")
+        except Exception as e: print(f"Error fixing {filepath}: {str(e)}")
+        
+        
+        def main(self):
     """Fix syntax errors in files that failed black formatting."""
 files_to_fix = [
 "analyze_performance_by_category.py",
@@ -82,8 +77,7 @@ files_to_fix = [
 "src/models/layers/enhanced_transformer.py",
 ]
 
-for file in files_to_fix:
-    if os.path.exists(file):
+for file in files_to_fix: ifos.path.exists(file):
         fix_file(file)
 
 

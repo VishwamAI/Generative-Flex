@@ -1,51 +1,48 @@
 import jax
 import json
 import pytest
-
-
     """Tests for the simple language model implementation using Flax."""
-
-
-class SimpleModel(nn.Module):
-
-    vocab_size: int
-    hidden_size: int = 64
-
-    def setup(self) -> None: self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
-    self.dense1 = nn.Dense(self.hidden_size)
-    self.dense2 = nn.Dense(self.hidden_size)
-    self.output = nn.Dense(self.vocab_size)
-
-def __call__(self, x) -> None: x = self.embedding(x)
-x = nn.relu(self.dense1(x))
-x = nn.relu(self.dense2(x))
-x = self.output(x)
-return x
-
-
-def init_model_state(model, rng, vocab_size) -> None: """Initialize model state with dummy input."""
-dummy_input = jnp.ones((1), dtype=jnp.int32)
-params = model.init(rng, dummy_input)
-return params
-
-
-def load_params(file_path) -> None: """Load and process saved parameters."""
-try: with open(file_path, "r") as f: saved_params = json.load(f)
-except FileNotFoundError: pytest.fail(f"Parameter file not found: {file_path}")
-except json.JSONDecodeError: pytest.fail(f"Invalid JSON in parameter file: {file_path}")
-
-# Convert lists to numpy arrays recursively
-def process_value(x) -> None: if isinstance(x, list):
-    return np.array(x)
-    elif isinstance(x, dict):
+        
+        
+        class SimpleModel(nn.Module):
+        
+        vocab_size: int, hidden_size: int = 64
+        
+        def setup(self) -> None: self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
+        self.dense1 = nn.Dense(self.hidden_size)
+        self.dense2 = nn.Dense(self.hidden_size)
+        self.output = nn.Dense(self.vocab_size)
+        
+        def __call__(self, x) -> None: x = self.embedding(x)
+        x = nn.relu(self.dense1(x))
+        x = nn.relu(self.dense2(x))
+        x = self.output(x)
+        return x
+        
+        
+        def init_model_state(model, rng, vocab_size) -> None: """Initialize model state with dummy input."""
+        dummy_input = jnp.ones((1), dtype=jnp.int32)
+        params = model.init(rng, dummy_input)
+        return params
+        
+        
+        def load_params(file_path) -> None: """Load and process saved parameters."""
+        try: withopen(file_path, "r") as f: saved_params = json.load(f)
+        except FileNotFoundError: pytest.fail(f"Parameter file not found: {file_path}")
+        except json.JSONDecodeError: pytest.fail(f"Invalid JSON in parameter file: {file_path}")
+        
+        # Convert lists to numpy arrays recursively
+        def process_value(x) -> None: ifisinstance(x, list):
+        return np.array(x)
+        elif isinstance(x, dict):
         return {k: process_value(v) for k, v in x.items()}
         return x
-
+        
         return process_value(saved_params)
-
-
+        
+        
         @pytest.fixture
-def vocab_list(self):
+        def vocab_list(self):
     """Fixture providing test vocabulary."""
 return [
 "<unk>",
@@ -64,8 +61,8 @@ return [
 
 @pytest.fixture
 def word_mappings(vocab_list) -> None: """Fixture providing word-to-id and id-to-word mappings."""
-word_to_id = {word: idx for idx, word in enumerate(vocab_list)}
-id_to_word = {idx: word for idx, word in enumerate(vocab_list)}
+word_to_id = {word: idxforidx, word in enumerate(vocab_list)}
+id_to_word = {idx: wordforidx, word in enumerate(vocab_list)}
 return word_to_id, id_to_word
 
 

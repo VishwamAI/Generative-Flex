@@ -1,11 +1,10 @@
 import os
 import subprocess
-
     """Script to format all files detected by CI as needing formatting."""
-
-
-
-def format_files(self):
+        
+        
+        
+        def format_files(self):
     """Format all detected files using black."""
 files_to_format = [
 "src/config/training_config.py",
@@ -43,15 +42,11 @@ files_to_format = [
 ]
 
 print("Formatting files...")
-for file in files_to_format:
-    if os.path.exists(file):
+for file in files_to_format: ifos.path.exists(file):
         print(f"Formatting {file}...")
-        try:
-            subprocess.run(["black", "--line-length", "79", file], check=True)
-            except subprocess.CalledProcessError as e:
-                print(f"Error formatting {file}: {e}")
-                else:
-                    print(f"Warning: {file} not found")
+        try: subprocess.run(["black", "--line-length", "79", file], check=True)
+            except subprocess.CalledProcessError as e: print(f"Error formatting {file}: {e}")
+                else: print(f"Warning: {file} not found")
 
                     print("\nAll files processed!")
 

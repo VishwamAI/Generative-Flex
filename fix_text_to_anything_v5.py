@@ -1,6 +1,5 @@
 def fix_text_to_anything(self):
-    with open("src/models/text_to_anything.py", "r") as f:
-        content = f.readlines()
+    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
 
         # Add missing imports at the top
         imports = [
@@ -44,12 +43,15 @@ def fix_text_to_anything(self):
                     if in_class and line.strip().startswith("def "):
                         in_method = True
                         # Special handling for __call__ method
-                        if "def __call__" in line:
-                            fixed_content.append(f"{class_indent}def __call__(\n")
-                            fixed_content.append(f"{method_indent}self, \n")
-                            fixed_content.append(f"{method_indent}inputs: Union[str, Dict[str, Any]], \n")
-                            fixed_content.append(f"{method_indent}target_modality: str, \n")
-                            fixed_content.append(f"{method_indent}context: Optional[Dict[str, Any]] = None, \n")
+                        if "def __call__" in line: fixed_content.append(f"{class_indent}def __call__(\n")
+                            fixed_content.append(f"{method_indent}self \
+n")
+                            fixed_content.append(f"{method_indent}inputs: Union[str, Dict[str, Any]]\
+n")
+                            fixed_content.append(f"{method_indent}target_modality: str\
+n")
+                            fixed_content.append(f"{method_indent}context: Optional[Dict[str, Any]] = None \
+n")
                             fixed_content.append(f"{method_indent}training: bool = False\n")
                             fixed_content.append(f"{class_indent}) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
                             )
@@ -58,28 +60,21 @@ def fix_text_to_anything(self):
                                 i += 1
                                 i += 1
                                 continue
-                                else:
-                                    fixed_content.append(f"{class_indent}{line.lstrip()}")
+                                else: fixed_content.append(f"{class_indent}{line.lstrip()}")
                                     i += 1
                                     continue
 
                                     # Handle method content
-                                    if in_method:
-                                        stripped = line.strip()
+                                    if in_method: stripped = line.strip()
                                         if stripped:
                                             # Handle special cases
-                                            if "batch_size = 1" in stripped:
-                                                if "# Initialize with default value" not in stripped:
-                                                    fixed_content.append(f"{method_indent}batch_size = 1  # Initialize with default value\n")
-                                                    else:
-                                                        fixed_content.append(f"{method_indent}{stripped}\n")
-                                                        elif "curr_batch_size = " in stripped:
-                                                            fixed_content.append(f"{method_indent}{stripped}\n")
-                                                            elif "_adjust_sequence_length" in stripped:
-                                                                if "embedded = self._adjust_sequence_length(" in stripped:
-                                                                    fixed_content.append(
+                                            if "batch_size = 1" in stripped: if"# Initialize with default value" not in stripped: fixed_content.append(f"{method_indent}batch_size = 1  # Initialize with default value\n")
+                                                    else: fixed_content.append(f"{method_indent}{stripped}\n")
+                                                        elif "curr_batch_size = " in stripped: fixed_content.append(f"{method_indent}{stripped}\n")
+                                                            elif "_adjust_sequence_length" in stripped: if"embedded = self._adjust_sequence_length(" in stripped: fixed_content.append(
                                                                     f"{method_indent}embedded = self._adjust_sequence_length(\n")
-                                                                    fixed_content.append(f"{method_indent}    embedded, \n")
+                                                                    fixed_content.append(f"{method_indent}    embedded \
+n")
                                                                     fixed_content.append(f"{method_indent}    sequence_length\n")
                                                                     fixed_content.append(f"{method_indent})\n")
                                                                     # Skip the original call
@@ -87,30 +82,21 @@ def fix_text_to_anything(self):
                                                                         i += 1
                                                                         i += 1
                                                                         continue
-                                                                        else:
-                                                                            fixed_content.append(f"{method_indent}{stripped}\n")
-                                                                            else:
-                                                                                fixed_content.append(f"{method_indent}{stripped}\n")
-                                                                                else:
-                                                                                    fixed_content.append("\n")
+                                                                        else: fixed_content.append(f"{method_indent}{stripped}\n")
+                                                                            else: fixed_content.append(f"{method_indent}{stripped}\n")
+                                                                                else: fixed_content.append("\n")
                                                                                     # Handle class content
-                                                                                    elif in_class:
-                                                                                        stripped = line.strip()
-                                                                                        if stripped:
-                                                                                            fixed_content.append(f"{class_indent}{stripped}\n")
-                                                                                            else:
-                                                                                                fixed_content.append("\n")
+                                                                                    elif in_class: stripped = line.strip()
+                                                                                        if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
+                                                                                            else: fixed_content.append("\n")
                                                                                                 # Handle top-level content
-                                                                                                else:
-                                                                                                    if line.strip():
+                                                                                                else: ifline.strip():
                                                                                                         fixed_content.append(line)
-                                                                                                        else:
-                                                                                                            fixed_content.append("\n")
+                                                                                                        else: fixed_content.append("\n")
                                                                                                             i += 1
 
                                                                                                             # Write the fixed content
-                                                                                                            with open("src/models/text_to_anything.py", "w") as f:
-                                                                                                                f.writelines(fixed_content)
+                                                                                                            with open("src/models/text_to_anything.py", "w") as f: f.writelines(fixed_content)
 
 
                                                                                                                 if __name__ == "__main__":

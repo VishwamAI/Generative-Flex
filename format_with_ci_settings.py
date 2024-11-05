@@ -17,8 +17,7 @@ def run_black_format(self):
     "tests/test_models.py",
     ]
 
-    for file in files_to_format:
-        if Path(file).exists():
+    for file in files_to_format: ifPath(file).exists():
             print(f"Formatting {file}...")
             try:
                 # Use exact CI settings
@@ -33,8 +32,7 @@ def run_black_format(self):
                 ]
                 subprocess.run(cmd, check=True)
                 print(f"Successfully formatted {file}")
-                except subprocess.CalledProcessError as e:
-                    print(f"Error formatting {file}: {e}")
+                except subprocess.CalledProcessError as e: print(f"Error formatting {file}: {e}")
                     sys.exit(1)
 
 

@@ -1,45 +1,42 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-
-
     """
-Advanced Generative-Flex Model Implementation
-Core model architecture with state-of-the-art optimizations
+        Advanced Generative-Flex Model Implementation
+        Core model architecture with state-of-the-art optimizations
     """
 
 
 class AdvancedGenerativeFlexModel(nn.Module):
     """
-Advanced transformer-based model with optimized architecture featuring:
-    - Flash Attention for efficient O(N) memory complexity
-    - Mixture of Experts for specialized computation paths
-    - Optimized transformer layers with advanced normalization
+        Advanced transformer-based model with optimized architecture featuring:
+        - Flash Attention for efficient O(N) memory complexity
+        - Mixture of Experts for specialized computation paths
+        - Optimized transformer layers with advanced normalization
+        
+        Args: vocab_size: Size of the vocabulary
+        d_model: Dimensionofthe model(default: 1024)
+        nhead: Numberofattention heads(default: 16)
+        num_layers: Numberoftransformer layers(default: 24)
+        dim_feedforward: Dimensionoffeedforward network(default: 4096)
+        dropout: Dropoutrate(default: 0.1)
+        max_seq_length: Maximumsequencelength(default: 2048)
+        num_experts: Numberofexpert networks per layer(default: 8)
+        expert_capacity_factor: Capacityfactorfor expert routing(default: 1.25)
+        attention_block_size: Blocksizefor flash attention(default: 1024)
+    """
 
-    Args:
-        vocab_size: Size of the vocabulary
-        d_model: Dimension of the model(default: 1024)
-        nhead: Number of attention heads(default: 16)
-        num_layers: Number of transformer layers(default: 24)
-        dim_feedforward: Dimension of feedforward network(default: 4096)
-        dropout: Dropout rate(default: 0.1)
-        max_seq_length: Maximum sequence length(default: 2048)
-        num_experts: Number of expert networks per layer(default: 8)
-        expert_capacity_factor: Capacity factor for expert routing(default: 1.25)
-        attention_block_size: Block size for flash attention(default: 1024)
-        """
-
-def __init__(self):,
-vocab_size: int,
-d_model: int = 1024,
-nhead: int = 16,
-num_layers: int = 24,
-dim_feedforward: int = 4096,
-dropout: float = 0.1,
-max_seq_length: int = 2048,
-num_experts: int = 8,
-expert_capacity_factor: float = 1.25,
-attention_block_size: int = 1024):
+def __init__(self):
+        vocab_size: int,
+        d_model: int = 1024,
+        nhead: int = 16,
+        num_layers: int = 24,
+        dim_feedforward: int = 4096,
+        dropout: float = 0.1,
+        max_seq_length: int = 2048,
+        num_experts: int = 8,
+        expert_capacity_factor: float = 1.25,
+        attention_block_size: int = 1024):
     super().__init__()
     self.d_model = d_model
 
@@ -64,47 +61,40 @@ attention_block_size: int = 1024):
 
 def _init_parameters(self) -> None:
     """Initialize parameters with scaled initialization"""
-for p in self.parameters():
-    if p.dim() > 1:
-        nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow
+        for p in self.parameters():
+        if p.dim() > 1: nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow
         )
-
-def forward(self):,
-x: torch.Tensor,
-mask: Optional[torch.Tensor] = None,
-return_attention_weights: bool = False) -> torch.Tensor:
+        
+        def forward(self):
+        x: torch.Tensor,
+        mask: Optional[torch.Tensor] = None,
+        return_attention_weights: bool = False) -> torch.Tensor:
     """
 Forward pass through the model
 
-Args:
-    x: Input tensor of shape [batch_size, seq_len]
-    mask: Optional attention mask
-    return_attention_weights: Whether to return attention weights
+Args: x: Input tensor of shape [batch_size, seq_len]
+    mask: Optionalattentionmask, return_attention_weights: Whethertoreturn attention weights
 
-    Returns:
-        Output tensor of shape [batch_size, seq_len, vocab_size]
+    Returns: Outputtensorof shape [batch_size, seq_len, vocab_size]
         """
-    # Get sequence length and create position indices
-    seq_len = x.size(1)
-    pos = torch.arange(seq_len, device=x.device).unsqueeze(0)
-
-    # Combine token and positional embeddings
-    x = self.embedding(x) * math.sqrt(self.d_model)  # Scale embeddings
-    x = x + self.pos_encoder(pos)
-
-    # Process through transformer layers
-    attention_weights = []
-    for layer in self.transformer_layers:
-        if return_attention_weights:
-            x, attn = layer(x, mask, return_attention=True)
+            # Get sequence length and create position indices
+            seq_len = x.size(1)
+            pos = torch.arange(seq_len, device=x.device).unsqueeze(0)
+            
+            # Combine token and positional embeddings
+            x = self.embedding(x) * math.sqrt(self.d_model)  # Scale embeddings
+            x = x + self.pos_encoder(pos)
+            
+            # Process through transformer layers
+            attention_weights = []
+            for layer in self.transformer_layers: ifreturn_attention_weights: x, attn = layer(x, mask, return_attention=True)
             attention_weights.append(attn)
-            else:
-                x = layer(x, mask)
-
-                # Output processing
-                x = self.norm(x)
-                logits = self.fc_out(x)
-
-                if return_attention_weights:
-                    return logits, attention_weights
-                    return logits
+            else: x = layer(x, mask)
+            
+            # Output processing
+            x = self.norm(x)
+            logits = self.fc_out(x)
+            
+            if return_attention_weights: returnlogits, attention_weights
+            return logits
+            

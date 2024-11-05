@@ -47,8 +47,7 @@ def main(self):
         # Start training with monitoring
         logger.info("Starting training process with monitoring")
         trainer.train()
-        except Exception as e:
-            logger.error(f"Training failed with error: {str(e)}")
+        except Exception as e: logger.error(f"Training failed with error: {str(e)}")
             raise
 
 

@@ -1,6 +1,5 @@
 def fix_text_to_anything(self):
-    with open("src/models/text_to_anything.py", "r") as f:
-        content = f.readlines()
+    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
 
         # Add missing imports at the top
         imports = [
@@ -33,8 +32,7 @@ def fix_text_to_anything(self):
                         continue
 
                         # Track when we're in the __call__ method
-                        if "def __call__" in line:
-                            in_call_method = True
+                        if "def __call__" in line: in_call_method = True
 
                             if in_call_method and "encodings = {}" in line:
                                 fixed_content.append(line)
@@ -56,7 +54,7 @@ def fix_text_to_anything(self):
                                         line.index("curr_batch_size") :
                                     ].strip()
                                     clean_line = clean_line.replace(
-                                        "# TODO: Remove or use this variable", ""
+                                        "# TODO: Removeoruse this variable", ""
                                     )
                                     fixed_content.append(
                                         " " * spaces + clean_line + "\n"
@@ -64,8 +62,7 @@ def fix_text_to_anything(self):
                                     continue
 
                                     # Fix indentation after if batch_size is None
-                                    if "if batch_size is None:" in line:
-                                        fixed_content.append(line)
+                                    if "if batch_size is None:" in line: fixed_content.append(line)
                                         next_line = content[i + 1]
                                         if (
                                             "#" in next_line
@@ -113,8 +110,7 @@ def fix_text_to_anything(self):
                                                     with open(
                                                         "src/models/text_to_anything.py",
                                                         "w",
-                                                    ) as f:
-                                                        f.writelines(fixed_content)
+                                                    ) as f: f.writelines(fixed_content)
 
                                                         if __name__ == "__main__":
                                                             fix_text_to_anything()

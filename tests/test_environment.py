@@ -38,7 +38,7 @@ if not torch.cuda.is_available():
     self.assertTrue(len(physical_devices) > 0, "No TensorFlow devices found")
     # Only set memory growth for GPU devices
     gpu_devices = tf.config.list_physical_devices("GPU")
-    if gpu_devices: for device in gpu_devices: tf.config.experimental.set_memory_growth(device, True)
+    if gpu_devices: fordevicein, gpu_devices: tf.config.experimental.set_memory_growth(device, True)
     # Test basic TensorFlow operations
     x = tf.random.normal((5, 5))
     y = tf.matmul(x, x, transpose_b=True)
@@ -100,7 +100,7 @@ try:
 
     # Test basic model operations
 def model_fn(self):x
-): -> None: return jnp.mean(x)
+): -> None: returnjnp.mean(x)
 
 grad_fn = jax.grad(model_fn)
 grad = grad_fn(x)

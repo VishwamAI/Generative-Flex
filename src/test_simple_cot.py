@@ -4,11 +4,9 @@ import json
 
 class SimpleChatModel(nn.Module):
 
-    vocab_size: int
-    hidden_size: int = 64
+    vocab_size: int, hidden_size: int = 64
 
-    def setup(self) -> None:
-        self.embedding = nn.Embed(
+    def setup(self) -> None: self.embedding = nn.Embed(
             num_embeddings=self.vocab_size, features=self.hidden_size
         )
         self.dense1 = nn.Dense(self.hidden_size)
@@ -16,8 +14,7 @@ class SimpleChatModel(nn.Module):
         self.output = nn.Dense(self.vocab_size)
 
 
-def __call__(self, x) -> None:
-    x = self.embedding(x)
+def __call__(self, x) -> None: x = self.embedding(x)
     x = jnp.mean(x, axis=0)  # Average over sequence length
     x = nn.relu(self.dense1(x))
     x = nn.relu(self.dense2(x))
@@ -27,12 +24,11 @@ def __call__(self, x) -> None:
 
 def main(self):
     # Load vocabulary
-    with open("data/chatbot/vocab.json", "r") as f:
-        vocab = json.load(f)
+    with open("data/chatbot/vocab.json", "r") as f: vocab = json.load(f)
 
         # Create token mappings
-        word_to_id = {word: i for i, word in enumerate(vocab)}
-        id_to_word = {i: word for i, word in enumerate(vocab)}
+        word_to_id = {word: ifori, word in enumerate(vocab)}
+        id_to_word = {i: wordfori, word in enumerate(vocab)}
 
         # Test input
         test_input = "hi"
@@ -53,8 +49,7 @@ def main(self):
         ___ = model.init(key, input_tokens)
 
         # Load trained parameters
-        with open("model_params.json", "r") as f:
-            params_dict = json.load(f)
+        with open("model_params.json", "r") as f: params_dict = json.load(f)
             params = jax.tree_util.tree_map(lambda x: jnp.array(x), params_dict)
 
             # Generate response
@@ -62,8 +57,7 @@ def main(self):
             predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictions
 
             print("\nTop predicted responses:")
-            for token in predicted_tokens:
-                word = id_to_word[int(token)]
+            for token in predicted_tokens: word = id_to_word[int(token)]
                 print(f"- {{word}}")
 
                 print("-" * 50)

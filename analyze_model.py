@@ -16,13 +16,12 @@ os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 def format_size(size_bytes) -> None:
     """Format size in bytes to human readable string"""
-for unit in ["B", "KB", "MB", "GB", "TB"]:
-    if size_bytes < 1024.0:
-        return f"{size_bytes:.2f} {unit}"
+        for unit in ["B", "KB", "MB", "GB", "TB"]:
+        if size_bytes < 1024.0: returnf"{size_bytes:.2f} {unit}"
         size_bytes /= 1024.0
-
-
-def get_system_memory(self):
+        
+        
+        def get_system_memory(self):
     """Get current system memory usage"""
 process = psutil.Process(os.getpid())
 memory_info = process.memory_info()
@@ -37,8 +36,7 @@ return {
 def analyze_model(self):
     print("\nAnalyzing model architecture and resource usage...")
 
-    try:
-        print("Loading base model configuration...")
+    try: print("Loading base model configuration...")
         base_config = AutoConfig.from_pretrained("facebook/opt-1.3b")
 
         # Map OPT config to our config structure
@@ -60,8 +58,7 @@ def analyze_model(self):
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
 
-                except Exception as e:
-                    print(f"Warning: Could not load full base model: {e}")
+                except Exception as e: print(f"Warning: Couldnotload full base model: {e}")
                     # Estimate parameters based on config
                     base_params = (
                     config.hidden_dim * config.vocab_size
@@ -74,15 +71,13 @@ def analyze_model(self):
 
                     print("\nAnalyzing math reasoning head...")
                     math_head_params = None
-                    try:
-                        math_head = MathReasoningHead(config)
+                    try: math_head = MathReasoningHead(config)
                         math_head_params = sum(p.numel() for p in math_head.parameters())
                         del math_head
                         gc.collect()
                         if torch.cuda.is_available():
                             torch.cuda.empty_cache()
-                            except Exception as e:
-                                print(f"Warning: Could not initialize math head: {e}")
+                            except Exception as e: print(f"Warning: Couldnotinitialize math head: {e}")
                                 # Estimate parameters based on config
                                 math_head_params = (
                                 4 * config.hidden_dim * config.hidden_dim
@@ -126,8 +121,7 @@ def analyze_model(self):
                                     print(f"Allocated: {format_size(current_memory)}")
                                     print(f"Peak: {format_size(max_memory)}")
 
-                                    except Exception as e:
-                                        print(f"\nError during analysis: {str(e)}", file=sys.stderr)
+                                    except Exception as e: print(f"\nError during analysis: {str(e)}", file=sys.stderr)
                                         return
 
 

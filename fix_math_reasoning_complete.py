@@ -1,10 +1,10 @@
-    """Complete reconstruction of math_reasoning.py with proper syntax."""
-
-import re
-
-
-def fix_imports(content: str) -> str:
-    """Fix and deduplicate imports."""
+"""Complete reconstruction of math_reasoning.py with proper syntax."""
+    
+    import re
+    
+    
+    def fix_imports(content: str) -> str:
+"""Fix and deduplicate imports."""
 imports = []
 seen = set()
 
@@ -12,8 +12,7 @@ seen = set()
 for line in content.split("\n"):
     if line.strip().startswith(("from ", "import ")):
         cleaned = line.strip()
-        if cleaned not in seen:
-            seen.add(cleaned)
+        if cleaned not in seen: seen.add(cleaned)
             imports.append(line)
 
             return "\n".join(imports) + "\n\n"
@@ -21,29 +20,28 @@ for line in content.split("\n"):
 
 def create_fixed_content() -> str:
     """Create properly formatted content for math_reasoning.py."""
-return '''from typing import Optional, Union, List, Dict, Any, Tuple
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from .layers.enhanced_transformer import EnhancedTransformerBlock
-from .layers.flash_moe import FlashAttention, MixtureOfExperts
-from .multimodal.base_transformer import BaseTransformer, TransformerBlock
-from .mathematical_notation import MathematicalNotationProcessor
-from .symbolic_math import SymbolicMathProcessor
-from transformers import PreTrainedModel, GenerationMixin
-import logging
-
-logger = logging.getLogger(__name__)
-
-class MathReasoningHead(nn.Module):
+        return '''from typing import Optional, Union, List, Dict, Any, Tuple
+        import torch
+        import torch.nn as nn
+        import torch.nn.functional as F
+        from .layers.enhanced_transformer import EnhancedTransformerBlock
+        from .layers.flash_moe import FlashAttention, MixtureOfExperts
+        from .multimodal.base_transformer import BaseTransformer, TransformerBlock
+        from .mathematical_notation import MathematicalNotationProcessor
+        from .symbolic_math import SymbolicMathProcessor
+        from transformers import PreTrainedModel, GenerationMixin
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
+        class MathReasoningHead(nn.Module):
     """Math reasoning module for enhanced transformer model."""
 
     def __init__(self, config) -> None:
         """Initialize the math reasoning head.
-
-        Args:
-            config: Model configuration object
-            """
+            
+            Args: config: Model configuration object
+        """
         super().__init__()
 
         # Use config's hidden dimension
@@ -126,16 +124,11 @@ class MathReasoningHead(nn.Module):
         expressions: Optional[List[str]] = None,
         **kwargs) -> Dict[str, torch.Tensor]:
             """Forward pass of the math reasoning head.
-
-            Args:
-                hidden_states: Input tensor
-                attention_mask: Optional attention mask
-                expressions: Optional list of mathematical expressions
-                **kwargs: Additional keyword arguments
-
-                Returns:
-                    Dictionary containing model outputs and auxiliary information
-                    """
+                
+                Args: hidden_states: Input tensor
+                attention_mask: Optionalattentionmask, expressions: Optionallistof mathematical expressions
+                **kwargs: Additionalkeywordarguments, Returns: Dictionarycontainingmodel outputs and auxiliary information
+            """
                 # Get input dimensions
                 batch_size = hidden_states.size(0)
                 seq_length = hidden_states.size(1)
@@ -147,35 +140,25 @@ class MathReasoningHead(nn.Module):
                 hidden_states = hidden_states_projected.reshape(batch_size, seq_length, self.hidden_dim)
 
                 # Ensure attention mask has correct shape and values
-                if attention_mask is not None:
-                    if attention_mask.dim() == 4 and attention_mask.shape[1] == 1 and attention_mask.shape[2] == 1:
+                if attention_mask is not None: ifattention_mask.dim() == 4 and attention_mask.shape[1] == 1 and attention_mask.shape[2] == 1:
                         # Already in correct shape [batch_size, 1, 1, seq_length]
                         pass
-                        elif attention_mask.dim() == 3 and attention_mask.shape[1] == 1:
-                            attention_mask = attention_mask.unsqueeze(2)
-                            elif attention_mask.dim() == 2:
-                                attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
-                                else:
+                        elif attention_mask.dim() == 3 and attention_mask.shape[1] == 1: attention_mask = attention_mask.unsqueeze(2)
+                            elif attention_mask.dim() == 2: attention_mask = attention_mask.unsqueeze(1).unsqueeze(2), else:
                                     # Handle complex cases
-                                    while attention_mask.dim() > 2:
-                                        attention_mask = attention_mask.squeeze(1)
+                                    while attention_mask.dim() > 2: attention_mask = attention_mask.squeeze(1)
                                         attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
 
                                         # Ensure proper sequence length
-                                        if attention_mask.size(-1) != seq_length:
-                                            if attention_mask.size(-1) > seq_length:
-                                                attention_mask = attention_mask[..., :seq_length]
-                                                else:
-                                                    pad_size = seq_length - attention_mask.size(-1)
+                                        if attention_mask.size(-1) != seq_length: ifattention_mask.size(-1) > seq_length: attention_mask = attention_mask[..., :seq_length]
+                                                else: pad_size = seq_length - attention_mask.size(-1)
                                                     attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
 
                                                     # Process with Flash Attention
-                                                    try:
-                                                        attn_output, attn_weights = self.flash_attention(hidden_states, attention_mask)
+                                                    try: attn_output, attn_weights = self.flash_attention(hidden_states, attention_mask)
                                                         hidden_states = attn_output
                                                         aux_info = {"attention_weights": attn_weights}
-                                                        except Exception as e:
-                                                            logger.error(f"Flash attention failed: {e}")
+                                                        except Exception as e: logger.error(f"Flash attention failed: {e}")
                                                             # Fallback to regular attention if flash attention fails
                                                             hidden_states = hidden_states + 0  # Identity operation as fallback
                                                             aux_info = {"attention_weights": None}
@@ -194,8 +177,7 @@ class MathReasoningHead(nn.Module):
                                                             router_entropy = -(router_probs * torch.log(router_probs + 1e-10)).sum(dim=-1).mean()
 
                                                             # Process symbolic mathematics if expressions are provided
-                                                            if expressions is not None:
-                                                                hidden_states = self.symbolic_processor(hidden_states, expressions)
+                                                            if expressions is not None: hidden_states = self.symbolic_processor(hidden_states, expressions)
 
                                                                 # Route through enhanced subfield-specific experts
                                                                 expert_outputs = []
@@ -211,10 +193,8 @@ class MathReasoningHead(nn.Module):
                                                                 # Process through each expert
                                                                 for name, expert in self.subfield_experts.items():
                                                                     # Ensure attention mask matches sequence length for each expert
-                                                                    if attention_mask is not None:
-                                                                        expert_mask = attention_mask[:, :seq_length, :seq_length]
-                                                                        else:
-                                                                            expert_mask = None
+                                                                    if attention_mask is not None: expert_mask = attention_mask[:, :seq_length, :seq_length]
+                                                                        else: expert_mask = None
                                                                             expert_out, _ = expert(hidden_states, expert_mask)
                                                                             expert_outputs.append(expert_out)
 
@@ -242,13 +222,11 @@ class MathReasoningHead(nn.Module):
                                                                             logits = self.classifier(x)
 
                                                                             # Calculate cross entropy loss and math accuracy
-                                                                            if "labels" in kwargs:
-                                                                                labels = kwargs["labels"]
+                                                                            if "labels" in kwargs: labels = kwargs["labels"]
                                                                                 loss = F.cross_entropy(logits, labels)
                                                                                 predictions = torch.argmax(logits, dim=-1)
                                                                                 math_accuracy = (predictions == labels).float().mean()
-                                                                                else:
-                                                                                    loss = logits.mean()  # Fallback for generation
+                                                                                else: loss = logits.mean()  # Fallback for generation
                                                                                     math_accuracy = torch.tensor(0.0, device=logits.device)
 
                                                                                     # Combine losses with proper weighting
@@ -266,23 +244,24 @@ class MathReasoningHead(nn.Module):
                                                                                     **aux_info,
                                                                                     }
 
-def _set_gradient_checkpointing(self, module: nn.Module, value: bool = False) -> None:
-    """Enable or disable gradient checkpointing for a module.
-
-    Args:
-        module: PyTorch module
-        value: Whether to enable gradient checkpointing
-        """
+def _set_gradient_checkpointing(self,
+        module: nn.Module,
+        value: bool = False) ->, None:
+            """Enable or disable gradient checkpointing for a module.
+                
+                Args: module: PyTorch module
+                value: Whethertoenable gradient checkpointing
+            """
     if isinstance(module, (BaseTransformer, TransformerBlock)):
         module.gradient_checkpointing = value
 
 def enable_gradient_checkpointing(self) -> None:
     """Enable gradient checkpointing for memory efficiency."""
-self.apply(lambda module: self._set_gradient_checkpointing(module, True))
-    '''
-
-
-def main(self):
+        self.apply(lambda module: self._set_gradient_checkpointing(module, True))
+        '''
+        
+        
+        def main(self):
     """Fix math_reasoning.py with complete reconstruction."""
 file_path = "src/models/reasoning/math_reasoning.py"
 
@@ -291,13 +270,11 @@ try:
     fixed_content = create_fixed_content()
 
     # Write the fixed content
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(fixed_content)
+    with open(file_path, "w", encoding="utf-8") as f: f.write(fixed_content)
 
         print(f"Successfully reconstructed {file_path}")
 
-        except Exception as e:
-            print(f"Error processing {file_path}: {str(e)}")
+        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
             if __name__ == "__main__":

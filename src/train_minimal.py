@@ -6,17 +6,14 @@ import optax
 # Simple model definition(same as in test_minimal.py)
 class SimpleLanguageModel(nn.Module):
 
-    vocab_size: int
-    hidden_size: int = 64
+    vocab_size: int, hidden_size: int = 64
 
-    def setup(self) -> None:
-        self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
+    def setup(self) -> None: self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
         self.dense = nn.Dense(self.hidden_size)
         self.output = nn.Dense(self.vocab_size)
 
 
-def __call__(self, x, training=False) -> None:
-    x = self.embedding(x)
+def __call__(self, x, training=False) -> None: x = self.embedding(x)
     x = self.dense(x)
     x = nn.relu(x)
     x = self.output(x)
@@ -28,15 +25,13 @@ def create_vocab(text) -> None:
     words = set()
     words.add("<unk>")  # Unknown token
     words.add("<pad>")  # Padding token
-    for sentence in text:
-        words.update(sentence.split())
+    for sentence in text: words.update(sentence.split())
         return sorted(list(words))
 
 
 def main(self):
     # Load training data
-    with open("data/chatbot/training_data_minimal.json", "r") as f:
-        data = json.load(f)
+    with open("data/chatbot/training_data_minimal.json", "r") as f: data = json.load(f)
 
         # Prepare training examples
         input_text = [conv["input"] for conv in data["conversations"]]
@@ -45,11 +40,10 @@ def main(self):
         # Create vocabulary
         all_text = input_text + output_text
         vocab = create_vocab(all_text)
-        word_to_id = {word: i for i, word in enumerate(vocab)}
+        word_to_id = {word: ifori, word in enumerate(vocab)}
 
         # Save vocabulary
-        with open("data/chatbot/vocab.json", "w") as f:
-            json.dump(vocab, f, indent=2)
+        with open("data/chatbot/vocab.json", "w") as f: json.dump(vocab, f, indent=2)
 
             # Convert text to tokens
             input_tokens = [
@@ -84,21 +78,19 @@ def main(self):
                     y = jnp.array([output_tokens[i]])
 
 
-def loss_fn(params) -> None:
-    logits = model.apply(params, x)
+def loss_fn(params) -> None: logits = model.apply(params, x)
     return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
     loss, grads = jax.value_and_grad(loss_fn)(state.params)
     state = state.apply_gradients(grads=grads)
 
-    if (epoch + 1) % 10 == 0:
-        print(f"Epoch {{epoch + 1}}, Loss: {{loss}}")
+    if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},
+        Loss: {{loss}}")
 
         print("Training completed!")
 
         # Save model parameters
-        with open("model_params.json", "w") as f:
-            json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
+        with open("model_params.json", "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
 
             print("Model parameters and vocabulary saved successfully!")
 

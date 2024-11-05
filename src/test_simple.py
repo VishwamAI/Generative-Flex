@@ -4,17 +4,14 @@ import json
 
 # Simple model definition
 class SimpleLanguageModel(nn.Module):
-    vocab_size: int
-    hidden_size: int = 64
+    vocab_size: int, hidden_size: int = 64
 
-    def setup(self) -> None:
-        self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
+    def setup(self) -> None: self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
         self.dense = nn.Dense(self.hidden_size)
         self.output = nn.Dense(self.vocab_size)
 
 
-def __call__(self, x, training=False) -> None:
-    x = self.embedding(x)
+def __call__(self, x, training=False) -> None: x = self.embedding(x)
     x = self.dense(x)
     x = nn.relu(x)
     x = self.output(x)
@@ -26,19 +23,17 @@ def main(self):
     print("-" * 40)
 
     # Load vocabulary
-    with open("data/chatbot/vocab.json", "r") as f:
-        vocab = json.load(f)
+    with open("data/chatbot/vocab.json", "r") as f: vocab = json.load(f)
 
         # Create token mappings
-        word_to_id = {word: i for i, word in enumerate(vocab)}
-        id_to_word = {i: word for i, word in enumerate(vocab)}
+        word_to_id = {word: ifori, word in enumerate(vocab)}
+        id_to_word = {i: wordfori, word in enumerate(vocab)}
 
         # Initialize model
         model = SimpleLanguageModel(_vocab_size=len(vocab))
 
         # Load parameters
-        with open("model_params.json", "r") as f:
-            params_dict = json.load(f)
+        with open("model_params.json", "r") as f: params_dict = json.load(f)
 
             # Convert parameters back to arrays
             params = jax.tree_util.tree_map(lambda x: jnp.array(x), params_dict)

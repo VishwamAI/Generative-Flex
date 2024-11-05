@@ -6,41 +6,41 @@ logger = logging.getLogger(__name__)
 
 
 class MathReasoningHead(nn.Module):
-
     """Mathematical reasoning head with mixture of experts for enhanced capabilities"""
-
-    def __init__(self, config) -> None: super().__init__()
-    self.config = config
-    self.num_labels = getattr(config, "num_labels", 4)  # Default to 4 for A, B, C, D options
-
-    # Expert configuration
-    self.num_experts = 4
-    self.expert_hidden_size = config.hidden_size * 2
-
-    # Router for selecting experts
-    self.router = nn.Linear(config.hidden_size, self.num_experts)
-    self.router_dropout = nn.Dropout(0.1)
-
-    # Expert layers
-    self.experts = nn.ModuleList([
-    nn.Sequential(
-    nn.Linear(config.hidden_size, self.expert_hidden_size),
-    nn.GELU(),
-    nn.Linear(self.expert_hidden_size, config.hidden_size))
-    for _ in range(self.num_experts)
-    ]
-    )
-
-    # Output layers
-    self.layer_norm = nn.LayerNorm(config.hidden_size)
-    self.dropout = nn.Dropout(0.1)
-    self.classifier = nn.Linear(config.hidden_size, self.num_labels)
-
-    # Mathematical operation detection
-    self.operation_detector = nn.Linear(config.hidden_size, 5)  # +, -, *, /, other
-
-def __init__(self):,    hidden_states: torch.Tensor,
-attention_mask: Optional[torch.Tensor]  = None) -> Dict[str, torch.Tensor]:
+        
+        def __init__(self, config) -> None: super().__init__()
+        self.config = config
+        self.num_labels = getattr(config, "num_labels", 4)  # Default to 4 for A, B, C, D options
+        
+        # Expert configuration
+        self.num_experts = 4
+        self.expert_hidden_size = config.hidden_size * 2
+        
+        # Router for selecting experts
+        self.router = nn.Linear(config.hidden_size, self.num_experts)
+        self.router_dropout = nn.Dropout(0.1)
+        
+        # Expert layers
+        self.experts = nn.ModuleList([
+        nn.Sequential(
+        nn.Linear(config.hidden_size, self.expert_hidden_size),
+        nn.GELU(),
+        nn.Linear(self.expert_hidden_size, config.hidden_size))
+        for _ in range(self.num_experts)
+        ]
+        )
+        
+        # Output layers
+        self.layer_norm = nn.LayerNorm(config.hidden_size)
+        self.dropout = nn.Dropout(0.1)
+        self.classifier = nn.Linear(config.hidden_size, self.num_labels)
+        
+        # Mathematical operation detection
+        self.operation_detector = nn.Linear(config.hidden_size, 5)  # +, -, *, /, other
+        
+        def __init__(self):
+        hidden_states: torch.Tensor,
+        attention_mask: Optional[torch.Tensor]  = None) -> Dict[str, torch.Tensor]:
     """Forward pass with expert routing and mathematical operation detection"""
 try: batch_size, seq_length, _hidden_size  = hidden_states.shape
 
@@ -96,7 +96,8 @@ for i, expert in enumerate(self.experts):
     except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
     raise
 
-def __init__(self):, expert_weights: torch.Tensor
+def __init__(self):
+        expert_weights: torch.Tensor
 ) -> torch.Tensor: """Compute load balancing loss to ensure even expert utilization"""
 # Calculate mean utilization per expert
 mean_expert_weights = expert_weights.mean(dim=0)

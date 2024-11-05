@@ -5,20 +5,18 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-
-
     """Training script for MMMU dataset using enhanced transformer model."""
-
-
-logger = logging.getLogger(__name__)
-
-
-def train_epoch(self):
-    model: EnhancedTransformer,
-    train_loader: DataLoader,
-    optimizer: torch.optim.Optimizer,
-    config: TrainingConfig) -> Dict[str, float]:
-        """Train for one epoch."""
+        
+        
+        logger = logging.getLogger(__name__)
+        
+        
+        def train_epoch(self):
+        model: EnhancedTransformer,
+        train_loader: DataLoader,
+        optimizer: torch.optim.Optimizer,
+        config: TrainingConfig) -> Dict[str, float]:
+    """Train for one epoch."""
     model.train()
     total_loss = 0.0
     correct = 0
@@ -35,32 +33,32 @@ def train_epoch(self):
 
 def evaluate(self):
     model: EnhancedTransformer,
-    val_loader: DataLoader) -> Dict[str, float]:
-        """Evaluate the model."""
-    model.eval()
-    total_loss = 0.0
-    correct = 0
-    total = 0
-
-    with torch.no_grad():
-        for batch in val_loader: loss = model(batch)
-        total_loss += loss.item()
-
-        return {"val_loss": total_loss / len(val_loader)}
-
-
-def log_metrics(self):
-    metrics: Dict[str, float],
-    step: Optional[int] = None,
-    epoch: Optional[int] = None) -> None: """Log training metrics."""
-metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())
-if epoch is not None: logger.info(f"Epoch {{epoch}}: {{metric_str}}")
-elif step is not None: logger.info(f"Step {{step}}: {{metric_str}}")
-else: logger.info(metric_str)
-
-
-def main(self):
-    """Main training function."""
+        val_loader: DataLoader) -> Dict[str, float]:
+            """Evaluate the model."""
+                model.eval()
+                total_loss = 0.0
+                correct = 0
+                total = 0
+                
+                with torch.no_grad():
+                for batch in val_loader: loss = model(batch)
+                total_loss += loss.item()
+                
+                return {"val_loss": total_loss / len(val_loader)}
+                
+                
+                def log_metrics(self):
+                metrics: Dict[str, float],
+                step: Optional[int] = None,
+                epoch: Optional[int] = None) -> None: """Log training metrics."""
+                metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())
+                if epoch is not None: logger.info(f"Epoch {{epoch}}: {{metric_str}}")
+                elif step is not None: logger.info(f"Step {{step}}: {{metric_str}}")
+                else: logger.info(metric_str)
+                
+                
+                def main(self):
+            """Main training function."""
 config = TrainingConfig()
 model = EnhancedTransformer(config)
 train_loader, val_loader = create_mmmu_dataloaders(config)

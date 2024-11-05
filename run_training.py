@@ -6,26 +6,24 @@ from transformers import AutoTokenizer, AutoConfig
 import logging
 import os
 import torch
-
     """Script to run MMMU model training with mathematical reasoning focus."""
-
-
-# Set up logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
-handlers=[logging.FileHandler("training.log"), logging.StreamHandler()])
-logger = logging.getLogger(__name__)
-
-
-def initialize_mmmu_dataset(subjects, cache_dir="./data/cache"):
+        
+        
+        # Set up logging
+        logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[logging.FileHandler("training.log"), logging.StreamHandler()])
+        logger = logging.getLogger(__name__)
+        
+        
+        def initialize_mmmu_dataset(self, subjects, cache_dir="./data/cache"):
     """Initialize and cache MMMU dataset."""
 logger.info(f"Initializing MMMU dataset for subjects: {subjects}")
-try: for subject in subjects: for split in ["dev", "validation", "test"]:
+try: forsubjectin, subjects: forsplitin ["dev", "validation", "test"]:
     logger.info(f"Loading {subject} - {split} split...")
     _ = load_dataset("MMMU/MMMU", subject, split=split, cache_dir=cache_dir)
     logger.info("Successfully initialized all dataset splits")
     return True
-    except Exception as e:
-        logger.error(f"Error initializing dataset: {e}")
+    except Exception as e: logger.error(f"Error initializing dataset: {e}")
         raise
 
 
@@ -117,8 +115,7 @@ try:
     logger.info(f"Test metrics: {test_metrics}")
 
     logger.info("Training completed successfully!")
-    except Exception as e:
-        logger.error(f"Error during training: {str(e)}", exc_info=True)
+    except Exception as e: logger.error(f"Error during training: {str(e)}", exc_info=True)
         raise
 
 

@@ -5,22 +5,20 @@ import matplotlib.pyplot as plt
 import os
 import re
 import seaborn as sns
-
     """Script to analyze performance across mathematical categories."""
-
-
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-
-def extract_validation_metrics(self):
+        
+        
+        
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger(__name__)
+        
+        
+        def extract_validation_metrics(self):
     """Extract validation metrics from training logs."""
 log_dir = "logs"
 log_files = [f for f in os.listdir(log_dir) if f.startswith("training_")]
 
-if not log_files:
-    logger.error("No training logs found")
+if not log_files: logger.error("No training logs found")
     return None
 
     latest_log = sorted(log_files)[-1]
@@ -30,44 +28,33 @@ if not log_files:
     "category_performance": defaultdict(lambda: {"correct": 0, "total": 0}),
     }
 
-    with open(os.path.join(log_dir, latest_log), "r") as f:
-        content = f.read()
+    with open(os.path.join(log_dir, latest_log), "r") as f: content = f.read()
 
         # Extract overall accuracy
         accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
-        if accuracy_matches:
-            metrics["overall_accuracy"] = float(accuracy_matches[-1])
+        if accuracy_matches: metrics["overall_accuracy"] = float(accuracy_matches[-1])
 
             # Extract validation loss
             loss_matches = re.findall(r"Validation loss: ([\d.]+)", content)
-            if loss_matches:
-                try:
-                    loss = float(loss_matches[-1])
+            if loss_matches: try: loss = float(loss_matches[-1])
                     if not isinstance(loss, complex):  # Filter out nan values
                     metrics["validation_loss"] = loss
-                    except ValueError:
-                        pass
-
-                        return metrics
+                    except ValueError: passreturnmetrics
 
 
 def load_category_distribution(self):
     """Load category distribution from previous analysis."""
-try:
-    with open("mmmu_category_stats.json", "r") as f:
-        return json.load(f)
-        except FileNotFoundError:
-            logger.error("Category statistics file not found")
-            return None
-
-
-def analyze_performance(self):
+        try: withopen("mmmu_category_stats.json", "r") as f: returnjson.load(f)
+        except FileNotFoundError: logger.error("Category statistics file not found")
+        return None
+        
+        
+        def analyze_performance(self):
     """Analyze performance across mathematical categories."""
 metrics = extract_validation_metrics()
 category_stats = load_category_distribution()
 
-if not category_stats:
-    logger.error("Required data not available")
+if not category_stats: logger.error("Required data not available")
     return
 
     # Combine metrics with category distribution
@@ -103,31 +90,27 @@ if not category_stats:
 
 def generate_visualization(analysis) -> None:
     """Generate performance visualization."""
-if not analysis:
-    return
-
-    # Create performance by category plot
-    plt.figure(figsize=(12, 6))
-    categories = list(analysis["category_analysis"].keys())
-    accuracies = [
-    data["estimated_accuracy"] * 100
-    for data in analysis["category_analysis"].values()
-    ]
-
-    sns.barplot(x=accuracies, y=categories)
-    plt.title("Estimated Performance by Mathematical Category")
-    plt.xlabel("Estimated Accuracy (%)")
-    plt.axvline(x=analysis["overall_metrics"]["accuracy"] * 100, color="r", linestyle="--", label=f'Overall Accuracy ({analysis["overall_metrics"]["accuracy"]*100:.1f}%)')
-    plt.legend()
-    plt.tight_layout()
-
-    plt.savefig("performance_by_category.png")
-    plt.close()
-
-def generate_report(analysis) -> None:
+        if not analysis: return# Create performance by category plot
+        plt.figure(figsize=(12, 6))
+        categories = list(analysis["category_analysis"].keys())
+        accuracies = [
+        data["estimated_accuracy"] * 100
+        for data in analysis["category_analysis"].values()
+        ]
+        
+        sns.barplot(x=accuracies, y=categories)
+        plt.title("Estimated Performance by Mathematical Category")
+        plt.xlabel("Estimated Accuracy (%)")
+        plt.axvline(x=analysis["overall_metrics"]["accuracy"] * 100, color="r", linestyle="--", label=f'Overall Accuracy ({analysis["overall_metrics"]["accuracy"]*100:.1f}%)')
+        plt.legend()
+        plt.tight_layout()
+        
+        plt.savefig("performance_by_category.png")
+        plt.close()
+        
+        def generate_report(analysis) -> None:
     """Generate comprehensive performance report."""
-if not analysis:
-    logger.error("No analysis data available")
+if not analysis: logger.error("No analysis data available")
     return
 
     report = ["MMMU Mathematical Performance Analysis\n"]
@@ -149,8 +132,7 @@ if not analysis:
         key=lambda x: x[1]["estimated_accuracy"],
         reverse=True)
 
-        for category, data in sorted_categories:
-            report.append(f"\n{category}:")
+        for category, data in sorted_categories: report.append(f"\n{category}:")
             report.append(f"  Number of Problems: {data['problems']}")
             report.append(f"  Dataset Percentage: {data['percentage']:.2f}%")
             report.append(f"  Estimated Accuracy: {data['estimated_accuracy']*100:.2f}%")
@@ -176,16 +158,15 @@ if not analysis:
 
                 # Save report
                 report_path = "performance_analysis.txt"
-                with open(report_path, "w") as f:
-                    f.write("\n".join(report))
+                with open(report_path, "w") as f: f.write("\n".join(report))
                     logger.info(f"Performance analysis saved to {report_path}")
 
 def main(self):
     """Main analysis function."""
-analysis = analyze_performance()
-if analysis:
-    generate_visualization(analysis)
-    generate_report(analysis)
-
-    if __name__ == "__main__":
+        analysis = analyze_performance()
+        if analysis: generate_visualization(analysis)
+        generate_report(analysis)
+        
+        if __name__ == "__main__":
         main()
+        

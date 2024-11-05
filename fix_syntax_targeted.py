@@ -3,21 +3,22 @@ import re
 from pathlib import Path
 
 
-def fix_method_signature(content):
+def fix_method_signature(self, content):
     """Fix method signatures with proper indentation and type hints."""
-# Fix self parameter in class methods
-content = re.sub(
-r"(\s+)def\s+(\w+)\s*\(\s*self\s*, ?\s*([^)]*)\)\s*(?:->|\s*:)",
-lambda m: f'{m.group(1)}def {m.group(2)}(self{", " + m.group(3).strip() if m.group(3).strip() else ""}) -> None:',
-content)
-
-# Fix standalone self parameters
-content = re.sub(r"(\s+)self, \s*\n", r"\1self, \n", content)
-
-return content
-
-
-def fix_class_inheritance(content):
+        # Fix self parameter in class methods
+        content = re.sub(
+        r"(\s+)def\s+(\w+)\s*\(\s*self\s*, ?\s*([^)]*)\)\s*(?:->|\s*:)",
+        lambda m: f'{m.group(1)}def {m.group(2)}(self{", " + m.group(3).strip() if m.group(3).strip() else ""}) -> None:',
+        content)
+        
+        # Fix standalone self parameters
+        content = re.sub(r"(\s+)self \
+        s*\n", r"\1self, \n", content)
+        
+        return content
+        
+        
+        def fix_class_inheritance(self, content):
     """Fix class inheritance patterns."""
 # Fix class definitions with inheritance
 content = re.sub(
@@ -27,17 +28,17 @@ content)
 return content
 
 
-def fix_function_calls(content):
+def fix_function_calls(self, content):
     """Fix function call patterns."""
-# Fix multiline function calls
-content = re.sub(
-r"(\s+)(\w+)\s*\(\s*\n\s+([^)]+)\s*\)",
-lambda m: f"{m.group(1)}{m.group(2)}(\n{m.group(1)}    {m.group(3).strip()}\n{m.group(1)})",
-content)
-return content
-
-
-def fix_string_literals(content):
+        # Fix multiline function calls
+        content = re.sub(
+        r"(\s+)(\w+)\s*\(\s*\n\s+([^)]+)\s*\)",
+        lambda m: f"{m.group(1)}{m.group(2)}(\n{m.group(1)}    {m.group(3).strip()}\n{m.group(1)})",
+        content)
+        return content
+        
+        
+        def fix_string_literals(self, content):
     """Fix string literal formatting."""
 # Fix f-string formatting
 content = re.sub(
@@ -52,30 +53,29 @@ r'"""([^"]*)"""', lambda m: f'"""\n{m.group(1).strip()}\n"""', content
 return content
 
 
-def fix_type_hints(content):
+def fix_type_hints(self, content):
     """Fix type hint syntax."""
-# Fix return type hints
-content = re.sub(
-r"def\s+(\w+)\s*\((.*?)\)\s*->\s*([^:]+):",
-lambda m: f"def {m.group(1)}({m.group(2).strip()}) -> {m.group(3).strip()}:",
-content)
-
-# Fix parameter type hints
-content = re.sub(
-r"(\w+):\s*([A-Za-z][A-Za-z0-9_]*(?:\[[^\]]+\])?)\s*(?:, |$)",
-r"\1: \2, ",
-content)
-return content
-
-
-def fix_indentation_issues(content):
+        # Fix return type hints
+        content = re.sub(
+        r"def\s+(\w+)\s*\((.*?)\)\s*->\s*([^:]+):",
+        lambda m: f"def {m.group(1)}({m.group(2).strip()}) -> {m.group(3).strip()}:",
+        content)
+        
+        # Fix parameter type hints
+        content = re.sub(
+        r"(\w+):\s*([A-Za-z][A-Za-z0-9_]*(?:\[[^\]]+\])?)\s*(?:, |$)",
+        r"\1: \2, ",
+        content)
+        return content
+        
+        
+        def fix_indentation_issues(self, content):
     """Fix common indentation issues."""
 lines = content.split("\n")
 fixed_lines = []
 indent_level = 0
 
-for line in lines:
-    stripped = line.lstrip()
+for line in lines: stripped = line.lstrip()
 
     # Adjust indent level based on content
     if stripped.startswith(("class ", "def ")):
@@ -98,13 +98,11 @@ for line in lines:
                     return "\n".join(fixed_lines)
 
 
-def process_file(file_path):
+def process_file(self, file_path):
     """Process a single file applying all fixes."""
-print(f"Processing {file_path}...")
-try:
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
+        print(f"Processing {file_path}...")
+        try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
+        
         # Apply fixes in specific order
         content = fix_method_signature(content)
         content = fix_class_inheritance(content)
@@ -112,19 +110,17 @@ try:
         content = fix_string_literals(content)
         content = fix_type_hints(content)
         content = fix_indentation_issues(content)
-
+        
         # Write back
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
-
-            print(f"Successfully processed {file_path}")
-            return True
-            except Exception as e:
-                print(f"Error processing {file_path}: {str(e)}")
-                return False
-
-
-def main(self):
+        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
+        
+        print(f"Successfully processed {file_path}")
+        return True
+        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+        return False
+        
+        
+        def main(self):
     """Process all Python files that failed formatting."""
 # List of files that failed formatting
 failed_files = [
@@ -164,8 +160,7 @@ failed_files = [
 ]
 
 success_count = 0
-for file_path in failed_files:
-    if os.path.exists(file_path) and process_file(file_path):
+for file_path in failed_files: ifos.path.exists(file_path) and process_file(file_path):
         success_count += 1
 
         print(f"\nProcessed {success_count}/{len(failed_files)} files successfully")

@@ -65,15 +65,13 @@ def video_model(self):
     mlp_dim=512)
 
 
-def test_language_model_init(language_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_language_model_init(language_model) -> None: rng = jax.random.PRNGKey(0)
     input_ids = jnp.ones((BATCH_SIZE, SEQ_LENGTH), dtype=jnp.int32)
 
     variables = language_model.init(rng, input_ids, training=False)
     assert variables is not None
 
-def test_language_model_forward(language_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_language_model_forward(language_model) -> None: rng = jax.random.PRNGKey(0)
     input_ids = jnp.ones((BATCH_SIZE, SEQ_LENGTH), dtype=jnp.int32)
 
     variables = language_model.init(rng, input_ids, training=False)
@@ -83,8 +81,7 @@ def test_language_model_forward(language_model) -> None:
 
     assert output.shape == (BATCH_SIZE, SEQ_LENGTH, VOCAB_SIZE)
 
-def test_language_model_training(language_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_language_model_training(language_model) -> None: rng = jax.random.PRNGKey(0)
     input_ids = jnp.ones((BATCH_SIZE, SEQ_LENGTH), dtype=jnp.int32)
 
     init_rng, dropout_rng = jax.random.split(rng)
@@ -98,8 +95,7 @@ def test_language_model_training(language_model) -> None:
     # Ensure gradients can flow(no NaNs)
     assert not jnp.any(jnp.isnan(output))
 
-def test_image_model_init(image_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_image_model_init(image_model) -> None: rng = jax.random.PRNGKey(0)
     images = jnp.ones(
     (BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32
     )
@@ -107,8 +103,7 @@ def test_image_model_init(image_model) -> None:
     variables = image_model.init(rng, images, training=False)
     assert variables is not None
 
-def test_image_model_forward(image_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_image_model_forward(image_model) -> None: rng = jax.random.PRNGKey(0)
     images = jnp.ones(
     (BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32
     )
@@ -120,8 +115,7 @@ def test_image_model_forward(image_model) -> None:
 
     assert output.shape == (BATCH_SIZE, *IMAGE_SIZE, CHANNELS)
 
-def test_image_model_training(image_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_image_model_training(image_model) -> None: rng = jax.random.PRNGKey(0)
     images = jnp.ones(
     (BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32
     )
@@ -137,8 +131,7 @@ def test_image_model_training(image_model) -> None:
     assert output.shape == (BATCH_SIZE, *IMAGE_SIZE, CHANNELS)
     assert not jnp.any(jnp.isnan(output))
 
-def test_audio_model_init(audio_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_audio_model_init(audio_model) -> None: rng = jax.random.PRNGKey(0)
     audio = jnp.ones(
     (BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32
     )
@@ -146,8 +139,7 @@ def test_audio_model_init(audio_model) -> None:
     variables = audio_model.init(rng, audio, training=False)
     assert variables is not None
 
-def test_audio_model_forward(audio_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_audio_model_forward(audio_model) -> None: rng = jax.random.PRNGKey(0)
     audio = jnp.ones(
     (BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32
     )
@@ -167,8 +159,7 @@ def test_audio_model_forward(audio_model) -> None:
     ) * audio_model.hop_length
     assert output.shape == (BATCH_SIZE, expected_samples)
 
-def test_audio_model_training(audio_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_audio_model_training(audio_model) -> None: rng = jax.random.PRNGKey(0)
     audio = jnp.ones(
     (BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32
     )
@@ -193,8 +184,7 @@ def test_audio_model_training(audio_model) -> None:
     expected_samples)
     assert not jnp.any(jnp.isnan(output))
 
-def test_video_model_init(video_model) -> None:
-    rng = jax.random.PRNGKey(0)
+def test_video_model_init(video_model) -> None: rng = jax.random.PRNGKey(0)
     video = jnp.ones(
     (
     BATCH_SIZE,
@@ -209,8 +199,7 @@ def test_video_model_init(video_model) -> None:
     assert variables is not None
 
     def test_video_model_forward(
-    video_model) -> None:
-        rng = jax.random.PRNGKey(0)
+    video_model) -> None: rng = jax.random.PRNGKey(0)
         video = jnp.ones(
         (
         BATCH_SIZE,
@@ -235,8 +224,7 @@ def test_video_model_init(video_model) -> None:
         CHANNELS)
 
         def test_video_model_training(
-        video_model) -> None:
-            rng = jax.random.PRNGKey(0)
+        video_model) -> None: rng = jax.random.PRNGKey(0)
             video = jnp.ones(
             (
             BATCH_SIZE,

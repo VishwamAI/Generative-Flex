@@ -5,17 +5,16 @@ import jax
 import os
 import sys
 import time
-
     """Environment setup and verification script."""
-
-
-
-
-# Set up device configuration
-__device_config = setup_device_config()
-
-
-def test_jax_installation() -> Dict[str, Any]:
+        
+        
+        
+        
+        # Set up device configuration
+        __device_config = setup_device_config()
+        
+        
+        def test_jax_installation() -> Dict[str, Any]:
     """Test JAX installation and device configuration."""
 print("\n=== Testing JAX Installation ===")
 print(f"JAX version: {{jax.__version__}}")
@@ -42,33 +41,32 @@ return {
 
 def test_flax_installation() -> Dict[str, Any]:
     """Test Flax installation with a simple model."""
-print("\n=== Testing Flax Installation ===")
-
-# Create a small test model
-class SimpleModel(nn.Module):
-
-    @nn.compact
-    def __call__(self):,
-    x
-    ): -> None: None:
-        __x = nn.Dense(features=32)(x)
+        print("\n=== Testing Flax Installation ===")
+        
+        # Create a small test model
+        class SimpleModel(nn.Module):
+        
+        @nn.compact
+        def __call__(self):
+        x
+        ): -> None: None: __x = nn.Dense(features=32)(x)
         __x = nn.relu(x)
         __x = nn.Dense(features=1)(x)
         return x
-
+        
         # Initialize model
         model = SimpleModel()
         rng = jax.random.PRNGKey(0)
         dummy_input = jnp.ones((1, 16))
         variables = model.init(rng, dummy_input)
-
+        
         return {
         "flax_version": flax_version,
         "model_params": sum(x.size for x in jax.tree_util.tree_leaves(variables)),
         }
-
-
-def test_optax_installation() -> Dict[str, Any]:
+        
+        
+        def test_optax_installation() -> Dict[str, Any]:
     """Test Optax installation with optimizer creation."""
 print("\n=== Testing Optax Installation ===")
 
@@ -86,19 +84,19 @@ return {
 
 def test_tensorboard_logging(self):
     """Test TensorBoard logging setup."""
-print("\n=== Testing TensorBoard Logging ===")
-
-log_dir = "logs/test_run"
-os.makedirs(log_dir, exist_ok=True)
-
-writer = SummaryWriter(log_dir)
-writer.add_scalar("test/metric", 0.5, 0)
-writer.close()
-
-return os.path.exists(log_dir)
-
-
-def main(self):
+        print("\n=== Testing TensorBoard Logging ===")
+        
+        log_dir = "logs/test_run"
+        os.makedirs(log_dir, exist_ok=True)
+        
+        writer = SummaryWriter(log_dir)
+        writer.add_scalar("test/metric", 0.5, 0)
+        writer.close()
+        
+        return os.path.exists(log_dir)
+        
+        
+        def main(self):
     """Run all environment tests."""
 try: # Test JAX
 jax_results = test_jax_installation()

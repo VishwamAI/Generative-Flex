@@ -2,20 +2,18 @@ import sys
 
 #!/usr/bin/env python3
     """Script to fix a single Python file's formatting."""
-
-
-
-def fix_file(filepath) -> None:
+        
+        
+        
+        def fix_file(filepath) -> None:
     """Fix formatting for a single file."""
-with open(filepath, "r", encoding="utf-8") as f:
-    content = f.read()
+with open(filepath, "r", encoding="utf-8") as f: content = f.read()
 
     # Split into sections
     sections = content.split("\n\n")
     fixed_sections = []
 
-    for section in sections:
-        if not section.strip():
+    for section in sections: ifnotsection.strip():
             continue
 
             # Fix imports section
@@ -60,21 +58,20 @@ with open(filepath, "r", encoding="utf-8") as f:
                             if not fixed_content.endswith("\n"):
                                 fixed_content += "\n"
 
-                                with open(filepath, "w", encoding="utf-8") as f:
-                                    f.write(fixed_content)
+                                with open(filepath, "w", encoding="utf-8") as f: f.write(fixed_content)
 
 
 def main(self):
     """Main function."""
-if len(sys.argv) != 2:
-    print("Usage: fix_single_file.py <filepath>")
-    sys.exit(1)
-
-    filepath = sys.argv[1]
-    print(f"Fixing file: {filepath}")
-    fix_file(filepath)
-    print("Done.")
-
-
-    if __name__ == "__main__":
+        if len(sys.argv) != 2: print("Usage: fix_single_file.py <filepath>")
+        sys.exit(1)
+        
+        filepath = sys.argv[1]
+        print(f"Fixing file: {filepath}")
+        fix_file(filepath)
+        print("Done.")
+        
+        
+        if __name__ == "__main__":
         main()
+        

@@ -2,26 +2,22 @@ from src.models.transformer import TransformerBlock
 from typing import Any, Optional, Tuple
 from typing import Tuple
 import jax
-
-
     """
-Image generation model implementation using JAX and Flax.
+        Image generation model implementation using JAX and Flax.
     """
 
 
 class PatchEmbedding(nn.Module):
     """
-Image to patch embedding.
+        Image to patch embedding.
     """
 
-patch_size: int
-hidden_dim: int
-dtype: Any = jnp.float32
+patch_size: inthidden_dim: intdtype: Any = jnp.float32
 
 @nn.compact
 def __call__(self, images) -> None:
     """
-Convert images to patch embeddings.
+        Convert images to patch embeddings.
     """
 batch_size, height, width, channels = images.shape
 
@@ -37,25 +33,18 @@ return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 
 class ImageGenerationModel(nn.Module):
     """
-Transformer-based image generation model.
+        Transformer-based image generation model.
     """
 
-image_size: Tuple[int, int]  # (height, width)
-patch_size: int
-hidden_dim: int
-num_layers: int
-num_heads: int
-head_dim: int
-mlp_dim: int
-channels: int = 3
-dropout_rate: float = 0.1
-dtype: Any = jnp.float32
+image_size: Tuple[int, int]# (height, width)
+patch_size: inthidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intchannels: int = 3, dropout_rate: float = 0.1, dtype: Any = jnp.float32
 
 @nn.compact
-def __call__(self, inputs, training: bool = True) -> None:
-    """
-Forward pass of the image generation model.
-    """
+def __call__(self, inputs,
+        training: bool = True) ->, None:
+            """
+                Forward pass of the image generation model.
+            """
 # Input shape validation
 batch_size, height, width, channels = inputs.shape
 assert height == self.image_size[0] and width == self.image_size[1]
@@ -89,20 +78,19 @@ for _ in range(self.num_layers):
 
     return x
 
-def generate(self):,
-rng: Any,
-condition: Optional[jnp.ndarray] = None,
-batch_size: int = 1):
-    """
-Generate images.
-    """
+def generate(self):
+        rng: Any,
+        condition: Optional[jnp.ndarray] = None,
+        batch_size: int = 1):
+            """
+                Generate images.
+            """
 # Initialize with random noise if no condition is provided
 if condition is None: rng, init_rng = jax.random.split(rng)
 x = jax.random.normal(init_rng, (
 batch_size, self.image_size[0], self.image_size[1], self.channels),
 _dtype=self.dtype)
-else:
-    x = condition
+else: x = condition
 
     # Generate image
     return self.apply({"params": self.params}, x, training=False)

@@ -1,11 +1,12 @@
-    """Fix specific syntax issues before applying black formatting."""
-
-import re
-from pathlib import Path
-
-
-def fix_file_syntax(file_path: str, content: str) -> str:
-    """Fix syntax issues in a specific file."""
+"""Fix specific syntax issues before applying black formatting."""
+    
+    import re
+    from pathlib import Path
+    
+    
+    def fix_file_syntax(file_path: str,
+    content: str) -> str:
+"""Fix syntax issues in a specific file."""
 if "mmmu_dataloader.py" in file_path:
     # Fix import statement
     content = re.sub(r"from typi", "from typing", content)
@@ -19,7 +20,8 @@ if "mmmu_dataloader.py" in file_path:
 
         elif "jax_trainer.py" in file_path:
             # Fix function definition formatting
-            content = re.sub(r"def train\(\s*self, \s*\):", "def train(self):", content)
+            content = re.sub(r"def train\(\s*self \
+s*\):", "def train(self):", content)
             content = re.sub(
             r"def evaluate\(\s*self, \s*\):", "def evaluate(self):", content
             )
@@ -53,41 +55,40 @@ if "mmmu_dataloader.py" in file_path:
                 ]
 
                 # Apply all common fixes
-                for pattern, replacement in fixes:
-                    content = re.sub(pattern, replacement, content)
+                for pattern, replacement in fixes: content = re.sub(pattern, replacement, content)
 
                     return content
 
 
 def main(self):
     """Fix syntax in all Python files."""
-files_to_fix = [
-"src/data/mmmu_dataloader.py",
-"src/models/apple_optimizations.py",
-"src/training/jax_trainer.py",
-"tests/test_features.py",
-"tests/test_models.py",
-]
-
-for file_path in files_to_fix:
-    print(f"\nProcessing {file_path}...")
-    path = Path(file_path)
-    if not path.exists():
+        files_to_fix = [
+        "src/data/mmmu_dataloader.py",
+        "src/models/apple_optimizations.py",
+        "src/training/jax_trainer.py",
+        "tests/test_features.py",
+        "tests/test_models.py",
+        ]
+        
+        for file_path in files_to_fix: print(f"\nProcessing {file_path}...")
+        path = Path(file_path)
+        if not path.exists():
         print(f"File not found: {file_path}")
         continue
-
+        
         # Read content
         content = path.read_text()
-
+        
         # Fix syntax
         fixed_content = fix_file_syntax(file_path, content)
-
+        
         # Write back
         path.write_text(fixed_content)
         print(f"Fixed syntax in {file_path}")
-
-
+        
+        
         if __name__ == "__main__":
-            print("Starting syntax fixes...")
-            main()
-            print("\nAll syntax fixes completed!")
+        print("Starting syntax fixes...")
+        main()
+        print("\nAll syntax fixes completed!")
+        

@@ -13,57 +13,55 @@ logging.basicConfig(level=logging.DEBUG)
 
 def get_memory_usage() -> float:
     """Get current memory usage percentage."""
-return psutil.Process(os.getpid()).memory_percent()
-
-
-def cleanup_memory(self):
+        return psutil.Process(os.getpid()).memory_percent()
+        
+        
+        def cleanup_memory(self):
     """Force garbage collection."""
 gc.collect()
 
 
 def stream_json_objects(self):
-    url: str, token: Optional[str] = None, chunk_size: int = 1024 * 1024
+    url: str,
+        token: Optional[str] = None,
+        chunk_size: int = 1024 * 1024
     ) -> Generator[Dict[str, Any], None, None]:
         """Stream JSON objects from a URL using chunked downloads and ijson."""
-    headers = {"Authorization": f"Bearer {token}"} if token else {}
-
-    # Get file size
-    head_response = requests.head(url, headers=headers, allow_redirects=True)
-    file_size = int(head_response.headers.get("content-length", 0))
-    logging.info(f"File size: {file_size / (1024*1024):.2f} MB")
-
-    response = requests.get(url, headers=headers, stream=True)
-    parser = ijson.parse(response.raw)
-
-    # Track array nesting level
-    array_level = 0
-    current_object = {}
-
-    try:
-        for prefix, event, value in parser:
-            if event == "start_array":
-                array_level += 1
-                elif event == "end_array":
-                    array_level -= 1
-                    elif array_level == 1:  # We're inside the main array
-                    if event == "start_map":
-                        current_object = {}
-                        elif event == "end_map":
-                            yield current_object
-                            if get_memory_usage() > 60:
-                                cleanup_memory()
-                                elif event != "start_array":  # Regular key-value pair
-                                current_object[prefix.split(".")[-1]] = value
-
-                                except Exception as e:
-                                    logging.error(f"Error parsing JSON: {str(e)}")
-                                    raise
-
-
-def verify_dataset(dataset_id: str, token: Optional[str] = None) -> Dict[str, Any]:
-    """Verify a dataset using streaming JSON parsing."""
-try:
-    api = HfApi()
+            headers = {"Authorization": f"Bearer {token}"} if token else {}
+            
+            # Get file size
+            head_response = requests.head(url, headers=headers, allow_redirects=True)
+            file_size = int(head_response.headers.get("content-length", 0))
+            logging.info(f"File size: {file_size / (1024*1024):.2f} MB")
+            
+            response = requests.get(url, headers=headers, stream=True)
+            parser = ijson.parse(response.raw)
+            
+            # Track array nesting level
+            array_level = 0
+            current_object = {}
+            
+            try: forprefix, event, value in parser: ifevent = = "start_array":
+            array_level += 1
+            elif event == "end_array":
+            array_level -= 1
+            elif array_level == 1:  # We're inside the main array
+            if event == "start_map":
+            current_object = {}
+            elif event == "end_map":
+            yield current_object
+            if get_memory_usage() > 60: cleanup_memory()
+            elif event != "start_array":  # Regular key-value pair
+            current_object[prefix.split(".")[-1]] = value
+            
+            except Exception as e: logging.error(f"Error parsing JSON: {str(e)}")
+            raise
+            
+            
+            def verify_dataset(dataset_id: str,
+            token: Optional[str] = None) -> Dict[str, Any]:
+        """Verify a dataset using streaming JSON parsing."""
+try: api = HfApi()
     logging.info(f"Verifying dataset: {dataset_id}")
 
     # Get dataset info
@@ -83,11 +81,9 @@ try:
     # Process objects
     for obj in stream_json_objects(file_url, token):
         total_objects += 1
-        if total_objects % 100 == 0:
-            current_memory = get_memory_usage()
+        if total_objects % 100 == 0: current_memory = get_memory_usage()
             logging.info(f"Processed {total_objects} objects. Memory usage: {current_memory:.1f}%")
-            if current_memory > 60:
-                cleanup_memory()
+            if current_memory > 60: cleanup_memory()
                 memory_cleanups += 1
 
                 return {
@@ -96,8 +92,7 @@ try:
                 "error_count": error_count,
                 "memory_cleanups": memory_cleanups,
                 }
-                except Exception as e:
-                    logging.error(f"Error verifying dataset {dataset_id}: {str(e)}")
+                except Exception as e: logging.error(f"Error verifying dataset {dataset_id}: {str(e)}")
                     return {"success": False, "error": str(e)}
 
 

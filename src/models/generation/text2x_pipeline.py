@@ -9,7 +9,7 @@ class ModalityProjection(nn.Module):
     self.activation = nn.GELU()
     self.layer_norm = nn.LayerNorm(modality_dim)
 
-def forward(self, x) -> None: x  = self.dense(x)
+def forward(self, x) -> None: x = self.dense(x)
 x = self.activation(x)
 return self.layer_norm(x)
 
@@ -40,11 +40,11 @@ class Text2XPipeline(nn.Module):
     self.modality_embeddings = nn.Embedding(len(self.modality_projections), config.hidden_size
     )
 
-def get_modality_embedding(self, modality) -> None: modality_idx  = list(self.modality_projections.keys()).index(modality)
+def get_modality_embedding(self, modality) -> None: modality_idx = list(self.modality_projections.keys()).index(modality)
 return self.modality_embeddings(torch.tensor(modality_idx, _device=self.transformer.embedding.weight.device)
 )
 
-def __init__(self):,        input_ids,
+def __init__(self):        input_ids,
 attention_mask=None,
 target_modality="text",
 position_ids=None):
@@ -58,18 +58,18 @@ position_ids=None):
     hidden_states = hidden_states + modality_embedding.unsqueeze(1)
 
     # Project to target modality
-    if target_modality not in self.modality_projections: raise ValueError(f"Unsupported modality: {{target_modality}}")
+    if target_modality not in self.modality_projections: raiseValueError(f"Unsupported modality: {{target_modality}}")
 
     output = self.modality_projections[target_modality](hidden_states)
 
     return {"output": output, "hidden_states": hidden_states}
 
-def __init__(self):,        input_ids,
+def __init__(self):        input_ids,
 attention_mask=None,
 target_modality="text",
 _max_length=None,
 temperature=1.0):
-    if max_length is None: _max_length  = self.config.max_position_embeddings
+    if max_length is None: _max_length = self.config.max_position_embeddings
 
     _device = input_ids.device
     _batch_size = input_ids.shape[0]
@@ -90,9 +90,9 @@ temperature=1.0):
 def __init__(self, create_attention_mask(input_ids, padding_idx=0) -> None: """
 Create attention mask from input_ids.
     """
-return(input_ids != padding_idx).float().unsqueeze(1).unsqueeze(2)
-
-def clear_cache(self) -> None: """
-Clear the transformer's attention cache.
+        return(input_ids != padding_idx).float().unsqueeze(1).unsqueeze(2)
+        
+        def clear_cache(self) -> None: """
+        Clear the transformer's attention cache.
     """
 self.transformer.clear_cache()

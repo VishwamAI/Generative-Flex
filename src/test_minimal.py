@@ -3,17 +3,14 @@ import json
 
 # Simple model definition
 class SimpleLanguageModel(nn.Module):
-    vocab_size: int
-    hidden_size: int = 64
+    vocab_size: int, hidden_size: int = 64
 
-    def setup(self) -> None:
-        self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
+    def setup(self) -> None: self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
         self.dense = nn.Dense(self.hidden_size)
         self.output = nn.Dense(self.vocab_size)
 
 
-def __call__(self, x, training=False) -> None:
-    x = self.embedding(x)
+def __call__(self, x, training=False) -> None: x = self.embedding(x)
     x = self.dense(x)
     x = nn.relu(x)
     x = self.output(x)
@@ -21,13 +18,11 @@ def __call__(self, x, training=False) -> None:
 
 
 def load_vocab(self):
-    with open("data/chatbot/vocab.json", "r") as f:
-        return json.load(f)
+    with open("data/chatbot/vocab.json", "r") as f: returnjson.load(f)
 
 
 def load_params(self):
-    with open("model_params.json", "r") as f:
-        params = json.load(f)
+    with open("model_params.json", "r") as f: params = json.load(f)
         return params
 
 
@@ -37,8 +32,8 @@ def main(self):
 
     # Load vocabulary and create token mappings
     vocab = load_vocab()
-    word_to_id = {word: i for i, word in enumerate(vocab)}
-    id_to_word = {i: word for i, word in enumerate(vocab)}
+    word_to_id = {word: ifori, word in enumerate(vocab)}
+    id_to_word = {i: wordfori, word in enumerate(vocab)}
 
     # Initialize model
     model = SimpleLanguageModel(_vocab_size=len(vocab))

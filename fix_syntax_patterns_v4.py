@@ -3,32 +3,33 @@ import re
 from pathlib import Path
 
 
-def fix_method_patterns(content):
+def fix_method_patterns(self, content):
     """Fix common method definition patterns."""
-# Fix __call__ methods with inline docstrings
-content = re.sub(
-r'def\s+__call__\s*\([^)]*\)\s*->\s*None:\s*"""([^"]*?)"""',
-lambda m: f'def __call__(self, x) -> None:\n        """{m.group(1)}"""',
-content)
-
-# Fix forward method definitions
-content = re.sub(
-r"def\s+(\w+)\s*\(\s*self\s*, \s*forward\(\s*\):", r"def \1(self):", content
-)
-
-# Fix empty parameter lists
-content = re.sub(r"def\s+(\w+)\s*\(\s*:\s*", r"def \1():", content)
-
-# Fix method definitions with self parameter
-content = re.sub(r"(\s+)self, \s*\n", r"\1self, ", content)
-
-return content
-
-
-def fix_class_patterns(content):
+        # Fix __call__ methods with inline docstrings
+        content = re.sub(
+        r'def\s+__call__\s*\([^)]*\)\s*->\s*None:\s*"""([^"]*?)"""',
+        lambda m: f'def __call__(self, x) -> None:\n        """{m.group(1)}"""',
+        content)
+        
+        # Fix forward method definitions
+        content = re.sub(
+        r"def\s+(\w+)\s*\(\s*self\s*, \s*forward\(\s*\):", r"def \1(self):", content
+        )
+        
+        # Fix empty parameter lists
+        content = re.sub(r"def\s+(\w+)\s*\(\s*:\s*", r"def \1():", content)
+        
+        # Fix method definitions with self parameter
+        content = re.sub(r"(\s+)self \
+        s*\n", r"\1self, ", content)
+        
+        return content
+        
+        
+        def fix_class_patterns(self, content):
     """Fix class definition patterns."""
 # Fix dataclass decorators
-content = re.sub(r"@dataclass\s*\n", r"@struct.dataclass\n", content)
+content = re.sub(r"@dataclass\s*\n", r"@dataclass\n", content)
 
 # Fix class inheritance
 content = re.sub(
@@ -39,35 +40,29 @@ content)
 return content
 
 
-def fix_docstring_patterns(content):
+def fix_docstring_patterns(self, content):
     """Fix docstring formatting patterns."""
-# Fix empty docstrings
-content = re.sub(r'"""\s*"""', r'"""No description provided."""', content)
-
-# Fix docstring indentation
-lines = content.split("\n")
-fixed_lines = []
-in_docstring = False
-docstring_indent = 0
-
-for line in lines:
-    stripped = line.lstrip()
-    if '"""' in stripped:
-        if not in_docstring:
-            in_docstring = True
-            docstring_indent = len(line) - len(stripped)
-            else:
-                in_docstring = False
-                fixed_lines.append(line)
-                elif in_docstring:
-                    fixed_lines.append(" " * docstring_indent + stripped)
-                    else:
-                        fixed_lines.append(line)
-
-                        return "\n".join(fixed_lines)
-
-
-def fix_import_patterns(content):
+        # Fix empty docstrings
+        content = re.sub(r'"""\s*"""', r'"""No description provided."""', content)
+        
+        # Fix docstring indentation
+        lines = content.split("\n")
+        fixed_lines = []
+        in_docstring = False
+        docstring_indent = 0
+        
+        for line in lines: stripped = line.lstrip()
+        if '"""' in stripped: ifnotin_docstring: in_docstring = True
+        docstring_indent = len(line) - len(stripped)
+        else: in_docstring = False
+        fixed_lines.append(line)
+        elif in_docstring: fixed_lines.append(" " * docstring_indent + stripped)
+        else: fixed_lines.append(line)
+        
+        return "\n".join(fixed_lines)
+        
+        
+        def fix_import_patterns(self, content):
     """Fix import statement patterns."""
 # Fix parenthesized imports
 content = re.sub(
@@ -78,30 +73,26 @@ content)
 return content
 
 
-def process_file(file_path):
+def process_file(self, file_path):
     """Process a single file applying all fixes."""
-print(f"Processing {file_path}...")
-try:
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
+        print(f"Processing {file_path}...")
+        try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
+        
         # Apply fixes in specific order
         content = fix_import_patterns(content)
         content = fix_method_patterns(content)
         content = fix_class_patterns(content)
         content = fix_docstring_patterns(content)
-
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
-
-            print(f"Successfully processed {file_path}")
-            return True
-            except Exception as e:
-                print(f"Error processing {file_path}: {str(e)}")
-                return False
-
-
-def main(self):
+        
+        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
+        
+        print(f"Successfully processed {file_path}")
+        return True
+        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+        return False
+        
+        
+        def main(self):
     """Process files with syntax pattern issues."""
 files_to_fix = [
 "src/models/audio_model.py",
@@ -131,8 +122,7 @@ files_to_fix = [
 ]
 
 success_count = 0
-for file_path in files_to_fix:
-    if os.path.exists(file_path) and process_file(file_path):
+for file_path in files_to_fix: ifos.path.exists(file_path) and process_file(file_path):
         success_count += 1
 
         print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")

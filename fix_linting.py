@@ -2,9 +2,8 @@ import os
 import re
 
 
-def fix_file(filename):
-    with open(filename, "r") as f:
-        content = f.read()
+def fix_file(self, filename):
+    with open(filename, "r") as f: content = f.read()
 
         # Track if we made any changes
         modified = False
@@ -32,23 +31,20 @@ def fix_file(filename):
             "from transformers import PretrainedConfig",
         ]
 
-        for line in lines:
-            if any(imp in line for imp in imports_to_remove):
+        for line in lines: ifany(imp in line for imp in imports_to_remove):
                 modified = True
                 continue
                 new_lines.append(line)
 
                 # Fix undefined flax references
-                if "jax_trainer.py" in filename:
-                    new_lines.insert(0, "import flax")
+                if "jax_trainer.py" in filename: new_lines.insert(0, "import flax")
                     modified = True
 
                     # Fix long lines
                     for i, line in enumerate(new_lines):
                         if len(line) > 88:
                             # Try to break the line at a reasonable point
-                            if "=" in line:
-                                parts = line.split("=")
+                            if "=" in line: parts = line.split("=")
                                 new_lines[i] = (
                                     parts[0].strip()
                                     + "=\\\n    =".join(parts[1:]).strip()
@@ -64,18 +60,15 @@ def fix_file(filename):
                                     "head_dim",
                                 ]
                                 for i, line in enumerate(new_lines):
-                                    for var in unused_vars:
-                                        if f"{var} =" in line:
+                                    for var in unused_vars: iff"{var} =" in line:
                                             # Comment out the line
                                             new_lines[i] = (
-                                                f"# {line}  # TODO: Remove or use this variable"
+                                                f"# {line}  # TODO: Removeoruse this variable"
                                             )
                                             modified = True
 
-                                            if modified:
-                                                print(f"Fixing {filename}")
-                                                with open(filename, "w") as f:
-                                                    f.write("\n".join(new_lines))
+                                            if modified: print(f"Fixing {filename}")
+                                                with open(filename, "w") as f: f.write("\n".join(new_lines))
 
 
 def main(self):
@@ -93,8 +86,7 @@ def main(self):
         "tests/test_training_setup.py",
     ]
 
-    for file in files_to_fix:
-        if os.path.exists(file):
+    for file in files_to_fix: ifos.path.exists(file):
             fix_file(file)
 
             if __name__ == "__main__":

@@ -1,49 +1,46 @@
-    """Fix syntax issues and apply black formatting to all remaining files."""
-
-import subprocess
-import sys
-from pathlib import Path
-
-
-def run_black(file_path):
-    """Run black formatter on a file."""
-try:
-    subprocess.run(
+"""Fix syntax issues and apply black formatting to all remaining files."""
+    
+    import subprocess
+    import sys
+    from pathlib import Path
+    
+    
+    def run_black(self, file_path):
+"""Run black formatter on a file."""
+try: subprocess.run(
     ["black", "--target-version", "py312", str(file_path)], check=True
     )
     print(f"Successfully formatted {file_path}")
-    except subprocess.CalledProcessError as e:
-        print(f"Error formatting {file_path}: {e}")
+    except subprocess.CalledProcessError as e: print(f"Error formatting {file_path}: {e}")
         return False
         return True
 
 
 def fix_syntax_issues(self):
     """Fix common syntax issues in Python files."""
-files_to_fix = [
-"src/config/config.py",
-"src/config/training_config.py",
-"src/data/mmmu_dataloader.py",
-"src/models/apple_optimizations.py",
-"src/models/reasoning/math_reasoning.py",
-"src/models/text_to_anything.py",
-"src/training/jax_trainer.py",
-"tests/test_features.py",
-"tests/test_models.py",
-]
-
-success = True
-for file_path in files_to_fix:
-    file_path = Path(file_path)
-    if not file_path.exists():
+        files_to_fix = [
+        "src/config/config.py",
+        "src/config/training_config.py",
+        "src/data/mmmu_dataloader.py",
+        "src/models/apple_optimizations.py",
+        "src/models/reasoning/math_reasoning.py",
+        "src/models/text_to_anything.py",
+        "src/training/jax_trainer.py",
+        "tests/test_features.py",
+        "tests/test_models.py",
+        ]
+        
+        success = True
+        for file_path in files_to_fix: file_path = Path(file_path)
+        if not file_path.exists():
         print(f"File not found: {file_path}")
         continue
-
+        
         print(f"\nProcessing {file_path}...")
-
+        
         # Read the file content
         content = file_path.read_text()
-
+        
         # Fix common syntax issues
         fixes = [
         # Fix dataclass field definitions
@@ -63,28 +60,27 @@ for file_path in files_to_fix:
         # Fix docstrings
         (r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
         ]
-
+        
         # Apply all fixes
         import re
-
-        for pattern, replacement in fixes:
-            content = re.sub(pattern, replacement, content)
-
-            # Write back the fixed content
-            file_path.write_text(content)
-
-            # Run black formatter
-            if not run_black(file_path):
-                success = False
-
-                return success
-
-
-                if __name__ == "__main__":
-                    print("Starting syntax fixes and formatting...")
-                    if fix_syntax_issues():
-                        print("\nAll files processed successfully!")
-                        sys.exit(0)
-                        else:
-                            print("\nSome files had formatting errors.")
-                            sys.exit(1)
+        
+        for pattern, replacement in fixes: content = re.sub(pattern, replacement, content)
+        
+        # Write back the fixed content
+        file_path.write_text(content)
+        
+        # Run black formatter
+        if not run_black(file_path):
+        success = False
+        
+        return success
+        
+        
+        if __name__ == "__main__":
+        print("Starting syntax fixes and formatting...")
+        if fix_syntax_issues():
+        print("\nAll files processed successfully!")
+        sys.exit(0)
+        else: print("\nSome files had formatting errors.")
+        sys.exit(1)
+        

@@ -5,16 +5,14 @@ import subprocess
 
 def run_command(command) -> None:
     """Run a command and return its output."""
-try:
-    result = subprocess.run(command, shell=True, check=True, capture_output=True, text=True)
-    return result.stdout
-    except subprocess.CalledProcessError as e:
-        print(f"Error running command: {command}")
+        try: result = subprocess.run(command, shell=True, check=True, capture_output=True, text=True)
+        return result.stdout
+        except subprocess.CalledProcessError as e: print(f"Error running command: {command}")
         print(f"Error output: {e.stderr}")
         return None
-
-
-def format_files(self):
+        
+        
+        def format_files(self):
     """Format all Python files in the repository."""
 # First run our structure fix script
 print("Running structure fix script...")
@@ -34,23 +32,18 @@ key_files = [
 
 # Format key files first
 print("\nFormatting key files...")
-for file in key_files:
-    print(f"Formatting {file}...")
+for file in key_files: print(f"Formatting {file}...")
     run_command(f"black --line-length 79 {file}")
 
     # Get all Python files in the repository
     print("\nFinding all Python files...")
     result = run_command("find . -name '*.py' -not -path '*/\.*'")
-    if result:
-        all_files = result.strip().split("\n")
-        else:
-            print("Error finding Python files")
+    if result: all_files = result.strip().split("\n"), else: print("Error finding Python files")
             return
 
             # Format all Python files
             print("\nFormatting all Python files...")
-            for file in all_files:
-                if file.strip():
+            for file in all_files: iffile.strip():
                     print(f"Formatting {file}...")
                     run_command(f"black --line-length 79 {file}")
 

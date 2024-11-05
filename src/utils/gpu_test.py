@@ -1,10 +1,8 @@
 import jax
-
-
     """Test script to verify GPU configuration and CUDA support in JAX."""
-
-
-def test_gpu_configuration(self):
+        
+        
+        def test_gpu_configuration(self):
     """Test GPU configuration and perform basic operations."""
 print("\nGPU Configuration Test")
 print("-" * 50)
@@ -34,11 +32,9 @@ print(f"Result shape: {result.shape}")
 
 # Memory test
 print("\nMemory Test:")
-try:
-    large_array = jnp.ones((20000, 20000))
+try: large_array = jnp.ones((20000, 20000))
     print(f"Successfully allocated {large_array.nbytes / 1e9:.2f} GB array")
-    except Exception as e:
-        print(f"Memory allocation failed: {str(e)}")
+    except Exception as e: print(f"Memory allocation failed: {str(e)}")
 
         if __name__ == "__main__":
             test_gpu_configuration()

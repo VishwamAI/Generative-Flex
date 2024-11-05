@@ -1,10 +1,10 @@
 import os
 
-def fix_setup_script():
-    """Fix setup.py indentation and structure."""
-    setup_content = '''from setuptools import setup, find_packages
 
-"""Setup script for Generative-Flex."""
+def fix_setup_script(self):
+    """Fix setup.py indentation and structure."""
+        setup_content = '''from setuptools import setup, find_packages
+    """Setup script for Generative-Flex."""
 
 setup(
     name="generative_flex",
@@ -58,8 +58,9 @@ setup(
 )
 '''
 
-    with open('setup.py', 'w') as f:
+    with open("setup.py", "w") as f:
         f.write(setup_content)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     fix_setup_script()

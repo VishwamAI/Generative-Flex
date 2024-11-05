@@ -2,27 +2,25 @@ from attention import FlashAttention
 from experts import MixtureOfExperts
 from typing import Optional
 import torch
-
-
     """
-Advanced Transformer Layer Implementation for Generative-Flex
-Combines Flash Attention and Mixture of Experts for optimal performance
+        Advanced Transformer Layer Implementation for Generative-Flex
+        Combines Flash Attention and Mixture of Experts for optimal performance
     """
 
 
 class TransformerLayer(nn.Module):
     """
-Advanced transformer layer combining Flash Attention and Mixture of Experts
+        Advanced transformer layer combining Flash Attention and Mixture of Experts
     """
 
-    def __init__(self):,
-    d_model: int,
-    nhead: int,
-    dim_feedforward: int,
-    dropout: float = 0.1,
-    num_experts: int = 8,
-    expert_capacity_factor: float = 1.25,
-    block_size: int = 1024):
+    def __init__(self):
+        d_model: int,
+        nhead: int,
+        dim_feedforward: int,
+        dropout: float = 0.1,
+        num_experts: int = 8,
+        expert_capacity_factor: float = 1.25,
+        block_size: int = 1024):
         super().__init__()
 
         # Flash Attention for efficient self-attention
@@ -36,16 +34,15 @@ Advanced transformer layer combining Flash Attention and Mixture of Experts
         self.norm2 = nn.LayerNorm(d_model)
         self.dropout = nn.Dropout(dropout)
 
-def forward(self):, x: torch.Tensor, mask: Optional[torch.Tensor] = None
+def forward(self):
+        x: torch.Tensor,
+        mask: Optional[torch.Tensor] = None
 ) -> torch.Tensor:
     """
-Forward pass combining attention and expert computation
-Args:
-    x: Input tensor of shape [batch_size, seq_len, d_model]
-    mask: Optional attention mask
-    Returns:
-        Output tensor of shape [batch_size, seq_len, d_model]
-        """
+        Forward pass combining attention and expert computation
+        Args: x: Input tensor of shape [batch_size, seq_len, d_model]
+        mask: Optionalattentionmask, Returns: Outputtensorof shape [batch_size, seq_len, d_model]
+    """
     # Self-attention with residual connection
     residual = x
     x = self.norm1(x)

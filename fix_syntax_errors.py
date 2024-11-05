@@ -1,10 +1,9 @@
 import re
-
     """Script to fix syntax errors introduced by formatting."""
-
-
-
-def fix_line_continuations(content) -> None:
+        
+        
+        
+        def fix_line_continuations(content) -> None:
     """Fix broken line continuations and indentation."""
 lines = content.split("\n")
 fixed_lines = []
@@ -13,11 +12,9 @@ base_indent = ""
 
 for i, line in enumerate(lines):
     # Fix missing parentheses in function calls
-    if "(" in line and ")" not in line:
-        in_function_call = True
+    if "(" in line and ")" not in line: in_function_call = True
         base_indent = " " * (len(line) - len(line.lstrip()))
-        elif in_function_call and ")" in line:
-            in_function_call = False
+        elif in_function_call and ")" in line: in_function_call = False
 
             # Fix broken dictionary syntax
             if line.strip().endswith("="):
@@ -55,19 +52,17 @@ for i, line in enumerate(lines):
 
 def fix_file(filename) -> None:
     """Fix syntax errors in a file."""
-print(f"Fixing syntax in {filename}")
-with open(filename, "r", encoding="utf-8") as f:
-    content = f.read()
-
-    # Apply fixes
-    fixed_content = fix_line_continuations(content)
-
-    # Write back to file
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(fixed_content)
-
-
-def main(self):
+        print(f"Fixing syntax in {filename}")
+        with open(filename, "r", encoding="utf-8") as f: content = f.read()
+        
+        # Apply fixes
+        fixed_content = fix_line_continuations(content)
+        
+        # Write back to file
+        with open(filename, "w", encoding="utf-8") as f: f.write(fixed_content)
+        
+        
+        def main(self):
     """Fix syntax errors in all affected files."""
 files_to_fix = [
 "src/training/train_mmmu.py",
@@ -75,8 +70,7 @@ files_to_fix = [
 "tests/test_models.py",
 ]
 
-for file in files_to_fix:
-    fix_file(file)
+for file in files_to_fix: fix_file(file)
 
 
     if __name__ == "__main__":
