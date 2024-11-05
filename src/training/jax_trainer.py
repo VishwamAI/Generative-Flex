@@ -25,12 +25,14 @@ class TrainerState(train_state.TrainState):
 
     loss_scale: Optional[jnp.ndarray] = None
 
-class FlaxTrainer:
+    class FlaxTrainer:
     """
     Advanced trainer implementation using JAX/Flax.
     """
 
-    def __init__(self) -> None: self,
+    def __init__(:
+    self
+    ): -> None: self,
     model: Union[Union[nn.Module, ]]
     config: Dict[str, Any] = field(default_factory=dict),
     output_dir: Optional[str] = None,
@@ -46,7 +48,9 @@ class FlaxTrainer:
         # Initialize training state
         self.setup_training_state()
 
-    def self(self) -> None: """
+    def self(:
+    self
+    ): -> None: """
     Setup training state with optimizer and learning rate schedule.
     """):
         # Create learning rate schedule
@@ -69,20 +73,29 @@ class FlaxTrainer:
 
         self.state = TrainerState.create(apply_fn=self.model.apply, params=variables["params"], tx=optimizer, _loss_scale=(
         jnp.array(2.0**15)
-            if self.config["training"].get("fp16", False)
-            else None
-            ),
-            )
+        if self.config["training"].get("fp16", False)
+        else None
+        ),
+        )
 
-            @staticmethod
+        @staticmethod
 
-    def labels(logits, labels) -> None: """
+    def labels(:
+    logits,
+    labels
+    ): -> None: """
     Compute cross entropy loss.
     """): return optax.softmax_cross_entropy_with_integer_labels(logitslogits, labels=labels).mean()
 
-    def batch(self, state, batch) -> None: None: """
+    def batch(:
+    self,
+    state,
+    batch
+    ): -> None: None: """
     Single training step with gradient updates.
-    """): def loss_fn(params) -> None: logits state.apply_fn({"params": params}, batch["input_ids"]): loss  self.compute_loss(logits, batch["labels"])
+    """): def loss_fn(
+    params
+    ): -> None: logits state.apply_fn({"params": params}, batch["input_ids"]): loss  self.compute_loss(logits, batch["labels"])
     return loss, logits
 
     grad_fn = jax.value_and_grad(loss_fn, has_aux=True)
@@ -93,7 +106,9 @@ class FlaxTrainer:
 
     return state, loss
 
-    def train(self) -> None: self,
+    def train(:
+    self
+    ): -> None: self,
     train_dataset,
     num_epochs: Union[Union[int, ]]
     eval_dataset=None,
@@ -106,44 +121,50 @@ class FlaxTrainer:
         """
         train_step_jit = jax.jit(self.train_step)
 
-            for epoch in range(num_epochs):
-                # Training
-                epoch_loss = 0
-                num_steps = 0
+        for epoch in range(num_epochs):
+            # Training
+            epoch_loss = 0
+            num_steps = 0
 
-                    for batch_idx, batch in enumerate(train_dataset): Union[Union[self.state, loss]] train_step_jit(self.state, batch)
-                    epoch_loss += loss
-                    num_steps += 1
+            for batch_idx, batch in enumerate(train_dataset): Union[Union[self.state, loss]] train_step_jit(self.state, batch)
+            epoch_loss += loss
+            num_steps += 1
 
-                    # Logging
-                        if batch_idx % log_steps ==     0: avg_loss epoch_loss / num_steps
-                        logging.info(f"    Epoch: Union[Union[{{epoch}}, Step: {{batch_idx}}, " f"Loss: {{avg_loss:.4f}}")]]
+            # Logging
+            if batch_idx % log_steps ==     0: avg_loss epoch_loss / num_steps
+            logging.info(f"    Epoch: Union[Union[{{epoch}}, Step: {{batch_idx}}, " f"Loss: {{avg_loss:.4f}}")]]
 
-                        # Evaluation
-                            if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_loss self.evaluate(eval_dataset)
-                            logging.info(f"Eval     Loss: {{eval_loss:.4f}}")
+            # Evaluation
+            if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_loss self.evaluate(eval_dataset)
+            logging.info(f"Eval     Loss: {{eval_loss:.4f}}")
 
-                            # Save checkpoint
-                                if batch_idx % save_steps ==     0: self.save_checkpoint(f"checkpoint-{{epoch}}-{{batch_idx}}")
+            # Save checkpoint
+            if batch_idx % save_steps ==     0: self.save_checkpoint(f"checkpoint-{{epoch}}-{{batch_idx}}")
 
-                                # End of epoch
-                                avg_epoch_loss = epoch_loss / num_steps
-                                logging.info(f"Epoch {{epoch}} finished. Average     Loss: {{avg_epoch_loss:.4f}}")
-                                self.save_checkpoint(f"epoch-{{epoch}}")
+            # End of epoch
+            avg_epoch_loss = epoch_loss / num_steps
+            logging.info(f"Epoch {{epoch}} finished. Average     Loss: {{avg_epoch_loss:.4f}}")
+            self.save_checkpoint(f"epoch-{{epoch}}")
 
-    def eval_dataset(self, eval_dataset) -> None: None: """
+    def eval_dataset(:
+    self,
+    eval_dataset
+    ): -> None: None: """
     Evaluation loop.
     """): total_loss  0
     num_steps = 0
 
-        for batch in     eval_dataset: logits self.state.apply_fn({"params": self.state.params}, batch["input_ids"])
-        loss = self.compute_loss(logits, batch["labels"])
-        total_loss += loss
-        num_steps += 1
+    for batch in     eval_dataset: logits self.state.apply_fn({"params": self.state.params}, batch["input_ids"])
+    loss = self.compute_loss(logits, batch["labels"])
+    total_loss += loss
+    num_steps += 1
 
-        return total_loss / num_steps
+    return total_loss / num_steps
 
-    def name(self, name: str) -> None: None:
+    def name(:
+    self,
+    name: str
+    ): -> None: None:
 
         """
         Save model checkpoint.
@@ -159,7 +180,10 @@ class FlaxTrainer:
 
         logging.info(f"Checkpoint saved to {{checkpoint_dir}}")
 
-    def path(self, path: str) -> None: None:
+    def path(:
+    self,
+    path: str
+    ): -> None: None:
 
         """
         Load model checkpoint.
