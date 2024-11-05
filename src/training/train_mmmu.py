@@ -1,6 +1,7 @@
 """
 Training script for MMMU dataset with enhanced model architecture.
 """
+
 import gc
 import logging
 import os
@@ -30,8 +31,8 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler("logs/training.log"),
-        logging.StreamHandler(sys.stdout)
-    ]
+        logging.StreamHandler(sys.stdout),
+    ],
 )
 logger = logging.getLogger(__name__)
 
@@ -70,8 +71,12 @@ class EnhancedMMUModel(PreTrainedModel):
         self.config = config
 
         # Set model dimensions for mathematical reasoning while maintaining efficiency
-        config.hidden_size = min(config.hidden_size, 256)  # Reduced for memory efficiency
-        config.num_attention_heads = min(config.num_attention_heads, 4)  # Fewer heads for efficiency
+        config.hidden_size = min(
+            config.hidden_size, 256
+        )  # Reduced for memory efficiency
+        config.num_attention_heads = min(
+            config.num_attention_heads, 4
+        )  # Fewer heads for efficiency
         config.num_hidden_layers = min(config.num_hidden_layers, 3)  # Reduced layers
 
         # Base transformer with enhanced attention
@@ -80,7 +85,7 @@ class EnhancedMMUModel(PreTrainedModel):
             num_attention_heads=config.num_attention_heads,
             num_hidden_layers=config.num_hidden_layers,
             max_position_embeddings=config.max_position_embeddings,
-            vocab_size=config.vocab_size
+            vocab_size=config.vocab_size,
         )
 
         # Multimodal processing with reduced size
@@ -152,10 +157,8 @@ class EnhancedMMUModel(PreTrainedModel):
                 loss_fct = nn.CrossEntropyLoss()
                 task_loss = loss_fct(
                     math_outputs["logits"].view(-1, self.num_labels),
-                        (
-                            batch["labels"].view(-1),
-                            )
-                        )
+                    (batch["labels"].view(-1),),
+                )
                 moe_loss = math_outputs.get(
                     "moe_loss", torch.tensor(0.0, device=task_loss.device)
                 )
@@ -191,7 +194,7 @@ class EnhancedMMUModel(PreTrainedModel):
         input_ids: torch.Tensor,
         attention_mask: torch.Tensor,
         images: Optional[torch.Tensor] = None,
-        labels: Optional[torch.Tensor] = None
+        labels: Optional[torch.Tensor] = None,
     ):
         """Forward pass with proper error handling and memory management."""
         try:
@@ -201,9 +204,7 @@ class EnhancedMMUModel(PreTrainedModel):
 
             # Process images if provided
             if images is not None:
-                logger.info(
-                    f"Starting image processing with batch size {batch_size}"
-                )
+                logger.info(f"Starting image processing with batch size {batch_size}")
                 try:
                     # Try processing all images at once
                     processed_images = self.process_images(images)
@@ -212,7 +213,7 @@ class EnhancedMMUModel(PreTrainedModel):
                     # Fall back to chunk processing
                     processed_chunks = []
                     for i in range(0, batch_size, chunk_size):
-                        chunk = images[i:i + chunk_size]
+                        chunk = images[i : i + chunk_size]
                         logger.info(
                             f"Processing image chunk {i}/{batch_size}, shape: {chunk.shape}"
                         )
@@ -255,7 +256,7 @@ class EnhancedMMUModel(PreTrainedModel):
                 "router_entropy": math_outputs.get("router_entropy", 0.0),
                 "expert_weights": math_outputs.get("expert_weights", None),
                 "last_hidden_state": hidden_states,
-                "loss": None  # Initialize loss as None
+                "loss": None,  # Initialize loss as None
             }
 
             if labels is not None:
@@ -270,6 +271,7 @@ class EnhancedMMUModel(PreTrainedModel):
 
 class MMUTrainer:
     """Trainer class for MMMU model."""
+
     def __init__(
         self,
         model: nn.Module,
@@ -285,14 +287,14 @@ class MMUTrainer:
         generation_config: Optional[Dict] = None,
         output_dir: str = "outputs",
         config=None,
-        tokenizer=None
+        tokenizer=None,
     ):
         """Initialize the MMU trainer with Accelerate support."""
         self.model = model
         self.optimizer = optimizer
         self.scheduler = scheduler
         self.device = device
-#         self.batch_size = batch_size  # TODO: Remove or use this variable
+        #         self.batch_size = batch_size  # TODO: Remove or use this variable
         self.learning_rate = learning_rate
         self.num_epochs = num_epochs
         self.gradient_accumulation_steps = gradient_accumulation_steps
@@ -307,13 +309,13 @@ class MMUTrainer:
             device_placement=True,
             mixed_precision="fp16" if torch.cuda.is_available() else None,
             gradient_accumulation_steps=gradient_accumulation_steps,
-            project_dir=output_dir
+            project_dir=output_dir,
         )
 
         # Set up model components with proper config
         if config is None:
             config = AutoConfig.from_pretrained("bert-base-uncased")
-#             config.hidden_size = 256  # TODO: Remove or use this variable
+            #             config.hidden_size = 256  # TODO: Remove or use this variable
             config.num_attention_heads = 4
             config.num_hidden_layers = 3
             config.intermediate_size = 512
@@ -329,20 +331,19 @@ class MMUTrainer:
         # Create optimizer if not provided
         if optimizer is None:
             self.optimizer = torch.optim.AdamW(
-                self.model.parameters(),
-                lr=learning_rate,
-                weight_decay=0.05,
-                eps=1e-8
+                self.model.parameters(), lr=learning_rate, weight_decay=0.05, eps=1e-8
             )
 
         # Create learning rate scheduler if not provided
         if scheduler is None:
-            num_training_steps = 1000  # Default value, should be updated with dataloader length
+            num_training_steps = (
+                1000  # Default value, should be updated with dataloader length
+            )
             num_warmup_steps = min(warmup_steps, int(num_training_steps * 0.15))
             self.scheduler = get_linear_schedule_with_warmup(
                 self.optimizer,
                 num_warmup_steps=num_warmup_steps,
-                num_training_steps=num_training_steps
+                num_training_steps=num_training_steps,
             )
 
         # Move model to device
@@ -351,7 +352,9 @@ class MMUTrainer:
         # Create output directory
         os.makedirs(output_dir, exist_ok=True)
         logger.info(f"Initialized MMUTrainer with {self.device} device")
-        logger.info(f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}")
+        logger.info(
+            f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}"
+        )
 
     def train(self):
         """Training loop with proper error handling and logging"""
@@ -389,7 +392,7 @@ class MMUTrainer:
                                 logits = outputs["logits"]
                                 loss = loss_fct(
                                     logits.view(-1, self.model.num_labels),
-                                    batch["labels"].view(-1)
+                                    batch["labels"].view(-1),
                                 )
                         else:
                             loss = outputs.loss if hasattr(outputs, "loss") else None
@@ -422,7 +425,7 @@ class MMUTrainer:
                             current_lr = self.optimizer.param_groups[0]["lr"]
                             metrics = {
                                 "loss": loss.item() * self.gradient_accumulation_steps,
-                                "learning_rate": current_lr
+                                "learning_rate": current_lr,
                             }
                             if (
                                 isinstance(outputs, dict)
@@ -495,7 +498,7 @@ class MMUTrainer:
                     input_ids=batch["input_ids"],
                     attention_mask=batch["attention_mask"],
                     images=batch.get("images", None),
-                    labels=batch.get("labels", None)
+                    labels=batch.get("labels", None),
                 )
 
                 # Calculate metrics
@@ -513,10 +516,7 @@ class MMUTrainer:
         avg_loss = total_loss / len(eval_dataloader)
         accuracy = total_correct / total_samples
 
-        return {
-            "eval_loss": avg_loss,
-            "eval_accuracy": accuracy
-        }
+        return {"eval_loss": avg_loss, "eval_accuracy": accuracy}
 
 
 if __name__ == "__main__":
@@ -528,10 +528,9 @@ if __name__ == "__main__":
             batch_size=1,  # Smaller batch size for larger model
             learning_rate=1e-5,  # Lower learning rate for stability
             num_epochs=5,
-                gradient_accumulation_steps=\
-    8,  # More gradient accumulation for larger effective batch
+            gradient_accumulation_steps=8,  # More gradient accumulation for larger effective batch
             output_dir="outputs",
-                )
+        )
 
         # Set device
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

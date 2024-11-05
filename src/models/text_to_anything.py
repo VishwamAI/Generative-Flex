@@ -38,12 +38,10 @@ class TextTokenizer:
             for c in text[: self.max_length - 1]
         ]  # Reserve 0,1 for pad/eos
 
-        # Add EOS token and create padding in one step
-        final_tokens = (
-            raw_tokens +
-            [self.eos_token] +
-            [self.pad_token] * (self.max_length - len(raw_tokens) - 1)
-        )
+        # Add EOS token and padding
+        tokens = raw_tokens + [self.eos_token]
+        padding = [self.pad_token] * (self.max_length - len(tokens))
+        final_tokens = tokens + padding
 
         # Convert to JAX array
         return jnp.array(final_tokens, dtype=jnp.int32)

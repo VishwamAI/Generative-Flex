@@ -52,8 +52,8 @@ def test_openai_features(config):
     model = EnhancedTransformer(config)
 
     # Test input
-#     batch_size = 2  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
+    #     batch_size = 2  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
             jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
@@ -79,8 +79,8 @@ def test_anthropic_features(config):
     model = EnhancedTransformer(config)
 
     # Test input with potentially harmful content
-#     batch_size = 2  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
+    #     batch_size = 2  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
             jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
@@ -102,8 +102,8 @@ def test_meta_features(config):
     model = EnhancedTransformer(config)
 
     # Test input
-#     batch_size = 2  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
+    #     batch_size = 2  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
             jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
@@ -125,8 +125,8 @@ def test_grok_features(knowledge_config):
     model = KnowledgeAugmentedTransformer(knowledge_config)
 
     # Test input
-#     batch_size = 2  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
+    #     batch_size = 2  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "text": jax.random.normal(
             jax.random.PRNGKey(0),
@@ -155,9 +155,9 @@ def test_gemini_features(text_to_anything_config):
     model = TextToAnything(text_to_anything_config)
 
     # Test multi-modal input
-#     batch_size = 2  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
-#     hidden_size = text_to_anything_config.hidden_size  # TODO: Remove or use this variable
+    #     batch_size = 2  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
+    #     hidden_size = text_to_anything_config.hidden_size  # TODO: Remove or use this variable
     inputs = {
         "text": jax.random.normal(
             jax.random.PRNGKey(0), (batch_size, seq_length, hidden_size)
@@ -199,9 +199,9 @@ def test_apple_optimizations():
     model = AppleOptimizedTransformer(config)
 
     # Test input
-#     batch_size = 2  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
-#     hidden_size = config.hidden_size  # TODO: Remove or use this variable
+    #     batch_size = 2  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
+    #     hidden_size = config.hidden_size  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
             jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
@@ -226,9 +226,9 @@ def test_text_to_anything_generation(text_to_anything_config):
     model = TextToAnything(text_to_anything_config)
 
     # Initialize tokenizer and model parameters
-#     batch_size = 1  # TODO: Remove or use this variable
-#     seq_length = 16  # TODO: Remove or use this variable
-#     hidden_size = text_to_anything_config.hidden_size  # TODO: Remove or use this variable
+    #     batch_size = 1  # TODO: Remove or use this variable
+    #     seq_length = 16  # TODO: Remove or use this variable
+    #     hidden_size = text_to_anything_config.hidden_size  # TODO: Remove or use this variable
     inputs = {
         "text": {
             "input_ids": jax.random.randint(

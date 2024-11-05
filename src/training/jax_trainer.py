@@ -1,4 +1,5 @@
 import flax
+
 """JAX/Flax training infrastructure for Generative-Flex."""
 
 from typing import Any, Dict, Optional
