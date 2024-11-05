@@ -1,22 +1,21 @@
-import os
-import logging
 from accelerate import Accelerator
-from transformers import AutoConfig, AutoTokenizer
-from src.training.train_mmmu import MMUTrainer
 from src.config.training_config import TrainingConfig
+from src.training.train_mmmu import MMUTrainer
+from transformers import AutoConfig, AutoTokenizer
+import logging
+import os
+
 
 # Set up logging
 os.makedirs("logs", exist_ok=True)
 os.makedirs("outputs", exist_ok=True)
 os.makedirs("logs/monitoring", exist_ok=True)
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.FileHandler("logs/training.log"),
-        logging.StreamHandler(),
-    ],
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
+handlers=[
+logging.FileHandler("logs/training.log"),
+logging.StreamHandler(),
+],
 )
 logger = logging.getLogger(__name__)
 
@@ -42,33 +41,17 @@ def main():
         logger.info(f"Tokenizer loaded: {tokenizer.__class__.__name__}")
 
         # Initialize trainer with memory-efficient settings for CPU
-        trainer = MMUTrainer(
-            model_name=model_name,
-            subjects=[
-                "Math",
-                "Computer_Science",
-            ],  # Updated to match available subjects
-            device="cpu",
-            fp16=False,
-            batch_size=1,
-            learning_rate=5e-6,
-            num_epochs=3,
-            gradient_accumulation_steps=32,
-            max_grad_norm=0.1,
-            warmup_steps=100,
-            output_dir="outputs",
-            config=base_config,
-            tokenizer=tokenizer,  # Pass the tokenizer
-        )
+        trainer = MMUTrainer(model_name=model_name, subjects=[
+        "Math", "Computer_Science", ], # Updated to match available subjects
+        device="cpu", fp16=False, batch_size=1, learning_rate=5e-6, num_epochs=3, gradient_accumulation_steps=32, max_grad_norm=0.1, warmup_steps=100, output_dir="outputs", config=base_config, tokenizer=tokenizer, # Pass the tokenizer)
 
         # Start training with monitoring
         logger.info("Starting training process with monitoring")
         trainer.train()
-
     except Exception as e:
-        logger.error(f"Training failed with error: {str(e)}")
-        raise
+            logger.error(f"Training failed with error: {str(e)}")
+            raise
 
 
-if __name__ == "__main__":
-    main()
+            if __name__ == "__main__":
+                main()

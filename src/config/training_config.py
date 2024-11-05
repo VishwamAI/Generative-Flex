@@ -33,14 +33,14 @@ class TrainingConfig:
 
     generation_config: Dict = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.subjects is None:
             self._subjects = ["Math", "Computer_Science"]
 
-        if self.generation_config is None:
-            self._generation_config = {
-                "do_sample": True,
-                "temperature": 0.7,
-                "top_p": 0.9,
-                "max_length": 512,
-            }
+            if self.generation_config is None:
+                self._generation_config = {
+                    "do_sample": True,
+                    "temperature": 0.7,
+                    "top_p": 0.9,
+                    "max_length": 512,
+                }

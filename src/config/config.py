@@ -1,8 +1,9 @@
+from dataclasses import dataclass
+from pathlib import Path
 from typing import Optional
 from typing import Tuple
 import json
-from dataclasses import dataclass
-from pathlib import Path
+
 
 """Centralized configuration management for Generative-Flex."""
 
@@ -71,75 +72,73 @@ class ModelConfig:
         return self.max_seq_length
 
 
-@dataclass
-class TrainingConfig:
-    """Training configuration."""
+    @dataclass
+    class TrainingConfig:
+        """Training configuration."""
 
-    batch_size: int = 2  # Reduced for larger model
-    learning_rate: float = 1e-4  # Increased for better optimization
-    weight_decay: float = 0.1  # Increased for better regularization
-    num_epochs: int = 10  # Increased for better convergence
-    warmup_steps: int = 500  # Increased for better initialization
-    max_grad_norm: float = 0.5  # Reduced for stability
-    fp16: bool = False  # Disabled for CPU training
-    distributed_training: bool = False  # Disabled for single CPU
-    save_steps: int = 100  # More frequent checkpoints
-    eval_steps: int = 50  # More frequent evaluation
-    output_dir: str = "outputs"
-    cache_dir: str = "cache"
-    seed: int = 42
+        batch_size: int = 2  # Reduced for larger model
+        learning_rate: float = 1e-4  # Increased for better optimization
+        weight_decay: float = 0.1  # Increased for better regularization
+        num_epochs: int = 10  # Increased for better convergence
+        warmup_steps: int = 500  # Increased for better initialization
+        max_grad_norm: float = 0.5  # Reduced for stability
+        fp16: bool = False  # Disabled for CPU training
+        distributed_training: bool = False  # Disabled for single CPU
+        save_steps: int = 100  # More frequent checkpoints
+        eval_steps: int = 50  # More frequent evaluation
+        output_dir: str = "outputs"
+        cache_dir: str = "cache"
+        seed: int = 42
 
 
-@dataclass
-class Config:
-    """Complete configuration."""
+        @dataclass
+        class Config:
+            """Complete configuration."""
 
-    model: ModelConfig
-    training: TrainingConfig
+            model: ModelConfig
+            training: TrainingConfig
 
-    @classmethod
-    def from_json(cls, path: str) -> "Config":
-        """Load configuration from JSON file."""
-        with open(path, "r") as f:
-            config_dict = json.load(f)
+            @classmethod
+            def from_json(cls, path: str) -> "Config":
+                """Load configuration from JSON file."""
+                with open(path, "r") as f:
+                    config_dict = json.load(f)
 
-        model_config = ModelConfig(**config_dict["model"])
-        training_config = TrainingConfig(**config_dict["training"])
+                    model_config = ModelConfig(**config_dict["model"])
+                    training_config = TrainingConfig(**config_dict["training"])
 
-        return cls(_model=model_config, _training=training_config)
+                    return cls(_model=model_config, _training=training_config)
 
-    def to_json(self, path: str):
-        """Save configuration to JSON file."""
-        config_dict = {
-            "model": {k: v for k, v in self.model.__dict__.items() if v is not None},
-            "training": self.training.__dict__,
-        }
+                def to_json(self, path: str) -> None:
+                    """Save configuration to JSON file."""
+                    config_dict = {
+                    "model": {k: v for k, v in self.model.__dict__.items() if v is not None},
+                    "training": self.training.__dict__,
+                    }
 
-        with open(path, "w") as f:
-            json.dump(config_dict, f, indent=2)
+                    with open(path, "w") as f:
+                        json.dump(config_dict, f, indent=2)
 
-    def get_config(model_type: str, config_path: Optional[str] = None) -> "Config":
-        """Get configuration for a specific model type."""
-        if config_path and Path(config_path).exists():
-            return Config.from_json(config_path)
+                        def get_config(model_type: str, config_path: Optional[str] = None) -> "Config":
+                            """Get configuration for a specific model type."""
+                            if config_path and Path(config_path).exists():
+                                return Config.from_json(config_path)
 
-        valid_model_types = {"language", "image", "audio", "video"}
-        if model_type not in valid_model_types:
-            raise ValueError(
-                f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
-            )
+                            valid_model_types = {"language", "image", "audio", "video"}
+                            if model_type not in valid_model_types:
+                                raise ValueError(f"Invalid model type: {model_type}. Must be one of {valid_model_types}")
 
-        # Default configurations for different model types
-        model_config = ModelConfig(model_type=model_type)
+                                # Default configurations for different model types
+                                model_config = ModelConfig(model_type=model_type)
 
-        if model_type == "image":
-            model_config._image_size = (256, 256)
-            model_config._patch_size = (16, 16)
-        elif model_type == "audio":
-            model_config._audio_sample_rate = 16000
-            model_config._frame_size = 1024
-        elif model_type == "video":
-            model_config._video_size = (16, 256, 256)
-            model_config._video_patch_size = (2, 16, 16)
+                                if model_type == "image":
+                                    model_config._image_size = (256, 256)
+                                    model_config._patch_size = (16, 16)
+                                    elif model_type == "audio":
+                                        model_config._audio_sample_rate = 16000
+                                        model_config._frame_size = 1024
+                                        elif model_type == "video":
+                                            model_config._video_size = (16, 256, 256)
+                                            model_config._video_patch_size = (2, 16, 16)
 
-        return Config(_model=model_config, _training=TrainingConfig())
+                                            return Config(_model=model_config, _training=TrainingConfig())

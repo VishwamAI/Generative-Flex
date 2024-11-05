@@ -1,5 +1,6 @@
 import jax
 
+
 """Test script to verify GPU configuration and CUDA support in JAX."""
 
 
@@ -39,6 +40,5 @@ def test_gpu_configuration():
     except Exception as e:
         print(f"Memory allocation failed: {str(e)}")
 
-
-if __name__ == "__main__":
-    test_gpu_configuration()
+        if __name__ == "__main__":
+            test_gpu_configuration()

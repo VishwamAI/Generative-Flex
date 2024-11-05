@@ -2,6 +2,7 @@ import jax
 import optax
 import transformers
 
+
 """Test script to verify JAX/Flax/Optax installation."""
 
 
@@ -33,6 +34,5 @@ def test_environment():
 
     print("\nAll environment tests passed successfully!")
 
-
-if __name__ == "__main__":
-    test_environment()
+    if __name__ == "__main__":
+        test_environment()

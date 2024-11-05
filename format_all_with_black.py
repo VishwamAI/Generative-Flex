@@ -1,8 +1,9 @@
-"""Script to format all Python files with black."""
-
+from pathlib import Path
 import os
 import subprocess
-from pathlib import Path
+
+"""Script to format all Python files with black."""
+
 
 
 def format_files():
@@ -10,20 +11,20 @@ def format_files():
     # Get all Python files
     python_files = []
     for root, _, files in os.walk("."):
-        for file in files:
-            if file.endswith(".py"):
-                python_files.append(os.path.join(root, file))
+    for file in files:
+    if file.endswith(".py"):
+        python_files.append(os.path.join(root, file))
 
-    print(f"Found {len(python_files)} Python files")
+        print(f"Found {len(python_files)} Python files")
 
-    # Format each file
-    for file in python_files:
+        # Format each file
+        for file in python_files:
         print(f"Formatting {file}...")
         try:
             subprocess.run(["black", file], check=True)
         except subprocess.CalledProcessError as e:
-            print(f"Error formatting {file}: {e}")
+                print(f"Error formatting {file}: {e}")
 
 
-if __name__ == "__main__":
-    format_files()
+                if __name__ == "__main__":
+                    format_files()

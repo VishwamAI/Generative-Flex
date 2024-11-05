@@ -1,6 +1,7 @@
+from dataclasses import dataclass, field
 from typing import List
 from typing import Tuple
-from dataclasses import dataclass, field
+
 
 VOCAB_SIZE = 256  # Character-level tokenization
 
@@ -39,15 +40,11 @@ class GenerationConfig:
     safety_threshold: float = field(default=0.9)
 
     # Supported modalities
-    supported_modalities: List[str] = field(
-        default_factory=lambda: ["text", "image", "audio", "video", "code"]
-    )
+    supported_modalities: List[str] = field(default_factory=lambda: ["text", "image", "audio", "video", "code"])
 
     # Constitutional principles
-    constitutional_principles: List[str] = field(
-        default_factory=lambda: [
+    constitutional_principles: List[str] = field(default_factory=lambda: [
             "Do not generate harmful content",
             "Respect privacy and intellectual property",
             "Be transparent about AI-generated content",
-        ]
-    )
+        ])

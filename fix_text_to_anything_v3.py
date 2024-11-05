@@ -2,46 +2,39 @@ def fix_text_to_anything():
     with open("src/models/text_to_anything.py", "r") as f:
         content = f.readlines()
 
-    # Add missing imports at the top
-    imports = [
+        # Add missing imports at the top
+        imports = [
         "import jax.numpy as jnp\n",
         "from typing import Dict, List, Optional, Tuple, Union\n",
         "from flax import linen as nn\n",
-    ]
+        ]
 
-    # Find where to insert imports
-    for i, line in enumerate(content):
+        # Find where to insert imports
+        for i, line in enumerate(content):
         if line.startswith("from flax import struct"):
             content = content[:i] + imports + content[i:]
             break
 
-    # Initialize variables properly
-    fixed_content = []
-    in_call_method = False
-    batch_size_initialized = False
+        # Initialize variables properly
+        fixed_content = []
+        in_call_method = False
+        batch_size_initialized = False
 
-    for i, line in enumerate(content):
+        for i, line in enumerate(content):
         # Skip the original imports we're replacing
-        if any(
-            imp in line
-            for imp in [
-                "import jax",
-                "from typing import",
-                "from flax import linen",
-            ]
-        ):
-            continue
+        if any(imp in line
+        for imp in [
+        "import jax", "from typing import", "from flax import linen", ]):
+        continue
 
-        # Track when we're in the __call__ method
-        if "def __call__" in line:
-            in_call_method = True
+    # Track when we're in the __call__ method
+    if "def __call__" in line:
+        in_call_method = True
 
         if in_call_method and "encodings = {}" in line:
             fixed_content.append(line)
             # Add batch size initialization with proper indentation
-            fixed_content.append(
-                "        batch_size = 1  # Initialize with default value\n"
-            )
+            fixed_content.append("        batch_size = 1  # Initialize with default value\n")
             batch_size_initialized = True
             continue
 
@@ -60,29 +53,27 @@ def fix_text_to_anything():
             next_line = content[i + 1]
             if "#" in next_line and "batch_size = curr_batch_size" in next_line:
                 spaces = (
-                    len(line) - len(line.lstrip()) + 4
+                len(line) - len(line.lstrip()) + 4
                 )  # Add 4 spaces for indentation
                 fixed_content.append(" " * spaces + "batch_size = curr_batch_size\n")
-            continue
+                continue
 
-        # Fix the sequence length adjustment indentation
-        if "_adjust_sequence_length" in line and "embedded" in line:
-            spaces = len(line) - len(line.lstrip())
-            fixed_content.append(
-                " " * spaces + "embedded = self._adjust_sequence_length(\n"
-            )
-            fixed_content.append(" " * (spaces + 4) + "embedded,\n")
-            fixed_content.append(" " * (spaces + 4) + "sequence_length\n")
-            fixed_content.append(" " * spaces + ")\n")
-            continue
+            # Fix the sequence length adjustment indentation
+            if "_adjust_sequence_length" in line and "embedded" in line:
+                spaces = len(line) - len(line.lstrip())
+                fixed_content.append(" " * spaces + "embedded = self._adjust_sequence_length(\n")
+                fixed_content.append(" " * (spaces + 4) + "embedded,\n")
+                fixed_content.append(" " * (spaces + 4) + "sequence_length\n")
+                fixed_content.append(" " * spaces + ")\n")
+                continue
 
-        if not batch_size_initialized or line.strip() != "":
-            fixed_content.append(line)
+            if not batch_size_initialized or line.strip() != "":
+                fixed_content.append(line)
 
-    # Write the fixed content
-    with open("src/models/text_to_anything.py", "w") as f:
-        f.writelines(fixed_content)
+                # Write the fixed content
+                with open("src/models/text_to_anything.py", "w") as f:
+                    f.writelines(fixed_content)
 
 
-if __name__ == "__main__":
-    fix_text_to_anything()
+                    if __name__ == "__main__":
+                        fix_text_to_anything()

@@ -27,8 +27,7 @@ def create_minimal_training_data():
     with open(output_file, "w") as f:
         json.dump(training_data, f, indent=2)
 
-    print(f"Created minimal training data file: {output_file}")
+        print(f"Created minimal training data file: {output_file}")
 
-
-if __name__ == "__main__":
-    create_minimal_training_data()
+        if __name__ == "__main__":
+            create_minimal_training_data()

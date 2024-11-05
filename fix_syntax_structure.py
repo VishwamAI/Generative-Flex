@@ -1,269 +1,274 @@
-"""Script to fix basic Python syntax structure in problematic files."""
-import os
-
-def fix_analyze_performance():
-    content = '''"""Extract validation metrics from training logs."""
+from contextlib import contextmanager
+from datasets import load_dataset
+from typing import Dict, List, Optional
+from typing import Generator, Optional
+from typing import List, Optional
+from typing import List, Optional
+from typing import List, Optional
+from typing import Optional
+from typing import Optional, Dict, Any
 import json
 import os
-from typing import Dict, List, Optional
+import os
+import os
+import os
+import os
+import os
+import time
+import torch
+import torch.nn as nn
 
-def extract_validation_metrics() -> Dict[str, float]:
-    """Extract metrics from validation logs."""
-    metrics = {}
-    log_dir = "logs"
+"""Script to fix basic Python syntax structure in problematic files."""
 
-    try:
-        for filename in os.listdir(log_dir):
+def fix_analyze_performance():
+    content = """"""Extract validation metrics from training logs."""
+
+    def extract_validation_metrics() -> Dict[str, float]:
+        """Extract metrics from validation logs."""
+        metrics = {}
+        log_dir = "logs"
+
+        try:
+            for filename in os.listdir(log_dir):
             if filename.startswith("training_") and filename.endswith(".log"):
                 with open(os.path.join(log_dir, filename), "r") as f:
                     for line in f:
-                        if "validation_loss" in line:
-                            try:
-                                data = json.loads(line)
-                                metrics["validation_loss"] = data["validation_loss"]
-                                if "accuracy" in data:
-                                    metrics["accuracy"] = data["accuracy"]
-                            except json.JSONDecodeError:
-                                continue
-    except FileNotFoundError:
-        print("No log files found")
+                    if "validation_loss" in line:
+                        try:
+                            data = json.loads(line)
+                            metrics["validation_loss"] = data["validation_loss"]
+                            if "accuracy" in data:
+                                metrics["accuracy"] = data["accuracy"]
 
-    return metrics
+        except json.JSONDecodeError:
+                                    continue
+                                except FileNotFoundError:
+                                    print("No log files found")
 
-if __name__ == "__main__":
-    metrics = extract_validation_metrics()
-    print("Validation Metrics:", metrics)
-'''
-    with open('analyze_performance_by_category.py', 'w') as f:
-        f.write(content)
+                                    return metrics
 
-def fix_dataset_verification():
-    content = '''"""Utility functions for dataset verification."""
-import time
-from contextlib import contextmanager
-from typing import Generator, Optional
+                                if __name__ == "__main__":
+                                    metrics = extract_validation_metrics()
+                                    print("Validation Metrics:", metrics)
+                                    """
+                                    with open('analyze_performance_by_category.py', 'w') as f:
+                                        f.write(content)
 
-@contextmanager
-def timeout(seconds: int) -> Generator[None, None, None]:
-    """Context manager for timing out operations."""
-    def signal_handler(signum, frame):
-        raise TimeoutError(f"Operation timed out after {seconds} seconds")
+                                        def fix_dataset_verification():
+                                            content = """"""Utility functions for dataset verification."""
 
-    # Save the old handler
-    old_handler = signal.signal(signal.SIGALRM, signal_handler)
-    # Set the alarm
-    signal.alarm(seconds)
+                                            @contextmanager
+                                            def timeout(seconds: int) -> Generator[None, None, None]:
+                                                """Context manager for timing out operations."""
+                                                def signal_handler(signum, frame) -> None:
+                                                    raise TimeoutError(f"Operation timed out after {seconds} seconds")
 
-    try:
-        yield
-    finally:
-        # Restore the old handler and cancel the alarm
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, old_handler)
+                                                    # Save the old handler
+                                                    old_handler = signal.signal(signal.SIGALRM, signal_handler)
+                                                    # Set the alarm
+                                                    signal.alarm(seconds)
 
-def verify_dataset_integrity(dataset_path: str) -> bool:
-    """Verify the integrity of a dataset."""
-    try:
-        with timeout(300):  # 5 minute timeout
-            # Add dataset verification logic here
-            time.sleep(1)  # Placeholder
-            return True
-    except TimeoutError:
-        print(f"Dataset verification timed out: {dataset_path}")
-        return False
-    except Exception as e:
-        print(f"Dataset verification failed: {str(e)}")
-        return False
-'''
-    with open('data/dataset_verification_utils.py', 'w') as f:
-        f.write(content)
+                                                    try:
+                                                        yield
+                                                        finally:
+                                                            # Restore the old handler and cancel the alarm
+                                                            signal.alarm(0)
+                                                            signal.signal(signal.SIGALRM, old_handler)
 
-def fix_verify_datasets():
-    content = '''"""Script to verify mapped datasets."""
-import os
-from typing import List, Optional
+                                                            def verify_dataset_integrity(dataset_path: str) -> bool:
+                                                                """Verify the integrity of a dataset."""
+                                                                try:
+                                                                    with timeout(300):  # 5 minute timeout
+                                                                    # Add dataset verification logic here
+                                                                    time.sleep(1)  # Placeholder
+                                                                    return True
 
-try:
-    from datasets import load_dataset
-except ImportError:
-    print("Warning: datasets package not installed")
+                                                    except TimeoutError:
+                                                                    print(f"Dataset verification timed out: {dataset_path}")
+                                                                    return False
+                                                                except Exception as e:
+                                                                    print(f"Dataset verification failed: {str(e)}")
+                                                                    return False
+                                                                """
+                                                                with open('data/dataset_verification_utils.py', 'w') as f:
+                                                                    f.write(content)
 
-def verify_dataset(dataset_name: str) -> bool:
-    """Verify a single dataset."""
-    try:
-        dataset = load_dataset(dataset_name)
-        return True
-    except Exception as e:
-        print(f"Failed to load dataset {dataset_name}: {str(e)}")
-        return False
+                                                                    def fix_verify_datasets():
+                                                                        content = """"""Script to verify mapped datasets."""
 
-def main():
-    """Main verification function."""
-    datasets = [
-        "mmlu-math",
-        "mmlu-physics",
-        "mmlu-chemistry"
-    ]
+                                                                        try:
 
-    results = []
-    for dataset in datasets:
-        success = verify_dataset(dataset)
-        results.append((dataset, success))
 
-    print("\nVerification Results:")
-    for dataset, success in results:
-        status = "✓" if success else "✗"
-        print(f"{status} {dataset}")
+                                                                        except ImportError:
+                                                                                print("Warning: datasets package not installed")
 
-if __name__ == "__main__":
-    main()
-'''
-    with open('data/verify_mapped_datasets.py', 'w') as f:
-        f.write(content)
+                                                                                def verify_dataset(dataset_name: str) -> bool:
+                                                                                    """Verify a single dataset."""
+                                                                                    try:
+                                                                                        dataset = load_dataset(dataset_name)
+                                                                                        return True
+                                                                                    except Exception as e:
+                                                                                        print(f"Failed to load dataset {dataset_name}: {str(e)}")
+                                                                                        return False
 
-def fix_flake8_comprehensive():
-    content = '''"""Script to fix flake8 issues comprehensively."""
-import os
-from typing import List, Optional
+                                                                                    def main():
+                                                                                        """Main verification function."""
+                                                                                        datasets = [
+                                                                                        "mmlu-math",
+                                                                                        "mmlu-physics",
+                                                                                        "mmlu-chemistry"
+                                                                                        ]
 
-def fix_line_length(content: str) -> str:
-    """Break long lines into multiple lines."""
-    lines = content.split("\\n")
-    fixed_lines = []
+                                                                                        results = []
+                                                                                        for dataset in datasets:
+                                                                                        success = verify_dataset(dataset)
+                                                                                        results.append((dataset, success))
 
-    for line in lines:
-        if len(line) > 88:  # Black's default line length
-            # Add line breaking logic here
-            fixed_lines.append(line)
-        else:
-            fixed_lines.append(line)
+                                                                                        print("\nVerification Results:")
+                                                                                        for dataset, success in results:
+                                                                                        status = "✓" if success else "✗"
+                                                                                        print(f"{status} {dataset}")
 
-    return "\\n".join(fixed_lines)
+                                                                                        if __name__ == "__main__":
+                                                                                            main()
+                                                                                            """
+                                                                                            with open('data/verify_mapped_datasets.py', 'w') as f:
+                                                                                                f.write(content)
 
-def main():
-    """Main function to fix flake8 issues."""
-    python_files = []
-    for root, _, files in os.walk("."):
-        for file in files:
-            if file.endswith(".py"):
-                python_files.append(os.path.join(root, file))
+                                                                                                def fix_flake8_comprehensive():
+                                                                                                    content = """"""Script to fix flake8 issues comprehensively."""
 
-    for file in python_files:
-        with open(file, "r") as f:
-            content = f.read()
+                                                                                                    def fix_line_length(content: str) -> str:
+                                                                                                        """Break long lines into multiple lines."""
+                                                                                                        lines = content.split("\\n")
+                                                                                                        fixed_lines = []
 
-        # Apply fixes
-        fixed_content = fix_line_length(content)
+                                                                                                        for line in lines:
+                                                                                                        if len(line) > 88:  # Black's default line length
+                                                                                                        # Add line breaking logic here
+                                                                                                        fixed_lines.append(line)
+                                                                                                        else:
+                                                                                                            fixed_lines.append(line)
 
-        with open(file, "w") as f:
-            f.write(fixed_content)
+                                                                                                            return "\\n".join(fixed_lines)
 
-if __name__ == "__main__":
-    main()
-'''
-    with open('fix_flake8_comprehensive.py', 'w') as f:
-        f.write(content)
+                                                                                                        def main():
+                                                                                                            """Main function to fix flake8 issues."""
+                                                                                                            python_files = []
+                                                                                                            for root, _, files in os.walk("."):
+                                                                                                            for file in files:
+                                                                                                            if file.endswith(".py"):
+                                                                                                                python_files.append(os.path.join(root, file))
 
-def fix_string_formatting():
-    content = '''"""Script to fix string formatting issues."""
-import os
-from typing import List, Optional
+                                                                                                                for file in python_files:
+                                                                                                                with open(file, "r") as f:
+                                                                                                                    content = f.read()
 
-def fix_multiline_fstrings(filename: str) -> None:
-    """Fix multiline f-string formatting."""
-    with open(filename, "r") as f:
-        content = f.read()
+                                                                                                                    # Apply fixes
+                                                                                                                    fixed_content = fix_line_length(content)
 
-    # Fix multiline f-strings
-    lines = content.split("\\n")
-    fixed_lines = []
+                                                                                                                    with open(file, "w") as f:
+                                                                                                                        f.write(fixed_content)
 
-    for line in lines:
-        # Check for f-strings at start of line
-        stripped = line.strip()
-        if stripped.startswith("f'''") or stripped.startswith('f"""'):
-            # Handle multiline f-strings
-            line = line.replace("f'''", "'''").replace('f"""', '"""')
-        fixed_lines.append(line)
+                                                                                                                        if __name__ == "__main__":
+                                                                                                                            main()
+                                                                                                                            """
+                                                                                                                            with open('fix_flake8_comprehensive.py', 'w') as f:
+                                                                                                                                f.write(content)
 
-    with open(filename, "w") as f:
-        f.write("\\n".join(fixed_lines))
+                                                                                                                                def fix_string_formatting():
+                                                                                                                                    content = """"""Script to fix string formatting issues."""
 
-def main():
-    """Main function to fix string formatting."""
-    python_files = []
-    for root, _, files in os.walk("."):
-        for file in files:
-            if file.endswith(".py"):
-                python_files.append(os.path.join(root, file))
+                                                                                                                                    def fix_multiline_fstrings(filename: str) -> None:
+                                                                                                                                        """Fix multiline f-string formatting."""
+                                                                                                                                        with open(filename, "r") as f:
+                                                                                                                                            content = f.read()
 
-    for file in python_files:
-        fix_multiline_fstrings(file)
+                                                                                                                                            # Fix multiline f-strings
+                                                                                                                                            lines = content.split("\\n")
+                                                                                                                                            fixed_lines = []
 
-if __name__ == "__main__":
-    main()
-'''
-    with open('fix_string_formatting.py', 'w') as f:
-        f.write(content)
+                                                                                                                                            for line in lines:
+                                                                                                                                            # Check for f-strings at start of line
+                                                                                                                                            stripped = line.strip()
+                                                                                                                                            if stripped.startswith(""""") or stripped.startswith('"""'):
+                                                                                                                                                # Handle multiline f-strings
+                                                                                                                                                line = line.replace(""""", """"").replace('"""', '"""')
+                                                                                                                                                fixed_lines.append(line)
 
-def fix_text_to_anything_files():
-    base_content = '''"""Script to fix text-to-anything implementation."""
-import os
-from typing import Optional
+                                                                                                                                                with open(filename, "w") as f:
+                                                                                                                                                    f.write("\\n".join(fixed_lines))
 
-def fix_text_to_anything() -> None:
-    """Fix the text-to-anything implementation."""
-    with open("src/models/text_to_anything.py", "r") as f:
-        content = f.read()
+                                                                                                                                                    def main():
+                                                                                                                                                        """Main function to fix string formatting."""
+                                                                                                                                                        python_files = []
+                                                                                                                                                        for root, _, files in os.walk("."):
+                                                                                                                                                        for file in files:
+                                                                                                                                                        if file.endswith(".py"):
+                                                                                                                                                            python_files.append(os.path.join(root, file))
 
-    # Add necessary imports
-    imports = """
-import torch
-import torch.nn as nn
-from typing import Optional, Dict, Any
-"""
+                                                                                                                                                            for file in python_files:
+                                                                                                                                                            fix_multiline_fstrings(file)
 
-    # Add class implementation
-    implementation = """
-class TextToAnything(nn.Module):
-    def __init__(self, config: Dict[str, Any]):
-        super().__init__()
-        self.config = config
+                                                                                                                                                            if __name__ == "__main__":
+                                                                                                                                                                main()
+                                                                                                                                                                """
+                                                                                                                                                                with open('fix_string_formatting.py', 'w') as f:
+                                                                                                                                                                    f.write(content)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # Implementation here
-        return x
-"""
+                                                                                                                                                                    def fix_text_to_anything_files():
+                                                                                                                                                                        base_content = """"""Script to fix text-to-anything implementation."""
 
-    new_content = imports + content + implementation
+                                                                                                                                                                        def fix_text_to_anything():
+                                                                                                                                                                            """Fix the text-to-anything implementation."""
+                                                                                                                                                                            with open("src/models/text_to_anything.py", "r") as f:
+                                                                                                                                                                                content = f.read()
 
-    with open("src/models/text_to_anything.py", "w") as f:
-        f.write(new_content)
+                                                                                                                                                                                # Add necessary imports
+                                                                                                                                                                                imports = """
+                                                                                                                                                                                """
 
-if __name__ == "__main__":
-    fix_text_to_anything()
-'''
+                                                                                                                                                                                # Add class implementation
+                                                                                                                                                                                implementation = """
+                                                                                                                                                                                class TextToAnything(nn.Module):
+                                                                                                                                                                                    def __init__(self, config: Dict[str, Any]) -> None:
+                                                                                                                                                                                        super().__init__()
+                                                                                                                                                                                        self.config = config
 
-    # Write to all text-to-anything fix files
-    files = [
-        'fix_text_to_anything.py',
-        'fix_text_to_anything_v6.py',
-        'fix_text_to_anything_v7.py',
-        'fix_text_to_anything_v8.py'
-    ]
+                                                                                                                                                                                        def forward(self, x: torch.Tensor) -> torch.Tensor:
+                                                                                                                                                                                            # Implementation here
+                                                                                                                                                                                            return x
+                                                                                                                                                                                        """
 
-    for file in files:
-        with open(file, 'w') as f:
-            f.write(base_content)
+                                                                                                                                                                                        new_content = imports + content + implementation
 
-def main():
-    """Fix syntax structure in all problematic files."""
-    fix_analyze_performance()
-    fix_dataset_verification()
-    fix_verify_datasets()
-    fix_flake8_comprehensive()
-    fix_string_formatting()
-    fix_text_to_anything_files()
+                                                                                                                                                                                        with open("src/models/text_to_anything.py", "w") as f:
+                                                                                                                                                                                            f.write(new_content)
 
-if __name__ == "__main__":
-    main()
+                                                                                                                                                                                            if __name__ == "__main__":
+                                                                                                                                                                                                fix_text_to_anything()
+                                                                                                                                                                                                """
+
+                                                                                                                                                                                                # Write to all text-to-anything fix files
+                                                                                                                                                                                                files = [
+                                                                                                                                                                                                'fix_text_to_anything.py',
+                                                                                                                                                                                                'fix_text_to_anything_v6.py',
+                                                                                                                                                                                                'fix_text_to_anything_v7.py',
+                                                                                                                                                                                                'fix_text_to_anything_v8.py'
+                                                                                                                                                                                                ]
+
+                                                                                                                                                                                                for file in files:
+                                                                                                                                                                                                with open(file, 'w') as f:
+                                                                                                                                                                                                    f.write(base_content)
+
+                                                                                                                                                                                                    def main():
+                                                                                                                                                                                                        """Fix syntax structure in all problematic files."""
+                                                                                                                                                                                                        fix_analyze_performance()
+                                                                                                                                                                                                        fix_dataset_verification()
+                                                                                                                                                                                                        fix_verify_datasets()
+                                                                                                                                                                                                        fix_flake8_comprehensive()
+                                                                                                                                                                                                        fix_string_formatting()
+                                                                                                                                                                                                        fix_text_to_anything_files()
+
+                                                                                                                                                                                                        if __name__ == "__main__":
+                                                                                                                                                                                                            main()
