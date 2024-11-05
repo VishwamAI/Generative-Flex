@@ -10,7 +10,7 @@ class MathematicalExpert(nn.Module):
 
     def __init__(self, hidden_size: int, intermediate_size: int = 2048):
         super().__init__()
-#         self.hidden_size = hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size = hidden_size  # TODO: Remove or use this variable
         self.intermediate_size = intermediate_size
 
         # Specialized layers for mathematical processing
@@ -66,7 +66,7 @@ class EnhancedMathExpertLayer(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config
-#         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
         self.num_experts = config.num_experts
 
         # Initialize specialized experts
@@ -85,7 +85,7 @@ class EnhancedMathExpertLayer(nn.Module):
         self, x: torch.Tensor, training: bool = True
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """Forward pass with specialized mathematical processing."""
-#         batch_size, seq_length, hidden_size = x.shape  # TODO: Remove or use this variable
+        #         batch_size, seq_length, hidden_size = x.shape  # TODO: Remove or use this variable
 
         # Normalize input
         normalized_input = self.layer_norm(x)

@@ -7,7 +7,7 @@ class MathematicalNotationProcessor(nn.Module):
 
     def __init__(self, config: PretrainedConfig):
         super().__init__()
-#         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
         # Embedding layers for different notation types

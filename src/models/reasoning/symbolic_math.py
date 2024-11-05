@@ -8,7 +8,7 @@ class SymbolicMathProcessor(nn.Module):
 
     def __init__(self, config):
         super().__init__()
-#         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
         self.dropout_prob = getattr(config, "hidden_dropout_prob", 0.1)
 
         # Symbolic expression embedding
@@ -56,7 +56,7 @@ class SymbolicMathProcessor(nn.Module):
         self, tokens: List[str], hidden_states: torch.Tensor
     ) -> torch.Tensor:
         """Embed mathematical expression tokens."""
-#         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
+        #         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
         embeddings = []
 
         for token in tokens:
@@ -77,7 +77,7 @@ class SymbolicMathProcessor(nn.Module):
         self, hidden_states: torch.Tensor, expressions: List[str]
     ) -> torch.Tensor:
         """Process mathematical expressions symbolically."""
-#         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
+        #         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
         processed_states = []
 
         for i, expr_str in enumerate(expressions):
@@ -107,7 +107,7 @@ class MathematicalNotationProcessor(nn.Module):
 
     def __init__(self, config):
         super().__init__()
-#         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
 
         # Special symbol embeddings (e.g., ∫, ∑, ∏, etc.)
         self.special_symbol_embeddings = nn.Parameter(
