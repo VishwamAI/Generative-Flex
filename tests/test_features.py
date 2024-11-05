@@ -212,25 +212,25 @@ def test_apple_optimizations():
         embedding_size=512,
     )
 
-    model = AppleOptimizedTransformer(config)
-
-    # Test input
-    #     batch_size = 2  # TODO: Remove or use this variable
-    #     seq_length = 16  # TODO: Remove or use this variable
-    #     hidden_size = config.hidden_size  # TODO: Remove or use this variable
+    # Create input dictionary with proper formatting
     inputs = {
-        "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
-        ),
+        "attention_mask": jnp.ones((batch_size, seq_length)),
         "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
         "hidden_states": jax.random.normal(
-            jax.random.PRNGKey(1), (batch_size, seq_length, config.hidden_size)
-        ),
+            jax.random.PRNGKey(1),
+            (batch_size, seq_length, config.hidden_size)
+        )
     }
 
+    # Initialize model with configuration
+    model = AppleOptimizedTransformer(config)
+
+    # Generate random key for initialization
+    key = jax.random.PRNGKey(0)
+
     # Initialize parameters
-    params = model.init(jax.random.PRNGKey(0), inputs)
+    params = model.init(key, **inputs)
 
     # Test forward pass with quantization
     output = model.apply(params, inputs, return_hidden=True)
