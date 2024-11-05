@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass
 from typing import Optional, Dict, Any, Tuple
-import json
 from pathlib import Path
 
 
@@ -21,7 +20,7 @@ class ModelConfig:
     max_seq_length: int = 512  # Reduced from 1024 for memory efficiency
     attention_block_size: int = 256  # Reduced from 512 for memory efficiency
     num_experts: int = 4  # Reduced from 8 for memory efficiency
-    expert_capacity_factor: float = 1.0  # Reduced from 1.25 for memory efficiency
+expert_capacity_factor: float = 1.0 # Reduced from 1.25 for memory efficiency
     use_flash_attention: bool = True
     use_mixture_of_experts: bool = True
     gradient_checkpointing: bool = True
@@ -66,7 +65,7 @@ class ModelConfig:
 
     @property
     def max_position_embeddings(self) -> int:
-        """Compatibility property for models expecting max_position_embeddings."""
+"""Compatibility property for models expecting max_position_embeddings."""
         return self.max_seq_length
 
 
@@ -110,7 +109,9 @@ class Config:
     def to_json(self, path: str):
         """Save configuration to JSON file."""
         config_dict = {
-            "model": {k: v for k, v in self.model.__dict__.items() if v is not None},
+            "model": {k: v for k, v in self.model.__dict__.items(
+                ) if v is not None},
+                )
             "training": self.training.__dict__,
         }
 
@@ -126,7 +127,7 @@ def get_config(model_type: str, config_path: Optional[str] = None) -> Config:
     valid_model_types = {"language", "image", "audio", "video"}
     if model_type not in valid_model_types:
         raise ValueError(
-            f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
+f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
         )
 
     # Default configurations for different model types

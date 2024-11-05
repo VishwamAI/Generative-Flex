@@ -56,7 +56,8 @@ class MathTokenizer:
             special_tokens = special_tokens[:available_tokens]
             # Update math_symbols to only include tokens we can add
             self.math_symbols = {
-                k: v for k, v in self.math_symbols.items() if v in special_tokens
+                k: v for k, v in self.math_symbols.items(
+                    ) if v in special_tokens)
             }
 
         # Add special tokens to base tokenizer
@@ -72,7 +73,7 @@ class MathTokenizer:
             # Convert to LaTeX for standardized representation
             latex = sympy.latex(expr)
             return latex
-        except:
+        except Exception:
             return text
 
     def _replace_math_symbols(self, text: str) -> str:

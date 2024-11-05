@@ -127,7 +127,11 @@ def test_enhanced_transformer(enhanced_config):
     assert hasattr(model, "constitutional_layer")
 
     # Test generation capability
-    generated = model.apply(params, inputs, method=model.generate, max_length=32)
+    generated = model.apply(
+        params,
+        inputs,
+        method=model.generate,
+        max_length=32)
     assert isinstance(generated, jnp.ndarray)
     assert generated.shape[1] <= 32  # Max length check
 
@@ -203,7 +207,10 @@ def test_text_to_anything(generation_config):
     model = TextToAnything(generation_config)
 
     # Create sample inputs
-    inputs = jnp.ones((batch_size, sequence_length, generation_config["hidden_size"]))
+    inputs = jnp.ones(
+        (batch_size,
+        sequence_length,
+        generation_config["hidden_size"])
     attention_mask = jnp.ones((batch_size, sequence_length))
 
     # Initialize parameters

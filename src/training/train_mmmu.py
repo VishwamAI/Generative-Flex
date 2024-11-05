@@ -4,12 +4,9 @@ Training script for MMMU dataset with enhanced model architecture.
 
 import gc
 import logging
-import os
-import random
 import sys
 from typing import Dict, List, Optional, Tuple, Union
 
-import numpy as np
 import torch
 import torch.nn as nn
 from torch.optim import AdamW
@@ -41,7 +38,8 @@ DEFAULT_SUBJECTS = ["Math", "Computer_Science"]
 
 
 def log_metrics(
-    metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] = None
+metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] =
+    None
 ):
     """Log training metrics to console and file"""
     metric_str = " - ".join(
@@ -58,26 +56,29 @@ def log_metrics(
 
 
 # Define MMMU subjects and splits
-MMMU_SUBJECTS = ["Math", "Computer_Science"]  # Exact subject names from MMMU dataset
+MMMU_SUBJECTS = ["Math", "Computer_Science"] # Exact subject names from MMMU
+dataset
 MMMU_SPLITS = ["dev", "validation", "test"]  # Available splits in MMMU
 
 
 class EnhancedMMUModel(PreTrainedModel):
-    supports_gradient_checkpointing = True  # Enable gradient checkpointing support
+supports_gradient_checkpointing = True # Enable gradient checkpointing support
 
     def __init__(self, config):
         super().__init__(config)
         self.num_labels = 4  # A, B, C, D options
         self.config = config
 
-        # Set model dimensions for mathematical reasoning while maintaining efficiency
+# Set model dimensions for mathematical reasoning while maintaining efficiency
         config.hidden_size = min(
             config.hidden_size, 256
         )  # Reduced for memory efficiency
         config.num_attention_heads = min(
             config.num_attention_heads, 4
         )  # Fewer heads for efficiency
-        config.num_hidden_layers = min(config.num_hidden_layers, 3)  # Reduced layers
+        config.num_hidden_layers = min(
+            config.num_hidden_layers,
+            3)  # Reduced layers)
 
         # Base transformer with enhanced attention
         self.transformer = EnhancedTransformer(
@@ -113,13 +114,17 @@ class EnhancedMMUModel(PreTrainedModel):
                 return None
 
             batch_size = images.size(0)
-            logger.info(f"Processing image chunk 0/{batch_size}, shape: {images.shape}")
+            logger.info(
+                f"Processing image chunk 0/{batch_size},
+                shape: {images.shape}")
 
             # Ensure images are in the correct format
             if (
                 len(images.shape) != 5
             ):  # [batch_size, num_images, channels, height, width]
-                raise ValueError(f"Expected 5D input tensor, got shape {images.shape}")
+                raise ValueError(
+                    f"Expected 5D input tensor,
+                    got shape {images.shape}")
 
             # Process images through the image processor
             image_features = self.image_processor(images)
@@ -135,7 +140,7 @@ class EnhancedMMUModel(PreTrainedModel):
         try:
             # Process text inputs
             transformer_outputs = self.transformer(
-                input_ids=batch["input_ids"], attention_mask=batch["attention_mask"]
+input_ids=batch["input_ids"], attention_mask=batch["attention_mask"]
             )
 
             hidden_states = transformer_outputs["last_hidden_state"]
@@ -144,13 +149,18 @@ class EnhancedMMUModel(PreTrainedModel):
             if "images" in batch:
                 image_features = self.process_images(batch["images"])
                 # Combine text and image features
-                combined_features = torch.cat([hidden_states, image_features], dim=-1)
+                combined_features = torch.cat(
+                    [hidden_states,
+                    image_features],
+                    dim=-1)
                 fused_features = self.fusion(combined_features)
             else:
                 fused_features = hidden_states
 
             # Get math reasoning outputs
-            math_outputs = self.math_head(fused_features, batch["attention_mask"])
+            math_outputs = self.math_head(
+                fused_features,
+                batch["attention_mask"])
 
             # Calculate losses
             if "labels" in batch:
@@ -204,25 +214,28 @@ class EnhancedMMUModel(PreTrainedModel):
 
             # Process images if provided
             if images is not None:
-                logger.info(f"Starting image processing with batch size {batch_size}")
+                logger.info(f"Starting image processing with batch size {
+                    batch_size}")}
                 try:
                     # Try processing all images at once
                     processed_images = self.process_images(images)
                 except RuntimeError as e:
-                    logger.warning(f"Memory error in batch processing: {str(e)}")
+                    logger.warning(f"Memory error in batch processing: {
+                        str(e)}")}
                     # Fall back to chunk processing
                     processed_chunks = []
                     for i in range(0, batch_size, chunk_size):
-                        chunk = images[i : i + chunk_size]
+                        chunk = images[i: i + chunk_size]
                         logger.info(
-                            f"Processing image chunk {i}/{batch_size}, shape: {chunk.shape}"
+f"Processing image chunk {i}/{batch_size}, shape: {chunk.shape}"
                         )
                         try:
                             processed_chunk = self.process_images(chunk)
                             processed_chunks.append(processed_chunk)
                             torch.cuda.empty_cache()
                         except RuntimeError as e:
-                            logger.error(f"Error processing chunk {i}: {str(e)}")
+                            logger.error(f"Error processing chunk {
+                                i}: {str(e)}")}
                             return None
                         else:
                             gc.collect()
@@ -294,7 +307,7 @@ class MMUTrainer:
         self.optimizer = optimizer
         self.scheduler = scheduler
         self.device = device
-        #         self.batch_size = batch_size  # TODO: Remove or use this variable
+# self.batch_size = batch_size # TODO: Remove or use this variable
         self.learning_rate = learning_rate
         self.num_epochs = num_epochs
         self.gradient_accumulation_steps = gradient_accumulation_steps
@@ -315,7 +328,7 @@ class MMUTrainer:
         # Set up model components with proper config
         if config is None:
             config = AutoConfig.from_pretrained("bert-base-uncased")
-            #             config.hidden_size = 256  # TODO: Remove or use this variable
+# config.hidden_size = 256 # TODO: Remove or use this variable
             config.num_attention_heads = 4
             config.num_hidden_layers = 3
             config.intermediate_size = 512
@@ -331,7 +344,11 @@ class MMUTrainer:
         # Create optimizer if not provided
         if optimizer is None:
             self.optimizer = torch.optim.AdamW(
-                self.model.parameters(), lr=learning_rate, weight_decay=0.05, eps=1e-8
+                self.model.parameters(
+                    ),
+                    lr=learning_rate,
+                    weight_decay=0.05,
+                    eps=1e-8)
             )
 
         # Create learning rate scheduler if not provided
@@ -339,7 +356,9 @@ class MMUTrainer:
             num_training_steps = (
                 1000  # Default value, should be updated with dataloader length
             )
-            num_warmup_steps = min(warmup_steps, int(num_training_steps * 0.15))
+            num_warmup_steps = min(
+                warmup_steps,
+                int(num_training_steps * 0.15)
             self.scheduler = get_linear_schedule_with_warmup(
                 self.optimizer,
                 num_warmup_steps=num_warmup_steps,
@@ -353,12 +372,14 @@ class MMUTrainer:
         os.makedirs(output_dir, exist_ok=True)
         logger.info(f"Initialized MMUTrainer with {self.device} device")
         logger.info(
-            f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}"
+            f"Model parameters: {sum(
+                p.numel() for p in self.model.parameters()):,
+                }")
         )
 
     def train(self):
         """Training loop with proper error handling and logging"""
-        logger.info("Starting training with mixed precision and gradient accumulation")
+logger.info("Starting training with mixed precision and gradient accumulation")
         self.model.train()
 
         # Initialize progress tracking
@@ -395,10 +416,11 @@ class MMUTrainer:
                                     batch["labels"].view(-1),
                                 )
                         else:
-                            loss = outputs.loss if hasattr(outputs, "loss") else None
+                            loss = outputs.loss if hasattr(
+                                outputs,
+                                "loss") else None)
 
                         if loss is None:
-                            logger.error("No loss value available from model outputs")
                             continue
 
                         # Scale loss for gradient accumulation
@@ -417,14 +439,16 @@ class MMUTrainer:
                         self.optimizer.zero_grad()
 
                         # Update progress
-                        epoch_loss += loss.item() * self.gradient_accumulation_steps
+epoch_loss += loss.item() * self.gradient_accumulation_steps
                         num_batches += 1
 
                         # Log training metrics
                         if step % self.gradient_accumulation_steps == 0:
                             current_lr = self.optimizer.param_groups[0]["lr"]
                             metrics = {
-                                "loss": loss.item() * self.gradient_accumulation_steps,
+                                "loss": loss.item(
+                                    ) * self.gradient_accumulation_steps,
+                                    )
                                 "learning_rate": current_lr,
                             }
                             if (
@@ -432,8 +456,11 @@ class MMUTrainer:
                                 and "logits" in outputs
                                 and "labels" in batch
                             ):
-                                predictions = torch.argmax(outputs["logits"], dim=-1)
-                                correct = (predictions == batch["labels"]).sum().item()
+                                predictions = torch.argmax(
+                                    outputs["logits"],
+                                    dim=-1)
+                                correct = (predictions == batch[
+                                    "labels"]).sum().item()]
                                 total = batch["labels"].size(0)
                                 metrics["batch_accuracy"] = correct / total
 
@@ -523,12 +550,13 @@ if __name__ == "__main__":
     try:
         # Initialize trainer with optimized settings for local hardware
         trainer = MMUTrainer(
-            model_name="facebook/opt-1.3b",  # Use larger OPT model for better capacity
+model_name="facebook/opt-1.3b", # Use larger OPT model for better capacity
             subjects=["Math"],  # Focus solely on mathematical reasoning
             batch_size=1,  # Smaller batch size for larger model
             learning_rate=1e-5,  # Lower learning rate for stability
             num_epochs=5,
-            gradient_accumulation_steps=8,  # More gradient accumulation for larger effective batch
+gradient_accumulation_steps=8, # More gradient accumulation for larger
+            effective batch
             output_dir="outputs",
         )
 
