@@ -75,7 +75,7 @@ def test_openai_features(config):
             0,
             config["vocab_size"],
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+        "position_ids": jnp.arange(seq_length)[None,:].repeat(
             batch_size, axis=0
         ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
@@ -105,7 +105,7 @@ def test_anthropic_features(config):
             0,
             config.vocab_size,
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+        "position_ids": jnp.arange(seq_length)[None,:].repeat(
             batch_size, axis=0
         ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
@@ -130,7 +130,7 @@ def test_meta_features(config):
             0,
             config.vocab_size,
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+        "position_ids": jnp.arange(seq_length)[None,:].repeat(
             batch_size, axis=0
         ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
@@ -183,7 +183,7 @@ def test_gemini_features(text_to_anything_config):
         "text": jax.random.normal(
             jax.random.PRNGKey(0), (batch_size, seq_length, hidden_size)
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+        "position_ids": jnp.arange(seq_length)[None,:].repeat(
             batch_size, axis=0
         ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
@@ -223,7 +223,7 @@ def test_apple_optimizations():
     # Create input dictionary with proper formatting
     inputs = {
         "attention_mask": jnp.ones((batch_size, seq_length)),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+        "position_ids": jnp.arange(seq_length)[None,:].repeat(
             batch_size, axis=0
         ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
@@ -257,7 +257,7 @@ def test_text_to_anything_generation(text_to_anything_config):
                 0,
                 text_to_anything_config.vocab_size,
             ),
-            "position_ids": jnp.arange(seq_length)[None, :],
+            "position_ids": jnp.arange(seq_length)[None,:],
             "token_type_ids": jnp.zeros(
                 (batch_size, seq_length), dtype=jnp.int32
             ),

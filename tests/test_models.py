@@ -78,7 +78,7 @@ def test_transformer_attention_mask(transformer):
     # Create inputs with attention mask
     inputs = jnp.ones(input_shape, dtype=jnp.int32)
     attention_mask = jnp.zeros(input_shape, dtype=jnp.int32)
-    attention_mask = attention_mask.at[:, :8].set(1)
+    attention_mask = attention_mask.at[:,:8].set(1)
 
     # Initialize parameters
     key = jax.random.PRNGKey(0)

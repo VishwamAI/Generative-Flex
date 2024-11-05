@@ -1,11 +1,11 @@
 """Training script for MMMU dataset using enhanced transformer model.
 
 This module implements the training loop and evaluation logic for the
-enhanced transformer model on the MMMU (Massive Multitask Mathematical Understanding)
+enhanced transformer model on the MMMU (Massive Multitask Mathematical
+Understanding)
 dataset. It includes logging, checkpointing, and performance monitoring.
 """
 
-import os
 import time
 import logging
 from typing import Dict, Any
