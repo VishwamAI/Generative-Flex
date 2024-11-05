@@ -3,13 +3,11 @@ import os
 import re
 
 
-                def fix_indentation(self, content):                    """Fix indentation issues."""
-        lines = content.split("\n")
+                def fix_indentation(self, content):                    """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         
-        for line in lines: stripped = line.lstrip()
-            if stripped.startswith(("class ", "def ")):
+        for line in lines: stripped = line.lstrip()            if stripped.startswith(("class ", "def ")):
         indent_level = 0
         elif stripped.startswith(("if ", "for ", "while ", "try:", "else:", "elif ")):
             indent_level += 1
@@ -25,8 +23,7 @@ import re
                         return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Process all Python files in the project."""
-        base_path = Path(".")
+                def main(self):                    """Process all Python files in the project."""        base_path = Path(".")
         python_files = [
         "src/models/multimodal/image_processor.py",
         "src/models/multimodal/base_transformer.py",
@@ -69,5 +66,4 @@ import re
         os.system("python3 -m black .")
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

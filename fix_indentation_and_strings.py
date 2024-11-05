@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_nested_blocks(self, content):                    """Fix indentation in nested blocks."""
-        lines = content.split("\n")
+                def fix_nested_blocks(self, content):                    """Fix indentation in nested blocks."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         in_class = False
@@ -41,28 +40,22 @@ import re
                                 "    " * indent_level
                                 ):
                                     indent_level -= 1
-                                    if in_class and indent_level < 1: indent_level = 1
-                                        elif in_function and indent_level < 1: in_function= False
-
+                                    if in_class and indent_level < 1: indent_level = 1                                        elif in_function and indent_level < 1: in_function= False
                                             # Add line with proper indentation
                                             fixed_lines.append("    " * indent_level + stripped)
 
                                             # Reset tracking if we're at class end
                                             if in_class and indent_level == 0: in_class = False
-
                                                 return "\n".join(fixed_lines)
 
 
-def fix_imports(self, content):    """Fix import statement formatting."""
-        lines = content.split("\n")
+def fix_imports(self, content):    """Fix import statement formatting."""        lines = content.split("\n")
         fixed_lines = []
         import_block = []
         in_import_block = False
         
-        for line in lines: stripped = line.lstrip()
-        if stripped.startswith(("import ", "from ")):
-        if not in_import_block: in_import_block = True
-        import_block.append(stripped)
+        for line in lines: stripped = line.lstrip()        if stripped.startswith(("import ", "from ")):
+        if not in_import_block: in_import_block = True        import_block.append(stripped)
         else: ifin_import_block:
         # Sort and add import block
         import_block.sort()
@@ -79,8 +72,7 @@ def fix_imports(self, content):    """Fix import statement formatting."""
         return "\n".join(fixed_lines)
         
         
-def main(self):    """Process files with indentation and string formatting issues."""
-        # Focus on files with known issues
+def main(self):    """Process files with indentation and string formatting issues."""        # Focus on files with known issues
         files_to_fix = [
         "src/models/audio_model.py",
         "src/models/video_model.py",
@@ -110,6 +102,5 @@ def main(self):    """Process files with indentation and string formatting issue
         os.system("python3 -m black .")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

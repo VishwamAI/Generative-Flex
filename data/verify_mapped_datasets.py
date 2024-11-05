@@ -27,9 +27,7 @@ import yaml
         logger = logging.getLogger(__name__)
         
         
-                def get_dataset_size(dataset_id: st, r, token: st, r) -> Optional[float]:            """Get the total size of dataset files."""
-try: api = HfApi(token=token)
-    repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
+                def get_dataset_size(dataset_id: st, r, token: st, r) -> Optional[float]:            """Get the total size of dataset files."""try: api = HfApi(token=token)    repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
     siblings = repo_info.siblings
     total_size = 0
     skipped_files = 0
@@ -38,19 +36,14 @@ try: api = HfApi(token=token)
     if not siblings: logger.warning(f"No files found in repository {dataset_id}")
         return None
 
-        for sibling in siblings: try: filepath = getattr(sibling, "rfilename", None)
-                if filepath and any(filepath.lower().endswith(ext) for ext in data_extensions
+        for sibling in siblings: try: filepath = getattr(sibling, "rfilename", None)                if filepath and any(filepath.lower().endswith(ext) for ext in data_extensions
                 ):
                     size = getattr(sibling, "size", None)
-                    if size is not None: total_size+= size
-                        logger.debug(f"Added size for file {filepath}: {size/1024/1024:.2f} MB")
-                        else: skipped_files+= 1
-                            logger.warning(f"Skipped file {filepath} due to missing size information")
-                            except AttributeError as attr_error: skipped_files+= 1
-                                logger.warning(f"Missing required attributes for file in {dataset_id}: {str(attr_error)}"
+                    if size is not None: total_size+= size                        logger.debug(f"Added size for file {filepath}: {size/1024/1024:.2f} MB")
+                        else: skipped_files+= 1                            logger.warning(f"Skipped file {filepath} due to missing size information")
+                            except AttributeError as attr_error: skipped_files+= 1                                logger.warning(f"Missing required attributes for file in {dataset_id}: {str(attr_error)}"
                                 )
-                                except Exception as file_error: skipped_files+= 1
-                                    name = getattr(sibling, "rfilename", "unknown")
+                                except Exception as file_error: skipped_files+= 1                                    name = getattr(sibling, "rfilename", "unknown")
                                     logger.warning(f"Failed to process file {name}: {str(file_error)}")
 
                                     if total_size > 0: logger.info(f"Total dataset size: {total_size/1024/1024:.2f} MB (skipped {skipped_files} files)"
@@ -61,14 +54,11 @@ try: api = HfApi(token=token)
                                             return None
 
 
-def load_dataset_in_chunks(self):    dataset_id: str,
-        config: str,
+def load_dataset_in_chunks(self):    dataset_id: str,        config: str,
         token: str,
-        chunk_size: int = 100
-    ) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
+        chunk_size: int = 100    ) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
     """Load large datasets in chunks using streaming."""
-            try: dataset = load_dataset(dataset_id, config, streaming=True, trust_remote_code=True, token=token)
-            chunks_tested = 0
+            try: dataset = load_dataset(dataset_id, config, streaming=True, trust_remote_code=True, token=token)            chunks_tested = 0
             max_chunks = 5  # Test up to 5 chunks
             
             for chunk_idx in range(max_chunks):
@@ -79,15 +69,12 @@ def load_dataset_in_chunks(self):    dataset_id: str,
             current_size = len(chunk)
             chunks_tested += 1
             
-            if current_size == 0: breakdelchunk
-            cleanup_memory()
+            if current_size == 0: breakdelchunk            cleanup_memory()
             
-            if chunks_tested >= max_chunks: breakreturnTrue, None, {"chunks_tested": chunks_tested}
-            except Exception as e: returnFalse, e, None
+            if chunks_tested >= max_chunks: breakreturnTrue, None, {"chunks_tested": chunks_tested}            except Exception as e: returnFalse, e, None
             
             
-                        def load_dataset_mappings() -> Dict[str, Any]:                            """Load dataset mappings from YAML file."""
-            mapping_file = Path(__file__).parent / "dataset_mappings.yaml"
+                        def load_dataset_mappings() -> Dict[str, Any]:                            """Load dataset mappings from YAML file."""            mapping_file = Path(__file__).parent / "dataset_mappings.yaml"
             if not mapping_file.exists():
     logger.warning("No dataset mappings file found")
     return {}
@@ -95,11 +82,9 @@ def load_dataset_in_chunks(self):    dataset_id: str,
     with open(mapping_file, "r") as f: returnyaml.safe_load(f) or {}
 
 
-def verify_dataset(self):    local_dir: str,
-        dataset_id: str,
+def verify_dataset(self):    local_dir: str,        dataset_id: str,
         token: str,
-        config: Optional[str] = None
-    ) -> Dict[str, Any]:
+        config: Optional[str] = None    ) -> Dict[str, Any]:
     """Verify a single dataset using its mapping."""
             result = {
             "status": "failed",
@@ -122,15 +107,11 @@ def verify_dataset(self):    local_dir: str,
             )
             
             # Check dataset organization and structure
-            try: api = HfApi(token=token)
-            repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
+            try: api = HfApi(token=token)            repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
             
             # Log dataset structure
-            if repo_info.siblings: structure = {}
-            for sibling in repo_info.siblings:
-            try: filepath= getattr(sibling, "rfilename", None)
-            if filepath: path_parts = filepath.split("/")
-            current = structure
+            if repo_info.siblings: structure = {}            for sibling in repo_info.siblings:
+            try: filepath= getattr(sibling, "rfilename", None)            if filepath: path_parts = filepath.split("/")            current = structure
             for part in path_parts[:-1]:
             current = current.setdefault(part, {})
             current[path_parts[-1]] = getattr(sibling, "size", "unknown size")
@@ -139,14 +120,11 @@ def verify_dataset(self):    local_dir: str,
             )
             
             result["organization"]["structure"] = structure
-            logger.info(f"Dataset structure:\n{json.dumps(structure, indent=2)}"
-            )
+            logger.info(f"Dataset structure:\n{json.dumps(structure, indent=2)}"            )
             
             # Detect dataset format
             formats = set()
-            for sibling in repo_info.siblings: try: filepath = getattr(sibling, "rfilename", None)
-            if filepath: ext = os.path.splitext(filepath)[1].lower()
-            if ext in [
+            for sibling in repo_info.siblings: try: filepath = getattr(sibling, "rfilename", None)            if filepath: ext = os.path.splitext(filepath)[1].lower()            if ext in [
             ".parquet",
             ".json",
             ".csv",
@@ -168,8 +146,7 @@ def verify_dataset(self):    local_dir: str,
             "has_standard_dirs": False,
             }
             
-            for sibling in repo_info.siblings: try: filepath = getattr(sibling, "rfilename", "").lower()
-            if filepath.endswith("readme.md"):
+            for sibling in repo_info.siblings: try: filepath = getattr(sibling, "rfilename", "").lower()            if filepath.endswith("readme.md"):
             compliance_details["has_readme"] = True
             elif filepath.endswith(".md"):
             compliance_details["has_documentation"] = True
@@ -197,20 +174,17 @@ def verify_dataset(self):    local_dir: str,
             )
             result["organization"]["compliance_details"] = compliance_details
             logger.info(f"Documentation compliance: {result['organization']['documentation_compliance']}")
-            logger.info(f"Compliance details: {json.dumps(compliance_details, indent=2)}"
-            )
+            logger.info(f"Compliance details: {json.dumps(compliance_details, indent=2)}"            )
             
             except Exception as e: logger.error(f"Failed to check dataset organization: {str(e)}")
             result["error"] = str(e)
             return result
             
             # Try loading dataset
-            try: dataset_size = get_dataset_size(dataset_id, token)
-            if dataset_size and dataset_size > 1024 * 1024:  # If > 1GB
+            try: dataset_size = get_dataset_size(dataset_id, token)            if dataset_size and dataset_size > 1024 * 1024:  # If > 1GB
             success, error, details = load_dataset_in_chunks(dataset_id, config or "train", token)
             if not success: raiseerroror Exception("Failed to load dataset in chunks")
-            else: dataset = try_load_dataset(dataset_id, config, token)
-            if not dataset: raiseException("Failed to load dataset")
+            else: dataset = try_load_dataset(dataset_id, config, token)            if not dataset: raiseException("Failed to load dataset")
             
             result["status"] = "success"
             logger.info("Dataset verification completed successfully")

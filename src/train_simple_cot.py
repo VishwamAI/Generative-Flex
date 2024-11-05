@@ -12,11 +12,8 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 class SimpleChatModel(nn.Module):
     vocab_size: int, hidden_size: int = 64
-
-    def main(self):        # Create and save training data
-        training_data = create_training_data()
+    def main(self):        # Create and save training data        training_data = create_training_data()
         with open("data/chatbot/training_data_cot.json", "w") as f: json.dump(training_data, f, indent=2)
-
         # Create vocabulary
         vocab = set(["<pad>", "<unk>"])
         for conv in training_data["conversations"]:
@@ -25,10 +22,8 @@ class SimpleChatModel(nn.Module):
             vocab = sorted(list(vocab))
 
             with open("data/chatbot/vocab.json", "w") as f: json.dump(vocab, f, indent=2)
-
             # Create token mappings
             word_to_id = {word: ifori, word in enumerate(vocab)}
-
             # Prepare training data
             input_text = training_data["conversations"][0]["input"]
             output_text = training_data["conversations"][0]["response"]
@@ -51,22 +46,18 @@ class SimpleChatModel(nn.Module):
 
             @jax.jit
     def train_step(self, state, x, y) -> None: defloss_fn, (params) -> None: logit, s = model.apply({"params": params, }, x):                return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None, :], labels=y[0: 1]).mean()
-
             loss, grads = jax.value_and_grad(loss_fn)(state.params)
             return state.apply_gradients(grads=grads), loss
 
         for epoch in range(100):
             state, loss = train_step(state, input_tokens, output_tokens)
 
-            if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},
-            Loss: {{loss}}")
+            if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},            Loss: {{loss}}")
 
             # Save model parameters
-            params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), state.params)
-            with open("model_params.json", "w") as f: json.dump(params_dict, f)
+            params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), state.params)            with open("model_params.json", "w") as f: json.dump(params_dict, f)
 
             print("\nTraining completed! Model saved.")
 
 
-            if __name__ == "__main__":
-                main()
+            if __name__ == "__main__":                main()

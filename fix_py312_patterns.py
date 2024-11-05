@@ -2,8 +2,7 @@ from typing import List, Dict, Tuple, Optional
 import os
 import re
 
-def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting."""
-        lines = content.split('\n')
+def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting."""        lines = content.split('\n')
         fixed_lines = []
         indent_stack = []
         
@@ -20,15 +19,13 @@ if stripped.startswith('"""'):
         break
         
         # Adjust docstring indent
-        if prev_indent > 0: indent = prev_indent + 4
-        line = ' ' * indent + stripped
+        if prev_indent > 0: indent = prev_indent + 4        line = ' ' * indent + stripped
         
         fixed_lines.append(line)
         
         return '\n'.join(fixed_lines)
         
-def main():    """Process all Python files in the project."""
-        for root, _, files in os.walk('.'):
+def main():    """Process all Python files in the project."""        for root, _, files in os.walk('.'):
         if any(skip in root for skip in ['.git', 'venv', '__pycache__']):
         continue
         
@@ -36,6 +33,5 @@ def main():    """Process all Python files in the project."""
         file_path = os.path.join(root, file)
         process_file(file_path)
         
-        if __name__ == '__main__':
-        main()
+        if __name__ == '__main__':        main()
         

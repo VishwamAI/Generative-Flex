@@ -3,22 +3,17 @@ import re
         
         
         
-                def fix_line_continuations(content) -> None:                    """Fix broken line continuations and indentation."""
-        lines = content.split("\n")
+                def fix_line_continuations(content) -> None:                    """Fix broken line continuations and indentation."""        lines = content.split("\n")
         fixed_lines = []
         in_function_call = False
         base_indent = ""
         
         for i, line in enumerate(lines):
     # Fix missing parentheses in function calls
-    if "(" in line and ")" not in line: in_function_call = True
-        base_indent = " " * (len(line) - len(line.lstrip()))
+    if "(" in line and ")" not in line: in_function_call = True        base_indent = " " * (len(line) - len(line.lstrip()))
         elif in_function_call and ")" in line: in_function_call = False
-
             # Fix broken dictionary syntax
-            if line.strip().endswith("="):
-                line = line.rstrip("=").rstrip() + ":"
-
+            if line.strip().endswith("="):                line = line.rstrip("=").rstrip() + ":"
                 # Fix broken list/dict comprehensions
                 if("[" in line
                 and "]" not in line
@@ -49,8 +44,7 @@ import re
                                     return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Fix syntax errors in all affected files."""
-        files_to_fix = [
+                def main(self):                    """Fix syntax errors in all affected files."""        files_to_fix = [
         "src/training/train_mmmu.py",
         "tests/test_features.py",
         "tests/test_models.py",
@@ -59,5 +53,4 @@ import re
         for file in files_to_fix: fix_file(file)
         
         
-            if __name__ == "__main__":
-        main()
+            if __name__ == "__main__":        main()

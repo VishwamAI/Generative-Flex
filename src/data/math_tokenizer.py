@@ -49,8 +49,7 @@ special_tokens = list(self.math_symbols.values())
 if (
 len(special_tokens) > available_tokens
 ):  # Prioritize basic arithmetic symbols if we need to reduce tokens
-special_tokens = special_tokens[:available_tokens]
-# Update math_symbols to only include tokens we can add
+special_tokens = special_tokens[:available_tokens]# Update math_symbols to only include tokens we can add
 self.math_symbols = {
 k: vfork, v in self.math_symbols.items() if v in special_tokens
 }
@@ -60,8 +59,7 @@ self.base_tokenizer.add_special_tokens(
 {"additional_special_tokens": special_tokens}
 )
 
-def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical expressions using sympy."""
-    try:
+def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical expressions using sympy."""    try:
         # Try to parse with sympy
         expr = sympy.parse_expr(text, evaluate=False)
         # Convert to LaTeX for standardized representation
@@ -73,8 +71,7 @@ def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical e
                 text = text.replace(symbol, f" {token} ")
                 return text
 
-                        def _detect_math_expressions(self, text: st, r) -> List[str]:                """Detect mathematical expressions in text."""
-                # Match expressions between $ signs(LaTeX style)
+                        def _detect_math_expressions(self, text: st, r) -> List[str]:                """Detect mathematical expressions in text."""                # Match expressions between $ signs(LaTeX style)
                 math_exprs = re.findall(r"\$(.*?)\$", text)
                 # Match expressions with common math patterns
                 patterns = [
@@ -92,7 +89,6 @@ def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical e
                 return math_exprs
                 
                         def __call__(self, text: st, r, **kwargs) -> Dict[str, torch.Tensor]:                """Tokenize text with special handling for mathematical content.
-
             Args: text: Text to tokenize
             **kwargs: Additionalargumentspassed to the base tokenizer
 
@@ -100,8 +96,7 @@ def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical e
         """
         # Detect and parse mathematical expressions
         math_exprs = self._detect_math_expressions(text)
-        for expr in math_exprs: parsed_expr = self._parse_math_expression(expr)
-        text = text.replace(expr, parsed_expr)
+        for expr in math_exprs: parsed_expr = self._parse_math_expression(expr)        text = text.replace(expr, parsed_expr)
                 
     # Replace mathematical symbols with special tokens
     text = self._replace_math_symbols(text)

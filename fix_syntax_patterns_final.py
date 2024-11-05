@@ -4,8 +4,7 @@ import re
 
 
 
-def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation issues."""
-    # Fix module-level docstrings
+def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation issues."""    # Fix module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
     # Fix method docstrings
@@ -21,20 +20,14 @@ content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
         elif in_class and line.strip() and not line.startswith(' ' * class_indent):
             in_class = False
 
-if in_class and '"""' in line: current_indent = len(re.match(r'^\s*', line).group())
-            if current_indent > class_indent: fixed_line = ' ' * (class_indent + 4) + line.lstrip()
-            else: fixed_line = line
-        else: fixed_line= line
-
+if in_class and '"""' in line: current_indent = len(re.match(r'^\s*', line).group())            if current_indent > class_indent: fixed_line = ' ' * (class_indent + 4) + line.lstrip()            else: fixed_line = line        else: fixed_line= line
         fixed_lines.append(fixed_line)
 
     return '\n'.join(fixed_lines)
 
 
-def fix_class_definitions(content: st, r) -> str:    """Fix class definition formatting."""
-    # Fix class inheritance
+def fix_class_definitions(content: st, r) -> str:    """Fix class definition formatting."""    # Fix class inheritance
     content = re.sub(r'class\s+(\w+)\s*\(\s*(\w+)\s*\):', r'class \1(\2):', content)
-
     # Fix method indentation
     lines = content.split('\n')
     fixed_lines = []
@@ -54,29 +47,24 @@ def fix_class_definitions(content: st, r) -> str:    """Fix class definition for
     return '\n'.join(fixed_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
-    try:
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""    try:
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
-
         # Apply fixes in sequence
         content = fix_docstring_indentation(content)
         content = fix_method_signatures(content)
         content = fix_class_definitions(content)
 
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f:            f.write(content)
         print(f"Fixed {file_path}")
 
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:    """Process all Python files in the project."""
-    root_dir = Path('.')
+def main() -> None:    """Process all Python files in the project."""    root_dir = Path('.')
     for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):
             process_file(str(file_path))
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

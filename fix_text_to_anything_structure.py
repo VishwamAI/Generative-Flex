@@ -1,8 +1,7 @@
 import re
 
 
-def fix_file_structure(content) -> None:    """Fix the structure of text_to_anything.py, particularly the GenerationConfig class."""
-        
+def fix_file_structure(content) -> None:    """Fix the structure of text_to_anything.py, particularly the GenerationConfig class."""        
         
         # Split content into lines
         lines = content.split("\n")
@@ -25,14 +24,12 @@ def fix_file_structure(content) -> None:    """Fix the structure of text_to_anyt
         
         # Handle imports
         if line.startswith("from") or line.startswith("import"):
-        if current_section is not imports: current_section = remaining
-        current_section.append(line)
+        if current_section is not imports: current_section = remaining        current_section.append(line)
         i += 1
         continue
         
         # Handle docstring
-if line.startswith('"""') and not docstring: current_section = docstring
-        while i < len(lines) and not (
+if line.startswith('"""') and not docstring: current_section = docstring        while i < len(lines) and not (
 lines[i].rstrip().endswith('"""') and i > 0
         ):
         current_section.append(lines[i])
@@ -117,9 +114,7 @@ lines[i].rstrip().endswith('"""') and i > 0
         )
         
         
-                def main(self):                # Read the original file
-            with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-                
+                def main(self):                # Read the original file            with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
                 # Fix the structure
                 fixed_content = fix_file_structure(content)
                 
@@ -128,6 +123,5 @@ lines[i].rstrip().endswith('"""') and i > 0
                 
                 print("File structure fixed in text_to_anything.py")
                 
-            if __name__ == "__main__": 
-        main()
+            if __name__ == "__main__":        main()
         

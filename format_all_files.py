@@ -3,8 +3,7 @@ import subprocess
 
 
 
-                def format_files(self):                    """Format all Python files in the repository."""
-        # First run our structure fix script
+                def format_files(self):                    """Format all Python files in the repository."""        # First run our structure fix script
         print("Running structure fix script...")
         run_command("python3 fix_text_to_anything_structure_v2.py")
         
@@ -28,8 +27,7 @@ import subprocess
             # Get all Python files in the repository
             print("\nFinding all Python files...")
             result = run_command("find . -name '*.py' -not -path '*/\.*'")
-            if result: all_files = result.strip().split("\n"), else: print("Error finding Python files")
-                    return
+            if result: all_files = result.strip().split("\n"), else: print("Error finding Python files")                    return
         
                     # Format all Python files
                     print("\nFormatting all Python files...")
@@ -44,5 +42,4 @@ import subprocess
                     print("\nFormatting complete!")
 
 
-                    if __name__ == "__main__":
-                        format_files()
+                    if __name__ == "__main__":                        format_files()

@@ -3,8 +3,7 @@ import subprocess
 import sys
 
 
-def fix_line_length(self):    """Fix line length issues using black with proper configuration."""
-        # Configure black with 79 character line length
+def fix_line_length(self):    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length
         black_args = ["--line-length", "79"]
         
         # Files to process
@@ -37,7 +36,6 @@ def fix_line_length(self):    """Fix line length issues using black with proper 
         except Exception as e: print(f"Error: {e}")
         return False
         
-        if __name__ == "__main__":
-        success = fix_line_length()
+        if __name__ == "__main__":        success = fix_line_length()
         sys.exit(0 if success else 1)
         

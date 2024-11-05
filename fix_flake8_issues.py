@@ -4,8 +4,7 @@ import sys
         
         
         
-                def fix_unused_imports(content) -> None:                    """Remove unused imports."""
-        lines = content.split("\n")
+                def fix_unused_imports(content) -> None:                    """Remove unused imports."""        lines = content.split("\n")
         imports_to_remove = [
         "typing.Dict",
         "typing.List",
@@ -29,8 +28,7 @@ import sys
         
         # Filter out lines that match unused imports
         filtered_lines = []
-        for line in lines: should_keep = True
-            for unused_import in imports_to_remove:
+        for line in lines: should_keep = True            for unused_import in imports_to_remove:
         if unused_import in line and("import " in line or "from " in line):
             should_keep = False
             break
@@ -39,20 +37,16 @@ import sys
                 return "\n".join(filtered_lines)
 
 
-def fix_line_length(content) -> None:    """Break long lines to comply with 79 character limit."""
-        lines = content.split("\n")
+def fix_line_length(content) -> None:    """Break long lines to comply with 79 character limit."""        lines = content.split("\n")
         fixed_lines = []
         
         for line in lines: iflen(line.rstrip()) > 79:
         # Handle function calls with multiple arguments
-        if "(" in line and ")" in line: indent = len(line) - len(line.lstrip())
-        base_indent = " " * indent
+        if "(" in line and ")" in line: indent = len(line) - len(line.lstrip())        base_indent = " " * indent
         extra_indent = " " * (indent + 4)
         
         # Split function arguments
-        if "(" in line and ")" in line and ", " in line: parts = line.split("(", 1)
-        if len(parts) == 2: func_name = parts[0] + "("
-        args = parts[1].rstrip(")")
+        if "(" in line and ")" in line and ", " in line: parts = line.split("(", 1)        if len(parts) == 2: func_name = parts[0] + "("        args = parts[1].rstrip(")")
         arg_list = [arg.strip() for arg in args.split(", ")]
         
         fixed_lines.append(func_name)
@@ -62,11 +56,9 @@ def fix_line_length(content) -> None:    """Break long lines to comply with 79 c
         continue
         
         # Split dictionary/list entries
-        if "{" in line or "[" in line: opener = "{" if "{" in line else "["
-        closer = "}" if "{" in line else "]"
+        if "{" in line or "[" in line: opener = "{" if "{" in line else "["        closer = "}" if "{" in line else "]"
         parts = line.split(opener, 1)
-        if len(parts) == 2: prefix = parts[0] + opener
-        content = parts[1].rstrip(closer)
+        if len(parts) == 2: prefix = parts[0] + opener        content = parts[1].rstrip(closer)
         entries = [entry.strip() for entry in content.split(", ")]
         
         fixed_lines.append(prefix)
@@ -80,8 +72,7 @@ def fix_line_length(content) -> None:    """Break long lines to comply with 79 c
         current_line = words[0]
         
         for word in words[1:]:
-        if len(current_line + " " + word) <= 79: current_line+= " " + word
-        else: fixed_lines.append(current_line)
+        if len(current_line + " " + word) <= 79: current_line+= " " + word        else: fixed_lines.append(current_line)
         current_line = " " * (len(line) - len(line.lstrip())) + word
         
         fixed_lines.append(current_line)
@@ -90,15 +81,12 @@ def fix_line_length(content) -> None:    """Break long lines to comply with 79 c
         return "\n".join(fixed_lines)
         
         
-def fix_bare_except(content) -> None:    """Fix bare except clauses."""
-        lines = content.split("\n")
+def fix_bare_except(content) -> None:    """Fix bare except clauses."""        lines = content.split("\n")
         for i, line in enumerate(lines):
-        if "except:" in line: lines[i] = line.replace("except:", "except Exception:")
-        return "\n".join(lines)
+        if "except:" in line: lines[i] = line.replace("except:", "except Exception:")        return "\n".join(lines)
         
         
-                def main(self):                    """Main function to process all files."""
-        files_to_process = [
+                def main(self):                    """Main function to process all files."""        files_to_process = [
         "tests/test_features.py",
         "tests/test_models.py",
         "src/config/training_config.py",
@@ -113,5 +101,4 @@ def fix_bare_except(content) -> None:    """Fix bare except clauses."""
         for file in files_to_process: process_file(file)
         
         
-            if __name__ == "__main__":
-        main()
+            if __name__ == "__main__":        main()

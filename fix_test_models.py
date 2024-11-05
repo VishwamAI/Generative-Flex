@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_file_content(self, content):    """Fix formatting issues in test_models.py."""
-        # Split content into lines
+def fix_file_content(self, content):    """Fix formatting issues in test_models.py."""        # Split content into lines
         lines = content.split("\n")
         
         # Fix imports
@@ -59,8 +58,7 @@ else: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
         # Handle normal lines
         if line.strip():
         indent = len(line) - len(line.lstrip())
-        if in_function and indent == 0:
-        # This is likely a line that should be indented
+        if in_function and indent == 0:        # This is likely a line that should be indented
         fixed_lines.append(" " * 4 + line.lstrip())
         else: fixed_lines.append(line)
         
@@ -73,9 +71,7 @@ else: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
         return "\n".join(result)
         
         
-                def main(self):                # Read the original file
-                with open("tests/test_models.py", "r") as f: content = f.read()
-                
+                def main(self):                # Read the original file                with open("tests/test_models.py", "r") as f: content = f.read()                
                 # Fix the content
                 fixed_content = fix_file_content(content)
                 
@@ -85,6 +81,5 @@ else: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
                 print("Fixed formatting in test_models.py")
                 
                 
-                if __name__ == "__main__":
-        main()
+                if __name__ == "__main__":        main()
         

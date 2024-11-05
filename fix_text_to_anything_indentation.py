@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_indentation(content) -> None:    """Fix indentation issues in the content."""
-        # Split content into lines
+def fix_indentation(content) -> None:    """Fix indentation issues in the content."""        # Split content into lines
         lines = content.split("\n")
         
         # Track indentation level and state
@@ -14,8 +13,7 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         
         fixed_lines = []
         
-        for line in lines: stripped = line.lstrip()
-        
+        for line in lines: stripped = line.lstrip()        
         # Skip empty lines
         if not stripped: fixed_lines.append("")
         continue
@@ -29,16 +27,14 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         
         # Detect class definitions
         if re.match(r"^class\s+\w+", stripped):
-        if not previous_was_decorator: current_indent = 0
-        in_class = True
+        if not previous_was_decorator: current_indent = 0        in_class = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
         continue
         
         # Detect function definitions
         if re.match(r"^def\s+\w+", stripped):
-        if in_class: current_indent = 4, else: current_indent = 0
-        in_function = True
+        if in_class: current_indent = 4, else: current_indent = 0        in_function = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
         continue
@@ -46,8 +42,7 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         # Handle function body
         if in_function: ifnotre.match(r"^(class|def|@)\s*\w+", stripped):
         fixed_lines.append(" " * (current_indent + 4) + stripped)
-        else: in_function = False
-        if stripped.startswith("@"):
+        else: in_function = False        if stripped.startswith("@"):
         if in_class: fixed_lines.append(" " * 4 + stripped)
         else: fixed_lines.append(stripped)
         else: fixed_lines.append(stripped)
@@ -69,9 +64,7 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         return "\n".join(fixed_lines)
         
         
-                def main(self):                # Read the original file
-                with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-                
+                def main(self):                # Read the original file                with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
                 # Fix indentation
                 fixed_content = fix_indentation(content)
                 
@@ -81,6 +74,5 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
                 print("Indentation fixed in text_to_anything.py")
                 
                 
-                if __name__ == "__main__":
-        main()
+                if __name__ == "__main__":        main()
         

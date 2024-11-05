@@ -4,8 +4,7 @@ import re
         
         
         
-def main(self):    """Fix formatting issues in specific files."""
-        # Files with file operation issues
+def main(self):    """Fix formatting issues in specific files."""        # Files with file operation issues
         file_op_files = [
         "fix_text_to_anything.py",
         "fix_text_to_anything_v6.py",
@@ -25,8 +24,7 @@ def main(self):    """Fix formatting issues in specific files."""
         module_files = ["src/model/experts.py", "src/model/attention.py"]
         
         # Fix datasets import issue
-        with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()
-        with open("data/verify_mapped_datasets.py", "w") as f: f.write("try:\n    from datasets import load_dataset\nexcept ImportError:\n    pass\n\n"
+        with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()        with open("data/verify_mapped_datasets.py", "w") as f: f.write("try:\n    from datasets import load_dataset\nexcept ImportError:\n    pass\n\n"
         + content[content.find("\n") + 1 :]
         )
         
@@ -44,6 +42,5 @@ def main(self):    """Fix formatting issues in specific files."""
         fix_module_syntax(filename)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

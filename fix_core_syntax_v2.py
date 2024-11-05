@@ -5,8 +5,7 @@ from pathlib import Path
 import ast
 
 
-def fix_indentation_and_spacing(content: st, r) -> str:    """Fix basic indentation and spacing issues."""
-    lines = []
+def fix_indentation_and_spacing(content: st, r) -> str:    """Fix basic indentation and spacing issues."""    lines = []
     current_indent = 0
 
     for line in content.split("\n"):
@@ -37,9 +36,7 @@ def fix_indentation_and_spacing(content: st, r) -> str:    """Fix basic indentat
 
 
 def fix_function_definition(content: st, r) -> str:    """Fix function definition syntax."""
-
-    def fix_single_def(match):        name = match.group(1)
-        params = match.group(2) or ""
+    def fix_single_def(match):        name = match.group(1)        params = match.group(2) or ""
         return_type = match.group(3)
 
         # Fix parameter formatting
@@ -47,14 +44,9 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
             param_parts = []
             for param in params.split(","):
                 param = param.strip()
-                if ":" in param and "=" in param:
-                    name, rest = param.split(":", 1)
-                    type_hint, default = rest.split("=", 1)
-                    param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"
-                elif ":" in param:
-                    name, type_hint = param.split(":", 1)
-                    param = f"{name.strip()}: {type_hint.strip()}"
-                param_parts.append(param)
+                if ":" in param and "=" in param:                    name, rest = param.split(":", 1)                    type_hint, default = rest.split("=", 1)
+                    param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"                elif ":" in param:
+                    name, type_hint = param.split(":", 1)                    param = f"{name.strip()}: {type_hint.strip()}"                param_parts.append(param)
             params = ", ".join(param_parts)
 
         # Format the function definition
@@ -63,26 +55,21 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
         return f"def {name}({params}):"
 
     # Fix function definitions
-    pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?:->\s*(.*?))?\s*:"
-    return re.sub(pattern, fix_single_def, content, flags=re.DOTALL)
+    pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?:->\s*(.*?))?\s*:"    return re.sub(pattern, fix_single_def, content, flags=re.DOTALL)
 
 
 def fix_class_definition(content: st, r) -> str:    """Fix class definition syntax."""
-
-    def fix_single_class(match):        name = match.group(1)
-        bases = match.group(2)
+    def fix_single_class(match):        name = match.group(1)        bases = match.group(2)
 
         if bases:
             bases = ", ".join(b.strip() for b in bases.split(",") if b.strip())
             return f"class {name}({bases}):"
         return f"class {name}:"
 
-    pattern = r"class\s+(\w+)\s*(?:\((.*?)\))?\s*:"
-    return re.sub(pattern, fix_single_class, content)
+    pattern = r"class\s+(\w+)\s*(?:\((.*?)\))?\s*:"    return re.sub(pattern, fix_single_class, content)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
-    if "@dataclass" not in content:
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if "@dataclass" not in content:
         return content
 
     lines = []
@@ -103,14 +90,9 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
             stripped = line.strip()
             indent = len(line) - len(stripped)
 
-            if "=" in stripped:
-                name, rest = stripped.split(":", 1)
-                type_hint, default = rest.split("=", 1)
-                line = f"{' ' * indent}{name.strip()}: {type_hint.strip()} = {default.strip()}"
-            else:
-                name, type_hint = stripped.split(":", 1)
-                line = f"{' ' * indent}{name.strip()}: {type_hint.strip()}"
-
+            if "=" in stripped:                name, rest = stripped.split(":", 1)                type_hint, default = rest.split("=", 1)
+                line = f"{' ' * indent}{name.strip()}: {type_hint.strip()} = {default.strip()}"            else:
+                name, type_hint = stripped.split(":", 1)                line = f"{' ' * indent}{name.strip()}: {type_hint.strip()}"
         lines.append(line)
 
         # Check if we're leaving the class
@@ -120,10 +102,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return "\n".join(lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying fixes."""
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
+def process_file(file_path: st, r) -> None:    """Process a single file applying fixes."""    try:
+        with open(file_path, "r", encoding="utf-8") as f:            content = f.read()
 
         # Skip empty files
         if not content.strip():
@@ -143,16 +123,14 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
             return
 
         # Write back the fixed content
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
+        with open(file_path, "w", encoding="utf-8") as f:            f.write(content)
         print(f"Fixed {file_path}")
 
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
 
-def main():    """Process core configuration files."""
-    core_files = [
+def main():    """Process core configuration files."""    core_files = [
         "src/config/config.py",
         "src/config/training_config.py",
         "src/models/reasoning/math_config.py",
@@ -168,5 +146,4 @@ def main():    """Process core configuration files."""
             process_file(str(full_path))
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

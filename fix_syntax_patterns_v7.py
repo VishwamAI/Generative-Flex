@@ -4,8 +4,7 @@ import re
 
 
 
-def fix_docstring_placement(content: st, r) -> str:    """Fix docstring placement and indentation."""
-    # Remove extra indentation from module-level docstrings
+def fix_docstring_placement(content: st, r) -> str:    """Fix docstring placement and indentation."""    # Remove extra indentation from module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
     # Fix class and function docstrings
@@ -39,14 +38,12 @@ if '"""' in line:
                 # This is a module-level docstring
                 fixed_line = stripped
         else: fixed_line = line
-
         fixed_lines.append(fixed_line)
 
     return '\n'.join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
-    if '@dataclass' not in content:
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if '@dataclass' not in content:
         return content
 
     lines = content.split('\n')
@@ -54,14 +51,11 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     in_dataclass = False
 
     for line in lines:
-        if '@dataclass' in line: in_dataclass = True
-            fixed_lines.append(line)
+        if '@dataclass' in line: in_dataclass = True            fixed_lines.append(line)
             continue
 
-    if in_dataclass and ': ' in line and '=' in line:
-            # Fix field definition
-    name, rest = line.split(': ', 1)
-            name = name.strip()
+    if in_dataclass and ': ' in line and '=' in line:            # Fix field definition
+    name, rest = line.split(': ', 1)            name = name.strip()
             rest = rest.strip()
 
             if 'field(' in rest:
@@ -69,12 +63,9 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
                 type_part, field_part = rest.split('=', 1)
                 type_part = type_part.strip()
                 field_part = field_part.strip()
-    fixed_line = f"    {name}: {type_part} = {field_part}"
-            else:
+    fixed_line = f"    {name}: {type_part} = {field_part}"            else:
                 # Handle regular assignment
-    fixed_line = f"    {name}: {rest}"
-    else: fixed_line = line
-            if line.strip() and not line.startswith(' '):
+    fixed_line = f"    {name}: {rest}"    else: fixed_line = line            if line.strip() and not line.startswith(' '):
                 in_dataclass = False
 
         fixed_lines.append(fixed_line)
@@ -82,8 +73,7 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return '\n'.join(fixed_lines)
 
 
-def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""
-    lines = content.split('\n')
+def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""    lines = content.split('\n')
     import_lines = []
     other_lines = []
 
@@ -105,10 +95,8 @@ def fix_imports(content: st, r) -> str:    """Fix import statement formatting.""
     return '\n'.join(import_lines + other_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
-    try:
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""    try:
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
-
         # Skip empty files
         if not content.strip():
             return
@@ -120,20 +108,17 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
         content = fix_dataclass_fields(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f:            f.write(content)
         print(f"Fixed {file_path}")
 
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:    """Process all Python files in the project."""
-    root_dir = Path('.')
+def main() -> None:    """Process all Python files in the project."""    root_dir = Path('.')
     for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):
             process_file(str(file_path))
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

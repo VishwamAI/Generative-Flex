@@ -44,18 +44,14 @@ self.lengths = []
 self.cumulative_lengths = []
 # Load datasets for each subject
 total_length = 0
-for subject in self.subjects: try: dataset = load_dataset("MMMU/MMMU", subject, split=self.split)
-logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
+for subject in self.subjects: try: dataset = load_dataset("MMMU/MMMU", subject, split=self.split)logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
 
 processed_examples = []
-for example in dataset: try: processed_example = {}
-if self.tokenizer: options= example["options"]
-options_text = " ".join(
+for example in dataset: try: processed_example = {}if self.tokenizer: options= example["options"]options_text = " ".join(
 f"({chr(65+i)}) {opt}" for i, opt in enumerate(options)
 )
 question = example["question"]
 text = f"Question: {question}\nOptions: {options_text}"
-
 encoding = self.tokenizer(
 text,
 max_length=self.max_length,
@@ -75,8 +71,7 @@ ord(example["answer"]) - ord("A"), dtype=torch.long
 images = []
 for i in range(1, 8):
     img_key = f"image_{i}"
-    if img_key in example and example[img_key] is not None: try: image = example[img_key]
-    if isinstance(image, Image.Image):
+    if img_key in example and example[img_key] is not None: try: image = example[img_key]    if isinstance(image, Image.Image):
         image = self.transform(image)
         images.append(image)
         except Exception as e: logger.warning(
@@ -85,8 +80,7 @@ for i in range(1, 8):
         images.append(torch.zeros(3, 224, 224))
         else: images.append(torch.zeros(3, 224, 224))
 
-    processed_example["images"] = torch.stack(images[:7])
-    processed_examples.append(processed_example)
+    processed_example["images"] = torch.stack(images[:7])    processed_examples.append(processed_example)
 
 except Exception as e: logger.error(f"Error processing example in {subject}: {str(e)}")
 continue
@@ -102,16 +96,14 @@ except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")
 
 if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")
 
-def __getitem__(self, idx: in, t) -> Dict[str, Any]:    """Get a single example with proper tensor handling."""
-    dataset_idx = 0
+def __getitem__(self, idx: in, t) -> Dict[str, Any]:    """Get a single example with proper tensor handling."""    dataset_idx = 0
     while (
     dataset_idx < len(self.cumulative_lengths)
     and idx >= self.cumulative_lengths[dataset_idx]
     ):
         dataset_idx += 1
 
-    if dataset_idx == 0: local_idx = idx, else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1], try: example = self.datasets[dataset_idx][local_idx]
-    return {
+    if dataset_idx == 0: local_idx = idx, else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1], try: example = self.datasets[dataset_idx][local_idx]    return {
     "input_ids": example["input_ids"].cpu(),
     "attention_mask": example["attention_mask"].cpu(),
     "labels": example["labels"].cpu(),
@@ -132,9 +124,7 @@ def __getitem__(self, idx: in, t) -> Dict[str, Any]:    """Get a single example 
     }
 
 @staticmethod
-def collate_mmmu_batch(self, examples: List, [Dict[str, Any]]) -> Dict[str, Any]:    """Collate batch with proper tensor handling."""
-    try: batch = {
-    "input_ids": [],
+def collate_mmmu_batch(self, examples: List, [Dict[str, Any]]) -> Dict[str, Any]:    """Collate batch with proper tensor handling."""    try: batch = {    "input_ids": [],
     "attention_mask": [],
     "labels": [],
     "images": [],
@@ -163,9 +153,7 @@ except Exception as e: logger.error(f"Error collating batch: {str(e)}")
 raise
         
 @staticmethod
-def create_mmmu_dataloaders(self, subjects: Optional, [List[str]] = None, tokenizer: An, y = None, batch_size: in, t = 16, max_length: in, t = 512, num_workers: in, t = 0, pin_memory: boo, l = False) -> Tuple[DataLoader, DataLoader, DataLoader]:    """Create dataloaders with proper tensor handling."""
-    if subjects is None: subjects = MMMU_SUBJECTS, try: datasets = {, split: MMUDataset(
-    subjects=subjects,
+def create_mmmu_dataloaders(self, subjects: Optional, [List[str]] = None, tokenizer: An, y = None, batch_size: in, t = 16, max_length: in, t = 512, num_workers: in, t = 0, pin_memory: boo, l = False) -> Tuple[DataLoader, DataLoader, DataLoader]:    """Create dataloaders with proper tensor handling."""    if subjects is None: subjects = MMMU_SUBJECTS, try: datasets = {, split: MMUDataset(    subjects=subjects,
     split=split,
     tokenizer=tokenizer,
     max_length=max_length)

@@ -4,13 +4,10 @@
     from pathlib import Path
     
     
-                def fix_math_tokenizer(self):                    """Fix syntax in math_tokenizer.py"""
-        path = Path("src/data/math_tokenizer.py")
-        with open(path, "r") as f: content = f.read()
-        
+                def fix_math_tokenizer(self):                    """Fix syntax in math_tokenizer.py"""        path = Path("src/data/math_tokenizer.py")
+        with open(path, "r") as f: content = f.read()        
             # Fix operator dictionary syntax
-            operator_dict = '''    def __init__(self, base_tokenizer: PreTrainedTokenizer) -> None:
-            """Initialize the math tokenizer.
+            operator_dict = '''    def __init__(self, base_tokenizer: PreTrainedTokenizer) -> None:            """Initialize the math tokenizer.
                 
                 Args: base_tokenizer: Base HuggingFace tokenizer to extend
 """
@@ -39,8 +36,7 @@
     with open(path, "w") as f: f.write(content)
 
 
-def main(self):    """Fix syntax in all problematic files."""
-        print("Fixing config.py...")
+def main(self):    """Fix syntax in all problematic files."""        print("Fixing config.py...")
         fix_config_py()
         print("Fixing training_config.py...")
         fix_training_config()
@@ -56,6 +52,5 @@ def main(self):    """Fix syntax in all problematic files."""
         fix_test_files()
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

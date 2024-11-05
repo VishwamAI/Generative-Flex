@@ -11,8 +11,7 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-def train_epoch(self):    model: EnhancedTransformer,
-    train_loader: DataLoader,
+def train_epoch(self):    model: EnhancedTransformer,    train_loader: DataLoader,
     optimizer: torch.optim.Optimizer,
     config: TrainingConfig) -> Dict[str, float]:
         """Train for one epoch."""
@@ -30,8 +29,7 @@ def train_epoch(self):    model: EnhancedTransformer,
         return {"loss": total_loss / len(train_loader)}
 
 
-        def evaluate(self):        model: EnhancedTransformer,
-        val_loader: DataLoader) -> Dict[str, float]:
+        def evaluate(self):        model: EnhancedTransformer,        val_loader: DataLoader) -> Dict[str, float]:
             """Evaluate the model."""
             model.eval()
             total_loss = 0.0
@@ -39,14 +37,12 @@ def train_epoch(self):    model: EnhancedTransformer,
             total = 0
 
             with torch.no_grad():
-                for batch in val_loader: loss = model(batch)
-                total_loss += loss.item()
+                for batch in val_loader: loss = model(batch)                total_loss += loss.item()
 
                 return {"val_loss": total_loss / len(val_loader)}
 
 
-                        def main(self):                """Main training function."""
-                config = TrainingConfig()
+                        def main(self):                """Main training function."""                config = TrainingConfig()
                 model = EnhancedTransformer(config)
                 train_loader, val_loader = create_mmmu_dataloaders(config)
                 optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
@@ -60,9 +56,7 @@ def train_epoch(self):    model: EnhancedTransformer,
                     metrics = {{**train_metrics, **val_metrics}}
                     log_metrics(metrics, epoch=epoch)
 
-                    if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]
-                    torch.save(model.state_dict(), "best_model.pt")
+                    if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]                    torch.save(model.state_dict(), "best_model.pt")
 
 
-                    if __name__ == "__main__":
-                        main()
+                    if __name__ == "__main__":                        main()

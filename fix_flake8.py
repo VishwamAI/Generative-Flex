@@ -2,8 +2,7 @@ import subprocess
 import sys
 
 
-def run_black_and_flake8(self):    """Run black and flake8 on modified files."""
-        
+def run_black_and_flake8(self):    """Run black and flake8 on modified files."""        
         
         # List of files to format
         files = [
@@ -28,7 +27,6 @@ def run_black_and_flake8(self):    """Run black and flake8 on modified files."""
         return black_result.returncode == 0 and flake8_result.returncode == 0
         
         
-        if __name__ == "__main__":
-        success = run_black_and_flake8()
+        if __name__ == "__main__":        success = run_black_and_flake8()
         sys.exit(0 if success else 1)
         

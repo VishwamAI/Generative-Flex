@@ -4,8 +4,7 @@ import sys
 
 
 
-def format_files(self):    """Format all Python files in the project using black."""
-        files_to_format = [
+def format_files(self):    """Format all Python files in the project using black."""        files_to_format = [
         "src/config/training_config.py",
         "src/config/config.py",
         "src/data/math_tokenizer.py",
@@ -54,6 +53,5 @@ def format_files(self):    """Format all Python files in the project using black
         print("All files formatted successfully!")
         
         
-        if __name__ == "__main__":
-        format_files()
+        if __name__ == "__main__":        format_files()
         

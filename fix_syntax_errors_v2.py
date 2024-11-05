@@ -3,18 +3,15 @@ import re
 
 
 
-                def fix_indentation_issues(content) -> None:                    """Fix indentation issues."""
-        lines = content.split("\n")
+                def fix_indentation_issues(content) -> None:                    """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-            if stripped:
+        for line in lines: stripped = line.lstrip()            if stripped:
         # Calculate proper indentation
         if stripped.startswith(("def ", "class ")):
             if not line.endswith(":"):
-                line = line + ":"
-                elif stripped.endswith(":"):
+                line = line + ":"                elif stripped.endswith(":"):
                     current_indent += 4
                     elif stripped.startswith(("return", "break", "continue")):
                         current_indent = max(0, current_indent - 4)
@@ -28,8 +25,7 @@ if not stripped.startswith(('"""', """"")):
                             return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Fix syntax errors in files that failed black formatting."""
-        files_to_fix = [
+                def main(self):                    """Fix syntax errors in files that failed black formatting."""        files_to_fix = [
         "analyze_performance_by_category.py",
         "data/dataset_verification_utils.py",
         "fix_flake8_comprehensive.py",
@@ -49,5 +45,4 @@ if not stripped.startswith(('"""', """"")):
         fix_file(file)
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

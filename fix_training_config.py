@@ -2,17 +2,14 @@
 """Script to fix training config formatting."""
         
         
-                def fix_training_config(self):                    """Fix the training config file formatting."""
-        with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()
-        
+                def fix_training_config(self):                    """Fix the training config file formatting."""        with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()        
             # Split into sections
             lines = content.split("\n")
             fixed_lines = []
             in_class = False
             class_indent = 0
         
-            for line in lines: stripped = line.strip()
-        
+            for line in lines: stripped = line.strip()        
                 # Skip empty lines
                 if not stripped: fixed_lines.append("")
                     continue
@@ -49,6 +46,4 @@ elif stripped.startswith('"""'):
                                             # Write back
                                             with open("src/config/training_config.py", "w", encoding="utf-8") as f: f.write(fixed_content)
 
-
-                                                if __name__ == "__main__":
-                                                    fix_training_config()
+                                                if __name__ == "__main__":                                                    fix_training_config()

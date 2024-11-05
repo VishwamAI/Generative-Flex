@@ -3,8 +3,7 @@ import os
 import subprocess
 import sys
 
-def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""
-        python_files = []
+def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""        python_files = []
         for root, dirs, files in os.walk("."):
         # Skip specific directories
         if ".git" in dirs: dirs.remove(".git")
@@ -16,17 +15,14 @@ def get_python_files() -> List[str]:    """Get all Python files recursively, exc
         
         return python_files
         
-def main() -> None:    """Main function to install black and format files."""
-        # Install black
+def main() -> None:    """Main function to install black and format files."""        # Install black
         print("Installing black...")
-        try: subprocess.check_call([sys.executable, "-m", "pip", "install", "black==24.10.0"])
-        except subprocess.CalledProcessError as e: print(f"Error installing black: {e}")
+        try: subprocess.check_call([sys.executable, "-m", "pip", "install", "black==24.10.0"])        except subprocess.CalledProcessError as e: print(f"Error installing black: {e}")
         sys.exit(1)
         
         # Get and format Python files
         python_files = get_python_files()
         format_files(python_files)
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

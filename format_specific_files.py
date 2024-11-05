@@ -38,8 +38,7 @@ files_to_format = [
 ]
 
 
-def format_files(self):    # First convert line endings
-    for file in files_to_format: ifos.path.exists(file):
+def format_files(self):    # First convert line endings    for file in files_to_format: ifos.path.exists(file):
             print(f"Converting line endings for {file}")
             subprocess.run(["dos2unix", file], check=True)
 
@@ -58,5 +57,4 @@ def format_files(self):    # First convert line endings
                         check=True,
                     )
 
-                    if __name__ == "__main__":
-                        format_files()
+                    if __name__ == "__main__":                        format_files()

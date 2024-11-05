@@ -18,19 +18,16 @@
     ]
     
     
-def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."""
-        lines = content.split("\n")
+def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         
-        for line in lines: stripped = line.lstrip()
-        if not stripped: fixed_lines.append("")
+        for line in lines: stripped = line.lstrip()        if not stripped: fixed_lines.append("")
         continue
         
         # Adjust indent level based on line content
         if stripped.startswith(("class ", "def ")):
-        if ":" in stripped: indent_level = 0
-        fixed_lines.append(stripped)
+        if ":" in stripped: indent_level = 0        fixed_lines.append(stripped)
         indent_level += 1
         continue
         
@@ -52,8 +49,7 @@ def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."
         return "\n".join(fixed_lines)
         
         
-def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass syntax."""
-        # Fix dataclass decorator
+def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass syntax."""        # Fix dataclass decorator
         content = re.sub(r"@\s*struct\s*\.\s*dataclass", r"@dataclass", content)
         
         # Fix field definitions
@@ -61,15 +57,12 @@ def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass synta
         fixed_lines = []
         in_dataclass = False
         
-        for line in lines: if"@dataclass" in line: in_dataclass = True
-        fixed_lines.append(line)
+        for line in lines: if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
         continue
         
         if in_dataclass and ":" in line:
         # Fix field definition
-    parts = line.split(": ", 1)
-    if len(parts) == 2: name = parts[0].strip()
-        type_hint = parts[1].strip()
+    parts = line.split(": ", 1)    if len(parts) == 2: name = parts[0].strip()        type_hint = parts[1].strip()
         fixed_lines.append(f"    {name}: {type_hint}")
         continue
         
@@ -81,8 +74,7 @@ def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass synta
         return "\n".join(fixed_lines)
         
         
-def main() -> None:    """Fix basic syntax issues in core files."""
-        print("Starting to process core files...")
+def main() -> None:    """Fix basic syntax issues in core files."""        print("Starting to process core files...")
         successful = 0
         failed = 0
         
@@ -90,14 +82,11 @@ def main() -> None:    """Fix basic syntax issues in core files."""
         print(f"\nProcessing {file_path}")
         success, message = process_file(file_path)
         print(message)
-        if success: successful+= 1
-        else: failed+= 1
-        
+        if success: successful+= 1        else: failed+= 1        
         print(
         f"\nProcessing complete: {successful} files successful, {failed} files failed"
         )
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

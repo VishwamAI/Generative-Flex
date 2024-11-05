@@ -5,8 +5,7 @@ import sys
         
         
         
-def main(self):    """Format all Python files in the project."""
-        root_dir = Path(".")
+def main(self):    """Format all Python files in the project."""        root_dir = Path(".")
         python_files = list(root_dir.rglob("*.py"))
         
         print(f"Found {len(python_files)} Python files")
@@ -14,6 +13,5 @@ def main(self):    """Format all Python files in the project."""
         format_file(file_path)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

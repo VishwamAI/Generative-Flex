@@ -21,16 +21,13 @@ class TrainerState(train_state.TrainState):    """
     """
 
     loss_scale: Optional[jnp.ndarray] = None
-
     class FlaxTrainer:        """
         Advanced trainer implementation using JAX/Flax.
         """
 
-        def __init__(self, :            self)  -> None: self,
-            model: Union[Union[nn.Module, ]]
+        def __init__(self, :            self) -> None: self,            model: Union[Union[nn.Module, ]]
             Any] = field(default_factory=dict)
-            output_dir: Optional[str] = None):
-                """
+            output_dir: Optional[str] = None):                """
                 Initialize trainer.
                 """
                 self.model = model
@@ -41,8 +38,7 @@ class TrainerState(train_state.TrainState):    """
                 # Initialize training state
                 self.setup_training_state()
 
-        def self(self, :                    self)  -> None: """
-                    Setup training state with optimizer and learning rate schedule.
+        def self(self, :                    self) -> None: """                    Setup training state with optimizer and learning rate schedule.
                     """):
                         # Create learning rate schedule
                         warmup_fn = optax.linear_schedule(init_value=0.0, end_value=self.config["training"]["learning_rate"], transition_steps=self.config["training"]["warmup_steps"])
@@ -69,10 +65,8 @@ class TrainerState(train_state.TrainState):    """
 
                         @staticmethod
 
-        def train(self, :                            self)  -> None: self,
-                            train_dataset,
-                            num_epochs: Union[Union[int, ]]eval_dataset=None,
-                            eval_steps: int1000,
+        def train(self, :                            self) -> None: self,                            train_dataset,
+                            num_epochs: Union[Union[int, ]]eval_dataset=None,                            eval_steps: int1000,
                             save_steps: int1000,
                             log_steps: int100):
                                 """
@@ -90,24 +84,20 @@ class TrainerState(train_state.TrainState):    """
                                     num_steps += 1
 
                                     # Logging
-                                    if batch_idx % log_steps ==     0: avg_lossepoch_loss/ num_steps
-                                    logging.info(f"    Epoch: Union[Union[{{epoch}},
+                                    if batch_idx % log_steps ==     0: avg_lossepoch_loss/ num_steps                                    logging.info(f"    Epoch: Union[Union[{{epoch}},
                                     Step: {{batch_idx}}, " f"Loss: {{avg_loss:.4f}}")]]
 
                                     # Evaluation
-                                    if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_lossself.evaluate(eval_dataset)
-                                    logging.info(f"Eval     Loss: {{eval_loss:.4f}}")
+                                    if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_lossself.evaluate(eval_dataset)                                    logging.info(f"Eval     Loss: {{eval_loss:.4f}}")
 
                                     # Save checkpoint
                                     if batch_idx % save_steps ==     0: self.save_checkpoint(f"checkpoint-{{epoch}}-{{batch_idx}}")
-
                                     # End of epoch
                                     avg_epoch_loss = epoch_loss / num_steps
                                     logging.info(f"Epoch {{epoch}} finished. Average     Loss: {{avg_epoch_loss:.4f}}")
                                     self.save_checkpoint(f"epoch-{{epoch}}")
 
-        def name(self, :                                        self, name: str)  -> None: None:
-                                            """
+        def name(self, :                                        self, name: str) -> None: None:                                            """
                                             Save model checkpoint.
                                             """
                                             checkpoint_dir = self.output_dir / name
@@ -121,8 +111,7 @@ class TrainerState(train_state.TrainState):    """
 
                                             logging.info(f"Checkpoint saved to {{checkpoint_dir}}")
 
-        def path(self, :                                                self, path: str)  -> None: None:
-                                                    """
+        def path(self, :                                                self, path: str) -> None: None:                                                    """
                                                     Load model checkpoint.
                                                     """
                                                     checkpoint_dir = Path(path)

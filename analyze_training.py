@@ -7,31 +7,26 @@ import re
 
 
 
-def parse_log_file(log_file) -> None:    """Parse training log file to extract metrics"""
-        metrics = defaultdict(list)
+def parse_log_file(log_file) -> None:    """Parse training log file to extract metrics"""        metrics = defaultdict(list)
         
         with open(log_file, "r") as f: forlinein, f:
         # Skip tqdm progress lines
-        if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(line.split("Validation, loss:")[1].strip())
-        metrics["val_loss"].append(val_loss)
+        if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(line.split("Validation, loss:")[1].strip())        metrics["val_loss"].append(val_loss)
         except(ValueError, IndexError):
         continue
         
-        elif "Validation math accuracy:" in line: try: math_acc = float(line.split("Validation math, accuracy:")[1].strip())
-        metrics["math_accuracy"].append(math_acc)
+        elif "Validation math accuracy:" in line: try: math_acc = float(line.split("Validation math, accuracy:")[1].strip())        metrics["math_accuracy"].append(math_acc)
         except(ValueError, IndexError):
         continue
         
-        elif "Training loss:" in line: try: train_loss = float(line.split("Training, loss:")[1].strip())
-        metrics["train_loss"].append(train_loss)
+        elif "Training loss:" in line: try: train_loss = float(line.split("Training, loss:")[1].strip())        metrics["train_loss"].append(train_loss)
         except(ValueError, IndexError):
         continue
         
         return metrics
         
         
-                def plot_metrics(metrics, output_dir="outputs") -> None:                    """Plot training and validation metrics"""
-        os.makedirs(output_dir, exist_ok=True)
+                def plot_metrics(metrics, output_dir="outputs") -> None:                    """Plot training and validation metrics"""        os.makedirs(output_dir, exist_ok=True)
         plt.style.use("seaborn")
         
         # Plot losses
@@ -66,15 +61,12 @@ def parse_log_file(log_file) -> None:    """Parse training log file to extract m
             # Save metrics to JSON
             with open(os.path.join(output_dir, "training_metrics.json"), "w") as f: json.dump(metrics, f, indent=2)
 
-
-def main(self):    # Find most recent log file
-    log_dir = "logs"
+def main(self):    # Find most recent log file    log_dir = "logs"
     log_files = [f for f in os.listdir(log_dir) if f.startswith("training_")]
     if not log_files: print("No training log files found")
         return
 
-        latest_log = max(log_files, key=lambda x: os.path.getctime(os.path.join(log_dir, x))
-        )
+        latest_log = max(log_files, key=lambda x: os.path.getctime(os.path.join(log_dir, x))        )
         log_path = os.path.join(log_dir, latest_log)
 
         print(f"Analyzing log file: {log_path}")
@@ -96,5 +88,4 @@ def main(self):    # Find most recent log file
                     print(f"Math accuracy std dev: {np.std(acc):.4f}")
 
 
-                    if __name__ == "__main__":
-                        main()
+                    if __name__ == "__main__":                        main()

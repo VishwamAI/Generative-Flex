@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def main(self):                    """Process files with syntax pattern issues."""
-        files_to_fix = [
+                def main(self):                    """Process files with syntax pattern issues."""        files_to_fix = [
         "src/models/audio_model.py",
         "src/models/base_model.py",
         "src/models/enhanced_transformer.py",
@@ -42,5 +41,4 @@ import re
         os.system("python3 -m black .")
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

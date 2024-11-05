@@ -8,8 +8,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def main(self):    # Initialize accelerator for CPU training
-    accelerator = Accelerator(cpu=True)
+def main(self):    # Initialize accelerator for CPU training    accelerator = Accelerator(cpu=True)
 
     # Initialize configuration with CPU-specific settings
     config = TrainingConfig(model_name="facebook/opt-125m", # Using smaller model for CPU training
@@ -25,5 +24,4 @@ def main(self):    # Initialize accelerator for CPU training
     # Start training
     trainer.train()
 
-    if __name__ == "__main__":
-        main()
+    if __name__ == "__main__":        main()

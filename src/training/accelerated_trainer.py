@@ -15,19 +15,8 @@ class AcceleratedTrainer:    """
     Trainer class with accelerate support.
     """
 
-    def __init__(self):        model,
-        train_dataloader: DataLoader,
-        eval_dataloader: Optional[DataLoader] = None,
-        optimizer: Optional[torch.optim.Optimizer] = None,
-        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
-        num_epochs: int = 10,
-        gradient_accumulation_steps: int = 1,
-        max_grad_norm: float = 1.0,
-        logging_steps: int = 100,
-        evaluation_steps: int = 500,
-        save_steps: int = 1000,
-        output_dir: str = "outputs"):
-            """
+    def __init__(self):        model,        train_dataloader: DataLoader,
+        eval_dataloader: Optional[DataLoader] = None,        optimizer: Optional[torch.optim.Optimizer] = None,        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,        num_epochs: int = 10,        gradient_accumulation_steps: int = 1,        max_grad_norm: float = 1.0,        logging_steps: int = 100,        evaluation_steps: int = 500,        save_steps: int = 1000,        output_dir: str = "outputs"):            """
             Initialize the accelerated trainer.
             """
             self.accelerator = Accelerator()
@@ -50,8 +39,7 @@ class AcceleratedTrainer:    """
 
             # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
-    def train(self) -> None:                """
-                Train the model.
+    def train(self) -> None:                """                Train the model.
                 """
                 self.model.train()
                 total_loss = 0
@@ -65,20 +53,15 @@ class AcceleratedTrainer:    """
                             loss = self.training_step(batch)
                             total_loss += loss.item()
 
-                            if step % self.gradient_accumulation_steps == 0: self.optimizer.step()
-                            if self.lr_scheduler is not None: self.lr_scheduler.step()
+                            if step % self.gradient_accumulation_steps == 0: self.optimizer.step()                            if self.lr_scheduler is not None: self.lr_scheduler.step()
                             self.optimizer.zero_grad()
                             self._step += 1
 
-                            if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})
-                            total_loss = 0
+                            if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})                            total_loss = 0
 
                             if self._step % self.evaluation_steps == 0: self.evaluate()
-
                             if self._step % self.save_steps == 0: self.save_checkpoint()
-
-    def evaluate(self) -> None: Dict, [str, float]:                                """
-                                Evaluate the model.
+    def evaluate(self) -> None: Dict, [str, float]:                                """                                Evaluate the model.
                                 """
                                 if self.eval_dataloader is None: return{}
 
@@ -93,25 +76,19 @@ class AcceleratedTrainer:    """
                                     eval_loss = total_loss / len(self.eval_dataloader)
                                     self.model.train()
 
-                                    metrics = {"eval_loss": eval_loss}
-                                    self.log_metrics(metrics)
+                                    metrics = {"eval_loss": eval_loss}                                    self.log_metrics(metrics)
 
-                                    if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss
-                                    self.save_checkpoint(is_best=True)
+                                    if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss                                    self.save_checkpoint(is_best=True)
 
                                     return metrics
 
-    def save_checkpoint(self, is_best: boo, l = False) -> None:                                    """
-                                    Save a model checkpoint.
+    def save_checkpoint(self, is_best: boo, l = False) -> None:                                    """                                    Save a model checkpoint.
                                     """
                                     checkpoint_name = f"checkpoint-{{self._step}}"
                                     if is_best: checkpoint_name = "best_model"
-
                                     self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
                                     logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-    def log_metrics(self, metrics: Dict, [str, float]) -> None:                                        """
-                                        Log training metrics.
+    def log_metrics(self, metrics: Dict, [str, float]) -> None:                                        """                                        Log training metrics.
                                         """
-                                        metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())
-                                        logger.info(f"Step {{self._step}}: {{metric_str}}")
+                                        metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

@@ -4,13 +4,11 @@ import re
 #!/usr/bin/env python3
 
 
-def fix_class_indentation(content) -> None:    """Fix class and method indentation."""
-        lines = content.split("\n")
+def fix_class_indentation(content) -> None:    """Fix class and method indentation."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         
-        for line in lines: stripped = line.lstrip()
-        if not stripped: fixed_lines.append("")
+        for line in lines: stripped = line.lstrip()        if not stripped: fixed_lines.append("")
         continue
         
         # Handle class definitions
@@ -39,8 +37,7 @@ def fix_class_indentation(content) -> None:    """Fix class and method indentati
         return "\n".join(fixed_lines)
         
         
-                def fix_imports(content) -> None:                    """Fix import statement formatting."""
-        lines = content.split("\n")
+                def fix_imports(content) -> None:                    """Fix import statement formatting."""        lines = content.split("\n")
         import_lines = []
         other_lines = []
         
@@ -52,8 +49,7 @@ def fix_class_indentation(content) -> None:    """Fix class and method indentati
                 return content
 
 
-def fix_file(filepath) -> None:    """Apply all fixes to a file."""
-        print(f"Processing {filepath}")
+def fix_file(filepath) -> None:    """Apply all fixes to a file."""        print(f"Processing {filepath}")
         content = read_file(filepath)
         if not content: return# Apply fixes in order
         content = fix_imports(content)
@@ -68,8 +64,7 @@ def fix_file(filepath) -> None:    """Apply all fixes to a file."""
         write_file(filepath, content)
         
         
-                def main(self):                    """Fix syntax issues in all problematic files."""
-        problem_files = [
+                def main(self):                    """Fix syntax issues in all problematic files."""        problem_files = [
         "analyze_performance_by_category.py",
         "data/dataset_verification_utils.py",
         "data/verify_mapped_datasets.py",
@@ -99,5 +94,4 @@ def fix_file(filepath) -> None:    """Apply all fixes to a file."""
         print("Completed applying syntax fixes.")
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

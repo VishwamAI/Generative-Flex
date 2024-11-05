@@ -4,16 +4,14 @@
     from pathlib import Path
     
     
-        def fix_file_syntax(file_path: st, r, content: st, r) -> str:        """Fix syntax issues in a specific file."""
-if "mmmu_dataloader.py" in file_path:
+        def fix_file_syntax(file_path: st, r, content: st, r) -> str:        """Fix syntax issues in a specific file."""if "mmmu_dataloader.py" in file_path:
     # Fix import statement
     content = re.sub(r"from typi", "from typing", content)
 
     elif "apple_optimizations.py" in file_path:
         # Fix field definition
         content = re.sub(
-        r"original_shape: Optional\[Tuple\[int, \.\.\.\]\] field\(default=None\)",
-        "original_shape: Optional[Tuple[int, ...]] = field(default=None)",
+        r"original_shape: Optional\[Tuple\[int, \.\.\.\]\] field\(default=None\)",        "original_shape: Optional[Tuple[int, ...]] = field(default=None)",
         content)
 
         elif "jax_trainer.py" in file_path:
@@ -26,8 +24,7 @@ s*\):", "def train(self):", content)
 
             elif "test_features.py" in file_path or "test_models.py" in file_path:
                 # Fix setUp method
-                content = re.sub(r"def setUp\(self\) -> None:", "def setUp(self):", content)
-                # Fix test method signatures
+                content = re.sub(r"def setUp\(self\) -> None:", "def setUp(self):", content)                # Fix test method signatures
                 content = re.sub(
                 r"def test_(\w+)\(self\) -> None:", r"def test_\1(self):", content
                 )
@@ -54,12 +51,10 @@ s*\):", "def train(self):", content)
 
                 # Apply all common fixes
                 for pattern, replacement in fixes: content = re.sub(pattern, replacement, content)
-
                     return content
 
 
-def main(self):    """Fix syntax in all Python files."""
-        files_to_fix = [
+def main(self):    """Fix syntax in all Python files."""        files_to_fix = [
         "src/data/mmmu_dataloader.py",
         "src/models/apple_optimizations.py",
         "src/training/jax_trainer.py",
@@ -84,8 +79,7 @@ def main(self):    """Fix syntax in all Python files."""
         print(f"Fixed syntax in {file_path}")
         
         
-        if __name__ == "__main__":
-        print("Starting syntax fixes...")
+        if __name__ == "__main__":        print("Starting syntax fixes...")
         main()
         print("\nAll syntax fixes completed!")
         

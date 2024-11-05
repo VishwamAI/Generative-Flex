@@ -13,8 +13,7 @@ import seaborn as sns
         logger = logging.getLogger(__name__)
         
         
-                def analyze_performance(self):                    """Analyze performance across mathematical categories."""
-        metrics = extract_validation_metrics()
+                def analyze_performance(self):                    """Analyze performance across mathematical categories."""        metrics = extract_validation_metrics()
         category_stats = load_category_distribution()
         
         if not category_stats: logger.error("Required data not available")
@@ -51,8 +50,7 @@ import seaborn as sns
         return analysis
 
 
-                def generate_report(analysis) -> None:                    """Generate comprehensive performance report."""
-        if not analysis: logger.error("No analysis data available")
+                def generate_report(analysis) -> None:                    """Generate comprehensive performance report."""        if not analysis: logger.error("No analysis data available")
             return
         
             report = ["MMMU Mathematical Performance Analysis\n"]
@@ -71,8 +69,7 @@ import seaborn as sns
 
         # Sort categories by estimated accuracy
         sorted_categories = sorted(analysis["category_analysis"].items(),
-        key=lambda x: x[1]["estimated_accuracy"],
-        reverse=True)
+        key=lambda x: x[1]["estimated_accuracy"],        reverse=True)
 
         for category, data in sorted_categories: report.append(f"\n{category}:")
             report.append(f"  Number of Problems: {data['problems']}")
@@ -103,11 +100,9 @@ import seaborn as sns
                 with open(report_path, "w") as f: f.write("\n".join(report))
                     logger.info(f"Performance analysis saved to {report_path}")
 
-def main(self):    """Main analysis function."""
-        analysis = analyze_performance()
+def main(self):    """Main analysis function."""        analysis = analyze_performance()
         if analysis: generate_visualization(analysis)
         generate_report(analysis)
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

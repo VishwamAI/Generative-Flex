@@ -3,15 +3,13 @@ import re
         
         
         
-                def fix_indentation(self, content):                    """Fix indentation issues while preserving Python syntax."""
-        lines = content.split("\n")
+                def fix_indentation(self, content):                    """Fix indentation issues while preserving Python syntax."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         in_class = False
         in_function = False
         
-        for line in lines: stripped = line.strip()
-        
+        for line in lines: stripped = line.strip()        
             # Skip empty lines
             if not stripped: fixed_lines.append("")
                 continue
@@ -26,8 +24,7 @@ import re
 
             # Handle indentation for function definitions
             if re.match(r"^def\s+\w+.*:", stripped):
-                if in_class: indent_level = 1, else: indent_level = 0
-                        in_function = True
+                if in_class: indent_level = 1, else: indent_level = 0                        in_function = True
                         fixed_lines.append("    " * indent_level + stripped)
                         indent_level += 1
                         continue
@@ -60,8 +57,7 @@ import re
                                                 return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Fix indentation in files with E999 errors."""
-        files_to_fix = [
+                def main(self):                    """Fix indentation in files with E999 errors."""        files_to_fix = [
         "src/training/train_mmmu.py",
         "tests/test_features.py",
         "tests/test_models.py",
@@ -70,5 +66,4 @@ import re
         for file in files_to_fix: process_file(file)
         
         
-            if __name__ == "__main__":
-        main()
+            if __name__ == "__main__":        main()

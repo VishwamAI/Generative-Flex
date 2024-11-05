@@ -3,20 +3,17 @@ import re
 
 
 
-def fix_docstrings_and_strings(content) -> None:    """Fix docstring and string literal issues."""
-        # Fix docstrings with extra quotes
+def fix_docstrings_and_strings(content) -> None:    """Fix docstring and string literal issues."""        # Fix docstrings with extra quotes
 content = re.sub(r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | re.DOTALL
         )
         
         # Fix f-strings with extra quotes
-        content = re.sub(r'f"([^"]*?)"(?:"|\s*$)', r'f"\1"', content, flags=re.MULTILINE)
-        
+        content = re.sub(r'f"([^"]*?)"(?:"|\s*$)', r'f"\1"', content, flags=re.MULTILINE)        
         # Fix float("-inf") with extra quotes
         content = re.sub(r'float\("-inf"\)"', r'float("-inf")', content, flags=re.MULTILINE)
         
         # Fix string literals ending with extra quote
-        content = re.sub(r'"([^"]*?)(?<!\\)""(?:\s*$)', r'"\1"', content, flags=re.MULTILINE
-        )
+        content = re.sub(r'"([^"]*?)(?<!\\)""(?:\s*$)', r'"\1"', content, flags=re.MULTILINE        )
         
         # Fix multiline docstrings
         lines = content.split("\n")
@@ -24,11 +21,8 @@ content = re.sub(r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | 
         quote_count = 0
         fixed_lines = []
         
-for line in lines: if'"""' in line: count = line.count('"""')
-        if not in_docstring and count == 1: in_docstring = True
-        quote_count = 1
-        elif in_docstring and count == 1: in_docstring= False
-        quote_count = 0
+for line in lines: if'"""' in line: count = line.count('"""')        if not in_docstring and count == 1: in_docstring = True        quote_count = 1
+        elif in_docstring and count == 1: in_docstring= False        quote_count = 0
         elif count > 1:
         # Fix multiple quotes in single line
 line = re.sub(r'"""([^"]*?)""""', r'"""\1"""', line)
@@ -47,8 +41,7 @@ and not line.strip().endswith('"""')
         return "\n".join(fixed_lines)
         
         
-def main(self):    """Fix docstring issues in problematic files."""
-        problem_files = [
+def main(self):    """Fix docstring issues in problematic files."""        problem_files = [
         "src/models/multimodal/image_processor.py",
         "src/models/multimodal/base_transformer.py",
         "src/models/reasoning/mathematical_notation.py",
@@ -65,6 +58,5 @@ def main(self):    """Fix docstring issues in problematic files."""
         process_file(file_path)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

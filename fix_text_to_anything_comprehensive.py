@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""
-        # Split content into sections
+def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""        # Split content into sections
         lines = content.split("\n")
         
         # Fix imports
@@ -44,8 +43,7 @@ if line.startswith('"""') and not sections["docstring"]:
         continue
         
         # Handle VOCAB_SIZE constant
-        if line.startswith("VOCAB_SIZE") and current_section == "constants":
-        sections["constants"].append("VOCAB_SIZE = 256  # Character-level tokenization")
+        if line.startswith("VOCAB_SIZE") and current_section == "constants":        sections["constants"].append("VOCAB_SIZE = 256  # Character-level tokenization")
         i += 1
         continue
         
@@ -72,8 +70,7 @@ if line.startswith('"""') and not sections["docstring"]:
         # Add remaining lines
         if line.strip():
         sections["remaining"].append(line)
-    else: ifsections["remaining"] and sections["remaining"][-1] != "":
-        sections["remaining"].append("")
+    else: ifsections["remaining"] and sections["remaining"][-1] != "":        sections["remaining"].append("")
         i += 1
         
         # Fix GenerationConfig
@@ -84,21 +81,13 @@ if line.startswith('"""') and not sections["docstring"]:
         in_config = True
         elif "class GenerationConfig" in line: config_lines.append("class GenerationConfig:")
 config_lines.append('    """Configuration for text-to-anything generation."""')
-        elif in_config and ":" in line and "=" in line:
-        # Fix field definitions
-        name, type_and_default = line.split(":", 1)
-        if "=" in type_and_default: type_name, default_value = type_and_default.split("=", 1)
-        if "struct_field" in default_value: default_value = (
-        re.search(r"default = ([^ \
+        elif in_config and ":" in line and "=" in line:        # Fix field definitions
+        name, type_and_default = line.split(":", 1)        if "=" in type_and_default: type_name, default_value = type_and_default.split("=", 1)        if "struct_field" in default_value: default_value = (        re.search(r"default = ([^ \
         )]+)", default_value).group(1).strip()
         )
-        if name.strip() == "image_size":
-        config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default=(256, 256))"
-        )
-        else: config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default={default_value})"
-        )
-        else: config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default={default_value.strip()})"
-        )
+        if name.strip() == "image_size":        config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default=(256, 256))"        )
+        else: config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default={default_value})"        )
+        else: config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default={default_value.strip()})"        )
         else: config_lines.append(f"    {line.strip()}")
         else: config_lines.append(line)
         
@@ -119,9 +108,7 @@ config_lines.append('    """Configuration for text-to-anything generation."""')
         return "\n".join(result)
         
         
-                def main(self):                # Read the original file
-                with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-                
+                def main(self):                # Read the original file                with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
                 # Fix the content
                 fixed_content = fix_file_content(content)
                 
@@ -131,6 +118,5 @@ config_lines.append('    """Configuration for text-to-anything generation."""')
                 print("Comprehensive fixes applied to text_to_anything.py")
                 
                 
-                if __name__ == "__main__":
-        main()
+                if __name__ == "__main__":        main()
         

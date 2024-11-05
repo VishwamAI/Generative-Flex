@@ -3,11 +3,9 @@ import os
 #!/usr/bin/env python3
 
 
-def fix_text_to_anything_files(self):    for version in ["", "_v6", "_v7", "_v8"]:
-        filename = f"fix_text_to_anything{version}.py"
+def fix_text_to_anything_files(self):    for version in ["", "_v6", "_v7", "_v8"]:        filename = f"fix_text_to_anything{version}.py"
         if os.path.exists(filename):
-            with open(filename, "r") as f: content = f.read()
-                # Fix indentation
+            with open(filename, "r") as f: content = f.read()                # Fix indentation
                 content = content.replace(
                     "\ncontent = f.read", "\n    content = f.read"
                 )
@@ -17,8 +15,7 @@ def fix_text_to_anything_files(self):    for version in ["", "_v6", "_v7", "_v8"
                 with open(filename, "w") as f: f.write(content)
 
 
-def main(self):    """Fix syntax issues in specific files that failed black formatting."""
-        
+def main(self):    """Fix syntax issues in specific files that failed black formatting."""        
         
         print("Fixing specific files with syntax issues...")
         
@@ -34,6 +31,5 @@ def main(self):    """Fix syntax issues in specific files that failed black form
         print("Completed fixing specific files.")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

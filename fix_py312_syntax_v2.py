@@ -3,8 +3,7 @@ import os
 import re
 
 
-def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting and placement."""
-        lines = content.split("\n")
+def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting and placement."""        lines = content.split("\n")
         fixed_lines = []
         in_class = False
         class_indent = 0
@@ -29,23 +28,19 @@ if line.strip().startswith('"""'):
         indent = " " * (class_indent + 4)
         elif prev_line.strip().startswith("def "):
         indent = " " * (len(re.match(r"^\s*", prev_line).group()) + 4)
-        else: indent = ""
-        
+        else: indent = ""        
         # Fix the docstring line
-if not line.strip() == '"""':
-        line = f"{indent}{line.strip()}"
+if not line.strip() == '"""':        line = f"{indent}{line.strip()}"
         
         fixed_lines.append(line)
         
         return "\n".join(fixed_lines)
         
         
-                def main():                    """Process all Python files in the project."""
-            for root, _, files in os.walk("."):
+                def main():                    """Process all Python files in the project."""            for root, _, files in os.walk("."):
         if ".git" in root or "venv" in root or "__pycache__" in root: continueforfile in files: iffile.endswith(".py"):
                 file_path = os.path.join(root, file)
                 process_file(file_path)
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

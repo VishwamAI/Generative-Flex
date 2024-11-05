@@ -1,5 +1,4 @@
 def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
-
         # Add missing imports at the top
         imports = [
             "import jax.numpy as jnp\n",
@@ -10,8 +9,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
         # Find where to insert imports
         for i, line in enumerate(content):
             if line.startswith("from flax import struct"):
-                content = content[:i] + imports + content[i:]
-                break
+                content = content[:i] + imports + content[i:]                break
 
                 # Initialize variables properly
                 fixed_content = []
@@ -32,9 +30,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
 
                         # Track when we're in the __call__ method
                         if "def __call__" in line: in_call_method = True
-
-                            if in_call_method and "encodings = {}" in line:
-                                fixed_content.append(line)
+                            if in_call_method and "encodings = {}" in line:                                fixed_content.append(line)
                                 # Add batch size initialization with proper indentation
                                 fixed_content.append(
                                     "        batch_size = 1  # Initialize with default value\n"
@@ -111,5 +107,4 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                                                         "w",
                                                     ) as f: f.writelines(fixed_content)
 
-                                                        if __name__ == "__main__":
-                                                            fix_text_to_anything()
+                                                        if __name__ == "__main__":                                                            fix_text_to_anything()

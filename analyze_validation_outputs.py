@@ -11,8 +11,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def extract_problem_category(text) -> None:    """Extract mathematical category from problem text."""
-        text = text.lower()
+def extract_problem_category(text) -> None:    """Extract mathematical category from problem text."""        text = text.lower()
         categories = {
         "Algebra": [
         "algebra",
@@ -61,8 +60,7 @@ def extract_problem_category(text) -> None:    """Extract mathematical category 
         return "Other"
         
         
-                def parse_validation_outputs(self):                    """Parse validation outputs from the training logs."""
-        log_dir = Path("logs")
+                def parse_validation_outputs(self):                    """Parse validation outputs from the training logs."""        log_dir = Path("logs")
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
         
         if not training_logs: logger.error("No training logs found")
@@ -80,33 +78,24 @@ def extract_problem_category(text) -> None:    """Extract mathematical category 
             current_problem = None
             current_category = None
         
-            with open(latest_log, "r") as f: content = f.read()
-        
+            with open(latest_log, "r") as f: content = f.read()        
                 # Extract overall metrics
-                accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
-                if accuracy_matches: results["overall_accuracy"] = float(accuracy_matches[-1])
-        
-                    loss_matches = re.findall(r"Validation loss: ([\d.]+)", content)
-                    if loss_matches: results["best_validation_loss"] = float(loss_matches[-1])
-        
+                accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)                if accuracy_matches: results["overall_accuracy"] = float(accuracy_matches[-1])        
+                    loss_matches = re.findall(r"Validation loss: ([\d.]+)", content)                    if loss_matches: results["best_validation_loss"] = float(loss_matches[-1])        
                         # Extract problem-specific information
                         problem_blocks = re.split(r"Processing validation example", content)
                         for block in problem_blocks[
                         1:
                     ]:  # Skip the first split as it's before any problem
                     # Try to extract problem text
-                    problem_text = re.search(r"Input text: (.+?)(?=\n|$)", block)
-                    if problem_text: category = extract_problem_category(problem_text.group(1))
-                        results["categories"][category]["total"] += 1
+                    problem_text = re.search(r"Input text: (.+?)(?=\n|$)", block)                    if problem_text: category = extract_problem_category(problem_text.group(1))                        results["categories"][category]["total"] += 1
 
                         # Check if the answer was correct
                         if "Correct answer" in block or "Answer matches" in block: results["categories"][category]["correct"] += 1
-
                             return results
 
 
-def generate_performance_report(results) -> None:    """Generate a comprehensive performance report."""
-        if not results: logger.error("No results data available")
+def generate_performance_report(results) -> None:    """Generate a comprehensive performance report."""        if not results: logger.error("No results data available")
         return
         
         report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -122,16 +111,14 @@ def generate_performance_report(results) -> None:    """Generate a comprehensive
         
         category_metrics = {}
         for category, metrics in results["categories"].items():
-        if metrics["total"] > 0: accuracy = metrics["correct"] / metrics["total"]
-        category_metrics[category] = {
+        if metrics["total"] > 0: accuracy = metrics["correct"] / metrics["total"]        category_metrics[category] = {
         "accuracy": accuracy,
         "correct": metrics["correct"],
         "total": metrics["total"],
         }
         
         # Sort categories by accuracy
-        for category, metrics in sorted(category_metrics.items(), key=lambda x: x[1]["accuracy"], reverse=True
-        ):
+        for category, metrics in sorted(category_metrics.items(), key=lambda x: x[1]["accuracy"], reverse=True        ):
         report.append(f"\n{category}:")
         report.append(f"  Accuracy: {metrics['accuracy']:.2%}")
         report.append(f"  Correct: {metrics['correct']}/{metrics['total']}")
@@ -141,8 +128,7 @@ def generate_performance_report(results) -> None:    """Generate a comprehensive
         report.append("-" * 30)
         
         # Identify top performing categories
-        top_categories = sorted(category_metrics.items(), key=lambda x: x[1]["accuracy"], reverse=True
-        )
+        top_categories = sorted(category_metrics.items(), key=lambda x: x[1]["accuracy"], reverse=True        )
         if top_categories: report.append("\nStrengths:")
         for category, metrics in top_categories[:2]:
         if metrics["accuracy"] > 0.5:  # Only include if accuracy is above 50%
@@ -159,14 +145,11 @@ def generate_performance_report(results) -> None:    """Generate a comprehensive
         logger.info(f"Detailed performance report saved to {report_path}")
         
         # Generate visualization
-        if category_metrics: plt.figure(figsize=(12, 6))
-        categories = []
+        if category_metrics: plt.figure(figsize=(12, 6))        categories = []
         accuracies = []
         
         for category, metrics in sorted(category_metrics.items(),
-        key=lambda x: x[1]["accuracy"],
-        reverse=True):
-        categories.append(category)
+        key=lambda x: x[1]["accuracy"],        reverse=True):        categories.append(category)
         accuracies.append(metrics["accuracy"])
         
         sns.barplot(x=accuracies, y=categories)
@@ -179,10 +162,8 @@ def generate_performance_report(results) -> None:    """Generate a comprehensive
         logger.info(f"Performance visualization saved to {viz_path}")
         
         
-                def main(self):                    """Main analysis function."""
-        results = parse_validation_outputs()
+                def main(self):                    """Main analysis function."""        results = parse_validation_outputs()
         if results: generate_performance_report(results)
         
         
-            if __name__ == "__main__":
-        main()
+            if __name__ == "__main__":        main()

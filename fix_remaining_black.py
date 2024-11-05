@@ -12,10 +12,8 @@ import torch.nn as nn
         
         
         
-                def fix_file(file_path, content) -> None:                    """Write fixed content to file."""
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-            print(f"Fixed {file_path}")
+                def fix_file(file_path, content) -> None:                    """Write fixed content to file."""        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "w", encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
         
         
             fixes = {
@@ -25,11 +23,8 @@ import torch.nn as nn
         
         class FlashMoELayer(nn.Module):    """Flash Mixture of Experts layer implementation."""
         
-                def __init__(self):                hidden_size: int,
-                intermediate_size: int,
-                num_experts: int = 8,
-                dropout_rate: float = 0.1):
-            """Initialize the FlashMoE layer."""
+            def __init__(self):                hidden_size: int,                intermediate_size: int,
+                num_experts: int = 8,                dropout_rate: float = 0.1):            """Initialize the FlashMoE layer."""
     super().__init__()
     self.hidden_size = hidden_size
     self.intermediate_size = intermediate_size
@@ -49,9 +44,7 @@ import torch.nn as nn
     # Router network
     self.router = nn.Linear(hidden_size, num_experts)
 
-def forward(self):        hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
-    """Forward pass through the FlashMoE layer."""
+def forward(self):        hidden_states: torch.Tensor,        attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:    """Forward pass through the FlashMoE layer."""
                 batch_size, seq_length, hidden_size = hidden_states.shape
                 
                 # Get routing weights
@@ -74,8 +67,7 @@ def forward(self):        hidden_states: torch.Tensor,
 
 class BaseTransformer(nn.Module):    """Base transformer model for multimodal processing."""
         
-    def __init__(self, config: Dict, [str, Any]) -> None:            """Initialize the base transformer."""
-    super().__init__()
+    def __init__(self, config: Dict, [str, Any]) -> None:            """Initialize the base transformer."""    super().__init__()
     self.config = config
     self.hidden_size = config.get("hidden_size", 768)
     self.num_attention_heads = config.get("num_attention_heads", 12)
@@ -91,22 +83,19 @@ class BaseTransformer(nn.Module):    """Base transformer model for multimodal pr
 
 def forward(self):
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-    """Forward pass through the base transformer."""
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """Forward pass through the base transformer."""
                 # Apply embeddings and dropout
                 hidden_states = self.embeddings(hidden_states)
                 hidden_states = self.dropout(hidden_states)
                 
                 # Apply transformer layers
-                for layer in self.layers: hidden_states = layer(hidden_states, attention_mask)
-                
+                for layer in self.layers: hidden_states = layer(hidden_states, attention_mask)                
                 return hidden_states
                 
                 
 class TransformerLayer(nn.Module):    """Single transformer layer implementation."""
 
-    def __init__(self, config: Dict, [str, Any]) -> None:        """Initialize the transformer layer."""
-                super().__init__()
+    def __init__(self, config: Dict, [str, Any]) -> None:        """Initialize the transformer layer."""                super().__init__()
                 self.attention = MultiHeadAttention(config)
                 self.intermediate = nn.Linear(config["hidden_size"], config["intermediate_size"])
                 self.output = nn.Linear(config["intermediate_size"], config["hidden_size"])
@@ -114,9 +103,7 @@ class TransformerLayer(nn.Module):    """Single transformer layer implementation
                 self.norm1 = nn.LayerNorm(config["hidden_size"])
                 self.norm2 = nn.LayerNorm(config["hidden_size"])
                 
-    def forward(self):                                hidden_states: torch.Tensor,
-                                attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-                    """Forward pass through the transformer layer."""
+    def forward(self):                                hidden_states: torch.Tensor,                                attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:                    """Forward pass through the transformer layer."""
 attention_output = self.attention(hidden_states, attention_mask)
 hidden_states = self.norm1(hidden_states + attention_output)
 
@@ -129,8 +116,7 @@ return self.norm2(hidden_states + layer_output)
 
 class MultiHeadAttention(nn.Module):    """Multi-head attention implementation."""
         
-    def __init__(self, config: Dict, [str, Any]) -> None:            """Initialize multi-head attention."""
-    super().__init__()
+    def __init__(self, config: Dict, [str, Any]) -> None:            """Initialize multi-head attention."""    super().__init__()
     self.num_attention_heads = config["num_attention_heads"]
     self.hidden_size = config["hidden_size"]
     self.attention_head_size = self.hidden_size // self.num_attention_heads
@@ -142,8 +128,7 @@ class MultiHeadAttention(nn.Module):    """Multi-head attention implementation."
 
 def forward(self):
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-    """Forward pass through multi-head attention."""
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """Forward pass through multi-head attention."""
                 batch_size = hidden_states.size(0)
                 
                 # Linear projections
@@ -160,8 +145,7 @@ def forward(self):
                 attention_scores = torch.matmul(query, key.transpose(-1, -2))
                 attention_scores = attention_scores / (self.attention_head_size ** 0.5)
                 
-                if attention_mask is not None: attention_scores = attention_scores + attention_mask
-                
+                if attention_mask is not None: attention_scores = attention_scores + attention_mask                
                 attention_probs = torch.softmax(attention_scores, dim=-1)
                 attention_probs = self.dropout(attention_probs)
                 
@@ -178,10 +162,7 @@ def forward(self):
 
 class ImageProcessor(nn.Module):    """Image processor for handling multimodal inputs in the MMMU model."""
         
-    def __init__(self):                image_size: int = 224,
-                hidden_size: int = 768,
-                dropout_rate: float = 0.1):
-            """Initialize the image processor."""
+    def __init__(self):                image_size: int = 224,                hidden_size: int = 768,                dropout_rate: float = 0.1):            """Initialize the image processor."""
     super().__init__()
     self.image_size = image_size
     self.hidden_size = hidden_size
@@ -208,11 +189,9 @@ class ImageProcessor(nn.Module):    """Image processor for handling multimodal i
 
 def forward(self):
         images: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-    """Process images for multimodal input."""
+        attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:    """Process images for multimodal input."""
                 # Apply preprocessing
-                if images.dim() == 3: images = images.unsqueeze(0)
-                
+                if images.dim() == 3: images = images.unsqueeze(0)                
                 batch_size = images.size(0)
                 processed_images = []
                 
@@ -238,19 +217,8 @@ def forward(self):
 class AcceleratedTrainer:    """Trainer class with accelerate support."""
         
         
-    def __init__(self):                model,
-                train_dataloader: DataLoader,
-                eval_dataloader: Optional[DataLoader] = None,
-                optimizer: Optional[torch.optim.Optimizer] = None,
-                lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
-                num_epochs: int = 10,
-                gradient_accumulation_steps: int = 1,
-                max_grad_norm: float = 1.0,
-                logging_steps: int = 100,
-                evaluation_steps: int = 500,
-                save_steps: int = 1000,
-                output_dir: str = "outputs"):
-            """Initialize the accelerated trainer."""
+    def __init__(self):                model,                train_dataloader: DataLoader,
+                eval_dataloader: Optional[DataLoader] = None,                optimizer: Optional[torch.optim.Optimizer] = None,                lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,                num_epochs: int = 10,                gradient_accumulation_steps: int = 1,                max_grad_norm: float = 1.0,                logging_steps: int = 100,                evaluation_steps: int = 500,                save_steps: int = 1000,                output_dir: str = "outputs"):            """Initialize the accelerated trainer."""
     self.accelerator = Accelerator()
     self.model = model
     self.train_dataloader = train_dataloader
@@ -285,20 +253,15 @@ def train(self) -> None:
         loss = self.training_step(batch)
         total_loss += loss.item()
         
-        if step % self.gradient_accumulation_steps == 0: self.optimizer.step()
-        if self.lr_scheduler is not None: self.lr_scheduler.step()
+        if step % self.gradient_accumulation_steps == 0: self.optimizer.step()        if self.lr_scheduler is not None: self.lr_scheduler.step()
         self.optimizer.zero_grad()
         self._step += 1
         
-        if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})
-        total_loss = 0
+        if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})        total_loss = 0
         
-        if self._step % self.evaluation_steps == 0: self.evaluate()
-        
-        if self._step % self.save_steps == 0: self.save_checkpoint()
-        
-def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""
-        if self.eval_dataloader is None: return{}
+        if self._step % self.evaluation_steps == 0: self.evaluate()        
+        if self._step % self.save_steps == 0: self.save_checkpoint()        
+def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""        if self.eval_dataloader is None: return{}
         
         self.model.eval()
         total_loss = 0
@@ -311,24 +274,18 @@ def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""
         eval_loss = total_loss / len(self.eval_dataloader)
         self.model.train()
         
-        metrics = {"eval_loss": eval_loss}
-        self.log_metrics(metrics)
+        metrics = {"eval_loss": eval_loss}        self.log_metrics(metrics)
         
-        if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss
-        self.save_checkpoint(is_best=True)
+        if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss        self.save_checkpoint(is_best=True)
         
         return metrics
         
-                def save_checkpoint(self, is_best: boo, l = False) -> None:            """Save a model checkpoint."""
-checkpoint_name = f"checkpoint-{self._step}"
+                def save_checkpoint(self, is_best: boo, l = False) -> None:            """Save a model checkpoint."""checkpoint_name = f"checkpoint-{self._step}"
 if is_best: checkpoint_name = "best_model"
-
     self.accelerator.save_state(f"{self.output_dir}/{checkpoint_name}")
     logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-def log_metrics(self, metrics: Dict, [str, float]) -> None:    """Log training metrics."""
-                metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
-                logger.info(f"Step {self._step}: {metric_str}")
+def log_metrics(self, metrics: Dict, [str, float]) -> None:    """Log training metrics."""                metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())                logger.info(f"Step {self._step}: {metric_str}")
 """,
 "src/training/trainer.py": """"""Base trainer implementation."""
 
@@ -338,19 +295,8 @@ logger = logging.getLogger(__name__)
 
 class Trainer:    """Base trainer class."""
         
-    def __init__(self):                model,
-                train_dataloader: DataLoader,
-                eval_dataloader: Optional[DataLoader] = None,
-                optimizer: Optional[torch.optim.Optimizer] = None,
-                lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
-                num_epochs: int = 10,
-                gradient_accumulation_steps: int = 1,
-                max_grad_norm: float = 1.0,
-                logging_steps: int = 100,
-                evaluation_steps: int = 500,
-                save_steps: int = 1000,
-                output_dir: str = "outputs"):
-            """Initialize the trainer."""
+    def __init__(self):                model,                train_dataloader: DataLoader,
+                eval_dataloader: Optional[DataLoader] = None,                optimizer: Optional[torch.optim.Optimizer] = None,                lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,                num_epochs: int = 10,                gradient_accumulation_steps: int = 1,                max_grad_norm: float = 1.0,                logging_steps: int = 100,                evaluation_steps: int = 500,                save_steps: int = 1000,                output_dir: str = "outputs"):            """Initialize the trainer."""
     self.model = model
     self.train_dataloader = train_dataloader
     self.eval_dataloader = eval_dataloader
@@ -381,20 +327,15 @@ def train(self) -> None:
         loss = self.training_step(batch)
         total_loss += loss.item()
         
-        if step % self.gradient_accumulation_steps == 0: self.optimizer.step()
-        if self.lr_scheduler is not None: self.lr_scheduler.step()
+        if step % self.gradient_accumulation_steps == 0: self.optimizer.step()        if self.lr_scheduler is not None: self.lr_scheduler.step()
         self.optimizer.zero_grad()
         self._step += 1
         
-        if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})
-        total_loss = 0
+        if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})        total_loss = 0
         
-        if self._step % self.evaluation_steps == 0: self.evaluate()
-        
-        if self._step % self.save_steps == 0: self.save_checkpoint()
-        
-def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""
-        if self.eval_dataloader is None: return{}
+        if self._step % self.evaluation_steps == 0: self.evaluate()        
+        if self._step % self.save_steps == 0: self.save_checkpoint()        
+def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""        if self.eval_dataloader is None: return{}
         
         self.model.eval()
         total_loss = 0
@@ -407,18 +348,14 @@ def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""
         eval_loss = total_loss / len(self.eval_dataloader)
         self.model.train()
         
-        metrics = {"eval_loss": eval_loss}
-        self.log_metrics(metrics)
+        metrics = {"eval_loss": eval_loss}        self.log_metrics(metrics)
         
-        if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss
-        self.save_checkpoint(is_best=True)
+        if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss        self.save_checkpoint(is_best=True)
         
         return metrics
         
-                def save_checkpoint(self, is_best: boo, l = False) -> None:            """Save a model checkpoint."""
-checkpoint_name = f"checkpoint-{self._step}"
+                def save_checkpoint(self, is_best: boo, l = False) -> None:            """Save a model checkpoint."""checkpoint_name = f"checkpoint-{self._step}"
 if is_best: checkpoint_name = "best_model"
-
     torch.save({
     "model_state_dict": self.model.state_dict(),
     "optimizer_state_dict": self.optimizer.state_dict(),
@@ -428,21 +365,17 @@ if is_best: checkpoint_name = "best_model"
     f"{self.output_dir}/{checkpoint_name}.pt")
     logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-def log_metrics(self, metrics: Dict, [str, float]) -> None:    """Log training metrics."""
-                metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
-                logger.info(f"Step {self._step}: {metric_str}")
+def log_metrics(self, metrics: Dict, [str, float]) -> None:    """Log training metrics."""                metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())                logger.info(f"Step {self._step}: {metric_str}")
 """,
     }
 
 
-def main(self):    """Fix black formatting issues in problematic files."""
-        for file_path, content in fixes.items():
+def main(self):    """Fix black formatting issues in problematic files."""        for file_path, content in fixes.items():
         full_path = os.path.join(os.getcwd(), file_path)
         if os.path.exists(full_path):
         fix_file(full_path, content)
         else: print(f"File not found: {file_path}")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

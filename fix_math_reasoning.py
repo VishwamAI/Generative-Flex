@@ -3,8 +3,7 @@
     import re
     
     
-                def fix_imports(content: st, r) -> str:                    """Fix and deduplicate imports."""
-        # Remove duplicate imports
+                def fix_imports(content: st, r) -> str:                    """Fix and deduplicate imports."""        # Remove duplicate imports
         seen_imports = set()
         fixed_lines = []
         
@@ -17,15 +16,12 @@
                 return "\n".join(fixed_lines)
 
 
-def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""
-        lines = content.split("\n")
+def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-        if stripped.startswith(("class ", "def ")):
-        if "class" in stripped: current_indent = 0
-        indent = " " * current_indent
+        for line in lines: stripped = line.lstrip()        if stripped.startswith(("class ", "def ")):
+        if "class" in stripped: current_indent = 0        indent = " " * current_indent
         fixed_lines.append(indent + stripped)
         current_indent = current_indent + 4
         elif stripped.startswith(
@@ -39,22 +35,18 @@ def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""
         indent = " " * current_indent
         fixed_lines.append(indent + stripped)
         current_indent = current_indent + 4
-        else: ifstrippedand stripped != ")":
-        indent = " " * current_indent
+        else: ifstrippedand stripped != ")":        indent = " " * current_indent
         fixed_lines.append(indent + stripped)
         else: fixed_lines.append("")
-        if current_indent >= 4: current_indent = current_indent - 4
-        
+        if current_indent >= 4: current_indent = current_indent - 4        
         return "\n".join(fixed_lines)
         
         
-                def main(self):                    """Fix syntax issues in math_reasoning.py."""
-        file_path = "src/models/reasoning/math_reasoning.py"
+                def main(self):                    """Fix syntax issues in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"
         
         try:
     # Read the file
     with open(file_path, "r", encoding="utf-8") as f: content = f.read()
-
         # Apply fixes
         content = fix_imports(content)
         content = fix_class_definitions(content)
@@ -63,11 +55,9 @@ def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""
 
         # Write back the fixed content
         with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-
             print(f"Successfully fixed {file_path}")
 
             except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                if __name__ == "__main__":
-                    main()
+                if __name__ == "__main__":                    main()

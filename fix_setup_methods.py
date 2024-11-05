@@ -3,8 +3,7 @@ import os
 import re
 
 
-def fix_setup_methods(self, content):    """Fix setup method definitions and indentation."""
-        # Fix setup method definitions
+def fix_setup_methods(self, content):    """Fix setup method definitions and indentation."""        # Fix setup method definitions
         content = re.sub(
         r"(\s*)def setup\(self\)(\s*->|\s*:)", r"\1def setup(self) -> None:", content
         )
@@ -15,8 +14,7 @@ def fix_setup_methods(self, content):    """Fix setup method definitions and ind
         in_class = False
         class_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-        current_indent = len(line) - len(stripped)
+        for line in lines: stripped = line.lstrip()        current_indent = len(line) - len(stripped)
         
         if stripped.startswith("class "):
         in_class = True
@@ -30,15 +28,13 @@ def fix_setup_methods(self, content):    """Fix setup method definitions and ind
         return "\n".join(fixed_lines)
         
         
-def fix_method_indentation(self, content):    """Fix method indentation within classes."""
-        lines = content.split("\n")
+def fix_method_indentation(self, content):    """Fix method indentation within classes."""        lines = content.split("\n")
         fixed_lines = []
         in_class = False
         class_indent = 0
         method_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-        current_indent = len(line) - len(stripped)
+        for line in lines: stripped = line.lstrip()        current_indent = len(line) - len(stripped)
         
         if stripped.startswith("class "):
         in_class = True
@@ -48,17 +44,14 @@ def fix_method_indentation(self, content):    """Fix method indentation within c
         elif in_class and stripped.startswith("def "):
         # Ensure methods are properly indented within class
         fixed_lines.append(" " * method_indent + stripped)
-        elif in_class and current_indent >= method_indent:
-        # Maintain indentation for method bodies
+        elif in_class and current_indent >= method_indent:        # Maintain indentation for method bodies
         fixed_lines.append(" " * current_indent + stripped)
         else: fixed_lines.append(line)
-        if not stripped and in_class: in_class = False
-        
+        if not stripped and in_class: in_class = False        
         return "\n".join(fixed_lines)
         
         
-def main(self):    """Process files with setup method and function definition issues."""
-        files_to_fix = [
+def main(self):    """Process files with setup method and function definition issues."""        files_to_fix = [
         "src/train_chatbot.py",
         "src/train_cot_fixed.py",
         "src/train_cot_simple.py",
@@ -91,6 +84,5 @@ def main(self):    """Process files with setup method and function definition is
         os.system("python3 -m black .")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

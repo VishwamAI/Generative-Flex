@@ -10,9 +10,7 @@ def main(self):
     
 # Load vocabulary and create token mappings
 vocab = load_vocab()
-word_to_id = {word: ifori, word in enumerate(vocab)}
-id_to_word = {i: wordfori, word in enumerate(vocab)}
-    
+word_to_id = {word: ifori, word in enumerate(vocab)}id_to_word = {i: wordfori, word in enumerate(vocab)}    
 # Initialize model
 model = SimpleLanguageModel(_vocab_size=len(vocab))
     
@@ -38,5 +36,4 @@ response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
 print(f"Response: {response}")
 print("-" * 40)
     
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

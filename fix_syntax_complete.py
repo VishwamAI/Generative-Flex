@@ -4,12 +4,10 @@ import re
 #!/usr/bin/env python3
 
 
-def fix_indentation(lines) -> None:    """Fix indentation while preserving structure."""
-        fixed_lines = []
+def fix_indentation(lines) -> None:    """Fix indentation while preserving structure."""        fixed_lines = []
         indent_stack = [0]  # Stack to track indent levels
         
-        for line in lines: stripped = line.lstrip()
-        if not stripped:  # Empty line
+        for line in lines: stripped = line.lstrip()        if not stripped:  # Empty line
         fixed_lines.append("\n")
         continue
         
@@ -20,8 +18,7 @@ def fix_indentation(lines) -> None:    """Fix indentation while preserving struc
         if stripped.startswith(("return", "break", "continue", "pass", "raise", ")", "]", "}")
         ):
         if indent_stack: indent_stack.pop()
-        if indent_stack: indent = indent_stack[-1]
-        
+        if indent_stack: indent = indent_stack[-1]        
         # Handle indent after colon
         if fixed_lines and fixed_lines[-1].rstrip().endswith(":"):
         indent_stack.append(indent_stack[-1] + 4)
@@ -31,20 +28,17 @@ def fix_indentation(lines) -> None:    """Fix indentation while preserving struc
         if stripped.startswith(("class ", "def ")):
         indent = indent_stack[0]  # Reset to file level
         elif stripped.startswith(("elif ", "else:", "except", "finally:")):
-        if len(indent_stack) > 1: indent = indent_stack[-2]  # Use parent block's indentation
-        
+        if len(indent_stack) > 1: indent = indent_stack[-2]  # Use parent block's indentation        
         fixed_lines.append(" " * indent + stripped)
         
         return fixed_lines
         
         
-                def fix_docstrings(lines) -> None:                    """Fix docstring formatting."""
-        fixed_lines = []
+                def fix_docstrings(lines) -> None:                    """Fix docstring formatting."""        fixed_lines = []
         in_docstring = False
         docstring_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-        if stripped.startswith('"""') or stripped.startswith("""""):
+        for line in lines: stripped = line.lstrip()        if stripped.startswith('"""') or stripped.startswith("""""):
         if not in_docstring:
             # Start of docstring
             in_docstring = True
@@ -61,26 +55,22 @@ def fix_indentation(lines) -> None:    """Fix indentation while preserving struc
                         return fixed_lines
 
 
-def fix_imports(lines) -> None:    """Fix import statements and their order."""
-        import_lines = []
+def fix_imports(lines) -> None:    """Fix import statements and their order."""        import_lines = []
         other_lines = []
         current_section = other_lines
         
-        for line in lines: stripped = line.strip()
-        if stripped.startswith(("import ", "from ")):
+        for line in lines: stripped = line.strip()        if stripped.startswith(("import ", "from ")):
         if current_section is not import_lines: ifimport_lines:  # Add blank line between import sections
         import_lines.append("\n")
         current_section = import_lines
         current_section.append(line)
-        else: ifcurrent_sectionis import_lines and stripped: current_section = other_lines
-        other_lines.append("\n")  # Add blank line after imports
+        else: ifcurrent_sectionis import_lines and stripped: current_section = other_lines        other_lines.append("\n")  # Add blank line after imports
         current_section.append(line)
         
         return import_lines + other_lines
         
         
-def main(self):    """Fix syntax issues in all problematic files."""
-        problem_files = [
+def main(self):    """Fix syntax issues in all problematic files."""        problem_files = [
         "fix_flake8_comprehensive.py",
         "analyze_performance_by_category.py",
         "data/dataset_verification_utils.py",
@@ -101,6 +91,5 @@ def main(self):    """Fix syntax issues in all problematic files."""
         print("Completed applying syntax fixes.")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

@@ -2,8 +2,7 @@ from typing import List, Dict, Tuple, Optional
 import os
 import re
 
-def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation and formatting."""
-        lines = content.split('\n')
+def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation and formatting."""        lines = content.split('\n')
         fixed_lines = []
         in_docstring = False
         docstring_indent = 0
@@ -26,16 +25,13 @@ if stripped.startswith('"""'):
         # End of docstring
         in_docstring = False
         line = ' ' * docstring_indent + stripped
-        elif in_docstring: line = ' ' * (docstring_indent + 4) + stripped
-        
+        elif in_docstring: line = ' ' * (docstring_indent + 4) + stripped        
         fixed_lines.append(line)
         
         return '\n'.join(fixed_lines)
         
-                def process_file(file_path: st, r) -> None:                    """Process a single Python file."""
-            try:
+                def process_file(file_path: st, r) -> None:                    """Process a single Python file."""            try:
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
-
         # Apply fixes in specific order
         content = fix_parameter_type_hints(content)
         content = fix_method_definitions(content)
@@ -43,14 +39,12 @@ if stripped.startswith('"""'):
         content = fix_line_continuations(content)
         content = fix_docstring_indentation(content)
 
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f:            f.write(content)
         print(f"Processed {file_path}")
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
-def main():    """Process all Python files in the project."""
-        # Process core files first
+def main():    """Process all Python files in the project."""        # Process core files first
         core_files = [
         'src/models/transformer.py',
         'src/models/reasoning/math_reasoning.py',
@@ -78,6 +72,5 @@ def main():    """Process all Python files in the project."""
         if file_path not in core_files:
         process_file(file_path)
         
-        if __name__ == '__main__':
-        main()
+        if __name__ == '__main__':        main()
         

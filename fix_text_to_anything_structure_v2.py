@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""
-        # Split content into sections
+def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""        # Split content into sections
         lines = content.split("\n")
         
         # Prepare the fixed content sections
@@ -62,8 +61,7 @@ def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.
         in_class = False
         current_class = []
         
-        for line in lines: ifline.startswith("class ") and "TextTokenizer" in line: in_class = True
-        current_class = [line]
+        for line in lines: ifline.startswith("class ") and "TextTokenizer" in line: in_class = True        current_class = [line]
         elif line.startswith("class ") and "GenerationConfig" not in line: ifcurrent_class: remaining_classes.extend(current_class)
         current_class = []
         in_class = True
@@ -96,9 +94,7 @@ def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.
         return "\n".join(result)
         
         
-                def main(self):                # Read the original file
-            with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-                
+                def main(self):                # Read the original file            with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
                 # Fix the content
                 fixed_content = fix_file_content(content)
                 
@@ -108,6 +104,5 @@ def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.
                 print("Structural fixes applied to text_to_anything.py")
                 
                 
-            if __name__ == "__main__": 
-        main()
+            if __name__ == "__main__":        main()
         

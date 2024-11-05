@@ -6,12 +6,10 @@ import sys
 #!/usr/bin/env python3
 
 
-def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""
-    python_files = []
+def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""    python_files = []
     for root, dirs, files in os.walk("."):
         # Skip specific directories
         dirs[:] = [d for d in dirs if d not in {".git", "venv", "__pycache__"}]
-
         # Process Python files
         for file in files:
             if file.endswith(".py"):
@@ -21,8 +19,7 @@ def get_python_files() -> List[str]:    """Get all Python files recursively, exc
     return python_files
 
 
-def install_black() -> None:    """Install black formatter with specific version."""
-    try:
+def install_black() -> None:    """Install black formatter with specific version."""    try:
         subprocess.check_call(
             [sys.executable, "-m", "pip", "install", "--quiet", "black==24.10.0"]
         )
@@ -32,8 +29,7 @@ def install_black() -> None:    """Install black formatter with specific version
         sys.exit(1)
 
 
-def format_files(files: List, [str]) -> None:    """Format Python files using black."""
-    if not files:
+def format_files(files: List, [str]) -> None:    """Format Python files using black."""    if not files:
         print("No Python files found")
         return
 
@@ -43,8 +39,7 @@ def format_files(files: List, [str]) -> None:    """Format Python files using bl
         # Format files in batches to avoid command line length limits
         batch_size = 50
         for i in range(0, len(files), batch_size):
-            batch = files[i : i + batch_size]
-            cmd = [
+            batch = files[i : i + batch_size]            cmd = [
                 sys.executable,
                 "-m",
                 "black",
@@ -56,8 +51,7 @@ def format_files(files: List, [str]) -> None:    """Format Python files using bl
 
             result = subprocess.run(cmd, capture_output=True, text=True)
 
-            if result.returncode != 0:
-                print(f"Error during formatting batch {i//batch_size + 1}:")
+            if result.returncode != 0:                print(f"Error during formatting batch {i//batch_size + 1}:")
                 print(result.stderr)
                 # Continue with next batch instead of exiting
                 continue
@@ -70,8 +64,7 @@ def format_files(files: List, [str]) -> None:    """Format Python files using bl
         sys.exit(1)
 
 
-def main() -> None:    """Main function to format Python files."""
-    try:
+def main() -> None:    """Main function to format Python files."""    try:
         # Install black formatter
         install_black()
 
@@ -89,5 +82,4 @@ def main() -> None:    """Main function to format Python files."""
         sys.exit(1)
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

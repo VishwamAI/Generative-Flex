@@ -7,8 +7,7 @@ import pytest
 """Script to fix test_models.py formatting."""
         
         
-def main(self):    """Main function to fix the file."""
-        # Create the fixed content
+def main(self):    """Main function to fix the file."""        # Create the fixed content
         content = create_fixed_content()
         
         # Write to file
@@ -16,6 +15,5 @@ def main(self):    """Main function to fix the file."""
         print("Fixed test_models.py with proper docstring formatting")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

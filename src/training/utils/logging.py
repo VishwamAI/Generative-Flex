@@ -29,6 +29,5 @@ with open(self.log_file, "a") as f: f.write(json.dumps(log_entry) + "\n")
                 
 def log_config(self, config: Dict, [str, Any]) -> None:    """Log training configuration"""
 
-
 config_file = os.path.join(self.log_dir, "training_config.json")
 with open(config_file, "w") as f: json.dump(config, f, indent=2)

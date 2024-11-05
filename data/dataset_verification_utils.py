@@ -32,8 +32,7 @@ pass
 
 
 @contextlib.contextmanager
-                def categorize_error(self, error: Exceptio, n) -> str:                    """Categorize the type of error encountered during dataset verification."""
-        error_str = str(error)
+                def categorize_error(self, error: Exceptio, n) -> str:                    """Categorize the type of error encountered during dataset verification."""        error_str = str(error)
         
         if isinstance(error, TimeoutException):
     return "timeout"
@@ -47,23 +46,13 @@ pass
                             else: return"other"
 
 
-def try_load_dataset(self):    dataset_id: str,
-        config: Optional[str] = None,
-        streaming: bool = False,
-        trust_remote_code: bool = False,
-        cache_dir: Optional[str] = None,
-        token: Optional[str] = None,
-        timeout_seconds: int = 300) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
-    """Try to load a dataset with specific configuration and timeout."""
+def try_load_dataset(self):    dataset_id: str,        config: Optional[str] = None,        streaming: bool = False,        trust_remote_code: bool = False,        cache_dir: Optional[str] = None,        token: Optional[str] = None,        timeout_seconds: int = 300) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:    """Try to load a dataset with specific configuration and timeout."""
                 try: withtimeout(timeout_seconds):
                 kwargs = {
                 "streaming": streaming,
                 "trust_remote_code": trust_remote_code,
                 }
-                if config: kwargs["name"] = config
-                if cache_dir: kwargs["cache_dir"]= cache_dir
-                if token: kwargs["token"]= token
-                
+                if config: kwargs["name"] = config                if cache_dir: kwargs["cache_dir"]= cache_dir                if token: kwargs["token"]= token                
                 dataset = load_dataset(dataset_id, **kwargs)
                 
                 # Get available splits
@@ -72,8 +61,7 @@ def try_load_dataset(self):    dataset_id: str,
                 # Try to get features from first available split if train is not available
                 features = None
                 test_split = None
-                if splits: first_split = splits[0]
-                features = str(dataset[first_split].features)
+                if splits: first_split = splits[0]                features = str(dataset[first_split].features)
                 test_split = first_split
                 
                 info = {
@@ -99,65 +87,38 @@ def try_load_dataset(self):    dataset_id: str,
                 except: passreturnFalse, e, None
                 
                 
-                                def format_verification_result(self, result: Dict, [str, Any]) -> str:                                    """Format the verification result for logging."""
-                status = result.get("status", "unknown")
+                                def format_verification_result(self, result: Dict, [str, Any]) -> str:                                    """Format the verification result for logging."""                status = result.get("status", "unknown")
                 configs = result.get("configs", {})
                 error = result.get("error")
                 attempts = result.get("attempts", [])
                 
-                formatted = f"Status: {status}\n"
-                
-                if configs: formatted+= "Configurations:\n"
-                    for config, config_status in configs.items():
+                formatted = f"Status: {status}\n"                
+                if configs: formatted+= "Configurations:\n"                    for config, config_status in configs.items():
         formatted += f"  - {config}: {config_status}\n"
+        if attempts: formatted+= "\nVerification Attempts:\n"            for attempt in attempts: formatted+= f"  Strategy: {attempt['strategy']}\n"                formatted += f"  Config: {attempt['config']}\n"                formatted += f"  Success: {attempt['success']}\n"                if attempt.get("error"):
+                    formatted += f"  Error: {attempt['error']}\n"                    formatted += f"  Error Category: {attempt['error_category']}\n"                    formatted += "\n"
 
-        if attempts: formatted+= "\nVerification Attempts:\n"
-            for attempt in attempts: formatted+= f"  Strategy: {attempt['strategy']}\n"
-                formatted += f"  Config: {attempt['config']}\n"
-                formatted += f"  Success: {attempt['success']}\n"
-                if attempt.get("error"):
-                    formatted += f"  Error: {attempt['error']}\n"
-                    formatted += f"  Error Category: {attempt['error_category']}\n"
-                    formatted += "\n"
-
-                    if error: formatted+= f"\nFinal Error: {error}\n"
-                        formatted += f"Error Category: {categorize_error(Exception(error))}\n"
-
+                    if error: formatted+= f"\nFinal Error: {error}\n"                        formatted += f"Error Category: {categorize_error(Exception(error))}\n"
                         return formatted
 
 
-def log_verification_attempt(self):    logger: logging.Logger,
-        dataset_id: str,
+def log_verification_attempt(self):    logger: logging.Logger,        dataset_id: str,
         attempt_type: str,
-        config: Optional[str] = None,
-        error: Optional[Exception] = None,
-        success: bool = False,
-        info: Optional[Dict[str, Any]] = None) -> None:
-    """Log a verification attempt with detailed information."""
-                config_str = f" (config: {config})" if config else ""
-                if success: logger.info(f"Successfully verified {dataset_id}{config_str} using {attempt_type}")
+        config: Optional[str] = None,        error: Optional[Exception] = None,        success: bool = False,        info: Optional[Dict[str, Any]] = None) -> None:    """Log a verification attempt with detailed information."""
+                config_str = f" (config: {config})" if config else ""                if success: logger.info(f"Successfully verified {dataset_id}{config_str} using {attempt_type}")
                 if info: logger.info(f"Dataset info: {info}")
-                else: error_category = categorize_error(error) if error else "unknown"
-                error_msg = str(error) if error else "No error message"
+                else: error_category = categorize_error(error) if error else "unknown"                error_msg = str(error) if error else "No error message"
                 logger.error(f"Failed to verify {dataset_id}{config_str} using {attempt_type}")
                 logger.error(f"Error category: {error_category}")
                 logger.error(f"Error details: {error_msg}")
                 
                 
-def cleanup_memory(self):    """Perform aggressive memory cleanup."""
-        gc.collect()
+def cleanup_memory(self):    """Perform aggressive memory cleanup."""        gc.collect()
         try: iftorch.cuda.is_available():
         torch.cuda.empty_cache()
         except ImportError: passdefload_dataset_in_chunks(self):
         dataset_id: str,
-        split: str = "train",
-        chunk_size: int = 50,
-        max_chunks: Optional[int] = None,
-        streaming: bool = True,
-        config: Optional[str] = None,
-        token: Optional[str] = None,
-        memory_threshold: float = 80.0) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
-    """Load and verify a dataset in chunks to manage memory usage."""
+        split: str = "train",        chunk_size: int = 50,        max_chunks: Optional[int] = None,        streaming: bool = True,        config: Optional[str] = None,        token: Optional[str] = None,        memory_threshold: float = 80.0) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:    """Load and verify a dataset in chunks to manage memory usage."""
     try:
         # Initialize tracking variables
         chunks_processed = 0
@@ -195,8 +156,7 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
             file_url = hf_hub_url(repo_id=dataset_id, filename=filename, repo_type="dataset")
 
             # Get file size
-            headers = {"Authorization": f"Bearer {token}"} if token else {}
-            head_response = requests.head(file_url, headers=headers, allow_redirects=True)
+            headers = {"Authorization": f"Bearer {token}"} if token else {}            head_response = requests.head(file_url, headers=headers, allow_redirects=True)
             file_size = int(head_response.headers.get("content-length", 0))
             logging.info(f"File size: {file_size / (1024*1024):.2f} MB")
 
@@ -207,8 +167,7 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
             while start_byte < file_size:
                 # Download chunk with retries
                 end_byte = min(start_byte + download_chunk_size - 1, file_size - 1)
-                range_header = {"Range": f"bytes={start_byte}-{end_byte}"}
-                headers.update(range_header)
+                range_header = {"Range": f"bytes={start_byte}-{end_byte}"}                headers.update(range_header)
 
                 retry_count = 0
                 chunk_data = None
@@ -218,14 +177,12 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
                         )
                         response = requests.get(file_url, headers=headers, stream=True, timeout=30)
 
-                        if response.status_code == 206:  # Partial Content
-                        chunk_data = response.content.decode("utf-8")
+                        if response.status_code == 206:  # Partial Content                        chunk_data = response.content.decode("utf-8")
                         else: logging.warning(f"Unexpected status code: {response.status_code}")
                             retry_count += 1
                             except Exception as download_error: logging.warning(f"Download error: {str(download_error)}")
                                 retry_count += 1
                                 if retry_count >= max_retries: raiseException(f"Failed to download chunk after {max_retries} retries")
-
                                     info["download_retries"] += retry_count
                                     info["bytes_processed"] = start_byte
 
@@ -236,16 +193,13 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
                                     # Save last partial line for next chunk
                                     partial_line = lines[-1] if not chunk_data.endswith("\n") else ""
                                     lines = lines[:-1] if not chunk_data.endswith("\n") else lines
-
                                     # Process complete lines
                                     for line in lines: ifnotline.strip():
                                             continue
 
-                                            try: obj = json.loads(line)
-                                                line_buffer.append(obj)
+                                            try: obj = json.loads(line)                                                line_buffer.append(obj)
 
-                                                if len(line_buffer) >= chunk_size: total_examples+= len(line_buffer)
-                                                    chunks_processed += 1
+                                                if len(line_buffer) >= chunk_size: total_examples+= len(line_buffer)                                                    chunks_processed += 1
                                                     cleanup_counter += 1
                                                     logging.debug(f"Processed chunk {chunks_processed} ({total_examples} examples)"
                                                     )
@@ -253,8 +207,7 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
 
                                                     current_memory = get_memory_usage()
                                                     if(current_memory > memory_threshold
-                                                    or cleanup_counter >= 3):
-                                                        cleanup_memory()
+                                                    or cleanup_counter >= 3):                                                        cleanup_memory()
                                                         cleanup_counter = 0
                                                         info["memory_cleanups"] += 1
 
@@ -265,9 +218,7 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
                                                         )
 
                                                         if max_chunks and chunks_processed >= max_chunks: returnTrue, None, info
-
-                                                            except json.JSONDecodeError as je: error_count+= 1
-                                                                info["parse_errors"] += 1
+                                                            except json.JSONDecodeError as je: error_count+= 1                                                                info["parse_errors"] += 1
                                                                 logging.warning(f"JSON parse error: {str(je)[:100]}...")
                                                                 if error_count > chunks_processed * 0.1:  # Allow 10% error rate
                                                                 raise Exception(f"Too many JSON parse errors: {error_count}/{chunks_processed}")
@@ -279,10 +230,7 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
                                                                     # Only fall back for network-related errors
                                                                     logging.warning(f"Network error, falling back to datasets library: {str(re)}"
                                                                     )
-                                                                    kwargs = {"streaming": True, "split": split}
-                                                                    if config: kwargs["name"] = config
-                                                                        if token: kwargs["token"]= token
-
+                                                                    kwargs = {"streaming": True, "split": split}                                                                    if config: kwargs["name"] = config                                                                        if token: kwargs["token"]= token
                                                                             dataset = load_dataset(dataset_id, **kwargs)
                                                                             info.update({
                                                                             "splits": (
@@ -295,32 +243,27 @@ def cleanup_memory(self):    """Perform aggressive memory cleanup."""
                                                                             }
                                                                             )
 
-                                                                            for batch in dataset.iter(batch_size=chunk_size):
-                                                                                try: current_memory = get_memory_usage()
-                                                                                    if current_memory > memory_threshold: cleanup_memory()
+                                                                            for batch in dataset.iter(batch_size=chunk_size):                                                                                try: current_memory = get_memory_usage()                                                                                    if current_memory > memory_threshold: cleanup_memory()
                                                                                         info["memory_cleanups"] += 1
 
                                                                                         total_examples += len(batch)
                                                                                         chunks_processed += 1
                                                                                         cleanup_counter += 1
 
-                                                                                        if cleanup_counter >= 3: cleanup_memory()
-                                                                                            cleanup_counter = 0
+                                                                                        if cleanup_counter >= 3: cleanup_memory()                                                                                            cleanup_counter = 0
                                                                                             info["memory_cleanups"] += 1
 
                                                                                             info.update({
                                                                                             "chunks_processed": chunks_processed, "total_examples": total_examples, "error_count": error_count, "last_memory_usage": current_memory, })
 
-                                                                                            if max_chunks and chunks_processed >= max_chunks: breakexceptException as chunk_error: error_count+= 1
-                                                                                                    info["error_count"] = error_count
+                                                                                            if max_chunks and chunks_processed >= max_chunks: breakexceptException as chunk_error: error_count+= 1                                                                                                    info["error_count"] = error_count
                                                                                                     info["last_error"] = str(chunk_error)
 
                                                                                                     if error_count > chunks_processed * 0.1: raiseException(f"Too many chunk processing errors: {error_count}/{chunks_processed}")
 
                                                                                                         return True, None, info
 
-                                                                                                        except Exception as e: error_info = {
-                                                                                                            "error": str(e),
+                                                                                                        except Exception as e: error_info = {                                                                                                            "error": str(e),
                                                                                                             "error_category": categorize_error(e),
                                                                                                             "chunks_processed": chunks_processed,
                                                                                                             "total_examples": total_examples,

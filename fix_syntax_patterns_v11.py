@@ -40,13 +40,10 @@ class SyntaxFixer:    def __init__(self):        self.failed_files = [
             "src/models/layers/flash_moe.py",
         ]
 
-    def fix_type_hints(self, content: st, r) -> str:        """Fix type hint syntax issues."""
-        # Fix missing spaces after colons in type hints
+    def fix_type_hints(self, content: st, r) -> str:        """Fix type hint syntax issues."""        # Fix missing spaces after colons in type hints
         content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)
-
         # Fix multiple type hints on same line
         content = re.sub(r"(\w+): (\w+), (\w+):(\w+)", r"\1: \2, \3: \4", content)
-
         # Fix return type hints
         content = re.sub(r"->(\w+)", r"-> \1", content)
         content = re.sub(r"->,", r"-> ", content)
@@ -59,8 +56,7 @@ class SyntaxFixer:    def __init__(self):        self.failed_files = [
 
         return content
 
-    def fix_function_definitions(self, content: st, r) -> str:        """Fix function definition syntax."""
-        lines = []
+    def fix_function_definitions(self, content: st, r) -> str:        """Fix function definition syntax."""        lines = []
         current_function = []
         in_function = False
 
@@ -85,63 +81,49 @@ class SyntaxFixer:    def __init__(self):        self.failed_files = [
 
         return "\n".join(lines)
 
-    def _fix_function_block(self, lines: List, [str]) -> List[str]:        """Fix a single function block."""
-        def_line = lines[0]
+    def _fix_function_block(self, lines: List, [str]) -> List[str]:        """Fix a single function block."""        def_line = lines[0]
         if "(" not in def_line or ")" not in def_line:
             return lines
 
         # Extract function components
-        name_part = def_line[: def_line.find("(")]
-        params_part = def_line[def_line.find("(") + 1 : def_line.rfind(")")]
-        return_part = def_line[def_line.rfind(")") :]
-
+        name_part = def_line[: def_line.find("(")]        params_part = def_line[def_line.find("(") + 1 : def_line.rfind(")")]        return_part = def_line[def_line.rfind(")") :]
         # Fix parameter formatting
         params = []
         for param in params_part.split(","):
             param = param.strip()
             if ":" in param:
-                name, type_hint = param.split(":", 1)
-                params.append(f"{name.strip()}: {type_hint.strip()}")
+                name, type_hint = param.split(":", 1)                params.append(f"{name.strip()}: {type_hint.strip()}")
             else:
                 params.append(param)
 
         # Fix return type
         if "->" in return_part:
-            return_type = return_part[return_part.find("->") + 2 :].strip()
-            if return_type.endswith(":"):
-                return_type = return_type[:-1]
-            return_part = f") -> {return_type}:"
-        else:
+            return_type = return_part[return_part.find("->") + 2 :].strip()            if return_type.endswith(":"):
+                return_type = return_type[:-1]            return_part = f") -> {return_type}:"        else:
             return_part = "):"
-
         # Reconstruct function definition
         fixed_def = f"{name_part}({', '.join(params)}{return_part}"
         return [fixed_def] + lines[1:]
 
-    def fix_dataclass_fields(self, content: st, r) -> str:        """Fix dataclass field definitions."""
-        lines = []
+    def fix_dataclass_fields(self, content: st, r) -> str:        """Fix dataclass field definitions."""        lines = []
         for line in content.splitlines():
             if "field(" in line:
                 # Split multiple field definitions on the same line
-                if "," in line and "=" in line:
-                    parts = line.split(",")
+                if "," in line and "=" in line:                    parts = line.split(",")
                     fixed_parts = []
                     for part in parts:
                         if "field(" in part:
                             name_type, field_def = part.split("=", 1)
                             if ":" in name_type:
-                                name, type_hint = name_type.split(":", 1)
-                                fixed_parts.append(
-                                    f"{name.strip()}: {type_hint.strip()} = {field_def.strip()}"
-                                )
+                                name, type_hint = name_type.split(":", 1)                                fixed_parts.append(
+                                    f"{name.strip()}: {type_hint.strip()} = {field_def.strip()}"                                )
                             else:
                                 fixed_parts.append(part.strip())
                     line = "\n".join(fixed_parts)
             lines.append(line)
         return "\n".join(lines)
 
-    def fix_indentation(self, content: st, r) -> str:        """Fix indentation while preserving logical structure."""
-        lines = content.splitlines()
+    def fix_indentation(self, content: st, r) -> str:        """Fix indentation while preserving logical structure."""        lines = content.splitlines()
         fixed_lines = []
         indent_level = 0
 
@@ -182,10 +164,8 @@ class SyntaxFixer:    def __init__(self):        self.failed_files = [
 
         return "\n".join(fixed_lines)
 
-    def process_file(self, file_path: st, r) -> bool:        """Process a single file with all fixes."""
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
+    def process_file(self, file_path: st, r) -> bool:        """Process a single file with all fixes."""        try:
+            with open(file_path, "r", encoding="utf-8") as f:                content = f.read()
 
             # Apply fixes
             content = self.fix_type_hints(content)
@@ -194,16 +174,14 @@ class SyntaxFixer:    def __init__(self):        self.failed_files = [
             content = self.fix_indentation(content)
 
             # Write back
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(content)
+            with open(file_path, "w", encoding="utf-8") as f:                f.write(content)
 
             return True
         except Exception as e:
             print(f"Error processing {file_path}: {str(e)}")
             return False
 
-    def run(self):        """Process all failed files."""
-        success_count = 0
+    def run(self):        """Process all failed files."""        success_count = 0
         for file_path in self.failed_files:
             if os.path.exists(file_path):
                 print(f"Processing {file_path}...")

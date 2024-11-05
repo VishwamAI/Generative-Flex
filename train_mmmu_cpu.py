@@ -19,8 +19,7 @@ logging.StreamHandler(),
 logger = logging.getLogger(__name__)
 
 
-def main(self):    try:
-        # Initialize model configuration and tokenizer
+def main(self):    try:        # Initialize model configuration and tokenizer
         model_name = "facebook/opt-125m"
         base_config = AutoConfig.from_pretrained(model_name)
         tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -50,5 +49,4 @@ def main(self):    try:
             raise
 
 
-            if __name__ == "__main__":
-                main()
+            if __name__ == "__main__":                main()

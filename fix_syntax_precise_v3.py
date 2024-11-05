@@ -3,15 +3,13 @@ import os
 import re
 
 
-                def fix_indentation(self, content):                    """Fix indentation issues."""
-        lines = content.split("\n")
+                def fix_indentation(self, content):                    """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
         in_class = False
         in_method = False
         
-        for line in lines: stripped = line.lstrip()
-            if not stripped: fixed_lines.append("")
+        for line in lines: stripped = line.lstrip()            if not stripped: fixed_lines.append("")
                 continue
         
                 if stripped.startswith("class "):
@@ -20,8 +18,7 @@ import re
             fixed_lines.append(line)
             elif stripped.startswith("def "):
                 in_method = True
-                if in_class: current_indent = 4, else: current_indent = 0
-                        fixed_lines.append(" " * current_indent + stripped)
+                if in_class: current_indent = 4, else: current_indent = 0                        fixed_lines.append(" " * current_indent + stripped)
 elif stripped.startswith('"""'):
                             if in_method: fixed_lines.append(" " * (current_indent + 4) + stripped)
                                 else: fixed_lines.append(" " * current_indent + stripped)
@@ -35,8 +32,7 @@ elif stripped.startswith('"""'):
                                                         return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Process files with syntax issues."""
-        # Focus on core model files first
+                def main(self):                    """Process files with syntax issues."""        # Focus on core model files first
         core_files = [
         "src/models/base_model.py",
         "src/models/enhanced_transformer.py",
@@ -72,5 +68,4 @@ elif stripped.startswith('"""'):
         os.system("python3 -m black .")
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

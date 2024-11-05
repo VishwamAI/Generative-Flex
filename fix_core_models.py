@@ -3,14 +3,12 @@ import os
 import re
 
 
-                def fix_method_bodies(self, content):                    """Fix method bodies and their indentation."""
-        lines = content.split("\n")
+                def fix_method_bodies(self, content):                    """Fix method bodies and their indentation."""        lines = content.split("\n")
         fixed_lines = []
         in_method = False
         method_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-            current_indent = len(line) - len(stripped)
+        for line in lines: stripped = line.lstrip()            current_indent = len(line) - len(stripped)
         
             if stripped.startswith("def "):
         in_method = True
@@ -19,8 +17,7 @@ import re
         if "self" not in stripped and not stripped.startswith("def __init__()"):
             line = line.replace("def ", "def __init__(self, ")
             fixed_lines.append(line)
-            elif in_method and (not stripped or current_indent <= method_indent):
-                in_method = False
+            elif in_method and (not stripped or current_indent <= method_indent):                in_method = False
                 fixed_lines.append(line)
                 elif in_method:
                     # Ensure proper indentation for method body
@@ -30,23 +27,19 @@ import re
                         return "\n".join(fixed_lines)
 
 
-                def fix_docstrings_and_comments(self, content):                    """Fix docstrings and comments formatting."""
-        lines = content.split("\n")
+                def fix_docstrings_and_comments(self, content):                    """Fix docstrings and comments formatting."""        lines = content.split("\n")
         fixed_lines = []
         in_docstring = False
         docstring_indent = 0
         
-        for line in lines: stripped = line.lstrip()
-            current_indent = len(line) - len(stripped)
+        for line in lines: stripped = line.lstrip()            current_indent = len(line) - len(stripped)
         
-        if '"""' in stripped: ifnotin_docstring: in_docstring = True
-                    docstring_indent = current_indent
+        if '"""' in stripped: ifnotin_docstring: in_docstring = True                    docstring_indent = current_indent
         if not stripped.endswith('"""'):
                 # Multi-line docstring start
                 fixed_lines.append(line)
                 continue
-                else: in_docstring = False
-                    fixed_lines.append(line)
+                else: in_docstring = False                    fixed_lines.append(line)
                     elif in_docstring:
                         # Maintain docstring indentation
                         fixed_lines.append(" " * docstring_indent + stripped)
@@ -55,8 +48,7 @@ import re
                             return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Process core model files."""
-        core_files = [
+                def main(self):                    """Process core model files."""        core_files = [
         "src/models/base_model.py",
         "src/models/enhanced_transformer.py",
         "src/models/transformer.py",
@@ -82,5 +74,4 @@ import re
         os.system("python3 -m black .")
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

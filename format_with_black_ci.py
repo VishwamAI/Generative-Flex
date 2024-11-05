@@ -3,8 +3,7 @@ import subprocess
 import sys
 
 
-                def format_python_files(self):                    """Format all Python files using black with CI settings."""
-            # Get all Python files recursively
+                def format_python_files(self):                    """Format all Python files using black with CI settings."""            # Get all Python files recursively
             python_files = []
             for root, dirs, files in os.walk("."):
         # Skip .git directory
@@ -22,8 +21,7 @@ import sys
     print(f"Found {len(python_files)} Python files to format")
 
     # Format files using black
-    try: cmd = [
-            sys.executable,
+    try: cmd = [            sys.executable,
             "-m",
             "black",
             "--target-version",
@@ -38,8 +36,7 @@ import sys
         sys.exit(1)
 
 
-if __name__ == "__main__":
-    print("Installing black...")
+if __name__ == "__main__":    print("Installing black...")
     install_black()
     print("Formatting files...")
     format_python_files()

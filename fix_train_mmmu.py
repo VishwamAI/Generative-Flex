@@ -15,19 +15,15 @@ import time
         
         
                                 def log_metrics(metrics: Dict, [str, Any], step: in, t, prefix: st, r = "") -> None:                    """Log training metrics to console and file.
-
     Args: metrics: Dictionary of metrics to log
         step: Currenttrainingstep, prefix: Optionalprefixfor metric names
 """
                 log_str = f"Step {step}"
                 for name, value in metrics.items():
-                if prefix: name = f"{prefix}_{name}"
-                log_str += f", {name}: {value:.4f}"
-                logging.info(log_str)
+                if prefix: name = f"{prefix}_{name}"                log_str += f", {name}: {value:.4f}"                logging.info(log_str)
                 
                 
-                                def main(self):                                    """Main training function."""
-                # Setup
+                                def main(self):                                    """Main training function."""                # Setup
                 config = ModelConfig()
                 setup_logging()
                 
@@ -48,27 +44,22 @@ import time
 
     # Log training metrics
     if step % config.log_every == 0: log_metrics(metrics, step, prefix="train")
-
         # Evaluation
-        if step % config.eval_every == 0: eval_metrics = evaluate(state, eval_ds, config)
-            log_metrics(eval_metrics, step, prefix="eval")
+        if step % config.eval_every == 0: eval_metrics = evaluate(state, eval_ds, config)            log_metrics(eval_metrics, step, prefix="eval")
 
             # Save checkpoint
-            if step % config.save_every == 0: checkpoint_dir = os.path.join(config.output_dir, f"checkpoint_{step}")
-                state.save(checkpoint_dir)
+            if step % config.save_every == 0: checkpoint_dir = os.path.join(config.output_dir, f"checkpoint_{step}")                state.save(checkpoint_dir)
 
 
                 logging.info("Training complete!")
 
 
-                if __name__ == "__main__":
-                    main()
+                if __name__ == "__main__":                    main()
 """
                             return content
                             
                             
-                                                        def main(self):                                                            """Main function to fix the file."""
-                            # Create the fixed content
+                                                        def main(self):                                                            """Main function to fix the file."""                            # Create the fixed content
                             content = create_fixed_content()
                             
                             # Write to file
@@ -76,5 +67,4 @@ import time
                                 print("Fixed train_mmmu.py with proper docstring formatting")
                             
                             
-                                if __name__ == "__main__":
-        main()
+                                if __name__ == "__main__":        main()

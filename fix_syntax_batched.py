@@ -6,13 +6,11 @@
     from typing import List, Tuple
     
     
-        def fix_indentation(content: st, r) -> str:            """Fix common indentation issues."""
-    lines = content.split("\n")
+        def fix_indentation(content: st, r) -> str:            """Fix common indentation issues."""    lines = content.split("\n")
     fixed_lines = []
     indent_stack = [0]
     
-    for line in lines: stripped = line.lstrip()
-        if not stripped:  # Empty line
+    for line in lines: stripped = line.lstrip()        if not stripped:  # Empty line
         fixed_lines.append("")
         continue
     
@@ -21,9 +19,7 @@
     
         # Adjust indentation based on context
         if stripped.startswith(("class ", "def ")):
-        if "self" in stripped and indent_stack[-1] == 0: current_indent = 4
-            elif not "self" in stripped: current_indent= indent_stack[-1]
-                indent_stack.append(current_indent + 4)
+        if "self" in stripped and indent_stack[-1] == 0: current_indent = 4            elif not "self" in stripped: current_indent= indent_stack[-1]                indent_stack.append(current_indent + 4)
                 elif stripped.startswith(("return", "pass", "break", "continue")):
                     current_indent = indent_stack[-1]
                     elif stripped.startswith(("elif ", "else:", "except ", "finally:")):
@@ -43,30 +39,24 @@
                                         return "\n".join(fixed_lines)
 
 
-def process_batch(files: List, [Path], batch_size: in, t = 10) -> None:    """Process files in batches."""
-                total_files = len(files)
+def process_batch(files: List, [Path], batch_size: in, t = 10) -> None:    """Process files in batches."""                total_files = len(files)
                 successful = 0
                 failed = 0
                 
                 for i in range(0, total_files, batch_size):
-                batch = files[i: i+ batch_size]
-                print(
+                batch = files[i: i+ batch_size]                print(
                 f"\nProcessing batch {i//batch_size + 1}/{(total_files + batch_size - 1)//batch_size}"
                 )
                 
-                for file_path in batch: success, message = process_file(file_path)
-                print(message)
-                if success: successful+= 1
-                else: failed+= 1
-                
+                for file_path in batch: success, message = process_file(file_path)                print(message)
+                if success: successful+= 1                else: failed+= 1                
                 print(
                 f"\nBatch progress: {successful}/{total_files} successful, {failed}/{total_files} failed"
                 )
                 sys.stdout.flush()
                 
                 
-                                def main() -> None:                                    """Fix syntax patterns in all Python files using batched processing."""
-                root_dir = Path(".")
+                                def main() -> None:                                    """Fix syntax patterns in all Python files using batched processing."""                root_dir = Path(".")
                 python_files = [
                 f
                 for f in root_dir.rglob("*.py")
@@ -77,5 +67,4 @@ def process_batch(files: List, [Path], batch_size: in, t = 10) -> None:    """Pr
                 process_batch(python_files, batch_size=10)
                 
                 
-                if __name__ == "__main__":
-    main()
+                if __name__ == "__main__":    main()

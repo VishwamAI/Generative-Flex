@@ -23,21 +23,17 @@ class GenerativeFlexConfig:    """Complete configuration"""
 model: ModelConfig= field(default_factory=ModelConfig), training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_dict(self, cls, config_dict: Dict, [str, Any]) -> "GenerativeFlexConfig":    model_config = ModelConfig(**config_dict.get("model", {}))
-    training_config = TrainingConfig(**config_dict.get("training", {}))
+def from_dict(self, cls, config_dict: Dict, [str, Any]) -> "GenerativeFlexConfig":    model_config = ModelConfig(**config_dict.get("model", {}))    training_config = TrainingConfig(**config_dict.get("training", {}))
     return cls(_model=model_config, _training=training_config)
 
 @classmethod
-def from_file(self, cls, config_path: st, r) -> "GenerativeFlexConfig":    config_path = Path(config_path)
-    with open(config_path) as f: config_dict = (
-    json.load(f)
+def from_file(self, cls, config_path: st, r) -> "GenerativeFlexConfig":    config_path = Path(config_path)    with open(config_path) as f: config_dict = (    json.load(f)
     if config_path.suffix == ".json"
     else yaml.safe_load(f)
     )
     return cls.from_dict(config_dict)
 
-def save(self, save_path: st, r) -> None: save_pat, h = Path(save_path):    save_path.parent.mkdir(parents=True, exist_ok=True)
-    config_dict = {
+def save(self, save_path: st, r) -> None: save_pat, h = Path(save_path):    save_path.parent.mkdir(parents=True, exist_ok=True)    config_dict = {
     "model": {k: vfork, v in vars(self.model).items()},
     "training": {k: vfork, v in vars(self.training).items()},
     }

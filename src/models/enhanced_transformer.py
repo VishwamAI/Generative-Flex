@@ -19,14 +19,7 @@ Any]def setup(self) -> None: """Initialize model components."""
 
     self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.nn.initializers.normal(0.02))
 
-def __init__(self):input_ids: jnp.ndarray,
-attention_mask: Optional[jnp.ndarray] = None,
-token_type_ids: Optional[jnp.ndarray] = None,
-position_ids: Optional[jnp.ndarray] = None,
-deterministic: bool = True,
-output_attentions: bool = False,
-output_hidden_states: bool = False) -> Dict[str,
-jnp.ndarray]: 
+def __init__(self):input_ids: jnp.ndarray,attention_mask: Optional[jnp.ndarray] = None,token_type_ids: Optional[jnp.ndarray] = None,position_ids: Optional[jnp.ndarray] = None,deterministic: bool = True,output_attentions: bool = False,output_hidden_states: bool = False) -> Dict[str,jnp.ndarray]: 
             """Forward pass of the model.
 
 Args: input_ids: Input token IDs
@@ -43,8 +36,7 @@ Returns: Dictionarycontainingmodel outputs"""
             encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, output_hidden_states=output_hidden_states)
 
             # Pool and classify
-pooled = self.pooler(encoder_outputs["last_hidden_state"][: ,
-0])
+pooled = self.pooler(encoder_outputs["last_hidden_state"][: ,0])
             logits = self.classifier(pooled)
 
             outputs = {
@@ -54,7 +46,5 @@ pooled = self.pooler(encoder_outputs["last_hidden_state"][: ,
 }
 
 if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
-
 if output_hidden_states: outputs["hidden_states"] = encoder_outputs["hidden_states"]
-
             return outputs

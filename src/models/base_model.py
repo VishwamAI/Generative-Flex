@@ -15,11 +15,8 @@ class TransformerBlock(nn.Module):        """Basic Transformer block for reuse a
 
 hidden_size: intnum_heads: int,
 dropout_rate: float = 0.1
-
         @nn.compact
-def __call__(self,x,
-training: bool = False):
-            attention_output = nn.MultiHeadDotProductAttention(_num_heads=self.num_heads, _dropout_rate=self.dropout_rate)(x, x)
+def __call__(self,x,training: bool = False):            attention_output = nn.MultiHeadDotProductAttention(_num_heads=self.num_heads, _dropout_rate=self.dropout_rate)(x, x)
             x = nn.LayerNorm()(x + attention_output)
 
             # Feed-forward network
@@ -33,34 +30,26 @@ training: bool = False):
 class PositionalEncoding(nn.Module):            """Positional encoding for sequence models."""
 
 max_len: int,
-hidden_size: intdef setup(self) -> None: position = jnp.arange(self.max_len)[:,
-None]
+hidden_size: intdef setup(self) -> None: position = jnp.arange(self.max_len)[:,None]
             div_term = jnp.exp(jnp.arange(0, self.hidden_size, 2) * (-jnp.log(10000.0) / self.hidden_size)
             )
             pe = jnp.zeros((self.max_len, self.hidden_size))
-pe = pe.at[: ,
-0: :2].set(jnp.sin(position * div_term))
-pe = pe.at[: ,
-1: :2].set(jnp.cos(position * div_term))
+pe = pe.at[: ,0: :2].set(jnp.sin(position * div_term))
+pe = pe.at[: ,1: :2].set(jnp.cos(position * div_term))
 self.pe = pe[None,
 : ,
 : ]
 
-def __call__(self,x): 
-
+def __call__(self,x):
 
 class BaseLanguageModel(BaseModel):                    """Base class for language models."""
 
 vocab_size: int,
 hidden_size: intnum_layers: intnum_heads: intmax_sequence_length: int,
 dropout_rate: float = 0.1
+def __call__(self,x,training: bool = False):                        x = self.pos_encoding(x)
 
-def __call__(self,x,
-training: bool = False):
-                        x = self.pos_encoding(x)
-
-for block in self.transformer_blocks: x = block(x,
-training = training)
+for block in self.transformer_blocks: x = block(x,training = training)
 
                         return self.output(x)
 
@@ -70,23 +59,16 @@ class BaseImageModel(BaseModel):                        """Base class for image 
 image_size: Tuple[int,
 int]hidden_size: intnum_layers: intnum_heads: int,
 dropout_rate: float = 0.1
-
                         @abstractmethod
-def __call__(self,x,
-training: bool = False):
-                            """Base class for audio generation models."""
+def __call__(self,x,training: bool = False):                            """Base class for audio generation models."""
 
 sample_rate: int,
 hidden_size: intnum_layers: intnum_heads: int,
 dropout_rate: float = 0.1
-
                             @abstractmethod
-def __call__(self,x,
-training: bool = False):
-                                """Base class for video generation models."""
+def __call__(self,x,training: bool = False):                                """Base class for video generation models."""
 
 num_frames: intframe_size: Tuple[int,
 int]hidden_size: intnum_layers: intnum_heads: int,
 dropout_rate: float = 0.1
-
                                 @abstractmethod

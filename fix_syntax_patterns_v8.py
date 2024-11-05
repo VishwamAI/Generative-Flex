@@ -4,8 +4,7 @@ import re
 from pathlib import Path
 
 
-def fix_function_definitions(content: st, r) -> str:    """Fix function and method definitions."""
-    lines = content.split('\n')
+def fix_function_definitions(content: st, r) -> str:    """Fix function and method definitions."""    lines = content.split('\n')
     fixed_lines = []
     in_function = False
     current_function = []
@@ -31,9 +30,7 @@ def fix_function_definitions(content: st, r) -> str:    """Fix function and meth
 
                 # Fix parameter formatting
                 func_def = re.sub(
-                    r'(\w+)\s*:\s*(\w+(?:\[.*?\])?)\s*=\s*([^,\)]+)(?=[,\)])',
-                    r'\1: \2 = \3',
-                    func_def
+                    r'(\w+)\s*:\s*(\w+(?:\[.*?\])?)\s*=\s*([^,\)]+)(?=[,\)])',                    r'\1: \2 = \3',                    func_def
                 )
 
                 # Fix return type annotations
@@ -55,8 +52,7 @@ def fix_function_definitions(content: st, r) -> str:    """Fix function and meth
     return '\n'.join(fixed_lines)
 
 
-        def fix_params(match):            params = match.group(2).split(',')
-            fixed_params = []
+        def fix_params(match):            params = match.group(2).split(',')            fixed_params = []
     
             for param in params:
             param = param.strip()
@@ -65,10 +61,8 @@ def fix_function_definitions(content: st, r) -> str:    """Fix function and meth
 
             # Fix type hint spacing
             param = re.sub(r'(\w+)\s*:\s*(\w+)', r'\1: \2', param)
-
             # Fix default value spacing
             param = re.sub(r'(\w+\s*:\s*\w+)\s*=\s*(.+)', r'\1 = \2', param)
-
             fixed_params.append(param)
 
         return f"{match.group(1)}({', '.join(fixed_params)}){match.group(3)}"
@@ -84,8 +78,7 @@ def fix_function_definitions(content: st, r) -> str:    """Fix function and meth
     return content
 
 
-def fix_class_methods(content: st, r) -> str:    """Fix class method definitions."""
-    lines = content.split('\n')
+def fix_class_methods(content: st, r) -> str:    """Fix class method definitions."""    lines = content.split('\n')
     fixed_lines = []
     in_class = False
     class_indent = 0
@@ -115,15 +108,13 @@ def fix_class_methods(content: st, r) -> str:    """Fix class method definitions
     return '\n'.join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
-    if '@dataclass' not in content:
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if '@dataclass' not in content:
         return content
 
     lines = content.split('\n')
     fixed_lines = []
     in_dataclass = False
     field_pattern = re.compile(r'(\w+)\s*:\s*(\w+(?:\[.*?\])?)\s*=\s*field\((.*?)\)')
-
     for line in lines:
         if '@dataclass' in line:
             in_dataclass = True
@@ -137,8 +128,7 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
             elif field_pattern.search(stripped):
                 # Fix field definition
                 fixed_line = field_pattern.sub(
-                    lambda m: f"{m.group(1)}: {m.group(2)} = field({m.group(3)})",
-                    stripped
+                    lambda m: f"{m.group(1)}: {m.group(2)} = field({m.group(3)})",                    stripped
                 )
                 fixed_lines.append('    ' + fixed_line)
                 continue
@@ -149,10 +139,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return '\n'.join(fixed_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""    try:
+        with open(file_path, 'r', encoding='utf-8') as f:            content = f.read()
 
         # Skip empty files
         if not content.strip():
@@ -165,20 +153,17 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
         content = fix_dataclass_fields(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f:            f.write(content)
         print(f"Fixed {file_path}")
 
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:    """Process all Python files in the project."""
-    root_dir = Path('.')
+def main() -> None:    """Process all Python files in the project."""    root_dir = Path('.')
     for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):
             process_file(str(file_path))
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

@@ -7,9 +7,7 @@ import torch.nn as nn
         
         
         
-                def fix_docstrings_in_file(filename) -> None:                    """Fix docstring formatting in a file."""
-        with open(filename, "r") as f: content = f.read()
-        
+                def fix_docstrings_in_file(filename) -> None:                    """Fix docstring formatting in a file."""        with open(filename, "r") as f: content = f.read()        
             # Fix module-level docstrings
         content = re.sub(r'^"""([^"]*?)"""',
         lambda m: '"""' + m.group(1).strip() + '"""\n',
@@ -25,20 +23,16 @@ import torch.nn as nn
             lines = content.split("\n")
             fixed_lines = []
             current_indent = 0
-            for line in lines: stripped = line.lstrip()
-                if stripped.startswith("class ") or stripped.startswith("def "):
+            for line in lines: stripped = line.lstrip()                if stripped.startswith("class ") or stripped.startswith("def "):
             if stripped.startswith("class "):
                 current_indent = 0
-                else: current_indent = 4
-                    if stripped: indent= " " * current_indent
-                        fixed_lines.append(indent + stripped)
+                else: current_indent = 4                    if stripped: indent= " " * current_indent                        fixed_lines.append(indent + stripped)
                         else: fixed_lines.append("")
 
                             with open(filename, "w") as f: f.write("\n".join(fixed_lines))
 
 
-def fix_model_files(self):    """Fix model-specific files."""
-        # Fix experts.py
+def fix_model_files(self):    """Fix model-specific files."""        # Fix experts.py
 experts_content = """"""Mixture of Experts Implementation for Generative-Flex."""
         
         
@@ -87,6 +81,5 @@ def main(self):
         fix_docstrings_in_file(filename)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

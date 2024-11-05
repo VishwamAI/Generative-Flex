@@ -6,10 +6,8 @@ import ast
 from typing import List, Dict, Any, Optional
 
 
-def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""
-    # Remove extra spaces around colons in type hints
+def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""    # Remove extra spaces around colons in type hints
     content = re.sub(r"\s*:\s*(\w+)", r": \1", content)
-
     # Fix spaces around equals in default values
     content = re.sub(r"\s*=\s*", r" = ", content)
 
@@ -19,8 +17,7 @@ def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""
     return content
 
 
-def fix_function_def(content: st, r) -> str:    """Fix function definition syntax."""
-    lines = content.split("\n")
+def fix_function_def(content: st, r) -> str:    """Fix function definition syntax."""    lines = content.split("\n")
     fixed_lines = []
     in_def = False
     def_lines = []
@@ -59,8 +56,7 @@ def fix_function_def(content: st, r) -> str:    """Fix function definition synta
     return "\n".join(fixed_lines)
 
 
-def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [str]) -> str:    """Fix parameter list formatting."""
-    if not params:
+def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [str]) -> str:    """Fix parameter list formatting."""    if not params:
         if return_type:
             return f"def {func_name}() -> {return_type.strip()}:"
         return f"def {func_name}():"
@@ -73,14 +69,9 @@ def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [
             continue
 
         # Handle type hints and default values
-        if ":" in param and "=" in param:
-            name, rest = param.split(":", 1)
-            type_hint, default = rest.split("=", 1)
-            param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"
-        elif ":" in param:
-            name, type_hint = param.split(":", 1)
-            param = f"{name.strip()}: {type_hint.strip()}"
-
+        if ":" in param and "=" in param:            name, rest = param.split(":", 1)            type_hint, default = rest.split("=", 1)
+            param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"        elif ":" in param:
+            name, type_hint = param.split(":", 1)            param = f"{name.strip()}: {type_hint.strip()}"
         param_list.append(param)
 
     # Join parameters and add return type if present
@@ -90,8 +81,7 @@ def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [
     return f"def {func_name}({params_str}):"
 
 
-def fix_class_def(content: st, r) -> str:    """Fix class definition syntax."""
-    lines = content.split("\n")
+def fix_class_def(content: st, r) -> str:    """Fix class definition syntax."""    lines = content.split("\n")
     fixed_lines = []
     in_class = False
     class_indent = ""
@@ -103,16 +93,13 @@ def fix_class_def(content: st, r) -> str:    """Fix class definition syntax."""
             # Fix class definition line
             stripped = line.lstrip()
             if "(" in stripped and ")" in stripped:
-                class_name = stripped[6 : stripped.find("(")].strip()
-                parents = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()
-                if parents:
+                class_name = stripped[6 : stripped.find("(")].strip()                parents = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if parents:
                     parents = ", ".join(p.strip() for p in parents.split(","))
                     fixed_lines.append(f"{class_indent}class {class_name}({parents}):")
                 else:
                     fixed_lines.append(f"{class_indent}class {class_name}:")
             else:
-                class_name = stripped[6 : stripped.find(":")].strip()
-                fixed_lines.append(f"{class_indent}class {class_name}:")
+                class_name = stripped[6 : stripped.find(":")].strip()                fixed_lines.append(f"{class_indent}class {class_name}:")
             continue
 
         if in_class and line.strip() and not line.startswith(class_indent):
@@ -122,8 +109,7 @@ def fix_class_def(content: st, r) -> str:    """Fix class definition syntax."""
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
-    if "@dataclass" not in content:
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if "@dataclass" not in content:
         return content
 
     lines = content.split("\n")
@@ -151,15 +137,12 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
 
             # Fix field definition
             if ":" in stripped:
-                name, type_def = stripped.split(":", 1)
-                name = name.strip()
+                name, type_def = stripped.split(":", 1)                name = name.strip()
                 type_def = type_def.strip()
 
-                if "=" in type_def:
-                    type_hint, default = type_def.split("=", 1)
+                if "=" in type_def:                    type_hint, default = type_def.split("=", 1)
                     fixed_lines.append(
-                        f"{dataclass_indent}    {name}: {type_hint.strip()} = {default.strip()}"
-                    )
+                        f"{dataclass_indent}    {name}: {type_hint.strip()} = {default.strip()}"                    )
                 else:
                     fixed_lines.append(f"{dataclass_indent}    {name}: {type_def}")
             else:
@@ -170,10 +153,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return "\n".join(fixed_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying fixes one at a time."""
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
+def process_file(file_path: st, r) -> None:    """Process a single file applying fixes one at a time."""    try:
+        with open(file_path, "r", encoding="utf-8") as f:            content = f.read()
 
         # Skip empty files
         if not content.strip():
@@ -196,16 +177,14 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
                 continue
 
         # Write back only if all fixes were successful
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
+        with open(file_path, "w", encoding="utf-8") as f:            f.write(content)
         print(f"Successfully fixed {file_path}")
 
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:    """Process all Python files in the project."""
-    # Process core files first
+def main() -> None:    """Process all Python files in the project."""    # Process core files first
     core_files = [
         "src/config/config.py",
         "src/config/training_config.py",
@@ -232,5 +211,4 @@ def main() -> None:    """Process all Python files in the project."""
             process_file(str(file_path))
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

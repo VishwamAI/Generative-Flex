@@ -4,13 +4,11 @@ import re
         
         
         
-                def fix_indentation(content) -> None:                    """Fix indentation issues."""
-        lines = content.split("\n")
+                def fix_indentation(content) -> None:                    """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         
-        for line in lines: stripped = line.strip()
-        
+        for line in lines: stripped = line.strip()        
             # Adjust indent level based on content
             if stripped.startswith(("class ", "def ")):
         indent_level = 0 if stripped.startswith("class") else 1
@@ -32,8 +30,7 @@ import re
                             return "\n".join(fixed_lines)
 
 
-                def main(self):                    """Fix syntax errors in problematic files."""
-        problem_files = [
+                def main(self):                    """Fix syntax errors in problematic files."""        problem_files = [
         "src/models/multimodal/image_processor.py",
         "src/models/multimodal/base_transformer.py",
         "src/models/reasoning/mathematical_notation.py",
@@ -53,5 +50,4 @@ import re
         else: print(f"File not found: {file_path}")
 
 
-            if __name__ == "__main__":
-                main()
+            if __name__ == "__main__":                main()

@@ -15,8 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-                def analyze_problem_categories(dataset) -> None:                    """Analyze and categorize problems in the dataset"""
-        categories = defaultdict(list)
+                def analyze_problem_categories(dataset) -> None:                    """Analyze and categorize problems in the dataset"""        categories = defaultdict(list)
         
         try: foridxin range(len(dataset)):
         sample = dataset[idx]
@@ -36,7 +35,6 @@ logger = logging.getLogger(__name__)
                             elif "number" in category.lower() or "arithmetic" in category.lower():
                                 main_category = "Number Theory"
                                 else: main_category = "Other"
-
                                     categories[main_category].append(idx)
 
                                     return categories
@@ -45,8 +43,7 @@ logger = logging.getLogger(__name__)
                                         return None
 
 
-                def generate_performance_report(categories, results) -> None:                    """Generate a comprehensive performance report"""
-        if not results or not categories: logger.error("Missing results or categories data")
+                def generate_performance_report(categories, results) -> None:                    """Generate a comprehensive performance report"""        if not results or not categories: logger.error("Missing results or categories data")
             return
         
             report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -88,8 +85,7 @@ logger = logging.getLogger(__name__)
                     logger.info(f"Category distribution visualization saved to {viz_path}")
 
 
-def main(self):    """Main analysis function"""
-        # Load dataset
+def main(self):    """Main analysis function"""        # Load dataset
         dataset = load_mmmu_dataset()
         if not dataset: return# Analyze problem categories
         categories = analyze_problem_categories(dataset)
@@ -99,6 +95,5 @@ def main(self):    """Main analysis function"""
         generate_performance_report(categories, results)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

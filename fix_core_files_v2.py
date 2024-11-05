@@ -4,23 +4,19 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-def fix_type_hints_line(line: st, r) -> str:    """Fix type hints in a single line."""
-    # Fix multiple type hints on same line
+def fix_type_hints_line(line: st, r) -> str:    """Fix type hints in a single line."""    # Fix multiple type hints on same line
     if ":" in line:
         parts = []
         current = ""
         in_brackets = 0
 
         for char in line:
-            if char == "[":
-                in_brackets += 1
-            elif char == "]":
-                in_brackets -= 1
+            if char == "[":                in_brackets += 1
+            elif char == "]":                in_brackets -= 1
 
             current += char
 
-            if char == "," and in_brackets == 0:
-                parts.append(current.strip())
+            if char == "," and in_brackets == 0:                parts.append(current.strip())
                 current = ""
 
         if current:
@@ -29,8 +25,7 @@ def fix_type_hints_line(line: st, r) -> str:    """Fix type hints in a single li
         fixed_parts = []
         for part in parts:
             # Fix missing spaces after colons in type hints
-            part = re.sub(r"(\w+):(\w+)", r"\1: \2", part)
-            # Fix spaces around equals
+            part = re.sub(r"(\w+):(\w+)", r"\1: \2", part)            # Fix spaces around equals
             part = re.sub(r"\s*=\s*", r" = ", part)
             fixed_parts.append(part)
 
@@ -38,8 +33,7 @@ def fix_type_hints_line(line: st, r) -> str:    """Fix type hints in a single li
     return line
 
 
-def fix_function_definition(content: st, r) -> str:    """Fix function definition syntax."""
-    lines = content.splitlines()
+def fix_function_definition(content: st, r) -> str:    """Fix function definition syntax."""    lines = content.splitlines()
     fixed_lines = []
     in_function = False
     function_indent = 0
@@ -52,34 +46,29 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
             in_function = True
             function_indent = indent
             # Extract function components
-            match = re.match(r"def\s+(\w+)\s*\((.*?)\)\s*(?:->.*?)?\s*:", line)
-            if match:
+            match = re.match(r"def\s+(\w+)\s*\((.*?)\)\s*(?:->.*?)?\s*:", line)            if match:
                 name, params = match.groups()
                 # Fix parameter list
                 fixed_params = []
                 for param in params.split(","):
                     param = param.strip()
                     if ":" in param:
-                        pname, ptype = param.split(":", 1)
-                        fixed_params.append(f"{pname.strip()}: {ptype.strip()}")
+                        pname, ptype = param.split(":", 1)                        fixed_params.append(f"{pname.strip()}: {ptype.strip()}")
                     else:
                         fixed_params.append(param)
 
                 # Reconstruct function definition
-                fixed_line = " " * indent + f"def {name}({', '.join(fixed_params)}):"
-                fixed_lines.append(fixed_line)
+                fixed_line = " " * indent + f"def {name}({', '.join(fixed_params)}):"                fixed_lines.append(fixed_line)
                 continue
 
-        if in_function and indent <= function_indent:
-            in_function = False
+        if in_function and indent <= function_indent:            in_function = False
 
         fixed_lines.append(line)
 
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
-    lines = content.splitlines()
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    lines = content.splitlines()
     fixed_lines = []
     in_class = False
     class_indent = 0
@@ -91,13 +80,11 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
         if stripped.startswith("class "):
             in_class = True
             class_indent = indent
-        elif in_class and indent <= class_indent:
-            in_class = False
+        elif in_class and indent <= class_indent:            in_class = False
 
         if in_class and "field(" in line:
             # Split multiple field definitions
-            if "," in line and "=" in line:
-                fields = line.split(",")
+            if "," in line and "=" in line:                fields = line.split(",")
                 fixed_fields = []
                 current_indent = " " * indent
 
@@ -105,12 +92,10 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
                     field = field.strip()
                     if "field(" in field:
                         # Fix field definition format
-                        match = re.match(r"(\w+):(\w+)\s*=\s*field\((.*?)\)", field)
-                        if match:
+                        match = re.match(r"(\w+):(\w+)\s*=\s*field\((.*?)\)", field)                        if match:
                             name, type_hint, args = match.groups()
                             fixed_field = (
-                                f"{current_indent}{name}: {type_hint} = field({args})"
-                            )
+                                f"{current_indent}{name}: {type_hint} = field({args})"                            )
                             fixed_fields.append(fixed_field)
 
                 fixed_lines.extend(fixed_fields)
@@ -121,10 +106,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return "\n".join(fixed_lines)
 
 
-def fix_file(file_path: st, r) -> bool:    """Fix a single file."""
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
+def fix_file(file_path: st, r) -> bool:    """Fix a single file."""    try:
+        with open(file_path, "r", encoding="utf-8") as f:            content = f.read()
 
         # Apply fixes
         lines = content.splitlines()
@@ -140,8 +123,7 @@ def fix_file(file_path: st, r) -> bool:    """Fix a single file."""
         content = fix_dataclass_fields(content)
 
         # Write back
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
+        with open(file_path, "w", encoding="utf-8") as f:            f.write(content)
 
         return True
     except Exception as e:
@@ -149,8 +131,7 @@ def fix_file(file_path: st, r) -> bool:    """Fix a single file."""
         return False
 
 
-def main():    """Fix core configuration files first."""
-    core_files = [
+def main():    """Fix core configuration files first."""    core_files = [
         "src/config/config.py",
         "src/config/training_config.py",
         "src/models/text_to_anything.py",
@@ -171,10 +152,8 @@ def main():    """Fix core configuration files first."""
 
     print(f"\nFixed {success_count}/{len(core_files)} core files")
 
-    if success_count == len(core_files):
-        print("\nRunning black formatter...")
+    if success_count == len(core_files):        print("\nRunning black formatter...")
         os.system("python3 -m black .")
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":    main()

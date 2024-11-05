@@ -6,9 +6,7 @@ import traceback
 
 
 
-                def fix_unused_imports(content) -> None:                    """Remove unused imports."""
-        try: lines = content.split("\n")
-            tree = ast.parse(content)
+                def fix_unused_imports(content) -> None:                    """Remove unused imports."""        try: lines = content.split("\n")            tree = ast.parse(content)
             imports = []
             used_names = set()
         
@@ -23,8 +21,7 @@ import traceback
                     new_lines = []
                     skip_next = False
                     for i, line in enumerate(lines):
-                        if skip_next: skip_next = False
-                            continue
+                        if skip_next: skip_next = False                            continue
 
                             if re.match(r"^from\s+.*\s+import\s+.*$|^import\s+.*$", line):
                                 # Check if this import is used
@@ -38,33 +35,27 @@ import traceback
                                                 new_lines.append(line)
 
                                                 return "\n".join(new_lines)
-                                                except SyntaxError: returncontentdef fix_line_length(content, max_length=88) -> None:
-            """Fix lines that are too long."""
+                                                except SyntaxError: returncontentdef fix_line_length(content, max_length=88) -> None:            """Fix lines that are too long."""
                                                         lines = content.split("\n")
                                                         new_lines = []
                                                         
                                                         for line in lines: iflen(line) > max_length:
                                                         # Try to break at a natural point
-                                                        if "=" in line: parts = line.split("=", 1)
-                                                        indent = len(parts[0]) - len(parts[0].lstrip())
+                                                        if "=" in line: parts = line.split("=", 1)                                                        indent = len(parts[0]) - len(parts[0].lstrip())
                                                         new_lines.append(parts[0] + "=\\")
                                                         new_lines.append(" " * (indent + 4) + parts[1].lstrip())
-                                                        elif ", " in line: parts = line.split(", ")
-                                                        base_indent = len(line) - len(line.lstrip())
+                                                        elif ", " in line: parts = line.split(", ")                                                        base_indent = len(line) - len(line.lstrip())
                                                         current_line = " " * base_indent
                                                         for part in parts: iflen(current_line + part) > max_length: new_lines.append(current_line.rstrip() + ", ")
                                                         current_line = " " * (base_indent + 4) + part.lstrip()
-                                                        else: current_line+= part + ", "
-                                                        new_lines.append(current_line.rstrip(", "))
+                                                        else: current_line+= part + ", "                                                        new_lines.append(current_line.rstrip(", "))
                                                         else: new_lines.append(line)  # Can't fix automatically
                                                         else: new_lines.append(line)
                                                         
                                                         return "\n".join(new_lines)
                                                         
                                                         
-                                                                                                                def fix_undefined_names(content) -> None:                                                                                                                    """Fix undefined names by adding imports."""
-                                                        try: undefined_fixes = {
-                                                            "PretrainedConfig": "from transformers import PretrainedConfig",
+                                                                                                                def fix_undefined_names(content) -> None:                                                                                                                    """Fix undefined names by adding imports."""                                                        try: undefined_fixes = {                                                            "PretrainedConfig": "from transformers import PretrainedConfig",
                                                             "PreTrainedModel": "from transformers import PreTrainedModel",
                                                             "Tuple": "from typing import Tuple",
                                                             "os": "import os",
@@ -81,8 +72,7 @@ import traceback
             return "\n".join(lines)
             except Exception: returncontentdef fix_unused_variables(content) -> None:
                                                             """Fix unused variables by prefixing them with _."""
-                    try: tree = ast.parse(content)
-                    unused_vars = set()
+                    try: tree = ast.parse(content)                    unused_vars = set()
                     
 class UnusedVarVisitor(ast.NodeVisitor):    def visit_Name(self, node) -> None: ifisinstance, (node.ctx, ast.Store):                        unused_vars.add(node.id)
                         elif isinstance(node.ctx, ast.Load):
@@ -90,8 +80,7 @@ class UnusedVarVisitor(ast.NodeVisitor):    def visit_Name(self, node) -> None: 
                     
                     UnusedVarVisitor().visit(tree)
                     
-                    for var in unused_vars: content = re.sub(rf"\b{var}\b(?=\s*=)", f"_{var}", content)
-                    
+                    for var in unused_vars: content = re.sub(rf"\b{var}\b(?=\s*=)", f"_{var}", content)                    
                     return content
                     except SyntaxError: returncontentdef process_file(file_path) -> None:
         """Process a single file fixing all flake8 issues."""
@@ -107,14 +96,12 @@ try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
         content = fix_unused_variables(content)
 
         # Write back
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-            print(f"Successfully processed {file_path}")
+        with open(file_path, "w", encoding="utf-8") as f: f.write(content)            print(f"Successfully processed {file_path}")
             except Exception as e: print(f"Error processing {file_path}: {str(e)}")
                 traceback.print_exc()
 
 
-def main(self):    """Fix flake8 issues in all Python files."""
-        src_dir = Path("src")
+def main(self):    """Fix flake8 issues in all Python files."""        src_dir = Path("src")
         tests_dir = Path("tests")
         
         # Process all Python files
@@ -125,6 +112,5 @@ def main(self):    """Fix flake8 issues in all Python files."""
         process_file(file_path)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

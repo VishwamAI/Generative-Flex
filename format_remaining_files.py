@@ -5,8 +5,7 @@ import sys
         
         
         
-def main(self):    """Main function to format files."""
-        files_to_format = [
+def main(self):    """Main function to format files."""        files_to_format = [
         "src/config/training_config.py",
         "src/config/config.py",
         "src/data/math_tokenizer.py",
@@ -28,6 +27,5 @@ def main(self):    """Main function to format files."""
         sys.exit(0 if success else 1)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

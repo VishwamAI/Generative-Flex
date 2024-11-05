@@ -4,9 +4,7 @@ import sys
 
 
 
-def remove_unused_imports(file_path) -> None:    """Remove unused imports from a file."""
-        with open(file_path, "r") as f: content = f.read()
-        
+def remove_unused_imports(file_path) -> None:    """Remove unused imports from a file."""        with open(file_path, "r") as f: content = f.read()        
         # Dictionary of files and their unused imports to remove
         unused_imports = {
         "src/models/text_to_anything.py": [
@@ -40,23 +38,19 @@ def remove_unused_imports(file_path) -> None:    """Remove unused imports from a
         with open(file_path, "w") as f: f.write(content)
         
         
-def fix_line_length_manually(file_path) -> None:    """Fix remaining line length issues manually."""
-        with open(file_path, "r") as f: lines = f.readlines()
-        
+def fix_line_length_manually(file_path) -> None:    """Fix remaining line length issues manually."""        with open(file_path, "r") as f: lines = f.readlines()        
         fixed_lines = []
         for line in lines: iflen(line.rstrip()) > 79:
         # Split long string literals
         if '"' in line or "'" in line:
         # Split at a space if possible
         if " " in line[40: 79]:
-        split_pos = line[40: 79].rindex(" ") + 40
-        indent = len(line) - len(line.lstrip())
+        split_pos = line[40: 79].rindex(" ") + 40        indent = len(line) - len(line.lstrip())
         fixed_lines.append(line[:split_pos] + "\n")
         fixed_lines.append(" " * (indent + 4) + line[split_pos:].lstrip())
         continue
         # Split long function calls
-        elif "(" in line and ")" in line: if", " in line: indent = len(line) - len(line.lstrip())
-        parts = line.split(", ")
+        elif "(" in line and ")" in line: if", " in line: indent = len(line) - len(line.lstrip())        parts = line.split(", ")
         fixed_lines.append(parts[0] + " \
         n")
         for part in parts[1:-1]:
@@ -69,8 +63,7 @@ def fix_line_length_manually(file_path) -> None:    """Fix remaining line length
         with open(file_path, "w") as f: f.writelines(fixed_lines)
         
         
-def main(self):    files_to_process = [
-    "src/models/reasoning/symbolic_math.py",
+def main(self):    files_to_process = [    "src/models/reasoning/symbolic_math.py",
     "src/models/text_to_anything.py",
     "src/training/train_mmmu.py",
     "tests/test_features.py",
@@ -85,6 +78,5 @@ def main(self):    files_to_process = [
         return True
 
 
-        if __name__ == "__main__":
-            success = main()
+        if __name__ == "__main__":            success = main()
             sys.exit(0 if success else 1)

@@ -2,7 +2,6 @@ import re
 
 
 def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
-
         # Add missing imports if not present
         imports = [
             "import jax.numpy as jnp\n",
@@ -13,8 +12,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
         # Find where to insert imports
         for i, line in enumerate(content):
             if line.startswith("from flax import struct"):
-                content = content[:i] + imports + content[i:]
-                break
+                content = content[:i] + imports + content[i:]                break
 
                 # Fix the content
                 fixed_content = []
@@ -24,8 +22,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
 
                 for i, line in enumerate(content):
                     # Skip lines if needed
-                    if skip_next_lines > 0: skip_next_lines-= 1
-                        continue
+                    if skip_next_lines > 0: skip_next_lines-= 1                        continue
 
                         # Skip duplicate imports
                         if any(
@@ -39,8 +36,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                             continue
 
                             # Track when we're in __call__ method
-                            if "def __call__" in line: in_call_method = True
-                                # Fix the method signature
+                            if "def __call__" in line: in_call_method = True                                # Fix the method signature
                                 fixed_content.append("    def __call__(")
                                 fixed_content.append("        self, ")
                                 fixed_content.append(
@@ -50,8 +46,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                                 fixed_content.append(
                                     "        context: Optional[Dict[str, Any]] = None, "
                                 )
-                                fixed_content.append("        training: bool = False")
-                                fixed_content.append(
+                                fixed_content.append("        training: bool = False")                                fixed_content.append(
                                     ") -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
                                 )
                                 skip_next_lines = (
@@ -60,8 +55,7 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                                 continue
 
                                 # Remove duplicate batch_size initialization
-                                if "batch_size = 1" in line and batch_size_initialized: continueif(
-                                        "batch_size = 1" in line
+                                if "batch_size = 1" in line and batch_size_initialized: continueif(                                        "batch_size = 1" in line
                                         and not batch_size_initialized
                                     ):
                                         fixed_content.append(

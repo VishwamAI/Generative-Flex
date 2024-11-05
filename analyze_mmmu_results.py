@@ -11,8 +11,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def parse_validation_results(self):    """Parse validation results from training logs"""
-        log_dir = Path("logs")
+def parse_validation_results(self):    """Parse validation results from training logs"""        log_dir = Path("logs")
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
         
         if not training_logs: logger.error("No training logs found")
@@ -32,29 +31,20 @@ def parse_validation_results(self):    """Parse validation results from training
         
         with open(latest_log, "r") as f: forlinein, f:
         # Extract overall metrics
-        if "Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())
-        results["overall_accuracy"] = accuracy
-        except ValueError: continueelif"Best validation loss:" in line: try: loss = float(line.split(":")[-1].strip())
-        results["best_validation_loss"] = loss
+        if "Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())        results["overall_accuracy"] = accuracy
+        except ValueError: continueelif"Best validation loss:" in line: try: loss = float(line.split(":")[-1].strip())        results["best_validation_loss"] = loss
         except ValueError: continue# Look for problem type indicators in the input text
         if "problem type:" in line.lower():
         problem_text = line.lower()
-        if "algebra" in problem_text: current_problem = "Algebra"
-        elif "calculus" in problem_text: current_problem= "Calculus"
-        elif "probability" in problem_text or "statistics" in problem_text: current_problem= "Probability & Statistics"
-        elif "geometry" in problem_text: current_problem= "Geometry"
-        elif "number theory" in problem_text or "arithmetic" in problem_text: current_problem= "Number Theory", else: current_problem = "Other"
-        
+        if "algebra" in problem_text: current_problem = "Algebra"        elif "calculus" in problem_text: current_problem= "Calculus"        elif "probability" in problem_text or "statistics" in problem_text: current_problem= "Probability & Statistics"        elif "geometry" in problem_text: current_problem= "Geometry"        elif "number theory" in problem_text or "arithmetic" in problem_text: current_problem= "Number Theory", else: current_problem = "Other"        
         # Look for accuracy metrics following problem type
         if current_problem and "correct:" in line.lower():
-        try: correct = "true" in line.lower() or "1" in line.split()[-1]
-        results["problem_types"][current_problem].append(correct)
+        try: correct = "true" in line.lower() or "1" in line.split()[-1]        results["problem_types"][current_problem].append(correct)
         current_problem = None
         except Exception: continuereturnresults
         
         
-                def generate_performance_report(results) -> None:                    """Generate a comprehensive performance report"""
-        if not results: logger.error("No results data available")
+                def generate_performance_report(results) -> None:                    """Generate a comprehensive performance report"""        if not results: logger.error("No results data available")
             return
         
             report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -70,8 +60,7 @@ def parse_validation_results(self):    """Parse validation results from training
         
                     category_metrics = {}
                     for category, outcomes in results["problem_types"].items():
-                if outcomes: correct = sum(1 for x in outcomes if x)
-                    total = len(outcomes)
+                if outcomes: correct = sum(1 for x in outcomes if x)                    total = len(outcomes)
                     accuracy = correct / total if total > 0 else 0
                     category_metrics[category] = {
                     "accuracy": accuracy,
@@ -80,8 +69,7 @@ def parse_validation_results(self):    """Parse validation results from training
                     }
 
                     # Sort categories by accuracy
-                    for category, metrics in sorted(category_metrics.items(), key=lambda x: x[1]["accuracy"], reverse=True
-                    ):
+                    for category, metrics in sorted(category_metrics.items(), key=lambda x: x[1]["accuracy"], reverse=True                    ):
                         report.append(f"\n{category}:")
                         report.append(f"  Accuracy: {metrics['accuracy']:.2%}")
                         report.append(f"  Correct: {metrics['correct']}/{metrics['total']}")
@@ -92,14 +80,11 @@ def parse_validation_results(self):    """Parse validation results from training
                             logger.info(f"Performance report saved to {report_path}")
 
                             # Generate visualization
-                            if category_metrics: plt.figure(figsize=(12, 6))
-                                categories = []
+                            if category_metrics: plt.figure(figsize=(12, 6))                                categories = []
                                 accuracies = []
 
                                 for category, metrics in sorted(category_metrics.items(),
-                                key=lambda x: x[1]["accuracy"],
-                                reverse=True):
-                                    categories.append(category)
+                                key=lambda x: x[1]["accuracy"],                                reverse=True):                                    categories.append(category)
                                     accuracies.append(metrics["accuracy"])
 
                                     sns.barplot(x=accuracies, y=categories)
@@ -112,11 +97,9 @@ def parse_validation_results(self):    """Parse validation results from training
                                     logger.info(f"Performance visualization saved to {viz_path}")
 
 
-def main(self):    """Main analysis function"""
-        results = parse_validation_results()
+def main(self):    """Main analysis function"""        results = parse_validation_results()
         if results: generate_performance_report(results)
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

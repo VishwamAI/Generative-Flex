@@ -4,8 +4,7 @@ import subprocess
         
         
         
-                def format_files(self):                    """Format all detected files using black."""
-        files_to_format = [
+                def format_files(self):                    """Format all detected files using black."""        files_to_format = [
         "src/config/training_config.py",
         "src/config/config.py",
         "src/data/math_tokenizer.py",
@@ -43,12 +42,10 @@ import subprocess
         print("Formatting files...")
         for file in files_to_format: ifos.path.exists(file):
         print(f"Formatting {file}...")
-        try: subprocess.run(["black", "--line-length", "79", file], check=True)
-            except subprocess.CalledProcessError as e: print(f"Error formatting {file}: {e}")
+        try: subprocess.run(["black", "--line-length", "79", file], check=True)            except subprocess.CalledProcessError as e: print(f"Error formatting {file}: {e}")
                 else: print(f"Warning: {file} not found")
 
                     print("\nAll files processed!")
 
 
-                    if __name__ == "__main__":
-                        format_files()
+                    if __name__ == "__main__":                        format_files()

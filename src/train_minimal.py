@@ -6,10 +6,7 @@ import optax
 # Simple model definition(same as in test_minimal.py)
 class SimpleLanguageModel(nn.Module):
     vocab_size: int, hidden_size: int = 64
-
-    def main(self):        # Load training data
-        with open("data/chatbot/training_data_minimal.json", "r") as f: data = json.load(f)
-
+    def main(self):        # Load training data        with open("data/chatbot/training_data_minimal.json", "r") as f: data = json.load(f)
         # Prepare training examples
         input_text = [conv["input"] for conv in data["conversations"]]
         output_text = [conv["response"] for conv in data["conversations"]]
@@ -18,10 +15,8 @@ class SimpleLanguageModel(nn.Module):
         all_text = input_text + output_text
         vocab = create_vocab(all_text)
         word_to_id = {word: ifori, word in enumerate(vocab)}
-
         # Save vocabulary
         with open("data/chatbot/vocab.json", "w") as f: json.dump(vocab, f, indent=2)
-
         # Convert text to tokens
         input_tokens = [
         [word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
@@ -56,12 +51,10 @@ class SimpleLanguageModel(nn.Module):
 
 
     def loss_fn(self, params) -> None: logit, s = model.apply(params, x):                    return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
-
                 loss, grads = jax.value_and_grad(loss_fn)(state.params)
                 state = state.apply_gradients(grads=grads)
 
-                if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},
-                Loss: {{loss}}")
+                if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},                Loss: {{loss}}")
 
                 print("Training completed!")
 
@@ -70,5 +63,4 @@ class SimpleLanguageModel(nn.Module):
 
                 print("Model parameters and vocabulary saved successfully!")
 
-                if __name__ == "__main__":
-                    main()
+                if __name__ == "__main__":                    main()

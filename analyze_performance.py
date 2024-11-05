@@ -12,9 +12,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-                def analyze_performance(self):                    """Analyze model performance by problem category"""
-        try: results = load_validation_results()
-        
+                def analyze_performance(self):                    """Analyze model performance by problem category"""        try: results = load_validation_results()        
             # Calculate statistics per category
             stats = {}
             for category, accuracies in results.items():
@@ -31,8 +29,7 @@ logger = logging.getLogger(__name__)
         report = ["Model Performance Analysis by Problem Category\n"]
         report.append("=" * 50 + "\n")
 
-        for category, metrics in sorted(stats.items(), key=lambda x: x[1]["mean_accuracy"], reverse=True
-        ):
+        for category, metrics in sorted(stats.items(), key=lambda x: x[1]["mean_accuracy"], reverse=True        ):
             report.append(f"\nCategory: {category}")
             report.append(f"Mean Accuracy: {metrics['mean_accuracy']:.2%}")
             report.append(f"Number of Samples: {metrics['num_samples']}")
@@ -61,5 +58,4 @@ logger = logging.getLogger(__name__)
                     return None
 
 
-                    if __name__ == "__main__":
-                        analyze_performance()
+                    if __name__ == "__main__":                        analyze_performance()

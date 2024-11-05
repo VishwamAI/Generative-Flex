@@ -3,15 +3,13 @@ import os
 import re
 
 
-                def format_params(self, func_name, params):                    """Format parameters with proper type hints."""
-        if not params.strip():
+                def format_params(self, func_name, params):                    """Format parameters with proper type hints."""        if not params.strip():
     return f"def {func_name}():"
 
     param_list = []
     for param in params.split(", "):
         param = param.strip()
-        if ":" in param: name, type_hint = param.split(":", 1)
-            param_list.append(f"{name.strip()}: {type_hint.strip()}")
+        if ":" in param: name, type_hint = param.split(":", 1)            param_list.append(f"{name.strip()}: {type_hint.strip()}")
             else: param_list.append(param)
 
                 formatted_params = " \
@@ -19,22 +17,19 @@ n    ".join(param_list)
                 return f"def {func_name}(\n    {formatted_params}\n):"
 
 
-def fix_function_bodies(self, content):    """Fix function body indentation and structure."""
-        lines = content.split("\n")
+def fix_function_bodies(self, content):    """Fix function body indentation and structure."""        lines = content.split("\n")
         fixed_lines = []
         in_function = False
         indent_level = 0
         
-        for line in lines: stripped = line.lstrip()
-        
+        for line in lines: stripped = line.lstrip()        
         # Handle function definitions
         if stripped.startswith("def "):
         in_function = True
         indent_level = 0
         fixed_lines.append(line)
         if not stripped.endswith(":"):
-        fixed_lines[-1] += ":"
-        indent_level += 1
+        fixed_lines[-1] += ":"        indent_level += 1
         continue
         
         # Handle nested blocks
@@ -52,13 +47,11 @@ def fix_function_bodies(self, content):    """Fix function body indentation and 
         else: fixed_lines.append(line)
         
         # Check for block end
-        if in_function and indent_level > 1 and not stripped: indent_level-= 1
-        
+        if in_function and indent_level > 1 and not stripped: indent_level-= 1        
         return "\n".join(fixed_lines)
         
         
-                def main(self):                    """Process files with function definition issues."""
-        files_to_fix = [
+                def main(self):                    """Process files with function definition issues."""        files_to_fix = [
         "src/training/jax_trainer.py",
         "src/models/layers/flash_moe.py",
         "src/training/train_mmmu.py",
@@ -83,5 +76,4 @@ def fix_function_bodies(self, content):    """Fix function body indentation and 
         os.system("python3 -m black .")
 
 
-        if __name__ == "__main__":
-            main()
+        if __name__ == "__main__":            main()

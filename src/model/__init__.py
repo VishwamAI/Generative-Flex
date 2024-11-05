@@ -27,16 +27,7 @@ class AdvancedGenerativeFlexModel(nn.Module):    """
 
 def __init__(self):
     vocab_size: int,
-    d_model: int = 1024,
-    nhead: int = 16,
-    num_layers: int = 24,
-    dim_feedforward: int = 4096,
-    dropout: float = 0.1,
-    max_seq_length: int = 2048,
-    num_experts: int = 8,
-    expert_capacity_factor: float = 1.25,
-    attention_block_size: int = 1024):
-        super().__init__()
+    d_model: int = 1024,    nhead: int = 16,    num_layers: int = 24,    dim_feedforward: int = 4096,    dropout: float = 0.1,    max_seq_length: int = 2048,    num_experts: int = 8,    expert_capacity_factor: float = 1.25,    attention_block_size: int = 1024):        super().__init__()
         self.d_model = d_model
 
     # Token and positional embeddings
@@ -58,15 +49,10 @@ self.fc_out = nn.Linear(d_model, vocab_size)
 # Initialize parameters with scaled initialization
 self._init_parameters()
 
-def _init_parameters(self) -> None:    """Initialize parameters with scaled initialization"""
-    for p in self.parameters():
-        if p.dim() > 1: nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow
-        )
+def _init_parameters(self) -> None:    """Initialize parameters with scaled initialization"""    for p in self.parameters():
+        if p.dim() > 1: nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow        )
         
-        def forward(self):        x: torch.Tensor,
-        mask: Optional[torch.Tensor] = None,
-        return_attention_weights: bool = False) -> torch.Tensor:
-        """
+        def forward(self):        x: torch.Tensor,        mask: Optional[torch.Tensor] = None,        return_attention_weights: bool = False) -> torch.Tensor:        """
         Forward pass through the model
 
     Args: x: Input tensor of shape [batch_size, seq_len]
@@ -84,10 +70,8 @@ x = x + self.pos_encoder(pos)
             
 # Process through transformer layers
 attention_weights = []
-for layer in self.transformer_layers: ifreturn_attention_weights: x, attn = layer(x, mask, return_attention=True)
-attention_weights.append(attn)
-else: x = layer(x, mask)
-            
+for layer in self.transformer_layers: ifreturn_attention_weights: x, attn = layer(x, mask, return_attention=True)attention_weights.append(attn)
+else: x = layer(x, mask)            
 # Output processing
 x = self.norm(x)
 logits = self.fc_out(x)

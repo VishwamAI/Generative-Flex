@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_class_structure(self, content):                    """Fix class structure and method indentation."""
-        lines = content.split("\n")
+                def fix_class_structure(self, content):                    """Fix class structure and method indentation."""        lines = content.split("\n")
         fixed_lines = []
         in_class = False
         class_indent = 0
@@ -36,16 +35,14 @@ import re
                 continue
 
                 # Handle class end
-                if in_class and (not stripped or current_indent <= class_indent):
-                    in_class = False
+                if in_class and (not stripped or current_indent <= class_indent):                    in_class = False
 
                     fixed_lines.append(line)
 
                     return "\n".join(fixed_lines)
 
 
-def main(self):    """Process files with method definition and class structure issues."""
-        files_to_fix = [
+def main(self):    """Process files with method definition and class structure issues."""        files_to_fix = [
         "src/models/audio_model.py",
         "src/models/base_model.py",
         "src/models/enhanced_transformer.py",
@@ -78,6 +75,5 @@ def main(self):    """Process files with method definition and class structure i
         os.system("python3 -m black .")
         
         
-        if __name__ == "__main__":
-        main()
+        if __name__ == "__main__":        main()
         

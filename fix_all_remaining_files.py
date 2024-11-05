@@ -5,8 +5,7 @@
     from pathlib import Path
     
     
-def fix_syntax_issues(self):    """Fix common syntax issues in Python files."""
-        files_to_fix = [
+def fix_syntax_issues(self):    """Fix common syntax issues in Python files."""        files_to_fix = [
         "src/config/config.py",
         "src/config/training_config.py",
         "src/data/mmmu_dataloader.py",
@@ -19,8 +18,7 @@ def fix_syntax_issues(self):    """Fix common syntax issues in Python files."""
         ]
         
         success = True
-        for file_path in files_to_fix: file_path = Path(file_path)
-        if not file_path.exists():
+        for file_path in files_to_fix: file_path = Path(file_path)        if not file_path.exists():
         print(f"File not found: {file_path}")
         continue
         
@@ -52,8 +50,7 @@ def fix_syntax_issues(self):    """Fix common syntax issues in Python files."""
         # Apply all fixes
         import re
         
-        for pattern, replacement in fixes: content = re.sub(pattern, replacement, content)
-        
+        for pattern, replacement in fixes: content = re.sub(pattern, replacement, content)        
         # Write back the fixed content
         file_path.write_text(content)
         
@@ -64,8 +61,7 @@ def fix_syntax_issues(self):    """Fix common syntax issues in Python files."""
         return success
         
         
-        if __name__ == "__main__":
-        print("Starting syntax fixes and formatting...")
+        if __name__ == "__main__":        print("Starting syntax fixes and formatting...")
         if fix_syntax_issues():
         print("\nAll files processed successfully!")
         sys.exit(0)

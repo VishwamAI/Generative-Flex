@@ -2,8 +2,7 @@ import os
 import re
 
 
-def main(self):    print("Fixing apple_optimizations.py...")
-    fix_apple_optimizations()
+def main(self):    print("Fixing apple_optimizations.py...")    fix_apple_optimizations()
 
     print("Fixing jax_trainer.py...")
     fix_jax_trainer()
@@ -17,5 +16,4 @@ def main(self):    print("Fixing apple_optimizations.py...")
     os.system("python3 -m black tests/test_features.py")
     os.system("python3 -m black tests/test_models.py")
 
-    if __name__ == "__main__":
-        main()
+    if __name__ == "__main__":        main()

@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""
-        # Split content into sections
+def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""        # Split content into sections
         lines = content.split("\n")
         
         # Fix imports
@@ -44,8 +43,7 @@ if line.startswith('"""') and not sections["docstring"]:
         continue
         
         # Handle VOCAB_SIZE constant
-        if line.startswith("VOCAB_SIZE") and current_section == "constants":
-        sections["constants"].append("VOCAB_SIZE = 256  # Character-level tokenization")
+        if line.startswith("VOCAB_SIZE") and current_section == "constants":        sections["constants"].append("VOCAB_SIZE = 256  # Character-level tokenization")
         i += 1
         continue
         
@@ -72,8 +70,7 @@ if line.startswith('"""') and not sections["docstring"]:
         # Add remaining lines
         if line.strip():
         sections["remaining"].append(line)
-    else: ifsections["remaining"] and sections["remaining"][-1] != "":
-        sections["remaining"].append("")
+    else: ifsections["remaining"] and sections["remaining"][-1] != "":        sections["remaining"].append("")
         i += 1
         
         # Fix GenerationConfig
@@ -86,24 +83,15 @@ if line.startswith('"""') and not sections["docstring"]:
 config_lines.append('    """Configuration for text-to-anything generation."""')
 elif in_config and ":" in line and not line.strip().startswith(('"""', "#")):
         # Fix field definitions
-        try: name, rest = line.split(":", 1)
-        name = name.strip()
+        try: name, rest = line.split(":", 1)        name = name.strip()
         rest = rest.strip()
         
         # Handle special cases
-        if name == "image_size":
-        config_lines.append(f"    {name}: Tuple[int, int] = field(default=(256, 256))"
-        )
+        if name == "image_size":        config_lines.append(f"    {name}: Tuple[int, int] = field(default=(256, 256))"        )
         continue
-        elif name == "supported_modalities":
-        config_lines.append("    supported_modalities: List[str] = field(")
-        config_lines.append('        default_factory=lambda: ["text", "image", "audio", "video", "code"]')
-        config_lines.append(")")
+        elif name == "supported_modalities":        config_lines.append("    supported_modalities: List[str] = field(")        config_lines.append('        default_factory=lambda: ["text", "image", "audio", "video", "code"]')        config_lines.append(")")
         continue
-        elif name == "constitutional_principles":
-        config_lines.append("    constitutional_principles: List[str] = field(")
-        config_lines.append("        default_factory=lambda: [")
-        config_lines.append('            "Do not generate harmful content", ')
+        elif name == "constitutional_principles":        config_lines.append("    constitutional_principles: List[str] = field(")        config_lines.append("        default_factory=lambda: [")        config_lines.append('            "Do not generate harmful content", ')
         config_lines.append('            "Respect privacy and intellectual property", ')
         config_lines.append('            "Be transparent about AI-generated content"')
         config_lines.append("        ]")
@@ -111,22 +99,17 @@ elif in_config and ":" in line and not line.strip().startswith(('"""', "#")):
         continue
         
         # Handle normal field definitions
-        if "=" in rest: type_name, default_value = rest.split("=", 1)
-        type_name = type_name.strip()
+        if "=" in rest: type_name, default_value = rest.split("=", 1)        type_name = type_name.strip()
         default_value = default_value.strip()
         
         # Extract default value from struct_field or field
-        if "struct_field" in default_value or "field" in default_value: match = re.search(r"default=([^ \
-        )]+)", default_value)
-        if match: default_value = match.group(1).strip(), else: match = re.search(r"default_factory=([^ \
-        )]+)", default_value
+        if "struct_field" in default_value or "field" in default_value: match = re.search(r"default=([^ \        )]+)", default_value)
+        if match: default_value = match.group(1).strip(), else: match = re.search(r"default_factory=([^ \        )]+)", default_value
         )
-        if match: config_lines.append(f"    {name}: {type_name} = field(default_factory={match.group(1).strip()})"
-        )
+        if match: config_lines.append(f"    {name}: {type_name} = field(default_factory={match.group(1).strip()})"        )
         continue
         
-        config_lines.append(f"    {name}: {type_name} = field(default={default_value})"
-        )
+        config_lines.append(f"    {name}: {type_name} = field(default={default_value})"        )
         else: config_lines.append(f"    {name}: {rest}")
         except Exception as e: print(f"Warning: Couldnotprocess, line: {line}")
         config_lines.append(line)
@@ -149,9 +132,7 @@ elif in_config and ":" in line and not line.strip().startswith(('"""', "#")):
         return "\n".join(result)
         
         
-                def main(self):                # Read the original file
-                with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-                
+                def main(self):                # Read the original file                with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
                 # Fix the content
                 fixed_content = fix_file_content(content)
                 
@@ -161,6 +142,5 @@ elif in_config and ":" in line and not line.strip().startswith(('"""', "#")):
                 print("Comprehensive fixes applied to text_to_anything.py")
                 
                 
-                if __name__ == "__main__":
-        main()
+                if __name__ == "__main__":        main()
         

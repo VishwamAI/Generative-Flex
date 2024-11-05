@@ -6,7 +6,6 @@ import os
 
 
 def main(self):    args = parse_args()
-
     # Set up logging
     os.makedirs("logs", exist_ok=True)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
@@ -35,5 +34,4 @@ def main(self):    args = parse_args()
                 logger.info("Training completed successfully!")
 
 
-                if __name__ == "__main__":
-                    main()
+                if __name__ == "__main__":                    main()
