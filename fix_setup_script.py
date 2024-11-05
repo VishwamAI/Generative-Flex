@@ -1,4 +1,8 @@
-from setuptools import setup, find_packages
+import os
+
+def fix_setup_script():
+    """Fix setup.py indentation and structure."""
+    setup_content = '''from setuptools import setup, find_packages
 
 """Setup script for Generative-Flex."""
 
@@ -52,3 +56,10 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
 )
+'''
+
+    with open('setup.py', 'w') as f:
+        f.write(setup_content)
+
+if __name__ == '__main__':
+    fix_setup_script()
