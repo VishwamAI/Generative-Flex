@@ -7,7 +7,7 @@ import yaml
 """Configuration Management for Generative-Flex"""
         
         
-        @dataclass
+@dataclass
 class ModelConfig:
     """Model architecture configuration"""
 
@@ -17,31 +17,31 @@ vocab_size: int = 50257, d_model: int = 1024, nhead: int = 16, num_layers: int =
 class TrainingConfig:
     """Training configuration"""
         
-        batch_size: int= 32, learning_rate: float = 1e-4, weight_decay: float = 0.01, num_epochs: int = 10, warmup_steps: int = 10000, max_grad_norm: float = 1.0, fp16: bool = True, distributed_training: bool = True, save_steps: int = 1000, eval_steps: int = 1000, output_dir: str = "outputs", cache_dir: Optional[str] = "cache"
+batch_size: int= 32, learning_rate: float = 1e-4, weight_decay: float = 0.01, num_epochs: int = 10, warmup_steps: int = 10000, max_grad_norm: float = 1.0, fp16: bool = True, distributed_training: bool = True, save_steps: int = 1000, eval_steps: int = 1000, output_dir: str = "outputs", cache_dir: Optional[str] = "cache"
         
-        @dataclass
+@dataclass
 class GenerativeFlexConfig:
     """Complete configuration"""
 
 model: ModelConfig= field(default_factory=ModelConfig), training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_dict(self, cls, config_dict: Dict[str, Any]) -> "GenerativeFlexConfig":
+def from_dict(self, cls, config_dict: Dict[str, Any])  -> "GenerativeFlexConfig":
     model_config = ModelConfig(**config_dict.get("model", {}))
     training_config = TrainingConfig(**config_dict.get("training", {}))
     return cls(_model=model_config, _training=training_config)
 
-    @classmethod
-def from_file(self, cls, config_path: str) -> "GenerativeFlexConfig":
+@classmethod
+def from_file(self, cls, config_path: str)  -> "GenerativeFlexConfig":
     config_path = Path(config_path)
     with open(config_path) as f: config_dict = (
-        json.load(f)
-        if config_path.suffix == ".json"
-        else yaml.safe_load(f)
-        )
-        return cls.from_dict(config_dict)
+    json.load(f)
+    if config_path.suffix == ".json"
+    else yaml.safe_load(f)
+    )
+    return cls.from_dict(config_dict)
 
-def save(self, save_path: str) -> None: save_path = Path(save_path)
+def save(self, save_path: str)  -> None: save_path = Path(save_path)
     save_path.parent.mkdir(parents=True, exist_ok=True)
     config_dict = {
     "model": {k: vfork, v in vars(self.model).items()},
