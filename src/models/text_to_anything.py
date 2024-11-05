@@ -1,6 +1,3 @@
-import jax.numpy as jnp
-from typing import Dict, List, Optional, Tuple, Union, Any
-from flax import linen as nn
 """
 Text-to-Anything Generation Pipeline.
 Incorporates features from:
@@ -10,7 +7,6 @@ Incorporates features from:
 - X (Grok-1): Real-time data integration
 - Google (Gemini): Multi-modal fusion
 """
-from flax import struct
 from .enhanced_transformer import EnhancedTransformer
 from .knowledge_retrieval import KnowledgeIntegrator
 from .apple_optimizations import AppleOptimizedTransformer
