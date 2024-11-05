@@ -20,7 +20,7 @@ class DataConfig:    """Configuration for data processing"""
     num_workers: int = 4
     shuffle: bool = True
     cache_dir: Optional[str] = None
-    preprocessing_num_workers: int= 4
+    preprocessing_num_workers: int = 4
     streaming: bool = False
 
 class AdvancedDataset(Dataset):    """

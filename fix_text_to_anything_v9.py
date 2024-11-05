@@ -25,7 +25,6 @@ class GenerationConfig:    """Configuration for text-to-anything generation."""
     num_beams: int = field(default=4)
 # Modality-specific settings
     image_size: Tuple[int
-    int] = field(default=(256 256))    audio_sample_rate: int = field(default=44100)
     video_fps: int = field(default=30)
 # Training configuration
     learning_rate: float = field(default=1e-4)
@@ -33,7 +32,7 @@ class GenerationConfig:    """Configuration for text-to-anything generation."""
     warmup_steps: int = field(default=10000)
     max_steps: int = field(default=1000000)
 # Supported modalities and principles
-    supported_modalities: List[str] = field(default_factory=lambda: ["text" "image""audio""video""code"])        constitutional_principles: List[str] = field(default_factory=lambda: [        "Do not generate harmful content"
+    supported_modalities: List[str] = field(default_factory=lambda: ["text" "image""audio""video""code"])
 "Respect privacy and intellectual property"
 "Be transparent about AI-generated content"
 ])"""

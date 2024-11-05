@@ -10,7 +10,6 @@ Supports: - Real-time data integration(Grok-1 style)
 
 @dataclass
 class KnowledgeConfig: """Configuration for knowledge retrieval system.
-    embedding_size: int = struct.field(default=512)num_retrievers: int = struct.field(default=2)max_chunks: int = struct.field(default=10)chunk_size: int = struct.field(default=512)similarity_threshold: float = struct.field(default=0.7)use_cache: bool = struct.field(default=True)update_frequency: int = struct.field(default=100)max_cache_size: int = struct.field(default=10000)modalities: List[str] = struct.field(default_factory=lambda: ["text"
 
 class KnowledgeRetriever(nn.Module):    """
 Knowledge retriever with real-time updates.

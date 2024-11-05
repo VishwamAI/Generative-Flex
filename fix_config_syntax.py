@@ -21,23 +21,21 @@ class ModelConfig:    """Model configuration."""
 'image'
 'audio'
 'video'
-    vocab_size: Optional[int] = field(default=50257)  # For language modelshidden_dim: int = field(default=768)  # Reduced from 1024 for memory efficiency
-    num_heads: int = field(default=12)  # Reduced from 16 for memory efficiency
-    num_layers: int = field(default=8)  # Reduced from 12 for memory efficiency
+    vocab_size: Optional[int] = field(default=50257)  # For language modelshidden_dim: int = field(default=768)
+    num_heads: int = field(default=12)
+    num_layers: int = field(default=8)
     head_dim: int = field(default=64)
-    mlp_dim: int = field(default=3072)  # Reduced from 4096 for memory efficiency
+    mlp_dim: int = field(default=3072)
     dropout_rate: float = field(default=0.1)
-    max_seq_length: int = field(default=512)  # Reduced from 1024 for memory efficiency
-    attention_block_size: int = field(default=256)  # Reduced from 512 for memory efficiency
-    num_experts: int = field(default=4)  # Reduced from 8 for memory efficiency
-    expert_capacity_factor: float = field(default=1.0)  # Reduced from 1.25 for memory efficiency
+    max_seq_length: int = field(default=512)
+    attention_block_size: int = field(default=256)
+    num_experts: int = field(default=4)
+    expert_capacity_factor: float = field(default=1.0)
     use_flash_attention: bool = field(default=True)
     use_mixture_of_experts: bool = field(default=True)
     gradient_checkpointing: bool = field(default=True)
 # Model-specific parameters
     image_size: Optional[Tuple[int
-    int]] = field(default=None)  # For image modelspatch_size: Optional[Tuple[int
-    int]] = field(default=None)  # For image modelsaudio_sample_rate: Optional[int] = field(default=None)  # For audio modelsframe_size: Optional[int] = field(default=None)  # For audio modelsvideo_size: Optional[Tuple[int
 int
 int]] = field(default=None)  # For video modelsvideo_
     patch_size: Optional[Tuple[int

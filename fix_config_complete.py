@@ -30,8 +30,6 @@ class ModelConfig:    """Model configuration."""
     gradient_checkpointing: bool = field(default=True)
 # Model-specific parameters
     image_size: Optional[Tuple[int
-    int]] = field(default=None)    patch_size: Optional[Tuple[int
-    int]] = field(default=None)    audio_sample_rate: Optional[int] = field(default=None)    frame_size: Optional[int] = field(default=None)    video_size: Optional[Tuple[int
 int
 int]] = field(default=None)    video_
     patch_size: Optional[Tuple[int
