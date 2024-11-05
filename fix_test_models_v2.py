@@ -1,4 +1,8 @@
-"""Test module for enhanced transformer models.
+"""Script to fix test_models.py formatting."""
+
+def create_fixed_content():
+    """Create properly formatted content for test_models.py."""
+    content = '''"""Test module for enhanced transformer models.
 
 This module contains test cases for the enhanced transformer architecture,
 including configuration validation and model behavior verification.
@@ -61,11 +65,7 @@ def test_transformer_forward_pass(transformer):
     outputs = transformer.apply(variables, inputs, attention_mask)
 
     # Check output shape
-    expected_shape = (
-        batch_size,
-        sequence_length,
-        transformer.config.hidden_size,
-    )
+    expected_shape = (batch_size, sequence_length, transformer.config.hidden_size)
     assert outputs.shape == expected_shape
 
 
@@ -88,11 +88,7 @@ def test_transformer_attention_mask(transformer):
     outputs = transformer.apply(variables, inputs, attention_mask)
 
     # Check output shape
-    expected_shape = (
-        batch_size,
-        sequence_length,
-        transformer.config.hidden_size,
-    )
+    expected_shape = (batch_size, sequence_length, transformer.config.hidden_size)
     assert outputs.shape == expected_shape
 
 
@@ -101,3 +97,18 @@ def test_transformer_config_validation(model_config):
     assert model_config.hidden_size % model_config.num_attention_heads == 0
     assert model_config.hidden_size >= model_config.num_attention_heads
     assert model_config.max_position_embeddings > 0
+'''
+    return content
+
+def main():
+    """Main function to fix the file."""
+    # Create the fixed content
+    content = create_fixed_content()
+
+    # Write to file
+    with open('tests/test_models.py', 'w') as f:
+        f.write(content)
+    print("Fixed test_models.py with proper docstring formatting")
+
+if __name__ == '__main__':
+    main()

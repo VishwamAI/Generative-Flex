@@ -1,15 +1,19 @@
-from dataclasses import dataclass, field
+"""Script to fix text_to_anything.py formatting."""
+from pathlib import Path
+
+def create_fixed_content():
+    """Create properly formatted content for text_to_anything.py."""
+    # Note: Content structure follows the same pattern as before but with proper indentation
+    content = '''from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple, Union
 import flax.linen as nn
 import jax.numpy as jnp
 
 VOCAB_SIZE = 256  # Character-level tokenization
 
-
 @dataclass
 class GenerationConfig:
     """Configuration for text-to-anything generation."""
-
     # Model configuration
     hidden_size: int = field(default=2048)
     num_attention_heads: int = field(default=32)
@@ -43,6 +47,21 @@ class GenerationConfig:
         default_factory=lambda: [
             "Do not generate harmful content",
             "Respect privacy and intellectual property",
-            "Be transparent about AI-generated content",
+            "Be transparent about AI-generated content"
         ]
-    )
+    )'''
+    
+    return content
+
+def main():
+    """Main function to fix the file."""
+    # Create the fixed content
+    content = create_fixed_content()
+    
+    # Write to file
+    file_path = Path('src/models/text_to_anything.py')
+    file_path.write_text(content)
+    print("Fixed text_to_anything.py")
+
+if __name__ == '__main__':
+    main()

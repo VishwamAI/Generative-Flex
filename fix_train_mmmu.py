@@ -1,4 +1,8 @@
-"""Training script for MMMU dataset using enhanced transformer model.
+"""Script to fix train_mmmu.py formatting."""
+
+def create_fixed_content():
+    """Create properly formatted content for train_mmmu.py."""
+    content = '''"""Training script for MMMU dataset using enhanced transformer model.
 
 This module implements the training loop and evaluation logic for the
 enhanced transformer model on the MMMU (Massive Multitask Mathematical Understanding)
@@ -32,12 +36,13 @@ def setup_training(config: ModelConfig):
     """
     model = EnhancedTransformer(config=config)
     optimizer = optax.adamw(
-        learning_rate=config.learning_rate, weight_decay=config.weight_decay
+        learning_rate=config.learning_rate,
+        weight_decay=config.weight_decay
     )
     initial_state = train_state.TrainState.create(
         apply_fn=model.apply,
         params=model.init(jax.random.PRNGKey(0), jnp.ones((1, 1))),
-        tx=optimizer,
+        tx=optimizer
     )
     return model, optimizer, initial_state
 
@@ -53,13 +58,15 @@ def train_step(state, batch, config):
     Returns:
         Updated state and metrics
     """
-
     def loss_fn(params):
         logits = state.apply_fn(
-            params, batch["input_ids"], batch["attention_mask"]
+            params,
+            batch["input_ids"],
+            batch["attention_mask"]
         )
         loss = optax.softmax_cross_entropy_with_integer_labels(
-            logits=logits, labels=batch["labels"]
+            logits=logits,
+            labels=batch["labels"]
         ).mean()
         return loss, {"loss": loss}
 
@@ -83,16 +90,20 @@ def evaluate(state, eval_ds, config):
     metrics = []
     for batch in eval_ds:
         logits = state.apply_fn(
-            state.params, batch["input_ids"], batch["attention_mask"]
+            state.params,
+            batch["input_ids"],
+            batch["attention_mask"]
         )
         loss = optax.softmax_cross_entropy_with_integer_labels(
-            logits=logits, labels=batch["labels"]
+            logits=logits,
+            labels=batch["labels"]
         ).mean()
         metrics.append({"loss": loss})
 
     # Average metrics across batches
     avg_metrics = {
-        k: jnp.mean([m[k] for m in metrics]) for k in metrics[0].keys()
+        k: jnp.mean([m[k] for m in metrics])
+        for k in metrics[0].keys()
     }
     return avg_metrics
 
@@ -145,13 +156,27 @@ def main():
 
         # Save checkpoint
         if step % config.save_every == 0:
-            checkpoint_dir = os.path.join(
-                config.output_dir, f"checkpoint_{step}"
-            )
+            checkpoint_dir = os.path.join(config.output_dir, f"checkpoint_{step}")
             state.save(checkpoint_dir)
+
 
     logging.info("Training complete!")
 
 
 if __name__ == "__main__":
+    main()
+'''
+    return content
+
+def main():
+    """Main function to fix the file."""
+    # Create the fixed content
+    content = create_fixed_content()
+
+    # Write to file
+    with open('src/training/train_mmmu.py', 'w') as f:
+        f.write(content)
+    print("Fixed train_mmmu.py with proper docstring formatting")
+
+if __name__ == '__main__':
     main()
