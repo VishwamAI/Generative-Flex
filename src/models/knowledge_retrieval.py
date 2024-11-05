@@ -1,5 +1,6 @@
-import os
-from typing import Tuple
+from typing import Dict, List, Optional, Tuple, Union
+from flax import struct
+
 """
 Knowledge Retrieval System for real-time information integration.
 Supports:
@@ -7,10 +8,6 @@ Supports:
 - Contextual knowledge retrieval (GPT-4 style)
 - Multi-modal knowledge fusion (Gemini style)
 """
-
-from typing import Dict, List, Optional, Tuple, Union
-from flax import struct
-
 
 @struct.dataclass
 class KnowledgeConfig:

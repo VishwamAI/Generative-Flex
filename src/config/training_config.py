@@ -1,7 +1,5 @@
-import os
 from dataclasses import dataclass
 from typing import List, Optional, Dict
-
 
 @dataclass
 class TrainingConfig:

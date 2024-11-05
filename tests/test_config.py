@@ -1,8 +1,7 @@
-"""Tests for configuration management."""
-
 import pytest
 from src.config.config import Config, ModelConfig, TrainingConfig, get_config
 
+"""Tests for configuration management."""
 
 def test_model_config():
     """Test model configuration."""

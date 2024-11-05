@@ -1,8 +1,7 @@
-"""Test module for chain-of-thought response generation."""
-
 import pytest
 import jax
 
+"""Test module for chain-of-thought response generation."""
 
 class SimpleChatModel(nn.Module):
     vocab_size: int

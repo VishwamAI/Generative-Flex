@@ -1,10 +1,8 @@
-"""Tests for model parameter loading and validation functionality."""
-
 import json
 from pathlib import Path
-
 import pytest
 
+"""Tests for model parameter loading and validation functionality."""
 
 @pytest.fixture
 def test_params():

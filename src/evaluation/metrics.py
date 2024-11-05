@@ -1,8 +1,3 @@
-"""
-Core Evaluation Metrics for Generative-Flex
-Implements essential metrics for model evaluation and benchmarking
-"""
-
 import torch
 from typing import Dict, List, Optional
 from dataclasses import dataclass
@@ -10,6 +5,10 @@ from torchmetrics.text import BLEUScore, ROUGEScore
 from torchmetrics import Perplexity
 import logging
 
+"""
+Core Evaluation Metrics for Generative-Flex
+Implements essential metrics for model evaluation and benchmarking
+"""
 
 @dataclass
 class EvalMetrics:

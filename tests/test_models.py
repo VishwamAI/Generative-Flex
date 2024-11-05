@@ -1,16 +1,13 @@
-import os
+import pytest
+import jax
+from src.models.enhanced_transformer import EnhancedTransformer
+from src.config.config import ModelConfig
+
 """Test module for enhanced transformer models.
 
 This module contains test cases for the enhanced transformer architecture,
 including configuration validation and model behavior verification.
 """
-
-import pytest
-import jax
-
-from src.models.enhanced_transformer import EnhancedTransformer
-from src.config.config import ModelConfig
-
 
 @pytest.fixture
 def model_config():

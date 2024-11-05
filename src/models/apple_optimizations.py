@@ -1,5 +1,7 @@
-import os
 from typing import Tuple
+from flax import struct
+from typing import Optional, Tuple
+
 """Apple-style optimizations for on-device ML performance.
 
 Implements:
@@ -8,10 +10,6 @@ Implements:
 - Stateful key-value cache
 - Privacy-preserving features
 """
-
-from flax import struct
-from typing import Optional, Tuple
-
 
 @struct.dataclass
 class OptimizationConfig:

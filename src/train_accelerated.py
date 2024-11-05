@@ -1,18 +1,17 @@
-"""
-Training script using AcceleratedTrainer for efficient distributed training
-with Hugging Face Accelerate.
-"""
-
 import json
 import logging
 from pathlib import Path
 from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import set_seed
-
 from model import GenerativeFlexModel
 from training.accelerated_trainer import AcceleratedTrainer
 from data.dataloader import create_dataloaders
+
+"""
+Training script using AcceleratedTrainer for efficient distributed training
+with Hugging Face Accelerate.
+"""
 
 logger = get_logger(__name__)
 

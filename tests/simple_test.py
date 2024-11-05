@@ -1,9 +1,8 @@
-"""Tests for the simple language model implementation using Flax."""
-
 import json
 import jax
 import pytest
 
+"""Tests for the simple language model implementation using Flax."""
 
 class SimpleModel(nn.Module):
     vocab_size: int

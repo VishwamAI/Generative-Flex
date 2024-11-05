@@ -1,9 +1,7 @@
-import os
-"""Enhanced transformer implementation with advanced features."""
-
 from typing import Optional, Dict, Any
 import jax
 
+"""Enhanced transformer implementation with advanced features."""
 
 class EnhancedTransformer(nn.Module):
     """Enhanced transformer with advanced attention mechanisms."""

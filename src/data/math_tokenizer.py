@@ -1,9 +1,11 @@
-"""Specialized tokenizer for mathematical expressions and symbols."""
+from typing import Dict
+from typing import List
 
 from transformers import PreTrainedTokenizer
 import sympy
 import torch
 
+"""Specialized tokenizer for mathematical expressions and symbols."""
 
 class MathTokenizer:
     """Tokenizer for mathematical expressions and symbols."""

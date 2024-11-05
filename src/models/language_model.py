@@ -1,11 +1,8 @@
-import os
-"""Language model implementation using JAX and Flax."""
-
 from typing import Any
 import jax
-
 from src.models.transformer import TransformerBlock
 
+"""Language model implementation using JAX and Flax."""
 
 class PositionalEncoding(nn.Module):
     """Sinusoidal positional encoding."""

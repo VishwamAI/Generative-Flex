@@ -1,12 +1,9 @@
-import os
 from typing import Tuple
-"""Image generation model implementation using JAX and Flax."""
-
 from typing import Any, Optional, Tuple
 import jax
-
 from src.models.transformer import TransformerBlock
 
+"""Image generation model implementation using JAX and Flax."""
 
 class PatchEmbedding(nn.Module):
     """Image to patch embedding."""

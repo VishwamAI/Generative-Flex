@@ -1,8 +1,3 @@
-"""
-Advanced Data Processing Pipeline for Generative-Flex
-Implements efficient data loading and preprocessing with dynamic batching
-"""
-
 import torch
 from torch.utils.data import Dataset, DataLoader
 from typing import Dict, Optional, Union
@@ -14,6 +9,10 @@ from transformers import PreTrainedTokenizer
 import h5py
 from torch.utils.data.distributed import DistributedSampler
 
+"""
+Advanced Data Processing Pipeline for Generative-Flex
+Implements efficient data loading and preprocessing with dynamic batching
+"""
 
 @dataclass
 class DataConfig:

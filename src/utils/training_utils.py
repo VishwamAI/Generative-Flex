@@ -1,14 +1,12 @@
 from typing import Tuple
-"""Utility functions for model training."""
-
 import os
 from typing import Any, Dict, Iterator, Optional, Tuple
-
 import jax
 import optax
 from flax.training import train_state
 from flax.training import checkpoints
 
+"""Utility functions for model training."""
 
 class TrainState(train_state.TrainState):
     """Extended TrainState for training."""

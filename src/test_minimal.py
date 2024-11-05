@@ -1,6 +1,5 @@
 import json
 
-
 # Simple model definition
 class SimpleLanguageModel(nn.Module):
     vocab_size: int

@@ -1,14 +1,11 @@
-import os
+import torch
+from typing import Optional
+from .transformer import TransformerLayer
+
 """
 Advanced Generative-Flex Model Implementation
 Core model architecture with state-of-the-art optimizations
 """
-
-import torch
-from typing import Optional
-
-from .transformer import TransformerLayer
-
 
 class AdvancedGenerativeFlexModel(nn.Module):
     """

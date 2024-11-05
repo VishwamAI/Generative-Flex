@@ -1,21 +1,19 @@
-"""
-Main training script for Generative-Flex
-Demonstrates how to achieve maximum benchmark performance
-"""
-
 import torch
 import logging
 import argparse
 from pathlib import Path
 from transformers import AutoTokenizer
-
-# Import our implemented components
 from model import AdvancedGenerativeFlexModel
 from training.trainer import AdvancedTrainer
 from data.dataloader import AdvancedDataset, DataConfig, create_dataloader
 from configs.model_config import GenerativeFlexConfig, create_default_config
 
+"""
+Main training script for Generative-Flex
+Demonstrates how to achieve maximum benchmark performance
+"""
 
+# Import our implemented components
 def setup_logging(output_dir: Path):
     """Setup logging configuration"""
     logging.basicConfig(

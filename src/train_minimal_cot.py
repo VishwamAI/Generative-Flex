@@ -1,6 +1,4 @@
-import os
 import jax
-
 
 class SimpleGreetingModel(nn.Module):
     vocab_size: int

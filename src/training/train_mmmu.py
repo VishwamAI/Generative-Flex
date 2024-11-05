@@ -1,5 +1,13 @@
-from typing import Tuple
 import os
+from typing import Dict, Any
+import jax
+from flax.training import train_state
+import optax
+from src.models.enhanced_transformer import EnhancedTransformer
+from src.config.config import ModelConfig
+from src.data.mmmu_dataloader import MMMUDataLoader
+from src.training.utils.logging import setup_logging
+
 """Training script for MMMU dataset using enhanced transformer model.
 
 This module implements the training loop and evaluation logic for the
@@ -7,17 +15,6 @@ enhanced transformer model on the MMMU (Massive Multitask Mathematical
 Understanding)
 dataset. It includes logging, checkpointing, and performance monitoring.
 """
-
-from typing import Dict, Any
-import jax
-from flax.training import train_state
-import optax
-
-from src.models.enhanced_transformer import EnhancedTransformer
-from src.config.config import ModelConfig
-from src.data.mmmu_dataloader import MMMUDataLoader
-from src.training.utils.logging import setup_logging
-
 
 def setup_training(config: ModelConfig):
     """Set up training environment and model.

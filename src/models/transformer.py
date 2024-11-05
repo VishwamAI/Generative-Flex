@@ -1,8 +1,7 @@
-"""Core transformer architecture implementation using JAX and Flax."""
-
 from typing import Any
 import jax
 
+"""Core transformer architecture implementation using JAX and Flax."""
 
 class MultiHeadAttention(nn.Module):
     """Multi-head attention mechanism."""

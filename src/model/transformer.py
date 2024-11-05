@@ -1,14 +1,12 @@
+import torch
+from typing import Optional
+from .attention import FlashAttention
+from .experts import MixtureOfExperts
+
 """
 Advanced Transformer Layer Implementation for Generative-Flex
 Combines Flash Attention and Mixture of Experts for optimal performance
 """
-
-import torch
-from typing import Optional
-
-from .attention import FlashAttention
-from .experts import MixtureOfExperts
-
 
 class TransformerLayer(nn.Module):
     """

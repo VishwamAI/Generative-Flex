@@ -7,7 +7,6 @@ import os
 import jax
 from datasets import load_dataset
 
-
 class TestEnvironment(unittest.TestCase):
     def setUp(self):
         warnings.filterwarnings("ignore")

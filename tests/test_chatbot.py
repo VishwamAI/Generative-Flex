@@ -1,12 +1,8 @@
-import os
-"""Tests for the language model chatbot implementation."""
-
 from typing import Dict, List
-
 import jax
-
 from src.models.language_model import LanguageModel
 
+"""Tests for the language model chatbot implementation."""
 
 def tokenize(text: str, vocab: Dict[str, int]) -> List[int]:
     """Convert text to tokens using vocabulary."""

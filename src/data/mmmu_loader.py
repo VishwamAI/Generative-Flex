@@ -1,10 +1,12 @@
-"""MMMU dataset loader implementation."""
+from typing import Dict
+from typing import List
 
 import os
 import json
 import torch
 from torch.utils.data import Dataset, DataLoader
 
+"""MMMU dataset loader implementation."""
 
 class MMMUDataset(Dataset):
     """Dataset class for MMMU data."""

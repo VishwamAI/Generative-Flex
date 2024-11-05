@@ -1,12 +1,9 @@
-import os
 from typing import Tuple
-"""Video generation model implementation using JAX and Flax."""
-
 from typing import Any, Optional, Tuple
 import jax
-
 from src.models.transformer import TransformerBlock
 
+"""Video generation model implementation using JAX and Flax."""
 
 class VideoEmbedding(nn.Module):
     """Video to embedding conversion."""

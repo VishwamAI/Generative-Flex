@@ -1,5 +1,3 @@
-"""Configuration Management for Generative-Flex"""
-
 from dataclasses import dataclass, field
 from typing import Optional, Dict, Any
 import json
@@ -7,6 +5,7 @@ from pathlib import Path
 import yaml
 import logging
 
+"""Configuration Management for Generative-Flex"""
 
 @dataclass
 class ModelConfig:

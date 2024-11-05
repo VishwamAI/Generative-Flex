@@ -1,4 +1,3 @@
-import os
 import jax
 from typing import Any, Dict, Optional
 import optax

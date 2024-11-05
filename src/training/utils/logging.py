@@ -3,7 +3,6 @@ import os
 from datetime import datetime
 from typing import Dict, Any
 
-
 class TrainingLogger:
     def __init__(self, log_dir: str = "logs"):
         self.log_dir = log_dir

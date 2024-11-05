@@ -1,18 +1,20 @@
-import os
-"""
-Math reasoning module for enhanced transformer model.
-"""
+from typing import Dict
+from typing import Optional
+from typing import List
 
 import logging
-
 import torch
 from transformers import PreTrainedModel, GenerationMixin
-
 from ..layers.flash_moe import FlashAttention, MixtureOfExperts
 from ..layers.enhanced_transformer import EnhancedTransformerBlock
 from ..multimodal.base_transformer import BaseTransformer, TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
 from .mathematical_notation import MathematicalNotationProcessor
+from transformers import PreTrainedModel
+
+"""
+Math reasoning module for enhanced transformer model.
+"""
 
 logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
@@ -295,9 +297,6 @@ class MathReasoningHead(nn.Module):
         return outputs
 
         return outputs
-
-
-from transformers import PreTrainedModel
 
 
 class MathReasoningModel(PreTrainedModel, GenerationMixin):
