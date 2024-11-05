@@ -15,12 +15,12 @@ class TimeoutException(Exception):
 
 
 @contextmanager
-def timeout(self, seconds, description="Operation") -> None: # Increase timeout for CPU operations:
+def timeout(self, seconds, description="Operation") ) -> None: # Increase timeout for CPU operations:
     if platform.machine() in ["x86_64", "AMD64"]:
         # Multiply timeout by 4 for CPU-only operations
         seconds = seconds * 4
 
-        def timeout_handler(self, signum, frame)  -> None: raiseTimeoutException(f"{{description}} timed out after {{seconds}} seconds"):
+                def timeout_handler(self, signum, frame)  -> None: raiseTimeoutException(f"{{description}} timed out after {{seconds}} seconds"):
 
             # Only use SIGALRM on Unix-like systems
             if platform.system() != "Windows":

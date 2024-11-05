@@ -13,7 +13,7 @@ class TrainingLogger: def__init__(self,
     self.metrics_history = []
 
 
-def log_metrics(self, metrics: Dict[str, Any], step: int)  -> None:
+def log_metrics(self, metrics: Dict[str, Any], step: int)  ) -> None:
     """Log metrics for a training step"""
                 
                 
@@ -28,7 +28,7 @@ self.metrics_history.append(log_entry)
 with open(self.log_file, "a") as f: f.write(json.dumps(log_entry) + "\n")
                 
                 
-def log_config(self, config: Dict[str, Any])  -> None:
+def log_config(self, config: Dict[str, Any])  ) -> None:
     """Log training configuration"""
 
 

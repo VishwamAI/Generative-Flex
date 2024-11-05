@@ -11,7 +11,7 @@ def load_data(self):
         return data["conversations"]
 
 
-    def create_vocabulary(conversations: List[Dict[str, str]]) -> Dict[str, int]:
+        def create_vocabulary(conversations: List[Dict[str, str]]) -> Dict[str, int]:
         vocab = {"<pad>": 0, "<start>": 1, "<end>": 2, "<unk>": 3}
         for conv in conversations: fortextin [conv["input"], conv["response"]]:
             for token in text.lower().split():
@@ -19,7 +19,7 @@ def load_data(self):
                 return vocab
 
 
-            def main(self):
+                        def main(self):
                 # Load and prepare data
                 conversations = load_data("data/chatbot/training_data.json")
                 vocab = create_vocabulary(conversations)

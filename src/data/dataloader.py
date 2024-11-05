@@ -44,7 +44,7 @@ def __init__(self):
 # Load or create cache
 self.load_and_cache_data()
         
-def load_and_cache_data(self)  -> None:
+def load_and_cache_data(self)  ) -> None:
     """Load and preprocess data with caching"""
     cache_path = (
     self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None

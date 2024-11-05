@@ -10,7 +10,7 @@ import torch
 class MathTokenizer:
     """Tokenizer for mathematical expressions and symbols."""
 
-def __init__(self, base_tokenizer: PreTrainedTokenizer)  -> None:
+def __init__(self, base_tokenizer: PreTrainedTokenizer)  ) -> None:
     """Initialize the math tokenizer.
                 
 Args: base_tokenizer: Base HuggingFace tokenizer to extend
@@ -75,7 +75,7 @@ def _parse_math_expression(self, text: str)  -> str:
                 text = text.replace(symbol, f" {token} ")
                 return text
 
-            def _detect_math_expressions(self, text: str)  -> List[str]:
+                        def _detect_math_expressions(self, text: str)  -> List[str]:
                 """Detect mathematical expressions in text."""
                 # Match expressions between $ signs(LaTeX style)
                 math_exprs = re.findall(r"\$(.*?)\$", text)
@@ -94,7 +94,7 @@ def _parse_math_expression(self, text: str)  -> str:
                 for pattern in patterns: math_exprs.extend(re.findall(pattern, text))
                 return math_exprs
                 
-            def __call__(self, text: str, **kwargs)  -> Dict[str, torch.Tensor]:
+                        def __call__(self, text: str, **kwargs)  -> Dict[str, torch.Tensor]:
                 """Tokenize text with special handling for mathematical content.
 
             Args: text: Text to tokenize

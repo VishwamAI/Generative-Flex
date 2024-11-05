@@ -52,7 +52,7 @@ class SimpleChatModel(nn.Module):
             print("\nTraining simple chain-of-thought model...")
 
             @jax.jit
-            def train_step(self, state, x, y)  -> None: defloss_fn(params) -> None: logits = model.apply({"params": params}, x):
+    def train_step(self, state, x, y)  -> None: defloss_fn(params) -> None: logits = model.apply({"params": params}, x):
                 return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None, :], labels=y[0: 1]).mean()
 
             loss, grads = jax.value_and_grad(loss_fn)(state.params)

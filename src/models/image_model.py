@@ -15,7 +15,7 @@ class PatchEmbedding(nn.Module):
     patch_size: inthidden_dim: intdtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, images) -> None:
+    def __call__(self, images) ) -> None:
         """
         Convert images to patch embeddings.
         """
@@ -40,7 +40,7 @@ class PatchEmbedding(nn.Module):
         patch_size: inthidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intchannels: int = 3, dropout_rate: float = 0.1, dtype: Any = jnp.float32
 
         @nn.compact
-        def __call__(self, inputs, training: bool = True) -> , None:
+        def __call__(self, inputs, training: bool = True) ) -> None:
             """
             Forward pass of the image generation model.
             """
@@ -77,7 +77,7 @@ class PatchEmbedding(nn.Module):
 
                 return x
 
-            def generate(self):
+        def generate(self):
                 rng: Any,
                 condition: Optional[jnp.ndarray] = None,
                 batch_size: int = 1):

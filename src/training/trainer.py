@@ -40,7 +40,7 @@ def __init__(self):
         self._epoch = 0
         self._best_eval_loss = float("inf")
 
-        def train(self):
+                def train(self):
             ) -> None: None:
                 """Train the model."""
                 self.model.train()
@@ -66,7 +66,7 @@ def __init__(self):
 
                         if self._step % self.save_steps == 0: self.save_checkpoint()
 
-                        def training_step(self):
+                                                def training_step(self):
                             batch
                             ) -> None: torch.Tensor:
                                 """Perform a single training step."""
@@ -76,7 +76,7 @@ def __init__(self):
                                 if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
                                 return loss
 
-                            def evaluate(self):
+                                                        def evaluate(self):
                                 ) -> None: Dict[str, float]:
                                     """Evaluate the model."""
                                     if self.eval_dataloader is None: return{}
@@ -100,7 +100,7 @@ def __init__(self):
 
                                         return metrics
 
-                                    def save_checkpoint(self):
+                                                                        def save_checkpoint(self):
                                         is_best: bool = False
                                         ) -> None: None:
                                             """Save a model checkpoint."""
@@ -116,7 +116,7 @@ def __init__(self):
                                             f"{{self.output_dir}}/{{checkpoint_name}}.pt")
                                             logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-                                            def log_metrics(self):
+                                                                                        def log_metrics(self):
                                                 metrics: Dict[str,
                                                 float]
                                                 ) -> None: None:

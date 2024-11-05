@@ -41,7 +41,7 @@ def from_file(self, cls, config_path: str)  -> "GenerativeFlexConfig":
     )
     return cls.from_dict(config_dict)
 
-def save(self, save_path: str)  -> None: save_path = Path(save_path)
+def save(self, save_path: str)  -> None: save_path = Path(save_path):
     save_path.parent.mkdir(parents=True, exist_ok=True)
     config_dict = {
     "model": {k: vfork, v in vars(self.model).items()},

@@ -9,7 +9,7 @@ class MultiHeadAttention(nn.Module):
     num_heads: int, head_dim: int, dropout_rate: float = 0.0, dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, x) -> None:
+    def __call__(self, x) ) -> None:
         """Applies multi-head attention on the input data."""
         qkv_features = self.num_heads * self.head_dim
 

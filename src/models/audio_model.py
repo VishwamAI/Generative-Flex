@@ -9,7 +9,7 @@ class AudioEmbedding(nn.Module):
     hidden_dim: intframe_size: int = 1024, hop_length: int = 256, dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, x) -> None:
+    def __call__(self, x) ) -> None:
         """Convert audio signal to embeddings."""
         batch_size, signal_length = audio.shape
 
@@ -35,7 +35,7 @@ class AudioEmbedding(nn.Module):
         hidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intframe_size: int = 1024, hop_length: int = 256, max_length: int = 65536  # Maximum audio length in samples, dropout_rate: float = 0.1, dtype: Any = jnp.float32
 
         @nn.compact
-        def __call__(self, x) -> None:
+        def __call__(self, x) ) -> None:
             """Forward pass of the audio generation model."""
             batch_size, signal_length = inputs.shape
             assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"

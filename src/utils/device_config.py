@@ -22,7 +22,7 @@ def setup_device_config(self):
             return config
 
 
-        def get_compute_dtype(self):
+                def get_compute_dtype(self):
             """Get optimal compute dtype based on available hardware."""
             config = get_device_info()
             return jnp.bfloat16 if config["has_gpu"] else jnp.float32

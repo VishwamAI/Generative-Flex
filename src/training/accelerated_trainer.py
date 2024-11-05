@@ -52,7 +52,7 @@ class AcceleratedTrainer:
 
             # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
-            def train(self) -> None:
+    def train(self) ) -> None:
                 """
                 Train the model.
                 """
@@ -80,7 +80,7 @@ class AcceleratedTrainer:
 
                             if self._step % self.save_steps == 0: self.save_checkpoint()
 
-                            def evaluate(self) -> None: Dict[str, float]:
+    def evaluate(self) ) -> None: Dict[str, float]:
                                 """
                                 Evaluate the model.
                                 """
@@ -105,7 +105,7 @@ class AcceleratedTrainer:
 
                                     return metrics
 
-                                def save_checkpoint(self, is_best: bool = False) -> , None:
+    def save_checkpoint(self, is_best: bool = False) ) -> None:
                                     """
                                     Save a model checkpoint.
                                     """
@@ -115,7 +115,7 @@ class AcceleratedTrainer:
                                     self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
                                     logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-                                    def log_metrics(self, metrics: Dict[str, float]) -> None:
+    def log_metrics(self, metrics: Dict[str, float]) ) -> None:
                                         """
                                         Log training metrics.
                                         """

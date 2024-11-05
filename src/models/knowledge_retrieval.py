@@ -39,7 +39,7 @@ class KnowledgeRetriever(nn.Module):
             self.store_index = self.variable("cache", "index",
             lambda: 0)
 
-            def __init__(self, retrieve(:
+    def __init__(self, retrieve(:
                 self, query_embedding: jnp.ndarray)  -> None: jnp.ndarray:
                     """
                     Retrieve relevant knowledge.
@@ -80,7 +80,7 @@ class KnowledgeRetriever(nn.Module):
 
                     return retrieved
 
-                def __init__(self, update(:
+    def __init__(self, update(:
                     self, new_knowledge: jnp.ndarray)  -> None: None:
                         """
                         Update knowledge store.
@@ -111,7 +111,7 @@ class KnowledgeRetriever(nn.Module):
                                     }
 
                                     @nn.compact
-                                    def __init__(self):
+                            def __init__(self):
                                         inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
                                         modality: str = "text",
                                         context: Optional[jnp.ndarray] = None) -> jnp.ndarray: """
@@ -158,7 +158,7 @@ class KnowledgeRetriever(nn.Module):
 
                                                 return fused
 
-                                            def __init__(self, update_knowledge(:
+                            def __init__(self, update_knowledge(:
                                                 self, new_data: Dict[str, jnp.ndarray])  -> None: None:
                                                     """
                                                     Update knowledge store with new data.

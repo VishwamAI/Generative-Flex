@@ -24,7 +24,7 @@ class TrainState(train_state.TrainState):
             return restored_state or state, step
 
 
-        def compute_metrics(self):
+    def compute_metrics(self):
             labels: jnp.ndarray
             ) -> Dict[str, float]:
                 """Computes metrics for evaluation."""
@@ -35,7 +35,7 @@ class TrainState(train_state.TrainState):
                 return {"loss": loss, "accuracy": accuracy}
 
 
-            def create_input_pipeline(self):
+    def create_input_pipeline(self):
                 data_dir: str,
                 batch_size: int,
                 train_split: float = 0.8,

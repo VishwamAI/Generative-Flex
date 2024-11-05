@@ -62,7 +62,7 @@ class SimpleSeq2SeqModel(nn.Module):
                 y = jnp.array(output_tokens)
 
 
-                def loss_fn(self, params)  -> None: logits = model.apply({"params": params}, x):
+    def loss_fn(self, params)  -> None: logits = model.apply({"params": params}, x):
                     return optax.softmax_cross_entropy_with_integer_labels(
                 logits=logits[:, : y.shape[0]], labels=y
                 ).mean()

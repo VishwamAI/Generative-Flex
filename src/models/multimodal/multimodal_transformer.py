@@ -23,7 +23,7 @@ class MultiModalTransformer(nn.Module):
 
         self.apply(_init_math_weights)
 
-        def __init__(self):
+    def __init__(self):
             input_ids: Optional[torch.Tensor] = None,
             attention_mask: Optional[torch.Tensor] = None,
             position_ids: Optional[torch.Tensor] = None,
@@ -97,7 +97,7 @@ class MultiModalTransformer(nn.Module):
                     }
                     return hidden_states
 
-                def __init__(self):
+    def __init__(self):
                     input_ids: torch.Tensor,
                     attention_mask: Optional[torch.Tensor] = None,
                     **kwargs) -> Dict[str, Any]:

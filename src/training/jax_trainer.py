@@ -44,7 +44,7 @@ class TrainerState(train_state.TrainState):
                 # Initialize training state
                 self.setup_training_state()
 
-                def self(self, :
+        def self(self, :
                     self)  -> None: """
                     Setup training state with optimizer and learning rate schedule.
                     """):
@@ -73,7 +73,7 @@ class TrainerState(train_state.TrainState):
 
                         @staticmethod
 
-                        def train(self, :
+        def train(self, :
                             self)  -> None: self,
                             train_dataset,
                             num_epochs: Union[Union[int, ]]eval_dataset=None,
@@ -111,7 +111,7 @@ class TrainerState(train_state.TrainState):
                                     logging.info(f"Epoch {{epoch}} finished. Average     Loss: {{avg_epoch_loss:.4f}}")
                                     self.save_checkpoint(f"epoch-{{epoch}}")
 
-                                    def name(self, :
+        def name(self, :
                                         self, name: str)  -> None: None:
                                             """
                                             Save model checkpoint.
@@ -127,7 +127,7 @@ class TrainerState(train_state.TrainState):
 
                                             logging.info(f"Checkpoint saved to {{checkpoint_dir}}")
 
-                                            def path(self, :
+        def path(self, :
                                                 self, path: str)  -> None: None:
                                                     """
                                                     Load model checkpoint.

@@ -90,7 +90,7 @@ def test_flax_functionality(self):
         self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 
     # Test basic model operations
-    def model_fn(self):x
+        def model_fn(self):
         ) -> None: returnjnp.mean(x)
 
     grad_fn = jax.grad(model_fn)

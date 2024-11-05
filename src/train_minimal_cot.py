@@ -42,7 +42,7 @@ class SimpleGreetingModel(nn.Module):
             return data, vocab
 
 
-        def main(self):
+    def main(self):
             print("\nCreating minimal training data with chain-of-thought...")
             data, vocab = create_minimal_data()
 
@@ -77,7 +77,7 @@ class SimpleGreetingModel(nn.Module):
                     # Define loss function for gradient computation
 
 
-                    def loss_fn(self, params)  -> None: logits = model.apply(params, input_tokens):
+    def loss_fn(self, params)  -> None: logits = model.apply(params, input_tokens):
                         loss = optax.softmax_cross_entropy_with_integer_labels(
                         logits[None, :], target_tokens[0: 1]
                         ).mean()

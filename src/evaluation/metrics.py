@@ -41,7 +41,7 @@ metrics["rouge"] = {k: v.item() for k, v in rouge_scores.items()}
 
 return EvalMetrics(**metrics)
 
-def log_metrics(self, metrics: EvalMetrics, step: int)  -> None:
+def log_metrics(self, metrics: EvalMetrics, step: int)  ) -> None:
     """Log metrics to console"""
     logging.info(f"Step {step} Evaluation Metrics:")
     logging.info(f"Perplexity: {metrics.perplexity:.4f}")

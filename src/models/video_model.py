@@ -12,7 +12,7 @@ class VideoEmbedding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, video) -> None: b, t, h, w, c = video.shape:
+    def __call__(self, video) ) -> None: b, t, h, w, c = video.shape:
         patches = jnp.reshape(video, (
         b, t // self.patch_size[0], h // self.patch_size[1], w // self.patch_size[2], *self.patch_size, c))
         patches = jnp.reshape(patches, (
@@ -28,7 +28,7 @@ class VideoEmbedding(nn.Module):
         hidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intchannels: int = 3, dropout_rate: float = 0.1, dtype: Any = jnp.float32
 
         @nn.compact
-        def __call__(self, inputs, training: bool = True) -> , None: b, t, h, w, c = inputs.shape:
+        def __call__(self, inputs, training: bool = True) ) -> None: b, t, h, w, c = inputs.shape:
             assert(t == self.video_size[0]
             and h == self.video_size[1]
             and w == self.video_size[2]
@@ -55,7 +55,7 @@ class VideoEmbedding(nn.Module):
                 x = jnp.reshape(x, (b, t, h, w, c))
                 return x
 
-            def generate(self):
+        def generate(self):
                 rng: Any,
                 prompt: Optional[jnp.ndarray] = None,
                 num_frames: int = 16):

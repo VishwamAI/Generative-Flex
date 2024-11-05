@@ -10,7 +10,7 @@ class PositionalEncoding(nn.Module):
     max_len: int = 2048, dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, x) -> None:
+    def __call__(self, x) ) -> None:
         """Add positional encodings to the input embeddings."""
         batch_size = inputs.shape[0]
         seq_length = inputs.shape[1]
@@ -36,7 +36,7 @@ class PositionalEncoding(nn.Module):
         vocab_size: inthidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intmax_seq_len: int = 2048, dropout_rate: float = 0.1, dtype: Any = jnp.float32
 
         @nn.compact
-        def __call__(self, x) -> None:
+        def __call__(self, x) ) -> None:
             """Forward pass of the language model."""
             # Token embeddings
             x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
@@ -66,7 +66,7 @@ class PositionalEncoding(nn.Module):
 
                 return logits
 
-            def generate(self):
+        def generate(self):
                 rng: Any,
                 prompt: jnp.ndarray,
                 max_length: int,

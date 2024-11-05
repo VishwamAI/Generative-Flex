@@ -71,14 +71,14 @@ class BlockWiseQuantization(nn.Module):
 
     block_size: intnum_bits: intquantization_mode: str = "linear_symmetric"
 
-    def self(self) -> None: """:
+    def self(self) ) -> None: """:
         Initialize components.
         """):
             # Initialize state variable for original shape
             self.state = self.variable("state", "shape",
             lambda: None)
 
-            def x(self, x: jnp.ndarray) Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]) -> None:
+    def x(self, x: jnp.ndarray) Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]) ) -> None:
                 """
                 Quantize input tensor to int4 format.
                 """
@@ -114,7 +114,7 @@ class BlockWiseQuantization(nn.Module):
 
                 return x_quant, scale, zero_point
 
-            def dequantize(self) -> None: self,:
+    def dequantize(self) ) -> None: self,:
                 x_quant: Union[Union[jnp.ndarray,
                 scale: jnp.ndarray,
                 zero_point: jnp.ndarray]]
@@ -138,7 +138,7 @@ class BlockWiseQuantization(nn.Module):
                 num_heads: int, head_dim: intmax_sequence_length: int2048dtype: str"float16"
                 cache_size_multiplier: float1.5
 
-                def self(self) -> None: """:
+                def self(self) ) -> None: """:
                     Initialize cache variables.
                     """):
                         # Cache shapes
@@ -157,7 +157,7 @@ class BlockWiseQuantization(nn.Module):
                         lambda: 0)
                         self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)
 
-                        def get(self) -> None: Union[Union[self,:
+                def get(self) ) -> None: Union[Union[self,:
                             start: int]] 0,
                             end: Optional[int]None
                             ) -> Tuple[jnp.ndarray, jnp.ndarray]:
@@ -230,7 +230,7 @@ class BlockWiseQuantization(nn.Module):
                                         self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=True)
 
                                         @nn.compact
-                                        def __call__(self) -> None: Union[Union[self,:
+                                    def __call__(self) ) -> None: Union[Union[self,:
                                             inputs: jnp.ndarray,
                                             attention_mask: Optional[jnp.ndarray]]] None
                                             ) -> Tuple[jnp.ndarray, jnp.ndarray]:
@@ -305,7 +305,7 @@ class BlockWiseQuantization(nn.Module):
 
                                                     if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size, _noise_multiplier=self.config.noise_multiplier, _l2_norm_clip=self.config.l2_norm_clip)
 
-                                                    def compute_key_value(self) -> None: self,:
+                                                def compute_key_value(self) ) -> None: self,:
                                                         hidden_states: jnp.ndarray
                                                         ) -> Tuple[jnp.ndarray, jnp.ndarray]:
                                                             """

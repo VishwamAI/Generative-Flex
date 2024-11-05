@@ -44,7 +44,7 @@ class ImageProcessor(nn.Module):
 
             self.dropout = nn.Dropout(dropout_rate)
 
-            def forward(self):
+    def forward(self):
                 images: torch.Tensor,
                 attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
                     """

@@ -17,7 +17,7 @@ MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 class MMUDataset(Dataset):
     """MMMU Dataset loader with multimodal support."""
 
-def __init__(self, subjects: Optional[List[str]] = None, split: str = "validation", tokenizer: Any = None, max_length: int = 512)  -> , None:
+def __init__(self, subjects: Optional[List[str]] = None, split: str = "validation", tokenizer: Any = None, max_length: int = 512)  ) -> None:
     """Initialize the dataset.
                 
 Args: subjects: List of subjects to load

@@ -57,7 +57,7 @@ class SimpleLanguageModel(nn.Module):
                 y = jnp.array([output_tokens[i]])
 
 
-                def loss_fn(self, params)  -> None: logits = model.apply(params, x):
+    def loss_fn(self, params)  -> None: logits = model.apply(params, x):
                     return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
                 loss, grads = jax.value_and_grad(loss_fn)(state.params)

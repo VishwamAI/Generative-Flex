@@ -30,7 +30,7 @@ class ModalityProjection(nn.Module):
 
                 return {"output": output, "hidden_states": hidden_states}
 
-            def __init__(self):
+        def __init__(self):
                 attention_mask=None,
                 target_modality="text",
                 _max_length=None,
