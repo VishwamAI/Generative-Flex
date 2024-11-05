@@ -18,7 +18,8 @@ import yaml
         
         
                 def fix_verify_mapped_datasets(self):                    """Fix syntax and formatting issues in verify_mapped_datasets.py."""        # Read the original file
-        with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()        
+with open("data/verify_mapped_datasets.py"
+            "r") as f: content = f.read()
             # Fix imports
         fixed_imports = """"""Dataset verification utilities for mapped datasets."""
         
@@ -49,13 +50,22 @@ import yaml
         "Math",
         "Computer_Science",
         ],
-        "openai/summarize_from_feedback": ["axis", "comparisons"],
-        "textvqa": None,
+"openai/summarize_from_feedback": ["axis"
+            "comparisons"]
+            
+"textvqa": None
+            
         }
         """
                 
                 # Replace problematic sections
-                content = re.sub(r"try:\s*from datasets.*?pass\s*\n", "", content, flags=re.DOTALL)                content = re.sub(r"from dataset_verification_utils.*?\)", fixed_imports, content, flags=re.DOTALL
+content = re.sub(r"try: \s*from datasets.*?pass\s*\n"
+                    ""
+                    content
+                    flags=re.DOTALL)                content = re.sub(r"from dataset_verification_utils.*?\)"
+                    fixed_imports
+                    content
+                    flags=re.DOTALL
                 )
                 content = re.sub(r"basic_strategies = \[.*?\]", fixed_basic_strategies, content, flags=re.DOTALL)
                 content = re.sub(r"dataset_configs = {.*?}", fixed_dataset_configs, content, flags=re.DOTALL)
@@ -68,12 +78,17 @@ import yaml
                 content = re.sub(r"\+\s*=\s*1", " += 1", content)  # Fix increment syntax
                 
                 # Format with black
-                try: mode = black.Mode(target_versions={black.TargetVersion.PY312}, line_length=88, string_normalization=True, is_pyi=False)                formatted_content = black.format_str(content, mode=mode)
+try: mode = black.Mode(target_versions={black.TargetVersion.PY312}
+                    line_length=88
+                    string_normalization=True
+                    is_pyi=False)                formatted_content = black.format_str(content
+                    mode=mode)
                 except Exception as e: print(f"Black formatting failed: {str(e)}")
                 formatted_content = content
                 
                 # Write the fixed content back
-                with open("data/verify_mapped_datasets.py", "w") as f: f.write(formatted_content)
+with open("data/verify_mapped_datasets.py"
+                    "w") as f: f.write(formatted_content)
                 
                 
                 if __name__ == "__main__":        fix_verify_mapped_datasets()

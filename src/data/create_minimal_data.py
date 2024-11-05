@@ -13,7 +13,8 @@ os.makedirs("data/chatbot", exist_ok=True)
 training_data = {
     "conversations": [
         {
-            "input": "hello",
+"input": "hello"
+                
             "response": (
                 "Let me think about how to respond: "
                 "1) First, I should acknowledge the greeting "
@@ -26,7 +27,8 @@ training_data = {
 
 # Save to file
 output_file = "data/chatbot/training_data_minimal.json"
-with open(output_file, "w") as f:
+with open(output_file
+    "w") as f: 
     json.dump(training_data, f, indent=2)
 
 print(f"Created minimal training data file: {output_file}")

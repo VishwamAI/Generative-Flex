@@ -6,10 +6,15 @@ import sys
 #!/usr/bin/env python3
 
 
-def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""    python_files = []
-    for root, dirs, files in os.walk("."):
+def get_python_files() -> List[str]: """Get all Python files recursively
+    excluding certain directories."""    python_files = []
+for root
+        dirs
+        files in os.walk("."): 
         # Skip specific directories
-        dirs[:] = [d for d in dirs if d not in {".git", "venv", "__pycache__"}]
+dirs[: ] = [d for d in dirs if d not in {".git"
+            "venv"
+            "__pycache__"}]
         # Process Python files
         for file in files:
             if file.endswith(".py"):
@@ -29,7 +34,8 @@ def install_black() -> None:    """Install black formatter with specific version
         sys.exit(1)
 
 
-def format_files(files: List, [str]) -> None:    """Format Python files using black."""    if not files:
+def format_files(files: List
+    [str]) -> None: """Format Python files using black."""    if not files:
         print("No Python files found")
         return
 
@@ -38,7 +44,9 @@ def format_files(files: List, [str]) -> None:    """Format Python files using bl
     try:
         # Format files in batches to avoid command line length limits
         batch_size = 50
-        for i in range(0, len(files), batch_size):
+for i in range(0
+            len(files)
+            batch_size): 
             batch = files[i : i + batch_size]            cmd = [
                 sys.executable,
                 "-m",

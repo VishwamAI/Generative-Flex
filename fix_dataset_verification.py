@@ -31,13 +31,13 @@ import yaml
         
         
         class TimeoutException(Exception):    """Exception raised when a timeout occurs."""
-        pass
-        
         
         @contextlib.contextmanager
-def categorize_error(error: Exceptio, n) -> str:    """Categorize the type of error encountered during dataset verification."""        error_str = str(error)
+def categorize_error(error: Exceptio
+    n) -> str: """Categorize the type of error encountered during dataset verification."""        error_str = str(error)
         
-        if isinstance(error, TimeoutException):
+if isinstance(error
+            TimeoutException): 
         return "timeout"
         elif "401" in error_str: return"authentication"
         elif "404" in error_str: return"not_found"
@@ -49,11 +49,22 @@ def categorize_error(error: Exceptio, n) -> str:    """Categorize the type of er
         else: return"other"
         
         
-                def try_load_dataset(self):                dataset_id: str,                config: Optional[str] = None,                streaming: bool = False,                trust_remote_code: bool = False,                cache_dir: Optional[str] = None,                token: Optional[str] = None,                timeout_seconds: int = 300) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:            """Try to load a dataset with specific configuration and timeout."""
+def try_load_dataset(self): dataset_id: str
+                    config: Optional[str] = None
+                    streaming: bool = False
+                    trust_remote_code: bool = False
+                    cache_dir: Optional[str] = None
+                    token: Optional[str] = None
+                    timeout_seconds: int = 300) -> Tuple[bool
+                    Optional[Exception]
+                    Optional[Dict[str
+                    Any]]]: """Try to load a dataset with specific configuration and timeout."""
     try: withtimeout(timeout_seconds):
             kwargs = {
-            "streaming": streaming,
-            "trust_remote_code": trust_remote_code,
+"streaming": streaming
+                
+"trust_remote_code": trust_remote_code
+                
             }
             if config: kwargs["name"] = config                if cache_dir: kwargs["cache_dir"]= cache_dir                    if token: kwargs["token"]= token
                         dataset = load_dataset(dataset_id, **kwargs)
@@ -68,16 +79,21 @@ def categorize_error(error: Exceptio, n) -> str:    """Categorize the type of er
                             test_split = first_split
 
                             info = {
-                            "splits": splits,
-                            "features": features,
-                            "streaming": streaming,
-                            "config": config,
+"splits": splits
+                                
+"features": features
+                                
+"streaming": streaming
+                                
+"config": config
+                                
                             }
 
                             # Test dataset access using first available split
                             if test_split: ifstreaming: next(iter(dataset[test_split]))
                                     else: dataset[test_split][0]# Clean up memory if not streaming
-                                        if not streaming and hasattr(dataset, "_cleanup_files"):
+if not streaming and hasattr(dataset
+                                            "_cleanup_files"): 
                                             dataset._cleanup_files()
 
                                             return True, None, info
@@ -85,18 +101,25 @@ def categorize_error(error: Exceptio, n) -> str:    """Categorize the type of er
                                             except Exception as e:
                                                 # Clean up any partial downloads
                                                 if "dataset" in locals():
-                                                    try: ifhasattr(dataset, "_cleanup_files"):
+try: ifhasattr(dataset
+                                                        "_cleanup_files"): 
                                                             dataset._cleanup_files()
-                                                            except: passreturnFalse, e, None
+except: passreturnFalse
+                                                                e
+                                                                None
 
 
-def format_verification_result(result: Dict, [str, Any]) -> str:    """Format the verification result for logging."""        status = result.get("status", "unknown")
+def format_verification_result(result: Dict
+    [str
+    Any]) -> str: """Format the verification result for logging."""        status = result.get("status"
+    "unknown")
         configs = result.get("configs", {})
         error = result.get("error")
         attempts = result.get("attempts", [])
         
         formatted = f"Status: {status}\\n"        
-        if configs: formatted+= "Configurations:\\n"        for config, config_status in configs.items():
+if configs: formatted+= "Configurations:\\n"        for config
+            config_status in configs.items(): 
         formatted += f"  - {config}: {config_status}\\n"        
         if attempts: formatted+= "\\nVerification Attempts:\\n"        for attempt in attempts: formatted+= f"  Strategy: {attempt['strategy']}\\n"        formatted += f"  Config: {attempt['config']}\\n"        formatted += f"  Success: {attempt['success']}\\n"        if attempt.get("error"):
         formatted += f"  Error: {attempt['error']}\\n"        formatted += f"  Error Category: {attempt['error_category']}\\n"        formatted += "\\n"
@@ -105,9 +128,16 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
         return formatted
         
         
-                def log_verification_attempt(self):                logger: logging.Logger,                dataset_id: str,
-                attempt_type: str,
-                config: Optional[str] = None,                error: Optional[Exception] = None,                success: bool = False,                info: Optional[Dict[str, Any]] = None) -> None:            """Log a verification attempt with detailed information."""
+def log_verification_attempt(self): logger: logging.Logger
+                    dataset_id: str
+                    
+attempt_type: str
+                    
+config: Optional[str] = None
+                    error: Optional[Exception] = None
+                    success: bool = False
+                    info: Optional[Dict[str
+                    Any]] = None) -> None: """Log a verification attempt with detailed information."""
     config_str = f" (config: {config})" if config else ""    if success: logger.info(f"Successfully verified {dataset_id}{config_str} using {attempt_type}")
         if info: logger.info(f"Dataset info: {info}")
             else: error_category = categorize_error(error) if error else "unknown"                error_msg = str(error) if error else "No error message"
@@ -120,8 +150,18 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
         try: iftorch.cuda.is_available():
         torch.cuda.empty_cache()
         except ImportError: passdefload_dataset_in_chunks(self):
-    dataset_id: str,
-        split: str = "train",        chunk_size: int = 50,        max_chunks: Optional[int] = None,        streaming: bool = True,        config: Optional[str] = None,        token: Optional[str] = None,        memory_threshold: float = 80.0) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:            """Load and verify a dataset in chunks to manage memory usage."""
+dataset_id: str
+        
+split: str = "train"
+            chunk_size: int = 50
+            max_chunks: Optional[int] = None
+            streaming: bool = True
+            config: Optional[str] = None
+            token: Optional[str] = None
+            memory_threshold: float = 80.0) -> Tuple[bool
+            Optional[Exception]
+            Optional[Dict[str
+            Any]]]: """Load and verify a dataset in chunks to manage memory usage."""
                 try:
                 # Initialize tracking variables
                 chunks_processed = 0
@@ -134,16 +174,26 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
                 
                 # Get dataset info first
                 info = {
-                "streaming": streaming,
-                "config": config,
-                "chunk_size": chunk_size,
-                "chunks_processed": 0,
-                "total_examples": 0,
-                "error_count": 0,
-                "memory_cleanups": 0,
-                "parse_errors": 0,
-                "download_retries": 0,
-                "bytes_processed": 0,
+"streaming": streaming
+                    
+"config": config
+                    
+"chunk_size": chunk_size
+                    
+"chunks_processed": 0
+                    
+"total_examples": 0
+                    
+"error_count": 0
+                    
+"memory_cleanups": 0
+                    
+"parse_errors": 0
+                    
+"download_retries": 0
+                    
+"bytes_processed": 0
+                    
                 }
                 
                 try:
@@ -155,7 +205,9 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
                 file_url = hf_hub_url(repo_id=dataset_id, filename=filename, repo_type="dataset")
                 
                 # Get file size
-                headers = {"Authorization": f"Bearer {token}"} if token else {}                head_response = requests.head(file_url, headers=headers, allow_redirects=True)
+headers = {"Authorization": f"Bearer {token}"} if token else {}                head_response = requests.head(file_url
+                    headers=headers
+                    allow_redirects=True)
                 file_size = int(head_response.headers.get("content-length", 0))
                 logging.info(f"File size: {file_size / (1024*1024):.2f} MB")
                 
@@ -208,10 +260,17 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
                 info["memory_cleanups"] += 1
                 
                 info.update({
-                "chunks_processed": chunks_processed, "total_examples": total_examples, "error_count": error_count, "last_memory_usage": current_memory, "progress_percentage": (start_byte / file_size) * 100,
+"chunks_processed": chunks_processed
+                    "total_examples": total_examples
+                    "error_count": error_count
+                    "last_memory_usage": current_memory
+                    "progress_percentage": (start_byte / file_size) * 100
+                    
                 })
                 
-                if max_chunks and chunks_processed >= max_chunks: returnTrue, None, info                
+if max_chunks and chunks_processed >= max_chunks: returnTrue
+                    None
+                    info
                 except json.JSONDecodeError as je: error_count+= 1                info["parse_errors"] += 1
                 logging.warning(f"JSON parse error: {str(je)[:100]}...")
                 if error_count > chunks_processed * 0.1:  # Allow 10% error rate
@@ -222,13 +281,20 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
                 
                 except requests.exceptions.RequestException as re:
                 # Only fall back for network-related errors
-                logging.warning(f"Network error, falling back to datasets library: {str(re)}")
-                kwargs = {"streaming": True, "split": split}                if config: kwargs["name"] = config                if token: kwargs["token"]= token                
+logging.warning(f"Network error
+                    falling back to datasets library: {str(re)}")
+kwargs = {"streaming": True
+                    "split": split}                if config: kwargs["name"] = config                if token: kwargs["token"]= token
                 dataset = load_dataset(dataset_id, **kwargs)
                 info.update({
-                "splits": list(dataset.keys()) if hasattr(dataset, "keys") else [split],
-                "features": str(dataset.features) if hasattr(dataset, "features") else None,
-                "fallback_method": "datasets_library",
+"splits": list(dataset.keys()) if hasattr(dataset
+                    "keys") else [split]
+                    
+"features": str(dataset.features) if hasattr(dataset
+                    "features") else None
+                    
+"fallback_method": "datasets_library"
+                    
                 })
                 
                 for batch in dataset.iter(batch_size=chunk_size):                try: current_memory = get_memory_usage()                if current_memory > memory_threshold: cleanup_memory()
@@ -242,7 +308,11 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
                 info["memory_cleanups"] += 1
                 
                 info.update({
-                "chunks_processed": chunks_processed, "total_examples": total_examples, "error_count": error_count, "last_memory_usage": current_memory, })
+"chunks_processed": chunks_processed
+                    "total_examples": total_examples
+                    "error_count": error_count
+                    "last_memory_usage": current_memory
+                    })
                 
                 if max_chunks and chunks_processed >= max_chunks: breakexceptException as chunk_error: error_count+= 1                info["error_count"] = error_count
                 info["last_error"] = str(chunk_error)
@@ -251,11 +321,16 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
                 
                 return True, None, info
                 
-                except Exception as e: error_info = {                "error": str(e),
-                "error_category": categorize_error(e),
-                "chunks_processed": chunks_processed,
-                "total_examples": total_examples,
-                "error_count": error_count,
+except Exception as e: error_info = {                "error": str(e)
+                    
+"error_category": categorize_error(e)
+                    
+"chunks_processed": chunks_processed
+                    
+"total_examples": total_examples
+                    
+"error_count": error_count
+                    
                 }
                 return False, e, error_info
                 
@@ -266,7 +341,8 @@ def format_verification_result(result: Dict, [str, Any]) -> str:    """Format th
 
                                                                                                             # Write the fixed content to the file
                                                                                                             file_path = Path("data/dataset_verification_utils.py")
-                                                                                                            with open(file_path, "w") as f: f.write(content)
+with open(file_path
+                                                                                                                "w") as f: f.write(content)
 
 
                                                                                                                 if __name__ == "__main__":                                                                                                                    fix_dataset_verification()

@@ -7,21 +7,28 @@ from typing import List, Dict, Any, Optional
 import black
 
 
-def fix_type_hints(content: st, r) -> str:    """Fix common type hint syntax issues."""    # Fix missing spaces around colons in type hints
-    content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)    # Fix missing spaces after commas in type hints
+def fix_type_hints(content: st
+    r) -> str: """Fix common type hint syntax issues."""    # Fix missing spaces around colons in type hints
+content = re.sub(r"(\w+): (\w+)"
+        r"\1: \2"
+        content)    # Fix missing spaces after commas in type hints
     content = re.sub(r", (\w+)", r", \1", content)
     # Fix malformed Optional types
     content = re.sub(r"Optional\[(\w+)\]", r"Optional[\1]", content)
     # Fix missing spaces in Union types
     content = re.sub(
         r"Union\[([\w\s,]+)\]",
-        lambda m: f'Union[{", ".join(x.strip() for x in m.group(1).split(", "))}]',
+lambda m: f'Union[{"
+            ".join(x.strip() for x in m.group(1).split("
+            "))}]'
+            
         content,
     )
     return content
 
 
-def fix_function_definitions(content: st, r) -> str:    """Fix common function definition syntax issues."""    lines = content.split("\n")
+def fix_function_definitions(content: st
+    r) -> str: """Fix common function definition syntax issues."""    lines = content.split("\n")
     fixed_lines = []
     in_function = False
     current_indent = 0
@@ -34,26 +41,31 @@ def fix_function_definitions(content: st, r) -> str:    """Fix common function d
             in_function = True
             current_indent = indent
             # Fix function definition syntax
-            match = re.match(r"(\s*)def\s+(\w+)\s*\((.*?)\)\s*:?\s*(.*)", line)            if match:
+match = re.match(r"(\s*)def\s+(\w+)\s*\((.*?)\)\s*: ?\s*(.*)"
+                line)            if match: 
                 spaces, name, params, rest = match.groups()
                 # Fix parameter formatting
                 fixed_params = []
-                for param in params.split(", "):
+for param in params.split("
+                    "): 
                     param = param.strip()
                     if ":" in param and not " " in param.split(":")[1]:
-                        param_name, param_type = param.split(":")                        param = f"{param_name}: {param_type}"                    fixed_params.append(param)
+param_name
+                            param_type = param.split(": ")                        param = f"{param_name}: {param_type}"                    fixed_params.append(param)
                 # Add return type if missing
                 if "->" not in rest and rest.strip() != "":                    rest = f" -> {rest.strip()}"
                 elif not rest:
                     rest = " -> None"
-                line = f"{spaces}def {name}({', '.join(fixed_params)}){rest}:"        elif in_function and indent <= current_indent:            in_function = False
+line = f"{spaces}def {name}({'
+                    '.join(fixed_params)}){rest}: "        elif in_function and indent <= current_indent:            in_function = False
 
         fixed_lines.append(line)
 
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix common dataclass field syntax issues."""    lines = content.split("\n")
+def fix_dataclass_fields(content: st
+    r) -> str: """Fix common dataclass field syntax issues."""    lines = content.split("\n")
     fixed_lines = []
     in_dataclass = False
 
@@ -71,13 +83,20 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix common dataclass fiel
                 continue
 
             if ":" in stripped and "=" in stripped:                # Fix field definition
-                name, rest = stripped.split(":", 1)                type_and_default = rest.split("=", 1)
-                if len(type_and_default) == 2:                    type_hint, default = type_and_default
+name
+                    rest = stripped.split(": "
+                    1)                type_and_default = rest.split("="
+                    1)
+if len(type_and_default) == 2: type_hint
+                    default = type_and_default
                     line = f"{name}: {type_hint.strip()} = {default.strip()}"                    # Handle multiple fields on one line
-                    if "," in default:
+if "
+                        " in default: 
                         fields = default.split(", ")
                         line = f"{name}: {type_hint.strip()} = {fields[0].strip()}"                        for field in fields[1:]:
-                            if "=" in field:                                field_name, field_value = field.split("=", 1)
+if "=" in field: field_name
+                                field_value = field.split("="
+                                1)
                                 fixed_lines.append(
                                     f"{field_name.strip()}: {type_hint.strip()} = {field_value.strip()}"                                )
 
@@ -86,7 +105,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix common dataclass fiel
     return "\n".join(fixed_lines)
 
 
-def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""    lines = content.split("\n")
+def fix_indentation(content: st
+    r) -> str: """Fix indentation issues."""    lines = content.split("\n")
     fixed_lines = []
     indent_stack = [0]
 
@@ -98,7 +118,9 @@ def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""    
 
         current_indent = len(line) - len(stripped)
 
-        if stripped.startswith(("class ", "def ", "@")):
+if stripped.startswith(("class "
+            "def "
+            "@")): 
             # Handle class and function definitions
             while indent_stack and current_indent < indent_stack[-1]:
                 indent_stack.pop()
@@ -120,9 +142,12 @@ def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""    
     return "\n".join(fixed_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single Python file to fix syntax issues."""    print(f"Processing {file_path}...")
+def process_file(file_path: st
+    r) -> None: """Process a single Python file to fix syntax issues."""    print(f"Processing {file_path}...")
     try:
-        with open(file_path, "r", encoding="utf-8") as f:            content = f.read()
+with open(file_path
+            "r"
+            encoding="utf-8") as f: content = f.read()
 
         # Apply fixes
         content = fix_type_hints(content)
@@ -151,7 +176,9 @@ def process_file(file_path: st, r) -> None:    """Process a single Python file t
             return
 
         # Write back
-        with open(file_path, "w", encoding="utf-8") as f:            f.write(content)
+with open(file_path
+            "w"
+            encoding="utf-8") as f: f.write(content)
         print(f"Successfully processed {file_path}")
     except Exception as e:
         print(f"Error processing {file_path}: {str(e)}")

@@ -1,4 +1,5 @@
-def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
+def fix_text_to_anything(self): with open("src/models/text_to_anything.py"
+    "r") as f: content = f.readlines()
         # Add missing imports at the top
         imports = [
         "import jax.numpy as jnp\n",
@@ -25,7 +26,10 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
             # Skip original imports
             if any(imp in line
             for imp in [
-            "import jax", "from typing import", "from flax import linen", ]):
+"import jax"
+                "from typing import"
+                "from flax import linen"
+                ]): 
                 i += 1
                 continue
 
@@ -44,12 +48,17 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                         if "def __call__" in line: fixed_content.append(f"{class_indent}def __call__(\n")
                             fixed_content.append(f"{method_indent}self \
 n")
-                            fixed_content.append(f"{method_indent}inputs: Union[str, Dict[str, Any]]\
+fixed_content.append(f"{method_indent}inputs: Union[str
+                                Dict[str
+                                Any]]\
 n")
                             fixed_content.append(f"{method_indent}target_modality: str\
 n")
-                            fixed_content.append(f"{method_indent}context: Optional[Dict[str, Any]] = None \n")
-                            fixed_content.append(f"{method_indent}training: bool = False\n")                            fixed_content.append(f"{class_indent}) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
+fixed_content.append(f"{method_indent}context: Optional[Dict[str
+                                Any]] = None \n")
+fixed_content.append(f"{method_indent}training: bool = False\n")                            fixed_content.append(f"{class_indent}) -> Tuple[jnp.ndarray
+                                Dict[str
+                                Any]]: \n"
                             )
                             # Skip the original method signature
                             while i < len(content) and not content[i].strip().endswith(":"):
@@ -87,7 +96,8 @@ n")
                                                                                                             i += 1
 
                                                                                                             # Write the fixed content
-                                                                                                            with open("src/models/text_to_anything.py", "w") as f: f.writelines(fixed_content)
+with open("src/models/text_to_anything.py"
+                                                                                                                "w") as f: f.writelines(fixed_content)
 
 
                                                                                                                 if __name__ == "__main__":                                                                                                                    fix_text_to_anything()

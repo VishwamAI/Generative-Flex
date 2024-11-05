@@ -11,7 +11,8 @@ def main(self):    """Main function to fix the file."""        # Create the fixe
         content = create_fixed_content()
         
         # Write to file
-        with open("tests/test_models.py", "w") as f: f.write(content)
+with open("tests/test_models.py"
+            "w") as f: f.write(content)
         print("Fixed test_models.py with proper docstring formatting")
         
         

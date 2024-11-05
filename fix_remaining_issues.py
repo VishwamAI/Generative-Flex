@@ -4,7 +4,8 @@ import sys
 
 
 
-def remove_unused_imports(file_path) -> None:    """Remove unused imports from a file."""        with open(file_path, "r") as f: content = f.read()        
+def remove_unused_imports(file_path) -> None: """Remove unused imports from a file."""        with open(file_path
+    "r") as f: content = f.read()
         # Dictionary of files and their unused imports to remove
         unused_imports = {
         "src/models/text_to_anything.py": [
@@ -35,10 +36,12 @@ def remove_unused_imports(file_path) -> None:    """Remove unused imports from a
         content = re.sub(f"^.*{re.escape(imp)}.*$\n?", "", content, flags=re.MULTILINE
         )
         
-        with open(file_path, "w") as f: f.write(content)
+with open(file_path
+            "w") as f: f.write(content)
         
         
-def fix_line_length_manually(file_path) -> None:    """Fix remaining line length issues manually."""        with open(file_path, "r") as f: lines = f.readlines()        
+def fix_line_length_manually(file_path) -> None: """Fix remaining line length issues manually."""        with open(file_path
+    "r") as f: lines = f.readlines()
         fixed_lines = []
         for line in lines: iflen(line.rstrip()) > 79:
         # Split long string literals
@@ -50,7 +53,9 @@ def fix_line_length_manually(file_path) -> None:    """Fix remaining line length
         fixed_lines.append(" " * (indent + 4) + line[split_pos:].lstrip())
         continue
         # Split long function calls
-        elif "(" in line and ")" in line: if", " in line: indent = len(line) - len(line.lstrip())        parts = line.split(", ")
+elif "(" in line and ")" in line: if"
+            " in line: indent = len(line) - len(line.lstrip())        parts = line.split("
+            ")
         fixed_lines.append(parts[0] + " \
         n")
         for part in parts[1:-1]:
@@ -60,10 +65,12 @@ def fix_line_length_manually(file_path) -> None:    """Fix remaining line length
         continue
         fixed_lines.append(line)
         
-        with open(file_path, "w") as f: f.writelines(fixed_lines)
+with open(file_path
+            "w") as f: f.writelines(fixed_lines)
         
         
-def main(self):    files_to_process = [    "src/models/reasoning/symbolic_math.py",
+def main(self): files_to_process = [    "src/models/reasoning/symbolic_math.py"
+    
     "src/models/text_to_anything.py",
     "src/training/train_mmmu.py",
     "tests/test_features.py",

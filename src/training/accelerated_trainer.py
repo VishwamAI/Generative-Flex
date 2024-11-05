@@ -14,9 +14,18 @@ logger = logging.getLogger(__name__)
 class AcceleratedTrainer:    """
     Trainer class with accelerate support.
     """
-
-    def __init__(self):        model,        train_dataloader: DataLoader,
-        eval_dataloader: Optional[DataLoader] = None,        optimizer: Optional[torch.optim.Optimizer] = None,        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,        num_epochs: int = 10,        gradient_accumulation_steps: int = 1,        max_grad_norm: float = 1.0,        logging_steps: int = 100,        evaluation_steps: int = 500,        save_steps: int = 1000,        output_dir: str = "outputs"):            """
+        train_dataloader: DataLoader
+        
+eval_dataloader: Optional[DataLoader] = None
+            optimizer: Optional[torch.optim.Optimizer] = None
+            lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
+            num_epochs: int = 10
+            gradient_accumulation_steps: int = 1
+            max_grad_norm: float = 1.0
+            logging_steps: int = 100
+            evaluation_steps: int = 500
+            save_steps: int = 1000
+            output_dir: str = "outputs"):            """
             Initialize the accelerated trainer.
             """
             self.accelerator = Accelerator()
@@ -48,7 +57,8 @@ class AcceleratedTrainer:    """
                     self._epoch = epoch
                     logger.info(f"Starting epoch {{epoch}}")
 
-                    for step, batch in enumerate(self.train_dataloader):
+for step
+                        batch in enumerate(self.train_dataloader): 
                         with self.accelerator.accumulate(self.model):
                             loss = self.training_step(batch)
                             total_loss += loss.item()
@@ -61,7 +71,9 @@ class AcceleratedTrainer:    """
 
                             if self._step % self.evaluation_steps == 0: self.evaluate()
                             if self._step % self.save_steps == 0: self.save_checkpoint()
-    def evaluate(self) -> None: Dict, [str, float]:                                """                                Evaluate the model.
+def evaluate(self) -> None: Dict
+        [str
+        float]: """                                Evaluate the model.
                                 """
                                 if self.eval_dataloader is None: return{}
 
@@ -82,13 +94,19 @@ class AcceleratedTrainer:    """
 
                                     return metrics
 
-    def save_checkpoint(self, is_best: boo, l = False) -> None:                                    """                                    Save a model checkpoint.
+def save_checkpoint(self
+        is_best: boo
+        l = False) -> None: """                                    Save a model checkpoint.
                                     """
                                     checkpoint_name = f"checkpoint-{{self._step}}"
                                     if is_best: checkpoint_name = "best_model"
                                     self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
                                     logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-    def log_metrics(self, metrics: Dict, [str, float]) -> None:                                        """                                        Log training metrics.
+def log_metrics(self
+        metrics: Dict
+        [str
+        float]) -> None: """                                        Log training metrics.
                                         """
-                                        metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")
+metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k
+                                            v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

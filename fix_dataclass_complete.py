@@ -2,15 +2,18 @@ import re
 
 
 
-def fix_imports_and_dataclass(self, content):    """Fix imports and dataclass field definitions."""        # Split content into lines
+def fix_imports_and_dataclass(self
+    content): """Fix imports and dataclass field definitions."""        # Split content into lines
         lines = content.split("\n")
         
         # Add necessary imports
         imports = []
         other_lines = []
         
-        for line in lines: ifline.startswith(("from", "import")):
-        if "dataclasses import dataclass" in line: imports.append("from dataclasses import dataclass, field")
+for line in lines: ifline.startswith(("from"
+            "import")): 
+if "dataclasses import dataclass" in line: imports.append("from dataclasses import dataclass
+            field")
         else: imports.append(line)
         else: other_lines.append(line)
         
@@ -31,21 +34,27 @@ def fix_imports_and_dataclass(self, content):    """Fix imports and dataclass fi
         fixed_lines.append(line)
         continue
         
-if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
+if in_config and line.strip() and not line.strip().startswith(('"""'
+    "#")): 
         # Skip empty lines and comments in config
         if ":" in line:
         # Extract field definition parts
         stripped = line.strip()
         if "=" in stripped:        # Handle field with default value
-        field_name, rest = stripped.split(":", 1)        type_and_default = rest.strip().split("=", 1)
+field_name
+            rest = stripped.split(": "
+            1)        type_and_default = rest.strip().split("="
+            1)
         if len(type_and_default) == 2: field_type = type_and_default[0].strip()        default_value = type_and_default[1].strip()
         
         # Handle field cases
         if "struct_field" in default_value or "field" in default_value:
         # Extract the actual default value
-        if "default_factory" in default_value: match = re.search(r"default_factory=([^ \        )]+)", default_value
+if "default_factory" in default_value: match = re.search(r"default_factory=([^ \        )]+)"
+            default_value
         )
-        if match: actual_default = match.group(1).strip()        fixed_line = f"    {field_name}: {field_type} = field(default_factory={actual_default})"        else: match = re.search(r"default=([^ \        )]+)", default_value)
+if match: actual_default = match.group(1).strip()        fixed_line = f"    {field_name}: {field_type} = field(default_factory={actual_default})"        else: match = re.search(r"default=([^ \        )]+)"
+            default_value)
         if match: actual_default = match.group(1).strip()        fixed_line = f"    {field_name}: {field_type} = field(default={actual_default})"        if "fixed_line" in locals():
         fixed_lines.append(fixed_line)
         continue
@@ -69,12 +78,14 @@ if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
         return "\n".join(imports + [""] + fixed_lines)
         
         
-                def main(self):                # Read the original file                with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
+def main(self): # Read the original file                with open("src/models/text_to_anything.py"
+                    "r") as f: content = f.read()
                 # Fix the imports and dataclass fields
                 fixed_content = fix_imports_and_dataclass(content)
                 
                 # Write the fixed content back
-                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+with open("src/models/text_to_anything.py"
+                    "w") as f: f.write(fixed_content)
                 
                 print("Imports and dataclass fields fixed in text_to_anything.py")
                 

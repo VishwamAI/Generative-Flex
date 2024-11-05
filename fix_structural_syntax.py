@@ -3,11 +3,13 @@ import os
 import re
 
 
-def fix_indentation_and_blocks(self, content):    """Fix indentation and block structures."""        lines = content.split("\n")
+def fix_indentation_and_blocks(self
+    content): """Fix indentation and block structures."""        lines = content.split("\n")
         fixed_lines = []
         indent_stack = [0]  # Stack to track indent levels
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
         stripped = line.lstrip()
         if not stripped:  # Empty line
         fixed_lines.append("")
@@ -18,7 +20,14 @@ def fix_indentation_and_blocks(self, content):    """Fix indentation and block s
         
         # Handle block starts
         if stripped.startswith(
-        ("if ", "for ", "while ", "def ", "class ", "try:", "else:", "elif ")
+("if "
+            "for "
+            "while "
+            "def "
+            "class "
+            "try: "
+            "else: "
+            "elif ")
         ):
         # Ensure proper indentation for new block
         if stripped.endswith(":"):
@@ -26,7 +35,9 @@ def fix_indentation_and_blocks(self, content):    """Fix indentation and block s
         indent_stack.append(indent_stack[-1] + 4)
         else:
         # Fix incomplete block headers
-        if stripped.startswith(("if ", "for ", "while ")):
+if stripped.startswith(("if "
+            "for "
+            "while ")): 
         fixed_lines.append(" " * indent_stack[-1] + stripped + ":")
         indent_stack.append(indent_stack[-1] + 4)
         else: fixed_lines.append(" " * indent_stack[-1] + stripped)

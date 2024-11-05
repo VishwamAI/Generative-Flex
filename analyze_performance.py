@@ -15,21 +15,28 @@ logger = logging.getLogger(__name__)
                 def analyze_performance(self):                    """Analyze model performance by problem category"""        try: results = load_validation_results()        
             # Calculate statistics per category
             stats = {}
-            for category, accuracies in results.items():
+for category
+                accuracies in results.items(): 
         stats[category] = {
         "mean_accuracy": (
         sum(accuracies) / len(accuracies) if accuracies else 0
         ),
-        "num_samples": len(accuracies),
-        "min_accuracy": min(accuracies) if accuracies else 0,
-        "max_accuracy": max(accuracies) if accuracies else 0,
+"num_samples": len(accuracies)
+            
+"min_accuracy": min(accuracies) if accuracies else 0
+            
+"max_accuracy": max(accuracies) if accuracies else 0
+            
         }
 
         # Create performance report
         report = ["Model Performance Analysis by Problem Category\n"]
         report.append("=" * 50 + "\n")
 
-        for category, metrics in sorted(stats.items(), key=lambda x: x[1]["mean_accuracy"], reverse=True        ):
+for category
+            metrics in sorted(stats.items()
+            key=lambda x: x[1]["mean_accuracy"]
+            reverse=True        ): 
             report.append(f"\nCategory: {category}")
             report.append(f"Mean Accuracy: {metrics['mean_accuracy']:.2%}")
             report.append(f"Number of Samples: {metrics['num_samples']}")
@@ -37,7 +44,8 @@ logger = logging.getLogger(__name__)
 
             # Save report
             report_path = "performance_analysis.txt"
-            with open(report_path, "w") as f: f.write("\n".join(report))
+with open(report_path
+                "w") as f: f.write("\n".join(report))
                 logger.info(f"Performance report saved to {report_path}")
 
                 # Create visualization

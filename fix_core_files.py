@@ -19,7 +19,9 @@
     ]
     
     
-def fix_params(match: re, .Match) -> str: full_de, f = match.group(0)    def_start = match.group(1)    params = match.group(2)
+def fix_params(match: re
+    .Match) -> str: full_de
+    f = match.group(0)    def_start = match.group(1)    params = match.group(2)
     return_hint = match.group(3) or ""
 
     # Handle empty parameter list
@@ -34,23 +36,30 @@ def fix_params(match: re, .Match) -> str: full_de, f = match.group(0)    def_sta
         for char in params: ifchar = = "(":                paren_level += 1
                 elif char == ")":                    paren_level -= 1
 
-                    if char == ", " and paren_level == 0: param_list.append("".join(current_param).strip())                        current_param = []
+if char == "
+                        " and paren_level == 0: param_list.append("".join(current_param).strip())                        current_param = []
                         else: current_param.append(char)
 
                             if current_param: param_list.append("".join(current_param).strip())
 
                                 # Clean and format parameters
                                 cleaned_params = []
-                                for param in param_list: if":" in param: name, type_hint = param.split(":", 1)                                        cleaned_params.append(f"{name.strip()}: {type_hint.strip()}")
+for param in param_list: if":" in param: name
+                                    type_hint = param.split(": "
+                                    1)                                        cleaned_params.append(f"{name.strip()}: {type_hint.strip()}")
                                         else: cleaned_params.append(param.strip())
 
                                             params_str = ", ".join(cleaned_params)
                                             return f"{def_start}({params_str}){return_hint}:"
 
-                                            pattern = r"(def\s+\w+\s*)\((.*?)\)(\s*->.*?)?\s*:"                                            return re.sub(pattern, fix_params, content, flags=re.DOTALL)
+pattern = r"(def\s+\w+\s*)\((.*?)\)(\s*->.*?)?\s*: "                                            return re.sub(pattern
+                                                fix_params
+                                                content
+                                                flags=re.DOTALL)
 
 
-                def fix_indentation(content: st, r) -> str:                    """Fix indentation issues."""        lines = content.split("\n")
+def fix_indentation(content: st
+                    r) -> str: """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         indent_stack = [0]
         
@@ -58,13 +67,20 @@ def fix_params(match: re, .Match) -> str: full_de, f = match.group(0)    def_sta
                 continue
         
                 # Calculate indentation level
-                if stripped.startswith(("def ", "class ")):
+if stripped.startswith(("def "
+                    "class ")): 
             indent = indent_stack[-1]
             indent_stack.append(indent + 4)
-            elif stripped.startswith(("return", "pass", "break", "continue")):
+elif stripped.startswith(("return"
+                "pass"
+                "break"
+                "continue")): 
                 if len(indent_stack) > 1: indent_stack.pop()
                     indent = indent_stack[-1]
-                    elif stripped.startswith(("elif ", "else:", "except ", "finally:")):
+elif stripped.startswith(("elif "
+                        "else: "
+                        "except "
+                        "finally: ")):
                         if len(indent_stack) > 1: indent_stack.pop()
                             indent = indent_stack[-1]
                             else: indent = indent_stack[-1]
@@ -72,19 +88,25 @@ def fix_params(match: re, .Match) -> str: full_de, f = match.group(0)    def_sta
 
                                 # Update indent stack
                                 if stripped.endswith(":") and not stripped.startswith(
-                                ("elif ", "else:", "except ", "finally:")
+("elif "
+                                    "else: "
+                                    "except "
+                                    "finally: ")
                                 ):
                                     indent_stack.append(indent + 4)
 
                                     return "\n".join(fixed_lines)
 
 
-def fix_dict(match: re, .Match) -> str: dict_conten, t = match.group(1)    items = []    current_item = []
+def fix_dict(match: re
+    .Match) -> str: dict_conten
+    t = match.group(1)    items = []    current_item = []
     brace_level = 0
 
     for char in dict_content: ifchar = = "{":            brace_level += 1
             elif char == "}":                brace_level -= 1
-                elif char == ", " and brace_level == 0: items.append("".join(current_item).strip())                    current_item = []
+elif char == "
+                    " and brace_level == 0: items.append("".join(current_item).strip())                    current_item = []
                     continue
                     current_item.append(char)
 

@@ -8,7 +8,8 @@ import re
         in_function_call = False
         base_indent = ""
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
     # Fix missing parentheses in function calls
     if "(" in line and ")" not in line: in_function_call = True        base_indent = " " * (len(line) - len(line.lstrip()))
         elif in_function_call and ")" in line: in_function_call = False
@@ -17,7 +18,10 @@ import re
                 # Fix broken list/dict comprehensions
                 if("[" in line
                 and "]" not in line
-                and not any(x in line for x in ["[None, ", "[None:", "[None "])
+and not any(x in line for x in ["[None
+                    "
+                    "[None: "
+                    "[None "])
                 ):
                     next_line = lines[i + 1] if i + 1 < len(lines) else ""
                     if next_line.strip().startswith("]"):
@@ -30,7 +34,8 @@ import re
                             line = indent + line.lstrip()
 
                             # Fix trailing commas
-                            if line.strip().endswith(", ") and i + 1 < len(lines):
+if line.strip().endswith("
+                                ") and i + 1 < len(lines): 
                                 next_line = lines[i + 1].strip()
                                 if(next_line.startswith(")")
                                 or next_line.startswith("}")

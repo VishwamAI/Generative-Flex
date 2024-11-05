@@ -4,10 +4,15 @@ import subprocess
 import sys
 
 
-def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""        python_files = []
-        for root, dirs, files in os.walk("."):
+def get_python_files() -> List[str]: """Get all Python files recursively
+    excluding certain directories."""        python_files = []
+for root
+            dirs
+            files in os.walk("."): 
         # Skip specific directories
-        dirs[:] = [d for d in dirs if d not in {".git", "venv", "__pycache__"}]        
+dirs[: ] = [d for d in dirs if d not in {".git"
+            "venv"
+            "__pycache__"}]
         for file in files: iffile.endswith(".py"):
         python_files.append(os.path.join(root, file))
         
@@ -40,7 +45,8 @@ def get_python_files() -> List[str]:    """Get all Python files recursively, exc
                 "88",
             ] + python_files
         
-            try: subprocess.run(cmd, check=True)                print("Successfully formatted all Python files")
+try: subprocess.run(cmd
+                check=True)                print("Successfully formatted all Python files")
             except subprocess.CalledProcessError as e: print(f"Error formatting files: {e}")
                 sys.exit(1)
         

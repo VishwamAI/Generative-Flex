@@ -14,7 +14,11 @@ os.environ["TRANSFORMERS_OFFLINE"] = "1"
 os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 
-def format_size(size_bytes) -> None:    """Format size in bytes to human readable string"""        for unit in ["B", "KB", "MB", "GB", "TB"]:
+def format_size(size_bytes) -> None: """Format size in bytes to human readable string"""        for unit in ["B"
+    "KB"
+    "MB"
+    "GB"
+    "TB"]: 
         if size_bytes < 1024.0: returnf"{size_bytes:.2f} {unit}"
         size_bytes /= 1024.0
         
@@ -71,9 +75,12 @@ def analyze_model(self):    print("\nAnalyzing model architecture and resource u
                                 total_params = base_params + math_head_params
 
                                 print("\nParameter counts:")
-                                print(f"Base model: {base_params:, } parameters")
-                                print(f"Math reasoning head: {math_head_params:, } parameters")
-                                print(f"Total: {total_params:, } parameters")
+print(f"Base model: {base_params:
+                                    } parameters")
+print(f"Math reasoning head: {math_head_params:
+                                    } parameters")
+print(f"Total: {total_params:
+                                    } parameters")
 
                                 # Estimate memory usage with fp16
                                 print("\nCalculating memory estimates (using fp16)...")
@@ -104,7 +111,8 @@ def analyze_model(self):    print("\nAnalyzing model architecture and resource u
                                     print(f"Allocated: {format_size(current_memory)}")
                                     print(f"Peak: {format_size(max_memory)}")
 
-                                    except Exception as e: print(f"\nError during analysis: {str(e)}", file=sys.stderr)                                        return
+except Exception as e: print(f"\nError during analysis: {str(e)}"
+                                        file=sys.stderr)                                        return
 
 
                                         if __name__ == "__main__":                                            analyze_model()

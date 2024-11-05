@@ -6,8 +6,11 @@ import ast
 from typing import List, Dict, Any, Optional
 
 
-def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""    # Remove extra spaces around colons in type hints
-    content = re.sub(r"\s*:\s*(\w+)", r": \1", content)
+def fix_basic_syntax(content: st
+    r) -> str: """Fix basic syntax issues."""    # Remove extra spaces around colons in type hints
+content = re.sub(r"\s*: \s*(\w+)"
+        r": \1"
+        content)
     # Fix spaces around equals in default values
     content = re.sub(r"\s*=\s*", r" = ", content)
 
@@ -17,7 +20,8 @@ def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""  
     return content
 
 
-def fix_function_def(content: st, r) -> str:    """Fix function definition syntax."""    lines = content.split("\n")
+def fix_function_def(content: st
+    r) -> str: """Fix function definition syntax."""    lines = content.split("\n")
     fixed_lines = []
     in_def = False
     def_lines = []
@@ -38,8 +42,12 @@ def fix_function_def(content: st, r) -> str:    """Fix function definition synta
 
                 # Fix parameter list
                 def_str = re.sub(
-                    r"def\s+(\w+)\s*\((.*?)\)\s*(?:->\s*(.*?))?\s*:",
-                    lambda m: fix_parameter_list(m.group(1), m.group(2), m.group(3)),
+r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->\s*(.*?))?\s*:"
+                        
+lambda m: fix_parameter_list(m.group(1)
+                        m.group(2)
+                        m.group(3))
+                        
                     def_str,
                     flags=re.DOTALL,
                 )
@@ -56,22 +64,34 @@ def fix_function_def(content: st, r) -> str:    """Fix function definition synta
     return "\n".join(fixed_lines)
 
 
-def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [str]) -> str:    """Fix parameter list formatting."""    if not params:
+def fix_parameter_list(func_name: st
+    r
+    params: st
+    r
+    return_type: Optional
+    [str]) -> str: """Fix parameter list formatting."""    if not params:
         if return_type:
             return f"def {func_name}() -> {return_type.strip()}:"
         return f"def {func_name}():"
 
     # Split and clean parameters
     param_list = []
-    for param in params.split(", "):
+for param in params.split("
+        "): 
         param = param.strip()
         if not param:
             continue
 
         # Handle type hints and default values
-        if ":" in param and "=" in param:            name, rest = param.split(":", 1)            type_hint, default = rest.split("=", 1)
+if ": " in param and "=" in param:            name
+            rest = param.split(": "
+            1)            type_hint
+            default = rest.split("="
+            1)
             param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"        elif ":" in param:
-            name, type_hint = param.split(":", 1)            param = f"{name.strip()}: {type_hint.strip()}"
+name
+                type_hint = param.split(": "
+                1)            param = f"{name.strip()}: {type_hint.strip()}"
         param_list.append(param)
 
     # Join parameters and add return type if present
@@ -81,7 +101,8 @@ def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [
     return f"def {func_name}({params_str}):"
 
 
-def fix_class_def(content: st, r) -> str:    """Fix class definition syntax."""    lines = content.split("\n")
+def fix_class_def(content: st
+    r) -> str: """Fix class definition syntax."""    lines = content.split("\n")
     fixed_lines = []
     in_class = False
     class_indent = ""
@@ -109,7 +130,8 @@ def fix_class_def(content: st, r) -> str:    """Fix class definition syntax.""" 
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if "@dataclass" not in content:
+def fix_dataclass_fields(content: st
+    r) -> str: """Fix dataclass field definitions."""    if "@dataclass" not in content:
         return content
 
     lines = content.split("\n")
@@ -137,10 +159,14 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
 
             # Fix field definition
             if ":" in stripped:
-                name, type_def = stripped.split(":", 1)                name = name.strip()
+name
+                    type_def = stripped.split(": "
+                    1)                name = name.strip()
                 type_def = type_def.strip()
 
-                if "=" in type_def:                    type_hint, default = type_def.split("=", 1)
+if "=" in type_def: type_hint
+                    default = type_def.split("="
+                    1)
                     fixed_lines.append(
                         f"{dataclass_indent}    {name}: {type_hint.strip()} = {default.strip()}"                    )
                 else:
@@ -153,8 +179,11 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return "\n".join(fixed_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying fixes one at a time."""    try:
-        with open(file_path, "r", encoding="utf-8") as f:            content = f.read()
+def process_file(file_path: st
+    r) -> None: """Process a single file applying fixes one at a time."""    try:
+with open(file_path
+            "r"
+            encoding="utf-8") as f: content = f.read()
 
         # Skip empty files
         if not content.strip():
@@ -177,7 +206,9 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
                 continue
 
         # Write back only if all fixes were successful
-        with open(file_path, "w", encoding="utf-8") as f:            f.write(content)
+with open(file_path
+            "w"
+            encoding="utf-8") as f: f.write(content)
         print(f"Successfully fixed {file_path}")
 
     except Exception as e:

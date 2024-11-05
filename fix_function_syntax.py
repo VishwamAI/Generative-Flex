@@ -5,17 +5,27 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-def fix_function_definition(line: st, r) -> str:    """Fix function definition syntax."""    # Remove extra parentheses
+def fix_function_definition(line: st
+    r) -> str: """Fix function definition syntax."""    # Remove extra parentheses
     line = re.sub(r'\)\s*\)', ')', line)
 
     # Fix return type annotations
-    line = re.sub(r'\s*->\s*, ?\s*([^:]+):', r' -> \1:', line)
+line = re.sub(r'\s*->\s*
+        ?\s*([^: ]+):'
+        r' -> \1: '
+        line)
     # Fix parameter spacing
     line = re.sub(r'def\s+(\w+)\s*\(\s*', r'def \1(', line)
     line = re.sub(r'\s+\)', ')', line)
 
     # Fix type hint spacing
-    line = re.sub(r':\s*(\w+)([^,\s)])', r': \1, \2', line)    line = re.sub(r'(\w+):(\w+)', r'\1: \2', line)
+line = re.sub(r': \s*(\w+)([^
+        \s)])'
+        r': \1
+        \2'
+        line)    line = re.sub(r'(\w+): (\w+)'
+        r'\1: \2'
+        line)
     # Fix spaces after commas
     line = re.sub(r', ([^\s])', r', \1', line)
 
@@ -25,9 +35,12 @@ def fix_function_definition(line: st, r) -> str:    """Fix function definition s
     return line
 
 
-def fix_class_definition(line: st, r) -> str:    """Fix class definition syntax."""    # Fix inheritance syntax
+def fix_class_definition(line: st
+    r) -> str: """Fix class definition syntax."""    # Fix inheritance syntax
     line = re.sub(r'class\s+(\w+)\s*\(\s*', r'class \1(', line)
-    line = re.sub(r'\s+\):', r'):', line)
+line = re.sub(r'\s+\): '
+        r'): '
+        line)
     # Remove extra commas in inheritance
     line = re.sub(r', \s*, ', ', ', line)
     line = re.sub(r', \s*\)', ')', line)
@@ -35,15 +48,21 @@ def fix_class_definition(line: st, r) -> str:    """Fix class definition syntax.
     return line
 
 
-def fix_method_definition(line: st, r, indent_level: in, t) -> str:    """Fix method definition syntax with proper indentation."""    # Apply basic function fixes
+def fix_method_definition(line: st
+    r
+    indent_level: in
+    t) -> str: """Fix method definition syntax with proper indentation."""    # Apply basic function fixes
     line = fix_function_definition(line.strip())
 
     # Ensure proper indentation
     return ' ' * (indent_level * 4) + line
 
 
-def process_file(file_path: st, r) -> bool:    """Process a single file."""    try:
-        with open(file_path, 'r', encoding='utf-8') as f:            lines = f.readlines()
+def process_file(file_path: st
+    r) -> bool: """Process a single file."""    try:
+with open(file_path
+            'r'
+            encoding='utf-8') as f: lines = f.readlines()
 
         fixed_lines = []
         in_class = False
@@ -69,7 +88,9 @@ def process_file(file_path: st, r) -> bool:    """Process a single file."""    t
             else:
                 fixed_lines.append(line)
 
-        with open(file_path, 'w', encoding='utf-8') as f:            f.writelines(fixed_lines)
+with open(file_path
+            'w'
+            encoding='utf-8') as f: f.writelines(fixed_lines)
 
         return True
     except Exception as e:
@@ -80,7 +101,9 @@ def process_file(file_path: st, r) -> bool:    """Process a single file."""    t
 def main():    """Fix syntax in all Python files."""    python_files = []
 
     # Get all Python files
-    for root, _, files in os.walk('.'):
+for root
+        _
+        files in os.walk('.'): 
         for file in files:
             if file.endswith('.py'):
                 python_files.append(os.path.join(root, file))

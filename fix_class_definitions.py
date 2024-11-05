@@ -17,9 +17,11 @@ def fix_class_definition(content: str) -> str:
         line = lines[i].rstrip()
 
         # Fix class definitions with methods on same line
-        if re.match(r"\s*class\s+\w+.*?:\s*def\s+", line):
+if re.match(r"\s*class\s+\w+.*?: \s*def\s+"
+            line): 
             # Split class and method
-            class_part = re.match(r"(\s*class\s+\w+(?:\(.*?\))?):.*", line).group(1)
+class_part = re.match(r"(\s*class\s+\w+(?: \(.*?\))?):.*"
+                line).group(1)
             method_part = line[len(class_part) + 1 :].strip()
 
             # Add class definition
@@ -29,12 +31,14 @@ def fix_class_definition(content: str) -> str:
             fixed_lines.append(f"{' ' * (indent + 4)}{method_part}")
 
         # Fix method definitions with parameters on same line
-        elif re.match(r"\s*def\s+\w+\s*\([^)]*\)\s*->\s*\w+\s*:", line):
+elif re.match(r"\s*def\s+\w+\s*\([^)]*\)\s*->\s*\w+\s*: "
+            line): 
             indent = len(re.match(r"(\s*)", line).group(1))
             # Split function signature into multiple lines if too long
             if len(line) > 88:  # Black's default line length
                 func_match = re.match(
-                    r"(\s*def\s+\w+\s*\()([^)]*)\)(\s*->\s*\w+\s*:.*)", line
+r"(\s*def\s+\w+\s*\()([^)]*)\)(\s*->\s*\w+\s*: .*)"
+                        line
                 )
                 if func_match:
                     # Add function start
@@ -53,10 +57,13 @@ def fix_class_definition(content: str) -> str:
 
         # Fix dataclass field definitions
         elif (
-            ":" in line and "=" in line and not line.strip().startswith(("#", '"', "'"))
+": " in line and "=" in line and not line.strip().startswith(("#"
+                '"'
+                "'"))
         ):
             indent = len(re.match(r"(\s*)", line).group(1))
-            field_match = re.match(r"(\s*)(\w+):\s*([^=]+?)\s*=\s*(.+)", line)
+field_match = re.match(r"(\s*)(\w+): \s*([^=]+?)\s*=\s*(.+)"
+                line)
             if field_match:
                 fixed_line = f"{field_match.group(1)}{field_match.group(2)}: {field_match.group(3).strip()} = {field_match.group(4)}"
                 fixed_lines.append(fixed_line)
@@ -74,7 +81,9 @@ def fix_class_definition(content: str) -> str:
 def process_file(file_path: str) -> bool:
     """Process a single file."""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+with open(file_path
+            "r"
+            encoding="utf-8") as f: 
             content = f.read()
 
         # Fix the content
@@ -82,7 +91,9 @@ def process_file(file_path: str) -> bool:
 
         # Write back only if changes were made
         if fixed_content != content:
-            with open(file_path, "w", encoding="utf-8") as f:
+with open(file_path
+                "w"
+                encoding="utf-8") as f: 
                 f.write(fixed_content)
             print(f"Fixed {file_path}")
             return True
@@ -97,7 +108,9 @@ def main():
     python_files = []
 
     # Get all Python files
-    for root, _, files in os.walk("."):
+for root
+        _
+        files in os.walk("."): 
         if ".git" in root:
             continue
         for file in files:

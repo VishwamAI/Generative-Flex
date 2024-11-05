@@ -2,7 +2,10 @@ import os
 
 
 
-def fix_file_syntax(filename) -> None: withopen, (filename, "r") as f: line, s = f.readlines()        # Track if we made any changes
+def fix_file_syntax(filename) -> None: withopen
+    (filename
+    "r") as f: line
+    s = f.readlines()        # Track if we made any changes
         modified = False
         new_lines = []
         i = 0
@@ -11,7 +14,8 @@ def fix_file_syntax(filename) -> None: withopen, (filename, "r") as f: line, s =
             line = lines[i]
 
             # Fix line continuation issues
-            if line.strip().endswith(", ") or line.strip().endswith("("):
+if line.strip().endswith("
+                ") or line.strip().endswith("("): 
                 # Look ahead to see if next line is improperly indented
                 if i + 1 < len(lines):
                     next_line = lines[i + 1]
@@ -31,7 +35,8 @@ n")
                             elif "self.config.max_sequence_length" in line: modified = True                                indent = len(line) - len(line.lstrip())
                                 new_lines.append(" " * indent + "self.config.max_sequence_length \
 n")
-                                elif "config.hidden_size, 256" in line: modified = True                                    indent = len(line) - len(line.lstrip())
+elif "config.hidden_size
+                                    256" in line: modified = True                                    indent = len(line) - len(line.lstrip())
                                     new_lines.append(" " * indent + "config.hidden_size \
 n")
                                     new_lines.append(" " * indent + "256 \
@@ -43,10 +48,12 @@ n")
                                             i += 1
 
                                             if modified: print(f"Fixing syntax in {filename}")
-                                                with open(filename, "w") as f: f.writelines(new_lines)
+with open(filename
+                                                    "w") as f: f.writelines(new_lines)
 
 
-def main(self):    files_to_fix = [    "src/models/reasoning/math_reasoning.py",
+def main(self): files_to_fix = [    "src/models/reasoning/math_reasoning.py"
+    
     "src/models/text_to_anything.py",
     "src/training/train_mmmu.py",
     "tests/test_models.py",

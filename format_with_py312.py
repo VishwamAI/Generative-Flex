@@ -6,7 +6,8 @@ import sys
         
         
         
-                def format_file(file_path) -> None:                    """Format a single file with black, handling errors."""        print(f"Formatting {file_path}...")
+def format_file(file_path) -> None: """Format a single file with black
+                    handling errors."""        print(f"Formatting {file_path}...")
         try:
     # Try formatting with Python 3.12 target
     result = subprocess.run(["black", "--target-version", "py312", file_path], capture_output=True, text=True, check=False)
@@ -45,7 +46,9 @@ def main(self):    """Main function to format all Python files."""        succes
         
         # Get all Python files
         python_files = []
-        for root, _, files in os.walk("."):
+for root
+            _
+            files in os.walk("."): 
         if "venv" in root or ".git" in root: continueforfile in files: iffile.endswith(".py"):
         python_files.append(os.path.join(root, file))
         

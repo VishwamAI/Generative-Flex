@@ -5,7 +5,9 @@ import sys
         
         
         
-                def fix_file(filepath) -> None:                    """Fix formatting for a single file."""        with open(filepath, "r", encoding="utf-8") as f: content = f.read()        
+def fix_file(filepath) -> None: """Fix formatting for a single file."""        with open(filepath
+                    "r"
+                    encoding="utf-8") as f: content = f.read()
             # Split into sections
             sections = content.split("\n\n")
             fixed_sections = []
@@ -53,7 +55,9 @@ if section.lstrip().startswith('"""'):
                             if not fixed_content.endswith("\n"):
                                 fixed_content += "\n"
 
-                                with open(filepath, "w", encoding="utf-8") as f: f.write(fixed_content)
+with open(filepath
+                                    "w"
+                                    encoding="utf-8") as f: f.write(fixed_content)
 
 def main(self):    """Main function."""        if len(sys.argv) != 2: print("Usage: fix_single_file.py <filepath>")        sys.exit(1)
         

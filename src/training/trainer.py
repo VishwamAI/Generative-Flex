@@ -9,9 +9,17 @@ logger = logging.getLogger(__name__)
 
 
 class Trainer: """Base trainer class."""
-def __init__(self):
-    train_dataloader: DataLoader,
-    eval_dataloader: Optional[DataLoader] = None,    optimizer: Optional[torch.optim.Optimizer] = None,    lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,    num_epochs: int = 10,    gradient_accumulation_steps: int = 1,    max_grad_norm: float = 1.0,    logging_steps: int = 100,    evaluation_steps: int = 500,    save_steps: int = 1000,    output_dir: str = "outputs"):        """Initialize the trainer."""
+        
+eval_dataloader: Optional[DataLoader] = None
+        optimizer: Optional[torch.optim.Optimizer] = None
+        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
+        num_epochs: int = 10
+        gradient_accumulation_steps: int = 1
+        max_grad_norm: float = 1.0
+        logging_steps: int = 100
+        evaluation_steps: int = 500
+        save_steps: int = 1000
+        output_dir: str = "outputs"):        """Initialize the trainer."""
         self.model = model
         self.train_dataloader = train_dataloader
         self.eval_dataloader = eval_dataloader
@@ -37,7 +45,8 @@ def __init__(self):
                     self._epoch = epoch
                     logger.info(f"Starting epoch {{epoch}}")
 
-                    for step, batch in enumerate(self.train_dataloader):
+for step
+                        batch in enumerate(self.train_dataloader): 
                         loss = self.training_step(batch)
                         total_loss += loss.item()
 
@@ -54,10 +63,12 @@ def __init__(self):
                                 outputs = self.model(**batch)
                                 loss = outputs.loss
                                 loss.backward()
-                                if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
+if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()
+                                    self.max_grad_norm)
                                 return loss
 
-                                                        def evaluate(self):                                ) -> None: Dict[str, float]:                                    """Evaluate the model."""
+def evaluate(self): ) -> None: Dict[str
+                                                            float]: """Evaluate the model."""
                                     if self.eval_dataloader is None: return{}
 
                                     self.model.eval()
@@ -82,15 +93,21 @@ def __init__(self):
                                             checkpoint_name = f"checkpoint-{{self._step}}"
                                             if is_best: checkpoint_name = "best_model"
                                             torch.save({
-                                            "model_state_dict": self.model.state_dict(),
-                                            "optimizer_state_dict": self.optimizer.state_dict(),
-                                            "step": self._step,
-                                            "epoch": self._epoch,
+"model_state_dict": self.model.state_dict()
+                                                
+"optimizer_state_dict": self.optimizer.state_dict()
+                                                
+"step": self._step
+                                                
+"epoch": self._epoch
+                                                
                                             },
                                             f"{{self.output_dir}}/{{checkpoint_name}}.pt")
                                             logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-                                                                                        def log_metrics(self):                                                metrics: Dict[str,                                                float]
+def log_metrics(self): metrics: Dict[str
+                                                                                            float]
                                                 ) -> None: None:
                                                     """Log training metrics."""
-                                                    metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")
+metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k
+                                                        v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")

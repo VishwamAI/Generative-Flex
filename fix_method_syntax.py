@@ -5,7 +5,8 @@
     from typing import List, Tuple
     
     
-        def fix_method_definition(content: st, r) -> str:            """Fix method definition syntax with proper handling of docstrings."""    lines = content.split("\n")
+def fix_method_definition(content: st
+            r) -> str: """Fix method definition syntax with proper handling of docstrings."""    lines = content.split("\n")
     fixed_lines = []
     in_method = False
     method_indent = 0
@@ -26,17 +27,21 @@
             # Handle special case of malformed self methods
 if '"""' in stripped:
                 # Method with inline docstring
-docstring_part = stripped[stripped.find('"""') :]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self", "def __init__")
-                if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->, None:"                    fixed_lines.append(" " * indent + fixed_method)
+docstring_part = stripped[stripped.find('"""') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
+    "def __init__")
+if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
+                    None: "                    fixed_lines.append(" " * indent + fixed_method)
                     fixed_lines.append(" " * (indent + 4) + docstring_part)
                     else:
                         # Regular method
                         fixed_method = stripped.replace("def self", "def __init__")
-                        if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->, None:"                            fixed_lines.append(" " * indent + fixed_method)
+if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
+                            None: "                            fixed_lines.append(" " * indent + fixed_method)
                             else:
                                 # Handle regular method definitions
                                 method_match = re.match(
-                                r"def\s+(\w+)\s*\((.*?)\)\s*(?:->.*?)?:", stripped
+r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->.*?)?:"
+                                    stripped
                                 )
                                 if method_match: method_name = method_match.group(1)                                    params = method_match.group(2)
 
@@ -47,7 +52,8 @@ docstring_part = stripped[stripped.find('"""') :]method_part = stripped[: stripp
                                             params = "self"
 
                                             # Add return type if missing
-                                            if " -> " not in stripped: fixed_line = f"def {method_name}({params}) -> None:", else: fixed_line = f"def {method_name}({params})"
+if " -> " not in stripped: fixed_line = f"def {method_name}({params}) -> None:"
+                                                else: fixed_line = f"def {method_name}({params})"
                                                     fixed_lines.append(" " * indent + fixed_line)
                                                     else: fixed_lines.append(line)
 
@@ -80,12 +86,16 @@ def main(self):    """Fix method definition syntax in math_reasoning.py."""     
         
         try:
         # Read the file
-        with open(file_path, "r", encoding="utf-8") as f: content = f.read()        
+with open(file_path
+            "r"
+            encoding="utf-8") as f: content = f.read()
         # Fix method definitions
         fixed_content = fix_method_definition(content)
         
         # Write back the fixed content
-        with open(file_path, "w", encoding="utf-8") as f: f.write(fixed_content)        
+with open(file_path
+            "w"
+            encoding="utf-8") as f: f.write(fixed_content)
         print(f"Successfully fixed method definitions in {file_path}")
         
         except Exception as e: print(f"Error processing {file_path}: {str(e)}")

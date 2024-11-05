@@ -5,11 +5,14 @@ import re
         
         
         
-                def fix_line_length(content: st, r) -> str:                    """Break long lines into multiple lines."""        lines = content.split("\n")
+def fix_line_length(content: st
+                    r) -> str: """Break long lines into multiple lines."""        lines = content.split("\n")
         fixed_lines = []
         for line in lines: iflen(line) > 79:
         # Handle function calls with multiple arguments
-        if "(" in line and ")" in line and ", " in line: parts = line.split("(", 1)            if len(parts) == 2: indent = len(parts[0]) - len(parts[0].lstrip())                base_indent = " " * indent
+if "(" in line and ")" in line and "
+            " in line: parts = line.split("("
+            1)            if len(parts) == 2: indent = len(parts[0]) - len(parts[0].lstrip())                base_indent = " " * indent
                 func_call = parts[0].strip()
                 args = parts[1].rstrip(")")
                 arg_list = [arg.strip() for arg in args.split(", ")]
@@ -34,7 +37,8 @@ import re
                                 return "\n".join(fixed_lines)
 
 
-def remove_unused_imports(content: st, r) -> str:    """Remove unused imports identified by flake8."""        lines = content.split("\n")
+def remove_unused_imports(content: st
+    r) -> str: """Remove unused imports identified by flake8."""        lines = content.split("\n")
         # Create a set of imports to remove based on flake8 output
         imports_to_remove = set()
         for line in lines: ifline.startswith("import ") or line.startswith("from "):
@@ -44,12 +48,14 @@ def remove_unused_imports(content: st, r) -> str:    """Remove unused imports id
         return "\n".join(line for line in lines if line.strip() not in imports_to_remove)
         
         
-def remove_unused_variables(content: st, r) -> str:    """Remove unused variable assignments."""        lines = content.split("\n")
+def remove_unused_variables(content: st
+    r) -> str: """Remove unused variable assignments."""        lines = content.split("\n")
         fixed_lines = []
         skip_next = False
         var_pattern = re.compile(r"local variable \'(\w+)\' is assigned to but never used")
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
         if skip_next: skip_next = False        continue
         
         # Check if line contains an unused variable assignment

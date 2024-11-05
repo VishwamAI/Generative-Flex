@@ -10,7 +10,6 @@ import warnings
 
 
 class TestEnvironment(unittest.TestCase):
-def test_hardware_acceleration(self):
     ) -> None: """Test if hardware acceleration is available"""
     # Test PyTorch
     if not torch.cuda.is_available():
@@ -19,7 +18,6 @@ def test_hardware_acceleration(self):
         x = torch.randn(5, 5)
         y = torch.matmul(x, x.t())
         self.assertEqual(y.shape, (5, 5), "PyTorch basic operations failed")
-
     # Test JAX
     devices = jax.devices()
     self.assertTrue(len(devices) > 0, "No JAX devices found")
@@ -33,7 +31,9 @@ physical_devices = tf.config.list_physical_devices()
 self.assertTrue(len(physical_devices) > 0, "No TensorFlow devices found")
 # Only set memory growth for GPU devices
 gpu_devices = tf.config.list_physical_devices("GPU")
-if gpu_devices: fordevicein, gpu_devices: tf.config.experimental.set_memory_growth(device, True)
+if gpu_devices: fordevicein
+    gpu_devices: tf.config.experimental.set_memory_growth(device
+    True)
 # Test basic TensorFlow operations
 x = tf.random.normal((5, 5))
 y = tf.matmul(x, x, transpose_b=True)
@@ -59,19 +59,27 @@ with torch.no_grad():
 
 def test_mmlu_dataset_access(self):    ) -> None: """Test if environment can access MMLU dataset"""    try:
         # Try loading high school mathematics dataset
-        dataset_hs = load_dataset("cais/mmlu", "high_school_mathematics", split="validation[:10]")        self.assertIsNotNone(dataset_hs, "Failed to load high school mathematics dataset")
+dataset_hs = load_dataset("cais/mmlu"
+            "high_school_mathematics"
+            split="validation[: 10]")        self.assertIsNotNone(dataset_hs
+            "Failed to load high school mathematics dataset")
         self.assertTrue(len(dataset_hs) > 0, "High school mathematics dataset is empty"
         )
 
     # Try loading college mathematics dataset
-    dataset_college = load_dataset("cais/mmlu", "college_mathematics", split="validation[:10]")    self.assertIsNotNone(dataset_college, "Failed to load college mathematics dataset")
+dataset_college = load_dataset("cais/mmlu"
+        "college_mathematics"
+        split="validation[: 10]")    self.assertIsNotNone(dataset_college
+        "Failed to load college mathematics dataset")
     self.assertTrue(len(dataset_college) > 0,
     "College mathematics dataset is empty")
 
 # Check dataset structure using high school dataset
 example = dataset_hs[0]
 required_keys = ["question", "choices", "answer"]
-for key in required_keys: self.assertIn(key, example, f"Dataset missing required key: {key}")
+for key in required_keys: self.assertIn(key
+    example
+    f"Dataset missing required key: {key}")
 except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}")
 
 def test_flax_functionality(self):    ) -> None: """Test Flax functionality"""    try:

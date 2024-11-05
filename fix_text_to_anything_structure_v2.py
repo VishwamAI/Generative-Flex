@@ -18,42 +18,80 @@ def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.
         # Define the GenerationConfig class properly
         fixed_generation_config = [
         "@dataclass",
-        "class GenerationConfig:",
+"class GenerationConfig: "
+            
 '    """Configuration for text-to-anything generation."""',
         "    # Model configuration",
-        "    hidden_size: int = field(default=2048)",
-        "    num_attention_heads: int = field(default=32)",
-        "    num_hidden_layers: int = field(default=24)",
-        "    intermediate_size: int = field(default=8192)",
-        "    vocab_size: int = field(default=VOCAB_SIZE)",
-        "    max_sequence_length: int = field(default=2048)",
+"    hidden_size: int = field(default=2048)"
+            
+"    num_attention_heads: int = field(default=32)"
+            
+"    num_hidden_layers: int = field(default=24)"
+            
+"    intermediate_size: int = field(default=8192)"
+            
+"    vocab_size: int = field(default=VOCAB_SIZE)"
+            
+"    max_sequence_length: int = field(default=2048)"
+            
         "",
         "    # Generation parameters",
-        "    temperature: float = field(default=0.9)",
-        "    top_k: int = field(default=50)",
-        "    top_p: float = field(default=0.9)",
-        "    num_beams: int = field(default=4)",
+"    temperature: float = field(default=0.9)"
+            
+"    top_k: int = field(default=50)"
+            
+"    top_p: float = field(default=0.9)"
+            
+"    num_beams: int = field(default=4)"
+            
         "",
         "    # Modality-specific settings",
-        "    image_size: Tuple[int, int] = field(default=(256, 256))",
-        "    audio_sample_rate: int = field(default=44100)",
-        "    video_fps: int = field(default=30)",
+"    image_size: Tuple[int
+            int] = field(default=(256
+            256))"
+            
+"    audio_sample_rate: int = field(default=44100)"
+            
+"    video_fps: int = field(default=30)"
+            
         "",
         "    # Training configuration",
-        "    learning_rate: float = field(default=1e-4)",
-        "    weight_decay: float = field(default=0.01)",
-        "    warmup_steps: int = field(default=10000)",
-        "    max_steps: int = field(default=1000000)",
+"    learning_rate: float = field(default=1e-4)"
+            
+"    weight_decay: float = field(default=0.01)"
+            
+"    warmup_steps: int = field(default=10000)"
+            
+"    max_steps: int = field(default=1000000)"
+            
         "",
         "    # Safety and compliance",
-        "    use_constitutional_ai: bool = field(default=True)",
-        "    safety_threshold: float = field(default=0.9)",
+"    use_constitutional_ai: bool = field(default=True)"
+            
+"    safety_threshold: float = field(default=0.9)"
+            
         "",
         "    # Supported modalities",
-        "    supported_modalities: List[str] = field(", '        default_factory=lambda: ["text", "image", "audio", "video", "code"]', ")",
+"    supported_modalities: List[str] = field("
+            '        default_factory=lambda: ["text"
+            "image"
+            "audio"
+            "video"
+            "code"]'
+            ")"
+            
         "",
         "    # Constitutional principles",
-        "    constitutional_principles: List[str] = field(", "        default_factory=lambda: [", '            "Do not generate harmful content", ', '            "Respect privacy and intellectual property", ', '            "Be transparent about AI-generated content"', "        ]", ")",
+"    constitutional_principles: List[str] = field("
+            "        default_factory=lambda: ["
+            '            "Do not generate harmful content"
+            '
+            '            "Respect privacy and intellectual property"
+            '
+            '            "Be transparent about AI-generated content"'
+            "        ]"
+            ")"
+            
         ]
         
         # Extract the remaining classes while fixing indentation
@@ -68,7 +106,8 @@ def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.
         current_class = [line]
         elif in_class:
         # Skip the nested GenerationConfig class
-        if "@dataclass" in line or "class GenerationConfig" in line: continueifline.strip() and not any(x in line for x in ["@dataclass", "class GenerationConfig"]):
+if "@dataclass" in line or "class GenerationConfig" in line: continueifline.strip() and not any(x in line for x in ["@dataclass"
+            "class GenerationConfig"]): 
         # Fix indentation for class methods
         if line[0].isspace():
         # Ensure 4 spaces for indentation
@@ -94,12 +133,14 @@ def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.
         return "\n".join(result)
         
         
-                def main(self):                # Read the original file            with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
+def main(self): # Read the original file            with open("src/models/text_to_anything.py"
+                    "r") as f: content = f.read()
                 # Fix the content
                 fixed_content = fix_file_content(content)
                 
                 # Write the fixed content back
-                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+with open("src/models/text_to_anything.py"
+                    "w") as f: f.write(fixed_content)
                 
                 print("Structural fixes applied to text_to_anything.py")
                 

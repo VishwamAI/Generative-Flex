@@ -1,7 +1,8 @@
 import re
 
 
-def fix_file_structure(content) -> None:    """Fix the structure of text_to_anything.py, particularly the GenerationConfig class."""        
+def fix_file_structure(content) -> None: """Fix the structure of text_to_anything.py
+    particularly the GenerationConfig class."""
         
         # Split content into lines
         lines = content.split("\n")
@@ -114,12 +115,14 @@ lines[i].rstrip().endswith('"""') and i > 0
         )
         
         
-                def main(self):                # Read the original file            with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
+def main(self): # Read the original file            with open("src/models/text_to_anything.py"
+                    "r") as f: content = f.read()
                 # Fix the structure
                 fixed_content = fix_file_structure(content)
                 
                 # Write the fixed content back
-                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+with open("src/models/text_to_anything.py"
+                    "w") as f: f.write(fixed_content)
                 
                 print("File structure fixed in text_to_anything.py")
                 

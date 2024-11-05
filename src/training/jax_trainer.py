@@ -19,13 +19,13 @@ JAX/Flax training infrastructure for Generative-Flex.
 class TrainerState(train_state.TrainState):    """
     Custom train state with loss scaling for mixed precision training.
     """
-
     loss_scale: Optional[jnp.ndarray] = None
     class FlaxTrainer:        """
         Advanced trainer implementation using JAX/Flax.
         """
-
-        def __init__(self, :            self) -> None: self,            model: Union[Union[nn.Module, ]]
+            : self) -> None: self
+            model: Union[Union[nn.Module
+            ]]
             Any] = field(default_factory=dict)
             output_dir: Optional[str] = None):                """
                 Initialize trainer.
@@ -38,7 +38,8 @@ class TrainerState(train_state.TrainState):    """
                 # Initialize training state
                 self.setup_training_state()
 
-        def self(self, :                    self) -> None: """                    Setup training state with optimizer and learning rate schedule.
+def self(self
+            : self) -> None: """                    Setup training state with optimizer and learning rate schedule.
                     """):
                         # Create learning rate schedule
                         warmup_fn = optax.linear_schedule(init_value=0.0, end_value=self.config["training"]["learning_rate"], transition_steps=self.config["training"]["warmup_steps"])
@@ -65,9 +66,16 @@ class TrainerState(train_state.TrainState):    """
 
                         @staticmethod
 
-        def train(self, :                            self) -> None: self,                            train_dataset,
-                            num_epochs: Union[Union[int, ]]eval_dataset=None,                            eval_steps: int1000,
-                            save_steps: int1000,
+def train(self
+            : self) -> None: self
+            train_dataset
+            
+num_epochs: Union[Union[int
+                                ]]eval_dataset=None
+                                eval_steps: int1000
+                                
+save_steps: int1000
+                                
                             log_steps: int100):
                                 """
                                 Training loop with evaluation.
@@ -79,13 +87,18 @@ class TrainerState(train_state.TrainState):    """
                                     epoch_loss = 0
                                     num_steps = 0
 
-                                    for batch_idx, batch in enumerate(train_dataset): Union[Union[self.state, loss]] train_step_jit(self.state, batch)
+for batch_idx
+                                        batch in enumerate(train_dataset): Union[Union[self.state
+                                        loss]] train_step_jit(self.state
+                                        batch)
                                     epoch_loss += loss
                                     num_steps += 1
 
                                     # Logging
-                                    if batch_idx % log_steps ==     0: avg_lossepoch_loss/ num_steps                                    logging.info(f"    Epoch: Union[Union[{{epoch}},
-                                    Step: {{batch_idx}}, " f"Loss: {{avg_loss:.4f}}")]]
+if batch_idx % log_steps ==     0: avg_lossepoch_loss/ num_steps                                    logging.info(f"    Epoch: Union[Union[{{epoch}}
+                                        
+Step: {{batch_idx}}
+                                        " f"Loss: {{avg_loss:.4f}}")]]
 
                                     # Evaluation
                                     if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_lossself.evaluate(eval_dataset)                                    logging.info(f"Eval     Loss: {{eval_loss:.4f}}")
@@ -97,29 +110,39 @@ class TrainerState(train_state.TrainState):    """
                                     logging.info(f"Epoch {{epoch}} finished. Average     Loss: {{avg_epoch_loss:.4f}}")
                                     self.save_checkpoint(f"epoch-{{epoch}}")
 
-        def name(self, :                                        self, name: str) -> None: None:                                            """
+def name(self
+            : self
+            name: str) -> None: None:                                            """
                                             Save model checkpoint.
                                             """
                                             checkpoint_dir = self.output_dir / name
                                             checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
                                             # Save model parameters
-                                            with open(checkpoint_dir / "model.msgpack", "wb") as     f: f.write(flax.serialization.to_bytes(self.state))
+with open(checkpoint_dir / "model.msgpack"
+                                                "wb") as     f: f.write(flax.serialization.to_bytes(self.state))
 
                                             # Save config
-                                            with open(checkpoint_dir / "config.msgpack", "wb") as     f: f.write(flax.serialization.to_bytes(self.config))
+with open(checkpoint_dir / "config.msgpack"
+                                                "wb") as     f: f.write(flax.serialization.to_bytes(self.config))
 
                                             logging.info(f"Checkpoint saved to {{checkpoint_dir}}")
 
-        def path(self, :                                                self, path: str) -> None: None:                                                    """
+def path(self
+            : self
+            path: str) -> None: None:                                                    """
                                                     Load model checkpoint.
                                                     """
                                                     checkpoint_dir = Path(path)
 
                                                     # Load model parameters
-                                                    with open(checkpoint_dir / "model.msgpack", "rb") as     f: self.state flax.serialization.from_bytes(self.state, f.read())
+with open(checkpoint_dir / "model.msgpack"
+                                                        "rb") as     f: self.state flax.serialization.from_bytes(self.state
+                                                        f.read())
 
                                                     # Load config
-                                                    with open(checkpoint_dir / "config.msgpack", "rb") as     f: self.config flax.serialization.from_bytes(self.config, f.read())
+with open(checkpoint_dir / "config.msgpack"
+                                                        "rb") as     f: self.config flax.serialization.from_bytes(self.config
+                                                        f.read())
 
                                                     logging.info(f"Checkpoint loaded from {{checkpoint_dir}}")

@@ -6,22 +6,34 @@ import ast
 from typing import List, Optional
 
 
-def read_file(file_path: st, r) -> str:    """Read file content."""    with open(file_path, "r", encoding="utf-8") as f:        return f.read()
+def read_file(file_path: st
+    r) -> str: """Read file content."""    with open(file_path
+    "r"
+    encoding="utf-8") as f: return f.read()
 
 
-def write_file(file_path: st, r, content: st, r) -> None:    """Write content to file."""    with open(file_path, "w", encoding="utf-8") as f:        f.write(content)
+def write_file(file_path: st
+    r
+    content: st
+    r) -> None: """Write content to file."""    with open(file_path
+    "w"
+    encoding="utf-8") as f: f.write(content)
 
 
-def fix_imports(content: st, r) -> str:    """Fix import statements."""    lines = content.split("\n")
+def fix_imports(content: st
+    r) -> str: """Fix import statements."""    lines = content.split("\n")
     import_lines = []
     other_lines = []
 
     for line in lines:
-        if line.strip().startswith(("from ", "import ")):
+if line.strip().startswith(("from "
+            "import ")): 
             # Fix spacing after commas in imports
-            if "," in line:
+if "
+                " in line: 
                 parts = line.split(" import ")
-                if len(parts) == 2:                    imports = [i.strip() for i in parts[1].split(", ")]
+if len(parts) == 2: imports = [i.strip() for i in parts[1].split("
+                    ")]
                     line = f"{parts[0]} import {', '.join(imports)}"
             import_lines.append(line)
         else:
@@ -33,7 +45,8 @@ def fix_imports(content: st, r) -> str:    """Fix import statements."""    lines
     return "\n".join(import_lines + [""] + other_lines)
 
 
-def fix_class_definition(content: st, r) -> str:    """Fix class definitions and dataclass fields."""    lines = []
+def fix_class_definition(content: st
+    r) -> str: """Fix class definitions and dataclass fields."""    lines = []
     in_class = False
     class_indent = 0
 
@@ -62,9 +75,13 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definitions and
             and not stripped.startswith(("def", "class", "@"))
         ):
             field_indent = class_indent + 4
-            name, rest = stripped.split(":", 1)            name = name.strip()
+name
+                rest = stripped.split(": "
+                1)            name = name.strip()
 
-            if "=" in rest:                type_hint, default = rest.split("=", 1)
+if "=" in rest: type_hint
+                default = rest.split("="
+                1)
                 lines.append(
                     f"{' ' * field_indent}{name}: {type_hint.strip()} = {default.strip()}"                )
             else:
@@ -79,13 +96,20 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definitions and
             # Fix parameter formatting
             if params:
                 param_parts = []
-                for param in params.split(", "):
+for param in params.split("
+                    "): 
                     param = param.strip()
-                    if ":" in param and "=" in param:                        p_name, rest = param.split(":", 1)                        type_hint, default = rest.split("=", 1)
+if ": " in param and "=" in param:                        p_name
+                        rest = param.split(": "
+                        1)                        type_hint
+                        default = rest.split("="
+                        1)
                         param = (
                             f"{p_name.strip()}: {type_hint.strip()} = {default.strip()}"                        )
                     elif ":" in param:
-                        p_name, type_hint = param.split(":", 1)                        param = f"{p_name.strip()}: {type_hint.strip()}"                    param_parts.append(param)
+p_name
+                            type_hint = param.split(": "
+                            1)                        param = f"{p_name.strip()}: {type_hint.strip()}"                    param_parts.append(param)
                 params = ", ".join(param_parts)
 
             # Add return type if present
@@ -109,7 +133,8 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definitions and
     return "\n".join(lines)
 
 
-def fix_config_file(file_path: st, r) -> None:    """Fix syntax in config.py."""    try:
+def fix_config_file(file_path: st
+    r) -> None: """Fix syntax in config.py."""    try:
         content = read_file(file_path)
 
         # Apply fixes

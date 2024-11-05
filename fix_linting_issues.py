@@ -25,7 +25,9 @@ imports_to_add = """
             
             # Fix line length issue
             content = re.sub(
-            r"(.*line too long.*)", lambda m: m.group(1).split(" ")[0][:88] + "...", content
+r"(.*line too long.*)"
+                lambda m: m.group(1).split(" ")[0][:88] + "..."
+                content
             )
             
             path.write_text(content)
@@ -51,7 +53,10 @@ imports_to_add = """
             "src.config.config.OptimizationConfig",
             ]
             
-            for imp in imports_to_remove: content = re.sub(f"^.*{imp}.*\n", "", content, flags=re.MULTILINE)            
+for imp in imports_to_remove: content = re.sub(f"^.*{imp}.*\n"
+                ""
+                content
+                flags=re.MULTILINE)
             path.write_text(content)
             
             if __name__ == "__main__":            fix_test_features()

@@ -3,7 +3,8 @@ import re
         
         
         
-                def fix_indentation(self, content):                    """Fix indentation issues while preserving Python syntax."""        lines = content.split("\n")
+def fix_indentation(self
+                    content): """Fix indentation issues while preserving Python syntax."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         in_class = False
@@ -15,7 +16,8 @@ import re
                 continue
         
                 # Handle indentation for class definitions
-                if re.match(r"^class\s+\w+.*:", stripped):
+if re.match(r"^class\s+\w+.*: "
+                    stripped): 
             indent_level = 0
             in_class = True
             fixed_lines.append(line.lstrip())
@@ -23,14 +25,17 @@ import re
             continue
 
             # Handle indentation for function definitions
-            if re.match(r"^def\s+\w+.*:", stripped):
-                if in_class: indent_level = 1, else: indent_level = 0                        in_function = True
+if re.match(r"^def\s+\w+.*: "
+                stripped): 
+if in_class: indent_level = 1
+                    else: indent_level = 0                        in_function = True
                         fixed_lines.append("    " * indent_level + stripped)
                         indent_level += 1
                         continue
 
                         # Handle indentation for control structures
-                        if re.match(r"^(if|elif|else|for|while|try|except|with)\s*.*:", stripped):
+if re.match(r"^(if|elif|else|for|while|try|except|with)\s*.*: "
+                            stripped): 
                             fixed_lines.append("    " * indent_level + stripped)
                             indent_level += 1
                             continue
@@ -41,7 +46,9 @@ import re
                                 continue
 
                                 # Handle closing brackets/braces
-                                if stripped in [")", "]", "}"]:
+if stripped in [")"
+                                    "]"
+                                    "}"]: 
                                     indent_level = max(0, indent_level - 1)
                                     fixed_lines.append("    " * indent_level + stripped)
                                     continue

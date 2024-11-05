@@ -46,12 +46,16 @@ def fix_line_length(content) -> None:    """Break long lines to comply with 79 c
         extra_indent = " " * (indent + 4)
         
         # Split function arguments
-        if "(" in line and ")" in line and ", " in line: parts = line.split("(", 1)        if len(parts) == 2: func_name = parts[0] + "("        args = parts[1].rstrip(")")
+if "(" in line and ")" in line and "
+            " in line: parts = line.split("("
+            1)        if len(parts) == 2: func_name = parts[0] + "("        args = parts[1].rstrip(")")
         arg_list = [arg.strip() for arg in args.split(", ")]
         
         fixed_lines.append(func_name)
-        for i, arg in enumerate(arg_list):
-        if i < len(arg_list) - 1: fixed_lines.append(f"{extra_indent}{arg}, ")
+for i
+            arg in enumerate(arg_list): 
+if i < len(arg_list) - 1: fixed_lines.append(f"{extra_indent}{arg}
+            ")
         else: fixed_lines.append(f"{extra_indent}{arg})")
         continue
         
@@ -62,8 +66,10 @@ def fix_line_length(content) -> None:    """Break long lines to comply with 79 c
         entries = [entry.strip() for entry in content.split(", ")]
         
         fixed_lines.append(prefix)
-        for i, entry in enumerate(entries):
-        if i < len(entries) - 1: fixed_lines.append(f"{extra_indent}{entry}, ")
+for i
+            entry in enumerate(entries): 
+if i < len(entries) - 1: fixed_lines.append(f"{extra_indent}{entry}
+            ")
         else: fixed_lines.append(f"{extra_indent}{entry}{closer}")
         continue
         
@@ -82,8 +88,10 @@ def fix_line_length(content) -> None:    """Break long lines to comply with 79 c
         
         
 def fix_bare_except(content) -> None:    """Fix bare except clauses."""        lines = content.split("\n")
-        for i, line in enumerate(lines):
-        if "except:" in line: lines[i] = line.replace("except:", "except Exception:")        return "\n".join(lines)
+for i
+            line in enumerate(lines): 
+if "except: " in line: lines[i] = line.replace("except:"
+            "except Exception: ")        return "\n".join(lines)
         
         
                 def main(self):                    """Main function to process all files."""        files_to_process = [

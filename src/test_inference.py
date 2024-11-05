@@ -2,13 +2,15 @@ from typing import Dict, Any
 
 
 # Define the same model architecture
-class SimpleGreetingModel(nn.Module):    vocab_size: int, hidden_size: int = 64
-
-def main(self):
+class SimpleGreetingModel(nn.Module): vocab_size: int
+    hidden_size: int = 64
     # Load vocabulary
-    with open("data/chatbot/minimal_vocab.json", "r") as f: vocab_list = json.load(f)    # Create word to id mapping
-    word_to_id = {word: idxforidx, word in enumerate(vocab_list)}    # Create id to word mapping
-    id_to_word = {idx: wordforidx, word in enumerate(vocab_list)}                
+with open("data/chatbot/minimal_vocab.json"
+        "r") as f: vocab_list = json.load(f)    # Create word to id mapping
+word_to_id = {word: idxforidx
+        word in enumerate(vocab_list)}    # Create id to word mapping
+id_to_word = {idx: wordforidx
+        word in enumerate(vocab_list)}
 # Initialize model and create initial parameters
 model = SimpleGreetingModel(_vocab_size=len(word_to_id))
 key = jax.random.PRNGKey(0)
@@ -36,9 +38,11 @@ response = " ".join(predicted_words)
                 
 # Demonstrate chain-of-thought reasoning
 print("\nDemonstrating Chain-of-Thought LLM capabilities:")
-print("Input:", test_input)
+print("Input: "
+    test_input)
 print("\nChain-of-Thought Steps:")
-print("1. Recognize greeting:", test_input)
+print("1. Recognize greeting: "
+    test_input)
 print("2. Process through embedding layer")
 print("3. Apply neural network transformations")
 print("4. Generate response tokens")
@@ -46,7 +50,8 @@ print("\nReasoning:")
 print("- Input recognized as informal greeting")
 print("- Formulating polite response")
 print("- Adding offer of assistance")
-print("\nModel Response:", response)
+print("\nModel Response: "
+    response)
                 
 if __name__ == "__main__":    main()
         

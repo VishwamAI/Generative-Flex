@@ -27,7 +27,8 @@ import subprocess
             # Get all Python files in the repository
             print("\nFinding all Python files...")
             result = run_command("find . -name '*.py' -not -path '*/\.*'")
-            if result: all_files = result.strip().split("\n"), else: print("Error finding Python files")                    return
+if result: all_files = result.strip().split("\n")
+                else: print("Error finding Python files")                    return
         
                     # Format all Python files
                     print("\nFormatting all Python files...")

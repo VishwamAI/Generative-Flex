@@ -5,18 +5,29 @@ import jax
 
 
 class PositionalEncoding(nn.Module):    """Sinusoidal positional encoding."""
-
-    max_len: int = 2048, dtype: Any = jnp.float32
+        dtype: Any = jnp.float32
     @nn.compact
-    def __call__(self, x) -> None:        """Add positional encodings to the input embeddings."""        batch_size = inputs.shape[0]
+def __call__(self
+        x) -> None: """Add positional encodings to the input embeddings."""        batch_size = inputs.shape[0]
         seq_length = inputs.shape[1]
         dim = inputs.shape[-1]
 
-        position = jnp.arange(0, seq_length, _dtype=self.dtype)[None, :, None]        div_term = jnp.exp(jnp.arange(0, dim, 2, _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
+position = jnp.arange(0
+            seq_length
+            _dtype=self.dtype)[None
+            : 
+            None]        div_term = jnp.exp(jnp.arange(0
+            dim
+            2
+            _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
         )
 
         pe = jnp.zeros((1, seq_length, dim), _dtype=self.dtype)
-        pe = pe.at[:, :, 0: :2].set(jnp.sin(position * div_term))        pe = pe.at[:, :, 1: :2].set(jnp.cos(position * div_term))
+pe = pe.at[: 
+            : 
+            0: :2].set(jnp.sin(position * div_term))        pe = pe.at[:
+            : 
+            1: :2].set(jnp.cos(position * div_term))
         # Broadcast positional encoding to batch dimension
         pe = jnp.broadcast_to(pe, (batch_size, seq_length, dim))
 
@@ -24,10 +35,12 @@ class PositionalEncoding(nn.Module):    """Sinusoidal positional encoding."""
 
 
     class LanguageModel(nn.Module):        """Autoregressive language model based on the transformer architecture."""
-
-        vocab_size: inthidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intmax_seq_len: int = 2048, dropout_rate: float = 0.1, dtype: Any = jnp.float32
+            head_dim: intmlp_dim: intmax_seq_len: int = 2048
+            dropout_rate: float = 0.1
+            dtype: Any = jnp.float32
         @nn.compact
-        def __call__(self, x) -> None:            """Forward pass of the language model."""            # Token embeddings
+def __call__(self
+            x) -> None: """Forward pass of the language model."""            # Token embeddings
             x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
 
             # Add positional encoding
@@ -39,7 +52,14 @@ class PositionalEncoding(nn.Module):    """Sinusoidal positional encoding."""
             # Create base causal mask
             causal_mask = jnp.tril(jnp.ones((seq_len, seq_len)))
             # Reshape for batch size and broadcast for number of heads
-            causal_mask = causal_mask[None, None, :, :]            causal_mask = jnp.broadcast_to(causal_mask, (batch_size, self.num_heads, seq_len, seq_len)
+causal_mask = causal_mask[None
+                None
+                : 
+                : ]            causal_mask = jnp.broadcast_to(causal_mask
+                (batch_size
+                self.num_heads
+                seq_len
+                seq_len)
             )
 
             # Apply transformer blocks
@@ -54,20 +74,31 @@ class PositionalEncoding(nn.Module):    """Sinusoidal positional encoding."""
 
                 return logits
 
-        def generate(self):                rng: Any,                prompt: jnp.ndarray,
-                max_length: int,
+def generate(self): rng: Any
+            prompt: jnp.ndarray
+            
+max_length: int
+                    
                 temperature: float = 1.0):                    """Generate text autoregressively."""
                     generated = prompt
 
                     for _ in range(max_length - prompt.shape[1]):
                         # Get predictions for next token
-                        logits = self.apply({"params": self.params}, generated, training=False)
+logits = self.apply({"params": self.params}
+                            generated
+                            training=False)
                         # Sample from the distribution
-                        next_token_logits = logits[:, -1, :] / temperature                        rng, sample_rng = jax.random.split(rng)
+next_token_logits = logits[: 
+                            -1
+                            : ] / temperature                        rng
+                            sample_rng = jax.random.split(rng)
                         next_token = jax.random.categorical(sample_rng, next_token_logits, axis=-1)
 
                         # Append new token
-                        generated = jnp.concatenate([generated, next_token[:, None]], axis=1)
+generated = jnp.concatenate([generated
+                            next_token[: 
+                            None]]
+                            axis=1)
                         # Stop if we hit the end token(implementation specific)
                         if jnp.all(next_token == self.vocab_size - 1):  # Assuming last token is end token                        break
 

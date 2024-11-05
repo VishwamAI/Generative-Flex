@@ -1,7 +1,9 @@
 import os
 
 
-def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file__), "src/models/text_to_anything.py"), "r") as f: content = f.readlines()
+def fix_text_to_anything(self): with open(os.path.join(os.path.dirname(__file__)
+    "src/models/text_to_anything.py")
+    "r") as f: content = f.readlines()
         # Add missing imports at the top
         imports = [
         "import jax.numpy as jnp\n",
@@ -45,11 +47,16 @@ def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file
                                 in_method = True
                                 # Special handling for TextTokenizer methods
                                 if current_class == "TextTokenizer":                                    if "def __init__" in line: fixed_content.extend([
-                                        f"{class_indent}def def __init__(self, max_length: int, vocab_size: int) -> None:\n")
+f"{class_indent}def def __init__(self
+                                            max_length: int
+                                            vocab_size: int) -> None:\n")
 f'{method_indent}"""Initialize the tokenizer.\n',
-                                        f"{method_indent}Args:\n",
-                                        f"{method_indent}    max_length: Maximumsequencelength\n",
-                                        f"{method_indent}    vocab_size: Sizeofthe vocabulary\n",
+f"{method_indent}Args: \n"
+                                            
+f"{method_indent}    max_length: Maximumsequencelength\n"
+                                            
+f"{method_indent}    vocab_size: Sizeofthe vocabulary\n"
+                                            
 f'{method_indent}"""\n',
                                         f"{method_indent}self.max_length = max_length\n",
                                         f"{method_indent}self.vocab_size = vocab_size\n",
@@ -62,17 +69,23 @@ f'{method_indent}"""\n',
                                         ].strip().startswith("def"):
                                             i += 1
                                             continue                 elif "def encode" in line: fixed_content.extend([
-                                                f"{class_indent}def def encode(self, text: str) -> jnp.ndarray:\n")
+f"{class_indent}def def encode(self
+                                                    text: str) -> jnp.ndarray:\n")
 f'{method_indent}"""Convert text to token IDs.\n',
-                                                f"{method_indent}Args:\n",
-                                                f"{method_indent}    text: Inputtextto tokenize\n",
-                                                f"{method_indent}Returns:\n",
-                                                f"{method_indent}    jnp.ndarray: Arrayoftoken IDs\n",
+f"{method_indent}Args: \n"
+                                                    
+f"{method_indent}    text: Inputtextto tokenize\n"
+                                                    
+f"{method_indent}Returns: \n"
+                                                    
+f"{method_indent}    jnp.ndarray: Arrayoftoken IDs\n"
+                                                    
 f'{method_indent}"""\n',
                                                 f"{method_indent}# Convert text to token IDs and handle padding in one step\n",
                                                 f"{method_indent}tokens = [\n",
                                                 f"{method_indent}    ord(c) % self.vocab_size\n")
-                                                f"{method_indent}    for c in text[:self.max_length]\n",
+f"{method_indent}    for c in text[: self.max_length]\n"
+                                                    
                                                 f"{method_indent}] +
                                                 [self.pad_token] * max(0, self.max_length - len(
                                                 text))\n")
@@ -89,12 +102,17 @@ f'{method_indent}"""\n',
                                                 ].strip().startswith("def"):
                                                     i += 1
                                                     continue                 elif "def decode" in line: fixed_content.extend([
-                                                        f"{class_indent}def def decode(self, tokens: jnp.ndarray) -> str:\n")
+f"{class_indent}def def decode(self
+                                                            tokens: jnp.ndarray) -> str:\n")
 f'{method_indent}"""Convert token IDs back to text.\n',
-                                                        f"{method_indent}Args:\n",
-                                                        f"{method_indent}    tokens: Arrayoftoken IDs\n",
-                                                        f"{method_indent}Returns:\n",
-                                                        f"{method_indent}    str: Decodedtext\n",
+f"{method_indent}Args: \n"
+                                                            
+f"{method_indent}    tokens: Arrayoftoken IDs\n"
+                                                            
+f"{method_indent}Returns: \n"
+                                                            
+f"{method_indent}    str: Decodedtext\n"
+                                                            
 f'{method_indent}"""\n',
                                                         f"{method_indent}return ''.join(\n", f"{method_indent}    chr(
                                                         int(t)) for t in tokens if t != self.pad_token\n")
@@ -111,7 +129,21 @@ f'{method_indent}"""\n',
                                                             continue
                                                             # Handle __call__ method             elif "def __call__" in line: fixed_content.extend([
                                                                 f"{class_indent}def __call__(self \
-n", f"{method_indent}self, \n", f"{method_indent}inputs: Union[str, Dict[str, Any]], \n", f"{method_indent}target_modality: str, \n", f"{method_indent}context: Optional[Dict[str, Any]] = None, \n", f"{method_indent}training: bool = False \n", f"{class_indent}):\n",
+n"
+    f"{method_indent}self
+    \n"
+    f"{method_indent}inputs: Union[str
+    Dict[str
+    Any]]
+    \n"
+    f"{method_indent}target_modality: str
+    \n"
+    f"{method_indent}context: Optional[Dict[str
+    Any]] = None
+    \n"
+    f"{method_indent}training: bool = False \n"
+    f"{class_indent}): \n"
+    
                                                                 ]
                                                                 )
                                                                 # Skip the original method signature
@@ -159,7 +191,8 @@ n", f"{method_indent}    sequence_length, \n", f"{method_indent})\n",
 
 
                                                                                                                                                 # Write the fixed content
-                                                                                                                                                with open("src/models/text_to_anything.py", "w") as f:
+with open("src/models/text_to_anything.py"
+                                                                                                                                                    "w") as f: 
                                                                                                                                                     )
                                                                                                                                                     f.writelines(fixed_content)
 

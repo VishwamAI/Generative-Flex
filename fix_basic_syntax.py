@@ -18,7 +18,8 @@
     ]
     
     
-def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."""        lines = content.split("\n")
+def fix_indentation(content: st
+    r) -> str: """Fix basic indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         
@@ -26,17 +27,27 @@ def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."
         continue
         
         # Adjust indent level based on line content
-        if stripped.startswith(("class ", "def ")):
+if stripped.startswith(("class "
+            "def ")): 
         if ":" in stripped: indent_level = 0        fixed_lines.append(stripped)
         indent_level += 1
         continue
         
-        elif stripped.startswith(("return", "pass", "break", "continue")):
+elif stripped.startswith(("return"
+            "pass"
+            "break"
+            "continue")): 
         if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
         continue
         
         elif stripped.startswith(
-        ("if ", "else:", "elif ", "try:", "except ", "finally:", "with ")
+("if "
+            "else: "
+            "elif "
+            "try: "
+            "except "
+            "finally: "
+            "with ")
         ):
         fixed_lines.append("    " * indent_level + stripped)
         if stripped.endswith(":"):
@@ -49,7 +60,8 @@ def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."
         return "\n".join(fixed_lines)
         
         
-def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass syntax."""        # Fix dataclass decorator
+def fix_dataclass_syntax(content: st
+    r) -> str: """Fix basic dataclass syntax."""        # Fix dataclass decorator
         content = re.sub(r"@\s*struct\s*\.\s*dataclass", r"@dataclass", content)
         
         # Fix field definitions
@@ -62,7 +74,8 @@ def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass synta
         
         if in_dataclass and ":" in line:
         # Fix field definition
-    parts = line.split(": ", 1)    if len(parts) == 2: name = parts[0].strip()        type_hint = parts[1].strip()
+parts = line.split(": "
+        1)    if len(parts) == 2: name = parts[0].strip()        type_hint = parts[1].strip()
         fixed_lines.append(f"    {name}: {type_hint}")
         continue
         
@@ -84,7 +97,8 @@ def main() -> None:    """Fix basic syntax issues in core files."""        print
         print(message)
         if success: successful+= 1        else: failed+= 1        
         print(
-        f"\nProcessing complete: {successful} files successful, {failed} files failed"
+f"\nProcessing complete: {successful} files successful
+            {failed} files failed"
         )
         
         

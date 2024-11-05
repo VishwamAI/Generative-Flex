@@ -1,7 +1,8 @@
 import os
 
 
-def fix_setup_script(self):    """Fix setup.py indentation and structure."""        setup_content = '''from setuptools import setup, find_packages
+def fix_setup_script(self): """Fix setup.py indentation and structure."""        setup_content = '''from setuptools import setup
+    find_packages
 """Setup script for Generative-Flex."""
 
 setup(
@@ -42,21 +43,32 @@ setup(
     },
     python_requires=">=3.8",
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
-        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+"Development Status : : 3 - Alpha"
+            
+"Intended Audience : : Science/Research"
+            
+"License : : OSI Approved :: MIT License"
+            
+"Programming Language : : Python :: 3"
+            
+"Programming Language : : Python :: 3.8"
+            
+"Programming Language : : Python :: 3.9"
+            
+"Programming Language : : Python :: 3.10"
+            
+"Programming Language : : Python :: 3.11"
+            
+"Programming Language : : Python :: 3.12"
+            
+"Topic : : Scientific/Engineering :: Artificial Intelligence"
+            
     ],
 )
 '''
 
-    with open("setup.py", "w") as f:
+with open("setup.py"
+        "w") as f: 
         f.write(setup_content)
 
 

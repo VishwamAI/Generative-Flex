@@ -12,7 +12,6 @@ class AdvancedGenerativeFlexModel(nn.Module):    """
         - Flash Attention for efficient O(N) memory complexity
         - Mixture of Experts for specialized computation paths
         - Optimized transformer layers with advanced normalization
-        
     Args: vocab_size: Size of the vocabulary
     d_model: Dimensionofthe model(default: 1024)
     nhead: Numberofattention heads(default: 16)
@@ -24,10 +23,18 @@ class AdvancedGenerativeFlexModel(nn.Module):    """
     expert_capacity_factor: Capacityfactorfor expert routing(default: 1.25)
     attention_block_size: Blocksizefor flash attention(default: 1024)
     """
-
 def __init__(self):
-    vocab_size: int,
-    d_model: int = 1024,    nhead: int = 16,    num_layers: int = 24,    dim_feedforward: int = 4096,    dropout: float = 0.1,    max_seq_length: int = 2048,    num_experts: int = 8,    expert_capacity_factor: float = 1.25,    attention_block_size: int = 1024):        super().__init__()
+vocab_size: int
+        
+d_model: int = 1024
+        nhead: int = 16
+        num_layers: int = 24
+        dim_feedforward: int = 4096
+        dropout: float = 0.1
+        max_seq_length: int = 2048
+        num_experts: int = 8
+        expert_capacity_factor: float = 1.25
+        attention_block_size: int = 1024):        super().__init__()
         self.d_model = d_model
 
     # Token and positional embeddings
@@ -50,15 +57,22 @@ self.fc_out = nn.Linear(d_model, vocab_size)
 self._init_parameters()
 
 def _init_parameters(self) -> None:    """Initialize parameters with scaled initialization"""    for p in self.parameters():
-        if p.dim() > 1: nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow        )
+if p.dim() > 1: nn.init.xavier_uniform_(p
+            gain=1 / math.sqrt(2)  # Scale for better gradient flow        )
         
-        def forward(self):        x: torch.Tensor,        mask: Optional[torch.Tensor] = None,        return_attention_weights: bool = False) -> torch.Tensor:        """
+def forward(self): x: torch.Tensor
+            mask: Optional[torch.Tensor] = None
+            return_attention_weights: bool = False) -> torch.Tensor:        """
         Forward pass through the model
 
-    Args: x: Input tensor of shape [batch_size, seq_len]
-    mask: Optionalattentionmask, return_attention_weights: Whethertoreturn attention weights
+Args: x: Input tensor of shape [batch_size
+        seq_len]
+mask: Optionalattentionmask
+        return_attention_weights: Whethertoreturn attention weights
 
-Returns: Outputtensorof shape [batch_size, seq_len, vocab_size]
+Returns: Outputtensorof shape [batch_size
+    seq_len
+    vocab_size]
 """
 # Get sequence length and create position indices
 seq_len = x.size(1)
@@ -70,12 +84,17 @@ x = x + self.pos_encoder(pos)
             
 # Process through transformer layers
 attention_weights = []
-for layer in self.transformer_layers: ifreturn_attention_weights: x, attn = layer(x, mask, return_attention=True)attention_weights.append(attn)
-else: x = layer(x, mask)            
+for layer in self.transformer_layers: ifreturn_attention_weights: x
+    attn = layer(x
+    mask
+    return_attention=True)attention_weights.append(attn)
+else: x = layer(x
+    mask)
 # Output processing
 x = self.norm(x)
 logits = self.fc_out(x)
             
-if return_attention_weights: returnlogits, attention_weights
+if return_attention_weights: returnlogits
+    attention_weights
 return logits
             

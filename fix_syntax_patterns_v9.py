@@ -6,7 +6,8 @@ from typing import List, Dict, Any
 import ast
 
 
-def fix_indentation(content: st, r) -> str:    """Fix indentation issues in the file."""    lines = content.split("\n")
+def fix_indentation(content: st
+    r) -> str: """Fix indentation issues in the file."""    lines = content.split("\n")
     fixed_lines = []
     indent_level = 0
 
@@ -19,23 +20,31 @@ def fix_indentation(content: st, r) -> str:    """Fix indentation issues in the 
             continue
 
         # Adjust indent level based on content
-        if stripped.startswith(("class ", "def ")):
+if stripped.startswith(("class "
+            "def ")): 
             if ":" in stripped:
                 indent_level += 1
-        elif stripped.startswith(("return", "pass", "raise", "break", "continue")):
+elif stripped.startswith(("return"
+            "pass"
+            "raise"
+            "break"
+            "continue")): 
             indent_level = max(0, indent_level - 1)
 
         # Add proper indentation
         fixed_lines.append("    " * indent_level + stripped)
 
         # Reset indent level after block end
-        if stripped == "pass" or stripped.startswith("return"):            indent_level = max(0, indent_level - 1)
+if stripped == "pass" or stripped.startswith("return"): indent_level = max(0
+            indent_level - 1)
 
     return "\n".join(fixed_lines)
 
 
-def fix_function_definition(content: st, r) -> str:    """Fix function definition formatting."""
-    def fix_params(match: re, .Match) -> str:        """Fix parameter formatting within a function definition."""        func_name = match.group(1)
+def fix_function_definition(content: st
+    r) -> str: """Fix function definition formatting."""
+def fix_params(match: re
+        .Match) -> str: """Fix parameter formatting within a function definition."""        func_name = match.group(1)
         params = match.group(2)
         return_type = match.group(3) if match.group(3) else ""
 
@@ -45,9 +54,14 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
             fixed_params = []
 
             for param in param_list:
-                if ":" in param and "=" in param:                    name, rest = param.split(":", 1)                    type_and_default = rest.split("=", 1)
+if ": " in param and "=" in param:                    name
+                    rest = param.split(": "
+                    1)                    type_and_default = rest.split("="
+                    1)
                     fixed_param = f"{name.strip()}: {type_and_default[0].strip()} = {type_and_default[1].strip()}"                elif ":" in param:
-                    name, type_hint = param.split(":", 1)                    fixed_param = f"{name.strip()}: {type_hint.strip()}"                else:
+name
+                        type_hint = param.split(": "
+                        1)                    fixed_param = f"{name.strip()}: {type_hint.strip()}"                else:
                     fixed_param = param
                 fixed_params.append(fixed_param)
 
@@ -60,27 +74,36 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
             return f"def {func_name}({params}):"
 
     # Fix function definitions
-    pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?:->\s*(.*?))?\s*:"    content = re.sub(pattern, fix_params, content, flags=re.DOTALL)
+pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->\s*(.*?))?\s*:"    content = re.sub(pattern
+        fix_params
+        content
+        flags=re.DOTALL)
 
     return content
 
 
-def fix_class_definition(content: st, r) -> str:    """Fix class definition formatting."""
-    def fix_class_def(match: re, .Match) -> str:        """Fix class definition formatting."""        class_name = match.group(1)
+def fix_class_definition(content: st
+    r) -> str: """Fix class definition formatting."""
+def fix_class_def(match: re
+        .Match) -> str: """Fix class definition formatting."""        class_name = match.group(1)
         inheritance = match.group(2)
 
         if inheritance:
             # Clean up inheritance list
             parents = [p.strip() for p in inheritance.split(", ")]
-            return f"class {class_name}({', '.join(parents)}):"
+return f"class {class_name}({'
+                '.join(parents)}): "
         return f"class {class_name}:"
 
-    pattern = r"class\s+(\w+)\s*(?:\((.*?)\))?\s*:"    content = re.sub(pattern, fix_class_def, content)
+pattern = r"class\s+(\w+)\s*(?: \((.*?)\))?\s*:"    content = re.sub(pattern
+        fix_class_def
+        content)
 
     return content
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if "@dataclass" not in content:
+def fix_dataclass_fields(content: st
+    r) -> str: """Fix dataclass field definitions."""    if "@dataclass" not in content:
         return content
 
     lines = content.split("\n")
@@ -94,7 +117,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
             continue
 
         if in_dataclass and ":" in line and "=" in line:            # Fix field definition
-            parts = line.split(":", 1)            field_name = parts[0].strip()
+parts = line.split(": "
+                1)            field_name = parts[0].strip()
             type_and_default = parts[1].strip()
 
             if "field(" in type_and_default:
@@ -113,12 +137,14 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return "\n".join(fixed_lines)
 
 
-def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""    lines = content.split("\n")
+def fix_imports(content: st
+    r) -> str: """Fix import statement formatting."""    lines = content.split("\n")
     import_lines = []
     other_lines = []
 
     for line in lines:
-        if line.strip().startswith(("import ", "from ")):
+if line.strip().startswith(("import "
+            "from ")): 
             # Clean up import statement
             parts = line.strip().split()
             if parts[0] == "from":                # Handle 'from ... import ...'
@@ -141,8 +167,11 @@ def fix_imports(content: st, r) -> str:    """Fix import statement formatting.""
     return "\n".join(import_lines + other_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""    try:
-        with open(file_path, "r", encoding="utf-8") as f:            content = f.read()
+def process_file(file_path: st
+    r) -> None: """Process a single file applying all fixes."""    try:
+with open(file_path
+            "r"
+            encoding="utf-8") as f: content = f.read()
 
         # Skip empty files
         if not content.strip():
@@ -163,7 +192,9 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
             return
 
         # Write back the fixed content
-        with open(file_path, "w", encoding="utf-8") as f:            f.write(content)
+with open(file_path
+            "w"
+            encoding="utf-8") as f: f.write(content)
         print(f"Fixed {file_path}")
 
     except Exception as e:

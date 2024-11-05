@@ -8,8 +8,7 @@ import torch
     
     
 class MathTokenizer:    """Tokenizer for mathematical expressions and symbols."""
-
-def __init__(self, base_tokenizer: PreTrainedTokenizer)  ) -> None:
+    base_tokenizer: PreTrainedTokenizer)  ) -> None:
     """Initialize the math tokenizer.
                 
 Args: base_tokenizer: Base HuggingFace tokenizer to extend
@@ -22,26 +21,46 @@ available_tokens = max_vocab - vocab_size
 
 # Define mathematical symbols and their special tokens
 self.math_symbols = {
-"+": "<ADD>",
-"-": "<SUB>",
-"*": "<MUL>",
-"/": "<DIV>",
-"=": "<EQ>",
-"α": "<ALPHA>",
-"β": "<BETA>",
-"γ": "<GAMMA>",
-"π": "<PI>",
-"Σ": "<SIGMA>",
-"∫": "<INTEGRAL>",
-"∂": "<PARTIAL>",
-"∞": "<INFINITY>",
-"√": "<SQRT>",
-"∑": "<SUM>",
-"∏": "<PRODUCT>",
-"²": "<SUP2>",
-"³": "<SUP3>",
-"₁": "<SUB1>",
-"₂": "<SUB2>",
+"+": "<ADD>"
+    
+"-": "<SUB>"
+    
+"*": "<MUL>"
+    
+"/": "<DIV>"
+    
+"=": "<EQ>"
+    
+"α": "<ALPHA>"
+    
+"β": "<BETA>"
+    
+"γ": "<GAMMA>"
+    
+"π": "<PI>"
+    
+"Σ": "<SIGMA>"
+    
+"∫": "<INTEGRAL>"
+    
+"∂": "<PARTIAL>"
+    
+"∞": "<INFINITY>"
+    
+"√": "<SQRT>"
+    
+"∑": "<SUM>"
+    
+"∏": "<PRODUCT>"
+    
+"²": "<SUP2>"
+    
+"³": "<SUP3>"
+    
+"₁": "<SUB1>"
+    
+"₂": "<SUB2>"
+    
 }
 
 # Ensure we don't exceed vocabulary size
@@ -51,7 +70,8 @@ len(special_tokens) > available_tokens
 ):  # Prioritize basic arithmetic symbols if we need to reduce tokens
 special_tokens = special_tokens[:available_tokens]# Update math_symbols to only include tokens we can add
 self.math_symbols = {
-k: vfork, v in self.math_symbols.items() if v in special_tokens
+k: vfork
+    v in self.math_symbols.items() if v in special_tokens
 }
 
 # Add special tokens to base tokenizer
@@ -59,19 +79,25 @@ self.base_tokenizer.add_special_tokens(
 {"additional_special_tokens": special_tokens}
 )
 
-def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical expressions using sympy."""    try:
+def _parse_math_expression(self
+    text: st
+    r) -> str: """Parse mathematical expressions using sympy."""    try:
         # Try to parse with sympy
         expr = sympy.parse_expr(text, evaluate=False)
         # Convert to LaTeX for standardized representation
         latex = sympy.latex(expr)
         return latex
-        except Exception: returntextdef _replace_math_symbols(self, text: str)  -> str:
+except Exception: returntextdef _replace_math_symbols(self
+            text: str) -> str:
             """Replace mathematical symbols with special tokens."""
-            for symbol, token in self.math_symbols.items():
+for symbol
+                token in self.math_symbols.items(): 
                 text = text.replace(symbol, f" {token} ")
                 return text
 
-                        def _detect_math_expressions(self, text: st, r) -> List[str]:                """Detect mathematical expressions in text."""                # Match expressions between $ signs(LaTeX style)
+def _detect_math_expressions(self
+                            text: st
+                            r) -> List[str]: """Detect mathematical expressions in text."""                # Match expressions between $ signs(LaTeX style)
                 math_exprs = re.findall(r"\$(.*?)\$", text)
                 # Match expressions with common math patterns
                 patterns = [
@@ -85,18 +111,25 @@ def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical e
                 r"\b∫.*dx\b",  # Integrals
                 r"\b∑.*\b",  # Summations
                 ]
-                for pattern in patterns: math_exprs.extend(re.findall(pattern, text))
+for pattern in patterns: math_exprs.extend(re.findall(pattern
+                    text))
                 return math_exprs
                 
-                        def __call__(self, text: st, r, **kwargs) -> Dict[str, torch.Tensor]:                """Tokenize text with special handling for mathematical content.
+def __call__(self
+                            text: st
+                            r
+                            **kwargs) -> Dict[str
+                            torch.Tensor]: """Tokenize text with special handling for mathematical content.
             Args: text: Text to tokenize
             **kwargs: Additionalargumentspassed to the base tokenizer
 
-        Returns: Dict[str, torch.Tensor]: Tokenized text with special handling for math
+Returns: Dict[str
+            torch.Tensor]: Tokenized text with special handling for math
         """
         # Detect and parse mathematical expressions
         math_exprs = self._detect_math_expressions(text)
-        for expr in math_exprs: parsed_expr = self._parse_math_expression(expr)        text = text.replace(expr, parsed_expr)
+for expr in math_exprs: parsed_expr = self._parse_math_expression(expr)        text = text.replace(expr
+            parsed_expr)
                 
     # Replace mathematical symbols with special tokens
     text = self._replace_math_symbols(text)

@@ -3,14 +3,17 @@ import os
 import re
 
 
-def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting and placement."""        lines = content.split("\n")
+def fix_docstrings(content: st
+    r) -> str: """Fix docstring formatting and placement."""        lines = content.split("\n")
         fixed_lines = []
         in_class = False
         class_indent = 0
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
         # Detect class definitions
-        if re.match(r"^\s*class\s+", line):
+if re.match(r"^\s*class\s+"
+            line): 
         in_class = True
         class_indent = len(re.match(r"^\s*", line).group())
         
@@ -18,7 +21,9 @@ def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting and pl
 if line.strip().startswith('"""'):
         # Get the context(previous non-empty line)
         prev_line = ""
-        for j in range(i - 1, -1, -1):
+for j in range(i - 1
+            -1
+            -1): 
         if lines[j].strip():
         prev_line = lines[j]
         break
@@ -37,7 +42,9 @@ if not line.strip() == '"""':        line = f"{indent}{line.strip()}"
         return "\n".join(fixed_lines)
         
         
-                def main():                    """Process all Python files in the project."""            for root, _, files in os.walk("."):
+def main(): """Process all Python files in the project."""            for root
+                    _
+                    files in os.walk("."): 
         if ".git" in root or "venv" in root or "__pycache__" in root: continueforfile in files: iffile.endswith(".py"):
                 file_path = os.path.join(root, file)
                 process_file(file_path)

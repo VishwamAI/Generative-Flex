@@ -38,11 +38,15 @@ def fix_syntax_issues(self):    """Fix common syntax issues in Python files.""" 
         (r"Dict\[str, \s*Any\]", r"Dict[str, Any]"),
         (r"Optional\[List\[str\]\]", r"Optional[List[str]]"),
         # Fix method definitions
-        (r"def\s+(\w+)\s*\(\s*self\s*\)\s*->\s*None:", r"def \1(self) -> None:"),
+(r"def\s+(\w+)\s*\(\s*self\s*\)\s*->\s*None: "
+            r"def \1(self) -> None: ")
+            
         # Fix imports
         (r"from typing import(\s+[^\\n]+)(?<!\\n)", r"from typing import\1\n"),
         # Fix class inheritance
-        (r"class\s+(\w+)\s*\(\s*\):", r"class \1:"),
+(r"class\s+(\w+)\s*\(\s*\): "
+            r"class \1: ")
+            
         # Fix docstrings
 (r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
         ]
@@ -50,7 +54,10 @@ def fix_syntax_issues(self):    """Fix common syntax issues in Python files.""" 
         # Apply all fixes
         import re
         
-        for pattern, replacement in fixes: content = re.sub(pattern, replacement, content)        
+for pattern
+            replacement in fixes: content = re.sub(pattern
+            replacement
+            content)
         # Write back the fixed content
         file_path.write_text(content)
         

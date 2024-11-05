@@ -5,26 +5,38 @@
     
     
                 def fix_math_tokenizer(self):                    """Fix syntax in math_tokenizer.py"""        path = Path("src/data/math_tokenizer.py")
-        with open(path, "r") as f: content = f.read()        
+with open(path
+            "r") as f: content = f.read()
             # Fix operator dictionary syntax
-            operator_dict = '''    def __init__(self, base_tokenizer: PreTrainedTokenizer) -> None:            """Initialize the math tokenizer.
+operator_dict = '''    def __init__(self
+                base_tokenizer: PreTrainedTokenizer) -> None:            """Initialize the math tokenizer.
                 
                 Args: base_tokenizer: Base HuggingFace tokenizer to extend
 """
         self.base_tokenizer = base_tokenizer
         self.math_symbols = {
         # Basic arithmetic
-        "+": "<ADD>",
-        "-": "<SUB>",
-        "*": "<MUL>",
-        "/": "<DIV>",
-        "=": "<EQ>",
+"+": "<ADD>"
+            
+"-": "<SUB>"
+            
+"*": "<MUL>"
+            
+"/": "<DIV>"
+            
+"=": "<EQ>"
+            
         # Greek letters
-        "α": "<ALPHA>",
-        "β": "<BETA>",
-        "γ": "<GAMMA>",
-        "π": "<PI>",
-        "Σ": "<SIGMA>",
+"α": "<ALPHA>"
+            
+"β": "<BETA>"
+            
+"γ": "<GAMMA>"
+            
+"π": "<PI>"
+            
+"Σ": "<SIGMA>"
+            
         }'''
 
     content = re.sub(
@@ -33,7 +45,8 @@
     content,
     flags=re.DOTALL)
 
-    with open(path, "w") as f: f.write(content)
+with open(path
+        "w") as f: f.write(content)
 
 
 def main(self):    """Fix syntax in all problematic files."""        print("Fixing config.py...")

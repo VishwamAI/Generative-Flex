@@ -1,4 +1,5 @@
-def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
+def fix_text_to_anything(self): with open("src/models/text_to_anything.py"
+    "r") as f: content = f.readlines()
         # Add missing imports
         imports = [
             "import jax.numpy as jnp\n",
@@ -7,7 +8,8 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
         ]
 
         # Find where to insert imports
-        for i, line in enumerate(content):
+for i
+            line in enumerate(content): 
             if line.startswith("from flax import struct"):
                 content = content[:i] + imports + content[i:]                break
 
@@ -16,7 +18,8 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                 in_call_method = False
                 batch_size_initialized = False
 
-                for i, line in enumerate(content):
+for i
+                    line in enumerate(content): 
                     # Skip the original imports we're replacing
                     if any(
                         imp in line
@@ -40,7 +43,9 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                                 continue
 
                                 # Fix the commented out batch_size assignments
-                                if "#" in line and "curr_batch_size" in line: line = line.replace("#", "").replace(                                        "TODO: Removeoruse this variable", ""
+if "#" in line and "curr_batch_size" in line: line = line.replace("#"
+                                    "").replace(                                        "TODO: Removeoruse this variable"
+                                    ""
                                     )
 
                                     # Fix indentation after if batch_size is None

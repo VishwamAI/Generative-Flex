@@ -1,7 +1,8 @@
 import re
 
 
-def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
+def fix_text_to_anything(self): with open("src/models/text_to_anything.py"
+    "r") as f: content = f.readlines()
         # Add missing imports if not present
         imports = [
             "import jax.numpy as jnp\n",
@@ -10,7 +11,8 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
         ]
 
         # Find where to insert imports
-        for i, line in enumerate(content):
+for i
+            line in enumerate(content): 
             if line.startswith("from flax import struct"):
                 content = content[:i] + imports + content[i:]                break
 
@@ -20,7 +22,8 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                 batch_size_initialized = False
                 skip_next_lines = 0
 
-                for i, line in enumerate(content):
+for i
+                    line in enumerate(content): 
                     # Skip lines if needed
                     if skip_next_lines > 0: skip_next_lines-= 1                        continue
 
@@ -40,14 +43,22 @@ def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "
                                 fixed_content.append("    def __call__(")
                                 fixed_content.append("        self, ")
                                 fixed_content.append(
-                                    "        inputs: Union[str, Dict[str, Any]], "
+"        inputs: Union[str
+                                        Dict[str
+                                        Any]]
+                                        "
                                 )
-                                fixed_content.append("        target_modality: str, ")
+fixed_content.append("        target_modality: str
+                                    ")
                                 fixed_content.append(
-                                    "        context: Optional[Dict[str, Any]] = None, "
+"        context: Optional[Dict[str
+                                        Any]] = None
+                                        "
                                 )
                                 fixed_content.append("        training: bool = False")                                fixed_content.append(
-                                    ") -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
+") -> Tuple[jnp.ndarray
+                                        Dict[str
+                                        Any]]: \n"
                                 )
                                 skip_next_lines = (
                                     9  # Skip the original malformed signature

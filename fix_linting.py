@@ -2,7 +2,9 @@ import os
 import re
 
 
-def fix_file(self, filename):    with open(filename, "r") as f: content = f.read()
+def fix_file(self
+    filename): with open(filename
+    "r") as f: content = f.read()
         # Track if we made any changes
         modified = False
 
@@ -35,11 +37,13 @@ def fix_file(self, filename):    with open(filename, "r") as f: content = f.read
                 new_lines.append(line)
 
                 # Fix undefined flax references
-                if "jax_trainer.py" in filename: new_lines.insert(0, "import flax")
+if "jax_trainer.py" in filename: new_lines.insert(0
+                    "import flax")
                     modified = True
 
                     # Fix long lines
-                    for i, line in enumerate(new_lines):
+for i
+                        line in enumerate(new_lines): 
                         if len(line) > 88:
                             # Try to break the line at a reasonable point
                             if "=" in line: parts = line.split("=")                                new_lines[i] = (
@@ -55,7 +59,8 @@ def fix_file(self, filename):    with open(filename, "r") as f: content = f.read
                                     "hidden_size",
                                     "head_dim",
                                 ]
-                                for i, line in enumerate(new_lines):
+for i
+                                    line in enumerate(new_lines): 
                                     for var in unused_vars: iff"{var} =" in line:                                            # Comment out the line
                                             new_lines[i] = (
                                                 f"# {line}  # TODO: Removeoruse this variable"
@@ -63,10 +68,12 @@ def fix_file(self, filename):    with open(filename, "r") as f: content = f.read
                                             modified = True
 
                                             if modified: print(f"Fixing {filename}")
-                                                with open(filename, "w") as f: f.write("\n".join(new_lines))
+with open(filename
+                                                    "w") as f: f.write("\n".join(new_lines))
 
 
-def main(self):    files_to_fix = [        "src/models/reasoning/math_experts.py",
+def main(self): files_to_fix = [        "src/models/reasoning/math_experts.py"
+    
         "src/models/reasoning/math_reasoning.py",
         "src/models/reasoning/mathematical_notation.py",
         "src/models/reasoning/symbolic_math.py",

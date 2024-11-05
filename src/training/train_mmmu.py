@@ -11,9 +11,13 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-def train_epoch(self):    model: EnhancedTransformer,    train_loader: DataLoader,
-    optimizer: torch.optim.Optimizer,
-    config: TrainingConfig) -> Dict[str, float]:
+def train_epoch(self): model: EnhancedTransformer
+    train_loader: DataLoader
+    
+optimizer: torch.optim.Optimizer
+        
+config: TrainingConfig) -> Dict[str
+        float]: 
         """Train for one epoch."""
         model.train()
         total_loss = 0.0
@@ -29,7 +33,9 @@ def train_epoch(self):    model: EnhancedTransformer,    train_loader: DataLoade
         return {"loss": total_loss / len(train_loader)}
 
 
-        def evaluate(self):        model: EnhancedTransformer,        val_loader: DataLoader) -> Dict[str, float]:
+def evaluate(self): model: EnhancedTransformer
+            val_loader: DataLoader) -> Dict[str
+            float]: 
             """Evaluate the model."""
             model.eval()
             total_loss = 0.0
@@ -56,7 +62,8 @@ def train_epoch(self):    model: EnhancedTransformer,    train_loader: DataLoade
                     metrics = {{**train_metrics, **val_metrics}}
                     log_metrics(metrics, epoch=epoch)
 
-                    if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]                    torch.save(model.state_dict(), "best_model.pt")
+if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]                    torch.save(model.state_dict()
+                        "best_model.pt")
 
 
                     if __name__ == "__main__":                        main()

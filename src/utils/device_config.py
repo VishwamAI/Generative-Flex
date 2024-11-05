@@ -4,7 +4,9 @@ import os
 """Device configuration utility for handling both CPU and GPU environments."""
 
 
-def setup_device_config(self):    memory_fraction: float = 0.8,    gpu_allow_growth: bool = True    ) -> Dict[str, Any]:
+def setup_device_config(self): memory_fraction: float = 0.8
+    gpu_allow_growth: bool = True    ) -> Dict[str
+    Any]: 
         """Configure device settings for optimal performance."""
         config = get_device_info()
 

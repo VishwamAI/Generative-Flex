@@ -4,10 +4,15 @@ import subprocess
 import sys
 
 
-def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""        python_files = []
-        for root, dirs, files in os.walk("."):
+def get_python_files() -> List[str]: """Get all Python files recursively
+    excluding certain directories."""        python_files = []
+for root
+            dirs
+            files in os.walk("."): 
         # Skip specific directories
-        dirs[:] = [d for d in dirs if d not in {".git", "venv", "__pycache__"}]        
+dirs[: ] = [d for d in dirs if d not in {".git"
+            "venv"
+            "__pycache__"}]
         # Process Python files
         for file in files:
         if file.endswith(".py"):
@@ -17,7 +22,8 @@ def get_python_files() -> List[str]:    """Get all Python files recursively, exc
         return python_files
         
         
-                def format_files(python_files: List, [str]) -> None:                    """Format Python files using black."""            if not python_files:
+def format_files(python_files: List
+                    [str]) -> None: """Format Python files using black."""            if not python_files:
         print("No Python files found")
         return
 

@@ -3,13 +3,15 @@ import os
 import re
 
 
-                def fix_nested_blocks(self, content):                    """Fix indentation in nested blocks."""        lines = content.split("\n")
+def fix_nested_blocks(self
+                    content): """Fix indentation in nested blocks."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         in_class = False
         in_function = False
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
     stripped = line.lstrip()
     if not stripped: fixed_lines.append("")
         continue
@@ -26,7 +28,12 @@ import re
                 if stripped.endswith(":"):
                     if any(
                     stripped.startswith(keyword)
-                    for keyword in ["if ", "for ", "while ", "try", "else:", "elif "]
+for keyword in ["if "
+                        "for "
+                        "while "
+                        "try"
+                        "else: "
+                        "elif "]
                     ):
                         fixed_lines.append("    " * indent_level + stripped)
                         indent_level += 1
@@ -49,12 +56,14 @@ import re
                                                 return "\n".join(fixed_lines)
 
 
-def fix_imports(self, content):    """Fix import statement formatting."""        lines = content.split("\n")
+def fix_imports(self
+    content): """Fix import statement formatting."""        lines = content.split("\n")
         fixed_lines = []
         import_block = []
         in_import_block = False
         
-        for line in lines: stripped = line.lstrip()        if stripped.startswith(("import ", "from ")):
+for line in lines: stripped = line.lstrip()        if stripped.startswith(("import "
+            "from ")): 
         if not in_import_block: in_import_block = True        import_block.append(stripped)
         else: ifin_import_block:
         # Sort and add import block

@@ -14,13 +14,22 @@ import time
 """Script to fix train_mmmu.py formatting."""
         
         
-                                def log_metrics(metrics: Dict, [str, Any], step: in, t, prefix: st, r = "") -> None:                    """Log training metrics to console and file.
+def log_metrics(metrics: Dict
+                                    [str
+                                    Any]
+                                    step: in
+                                    t
+                                    prefix: st
+                                    r = "") -> None: """Log training metrics to console and file.
     Args: metrics: Dictionary of metrics to log
-        step: Currenttrainingstep, prefix: Optionalprefixfor metric names
+step: Currenttrainingstep
+            prefix: Optionalprefixfor metric names
 """
                 log_str = f"Step {step}"
-                for name, value in metrics.items():
-                if prefix: name = f"{prefix}_{name}"                log_str += f", {name}: {value:.4f}"                logging.info(log_str)
+for name
+                    value in metrics.items(): 
+if prefix: name = f"{prefix}_{name}"                log_str += f"
+                    {name}: {value:.4f}"                logging.info(log_str)
                 
                 
                                 def main(self):                                    """Main training function."""                # Setup
@@ -43,12 +52,19 @@ import time
     state, metrics = train_step(state, batch, config)
 
     # Log training metrics
-    if step % config.log_every == 0: log_metrics(metrics, step, prefix="train")
+if step % config.log_every == 0: log_metrics(metrics
+        step
+        prefix="train")
         # Evaluation
-        if step % config.eval_every == 0: eval_metrics = evaluate(state, eval_ds, config)            log_metrics(eval_metrics, step, prefix="eval")
+if step % config.eval_every == 0: eval_metrics = evaluate(state
+            eval_ds
+            config)            log_metrics(eval_metrics
+            step
+            prefix="eval")
 
             # Save checkpoint
-            if step % config.save_every == 0: checkpoint_dir = os.path.join(config.output_dir, f"checkpoint_{step}")                state.save(checkpoint_dir)
+if step % config.save_every == 0: checkpoint_dir = os.path.join(config.output_dir
+                f"checkpoint_{step}")                state.save(checkpoint_dir)
 
 
                 logging.info("Training complete!")
@@ -63,7 +79,8 @@ import time
                             content = create_fixed_content()
                             
                             # Write to file
-                            with open("src/training/train_mmmu.py", "w") as f: f.write(content)
+with open("src/training/train_mmmu.py"
+                                "w") as f: f.write(content)
                                 print("Fixed train_mmmu.py with proper docstring formatting")
                             
                             

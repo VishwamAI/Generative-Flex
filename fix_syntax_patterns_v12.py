@@ -13,7 +13,9 @@ def fix_self_parameter(content: str) -> str:
 
     for line in lines:
         # Fix self parameter on its own line
-        if re.match(r"\s*self\s*, \s*$", line):
+if re.match(r"\s*self\s*
+            \s*$"
+            line): 
             indent = len(re.match(r"(\s*)", line).group(1))
             fixed_lines.append(f"{' ' * indent}self, ")
             continue
@@ -21,13 +23,16 @@ def fix_self_parameter(content: str) -> str:
         # Fix method definitions with self
         if "def " in line and "self" in line:
             # Handle multiline method definitions
-            if re.match(r"\s*def\s+\w+\s*\(\s*$", line):
+if re.match(r"\s*def\s+\w+\s*\(\s*$"
+                line): 
                 fixed_lines.append(line)
                 continue
 
             # Fix single line method definitions
             match = re.match(
-                r"(\s*def\s+\w+\s*\()(\s*self\s*,?\s*)([^)]*)\)\s*(?:->\s*([^:]+))?\s*:",
+r"(\s*def\s+\w+\s*\()(\s*self\s*
+                    ?\s*)([^)]*)\)\s*(?: ->\s*([^:]+))?\s*:"
+                    
                 line,
             )
             if match:
@@ -64,7 +69,8 @@ def fix_multiline_function(content: str) -> str:
         line = lines[i]
 
         # Start of function definition
-        if re.match(r"\s*def\s+\w+\s*\(\s*$", line):
+if re.match(r"\s*def\s+\w+\s*\(\s*$"
+            line): 
             in_function_def = True
             base_indent = len(re.match(r"(\s*)", line).group(1))
             fixed_lines.append(line)
@@ -78,7 +84,8 @@ def fix_multiline_function(content: str) -> str:
                 # End of function definition
                 fixed_lines.append(f"{' ' * base_indent}{stripped}")
                 in_function_def = False
-            elif stripped.endswith(", "):
+elif stripped.endswith("
+                "): 
                 # Parameter line
                 fixed_lines.append(f"{' ' * (base_indent + 4)}{stripped}")
             else:
@@ -108,7 +115,10 @@ def fix_method_calls(content: str) -> str:
         if "(" in line and ")" in line:
             line = re.sub(
                 r"(\w+)\s*\(\s*([^)]+)\s*\)",
-                lambda m: f'{m.group(1)}({", ".join(arg.strip() for arg in m.group(2).split(", ") if arg.strip())})',
+lambda m: f'{m.group(1)}({"
+                    ".join(arg.strip() for arg in m.group(2).split("
+                    ") if arg.strip())})'
+                    
                 line,
             )
 
@@ -137,7 +147,8 @@ def fix_exception_blocks(content: str) -> str:
         # Exception handling
         if in_try_block and stripped.startswith("except"):
             # Fix except line formatting
-            match = re.match(r"(\s*)except\s+(\w+)(?:\s+as\s+(\w+))?\s*:", line)
+match = re.match(r"(\s*)except\s+(\w+)(?: \s+as\s+(\w+))?\s*:"
+                line)
             if match:
                 indent, exc_type, exc_name = match.groups()
                 fixed_line = f"{' ' * try_indent}except {exc_type}"
@@ -149,7 +160,10 @@ def fix_exception_blocks(content: str) -> str:
 
         # End of try block
         if in_try_block and not stripped.startswith(
-            ("try:", "except", "finally:", " ")
+("try: "
+                "except"
+                "finally: "
+                " ")
         ):
             in_try_block = False
 
@@ -161,7 +175,9 @@ def fix_exception_blocks(content: str) -> str:
 def process_file(file_path: str) -> bool:
     """Process a single file with robust error handling."""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+with open(file_path
+            "r"
+            encoding="utf-8") as f: 
             content = f.read()
 
         # Apply fixes in sequence
@@ -171,7 +187,9 @@ def process_file(file_path: str) -> bool:
         content = fix_exception_blocks(content)
 
         # Write back only if changes were made
-        with open(file_path, "w", encoding="utf-8") as f:
+with open(file_path
+            "w"
+            encoding="utf-8") as f: 
             f.write(content)
 
         return True
@@ -184,7 +202,9 @@ def main():
     """Fix syntax in all Python files."""
     # Get all Python files
     python_files = []
-    for root, _, files in os.walk("."):
+for root
+        _
+        files in os.walk("."): 
         if ".git" in root:
             continue
         for file in files:

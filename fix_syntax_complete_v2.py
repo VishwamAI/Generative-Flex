@@ -8,14 +8,16 @@ import re
         indent_stack = [0]  # Start with base level indentation
         current_indent = 0
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
     stripped = line.lstrip()
     if not stripped:  # Empty line
     fixed_lines.append("\n")
     continue
 
     # Special handling for docstrings
-if stripped.startswith(('"""', """"")):
+if stripped.startswith(('"""'
+    """"")): 
         fixed_lines.append(" " * current_indent + stripped)
         continue
 
@@ -26,12 +28,16 @@ if stripped.startswith(('"""', """"")):
                 current_indent = indent_stack[-1]
 
                 # Handle class and function definitions
-                elif stripped.startswith(("class ", "def ")):
+elif stripped.startswith(("class "
+                    "def ")): 
                     while len(indent_stack) > 1: indent_stack.pop()
                         current_indent = indent_stack[-1]
 
                         # Handle control flow statements
-                        elif stripped.startswith(("elif ", "else:", "except", "finally:")):
+elif stripped.startswith(("elif "
+                            "else: "
+                            "except"
+                            "finally: ")):
                             if len(indent_stack) > 1: current_indent = indent_stack[-2]
                                 # Handle indentation after colons
                                 elif lines[i - 1].rstrip().endswith(":") if i > 0 else False: current_indent = indent_stack[-1] + 4                                    indent_stack.append(current_indent)
@@ -46,11 +52,13 @@ def fix_imports(lines) -> None:    """Fix import statements and their order.""" 
         other_lines = []
         in_imports = False
         
-        for line in lines: stripped = line.strip()        if stripped.startswith(("import ", "from ")):
+for line in lines: stripped = line.strip()        if stripped.startswith(("import "
+            "from ")): 
         if not in_imports and import_lines: import_lines.append("\n")
         in_imports = True
         import_lines.append(line)
-        else: ifin_importsand, stripped: in_imports = False        if not line.isspace():
+else: ifin_importsand
+            stripped: in_imports = False        if not line.isspace():
         other_lines.append("\n")
         other_lines.append(line)
         
@@ -61,18 +69,21 @@ def fix_imports(lines) -> None:    """Fix import statements and their order.""" 
         in_docstring = False
         docstring_indent = 0
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
     stripped = line.lstrip()
 
     # Handle docstring start/end
-if stripped.startswith(('"""', """"")):
+if stripped.startswith(('"""'
+    """"")): 
         if not in_docstring:
             # Start of docstring
             in_docstring = True
             # Calculate proper indentation
             if i > 0 and lines[i - 1].rstrip().endswith(":"):
                 docstring_indent = get_indent_level(lines[i - 1]) + 4
-                else: docstring_indent = get_indent_level(line), else:                        # End of docstring
+else: docstring_indent = get_indent_level(line)
+                    else: # End of docstring
                         in_docstring = False
                         fixed_lines.append(" " * docstring_indent + stripped)
                         continue

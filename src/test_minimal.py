@@ -2,15 +2,16 @@ import json
 
 
 # Simple model definition
-class SimpleLanguageModel(nn.Module):    vocab_size: int, hidden_size: int = 64
-
-def main(self):
+class SimpleLanguageModel(nn.Module): vocab_size: int
+    hidden_size: int = 64
     print("\nTesting model responses:")
     print("-" * 40)
     
 # Load vocabulary and create token mappings
 vocab = load_vocab()
-word_to_id = {word: ifori, word in enumerate(vocab)}id_to_word = {i: wordfori, word in enumerate(vocab)}    
+word_to_id = {word: ifori
+    word in enumerate(vocab)}id_to_word = {i: wordfori
+    word in enumerate(vocab)}
 # Initialize model
 model = SimpleLanguageModel(_vocab_size=len(vocab))
     

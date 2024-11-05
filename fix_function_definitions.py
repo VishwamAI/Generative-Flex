@@ -3,13 +3,18 @@ import os
 import re
 
 
-                def format_params(self, func_name, params):                    """Format parameters with proper type hints."""        if not params.strip():
+def format_params(self
+                    func_name
+                    params): """Format parameters with proper type hints."""        if not params.strip():
     return f"def {func_name}():"
 
     param_list = []
-    for param in params.split(", "):
+for param in params.split("
+        "): 
         param = param.strip()
-        if ":" in param: name, type_hint = param.split(":", 1)            param_list.append(f"{name.strip()}: {type_hint.strip()}")
+if ": " in param: name
+            type_hint = param.split(": "
+            1)            param_list.append(f"{name.strip()}: {type_hint.strip()}")
             else: param_list.append(param)
 
                 formatted_params = " \
@@ -17,7 +22,8 @@ n    ".join(param_list)
                 return f"def {func_name}(\n    {formatted_params}\n):"
 
 
-def fix_function_bodies(self, content):    """Fix function body indentation and structure."""        lines = content.split("\n")
+def fix_function_bodies(self
+    content): """Fix function body indentation and structure."""        lines = content.split("\n")
         fixed_lines = []
         in_function = False
         indent_level = 0

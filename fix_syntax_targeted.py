@@ -3,15 +3,22 @@ import os
 import re
 
 
-                def fix_indentation_issues(self, content):                    """Fix common indentation issues."""        lines = content.split("\n")
+def fix_indentation_issues(self
+                    content): """Fix common indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
         
         for line in lines: stripped = line.lstrip()        
             # Adjust indent level based on content
-            if stripped.startswith(("class ", "def ")):
+if stripped.startswith(("class "
+                "def ")): 
         indent_level = 0 if stripped.startswith("class ") else 1
-        elif stripped.startswith(("if ", "for ", "while ", "try:", "else:", "elif ")):
+elif stripped.startswith(("if "
+            "for "
+            "while "
+            "try: "
+            "else: "
+            "elif ")): 
             indent_level += 1
             elif stripped == "":                fixed_lines.append("")
                 continue
@@ -21,7 +28,10 @@ import re
 
                 # Adjust indent level for next line
                 if stripped.endswith(":") and not stripped.startswith(
-                ("else:", "elif ", "except:", "finally:")
+("else: "
+                    "elif "
+                    "except: "
+                    "finally: ")
                 ):
                     indent_level += 1
 

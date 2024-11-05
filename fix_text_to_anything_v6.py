@@ -1,7 +1,9 @@
 import os
 
 
-def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file__), "src/models/text_to_anything.py"), "r") as f: content = f.readlines()
+def fix_text_to_anything(self): with open(os.path.join(os.path.dirname(__file__)
+    "src/models/text_to_anything.py")
+    "r") as f: content = f.readlines()
         # Add missing imports at the top
         imports = [
         "import jax.numpy as jnp\n",
@@ -44,7 +46,9 @@ def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file
                             if in_class and line.strip().startswith("def "):
                                 in_method = True
                                 # Special handling for TextTokenizer methods
-                                if current_class == "TextTokenizer":                                    if "def __init__" in line: fixed_content.append(f"{class_indent}def __init__(self, max_length: int, vocab_size: int):\n"
+if current_class == "TextTokenizer": if "def __init__" in line: fixed_content.append(f"{class_indent}def __init__(self
+                                    max_length: int
+                                    vocab_size: int):\n"
                                         )
                                         )
                                         fixed_content.append(f"{method_indent}self.max_length = max_length\n")
@@ -55,7 +59,8 @@ def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file
                                         i
                                         ].strip().startswith("def"):
                                             i += 1
-                                            continue                 elif "def encode" in line: fixed_content.append(f"{class_indent}def encode(self, text: str) -> jnp.ndarray:\n"
+continue                 elif "def encode" in line: fixed_content.append(f"{class_indent}def encode(self
+                                                text: str) -> jnp.ndarray:\n"
                                                 )
                                                 )
                                                 fixed_content.append(f"{method_indent}# Convert text to token IDs\n")
@@ -75,7 +80,8 @@ def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file
                                                 i
                                                 ].strip().startswith("def"):
                                                     i += 1
-                                                    continue                 elif "def decode" in line: fixed_content.append(f"{class_indent}def decode(self, tokens: jnp.ndarray) -> str:\n"
+continue                 elif "def decode" in line: fixed_content.append(f"{class_indent}def decode(self
+                                                        tokens: jnp.ndarray) -> str:\n"
                                                         )
                                                         )
                                                         fixed_content.append(f"{method_indent}# Convert token IDs back to text\n")
@@ -90,12 +96,17 @@ def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file
                                                             # Handle __call__ method             elif "def __call__" in line: fixed_content.append(f"{class_indent}def __call__(\n")
                                                                 fixed_content.append(f"{method_indent}self \
 n")
-                                                                fixed_content.append(f"{method_indent}inputs: Union[str, Dict[str, Any]]\
+fixed_content.append(f"{method_indent}inputs: Union[str
+                                                                    Dict[str
+                                                                    Any]]\
 n")
                                                                 fixed_content.append(f"{method_indent}target_modality: str\
 n")
-                                                                fixed_content.append(f"{method_indent}context: Optional[Dict[str, Any]] = None \n")
-                                                                fixed_content.append(f"{method_indent}training: bool = False\n")                                                                fixed_content.append(f"{class_indent}) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
+fixed_content.append(f"{method_indent}context: Optional[Dict[str
+                                                                    Any]] = None \n")
+fixed_content.append(f"{method_indent}training: bool = False\n")                                                                fixed_content.append(f"{class_indent}) -> Tuple[jnp.ndarray
+                                                                    Dict[str
+                                                                    Any]]: \n"
                                                                 )
                                                                 # Skip the original method signature
                                                                 while i < len(content) and not content[i].strip().endswith(":"):
@@ -142,7 +153,8 @@ n")
 
 
                                                                                                                                                 # Write the fixed content
-                                                                                                                                                with open("src/models/text_to_anything.py", "w") as f:
+with open("src/models/text_to_anything.py"
+                                                                                                                                                    "w") as f: 
                                                                                                                                                     )
                                                                                                                                                     f.writelines(fixed_content)
 

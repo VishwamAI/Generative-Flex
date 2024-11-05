@@ -12,12 +12,14 @@ import re
             continue
         
             # Detect if this is an import statement
-            if stripped.startswith(("import ", "from ")):
+if stripped.startswith(("import "
+                "from ")): 
         fixed_lines.append(stripped)  # No indentation for imports
         continue
 
         # Handle class and function definitions
-        if stripped.startswith(("class ", "def ")):
+if stripped.startswith(("class "
+            "def ")): 
             current_indent = 0
             fixed_lines.append(line.lstrip())
             if stripped.endswith(":"):
@@ -25,7 +27,10 @@ import re
                 continue
 
                 # Handle normal lines
-                if stripped.startswith(("return ", "raise ", "break", "continue")):
+if stripped.startswith(("return "
+                    "raise "
+                    "break"
+                    "continue")): 
                     # These should align with the current block
                     fixed_lines.append(" " * current_indent + stripped)
                     else:

@@ -3,7 +3,8 @@ import os
 import re
 
 
-                def fix_method_bodies(self, content):                    """Fix method bodies and their indentation."""        lines = content.split("\n")
+def fix_method_bodies(self
+                    content): """Fix method bodies and their indentation."""        lines = content.split("\n")
         fixed_lines = []
         in_method = False
         method_indent = 0
@@ -27,7 +28,8 @@ import re
                         return "\n".join(fixed_lines)
 
 
-                def fix_docstrings_and_comments(self, content):                    """Fix docstrings and comments formatting."""        lines = content.split("\n")
+def fix_docstrings_and_comments(self
+                    content): """Fix docstrings and comments formatting."""        lines = content.split("\n")
         fixed_lines = []
         in_docstring = False
         docstring_indent = 0

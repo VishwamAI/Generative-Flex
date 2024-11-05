@@ -3,7 +3,8 @@ import os
 import re
 
 
-                def fix_indentation(self, content):                    """Fix indentation issues."""        lines = content.split("\n")
+def fix_indentation(self
+                    content): """Fix indentation issues."""        lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
         in_class = False
@@ -18,7 +19,8 @@ import re
             fixed_lines.append(line)
             elif stripped.startswith("def "):
                 in_method = True
-                if in_class: current_indent = 4, else: current_indent = 0                        fixed_lines.append(" " * current_indent + stripped)
+if in_class: current_indent = 4
+                    else: current_indent = 0                        fixed_lines.append(" " * current_indent + stripped)
 elif stripped.startswith('"""'):
                             if in_method: fixed_lines.append(" " * (current_indent + 4) + stripped)
                                 else: fixed_lines.append(" " * current_indent + stripped)

@@ -41,7 +41,8 @@ def fix_class_indentation(content) -> None:    """Fix class and method indentati
         import_lines = []
         other_lines = []
         
-        for line in lines: ifline.strip().startswith(("import ", "from ")):
+for line in lines: ifline.strip().startswith(("import "
+            "from ")): 
         import_lines.append(line)
         else: other_lines.append(line)
 

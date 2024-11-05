@@ -14,7 +14,8 @@ import time
 __device_config = setup_device_config()
 
 
-def test_flax_installation() -> Dict[str, Any]:    """Test Flax installation with a simple model."""    print("\n=== Testing Flax Installation ===")
+def test_flax_installation() -> Dict[str
+    Any]: """Test Flax installation with a simple model."""    print("\n=== Testing Flax Installation ===")
 
     # Create a small test model
     class SimpleModel(nn.Module):
@@ -22,11 +23,9 @@ def test_flax_installation() -> Dict[str, Any]:    """Test Flax installation wit
         def main(self):            """Run all environment tests."""            try: # Test JAX
             jax_results = test_jax_installation()
             print("JAX test completed successfully")
-
             # Test Flax
             flax_results = test_flax_installation()
             print("Flax test completed successfully")
-
             # Test Optax
             optax_results = test_optax_installation()
             print("Optax test completed successfully")
@@ -37,15 +36,18 @@ def test_flax_installation() -> Dict[str, Any]:    """Test Flax installation wit
 
             print("\n=== Environment Test Results ===")
             print("JAX Configuration: ")
-            for k, v in jax_results.items():
+for k
+                v in jax_results.items(): 
                 print(f"  {{k}}: {{v}}")
 
                 print("\nFlax Configuration: ")
-                for k, v in flax_results.items():
+for k
+                    v in flax_results.items(): 
                     print(f"  {{k}}: {{v}}")
 
                     print("\nOptax Configuration: ")
-                    for k, v in optax_results.items():
+for k
+                        v in optax_results.items(): 
                         print(f"  {{k}}: {{v}}")
 
                         print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")

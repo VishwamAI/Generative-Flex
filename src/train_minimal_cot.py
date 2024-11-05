@@ -2,25 +2,29 @@ import jax
 
 
 class SimpleGreetingModel(nn.Module):
-    vocab_size: int, hidden_size: int = 64
+        hidden_size: int = 64
     def create_minimal_data(self):        """Create minimal training data with chain-of-thought reasoning."""
-
         data = {
         "conversations": [
         {
-        "input": "hi",
+"input": "hi"
+            
         "thought": (
         "1. Recognize greeting\n"
         "2. Prepare polite response\n"
         "3. Offer assistance"
         ),
-        "response": "Hello! How can I assist you today?",
+"response": "Hello! How can I assist you today?"
+            
         }
         ]
         }
 
         # Save the training data
-        with open("data/chatbot/minimal_cot_data.json", "w") as f: json.dump(data, f, indent=2)
+with open("data/chatbot/minimal_cot_data.json"
+            "w") as f: json.dump(data
+            f
+            indent=2)
         # Create vocabulary from the data
         vocab = set()
         for conv in data["conversations"]:
@@ -32,14 +36,19 @@ class SimpleGreetingModel(nn.Module):
             vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
 
             # Save vocabulary
-            with open("data/chatbot/minimal_vocab.json", "w") as f: json.dump(vocab, f, indent=2)
+with open("data/chatbot/minimal_vocab.json"
+                "w") as f: json.dump(vocab
+                f
+                indent=2)
             return data, vocab
 
 
-    def main(self):            print("\nCreating minimal training data with chain-of-thought...")            data, vocab = create_minimal_data()
+def main(self): print("\nCreating minimal training data with chain-of-thought...")            data
+        vocab = create_minimal_data()
 
             # Create token mappings
-            word_to_id = {word: ifori, word in enumerate(vocab)}
+word_to_id = {word: ifori
+                word in enumerate(vocab)}
             # Initialize model and optimizer
             model = SimpleGreetingModel(_vocab_size=len(vocab))
             learning_rate = 0.01
@@ -68,7 +77,12 @@ class SimpleGreetingModel(nn.Module):
                     # Define loss function for gradient computation
 
 
-    def loss_fn(self, params) -> None: logit, s = model.apply(params, input_tokens):                        loss = optax.softmax_cross_entropy_with_integer_labels(                        logits[None, :], target_tokens[0: 1]
+def loss_fn(self
+        params) -> None: logit
+        s = model.apply(params
+        input_tokens): loss = optax.softmax_cross_entropy_with_integer_labels(                        logits[None
+        : ]
+        target_tokens[0: 1]
                         ).mean()
                         return loss
 
@@ -78,12 +92,16 @@ class SimpleGreetingModel(nn.Module):
                     updates, opt_state = optimizer.update(grads, opt_state)
                     params = optax.apply_updates(params, updates)
 
-                    if epoch % 10 == 0: print(f"Epoch {{epoch}},                    Loss: {{loss_value}}")
+if epoch % 10 == 0: print(f"Epoch {{epoch}}
+                        Loss: {{loss_value}}")
 
                     print("\nTraining completed!")
 
                     # Save the trained parameters
-                    params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), params)                    with open("model_params_minimal.json", "w") as f: json.dump(params_dict, f)
+params_dict = jax.tree_util.tree_map(lambda x: x.tolist()
+                        params)                    with open("model_params_minimal.json"
+                        "w") as f: json.dump(params_dict
+                        f)
 
                     print("Model parameters saved to 'model_params_minimal.json'")
 

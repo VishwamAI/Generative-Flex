@@ -8,12 +8,18 @@ content = re.sub(r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | 
         )
         
         # Fix f-strings with extra quotes
-        content = re.sub(r'f"([^"]*?)"(?:"|\s*$)', r'f"\1"', content, flags=re.MULTILINE)        
+content = re.sub(r'f"([^"]*?)"(?: "|\s*$)'
+            r'f"\1"'
+            content
+            flags=re.MULTILINE)
         # Fix float("-inf") with extra quotes
         content = re.sub(r'float\("-inf"\)"', r'float("-inf")', content, flags=re.MULTILINE)
         
         # Fix string literals ending with extra quote
-        content = re.sub(r'"([^"]*?)(?<!\\)""(?:\s*$)', r'"\1"', content, flags=re.MULTILINE        )
+content = re.sub(r'"([^"]*?)(?<!\\)""(?: \s*$)'
+            r'"\1"'
+            content
+            flags=re.MULTILINE        )
         
         # Fix multiline docstrings
         lines = content.split("\n")

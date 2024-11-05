@@ -18,7 +18,8 @@
     ]
     
     
-def ensure_imports(content: st, r) -> str:    """Ensure necessary imports are present at the top."""        required_imports = {
+def ensure_imports(content: st
+    r) -> str: """Ensure necessary imports are present at the top."""        required_imports = {
         "from dataclasses import dataclass, field",
         "from typing import Optional, Union, List, Dict, Any, Tuple",
         "import unittest",
@@ -29,8 +30,10 @@ def ensure_imports(content: st, r) -> str:    """Ensure necessary imports are pr
         
         # Check which imports are needed
         needed_imports = set()
-        if "field(" in content: needed_imports.add("from dataclasses import dataclass, field")
-        if "@dataclass" in content: needed_imports.add("from dataclasses import dataclass, field")
+if "field(" in content: needed_imports.add("from dataclasses import dataclass
+            field")
+if "@dataclass" in content: needed_imports.add("from dataclasses import dataclass
+            field")
         if "unittest.TestCase" in content: needed_imports.add("import unittest")
         if "nn.Module" in content: needed_imports.add("import torch.nn as nn")
         if "train_state.TrainState" in content: needed_imports.add("from flax.training import train_state")
@@ -44,7 +47,8 @@ def ensure_imports(content: st, r) -> str:    """Ensure necessary imports are pr
         # Get existing imports
         existing_imports = set()
         for line in content.split("\n"):
-        if line.strip().startswith(("import ", "from ")):
+if line.strip().startswith(("import "
+            "from ")): 
         existing_imports.add(line.strip())
         
         # Add missing imports at the top
@@ -72,7 +76,8 @@ def main() -> None:    """Fix syntax patterns in core files."""        print("St
         print(message)
         if success: successful+= 1        else: failed+= 1        
         print(
-        f"\nProcessing complete: {successful} files successful, {failed} files failed"
+f"\nProcessing complete: {successful} files successful
+            {failed} files failed"
         )
         
         

@@ -9,15 +9,19 @@ import re
         
         for line in lines: stripped = line.lstrip()            if stripped:
         # Calculate proper indentation
-        if stripped.startswith(("def ", "class ")):
+if stripped.startswith(("def "
+            "class ")): 
             if not line.endswith(":"):
                 line = line + ":"                elif stripped.endswith(":"):
                     current_indent += 4
-                    elif stripped.startswith(("return", "break", "continue")):
+elif stripped.startswith(("return"
+                        "break"
+                        "continue")): 
                         current_indent = max(0, current_indent - 4)
 
                         # Apply proper indentation
-if not stripped.startswith(('"""', """"")):
+if not stripped.startswith(('"""'
+    """"")): 
                             line = " " * current_indent + stripped
 
                             fixed_lines.append(line)

@@ -19,7 +19,8 @@ logger = logging.getLogger(__name__)
         
         try: foridxin range(len(dataset)):
         sample = dataset[idx]
-        if isinstance(sample, dict):
+if isinstance(sample
+            dict): 
             # Extract problem category/type
             category = sample.get("subject_name", "Unknown")
             if "algebra" in category.lower():
@@ -43,7 +44,8 @@ logger = logging.getLogger(__name__)
                                         return None
 
 
-                def generate_performance_report(categories, results) -> None:                    """Generate a comprehensive performance report"""        if not results or not categories: logger.error("Missing results or categories data")
+def generate_performance_report(categories
+                    results) -> None: """Generate a comprehensive performance report"""        if not results or not categories: logger.error("Missing results or categories data")
             return
         
             report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -58,7 +60,8 @@ logger = logging.getLogger(__name__)
                     report.append("-" * 30)
                     total_problems = sum(len(probs) for probs in categories.values())
         
-                    for category, problems in sorted(categories.items()):
+for category
+                        problems in sorted(categories.items()): 
                 count = len(problems)
                 percentage = count / total_problems * 100
                 report.append(f"\n{category}:")
@@ -67,7 +70,8 @@ logger = logging.getLogger(__name__)
 
                 # Save report
                 report_path = "mmmu_performance_report.txt"
-                with open(report_path, "w") as f: f.write("\n".join(report))
+with open(report_path
+                    "w") as f: f.write("\n".join(report))
                     logger.info(f"Performance report saved to {report_path}")
 
                     # Generate visualization

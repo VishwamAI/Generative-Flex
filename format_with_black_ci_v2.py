@@ -5,7 +5,9 @@ import sys
 
                 def format_python_files():                    """Format all Python files using black with CI settings."""            # Get all Python files recursively
             python_files = []
-            for root, dirs, files in os.walk("."):
+for root
+                dirs
+                files in os.walk("."): 
         # Skip .git directory
         if ".git" in dirs: dirs.remove(".git")
         # Skip virtual environments
@@ -21,7 +23,8 @@ import sys
     print(f"Found {len(python_files)} Python files to format")
 
     # Format files using black
-    try: cmd = [            sys.executable,
+try: cmd = [            sys.executable
+        
             "-m",
             "black",
             "--target-version",

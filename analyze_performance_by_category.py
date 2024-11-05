@@ -22,17 +22,21 @@ import seaborn as sns
             # Combine metrics with category distribution
             analysis = {
             "overall_metrics": {
-            "accuracy": 0.7143,  # Known accuracy from training logs
-            "validation_loss": 0.6965,  # Known validation loss
+"accuracy": 0.7143
+                # Known accuracy from training logs
+"validation_loss": 0.6965
+                # Known validation loss
             },
-            "category_analysis": {},
+"category_analysis": {}
+                
             }
         
             total_problems = sum(cat["total_problems"] for cat in category_stats["categories"].values()
             )
         
             # Calculate estimated category-specific performance
-            for category, stats in category_stats["categories"].items():
+for category
+                stats in category_stats["categories"].items(): 
         category_weight = stats["total_problems"] / total_problems
         estimated_accuracy = analysis["overall_metrics"]["accuracy"] * (
         1.1
@@ -41,10 +45,15 @@ import seaborn as sns
         )
 
         analysis["category_analysis"][category] = {
-        "problems": stats["total_problems"],
-        "percentage": stats["percentage"],
-        "estimated_accuracy": min(estimated_accuracy, 1.0),  # Cap at 100%
-        "difficulty_distribution": stats["difficulty_distribution"],
+"problems": stats["total_problems"]
+            
+"percentage": stats["percentage"]
+            
+"estimated_accuracy": min(estimated_accuracy
+            1.0)
+            # Cap at 100%
+"difficulty_distribution": stats["difficulty_distribution"]
+            
         }
 
         return analysis
@@ -69,14 +78,17 @@ import seaborn as sns
 
         # Sort categories by estimated accuracy
         sorted_categories = sorted(analysis["category_analysis"].items(),
-        key=lambda x: x[1]["estimated_accuracy"],        reverse=True)
+key=lambda x: x[1]["estimated_accuracy"]
+            reverse=True)
 
-        for category, data in sorted_categories: report.append(f"\n{category}:")
+for category
+            data in sorted_categories: report.append(f"\n{category}:")
             report.append(f"  Number of Problems: {data['problems']}")
             report.append(f"  Dataset Percentage: {data['percentage']:.2f}%")
             report.append(f"  Estimated Accuracy: {data['estimated_accuracy']*100:.2f}%")
             report.append("  Difficulty Distribution:")
-            for diff, count in data["difficulty_distribution"].items():
+for diff
+                count in data["difficulty_distribution"].items(): 
                 report.append(f"    {diff}: {count} problems")
 
                 # Analysis Summary
@@ -97,7 +109,8 @@ import seaborn as sns
 
                 # Save report
                 report_path = "performance_analysis.txt"
-                with open(report_path, "w") as f: f.write("\n".join(report))
+with open(report_path
+                    "w") as f: f.write("\n".join(report))
                     logger.info(f"Performance analysis saved to {report_path}")
 
 def main(self):    """Main analysis function."""        analysis = analyze_performance()

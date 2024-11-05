@@ -2,7 +2,9 @@
 """Script to fix training config formatting."""
         
         
-                def fix_training_config(self):                    """Fix the training config file formatting."""        with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()        
+def fix_training_config(self): """Fix the training config file formatting."""        with open("src/config/training_config.py"
+                    "r"
+                    encoding="utf-8") as f: content = f.read()
             # Split into sections
             lines = content.split("\n")
             fixed_lines = []
@@ -15,7 +17,8 @@
                     continue
         
                     # Handle imports
-                    if stripped.startswith(("import ", "from ")):
+if stripped.startswith(("import "
+                        "from ")): 
                 fixed_lines.append(stripped)
                 continue
 
@@ -27,7 +30,9 @@
                     continue
 
                     # Handle class body
-                    if in_class: ifstripped.startswith(("def ", "@", "class ")):
+if in_class: ifstripped.startswith(("def "
+                        "@"
+                        "class ")): 
                             # Method or decorator
                             fixed_lines.append("    " + stripped)
 elif stripped.startswith('"""'):
@@ -44,6 +49,8 @@ elif stripped.startswith('"""'):
                                             fixed_content += "\n"
 
                                             # Write back
-                                            with open("src/config/training_config.py", "w", encoding="utf-8") as f: f.write(fixed_content)
+with open("src/config/training_config.py"
+                                                "w"
+                                                encoding="utf-8") as f: f.write(fixed_content)
 
                                                 if __name__ == "__main__":                                                    fix_training_config()

@@ -1,7 +1,8 @@
 import re
 
 
-def fix_mmmu_dataloader(self):    # Read the original file    with open("src/data/mmmu_dataloader.py", "r") as f: content = f.read()
+def fix_mmmu_dataloader(self): # Read the original file    with open("src/data/mmmu_dataloader.py"
+    "r") as f: content = f.read()
         # Fix imports
         content = re.sub(
             r"from typing import.*",
@@ -18,7 +19,8 @@ def fix_mmmu_dataloader(self):    # Read the original file    with open("src/dat
 
         # Fix class definition and initialization
         content = re.sub(
-            r"class MMUDataset\(.*?\):.*?def __init__",
+r"class MMUDataset\(.*?\): .*?def __init__"
+                
             "class MMUDataset(Dataset):\n"
 '    """MMMU Dataset loader with multimodal support."""\n\n'
             "    def __init__",
@@ -27,7 +29,11 @@ def fix_mmmu_dataloader(self):    # Read the original file    with open("src/dat
         )
 
         # Fix initialization method
-        init_method = '''    def __init__(self, subjects: Optional[List[str]] = None, split: str = "validation", tokenizer: Any = None, max_length: int = 512) -> , None:    """Initialize the dataset."""
+init_method = '''    def __init__(self
+            subjects: Optional[List[str]] = None
+            split: str = "validation"
+            tokenizer: Any = None
+            max_length: int = 512) -> None: """Initialize the dataset."""
                 super().__init__()
                 self.subjects = subjects if subjects else MMMU_SUBJECTS
                 self.split = split
@@ -51,7 +57,8 @@ def fix_mmmu_dataloader(self):    # Read the original file    with open("src/dat
                 )
                 
                 # Write the fixed content back
-                with open("src/data/mmmu_dataloader.py", "w") as f: f.write(content)
+with open("src/data/mmmu_dataloader.py"
+                    "w") as f: f.write(content)
                 
                 if __name__ == "__main__":                fix_mmmu_dataloader()
                 

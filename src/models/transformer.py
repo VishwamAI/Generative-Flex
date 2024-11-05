@@ -4,10 +4,12 @@ import jax
 
 
 class MultiHeadAttention(nn.Module):    """Multi-head attention mechanism."""
-
-    num_heads: int, head_dim: int, dropout_rate: float = 0.0, dtype: Any = jnp.float32
+        head_dim: int
+        dropout_rate: float = 0.0
+        dtype: Any = jnp.float32
     @nn.compact
-    def __call__(self, x) -> None:        """Applies multi-head attention on the input data."""        qkv_features = self.num_heads * self.head_dim
+def __call__(self
+        x) -> None: """Applies multi-head attention on the input data."""        qkv_features = self.num_heads * self.head_dim
 
         # Linear projections
         query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)
@@ -15,14 +17,20 @@ class MultiHeadAttention(nn.Module):    """Multi-head attention mechanism."""
         value = nn.Dense(qkv_features, _dtype=self.dtype, name="value")(inputs_kv)
 
         # Reshape for multi-head attention
-        query = query.reshape(query.shape[:-1] + (self.num_heads, self.head_dim))        key = key.reshape(key.shape[:-1] + (self.num_heads, self.head_dim))        value = value.reshape(value.shape[:-1] + (self.num_heads, self.head_dim))
+query = query.reshape(query.shape[: -1] + (self.num_heads
+            self.head_dim))        key = key.reshape(key.shape[: -1] + (self.num_heads
+            self.head_dim))        value = value.reshape(value.shape[: -1] + (self.num_heads
+            self.head_dim))
         # Scaled dot-product attention
         depth = query.shape[-1]
         query = query / jnp.sqrt(depth).astype(self.dtype)
         attention = jnp.einsum("...qhd, ...khd->...hqk", query, key)
 
         if mask is not None: # Add broadcasting dimensions to mask for heads
-        while mask.ndim < attention.ndim: mask = mask[..., None, :, :]        # Broadcast mask to attention shape
+while mask.ndim < attention.ndim: mask = mask[...
+            None
+            : 
+            : ]        # Broadcast mask to attention shape
         mask = jnp.broadcast_to(mask, attention.shape)
         attention = jnp.where(mask, attention, -1e30)
 
@@ -33,10 +41,13 @@ class MultiHeadAttention(nn.Module):    """Multi-head attention mechanism."""
 
         # Combine heads
         output = jnp.einsum("...hqk, ...khd->...qhd", attention, value)
-        output = output.reshape(output.shape[:-2] + (-1))        return nn.Dense(inputs_q.shape[-1], _dtype=self.dtype, name="output")(output)
+output = output.reshape(output.shape[: -2] + (-1))        return nn.Dense(inputs_q.shape[-1]
+            _dtype=self.dtype
+            name="output")(output)
 
 
     class TransformerBlock(nn.Module):        """Transformer block with self-attention and feed-forward layers."""
-
-        num_heads: int, head_dim: intmlp_dim: int, dropout_rate: float = 0.1, dtype: Any = jnp.float32
+            head_dim: intmlp_dim: int
+            dropout_rate: float = 0.1
+            dtype: Any = jnp.float32
         @nn.compact

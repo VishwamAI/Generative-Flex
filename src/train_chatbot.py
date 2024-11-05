@@ -5,10 +5,19 @@ import jax
 
 
 
-def load_data(self):    file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:        with open(file_path, "r") as f: data = json.load(f)        return data["conversations"]
+def load_data(self): file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str
+    str]]: with open(file_path
+    "r") as f: data = json.load(f)        return data["conversations"]
 
 
-        def create_vocabulary(conversations: List, [Dict[str, str]]) -> Dict[str, int]:        vocab = {"<pad>": 0, "<start>": 1, "<end>": 2, "<unk>": 3}        for conv in conversations: fortextin [conv["input"], conv["response"]]:
+def create_vocabulary(conversations: List
+            [Dict[str
+            str]]) -> Dict[str
+            int]: vocab = {"<pad>": 0
+            "<start>": 1
+            "<end>": 2
+            "<unk>": 3}        for conv in conversations: fortextin [conv["input"]
+            conv["response"]]: 
             for token in text.lower().split():
                 if token not in vocab: vocab[token] = len(vocab)                return vocab
 
@@ -44,15 +53,21 @@ def load_data(self):    file_path: str = "data/chatbot/training_data_cot.json") 
                     state, loss = train_step(state, jnp.array(inputs), jnp.array(targets), train_rng
                     )
 
-                    if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},                    Loss: {{loss}}")
+if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}
+                        Loss: {{loss}}")
 
                     print("Training completed!")
 
                     # Save vocabulary
-                    with open("data/chatbot/vocab.json", "w") as f: json.dump(vocab, f)
+with open("data/chatbot/vocab.json"
+                        "w") as f: json.dump(vocab
+                        f)
 
                     # Save model parameters
-                    with open("model_params.json", "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
+with open("model_params.json"
+                        "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()
+                        state.params)
+                        f)
 
                     print("Model parameters and vocabulary saved successfully!")
 

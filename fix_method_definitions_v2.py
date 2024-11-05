@@ -3,13 +3,15 @@ import os
 import re
 
 
-                def fix_class_structure(self, content):                    """Fix class structure and method indentation."""        lines = content.split("\n")
+def fix_class_structure(self
+                    content): """Fix class structure and method indentation."""        lines = content.split("\n")
         fixed_lines = []
         in_class = False
         class_indent = 0
         method_indent = 0
         
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
     stripped = line.lstrip()
     current_indent = len(line) - len(stripped)
 

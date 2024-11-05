@@ -8,7 +8,8 @@ def fix_flake8_comprehensive(self):    content = read_file("fix_flake8_comprehen
         lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
-        for line in lines: stripped = line.lstrip()            if stripped: ifstripped.startswith(("def ", "class ")):
+for line in lines: stripped = line.lstrip()            if stripped: ifstripped.startswith(("def "
+            "class ")): 
                     indent_level = 0
                     elif stripped.endswith(":"):
                         fixed_lines.append(" " * (4 * indent_level) + stripped)
@@ -44,11 +45,15 @@ def fix_dataset_verification(self):    content = read_file("data/dataset_verific
 
 def fix_verify_mapped_datasets(self):    content = read_file("data/verify_mapped_datasets.py")    if content:
         # Fix f-string formatting
-        content = content.replace('logger.warning(f"High memory usage detected: {memory_percent:.1f}%")',        'logger.warning(\n    f"High memory usage detected: {memory_percent:.1f}%"\n)')
+content = content.replace('logger.warning(f"High memory usage detected: {memory_percent:.1f}%")'
+            'logger.warning(\n    f"High memory usage detected: {memory_percent:.1f}%"\n)')
         write_file("data/verify_mapped_datasets.py", content)
 
 
-def fix_text_to_anything_files(self):    for version in ["", "_v6", "_v7", "_v8"]:        filepath = f"fix_text_to_anything{version}.py"
+def fix_text_to_anything_files(self): for version in [""
+    "_v6"
+    "_v7"
+    "_v8"]: filepath = f"fix_text_to_anything{version}.py"
         content = read_file(filepath)
         if content:
             # Fix indentation
@@ -75,7 +80,9 @@ def fix_apple_optimizations(self):    content = read_file("src/models/apple_opti
         fixed_lines = []
         for line in lines: ifline.strip().startswith("from typing import"):
                 fixed_lines.append("from typing import Optional, Tuple")
-                elif "batch_size, " in line: fixed_lines.append("            batch_size, ")
+elif "batch_size
+                    " in line: fixed_lines.append("            batch_size
+                    ")
                     else: fixed_lines.append(line)
                         write_file("src/models/apple_optimizations.py", "\n".join(fixed_lines))
 

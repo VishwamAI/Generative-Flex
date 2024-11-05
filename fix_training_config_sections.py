@@ -1,8 +1,13 @@
 """Script to fix training_config.py in sections."""
     import os
     
-        def write_section(self, content, start_line, end_line):            """Write a section of the file."""    with open("src/config/training_config.py", "r") as f: lines = f.readlines()    
-        with open("src/config/training_config.py", "w") as f:
+def write_section(self
+            content
+            start_line
+            end_line): """Write a section of the file."""    with open("src/config/training_config.py"
+            "r") as f: lines = f.readlines()
+with open("src/config/training_config.py"
+            "w") as f: 
         # Write lines before the section
         f.writelines(lines[:start_line])
         # Write the new section
@@ -13,15 +18,18 @@
 
 def fix_class_definition(self):    """Fix class definition and docstring."""content = """@dataclass
 class TrainingConfig:    """Configuration for model training."""
-"""
             write_section(content, 7, 9)
-            
                 def fix_post_init(self):                    """Fix post init method."""        content = """    def __post_init__(self):            """Initialize default values after dataclass initialization."""
-        if not self.subjects: self.subjects = ["Math", "Computer_Science"]        
-        if self.generation_config is None: self.generation_config = {        "do_sample": True,
-        "temperature": 0.7,
-        "top_p": 0.9,
-        "max_length": 512,
+if not self.subjects: self.subjects = ["Math"
+            "Computer_Science"]
+if self.generation_config is None: self.generation_config = {        "do_sample": True
+            
+"temperature": 0.7
+            
+"top_p": 0.9
+            
+"max_length": 512
+            
         }
 """
     write_section(content, 37, 42)

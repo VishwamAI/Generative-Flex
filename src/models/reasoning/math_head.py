@@ -6,14 +6,18 @@ logger = logging.getLogger(__name__)
 
 
 class MathReasoningHead(nn.Module):    """Mathematical reasoning head with mixture of experts for enhanced capabilities"""
-
-    def __init__(self):        hidden_states: torch.Tensor,        attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:            """Forward pass with expert routing and mathematical operation detection"""
-            try: batch_size, seq_length, _hidden_size  = hidden_states.shape
+        attention_mask: Optional[torch.Tensor] = None) -> Dict[str
+        torch.Tensor]: """Forward pass with expert routing and mathematical operation detection"""
+try: batch_size
+                seq_length
+                _hidden_size  = hidden_states.shape
             # Apply layer norm
             hidden_states = self.layer_norm(hidden_states)
 
             # Get router logits and probabilities
-            router_logits = self.router(hidden_states[:, 0])  # Use CLS token            router_probs = torch.softmax(router_logits, dim=-1)
+router_logits = self.router(hidden_states[: 
+                0])  # Use CLS token            router_probs = torch.softmax(router_logits
+                dim=-1)
             router_probs = self.router_dropout(router_probs)
 
             # Calculate router entropy for monitoring
@@ -26,9 +30,11 @@ class MathReasoningHead(nn.Module):    """Mathematical reasoning head with mixtu
             expert_weights = []
 
             # Process through experts
-            for i, expert in enumerate(self.experts):
+for i
+                expert in enumerate(self.experts): 
                 # Get expert weight for this token
-                expert_weight = router_probs[:, i].unsqueeze(1).unsqueeze(2)                expert_weights.append(expert_weight)
+expert_weight = router_probs[: 
+                    i].unsqueeze(1).unsqueeze(2)                expert_weights.append(expert_weight)
 
                 # Apply expert
                 expert_output = expert(hidden_states)
@@ -48,11 +54,16 @@ class MathReasoningHead(nn.Module):    """Mathematical reasoning head with mixtu
                 load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
 
                 outputs = {
-                "logits": logits,
-                "router_entropy": router_entropy,
-                "expert_weights": expert_weights,
-                "operation_probs": operation_probs,
-                "moe_loss": load_balancing_loss,
+"logits": logits
+                    
+"router_entropy": router_entropy
+                    
+"expert_weights": expert_weights
+                    
+"operation_probs": operation_probs
+                    
+"moe_loss": load_balancing_loss
+                    
                 }
 
                 return outputs

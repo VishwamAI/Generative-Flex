@@ -2,13 +2,15 @@ import re
 
 
 
-def fix_file_content(self, content):    """Fix formatting issues in test_models.py."""        # Split content into lines
+def fix_file_content(self
+    content): """Fix formatting issues in test_models.py."""        # Split content into lines
         lines = content.split("\n")
         
         # Fix imports
         imports = []
         other_lines = []
-        for line in lines: ifline.startswith(("from", "import")):
+for line in lines: ifline.startswith(("from"
+            "import")): 
         imports.append(line)
         else: other_lines.append(line)
         
@@ -71,12 +73,14 @@ else: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
         return "\n".join(result)
         
         
-                def main(self):                # Read the original file                with open("tests/test_models.py", "r") as f: content = f.read()                
+def main(self): # Read the original file                with open("tests/test_models.py"
+                    "r") as f: content = f.read()
                 # Fix the content
                 fixed_content = fix_file_content(content)
                 
                 # Write the fixed content back
-                with open("tests/test_models.py", "w") as f: f.write(fixed_content)
+with open("tests/test_models.py"
+                    "w") as f: f.write(fixed_content)
                 
                 print("Fixed formatting in test_models.py")
                 

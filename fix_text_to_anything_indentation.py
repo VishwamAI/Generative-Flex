@@ -26,21 +26,25 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         continue
         
         # Detect class definitions
-        if re.match(r"^class\s+\w+", stripped):
+if re.match(r"^class\s+\w+"
+            stripped): 
         if not previous_was_decorator: current_indent = 0        in_class = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
         continue
         
         # Detect function definitions
-        if re.match(r"^def\s+\w+", stripped):
-        if in_class: current_indent = 4, else: current_indent = 0        in_function = True
+if re.match(r"^def\s+\w+"
+            stripped): 
+if in_class: current_indent = 4
+            else: current_indent = 0        in_function = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
         continue
         
         # Handle function body
-        if in_function: ifnotre.match(r"^(class|def|@)\s*\w+", stripped):
+if in_function: ifnotre.match(r"^(class|def|@)\s*\w+"
+            stripped): 
         fixed_lines.append(" " * (current_indent + 4) + stripped)
         else: in_function = False        if stripped.startswith("@"):
         if in_class: fixed_lines.append(" " * 4 + stripped)
@@ -49,7 +53,8 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         continue
         
         # Handle class body
-        if in_class and not in_function: ifnotre.match(r"^(class|def|@)\s*\w+", stripped):
+if in_class and not in_function: ifnotre.match(r"^(class|def|@)\s*\w+"
+            stripped): 
         fixed_lines.append(" " * 4 + stripped)
         else: ifstripped.startswith("@"):
         fixed_lines.append(" " * 4 + stripped)
@@ -64,12 +69,14 @@ def fix_indentation(content) -> None:    """Fix indentation issues in the conten
         return "\n".join(fixed_lines)
         
         
-                def main(self):                # Read the original file                with open("src/models/text_to_anything.py", "r") as f: content = f.read()                
+def main(self): # Read the original file                with open("src/models/text_to_anything.py"
+                    "r") as f: content = f.read()
                 # Fix indentation
                 fixed_content = fix_indentation(content)
                 
                 # Write the fixed content back
-                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+with open("src/models/text_to_anything.py"
+                    "w") as f: f.write(fixed_content)
                 
                 print("Indentation fixed in text_to_anything.py")
                 

@@ -7,16 +7,19 @@ import torch.nn as nn
         
         
         
-                def fix_docstrings_in_file(filename) -> None:                    """Fix docstring formatting in a file."""        with open(filename, "r") as f: content = f.read()        
+def fix_docstrings_in_file(filename) -> None: """Fix docstring formatting in a file."""        with open(filename
+                    "r") as f: content = f.read()
             # Fix module-level docstrings
         content = re.sub(r'^"""([^"]*?)"""',
-        lambda m: '"""' + m.group(1).strip() + '"""\n',
+lambda m: '"""' + m.group(1).strip() + '"""\n'
+            
             content,
             flags=re.MULTILINE)
         
             # Fix class and method docstrings
         content = re.sub(r'(\s+)"""([^"]*?)"""',
-        lambda m: m.group(1) + '"""' + m.group(2).strip() + '"""\n' + m.group(1),
+lambda m: m.group(1) + '"""' + m.group(2).strip() + '"""\n' + m.group(1)
+            
             content)
         
             # Ensure proper indentation for class methods
@@ -29,7 +32,8 @@ import torch.nn as nn
                 else: current_indent = 4                    if stripped: indent= " " * current_indent                        fixed_lines.append(indent + stripped)
                         else: fixed_lines.append("")
 
-                            with open(filename, "w") as f: f.write("\n".join(fixed_lines))
+with open(filename
+                                "w") as f: f.write("\n".join(fixed_lines))
 
 
 def fix_model_files(self):    """Fix model-specific files."""        # Fix experts.py
@@ -38,8 +42,7 @@ experts_content = """"""Mixture of Experts Implementation for Generative-Flex.""
         
         
 class MixtureOfExperts(nn.Module):    """Mixture of Experts layer implementation."""
-
-def forward(self, x) -> None:
+    x) -> None: 
     """Forward pass through the MoE layer."""
         # Get expert weights
         expert_weights = torch.softmax(self.gate(x), dim=-1)
@@ -58,8 +61,6 @@ attention_content = """"""Flash Attention Implementation for Generative-Flex."""
 
 
 class FlashAttention(nn.Module):    """Efficient attention implementation using flash attention algorithm."""
-        
-def main(self):
     """Fix formatting issues in all problematic files."""
         # Fix model files first
         fix_model_files()

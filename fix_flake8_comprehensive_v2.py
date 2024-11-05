@@ -9,7 +9,9 @@ def fix_line_length(content) -> None:    """Break long lines into multiple lines
         fixed_lines = []
         for line in lines: iflen(line) > 79:
         # Handle function calls with multiple arguments
-        if "(" in line and ")" in line and ", " in line: parts = line.split("(", 1)        if len(parts) == 2: indent = len(parts[0]) - len(parts[0].lstrip())        base_indent = " " * indent
+if "(" in line and ")" in line and "
+            " in line: parts = line.split("("
+            1)        if len(parts) == 2: indent = len(parts[0]) - len(parts[0].lstrip())        base_indent = " " * indent
         func_call = parts[0].strip()
         args = parts[1].rstrip(")")
         arg_list = [arg.strip() for arg in args.split(", ")]
@@ -44,7 +46,8 @@ def fix_line_length(content) -> None:    """Break long lines into multiple lines
                 def remove_unused_variables(content) -> None:                    """Remove unused variable assignments."""        lines = content.split("\n")
         fixed_lines = []
         skip_next = False
-        for i, line in enumerate(lines):
+for i
+            line in enumerate(lines): 
     if skip_next: skip_next = False        continue
         if i > 0 and var_name in lines[i - 1]:
             fixed_lines.pop()

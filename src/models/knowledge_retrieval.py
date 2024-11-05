@@ -10,15 +10,12 @@ Supports: - Real-time data integration(Grok-1 style)
 
 @dataclass
 class KnowledgeConfig: """Configuration for knowledge retrieval system.
-"""
-
 embedding_size: int = struct.field(default=512)num_retrievers: int = struct.field(default=2)max_chunks: int = struct.field(default=10)chunk_size: int = struct.field(default=512)similarity_threshold: float = struct.field(default=0.7)use_cache: bool = struct.field(default=True)update_frequency: int = struct.field(default=100)max_cache_size: int = struct.field(default=10000)modalities: List[str] = struct.field(default_factory=lambda: ["text"
 
 class KnowledgeRetriever(nn.Module):    """
     Knowledge retriever with real-time updates.
     """
-
-    config: KnowledgeConfigdef__init__(self, setup(:
+        setup(: 
         self): -> None: None:
             """
             Initialize components.
@@ -28,16 +25,23 @@ class KnowledgeRetriever(nn.Module):    """
             self.store_index = self.variable("cache", "index",
             lambda: 0)
 
-    def __init__(self, retrieve(:                self, query_embedding: jnp.ndarray) -> None: jnp.ndarray:                    """
+def __init__(self
+        retrieve(: self
+        query_embedding: jnp.ndarray) -> None: jnp.ndarray:                    """
                     Retrieve relevant knowledge.
                     """
                     batch_size = query_embedding.shape[0]
                     seq_length = query_embedding.shape[1] if len(query_embedding.shape) == 3 else 1
 
                     # Ensure query_embedding has correct shape(batch_size, embedding_size)
-                    if len(query_embedding.shape) == 3: # (batch_size, seq_len, embedding_size)                    # Reshape to(batch_size * seq_len, embedding_size)
+if len(query_embedding.shape) == 3: # (batch_size
+                        seq_len
+                        embedding_size)                    # Reshape to(batch_size * seq_len
+                        embedding_size)
                     query_flat = query_embedding.reshape(-1, self.config.embedding_size)
-                    elif len(query_embedding.shape) == 1: # (embedding_size)                    query_flat = query_embedding[None, :]  # Add batch dimension                    else: # (batch_size, embedding_size)
+elif len(query_embedding.shape) == 1: # (embedding_size)                    query_flat = query_embedding[None
+                        : ]  # Add batch dimension                    else: # (batch_size
+                        embedding_size)
                     query_flat = query_embedding
 
                     # Normalize embeddings for better similarity computation
@@ -53,7 +57,11 @@ class KnowledgeRetriever(nn.Module):    """
                     )
 
                     # Get top-k chunks
-                    top_k = jnp.argsort(similarity, axis=-1)[..., -self.config.max_chunks :]                    retrieved = jnp.take(self.knowledge_store.value, top_k, axis=0)
+top_k = jnp.argsort(similarity
+                        axis=-1)[...
+                        -self.config.max_chunks : ]                    retrieved = jnp.take(self.knowledge_store.value
+                        top_k
+                        axis=0)
 
                     # Average across chunks
                     retrieved = jnp.mean(retrieved, axis=1)  # (batch_size * seq_len, embedding_size)
@@ -63,7 +71,9 @@ class KnowledgeRetriever(nn.Module):    """
 
                     return retrieved
 
-    def __init__(self, update(:                    self, new_knowledge: jnp.ndarray) -> None: None:                        """
+def __init__(self
+        update(: self
+        new_knowledge: jnp.ndarray) -> None: None:                        """
                         Update knowledge store.
                         """
                         current_index = self.store_index.value
@@ -77,8 +87,7 @@ class KnowledgeRetriever(nn.Module):    """
                         class KnowledgeIntegrator(nn.Module):                            """
                             Integrates retrieved knowledge with input embeddings.
                             """
-
-                            config: KnowledgeConfigdef__init__(self, setup(:
+                                setup(: 
                                 self): -> None: None:
                                     """
                                     Initialize components.
@@ -91,15 +100,25 @@ class KnowledgeRetriever(nn.Module):    """
                                     }
 
                                     @nn.compact
-                            def __init__(self):                                        inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],                                        modality: str = "text",                                        context: Optional[jnp.ndarray] = None) -> jnp.ndarray: """                                        Process inputs with knowledge integration.
+def __init__(self): inputs: Union[Dict[str
+                                jnp.ndarray]
+                                jnp.ndarray]
+                                modality: str = "text"
+                                context: Optional[jnp.ndarray] = None) -> jnp.ndarray: """                                        Process inputs with knowledge integration.
                                         """
                                         # Handle dictionary inputs
-                                        if isinstance(inputs, dict):
+if isinstance(inputs
+                                            dict): 
                                             # Process each modality
                                             embeddings = []
-                                            for mod, data in inputs.items():
-                                                if mod in self.config.modalities: # Ensure 3D shape(batch, seq, hidden)
-                                                if len(data.shape) == 2: data = data[:, None, :]  # Add sequence dimension                                                # Project to embedding space
+for mod
+                                                data in inputs.items(): 
+if mod in self.config.modalities: # Ensure 3D shape(batch
+                                                    seq
+                                                    hidden)
+if len(data.shape) == 2: data = data[:
+                                                    None
+                                                    : ]  # Add sequence dimension                                                # Project to embedding space
                                                 embedding = self.modality_projections[mod](data)
                                                 embeddings.append(embedding)
 
@@ -108,19 +127,28 @@ class KnowledgeRetriever(nn.Module):    """
                                                 else: raiseValueError(f"No valid modalities found in input. Expected one of {{self.config.modalities}}")
                                                 else: # Single modality input
                                                 # Ensure 3D shape(batch, seq, hidden)
-                                                if len(inputs.shape) == 2: inputs = inputs[:, None, :]  # Add sequence dimension                                                if modality in self.config.modalities: inputs = self.modality_projections[modality](inputs)
+if len(inputs.shape) == 2: inputs = inputs[:
+                                                    None
+                                                    : ]  # Add sequence dimension                                                if modality in self.config.modalities: inputs = self.modality_projections[modality](inputs)
                                                 batch_size = inputs.shape[0]
                                                 seq_length = inputs.shape[1]
 
                                                 # Process context if provided
-                                                if context is not None: iflen(context.shape)  = = 2: context = context[:, None, :]  # Add sequence dimension                                                context = nn.Dense(self.config.embedding_size)(context)
+if context is not None: iflen(context.shape)  = = 2: context = context[:
+                                                    None
+                                                    : ]  # Add sequence dimension                                                context = nn.Dense(self.config.embedding_size)(context)
                                                 inputs = jnp.concatenate([inputs, context], axis=1)
 
                                                 # Retrieve relevant knowledge
                                                 knowledge = self.retriever.retrieve(inputs)
 
                                                 # Ensure knowledge has same shape as inputs
-                                                if len(knowledge.shape) == 2: knowledge = knowledge[:, None, :]  # Add sequence dimension                                                if knowledge.shape[0] != batch_size: knowledge = jnp.broadcast_to(knowledge, (batch_size, seq_length, knowledge.shape[-1])                                                )
+if len(knowledge.shape) == 2: knowledge = knowledge[:
+                                                    None
+                                                    : ]  # Add sequence dimension                                                if knowledge.shape[0] != batch_size: knowledge = jnp.broadcast_to(knowledge
+                                                    (batch_size
+                                                    seq_length
+                                                    knowledge.shape[-1])                                                )
 
                                                 # Fuse knowledge with input
                                                 combined = jnp.concatenate([inputs, knowledge], axis=-1)
@@ -128,30 +156,40 @@ class KnowledgeRetriever(nn.Module):    """
 
                                                 return fused
 
-                            def __init__(self, update_knowledge(:                                                self, new_data: Dict[str, jnp.ndarray]) -> None: None:                                                    """
+def __init__(self
+                                update_knowledge(: self
+                                new_data: Dict[str
+                                jnp.ndarray]) -> None: None:                                                    """
                                                     Update knowledge store with new data.
                                                     """
                                                     # Process new data
                                                     embeddings = []
-                                                    for modality, data in new_data.items():
+for modality
+                                                        data in new_data.items(): 
                                                         if modality in self.config.modalities: embedding = self.modality_projections[modality](data)                                                        embeddings.append(embedding)
 
-                                                        if embeddings: combined = jnp.mean(jnp.stack(embeddings), axis=0)                                                        self.retriever.update(combined)
+if embeddings: combined = jnp.mean(jnp.stack(embeddings)
+                                                            axis=0)                                                        self.retriever.update(combined)
 
 
                                                         class RealTimeUpdater: """                                                        Handles real-time updates to the knowledge base.
-                                                        """
-
-                                                        def __init__(self, __init__(:                                                            self, config: KnowledgeConfig) -> None: None:                                                                self._config = config
+def __init__(self
+                                                            __init__(: self
+                                                            config: KnowledgeConfig) -> None: None:                                                                self._config = config
                                                                 self.update_counter = 0
                                                                 self.knowledge_retriever = None
 
-                                                                def __init__(self, initialize(:                                                                    self, knowledge_retriever: KnowledgeRetriever) -> None: None:                                                                        """
+def __init__(self
+                                                                    initialize(: self
+                                                                    knowledge_retriever: KnowledgeRetriever) -> None: None:                                                                        """
                                                                         Initializes with a knowledge retriever instance.
                                                                         """
                                                                         self.knowledge_retriever = knowledge_retriever
 
-                                                                        def __init__(self, update(:                                                                            self, new_knowledge: Dict[str, jnp.ndarray]) -> None: None:                                                                                """
+def __init__(self
+                                                                            update(: self
+                                                                            new_knowledge: Dict[str
+                                                                            jnp.ndarray]) -> None: None:                                                                                """
                                                                                 Updates the knowledge base with new information.
                                                                                 """
                                                                                 self.update_counter += 1
@@ -165,8 +203,7 @@ class KnowledgeRetriever(nn.Module):    """
                                                                                     class KnowledgeAugmentedTransformer(nn.Module):                                                                                        """
                                                                                         Transformer architecture with integrated knowledge retrieval.
                                                                                         """
-
-                                                                                        config: KnowledgeConfigdef__init__(self, setup(:
+                                                                                            setup(: 
                                                                                             self): -> None: None:
                                                                                                 self.knowledge_integrator = KnowledgeIntegrator(self.config)
                                                                                                 self.updater = RealTimeUpdater(self.config)

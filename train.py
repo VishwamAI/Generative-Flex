@@ -18,7 +18,8 @@ def main(self):    args = parse_args()
     # Log configuration
     logger.info("Training configuration:")
     for arg in vars(args):
-        logger.info(f"{arg}: {getattr(args, arg)}")
+logger.info(f"{arg}: {getattr(args
+            arg)}")
 
         # Initialize trainer
         trainer = MMUTrainer(model_name=args.model_name, subjects=[args.subjects], batch_size=args.batch_size, gradient_accumulation_steps=args.gradient_accumulation_steps, learning_rate=args.learning_rate, num_epochs=args.num_epochs, output_dir=args.output_dir)

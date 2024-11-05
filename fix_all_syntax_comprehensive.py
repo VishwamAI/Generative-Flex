@@ -5,11 +5,14 @@
     from typing import List, Dict, Set
     
     
-        def fix_imports(content: st, r) -> str:            """Fix and deduplicate imports, especially dataclass-related ones."""    lines = content.split("\n")
+def fix_imports(content: st
+            r) -> str: """Fix and deduplicate imports
+            especially dataclass-related ones."""    lines = content.split("\n")
     fixed_lines = []
     seen_imports = set()
     
-    for line in lines: ifline.strip().startswith(("from ", "import ")):
+for line in lines: ifline.strip().startswith(("from "
+        "import ")): 
         # Fix common import issues
         line = line.replace("dataclass es", "dataclasses")
         line = line.replace("from.", "from .")
@@ -21,18 +24,27 @@
                 return "\n".join(fixed_lines)
 
 
-                def fix_function_definitions(content: st, r) -> str:                    """Fix malformed function definitions."""        lines = content.split("\n")
+def fix_function_definitions(content: st
+                    r) -> str: """Fix malformed function definitions."""        lines = content.split("\n")
         fixed_lines = []
         
         for line in lines: ifline.strip().startswith("def "):
         # Fix various malformed patterns
         line = re.sub(
-        r"def\s+(\w+)\)None\((.*?)\)None:", r"def \1(\2) -> None:", line
+r"def\s+(\w+)\)None\((.*?)\)None: "
+            r"def \1(\2) -> None: "
+            line
         )
-        line = re.sub(r"def\s+(\w+)\)None\((.*?)\):", r"def \1(\2):", line)        line = re.sub(r"def\s+(\w+)\((.*?)\)None:", r"def \1(\2) -> None:", line)
+line = re.sub(r"def\s+(\w+)\)None\((.*?)\): "
+            r"def \1(\2): "
+            line)        line = re.sub(r"def\s+(\w+)\((.*?)\)None: "
+            r"def \1(\2) -> None: "
+            line)
         # Fix parameter default values
         line = re.sub(
-        r"def\s+(\w+)\((.*?)=(\w+)\)None:", r"def \1(\2=\3) -> None:", line        )
+r"def\s+(\w+)\((.*?)=(\w+)\)None: "
+            r"def \1(\2=\3) -> None: "
+            line        )
 
         # Ensure proper return type annotation
         if not " -> " in line and line.endswith(":"):
@@ -42,14 +54,18 @@
             return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""        lines = content.split("\n")
+def fix_dataclass_fields(content: st
+    r) -> str: """Fix dataclass field definitions."""        lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
         
         for line in lines: if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
         elif in_dataclass and ":" in line and "field(" in line:
         # Fix field definitions
-    before_colon, after_colon = line.split(": ", 1)    if "=" not in after_colon and "field(" in after_colon: after_colon = " " + after_colon.replace("field(", "= field(")        fixed_lines.append(before_colon + ":" + after_colon)
+before_colon
+        after_colon = line.split(": "
+        1)    if "=" not in after_colon and "field(" in after_colon: after_colon = " " + after_colon.replace("field("
+        "= field(")        fixed_lines.append(before_colon + ": " + after_colon)
         else: ifline.strip() and not line.startswith(" "):
         in_dataclass = False
         fixed_lines.append(line)

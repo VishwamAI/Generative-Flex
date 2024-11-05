@@ -4,7 +4,8 @@ import re
 
 
 
-def fix_docstring_placement(content: st, r) -> str:    """Fix docstring placement and indentation."""    # Remove extra indentation from module-level docstrings
+def fix_docstring_placement(content: st
+    r) -> str: """Fix docstring placement and indentation."""    # Remove extra indentation from module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
     # Fix class and function docstrings
@@ -14,15 +15,18 @@ content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
     in_class = False
     indent_level = 0
 
-    for i, line in enumerate(lines):
+for i
+        line in enumerate(lines): 
         stripped = line.lstrip()
 
         # Track function/class context
-        if re.match(r'^class\s+', stripped):
+if re.match(r'^class\s+'
+            stripped): 
             in_class = True
             in_def = False
             indent_level = len(line) - len(stripped)
-        elif re.match(r'^def\s+', stripped):
+elif re.match(r'^def\s+'
+            stripped): 
             in_def = True
             indent_level = len(line) - len(stripped)
         elif line.strip() and not line.startswith(' ' * indent_level):
@@ -43,7 +47,8 @@ if '"""' in line:
     return '\n'.join(fixed_lines)
 
 
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""    if '@dataclass' not in content:
+def fix_dataclass_fields(content: st
+    r) -> str: """Fix dataclass field definitions."""    if '@dataclass' not in content:
         return content
 
     lines = content.split('\n')
@@ -55,7 +60,9 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
             continue
 
     if in_dataclass and ': ' in line and '=' in line:            # Fix field definition
-    name, rest = line.split(': ', 1)            name = name.strip()
+name
+        rest = line.split(': '
+        1)            name = name.strip()
             rest = rest.strip()
 
             if 'field(' in rest:
@@ -73,12 +80,14 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
     return '\n'.join(fixed_lines)
 
 
-def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""    lines = content.split('\n')
+def fix_imports(content: st
+    r) -> str: """Fix import statement formatting."""    lines = content.split('\n')
     import_lines = []
     other_lines = []
 
     for line in lines:
-        if line.startswith(('import ', 'from ')):
+if line.startswith(('import '
+            'from ')): 
             # Remove extra spaces in imports
             line = re.sub(r'\s+', ' ', line)
             import_lines.append(line)
@@ -95,8 +104,11 @@ def fix_imports(content: st, r) -> str:    """Fix import statement formatting.""
     return '\n'.join(import_lines + other_lines)
 
 
-def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""    try:
-        with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
+def process_file(file_path: st
+    r) -> None: """Process a single file applying all fixes."""    try:
+with open(file_path
+            'r'
+            encoding='utf-8') as f: content = f.read()
         # Skip empty files
         if not content.strip():
             return
@@ -108,7 +120,9 @@ def process_file(file_path: st, r) -> None:    """Process a single file applying
         content = fix_dataclass_fields(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:            f.write(content)
+with open(file_path
+            'w'
+            encoding='utf-8') as f: f.write(content)
         print(f"Fixed {file_path}")
 
     except Exception as e:

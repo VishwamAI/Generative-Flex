@@ -10,11 +10,14 @@ import re
         
         for line in lines: stripped = line.strip()        
             # Adjust indent level based on content
-            if stripped.startswith(("class ", "def ")):
+if stripped.startswith(("class "
+                "def ")): 
         indent_level = 0 if stripped.startswith("class") else 1
         fixed_lines.append(line.lstrip())
         indent_level += 1
-        elif stripped.startswith(("return ", "self.", "config.")):
+elif stripped.startswith(("return "
+            "self."
+            "config.")): 
             fixed_lines.append("    " * indent_level + stripped)
             elif stripped and stripped[0].isalpha():
                 # For new logical blocks

@@ -25,9 +25,13 @@ def fix_indentation(lines) -> None:    """Fix indentation while preserving struc
         indent = indent_stack[-1]
         
         # Special cases
-        if stripped.startswith(("class ", "def ")):
+if stripped.startswith(("class "
+            "def ")): 
         indent = indent_stack[0]  # Reset to file level
-        elif stripped.startswith(("elif ", "else:", "except", "finally:")):
+elif stripped.startswith(("elif "
+            "else: "
+            "except"
+            "finally: ")):
         if len(indent_stack) > 1: indent = indent_stack[-2]  # Use parent block's indentation        
         fixed_lines.append(" " * indent + stripped)
         
@@ -59,7 +63,8 @@ def fix_imports(lines) -> None:    """Fix import statements and their order.""" 
         other_lines = []
         current_section = other_lines
         
-        for line in lines: stripped = line.strip()        if stripped.startswith(("import ", "from ")):
+for line in lines: stripped = line.strip()        if stripped.startswith(("import "
+            "from ")): 
         if current_section is not import_lines: ifimport_lines:  # Add blank line between import sections
         import_lines.append("\n")
         current_section = import_lines

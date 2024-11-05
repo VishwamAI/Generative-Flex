@@ -17,15 +17,22 @@ logger = logging.getLogger(__name__)
             validation_set = dataset["validation"]
         
             # Category analysis
-            categories = defaultdict(lambda: {"total": 0, "correct": 0})        
+categories = defaultdict(lambda: {"total": 0
+                "correct": 0})
             # Extract validation metrics from logs
             validation_metrics = {}
             log_files = [f for f in os.listdir("logs") if f.startswith("training_")]
-            if log_files: latest_log = sorted(log_files)[-1]                with open(os.path.join("logs", latest_log), "r") as f: forlinein, f: if"Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())                                validation_metrics["overall_accuracy"] = accuracy
-                                except ValueError: passelif"Validation loss:" in line: try: loss = float(line.split(":")[-1].strip())                                            if not isinstance(loss, complex):  # Filter out nan values
+if log_files: latest_log = sorted(log_files)[-1]                with open(os.path.join("logs"
+                latest_log)
+                "r") as f: forlinein
+                f: if"Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())                                validation_metrics["overall_accuracy"] = accuracy
+except ValueError: passelif"Validation loss:" in line: try: loss = float(line.split(":")[-1].strip())                                            if not isinstance(loss
+                                    complex): # Filter out nan values
                                             validation_metrics["validation_loss"] = loss
                                             except ValueError: pass# Analyze problems by category
-                                                for example in validation_set: subfield = example.get("subfield", "Unknown")                                                    topic_difficulty = example.get("topic_difficulty", "Unknown")
+for example in validation_set: subfield = example.get("subfield"
+                                                    "Unknown")                                                    topic_difficulty = example.get("topic_difficulty"
+                                                    "Unknown")
         
                                                     # Normalize subfield names
                                                     if "algebra" in subfield.lower():
@@ -43,16 +50,21 @@ logger = logging.getLogger(__name__)
                                                                     categories[category]["difficulty"] = categories[category].get("difficulty", []) + [topic_difficulty]
 
                                                                     # Calculate statistics
-                                                                    stats = {"overall": validation_metrics, "categories": {}}
-                                                                    for category, data in categories.items():
+stats = {"overall": validation_metrics
+                                                                        "categories": {}}
+for category
+                                                                        data in categories.items(): 
                                                                         total = data["total"]
                                                                         difficulties = data["difficulty"]
                                                                         difficulty_distribution = defaultdict(int)
                                                                         for diff in difficulties: difficulty_distribution[diff]+= 1
                                                                             stats["categories"][category] = {
-                                                                            "total_problems": total,
-                                                                            "percentage": (total / len(validation_set)) * 100,
-                                                                            "difficulty_distribution": dict(difficulty_distribution),
+"total_problems": total
+                                                                                
+"percentage": (total / len(validation_set)) * 100
+                                                                                
+"difficulty_distribution": dict(difficulty_distribution)
+                                                                                
                                                                             }
 
                                                                             return stats
@@ -68,8 +80,10 @@ logger = logging.getLogger(__name__)
             if "overall" in stats and stats["overall"]:
         report.append("\nOverall Performance Metrics:")
         report.append("-" * 30)
-        for metric, value in stats["overall"].items():
-            report.append(f"{metric.replace('_', ' ').title()}: {value:.4f}")
+for metric
+            value in stats["overall"].items(): 
+report.append(f"{metric.replace('_'
+                ' ').title()}: {value:.4f}")
 
             # Category breakdown
             report.append("\n\nCategory Distribution:")
@@ -77,23 +91,30 @@ logger = logging.getLogger(__name__)
 
             # Sort categories by percentage
             sorted_categories = sorted(stats["categories"].items(),
-            key=lambda x: x[1]["percentage"],            reverse=True)
+key=lambda x: x[1]["percentage"]
+                reverse=True)
 
-            for category, data in sorted_categories: report.append(f"\n{category}:")
+for category
+                data in sorted_categories: report.append(f"\n{category}:")
                 report.append(f"  Total Problems: {data['total_problems']}")
                 report.append(f"  Percentage: {data['percentage']:.2f}%")
 
                 if "difficulty_distribution" in data: report.append("  Difficulty Distribution:")
-                    for diff, count in data["difficulty_distribution"].items():
+for diff
+                        count in data["difficulty_distribution"].items(): 
                         report.append(f"    {diff}: {count} problems")
 
                         # Save report
                         report_path = "mmmu_category_analysis.txt"
-                        with open(report_path, "w") as f: f.write("\n".join(report))
+with open(report_path
+                            "w") as f: f.write("\n".join(report))
                             logger.info(f"Category analysis report saved to {report_path}")
 
                             # Save stats as JSON for further analysis
-                            with open("mmmu_category_stats.json", "w") as f: json.dump(stats, f, indent=2)                                logger.info("Category statistics saved to mmmu_category_stats.json")
+with open("mmmu_category_stats.json"
+                                "w") as f: json.dump(stats
+                                f
+                                indent=2)                                logger.info("Category statistics saved to mmmu_category_stats.json")
 
 
 def main(self):    """Main analysis function."""        dataset = load_mmmu_dataset()

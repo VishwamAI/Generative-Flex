@@ -18,7 +18,8 @@
     ]
     
     
-def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field patterns."""        lines = content.split("\n")
+def fix_dataclass_fields(content: st
+    r) -> str: """Fix dataclass field patterns."""        lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
         class_indent = 0
@@ -34,23 +35,31 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field patte
         continue
         
     if ": " in stripped and "=" in stripped:        # Handle field with default value
-    parts = line.split(": ", 1)    if len(parts) == 2: name = parts[0].strip()        type_and_default = parts[1].strip()
+parts = line.split(": "
+        1)    if len(parts) == 2: name = parts[0].strip()        type_and_default = parts[1].strip()
         
-    if "=" in type_and_default: type_hint, default = type_and_default.split("=", 1)        type_hint = type_hint.strip()
+if "=" in type_and_default: type_hint
+        default = type_and_default.split("="
+        1)        type_hint = type_hint.strip()
         default = default.strip()
         
         # Format the field definition
-    if "field(" in default: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = {default}", else: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = field(default={default})"        fixed_lines.append(fixed_line)
+if "field(" in default: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = {default}"
+        else: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = field(default={default})"        fixed_lines.append(fixed_line)
         continue
         
         elif ":" in stripped:
         # Handle field without default value
-    parts = line.split(": ", 1)    if len(parts) == 2: name = parts[0].strip()        type_hint = parts[1].strip()
+parts = line.split(": "
+        1)    if len(parts) == 2: name = parts[0].strip()        type_hint = parts[1].strip()
     fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint}"        fixed_lines.append(fixed_line)
         continue
         
         # Exit dataclass context if we hit a method or empty line
-    if stripped.startswith(("def ", "async def ", "@", '"""')) or not stripped: in_dataclass = False        
+if stripped.startswith(("def "
+        "async def "
+        "@"
+        '"""')) or not stripped: in_dataclass = False
         fixed_lines.append(line)
         
         return "\n".join(fixed_lines)
@@ -66,7 +75,8 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field patte
         print(message)
         if success: successful+= 1            else: failed+= 1
                 print(
-                f"\nProcessing complete: {successful} files successful, {failed} files failed"
+f"\nProcessing complete: {successful} files successful
+                    {failed} files failed"
                 )
 
 
