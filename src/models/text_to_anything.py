@@ -169,6 +169,7 @@ class ModalityEncoder(nn.Module):
         """Encode inputs into a unified representation."""
         encodings = {}
         batch_size = 1  # Initialize with default value
+        batch_size = 1  # Initialize with default value
         curr_batch_size = 1  # Initialize with default value
 #         batch_size = None  # TODO: Remove or use this variable
         # Calculate proper sequence length (ensure it's a multiple of attention heads)
@@ -199,6 +200,9 @@ class ModalityEncoder(nn.Module):
                  batch_size = curr_batch_size   
             # Ensure proper sequence length
             embedded = self._adjust_sequence_length(
+                embedded,
+                sequence_length
+            )
                 embedded,
                 sequence_length
             )
@@ -251,6 +255,9 @@ class ModalityEncoder(nn.Module):
                 batch_size = curr_batch_size
                  batch_size = curr_batch_size   
             embedded = self._adjust_sequence_length(
+                embedded,
+                sequence_length
+            )
                 embedded,
                 sequence_length
             )
