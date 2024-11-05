@@ -1,8 +1,8 @@
-"""
-Comprehensive tests for Generative-Flex models and features.
-Tests:
-1. Enhanced transformer features
-2. Knowledge retrieval system
+"""Test suite for model implementations.
+
+Tests cover:
+1. Enhanced transformer capabilities
+2. Knowledge retrieval integration
 3. Apple optimizations
 4. Text-to-anything generation
 5. Constitutional AI principles
@@ -16,7 +16,6 @@ from src.models.enhanced_transformer import EnhancedTransformer
 from src.models.knowledge_retrieval import KnowledgeIntegrator
 from src.models.apple_optimizations import AppleOptimizedTransformer
 from src.models.text_to_anything import TextToAnything, GenerationConfig
-from src.config.config import EnhancedConfig, KnowledgeConfig, OptimizationConfig
 
 
 @pytest.fixture
