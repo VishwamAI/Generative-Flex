@@ -199,7 +199,10 @@ class ModalityEncoder(nn.Module):
 #                 batch_size = curr_batch_size  # TODO: Remove or use this variable
 
             # Ensure proper sequence length
-            embedded = self._adjust_sequence_length(embedded, sequence_length)
+            embedded = self._adjust_sequence_length(
+                embedded,
+                sequence_length
+            )
             encodings["text"] = self.text_encoder(embedded)
 
         if "image" in inputs:
@@ -253,7 +256,10 @@ class ModalityEncoder(nn.Module):
             if batch_size is None:
 #                 batch_size = curr_batch_size  # TODO: Remove or use this variable
 
-            embedded = self._adjust_sequence_length(embedded, sequence_length)
+            embedded = self._adjust_sequence_length(
+                embedded,
+                sequence_length
+            )
             encodings["code"] = self.code_encoder(embedded)
 
         if not encodings:
