@@ -2,15 +2,17 @@
 
 import os
 
+
 def fix_file(file_path, content):
     """Write fixed content to file."""
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f'Fixed {file_path}')
+    print(f"Fixed {file_path}")
+
 
 fixes = {
-    'src/models/layers/flash_moe.py': '''"""Flash Mixture of Experts implementation."""
+    "src/models/layers/flash_moe.py": '''"""Flash Mixture of Experts implementation."""
 
 import torch
 import torch.nn as nn
@@ -69,8 +71,7 @@ class FlashMoELayer(nn.Module):
 
         return combined_output, routing_weights
 ''',
-
-    'src/models/multimodal/base_transformer.py': '''"""Base transformer implementation for multimodal processing."""
+    "src/models/multimodal/base_transformer.py": '''"""Base transformer implementation for multimodal processing."""
 
 import torch
 import torch.nn as nn
@@ -195,8 +196,7 @@ class MultiHeadAttention(nn.Module):
 
         return context_layer
 ''',
-
-    'src/models/multimodal/image_processor.py': '''"""Image processor for multimodal inputs."""
+    "src/models/multimodal/image_processor.py": '''"""Image processor for multimodal inputs."""
 
 import torch
 import torch.nn as nn
@@ -265,8 +265,7 @@ class ImageProcessor(nn.Module):
 
         return features, attention_mask
 ''',
-
-    'src/training/accelerated_trainer.py': '''"""Accelerated trainer implementation."""
+    "src/training/accelerated_trainer.py": '''"""Accelerated trainer implementation."""
 
 import torch
 import logging
@@ -408,8 +407,7 @@ class AcceleratedTrainer:
         metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
         logger.info(f"Step {self._step}: {metric_str}")
 ''',
-
-    'src/training/trainer.py': '''"""Base trainer implementation."""
+    "src/training/trainer.py": '''"""Base trainer implementation."""
 
 import torch
 import logging
@@ -541,8 +539,9 @@ class Trainer:
         """Log training metrics."""
         metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
         logger.info(f"Step {self._step}: {metric_str}")
-'''
+''',
 }
+
 
 def main():
     """Fix black formatting issues in problematic files."""
@@ -551,7 +550,8 @@ def main():
         if os.path.exists(full_path):
             fix_file(full_path, content)
         else:
-            print(f'File not found: {file_path}')
+            print(f"File not found: {file_path}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

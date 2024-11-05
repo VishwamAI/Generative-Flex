@@ -14,9 +14,7 @@ logger = logging.getLogger(__name__)
 def load_validation_results():
     """Load validation results from the latest training log"""
     log_dir = Path("logs")
-    training_logs = sorted(
-        log_dir.glob("training_*.log"), key=os.path.getmtime
-    )
+    training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
     if not training_logs:
         raise FileNotFoundError("No training logs found")
@@ -86,9 +84,7 @@ def analyze_performance():
 
         plt.tight_layout()
         plt.savefig("performance_by_category.png")
-        logger.info(
-            "Performance visualization saved to performance_by_category.png"
-        )
+        logger.info("Performance visualization saved to performance_by_category.png")
 
         return stats
 

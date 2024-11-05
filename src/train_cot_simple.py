@@ -2,6 +2,7 @@ import jax
 from flax.training import train_state
 import optax
 
+
 # Simple model for chain-of-thought demonstration
 class SimpleCoTModel(nn.Module):
     vocab_size: int

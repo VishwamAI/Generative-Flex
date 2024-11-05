@@ -11,6 +11,7 @@ Implements:
 - Privacy-preserving features
 """
 
+
 @struct.dataclass
 class OptimizationConfig:
     """Configuration for Apple-style optimizations."""

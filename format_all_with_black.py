@@ -1,7 +1,9 @@
 """Script to format all Python files with black."""
+
 import os
 import subprocess
 from pathlib import Path
+
 
 def format_files():
     """Format all Python files using black."""
@@ -21,6 +23,7 @@ def format_files():
             subprocess.run(["black", file], check=True)
         except subprocess.CalledProcessError as e:
             print(f"Error formatting {file}: {e}")
+
 
 if __name__ == "__main__":
     format_files()

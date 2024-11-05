@@ -64,9 +64,7 @@ def extract_problem_category(text):
 def parse_validation_outputs():
     """Parse validation outputs from the training logs."""
     log_dir = Path("logs")
-    training_logs = sorted(
-        log_dir.glob("training_*.log"), key=os.path.getmtime
-    )
+    training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
     if not training_logs:
         logger.error("No training logs found")
@@ -88,9 +86,7 @@ def parse_validation_outputs():
         content = f.read()
 
         # Extract overall metrics
-        accuracy_matches = re.findall(
-            r"Validation math accuracy: ([\d.]+)", content
-        )
+        accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
         if accuracy_matches:
             results["overall_accuracy"] = float(accuracy_matches[-1])
 
@@ -131,9 +127,7 @@ def generate_performance_report(results):
             f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}"
         )
     if results["best_validation_loss"] is not None:
-        report.append(
-            f"Best Validation Loss: {results['best_validation_loss']:.4f}\n"
-        )
+        report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
 
     # Category-specific Performance
     report.append("\nPerformance by Mathematical Category:")
@@ -168,19 +162,13 @@ def generate_performance_report(results):
     if top_categories:
         report.append("\nStrengths:")
         for category, metrics in top_categories[:2]:
-            if (
-                metrics["accuracy"] > 0.5
-            ):  # Only include if accuracy is above 50%
-                report.append(
-                    f"- {category}: {metrics['accuracy']:.2%} accuracy"
-                )
+            if metrics["accuracy"] > 0.5:  # Only include if accuracy is above 50%
+                report.append(f"- {category}: {metrics['accuracy']:.2%} accuracy")
 
         report.append("\nAreas for Improvement:")
         for category, metrics in top_categories[-2:]:
             if metrics["accuracy"] < 0.8:  # Include if accuracy is below 80%
-                report.append(
-                    f"- {category}: {metrics['accuracy']:.2%} accuracy"
-                )
+                report.append(f"- {category}: {metrics['accuracy']:.2%} accuracy")
 
     # Save report
     report_path = "mmmu_detailed_performance.txt"

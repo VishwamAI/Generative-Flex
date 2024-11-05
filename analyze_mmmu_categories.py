@@ -47,9 +47,7 @@ def analyze_validation_set(dataset):
                 elif "Validation loss:" in line:
                     try:
                         loss = float(line.split(":")[-1].strip())
-                        if not isinstance(
-                            loss, complex
-                        ):  # Filter out nan values
+                        if not isinstance(loss, complex):  # Filter out nan values
                             validation_metrics["validation_loss"] = loss
                     except ValueError:
                         pass
@@ -64,10 +62,7 @@ def analyze_validation_set(dataset):
             category = "Algebra"
         elif "calculus" in subfield.lower():
             category = "Calculus"
-        elif (
-            "probability" in subfield.lower()
-            or "statistics" in subfield.lower()
-        ):
+        elif "probability" in subfield.lower() or "statistics" in subfield.lower():
             category = "Probability & Statistics"
         elif "geometry" in subfield.lower():
             category = "Geometry"

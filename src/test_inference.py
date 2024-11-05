@@ -1,5 +1,6 @@
 from typing import Dict, Any
 
+
 # Define the same model architecture
 class SimpleGreetingModel(nn.Module):
     vocab_size: int

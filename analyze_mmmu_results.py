@@ -13,9 +13,7 @@ logger = logging.getLogger(__name__)
 def parse_validation_results():
     """Parse validation results from training logs"""
     log_dir = Path("logs")
-    training_logs = sorted(
-        log_dir.glob("training_*.log"), key=os.path.getmtime
-    )
+    training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
     if not training_logs:
         logger.error("No training logs found")
@@ -56,17 +54,11 @@ def parse_validation_results():
                     current_problem = "Algebra"
                 elif "calculus" in problem_text:
                     current_problem = "Calculus"
-                elif (
-                    "probability" in problem_text
-                    or "statistics" in problem_text
-                ):
+                elif "probability" in problem_text or "statistics" in problem_text:
                     current_problem = "Probability & Statistics"
                 elif "geometry" in problem_text:
                     current_problem = "Geometry"
-                elif (
-                    "number theory" in problem_text
-                    or "arithmetic" in problem_text
-                ):
+                elif "number theory" in problem_text or "arithmetic" in problem_text:
                     current_problem = "Number Theory"
                 else:
                     current_problem = "Other"
@@ -98,9 +90,7 @@ def generate_performance_report(results):
             f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}"
         )
     if results["best_validation_loss"] is not None:
-        report.append(
-            f"Best Validation Loss: {results['best_validation_loss']:.4f}\n"
-        )
+        report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
 
     # Performance by Category
     report.append("\nPerformance by Problem Category:")

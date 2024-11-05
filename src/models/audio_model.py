@@ -3,6 +3,7 @@ from src.models.transformer import TransformerBlock
 
 """Audio generation model implementation using JAX and Flax."""
 
+
 class AudioEmbedding(nn.Module):
     """Audio signal to embedding."""
 

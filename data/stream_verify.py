@@ -59,9 +59,7 @@ def stream_json_objects(
         raise
 
 
-def verify_dataset(
-    dataset_id: str, token: Optional[str] = None
-) -> Dict[str, Any]:
+def verify_dataset(dataset_id: str, token: Optional[str] = None) -> Dict[str, Any]:
     """Verify a dataset using streaming JSON parsing."""
     try:
         api = HfApi()

@@ -21,10 +21,14 @@ class ImageProcessor(nn.Module):
         self.hidden_size = hidden_size
 
         # Image preprocessing
-        self.transform = transforms.Compose([
-            transforms.Resize((image_size, image_size)),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
+        self.transform = transforms.Compose(
+            [
+                transforms.Resize((image_size, image_size)),
+                transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+                ),
+            ]
+        )
 
         # CNN backbone
         self.backbone = nn.Sequential(
@@ -36,7 +40,7 @@ class ImageProcessor(nn.Module):
             nn.MaxPool2d(kernel_size=3, stride=2, padding=1),
             nn.Conv2d(192, hidden_size, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
-            nn.AdaptiveAvgPool2d((1, 1))
+            nn.AdaptiveAvgPool2d((1, 1)),
         )
 
         self.dropout = nn.Dropout(dropout_rate)

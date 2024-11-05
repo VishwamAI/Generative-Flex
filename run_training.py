@@ -25,9 +25,7 @@ def initialize_mmmu_dataset(subjects, cache_dir="./data/cache"):
         for subject in subjects:
             for split in ["dev", "validation", "test"]:
                 logger.info(f"Loading {subject} - {split} split...")
-                _ = load_dataset(
-                    "MMMU/MMMU", subject, split=split, cache_dir=cache_dir
-                )
+                _ = load_dataset("MMMU/MMMU", subject, split=split, cache_dir=cache_dir)
         logger.info("Successfully initialized all dataset splits")
         return True
     except Exception as e:
@@ -42,9 +40,7 @@ def main():
         model_name = "facebook/opt-125m"  # Smaller model for local training
         subjects = ["Math"]  # Focus only on Math for initial training
         batch_size = 1  # Minimal batch size for memory efficiency
-        gradient_accumulation_steps = (
-            16  # Increased for effective batch size of 16
-        )
+        gradient_accumulation_steps = 16  # Increased for effective batch size of 16
         learning_rate = 1e-5  # Reduced learning rate for stability
         num_epochs = 5  # Reduced epochs for initial testing
         max_length = 256  # Reduced sequence length for memory efficiency
@@ -68,9 +64,7 @@ def main():
         logger.info(f"Model: {model_name}")
         logger.info(f"Subjects: {subjects}")
         logger.info(f"Batch size: {batch_size}")
-        logger.info(
-            f"Gradient accumulation steps: {gradient_accumulation_steps}"
-        )
+        logger.info(f"Gradient accumulation steps: {gradient_accumulation_steps}")
         logger.info(f"Learning rate: {learning_rate}")
         logger.info(f"Number of epochs: {num_epochs}")
         logger.info(f"Max sequence length: {max_length}")
@@ -79,12 +73,8 @@ def main():
         initialize_mmmu_dataset(subjects, cache_dir)
 
         # Initialize tokenizer and model configuration
-        tokenizer = AutoTokenizer.from_pretrained(
-            model_name, cache_dir=cache_dir
-        )
-        model_config = AutoConfig.from_pretrained(
-            model_name, cache_dir=cache_dir
-        )
+        tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
+        model_config = AutoConfig.from_pretrained(model_name, cache_dir=cache_dir)
 
         # Enhanced configuration for mathematical reasoning
         model_config.num_choices = 4  # A, B, C, D options
@@ -97,31 +87,21 @@ def main():
         model_config.expert_dim = (
             model_config.hidden_size
         )  # Match expert dimension to hidden size
-        model_config.use_flash_attention = (
-            False  # Disable flash attention for CPU
-        )
+        model_config.use_flash_attention = False  # Disable flash attention for CPU
         model_config.dropout = 0.1  # Standard dropout rate
         model_config.load_in_8bit = False  # Keep full precision for accuracy
         model_config.use_cache = False  # Disable KV cache to save memory
-        model_config.gradient_checkpointing = (
-            True  # Enable gradient checkpointing
-        )
-        model_config.tie_word_embeddings = (
-            True  # Enable weight tying for efficiency
-        )
+        model_config.gradient_checkpointing = True  # Enable gradient checkpointing
+        model_config.tie_word_embeddings = True  # Enable weight tying for efficiency
         model_config.use_memory_efficient_attention = (
             True  # Enable memory efficient attention
         )
-        model_config.attention_probs_dropout_prob = (
-            0.1  # Standard attention dropout
-        )
+        model_config.attention_probs_dropout_prob = 0.1  # Standard attention dropout
         model_config.hidden_dropout_prob = 0.1  # Standard hidden dropout
         model_config.use_reentrant = (
             True  # Enable reentrant for better memory efficiency
         )
-        model_config.image_input_size = (
-            112  # Reduced image size for memory efficiency
-        )
+        model_config.image_input_size = 112  # Reduced image size for memory efficiency
 
         # Initialize trainer with enhanced settings and accelerator
         trainer = MMUTrainer(

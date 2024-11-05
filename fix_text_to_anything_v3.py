@@ -50,9 +50,7 @@ def fix_text_to_anything():
             # Remove comment and TODO, maintain indentation
             spaces = len(line) - len(line.lstrip())
             clean_line = line[line.index("curr_batch_size") :].strip()
-            clean_line = clean_line.replace(
-                "# TODO: Remove or use this variable", ""
-            )
+            clean_line = clean_line.replace("# TODO: Remove or use this variable", "")
             fixed_content.append(" " * spaces + clean_line + "\n")
             continue
 
@@ -60,16 +58,11 @@ def fix_text_to_anything():
         if "if batch_size is None:" in line:
             fixed_content.append(line)
             next_line = content[i + 1]
-            if (
-                "#" in next_line
-                and "batch_size = curr_batch_size" in next_line
-            ):
+            if "#" in next_line and "batch_size = curr_batch_size" in next_line:
                 spaces = (
                     len(line) - len(line.lstrip()) + 4
                 )  # Add 4 spaces for indentation
-                fixed_content.append(
-                    " " * spaces + "batch_size = curr_batch_size\n"
-                )
+                fixed_content.append(" " * spaces + "batch_size = curr_batch_size\n")
             continue
 
         # Fix the sequence length adjustment indentation

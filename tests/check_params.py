@@ -4,6 +4,7 @@ import pytest
 
 """Tests for model parameter loading and validation functionality."""
 
+
 @pytest.fixture
 def test_params():
     """Fixture providing minimal test parameters for validation."""

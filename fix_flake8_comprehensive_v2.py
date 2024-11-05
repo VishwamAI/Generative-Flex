@@ -41,9 +41,7 @@ def fix_line_length(content):
                 comment_pos = line.index("#")
                 if comment_pos > 79:
                     fixed_lines.append(line[:79])
-                    fixed_lines.append(
-                        f"{' ' * comment_pos}#{line[comment_pos + 1:]}"
-                    )
+                    fixed_lines.append(f"{' ' * comment_pos}#{line[comment_pos + 1:]}")
                     continue
         fixed_lines.append(line)
     return "\n".join(fixed_lines)
@@ -57,9 +55,7 @@ def remove_unused_imports(content):
         if line.startswith("import ") or line.startswith("from "):
             if "imported but unused" in line:
                 imports_to_remove.add(line.strip())
-    return "\n".join(
-        line for line in lines if line.strip() not in imports_to_remove
-    )
+    return "\n".join(line for line in lines if line.strip() not in imports_to_remove)
 
 
 def fix_whitespace_before_colon(content):

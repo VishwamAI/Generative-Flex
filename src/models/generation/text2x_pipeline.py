@@ -1,6 +1,7 @@
 import torch
 from ..multimodal.base_transformer import BaseTransformer
 
+
 class ModalityProjection(nn.Module):
     def __init__(self, config, modality_dim):
         super().__init__()

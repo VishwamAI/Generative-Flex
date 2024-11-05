@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional, Dict
 
+
 @dataclass
 class TrainingConfig:
     model_name: str = "facebook/opt-125m"

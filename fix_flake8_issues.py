@@ -33,9 +33,7 @@ def fix_unused_imports(content):
     for line in lines:
         should_keep = True
         for unused_import in imports_to_remove:
-            if unused_import in line and (
-                "import " in line or "from " in line
-            ):
+            if unused_import in line and ("import " in line or "from " in line):
                 should_keep = False
                 break
         if should_keep:
@@ -81,18 +79,14 @@ def fix_line_length(content):
                     if len(parts) == 2:
                         prefix = parts[0] + opener
                         content = parts[1].rstrip(closer)
-                        entries = [
-                            entry.strip() for entry in content.split(",")
-                        ]
+                        entries = [entry.strip() for entry in content.split(",")]
 
                         fixed_lines.append(prefix)
                         for i, entry in enumerate(entries):
                             if i < len(entries) - 1:
                                 fixed_lines.append(f"{extra_indent}{entry},")
                             else:
-                                fixed_lines.append(
-                                    f"{extra_indent}{entry}{closer}"
-                                )
+                                fixed_lines.append(f"{extra_indent}{entry}{closer}")
                         continue
 
             # Default handling for other long lines
@@ -104,9 +98,7 @@ def fix_line_length(content):
                     current_line += " " + word
                 else:
                     fixed_lines.append(current_line)
-                    current_line = (
-                        " " * (len(line) - len(line.lstrip())) + word
-                    )
+                    current_line = " " * (len(line) - len(line.lstrip())) + word
 
             fixed_lines.append(current_line)
         else:

@@ -31,10 +31,7 @@ def fix_file_content(content):
             # If this is a single-line docstring
             if line.strip().endswith('"""') and len(line.strip()) > 3:
                 fixed_lines.append(
-                    " " * current_indent
-                    + '"""'
-                    + line.strip()[3:-3].strip()
-                    + '"""'
+                    " " * current_indent + '"""' + line.strip()[3:-3].strip() + '"""'
                 )
             else:
                 # Multi-line docstring

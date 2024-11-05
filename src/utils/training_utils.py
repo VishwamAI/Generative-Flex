@@ -8,6 +8,7 @@ from flax.training import checkpoints
 
 """Utility functions for model training."""
 
+
 class TrainState(train_state.TrainState):
     """Extended TrainState for training."""
 

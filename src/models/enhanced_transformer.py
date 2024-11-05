@@ -3,6 +3,7 @@ import jax
 
 """Enhanced transformer implementation with advanced features."""
 
+
 class EnhancedTransformer(nn.Module):
     """Enhanced transformer with advanced attention mechanisms."""
 

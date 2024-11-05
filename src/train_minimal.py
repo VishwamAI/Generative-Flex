@@ -2,6 +2,7 @@ import jax
 from flax.training import train_state
 import optax
 
+
 # Simple model definition (same as in test_minimal.py)
 class SimpleLanguageModel(nn.Module):
     vocab_size: int

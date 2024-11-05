@@ -5,6 +5,7 @@ from src.models.transformer import TransformerBlock
 
 """Video generation model implementation using JAX and Flax."""
 
+
 class VideoEmbedding(nn.Module):
     """Video to embedding conversion."""
 

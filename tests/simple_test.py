@@ -4,6 +4,7 @@ import pytest
 
 """Tests for the simple language model implementation using Flax."""
 
+
 class SimpleModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64

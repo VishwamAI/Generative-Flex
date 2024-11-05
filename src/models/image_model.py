@@ -5,6 +5,7 @@ from src.models.transformer import TransformerBlock
 
 """Image generation model implementation using JAX and Flax."""
 
+
 class PatchEmbedding(nn.Module):
     """Image to patch embedding."""
 

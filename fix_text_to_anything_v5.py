@@ -59,16 +59,12 @@ def fix_text_to_anything():
                 fixed_content.append(
                     f"{method_indent}context: Optional[Dict[str, Any]] = None,\n"
                 )
-                fixed_content.append(
-                    f"{method_indent}training: bool = False\n"
-                )
+                fixed_content.append(f"{method_indent}training: bool = False\n")
                 fixed_content.append(
                     f"{class_indent}) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
                 )
                 # Skip the original method signature
-                while i < len(content) and not content[i].strip().endswith(
-                    ":"
-                ):
+                while i < len(content) and not content[i].strip().endswith(":"):
                     i += 1
                 i += 1
                 continue
@@ -97,9 +93,7 @@ def fix_text_to_anything():
                             f"{method_indent}embedded = self._adjust_sequence_length(\n"
                         )
                         fixed_content.append(f"{method_indent}    embedded,\n")
-                        fixed_content.append(
-                            f"{method_indent}    sequence_length\n"
-                        )
+                        fixed_content.append(f"{method_indent}    sequence_length\n")
                         fixed_content.append(f"{method_indent})\n")
                         # Skip the original call
                         while i < len(content) and ")" not in content[i]:

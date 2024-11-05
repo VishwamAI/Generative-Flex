@@ -1,5 +1,6 @@
 import jax
 
+
 class SimpleGreetingModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64

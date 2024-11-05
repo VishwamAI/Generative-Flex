@@ -9,6 +9,7 @@ Supports:
 - Multi-modal knowledge fusion (Gemini style)
 """
 
+
 @struct.dataclass
 class KnowledgeConfig:
     """Configuration for knowledge retrieval system."""

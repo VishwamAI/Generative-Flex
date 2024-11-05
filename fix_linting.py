@@ -50,9 +50,7 @@ def fix_file(filename):
             if "=" in line:
                 parts = line.split("=")
                 new_lines[i] = (
-                    parts[0].strip()
-                    + "=\\\n    "
-                    + "=".join(parts[1:]).strip()
+                    parts[0].strip() + "=\\\n    " + "=".join(parts[1:]).strip()
                 )
                 modified = True
 

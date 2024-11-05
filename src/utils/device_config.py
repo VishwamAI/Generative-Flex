@@ -4,6 +4,7 @@ import os
 
 """Device configuration utility for handling both CPU and GPU environments."""
 
+
 def get_device_info() -> Dict[str, Any]:
     """Get information about available devices and their capabilities."""
     return {

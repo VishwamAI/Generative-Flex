@@ -22,9 +22,7 @@ def fix_analyze_performance():
     # Fix indentation
     content = content.replace("\nif not log_files:", "\n    if not log_files:")
     # Fix f-string formatting
-    content = content.replace(
-        "label=f'Overall Accuracy(", "label='Overall Accuracy'"
-    )
+    content = content.replace("label=f'Overall Accuracy(", "label='Overall Accuracy'")
     with open("analyze_performance_by_category.py", "w") as f:
         f.write(content)
 
@@ -82,9 +80,7 @@ def fix_enhanced_transformer_layers():
     with open("src/models/layers/enhanced_transformer.py", "r") as f:
         content = f.read()
     # Fix super() call indentation
-    content = content.replace(
-        "\nsuper().__init__()", "\n        super().__init__()"
-    )
+    content = content.replace("\nsuper().__init__()", "\n        super().__init__()")
     with open("src/models/layers/enhanced_transformer.py", "w") as f:
         f.write(content)
 
@@ -96,9 +92,7 @@ def fix_text_to_anything_files():
             with open(filename, "r") as f:
                 content = f.read()
             # Fix indentation
-            content = content.replace(
-                "\ncontent = f.read", "\n    content = f.read"
-            )
+            content = content.replace("\ncontent = f.read", "\n    content = f.read")
             content = content.replace(
                 "\ncontent = f.readlines", "\n    content = f.readlines"
             )

@@ -1,6 +1,7 @@
 import json
 import jax
 
+
 class SimpleChatModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64

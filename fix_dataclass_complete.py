@@ -20,9 +20,7 @@ def fix_imports_and_dataclass(content):
             other_lines.append(line)
 
     # Ensure we have the field import
-    if not any(
-        "from dataclasses import" in imp and "field" in imp for imp in imports
-    ):
+    if not any("from dataclasses import" in imp and "field" in imp for imp in imports):
         imports.append("from dataclasses import dataclass, field")
 
     # Fix dataclass definition
@@ -40,11 +38,7 @@ def fix_imports_and_dataclass(content):
             fixed_lines.append(line)
             continue
 
-        if (
-            in_config
-            and line.strip()
-            and not line.strip().startswith(('"""', "#"))
-        ):
+        if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
             # Skip empty lines and comments in config
             if ":" in line:
                 # Extract field definition parts
@@ -58,10 +52,7 @@ def fix_imports_and_dataclass(content):
                         default_value = type_and_default[1].strip()
 
                         # Handle field cases
-                        if (
-                            "struct_field" in default_value
-                            or "field" in default_value
-                        ):
+                        if "struct_field" in default_value or "field" in default_value:
                             # Extract the actual default value
                             if "default_factory" in default_value:
                                 match = re.search(
@@ -71,9 +62,7 @@ def fix_imports_and_dataclass(content):
                                     actual_default = match.group(1).strip()
                                     fixed_line = f"    {field_name}: {field_type} = field(default_factory={actual_default})"
                             else:
-                                match = re.search(
-                                    r"default=([^,\)]+)", default_value
-                                )
+                                match = re.search(r"default=([^,\)]+)", default_value)
                                 if match:
                                     actual_default = match.group(1).strip()
                                     fixed_line = f"    {field_name}: {field_type} = field(default={actual_default})"

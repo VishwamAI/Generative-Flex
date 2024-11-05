@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 class AcceleratedTrainer:
     """Trainer class with accelerate support."""
 
-
     def __init__(
         self,
         model,
@@ -97,7 +96,9 @@ class AcceleratedTrainer:
         loss = outputs.loss
         self.accelerator.backward(loss)
         if self.max_grad_norm > 0:
-            self.accelerator.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
+            self.accelerator.clip_grad_norm_(
+                self.model.parameters(), self.max_grad_norm
+            )
         return loss
 
     def evaluate(self) -> Dict[str, float]:

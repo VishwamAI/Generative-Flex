@@ -7,16 +7,22 @@ import re
 def fix_docstrings(content):
     """Fix docstring syntax issues."""
     # Fix extra quotes in docstrings
-    content = re.sub(r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | re.DOTALL)
+    content = re.sub(
+        r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | re.DOTALL
+    )
     # Fix unterminated docstrings
-    content = re.sub(r'"""([^"]*)(?<!""")\s*$', r'"""\1"""', content, flags=re.MULTILINE)
+    content = re.sub(
+        r'"""([^"]*)(?<!""")\s*$', r'"""\1"""', content, flags=re.MULTILINE
+    )
     return content
 
 
 def fix_string_literals(content):
     """Fix string literal syntax issues."""
     # Fix unterminated string literals
-    content = re.sub(r'"([^"]*?)(?<!\\)"(?:"|\s*$)', r'"\1"', content, flags=re.MULTILINE)
+    content = re.sub(
+        r'"([^"]*?)(?<!\\)"(?:"|\s*$)', r'"\1"', content, flags=re.MULTILINE
+    )
     # Fix float("-inf") with extra quotes
     content = re.sub(r'float\("-inf"\)"', r'float("-inf")', content)
     # Fix f-strings with extra quotes
@@ -42,7 +48,7 @@ def fix_indentation(content):
             fixed_lines.append("    " * indent_level + stripped)
         elif stripped and stripped[0].isalpha():
             # For new logical blocks
-            if indent_level > 1 and not line.startswith((" " * 4 * (indent_level-1))):
+            if indent_level > 1 and not line.startswith((" " * 4 * (indent_level - 1))):
                 indent_level -= 1
             fixed_lines.append("    " * indent_level + stripped)
         else:
@@ -88,7 +94,7 @@ def main():
         "tests/test_training_setup.py",
         "tests/test_features.py",
         "src/training/train_mmmu.py",
-        "tests/test_models.py"
+        "tests/test_models.py",
     ]
 
     for file_path in problem_files:

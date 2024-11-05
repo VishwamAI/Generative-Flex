@@ -33,9 +33,7 @@ def fix_file_structure(content):
         # Handle docstring
         if line.startswith('"""') and not docstring:
             current_section = docstring
-            while i < len(lines) and not (
-                lines[i].rstrip().endswith('"""') and i > 0
-            ):
+            while i < len(lines) and not (lines[i].rstrip().endswith('"""') and i > 0):
                 current_section.append(lines[i])
                 i += 1
             if i < len(lines):

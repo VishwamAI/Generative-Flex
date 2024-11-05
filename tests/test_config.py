@@ -3,6 +3,7 @@ from src.config.config import Config, ModelConfig, TrainingConfig, get_config
 
 """Tests for configuration management."""
 
+
 def test_model_config():
     """Test model configuration."""
     config = ModelConfig(model_type="language")

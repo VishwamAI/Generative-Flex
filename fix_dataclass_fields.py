@@ -21,11 +21,7 @@ def fix_dataclass_fields(content):
             fixed_lines.append(line)
             continue
 
-        if (
-            in_config
-            and line.strip()
-            and not line.strip().startswith(('"""', "#"))
-        ):
+        if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
             # Skip empty lines and comments in config
             if ":" in line:
                 # Extract field definition parts
@@ -41,9 +37,7 @@ def fix_dataclass_fields(content):
                         # Handle struct_field cases
                         if "struct_field" in default_value:
                             # Extract the actual default value
-                            match = re.search(
-                                r"default=([^,\)]+)", default_value
-                            )
+                            match = re.search(r"default=([^,\)]+)", default_value)
                             if match:
                                 actual_default = match.group(1).strip()
                                 # Handle default_factory case

@@ -8,6 +8,7 @@ Advanced Transformer Layer Implementation for Generative-Flex
 Combines Flash Attention and Mixture of Experts for optimal performance
 """
 
+
 class TransformerLayer(nn.Module):
     """
     Advanced transformer layer combining Flash Attention and Mixture of Experts

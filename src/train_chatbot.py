@@ -3,6 +3,7 @@ from flax.training import train_state
 from src.models.language_model import LanguageModel
 from typing import Dict, List
 
+
 def load_data(
     file_path: str = "data/chatbot/training_data_cot.json",
 ) -> List[Dict[str, str]]:

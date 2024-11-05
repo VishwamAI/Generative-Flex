@@ -25,9 +25,7 @@ def fix_file_syntax(filename):
                 if next_indent <= current_indent:
                     modified = True
                     new_lines.append(line.rstrip() + "\n")
-                    new_lines.append(
-                        " " * (current_indent + 4) + next_line.lstrip()
-                    )
+                    new_lines.append(" " * (current_indent + 4) + next_line.lstrip())
                     i += 2
                     continue
 
@@ -35,15 +33,11 @@ def fix_file_syntax(filename):
         if "config.max_position_embeddings" in line:
             modified = True
             indent = len(line) - len(line.lstrip())
-            new_lines.append(
-                " " * indent + "config.max_position_embeddings,\n"
-            )
+            new_lines.append(" " * indent + "config.max_position_embeddings,\n")
         elif "self.config.max_sequence_length" in line:
             modified = True
             indent = len(line) - len(line.lstrip())
-            new_lines.append(
-                " " * indent + "self.config.max_sequence_length,\n"
-            )
+            new_lines.append(" " * indent + "self.config.max_sequence_length,\n")
         elif "config.hidden_size, 256" in line:
             modified = True
             indent = len(line) - len(line.lstrip())

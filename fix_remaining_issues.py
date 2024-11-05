@@ -71,9 +71,7 @@ def fix_line_length_manually(file_path):
                     split_pos = line[40:79].rindex(" ") + 40
                     indent = len(line) - len(line.lstrip())
                     fixed_lines.append(line[:split_pos] + "\n")
-                    fixed_lines.append(
-                        " " * (indent + 4) + line[split_pos:].lstrip()
-                    )
+                    fixed_lines.append(" " * (indent + 4) + line[split_pos:].lstrip())
                     continue
             # Split long function calls
             elif "(" in line and ")" in line:
@@ -82,9 +80,7 @@ def fix_line_length_manually(file_path):
                     parts = line.split(",")
                     fixed_lines.append(parts[0] + ",\n")
                     for part in parts[1:-1]:
-                        fixed_lines.append(
-                            " " * (indent + 4) + part.strip() + ",\n"
-                        )
+                        fixed_lines.append(" " * (indent + 4) + part.strip() + ",\n")
                     fixed_lines.append(" " * (indent + 4) + parts[-1].strip())
                     continue
         fixed_lines.append(line)

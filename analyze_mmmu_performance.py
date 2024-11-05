@@ -48,10 +48,7 @@ def analyze_problem_categories(dataset):
                     main_category = "Probability & Statistics"
                 elif "geometry" in category.lower():
                     main_category = "Geometry"
-                elif (
-                    "number" in category.lower()
-                    or "arithmetic" in category.lower()
-                ):
+                elif "number" in category.lower() or "arithmetic" in category.lower():
                     main_category = "Number Theory"
                 else:
                     main_category = "Other"
@@ -67,9 +64,7 @@ def analyze_problem_categories(dataset):
 def load_validation_results():
     """Load validation results from the most recent training log"""
     log_dir = Path("logs")
-    training_logs = sorted(
-        log_dir.glob("training_*.log"), key=os.path.getmtime
-    )
+    training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
     if not training_logs:
         logger.error("No training logs found")
@@ -121,9 +116,7 @@ def generate_performance_report(categories, results):
             f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}"
         )
     if results["best_validation_loss"] is not None:
-        report.append(
-            f"Best Validation Loss: {results['best_validation_loss']:.4f}\n"
-        )
+        report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
 
     # Category Distribution
     report.append("\nProblem Category Distribution:")

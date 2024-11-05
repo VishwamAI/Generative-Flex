@@ -61,9 +61,7 @@ def fix_analyze_performance():
                 )
             else:
                 fixed_lines.append(line)
-        write_file(
-            "analyze_performance_by_category.py", "\n".join(fixed_lines)
-        )
+        write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
 
 
 def fix_dataset_verification():
@@ -77,9 +75,7 @@ def fix_dataset_verification():
                 fixed_lines.append("    " + line.strip())
             else:
                 fixed_lines.append(line)
-        write_file(
-            "data/dataset_verification_utils.py", "\n".join(fixed_lines)
-        )
+        write_file("data/dataset_verification_utils.py", "\n".join(fixed_lines))
 
 
 def fix_verify_mapped_datasets():
@@ -102,10 +98,7 @@ def fix_text_to_anything_files():
             lines = content.split("\n")
             fixed_lines = []
             for line in lines:
-                if (
-                    "content = f.read" in line
-                    or "content = f.readlines" in line
-                ):
+                if "content = f.read" in line or "content = f.readlines" in line:
                     fixed_lines.append("    " + line.strip())
                 else:
                     fixed_lines.append(line)
@@ -158,9 +151,7 @@ def fix_enhanced_transformers():
                 fixed_lines.append("    super().__init__()")
             else:
                 fixed_lines.append(line)
-        write_file(
-            "src/models/enhanced_transformer.py", "\n".join(fixed_lines)
-        )
+        write_file("src/models/enhanced_transformer.py", "\n".join(fixed_lines))
 
     # Fix layers enhanced transformer
     content = read_file("src/models/layers/enhanced_transformer.py")
@@ -172,16 +163,12 @@ def fix_enhanced_transformers():
             stripped = line.lstrip()
             if stripped:
                 if "if attention_mask is not None:" in line:
-                    fixed_lines.append(
-                        "                if attention_mask is not None:"
-                    )
+                    fixed_lines.append("                if attention_mask is not None:")
                 else:
                     fixed_lines.append(line)
             else:
                 fixed_lines.append("")
-        write_file(
-            "src/models/layers/enhanced_transformer.py", "\n".join(fixed_lines)
-        )
+        write_file("src/models/layers/enhanced_transformer.py", "\n".join(fixed_lines))
 
 
 def main():

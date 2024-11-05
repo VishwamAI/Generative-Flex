@@ -2,15 +2,17 @@
 
 import os
 
+
 def fix_file(file_path, content):
     """Write fixed content to file."""
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, 'w', encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f'Fixed {file_path}')
+    print(f"Fixed {file_path}")
+
 
 fixes = {
-    'src/models/reasoning/math_experts.py': '''"""Specialized experts for mathematical reasoning."""
+    "src/models/reasoning/math_experts.py": '''"""Specialized experts for mathematical reasoning."""
 
 import torch
 import torch.nn as nn
@@ -40,8 +42,7 @@ class MathematicalExpert(nn.Module):
 
         return layer_output, torch.mean(intermediate_output, dim=-1)
 ''',
-
-    'src/models/reasoning/mathematical_notation.py': '''"""Mathematical notation processing module."""
+    "src/models/reasoning/mathematical_notation.py": '''"""Mathematical notation processing module."""
 
 from transformers import PretrainedConfig
 import torch.nn as nn
@@ -60,8 +61,7 @@ class MathNotationProcessor(nn.Module):
         # Implementation for processing mathematical notation
         pass
 ''',
-
-    'src/models/reasoning/symbolic_math.py': '''"""Symbolic mathematics processing module."""
+    "src/models/reasoning/symbolic_math.py": '''"""Symbolic mathematics processing module."""
 
 import torch.nn as nn
 
@@ -79,8 +79,7 @@ class SymbolicMathProcessor(nn.Module):
         """Forward pass for symbolic math processing."""
         return self.dropout(x)
 ''',
-
-    'src/training/train_mmmu.py': '''"""Training script for MMMU dataset using enhanced transformer model."""
+    "src/training/train_mmmu.py": '''"""Training script for MMMU dataset using enhanced transformer model."""
 
 import torch
 import logging
@@ -172,8 +171,7 @@ def main():
 if __name__ == "__main__":
     main()
 ''',
-
-    'tests/test_features.py': '''"""Comprehensive tests for all model features."""
+    "tests/test_features.py": '''"""Comprehensive tests for all model features."""
 
 import unittest
 import torch
@@ -209,8 +207,7 @@ class TestModelFeatures(unittest.TestCase):
             outputs.shape, (batch_size, seq_length, self.config.hidden_size)
         )
 ''',
-
-    'tests/test_models.py': '''"""Test module for enhanced transformer models."""
+    "tests/test_models.py": '''"""Test module for enhanced transformer models."""
 
 import unittest
 import torch
@@ -245,8 +242,7 @@ class TestEnhancedTransformer(unittest.TestCase):
             outputs.shape, (batch_size, seq_length, self.config.hidden_size)
         )
 ''',
-
-    'tests/test_training_setup.py': '''"""Test cases for training setup and configuration."""
+    "tests/test_training_setup.py": '''"""Test cases for training setup and configuration."""
 
 import unittest
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
@@ -268,8 +264,9 @@ class TestTrainingSetup(unittest.TestCase):
         train_loader, val_loader = create_mmmu_dataloaders(self.config)
         self.assertIsNotNone(train_loader)
         self.assertIsNotNone(val_loader)
-'''
+''',
 }
+
 
 def main():
     """Fix black formatting issues in problematic files."""
@@ -277,7 +274,8 @@ def main():
         if os.path.exists(file_path):
             fix_file(file_path, content)
         else:
-            print(f'File not found: {file_path}')
+            print(f"File not found: {file_path}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

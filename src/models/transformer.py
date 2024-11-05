@@ -3,6 +3,7 @@ import jax
 
 """Core transformer architecture implementation using JAX and Flax."""
 
+
 class MultiHeadAttention(nn.Module):
     """Multi-head attention mechanism."""
 

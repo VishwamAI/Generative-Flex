@@ -10,6 +10,7 @@ Core Evaluation Metrics for Generative-Flex
 Implements essential metrics for model evaluation and benchmarking
 """
 
+
 @dataclass
 class EvalMetrics:
     """Collection of evaluation metrics"""

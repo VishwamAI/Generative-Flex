@@ -23,15 +23,17 @@ class FlashMoELayer(nn.Module):
         self.dropout = nn.Dropout(dropout_rate)
 
         # Expert network
-        self.experts = nn.ModuleList([
-            nn.Sequential(
-                nn.Linear(hidden_size, intermediate_size),
-                nn.GELU(),
-                nn.Linear(intermediate_size, hidden_size),
-                nn.Dropout(dropout_rate),
-            )
-            for _ in range(num_experts)
-        ])
+        self.experts = nn.ModuleList(
+            [
+                nn.Sequential(
+                    nn.Linear(hidden_size, intermediate_size),
+                    nn.GELU(),
+                    nn.Linear(intermediate_size, hidden_size),
+                    nn.Dropout(dropout_rate),
+                )
+                for _ in range(num_experts)
+            ]
+        )
 
         # Router network
         self.router = nn.Linear(hidden_size, num_experts)
@@ -53,6 +55,6 @@ class FlashMoELayer(nn.Module):
         # Apply each expert
         for i, expert in enumerate(self.experts):
             expert_output = expert(hidden_states)
-            combined_output += routing_weights[..., i:i+1] * expert_output
+            combined_output += routing_weights[..., i : i + 1] * expert_output
 
         return combined_output, routing_weights

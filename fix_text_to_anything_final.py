@@ -70,9 +70,9 @@ def fix_file_content(content):
                     "@dataclass" in other_lines[i]
                     or "class GenerationConfig" in other_lines[i]
                 ):
-                    while i < len(other_lines) and not other_lines[
-                        i
-                    ].startswith("class ModalityEncoder"):
+                    while i < len(other_lines) and not other_lines[i].startswith(
+                        "class ModalityEncoder"
+                    ):
                         if other_lines[i].strip():
                             sections["generation_config"].append(
                                 other_lines[i].lstrip()
@@ -103,11 +103,7 @@ def fix_file_content(content):
             config_lines.append(
                 '    """Configuration for text-to-anything generation."""'
             )
-        elif (
-            in_config
-            and ":" in line
-            and not line.strip().startswith(('"""', "#"))
-        ):
+        elif in_config and ":" in line and not line.strip().startswith(('"""', "#")):
             # Fix field definitions
             try:
                 name, rest = line.split(":", 1)
@@ -121,9 +117,7 @@ def fix_file_content(content):
                     )
                     continue
                 elif name == "supported_modalities":
-                    config_lines.append(
-                        "    supported_modalities: List[str] = field("
-                    )
+                    config_lines.append("    supported_modalities: List[str] = field(")
                     config_lines.append(
                         '        default_factory=lambda: ["text", "image", "audio", "video", "code"]'
                     )
@@ -154,10 +148,7 @@ def fix_file_content(content):
                     default_value = default_value.strip()
 
                     # Extract default value from struct_field or field
-                    if (
-                        "struct_field" in default_value
-                        or "field" in default_value
-                    ):
+                    if "struct_field" in default_value or "field" in default_value:
                         match = re.search(r"default=([^,\)]+)", default_value)
                         if match:
                             default_value = match.group(1).strip()

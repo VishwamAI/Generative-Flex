@@ -19,17 +19,13 @@ def fix_file_syntax(filename):
             modified = True
             indent = len(line) - len(line.lstrip())
             new_lines.append(" " * indent + "max_position_embeddings = (")
-            new_lines.append(
-                " " * (indent + 4) + "config.max_position_embeddings"
-            )
+            new_lines.append(" " * (indent + 4) + "config.max_position_embeddings")
             new_lines.append(" " * indent + ")")
         elif "self.config.max_sequence_length" in line:
             modified = True
             indent = len(line) - len(line.lstrip())
             new_lines.append(" " * indent + "sequence_length = (")
-            new_lines.append(
-                " " * (indent + 4) + "self.config.max_sequence_length"
-            )
+            new_lines.append(" " * (indent + 4) + "self.config.max_sequence_length")
             new_lines.append(" " * indent + ")")
         elif "config.hidden_size, 256" in line:
             modified = True
@@ -43,8 +39,7 @@ def fix_file_syntax(filename):
             indent = len(line) - len(line.lstrip())
             new_lines.append(" " * indent + "head_dim = (")
             new_lines.append(
-                " " * (indent + 4)
-                + "generation_config.num_attention_heads * 8"
+                " " * (indent + 4) + "generation_config.num_attention_heads * 8"
             )
             new_lines.append(" " * indent + ")")
         else:
@@ -59,13 +54,9 @@ def fix_file_syntax(filename):
                 if next_indent <= current_indent:
                     modified = True
                     # Wrap in parentheses for proper line continuation
-                    if not any(
-                        line.lstrip().startswith(x) for x in ["(", "[", "{"]
-                    ):
+                    if not any(line.lstrip().startswith(x) for x in ["(", "[", "{"]):
                         new_lines.append(" " * current_indent + "(")
-                        new_lines.append(
-                            " " * (current_indent + 4) + line.lstrip()
-                        )
+                        new_lines.append(" " * (current_indent + 4) + line.lstrip())
                         new_lines.append(
                             " " * (current_indent + 4) + next_line.lstrip()
                         )

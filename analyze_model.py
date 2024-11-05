@@ -49,8 +49,7 @@ def analyze_model():
             hidden_dim=base_config.hidden_size,
             num_heads=base_config.num_attention_heads,
             num_layers=base_config.num_hidden_layers,
-            head_dim=base_config.hidden_size
-            // base_config.num_attention_heads,
+            head_dim=base_config.hidden_size // base_config.num_attention_heads,
             mlp_dim=base_config.ffn_dim,
             dropout_rate=base_config.dropout,
             max_seq_length=base_config.max_position_embeddings,
@@ -86,9 +85,7 @@ def analyze_model():
                 + config.num_layers  # Embedding layer
                 * (
                     4 * config.hidden_dim * config.hidden_dim
-                    + 4  # Self-attention
-                    * config.hidden_dim
-                    * config.mlp_dim  # FFN
+                    + 4 * config.hidden_dim * config.mlp_dim  # Self-attention  # FFN
                 )
             )
 
@@ -120,12 +117,8 @@ def analyze_model():
         # Estimate memory usage with fp16
         print("\nCalculating memory estimates (using fp16)...")
         param_memory = total_params * 2  # 2 bytes per parameter in fp16
-        activation_memory = (
-            param_memory * 1.5
-        )  # Reduced activation estimate for fp16
-        optimizer_memory = (
-            param_memory * 4
-        )  # Reduced optimizer states for fp16
+        activation_memory = param_memory * 1.5  # Reduced activation estimate for fp16
+        optimizer_memory = param_memory * 4  # Reduced optimizer states for fp16
         total_memory = param_memory + activation_memory + optimizer_memory
 
         print("\nEstimated memory usage:")
@@ -140,9 +133,7 @@ def analyze_model():
         print(f"Process RSS: {format_size(memory_info['rss'])}")
         print(f"Process VMS: {format_size(memory_info['vms'])}")
         print(f"System total: {format_size(memory_info['system_total'])}")
-        print(
-            f"System available: {format_size(memory_info['system_available'])}"
-        )
+        print(f"System available: {format_size(memory_info['system_available'])}")
 
         # Get current GPU memory usage if available
         if torch.cuda.is_available():

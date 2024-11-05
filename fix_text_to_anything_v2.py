@@ -56,13 +56,8 @@ def fix_text_to_anything():
         if "if batch_size is None:" in line:
             fixed_content.append(line)
             next_line = content[i + 1]
-            if (
-                "#" in next_line
-                and "batch_size = curr_batch_size" in next_line
-            ):
-                fixed_content.append(
-                    "                batch_size = curr_batch_size\n"
-                )
+            if "#" in next_line and "batch_size = curr_batch_size" in next_line:
+                fixed_content.append("                batch_size = curr_batch_size\n")
             continue
 
         if not batch_size_initialized or line.strip() != "":

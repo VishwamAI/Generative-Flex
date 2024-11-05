@@ -70,9 +70,9 @@ def fix_file_content(content):
                     "@dataclass" in other_lines[i]
                     or "class GenerationConfig" in other_lines[i]
                 ):
-                    while i < len(other_lines) and not other_lines[
-                        i
-                    ].startswith("class ModalityEncoder"):
+                    while i < len(other_lines) and not other_lines[i].startswith(
+                        "class ModalityEncoder"
+                    ):
                         if other_lines[i].strip():
                             sections["generation_config"].append(
                                 other_lines[i].lstrip()
@@ -110,9 +110,7 @@ def fix_file_content(content):
                 type_name, default_value = type_and_default.split("=", 1)
                 if "struct_field" in default_value:
                     default_value = (
-                        re.search(r"default=([^,\)]+)", default_value)
-                        .group(1)
-                        .strip()
+                        re.search(r"default=([^,\)]+)", default_value).group(1).strip()
                     )
                     if name.strip() == "image_size":
                         config_lines.append(

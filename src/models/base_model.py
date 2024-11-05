@@ -3,6 +3,7 @@ from typing import Tuple
 
 """Base model classes for different types of generative models."""
 
+
 class BaseModel(nn.Module, ABC):
     """Abstract base class for all generative models."""
 

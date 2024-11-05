@@ -3,6 +3,7 @@ import jax
 
 """Test module for chain-of-thought response generation."""
 
+
 class SimpleChatModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64

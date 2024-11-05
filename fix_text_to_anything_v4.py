@@ -49,13 +49,9 @@ def fix_text_to_anything():
             fixed_content.append("        self,")
             fixed_content.append("        inputs: Union[str, Dict[str, Any]],")
             fixed_content.append("        target_modality: str,")
-            fixed_content.append(
-                "        context: Optional[Dict[str, Any]] = None,"
-            )
+            fixed_content.append("        context: Optional[Dict[str, Any]] = None,")
             fixed_content.append("        training: bool = False")
-            fixed_content.append(
-                "    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
-            )
+            fixed_content.append("    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n")
             skip_next_lines = 9  # Skip the original malformed signature
             continue
 

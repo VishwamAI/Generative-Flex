@@ -22,10 +22,9 @@ class BaseTransformer(nn.Module):
         self.dropout = nn.Dropout(self.hidden_dropout_prob)
 
         # Initialize transformer layers
-        self.layers = nn.ModuleList([
-            TransformerLayer(self.config)
-            for _ in range(self.num_hidden_layers)
-        ])
+        self.layers = nn.ModuleList(
+            [TransformerLayer(self.config) for _ in range(self.num_hidden_layers)]
+        )
 
     def forward(
         self,
@@ -51,7 +50,9 @@ class TransformerLayer(nn.Module):
         """Initialize the transformer layer."""
         super().__init__()
         self.attention = MultiHeadAttention(config)
-        self.intermediate = nn.Linear(config["hidden_size"], config["intermediate_size"])
+        self.intermediate = nn.Linear(
+            config["hidden_size"], config["intermediate_size"]
+        )
         self.output = nn.Linear(config["intermediate_size"], config["hidden_size"])
         self.dropout = nn.Dropout(config["hidden_dropout_prob"])
         self.norm1 = nn.LayerNorm(config["hidden_size"])
@@ -102,13 +103,19 @@ class MultiHeadAttention(nn.Module):
         value = self.value(hidden_states)
 
         # Reshape for attention
-        query = query.view(batch_size, -1, self.num_attention_heads, self.attention_head_size).transpose(1, 2)
-        key = key.view(batch_size, -1, self.num_attention_heads, self.attention_head_size).transpose(1, 2)
-        value = value.view(batch_size, -1, self.num_attention_heads, self.attention_head_size).transpose(1, 2)
+        query = query.view(
+            batch_size, -1, self.num_attention_heads, self.attention_head_size
+        ).transpose(1, 2)
+        key = key.view(
+            batch_size, -1, self.num_attention_heads, self.attention_head_size
+        ).transpose(1, 2)
+        value = value.view(
+            batch_size, -1, self.num_attention_heads, self.attention_head_size
+        ).transpose(1, 2)
 
         # Calculate attention scores
         attention_scores = torch.matmul(query, key.transpose(-1, -2))
-        attention_scores = attention_scores / (self.attention_head_size ** 0.5)
+        attention_scores = attention_scores / (self.attention_head_size**0.5)
 
         if attention_mask is not None:
             attention_scores = attention_scores + attention_mask

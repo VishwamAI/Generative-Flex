@@ -122,9 +122,7 @@ def fix_imports(content):
             other_lines.append(line)
 
     if import_lines:
-        return (
-            "\n".join(sorted(import_lines)) + "\n\n" + "\n".join(other_lines)
-        )
+        return "\n".join(sorted(import_lines)) + "\n\n" + "\n".join(other_lines)
     return content
 
 

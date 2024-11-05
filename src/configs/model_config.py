@@ -7,6 +7,7 @@ import logging
 
 """Configuration Management for Generative-Flex"""
 
+
 @dataclass
 class ModelConfig:
     """Model architecture configuration"""

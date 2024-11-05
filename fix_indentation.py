@@ -39,9 +39,7 @@ def fix_indentation(content):
             continue
 
         # Handle indentation for control structures
-        if re.match(
-            r"^(if|elif|else|for|while|try|except|with)\s*.*:", stripped
-        ):
+        if re.match(r"^(if|elif|else|for|while|try|except|with)\s*.*:", stripped):
             fixed_lines.append("    " * indent_level + stripped)
             indent_level += 1
             continue

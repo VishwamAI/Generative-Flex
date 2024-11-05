@@ -1,4 +1,5 @@
 """Script to format all files detected by CI as needing formatting."""
+
 import subprocess
 import os
 
@@ -45,9 +46,7 @@ def format_files():
         if os.path.exists(file):
             print(f"Formatting {file}...")
             try:
-                subprocess.run(
-                    ["black", "--line-length", "79", file], check=True
-                )
+                subprocess.run(["black", "--line-length", "79", file], check=True)
             except subprocess.CalledProcessError as e:
                 print(f"Error formatting {file}: {e}")
         else:

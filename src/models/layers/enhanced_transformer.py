@@ -3,6 +3,7 @@ import jax
 
 """Enhanced transformer layer implementations."""
 
+
 class EnhancedTransformerLayer(nn.Module):
     """Enhanced transformer layer with advanced features."""
 

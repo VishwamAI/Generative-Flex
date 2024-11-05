@@ -6,6 +6,7 @@ from pathlib import Path
 
 """Centralized configuration management for Generative-Flex."""
 
+
 @dataclass
 class ModelConfig:
     """Model configuration."""

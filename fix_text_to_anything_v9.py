@@ -1,4 +1,5 @@
 """Script to fix text_to_anything.py formatting."""
+
 from pathlib import Path
 
 

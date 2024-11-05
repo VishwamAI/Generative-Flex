@@ -6,6 +6,7 @@ import torch
 
 """Specialized tokenizer for mathematical expressions and symbols."""
 
+
 class MathTokenizer:
     """Tokenizer for mathematical expressions and symbols."""
 

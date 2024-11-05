@@ -34,11 +34,7 @@ def fix_line_continuations(content):
                 lines[i + 1] = ""
 
         # Fix indentation in function calls
-        if (
-            in_function_call
-            and line.strip()
-            and not line.strip().startswith(")")
-        ):
+        if in_function_call and line.strip() and not line.strip().startswith(")"):
             indent = " " * (len(base_indent) + 4)
             line = indent + line.lstrip()
 

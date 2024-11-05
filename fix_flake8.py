@@ -16,16 +16,12 @@ def run_black_and_flake8():
 
     # Run black
     print("Running black...")
-    black_result = subprocess.run(
-        ["black"] + files, capture_output=True, text=True
-    )
+    black_result = subprocess.run(["black"] + files, capture_output=True, text=True)
     print(black_result.stdout)
 
     # Run flake8
     print("\nRunning flake8...")
-    flake8_result = subprocess.run(
-        ["flake8"] + files, capture_output=True, text=True
-    )
+    flake8_result = subprocess.run(["flake8"] + files, capture_output=True, text=True)
     print(flake8_result.stdout)
 
     return black_result.returncode == 0 and flake8_result.returncode == 0

@@ -25,9 +25,7 @@ def parse_log_file(log_file):
 
             elif "Validation math accuracy:" in line:
                 try:
-                    math_acc = float(
-                        line.split("Validation math accuracy:")[1].strip()
-                    )
+                    math_acc = float(line.split("Validation math accuracy:")[1].strip())
                     metrics["math_accuracy"].append(math_acc)
                 except (ValueError, IndexError):
                     continue

@@ -4,6 +4,7 @@ import transformers
 
 """Test script to verify JAX/Flax/Optax installation."""
 
+
 def test_environment():
     """Verify JAX installation and GPU availability."""
     print("\nEnvironment Test Results:")
