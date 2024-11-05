@@ -1,5 +1,6 @@
 """Script to fix test_models.py formatting."""
 
+
 def create_fixed_content():
     """Create properly formatted content for test_models.py."""
     content = '''"""Test module for enhanced transformer models.
@@ -100,15 +101,17 @@ def test_transformer_config_validation(model_config):
 '''
     return content
 
+
 def main():
     """Main function to fix the file."""
     # Create the fixed content
     content = create_fixed_content()
 
     # Write to file
-    with open('tests/test_models.py', 'w') as f:
+    with open("tests/test_models.py", "w") as f:
         f.write(content)
     print("Fixed test_models.py with proper docstring formatting")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

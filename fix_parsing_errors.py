@@ -1,6 +1,7 @@
 """Script to fix parsing errors in problematic files."""
 import os
 
+
 def fix_mmmu_loader():
     """Fix mmmu_loader.py parsing issues."""
     content = '''"""MMMU dataset loader implementation."""
@@ -135,8 +136,9 @@ def create_dataloader(
         pin_memory=True
     )
 '''
-    with open('src/data/mmmu_loader.py', 'w') as f:
+    with open("src/data/mmmu_loader.py", "w") as f:
         f.write(content)
+
 
 def fix_enhanced_transformer():
     """Fix enhanced_transformer.py parsing issues."""
@@ -236,8 +238,9 @@ class EnhancedTransformer(nn.Module):
 
         return outputs
 '''
-    with open('src/models/enhanced_transformer.py', 'w') as f:
+    with open("src/models/enhanced_transformer.py", "w") as f:
         f.write(content)
+
 
 def fix_layers_enhanced_transformer():
     """Fix layers/enhanced_transformer.py parsing issues."""
@@ -316,8 +319,9 @@ class EnhancedTransformerLayer(nn.Module):
 
         return outputs
 '''
-    with open('src/models/layers/enhanced_transformer.py', 'w') as f:
+    with open("src/models/layers/enhanced_transformer.py", "w") as f:
         f.write(content)
+
 
 def main():
     """Fix all files with parsing errors."""
@@ -333,6 +337,7 @@ def main():
     print("Fixed layers/enhanced_transformer.py")
 
     print("\nAll parsing errors fixed!")
+
 
 if __name__ == "__main__":
     main()

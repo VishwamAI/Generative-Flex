@@ -1,6 +1,7 @@
 """Script to fix text_to_anything.py formatting."""
 from pathlib import Path
 
+
 def create_fixed_content():
     """Create properly formatted content for text_to_anything.py."""
     # Note: Content structure follows the same pattern as before but with proper indentation
@@ -50,18 +51,20 @@ class GenerationConfig:
             "Be transparent about AI-generated content"
         ]
     )'''
-    
+
     return content
+
 
 def main():
     """Main function to fix the file."""
     # Create the fixed content
     content = create_fixed_content()
-    
+
     # Write to file
-    file_path = Path('src/models/text_to_anything.py')
+    file_path = Path("src/models/text_to_anything.py")
     file_path.write_text(content)
     print("Fixed text_to_anything.py")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

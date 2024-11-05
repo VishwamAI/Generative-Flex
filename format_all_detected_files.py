@@ -2,6 +2,7 @@
 import subprocess
 import os
 
+
 def format_files():
     """Format all detected files using black."""
     files_to_format = [
@@ -36,7 +37,7 @@ def format_files():
         "tests/test_environment.py",
         "tests/test_models.py",
         "tests/test_features.py",
-        "tests/test_training_setup.py"
+        "tests/test_training_setup.py",
     ]
 
     print("Formatting files...")
@@ -44,13 +45,16 @@ def format_files():
         if os.path.exists(file):
             print(f"Formatting {file}...")
             try:
-                subprocess.run(["black", "--line-length", "79", file], check=True)
+                subprocess.run(
+                    ["black", "--line-length", "79", file], check=True
+                )
             except subprocess.CalledProcessError as e:
                 print(f"Error formatting {file}: {e}")
         else:
             print(f"Warning: {file} not found")
 
     print("\nAll files processed!")
+
 
 if __name__ == "__main__":
     format_files()

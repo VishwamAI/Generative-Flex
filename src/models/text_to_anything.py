@@ -35,10 +35,16 @@ class GenerationConfig:
     warmup_steps: int = field(default=10000)
     max_steps: int = field(default=1000000)
 
-    # Supported modalities and principles
+    # Safety and compliance
+    use_constitutional_ai: bool = field(default=True)
+    safety_threshold: float = field(default=0.9)
+
+    # Supported modalities
     supported_modalities: List[str] = field(
         default_factory=lambda: ["text", "image", "audio", "video", "code"]
     )
+
+    # Constitutional principles
     constitutional_principles: List[str] = field(
         default_factory=lambda: [
             "Do not generate harmful content",

@@ -1,5 +1,6 @@
 """Script to fix train_mmmu.py formatting."""
 
+
 def create_fixed_content():
     """Create properly formatted content for train_mmmu.py."""
     content = '''"""Training script for MMMU dataset using enhanced transformer model.
@@ -168,15 +169,17 @@ if __name__ == "__main__":
 '''
     return content
 
+
 def main():
     """Main function to fix the file."""
     # Create the fixed content
     content = create_fixed_content()
 
     # Write to file
-    with open('src/training/train_mmmu.py', 'w') as f:
+    with open("src/training/train_mmmu.py", "w") as f:
         f.write(content)
     print("Fixed train_mmmu.py with proper docstring formatting")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

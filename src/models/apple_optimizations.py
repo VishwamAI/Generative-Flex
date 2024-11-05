@@ -191,10 +191,12 @@ class StatefulKeyValueCache(nn.Module):
             actual_len = end_pos - position
 
             # Update only the valid portion
-            self.key_cache.value = self.key_cache.value.at[:, position:end_pos
-            ].set(key[:,:actual_len])
-            self.value_cache.value = self.value_cache.value.at[:, position:end_pos
-            ].set(value[:,:actual_len])
+            self.key_cache.value = self.key_cache.value.at[
+                :, position:end_pos
+            ].set(key[:, :actual_len])
+            self.value_cache.value = self.value_cache.value.at[
+                :, position:end_pos
+            ].set(value[:, :actual_len])
             self.valid_mask.value = self.valid_mask.value.at[
                 position:end_pos
             ].set(True)
@@ -323,7 +325,7 @@ class FlexibleInputProcessor(nn.Module):
         # Create causal mask for decoder
         causal_mask = jnp.tril(jnp.ones((seq_length, seq_length)))
         attention_mask = (
-            attention_mask[:, None, None,:] * causal_mask[None, None,:,:]
+            attention_mask[:, None, None, :] * causal_mask[None, None, :, :]
         )
 
         return inputs + position_embeddings, attention_mask
@@ -417,7 +419,7 @@ class AppleOptimizedTransformer(nn.Module):
         seq_length = min(
             hidden_states.shape[1], self.config.max_sequence_length
         )
-        hidden_states = hidden_states[:,:seq_length,:]
+        hidden_states = hidden_states[:, :seq_length, :]
 
         # Apply layer norm
         hidden_states = self.layer_norm(hidden_states)
@@ -459,7 +461,7 @@ class AppleOptimizedTransformer(nn.Module):
             attention_mask = jnp.ones((batch_size, seq_length))
 
         # Expand attention mask for broadcasting
-        attention_mask = attention_mask[:, None, None,:]
+        attention_mask = attention_mask[:, None, None, :]
 
         # Compute attention scores with scaled dot product
         scale = jnp.sqrt(self.head_dim).astype(hidden_states.dtype)

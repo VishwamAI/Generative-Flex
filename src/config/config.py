@@ -131,7 +131,7 @@ class Config:
         valid_model_types = {"language", "image", "audio", "video"}
         if model_type not in valid_model_types:
             raise ValueError(
-f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
+                f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
             )
 
         # Default configurations for different model types
