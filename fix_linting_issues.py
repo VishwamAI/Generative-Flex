@@ -13,13 +13,13 @@ def fix_test_features(self):
         content = path.read_text()
 
         # Add missing imports
-        imports_to_add = """
+imports_to_add = """
 
     # Test configuration
     batch_size = 4
     seq_length = 16
     hidden_size = 32
-        """
+"""
             
             
             # Add imports at the beginning of the file after existing imports
@@ -33,9 +33,9 @@ def fix_test_features(self):
             path.write_text(content)
             
             
-            def fix_test_models(self):
-            path = Path("tests/test_models.py")
-            if not path.exists():
+                        def fix_test_models(self):
+                        path = Path("tests/test_models.py")
+                        if not path.exists():
             return
             
             content = path.read_text()

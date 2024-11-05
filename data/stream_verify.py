@@ -11,22 +11,12 @@ import requests
 logging.basicConfig(level=logging.DEBUG)
 
 
-def get_memory_usage() -> float:
-    """Get current memory usage percentage."""
-        return psutil.Process(os.getpid()).memory_percent()
-        
-        
-        def cleanup_memory(self):
-    """Force garbage collection."""
-gc.collect()
-
-
 def stream_json_objects(self):
     url: str,
         token: Optional[str] = None,
         chunk_size: int = 1024 * 1024
     ) -> Generator[Dict[str, Any], None, None]:
-        """Stream JSON objects from a URL using chunked downloads and ijson."""
+    """Stream JSON objects from a URL using chunked downloads and ijson."""
             headers = {"Authorization": f"Bearer {token}"} if token else {}
             
             # Get file size
@@ -58,9 +48,8 @@ def stream_json_objects(self):
             raise
             
             
-            def verify_dataset(dataset_id: str,
-            token: Optional[str] = None) -> Dict[str, Any]:
-        """Verify a dataset using streaming JSON parsing."""
+                        def verify_dataset(dataset_id: str, token: Optional[str] = None) -> Dict[str, Any]:
+                """Verify a dataset using streaming JSON parsing."""
 try: api = HfApi()
     logging.info(f"Verifying dataset: {dataset_id}")
 

@@ -12,7 +12,7 @@ import tempfile
 import time
 import torch
 import yaml
-    """Dataset verification utilities for mapped datasets."""
+"""Dataset verification utilities for mapped datasets."""
         
         
         
@@ -26,31 +26,18 @@ import yaml
         logger = logging.getLogger(__name__)
         
         
-        class TimeoutException(Exception):
+class TimeoutException(Exception):
     """Exception raised when a timeout occurs."""
 
 pass
 
 
 @contextlib.contextmanager
-def timeout(seconds: int) -> Iterator[None]:
-    """Context manager for timing out operations."""
-        timer = None
+                def categorize_error(self, error: Exception) -> str:
+                    """Categorize the type of error encountered during dataset verification."""
+        error_str = str(error)
         
-        def timeout_handler(self):
-        raise TimeoutException(f"Timed out after {seconds} seconds")
-        
-        try: timer = threading.Timer(seconds, timeout_handler)
-        timer.start()
-        yield
-        finally: iftimer: timer.cancel()
-        
-        
-        def categorize_error(error: Exception) -> str:
-    """Categorize the type of error encountered during dataset verification."""
-error_str = str(error)
-
-if isinstance(error, TimeoutException):
+        if isinstance(error, TimeoutException):
     return "timeout"
     elif "401" in error_str: return"authentication"
         elif "404" in error_str: return"not_found"
@@ -70,15 +57,15 @@ def try_load_dataset(self):
         cache_dir: Optional[str] = None,
         token: Optional[str] = None,
         timeout_seconds: int = 300) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
-            """Try to load a dataset with specific configuration and timeout."""
+    """Try to load a dataset with specific configuration and timeout."""
                 try: withtimeout(timeout_seconds):
                 kwargs = {
                 "streaming": streaming,
                 "trust_remote_code": trust_remote_code,
                 }
                 if config: kwargs["name"] = config
-                if cache_dir: kwargs["cache_dir"] = cache_dir
-                if token: kwargs["token"] = token
+                if cache_dir: kwargs["cache_dir"]= cache_dir
+                if token: kwargs["token"]= token
                 
                 dataset = load_dataset(dataset_id, **kwargs)
                 
@@ -115,17 +102,17 @@ def try_load_dataset(self):
                 except: passreturnFalse, e, None
                 
                 
-                def format_verification_result(result: Dict[str, Any]) -> str:
-            """Format the verification result for logging."""
-status = result.get("status", "unknown")
-configs = result.get("configs", {})
-error = result.get("error")
-attempts = result.get("attempts", [])
-
-formatted = f"Status: {status}\n"
-
-if configs: formatted+= "Configurations:\n"
-    for config, config_status in configs.items():
+                                def format_verification_result(self, result: Dict[str, Any]) -> str:
+                                    """Format the verification result for logging."""
+                status = result.get("status", "unknown")
+                configs = result.get("configs", {})
+                error = result.get("error")
+                attempts = result.get("attempts", [])
+                
+                formatted = f"Status: {status}\n"
+                
+                if configs: formatted+= "Configurations:\n"
+                    for config, config_status in configs.items():
         formatted += f"  - {config}: {config_status}\n"
 
         if attempts: formatted+= "\nVerification Attempts:\n"
@@ -151,7 +138,7 @@ def log_verification_attempt(self):
         error: Optional[Exception] = None,
         success: bool = False,
         info: Optional[Dict[str, Any]] = None) -> None:
-            """Log a verification attempt with detailed information."""
+    """Log a verification attempt with detailed information."""
                 config_str = f" (config: {config})" if config else ""
                 if success: logger.info(f"Successfully verified {dataset_id}{config_str} using {attempt_type}")
                 if info: logger.info(f"Dataset info: {info}")
@@ -162,12 +149,6 @@ def log_verification_attempt(self):
                 logger.error(f"Error details: {error_msg}")
                 
                 
-                def get_memory_usage() -> float:
-            """Get current memory usage as a percentage."""
-process = psutil.Process(os.getpid())
-return process.memory_percent()
-
-
 def cleanup_memory(self):
     """Perform aggressive memory cleanup."""
         gc.collect()
@@ -306,7 +287,7 @@ def cleanup_memory(self):
                                                                     )
                                                                     kwargs = {"streaming": True, "split": split}
                                                                     if config: kwargs["name"] = config
-                                                                        if token: kwargs["token"] = token
+                                                                        if token: kwargs["token"]= token
 
                                                                             dataset = load_dataset(dataset_id, **kwargs)
                                                                             info.update({

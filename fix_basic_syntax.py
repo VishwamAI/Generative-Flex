@@ -18,23 +18,6 @@
     ]
     
     
-    def fix_class_definitions(content: str) -> str:
-"""Fix basic class definition syntax."""
-# Remove extra spaces in class definitions
-content = re.sub(r"class\s+(\w+)\s*:", r"class \1:", content)
-
-# Fix class inheritance
-content = re.sub(
-r"class\s+(\w+)\s*\(\s*([^)]+)\s*\)\s*:",
-lambda m: f"class {m.group(1)}({m.group(2).strip()}):",
-content)
-
-# Remove 'def class' syntax
-content = re.sub(r"def\s+class\s+(\w+)", r"class \1", content)
-
-return content
-
-
 def fix_indentation(content: str) -> str:
     """Fix basic indentation issues."""
         lines = content.split("\n")
@@ -70,23 +53,6 @@ def fix_indentation(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_function_definitions(content: str) -> str:
-    """Fix basic function definition syntax."""
-# Remove extra spaces in function definitions
-content = re.sub(r"def\s+(\w+)\s*\(", r"def \1(", content)
-
-# Fix parameter formatting
-content = re.sub(
-r"def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*:",
-lambda m: f'def {m.group(1)}({", ".join(p.strip() for p in m.group(2).split(", ") if p.strip())}):',
-content)
-
-# Remove double def
-content = re.sub(r"def\s+def\s+", r"def ", content)
-
-return content
-
-
 def fix_dataclass_syntax(content: str) -> str:
     """Fix basic dataclass syntax."""
         # Fix dataclass decorator
@@ -103,8 +69,8 @@ def fix_dataclass_syntax(content: str) -> str:
         
         if in_dataclass and ":" in line:
         # Fix field definition
-        parts = line.split(":", 1)
-        if len(parts) == 2: name = parts[0].strip()
+    parts = line.split(": ", 1)
+    if len(parts) == 2: name = parts[0].strip()
         type_hint = parts[1].strip()
         fixed_lines.append(f"    {name}: {type_hint}")
         continue
@@ -117,25 +83,6 @@ def fix_dataclass_syntax(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def process_file(file_path: str) -> Tuple[bool, str]:
-    """Process a single file applying all fixes."""
-try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
-
-        # Apply basic fixes
-        content = fix_class_definitions(content)
-        content = fix_indentation(content)
-        content = fix_function_definitions(content)
-        content = fix_dataclass_syntax(content)
-
-        # Ensure proper spacing
-        content = re.sub(r"\n{3, }", "\n\n", content)
-
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-
-            return True, f"Successfully processed {file_path}"
-            except Exception as e: returnFalse, f"Error processing {file_path}: {str(e)}"
-
-
 def main() -> None:
     """Fix basic syntax issues in core files."""
         print("Starting to process core files...")

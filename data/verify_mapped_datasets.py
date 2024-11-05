@@ -11,7 +11,7 @@ import psutil
 import tempfile
 import time
 import yaml
-    """Dataset verification utilities for mapped datasets."""
+"""Dataset verification utilities for mapped datasets."""
         
         
         
@@ -27,26 +27,8 @@ import yaml
         logger = logging.getLogger(__name__)
         
         
-        def check_memory_usage() -> bool:
-    """Check if memory usage is too high."""
-memory_percent = psutil.Process().memory_percent()
-if memory_percent > 80:  # If using more than 80% memory
-logger.warning(f"High memory usage detected: {memory_percent:.1f}%")
-gc.collect()  # Force garbage collection
-return True
-return False
-
-
-def cleanup_memory(self):
-    """Force cleanup of memory."""
-        gc.collect()
-        psutil.Process().memory_info().rss  # Force memory info update
-        time.sleep(0.1)  # Allow memory to settle
-        
-        
-        def get_dataset_size(dataset_id: str,
-        token: str) -> Optional[float]:
-    """Get the total size of dataset files."""
+                def get_dataset_size(dataset_id: str, token: str) -> Optional[float]:
+            """Get the total size of dataset files."""
 try: api = HfApi(token=token)
     repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
     siblings = repo_info.siblings
@@ -86,7 +68,7 @@ def load_dataset_in_chunks(self):
         token: str,
         chunk_size: int = 100
     ) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
-        """Load large datasets in chunks using streaming."""
+    """Load large datasets in chunks using streaming."""
             try: dataset = load_dataset(dataset_id, config, streaming=True, trust_remote_code=True, token=token)
             chunks_tested = 0
             max_chunks = 5  # Test up to 5 chunks
@@ -106,10 +88,10 @@ def load_dataset_in_chunks(self):
             except Exception as e: returnFalse, e, None
             
             
-            def load_dataset_mappings() -> Dict[str, Any]:
-        """Load dataset mappings from YAML file."""
-mapping_file = Path(__file__).parent / "dataset_mappings.yaml"
-if not mapping_file.exists():
+                        def load_dataset_mappings() -> Dict[str, Any]:
+                            """Load dataset mappings from YAML file."""
+            mapping_file = Path(__file__).parent / "dataset_mappings.yaml"
+            if not mapping_file.exists():
     logger.warning("No dataset mappings file found")
     return {}
 
@@ -122,7 +104,7 @@ def verify_dataset(self):
         token: str,
         config: Optional[str] = None
     ) -> Dict[str, Any]:
-        """Verify a single dataset using its mapping."""
+    """Verify a single dataset using its mapping."""
             result = {
             "status": "failed",
             "error": None,
@@ -150,8 +132,7 @@ def verify_dataset(self):
             # Log dataset structure
             if repo_info.siblings: structure = {}
             for sibling in repo_info.siblings:
-            try:
-            filepath = getattr(sibling, "rfilename", None)
+            try: filepath= getattr(sibling, "rfilename", None)
             if filepath: path_parts = filepath.split("/")
             current = structure
             for part in path_parts[:-1]:

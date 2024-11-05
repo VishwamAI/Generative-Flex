@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
-    """Script to fix training config formatting."""
+"""Script to fix training config formatting."""
         
         
-        def fix_training_config(self):
-    """Fix the training config file formatting."""
-with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()
-
-    # Split into sections
-    lines = content.split("\n")
-    fixed_lines = []
-    in_class = False
-    class_indent = 0
-
-    for line in lines: stripped = line.strip()
-
-        # Skip empty lines
-        if not stripped: fixed_lines.append("")
-            continue
-
-            # Handle imports
-            if stripped.startswith(("import ", "from ")):
+                def fix_training_config(self):
+                    """Fix the training config file formatting."""
+        with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()
+        
+            # Split into sections
+            lines = content.split("\n")
+            fixed_lines = []
+            in_class = False
+            class_indent = 0
+        
+            for line in lines: stripped = line.strip()
+        
+                # Skip empty lines
+                if not stripped: fixed_lines.append("")
+                    continue
+        
+                    # Handle imports
+                    if stripped.startswith(("import ", "from ")):
                 fixed_lines.append(stripped)
                 continue
 
@@ -34,7 +34,7 @@ with open("src/config/training_config.py", "r", encoding="utf-8") as f: content 
                     if in_class: ifstripped.startswith(("def ", "@", "class ")):
                             # Method or decorator
                             fixed_lines.append("    " + stripped)
-                            elif stripped.startswith('"""'):
+elif stripped.startswith('"""'):
                                 # Docstring
                                 fixed_lines.append("    " + stripped)
                                 else:

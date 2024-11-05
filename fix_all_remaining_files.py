@@ -5,17 +5,6 @@
     from pathlib import Path
     
     
-    def run_black(self, file_path):
-"""Run black formatter on a file."""
-try: subprocess.run(
-    ["black", "--target-version", "py312", str(file_path)], check=True
-    )
-    print(f"Successfully formatted {file_path}")
-    except subprocess.CalledProcessError as e: print(f"Error formatting {file_path}: {e}")
-        return False
-        return True
-
-
 def fix_syntax_issues(self):
     """Fix common syntax issues in Python files."""
         files_to_fix = [
@@ -58,7 +47,7 @@ def fix_syntax_issues(self):
         # Fix class inheritance
         (r"class\s+(\w+)\s*\(\s*\):", r"class \1:"),
         # Fix docstrings
-        (r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
+(r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
         ]
         
         # Apply all fixes

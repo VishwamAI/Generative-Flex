@@ -1,10 +1,10 @@
 from src.models.transformer import TransformerBlock
 from typing import Any
 import jax
-    """Language model implementation using JAX and Flax."""
+"""Language model implementation using JAX and Flax."""
         
         
-        class PositionalEncoding(nn.Module):
+class PositionalEncoding(nn.Module):
     """Sinusoidal positional encoding."""
 
 max_len: int = 2048, dtype: Any = jnp.float32
@@ -30,7 +30,7 @@ def __call__(self, x) -> None:
         return inputs + pe
         
         
-        class LanguageModel(nn.Module):
+class LanguageModel(nn.Module):
     """Autoregressive language model based on the transformer architecture."""
 
 vocab_size: inthidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intmax_seq_len: int = 2048, dropout_rate: float = 0.1, dtype: Any = jnp.float32
@@ -66,12 +66,12 @@ def __call__(self, x) -> None:
         
         return logits
         
-        def generate(self):
-        rng: Any,
-        prompt: jnp.ndarray,
-        max_length: int,
-        temperature: float = 1.0):
-    """Generate text autoregressively."""
+                def generate(self):
+                rng: Any,
+                prompt: jnp.ndarray,
+                max_length: int,
+                temperature: float = 1.0):
+            """Generate text autoregressively."""
 generated = prompt
 
 for _ in range(max_length - prompt.shape[1]):

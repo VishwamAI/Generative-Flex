@@ -19,21 +19,21 @@
     ]
     
     
-    def fix_dataclass_syntax(content: str) -> str:
-"""Fix dataclass syntax issues."""
-# Fix dataclass field definitions
-lines = content.split("\n")
-fixed_lines = []
-in_dataclass = False
-
-for line in lines: if"@dataclass" in line: in_dataclass = True
-        fixed_lines.append(line)
-        continue
-
-        if in_dataclass and ":" in line and "=" in line and "field(" in line:
+        def fix_dataclass_syntax(content: str) -> str:
+            """Fix dataclass syntax issues."""
+    # Fix dataclass field definitions
+    lines = content.split("\n")
+    fixed_lines = []
+    in_dataclass = False
+    
+    for line in lines: if"@dataclass" in line: in_dataclass = True
+            fixed_lines.append(line)
+            continue
+    
+        if in_dataclass and ": " in line and " = " in line and "field(" in line:
             # Fix field definition
-            parts = line.split(":", 1)
-            if len(parts) == 2: name = parts[0].strip()
+    parts = line.split(": ", 1)
+    if len(parts) == 2: name = parts[0].strip()
                 type_and_default = parts[1].strip()
 
                 # Clean up type hint and default value
@@ -41,7 +41,7 @@ for line in lines: if"@dataclass" in line: in_dataclass = True
                 default_value = type_and_default.split("=")[1].strip()
 
                 # Format properly
-                fixed_lines.append(f"    {name}: {type_hint} = {default_value}")
+    fixed_lines.append(f"    {name}: {type_hint} = {default_value}")
                 continue
 
                 if line.strip() and not line.strip().startswith(("class", "def")):
@@ -80,9 +80,9 @@ def fix_function_syntax(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def format_file(file_path: str) -> Tuple[bool, str]:
-    """Format a single file with black and fix any issues."""
-try:
+                def format_file(file_path: str) -> Tuple[bool, str]:
+                    """Format a single file with black and fix any issues."""
+        try:
     # First try to format with black
     result = subprocess.run(
     ["python3", "-m", "black", "--target-version", "py312", file_path],

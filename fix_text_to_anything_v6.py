@@ -47,9 +47,7 @@ def fix_text_to_anything(self):
                                 in_method = True
                                 # Special handling for TextTokenizer methods
                                 if current_class == "TextTokenizer":
-                                    if "def __init__" in line: fixed_content.append(f"{class_indent}def __init__(self,
-        max_length: int,
-        vocab_size: int):\n"
+                                    if "def __init__" in line: fixed_content.append(f"{class_indent}def __init__(self, max_length: int, vocab_size: int):\n"
                                         )
                                         )
                                         fixed_content.append(f"{method_indent}self.max_length = max_length\n")
@@ -60,9 +58,7 @@ def fix_text_to_anything(self):
                                         i
                                         ].strip().startswith("def"):
                                             i += 1
-                                            continue                 elif "def encode" in line: fixed_content.append(f"{class_indent}def encode(
-                                                self,
-        text: str) -> jnp.ndarray:\n"
+                                            continue                 elif "def encode" in line: fixed_content.append(f"{class_indent}def encode(self, text: str) -> jnp.ndarray:\n"
                                                 )
                                                 )
                                                 fixed_content.append(f"{method_indent}# Convert text to token IDs\n")
@@ -83,9 +79,7 @@ def fix_text_to_anything(self):
                                                 i
                                                 ].strip().startswith("def"):
                                                     i += 1
-                                                    continue                 elif "def decode" in line: fixed_content.append(f"{class_indent}def decode(
-                                                        self,
-        tokens: jnp.ndarray) -> str:\n"
+                                                    continue                 elif "def decode" in line: fixed_content.append(f"{class_indent}def decode(self, tokens: jnp.ndarray) -> str:\n"
                                                         )
                                                         )
                                                         fixed_content.append(f"{method_indent}# Convert token IDs back to text\n")

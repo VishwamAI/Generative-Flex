@@ -1,48 +1,38 @@
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
-from torch.utils.data import DataLoader
 from torchvision import transforms
-from typing import Dict, Optional
 from typing import Dict, Optional
 from typing import Optional, Dict, Any
 from typing import Optional, Tuple
-from typing import Optional, Tuple
-import logging
 import logging
 import os
 import torch
-import torch
-import torch
-import torch
-import torch
 import torch.nn as nn
-import torch.nn as nn
-import torch.nn as nn
-    """Script to fix remaining black formatting issues."""
+"""Script to fix remaining black formatting issues."""
         
         
         
-        def fix_file(file_path, content) -> None:
-    """Write fixed content to file."""
-os.makedirs(os.path.dirname(file_path), exist_ok=True)
-with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-    print(f"Fixed {file_path}")
-
-
-    fixes = {
-    "src/models/layers/flash_moe.py": """"""Flash Mixture of Experts implementation."""
-
-
-
-class FlashMoELayer(nn.Module):
+                def fix_file(file_path, content) -> None:
+                    """Write fixed content to file."""
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
+            print(f"Fixed {file_path}")
+        
+        
+            fixes = {
+        "src/models/layers/flash_moe.py": """"""Flash Mixture of Experts implementation."""
+        
+        
+        
+        class FlashMoELayer(nn.Module):
     """Flash Mixture of Experts layer implementation."""
         
-        def __init__(self):
-        hidden_size: int,
-        intermediate_size: int,
-        num_experts: int = 8,
-        dropout_rate: float = 0.1):
-    """Initialize the FlashMoE layer."""
+                def __init__(self):
+                hidden_size: int,
+                intermediate_size: int,
+                num_experts: int = 8,
+                dropout_rate: float = 0.1):
+            """Initialize the FlashMoE layer."""
     super().__init__()
     self.hidden_size = hidden_size
     self.intermediate_size = intermediate_size
@@ -65,7 +55,7 @@ class FlashMoELayer(nn.Module):
 def forward(self):
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
-            """Forward pass through the FlashMoE layer."""
+    """Forward pass through the FlashMoE layer."""
                 batch_size, seq_length, hidden_size = hidden_states.shape
                 
                 # Get routing weights
@@ -81,17 +71,16 @@ def forward(self):
                 i: i+1] * expert_output
                 
                 return combined_output, routing_weights
-            """,
-    "src/models/multimodal/base_transformer.py": """"""Base transformer implementation for multimodal processing."""
+""",
+"src/models/multimodal/base_transformer.py": """"""Base transformer implementation for multimodal processing."""
 
 
 
 class BaseTransformer(nn.Module):
     """Base transformer model for multimodal processing."""
         
-        def __init__(self,
-        config: Dict[str, Any]) -> None:
-    """Initialize the base transformer."""
+                def __init__(self, config: Dict[str, Any]) -> None:
+            """Initialize the base transformer."""
     super().__init__()
     self.config = config
     self.hidden_size = config.get("hidden_size", 768)
@@ -109,7 +98,7 @@ class BaseTransformer(nn.Module):
 def forward(self):
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-            """Forward pass through the base transformer."""
+    """Forward pass through the base transformer."""
                 # Apply embeddings and dropout
                 hidden_states = self.embeddings(hidden_states)
                 hidden_states = self.dropout(hidden_states)
@@ -120,12 +109,11 @@ def forward(self):
                 return hidden_states
                 
                 
-                class TransformerLayer(nn.Module):
-            """Single transformer layer implementation."""
+class TransformerLayer(nn.Module):
+    """Single transformer layer implementation."""
 
-    def __init__(self,
-        config: Dict[str, Any]) -> None:
-            """Initialize the transformer layer."""
+        def __init__(self, config: Dict[str, Any]) -> None:
+        """Initialize the transformer layer."""
                 super().__init__()
                 self.attention = MultiHeadAttention(config)
                 self.intermediate = nn.Linear(config["hidden_size"], config["intermediate_size"])
@@ -134,10 +122,10 @@ def forward(self):
                 self.norm1 = nn.LayerNorm(config["hidden_size"])
                 self.norm2 = nn.LayerNorm(config["hidden_size"])
                 
-                def forward(self):
-                hidden_states: torch.Tensor,
-                attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-            """Forward pass through the transformer layer."""
+                                def forward(self):
+                                hidden_states: torch.Tensor,
+                                attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
+                    """Forward pass through the transformer layer."""
 attention_output = self.attention(hidden_states, attention_mask)
 hidden_states = self.norm1(hidden_states + attention_output)
 
@@ -151,9 +139,8 @@ return self.norm2(hidden_states + layer_output)
 class MultiHeadAttention(nn.Module):
     """Multi-head attention implementation."""
         
-        def __init__(self,
-        config: Dict[str, Any]) -> None:
-    """Initialize multi-head attention."""
+                def __init__(self, config: Dict[str, Any]) -> None:
+            """Initialize multi-head attention."""
     super().__init__()
     self.num_attention_heads = config["num_attention_heads"]
     self.hidden_size = config["hidden_size"]
@@ -167,7 +154,7 @@ class MultiHeadAttention(nn.Module):
 def forward(self):
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-            """Forward pass through multi-head attention."""
+    """Forward pass through multi-head attention."""
                 batch_size = hidden_states.size(0)
                 
                 # Linear projections
@@ -195,19 +182,19 @@ def forward(self):
                 context_layer = context_layer.view(batch_size, -1, self.hidden_size)
                 
                 return context_layer
-            """,
-    "src/models/multimodal/image_processor.py": """"""Image processor for multimodal inputs."""
+""",
+"src/models/multimodal/image_processor.py": """"""Image processor for multimodal inputs."""
 
 
 
 class ImageProcessor(nn.Module):
     """Image processor for handling multimodal inputs in the MMMU model."""
         
-        def __init__(self):
-        image_size: int = 224,
-        hidden_size: int = 768,
-        dropout_rate: float = 0.1):
-    """Initialize the image processor."""
+                def __init__(self):
+                image_size: int = 224,
+                hidden_size: int = 768,
+                dropout_rate: float = 0.1):
+            """Initialize the image processor."""
     super().__init__()
     self.image_size = image_size
     self.hidden_size = hidden_size
@@ -235,7 +222,7 @@ class ImageProcessor(nn.Module):
 def forward(self):
         images: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-            """Process images for multimodal input."""
+    """Process images for multimodal input."""
                 # Apply preprocessing
                 if images.dim() == 3: images = images.unsqueeze(0)
                 
@@ -254,8 +241,8 @@ def forward(self):
                 features = self.dropout(features)
                 
                 return features, attention_mask
-            """,
-        "src/training/accelerated_trainer.py": """"""Accelerated trainer implementation."""
+""",
+"src/training/accelerated_trainer.py": """"""Accelerated trainer implementation."""
 
 
     logger = logging.getLogger(__name__)
@@ -265,20 +252,20 @@ class AcceleratedTrainer:
     """Trainer class with accelerate support."""
         
         
-        def __init__(self):
-        model,
-        train_dataloader: DataLoader,
-        eval_dataloader: Optional[DataLoader] = None,
-        optimizer: Optional[torch.optim.Optimizer] = None,
-        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
-        num_epochs: int = 10,
-        gradient_accumulation_steps: int = 1,
-        max_grad_norm: float = 1.0,
-        logging_steps: int = 100,
-        evaluation_steps: int = 500,
-        save_steps: int = 1000,
-        output_dir: str = "outputs"):
-    """Initialize the accelerated trainer."""
+                def __init__(self):
+                model,
+                train_dataloader: DataLoader,
+                eval_dataloader: Optional[DataLoader] = None,
+                optimizer: Optional[torch.optim.Optimizer] = None,
+                lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
+                num_epochs: int = 10,
+                gradient_accumulation_steps: int = 1,
+                max_grad_norm: float = 1.0,
+                logging_steps: int = 100,
+                evaluation_steps: int = 500,
+                save_steps: int = 1000,
+                output_dir: str = "outputs"):
+            """Initialize the accelerated trainer."""
     self.accelerator = Accelerator()
     self.model = model
     self.train_dataloader = train_dataloader
@@ -325,14 +312,6 @@ def train(self) -> None:
         
         if self._step % self.save_steps == 0: self.save_checkpoint()
         
-        def training_step(self, batch) -> torch.Tensor:
-    """Perform a single training step."""
-outputs = self.model(**batch)
-loss = outputs.loss
-self.accelerator.backward(loss)
-if self.max_grad_norm > 0: self.accelerator.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
-    return loss
-
 def evaluate(self) -> Dict[str, float]:
     """Evaluate the model."""
         if self.eval_dataloader is None: return{}
@@ -356,22 +335,20 @@ def evaluate(self) -> Dict[str, float]:
         
         return metrics
         
-        def save_checkpoint(self,
-        is_best: bool = False) ->, None:
-    """Save a model checkpoint."""
+                def save_checkpoint(self, is_best: bool = False) -> , None:
+            """Save a model checkpoint."""
 checkpoint_name = f"checkpoint-{self._step}"
 if is_best: checkpoint_name = "best_model"
 
     self.accelerator.save_state(f"{self.output_dir}/{checkpoint_name}")
     logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-def log_metrics(self,
-        metrics: Dict[str, float]) -> None:
-            """Log training metrics."""
+def log_metrics(self, metrics: Dict[str, float]) -> None:
+    """Log training metrics."""
                 metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
                 logger.info(f"Step {self._step}: {metric_str}")
-            """,
-    "src/training/trainer.py": """"""Base trainer implementation."""
+""",
+"src/training/trainer.py": """"""Base trainer implementation."""
 
 
 logger = logging.getLogger(__name__)
@@ -380,20 +357,20 @@ logger = logging.getLogger(__name__)
 class Trainer:
     """Base trainer class."""
         
-        def __init__(self):
-        model,
-        train_dataloader: DataLoader,
-        eval_dataloader: Optional[DataLoader] = None,
-        optimizer: Optional[torch.optim.Optimizer] = None,
-        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
-        num_epochs: int = 10,
-        gradient_accumulation_steps: int = 1,
-        max_grad_norm: float = 1.0,
-        logging_steps: int = 100,
-        evaluation_steps: int = 500,
-        save_steps: int = 1000,
-        output_dir: str = "outputs"):
-    """Initialize the trainer."""
+                def __init__(self):
+                model,
+                train_dataloader: DataLoader,
+                eval_dataloader: Optional[DataLoader] = None,
+                optimizer: Optional[torch.optim.Optimizer] = None,
+                lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
+                num_epochs: int = 10,
+                gradient_accumulation_steps: int = 1,
+                max_grad_norm: float = 1.0,
+                logging_steps: int = 100,
+                evaluation_steps: int = 500,
+                save_steps: int = 1000,
+                output_dir: str = "outputs"):
+            """Initialize the trainer."""
     self.model = model
     self.train_dataloader = train_dataloader
     self.eval_dataloader = eval_dataloader
@@ -436,14 +413,6 @@ def train(self) -> None:
         
         if self._step % self.save_steps == 0: self.save_checkpoint()
         
-        def training_step(self, batch) -> torch.Tensor:
-    """Perform a single training step."""
-outputs = self.model(**batch)
-loss = outputs.loss
-loss.backward()
-if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
-    return loss
-
 def evaluate(self) -> Dict[str, float]:
     """Evaluate the model."""
         if self.eval_dataloader is None: return{}
@@ -467,9 +436,8 @@ def evaluate(self) -> Dict[str, float]:
         
         return metrics
         
-        def save_checkpoint(self,
-        is_best: bool = False) ->, None:
-    """Save a model checkpoint."""
+                def save_checkpoint(self, is_best: bool = False) -> , None:
+            """Save a model checkpoint."""
 checkpoint_name = f"checkpoint-{self._step}"
 if is_best: checkpoint_name = "best_model"
 
@@ -482,12 +450,11 @@ if is_best: checkpoint_name = "best_model"
     f"{self.output_dir}/{checkpoint_name}.pt")
     logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-def log_metrics(self,
-        metrics: Dict[str, float]) -> None:
-            """Log training metrics."""
+def log_metrics(self, metrics: Dict[str, float]) -> None:
+    """Log training metrics."""
                 metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
                 logger.info(f"Step {self._step}: {metric_str}")
-            """,
+""",
     }
 
 

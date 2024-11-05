@@ -41,16 +41,6 @@ def remove_unused_imports(file_path) -> None:
         with open(file_path, "w") as f: f.write(content)
         
         
-        def fix_whitespace_issues(file_path) -> None:
-    """Fix whitespace before colons."""
-with open(file_path, "r") as f: content = f.read()
-
-    # Fix whitespace before colons
-    content = re.sub(r"\s+:", ":", content)
-
-    with open(file_path, "w") as f: f.write(content)
-
-
 def fix_line_length_manually(file_path) -> None:
     """Fix remaining line length issues manually."""
         with open(file_path, "r") as f: lines = f.readlines()
@@ -81,16 +71,6 @@ def fix_line_length_manually(file_path) -> None:
         with open(file_path, "w") as f: f.writelines(fixed_lines)
         
         
-        def fix_batch_size_issue(file_path) -> None:
-    """Fix unused batch_size variable."""
-if "symbolic_math.py" in file_path: withopen(file_path, "r") as f: content = f.read()
-
-        # Remove the unused batch_size assignment
-        content = re.sub(r"batch_size = .*\n", "", content)
-
-        with open(file_path, "w") as f: f.write(content)
-
-
 def main(self):
     files_to_process = [
     "src/models/reasoning/symbolic_math.py",

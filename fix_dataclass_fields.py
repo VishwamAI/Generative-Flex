@@ -21,7 +21,7 @@ def fix_dataclass_fields(content) -> None:
         fixed_lines.append(line)
         continue
         
-        if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
+if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
         # Skip empty lines and comments in config
         if ":" in line:
         # Extract field definition parts
@@ -56,19 +56,19 @@ def fix_dataclass_fields(content) -> None:
         return "\n".join(fixed_lines)
         
         
-        def main(self):
-        # Read the original file
-        with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-        
-        # Fix the dataclass fields
-        fixed_content = fix_dataclass_fields(content)
-        
-        # Write the fixed content back
-        with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
-        
-        print("Dataclass fields fixed in text_to_anything.py")
-        
-        
-        if __name__ == "__main__":
+                def main(self):
+                # Read the original file
+                with open("src/models/text_to_anything.py", "r") as f: content = f.read()
+                
+                # Fix the dataclass fields
+                fixed_content = fix_dataclass_fields(content)
+                
+                # Write the fixed content back
+                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+                
+                print("Dataclass fields fixed in text_to_anything.py")
+                
+                
+                if __name__ == "__main__":
         main()
         

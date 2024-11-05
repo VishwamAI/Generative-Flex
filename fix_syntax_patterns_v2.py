@@ -18,17 +18,6 @@
     ]
     
     
-    def fix_class_definitions(content: str) -> str:
-"""Fix class definitions with double parentheses."""
-# Fix class definitions with 'def class' pattern
-content = re.sub(r"def class (\w+)\(\(([^)]+)\)\):", r"class \1(\2):", content)
-
-# Fix class definitions with double parentheses
-content = re.sub(r"class (\w+)\(\(([^)]+)\)\):", r"class \1(\2):", content)
-
-return content
-
-
 def fix_dataclass_fields(content: str) -> str:
     """Fix dataclass field definitions."""
         lines = content.split("\n")
@@ -41,20 +30,20 @@ def fix_dataclass_fields(content: str) -> str:
         
         if in_dataclass and ":" in line:
         # Extract field name and type
-        parts = line.split(":", 1)
-        if len(parts) == 2: name = parts[0].strip()
+    parts = line.split(": ", 1)
+    if len(parts) == 2: name = parts[0].strip()
         type_and_default = parts[1].strip()
         
         # Handle field with default value
-        if "=" in type_and_default: type_hint, default = type_and_default.split("=", 1)
+    if "=" in type_and_default: type_hint, default = type_and_default.split("=", 1)
         if "field(" in default:
         # Clean up field definition
         default = default.strip()
         fixed_lines.append(
-        f"    {name}: {type_hint.strip()} = {default}"
+    f"    {name}: {type_hint.strip()} = {default}"
         )
         else: fixed_lines.append(
-        f"    {name}: {type_hint.strip()} = field(default={default.strip()})"
+    f"    {name}: {type_hint.strip()} = field(default={default.strip()})"
         )
         else: fixed_lines.append(f"    {name}: {type_and_default}")
         continue
@@ -67,12 +56,6 @@ def fix_dataclass_fields(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_function_definitions(content: str) -> str:
-    """Fix function definitions with malformed def statements."""
-# Fix double def statements
-content = re.sub(r"def def (\w+)", r"def \1", content)
-
-# Fix function parameters
 def fix_params(match: re.Match) -> str: indent = match.group(1)
     func_name = match.group(2)
     params = match.group(3)
@@ -95,14 +78,10 @@ def fix_params(match: re.Match) -> str: indent = match.group(1)
                     return content
 
 
-def fix_type_hints(content: str) -> str:
-    """Fix type hint formatting."""
-        
-        # Fix Union type hints
-        def fix_union(match: re.Match) -> str: types = match.group(1)
-        if ", " in types and not (
-        "List[" in types or "Dict[" in types or "Tuple[" in types
-        ):
+                def fix_union(match: re.Match) -> str: types = match.group(1)
+                if ", " in types and not (
+                "List[" in types or "Dict[" in types or "Tuple[" in types
+                ):
         type_list = [t.strip() for t in types.split(", ")]
         return f"Union[{', '.join(type_list)}]"
         return types
@@ -115,23 +94,6 @@ def fix_type_hints(content: str) -> str:
         return content
         
         
-        def process_file(file_path: str) -> Tuple[bool, str]:
-    """Process a single file applying all fixes."""
-try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
-
-        # Apply fixes
-        content = fix_class_definitions(content)
-        content = fix_dataclass_fields(content)
-        content = fix_function_definitions(content)
-        content = fix_type_hints(content)
-
-        # Write fixed content
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-
-            return True, f"Successfully processed {file_path}"
-            except Exception as e: returnFalse, f"Error processing {file_path}: {str(e)}"
-
-
 def main() -> None:
     """Fix specific syntax patterns in core files."""
         print("Starting to process core files...")

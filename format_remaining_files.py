@@ -1,20 +1,10 @@
 import os
 import subprocess
 import sys
-    """Script to format remaining files according to CI settings."""
+"""Script to format remaining files according to CI settings."""
         
         
         
-        def run_black_on_file(file_path) -> None:
-    """Run black formatter on a single file."""
-try: subprocess.run([
-    "black", "--target-version", "py312", "--line-length", "88", "--skip-string-normalization", file_path, ], check=True)
-    print(f"Successfully formatted {file_path}")
-    except subprocess.CalledProcessError as e: print(f"Error formatting {file_path}: {e}")
-        return False
-        return True
-
-
 def main(self):
     """Main function to format files."""
         files_to_format = [

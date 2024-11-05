@@ -15,21 +15,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def load_mmmu_dataset(self):
-    """Load the MMMU validation dataset"""
-        try: dataset = MMUDataset("Math", "validation")
-        logger.info(f"Successfully loaded MMMU validation dataset with {len(dataset)} examples"
-        )
-        return dataset
-        except Exception as e: logger.error(f"Error loading dataset: {str(e)}")
-        return None
+                def analyze_problem_categories(dataset) -> None:
+                    """Analyze and categorize problems in the dataset"""
+        categories = defaultdict(list)
         
-        
-        def analyze_problem_categories(dataset) -> None:
-    """Analyze and categorize problems in the dataset"""
-categories = defaultdict(list)
-
-try: foridxin range(len(dataset)):
+        try: foridxin range(len(dataset)):
         sample = dataset[idx]
         if isinstance(sample, dict):
             # Extract problem category/type
@@ -56,51 +46,24 @@ try: foridxin range(len(dataset)):
                                         return None
 
 
-def load_validation_results(self):
-    """Load validation results from the most recent training log"""
-        log_dir = Path("logs")
-        training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
+                def generate_performance_report(categories, results) -> None:
+                    """Generate a comprehensive performance report"""
+        if not results or not categories: logger.error("Missing results or categories data")
+            return
         
-        if not training_logs: logger.error("No training logs found")
-        return None
+            report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
+            report.append("=" * 50 + "\n")
         
-        latest_log = training_logs[-1]
-        logger.info(f"Analyzing log file: {latest_log}")
+            # Overall Performance
+            if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
+                if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
         
-        results = {
-        "overall_accuracy": None,
-        "best_validation_loss": None,
-        "category_performance": defaultdict(list),
-        }
+                    # Category Distribution
+                    report.append("\nProblem Category Distribution:")
+                    report.append("-" * 30)
+                    total_problems = sum(len(probs) for probs in categories.values())
         
-        try: withopen(latest_log, "r") as f: forlinein, f: if"Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())
-        results["overall_accuracy"] = accuracy
-        
-        except ValueError: continueelif"Best validation loss:" in line: try: loss = float(line.split(":")[-1].strip())
-        results["best_validation_loss"] = loss
-        except ValueError: continuereturnresults
-        except Exception as e: logger.error(f"Error loading validation results: {str(e)}")
-        return None
-        
-        
-        def generate_performance_report(categories, results) -> None:
-    """Generate a comprehensive performance report"""
-if not results or not categories: logger.error("Missing results or categories data")
-    return
-
-    report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
-    report.append("=" * 50 + "\n")
-
-    # Overall Performance
-    if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
-
-            # Category Distribution
-            report.append("\nProblem Category Distribution:")
-            report.append("-" * 30)
-            total_problems = sum(len(probs) for probs in categories.values())
-
-            for category, problems in sorted(categories.items()):
+                    for category, problems in sorted(categories.items()):
                 count = len(problems)
                 percentage = count / total_problems * 100
                 report.append(f"\n{category}:")

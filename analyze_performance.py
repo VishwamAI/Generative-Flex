@@ -12,33 +12,13 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def load_validation_results(self):
-    """Load validation results from the latest training log"""
-        log_dir = Path("logs")
-        training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
+                def analyze_performance(self):
+                    """Analyze model performance by problem category"""
+        try: results = load_validation_results()
         
-        if not training_logs: raiseFileNotFoundError("No training logs found")
-        
-        latest_log = training_logs[-1]
-        logger.info(f"Analyzing log file: {latest_log}")
-        
-        results = defaultdict(list)
-        current_category = None
-        
-        with open(latest_log) as f: forlinein, f: if"Processing problem category:" in line: current_category = line.split(":")[-1].strip()
-        elif "Batch accuracy:" in line and current_category: acc = float(line.split(":")[-1].strip())
-        results[current_category].append(acc)
-        
-        return results
-        
-        
-        def analyze_performance(self):
-    """Analyze model performance by problem category"""
-try: results = load_validation_results()
-
-    # Calculate statistics per category
-    stats = {}
-    for category, accuracies in results.items():
+            # Calculate statistics per category
+            stats = {}
+            for category, accuracies in results.items():
         stats[category] = {
         "mean_accuracy": (
         sum(accuracies) / len(accuracies) if accuracies else 0

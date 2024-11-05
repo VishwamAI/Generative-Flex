@@ -3,33 +3,13 @@
     import re
     
     
-    def fix_class_definitions(content: str) -> str:
-"""Fix class definitions with double parentheses."""
-# Fix patterns like 'class Name((Parent):'
-content = re.sub(r"class\s+(\w+)\(\((\w+(?:\.\w+)*)\):", r"class \1(\2):", content)
-return content
-
-
-def fix_function_definitions(content: str) -> str:
-    """Fix malformed function definitions."""
-        # Fix patterns like 'def config)None(self, config)None:'
-        content = re.sub(
-        r"def\s+(\w+)\)None\((.*?)\)None:", r"def \1(\2) -> None:", content
-        )
-        # Fix patterns like 'def self)None(self)None:'
-        content = re.sub(
-        r"def\s+self\)None\(self\)None:", r"def __init__(self) -> None:", content
-        )
-        return content
+                def fix_imports(content: str) -> str:
+                    """Fix and deduplicate imports."""
+        # Remove duplicate imports
+        seen_imports = set()
+        fixed_lines = []
         
-        
-        def fix_imports(content: str) -> str:
-    """Fix and deduplicate imports."""
-# Remove duplicate imports
-seen_imports = set()
-fixed_lines = []
-
-for line in content.split("\n"):
+        for line in content.split("\n"):
     if line.strip().startswith(("import ", "from ")):
         if line.strip() not in seen_imports: seen_imports.add(line.strip())
             fixed_lines.append(line)
@@ -70,11 +50,11 @@ def fix_indentation(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def main(self):
-    """Fix syntax issues in math_reasoning.py."""
-file_path = "src/models/reasoning/math_reasoning.py"
-
-try:
+                def main(self):
+                    """Fix syntax issues in math_reasoning.py."""
+        file_path = "src/models/reasoning/math_reasoning.py"
+        
+        try:
     # Read the file
     with open(file_path, "r", encoding="utf-8") as f: content = f.read()
 

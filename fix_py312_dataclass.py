@@ -18,10 +18,6 @@
     ]
     
     
-    def fix_dataclass_fields(content: str) -> str:
-"""Fix dataclass field definitions for Python 3.12 compatibility."""
-
-# Fix field definitions with default values
 def fix_field_def(match: re.Match) -> str: var_name = match.group(1)
     type_hint = match.group(2)
     field_args = match.group(3)
@@ -49,24 +45,21 @@ def fix_field_def(match: re.Match) -> str: var_name = match.group(1)
             return content
 
 
-def fix_function_definitions(content: str) -> str:
-    """Fix function definitions for Python 3.12 compatibility."""
-        
-        def fix_func_def(match: re.Match) -> str: indent = match.group(1)
-        def_line = match.group(2)
-        body = match.group(3)
-        
-        # Clean up function definition
-        def_parts = def_line.split("(", 1)
-        if len(def_parts) == 2: func_name, params = def_parts
-        params = params.rstrip("):")
-        
-        # Clean parameters
-        param_list = []
-        current_param = []
-        paren_level = 0
-        
-        for char in params: ifchar = = "(":
+                def fix_func_def(match: re.Match) -> str: indent = match.group(1)
+                def_line = match.group(2)
+                body = match.group(3)
+                
+                # Clean up function definition
+                def_parts = def_line.split("(", 1)
+                if len(def_parts) == 2: func_name, params = def_parts
+                params = params.rstrip("):")
+                
+                # Clean parameters
+                param_list = []
+                current_param = []
+                paren_level = 0
+                
+                for char in params: ifchar = = "(":
         paren_level += 1
         elif char == ")":
         paren_level -= 1
@@ -91,9 +84,6 @@ def fix_function_definitions(content: str) -> str:
         return re.sub(pattern, fix_func_def, content, flags=re.MULTILINE)
         
         
-        def fix_class_methods(content: str) -> str:
-    """Fix class method definitions for Python 3.12 compatibility."""
-
 def fix_method(match: re.Match) -> str: indent = match.group(1)
     decorator = match.group(2) or ""
     method_def = match.group(3)
@@ -119,33 +109,13 @@ def fix_method(match: re.Match) -> str: indent = match.group(1)
                     return re.sub(pattern, fix_method, content, flags=re.MULTILINE)
 
 
-def process_file(file_path: str) -> Tuple[bool, str]:
-    """Process a single file applying all fixes."""
-        try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
+                def main() -> None:
+                    """Fix Python 3.12 dataclass and function definition issues in core files."""
+        print("Starting to process core files...")
+        successful = 0
+        failed = 0
         
-        # Apply fixes
-        content = fix_dataclass_fields(content)
-        content = fix_function_definitions(content)
-        content = fix_class_methods(content)
-        
-        # Ensure proper newlines between class/function definitions
-        content = re.sub(r"\n{3, }", "\n\n", content)
-        content = re.sub(r"(class.*?:)\n(?!\n)", r"\1\n\n", content)
-        content = re.sub(r"(@.*?\n)?(\s*def.*?:)\n(?!\n)", r"\1\2\n\n", content)
-        
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-        
-        return True, f"Successfully processed {file_path}"
-        except Exception as e: returnFalse, f"Error processing {file_path}: {str(e)}"
-        
-        
-        def main() -> None:
-    """Fix Python 3.12 dataclass and function definition issues in core files."""
-print("Starting to process core files...")
-successful = 0
-failed = 0
-
-for file_path in CORE_FILES: ifPath(file_path).exists():
+        for file_path in CORE_FILES: ifPath(file_path).exists():
         print(f"\nProcessing {file_path}")
         success, message = process_file(file_path)
         print(message)

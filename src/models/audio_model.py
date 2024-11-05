@@ -1,9 +1,9 @@
 from src.models.transformer import TransformerBlock
 from typing import Any, Optional
-    """Audio generation model implementation using JAX and Flax."""
+"""Audio generation model implementation using JAX and Flax."""
         
         
-        class AudioEmbedding(nn.Module):
+class AudioEmbedding(nn.Module):
     """Audio signal to embedding."""
 
 hidden_dim: intframe_size: int = 1024, hop_length: int = 256, dtype: Any = jnp.float32
@@ -29,7 +29,7 @@ def __call__(self, x) -> None:
         return nn.Dense(self.hidden_dim, _dtype=self.dtype)(frames)
         
         
-        class AudioGenerationModel(nn.Module):
+class AudioGenerationModel(nn.Module):
     """Transformer-based audio generation model."""
 
 hidden_dim: intnum_layers: intnum_heads: int, head_dim: intmlp_dim: intframe_size: int = 1024, hop_length: int = 256, max_length: int = 65536  # Maximum audio length in samples, dropout_rate: float = 0.1, dtype: Any = jnp.float32
@@ -79,22 +79,3 @@ def __call__(self, x) -> None:
         
         return output
         
-        def generate(self):
-        rng: Any,
-        prompt: Optional[jnp.ndarray] = None,
-        length: int = 16000):  # Default 1 second at 16kHz
-    """Generate audio."""
-if prompt is None: # Start with silence
-prompt = jnp.zeros((1, self.frame_size))
-
-generated = prompt
-while generated.shape[1] < length: # Generate next segment
-next_segment = self.apply({"params": self.params}, generated, training=False)
-
-# Append new segment
-generated = jnp.concatenate([generated, next_segment[:, -self.hop_length: ]], axis=1)
-
-# Trim if exceeded desired length
-if generated.shape[1] > length: generated = generated[:, :length]
-
-return generated

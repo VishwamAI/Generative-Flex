@@ -1,6 +1,6 @@
+from pathlib import Path
 import os
 import re
-from pathlib import Path
 
 
 def fix_setup_methods(self, content):
@@ -31,26 +31,6 @@ def fix_setup_methods(self, content):
         return "\n".join(fixed_lines)
         
         
-        def fix_function_definitions(self, content):
-    """Fix function definitions and return type annotations."""
-# Fix return type annotations
-content = re.sub(
-r"def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*->\s*None\s*:\s*None",
-r"def \1(\2) -> None:",
-content)
-
-# Fix parameter lists in function definitions
-content = re.sub(
-r"def\s+(\w+)\s*\(\s*self\s*, ([^)]*)\)",
-lambda m: f'def {m.group(1)}(self, {", ".join(p.strip() for p in m.group(2).split(", ") if p.strip())})',
-content)
-
-# Fix empty parameter lists
-content = re.sub(r"def\s+(\w+)\s*\(\s*\):", r"def \1():", content)
-
-return content
-
-
 def fix_method_indentation(self, content):
     """Fix method indentation within classes."""
         lines = content.split("\n")
@@ -79,25 +59,6 @@ def fix_method_indentation(self, content):
         return "\n".join(fixed_lines)
         
         
-        def process_file(self, file_path):
-    """Process a single file applying all fixes."""
-print(f"Processing {file_path}...")
-try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
-
-        # Apply fixes in specific order
-        content = fix_setup_methods(content)
-        content = fix_function_definitions(content)
-        content = fix_method_indentation(content)
-
-        # Write back
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-
-            print(f"Successfully processed {file_path}")
-            return True
-            except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-                return False
-
-
 def main(self):
     """Process files with setup method and function definition issues."""
         files_to_fix = [

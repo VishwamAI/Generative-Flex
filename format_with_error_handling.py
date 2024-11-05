@@ -2,14 +2,14 @@ from pathlib import Path
 import os
 import subprocess
 import sys
-    """Script to format Python files with black, handling errors gracefully."""
+"""Script to format Python files with black, handling errors gracefully."""
         
         
         
-        def format_file(file_path) -> None:
-    """Format a single file with black, handling errors."""
-print(f"Formatting {file_path}...")
-try:
+                def format_file(file_path) -> None:
+                    """Format a single file with black, handling errors."""
+        print(f"Formatting {file_path}...")
+        try:
     # Try formatting with black's default settings
     result = subprocess.run(["black", "--target-version", "py39", file_path], capture_output=True, text=True, check=False)
 

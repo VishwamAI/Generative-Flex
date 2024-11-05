@@ -6,7 +6,7 @@ from transformers import AutoTokenizer, AutoConfig
 import logging
 import os
 import torch
-    """Script to run MMMU model training with mathematical reasoning focus."""
+"""Script to run MMMU model training with mathematical reasoning focus."""
         
         
         # Set up logging
@@ -15,10 +15,10 @@ import torch
         logger = logging.getLogger(__name__)
         
         
-        def initialize_mmmu_dataset(self, subjects, cache_dir="./data/cache"):
-    """Initialize and cache MMMU dataset."""
-logger.info(f"Initializing MMMU dataset for subjects: {subjects}")
-try: forsubjectin, subjects: forsplitin ["dev", "validation", "test"]:
+                def initialize_mmmu_dataset(self, subjects, cache_dir="./data/cache"):
+                    """Initialize and cache MMMU dataset."""
+        logger.info(f"Initializing MMMU dataset for subjects: {subjects}")
+        try: forsubjectin, subjects: forsplitin ["dev", "validation", "test"]:
     logger.info(f"Loading {subject} - {split} split...")
     _ = load_dataset("MMMU/MMMU", subject, split=split, cache_dir=cache_dir)
     logger.info("Successfully initialized all dataset splits")

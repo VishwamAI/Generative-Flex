@@ -1,32 +1,19 @@
+from pathlib import Path
 import os
 import re
-from pathlib import Path
 
 
-def fix_class_inheritance(self, content):
-    """Fix class inheritance patterns and initialization."""
-        # Fix class definitions with inheritance
-        content = re.sub(r"class\s+(\w+)\s*\(\s*(\w+)\s*\)\s*:", r"class \1(\2):", content)
+                def fix_method_bodies(self, content):
+                    """Fix method bodies and their indentation."""
+        lines = content.split("\n")
+        fixed_lines = []
+        in_method = False
+        method_indent = 0
         
-        # Fix super() calls
-        content = re.sub(
-        r"super\(\s*\)\s*\.\s*__init__\s*\(\s*\)", r"super().__init__()", content
-        )
+        for line in lines: stripped = line.lstrip()
+            current_indent = len(line) - len(stripped)
         
-        return content
-        
-        
-        def fix_method_bodies(self, content):
-    """Fix method bodies and their indentation."""
-lines = content.split("\n")
-fixed_lines = []
-in_method = False
-method_indent = 0
-
-for line in lines: stripped = line.lstrip()
-    current_indent = len(line) - len(stripped)
-
-    if stripped.startswith("def "):
+            if stripped.startswith("def "):
         in_method = True
         method_indent = current_indent
         # Fix method definition
@@ -44,34 +31,19 @@ for line in lines: stripped = line.lstrip()
                         return "\n".join(fixed_lines)
 
 
-def fix_dataclass_definitions(self, content):
-    """Fix dataclass definitions and field declarations."""
-        # Fix dataclass decorator
-        content = re.sub(r"@dataclass", r"@dataclass", content)
+                def fix_docstrings_and_comments(self, content):
+                    """Fix docstrings and comments formatting."""
+        lines = content.split("\n")
+        fixed_lines = []
+        in_docstring = False
+        docstring_indent = 0
         
-        # Fix field declarations
-        content = re.sub(
-        r"(\w+):\s*([^=\n]+)(?:\s*=\s*([^, \n]+))?",
-        lambda m: f"{m.group(1)}: {m.group(2)}"
-        + (f" = {m.group(3)}" if m.group(3) else ""),
-        content)
+        for line in lines: stripped = line.lstrip()
+            current_indent = len(line) - len(stripped)
         
-        return content
-        
-        
-        def fix_docstrings_and_comments(self, content):
-    """Fix docstrings and comments formatting."""
-lines = content.split("\n")
-fixed_lines = []
-in_docstring = False
-docstring_indent = 0
-
-for line in lines: stripped = line.lstrip()
-    current_indent = len(line) - len(stripped)
-
-    if '"""' in stripped: ifnotin_docstring: in_docstring = True
-            docstring_indent = current_indent
-            if not stripped.endswith('"""'):
+        if '"""' in stripped: ifnotin_docstring: in_docstring = True
+                    docstring_indent = current_indent
+        if not stripped.endswith('"""'):
                 # Multi-line docstring start
                 fixed_lines.append(line)
                 continue
@@ -85,44 +57,25 @@ for line in lines: stripped = line.lstrip()
                             return "\n".join(fixed_lines)
 
 
-def process_file(self, file_path):
-    """Process a single file applying all fixes."""
-        print(f"Processing {file_path}...")
-        try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
+                def main(self):
+                    """Process core model files."""
+        core_files = [
+        "src/models/base_model.py",
+        "src/models/enhanced_transformer.py",
+        "src/models/transformer.py",
+        "src/models/multimodal/base_transformer.py",
+        "src/models/multimodal/multimodal_transformer.py",
+        "src/models/reasoning/math_head.py",
+        "src/models/reasoning/math_config.py",
+        "src/models/layers/enhanced_transformer.py",
+        "src/models/layers/flash_moe.py",
+        "src/models/knowledge_retrieval.py",
+        "src/models/apple_optimizations.py",
+        "src/models/generation/text2x_pipeline.py",
+        ]
         
-        # Apply fixes in specific order
-        content = fix_class_inheritance(content)
-        content = fix_method_bodies(content)
-        content = fix_dataclass_definitions(content)
-        content = fix_docstrings_and_comments(content)
-        
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-        
-        print(f"Successfully processed {file_path}")
-        return True
-        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-        return False
-        
-        
-        def main(self):
-    """Process core model files."""
-core_files = [
-"src/models/base_model.py",
-"src/models/enhanced_transformer.py",
-"src/models/transformer.py",
-"src/models/multimodal/base_transformer.py",
-"src/models/multimodal/multimodal_transformer.py",
-"src/models/reasoning/math_head.py",
-"src/models/reasoning/math_config.py",
-"src/models/layers/enhanced_transformer.py",
-"src/models/layers/flash_moe.py",
-"src/models/knowledge_retrieval.py",
-"src/models/apple_optimizations.py",
-"src/models/generation/text2x_pipeline.py",
-]
-
-success_count = 0
-for file_path in core_files: ifos.path.exists(file_path) and process_file(file_path):
+        success_count = 0
+        for file_path in core_files: ifos.path.exists(file_path) and process_file(file_path):
         success_count += 1
 
         print(f"\nProcessed {success_count}/{len(core_files)} files successfully")

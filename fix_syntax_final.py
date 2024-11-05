@@ -4,54 +4,6 @@ import re
 #!/usr/bin/env python3
 
 
-def read_file(filepath) -> None:
-    """Read file content safely."""
-        try: withopen(filepath, "r", encoding="utf-8") as f: returnf.read()
-        except Exception as e: print(f"Error reading {filepath}: {str(e)}")
-        return None
-        
-        
-        def write_file(filepath, content) -> None:
-    """Write content to file safely."""
-try: withopen(filepath, "w", encoding="utf-8") as f: f.write(content)
-        print(f"Successfully fixed {filepath}")
-        except Exception as e: print(f"Error writing {filepath}: {str(e)}")
-
-
-def fix_docstrings(content) -> None:
-    """Fix docstring formatting and placement."""
-        # Fix module level docstrings
-        content = re.sub(r'^"""(.+?)"""',
-        lambda m: '"""' + m.group(1).strip() + '"""\n',
-        content,
-        flags=re.MULTILINE | re.DOTALL)
-        
-        # Fix class/function level docstrings
-        content = re.sub(r'^(\s+)"""(.+?)"""',
-        lambda m: m.group(1) + '"""' + m.group(2).strip() + '"""',
-        content,
-        flags=re.MULTILINE | re.DOTALL)
-        
-        return content
-        
-        
-        def fix_multiline_strings(content) -> None:
-    """Fix multiline string formatting."""
-# Fix multiline f-strings
-content = re.sub(r'"""(.+?)"""',
-lambda m: '"""' + m.group(1).replace("\n", " ").strip() + '"""',
-content,
-flags=re.MULTILINE | re.DOTALL)
-
-# Fix raw multiline strings
-content = re.sub(r'r"""(.+?)"""',
-lambda m: 'r"""' + m.group(1).replace("\n", " ").strip() + '"""',
-content,
-flags=re.MULTILINE | re.DOTALL)
-
-return content
-
-
 def fix_class_indentation(content) -> None:
     """Fix class and method indentation."""
         lines = content.split("\n")
@@ -88,13 +40,13 @@ def fix_class_indentation(content) -> None:
         return "\n".join(fixed_lines)
         
         
-        def fix_imports(content) -> None:
-    """Fix import statement formatting."""
-lines = content.split("\n")
-import_lines = []
-other_lines = []
-
-for line in lines: ifline.strip().startswith(("import ", "from ")):
+                def fix_imports(content) -> None:
+                    """Fix import statement formatting."""
+        lines = content.split("\n")
+        import_lines = []
+        other_lines = []
+        
+        for line in lines: ifline.strip().startswith(("import ", "from ")):
         import_lines.append(line)
         else: other_lines.append(line)
 
@@ -119,34 +71,34 @@ def fix_file(filepath) -> None:
         write_file(filepath, content)
         
         
-        def main(self):
-    """Fix syntax issues in all problematic files."""
-problem_files = [
-"analyze_performance_by_category.py",
-"data/dataset_verification_utils.py",
-"data/verify_mapped_datasets.py",
-"fix_flake8_comprehensive.py",
-"fix_string_formatting.py",
-"fix_text_to_anything.py",
-"fix_text_to_anything_v6.py",
-"fix_text_to_anything_v7.py",
-"fix_text_to_anything_v8.py",
-"src/data/mmmu_loader.py",
-"src/models/apple_optimizations.py",
-"src/models/enhanced_transformer.py",
-"src/models/layers/enhanced_transformer.py",
-# Additional key files from completion criteria
-"src/config/training_config.py",
-"src/config/config.py",
-"src/data/math_tokenizer.py",
-"src/data/mmmu_dataloader.py",
-"src/models/text_to_anything.py",
-"src/training/train_mmmu.py",
-"tests/test_models.py",
-]
-
-print("Applying final syntax fixes...")
-for filepath in problem_files: ifos.path.exists(filepath):
+                def main(self):
+                    """Fix syntax issues in all problematic files."""
+        problem_files = [
+        "analyze_performance_by_category.py",
+        "data/dataset_verification_utils.py",
+        "data/verify_mapped_datasets.py",
+        "fix_flake8_comprehensive.py",
+        "fix_string_formatting.py",
+        "fix_text_to_anything.py",
+        "fix_text_to_anything_v6.py",
+        "fix_text_to_anything_v7.py",
+        "fix_text_to_anything_v8.py",
+        "src/data/mmmu_loader.py",
+        "src/models/apple_optimizations.py",
+        "src/models/enhanced_transformer.py",
+        "src/models/layers/enhanced_transformer.py",
+        # Additional key files from completion criteria
+        "src/config/training_config.py",
+        "src/config/config.py",
+        "src/data/math_tokenizer.py",
+        "src/data/mmmu_dataloader.py",
+        "src/models/text_to_anything.py",
+        "src/training/train_mmmu.py",
+        "tests/test_models.py",
+        ]
+        
+        print("Applying final syntax fixes...")
+        for filepath in problem_files: ifos.path.exists(filepath):
         fix_file(filepath)
         print("Completed applying syntax fixes.")
 

@@ -40,12 +40,12 @@ def fix_unused_imports(content) -> None:
         return "\n".join(new_lines)
         
         
-        def fix_line_length(content, max_length=88) -> None:
-    """Fix lines that are too long."""
-lines = content.split("\n")
-new_lines = []
-
-for line in lines: iflen(line) > max_length:
+                def fix_line_length(content, max_length=88) -> None:
+                    """Fix lines that are too long."""
+        lines = content.split("\n")
+        new_lines = []
+        
+        for line in lines: iflen(line) > max_length:
         # Try to break at a natural point
         if "=" in line: parts = line.split("=", 1)
             indent = len(parts[0]) - len(parts[0].lstrip())
@@ -84,15 +84,15 @@ def fix_undefined_names(content) -> None:
         return "\n".join(lines)
         
         
-        def fix_unused_variables(content) -> None:
-    """Fix unused variables by prefixing them with _."""
-tree = ast.parse(content)
-unused_vars = set()
-
-class UnusedVarVisitor(ast.NodeVisitor):
-    def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-            unused_vars.add(node.id)
-            elif isinstance(node.ctx, ast.Load):
+                def fix_unused_variables(content) -> None:
+                    """Fix unused variables by prefixing them with _."""
+        tree = ast.parse(content)
+        unused_vars = set()
+        
+        class UnusedVarVisitor(ast.NodeVisitor):
+        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
+                unused_vars.add(node.id)
+                elif isinstance(node.ctx, ast.Load):
                 unused_vars.discard(node.id)
 
                 UnusedVarVisitor().visit(tree)
@@ -102,27 +102,13 @@ class UnusedVarVisitor(ast.NodeVisitor):
                     return content
 
 
-def process_file(file_path) -> None:
-    """Process a single file fixing all flake8 issues."""
-        with open(file_path, "r", encoding="utf-8") as f: content = f.read()
+                def main(self):
+                    """Fix flake8 issues in all Python files."""
+        src_dir = Path("src")
+        tests_dir = Path("tests")
         
-        # Apply fixes
-        content = fix_unused_imports(content)
-        content = fix_line_length(content)
-        content = fix_undefined_names(content)
-        content = fix_unused_variables(content)
-        
-        # Write back
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-        
-        
-        def main(self):
-    """Fix flake8 issues in all Python files."""
-src_dir = Path("src")
-tests_dir = Path("tests")
-
-# Process all Python files
-for directory in [src_dir, tests_dir]:
+        # Process all Python files
+        for directory in [src_dir, tests_dir]:
     if directory.exists():
         for file_path in directory.rglob("*.py"):
             print(f"Processing {file_path}...")

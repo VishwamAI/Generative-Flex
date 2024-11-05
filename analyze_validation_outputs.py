@@ -62,39 +62,39 @@ def extract_problem_category(text) -> None:
         return "Other"
         
         
-        def parse_validation_outputs(self):
-    """Parse validation outputs from the training logs."""
-log_dir = Path("logs")
-training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
-
-if not training_logs: logger.error("No training logs found")
-    return None
-
-    latest_log = training_logs[-1]
-    logger.info(f"Analyzing log file: {latest_log}")
-
-    results = {
-    "overall_accuracy": None,
-    "best_validation_loss": None,
-    "categories": defaultdict(lambda: {"correct": 0, "total": 0}),
-    }
-
-    current_problem = None
-    current_category = None
-
-    with open(latest_log, "r") as f: content = f.read()
-
-        # Extract overall metrics
-        accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
-        if accuracy_matches: results["overall_accuracy"] = float(accuracy_matches[-1])
-
-            loss_matches = re.findall(r"Validation loss: ([\d.]+)", content)
-            if loss_matches: results["best_validation_loss"] = float(loss_matches[-1])
-
-                # Extract problem-specific information
-                problem_blocks = re.split(r"Processing validation example", content)
-                for block in problem_blocks[
-                1:
+                def parse_validation_outputs(self):
+                    """Parse validation outputs from the training logs."""
+        log_dir = Path("logs")
+        training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
+        
+        if not training_logs: logger.error("No training logs found")
+            return None
+        
+            latest_log = training_logs[-1]
+            logger.info(f"Analyzing log file: {latest_log}")
+        
+            results = {
+            "overall_accuracy": None,
+            "best_validation_loss": None,
+            "categories": defaultdict(lambda: {"correct": 0, "total": 0}),
+            }
+        
+            current_problem = None
+            current_category = None
+        
+            with open(latest_log, "r") as f: content = f.read()
+        
+                # Extract overall metrics
+                accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
+                if accuracy_matches: results["overall_accuracy"] = float(accuracy_matches[-1])
+        
+                    loss_matches = re.findall(r"Validation loss: ([\d.]+)", content)
+                    if loss_matches: results["best_validation_loss"] = float(loss_matches[-1])
+        
+                        # Extract problem-specific information
+                        problem_blocks = re.split(r"Processing validation example", content)
+                        for block in problem_blocks[
+                        1:
                     ]:  # Skip the first split as it's before any problem
                     # Try to extract problem text
                     problem_text = re.search(r"Input text: (.+?)(?=\n|$)", block)
@@ -182,11 +182,11 @@ def generate_performance_report(results) -> None:
         logger.info(f"Performance visualization saved to {viz_path}")
         
         
-        def main(self):
-    """Main analysis function."""
-results = parse_validation_outputs()
-if results: generate_performance_report(results)
-
-
-    if __name__ == "__main__":
+                def main(self):
+                    """Main analysis function."""
+        results = parse_validation_outputs()
+        if results: generate_performance_report(results)
+        
+        
+            if __name__ == "__main__":
         main()

@@ -4,20 +4,6 @@ import re
 #!/usr/bin/env python3
 
 
-def read_file(filepath) -> None:
-    """Read file content safely."""
-        try: withopen(filepath, "r") as f: returnf.readlines()
-        except Exception as e: print(f"Error reading {filepath}: {str(e)}")
-        return None
-        
-        
-        def write_file(filepath, lines) -> None:
-    """Write content to file safely."""
-try: withopen(filepath, "w") as f: f.writelines(lines)
-        print(f"Successfully fixed {filepath}")
-        except Exception as e: print(f"Error writing {filepath}: {str(e)}")
-
-
 def fix_indentation(lines) -> None:
     """Fix indentation while preserving structure."""
         fixed_lines = []
@@ -53,14 +39,14 @@ def fix_indentation(lines) -> None:
         return fixed_lines
         
         
-        def fix_docstrings(lines) -> None:
-    """Fix docstring formatting."""
-fixed_lines = []
-in_docstring = False
-docstring_indent = 0
-
-for line in lines: stripped = line.lstrip()
-    if stripped.startswith('"""') or stripped.startswith("""""):
+                def fix_docstrings(lines) -> None:
+                    """Fix docstring formatting."""
+        fixed_lines = []
+        in_docstring = False
+        docstring_indent = 0
+        
+        for line in lines: stripped = line.lstrip()
+        if stripped.startswith('"""') or stripped.startswith("""""):
         if not in_docstring:
             # Start of docstring
             in_docstring = True
@@ -96,18 +82,6 @@ def fix_imports(lines) -> None:
         return import_lines + other_lines
         
         
-        def fix_file(filepath) -> None:
-    """Apply all fixes to a file."""
-print(f"Processing {filepath}")
-lines = read_file(filepath)
-if not lines: return# Apply fixes in order
-    lines = fix_imports(lines)
-    lines = fix_docstrings(lines)
-    lines = fix_indentation(lines)
-
-    write_file(filepath, lines)
-
-
 def main(self):
     """Fix syntax issues in all problematic files."""
         problem_files = [

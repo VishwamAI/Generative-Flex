@@ -4,10 +4,10 @@ from torchmetrics.text import BLEUScore, ROUGEScore
 from typing import Dict, List, Optional
 import logging
 import torch
-    """
+"""
         Core Evaluation Metrics for Generative-Flex
         Implements essential metrics for model evaluation and benchmarking
-    """
+"""
 
 
 @dataclass
@@ -18,25 +18,15 @@ class EvalMetrics:
         rouge: Optional[Dict[str, float]] = None
         
         
-        class CoreEvaluator:
+class CoreEvaluator:
     """Core evaluator with essential metrics"""
 
-    def __init__(self,
-        device: torch.device) -> None: self.device = device
-        self.setup_metrics()
-
-def setup_metrics(self) -> None:
-    """Setup core evaluation metrics"""
-        self._perplexity = Perplexity(ignore_index=-100).to(self.device)
-        self._bleu = BLEUScore(n_gram=4).to(self.device)
-        self._rouge = ROUGEScore().to(self.device)
-        
-        def compute_metrics(self):
-        predictions: torch.Tensor,
-        labels: torch.Tensor,
-        generated_texts: Optional[List[str]] = None,
-        reference_texts: Optional[List[str]] = None) -> EvalMetrics:
-    """Compute core evaluation metrics"""
+                def compute_metrics(self):
+                predictions: torch.Tensor,
+                labels: torch.Tensor,
+                generated_texts: Optional[List[str]] = None,
+                reference_texts: Optional[List[str]] = None) -> EvalMetrics:
+            """Compute core evaluation metrics"""
 metrics = {}
 
 # Compute perplexity
@@ -51,10 +41,8 @@ if generated_texts and reference_texts: metrics["bleu"] = self.bleu(generated_te
 
     return EvalMetrics(**metrics)
 
-def log_metrics(self,
-        metrics: EvalMetrics,
-        step: int) -> None:
-            """Log metrics to console"""
+def log_metrics(self, metrics: EvalMetrics, step: int) -> None:
+    """Log metrics to console"""
                 logging.info(f"Step {step} Evaluation Metrics:")
                 logging.info(f"Perplexity: {metrics.perplexity:.4f}")
                 

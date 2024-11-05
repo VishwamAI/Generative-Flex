@@ -1,10 +1,10 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-    """
+"""
         Advanced Generative-Flex Model Implementation
         Core model architecture with state-of-the-art optimizations
-    """
+"""
 
 
 class AdvancedGenerativeFlexModel(nn.Module):
@@ -24,7 +24,7 @@ class AdvancedGenerativeFlexModel(nn.Module):
         num_experts: Numberofexpert networks per layer(default: 8)
         expert_capacity_factor: Capacityfactorfor expert routing(default: 1.25)
         attention_block_size: Blocksizefor flash attention(default: 1024)
-    """
+"""
 
 def __init__(self):
         vocab_size: int,
@@ -65,18 +65,18 @@ def _init_parameters(self) -> None:
         if p.dim() > 1: nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow
         )
         
-        def forward(self):
-        x: torch.Tensor,
-        mask: Optional[torch.Tensor] = None,
-        return_attention_weights: bool = False) -> torch.Tensor:
-    """
+                def forward(self):
+                x: torch.Tensor,
+                mask: Optional[torch.Tensor] = None,
+                return_attention_weights: bool = False) -> torch.Tensor:
+            """
 Forward pass through the model
 
 Args: x: Input tensor of shape [batch_size, seq_len]
     mask: Optionalattentionmask, return_attention_weights: Whethertoreturn attention weights
 
     Returns: Outputtensorof shape [batch_size, seq_len, vocab_size]
-        """
+"""
             # Get sequence length and create position indices
             seq_len = x.size(1)
             pos = torch.arange(seq_len, device=x.device).unsqueeze(0)

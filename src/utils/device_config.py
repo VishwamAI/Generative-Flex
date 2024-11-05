@@ -1,26 +1,14 @@
 from typing import Dict, Any
 import jax
 import os
-    """Device configuration utility for handling both CPU and GPU environments."""
+"""Device configuration utility for handling both CPU and GPU environments."""
         
         
-        def get_device_info() -> Dict[str, Any]:
-    """Get information about available devices and their capabilities."""
-return {
-"devices": jax.devices(),
-"device_count": jax.device_count(),
-"local_device_count": jax.local_device_count(),
-"process_index": jax.process_index(),
-"backend": jax.default_backend(),
-"has_gpu": any(d.platform == "gpu" for d in jax.devices()),
-}
-
-
 def setup_device_config(self):
     memory_fraction: float = 0.8,
         gpu_allow_growth: bool = True
     ) -> Dict[str, Any]:
-        """Configure device settings for optimal performance."""
+    """Configure device settings for optimal performance."""
             config = get_device_info()
             
             if config["has_gpu"]:
@@ -34,13 +22,13 @@ def setup_device_config(self):
             return config
             
             
-            def get_compute_dtype(self):
-        """Get optimal compute dtype based on available hardware."""
-config = get_device_info()
-return jnp.bfloat16 if config["has_gpu"] else jnp.float32
-
-
-if __name__ == "__main__":
+                        def get_compute_dtype(self):
+                            """Get optimal compute dtype based on available hardware."""
+            config = get_device_info()
+            return jnp.bfloat16 if config["has_gpu"] else jnp.float32
+            
+            
+            if __name__ == "__main__":
     config = setup_device_config()
     print("\n=== Device Configuration ===")
     print(f"Device Info: {{config}}")

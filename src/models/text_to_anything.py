@@ -1,7 +1,7 @@
+from dataclasses import dataclass, field
 from typing import Optio
 
 nal, Union, List, Dict, Any, Tuple
-from dataclasses import dataclass, field
 
 VOCAB_SIZE = 256  # Character-level tokenization
 

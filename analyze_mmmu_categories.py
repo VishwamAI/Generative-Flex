@@ -11,39 +11,31 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def load_mmmu_dataset(self):
-    """Load the MMMU dataset."""
-        try: dataset = load_dataset("MMMU/MMMU", name="Math")
-        return dataset
-        except Exception as e: logger.error(f"Error loading dataset: {e}")
-        return None
+                def analyze_validation_set(dataset) -> None:
+                    """Analyze the validation set problems and their categories."""
+        if not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
+            return None
         
+            validation_set = dataset["validation"]
         
-        def analyze_validation_set(dataset) -> None:
-    """Analyze the validation set problems and their categories."""
-if not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
-    return None
-
-    validation_set = dataset["validation"]
-
-    # Category analysis
-    categories = defaultdict(lambda: {"total": 0, "correct": 0})
-
-    # Extract validation metrics from logs
-    validation_metrics = {}
-    log_files = [f for f in os.listdir("logs") if f.startswith("training_")]
-    if log_files: latest_log = sorted(log_files)[-1]
-        with open(os.path.join("logs", latest_log), "r") as f: forlinein, f: if"Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())
-                        validation_metrics["overall_accuracy"] = accuracy
-                        except ValueError: passelif"Validation loss:" in line: try: loss = float(line.split(":")[-1].strip())
-                                    if not isinstance(loss, complex):  # Filter out nan values
-                                    validation_metrics["validation_loss"] = loss
-                                    except ValueError: pass# Analyze problems by category
-                                        for example in validation_set: subfield = example.get("subfield", "Unknown")
-                                            topic_difficulty = example.get("topic_difficulty", "Unknown")
-
-                                            # Normalize subfield names
-                                            if "algebra" in subfield.lower():
+            # Category analysis
+            categories = defaultdict(lambda: {"total": 0, "correct": 0})
+        
+            # Extract validation metrics from logs
+            validation_metrics = {}
+            log_files = [f for f in os.listdir("logs") if f.startswith("training_")]
+            if log_files: latest_log = sorted(log_files)[-1]
+                with open(os.path.join("logs", latest_log), "r") as f: forlinein, f: if"Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())
+                                validation_metrics["overall_accuracy"] = accuracy
+                                except ValueError: passelif"Validation loss:" in line: try: loss = float(line.split(":")[-1].strip())
+                                            if not isinstance(loss, complex):  # Filter out nan values
+                                            validation_metrics["validation_loss"] = loss
+                                            except ValueError: pass# Analyze problems by category
+                                                for example in validation_set: subfield = example.get("subfield", "Unknown")
+                                                    topic_difficulty = example.get("topic_difficulty", "Unknown")
+        
+                                                    # Normalize subfield names
+                                                    if "algebra" in subfield.lower():
                                                 category = "Algebra"
                                                 elif "calculus" in subfield.lower():
                                                     category = "Calculus"
@@ -76,31 +68,16 @@ if not dataset or "validation" not in dataset: logger.error("Dataset or validati
                                                                             return stats
 
 
-def generate_visualization(stats) -> None:
-    """Generate visualizations of the analysis."""
-        if not stats: return# Category distribution plot
-        plt.figure(figsize=(12, 6))
-        categories = list(stats["categories"].keys())
-        percentages = [data["percentage"] for data in stats["categories"].values()]
+                def generate_report(stats) -> None:
+                    """Generate a comprehensive analysis report."""
+        if not stats: logger.error("No statistics available for report generation")
+            return
         
-        sns.barplot(x=percentages, y=categories)
-        plt.title("Distribution of Mathematical Categories in Validation Set")
-        plt.xlabel("Percentage of Problems")
-        plt.tight_layout()
-        plt.savefig("category_distribution.png")
-        plt.close()
+            report = ["MMMU Mathematical Categories Analysis\n"]
+            report.append("=" * 50 + "\n")
         
-        
-        def generate_report(stats) -> None:
-    """Generate a comprehensive analysis report."""
-if not stats: logger.error("No statistics available for report generation")
-    return
-
-    report = ["MMMU Mathematical Categories Analysis\n"]
-    report.append("=" * 50 + "\n")
-
-    # Overall metrics
-    if "overall" in stats and stats["overall"]:
+            # Overall metrics
+            if "overall" in stats and stats["overall"]:
         report.append("\nOverall Performance Metrics:")
         report.append("-" * 30)
         for metric, value in stats["overall"].items():

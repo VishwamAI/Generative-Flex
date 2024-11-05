@@ -5,18 +5,18 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-    """Training script for MMMU dataset using enhanced transformer model."""
+"""Training script for MMMU dataset using enhanced transformer model."""
         
         
         logger = logging.getLogger(__name__)
         
         
-        def train_epoch(self):
-        model: EnhancedTransformer,
-        train_loader: DataLoader,
-        optimizer: torch.optim.Optimizer,
-        config: TrainingConfig) -> Dict[str, float]:
-    """Train for one epoch."""
+                def train_epoch(self):
+                model: EnhancedTransformer,
+                train_loader: DataLoader,
+                optimizer: torch.optim.Optimizer,
+                config: TrainingConfig) -> Dict[str, float]:
+            """Train for one epoch."""
     model.train()
     total_loss = 0.0
     correct = 0
@@ -34,7 +34,7 @@ import torch
 def evaluate(self):
     model: EnhancedTransformer,
         val_loader: DataLoader) -> Dict[str, float]:
-            """Evaluate the model."""
+    """Evaluate the model."""
                 model.eval()
                 total_loss = 0.0
                 correct = 0
@@ -47,26 +47,16 @@ def evaluate(self):
                 return {"val_loss": total_loss / len(val_loader)}
                 
                 
-                def log_metrics(self):
-                metrics: Dict[str, float],
-                step: Optional[int] = None,
-                epoch: Optional[int] = None) -> None: """Log training metrics."""
-                metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())
-                if epoch is not None: logger.info(f"Epoch {{epoch}}: {{metric_str}}")
-                elif step is not None: logger.info(f"Step {{step}}: {{metric_str}}")
-                else: logger.info(metric_str)
+                                def main(self):
+                                    """Main training function."""
+                config = TrainingConfig()
+                model = EnhancedTransformer(config)
+                train_loader, val_loader = create_mmmu_dataloaders(config)
+                optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
                 
+                best_val_loss = float("inf")
                 
-                def main(self):
-            """Main training function."""
-config = TrainingConfig()
-model = EnhancedTransformer(config)
-train_loader, val_loader = create_mmmu_dataloaders(config)
-optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
-
-best_val_loss = float("inf")
-
-for epoch in range(config.num_epochs):
+                for epoch in range(config.num_epochs):
     train_metrics = train_epoch(model, train_loader, optimizer, config)
     val_metrics = evaluate(model, val_loader)
 

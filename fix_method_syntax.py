@@ -5,16 +5,16 @@
     from typing import List, Tuple
     
     
-    def fix_method_definition(content: str) -> str:
-"""Fix method definition syntax with proper handling of docstrings."""
-lines = content.split("\n")
-fixed_lines = []
-in_method = False
-method_indent = 0
-docstring_started = False
-
-i = 0
-while i < len(lines):
+        def fix_method_definition(content: str) -> str:
+            """Fix method definition syntax with proper handling of docstrings."""
+    lines = content.split("\n")
+    fixed_lines = []
+    in_method = False
+    method_indent = 0
+    docstring_started = False
+    
+    i = 0
+    while i < len(lines):
     line = lines[i]
     stripped = line.strip()
     indent = len(line) - len(stripped)
@@ -26,10 +26,10 @@ while i < len(lines):
         # Fix method definition
         if "def self" in stripped:
             # Handle special case of malformed self methods
-            if '"""' in stripped:
+if '"""' in stripped:
                 # Method with inline docstring
-                docstring_part = stripped[stripped.find('"""') :]
-                method_part = stripped[: stripped.find('"""')].strip()
+docstring_part = stripped[stripped.find('"""') :]
+method_part = stripped[: stripped.find('"""')].strip()
                 fixed_method = method_part.replace("def self", "def __init__")
                 if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->, None:"
                     fixed_lines.append(" " * indent + fixed_method)
@@ -60,12 +60,12 @@ while i < len(lines):
                                                     else: fixed_lines.append(line)
 
                                                         # Check for docstring in next line
-                                                        if i + 1 < len(lines) and '"""' in lines[i + 1].strip():
+if i + 1 < len(lines) and '"""' in lines[i + 1].strip():
                                                             docstring_started = True
 
                                                             elif docstring_started:
                                                                 # Handle docstring
-                                                                if '"""' in stripped and not stripped.startswith('"""'):
+if '"""' in stripped and not stripped.startswith('"""'):
                                                                     # End of docstring
                                                                     docstring_started = False
                                                                     fixed_lines.append(line)

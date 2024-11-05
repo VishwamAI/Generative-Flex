@@ -1,9 +1,9 @@
 from typing import Optional, Dict, Any
 import jax
-    """Enhanced transformer implementation with advanced features."""
+"""Enhanced transformer implementation with advanced features."""
         
         
-        class EnhancedTransformer(nn.Module):
+class EnhancedTransformer(nn.Module):
     """Enhanced transformer with advanced attention mechanisms."""
 
 config: Dict[str, Any]def setup(self) -> None: """Initialize model components."""
@@ -21,20 +21,20 @@ self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.n
 
 def __init__(self):
         input_ids: jnp.ndarray,
-        attention_mask: Optional[jnp.ndarray]  = None,
-        token_type_ids: Optional[jnp.ndarray]  = None,
-        position_ids: Optional[jnp.ndarray]  = None,
+        attention_mask: Optional[jnp.ndarray] = None,
+        token_type_ids: Optional[jnp.ndarray] = None,
+        position_ids: Optional[jnp.ndarray] = None,
         deterministic: bool = True,
         output_attentions: bool = False,
         output_hidden_states: bool = False) -> Dict[str, jnp.ndarray]:
-            """Forward pass of the model.
+    """Forward pass of the model.
                 
                 Args: input_ids: Input token IDs
                 attention_mask: Attentionmasktoken_type_ids: TokentypeIDs, position_ids: PositionIDsdeterministic: Whethertouse deterministic behavior
                 output_attentions: Whethertooutput attention weights
                 output_hidden_states: Whethertooutput hidden states
                 
-                Returns: Dictionarycontainingmodel outputs"""
+Returns: Dictionarycontainingmodel outputs"""
                 # Get embeddings
                 hidden_states = self.embeddings(input_ids)
                 
@@ -51,9 +51,9 @@ def __init__(self):
                 "last_hidden_state": encoder_outputs["last_hidden_state"],
                 }
                 
-                if output_attentions: outputs["attentions"]  = encoder_outputs["attentions"]
+                if output_attentions: outputs["attentions"]= encoder_outputs["attentions"]
                 
-                if output_hidden_states: outputs["hidden_states"]  = encoder_outputs["hidden_states"]
+                if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
                 
                 return outputs
                 

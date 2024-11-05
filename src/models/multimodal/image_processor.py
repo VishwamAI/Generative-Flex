@@ -2,24 +2,24 @@ from torchvision import transforms
 from typing import Optional, Tuple
 import torch
 import torch.nn as nn
-    """
+"""
         Image processor for multimodal inputs.
-    """
+"""
 
 
 
 class ImageProcessor(nn.Module):
     """
         Image processor for handling multimodal inputs in the MMMU model.
-    """
+"""
 
 def __init__(self):
         image_size: int = 224,
         hidden_size: int = 768,
         dropout_rate: float = 0.1):
-            """
+    """
                 Initialize the image processor.
-            """
+"""
 super().__init__()
 self.image_size = image_size
 self.hidden_size = hidden_size
@@ -47,9 +47,9 @@ self.dropout = nn.Dropout(dropout_rate)
 def forward(self):
         images: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-            """
+    """
                 Process images for multimodal input.
-            """
+"""
 # Apply preprocessing
 if images.dim() == 3: images = images.unsqueeze(0)
 

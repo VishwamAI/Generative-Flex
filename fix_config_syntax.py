@@ -3,24 +3,24 @@
     import re
     
     
-    def fix_config_file(self):
-    # Read the original file
-    with open("src/config/config.py", "r") as f: content = f.read()
-    
-    # Fix imports
+        def fix_config_file(self):
+        # Read the original file
+        with open("src/config/config.py", "r") as f: content = f.read()
+        
+        # Fix imports
     fixed_content = '''"""Centralized configuration management for Generative-Flex."""
-    from typing import Optional, Union, List, Dict, Any, Tuple
-    from dataclasses import dataclass, field
-    from pathlib import Path
-    import json
-    
-    '''
-    
-    
-    # Fix ModelConfig class
-    fixed_content += '''@dataclass
+        from typing import Optional, Union, List, Dict, Any, Tuple
+        from dataclasses import dataclass, field
+        from pathlib import Path
+        import json
+        
+        '''
+        
+        
+        # Fix ModelConfig class
+        fixed_content += '''@dataclass
     class ModelConfig:
-"""Model configuration."""
+    """Model configuration."""
 
 model_type: str = field(default="language")  # 'language', 'image', 'audio', 'video'
 vocab_size: Optional[int] = field(default=50257)  # For language models
@@ -33,36 +33,6 @@ audio_sample_rate: Optional[int] = field(default=None)  # For audio models
 frame_size: Optional[int] = field(default=None)  # For audio models
 video_size: Optional[Tuple[int, int, int]] = field(default=None)  # For video models
 video_, patch_size: Optional[Tuple[int, int, int]] = field(default=None)  # For video models
-
-@property
-def hidden_size(self) -> int:
-    """Compatibility property for models expecting hidden_size."""
-        return self.hidden_dim
-        
-        @property
-        def num_attention_heads(self) -> int:
-    """Compatibility property for models expecting num_attention_heads."""
-return self.num_heads
-
-@property
-def num_hidden_layers(self) -> int:
-    """Compatibility property for models expecting num_hidden_layers."""
-        return self.num_layers
-        
-        @property
-        def intermediate_size(self) -> int:
-    """Compatibility property for models expecting intermediate_size."""
-return self.mlp_dim
-
-@property
-def attention_dropout(self) -> float:
-    """Compatibility property for models expecting attention_dropout."""
-        return self.dropout_rate
-        
-        @property
-        def hidden_dropout(self) -> float:
-    """Compatibility property for models expecting hidden_dropout."""
-return self.dropout_rate
 
 @property
 def max_position_embeddings(self) -> int:

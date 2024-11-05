@@ -4,9 +4,8 @@
     from pathlib import Path
     
     
-    def fix_file_syntax(file_path: str,
-    content: str) -> str:
-"""Fix syntax issues in a specific file."""
+        def fix_file_syntax(file_path: str, content: str) -> str:
+        """Fix syntax issues in a specific file."""
 if "mmmu_dataloader.py" in file_path:
     # Fix import statement
     content = re.sub(r"from typi", "from typing", content)
@@ -51,7 +50,7 @@ s*\):", "def train(self):", content)
                 # Fix class inheritance
                 (r"class\s+(\w+)\s*\(\s*\):", r"class \1:"),
                 # Fix docstrings
-                (r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
+(r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
                 ]
 
                 # Apply all common fixes

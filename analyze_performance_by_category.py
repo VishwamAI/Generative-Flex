@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import os
 import re
 import seaborn as sns
-    """Script to analyze performance across mathematical categories."""
+"""Script to analyze performance across mathematical categories."""
         
         
         
@@ -13,64 +13,28 @@ import seaborn as sns
         logger = logging.getLogger(__name__)
         
         
-        def extract_validation_metrics(self):
-    """Extract validation metrics from training logs."""
-log_dir = "logs"
-log_files = [f for f in os.listdir(log_dir) if f.startswith("training_")]
-
-if not log_files: logger.error("No training logs found")
-    return None
-
-    latest_log = sorted(log_files)[-1]
-    metrics = {
-    "overall_accuracy": None,
-    "validation_loss": None,
-    "category_performance": defaultdict(lambda: {"correct": 0, "total": 0}),
-    }
-
-    with open(os.path.join(log_dir, latest_log), "r") as f: content = f.read()
-
-        # Extract overall accuracy
-        accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
-        if accuracy_matches: metrics["overall_accuracy"] = float(accuracy_matches[-1])
-
-            # Extract validation loss
-            loss_matches = re.findall(r"Validation loss: ([\d.]+)", content)
-            if loss_matches: try: loss = float(loss_matches[-1])
-                    if not isinstance(loss, complex):  # Filter out nan values
-                    metrics["validation_loss"] = loss
-                    except ValueError: passreturnmetrics
-
-
-def load_category_distribution(self):
-    """Load category distribution from previous analysis."""
-        try: withopen("mmmu_category_stats.json", "r") as f: returnjson.load(f)
-        except FileNotFoundError: logger.error("Category statistics file not found")
-        return None
+                def analyze_performance(self):
+                    """Analyze performance across mathematical categories."""
+        metrics = extract_validation_metrics()
+        category_stats = load_category_distribution()
         
+        if not category_stats: logger.error("Required data not available")
+            return
         
-        def analyze_performance(self):
-    """Analyze performance across mathematical categories."""
-metrics = extract_validation_metrics()
-category_stats = load_category_distribution()
-
-if not category_stats: logger.error("Required data not available")
-    return
-
-    # Combine metrics with category distribution
-    analysis = {
-    "overall_metrics": {
-    "accuracy": 0.7143,  # Known accuracy from training logs
-    "validation_loss": 0.6965,  # Known validation loss
-    },
-    "category_analysis": {},
-    }
-
-    total_problems = sum(cat["total_problems"] for cat in category_stats["categories"].values()
-    )
-
-    # Calculate estimated category-specific performance
-    for category, stats in category_stats["categories"].items():
+            # Combine metrics with category distribution
+            analysis = {
+            "overall_metrics": {
+            "accuracy": 0.7143,  # Known accuracy from training logs
+            "validation_loss": 0.6965,  # Known validation loss
+            },
+            "category_analysis": {},
+            }
+        
+            total_problems = sum(cat["total_problems"] for cat in category_stats["categories"].values()
+            )
+        
+            # Calculate estimated category-specific performance
+            for category, stats in category_stats["categories"].items():
         category_weight = stats["total_problems"] / total_problems
         estimated_accuracy = analysis["overall_metrics"]["accuracy"] * (
         1.1
@@ -88,39 +52,19 @@ if not category_stats: logger.error("Required data not available")
         return analysis
 
 
-def generate_visualization(analysis) -> None:
-    """Generate performance visualization."""
-        if not analysis: return# Create performance by category plot
-        plt.figure(figsize=(12, 6))
-        categories = list(analysis["category_analysis"].keys())
-        accuracies = [
-        data["estimated_accuracy"] * 100
-        for data in analysis["category_analysis"].values()
-        ]
+                def generate_report(analysis) -> None:
+                    """Generate comprehensive performance report."""
+        if not analysis: logger.error("No analysis data available")
+            return
         
-        sns.barplot(x=accuracies, y=categories)
-        plt.title("Estimated Performance by Mathematical Category")
-        plt.xlabel("Estimated Accuracy (%)")
-        plt.axvline(x=analysis["overall_metrics"]["accuracy"] * 100, color="r", linestyle="--", label=f'Overall Accuracy ({analysis["overall_metrics"]["accuracy"]*100:.1f}%)')
-        plt.legend()
-        plt.tight_layout()
+            report = ["MMMU Mathematical Performance Analysis\n"]
+            report.append("=" * 50 + "\n")
         
-        plt.savefig("performance_by_category.png")
-        plt.close()
-        
-        def generate_report(analysis) -> None:
-    """Generate comprehensive performance report."""
-if not analysis: logger.error("No analysis data available")
-    return
-
-    report = ["MMMU Mathematical Performance Analysis\n"]
-    report.append("=" * 50 + "\n")
-
-    # Overall Performance
-    report.append("\nOverall Performance Metrics:")
-    report.append("-" * 30)
-    report.append(f"Overall Accuracy: {analysis['overall_metrics']['accuracy']*100:.2f}%")
-    if analysis["overall_metrics"]["validation_loss"]:
+            # Overall Performance
+            report.append("\nOverall Performance Metrics:")
+            report.append("-" * 30)
+            report.append(f"Overall Accuracy: {analysis['overall_metrics']['accuracy']*100:.2f}%")
+            if analysis["overall_metrics"]["validation_loss"]:
         report.append(f"Validation Loss: {analysis['overall_metrics']['validation_loss']:.4f}")
 
         # Category-specific Performance

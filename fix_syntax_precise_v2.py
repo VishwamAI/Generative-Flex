@@ -4,18 +4,18 @@
     from typing import List, Tuple
     
     
-    def split_into_blocks(content: str) -> List[Tuple[str, str, int]]:
-"""Split content into blocks (imports, classes, functions) with their indentation."""
-lines = content.split("\n")
-blocks = []
-current_block = []
-current_type = None
-current_indent = 0
-
-for line in lines: stripped = line.lstrip()
-    indent = len(line) - len(stripped)
-
-    if stripped.startswith("import ") or stripped.startswith("from "):
+        def split_into_blocks(content: str) -> List[Tuple[str, str, int]]:
+            """Split content into blocks (imports, classes, functions) with their indentation."""
+    lines = content.split("\n")
+    blocks = []
+    current_block = []
+    current_type = None
+    current_indent = 0
+    
+    for line in lines: stripped = line.lstrip()
+        indent = len(line) - len(stripped)
+    
+        if stripped.startswith("import ") or stripped.startswith("from "):
         if current_block and current_type != "import":
             blocks.append((current_type, "\n".join(current_block), current_indent))
             current_block = []
@@ -43,26 +43,12 @@ for line in lines: stripped = line.lstrip()
                                             return blocks
 
 
-def fix_imports(block: str) -> str:
-    """Fix and deduplicate imports."""
+                def fix_class_definition(block: str) -> str:
+                    """Fix class definition syntax."""
         lines = block.split("\n")
-        seen = set()
-        fixed = []
+        fixed_lines = []
         
-        for line in lines: stripped = line.strip()
-        if stripped and stripped not in seen: if"dataclass es" in stripped: line = line.replace("dataclass es", "dataclasses")
-        seen.add(stripped)
-        fixed.append(line)
-        
-        return "\n".join(fixed)
-        
-        
-        def fix_class_definition(block: str) -> str:
-    """Fix class definition syntax."""
-lines = block.split("\n")
-fixed_lines = []
-
-for line in lines: ifline.strip().startswith("class "):
+        for line in lines: ifline.strip().startswith("class "):
         # Fix double parentheses
         if "((" in line: line = re.sub(
             r"class\s+(\w+)\(\((\w+(?:\.\w+)*)\):", r"class \1(\2):", line
@@ -112,16 +98,16 @@ def fix_method_definition(block: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_indentation(content: str) -> str:
-    """Fix indentation issues."""
-lines = content.split("\n")
-fixed_lines = []
-indent_level = 0
-
-for line in lines: stripped = line.strip()
-
-    # Adjust indent level based on content
-    if stripped.startswith(("class ", "def ")):
+                def fix_indentation(content: str) -> str:
+                    """Fix indentation issues."""
+        lines = content.split("\n")
+        fixed_lines = []
+        indent_level = 0
+        
+        for line in lines: stripped = line.strip()
+        
+            # Adjust indent level based on content
+            if stripped.startswith(("class ", "def ")):
         if stripped.startswith("class"):
             indent_level = 0
             fixed_lines.append(" " * indent_level + stripped)

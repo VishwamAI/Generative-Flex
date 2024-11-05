@@ -41,14 +41,10 @@ def parse_validation_results(self):
         if "problem type:" in line.lower():
         problem_text = line.lower()
         if "algebra" in problem_text: current_problem = "Algebra"
-        elif "calculus" in problem_text:
-        current_problem = "Calculus"
-        elif "probability" in problem_text or "statistics" in problem_text:
-        current_problem = "Probability & Statistics"
-        elif "geometry" in problem_text:
-        current_problem = "Geometry"
-        elif "number theory" in problem_text or "arithmetic" in problem_text: current_problem = "Number Theory", else:
-        current_problem = "Other"
+        elif "calculus" in problem_text: current_problem= "Calculus"
+        elif "probability" in problem_text or "statistics" in problem_text: current_problem= "Probability & Statistics"
+        elif "geometry" in problem_text: current_problem= "Geometry"
+        elif "number theory" in problem_text or "arithmetic" in problem_text: current_problem= "Number Theory", else: current_problem = "Other"
         
         # Look for accuracy metrics following problem type
         if current_problem and "correct:" in line.lower():
@@ -58,24 +54,24 @@ def parse_validation_results(self):
         except Exception: continuereturnresults
         
         
-        def generate_performance_report(results) -> None:
-    """Generate a comprehensive performance report"""
-if not results: logger.error("No results data available")
-    return
-
-    report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
-    report.append("=" * 50 + "\n")
-
-    # Overall Performance
-    if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
-
-            # Performance by Category
-            report.append("\nPerformance by Problem Category:")
-            report.append("-" * 30)
-
-            category_metrics = {}
-            for category, outcomes in results["problem_types"].items():
+                def generate_performance_report(results) -> None:
+                    """Generate a comprehensive performance report"""
+        if not results: logger.error("No results data available")
+            return
+        
+            report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
+            report.append("=" * 50 + "\n")
+        
+            # Overall Performance
+            if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
+                if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
+        
+                    # Performance by Category
+                    report.append("\nPerformance by Problem Category:")
+                    report.append("-" * 30)
+        
+                    category_metrics = {}
+                    for category, outcomes in results["problem_types"].items():
                 if outcomes: correct = sum(1 for x in outcomes if x)
                     total = len(outcomes)
                     accuracy = correct / total if total > 0 else 0

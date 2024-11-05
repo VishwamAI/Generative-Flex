@@ -1,15 +1,15 @@
 from pathlib import Path
 import os
 import subprocess
-    """Script to format all Python files with black."""
+"""Script to format all Python files with black."""
         
         
         
-        def format_files(self):
-    """Format all Python files using black."""
-# Get all Python files
-python_files = []
-for root, _, files in os.walk("."):
+                def format_files(self):
+                    """Format all Python files using black."""
+        # Get all Python files
+        python_files = []
+        for root, _, files in os.walk("."):
     for file in files: iffile.endswith(".py"):
             python_files.append(os.path.join(root, file))
 

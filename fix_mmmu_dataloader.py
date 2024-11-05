@@ -23,20 +23,15 @@ def fix_mmmu_dataloader(self):
         content = re.sub(
             r"class MMUDataset\(.*?\):.*?def __init__",
             "class MMUDataset(Dataset):\n"
-            '    """MMMU Dataset loader with multimodal support."""\n\n'
+'    """MMMU Dataset loader with multimodal support."""\n\n'
             "    def __init__",
             content,
             flags=re.DOTALL,
         )
 
         # Fix initialization method
-        init_method = '''    def __init__(
-        self,
-        subjects: Optional[List[str]] = None,
-        split: str = "validation",
-        tokenizer: Any = None,
-        max_length: int = 512) ->, None:
-            """Initialize the dataset."""
+        init_method = '''    def __init__(self, subjects: Optional[List[str]] = None, split: str = "validation", tokenizer: Any = None, max_length: int = 512) -> , None:
+    """Initialize the dataset."""
                 super().__init__()
                 self.subjects = subjects if subjects else MMMU_SUBJECTS
                 self.split = split

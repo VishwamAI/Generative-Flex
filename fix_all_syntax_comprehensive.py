@@ -5,13 +5,13 @@
     from typing import List, Dict, Set
     
     
-    def fix_imports(content: str) -> str:
-"""Fix and deduplicate imports, especially dataclass-related ones."""
-lines = content.split("\n")
-fixed_lines = []
-seen_imports = set()
-
-for line in lines: ifline.strip().startswith(("from ", "import ")):
+        def fix_imports(content: str) -> str:
+            """Fix and deduplicate imports, especially dataclass-related ones."""
+    lines = content.split("\n")
+    fixed_lines = []
+    seen_imports = set()
+    
+    for line in lines: ifline.strip().startswith(("from ", "import ")):
         # Fix common import issues
         line = line.replace("dataclass es", "dataclasses")
         line = line.replace("from.", "from .")
@@ -23,19 +23,12 @@ for line in lines: ifline.strip().startswith(("from ", "import ")):
                 return "\n".join(fixed_lines)
 
 
-def fix_class_definitions(content: str) -> str:
-    """Fix class definitions with double parentheses."""
-        # Fix patterns like 'class Name((Parent):'
-        content = re.sub(r"class\s+(\w+)\(\((\w+(?:\.\w+)*)\):", r"class \1(\2):", content)
-        return content
+                def fix_function_definitions(content: str) -> str:
+                    """Fix malformed function definitions."""
+        lines = content.split("\n")
+        fixed_lines = []
         
-        
-        def fix_function_definitions(content: str) -> str:
-    """Fix malformed function definitions."""
-lines = content.split("\n")
-fixed_lines = []
-
-for line in lines: ifline.strip().startswith("def "):
+        for line in lines: ifline.strip().startswith("def "):
         # Fix various malformed patterns
         line = re.sub(
         r"def\s+(\w+)\)None\((.*?)\)None:", r"def \1(\2) -> None:", line
@@ -67,8 +60,8 @@ def fix_dataclass_fields(content: str) -> str:
         fixed_lines.append(line)
         elif in_dataclass and ":" in line and "field(" in line:
         # Fix field definitions
-        before_colon, after_colon = line.split(":", 1)
-        if "=" not in after_colon and "field(" in after_colon: after_colon = " " + after_colon.replace("field(", "= field(")
+    before_colon, after_colon = line.split(": ", 1)
+    if "=" not in after_colon and "field(" in after_colon: after_colon = " " + after_colon.replace("field(", "= field(")
         fixed_lines.append(before_colon + ":" + after_colon)
         else: ifline.strip() and not line.startswith(" "):
         in_dataclass = False
@@ -77,24 +70,6 @@ def fix_dataclass_fields(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_file(file_path: Path) -> None:
-    """Apply all fixes to a single file."""
-try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
-
-        # Apply fixes in sequence
-        content = fix_imports(content)
-        content = fix_class_definitions(content)
-        content = fix_function_definitions(content)
-        content = fix_dataclass_fields(content)
-
-        # Write back the fixed content
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-
-            print(f"Successfully fixed {file_path}")
-
-            except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-
-
 def main(self):
     """Fix syntax issues in all Python files."""
         files_to_fix = [

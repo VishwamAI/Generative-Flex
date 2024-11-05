@@ -26,15 +26,15 @@ def fix_file_content(self, content):
         continue
         
         # Fix docstring formatting
-        if line.strip().startswith('"""'):
+if line.strip().startswith('"""'):
         # If this is a single-line docstring
-        if line.strip().endswith('"""') and len(line.strip()) > 3: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:-3].strip() + '"""'
+if line.strip().endswith('"""') and len(line.strip()) > 3: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:-3].strip() + '"""'
         )
         else:
         # Multi-line docstring
         if not line.strip()[3:].strip():  # Empty first line
-        fixed_lines.append(" " * current_indent + '"""')
-        else: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
+fixed_lines.append(" " * current_indent + '"""')
+else: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:].strip()
         )
         continue
         
@@ -74,19 +74,19 @@ def fix_file_content(self, content):
         return "\n".join(result)
         
         
-        def main(self):
-        # Read the original file
-        with open("tests/test_models.py", "r") as f: content = f.read()
-        
-        # Fix the content
-        fixed_content = fix_file_content(content)
-        
-        # Write the fixed content back
-        with open("tests/test_models.py", "w") as f: f.write(fixed_content)
-        
-        print("Fixed formatting in test_models.py")
-        
-        
-        if __name__ == "__main__":
+                def main(self):
+                # Read the original file
+                with open("tests/test_models.py", "r") as f: content = f.read()
+                
+                # Fix the content
+                fixed_content = fix_file_content(content)
+                
+                # Write the fixed content back
+                with open("tests/test_models.py", "w") as f: f.write(fixed_content)
+                
+                print("Fixed formatting in test_models.py")
+                
+                
+                if __name__ == "__main__":
         main()
         

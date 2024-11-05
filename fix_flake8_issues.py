@@ -1,37 +1,37 @@
 import re
 import sys
-    """Script to fix flake8 issues in Python files."""
+"""Script to fix flake8 issues in Python files."""
         
         
         
-        def fix_unused_imports(content) -> None:
-    """Remove unused imports."""
-lines = content.split("\n")
-imports_to_remove = [
-"typing.Dict",
-"typing.List",
-"typing.Optional",
-"typing.Tuple",
-"typing.Any",
-"typing.Union",
-"os",
-"json",
-"random",
-"numpy as np",
-"torch.optim.AdamW",
-"torch.utils.data.DataLoader",
-"torch.utils.data.Dataset",
-"torch.utils.data.ConcatDataset",
-".enhanced_transformer.EnhancedTransformer",
-".knowledge_retrieval.KnowledgeIntegrator",
-".apple_optimizations.AppleOptimizedTransformer",
-"src.models.knowledge_retrieval.KnowledgeIntegrator",
-]
-
-# Filter out lines that match unused imports
-filtered_lines = []
-for line in lines: should_keep = True
-    for unused_import in imports_to_remove:
+                def fix_unused_imports(content) -> None:
+                    """Remove unused imports."""
+        lines = content.split("\n")
+        imports_to_remove = [
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Tuple",
+        "typing.Any",
+        "typing.Union",
+        "os",
+        "json",
+        "random",
+        "numpy as np",
+        "torch.optim.AdamW",
+        "torch.utils.data.DataLoader",
+        "torch.utils.data.Dataset",
+        "torch.utils.data.ConcatDataset",
+        ".enhanced_transformer.EnhancedTransformer",
+        ".knowledge_retrieval.KnowledgeIntegrator",
+        ".apple_optimizations.AppleOptimizedTransformer",
+        "src.models.knowledge_retrieval.KnowledgeIntegrator",
+        ]
+        
+        # Filter out lines that match unused imports
+        filtered_lines = []
+        for line in lines: should_keep = True
+            for unused_import in imports_to_remove:
         if unused_import in line and("import " in line or "from " in line):
             should_keep = False
             break
@@ -92,13 +92,6 @@ def fix_line_length(content) -> None:
         return "\n".join(fixed_lines)
         
         
-        def fix_whitespace(content) -> None:
-    """Fix whitespace issues."""
-# Fix whitespace before colons
-content = re.sub(r"\s+:", ":", content)
-return content
-
-
 def fix_bare_except(content) -> None:
     """Fix bare except clauses."""
         lines = content.split("\n")
@@ -107,46 +100,22 @@ def fix_bare_except(content) -> None:
         return "\n".join(lines)
         
         
-        def fix_unused_variables(content) -> None:
-    """Fix unused variables."""
-# Replace unused batch_size assignment with a comment
-content = content.replace("batch_size = inputs.shape[0]", "# batch_size = inputs.shape[0]  # Commented out unused variable")
-return content
-
-
-def process_file(filename) -> None:
-    """Process a single file to fix all flake8 issues."""
-        with open(filename, "r", encoding="utf-8") as f: content = f.read()
+                def main(self):
+                    """Main function to process all files."""
+        files_to_process = [
+        "tests/test_features.py",
+        "tests/test_models.py",
+        "src/config/training_config.py",
+        "src/config/config.py",
+        "src/data/math_tokenizer.py",
+        "src/data/mmmu_dataloader.py",
+        "src/models/apple_optimizations.py",
+        "src/models/text_to_anything.py",
+        "src/training/train_mmmu.py",
+        ]
         
-        # Apply fixes
-        content = fix_unused_imports(content)
-        content = fix_line_length(content)
-        content = fix_whitespace(content)
-        content = fix_bare_except(content)
-        content = fix_unused_variables(content)
-        
-        # Write back to file
-        with open(filename, "w", encoding="utf-8") as f: f.write(content)
-        
-        print(f"Processed {filename}")
+        for file in files_to_process: process_file(file)
         
         
-        def main(self):
-    """Main function to process all files."""
-files_to_process = [
-"tests/test_features.py",
-"tests/test_models.py",
-"src/config/training_config.py",
-"src/config/config.py",
-"src/data/math_tokenizer.py",
-"src/data/mmmu_dataloader.py",
-"src/models/apple_optimizations.py",
-"src/models/text_to_anything.py",
-"src/training/train_mmmu.py",
-]
-
-for file in files_to_process: process_file(file)
-
-
-    if __name__ == "__main__":
+            if __name__ == "__main__":
         main()

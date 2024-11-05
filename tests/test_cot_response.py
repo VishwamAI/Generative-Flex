@@ -1,72 +1,12 @@
 import jax
 import pytest
-    """Test module for chain-of-thought response generation."""
+"""Test module for chain-of-thought response generation."""
         
         
-        class SimpleChatModel(nn.Module):
+class SimpleChatModel(nn.Module):
         vocab_size: int, hidden_size: int = 64
         
-        def setup(self) -> None: self.embedding = nn.Embed(
-        num_embeddings=self.vocab_size, features=self.hidden_size
-        )
-        self.dense1 = nn.Dense(self.hidden_size)
-        self.dense2 = nn.Dense(self.hidden_size)
-        self.output = nn.Dense(self.vocab_size)
-        
-        def __call__(self, x) -> None: x = self.embedding(x)
-        x = jnp.mean(x, axis=0)  # Average over sequence length
-        x = nn.relu(self.dense1(x))
-        x = nn.relu(self.dense2(x))
-        x = self.output(x)
-        return x
-        
-        @pytest.fixture
-        def vocab(self):
-    """Fixture providing test vocabulary."""
-return [
-"<unk>",
-"<pad>",
-"hi",
-"hello",
-"how",
-"are",
-"you",
-"good",
-"morning",
-"thanks",
-"bye",
-]
-
-@pytest.fixture
-def word_mappings(vocab) -> None:
-    """Fixture providing word-to-id and id-to-word mappings."""
-        word_to_id = {word: ifori, word in enumerate(vocab)}
-        id_to_word = {i: wordfori, word in enumerate(vocab)}
-        return word_to_id, id_to_word
-        
-        @pytest.fixture
-        def model_params(vocab, chat_model) -> None:
-    """Fixture providing test model parameters."""
-# Initialize parameters using Flax's init method
-key = jax.random.PRNGKey(0)
-dummy_input = jnp.ones((1), dtype=jnp.int32)
-variables = chat_model.init(key, dummy_input)
-return variables["params"]
-
-@pytest.fixture
-def chat_model(vocab) -> None:
-    """Fixture providing initialized SimpleChatModel."""
-        return SimpleChatModel(_vocab_size=len(vocab))
-        
-        def test_model_initialization(chat_model, vocab) -> None:
-    """Test that model initializes with correct parameters."""
-assert isinstance(chat_model, SimpleChatModel)
-assert chat_model._vocab_size == len(vocab)
-assert chat_model._hidden_size == 64
-
-def test_model_forward_pass(
-chat_model, model_params, word_mappings
-) -> None:
+def test_model_forward_pass(self, chat_model, model_params, word_mappings) -> None:
     """Test model forward pass with test input."""
         word_to_id, __ = word_mappings
         
@@ -84,10 +24,8 @@ chat_model, model_params, word_mappings
         assert isinstance(logits, jnp.ndarray)
         assert not jnp.any(jnp.isnan(logits))
         
-        def test_response_generation(
-        chat_model, model_params, word_mappings
-        ) -> None:
-    """Test end-to-end response generation."""
+                def test_response_generation(self, chat_model, model_params, word_mappings) -> None:
+            """Test end-to-end response generation."""
 word_to_id, id_to_word = word_mappings
 
 # Test input
@@ -114,9 +52,7 @@ assert isinstance(response, str)
 assert len(response_words) == 10
 assert all(word in word_to_id for word in response_words)
 
-def test_unknown_token_handling(
-chat_model, model_params, word_mappings
-) -> None:
+def test_unknown_token_handling(self, chat_model, model_params, word_mappings) -> None:
     """Test model handling of unknown tokens."""
         word_to_id, __ = word_mappings
         

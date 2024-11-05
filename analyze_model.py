@@ -21,18 +21,6 @@ def format_size(size_bytes) -> None:
         size_bytes /= 1024.0
         
         
-        def get_system_memory(self):
-    """Get current system memory usage"""
-process = psutil.Process(os.getpid())
-memory_info = process.memory_info()
-return {
-"rss": memory_info.rss,  # Resident Set Size
-"vms": memory_info.vms,  # Virtual Memory Size
-"system_total": psutil.virtual_memory().total,
-"system_available": psutil.virtual_memory().available,
-}
-
-
 def analyze_model(self):
     print("\nAnalyzing model architecture and resource usage...")
 

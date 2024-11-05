@@ -1,16 +1,16 @@
+from .layers.enhanced_transformer import EnhancedTransformerBlock
+from .layers.flash_moe import FlashAttention, MixtureOfExperts
+from .mathematical_notation import MathematicalNotationProcessor
+from .multimodal.base_transformer import BaseTransformer, TransformerBlock
+from .symbolic_math import SymbolicMathProcessor
+from transformers import PreTrainedModel, GenerationMixin
 from typing import Optio
-
-nal, Union, List, Dict, Any, Tuple
+import logging
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from .layers.enhanced_transformer import EnhancedTransformerBlock
-from .layers.flash_moe import FlashAttention, MixtureOfExperts
-from .multimodal.base_transformer import BaseTransformer, TransformerBlock
-from .mathematical_notation import MathematicalNotationProcessor
-from .symbolic_math import SymbolicMathProcessor
-from transformers import PreTrainedModel, GenerationMixin
-import logging
+
+nal, Union, List, Dict, Any, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -18,117 +18,13 @@ logger = logging.getLogger(__name__)
 class MathReasoningHead(nn.Module):
     """Math reasoning module for enhanced transformer model."""
         
-        def __init__(self, config) -> None:
-    """Initialize the math reasoning head.
-
-        Args: config: Model configuration object
-            """
-                super().__init__()
-                
-                # Use config's hidden dimension
-                self.hidden_dim = config.hidden_size if hasattr(config, "hidden_size") else 256
-                self.num_choices = 4  # Default for multiple choice
-                self.dropout_prob = (
-                config.dropout_rate if hasattr(config, "dropout_rate") else 0.1
-                )
-                
-                # Enhanced attention with more heads
-                self.num_attention_heads = (
-                config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
-                )
-                
-                # Head dimension and sequence length configuration
-                self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32
-                self.max_seq_length = (
-                config.max_position_embeddings
-                if hasattr(config, "max_position_embeddings")
-                else 512
-                )
-                
-                # Input dimension handling
-                self.input_projector = nn.Sequential(
-                nn.Linear(self.hidden_dim, self.hidden_dim),
-                nn.GELU(),
-                nn.LayerNorm(self.hidden_dim))
-                
-                # Flash Attention with increased heads
-                self.flash_attention = FlashAttention(
-                dim=self.hidden_dim,
-                num_heads=self.num_attention_heads,
-                dropout=self.dropout_prob,
-                max_seq_length=self.max_seq_length)
-                
-                # Mixture of Experts with increased capacity
-                self.math_experts = MixtureOfExperts(
-                input_dim=self.hidden_dim,
-                expert_dim=(
-                config.mlp_dim if hasattr(config, "mlp_dim") else self.hidden_dim * 4
-                ),
-                num_experts=config.num_experts if hasattr(config, "num_experts") else 4,
-                capacity_factor=(
-                config.expert_capacity_factor
-                if hasattr(config, "expert_capacity_factor")
-                else 1.25
-                ),
-                dropout=self.dropout_prob,
-                k=2,  # Use top-2 routing
-                )
-                
-                # Symbolic mathematics processor
-                self.symbolic_processor = SymbolicMathProcessor(config)
-                self.notation_processor = MathematicalNotationProcessor(config)
-                
-                # Subfield-specific expert modules
-                self.subfield_experts = nn.ModuleDict(
-                {
-                "algebra": EnhancedTransformerBlock(
-                config=config, dropout=self.dropout_prob
-                ),
-                "calculus": EnhancedTransformerBlock(
-                config=config, dropout=self.dropout_prob
-                ),
-                "arithmetic": EnhancedTransformerBlock(
-                config=config, dropout=self.dropout_prob
-                ),
-                "statistics": EnhancedTransformerBlock(
-                config=config, dropout=self.dropout_prob
-                ),
-                }
-                )
-                
-                # Expert routing network
-                self.router = nn.Sequential(
-                nn.Linear(self.hidden_dim, self.hidden_dim),
-                nn.GELU(),
-                nn.LayerNorm(self.hidden_dim),
-                nn.Linear(self.hidden_dim, len(self.subfield_experts)),
-                nn.Softmax(dim=-1))
-                
-                # Output layers with improved capacity
-                self.dense = nn.Sequential(
-                nn.Linear(self.hidden_dim, self.hidden_dim * 4),
-                nn.GELU(),
-                nn.LayerNorm(self.hidden_dim * 4),
-                nn.Dropout(self.dropout_prob),
-                nn.Linear(self.hidden_dim * 4, self.hidden_dim))
-                
-                self.activation = nn.GELU()
-                self.layer_norm = nn.LayerNorm(self.hidden_dim)
-                self.classifier = nn.Linear(self.hidden_dim, self.num_choices)
-                self.dropout = nn.Dropout(self.dropout_prob)
-                
-                def forward(
-                self,
-                hidden_states: torch.Tensor,
-                attention_mask: Optional[torch.Tensor] = None,
-                expressions: Optional[List[str]] = None,
-                **kwargs) -> Dict[str, torch.Tensor]:
-            """Forward pass of the math reasoning head.
+                                def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None, expressions: Optional[List[str]] = None, **kwargs) -> Dict[str, torch.Tensor]:
+                    """Forward pass of the math reasoning head.
 
             Args: hidden_states: Input tensor
                 attention_mask: Optionalattentionmask, expressions: Optionallistof mathematical expressions
                 **kwargs: Additionalkeywordarguments, Returns: Dictionarycontainingmodel outputs and auxiliary information
-                    """
+"""
                         # Get input dimensions
                         batch_size = hidden_states.size(0)
                         seq_length = hidden_states.size(1)
@@ -277,19 +173,12 @@ class MathReasoningHead(nn.Module):
                         **aux_info,
                         }
                         
-                        def _set_gradient_checkpointing(
-                        self,
-                        module: nn.Module,
-                        value: bool = False
-                        ) -> None:
-                    """Enable or disable gradient checkpointing for a module.
+                                                def _set_gradient_checkpointing(self, module: nn.Module, value: bool = False) -> None:
+                            """Enable or disable gradient checkpointing for a module.
 
                                                                                         Args: module: PyTorch module
                                                                                             value: Whethertoenable gradient checkpointing
-                                                                                                """
+"""
                                                                                                     if isinstance(module, (BaseTransformer, TransformerBlock)):
                                                                                                     module.gradient_checkpointing = value
                                                                                                     
-                                                                                                    def enable_gradient_checkpointing(self) -> None:
-                                                                                                """Enable gradient checkpointing for memory efficiency."""
-self.apply(lambda module: self._set_gradient_checkpointing(module, True))

@@ -7,8 +7,8 @@
     
     
     @dataclass
-    class TrainingConfig:
-"""Configuration for model training."""
+class TrainingConfig:
+    """Configuration for model training."""
 
 
 # Model configuration
@@ -24,17 +24,3 @@ weight_decay: float = field(default=0.01), warmup_ratio: float = field(default=0
 # Generation configuration
 generation_config: Optional[Dict[str, Any]] = field(default=None)
 
-
-def __post_init__(self):
-    """Initialize default values after dataclass initialization."""
-        
-        
-        if not self.subjects: self.subjects = ["Math", "Computer_Science"]
-        
-        if self.generation_config is None: self.generation_config = {
-        "do_sample": True,
-        "temperature": 0.7,
-        "top_p": 0.9,
-        "max_length": 512,
-        }
-        

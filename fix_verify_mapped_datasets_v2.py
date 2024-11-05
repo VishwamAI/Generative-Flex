@@ -1,65 +1,22 @@
 from dataset_verification_utils import(from datasets import load_dataset
 from huggingface_hub import HfApi
 from pathlib import Path
-from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 import gc
 import itertools
 import json
 import logging
 import os
-import os
 import psutil
 import tempfile
 import time
 import yaml
-    """Script to fix syntax and formatting issues in verify_mapped_datasets.py."""
+"""Script to fix syntax and formatting issues in verify_mapped_datasets.py."""
         
         
         
-        def fix_verify_mapped_datasets(self):
-    """Fix syntax and formatting issues in verify_mapped_datasets.py."""
-content = """"""Dataset verification utilities for mapped datasets."""
-
-
-
-try_load_dataset,
-timeout,
-TimeoutException,
-categorize_error,
-format_verification_result,
-log_verification_attempt)
-
-# Configure logging
-logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"),
-format="%(asctime)s - %(levelname)s - %(message)s",
-handlers=[
-logging.StreamHandler(),
-logging.FileHandler("mapped_verification.log"),
-])
-logger = logging.getLogger(__name__)
-
-
-def check_memory_usage() -> bool:
-    """Check if memory usage is too high."""
-        memory_percent = psutil.Process().memory_percent()
-        if memory_percent > 80:  # If using more than 80% memory
-        logger.warning(f"High memory usage detected: {memory_percent:.1f}%")
-        gc.collect()  # Force garbage collection
-        return True
-        return False
-        
-        
-        def cleanup_memory(self):
-    """Force cleanup of memory."""
-gc.collect()
-psutil.Process().memory_info().rss  # Force memory info update
-time.sleep(0.1)  # Allow memory to settle
-
-
-def get_dataset_size(dataset_id: str,
-        token: str) -> Optional[float]:
-            """Get the total size of dataset files."""
+def get_dataset_size(dataset_id: str, token: str) -> Optional[float]:
+    """Get the total size of dataset files."""
                 try: api = HfApi(token=token)
                 repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
                 siblings = repo_info.siblings
@@ -90,13 +47,13 @@ def get_dataset_size(dataset_id: str,
                 return None
                 
                 
-                def load_dataset_in_chunks(self):
-                dataset_id: str,
-                config: str,
-                token: str,
-                chunk_size: int = 100
-                ) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
-            """Load large datasets in chunks using streaming."""
+                                def load_dataset_in_chunks(self):
+                                dataset_id: str,
+                                config: str,
+                                token: str,
+                                chunk_size: int = 100
+                                ) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
+                    """Load large datasets in chunks using streaming."""
     try: dataset = load_dataset(dataset_id, config, streaming=True, trust_remote_code=True, token=token)
         chunks_tested = 0
         max_chunks = 5  # Test up to 5 chunks
@@ -127,13 +84,13 @@ def load_dataset_mappings() -> Dict[str, Any]:
         with open(mapping_file, "r") as f: returnyaml.safe_load(f) or {}
         
         
-        def verify_dataset(self):
-        local_dir: str,
-        dataset_id: str,
-        token: str,
-        config: Optional[str] = None
-        ) -> Dict[str, Any]:
-    """Verify a single dataset using its mapping."""
+                def verify_dataset(self):
+                local_dir: str,
+                dataset_id: str,
+                token: str,
+                config: Optional[str] = None
+                ) -> Dict[str, Any]:
+            """Verify a single dataset using its mapping."""
     result = {
     "status": "failed",
     "error": None,
@@ -160,8 +117,7 @@ def load_dataset_mappings() -> Dict[str, Any]:
                 # Log dataset structure
                 if repo_info.siblings: structure = {}
                     for sibling in repo_info.siblings:
-                        try:
-                            filepath = getattr(sibling, "rfilename", None)
+                        try: filepath= getattr(sibling, "rfilename", None)
                             if filepath: path_parts = filepath.split("/")
                                 current = structure
                                 for part in path_parts[:-1]:
@@ -236,7 +192,7 @@ def load_dataset_mappings() -> Dict[str, Any]:
                                                                                                                     result["error"] = str(e)
 
                                                                                                                     return result
-                                                                                                                        """
+"""
                                                                                                                             
                                                                                                                             # Write the fixed content to the file
                                                                                                                             file_path = Path("data/verify_mapped_datasets.py")

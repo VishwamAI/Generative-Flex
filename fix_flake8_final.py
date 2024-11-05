@@ -17,19 +17,15 @@ def remove_unused_imports(content) -> None:
         used_names = set()
         import_names = set()
         
-        class NameCollector(ast.NodeVisitor):
-        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Load):
-        used_names.add(node.id)
-        self.generic_visit(node)
-        
+class NameCollector(ast.NodeVisitor):
         def visit_Attribute(self, node) -> None: ifisinstance(node.value, ast.Name):
-        used_names.add(node.value.id)
-        self.generic_visit(node)
-        
-        NameCollector().visit(tree)
-        
-        # Second pass: onlykeepimports that are used
-        for i, line in enumerate(lines):
+            used_names.add(node.value.id)
+            self.generic_visit(node)
+            
+            NameCollector().visit(tree)
+            
+            # Second pass: onlykeepimports that are used
+            for i, line in enumerate(lines):
         if skip_next: skip_next = False
         continue
         
@@ -62,19 +58,19 @@ def remove_unused_imports(content) -> None:
         return "\n".join(new_lines)
         
         
-        def fix_line_length(content, max_length=88) -> None:
-    """Fix lines that are too long with better formatting."""
-lines = content.split("\n")
-new_lines = []
-
-for line in lines: iflen(line) <= max_length: new_lines.append(line)
-        continue
-
-        indent = len(line) - len(line.lstrip())
-        content = line.lstrip()
-
-        # Handle different cases
-        if "=" in content and not content.startswith("return"):
+        def fix_line_length(self, content, max_length=88) -> None:
+            """Fix lines that are too long with better formatting."""
+    lines = content.split("\n")
+    new_lines = []
+    
+    for line in lines: iflen(line) <= max_length: new_lines.append(line)
+            continue
+    
+            indent = len(line) - len(line.lstrip())
+            content = line.lstrip()
+    
+            # Handle different cases
+            if "=" in content and not content.startswith("return"):
             # Split assignment
             lhs, rhs = content.split("=", 1)
             new_lines.append(" " * indent + lhs.rstrip() + "=\\")
@@ -107,7 +103,7 @@ for line in lines: iflen(line) <= max_length: new_lines.append(line)
                                         return "\n".join(new_lines)
 
 
-def add_missing_imports(content) -> None:
+def add_missing_imports(self, content) -> None:
     """Add imports for undefined names."""
         required_imports = {
         "Tuple": "from typing import Tuple",
@@ -126,29 +122,26 @@ def add_missing_imports(content) -> None:
         defined_names = set()
         used_names = set()
         
-        class NameAnalyzer(ast.NodeVisitor):
+class NameAnalyzer(ast.NodeVisitor):
         def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-        defined_names.add(node.id)
-        elif isinstance(node.ctx, ast.Load):
+            defined_names.add(node.id)
+            elif isinstance(node.ctx, ast.Load):
         used_names.add(node.id)
         self.generic_visit(node)
         
-        def visit_Import(self, node) -> None: foraliasin node.names: defined_names.add(alias.asname or alias.name)
-        self.generic_visit(node)
-        
         def visit_ImportFrom(self, node) -> None: foraliasin node.names: defined_names.add(alias.asname or alias.name)
-        self.generic_visit(node)
-        
-        NameAnalyzer().visit(tree)
-        
-        # Add required imports
-        lines = content.split("\n")
-        import_lines = []
-        for name in used_names - defined_names: ifnamein, required_imports: import_lines.append(required_imports[name])
-        
-        # Add imports at the top, after any module docstring
-        if import_lines: docstring_end = 0
-        if lines and lines[0].startswith('"""'):
+            self.generic_visit(node)
+            
+            NameAnalyzer().visit(tree)
+            
+            # Add required imports
+            lines = content.split("\n")
+            import_lines = []
+            for name in used_names - defined_names: ifnamein, required_imports: import_lines.append(required_imports[name])
+            
+            # Add imports at the top, after any module docstring
+            if import_lines: docstring_end = 0
+    if lines and lines[0].startswith('"""'):
         for i, line in enumerate(lines[1:], 1):
         if '"""' in line: docstring_end = i + 1
         break
@@ -157,16 +150,16 @@ def add_missing_imports(content) -> None:
         return content
         
         
-        def fix_unused_variables(content) -> None:
-    """Fix unused variables by prefixing with underscore."""
-tree = ast.parse(content)
-assigned_names = set()
-used_names = set()
-
-class VariableAnalyzer(ast.NodeVisitor):
-    def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-            assigned_names.add(node.id)
-            elif isinstance(node.ctx, ast.Load):
+        def fix_unused_variables(self, content) -> None:
+            """Fix unused variables by prefixing with underscore."""
+    tree = ast.parse(content)
+    assigned_names = set()
+    used_names = set()
+    
+    class VariableAnalyzer(ast.NodeVisitor):
+        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
+                assigned_names.add(node.id)
+                elif isinstance(node.ctx, ast.Load):
                 used_names.add(node.id)
                 self.generic_visit(node)
 
@@ -184,14 +177,14 @@ class VariableAnalyzer(ast.NodeVisitor):
                         return content
 
 
-def fix_import_order(content) -> None:
-    """Fix import order to follow PEP8."""
-        lines = content.split("\n")
-        import_lines = []
-        other_lines = []
-        current_section = other_lines
-        
-        for line in lines: ifline.lstrip().startswith(("import ", "from ")):
+        def fix_import_order(self, content) -> None:
+            """Fix import order to follow PEP8."""
+            lines = content.split("\n")
+            import_lines = []
+            other_lines = []
+            current_section = other_lines
+            
+            for line in lines: ifline.lstrip().startswith(("import ", "from ")):
         if current_section is not import_lines: import_lines.append("")  # Add blank line before imports
         current_section = import_lines
         else: ifline.strip() == "" and current_section is import_lines: continue# Skip empty lines between imports
@@ -204,26 +197,6 @@ def fix_import_order(content) -> None:
         return "\n".join(import_lines + ([] if not import_lines else [""]) + other_lines)
         
         
-        def process_file(file_path) -> None:
-    """Process a single file fixing all flake8 issues."""
-print(f"Processing {file_path}...")
-try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
-
-        # Apply fixes in specific order
-        content = fix_import_order(content)
-        content = remove_unused_imports(content)
-        content = add_missing_imports(content)
-        content = fix_line_length(content)
-        content = fix_unused_variables(content)
-
-        # Write back
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-            print(f"Successfully processed {file_path}")
-            except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-
-                traceback.print_exc()
-
-
 def main(self):
     """Fix flake8 issues in all Python files."""
         src_dir = Path("src")

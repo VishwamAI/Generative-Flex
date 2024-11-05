@@ -32,9 +32,9 @@ def fix_file_structure(content) -> None:
         continue
         
         # Handle docstring
-        if line.startswith('"""') and not docstring: current_section = docstring
+if line.startswith('"""') and not docstring: current_section = docstring
         while i < len(lines) and not (
-        lines[i].rstrip().endswith('"""') and i > 0
+lines[i].rstrip().endswith('"""') and i > 0
         ):
         current_section.append(lines[i])
         i += 1
@@ -118,18 +118,18 @@ def fix_file_structure(content) -> None:
         )
         
         
-        def main(self):
-        # Read the original file
-        with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-        
-        # Fix the structure
-        fixed_content = fix_file_structure(content)
-        
-        # Write the fixed content back
-        with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
-        
-        print("File structure fixed in text_to_anything.py")
-        
-        if __name__ == "__main__":
+                def main(self):
+                # Read the original file
+            with open("src/models/text_to_anything.py", "r") as f: content = f.read()
+                
+                # Fix the structure
+                fixed_content = fix_file_structure(content)
+                
+                # Write the fixed content back
+                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+                
+                print("File structure fixed in text_to_anything.py")
+                
+            if __name__ == "__main__": 
         main()
         

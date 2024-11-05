@@ -33,8 +33,8 @@ def fix_file_content(content) -> None:
         line = other_lines[i].rstrip()
         
         # Handle docstring
-        if line.startswith('"""') and not sections["docstring"]:
-        while i < len(other_lines) and not(other_lines[i].rstrip().endswith('"""') and i > 0
+if line.startswith('"""') and not sections["docstring"]:
+    while i < len(other_lines) and not(other_lines[i].rstrip().endswith('"""') and i > 0
         ):
         sections["docstring"].append(other_lines[i])
         i += 1
@@ -73,7 +73,7 @@ def fix_file_content(content) -> None:
         # Add remaining lines
         if line.strip():
         sections["remaining"].append(line)
-        else: ifsections["remaining"] and sections["remaining"][-1] != "":
+    else: ifsections["remaining"] and sections["remaining"][-1] != "":
         sections["remaining"].append("")
         i += 1
         
@@ -84,7 +84,7 @@ def fix_file_content(content) -> None:
         if "@dataclass" in line: config_lines.append("@dataclass")
         in_config = True
         elif "class GenerationConfig" in line: config_lines.append("class GenerationConfig:")
-        config_lines.append('    """Configuration for text-to-anything generation."""')
+config_lines.append('    """Configuration for text-to-anything generation."""')
         elif in_config and ":" in line and "=" in line:
         # Fix field definitions
         name, type_and_default = line.split(":", 1)
@@ -120,19 +120,19 @@ def fix_file_content(content) -> None:
         return "\n".join(result)
         
         
-        def main(self):
-        # Read the original file
-        with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-        
-        # Fix the content
-        fixed_content = fix_file_content(content)
-        
-        # Write the fixed content back
-        with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
-        
-        print("Comprehensive fixes applied to text_to_anything.py")
-        
-        
-        if __name__ == "__main__":
+                def main(self):
+                # Read the original file
+                with open("src/models/text_to_anything.py", "r") as f: content = f.read()
+                
+                # Fix the content
+                fixed_content = fix_file_content(content)
+                
+                # Write the fixed content back
+                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+                
+                print("Comprehensive fixes applied to text_to_anything.py")
+                
+                
+                if __name__ == "__main__":
         main()
         

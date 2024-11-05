@@ -3,9 +3,8 @@
     from pathlib import Path
     
     
-    def fix_function_parameters(self,
-    content: str):
-"""Fix function parameter formatting."""
+        def fix_function_parameters(self, content: str):
+        """Fix function parameter formatting."""
 # Fix self parameter definitions
 content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*self\s* \
 s*\)',
@@ -29,9 +28,8 @@ content
 return content
 
 
-def fix_method_calls(self,
-        content: str):
-            """Fix method call formatting."""
+def fix_method_calls(self, content: str):
+    """Fix method call formatting."""
                 # Fix TransformerBlock calls
                 content = re.sub(r'x\s*=\s*TransformerBlock\([^)]+\)\s*\(\s*x\s* \
                 s*[^)]+\)',
@@ -48,9 +46,8 @@ def fix_method_calls(self,
                 return content
                 
                 
-                def fix_indentation(self,
-                content: str):
-            """Fix indentation issues."""
+                                def fix_indentation(self, content: str):
+                    """Fix indentation issues."""
 lines = content.split('\n')
 fixed_lines = []
 current_indent = 0 for line in lines: stripped = line.lstrip()
@@ -74,9 +71,8 @@ current_indent = 0 for line in lines: stripped = line.lstrip()
                         return '\n'.join(fixed_lines)
 
 
-def fix_dict_formatting(self,
-        content: str):
-            """Fix dictionary formatting."""
+def fix_dict_formatting(self, content: str):
+    """Fix dictionary formatting."""
                 # Fix dictionary comprehensions
                 content = re.sub(r'\{\s*([^:]+)\s*:\s*([^}]+)\s+for\s+([^}]+)\s*\}',
                 r'{\1: \2 for \3}',
@@ -92,9 +88,8 @@ def fix_dict_formatting(self,
                 return content
                 
                 
-                def process_file(self,
-                file_path: Path):
-            """Process a single file to fix syntax patterns."""
+                                def process_file(self, file_path: Path):
+                    """Process a single file to fix syntax patterns."""
 try: withopen(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply fixes in sequence

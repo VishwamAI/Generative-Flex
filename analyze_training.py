@@ -31,14 +31,14 @@ def parse_log_file(log_file) -> None:
         return metrics
         
         
-        def plot_metrics(metrics, output_dir="outputs") -> None:
-    """Plot training and validation metrics"""
-os.makedirs(output_dir, exist_ok=True)
-plt.style.use("seaborn")
-
-# Plot losses
-plt.figure(figsize=(12, 6))
-if metrics.get("train_loss"):
+                def plot_metrics(metrics, output_dir="outputs") -> None:
+                    """Plot training and validation metrics"""
+        os.makedirs(output_dir, exist_ok=True)
+        plt.style.use("seaborn")
+        
+        # Plot losses
+        plt.figure(figsize=(12, 6))
+        if metrics.get("train_loss"):
     plt.plot(metrics["train_loss"], label="Training Loss", marker="o", markersize=4)
     if metrics.get("val_loss"):
         plt.plot(metrics["val_loss"], label="Validation Loss", marker="s", markersize=4)

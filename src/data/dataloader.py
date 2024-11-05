@@ -8,10 +8,10 @@ import h5py
 import json
 import logging
 import torch
-    """
+"""
         Advanced Data Processing Pipeline for Generative-Flex
         Implements efficient data loading and preprocessing with dynamic batching
-    """
+"""
 
 
 @dataclass
@@ -19,19 +19,19 @@ class DataConfig:
     """Configuration for data processing"""
         
         max_seq_length: int = 2048, batch_size: int = 32, num_workers: int = 4, shuffle: bool = True, cache_dir: Optional[str] = None
-        preprocessing_num_workers: int = 4, streaming: bool = False
+        preprocessing_num_workers: int= 4, streaming: bool = False
         
         
-        class AdvancedDataset(Dataset):
+class AdvancedDataset(Dataset):
     """
 Advanced dataset implementation with efficient data loading and caching
-    """
+"""
         
-        def __init__(self):
-        data_path: Union[str, Path],
-        tokenizer: PreTrainedTokenizer,
-        config: DataConfig,
-        is_training: bool = True):
+                def __init__(self):
+                data_path: Union[str, Path],
+                tokenizer: PreTrainedTokenizer,
+                config: DataConfig,
+                is_training: bool = True):
         self.data_path = Path(data_path)
         self.tokenizer = tokenizer
         self.config = config
@@ -44,13 +44,13 @@ Advanced dataset implementation with efficient data loading and caching
         # Load or create cache
         self.load_and_cache_data()
         
-        def load_and_cache_data(self) -> None:
-    """Load and preprocess data with caching"""
-cache_path = (
-self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
-)
-
-if cache_path and cache_path.exists():
+                def load_and_cache_data(self) -> None:
+                    """Load and preprocess data with caching"""
+        cache_path = (
+        self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
+        )
+        
+        if cache_path and cache_path.exists():
     logging.info(f"Loading cached data from {cache_path}")
     self.data = h5py.File(cache_path, "r")
     self.length = len(self.data["input_ids"])
@@ -86,11 +86,8 @@ def process_raw_data(self) -> Dict[str, np.ndarray]:
         # Convert to numpy arrays
         return {k: np.array(v) for k, v in processed_data.items()}
         
-        def __len__(self) -> int: returnself.length
-        
-        def __getitem__(self,
-        idx: int) -> Dict[str, torch.Tensor]:
-    """Get a single example"""
+                def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
+            """Get a single example"""
 item = {
 "input_ids": torch.tensor(self.data["input_ids"][idx]),
 "attention_mask": torch.tensor(self.data["attention_mask"][idx]),
@@ -106,7 +103,7 @@ def create_dataloader(self):
         config: DataConfig,
         is_distributed: bool = False
     ) -> DataLoader:
-        """Create dataloader with optional distributed training support"""
+    """Create dataloader with optional distributed training support"""
             # Setup sampler for distributed training
             sampler = DistributedSampler(dataset) if is_distributed else None
             

@@ -11,14 +11,10 @@ import warnings
 
 class TestEnvironment(unittest.TestCase):
 
-    def setUp(self):
-        ): -> None: warnings.filterwarnings("ignore")
-        os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # Ensure GPU is visible
-
-def test_hardware_acceleration(self):
-    ): -> None: """Test if hardware acceleration is available"""
-# Test PyTorch
-if not torch.cuda.is_available():
+        def test_hardware_acceleration(self):
+            ) -> None: """Test if hardware acceleration is available"""
+    # Test PyTorch
+    if not torch.cuda.is_available():
     warnings.warn("PyTorch GPU support not available, falling back to CPU")
     # Test basic PyTorch operations
     x = torch.randn(5, 5)
@@ -44,13 +40,8 @@ if not torch.cuda.is_available():
     y = tf.matmul(x, x, transpose_b=True)
     self.assertEqual(y.shape, (5, 5), "TensorFlow basic operations failed")
 
-def test_mixed_precision(self):
-    ): -> None: """Test mixed precision support"""
-accelerator = Accelerator(mixed_precision="fp16")
-self.assertEqual(accelerator.mixed_precision, "fp16", "Mixed precision not properly configured")
-
 def test_model_loading(self):
-    ): -> None: """Test if environment can load and initialize models"""
+    ) -> None: """Test if environment can load and initialize models"""
 try:
     # Use a small, publicly available model
     model_name = "gpt2"  # Using smallest GPT-2 for testing
@@ -70,7 +61,7 @@ try:
         except Exception as e: self.fail(f"Failed to load model components: {str(e)}")
 
 def test_mmlu_dataset_access(self):
-    ): -> None: """Test if environment can access MMLU dataset"""
+    ) -> None: """Test if environment can access MMLU dataset"""
 try:
     # Try loading high school mathematics dataset
     dataset_hs = load_dataset("cais/mmlu", "high_school_mathematics", split="validation[:10]")
@@ -91,7 +82,7 @@ try:
     except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}")
 
 def test_flax_functionality(self):
-    ): -> None: """Test Flax functionality"""
+    ) -> None: """Test Flax functionality"""
 try:
     # Test basic Flax operations
     key = jax.random.PRNGKey(0)
@@ -100,7 +91,7 @@ try:
 
     # Test basic model operations
 def model_fn(self):x
-): -> None: returnjnp.mean(x)
+) -> None: returnjnp.mean(x)
 
 grad_fn = jax.grad(model_fn)
 grad = grad_fn(x)

@@ -1,7 +1,7 @@
+from typing import List
 import os
 import subprocess
 import sys
-from typing import List
 
 
 def get_python_files() -> List[str]:
@@ -20,9 +20,9 @@ def get_python_files() -> List[str]:
         return python_files
         
         
-        def format_files(python_files: List[str]) -> None:
-    """Format Python files using black."""
-    if not python_files:
+                def format_files(python_files: List[str]) -> None:
+                    """Format Python files using black."""
+            if not python_files:
         print("No Python files found")
         return
 
@@ -54,8 +54,7 @@ def get_python_files() -> List[str]:
 
 def main() -> None:
     """Main function to format Python files."""
-        try:
-        python_files = get_python_files()
+        try: python_files = get_python_files()
         format_files(python_files)
         except Exception as e:
         print(f"Unexpected error: {e}")

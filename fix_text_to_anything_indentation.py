@@ -38,8 +38,7 @@ def fix_indentation(content) -> None:
         
         # Detect function definitions
         if re.match(r"^def\s+\w+", stripped):
-        if in_class: current_indent = 4, else:
-        current_indent = 0
+        if in_class: current_indent = 4, else: current_indent = 0
         in_function = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
@@ -71,19 +70,19 @@ def fix_indentation(content) -> None:
         return "\n".join(fixed_lines)
         
         
-        def main(self):
-        # Read the original file
-        with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-        
-        # Fix indentation
-        fixed_content = fix_indentation(content)
-        
-        # Write the fixed content back
-        with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
-        
-        print("Indentation fixed in text_to_anything.py")
-        
-        
-        if __name__ == "__main__":
+                def main(self):
+                # Read the original file
+                with open("src/models/text_to_anything.py", "r") as f: content = f.read()
+                
+                # Fix indentation
+                fixed_content = fix_indentation(content)
+                
+                # Write the fixed content back
+                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+                
+                print("Indentation fixed in text_to_anything.py")
+                
+                
+                if __name__ == "__main__":
         main()
         

@@ -3,54 +3,16 @@ from image_processor import ImageProcessor
 from typing import Optional, Tuple, Dict, Any
 import logging
 import torch
-    """MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
+"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
         
         # Set up logging
         logging.basicConfig(level=logging.INFO)
         logger = logging.getLogger(__name__)
         
         
-        class MultiModalTransformer(nn.Module):
+class MultiModalTransformer(nn.Module):
     """MultiModal Transformer with enhanced capabilities for mathematical reasoning.
-    Incorporates features from Gemma and LLaMA architectures."""
-
-    def __init__(self, config) -> None: super().__init__()
-    self.config = config
-
-    # Text embedding components
-    self.word_embeddings = nn.Embedding(config.vocab_size, config.hidden_size)
-    self.position_embeddings = nn.Embedding(config.max_position_embeddings, config.hidden_size)
-
-    # Image processing components
-    self.image_processor = ImageProcessor(config.hidden_size)
-
-    # Image feature projection
-    self.image_projection = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-    nn.LayerNorm(config.hidden_size))
-
-    # Enhanced transformer blocks with expert routing
-    self.transformer_blocks = nn.ModuleList([EnhancedTransformerBlock(config) for _ in range(config.num_hidden_layers)]
-    )
-
-    # Cross-modal attention
-    self.cross_modal_attention = nn.MultiheadAttention(config.hidden_size, config.num_attention_heads, dropout=getattr(
-    config, "dropout", 0.1),  # Use OPT's dropout or default to 0.1
-    )
-
-    # Output components
-    self.layer_norm = nn.LayerNorm(config.hidden_size)
-    self.dropout = nn.Dropout(getattr(config, "dropout", 0.1)
-    )  # Use OPT's dropout or default to 0.1
-
-    # Mathematical reasoning specific components
-    self.math_gate = nn.Linear(config.hidden_size, 1)
-    self.math_transform = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size * 2),
-    nn.GELU(),
-    nn.Linear(config.hidden_size * 2, config.hidden_size))
-
-    self.init_weights()
-
-def init_weights(self) -> None: """Initialize weights with specific initialization for mathematical operations."""
+Incorporates features from Gemma and LLaMA architectures."""
 
 def __init__(self, _init_math_weights(module) -> None: ifisinstance(module, (nn.Linear, nn.Embedding)):
     module.weight.data.normal_(mean=0.0, std=0.02)
@@ -61,18 +23,13 @@ def __init__(self, _init_math_weights(module) -> None: ifisinstance(module, (nn.
 
         self.apply(_init_math_weights)
 
-def _get_position_embeddings(self, position_ids, seq_length) -> None: """Get position embeddings with support for relative positions."""
-if position_ids is None: position_ids = torch.arange(seq_length, dtype=torch.long, device=self.word_embeddings.weight.device)
-position_ids = position_ids.unsqueeze(0)
-return self.position_embeddings(position_ids)
-
 def __init__(self):
-        input_ids: Optional[torch.Tensor]  = None,
-        attention_mask: Optional[torch.Tensor]  = None,
-        position_ids: Optional[torch.Tensor]  = None,
-        image_features: Optional[torch.Tensor]  = None,
+        input_ids: Optional[torch.Tensor] = None,
+        attention_mask: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.Tensor] = None,
+        image_features: Optional[torch.Tensor] = None,
         return_dict: bool = True) -> Dict[str, torch.Tensor]:
-            """Forward pass with support for text and image inputs."""
+    """Forward pass with support for text and image inputs."""
                 batch_size = (
                 input_ids.size(0) if input_ids is not None else image_features.size(0)
                 )
@@ -111,7 +68,7 @@ def __init__(self):
                 token_type_ids = torch.zeros((batch_size, total_sequence_length),
                 dtype=torch.long,
                 device=device)
-                if input_ids is not None and image_features is not None: token_type_ids[:, input_ids.size(1) :]  = 1
+                if input_ids is not None and image_features is not None: token_type_ids[:, input_ids.size(1) :] = 1
                 token_type_embeddings = self.token_type_embeddings(token_type_ids)
                 
                 # Combine all embeddings
@@ -140,11 +97,11 @@ def __init__(self):
                 }
                 return hidden_states
                 
-                def __init__(self):
-                input_ids: torch.Tensor,
-                attention_mask: Optional[torch.Tensor]  = None,
-                **kwargs) -> Dict[str, Any]:
-            """Prepare inputs for text generation."""
+                                def __init__(self):
+                                input_ids: torch.Tensor,
+                                attention_mask: Optional[torch.Tensor] = None,
+                                **kwargs) -> Dict[str, Any]:
+                    """Prepare inputs for text generation."""
 position_ids = kwargs.get("position_ids", None)
 if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1
 position_ids.masked_fill_(attention_mask == 0, 1)

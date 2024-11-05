@@ -6,24 +6,15 @@ import traceback
 
 
 
-def fix_syntax_errors(content) -> None:
-    """Fix common syntax errors."""
-        # Fix unterminated f-strings
-        content = re.sub(r'f"([^"]*?)(?<!\\)$', r'f"\1"', content, flags=re.MULTILINE)
-        content = re.sub(r"f'([^']*?)(?<!\\)$", r"f'\1'", content, flags=re.MULTILINE)
+                def fix_unused_imports(content) -> None:
+                    """Remove unused imports."""
+        try: lines = content.split("\n")
+            tree = ast.parse(content)
+            imports = []
+            used_names = set()
         
-        return content
-        
-        
-        def fix_unused_imports(content) -> None:
-    """Remove unused imports."""
-try: lines = content.split("\n")
-    tree = ast.parse(content)
-    imports = []
-    used_names = set()
-
-    # Collect all imports
-    for node in ast.walk(tree):
+            # Collect all imports
+            for node in ast.walk(tree):
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             for n in node.names: imports.append((n.name, n.asname or n.name))
                 elif isinstance(node, ast.Name):
@@ -49,7 +40,7 @@ try: lines = content.split("\n")
 
                                                 return "\n".join(new_lines)
                                                 except SyntaxError: returncontentdef fix_line_length(content, max_length=88) -> None:
-                                                    """Fix lines that are too long."""
+            """Fix lines that are too long."""
                                                         lines = content.split("\n")
                                                         new_lines = []
                                                         
@@ -72,33 +63,33 @@ try: lines = content.split("\n")
                                                         return "\n".join(new_lines)
                                                         
                                                         
-                                                        def fix_undefined_names(content) -> None:
-                                                    """Fix undefined names by adding imports."""
-try: undefined_fixes = {
-    "PretrainedConfig": "from transformers import PretrainedConfig",
-    "PreTrainedModel": "from transformers import PreTrainedModel",
-    "Tuple": "from typing import Tuple",
-    "os": "import os",
-    }
-
-    lines = content.split("\n")
-    imports_added = set()
-
-    # Add necessary imports at the top
-    for name, import_stmt in undefined_fixes.items():
+                                                                                                                def fix_undefined_names(content) -> None:
+                                                                                                                    """Fix undefined names by adding imports."""
+                                                        try: undefined_fixes = {
+                                                            "PretrainedConfig": "from transformers import PretrainedConfig",
+                                                            "PreTrainedModel": "from transformers import PreTrainedModel",
+                                                            "Tuple": "from typing import Tuple",
+                                                            "os": "import os",
+                                                            }
+                                                        
+                                                            lines = content.split("\n")
+                                                            imports_added = set()
+                                                        
+                                                            # Add necessary imports at the top
+                                                            for name, import_stmt in undefined_fixes.items():
         if name in content and import_stmt not in content: lines.insert(0, import_stmt)
             imports_added.add(import_stmt)
 
             return "\n".join(lines)
             except Exception: returncontentdef fix_unused_variables(content) -> None:
-                """Fix unused variables by prefixing them with _."""
+                                                            """Fix unused variables by prefixing them with _."""
                     try: tree = ast.parse(content)
                     unused_vars = set()
                     
-                    class UnusedVarVisitor(ast.NodeVisitor):
-                    def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-                    unused_vars.add(node.id)
-                    elif isinstance(node.ctx, ast.Load):
+class UnusedVarVisitor(ast.NodeVisitor):
+        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
+                        unused_vars.add(node.id)
+                        elif isinstance(node.ctx, ast.Load):
                     unused_vars.discard(node.id)
                     
                     UnusedVarVisitor().visit(tree)
@@ -107,7 +98,7 @@ try: undefined_fixes = {
                     
                     return content
                     except SyntaxError: returncontentdef process_file(file_path) -> None:
-                """Process a single file fixing all flake8 issues."""
+        """Process a single file fixing all flake8 issues."""
 try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
 
         # First fix syntax errors

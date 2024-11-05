@@ -1,8 +1,9 @@
-#!/usr/bin/env python3
+from typing import List
 import os
 import subprocess
 import sys
-from typing import List
+
+#!/usr/bin/env python3
 
 
 def get_python_files() -> List[str]:

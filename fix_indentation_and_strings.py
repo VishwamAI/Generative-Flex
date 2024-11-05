@@ -1,37 +1,17 @@
+from pathlib import Path
 import os
 import re
-from pathlib import Path
 
 
-def fix_string_literals(self, content):
-    """Fix string literal formatting issues."""
-        # Fix triple-quoted docstrings
-        content = re.sub(r'"""([^"]*)"""', lambda m: f'"""{m.group(1).strip()}"""', content)
+                def fix_nested_blocks(self, content):
+                    """Fix indentation in nested blocks."""
+        lines = content.split("\n")
+        fixed_lines = []
+        indent_level = 0
+        in_class = False
+        in_function = False
         
-        # Fix f-string formatting
-        content = re.sub(
-        r'f"([^"]*)"',
-        lambda m: f'f"{m.group(1).replace("{ ", "{").replace(" }", "}")}"',
-        content)
-        
-        # Fix multiline strings
-        content = re.sub(
-        r'"""([^"]*)"""\s*\+\s*"""([^"]*)"""',
-        lambda m: f'"""{m.group(1).strip()}\n{m.group(2).strip()}"""',
-        content)
-        
-        return content
-        
-        
-        def fix_nested_blocks(self, content):
-    """Fix indentation in nested blocks."""
-lines = content.split("\n")
-fixed_lines = []
-indent_level = 0
-in_class = False
-in_function = False
-
-for i, line in enumerate(lines):
+        for i, line in enumerate(lines):
     stripped = line.lstrip()
     if not stripped: fixed_lines.append("")
         continue
@@ -63,8 +43,7 @@ for i, line in enumerate(lines):
                                 ):
                                     indent_level -= 1
                                     if in_class and indent_level < 1: indent_level = 1
-                                        elif in_function and indent_level < 1:
-                                            in_function = False
+                                        elif in_function and indent_level < 1: in_function= False
 
                                             # Add line with proper indentation
                                             fixed_lines.append("    " * indent_level + stripped)
@@ -102,25 +81,6 @@ def fix_imports(self, content):
         return "\n".join(fixed_lines)
         
         
-        def process_file(self, file_path):
-    """Process a single file applying all formatting fixes."""
-print(f"Processing {file_path}...")
-try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
-
-        # Apply fixes in specific order
-        content = fix_imports(content)
-        content = fix_string_literals(content)
-        content = fix_nested_blocks(content)
-
-        # Write back
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-
-            print(f"Successfully processed {file_path}")
-            return True
-            except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-                return False
-
-
 def main(self):
     """Process files with indentation and string formatting issues."""
         # Focus on files with known issues

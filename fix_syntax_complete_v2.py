@@ -4,39 +4,20 @@ import re
 #!/usr/bin/env python3
 
 
-def read_file(filepath) -> None:
-    """Read file content safely."""
-        try: withopen(filepath, "r") as f: returnf.readlines()
-        except Exception as e: print(f"Error reading {filepath}: {str(e)}")
-        return None
+                def fix_indentation(lines) -> None:
+                    """Fix indentation while preserving structure."""
+        fixed_lines = []
+        indent_stack = [0]  # Start with base level indentation
+        current_indent = 0
         
-        
-        def write_file(filepath, lines) -> None:
-    """Write content to file safely."""
-try: withopen(filepath, "w") as f: f.writelines(lines)
-        print(f"Successfully fixed {filepath}")
-        except Exception as e: print(f"Error writing {filepath}: {str(e)}")
-
-
-def get_indent_level(line) -> None:
-    """Get the indentation level of a line."""
-        return len(line) - len(line.lstrip())
-        
-        
-        def fix_indentation(lines) -> None:
-    """Fix indentation while preserving structure."""
-fixed_lines = []
-indent_stack = [0]  # Start with base level indentation
-current_indent = 0
-
-for i, line in enumerate(lines):
+        for i, line in enumerate(lines):
     stripped = line.lstrip()
     if not stripped:  # Empty line
     fixed_lines.append("\n")
     continue
 
     # Special handling for docstrings
-    if stripped.startswith(('"""', """"")):
+if stripped.startswith(('"""', """"")):
         fixed_lines.append(" " * current_indent + stripped)
         continue
 
@@ -84,17 +65,17 @@ def fix_imports(lines) -> None:
         return import_lines + other_lines
         
         
-        def fix_docstrings(lines) -> None:
-    """Fix docstring formatting."""
-fixed_lines = []
-in_docstring = False
-docstring_indent = 0
-
-for i, line in enumerate(lines):
+                def fix_docstrings(lines) -> None:
+                    """Fix docstring formatting."""
+        fixed_lines = []
+        in_docstring = False
+        docstring_indent = 0
+        
+        for i, line in enumerate(lines):
     stripped = line.lstrip()
 
     # Handle docstring start/end
-    if stripped.startswith(('"""', """"")):
+if stripped.startswith(('"""', """"")):
         if not in_docstring:
             # Start of docstring
             in_docstring = True
@@ -131,28 +112,28 @@ def fix_file(filepath) -> None:
         write_file(filepath, lines)
         
         
-        def main(self):
-    """Fix syntax issues in all problematic files."""
-problem_files = [
-"fix_flake8_comprehensive.py",
-"analyze_performance_by_category.py",
-"data/dataset_verification_utils.py",
-"data/verify_mapped_datasets.py",
-"fix_string_formatting.py",
-"fix_text_to_anything.py",
-"fix_text_to_anything_v6.py",
-"fix_text_to_anything_v7.py",
-"fix_text_to_anything_v8.py",
-"src/data/mmmu_loader.py",
-"src/models/apple_optimizations.py",
-"src/models/enhanced_transformer.py",
-"src/models/layers/enhanced_transformer.py",
-]
-
-print("Applying complete syntax fixes...")
-for filepath in problem_files: fix_file(filepath)
-    print("Completed applying syntax fixes.")
-
-
-    if __name__ == "__main__":
+                def main(self):
+                    """Fix syntax issues in all problematic files."""
+        problem_files = [
+        "fix_flake8_comprehensive.py",
+        "analyze_performance_by_category.py",
+        "data/dataset_verification_utils.py",
+        "data/verify_mapped_datasets.py",
+        "fix_string_formatting.py",
+        "fix_text_to_anything.py",
+        "fix_text_to_anything_v6.py",
+        "fix_text_to_anything_v7.py",
+        "fix_text_to_anything_v8.py",
+        "src/data/mmmu_loader.py",
+        "src/models/apple_optimizations.py",
+        "src/models/enhanced_transformer.py",
+        "src/models/layers/enhanced_transformer.py",
+        ]
+        
+        print("Applying complete syntax fixes...")
+        for filepath in problem_files: fix_file(filepath)
+            print("Completed applying syntax fixes.")
+        
+        
+            if __name__ == "__main__":
         main()

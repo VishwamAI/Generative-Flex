@@ -21,7 +21,7 @@ def fix_file_content(content) -> None:
         fixed_generation_config = [
         "@dataclass",
         "class GenerationConfig:",
-        '    """Configuration for text-to-anything generation."""',
+'    """Configuration for text-to-anything generation."""',
         "    # Model configuration",
         "    hidden_size: int = field(default=2048)",
         "    num_attention_heads: int = field(default=32)",
@@ -97,19 +97,19 @@ def fix_file_content(content) -> None:
         return "\n".join(result)
         
         
-        def main(self):
-        # Read the original file
-        with open("src/models/text_to_anything.py", "r") as f: content = f.read()
-        
-        # Fix the content
-        fixed_content = fix_file_content(content)
-        
-        # Write the fixed content back
-        with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
-        
-        print("Structural fixes applied to text_to_anything.py")
-        
-        
-        if __name__ == "__main__":
+                def main(self):
+                # Read the original file
+            with open("src/models/text_to_anything.py", "r") as f: content = f.read()
+                
+                # Fix the content
+                fixed_content = fix_file_content(content)
+                
+                # Write the fixed content back
+                with open("src/models/text_to_anything.py", "w") as f: f.write(fixed_content)
+                
+                print("Structural fixes applied to text_to_anything.py")
+                
+                
+            if __name__ == "__main__": 
         main()
         

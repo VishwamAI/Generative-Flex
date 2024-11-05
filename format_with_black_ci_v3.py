@@ -2,17 +2,11 @@ import os
 import subprocess
 import sys
 
-def install_black():
-    """Install the specific version of black used in CI."""
-        try: subprocess.check_call([sys.executable, "-m", "pip", "install", "black==24.10.0"])
-        except subprocess.CalledProcessError as e: print(f"Error installing black: {e}")
-        sys.exit(1)
-        
-        def format_python_files():
-    """Format all Python files using black with CI settings."""
-    # Get all Python files recursively
-    python_files = []
-    for root, dirs, files in os.walk("."):
+                def format_python_files():
+                    """Format all Python files using black with CI settings."""
+            # Get all Python files recursively
+            python_files = []
+            for root, dirs, files in os.walk("."):
         # Skip .git directory
         if ".git" in dirs: dirs.remove(".git")
         # Skip virtual environments

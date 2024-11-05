@@ -1,15 +1,15 @@
 from pathlib import Path
 import os
 import re
-    """Script to fix flake8 issues comprehensively."""
+"""Script to fix flake8 issues comprehensively."""
         
         
         
-        def fix_line_length(content: str) -> str:
-    """Break long lines into multiple lines."""
-lines = content.split("\n")
-fixed_lines = []
-for line in lines: iflen(line) > 79:
+                def fix_line_length(content: str) -> str:
+                    """Break long lines into multiple lines."""
+        lines = content.split("\n")
+        fixed_lines = []
+        for line in lines: iflen(line) > 79:
         # Handle function calls with multiple arguments
         if "(" in line and ")" in line and ", " in line: parts = line.split("(", 1)
             if len(parts) == 2: indent = len(parts[0]) - len(parts[0].lstrip())
@@ -52,11 +52,6 @@ def remove_unused_imports(content: str) -> str:
         return "\n".join(line for line in lines if line.strip() not in imports_to_remove)
         
         
-        def fix_whitespace_before_colon(content: str) -> str:
-    """Fix whitespace before colons in slices."""
-return re.sub(r"\s+:", ":", content)
-
-
 def remove_unused_variables(content: str) -> str:
     """Remove unused variable assignments."""
         lines = content.split("\n")
@@ -80,19 +75,6 @@ def remove_unused_variables(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def process_file(file_path: str) -> None:
-    """Process a single file to fix all flake8 issues."""
-with open(file_path, "r") as f: content = f.read()
-
-    # Apply all fixes
-    content = fix_line_length(content)
-    content = remove_unused_imports(content)
-    content = fix_whitespace_before_colon(content)
-    content = remove_unused_variables(content)
-
-    with open(file_path, "w") as f: f.write(content)
-
-
 def main(self):
     """Process all Python files in the project."""
         root_dir = Path(".")

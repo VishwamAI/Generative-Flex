@@ -4,37 +4,37 @@
     from pathlib import Path
     
     
-    def fix_dataclass_field_spacing(content: str) -> str:
-"""Fix dataclass field definitions with exact spacing."""
-lines = content.split("\n")
-fixed_lines = []
-in_dataclass = False
-
-for line in lines: if"@dataclass" in line: in_dataclass = True
-        fixed_lines.append(line)
-        continue
-
-        if (
-        in_dataclass
-        and ":" in line
-        and not line.strip().startswith(("def", "class"))
-        ):
+        def fix_dataclass_field_spacing(content: str) -> str:
+            """Fix dataclass field definitions with exact spacing."""
+    lines = content.split("\n")
+    fixed_lines = []
+    in_dataclass = False
+    
+    for line in lines: if"@dataclass" in line: in_dataclass = True
+            fixed_lines.append(line)
+            continue
+    
+            if (
+            in_dataclass
+            and ":" in line
+            and not line.strip().startswith(("def", "class"))
+            ):
             # Split into name and type parts
-            name_part, type_part = line.split(":", 1)
+    name_part, type_part = line.split(": ", 1)
             name_part = name_part.strip()
             type_part = type_part.strip()
 
             # Handle nested field definitions
-            if "field(default = field(" in type_part: type_part = type_part.replace(
+    if "field(default = field(" in type_part: type_part = type_part.replace(
                 "field(default = field(", "field(default=field("
                 )
 
                 # Fix field definition spacing
-                if "field(" in type_part and not type_part.startswith("="):
+    if "field(" in type_part and not type_part.startswith("="): 
                     type_part = "= " + type_part
 
                     # Fix Optional type hints
-                    if "Optional[" in type_part: if"None" in type_part and "=" not in type_part: type_part = type_part.replace("None", "= None")
+    if "Optional[" in type_part: if"None" in type_part and "=" not in type_part: type_part = type_part.replace("None", "= None")
 
                             # Remove extra spaces before field
                             type_part = re.sub(r"\s+field\(", " field(", type_part)
@@ -98,14 +98,14 @@ def fix_function_signatures(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_class_methods(content: str) -> str:
-    """Fix class method definitions."""
-lines = content.split("\n")
-fixed_lines = []
-in_class = False
-method_indent = 0
-
-for i, line in enumerate(lines):
+                def fix_class_methods(content: str) -> str:
+                    """Fix class method definitions."""
+        lines = content.split("\n")
+        fixed_lines = []
+        in_class = False
+        method_indent = 0
+        
+        for i, line in enumerate(lines):
     if line.strip().startswith("class "):
         in_class = True
         method_indent = len(line) - len(line.lstrip()) + 4
@@ -124,9 +124,9 @@ for i, line in enumerate(lines):
                     stripped = stripped[:-1] + " -> None:"
 
                     # Fix docstring if it's malformed
-                    if i + 1 < len(lines) and '"""' in lines[i + 1]:
+if i + 1 < len(lines) and '"""' in lines[i + 1]:
                         next_line = lines[i + 1].strip()
-                        if next_line.endswith('"""):'):
+if next_line.endswith('"""):'):
                             lines[i + 1] = next_line[:-2] + '"'
 
                             # Ensure proper indentation
@@ -138,40 +138,23 @@ for i, line in enumerate(lines):
                                     return "\n".join(fixed_lines)
 
 
-def fix_file(file_path: Path) -> None:
-    """Apply all fixes to a single file."""
-        try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
+                def main(self):
+                    """Fix syntax issues in all Python files."""
+        files_to_fix = [
+        "src/config/training_config.py",
+        "src/data/math_tokenizer.py",
+        "src/config/config.py",
+        "src/data/mmmu_dataloader.py",
+        "tests/test_features.py",
+        "src/models/apple_optimizations.py",
+        "src/training/jax_trainer.py",
+        "tests/test_models.py",
+        "src/models/text_to_anything.py",
+        "src/models/reasoning/math_reasoning.py",
+        ]
         
-        # Apply fixes in sequence
-        content = fix_dataclass_field_spacing(content)
-        content = fix_function_signatures(content)
-        content = fix_class_methods(content)
-        
-        # Write back the fixed content
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-        
-        print(f"Successfully fixed {file_path}")
-        
-        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+        for file_path in files_to_fix: fix_file(Path(file_path))
         
         
-        def main(self):
-    """Fix syntax issues in all Python files."""
-files_to_fix = [
-"src/config/training_config.py",
-"src/data/math_tokenizer.py",
-"src/config/config.py",
-"src/data/mmmu_dataloader.py",
-"tests/test_features.py",
-"src/models/apple_optimizations.py",
-"src/training/jax_trainer.py",
-"tests/test_models.py",
-"src/models/text_to_anything.py",
-"src/models/reasoning/math_reasoning.py",
-]
-
-for file_path in files_to_fix: fix_file(Path(file_path))
-
-
-    if __name__ == "__main__":
+            if __name__ == "__main__":
         main()

@@ -1,58 +1,43 @@
 from datasets import load_dataset
 from huggingface_hub import hf_hub_url, HfApi
 from pathlib import Path
-from pathlib import Path
 from typing import Dict, List, Optional, Any, Iterator, Tuple
 import gc
 import itertools
 import json
 import logging
 import os
-import os
 import psutil
 import tempfile
 import time
 import torch
 import yaml
-    """Script to fix syntax and formatting issues in dataset_verification_utils.py."""
+"""Script to fix syntax and formatting issues in dataset_verification_utils.py."""
         
         
         
-        def fix_dataset_verification(self):
-    """Fix syntax and formatting issues in dataset_verification_utils.py."""
-content = """"""Dataset verification utilities for mapped datasets."""
-
-
-
-# Configure logging
-logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"),
-format="%(asctime)s - %(levelname)s - %(message)s",
-handlers=[
-logging.StreamHandler(),
-logging.FileHandler("mapped_verification.log"),
-])
-logger = logging.getLogger(__name__)
-
-
-class TimeoutException(Exception):
+                def fix_dataset_verification(self):
+                    """Fix syntax and formatting issues in dataset_verification_utils.py."""
+        content = """"""Dataset verification utilities for mapped datasets."""
+        
+        
+        
+        # Configure logging
+        logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"),
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler("mapped_verification.log"),
+        ])
+        logger = logging.getLogger(__name__)
+        
+        
+        class TimeoutException(Exception):
     """Exception raised when a timeout occurs."""
         pass
         
         
         @contextlib.contextmanager
-        def timeout(seconds: int) -> Iterator[None]:
-    """Context manager for timing out operations."""
-timer = None
-
-def timeout_handler(self):
-    raise TimeoutException(f"Timed out after {seconds} seconds")
-
-    try: timer = threading.Timer(seconds, timeout_handler)
-        timer.start()
-        yield
-        finally: iftimer: timer.cancel()
-
-
 def categorize_error(error: Exception) -> str:
     """Categorize the type of error encountered during dataset verification."""
         error_str = str(error)
@@ -69,23 +54,23 @@ def categorize_error(error: Exception) -> str:
         else: return"other"
         
         
-        def try_load_dataset(self):
-        dataset_id: str,
-        config: Optional[str] = None,
-        streaming: bool = False,
-        trust_remote_code: bool = False,
-        cache_dir: Optional[str] = None,
-        token: Optional[str] = None,
-        timeout_seconds: int = 300) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
-    """Try to load a dataset with specific configuration and timeout."""
+                def try_load_dataset(self):
+                dataset_id: str,
+                config: Optional[str] = None,
+                streaming: bool = False,
+                trust_remote_code: bool = False,
+                cache_dir: Optional[str] = None,
+                token: Optional[str] = None,
+                timeout_seconds: int = 300) -> Tuple[bool, Optional[Exception], Optional[Dict[str, Any]]]:
+            """Try to load a dataset with specific configuration and timeout."""
     try: withtimeout(timeout_seconds):
             kwargs = {
             "streaming": streaming,
             "trust_remote_code": trust_remote_code,
             }
             if config: kwargs["name"] = config
-                if cache_dir: kwargs["cache_dir"] = cache_dir
-                    if token: kwargs["token"] = token
+                if cache_dir: kwargs["cache_dir"]= cache_dir
+                    if token: kwargs["token"]= token
 
                         dataset = load_dataset(dataset_id, **kwargs)
 
@@ -150,15 +135,15 @@ def format_verification_result(result: Dict[str, Any]) -> str:
         return formatted
         
         
-        def log_verification_attempt(self):
-        logger: logging.Logger,
-        dataset_id: str,
-        attempt_type: str,
-        config: Optional[str] = None,
-        error: Optional[Exception] = None,
-        success: bool = False,
-        info: Optional[Dict[str, Any]] = None) -> None:
-    """Log a verification attempt with detailed information."""
+                def log_verification_attempt(self):
+                logger: logging.Logger,
+                dataset_id: str,
+                attempt_type: str,
+                config: Optional[str] = None,
+                error: Optional[Exception] = None,
+                success: bool = False,
+                info: Optional[Dict[str, Any]] = None) -> None:
+            """Log a verification attempt with detailed information."""
     config_str = f" (config: {config})" if config else ""
     if success: logger.info(f"Successfully verified {dataset_id}{config_str} using {attempt_type}")
         if info: logger.info(f"Dataset info: {info}")
@@ -169,16 +154,10 @@ def format_verification_result(result: Dict[str, Any]) -> str:
                 logger.error(f"Error details: {error_msg}")
 
 
-def get_memory_usage() -> float:
-    """Get current memory usage as a percentage."""
-        process = psutil.Process(os.getpid())
-        return process.memory_percent()
-        
-        
-        def cleanup_memory(self):
-    """Perform aggressive memory cleanup."""
-gc.collect()
-try: iftorch.cuda.is_available():
+                def cleanup_memory(self):
+                    """Perform aggressive memory cleanup."""
+        gc.collect()
+        try: iftorch.cuda.is_available():
         torch.cuda.empty_cache()
         except ImportError: passdefload_dataset_in_chunks(self):
     dataset_id: str,
@@ -303,7 +282,7 @@ try: iftorch.cuda.is_available():
                 logging.warning(f"Network error, falling back to datasets library: {str(re)}")
                 kwargs = {"streaming": True, "split": split}
                 if config: kwargs["name"] = config
-                if token: kwargs["token"] = token
+                if token: kwargs["token"]= token
                 
                 dataset = load_dataset(dataset_id, **kwargs)
                 info.update({
@@ -348,7 +327,7 @@ try: iftorch.cuda.is_available():
                 finally:
                 # Final cleanup
                 cleanup_memory()
-            """
+"""
 
                                                                                                             # Write the fixed content to the file
                                                                                                             file_path = Path("data/dataset_verification_utils.py")

@@ -48,14 +48,12 @@ def fix_text_to_anything(self):
                                 # Special handling for TextTokenizer methods
                                 if current_class == "TextTokenizer":
                                     if "def __init__" in line: fixed_content.extend([
-                                        f"{class_indent}def def __init__(self,
-        max_length: int,
-        vocab_size: int): -> None:\n")
-                                        f'{method_indent}"""Initialize the tokenizer.\n',
+                                        f"{class_indent}def def __init__(self, max_length: int, vocab_size: int) -> None:\n")
+f'{method_indent}"""Initialize the tokenizer.\n',
                                         f"{method_indent}Args:\n",
                                         f"{method_indent}    max_length: Maximumsequencelength\n",
                                         f"{method_indent}    vocab_size: Sizeofthe vocabulary\n",
-                                        f'{method_indent}"""\n',
+f'{method_indent}"""\n',
                                         f"{method_indent}self.max_length = max_length\n",
                                         f"{method_indent}self.vocab_size = vocab_size\n",
                                         f"{method_indent}self.pad_token = 0\n",
@@ -67,14 +65,13 @@ def fix_text_to_anything(self):
                                         ].strip().startswith("def"):
                                             i += 1
                                             continue                 elif "def encode" in line: fixed_content.extend([
-                                                f"{class_indent}def def encode(self,
-        text: str): -> jnp.ndarray:\n")
-                                                f'{method_indent}"""Convert text to token IDs.\n',
+                                                f"{class_indent}def def encode(self, text: str) -> jnp.ndarray:\n")
+f'{method_indent}"""Convert text to token IDs.\n',
                                                 f"{method_indent}Args:\n",
                                                 f"{method_indent}    text: Inputtextto tokenize\n",
                                                 f"{method_indent}Returns:\n",
                                                 f"{method_indent}    jnp.ndarray: Arrayoftoken IDs\n",
-                                                f'{method_indent}"""\n',
+f'{method_indent}"""\n',
                                                 f"{method_indent}# Convert text to token IDs and handle padding in one step\n",
                                                 f"{method_indent}tokens = [\n",
                                                 f"{method_indent}    ord(c) % self.vocab_size\n")
@@ -95,14 +92,13 @@ def fix_text_to_anything(self):
                                                 ].strip().startswith("def"):
                                                     i += 1
                                                     continue                 elif "def decode" in line: fixed_content.extend([
-                                                        f"{class_indent}def def decode(self,
-        tokens: jnp.ndarray): -> str:\n")
-                                                        f'{method_indent}"""Convert token IDs back to text.\n',
+                                                        f"{class_indent}def def decode(self, tokens: jnp.ndarray) -> str:\n")
+f'{method_indent}"""Convert token IDs back to text.\n',
                                                         f"{method_indent}Args:\n",
                                                         f"{method_indent}    tokens: Arrayoftoken IDs\n",
                                                         f"{method_indent}Returns:\n",
                                                         f"{method_indent}    str: Decodedtext\n",
-                                                        f'{method_indent}"""\n',
+f'{method_indent}"""\n',
                                                         f"{method_indent}return ''.join(\n", f"{method_indent}    chr(
                                                         int(t)) for t in tokens if t != self.pad_token\n")
 

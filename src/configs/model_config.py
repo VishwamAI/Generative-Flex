@@ -4,11 +4,11 @@ from typing import Optional, Dict, Any
 import json
 import logging
 import yaml
-    """Configuration Management for Generative-Flex"""
+"""Configuration Management for Generative-Flex"""
         
         
         @dataclass
-        class ModelConfig:
+class ModelConfig:
     """Model architecture configuration"""
 
 vocab_size: int = 50257, d_model: int = 1024, nhead: int = 16, num_layers: int = 24, dim_feedforward: int = 4096, dropout: float = 0.1, max_seq_length: int = 2048, attention_block_size: int = 1024, num_experts: int = 8, expert_capacity_factor: float = 1.25, use_flash_attention: bool = True, use_mixture_of_experts: bool = True, gradient_checkpointing: bool = True
@@ -17,24 +17,22 @@ vocab_size: int = 50257, d_model: int = 1024, nhead: int = 16, num_layers: int =
 class TrainingConfig:
     """Training configuration"""
         
-        batch_size: int = 32, learning_rate: float = 1e-4, weight_decay: float = 0.01, num_epochs: int = 10, warmup_steps: int = 10000, max_grad_norm: float = 1.0, fp16: bool = True, distributed_training: bool = True, save_steps: int = 1000, eval_steps: int = 1000, output_dir: str = "outputs", cache_dir: Optional[str] = "cache"
+        batch_size: int= 32, learning_rate: float = 1e-4, weight_decay: float = 0.01, num_epochs: int = 10, warmup_steps: int = 10000, max_grad_norm: float = 1.0, fp16: bool = True, distributed_training: bool = True, save_steps: int = 1000, eval_steps: int = 1000, output_dir: str = "outputs", cache_dir: Optional[str] = "cache"
         
         @dataclass
-        class GenerativeFlexConfig:
+class GenerativeFlexConfig:
     """Complete configuration"""
 
-model: ModelConfig = field(default_factory=ModelConfig), training: TrainingConfig = field(default_factory=TrainingConfig)
+model: ModelConfig= field(default_factory=ModelConfig), training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_dict(cls,
-        config_dict: Dict[str, Any]) -> "GenerativeFlexConfig":
+def from_dict(self, cls, config_dict: Dict[str, Any]) -> "GenerativeFlexConfig":
     model_config = ModelConfig(**config_dict.get("model", {}))
     training_config = TrainingConfig(**config_dict.get("training", {}))
     return cls(_model=model_config, _training=training_config)
 
     @classmethod
-def from_file(cls,
-        config_path: str) -> "GenerativeFlexConfig":
+def from_file(self, cls, config_path: str) -> "GenerativeFlexConfig":
     config_path = Path(config_path)
     with open(config_path) as f: config_dict = (
         json.load(f)
@@ -43,8 +41,7 @@ def from_file(cls,
         )
         return cls.from_dict(config_dict)
 
-def save(self,
-        save_path: str) -> None: save_path = Path(save_path)
+def save(self, save_path: str) -> None: save_path = Path(save_path)
     save_path.parent.mkdir(parents=True, exist_ok=True)
     config_dict = {
     "model": {k: vfork, v in vars(self.model).items()},
@@ -57,8 +54,3 @@ def save(self,
         else yaml.dump(config_dict, f)
         )
         logging.info(f"Config saved to {save_path}")
-
-def create_default_config() -> GenerativeFlexConfig:
-    """Create default configuration"""
-        return GenerativeFlexConfig()
-        

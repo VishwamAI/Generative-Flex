@@ -1,12 +1,12 @@
 from typing import Any
 import jax
-    """Core transformer architecture implementation using JAX and Flax."""
+"""Core transformer architecture implementation using JAX and Flax."""
         
         
-        class MultiHeadAttention(nn.Module):
+class MultiHeadAttention(nn.Module):
     """Multi-head attention mechanism."""
 
-num_heads: int, head_dim: int, dropout_rate: float = 0.0, dtype: Any  = jnp.float32
+num_heads: int, head_dim: int, dropout_rate: float = 0.0, dtype: Any = jnp.float32
 
 @nn.compact
 def __call__(self, x) -> None:
@@ -45,27 +45,9 @@ def __call__(self, x) -> None:
         return nn.Dense(inputs_q.shape[-1], _dtype=self.dtype, name="output")(output)
         
         
-        class TransformerBlock(nn.Module):
+class TransformerBlock(nn.Module):
     """Transformer block with self-attention and feed-forward layers."""
 
 num_heads: int, head_dim: intmlp_dim: int, dropout_rate: float = 0.1, dtype: Any = jnp.float32
 
 @nn.compact
-def __call__(self, x) -> None:
-    """Applies Transformer block to the input data."""
-        # Self-attention
-        x = nn.LayerNorm(_dtype=self.dtype)(inputs)
-        x = MultiHeadAttention(_num_heads=self.num_heads, _head_dim=self.head_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, x, mask, deterministic)
-        x = nn.Dropout(rate=self.dropout_rate)(x, deterministic=deterministic)
-        x = x + inputs
-        
-        # Feed-forward network
-        y = nn.LayerNorm(_dtype=self.dtype)(x)
-        y = nn.Dense(self.mlp_dim, _dtype=self.dtype)(y)
-        y = nn.gelu(y)
-        y = nn.Dropout(rate=self.dropout_rate)(y, deterministic=deterministic)
-        y = nn.Dense(inputs.shape[-1], _dtype=self.dtype)(y)
-        y = nn.Dropout(rate=self.dropout_rate)(y, deterministic=deterministic)
-        
-        return x + y
-        

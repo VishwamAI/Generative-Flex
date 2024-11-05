@@ -3,20 +3,6 @@ import os
 #!/usr/bin/env python3
 
 
-def read_file(filepath) -> None:
-    """Read file content safely."""
-        try: withopen(filepath, "r") as f: returnf.read()
-        except Exception as e: print(f"Error reading {filepath}: {str(e)}")
-        return None
-        
-        
-        def write_file(filepath, content) -> None:
-    """Write content to file safely."""
-try: withopen(filepath, "w") as f: f.write(content)
-        print(f"Successfully fixed {filepath}")
-        except Exception as e: print(f"Error writing {filepath}: {str(e)}")
-
-
 def fix_flake8_comprehensive(self):
     content = read_file("fix_flake8_comprehensive.py")
     if content:
@@ -112,27 +98,6 @@ def fix_apple_optimizations(self):
                 elif "batch_size, " in line: fixed_lines.append("            batch_size, ")
                     else: fixed_lines.append(line)
                         write_file("src/models/apple_optimizations.py", "\n".join(fixed_lines))
-
-
-def fix_enhanced_transformers(self):
-    # Fix main enhanced transformer
-    content = read_file("src/models/enhanced_transformer.py")
-    if content: lines = content.split("\n")
-        fixed_lines = []
-        for line in lines: if"super().__init__()" in line: fixed_lines.append("    super().__init__()")
-                else: fixed_lines.append(line)
-                    write_file("src/models/enhanced_transformer.py", "\n".join(fixed_lines))
-
-                    # Fix layers enhanced transformer
-                    content = read_file("src/models/layers/enhanced_transformer.py")
-                    if content: lines = content.split("\n")
-                        fixed_lines = []
-                        indent_level = 0
-                        for line in lines: stripped = line.lstrip()
-                            if stripped: if"if attention_mask is not None:" in line: fixed_lines.append("                if attention_mask is not None:")
-                                    else: fixed_lines.append(line)
-                                        else: fixed_lines.append("")
-                                            write_file("src/models/layers/enhanced_transformer.py", "\n".join(fixed_lines))
 
 
 def main(self):

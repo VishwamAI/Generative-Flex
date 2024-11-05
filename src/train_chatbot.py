@@ -19,51 +19,6 @@ def create_vocabulary(conversations: List[Dict[str, str]]) -> Dict[str, int]:
                     return vocab
 
 
-def tokenize(text: str,
-        vocab: Dict[str, int],
-        max_length: int) -> np.ndarray: tokens = ["<start>"] + text.lower().split() + ["<end>"]
-    token_ids = [vocab[token] for token in tokens]
-    if len(token_ids) < max_length: token_ids+= [vocab["<pad>"]] * (max_length - len(token_ids))
-        return np.array(token_ids[:max_length])
-
-
-def prepare_batch(self):
-    conversations: List[Dict[str, str]],
-        vocab: Dict[str, int],
-        batch_size: int,
-        max_length: int) -> tuple: inputs = []
-        targets = []
-
-        for conv in conversations:
-            input_ids = tokenize(conv["input"], vocab, max_length)
-            target_ids = tokenize(conv["response"], vocab, max_length)
-            inputs.append(input_ids)
-            targets.append(target_ids)
-
-            inputs = np.array(inputs)
-            targets = np.array(targets)
-
-            return inputs, targets
-
-
-def create_train_state(model,
-        learning_rate: float) -> None: params = model.init(jax.random.PRNGKey(0),
-    jnp.ones((1, 32), dtype=jnp.int32),
-    training=False)
-    tx = optax.adam(learning_rate)
-    return train_state.TrainState.create(apply_fn=model.apply, params=params, tx=tx)
-
-
-    @jax.jit
-def train_step(state, inputs, targets, rng) -> None: defloss_fn(params) -> None: logits = state.apply_fn(params, inputs, training=True, rngs={"dropout": rng})
-    return optax.softmax_cross_entropy_with_integer_labels(logits, targets).mean()
-
-    grad_fn = jax.value_and_grad(loss_fn)
-    loss, grads = grad_fn(state.params)
-    state = state.apply_gradients(grads=grads)
-    return state, loss
-
-
 def main(self):
     # Load and prepare data
     conversations = load_data("data/chatbot/training_data.json")

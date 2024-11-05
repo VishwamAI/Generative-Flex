@@ -14,39 +14,14 @@ class SimpleChatModel(nn.Module):
 
     vocab_size: int, hidden_size: int = 64
 
-    def setup(self) -> None: self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size)
-        self.dense1 = nn.Dense(self.hidden_size)
-        self.dense2 = nn.Dense(self.hidden_size)
-        self.output = nn.Dense(self.vocab_size)
-
-def __call__(self, x) -> None: x = self.embedding(x)
-    x = jnp.mean(x, axis=0)  # Average over sequence length
-    x = nn.relu(self.dense1(x))
-    x = nn.relu(self.dense2(x))
-    x = self.output(x)
-    return x
-
-
-def create_training_data(self):
-    data = {
-    "conversations": [
-    {
-    "input": "hi",
-    "response": "Step 1: GreetStep2: HelpHellohow can I help",
-    }
-    ]
-    }
-    return data
-
-
-def main(self):
-    # Create and save training data
-    training_data = create_training_data()
-    with open("data/chatbot/training_data_cot.json", "w") as f: json.dump(training_data, f, indent=2)
-
-        # Create vocabulary
-        vocab = set(["<pad>", "<unk>"])
-        for conv in training_data["conversations"]:
+        def main(self):
+        # Create and save training data
+        training_data = create_training_data()
+        with open("data/chatbot/training_data_cot.json", "w") as f: json.dump(training_data, f, indent=2)
+    
+            # Create vocabulary
+            vocab = set(["<pad>", "<unk>"])
+            for conv in training_data["conversations"]:
             vocab.update(conv["input"].split())
             vocab.update(conv["response"].split())
             vocab = sorted(list(vocab))
@@ -77,13 +52,13 @@ def main(self):
                 print("\nTraining simple chain-of-thought model...")
 
                 @jax.jit
-def train_step(state, x, y) -> None: defloss_fn(params) -> None: logits = model.apply({"params": params}, x)
-    return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None, :], labels=y[0: 1]).mean()
-
-    loss, grads = jax.value_and_grad(loss_fn)(state.params)
-    return state.apply_gradients(grads=grads), loss
-
-    for epoch in range(100):
+        def train_step(self, state, x, y) -> None: defloss_fn(params) -> None: logits = model.apply({"params": params}, x)
+        return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None, :], labels=y[0: 1]).mean()
+    
+        loss, grads = jax.value_and_grad(loss_fn)(state.params)
+        return state.apply_gradients(grads=grads), loss
+    
+        for epoch in range(100):
         state, loss = train_step(state, input_tokens, output_tokens)
 
         if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}},

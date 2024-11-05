@@ -18,9 +18,6 @@
     ]
     
     
-    def fix_self_parameter(content: str) -> str:
-"""Fix self parameter formatting in class methods."""
-
 def fix_method(match: re.Match) -> str: indent = match.group(1)
     def_keyword = match.group(2)
     method_name = match.group(3)
@@ -41,16 +38,13 @@ def fix_method(match: re.Match) -> str: indent = match.group(1)
                 return re.sub(pattern, fix_method, content, flags=re.MULTILINE)
 
 
-def fix_function_params(content: str) -> str:
-    """Fix function parameter formatting."""
-        
-        def fix_params(match: re.Match) -> str: indent = match.group(1)
-        def_keyword = match.group(2)
-        func_name = match.group(3)
-        params = match.group(4)
-        return_hint = match.group(5) or ""
-        
-        if not params.strip():
+                def fix_params(match: re.Match) -> str: indent = match.group(1)
+                def_keyword = match.group(2)
+                func_name = match.group(3)
+                params = match.group(4)
+                return_hint = match.group(5) or ""
+                
+                if not params.strip():
         return f"{indent}{def_keyword} {func_name}(){return_hint}:"
         
         # Split and clean parameters
@@ -81,20 +75,6 @@ def fix_function_params(content: str) -> str:
         return re.sub(pattern, fix_params, content, flags=re.MULTILINE)
         
         
-        def fix_class_methods(content: str) -> str:
-    """Fix class method formatting."""
-
-def fix_method(match: re.Match) -> str: indent = match.group(1)
-    decorator = match.group(2) or ""
-    method_def = match.group(3)
-
-    if decorator: returnf"{indent}{decorator}\n{indent}{method_def}"
-        return f"{indent}{method_def}"
-
-        pattern = r"^(\s*)(@\w+(?:\(.*?\))?\s*)?(def\s+\w+\s*\(.*?\)(?:\s*->.*?)?\s*:)"
-        return re.sub(pattern, fix_method, content, flags=re.MULTILINE)
-
-
 def fix_indentation_py312(content: str) -> str:
     """Fix indentation issues for Python 3.12 compatibility."""
         lines = content.split("\n")
@@ -117,8 +97,7 @@ def fix_indentation_py312(content: str) -> str:
         # Handle method/function definitions
         elif stripped.startswith("def "):
         in_function = True
-        if in_class: current_indent = 4, else:
-        current_indent = indent_stack[-1]
+        if in_class: current_indent = 4, else: current_indent = indent_stack[-1]
         indent_stack.append(current_indent + 4)
         # Handle control flow statements
         elif stripped.startswith(
@@ -142,9 +121,6 @@ def fix_indentation_py312(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_type_hints(content: str) -> str:
-    """Fix type hint formatting."""
-
 def fix_hint(match: re.Match) -> str: var_name = match.group(1)
     type_hint = match.group(2)
     value = match.group(3)
@@ -161,30 +137,13 @@ def fix_hint(match: re.Match) -> str: var_name = match.group(1)
             return re.sub(pattern, fix_hint, content)
 
 
-def process_file(file_path: str) -> Tuple[bool, str]:
-    """Process a single file applying all fixes."""
-        try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
+                def main() -> None:
+                    """Fix Python 3.12 syntax issues in core files."""
+        print("Starting to process core files...")
+        successful = 0
+        failed = 0
         
-        # Apply fixes in sequence
-        content = fix_self_parameter(content)
-        content = fix_function_params(content)
-        content = fix_class_methods(content)
-        content = fix_indentation_py312(content)
-        content = fix_type_hints(content)
-        
-        with open(file_path, "w", encoding="utf-8") as f: f.write(content)
-        
-        return True, f"Successfully processed {file_path}"
-        except Exception as e: returnFalse, f"Error processing {file_path}: {str(e)}"
-        
-        
-        def main() -> None:
-    """Fix Python 3.12 syntax issues in core files."""
-print("Starting to process core files...")
-successful = 0
-failed = 0
-
-for file_path in CORE_FILES: ifPath(file_path).exists():
+        for file_path in CORE_FILES: ifPath(file_path).exists():
         print(f"\nProcessing {file_path}")
         success, message = process_file(file_path)
         print(message)
