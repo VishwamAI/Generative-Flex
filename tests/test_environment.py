@@ -13,7 +13,7 @@ import warnings
 
 class TestEnvironment(unittest.TestCase):
     def setUp(self):
-        warnings.filterwarnings('ignore')
+        warnings.filterwarnings("ignore")
         os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # Ensure GPU is visible
 
     def test_hardware_acceleration(self):
@@ -38,7 +38,7 @@ class TestEnvironment(unittest.TestCase):
         physical_devices = tf.config.list_physical_devices()
         self.assertTrue(len(physical_devices) > 0, "No TensorFlow devices found")
         # Only set memory growth for GPU devices
-        gpu_devices = tf.config.list_physical_devices('GPU')
+        gpu_devices = tf.config.list_physical_devices("GPU")
         if gpu_devices:
             for device in gpu_devices:
                 tf.config.experimental.set_memory_growth(device, True)
@@ -49,10 +49,10 @@ class TestEnvironment(unittest.TestCase):
 
     def test_mixed_precision(self):
         """Test mixed precision support"""
-        accelerator = Accelerator(mixed_precision='fp16')
+        accelerator = Accelerator(mixed_precision="fp16")
         self.assertEqual(
             accelerator.mixed_precision,
-            'fp16',
+            "fp16",
             "Mixed precision not properly configured",
         )
 
@@ -105,7 +105,7 @@ class TestEnvironment(unittest.TestCase):
 
             # Check dataset structure using high school dataset
             example = dataset_hs[0]
-            required_keys = ['question', 'choices', 'answer']
+            required_keys = ["question", "choices", "answer"]
             for key in required_keys:
                 self.assertIn(key, example, f"Dataset missing required key: {key}")
 
@@ -134,5 +134,5 @@ class TestEnvironment(unittest.TestCase):
             self.fail(f"Failed to test Flax functionality: {str(e)}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

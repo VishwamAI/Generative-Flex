@@ -13,7 +13,7 @@ class MathReasoningHead(nn.Module):
         super().__init__()
         self.config = config
         self.num_labels = getattr(
-            config, 'num_labels', 4
+            config, "num_labels", 4
         )  # Default to 4 for A,B,C,D options
 
         # Expert configuration
@@ -94,11 +94,11 @@ class MathReasoningHead(nn.Module):
             load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
 
             outputs = {
-                'logits': logits,
-                'router_entropy': router_entropy,
-                'expert_weights': expert_weights,
-                'operation_probs': operation_probs,
-                'moe_loss': load_balancing_loss,
+                "logits": logits,
+                "router_entropy": router_entropy,
+                "expert_weights": expert_weights,
+                "operation_probs": operation_probs,
+                "moe_loss": load_balancing_loss,
             }
 
             return outputs

@@ -51,7 +51,7 @@ class TextTokenizer:
 
     def decode(self, tokens: jnp.ndarray) -> str:
         """Convert token indices back to text."""
-        return ''.join(chr(t - 2) for t in tokens if t > 1)  # Skip pad and eos tokens
+        return "".join(chr(t - 2) for t in tokens if t > 1)  # Skip pad and eos tokens
 
 
 @struct.dataclass
@@ -87,7 +87,7 @@ class GenerationConfig:
 
     # Multi-modal settings
     supported_modalities: List[str] = struct.field(
-        default_factory=lambda: ['text', 'image', 'audio', 'video', 'code']
+        default_factory=lambda: ["text", "image", "audio", "video", "code"]
     )
     image_size: Tuple[int, int] = struct.field(default=(256, 256))
     audio_sample_rate: int = struct.field(default=16000)
@@ -125,7 +125,7 @@ class GenerationConfig:
     )  # Added for privacy gradient clipping
 
     # Cache settings
-    cache_dtype: str = struct.field(default='float16')
+    cache_dtype: str = struct.field(default="float16")
     cache_size_multiplier: float = struct.field(default=1.5)
 
     # Runtime state (mutable)
@@ -144,13 +144,13 @@ class ModalityEncoder(nn.Module):
         )
         self.text_encoder = nn.Dense(self.config.hidden_size)
         self.image_encoder = nn.Conv(
-            features=self.config.hidden_size, kernel_size=(3, 3), padding='SAME'
+            features=self.config.hidden_size, kernel_size=(3, 3), padding="SAME"
         )
         self.audio_encoder = nn.Conv(
-            features=self.config.hidden_size, kernel_size=(7,), padding='SAME'
+            features=self.config.hidden_size, kernel_size=(7,), padding="SAME"
         )
         self.video_encoder = nn.Conv(
-            features=self.config.hidden_size, kernel_size=(3, 3, 3), padding='SAME'
+            features=self.config.hidden_size, kernel_size=(3, 3, 3), padding="SAME"
         )
         self.code_encoder = nn.Dense(self.config.hidden_size)
 
@@ -187,16 +187,16 @@ class ModalityEncoder(nn.Module):
             ),
         )
 
-        if 'text' in inputs:
-            if isinstance(inputs['text'], str):
+        if "text" in inputs:
+            if isinstance(inputs["text"], str):
                 # Tokenize and embed text
-                tokens = self.tokenizer.encode(inputs['text'])
+                tokens = self.tokenizer.encode(inputs["text"])
                 tokens = tokens.reshape(1, -1)  # Add batch dimension
                 embedded = self.embedding(tokens)
                 curr_batch_size = 1
             else:
                 # Handle pre-tokenized input
-                input_tensor = inputs['text']
+                input_tensor = inputs["text"]
                 if len(input_tensor.shape) == 2:
                     embedded = self.embedding(input_tensor)
                     curr_batch_size = embedded.shape[0]
@@ -210,10 +210,10 @@ class ModalityEncoder(nn.Module):
 
             # Ensure proper sequence length
             embedded = self._adjust_sequence_length(embedded, target_seq_length)
-            encodings['text'] = self.text_encoder(embedded)
+            encodings["text"] = self.text_encoder(embedded)
 
-        if 'image' in inputs:
-            img = inputs['image']
+        if "image" in inputs:
+            img = inputs["image"]
             if len(img.shape) == 4:  # (batch_size, height, width, channels)
                 curr_batch_size = img.shape[0]
                 if batch_size is None:
@@ -223,10 +223,10 @@ class ModalityEncoder(nn.Module):
                 height, width = img.shape[1:3]
                 img_flat = img.reshape(curr_batch_size, height * width, img.shape[-1])
                 img_flat = self._adjust_sequence_length(img_flat, target_seq_length)
-                encodings['image'] = self.image_encoder(img_flat)
+                encodings["image"] = self.image_encoder(img_flat)
 
-        if 'audio' in inputs:
-            audio = inputs['audio']
+        if "audio" in inputs:
+            audio = inputs["audio"]
             if len(audio.shape) == 3:  # (batch_size, time, features)
                 curr_batch_size = audio.shape[0]
                 if batch_size is None:
@@ -234,10 +234,10 @@ class ModalityEncoder(nn.Module):
 
                 audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
                 audio_flat = self._adjust_sequence_length(audio_flat, target_seq_length)
-                encodings['audio'] = self.audio_encoder(audio_flat)
+                encodings["audio"] = self.audio_encoder(audio_flat)
 
-        if 'video' in inputs:
-            video = inputs['video']
+        if "video" in inputs:
+            video = inputs["video"]
             if len(video.shape) == 5:  # (batch_size, frames, height, width, channels)
                 curr_batch_size = video.shape[0]
                 if batch_size is None:
@@ -248,23 +248,23 @@ class ModalityEncoder(nn.Module):
                     curr_batch_size, frames * height * width, video.shape[-1]
                 )
                 video_flat = self._adjust_sequence_length(video_flat, target_seq_length)
-                encodings['video'] = self.video_encoder(video_flat)
+                encodings["video"] = self.video_encoder(video_flat)
 
-        if 'code' in inputs:
-            if isinstance(inputs['code'], str):
-                tokens = self.tokenizer.encode(inputs['code'])
+        if "code" in inputs:
+            if isinstance(inputs["code"], str):
+                tokens = self.tokenizer.encode(inputs["code"])
                 tokens = tokens.reshape(1, -1)
                 embedded = self.embedding(tokens)
                 curr_batch_size = 1
             else:
-                embedded = inputs['code']
+                embedded = inputs["code"]
                 curr_batch_size = embedded.shape[0]
 
             if batch_size is None:
                 batch_size = curr_batch_size
 
             embedded = self._adjust_sequence_length(embedded, target_seq_length)
-            encodings['code'] = self.code_encoder(embedded)
+            encodings["code"] = self.code_encoder(embedded)
 
         if not encodings:
             raise ValueError("No supported modality found in inputs")
@@ -301,26 +301,26 @@ class ModalityDecoder(nn.Module):
     def setup(self):
         self.text_decoder = nn.Dense(self.config.hidden_size)
         self.image_decoder = nn.ConvTranspose(
-            features=3, kernel_size=(3, 3), padding='SAME'  # RGB channels
+            features=3, kernel_size=(3, 3), padding="SAME"  # RGB channels
         )
         self.audio_decoder = nn.ConvTranspose(
-            features=1, kernel_size=(7,), padding='SAME'  # Mono audio
+            features=1, kernel_size=(7,), padding="SAME"  # Mono audio
         )
         self.video_decoder = nn.ConvTranspose(
-            features=3, kernel_size=(3, 3, 3), padding='SAME'  # RGB channels
+            features=3, kernel_size=(3, 3, 3), padding="SAME"  # RGB channels
         )
         self.code_decoder = nn.Dense(self.config.hidden_size)
 
     def __call__(self, hidden_states: jnp.ndarray, target_modality: str) -> jnp.ndarray:
-        if target_modality == 'text':
+        if target_modality == "text":
             return self.text_decoder(hidden_states)
-        elif target_modality == 'image':
+        elif target_modality == "image":
             return self.image_decoder(hidden_states)
-        elif target_modality == 'audio':
+        elif target_modality == "audio":
             return self.audio_decoder(hidden_states)
-        elif target_modality == 'video':
+        elif target_modality == "video":
             return self.video_decoder(hidden_states)
-        elif target_modality == 'code':
+        elif target_modality == "code":
             return self.code_decoder(hidden_states)
         else:
             raise ValueError(f"Unsupported target modality: {target_modality}")
@@ -439,13 +439,13 @@ class TextToAnything(nn.Module):
 
         # Handle string input by converting to dict
         if isinstance(inputs, str):
-            inputs = {'text': inputs}
-        elif isinstance(inputs, dict) and 'input_ids' in inputs:
+            inputs = {"text": inputs}
+        elif isinstance(inputs, dict) and "input_ids" in inputs:
             # Handle tokenized input
             inputs = {
-                'text': inputs['input_ids'],
-                'position_ids': inputs.get('position_ids'),
-                'token_type_ids': inputs.get('token_type_ids'),
+                "text": inputs["input_ids"],
+                "position_ids": inputs.get("position_ids"),
+                "token_type_ids": inputs.get("token_type_ids"),
             }
 
         # Process multi-modal inputs with proper shape handling
@@ -453,8 +453,8 @@ class TextToAnything(nn.Module):
         batch_size = None
 
         # Encode text input with shape validation
-        if 'text' in inputs:
-            text_hidden = self.encoder({'text': inputs['text']})
+        if "text" in inputs:
+            text_hidden = self.encoder({"text": inputs["text"]})
             # Ensure proper shape (batch_size, seq_length, hidden_size)
             if len(text_hidden.shape) == 2:
                 batch_size = text_hidden.shape[0] // self.config.max_sequence_length
@@ -464,8 +464,8 @@ class TextToAnything(nn.Module):
             hidden_states_list.append(text_hidden)
 
         # Encode image input if present
-        if 'image' in inputs:
-            image_hidden = self.encoder({'image': inputs['image']})
+        if "image" in inputs:
+            image_hidden = self.encoder({"image": inputs["image"]})
             # Ensure proper shape for image features
             if len(image_hidden.shape) == 4:  # (batch_size, height, width, channels)
                 if batch_size is None:
@@ -491,7 +491,7 @@ class TextToAnything(nn.Module):
         if context is not None:
             context_states = []
             for modality, data in context.items():
-                if modality != 'text':
+                if modality != "text":
                     # Encode other modalities
                     encoded_context = self.encoder({modality: data})
                     # Ensure proper shape
@@ -542,13 +542,13 @@ class TextToAnything(nn.Module):
 
         # Prepare metadata
         metadata = {
-            'modality': target_modality,
-            'constitutional_compliant': compliant,
-            'principles_applied': self.config.constitutional_principles,
-            'generation_params': {
-                'temperature': self.config.temperature,
-                'top_k': self.config.top_k,
-                'top_p': self.config.top_p,
+            "modality": target_modality,
+            "constitutional_compliant": compliant,
+            "principles_applied": self.config.constitutional_principles,
+            "generation_params": {
+                "temperature": self.config.temperature,
+                "top_k": self.config.top_k,
+                "top_p": self.config.top_p,
             },
         }
 
@@ -569,7 +569,7 @@ class TextToAnything(nn.Module):
         output, metadata = self(text_prompt, target_modality, context, training=False)
 
         # Apply safety checks and regenerate if needed
-        if not metadata['constitutional_compliant']:
+        if not metadata["constitutional_compliant"]:
             # Regenerate with stronger safety constraints
             self.config.safety_threshold *= 1.2
             output, metadata = self(

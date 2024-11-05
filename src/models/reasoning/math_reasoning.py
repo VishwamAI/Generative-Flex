@@ -23,21 +23,21 @@ class MathReasoningHead(nn.Module):
         super().__init__()
         # Use config's hidden dimension
         self.hidden_dim = (
-            config.hidden_size if hasattr(config, 'hidden_size') else 256
+            config.hidden_size if hasattr(config, "hidden_size") else 256
         )  # Match transformer
         self.num_choices = 4  # Default for multiple choice
         self.dropout_prob = (
-            config.dropout_rate if hasattr(config, 'dropout_rate') else 0.1
+            config.dropout_rate if hasattr(config, "dropout_rate") else 0.1
         )
 
         # Enhanced attention with more heads
         self.num_attention_heads = (
-            config.num_attention_heads if hasattr(config, 'num_attention_heads') else 8
+            config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
         )
-        self.head_dim = config.head_dim if hasattr(config, 'head_dim') else 32
+        self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32
         self.max_seq_length = (
             config.max_position_embeddings
-            if hasattr(config, 'max_position_embeddings')
+            if hasattr(config, "max_position_embeddings")
             else 512
         )
 
@@ -60,12 +60,12 @@ class MathReasoningHead(nn.Module):
         self.math_experts = MixtureOfExperts(
             input_dim=self.hidden_dim,
             expert_dim=(
-                config.mlp_dim if hasattr(config, 'mlp_dim') else self.hidden_dim * 4
+                config.mlp_dim if hasattr(config, "mlp_dim") else self.hidden_dim * 4
             ),
-            num_experts=config.num_experts if hasattr(config, 'num_experts') else 4,
+            num_experts=config.num_experts if hasattr(config, "num_experts") else 4,
             capacity_factor=(
                 config.expert_capacity_factor
-                if hasattr(config, 'expert_capacity_factor')
+                if hasattr(config, "expert_capacity_factor")
                 else 1.25
             ),
             dropout=self.dropout_prob,
@@ -79,16 +79,16 @@ class MathReasoningHead(nn.Module):
         # Subfield-specific expert modules
         self.subfield_experts = nn.ModuleDict(
             {
-                'algebra': EnhancedTransformerBlock(
+                "algebra": EnhancedTransformerBlock(
                     config=config, dropout=self.dropout_prob
                 ),
-                'calculus': EnhancedTransformerBlock(
+                "calculus": EnhancedTransformerBlock(
                     config=config, dropout=self.dropout_prob
                 ),
-                'arithmetic': EnhancedTransformerBlock(
+                "arithmetic": EnhancedTransformerBlock(
                     config=config, dropout=self.dropout_prob
                 ),
-                'statistics': EnhancedTransformerBlock(
+                "statistics": EnhancedTransformerBlock(
                     config=config, dropout=self.dropout_prob
                 ),
             }
@@ -168,12 +168,12 @@ class MathReasoningHead(nn.Module):
                 hidden_states, attention_mask
             )
             hidden_states = attn_output
-            aux_info = {'attention_weights': attn_weights}
+            aux_info = {"attention_weights": attn_weights}
         except Exception as e:
             logger.error(f"Flash attention failed: {e}")
             # Fallback to regular attention if flash attention fails
             hidden_states = hidden_states + 0  # Identity operation as fallback
-            aux_info = {'attention_weights': None}
+            aux_info = {"attention_weights": None}
         # Process through MoE layer
         moe_output, router_probs = self.math_experts(hidden_states)
         hidden_states = hidden_states + self.dropout(moe_output)
@@ -185,7 +185,7 @@ class MathReasoningHead(nn.Module):
             -1
         )  # Uniform distribution
         load_balance_loss = F.kl_div(
-            expert_usage.log(), target_usage, reduction='batchmean'
+            expert_usage.log(), target_usage, reduction="batchmean"
         )
 
         # Router entropy for monitoring expert specialization
@@ -264,8 +264,8 @@ class MathReasoningHead(nn.Module):
         logits = self.classifier(x)
 
         # Calculate cross entropy loss and math accuracy
-        if 'labels' in kwargs:
-            labels = kwargs['labels']
+        if "labels" in kwargs:
+            labels = kwargs["labels"]
             loss = F.cross_entropy(logits, labels)
             predictions = torch.argmax(logits, dim=-1)
             math_accuracy = (predictions == labels).float().mean()
@@ -278,13 +278,13 @@ class MathReasoningHead(nn.Module):
 
         # Return outputs and auxiliary information
         outputs = {
-            'logits': logits,
-            'loss': total_loss,
-            'math_accuracy': math_accuracy,
-            'load_balance_loss': load_balance_loss,
-            'router_entropy': router_entropy,
-            'expert_entropy': expert_entropy,
-            'aux_info': aux_info,
+            "logits": logits,
+            "loss": total_loss,
+            "math_accuracy": math_accuracy,
+            "load_balance_loss": load_balance_loss,
+            "router_entropy": router_entropy,
+            "expert_entropy": expert_entropy,
+            "aux_info": aux_info,
         }
 
         return outputs
@@ -312,13 +312,13 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
         self.symbolic_processor = SymbolicMathProcessor(config)
 
         # Set up dropout
-        self.dropout = nn.Dropout(getattr(config, 'hidden_dropout_prob', 0.1))
+        self.dropout = nn.Dropout(getattr(config, "hidden_dropout_prob", 0.1))
 
         # Initialize weights
         self._init_weights()
 
         # Enable gradient checkpointing if specified
-        if getattr(config, 'gradient_checkpointing', False):
+        if getattr(config, "gradient_checkpointing", False):
             self.gradient_checkpointing_enable()
 
     def _set_gradient_checkpointing(self, module, value=False):
@@ -355,7 +355,7 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
         batch_size = hidden_states.size(0)
 
         # Create empty expressions list when no expressions are provided
-        expressions = [''] * batch_size
+        expressions = [""] * batch_size
 
         # Apply symbolic processing
         processed_states = self.symbolic_processor(hidden_states, expressions)
@@ -389,20 +389,20 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
 
         # Calculate total loss with proper weighting
         outputs = {
-            'logits': math_outputs['logits'],
-            'hidden_states': enhanced_states,
-            'loss': math_outputs['loss'],
-            'math_accuracy': math_outputs['math_accuracy'],
-            'moe_loss': math_outputs['moe_loss'],
-            'router_entropy': math_outputs['router_entropy'],
-            'expert_weights': math_outputs['expert_weights'],
+            "logits": math_outputs["logits"],
+            "hidden_states": enhanced_states,
+            "loss": math_outputs["loss"],
+            "math_accuracy": math_outputs["math_accuracy"],
+            "moe_loss": math_outputs["moe_loss"],
+            "router_entropy": math_outputs["router_entropy"],
+            "expert_weights": math_outputs["expert_weights"],
         }
 
         return outputs
 
     def prepare_inputs_for_generation(self, input_ids, attention_mask=None, **kwargs):
         # Prepare inputs for text generation
-        position_ids = kwargs.get('position_ids', None)
+        position_ids = kwargs.get("position_ids", None)
         if position_ids is None:
             position_ids = torch.arange(
                 input_ids.shape[1], dtype=torch.long, device=input_ids.device
@@ -410,9 +410,9 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
             position_ids = position_ids.unsqueeze(0).expand_as(input_ids)
 
         return {
-            'input_ids': input_ids,
-            'attention_mask': attention_mask,
-            'position_ids': position_ids,
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "position_ids": position_ids,
         }
 
     @staticmethod

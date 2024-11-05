@@ -19,7 +19,7 @@ class MultiHeadAttention(nn.Module):
         self.scale = math.sqrt(self.head_dim)
 
         # Attention cache for memory efficiency
-        self.cache_enabled = hasattr(config, 'use_cache') and config.use_cache
+        self.cache_enabled = hasattr(config, "use_cache") and config.use_cache
         self.key_cache = {}
         self.value_cache = {}
 
@@ -46,7 +46,7 @@ class MultiHeadAttention(nn.Module):
 
         if attention_mask is not None:
             attention_scores = attention_scores.masked_fill(
-                attention_mask == 0, float('-inf')
+                attention_mask == 0, float("-inf")
             )
 
         attention_probs = torch.softmax(attention_scores, dim=-1)
@@ -142,6 +142,6 @@ class BaseTransformer(nn.Module):
 
     def clear_cache(self):
         for layer in self.layers:
-            if hasattr(layer.attention, 'key_cache'):
+            if hasattr(layer.attention, "key_cache"):
                 layer.attention.key_cache.clear()
                 layer.attention.value_cache.clear()

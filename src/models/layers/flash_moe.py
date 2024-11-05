@@ -89,7 +89,7 @@ class FlashAttention(torch.nn.Module):
 
         # Compute attention with better memory efficiency
         attn_weights = torch.matmul(q, k.transpose(-2, -1)) * self.scaling
-        attn_weights = attn_weights.masked_fill(attention_mask == 0, float('-inf'))
+        attn_weights = attn_weights.masked_fill(attention_mask == 0, float("-inf"))
 
         attn_weights = F.softmax(attn_weights, dim=-1)
         attn_weights_dropout = self.dropout(attn_weights)
@@ -169,7 +169,7 @@ class MixtureOfExperts(torch.nn.Module):
         uniform_prob = torch.ones_like(mean_prob) / self.k
         # KL divergence for load balancing
         load_balance_loss = F.kl_div(
-            mean_prob.log(), uniform_prob, reduction='batchmean'
+            mean_prob.log(), uniform_prob, reduction="batchmean"
         )
 
         # Compute capacity
@@ -214,17 +214,17 @@ class EnhancedTransformerBlock(torch.nn.Module):
         super().__init__()
         # Extract dimensions from config
         self.hidden_size = (
-            config.hidden_size if hasattr(config, 'hidden_size') else config.d_model
+            config.hidden_size if hasattr(config, "hidden_size") else config.d_model
         )
         self.num_heads = (
-            config.num_attention_heads if hasattr(config, 'num_attention_heads') else 8
+            config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
         )
         self.max_seq_length = (
             config.max_position_embeddings
-            if hasattr(config, 'max_position_embeddings')
+            if hasattr(config, "max_position_embeddings")
             else 512
         )
-        self.num_experts = getattr(config, 'num_experts', 4)
+        self.num_experts = getattr(config, "num_experts", 4)
 
         # Calculate expert dimension
         expert_dim = self.hidden_size * 4
@@ -250,7 +250,7 @@ class EnhancedTransformerBlock(torch.nn.Module):
         mask: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, Dict]:
         # Initialize auxiliary info dictionary
-        aux_info = {'attention_weights': [], 'router_probs': [], 'layer_outputs': []}
+        aux_info = {"attention_weights": [], "router_probs": [], "layer_outputs": []}
 
         # Handle input that might be a tuple
         if isinstance(x, tuple):
@@ -259,15 +259,15 @@ class EnhancedTransformerBlock(torch.nn.Module):
         # Attention block with residual connection
         normed_x = self.norm1(x)
         attn_output, attn_weights = self.attention(normed_x, mask)
-        aux_info['attention_weights'].append(attn_weights)
+        aux_info["attention_weights"].append(attn_weights)
         x = x + self.dropout(attn_output)
-        aux_info['layer_outputs'].append(x.detach().clone())
+        aux_info["layer_outputs"].append(x.detach().clone())
 
         # MoE block with residual connection
         normed_x = self.norm2(x)
         moe_output, router_probs = self.moe(normed_x)
-        aux_info['router_probs'].append(router_probs)
+        aux_info["router_probs"].append(router_probs)
         x = x + self.dropout(moe_output)
-        aux_info['layer_outputs'].append(x.detach().clone())
+        aux_info["layer_outputs"].append(x.detach().clone())
 
         return x, aux_info

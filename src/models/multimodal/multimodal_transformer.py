@@ -51,14 +51,14 @@ class MultiModalTransformer(nn.Module):
             config.hidden_size,
             config.num_attention_heads,
             dropout=getattr(
-                config, 'dropout', 0.1
+                config, "dropout", 0.1
             ),  # Use OPT's dropout or default to 0.1
         )
 
         # Output components
         self.layer_norm = nn.LayerNorm(config.hidden_size)
         self.dropout = nn.Dropout(
-            getattr(config, 'dropout', 0.1)
+            getattr(config, "dropout", 0.1)
         )  # Use OPT's dropout or default to 0.1
 
         # Mathematical reasoning specific components
@@ -185,10 +185,10 @@ class MultiModalTransformer(nn.Module):
 
         if return_dict:
             return {
-                'last_hidden_state': hidden_states,
-                'pooler_output': hidden_states[:, 0],  # Use first token for pooling
-                'math_gate': math_gate,
-                'router_probs': router_probs_list,
+                "last_hidden_state": hidden_states,
+                "pooler_output": hidden_states[:, 0],  # Use first token for pooling
+                "math_gate": math_gate,
+                "router_probs": router_probs_list,
             }
         return hidden_states
 
@@ -199,14 +199,14 @@ class MultiModalTransformer(nn.Module):
         **kwargs,
     ) -> Dict[str, Any]:
         """Prepare inputs for text generation."""
-        position_ids = kwargs.get('position_ids', None)
+        position_ids = kwargs.get("position_ids", None)
         if position_ids is None:
             position_ids = attention_mask.long().cumsum(-1) - 1
             position_ids.masked_fill_(attention_mask == 0, 1)
 
         return {
-            'input_ids': input_ids,
-            'attention_mask': attention_mask,
-            'position_ids': position_ids,
-            'image_features': kwargs.get('image_features', None),
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "position_ids": position_ids,
+            "image_features": kwargs.get("image_features", None),
         }

@@ -11,7 +11,7 @@ class SymbolicMathProcessor(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.hidden_size = config.hidden_size
-        self.dropout_prob = getattr(config, 'hidden_dropout_prob', 0.1)
+        self.dropout_prob = getattr(config, "hidden_dropout_prob", 0.1)
 
         # Symbolic expression embedding
         self.symbol_embedder = nn.Sequential(
@@ -32,7 +32,7 @@ class SymbolicMathProcessor(nn.Module):
             nhead=8,
             dim_feedforward=self.hidden_size * 4,
             dropout=self.dropout_prob,
-            activation='gelu',
+            activation="gelu",
             batch_first=True,
         )
 
@@ -52,7 +52,7 @@ class SymbolicMathProcessor(nn.Module):
 
     def tokenize_expression(self, expr: sympy.Expr) -> List[str]:
         """Convert SymPy expression to token sequence."""
-        return str(expr).replace('(', ' ( ').replace(')', ' ) ').split()
+        return str(expr).replace("(", " ( ").replace(")", " ) ").split()
 
     def embed_expression(
         self, tokens: List[str], hidden_states: torch.Tensor
@@ -62,8 +62,8 @@ class SymbolicMathProcessor(nn.Module):
         embeddings = []
 
         for token in tokens:
-            if token in ['+', '-', '*', '/']:
-                op_idx = ['+', '-', '*', '/'].index(token)
+            if token in ["+", "-", "*", "/"]:
+                op_idx = ["+", "-", "*", "/"].index(token)
                 embedding = (
                     self.operator_embeddings[op_idx].unsqueeze(0).expand(batch_size, -1)
                 )
@@ -122,7 +122,7 @@ class MathematicalNotationProcessor(nn.Module):
             nhead=8,
             dim_feedforward=self.hidden_size * 4,
             dropout=0.1,
-            activation='gelu',
+            activation="gelu",
             batch_first=True,
         )
 

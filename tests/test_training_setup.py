@@ -16,12 +16,12 @@ class TestTrainingSetup(unittest.TestCase):
         """Set up test environment"""
         cls.accelerator = Accelerator(
             gradient_accumulation_steps=4,
-            mixed_precision='fp16' if torch.cuda.is_available() else 'no',
+            mixed_precision="fp16" if torch.cuda.is_available() else "no",
         )
         cls.device = cls.accelerator.device
         # Initialize tokenizer for MMMU dataset using an open source model
         logger.info("Initializing tokenizer...")
-        cls.tokenizer = AutoTokenizer.from_pretrained('facebook/opt-125m')
+        cls.tokenizer = AutoTokenizer.from_pretrained("facebook/opt-125m")
         logger.info("Tokenizer initialized successfully")
 
     def test_environment_setup(self):
@@ -29,7 +29,7 @@ class TestTrainingSetup(unittest.TestCase):
         # Test CUDA availability
         print(f"CUDA available: {torch.cuda.is_available()}")
         print(f"Device being used: {self.device}")
-        self.assertTrue(hasattr(self.accelerator, 'gradient_accumulation_steps'))
+        self.assertTrue(hasattr(self.accelerator, "gradient_accumulation_steps"))
 
     def test_mmmu_dataset_loading(self):
         """Test MMMU dataset loading and processing"""
@@ -39,7 +39,7 @@ class TestTrainingSetup(unittest.TestCase):
 
             # Create dataloaders
             dataloaders = create_mmmu_dataloaders(
-                subjects=['Math', 'Physics', 'Computer_Science'],
+                subjects=["Math", "Physics", "Computer_Science"],
                 tokenizer=self.tokenizer,
                 batch_size=4,  # Small batch size for testing
             )
@@ -57,16 +57,16 @@ class TestTrainingSetup(unittest.TestCase):
                 batch = next(iter(dataloader))
 
                 if self.tokenizer:  # If using tokenizer
-                    self.assertIn('input_ids', batch)
-                    self.assertIn('attention_mask', batch)
-                    self.assertIn('labels', batch)
+                    self.assertIn("input_ids", batch)
+                    self.assertIn("attention_mask", batch)
+                    self.assertIn("labels", batch)
                 else:  # If using raw data
-                    self.assertIn('question', batch)
-                    self.assertIn('options', batch)
-                    self.assertIn('answer', batch)
+                    self.assertIn("question", batch)
+                    self.assertIn("options", batch)
+                    self.assertIn("answer", batch)
 
-                self.assertIn('images', batch)
-                self.assertIn('metadata', batch)
+                self.assertIn("images", batch)
+                self.assertIn("metadata", batch)
                 print(f"Successfully loaded batch from {split} split")
                 break  # Test only one split
 
@@ -107,13 +107,13 @@ class TestTrainingSetup(unittest.TestCase):
         if torch.cuda.is_available():
             self.assertEqual(
                 self.accelerator.mixed_precision,
-                'fp16',
+                "fp16",
                 "Mixed precision not set correctly for GPU",
             )
         else:
             self.assertEqual(
                 self.accelerator.mixed_precision,
-                'no',
+                "no",
                 "Mixed precision should be disabled for CPU",
             )
 
@@ -139,5 +139,5 @@ class TestTrainingSetup(unittest.TestCase):
             self.fail(f"Forward pass failed: {str(e)}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main(verbosity=2)

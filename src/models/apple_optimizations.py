@@ -35,7 +35,7 @@ class OptimizationConfig:
     use_int4_quantization: bool = struct.field(default=True)
     block_size: int = struct.field(default=32)
     num_bits: int = struct.field(default=4)
-    quantization_mode: str = struct.field(default='linear_symmetric')
+    quantization_mode: str = struct.field(default="linear_symmetric")
     original_shape: Optional[Tuple[int, ...]] = struct.field(default=None)
 
     # Cache parameters
@@ -61,12 +61,12 @@ class BlockWiseQuantization(nn.Module):
 
     block_size: int
     num_bits: int
-    quantization_mode: str = 'linear_symmetric'
+    quantization_mode: str = "linear_symmetric"
 
     def setup(self):
         """Initialize components."""
         # Initialize state variable for original shape
-        self.state = self.variable('state', 'shape', lambda: None)
+        self.state = self.variable("state", "shape", lambda: None)
 
     def quantize(self, x: jnp.ndarray) -> Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
         """Quantize input tensor to int4 format."""
@@ -77,7 +77,7 @@ class BlockWiseQuantization(nn.Module):
         x_reshaped = x.reshape(-1, self.block_size)  # Flatten to (N, block_size)
 
         # Compute statistics based on quantization mode
-        if self.quantization_mode == 'linear_symmetric':
+        if self.quantization_mode == "linear_symmetric":
             max_abs = jnp.max(jnp.abs(x_reshaped), axis=1, keepdims=True)
             scale = max_abs / (2 ** (self.num_bits - 1) - 1)
             zero_point = jnp.zeros_like(scale)
@@ -123,7 +123,7 @@ class StatefulKeyValueCache(nn.Module):
     num_heads: int
     head_dim: int
     max_sequence_length: int = 2048
-    dtype: str = 'float16'
+    dtype: str = "float16"
     cache_size_multiplier: float = 1.5
 
     def setup(self):
@@ -139,13 +139,13 @@ class StatefulKeyValueCache(nn.Module):
 
         # Use variables for stateful cache
         self.key_cache = self.variable(
-            'cache', 'key', jnp.zeros, key_shape, dtype=getattr(jnp, self.dtype)
+            "cache", "key", jnp.zeros, key_shape, dtype=getattr(jnp, self.dtype)
         )
         self.value_cache = self.variable(
-            'cache', 'value', jnp.zeros, value_shape, dtype=getattr(jnp, self.dtype)
+            "cache", "value", jnp.zeros, value_shape, dtype=getattr(jnp, self.dtype)
         )
-        self.current_length = self.variable('cache', 'length', lambda: 0)
-        self.valid_mask = self.variable('cache', 'mask', jnp.zeros, (max_length,), bool)
+        self.current_length = self.variable("cache", "length", lambda: 0)
+        self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length,), bool)
 
     def update(
         self, key: jnp.ndarray, value: jnp.ndarray, position: int = None
@@ -220,7 +220,7 @@ class PrivacyPreservingLayer(nn.Module):
             epsilon=1e-12,  # Default epsilon
             use_bias=True,
             use_scale=True,
-            name='layer_norm',
+            name="layer_norm",
         )
 
     @nn.compact
@@ -241,7 +241,7 @@ class PrivacyPreservingLayer(nn.Module):
         if training and self.use_privacy_preserving:
             # Generate noise with matching batch size
             noise = (
-                jax.random.normal(self.make_rng('dropout'), x.shape)
+                jax.random.normal(self.make_rng("dropout"), x.shape)
                 * self.noise_multiplier
             )
             x = x + noise
@@ -371,10 +371,10 @@ class AppleOptimizedTransformer(nn.Module):
         """Forward pass with optimizations."""
         # Handle dictionary input
         if isinstance(hidden_states, dict):
-            if 'input_ids' in hidden_states:
-                hidden_states = hidden_states['input_ids']
-            elif 'text' in hidden_states:
-                hidden_states = hidden_states['text']
+            if "input_ids" in hidden_states:
+                hidden_states = hidden_states["input_ids"]
+            elif "text" in hidden_states:
+                hidden_states = hidden_states["text"]
             else:
                 raise ValueError(
                     "Input dictionary must contain 'input_ids' or 'text' key"

@@ -21,7 +21,7 @@ class EnhancedConfig(PretrainedConfig):
         num_attention_heads: int = 4,  # Reduced from 8
         num_hidden_layers: int = 3,  # Reduced from 4
         intermediate_size: int = 1024,  # Reduced from 8192
-        hidden_act: str = 'gelu',
+        hidden_act: str = "gelu",
         attention_dropout_prob: float = 0.1,
         hidden_dropout_prob: float = 0.1,
         max_position_embeddings: int = 512,
@@ -57,7 +57,7 @@ class EnhancedConfig(PretrainedConfig):
         use_neural_engine: bool = True,  # Apple's ML acceleration
         block_size: int = 16,  # Reduced from 32
         num_bits: int = 4,  # For quantization precision
-        cache_dtype: str = 'float16',  # Cache data type
+        cache_dtype: str = "float16",  # Cache data type
         cache_size_multiplier: float = 1.5,  # Cache size multiplier
         # Modality-specific parameters
         image_input_size: int = 96,  # Input dimension for image features
@@ -164,7 +164,7 @@ class MultiModalEmbedding(nn.Module):
                     f"Processing {modality} modality, input shape: {data.shape}"
                 )
 
-                if modality == 'text':
+                if modality == "text":
                     try:
                         if data.dtype in [torch.float32, torch.float64]:
                             # If input is already embedded, use it directly
@@ -193,7 +193,7 @@ class MultiModalEmbedding(nn.Module):
                         logger.error(f"Error processing text input: {str(e)}")
                         raise
 
-                elif modality == 'image':
+                elif modality == "image":
                     try:
                         logger.info("Starting image projection")
                         # Project image features to hidden size
@@ -221,7 +221,7 @@ class MultiModalEmbedding(nn.Module):
                     except Exception as e:
                         logger.error(f"Error processing image input: {str(e)}")
                         raise
-                elif modality == 'audio':
+                elif modality == "audio":
                     try:
                         # Project audio features to hidden size
                         audio_embeddings = self.audio_projection(data)
@@ -245,7 +245,7 @@ class MultiModalEmbedding(nn.Module):
                         logger.error(f"Error processing audio input: {str(e)}")
                         raise
 
-                elif modality == 'video':
+                elif modality == "video":
                     try:
                         # Project video features to hidden size
                         video_embeddings = self.video_projection(data)
@@ -365,7 +365,7 @@ class FlashAttention(nn.Module):
         v = v.reshape(batch_size, seq_length, num_heads, head_dim)
 
         # Compute attention scores
-        qk = torch.einsum('bqhd,bkhd->bhqk', q, k) * scale
+        qk = torch.einsum("bqhd,bkhd->bhqk", q, k) * scale
 
         # Apply causal mask for generation
         if mask is not None:
@@ -395,7 +395,7 @@ class FlashAttention(nn.Module):
             )
 
         # Compute attention output
-        attention_output = torch.einsum('bhqk,bkhd->bqhd', attention_weights, v)
+        attention_output = torch.einsum("bhqk,bkhd->bqhd", attention_weights, v)
         return attention_output
 
 
@@ -508,7 +508,7 @@ class EnhancedTransformerBlock(nn.Module):
         else:
             self.ffn = nn.Sequential(
                 nn.Linear(config.hidden_size, config.intermediate_size),
-                nn.GELU() if config.hidden_act == 'gelu' else nn.ReLU(),
+                nn.GELU() if config.hidden_act == "gelu" else nn.ReLU(),
                 nn.Linear(config.intermediate_size, config.hidden_size),
             )
 
@@ -627,7 +627,7 @@ class EnhancedTransformerBlock(nn.Module):
             x = self.ffn_layernorm(x)
 
             # Feed-forward network with expert routing
-            if hasattr(self, 'expert_layer'):
+            if hasattr(self, "expert_layer"):
                 logger.info("Using expert layer")
                 expert_output = self.expert_layer(x)
                 x = x + (self.dropout(expert_output) if training else expert_output)
@@ -839,11 +839,11 @@ class EnhancedTransformer(PreTrainedModel):
                 return ((loss,) + output) if loss is not None else output
 
             return {
-                'loss': loss,  # Will be None during evaluation if no labels provided
-                'logits': logits,
-                'last_hidden_state': hidden_states,
-                'hidden_states': all_hidden_states,
-                'attentions': all_attentions,
+                "loss": loss,  # Will be None during evaluation if no labels provided
+                "logits": logits,
+                "last_hidden_state": hidden_states,
+                "hidden_states": all_hidden_states,
+                "attentions": all_attentions,
             }
 
         except Exception as e:
@@ -896,7 +896,7 @@ class EnhancedTransformer(PreTrainedModel):
                     next_token_logits
                     < torch.topk(next_token_logits, top_k)[0][..., -1, None]
                 )
-                next_token_logits[indices_to_remove] = float('-inf')
+                next_token_logits[indices_to_remove] = float("-inf")
 
             # Apply top-p (nucleus) filtering
             if top_p < 1.0:
@@ -914,19 +914,19 @@ class EnhancedTransformer(PreTrainedModel):
                 indices_to_remove = sorted_indices_to_remove.scatter(
                     1, sorted_indices, sorted_indices_to_remove
                 )
-                next_token_logits[indices_to_remove] = float('-inf')
+                next_token_logits[indices_to_remove] = float("-inf")
 
             # Sample next token
             probs = F.softmax(next_token_logits, dim=-1)
             next_token = torch.multinomial(probs, num_samples=1)
 
             # Update inputs for next iteration
-            if 'text' in current_input:
-                current_input['text'] = torch.cat(
-                    [current_input['text'], next_token], dim=1
+            if "text" in current_input:
+                current_input["text"] = torch.cat(
+                    [current_input["text"], next_token], dim=1
                 )
             else:
-                current_input = {'text': next_token}
+                current_input = {"text": next_token}
 
             # Store generated token
             generated_tokens.append(next_token)

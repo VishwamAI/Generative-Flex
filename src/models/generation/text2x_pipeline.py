@@ -26,22 +26,22 @@ class Text2XPipeline(nn.Module):
         # Modality-specific output projections
         self.modality_projections = nn.ModuleDict(
             {
-                'text': ModalityProjection(config, config.vocab_size),
-                'image': nn.Sequential(
+                "text": ModalityProjection(config, config.vocab_size),
+                "image": nn.Sequential(
                     ModalityProjection(config, 3072),  # 3 * 32 * 32
                     nn.Unflatten(-1, (3, 32, 32)),
                     nn.Upsample(scale_factor=2),
                 ),
-                'audio': ModalityProjection(config, config.audio_dim),
-                'video': nn.Sequential(
+                "audio": ModalityProjection(config, config.audio_dim),
+                "video": nn.Sequential(
                     ModalityProjection(config, 3072),  # 3 * 32 * 32
                     nn.Unflatten(-1, (3, 32, 32)),
                     nn.Upsample(scale_factor=2),
                     nn.Conv2d(3, 3, 3, padding=1),
                 ),
-                'protein': ModalityProjection(config, 20),  # 20 amino acids
-                'dna': ModalityProjection(config, 4),  # 4 nucleotides
-                'music': ModalityProjection(config, config.music_dim),
+                "protein": ModalityProjection(config, 20),  # 20 amino acids
+                "dna": ModalityProjection(config, 4),  # 4 nucleotides
+                "music": ModalityProjection(config, config.music_dim),
             }
         )
 
@@ -57,7 +57,7 @@ class Text2XPipeline(nn.Module):
         )
 
     def forward(
-        self, input_ids, attention_mask=None, target_modality='text', position_ids=None
+        self, input_ids, attention_mask=None, target_modality="text", position_ids=None
     ):
         # Add modality embedding to input embeddings
         modality_embedding = self.get_modality_embedding(target_modality)
@@ -74,13 +74,13 @@ class Text2XPipeline(nn.Module):
 
         output = self.modality_projections[target_modality](hidden_states)
 
-        return {'output': output, 'hidden_states': hidden_states}
+        return {"output": output, "hidden_states": hidden_states}
 
     def generate(
         self,
         input_ids,
         attention_mask=None,
-        target_modality='text',
+        target_modality="text",
         max_length=None,
         temperature=1.0,
     ):
@@ -93,15 +93,15 @@ class Text2XPipeline(nn.Module):
         with torch.no_grad():
             outputs = self.forward(input_ids, attention_mask, target_modality)
 
-            if target_modality == 'text':
+            if target_modality == "text":
                 # Text generation with sampling
-                logits = outputs['output'][:, -1, :] / temperature
+                logits = outputs["output"][:, -1, :] / temperature
                 probs = F.softmax(logits, dim=-1)
                 next_token = torch.multinomial(probs, num_samples=1)
                 return next_token
             else:
                 # Direct generation for other modalities
-                return outputs['output']
+                return outputs["output"]
 
     @staticmethod
     def create_attention_mask(input_ids, padding_idx=0):

@@ -26,7 +26,7 @@ def enhanced_config():
         num_attention_heads=8,
         num_hidden_layers=4,
         intermediate_size=8192,
-        hidden_act='gelu',
+        hidden_act="gelu",
         attention_dropout_prob=0.1,  # Renamed from attention_probs_dropout_prob
         hidden_dropout_prob=0.1,
         max_position_embeddings=512,
@@ -55,7 +55,7 @@ def knowledge_config():
         use_cache=True,
         update_frequency=100,
         max_cache_size=10000,
-        modalities=['text', 'image', 'audio', 'video'],
+        modalities=["text", "image", "audio", "video"],
     )
 
 
@@ -72,7 +72,7 @@ def optimization_config():
         default_sequence_length=512,
         use_int4_quantization=True,
         block_size=32,
-        quantization_mode='linear_symmetric',
+        quantization_mode="linear_symmetric",
         use_kv_cache=True,
         deterministic=False,  # Added for attention layer
         num_key_value_heads=8,  # Added for KV cache
@@ -96,10 +96,10 @@ def generation_config():
         block_size=32,
         num_key_value_heads=8,  # Added for KV cache
         max_cache_size=2048,  # Added for KV cache
-        supported_modalities=['text', 'image', 'audio', 'video', 'code'],
+        supported_modalities=["text", "image", "audio", "video", "code"],
         constitutional_principles=[
-            'Respect privacy',
-            'Be transparent about AI-generated content',
+            "Respect privacy",
+            "Be transparent about AI-generated content",
         ],
     )
 
@@ -127,9 +127,9 @@ def test_enhanced_transformer(enhanced_config):
     assert outputs.shape == expected_shape
 
     # Verify transformer components
-    assert hasattr(model, 'expert_layer')
-    assert hasattr(model, 'flash_attention')
-    assert hasattr(model, 'constitutional_layer')
+    assert hasattr(model, "expert_layer")
+    assert hasattr(model, "flash_attention")
+    assert hasattr(model, "constitutional_layer")
 
     # Test generation capability
     generated = model.apply(params, inputs, method=model.generate, max_length=32)
@@ -185,8 +185,8 @@ def test_apple_optimizations(optimization_config):
     assert outputs.shape == (batch_size, seq_length, hidden_size)
 
     # Test optimizations
-    assert hasattr(model, 'quantization')
-    assert hasattr(model, 'privacy_layer')
+    assert hasattr(model, "quantization")
+    assert hasattr(model, "privacy_layer")
 
 
 def test_text_to_anything(generation_config):
@@ -196,7 +196,7 @@ def test_text_to_anything(generation_config):
 
     # Test text to image
     text_prompt = "Generate a landscape image"
-    target_modality = 'image'
+    target_modality = "image"
 
     # Create sample input with correct shape
     batch_size = 1
@@ -214,12 +214,12 @@ def test_text_to_anything(generation_config):
 
     # Verify output shape and metadata
     assert isinstance(output, jnp.ndarray)
-    assert metadata['modality'] == target_modality
-    assert 'constitutional_compliant' in metadata
+    assert metadata["modality"] == target_modality
+    assert "constitutional_compliant" in metadata
 
     # Test supported modalities
     for modality in generation_config.supported_modalities:
-        assert modality in ['text', 'image', 'audio', 'video', 'code']
+        assert modality in ["text", "image", "audio", "video", "code"]
 
 
 def test_constitutional_principles(generation_config):
@@ -229,7 +229,7 @@ def test_constitutional_principles(generation_config):
 
     # Test with potentially unsafe content
     text_prompt = "Generate potentially unsafe content"
-    target_modality = 'text'
+    target_modality = "text"
 
     # Create sample input with correct shape
     batch_size = 1
@@ -246,10 +246,10 @@ def test_constitutional_principles(generation_config):
     output, metadata = model.apply(params, text_prompt, target_modality)
 
     # Verify safety checks
-    assert metadata['constitutional_compliant'] in [True, False]
-    assert hasattr(model, 'constitutional_checker')
-    assert 'safety_score' in metadata
-    assert 'filtered_content' in metadata
+    assert metadata["constitutional_compliant"] in [True, False]
+    assert hasattr(model, "constitutional_checker")
+    assert "safety_score" in metadata
+    assert "filtered_content" in metadata
 
 
 def test_real_time_integration(knowledge_config):
@@ -258,7 +258,7 @@ def test_real_time_integration(knowledge_config):
     model = KnowledgeIntegrator(knowledge_config)
 
     # Test real-time update
-    new_data = {'text': jnp.ones((1, knowledge_config.embedding_size))}
+    new_data = {"text": jnp.ones((1, knowledge_config.embedding_size))}
 
     # Initialize parameters
     key = jax.random.PRNGKey(0)
@@ -268,7 +268,7 @@ def test_real_time_integration(knowledge_config):
     model.apply(params, new_data)
 
     # Verify update mechanism
-    assert hasattr(model, 'update_knowledge')
+    assert hasattr(model, "update_knowledge")
 
 
 def test_multi_modal_processing(generation_config):
@@ -278,7 +278,7 @@ def test_multi_modal_processing(generation_config):
 
     # Test multi-modal input
     text_prompt = "Describe this image"
-    target_modality = 'text'
+    target_modality = "text"
 
     # Create sample inputs with correct shapes
     batch_size = 2
@@ -288,8 +288,8 @@ def test_multi_modal_processing(generation_config):
     hidden_size = generation_config.hidden_size
 
     inputs = {
-        'text': jnp.ones((batch_size, text_seq_length, hidden_size)),
-        'image': jnp.ones((batch_size, 256, 256, 3)),
+        "text": jnp.ones((batch_size, text_seq_length, hidden_size)),
+        "image": jnp.ones((batch_size, 256, 256, 3)),
     }
 
     # Initialize parameters
@@ -301,12 +301,12 @@ def test_multi_modal_processing(generation_config):
 
     # Verify multi-modal capabilities
     assert isinstance(output, jnp.ndarray)
-    assert metadata['modality'] == target_modality
-    assert 'multi_modal_attention_weights' in metadata
-    assert hasattr(model.encoder, 'image_encoder')
-    assert hasattr(model.encoder, 'text_encoder')
-    assert hasattr(model, 'cross_modal_attention')
+    assert metadata["modality"] == target_modality
+    assert "multi_modal_attention_weights" in metadata
+    assert hasattr(model.encoder, "image_encoder")
+    assert hasattr(model.encoder, "text_encoder")
+    assert hasattr(model, "cross_modal_attention")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main([__file__])

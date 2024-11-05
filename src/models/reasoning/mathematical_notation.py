@@ -24,7 +24,7 @@ class MathematicalNotationProcessor(nn.Module):
         self.layer_norm = nn.LayerNorm(config.hidden_size)
 
     def forward(
-        self, hidden_states: torch.Tensor, notation_type: str = 'latex'
+        self, hidden_states: torch.Tensor, notation_type: str = "latex"
     ) -> torch.Tensor:
         """Process mathematical notation
         Args:
@@ -33,11 +33,11 @@ class MathematicalNotationProcessor(nn.Module):
         Returns:
             Processed tensor of shape (batch_size, seq_length, hidden_size)
         """
-        if notation_type == 'latex':
+        if notation_type == "latex":
             embedded = self.latex_embedding(hidden_states)
-        elif notation_type == 'ascii':
+        elif notation_type == "ascii":
             embedded = self.ascii_embedding(hidden_states)
-        elif notation_type == 'unicode':
+        elif notation_type == "unicode":
             embedded = self.unicode_embedding(hidden_states)
         else:
             raise ValueError(f"Unsupported notation type: {notation_type}")

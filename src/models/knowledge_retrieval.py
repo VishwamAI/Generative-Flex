@@ -26,7 +26,7 @@ class KnowledgeConfig:
     update_frequency: int = struct.field(default=100)
     max_cache_size: int = struct.field(default=10000)
     modalities: List[str] = struct.field(
-        default_factory=lambda: ['text', 'image', 'audio', 'video']
+        default_factory=lambda: ["text", "image", "audio", "video"]
     )
 
 
@@ -39,12 +39,12 @@ class KnowledgeRetriever(nn.Module):
         """Initialize components."""
         self.embedder = nn.Dense(self.config.embedding_size)
         self.knowledge_store = self.variable(
-            'cache',
-            'knowledge',
+            "cache",
+            "knowledge",
             jnp.zeros,
             (self.config.max_chunks, self.config.embedding_size),
         )
-        self.store_index = self.variable('cache', 'index', lambda: 0)
+        self.store_index = self.variable("cache", "index", lambda: 0)
 
     def retrieve(self, query_embedding: jnp.ndarray) -> jnp.ndarray:
         """Retrieve relevant knowledge."""
@@ -71,7 +71,7 @@ class KnowledgeRetriever(nn.Module):
 
         # Compute similarity scores
         similarity = jnp.einsum(
-            'be,ke->bk',
+            "be,ke->bk",
             query_normalized,  # (batch_size * seq_len, embedding_size)
             normalized_knowledge,  # (max_chunks, embedding_size)
         )
@@ -122,7 +122,7 @@ class KnowledgeIntegrator(nn.Module):
     def __call__(
         self,
         inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
-        modality: str = 'text',
+        modality: str = "text",
         context: Optional[jnp.ndarray] = None,
     ) -> jnp.ndarray:
         """Process inputs with knowledge integration."""

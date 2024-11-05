@@ -36,7 +36,7 @@ class EnhancedTransformerBlock(nn.Module):
         self.feed_forward_norm = nn.LayerNorm(config.hidden_size)
 
         # Optional: Flash Attention support
-        self.use_flash_attention = getattr(config, 'flash_attention', False)
+        self.use_flash_attention = getattr(config, "flash_attention", False)
 
         # Gradient checkpointing
         self.gradient_checkpointing = False
@@ -144,10 +144,10 @@ class EnhancedTransformerBlock(nn.Module):
 
         # Return both hidden states and auxiliary information
         auxiliary_info = {
-            'attention_weights': attn_weights,
-            'attention_output': attn_output,
-            'intermediate_states': hidden_states.detach(),
-            'layer_past': layer_past,
+            "attention_weights": attn_weights,
+            "attention_output": attn_output,
+            "intermediate_states": hidden_states.detach(),
+            "layer_past": layer_past,
         }
 
         return hidden_states, auxiliary_info

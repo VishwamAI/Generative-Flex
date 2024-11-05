@@ -22,38 +22,38 @@ from ..models.multimodal.image_processor import ImageProcessor
 from ..data.mmmu_loader import create_mmmu_dataloaders
 
 # Set up logging
-os.makedirs('logs', exist_ok=True)
+os.makedirs("logs", exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler(), logging.FileHandler('logs/training.log')],
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.StreamHandler(), logging.FileHandler("logs/training.log")],
 )
 logger = logging.getLogger(__name__)
 
 # Default subjects for MMMU dataset
-DEFAULT_SUBJECTS = ['Math', 'Computer_Science']
+DEFAULT_SUBJECTS = ["Math", "Computer_Science"]
 
 
 def log_metrics(
     metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] = None
 ):
     """Log training metrics to console and file"""
-    metric_str = ' - '.join(
+    metric_str = " - ".join(
         [
-            f'{k}: {v:.4f}' if isinstance(v, (float, int)) else f'{k}: {v}'
+            f"{k}: {v:.4f}" if isinstance(v, (float, int)) else f"{k}: {v}"
             for k, v in metrics.items()
         ]
     )
     if epoch is not None:
-        metric_str = f'Epoch {epoch} - {metric_str}'
+        metric_str = f"Epoch {epoch} - {metric_str}"
     if step is not None:
-        metric_str = f'Step {step} - {metric_str}'
+        metric_str = f"Step {step} - {metric_str}"
     logger.info(metric_str)
 
 
 # Define MMMU subjects and splits
-MMMU_SUBJECTS = ['Math', 'Computer_Science']  # Exact subject names from MMMU dataset
-MMMU_SPLITS = ['dev', 'validation', 'test']  # Available splits in MMMU
+MMMU_SUBJECTS = ["Math", "Computer_Science"]  # Exact subject names from MMMU dataset
+MMMU_SPLITS = ["dev", "validation", "test"]  # Available splits in MMMU
 
 
 class EnhancedMMUModel(PreTrainedModel):
@@ -123,14 +123,14 @@ class EnhancedMMUModel(PreTrainedModel):
         try:
             # Process text inputs
             transformer_outputs = self.transformer(
-                input_ids=batch['input_ids'], attention_mask=batch['attention_mask']
+                input_ids=batch["input_ids"], attention_mask=batch["attention_mask"]
             )
 
-            hidden_states = transformer_outputs['last_hidden_state']
+            hidden_states = transformer_outputs["last_hidden_state"]
 
             # Process images if present
-            if 'images' in batch:
-                image_features = self.process_images(batch['images'])
+            if "images" in batch:
+                image_features = self.process_images(batch["images"])
                 # Combine text and image features
                 combined_features = torch.cat([hidden_states, image_features], dim=-1)
                 fused_features = self.fusion(combined_features)
@@ -138,17 +138,17 @@ class EnhancedMMUModel(PreTrainedModel):
                 fused_features = hidden_states
 
             # Get math reasoning outputs
-            math_outputs = self.math_head(fused_features, batch['attention_mask'])
+            math_outputs = self.math_head(fused_features, batch["attention_mask"])
 
             # Calculate losses
-            if 'labels' in batch:
+            if "labels" in batch:
                 loss_fct = nn.CrossEntropyLoss()
                 task_loss = loss_fct(
-                    math_outputs['logits'].view(-1, self.num_labels),
-                    batch['labels'].view(-1),
+                    math_outputs["logits"].view(-1, self.num_labels),
+                    batch["labels"].view(-1),
                 )
                 moe_loss = math_outputs.get(
-                    'moe_loss', torch.tensor(0.0, device=task_loss.device)
+                    "moe_loss", torch.tensor(0.0, device=task_loss.device)
                 )
                 total_loss = task_loss + 0.01 * moe_loss
                 return total_loss
@@ -158,7 +158,7 @@ class EnhancedMMUModel(PreTrainedModel):
         except Exception as e:
             logger.error(f"Error in training step: {str(e)}")
             # Return a default loss that can be backpropagated
-            return torch.tensor(float('inf'), requires_grad=True)
+            return torch.tensor(float("inf"), requires_grad=True)
 
         # Enable gradient checkpointing if specified in config
         if getattr(self.config, "gradient_checkpointing", False):
@@ -180,7 +180,7 @@ class EnhancedMMUModel(PreTrainedModel):
         labels: Optional[torch.Tensor] = None,
     ):
         # Format inputs for transformer
-        inputs = {'text': input_ids}  # Keep input_ids as integers
+        inputs = {"text": input_ids}  # Keep input_ids as integers
         if images is not None:
             try:
                 # Process images through image processor in smaller chunks
@@ -211,7 +211,7 @@ class EnhancedMMUModel(PreTrainedModel):
                 processed_images = torch.cat(processed_chunks, dim=0)
                 # Log final processed shape
                 logger.info(f"Final processed image shape: {processed_images.shape}")
-                inputs['image'] = processed_images
+                inputs["image"] = processed_images
 
                 # Clear temporary storage
                 del processed_chunks
@@ -233,24 +233,24 @@ class EnhancedMMUModel(PreTrainedModel):
                     inputs, attention_mask=attention_mask
                 )
 
-            hidden_states = transformer_outputs['last_hidden_state']
+            hidden_states = transformer_outputs["last_hidden_state"]
 
             # Pass full hidden states to math reasoning head
             math_outputs = self.math_head(hidden_states, attention_mask)
 
             # Combine outputs
             result = {
-                'logits': math_outputs['logits'],
-                'router_entropy': math_outputs.get('router_entropy', 0.0),
-                'expert_weights': math_outputs.get('expert_weights', None),
-                'last_hidden_state': hidden_states,
-                'loss': None,  # Initialize loss as None
+                "logits": math_outputs["logits"],
+                "router_entropy": math_outputs.get("router_entropy", 0.0),
+                "expert_weights": math_outputs.get("expert_weights", None),
+                "last_hidden_state": hidden_states,
+                "loss": None,  # Initialize loss as None
             }
 
             if labels is not None:
                 loss_fct = torch.nn.CrossEntropyLoss()
                 # Ensure logits and labels have correct shapes for loss calculation
-                logits = math_outputs['logits']
+                logits = math_outputs["logits"]
                 if len(logits.shape) == 2:  # [batch_size, num_labels]
                     task_loss = loss_fct(logits, labels)
                 else:  # Handle unexpected shapes
@@ -262,19 +262,19 @@ class EnhancedMMUModel(PreTrainedModel):
                     )
 
                 moe_loss = math_outputs.get(
-                    'moe_loss', torch.tensor(0.0, device=task_loss.device)
+                    "moe_loss", torch.tensor(0.0, device=task_loss.device)
                 )
-                result['loss'] = task_loss + 0.01 * moe_loss  # Scale MoE loss
-                result['task_loss'] = task_loss
-                result['moe_loss'] = moe_loss
+                result["loss"] = task_loss + 0.01 * moe_loss  # Scale MoE loss
+                result["task_loss"] = task_loss
+                result["moe_loss"] = moe_loss
 
             return result
 
         finally:
             # Clean up memory
-            if 'hidden_states' in locals():
+            if "hidden_states" in locals():
                 del hidden_states
-            if 'transformer_outputs' in locals():
+            if "transformer_outputs" in locals():
                 del transformer_outputs
             torch.cuda.empty_cache() if torch.cuda.is_available() else gc.collect()
 
@@ -389,7 +389,7 @@ class MMUTrainer:
         total_steps = len(self.train_dataloader) * self.num_epochs
         progress_bar = tqdm(total=total_steps, desc="Training")
 
-        best_val_loss = float('inf')
+        best_val_loss = float("inf")
         best_math_acc = 0.0
 
         for epoch in range(self.num_epochs):
@@ -405,21 +405,21 @@ class MMUTrainer:
 
                         # Handle loss calculation
                         if isinstance(outputs, dict):
-                            loss = outputs.get('loss')
+                            loss = outputs.get("loss")
                             if (
                                 loss is None
-                                and 'logits' in outputs
-                                and 'labels' in batch
+                                and "logits" in outputs
+                                and "labels" in batch
                             ):
                                 # Calculate loss if not provided by model
                                 loss_fct = torch.nn.CrossEntropyLoss()
-                                logits = outputs['logits']
+                                logits = outputs["logits"]
                                 loss = loss_fct(
                                     logits.view(-1, self.model.num_labels),
-                                    batch['labels'].view(-1),
+                                    batch["labels"].view(-1),
                                 )
                         else:
-                            loss = outputs.loss if hasattr(outputs, 'loss') else None
+                            loss = outputs.loss if hasattr(outputs, "loss") else None
 
                         if loss is None:
                             logger.error("No loss value available from model outputs")
@@ -446,20 +446,20 @@ class MMUTrainer:
 
                         # Log training metrics
                         if step % self.gradient_accumulation_steps == 0:
-                            current_lr = self.optimizer.param_groups[0]['lr']
+                            current_lr = self.optimizer.param_groups[0]["lr"]
                             metrics = {
-                                'loss': loss.item() * self.gradient_accumulation_steps,
-                                'learning_rate': current_lr,
+                                "loss": loss.item() * self.gradient_accumulation_steps,
+                                "learning_rate": current_lr,
                             }
                             if (
                                 isinstance(outputs, dict)
-                                and 'logits' in outputs
-                                and 'labels' in batch
+                                and "logits" in outputs
+                                and "labels" in batch
                             ):
-                                predictions = torch.argmax(outputs['logits'], dim=-1)
-                                correct = (predictions == batch['labels']).sum().item()
-                                total = batch['labels'].size(0)
-                                metrics['batch_accuracy'] = correct / total
+                                predictions = torch.argmax(outputs["logits"], dim=-1)
+                                correct = (predictions == batch["labels"]).sum().item()
+                                total = batch["labels"].size(0)
+                                metrics["batch_accuracy"] = correct / total
 
                             log_metrics(metrics, step=step, epoch=epoch)
 
@@ -482,8 +482,8 @@ class MMUTrainer:
 
             # Evaluate on validation set
             val_metrics = self.evaluate()
-            val_loss = val_metrics['val_loss']
-            math_acc = val_metrics['math_accuracy']
+            val_loss = val_metrics["val_loss"]
+            math_acc = val_metrics["math_accuracy"]
 
             # Log validation metrics
             logger.info(f"Validation loss: {val_loss:.4f}")
@@ -519,42 +519,42 @@ class MMUTrainer:
                 try:
                     # Forward pass
                     outputs = self.model(
-                        input_ids=batch['input_ids'],
-                        attention_mask=batch['attention_mask'],
-                        labels=batch['labels'],
-                        images=batch.get('images', None),  # Make images optional
+                        input_ids=batch["input_ids"],
+                        attention_mask=batch["attention_mask"],
+                        labels=batch["labels"],
+                        images=batch.get("images", None),  # Make images optional
                     )
 
                     # Handle dictionary outputs
                     if isinstance(outputs, dict):
-                        loss = outputs.get('loss', 0.0)
+                        loss = outputs.get("loss", 0.0)
                         if loss is not None:
                             total_loss += (
                                 loss.item() if isinstance(loss, torch.Tensor) else loss
                             )
-                        logits = outputs.get('logits')
+                        logits = outputs.get("logits")
                     else:
-                        loss = getattr(outputs, 'loss', 0.0)
+                        loss = getattr(outputs, "loss", 0.0)
                         total_loss += (
                             loss.item() if isinstance(loss, torch.Tensor) else loss
                         )
-                        logits = getattr(outputs, 'logits', None)
+                        logits = getattr(outputs, "logits", None)
 
                     steps += 1
 
                     # Calculate math accuracy
-                    if logits is not None and 'labels' in batch:
+                    if logits is not None and "labels" in batch:
                         predictions = torch.argmax(logits, dim=-1)
-                        correct = (predictions == batch['labels']).sum().item()
+                        correct = (predictions == batch["labels"]).sum().item()
                         total_math_correct += correct
-                        total_math_samples += batch['labels'].size(0)
+                        total_math_samples += batch["labels"].size(0)
 
                 except Exception as e:
                     logger.error(f"Error in evaluation step: {str(e)}")
                     continue
 
         # Calculate metrics
-        avg_loss = total_loss / steps if steps > 0 else float('inf')
+        avg_loss = total_loss / steps if steps > 0 else float("inf")
         math_accuracy = (
             total_math_correct / total_math_samples if total_math_samples > 0 else 0
         )
@@ -563,7 +563,7 @@ class MMUTrainer:
         logger.info(f"Validation loss: {avg_loss:.4f}")
         logger.info(f"Validation math accuracy: {math_accuracy:.4f}")
 
-        return {'val_loss': avg_loss, 'math_accuracy': math_accuracy}
+        return {"val_loss": avg_loss, "math_accuracy": math_accuracy}
 
 
 if __name__ == "__main__":
@@ -571,7 +571,7 @@ if __name__ == "__main__":
         # Initialize trainer with optimized settings for local hardware
         trainer = MMUTrainer(
             model_name="facebook/opt-1.3b",  # Use larger OPT model for better capacity
-            subjects=['Math'],  # Focus solely on mathematical reasoning
+            subjects=["Math"],  # Focus solely on mathematical reasoning
             batch_size=1,  # Smaller batch size for larger model
             learning_rate=1e-5,  # Lower learning rate for stability
             num_epochs=5,
@@ -590,11 +590,11 @@ if __name__ == "__main__":
 
         # Evaluate on validation and test splits
         print("Evaluating on validation split...")
-        val_metrics = trainer.evaluate('validation')
+        val_metrics = trainer.evaluate("validation")
         print("Validation metrics:", val_metrics)
 
         print("Evaluating on test split...")
-        test_metrics = trainer.evaluate('test')
+        test_metrics = trainer.evaluate("test")
         print("Test metrics:", test_metrics)
 
     except Exception as e:
