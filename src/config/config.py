@@ -1,5 +1,4 @@
 from typing import Optional
-
 from typing import Tuple
 import json
 from dataclasses import dataclass

@@ -1,6 +1,5 @@
 from typing import Optional
 from typing import List
-
 from typing import Tuple
 from PIL import Image
 from datasets import load_dataset
