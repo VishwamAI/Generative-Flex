@@ -5,6 +5,7 @@ import optax
 import os
 
 
+
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok=True)
 
@@ -15,12 +16,12 @@ class SimpleCoTModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64
 
-    def setup(self) -> None:
+                def setup(self) -> None:
         self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.vocab_size)
 
-    def __call__(self, x, training=False) -> None:
+                def __call__(self, x, training=False) -> None:
         x = self.embedding(x)
         x = self.dense1(x)
         x = nn.relu(x)
@@ -28,7 +29,7 @@ class SimpleCoTModel(nn.Module):
         return x
 
 
-    def main():
+                def main():
         # Create minimal training data with chain-of-thought
         training_data = {
         "conversations": [
@@ -49,42 +50,42 @@ class SimpleCoTModel(nn.Module):
 
             # Create and save vocabulary
             words = set(["<unk>", "<pad>"])
-                for conv in training_data["conversations"]:
-                    words.update(conv["input"].split())
-                    words.update(conv["response"].split())
-                    vocab = sorted(list(words))
+            for conv in training_data["conversations"]:
+                words.update(conv["input"].split())
+                words.update(conv["response"].split())
+                vocab = sorted(list(words))
 
-                    with open("data/chatbot/vocab.json", "w") as f:
-                        json.dump(vocab, f, indent=2)
+                with open("data/chatbot/vocab.json", "w") as f:
+                    json.dump(vocab, f, indent=2)
 
-                        # Convert to tokens and train
-                        word_to_id = {word: i for i, word in enumerate(vocab)}
-                        input_tokens = [
-                        [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
-                            for conv in training_data["conversations"]
-                            ]
-                            output_tokens = [
-                            [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["response"].split()]
-                                for conv in training_data["conversations"]
-                                ]
+                    # Convert to tokens and train
+                    word_to_id = {word: i for i, word in enumerate(vocab)}
+                    input_tokens = [
+                    [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
+                    for conv in training_data["conversations"]
+                    ]
+                    output_tokens = [
+                    [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["response"].split()]
+                    for conv in training_data["conversations"]
+                    ]
 
-                                # Initialize model and train
-                                model = SimpleCoTModel(_vocab_size=len(vocab))
-                                optimizer = optax.adam(0.01)
+                    # Initialize model and train
+                    model = SimpleCoTModel(_vocab_size=len(vocab))
+                    optimizer = optax.adam(0.01)
 
-                                key = jax.random.PRNGKey(0)
-                                x = jnp.array([input_tokens[0]])
-                                variables = model.init(key, x)
+                    key = jax.random.PRNGKey(0)
+                    x = jnp.array([input_tokens[0]])
+                    variables = model.init(key, x)
 
-                                state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer)
+                    state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer)
 
-                                # Training loop
-                                print("\nTraining with chain-of-thought reasoning...")
-                                    for epoch in range(100):
-                                        x = jnp.array([input_tokens[0]])
-                                        y = jnp.array([output_tokens[0]])
+                    # Training loop
+                    print("\nTraining with chain-of-thought reasoning...")
+                    for epoch in range(100):
+                        x = jnp.array([input_tokens[0]])
+                        y = jnp.array([output_tokens[0]])
 
-    def loss_fn(params) -> None:
+                def loss_fn(params) -> None:
         logits = model.apply({"params": params}, x)
         return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
@@ -101,5 +102,5 @@ class SimpleCoTModel(nn.Module):
                 print("\nTraining completed! Model saved.")
 
 
-                    if __name__ == "__main__":
-                        main()
+                if __name__ == "__main__":
+                    main()

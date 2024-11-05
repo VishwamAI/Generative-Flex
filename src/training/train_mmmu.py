@@ -6,23 +6,20 @@ from typing import Dict, Optional
 import logging
 import torch
 
-"""
-Training script for MMMU dataset using enhanced transformer model.
-"""
+
+"""Training script for MMMU dataset using enhanced transformer model."""
 
 
 logger = logging.getLogger(__name__)
 
 
-    def train_epoch():
+def train_epoch():
     model: EnhancedTransformer,
     train_loader: DataLoader,
     optimizer: torch.optim.Optimizer,
     config: TrainingConfig,
     ) -> Dict[str, float]:
-        """
-        Train for one epoch.
-        """
+        """Train for one epoch."""
         model.train()
         total_loss = 0.0
         correct = 0
@@ -38,13 +35,11 @@ logger = logging.getLogger(__name__)
             return {"loss": total_loss / len(train_loader)}
 
 
-    def evaluate():
+def evaluate():
     model: EnhancedTransformer,
     val_loader: DataLoader,
     ) -> Dict[str, float]:
-        """
-        Evaluate the model.
-        """
+        """Evaluate the model."""
         model.eval()
         total_loss = 0.0
         correct = 0
@@ -52,19 +47,17 @@ logger = logging.getLogger(__name__)
 
         with torch.no_grad():
             for batch in val_loader: loss = model(batch)
-                total_loss += loss.item()
+            total_loss += loss.item()
 
-                return {"val_loss": total_loss / len(val_loader)}
+            return {"val_loss": total_loss / len(val_loader)}
 
 
-    def log_metrics():
+def log_metrics():
     metrics: Dict[str, float],
     step: Optional[int] = None,
     epoch: Optional[int] = None,
     ) -> None:
-        """
-        Log training metrics.
-        """
+        """Log training metrics."""
         metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())
         if epoch is not None:
             logger.info(f"Epoch {{epoch}}: {{metric_str}}")
@@ -74,10 +67,8 @@ logger = logging.getLogger(__name__)
                     logger.info(metric_str)
 
 
-    def main():
-    """
-    Main training function.
-    """
+def main():
+    """Main training function."""
     config = TrainingConfig()
     model = EnhancedTransformer(config)
     train_loader, val_loader = create_mmmu_dataloaders(config)
@@ -93,8 +84,8 @@ logger = logging.getLogger(__name__)
         log_metrics(metrics, epoch=epoch)
 
         if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]
-            torch.save(model.state_dict(), "best_model.pt")
+        torch.save(model.state_dict(), "best_model.pt")
 
 
-            if __name__ == "__main__":
-                main()
+        if __name__ == "__main__":
+            main()

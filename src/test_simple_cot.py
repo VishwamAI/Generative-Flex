@@ -3,18 +3,19 @@ import json
 
 
 
+
 class SimpleChatModel(nn.Module):
 
     vocab_size: int
     hidden_size: int = 64
 
-    def setup(self) -> None:
+                def setup(self) -> None:
         self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size)
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.hidden_size)
         self.output = nn.Dense(self.vocab_size)
 
-    def __call__(self, x) -> None:
+                def __call__(self, x) -> None:
         x = self.embedding(x)
         x = jnp.mean(x, axis=0)  # Average over sequence length
         x = nn.relu(self.dense1(x))
@@ -23,7 +24,7 @@ class SimpleChatModel(nn.Module):
         return x
 
 
-    def main():
+                def main():
         # Load vocabulary
         with open("data/chatbot/vocab.json", "r") as f:
             vocab = json.load(f)
@@ -59,12 +60,12 @@ class SimpleChatModel(nn.Module):
                 predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictions
 
                 print("\nTop predicted responses:")
-                    for token in predicted_tokens:
-                        word = id_to_word[int(token)]
-                        print(f"- {{word}}")
+                for token in predicted_tokens:
+                    word = id_to_word[int(token)]
+                    print(f"- {{word}}")
 
-                        print("-" * 50)
+                    print("-" * 50)
 
 
-                            if __name__ == "__main__":
-                                main()
+                    if __name__ == "__main__":
+                        main()

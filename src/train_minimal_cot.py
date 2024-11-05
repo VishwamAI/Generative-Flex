@@ -2,18 +2,19 @@ import jax
 
 
 
+
 class SimpleGreetingModel(nn.Module):
 
     vocab_size: int
     hidden_size: int = 64
 
-    def setup(self) -> None:
+                def setup(self) -> None:
         self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size)
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.hidden_size)
         self.output = nn.Dense(self.vocab_size)
 
-    def __call__(self, x) -> None:
+                def __call__(self, x) -> None:
         x = self.embedding(x)
         x = jnp.mean(x, axis=0)
         x = nn.relu(self.dense1(x))
@@ -22,10 +23,8 @@ class SimpleGreetingModel(nn.Module):
         return x
 
 
-    def create_minimal_data():
-        """
-        Create minimal training data with chain-of-thought reasoning.
-        """
+                def create_minimal_data():
+        """Create minimal training data with chain-of-thought reasoning."""
         data = {
         "conversations": [
         {
@@ -46,22 +45,22 @@ class SimpleGreetingModel(nn.Module):
 
             # Create vocabulary from the data
             vocab = set()
-                for conv in data["conversations"]:
-                    vocab.update(conv["input"].split())
-                    vocab.update(conv["thought"].split())
-                    vocab.update(conv["response"].split())
+            for conv in data["conversations"]:
+                vocab.update(conv["input"].split())
+                vocab.update(conv["thought"].split())
+                vocab.update(conv["response"].split())
 
-                    # Add special tokens
-                    vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
+                # Add special tokens
+                vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
 
-                    # Save vocabulary
-                    with open("data/chatbot/minimal_vocab.json", "w") as f:
-                        json.dump(vocab, f, indent=2)
+                # Save vocabulary
+                with open("data/chatbot/minimal_vocab.json", "w") as f:
+                    json.dump(vocab, f, indent=2)
 
-                        return data, vocab
+                    return data, vocab
 
 
-    def main():
+                def main():
         print("\nCreating minimal training data with chain-of-thought...")
         data, vocab = create_minimal_data()
 
@@ -80,19 +79,19 @@ class SimpleGreetingModel(nn.Module):
         opt_state = optimizer.init(params)
 
         print("\nStarting training...")
-            for epoch in range(100):
-                # Convert input to tokens
-                    for conv in data["conversations"]:
-                        input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
-                        )
-                        target_tokens = jnp.array([
-                        word_to_id.get(w, word_to_id["<unk>"])
-                            for w in conv["response"].split()
-                            ]
-                            )
+        for epoch in range(100):
+            # Convert input to tokens
+            for conv in data["conversations"]:
+                input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
+                )
+                target_tokens = jnp.array([
+                word_to_id.get(w, word_to_id["<unk>"])
+                for w in conv["response"].split()
+                ]
+                )
 
-                            # Define loss function for gradient computation
-    def loss_fn(params) -> None:
+                # Define loss function for gradient computation
+                def loss_fn(params) -> None:
         logits = model.apply(params, input_tokens)
         loss = optax.softmax_cross_entropy_with_integer_labels(logits[None, :], target_tokens[0:1]).mean()
         return loss
@@ -103,18 +102,18 @@ class SimpleGreetingModel(nn.Module):
         updates, opt_state = optimizer.update(grads, opt_state)
         params = optax.apply_updates(params, updates)
 
-            if epoch % 10 == 0:
-                print(f"Epoch {{epoch}}, Loss: {{loss_value}}")
+        if epoch % 10 == 0:
+            print(f"Epoch {{epoch}}, Loss: {{loss_value}}")
 
-                print("\nTraining completed!")
+            print("\nTraining completed!")
 
-                # Save the trained parameters
-                params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), params)
-                with open("model_params_minimal.json", "w") as f:
-                    json.dump(params_dict, f)
+            # Save the trained parameters
+            params_dict = jax.tree_util.tree_map(lambda x: x.tolist(), params)
+            with open("model_params_minimal.json", "w") as f:
+                json.dump(params_dict, f)
 
-                    print("Model parameters saved to 'model_params_minimal.json'")
+                print("Model parameters saved to 'model_params_minimal.json'")
 
 
-                        if __name__ == "__main__":
-                            main()
+                if __name__ == "__main__":
+                    main()
