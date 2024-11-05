@@ -14,14 +14,13 @@ class EnhancedTransformerLayer(nn.Module):
 
     config: Dict[str, Any]
 
-    def setup(self) -> None: None:
+    def setup(self) -> None:
         """
         Initialize layer components.
         """
-        self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"], )
+        self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
 
-        self.mlp = nn.Dense(features=self.config["intermediate_size"], kernel_init=jax.nn.initializers.normal(0.02),
-        )
+        self.mlp = nn.Dense(features=self.config["intermediate_size"], kernel_init=jax.nn.initializers.normal(0.02))
 
         self.layer_norm1 = nn.LayerNorm()
         self.layer_norm2 = nn.LayerNorm()
@@ -32,8 +31,7 @@ class EnhancedTransformerLayer(nn.Module):
         hidden_states: jnp.ndarray,
         attention_mask: Optional[jnp.ndarray] = None,
         deterministic: bool = True,
-        output_attentions: bool = False,
-        ) -> Dict[str, jnp.ndarray]:
+        output_attentions: bool = False) -> Dict[str, jnp.ndarray]:
             """
             Forward pass of the layer.
 
@@ -48,7 +46,7 @@ class EnhancedTransformerLayer(nn.Module):
                     """
                     # Self attention
                     normed_hidden_states = self.layer_norm1(hidden_states)
-                    attention_output = self.attention(normed_hidden_states, normed_hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, )
+                    attention_output = self.attention(normed_hidden_states, normed_hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions)
 
                     hidden_states = hidden_states + self.dropout(attention_output["hidden_states"], deterministic=deterministic)
 

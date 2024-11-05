@@ -15,13 +15,12 @@ class SimpleSeq2SeqModel(nn.Module):
     hidden_size: int = 64
     max_length: int = 32  # Maximum sequence length
 
-    def setup(self) -> None: None:
-        self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size, embedding_init=nn.initializers.normal(stddev=0.1),
-        )
+    def setup(self) -> None:
+        self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size, embedding_init=nn.initializers.normal(stddev=0.1))
         self.encoder = nn.Dense(self.hidden_size)
         self.decoder = nn.Dense(self.vocab_size)
 
-    def __call__(self, x, training=False) -> None: None:
+    def __call__(self, x, training=False) -> None:
         # Ensure input has proper shape
             if x.ndim == 1:
                 x = x[None, :]
@@ -92,7 +91,7 @@ class SimpleSeq2SeqModel(nn.Module):
                         variables = model.init(key, x)
 
                         optimizer = optax.adam(learning_rate=0.01)
-                        state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer, )
+                        state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer)
 
                         # Training loop
                         print("\nTraining sequence-to-sequence model with chain-of-thought...")

@@ -4,20 +4,20 @@ import torch
 
 
 class ModalityProjection(nn.Module):
-    def __init__(self, config, modality_dim) -> None: None:
+    def __init__(self, config, modality_dim) -> None:
         super().__init__()
         self.dense = nn.Linear(config.hidden_size, modality_dim)
         self.activation = nn.GELU()
         self.layer_norm = nn.LayerNorm(modality_dim)
 
-    def forward(self, x) -> None: None:
+    def forward(self, x) -> None:
         x = self.dense(x)
         x = self.activation(x)
         return self.layer_norm(x)
 
 
 class Text2XPipeline(nn.Module):
-    def __init__(self, config) -> None: None:
+    def __init__(self, config) -> None:
         super().__init__()
         self.config = config
         self.transformer = BaseTransformer(config)
@@ -27,14 +27,12 @@ class Text2XPipeline(nn.Module):
         "text": ModalityProjection(config, config.vocab_size),
         "image": nn.Sequential(ModalityProjection(config, 3072),  # 3 * 32 * 32
         nn.Unflatten(-1, (3, 32, 32)),
-        nn.Upsample(scale_factor=2),
-        ),
+        nn.Upsample(scale_factor=2)),
         "audio": ModalityProjection(config, config.audio_dim),
         "video": nn.Sequential(ModalityProjection(config, 3072),  # 3 * 32 * 32
         nn.Unflatten(-1, (3, 32, 32)),
         nn.Upsample(scale_factor=2),
-        nn.Conv2d(3, 3, 3, padding=1),
-        ),
+        nn.Conv2d(3, 3, 3, padding=1)),
         "protein": ModalityProjection(config, 20),  # 20 amino acids
         "dna": ModalityProjection(config, 4),  # 4 nucleotides
         "music": ModalityProjection(config, config.music_dim),
@@ -45,7 +43,7 @@ class Text2XPipeline(nn.Module):
         self.modality_embeddings = nn.Embedding(len(self.modality_projections), config.hidden_size
         )
 
-    def get_modality_embedding(self, modality) -> None: None:
+    def get_modality_embedding(self, modality) -> None:
         modality_idx = list(self.modality_projections.keys()).index(modality)
         return self.modality_embeddings(torch.tensor(modality_idx, _device=self.transformer.embedding.weight.device)
         )
@@ -55,8 +53,7 @@ class Text2XPipeline(nn.Module):
         input_ids,
         attention_mask=None,
         target_modality="text",
-        position_ids=None,
-        ):
+        position_ids=None):
             # Add modality embedding to input embeddings
             modality_embedding = self.get_modality_embedding(target_modality)
 
@@ -80,8 +77,7 @@ class Text2XPipeline(nn.Module):
         attention_mask=None,
         target_modality="text",
         _max_length=None,
-        temperature=1.0,
-        ):
+        temperature=1.0):
                 if max_length is None:
                     _max_length = self.config.max_position_embeddings
 
@@ -108,7 +104,7 @@ class Text2XPipeline(nn.Module):
         """
         return(input_ids != padding_idx).float().unsqueeze(1).unsqueeze(2)
 
-    def clear_cache(self) -> None: None:
+    def clear_cache(self) -> None:
         """
         Clear the transformer's attention cache.
         """

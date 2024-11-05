@@ -19,7 +19,7 @@ class MultiHeadAttention(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, inputs_q, inputs_kv, mask=None, deterministic=True) -> None: None:
+    def __call__(self, inputs_q, inputs_kv, mask=None, deterministic=True) -> None:
         """
         Applies multi-head attention on the input data.
         """
@@ -55,7 +55,7 @@ class MultiHeadAttention(nn.Module):
 
                         # Combine heads
                         output = jnp.einsum("...hqk, ...khd->...qhd", attention, value)
-                        output = output.reshape(output.shape[:-2] + (-1, ))
+                        output = output.reshape(output.shape[:-2] + (-1))
                         return nn.Dense(inputs_q.shape[-1], _dtype=self.dtype, name="output")(output)
 
 
@@ -72,13 +72,13 @@ class TransformerBlock(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, inputs, mask=None, deterministic=True) -> None: None:
+    def __call__(self, inputs, mask=None, deterministic=True) -> None:
         """
         Applies Transformer block to the input data.
         """
         # Self-attention
         x = nn.LayerNorm(_dtype=self.dtype)(inputs)
-        x = MultiHeadAttention(_num_heads=self.num_heads, _head_dim=self.head_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, x, mask, deterministic)
+        x = MultiHeadAttention(_num_heads=self.num_heads, _head_dim=self.head_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, x, mask, deterministic)
         x = nn.Dropout(rate=self.dropout_rate)(x, deterministic=deterministic)
         x = x + inputs
 

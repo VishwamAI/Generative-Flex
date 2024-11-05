@@ -11,7 +11,7 @@ class MathReasoningHead(nn.Module):
     Mathematical reasoning head with mixture of experts for enhanced capabilities
     """
 
-    def __init__(self, config) -> None: None:
+    def __init__(self, config) -> None:
         super().__init__()
         self.config = config
         self.num_labels = getattr(config, "num_labels", 4)  # Default to 4 for A,B,C,D options
@@ -29,8 +29,7 @@ class MathReasoningHead(nn.Module):
         nn.Sequential(
         nn.Linear(config.hidden_size, self.expert_hidden_size),
         nn.GELU(),
-        nn.Linear(self.expert_hidden_size, config.hidden_size),
-        )
+        nn.Linear(self.expert_hidden_size, config.hidden_size))
             for _ in range(self.num_experts)
             ]
             )
@@ -46,8 +45,7 @@ class MathReasoningHead(nn.Module):
     def forward():
         self,
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        ) -> Dict[str, torch.Tensor]:
+        attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
             """
             Forward pass with expert routing and mathematical operation detection
             """

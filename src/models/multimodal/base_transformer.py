@@ -14,7 +14,7 @@ class BaseTransformer(nn.Module):
     Base transformer model for multimodal processing.
     """
 
-    def __init__(self, config: Dict[str, Any]) -> None: None:
+    def __init__(self, config: Dict[str, Any]) -> None:
         """
         Initialize the base transformer.
         """
@@ -36,8 +36,7 @@ class BaseTransformer(nn.Module):
     def forward():
         self,
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        ) -> torch.Tensor:
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
             """
             Forward pass through the base transformer.
             """
@@ -58,7 +57,7 @@ class TransformerLayer(nn.Module):
     Single transformer layer implementation.
     """
 
-    def __init__(self, config: Dict[str, Any]) -> None: None:
+    def __init__(self, config: Dict[str, Any]) -> None:
         """
         Initialize the transformer layer.
         """
@@ -73,8 +72,7 @@ class TransformerLayer(nn.Module):
     def forward():
         self,
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        ) -> torch.Tensor:
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
             """
             Forward pass through the transformer layer.
             """
@@ -94,7 +92,7 @@ class MultiHeadAttention(nn.Module):
     Multi-head attention implementation.
     """
 
-    def __init__(self, config: Dict[str, Any]) -> None: None:
+    def __init__(self, config: Dict[str, Any]) -> None:
         """
         Initialize multi-head attention.
         """
@@ -111,8 +109,7 @@ class MultiHeadAttention(nn.Module):
     def forward():
         self,
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        ) -> torch.Tensor:
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
             """
             Forward pass through multi-head attention.
             """

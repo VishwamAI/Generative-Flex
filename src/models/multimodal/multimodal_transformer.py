@@ -21,7 +21,7 @@ class MultiModalTransformer(nn.Module):
     Incorporates features from Gemma and LLaMA architectures.
     """
 
-    def __init__(self, config) -> None: None:
+    def __init__(self, config) -> None:
         super().__init__()
         self.config = config
 
@@ -34,8 +34,7 @@ class MultiModalTransformer(nn.Module):
 
         # Image feature projection
         self.image_projection = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-        nn.LayerNorm(config.hidden_size),
-        )
+        nn.LayerNorm(config.hidden_size))
 
         # Enhanced transformer blocks with expert routing
         self.transformer_blocks = nn.ModuleList([EnhancedTransformerBlock(config) for _ in range(config.num_hidden_layers)]
@@ -55,12 +54,11 @@ class MultiModalTransformer(nn.Module):
         self.math_gate = nn.Linear(config.hidden_size, 1)
         self.math_transform = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size * 2),
         nn.GELU(),
-        nn.Linear(config.hidden_size * 2, config.hidden_size),
-        )
+        nn.Linear(config.hidden_size * 2, config.hidden_size))
 
         self.init_weights()
 
-    def init_weights(self) -> None: None:
+    def init_weights(self) -> None:
         """
         Initialize weights with specific initialization for mathematical operations.
         """
@@ -76,12 +74,12 @@ class MultiModalTransformer(nn.Module):
 
                             self.apply(_init_math_weights)
 
-    def _get_position_embeddings(self, position_ids, seq_length) -> None: None:
+    def _get_position_embeddings(self, position_ids, seq_length) -> None:
         """
         Get position embeddings with support for relative positions.
         """
             if position_ids is None:
-                position_ids = torch.arange(seq_length, dtype=torch.long, device=self.word_embeddings.weight.device, )
+                position_ids = torch.arange(seq_length, dtype=torch.long, device=self.word_embeddings.weight.device)
                 position_ids = position_ids.unsqueeze(0)
                 return self.position_embeddings(position_ids)
 
@@ -91,8 +89,7 @@ class MultiModalTransformer(nn.Module):
         attention_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None,
         image_features: Optional[torch.Tensor] = None,
-        return_dict: bool = True,
-        ) -> Dict[str, torch.Tensor]:
+        return_dict: bool = True) -> Dict[str, torch.Tensor]:
             """
             Forward pass with support for text and image inputs.
             """
@@ -139,8 +136,7 @@ class MultiModalTransformer(nn.Module):
                                                             # Add token type embeddings(0 for text, 1 for image)
                                                             token_type_ids = torch.zeros((batch_size, total_sequence_length),
                                                             dtype=torch.long,
-                                                            device=device,
-                                                            )
+                                                            device=device)
                                                                 if input_ids is not None and image_features is not None:
                                                                     token_type_ids[:, input_ids.size(1) :] = 1
                                                                     token_type_embeddings = self.token_type_embeddings(token_type_ids)
@@ -176,8 +172,7 @@ class MultiModalTransformer(nn.Module):
         self,
         input_ids: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
-        **kwargs,
-        ) -> Dict[str, Any]:
+        **kwargs) -> Dict[str, Any]:
             """
             Prepare inputs for text generation.
             """

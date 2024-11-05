@@ -8,13 +8,13 @@ class SimpleChatModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64
 
-    def setup(self) -> None: None:
+    def setup(self) -> None:
         self.embedding = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_size)
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.hidden_size)
         self.output = nn.Dense(self.vocab_size)
 
-    def __call__(self, x) -> None: None:
+    def __call__(self, x) -> None:
         x = self.embedding(x)
         x = jnp.mean(x, axis=0)  # Average over sequence length
         x = nn.relu(self.dense1(x))

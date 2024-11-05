@@ -18,7 +18,7 @@ class AudioEmbedding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, audio) -> None: None:
+    def __call__(self, audio) -> None:
         """
         Convert audio signal to embeddings.
         """
@@ -57,7 +57,7 @@ class AudioGenerationModel(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, inputs, training: bool = True) -> None: None:
+    def __call__(self, inputs, training: bool = True) -> None:
         """
         Forward pass of the audio generation model.
         """
@@ -65,18 +65,17 @@ class AudioGenerationModel(nn.Module):
         assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"
 
         # Convert audio to embeddings
-        x = AudioEmbedding(_hidden_dim=self.hidden_dim, _frame_size=self.frame_size, _hop_length=self.hop_length, _dtype=self.dtype, )(inputs)
+        x = AudioEmbedding(_hidden_dim=self.hidden_dim, _frame_size=self.frame_size, _hop_length=self.hop_length, _dtype=self.dtype)(inputs)
 
         # Add positional embeddings
         num_frames = x.shape[1]
         pos_embedding = self.param("pos_embedding", nn.initializers.normal(stddev=0.02),
-        (1, num_frames, self.hidden_dim),
-        )
+        (1, num_frames, self.hidden_dim))
         x = x + pos_embedding
 
         # Apply transformer blocks
             for _ in range(self.num_layers):
-                x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, deterministic=not training)
+                x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, deterministic=not training)
 
                 # Project back to audio frame space
                 x = nn.Dense(self.frame_size, _dtype=self.dtype)(x)
@@ -108,8 +107,7 @@ class AudioGenerationModel(nn.Module):
         self,
         rng: Any,
         prompt: Optional[jnp.ndarray] = None,
-        length: int = 16000,
-        ):  # Default 1 second at 16kHz
+        length: int = 16000):  # Default 1 second at 16kHz
         """
         Generate audio.
         """

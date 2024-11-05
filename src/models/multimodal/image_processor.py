@@ -19,8 +19,7 @@ class ImageProcessor(nn.Module):
         self,
         image_size: int = 224,
         hidden_size: int = 768,
-        dropout_rate: float = 0.1,
-        ):
+        dropout_rate: float = 0.1):
             """
             Initialize the image processor.
             """
@@ -44,16 +43,14 @@ class ImageProcessor(nn.Module):
             nn.MaxPool2d(kernel_size=3, stride=2, padding=1),
             nn.Conv2d(192, hidden_size, kernel_size=3, padding=1),
             nn.ReLU(inplace=True),
-            nn.AdaptiveAvgPool2d((1, 1)),
-            )
+            nn.AdaptiveAvgPool2d((1, 1)))
 
             self.dropout = nn.Dropout(dropout_rate)
 
     def forward():
         self,
         images: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
+        attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
             """
             Process images for multimodal input.
             """

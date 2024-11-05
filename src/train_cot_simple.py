@@ -10,12 +10,12 @@ class SimpleCoTModel(nn.Module):
     vocab_size: int
     hidden_size: int = 64
 
-    def setup(self) -> None: None:
+    def setup(self) -> None:
         self.embedding = nn.Embed(self.vocab_size, self.hidden_size)
         self.dense1 = nn.Dense(self.hidden_size)
         self.dense2 = nn.Dense(self.vocab_size)
 
-    def __call__(self, x, training=False) -> None: None:
+    def __call__(self, x, training=False) -> None:
         x = self.embedding(x)
         x = self.dense1(x)
         x = nn.relu(x)
@@ -71,7 +71,7 @@ class SimpleCoTModel(nn.Module):
                                 x = jnp.array([input_tokens[0]])
                                 params = model.init(key, x)
 
-                                state = train_state.TrainState.create(apply_fn=model.apply, params=params, tx=optimizer, )
+                                state = train_state.TrainState.create(apply_fn=model.apply, params=params, tx=optimizer)
 
                                 # Training loop
                                 print("\nTraining with chain-of-thought reasoning...")

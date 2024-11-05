@@ -17,7 +17,7 @@ class PositionalEncoding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, inputs) -> None: None:
+    def __call__(self, inputs) -> None:
         """
         Add positional encodings to the input embeddings.
         """
@@ -55,12 +55,12 @@ class LanguageModel(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-    def __call__(self, inputs, training: bool = True) -> None: None:
+    def __call__(self, inputs, training: bool = True) -> None:
         """
         Forward pass of the language model.
         """
         # Token embeddings
-        x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype, )(inputs)
+        x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
 
         # Add positional encoding
         x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
@@ -77,14 +77,13 @@ class LanguageModel(nn.Module):
 
         # Apply transformer blocks
             for _ in range(self.num_layers):
-                x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype, )(x, mask=causal_mask, deterministic=not training)
+                x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, mask=causal_mask, deterministic=not training)
 
                 # Final layer normalization
                 x = nn.LayerNorm(_dtype=self.dtype)(x)
 
                 # Output projection
-                logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02),
-                )(x)
+                logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02))(x)
 
                 return logits
 
@@ -93,8 +92,7 @@ class LanguageModel(nn.Module):
         rng: Any,
         prompt: jnp.ndarray,
         max_length: int,
-        temperature: float = 1.0,
-        ):
+        temperature: float = 1.0):
             """
             Generate text autoregressively.
             """

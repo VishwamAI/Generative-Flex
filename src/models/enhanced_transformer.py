@@ -14,7 +14,7 @@ class EnhancedTransformer(nn.Module):
 
     config: Dict[str, Any]
 
-    def setup(self) -> None: None:
+    def setup(self) -> None:
         """
         Initialize model components.
         """
@@ -24,13 +24,11 @@ class EnhancedTransformer(nn.Module):
 
         self.embeddings = nn.Embed(num_embeddings=self.config["vocab_size"], features=self.embed_dim)
 
-        self.encoder = nn.TransformerEncoder(num_layers=self.config["num_hidden_layers"], mlp_dim=self.config["intermediate_size"], num_heads=self.num_heads, dropout_rate=self.dropout_rate, attention_dropout_rate=self.dropout_rate, deterministic=not self.config["training"], )
+        self.encoder = nn.TransformerEncoder(num_layers=self.config["num_hidden_layers"], mlp_dim=self.config["intermediate_size"], num_heads=self.num_heads, dropout_rate=self.dropout_rate, attention_dropout_rate=self.dropout_rate, deterministic=not self.config["training"])
 
-        self.pooler = nn.Dense(features=self.embed_dim, kernel_init=jax.nn.initializers.normal(0.02),
-        )
+        self.pooler = nn.Dense(features=self.embed_dim, kernel_init=jax.nn.initializers.normal(0.02))
 
-        self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.nn.initializers.normal(0.02),
-        )
+        self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.nn.initializers.normal(0.02))
 
     def __call__():
         self,
@@ -40,8 +38,7 @@ class EnhancedTransformer(nn.Module):
         position_ids: Optional[jnp.ndarray] = None,
         deterministic: bool = True,
         output_attentions: bool = False,
-        output_hidden_states: bool = False,
-        ) -> Dict[str, jnp.ndarray]:
+        output_hidden_states: bool = False) -> Dict[str, jnp.ndarray]:
             """
             Forward pass of the model.
 
@@ -61,7 +58,7 @@ class EnhancedTransformer(nn.Module):
                     hidden_states = self.embeddings(input_ids)
 
                     # Apply encoder
-                    encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, output_hidden_states=output_hidden_states, )
+                    encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, output_hidden_states=output_hidden_states)
 
                     # Pool and classify
                     pooled = self.pooler(encoder_outputs["last_hidden_state"][:, 0])
