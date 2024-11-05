@@ -94,9 +94,11 @@ class GenerationConfig:
     constitutional_principles: List[str] = struct.field(
         default_factory=lambda: [
             "Do not generate harmful content",
-            "Respect privacy and intellectual property",
-            "Be transparent about AI-generated content",
-        ]
+                (
+                    "Respect privacy and intellectual property",
+                    "Be transparent about AI-generated content",
+                )
+                ]
     )
 
     # Optimization settings
@@ -169,17 +171,10 @@ class ModalityEncoder(nn.Module):
 #         batch_size = None  # TODO: Remove or use this variable
 
         # Calculate proper sequence length (ensure it's a multiple of attention heads)
-#         target_seq_length = min(  # TODO: Remove or use this variable
+        sequence_length = min(
             self.config.max_sequence_length,
-            (
-                (
-                    self.config.default_sequence_length
-                    + self.config.num_attention_heads
-                    - 1
-                )
-                // self.config.num_attention_heads
-                * self.config.num_attention_heads
-            ),
+            ((self.config.default_sequence_length + self.config.num_attention_heads - 1)
+             // self.config.num_attention_heads * self.config.num_attention_heads)
         )
 
         if "text" in inputs:
@@ -204,7 +199,7 @@ class ModalityEncoder(nn.Module):
 #                 batch_size = curr_batch_size  # TODO: Remove or use this variable
 
             # Ensure proper sequence length
-            embedded = self._adjust_sequence_length(embedded, target_seq_length)
+            embedded = self._adjust_sequence_length(embedded, sequence_length)
             encodings["text"] = self.text_encoder(embedded)
 
         if "image" in inputs:
@@ -217,7 +212,7 @@ class ModalityEncoder(nn.Module):
                 # Flatten spatial dimensions
                 height, width = img.shape[1:3]
                 img_flat = img.reshape(curr_batch_size, height * width, img.shape[-1])
-                img_flat = self._adjust_sequence_length(img_flat, target_seq_length)
+                img_flat = self._adjust_sequence_length(img_flat, sequence_length)
                 encodings["image"] = self.image_encoder(img_flat)
 
         if "audio" in inputs:
@@ -228,7 +223,7 @@ class ModalityEncoder(nn.Module):
 #                     batch_size = curr_batch_size  # TODO: Remove or use this variable
 
                 audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
-                audio_flat = self._adjust_sequence_length(audio_flat, target_seq_length)
+                audio_flat = self._adjust_sequence_length(audio_flat, sequence_length)
                 encodings["audio"] = self.audio_encoder(audio_flat)
 
         if "video" in inputs:
@@ -242,7 +237,7 @@ class ModalityEncoder(nn.Module):
                 video_flat = video.reshape(
                     curr_batch_size, frames * height * width, video.shape[-1]
                 )
-                video_flat = self._adjust_sequence_length(video_flat, target_seq_length)
+                video_flat = self._adjust_sequence_length(video_flat, sequence_length)
                 encodings["video"] = self.video_encoder(video_flat)
 
         if "code" in inputs:
@@ -258,7 +253,7 @@ class ModalityEncoder(nn.Module):
             if batch_size is None:
 #                 batch_size = curr_batch_size  # TODO: Remove or use this variable
 
-            embedded = self._adjust_sequence_length(embedded, target_seq_length)
+            embedded = self._adjust_sequence_length(embedded, sequence_length)
             encodings["code"] = self.code_encoder(embedded)
 
         if not encodings:
@@ -278,7 +273,7 @@ class ModalityEncoder(nn.Module):
                 encoding = nn.Dense(self.config.hidden_size)(encoding)
 
             # Ensure consistent sequence length
-            encoding = self._adjust_sequence_length(encoding, target_seq_length)
+            encoding = self._adjust_sequence_length(encoding, sequence_length)
             encoded_list.append(encoding)
 
         # Stack and average across modalities
@@ -423,11 +418,15 @@ class TextToAnything(nn.Module):
     @nn.compact
     def __call__(
         self,
-        inputs: Union[str, Dict[str, Any]],
-        target_modality: str,
-        context: Optional[Dict[str, Any]] = None,
-        training: bool = False,
-    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
+            (
+                inputs: Union[str, Dict[str, Any]],
+                target_modality: str,
+            )
+            (
+                context: Optional[Dict[str, Any]] = None,
+                training: bool = False,
+            )
+            ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         # Validate target modality
         if target_modality not in self.config.supported_modalities:
             raise ValueError(f"Unsupported target modality: {target_modality}")
@@ -439,9 +438,11 @@ class TextToAnything(nn.Module):
             # Handle tokenized input
             inputs = {
                 "text": inputs["input_ids"],
-                "position_ids": inputs.get("position_ids"),
-                "token_type_ids": inputs.get("token_type_ids"),
-            }
+                    (
+                        "position_ids": inputs.get("position_ids"),
+                        "token_type_ids": inputs.get("token_type_ids"),
+                    )
+                    }
 
         # Process multi-modal inputs with proper shape handling
         hidden_states_list = []
@@ -452,7 +453,9 @@ class TextToAnything(nn.Module):
             text_hidden = self.encoder({"text": inputs["text"]})
             # Ensure proper shape (batch_size, seq_length, hidden_size)
             if len(text_hidden.shape) == 2:
-#                 batch_size = text_hidden.shape[0] // self.config.max_sequence_length  # TODO: Remove or use this variable
+sequence_length = (
+    self.config.max_sequence_length
+)
                 text_hidden = text_hidden.reshape(
                     batch_size, -1, self.config.hidden_size
                 )
@@ -513,8 +516,10 @@ class TextToAnything(nn.Module):
 
         # Ensure sequence length is compatible with attention heads
 #         target_seq_length = min(  # TODO: Remove or use this variable
-            self.config.max_sequence_length,
-            ((seq_length + num_heads - 1) // num_heads) * num_heads,
+            sequence_length = (
+                self.config.max_sequence_length
+            )
+                ((seq_length + num_heads - 1) // num_heads) * num_heads,
         )
 
         # Adjust hidden states to target sequence length
@@ -538,24 +543,34 @@ class TextToAnything(nn.Module):
         # Prepare metadata
         metadata = {
             "modality": target_modality,
-            "constitutional_compliant": compliant,
-            "principles_applied": self.config.constitutional_principles,
-            "generation_params": {
+                (
+                    "constitutional_compliant": compliant,
+                    "principles_applied": self.config.constitutional_principles,
+                )
+                "generation_params": {
                 "temperature": self.config.temperature,
-                "top_k": self.config.top_k,
-                "top_p": self.config.top_p,
-            },
-        }
+                    (
+                        "top_k": self.config.top_k,
+                        "top_p": self.config.top_p,
+                    )
+                    (
+                        },
+                        }
+                    )
 
         return output, metadata
 
     def generate(
         self,
-        text_prompt: str,
-        target_modality: str,
-        context: Optional[Dict[str, Any]] = None,
-        max_length: Optional[int] = None,
-    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
+            (
+                text_prompt: str,
+                target_modality: str,
+            )
+            (
+                context: Optional[Dict[str, Any]] = None,
+                max_length: Optional[int] = None,
+            )
+            ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         """Generate content with specified parameters."""
         if max_length is None:
             max_length = self.config.max_length

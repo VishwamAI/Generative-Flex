@@ -1,18 +1,21 @@
+"""
+Math reasoning module for enhanced transformer model.
+"""
+import logging
+from typing import Dict, List, Optional, Tuple, Union
+
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import torch.utils.checkpoint
-from transformers import PreTrainedModel, GenerationMixin, PretrainedConfig
-from ..multimodal.base_transformer import BaseTransformer, TransformerBlock
+from torch.nn import functional as F
+from transformers import PreTrainedModel, GenerationMixin
+
 from ..layers.flash_moe import FlashAttention, MixtureOfExperts
 from ..layers.enhanced_transformer import EnhancedTransformerBlock
+from ..multimodal.base_transformer import BaseTransformer, TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
 from .mathematical_notation import MathematicalNotationProcessor
-import logging
 
-# Set up logging
 logger = logging.getLogger(__name__)
-
 logger = logging.getLogger(__name__)
 
 
@@ -32,18 +35,17 @@ class MathReasoningHead(nn.Module):
         self.num_attention_heads = (
             config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
         )
-#         self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32  # TODO: Remove or use this variable
-#         self.max_seq_length = (  # TODO: Remove or use this variable
-            config.max_position_embeddings
-            if hasattr(config, "max_position_embeddings")
-            else 512
+        # Head dimension and sequence length configuration
+        self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32
+        self.max_seq_length = (
+            config.max_position_embeddings if hasattr(config, "max_position_embeddings") else 512
         )
 
         # Input dimension handling
         self.input_projector = nn.Sequential(
             nn.Linear(self.hidden_dim, self.hidden_dim),
             nn.GELU(),
-            nn.LayerNorm(self.hidden_dim),
+            nn.LayerNorm(self.hidden_dim)
         )
 
         # Flash Attention with increased heads
@@ -51,23 +53,17 @@ class MathReasoningHead(nn.Module):
             dim=self.hidden_dim,
             num_heads=self.num_attention_heads,
             dropout=self.dropout_prob,
-            max_seq_length=self.max_seq_length,
+            max_seq_length=self.max_seq_length
         )
 
         # Mixture of Experts with increased capacity
         self.math_experts = MixtureOfExperts(
             input_dim=self.hidden_dim,
-            expert_dim=(
-                config.mlp_dim if hasattr(config, "mlp_dim") else self.hidden_dim * 4
-            ),
+            expert_dim=config.mlp_dim if hasattr(config, "mlp_dim") else self.hidden_dim * 4,
             num_experts=config.num_experts if hasattr(config, "num_experts") else 4,
-            capacity_factor=(
-                config.expert_capacity_factor
-                if hasattr(config, "expert_capacity_factor")
-                else 1.25
-            ),
+            capacity_factor=config.expert_capacity_factor if hasattr(config, "expert_capacity_factor") else 1.25,
             dropout=self.dropout_prob,
-            k=2,  # Use top-2 routing
+            k=2  # Use top-2 routing
         )
 
         # Symbolic mathematics processor
@@ -75,22 +71,12 @@ class MathReasoningHead(nn.Module):
         self.notation_processor = MathematicalNotationProcessor(config)
 
         # Subfield-specific expert modules
-        self.subfield_experts = nn.ModuleDict(
-            {
-                "algebra": EnhancedTransformerBlock(
-                    config=config, dropout=self.dropout_prob
-                ),
-                "calculus": EnhancedTransformerBlock(
-                    config=config, dropout=self.dropout_prob
-                ),
-                "arithmetic": EnhancedTransformerBlock(
-                    config=config, dropout=self.dropout_prob
-                ),
-                "statistics": EnhancedTransformerBlock(
-                    config=config, dropout=self.dropout_prob
-                ),
-            }
-        )
+        self.subfield_experts = nn.ModuleDict({
+            "algebra": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob),
+            "calculus": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob),
+            "arithmetic": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob),
+            "statistics": EnhancedTransformerBlock(config=config, dropout=self.dropout_prob)
+        })
 
         # Expert routing network
         self.router = nn.Sequential(
@@ -98,7 +84,7 @@ class MathReasoningHead(nn.Module):
             nn.GELU(),
             nn.LayerNorm(self.hidden_dim),
             nn.Linear(self.hidden_dim, len(self.subfield_experts)),
-            nn.Softmax(dim=-1),
+            nn.Softmax(dim=-1)
         )
 
         # Output layers with improved capacity
@@ -107,7 +93,7 @@ class MathReasoningHead(nn.Module):
             nn.GELU(),
             nn.LayerNorm(self.hidden_dim * 4),
             nn.Dropout(self.dropout_prob),
-            nn.Linear(self.hidden_dim * 4, self.hidden_dim),
+            nn.Linear(self.hidden_dim * 4, self.hidden_dim)
         )
         self.activation = nn.GELU()
         self.layer_norm = nn.LayerNorm(self.hidden_dim)
@@ -119,10 +105,11 @@ class MathReasoningHead(nn.Module):
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
         expressions: Optional[List[str]] = None,
-        **kwargs,
+        **kwargs
     ) -> Dict[str, torch.Tensor]:
-#         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
-#         seq_length = hidden_states.size(1)  # TODO: Remove or use this variable
+        # Get input dimensions
+        batch_size = hidden_states.size(0)
+        seq_length = hidden_states.size(1)
         hidden_dim = hidden_states.size(2)
 
         # Project input to correct dimension
@@ -276,14 +263,19 @@ class MathReasoningHead(nn.Module):
 
         # Return outputs and auxiliary information
         outputs = {
-            "logits": logits,
-            "loss": total_loss,
-            "math_accuracy": math_accuracy,
-            "load_balance_loss": load_balance_loss,
+            "logits": self.classifier(hidden_states),
+            "hidden_states": hidden_states,
+            "attention_weights": aux_info.get("attention_weights", None),
             "router_entropy": router_entropy,
-            "expert_entropy": expert_entropy,
-            "aux_info": aux_info,
+            "load_balance_loss": load_balance_loss,
+            "expert_outputs": expert_outputs,
+            "routing_weights": routing_weights
         }
+
+        if "labels" in kwargs:
+            outputs["loss"] = total_loss
+
+        return outputs
 
         return outputs
 
@@ -346,22 +338,15 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
                     if submodule.bias is not None:
                         submodule.bias.data.zero_()
 
-    def process_mathematical_expression(
-        self, hidden_states: torch.Tensor
-    ) -> torch.Tensor:
-        """Process mathematical expressions using symbolic processor."""
-#         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
-
-        # Create empty expressions list when no expressions are provided
-        expressions = [""] * batch_size
-
-        # Apply symbolic processing
-        processed_states = self.symbolic_processor(hidden_states, expressions)
-
-        # Apply dropout for regularization
-        processed_states = self.dropout(processed_states)
-
-        return processed_states
+    def process_mathematical_expression(self, expression: str) -> str:
+        """Process mathematical expressions with error handling."""
+        try:
+            # Apply symbolic processing
+            processed = self.symbolic_processor.process(expression)
+            return processed
+        except Exception as e:
+            logger.error(f"Error processing expression: {e}")
+            return expression
 
     def forward(
         self,
@@ -369,7 +354,7 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
         attention_mask: Optional[torch.Tensor] = None,
         expressions: Optional[List[str]] = None,
         labels: Optional[torch.Tensor] = None,
-        **kwargs,
+        **kwargs
     ) -> Dict[str, torch.Tensor]:
         # Get transformer outputs
         hidden_states = self.transformer(input_ids, attention_mask, **kwargs)
@@ -389,49 +374,51 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
         outputs = {
             "logits": math_outputs["logits"],
             "hidden_states": enhanced_states,
-            "loss": math_outputs["loss"],
-            "math_accuracy": math_outputs["math_accuracy"],
-            "moe_loss": math_outputs["moe_loss"],
-            "router_entropy": math_outputs["router_entropy"],
-            "expert_weights": math_outputs["expert_weights"],
+            "attention_weights": math_outputs.get("attention_weights", None),
+            "expert_outputs": math_outputs.get("expert_outputs", None),
+            "routing_weights": math_outputs.get("routing_weights", None)
         }
+
+        if labels is not None:
+            outputs["loss"] = math_outputs["loss"]
+            outputs["math_accuracy"] = math_outputs.get("math_accuracy", None)
+            outputs["moe_loss"] = math_outputs.get("moe_loss", None)
+            outputs["router_entropy"] = math_outputs.get("router_entropy", None)
 
         return outputs
 
     def prepare_inputs_for_generation(self, input_ids, attention_mask=None, **kwargs):
-        # Prepare inputs for text generation
-        position_ids = kwargs.get("position_ids", None)
-        if position_ids is None:
-            position_ids = torch.arange(
-                input_ids.shape[1], dtype=torch.long, device=input_ids.device
-            )
-            position_ids = position_ids.unsqueeze(0).expand_as(input_ids)
-
-        return {
+        """Prepare inputs for generation."""
+        inputs = {
             "input_ids": input_ids,
-            "attention_mask": attention_mask,
-            "position_ids": position_ids,
+            "attention_mask": attention_mask
         }
+
+        if kwargs:
+            inputs.update(kwargs)
+
+        return inputs
 
     @staticmethod
     def create_attention_mask(input_ids, padding_idx=0):
         """Create attention mask from input_ids."""
-        # Create initial attention mask
-#         batch_size, seq_length = input_ids.shape  # TODO: Remove or use this variable
-        mask = (input_ids != padding_idx).float()
+        # Get input dimensions
+        batch_size, seq_length = input_ids.size()
+        device = input_ids.device
 
-        # Create 2D attention mask of shape (seq_length, seq_length)
-        # This creates a causal (triangular) mask that allows each position to attend to itself and previous positions
-        causal_mask = torch.tril(
-            torch.ones(
-                (seq_length, seq_length), dtype=torch.float32, device=input_ids.device
-            )
+        # Create causal mask
+        attention_mask = torch.ones(
+            (seq_length, seq_length),
+            dtype=torch.float32,
+            device=device
         )
+        attention_mask = torch.triu(attention_mask)
 
-        # Combine with padding mask
-        attention_mask = mask.unsqueeze(1) * causal_mask.unsqueeze(0)
+        # Create padding mask
+        padding_mask = (input_ids != padding_idx).float()
+        attention_mask = attention_mask * padding_mask.unsqueeze(-1)
 
-        # Expand mask to match the expected shape (batch_size, seq_length, seq_length)
+        # Expand to batch size
         attention_mask = attention_mask.expand(batch_size, seq_length, seq_length)
 
         return attention_mask
