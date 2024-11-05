@@ -39,12 +39,12 @@ class MathReasoningHead(nn.Module):
     # Mathematical operation detection
     self.operation_detector = nn.Linear(config.hidden_size, 5)  # +, -, *, /, other
     
-    def forward():
+    def __init__(self, forward():
     self,
     hidden_states: torch.Tensor,
-    attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
+    attention_mask: Optional[torch.Tensor]  = None) -> Dict[str, torch.Tensor]:
             """Forward pass with expert routing and mathematical operation detection"""
-                try: batch_size, seq_length, _hidden_size = hidden_states.shape
+                try: batch_size, seq_length, _hidden_size  = hidden_states.shape
 
                 # Apply layer norm
                 hidden_states = self.layer_norm(hidden_states)
@@ -98,18 +98,18 @@ class MathReasoningHead(nn.Module):
                         except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
                             raise
 
-    def _compute_load_balancing_loss():
+    def __init__(self, _compute_load_balancing_loss():
         self, expert_weights: torch.Tensor
         ) -> torch.Tensor: """Compute load balancing loss to ensure even expert utilization"""
-            # Calculate mean utilization per expert
-            mean_expert_weights = expert_weights.mean(dim=0)
-            
-            # Ideal distribution would be uniform
-            target_distribution = torch.ones_like(mean_expert_weights) / self.num_experts
-            
-            # Calculate KL divergence loss
-            load_balancing_loss = torch.sum(mean_expert_weights * torch.log(mean_expert_weights / target_distribution)
-            )
-            
-            return load_balancing_loss
-            
+        # Calculate mean utilization per expert
+        mean_expert_weights = expert_weights.mean(dim=0)
+        
+        # Ideal distribution would be uniform
+        target_distribution = torch.ones_like(mean_expert_weights) / self.num_experts
+        
+        # Calculate KL divergence loss
+        load_balancing_loss = torch.sum(mean_expert_weights * torch.log(mean_expert_weights / target_distribution)
+        )
+        
+        return load_balancing_loss
+        

@@ -17,8 +17,8 @@ class FlashMoELayer(nn.Module):
     self,
     hidden_size: int,
     intermediate_size: int,
-    num_experts: int = 8,
-    dropout_rate: float = 0.1,
+    num_experts: int  = 8,
+    dropout_rate: float  = 0.1,
     ):
         """
         Initialize the FlashMoE layer.
@@ -44,10 +44,10 @@ class FlashMoELayer(nn.Module):
         # Router network
         self.router = nn.Linear(hidden_size, num_experts)
 
-    def forward():
+    def __init__(self, forward():
     self,
     hidden_states: torch.Tensor,
-    attention_mask: Optional[torch.Tensor] = None,
+    attention_mask: Optional[torch.Tensor]  = None,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Forward pass through the FlashMoE layer.

@@ -22,50 +22,49 @@ Implements: - Block-wise int4 quantization
 - Privacy-preserving features
 """
 
-@dataclass
-class OptimizationConfig:
-    """
-    Configuration for Apple-style optimizations.
+@struct.dataclass
+class OptimizationConfig: """
+Configuration for Apple-style optimizations.
     """
 
     # Model architecture
-    hidden_size: int = field(default=512)
-    num_attention_heads: int = field(default=8)
-    head_dim: int = field(default=64)
-    dropout_rate: float = field(default=0.1)
-    layer_norm_eps: float = field(default=1e-12)
-    vocab_size: int = field(default=32000)
+    hidden_size: int  = field(default=512)
+    num_attention_heads: int  = field(default=8)
+    head_dim: int  = field(default=64)
+    dropout_rate: float  = field(default=0.1)
+    layer_norm_eps: float  = field(default=1e-12)
+    vocab_size: int  = field(default=32000)
 
     # Sequence parameters
-    min_sequence_length: int = field(default=1)
-    max_sequence_length: int = field(default=2048)
-    default_sequence_length: int = field(default=512)
+    min_sequence_length: int  = field(default=1)
+    max_sequence_length: int  = field(default=2048)
+    default_sequence_length: int  = field(default=512)
 
     # Quantization parameters
-    use_int4_quantization: bool = field(default=True)
-    block_size: int = field(default=32)
-    num_bits: int = field(default=4)
-    quantization_mode: str = field(default="linear_symmetric")
-    original_shape: Optional[Tuple[int, ...]] = field(default=None)
+    use_int4_quantization: bool  = field(default=True)
+    block_size: int  = field(default=32)
+    num_bits: int  = field(default=4)
+    quantization_mode: str  = field(default="linear_symmetric")
+    original_shape: Optional[Tuple[int, ...]]  = field(default=None)
 
     # Cache parameters
-    use_kv_cache: bool = field(default=True)
-    num_key_value_heads: int = field(default=8)
-    max_cache_size: int = field(default=2048)
-    cache_dtype: str = field(default="float16")
-    cache_size_multiplier: float = field(default=1.5)
+    use_kv_cache: bool  = field(default=True)
+    num_key_value_heads: int  = field(default=8)
+    max_cache_size: int  = field(default=2048)
+    cache_dtype: str  = field(default="float16")
+    cache_size_multiplier: float  = field(default=1.5)
 
     # Privacy parameters
-    use_privacy_preserving: bool = field(default=True)
-    noise_multiplier: float = field(default=0.1)
-    l2_norm_clip: float = field(default=1.0)
+    use_privacy_preserving: bool  = field(default=True)
+    noise_multiplier: float  = field(default=0.1)
+    l2_norm_clip: float  = field(default=1.0)
 
     # Training parameters
-    deterministic: bool = field(default=False)
+    deterministic: bool  = field(default=False)
 
     # Hardware settings
-    use_metal: bool = field(default=True)
-    use_neural_engine: bool = field(default=True)
+    use_metal: bool  = field(default=True)
+    use_neural_engine: bool  = field(default=True)
 
 class BlockWiseQuantization(nn.Module):
     """
@@ -74,7 +73,7 @@ class BlockWiseQuantization(nn.Module):
 
     block_size: int
     num_bits: int
-    quantization_mode: str = "linear_symmetric"
+    quantization_mode: str  = "linear_symmetric"
 
     def self(self) -> None: """
     Initialize components.
@@ -266,7 +265,7 @@ class FlexibleInputProcessor(nn.Module):
 
     config: OptimizationConfig
 
-    def self(self) -> None: self.position_embedding nn.Embed(num_embeddings=self.config.max_sequence_length, features=self.config.head_dim):
+    def self(self) -> None: self.position_embedding nn.Embed(num_embeddings = self.config.max_sequence_length, features=self.config.head_dim):
         # Initialize projection layer in setup
         self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=True)
 
@@ -341,11 +340,11 @@ class AppleOptimizedTransformer(nn.Module):
         self.dropout = nn.Dropout(rate=self.config.dropout_rate)
 
         # Optional components based on config
-            if self.config.    use_int4_quantization: self.quantization BlockWiseQuantization(_block_size=self.config.block_size, _num_bits=4)
+            if self.config.    use_int4_quantization: self.quantization BlockWiseQuantization(_block_size = self.config.block_size, _num_bits=4)
 
-                if self.config.    use_kv_cache: self.kv_cache StatefulKeyValueCache(num_heads=self.num_heads, head_dim=self.head_dim, _max_sequence_length=self.config.max_sequence_length, _dtype=self.config.cache_dtype, _cache_size_multiplier=self.config.cache_size_multiplier, )
+                if self.config.    use_kv_cache: self.kv_cache StatefulKeyValueCache(num_heads = self.num_heads, head_dim=self.head_dim, _max_sequence_length=self.config.max_sequence_length, _dtype=self.config.cache_dtype, _cache_size_multiplier=self.config.cache_size_multiplier, )
 
-                    if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size=self.config.hidden_size, _noise_multiplier=self.config.noise_multiplier, _l2_norm_clip=self.config.l2_norm_clip, )
+                    if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size, _noise_multiplier=self.config.noise_multiplier, _l2_norm_clip=self.config.l2_norm_clip, )
 
     def __call__(self) -> None: self,
     hidden_states: Union[Union[jnp.ndarray, ]]
@@ -412,7 +411,7 @@ class AppleOptimizedTransformer(nn.Module):
                                         attention_probs = jax.nn.softmax(attention_scores, axis=-1)
 
                                         # Apply dropout during training
-                                            if     training: attention_probs self.dropout(attention_probs, _deterministic=False)
+                                            if     training: attention_probs self.dropout(attention_probs, _deterministic = False)
 
                                             # Compute context layer
                                             context_layer = jnp.matmul(attention_probs, value)
@@ -423,7 +422,7 @@ class AppleOptimizedTransformer(nn.Module):
                                             output = self.output_projection(context_layer)
 
                                             # Apply privacy-preserving layer if enabled
-                                                if self.config.    use_privacy_preserving: output self.privacy_layer(output, training=training)
+                                                if self.config.    use_privacy_preserving: output self.privacy_layer(output, training = training)
 
                                                 return output
 
@@ -431,9 +430,9 @@ class AppleOptimizedTransformer(nn.Module):
     ) -> Tuple[jnp.ndarray, jnp.ndarray]:
         """
         Compute key and value for caching.
-
+        
         Args: hidden_states: Input hidden states tensor
-
+        
         Returns: Tuple of computed key and value tensors
         """
         key = self.key_proj(hidden_states)

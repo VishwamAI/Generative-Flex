@@ -56,7 +56,7 @@ class MultiModalTransformer(nn.Module):
     
     def init_weights(self) -> None: """Initialize weights with specific initialization for mathematical operations."""
 
-                def _init_math_weights(module) -> None: if isinstance(module, (nn.Linear, nn.Embedding)):
+                def __init__(self, _init_math_weights(module) -> None: if isinstance(module, (nn.Linear, nn.Embedding)):
                 module.weight.data.normal_(mean=0.0, std=0.02)
                 if isinstance(module, nn.Linear) and module.bias is not None: module.bias.data.zero_()
                     elif isinstance(module, nn.LayerNorm):
@@ -66,18 +66,17 @@ class MultiModalTransformer(nn.Module):
                         self.apply(_init_math_weights)
 
                 def _get_position_embeddings(self, position_ids, seq_length) -> None: """Get position embeddings with support for relative positions."""
-        if position_ids is None:
-        position_ids = torch.arange(seq_length, dtype=torch.long, device=self.word_embeddings.weight.device)
-        position_ids = position_ids.unsqueeze(0)
-        return self.position_embeddings(position_ids)
-        
-        def forward():
-        self,
-        input_ids: Optional[torch.Tensor] = None,
-        attention_mask: Optional[torch.Tensor] = None,
-        position_ids: Optional[torch.Tensor] = None,
-        image_features: Optional[torch.Tensor] = None,
-        return_dict: bool = True) -> Dict[str, torch.Tensor]:
+                if position_ids is None: position_ids  = torch.arange(seq_length, dtype=torch.long, device=self.word_embeddings.weight.device)
+                position_ids = position_ids.unsqueeze(0)
+                return self.position_embeddings(position_ids)
+                
+                def __init__(self, forward():
+                self,
+                input_ids: Optional[torch.Tensor]  = None,
+                attention_mask: Optional[torch.Tensor]  = None,
+                position_ids: Optional[torch.Tensor]  = None,
+                image_features: Optional[torch.Tensor]  = None,
+                return_dict: bool  = True) -> Dict[str, torch.Tensor]:
             """Forward pass with support for text and image inputs."""
             batch_size = (
             input_ids.size(0) if input_ids is not None else image_features.size(0)
@@ -87,7 +86,7 @@ class MultiModalTransformer(nn.Module):
             total_sequence_length = 0
 
             # Process text inputs
-            if input_ids is not None: text_embeddings = self.word_embeddings(input_ids)  # [batch_size, seq_len, hidden_size]
+            if input_ids is not None: text_embeddings  = self.word_embeddings(input_ids)  # [batch_size, seq_len, hidden_size]
                 total_sequence_length += text_embeddings.size(1)
                 embeddings = text_embeddings
 
@@ -103,10 +102,9 @@ class MultiModalTransformer(nn.Module):
 
                         if embeddings is not None: # Combine text and image embeddings along sequence dimension
                             embeddings = torch.cat([embeddings, image_embeddings], dim=1)
-                            else: embeddings = image_embeddings
-                                except Exception as e:
-                                    logger.error(f"Error processing images in transformer: {{str(e)}}")
-                                    if embeddings is None: embeddings = torch.zeros(batch_size, 1, self.config.hidden_size, device=device)
+                            else: embeddings  = image_embeddings
+                                except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
+                                    if embeddings is None: embeddings  = torch.zeros(batch_size, 1, self.config.hidden_size, device=device)
                                         total_sequence_length += 1
 
                                         # Add position embeddings
@@ -118,7 +116,7 @@ class MultiModalTransformer(nn.Module):
                                         token_type_ids = torch.zeros((batch_size, total_sequence_length),
                                         dtype=torch.long,
                                         device=device)
-                                        if input_ids is not None and image_features is not None: token_type_ids[:, input_ids.size(1) :] = 1
+                                        if input_ids is not None and image_features is not None: token_type_ids[:, input_ids.size(1) :]  = 1
                                             token_type_embeddings = self.token_type_embeddings(token_type_ids)
 
                                             # Combine all embeddings
@@ -128,7 +126,7 @@ class MultiModalTransformer(nn.Module):
 
                                             # Apply transformer blocks
                                             router_probs_list = []
-                                            for block in self.transformer_blocks: hidden_states, router_probs = block(hidden_states, attention_mask)
+                                            for block in self.transformer_blocks: hidden_states, router_probs  = block(hidden_states, attention_mask)
                                             router_probs_list.append(router_probs)
 
                                             # Apply mathematical reasoning enhancement
@@ -147,14 +145,14 @@ class MultiModalTransformer(nn.Module):
                                                 }
                                                 return hidden_states
 
-                def prepare_inputs_for_generation():
+                def __init__(self, prepare_inputs_for_generation():
         self,
         input_ids: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
+        attention_mask: Optional[torch.Tensor]  = None,
         **kwargs) -> Dict[str, Any]:
             """Prepare inputs for text generation."""
             position_ids = kwargs.get("position_ids", None)
-            if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1
+            if position_ids is None: position_ids  = attention_mask.long().cumsum(-1) - 1
             position_ids.masked_fill_(attention_mask == 0, 1)
             
             return {

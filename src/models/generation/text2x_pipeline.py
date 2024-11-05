@@ -4,21 +4,18 @@ import torch
 
 
 class ModalityProjection(nn.Module):
-    def __init__(self, config, modality_dim) -> None:
-        super().__init__()
+    def __init__(self, config, modality_dim) -> None: super().__init__()
         self.dense = nn.Linear(config.hidden_size, modality_dim)
         self.activation = nn.GELU()
         self.layer_norm = nn.LayerNorm(modality_dim)
 
-    def forward(self, x) -> None:
-        x = self.dense(x)
+    def forward(self, x) -> None: x  = self.dense(x)
         x = self.activation(x)
         return self.layer_norm(x)
 
 
 class Text2XPipeline(nn.Module):
-    def __init__(self, config) -> None:
-        super().__init__()
+    def __init__(self, config) -> None: super().__init__()
         self.config = config
         self.transformer = BaseTransformer(config)
 
@@ -43,19 +40,18 @@ class Text2XPipeline(nn.Module):
         self.modality_embeddings = nn.Embedding(len(self.modality_projections), config.hidden_size
         )
 
-    def get_modality_embedding(self, modality) -> None:
-        modality_idx = list(self.modality_projections.keys()).index(modality)
+    def get_modality_embedding(self, modality) -> None: modality_idx  = list(self.modality_projections.keys()).index(modality)
         return self.modality_embeddings(torch.tensor(modality_idx, _device=self.transformer.embedding.weight.device)
         )
 
-    def forward():
+    def __init__(self, forward():
         self,
         input_ids,
         attention_mask=None,
         target_modality="text",
         position_ids=None):
-            # Add modality embedding to input embeddings
-            modality_embedding = self.get_modality_embedding(target_modality)
+        # Add modality embedding to input embeddings
+        modality_embedding = self.get_modality_embedding(target_modality)
 
             # Get transformer outputs
             hidden_states = self.transformer(input_ids, attention_mask, position_ids)
@@ -64,22 +60,20 @@ class Text2XPipeline(nn.Module):
             hidden_states = hidden_states + modality_embedding.unsqueeze(1)
 
             # Project to target modality
-                if target_modality not in self.modality_projections:
-                    raise ValueError(f"Unsupported modality: {{target_modality}}")
+                if target_modality not in self.modality_projections: raise ValueError(f"Unsupported modality: {{target_modality}}")
 
                     output = self.modality_projections[target_modality](hidden_states)
 
                     return {"output": output, "hidden_states": hidden_states}
 
-    def generate():
+    def __init__(self, generate():
         self,
         input_ids,
         attention_mask=None,
         target_modality="text",
         _max_length=None,
         temperature=1.0):
-                if max_length is None:
-                    _max_length = self.config.max_position_embeddings
+        if max_length is None: _max_length  = self.config.max_position_embeddings
 
                     _device = input_ids.device
                     _batch_size = input_ids.shape[0]
@@ -93,19 +87,16 @@ class Text2XPipeline(nn.Module):
                                 probs = F.softmax(logits, dim=-1)
                                 next_token = torch.multinomial(probs, num_samples=1)
                                 return next_token
-                                    else:
-                                    # Direct generation for other modalities
+                                    else: # Direct generation for other modalities
                                     return outputs["output"]
 
                                     @staticmethod
-    def create_attention_mask(input_ids, padding_idx=0) -> None:
-        """
-        Create attention mask from input_ids.
+    def __init__(self, create_attention_mask(input_ids, padding_idx=0) -> None: """
+    Create attention mask from input_ids.
         """
         return(input_ids != padding_idx).float().unsqueeze(1).unsqueeze(2)
 
-    def clear_cache(self) -> None:
-        """
-        Clear the transformer's attention cache.
+    def clear_cache(self) -> None: """
+    Clear the transformer's attention cache.
         """
         self.transformer.clear_cache()
