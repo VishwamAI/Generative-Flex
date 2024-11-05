@@ -53,17 +53,25 @@ class Text2XPipeline(nn.Module):
     def get_modality_embedding(self, modality):
         modality_idx = list(self.modality_projections.keys()).index(modality)
         return self.modality_embeddings(
-            torch.tensor(modality_idx, device=self.transformer.embedding.weight.device)
+            torch.tensor(
+                modality_idx, device=self.transformer.embedding.weight.device
+            )
         )
 
     def forward(
-        self, input_ids, attention_mask=None, target_modality="text", position_ids=None
+        self,
+        input_ids,
+        attention_mask=None,
+        target_modality="text",
+        position_ids=None,
     ):
         # Add modality embedding to input embeddings
         modality_embedding = self.get_modality_embedding(target_modality)
 
         # Get transformer outputs
-        hidden_states = self.transformer(input_ids, attention_mask, position_ids)
+        hidden_states = self.transformer(
+            input_ids, attention_mask, position_ids
+        )
 
         # Add modality embedding to each position
         hidden_states = hidden_states + modality_embedding.unsqueeze(1)

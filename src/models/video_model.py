@@ -31,7 +31,14 @@ class VideoEmbedding(nn.Module):
         )
         patches = jnp.reshape(
             patches,
-            (b, -1, self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * c),
+            (
+                b,
+                -1,
+                self.patch_size[0]
+                * self.patch_size[1]
+                * self.patch_size[2]
+                * c,
+            ),
         )
         return nn.Dense(self.hidden_dim, dtype=self.dtype)(patches)
 
@@ -61,7 +68,9 @@ class VideoGenerationModel(nn.Module):
         )
 
         x = VideoEmbedding(
-            hidden_dim=self.hidden_dim, patch_size=self.patch_size, dtype=self.dtype
+            hidden_dim=self.hidden_dim,
+            patch_size=self.patch_size,
+            dtype=self.dtype,
         )(inputs)
 
         num_patches = (
@@ -87,7 +96,10 @@ class VideoGenerationModel(nn.Module):
             )(x, deterministic=not training)
 
         x = nn.Dense(
-            self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * self.channels
+            self.patch_size[0]
+            * self.patch_size[1]
+            * self.patch_size[2]
+            * self.channels
         )(x)
 
         # Reshape back to video dimensions
@@ -95,18 +107,26 @@ class VideoGenerationModel(nn.Module):
         return x
 
     def generate(
-        self, rng: Any, prompt: Optional[jnp.ndarray] = None, num_frames: int = 16
+        self,
+        rng: Any,
+        prompt: Optional[jnp.ndarray] = None,
+        num_frames: int = 16,
     ):
         """Generate video frames."""
         if prompt is None:
             rng, init_rng = jax.random.split(rng)
             prompt = jax.random.normal(
-                init_rng, (1, 1, self.video_size[1], self.video_size[2], self.channels)
+                init_rng,
+                (1, 1, self.video_size[1], self.video_size[2], self.channels),
             )
 
         generated = prompt
         while generated.shape[1] < num_frames:
-            next_frame = self.apply({"params": self.params}, generated, training=False)
-            generated = jnp.concatenate([generated, next_frame[:, -1:]], axis=1)
+            next_frame = self.apply(
+                {"params": self.params}, generated, training=False
+            )
+            generated = jnp.concatenate(
+                [generated, next_frame[:, -1:]], axis=1
+            )
 
         return generated[:, :num_frames]

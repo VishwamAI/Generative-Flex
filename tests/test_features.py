@@ -70,9 +70,14 @@ def test_openai_features(config):
     # Test input
     inputs = {
         "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config["vocab_size"]
+            jax.random.PRNGKey(0),
+            (batch_size, seq_length),
+            0,
+            config["vocab_size"],
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+            batch_size, axis=0
+        ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
     }
     # Initialize parameters
@@ -95,9 +100,14 @@ def test_anthropic_features(config):
     #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
+            jax.random.PRNGKey(0),
+            (batch_size, seq_length),
+            0,
+            config.vocab_size,
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+            batch_size, axis=0
+        ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
     }
     # Initialize parameters
@@ -115,9 +125,14 @@ def test_meta_features(config):
     #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
+            jax.random.PRNGKey(0),
+            (batch_size, seq_length),
+            0,
+            config.vocab_size,
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+            batch_size, axis=0
+        ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
     }
     # Initialize parameters
@@ -143,7 +158,11 @@ def test_grok_features(knowledge_config):
     params = model.init(jax.random.PRNGKey(0), inputs)
     # Test forward pass with knowledge integration
     output = model.apply(params, inputs)
-    assert output.shape == (batch_size, seq_length, knowledge_config["embedding_size"])
+    assert output.shape == (
+        batch_size,
+        seq_length,
+        knowledge_config["embedding_size"],
+    )
     # Test real-time updates
     new_knowledge = {
         "text": jax.random.normal(
@@ -164,7 +183,9 @@ def test_gemini_features(text_to_anything_config):
         "text": jax.random.normal(
             jax.random.PRNGKey(0), (batch_size, seq_length, hidden_size)
         ),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+            batch_size, axis=0
+        ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
         "image": jax.random.normal(
             jax.random.PRNGKey(1),
@@ -202,7 +223,9 @@ def test_apple_optimizations():
     # Create input dictionary with proper formatting
     inputs = {
         "attention_mask": jnp.ones((batch_size, seq_length)),
-        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(
+            batch_size, axis=0
+        ),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
         "hidden_states": jax.random.normal(
             jax.random.PRNGKey(1), (batch_size, seq_length, config.hidden_size)
@@ -235,8 +258,12 @@ def test_text_to_anything_generation(text_to_anything_config):
                 text_to_anything_config.vocab_size,
             ),
             "position_ids": jnp.arange(seq_length)[None, :],
-            "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
-            "attention_mask": jnp.ones((batch_size, seq_length), dtype=jnp.int32),
+            "token_type_ids": jnp.zeros(
+                (batch_size, seq_length), dtype=jnp.int32
+            ),
+            "attention_mask": jnp.ones(
+                (batch_size, seq_length), dtype=jnp.int32
+            ),
         }
     }
     params = model.init(jax.random.PRNGKey(0), inputs, target_modality="text")
@@ -255,7 +282,13 @@ def test_text_to_anything_generation(text_to_anything_config):
         elif modality == "video":
             inputs["video"] = jax.random.normal(
                 jax.random.PRNGKey(3),
-                (batch_size, 8, 32, 32, 3),  # (batch, frames, height, width, channels)
+                (
+                    batch_size,
+                    8,
+                    32,
+                    32,
+                    3,
+                ),  # (batch, frames, height, width, channels)
             )
 
         output, metadata = model.apply(

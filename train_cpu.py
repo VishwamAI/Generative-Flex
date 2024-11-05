@@ -6,6 +6,7 @@ from accelerate import Accelerator
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def main():
     # Initialize accelerator for CPU training
     accelerator = Accelerator(cpu=True)
@@ -19,7 +20,7 @@ def main():
         num_epochs=5,
         gradient_accumulation_steps=16,  # Increased for CPU
         max_grad_norm=1.0,
-        warmup_steps=100
+        warmup_steps=100,
     )
 
     logger.info(f"Training configuration: {config.__dict__}")
@@ -33,11 +34,12 @@ def main():
         num_epochs=config.num_epochs,
         gradient_accumulation_steps=config.gradient_accumulation_steps,
         max_grad_norm=config.max_grad_norm,
-        accelerator=accelerator  # Pass accelerator for CPU training
+        accelerator=accelerator,  # Pass accelerator for CPU training
     )
 
     # Start training
     trainer.train()
+
 
 if __name__ == "__main__":
     main()

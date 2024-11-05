@@ -81,7 +81,9 @@ def main():
     input_text = training_data["conversations"][0]["input"]
     output_text = training_data["conversations"][0]["response"]
 
-    input_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()]
+    input_tokens = [
+        word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()
+    ]
     output_tokens = [
         word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
     ]

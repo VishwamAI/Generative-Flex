@@ -33,8 +33,9 @@ files_to_format = [
     "tests/test_environment.py",
     "tests/test_models.py",
     "tests/test_features.py",
-    "tests/test_training_setup.py"
+    "tests/test_training_setup.py",
 ]
+
 
 def format_files():
     # First convert line endings
@@ -47,7 +48,18 @@ def format_files():
     for file in files_to_format:
         if os.path.exists(file):
             print(f"Formatting {file}")
-            subprocess.run(["black", "--line-length", "88", "--target-version", "py312", file], check=True)
+            subprocess.run(
+                [
+                    "black",
+                    "--line-length",
+                    "88",
+                    "--target-version",
+                    "py312",
+                    file,
+                ],
+                check=True,
+            )
+
 
 if __name__ == "__main__":
     format_files()

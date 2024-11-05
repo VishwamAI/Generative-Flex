@@ -42,7 +42,9 @@ class MathReasoningHead(nn.Module):
         self.classifier = nn.Linear(config.hidden_size, self.num_labels)
 
         # Mathematical operation detection
-        self.operation_detector = nn.Linear(config.hidden_size, 5)  # +, -, *, /, other
+        self.operation_detector = nn.Linear(
+            config.hidden_size, 5
+        )  # +, -, *, /, other
 
     def forward(
         self,
@@ -63,7 +65,9 @@ class MathReasoningHead(nn.Module):
 
             # Calculate router entropy for monitoring
             router_entropy = (
-                -(router_probs * torch.log(router_probs + 1e-10)).sum(-1).mean()
+                -(router_probs * torch.log(router_probs + 1e-10))
+                .sum(-1)
+                .mean()
             )
 
             # Initialize expert outputs
@@ -91,7 +95,9 @@ class MathReasoningHead(nn.Module):
 
             # Calculate auxiliary losses
             expert_weights = torch.stack(expert_weights, dim=1)
-            load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
+            load_balancing_loss = self._compute_load_balancing_loss(
+                expert_weights
+            )
 
             outputs = {
                 "logits": logits,
@@ -115,11 +121,14 @@ class MathReasoningHead(nn.Module):
         mean_expert_weights = expert_weights.mean(dim=0)
 
         # Ideal distribution would be uniform
-        target_distribution = torch.ones_like(mean_expert_weights) / self.num_experts
+        target_distribution = (
+            torch.ones_like(mean_expert_weights) / self.num_experts
+        )
 
         # Calculate KL divergence loss
         load_balancing_loss = torch.sum(
-            mean_expert_weights * torch.log(mean_expert_weights / target_distribution)
+            mean_expert_weights
+            * torch.log(mean_expert_weights / target_distribution)
         )
 
         return load_balancing_loss

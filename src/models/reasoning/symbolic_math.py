@@ -1,10 +1,12 @@
 import torch
 import torch.nn as nn
 import sympy
+from typing import Optional, List
 
 
 class SymbolicMathProcessor(nn.Module):
-    """Handles symbolic mathematics processing for enhanced mathematical reasoning."""
+    """Handles symbolic mathematics processing for enhanced mathematical
+    reasoning."""
 
     def __init__(self, config):
         super().__init__()
@@ -56,18 +58,21 @@ class SymbolicMathProcessor(nn.Module):
         self, tokens: List[str], hidden_states: torch.Tensor
     ) -> torch.Tensor:
         """Embed mathematical expression tokens."""
-        #         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
         embeddings = []
 
         for token in tokens:
             if token in ["+", "-", "*", "/"]:
                 op_idx = ["+", "-", "*", "/"].index(token)
                 embedding = (
-                    self.operator_embeddings[op_idx].unsqueeze(0).expand(batch_size, -1)
+                    self.operator_embeddings[op_idx]
+                    .unsqueeze(0)
+                    .expand(hidden_states.size(0), -1)
                 )
             else:
                 # Use symbol embedder for numbers and variables
-                token_embedding = self.symbol_embedder(hidden_states.mean(dim=1))
+                token_embedding = self.symbol_embedder(
+                    hidden_states.mean(dim=1)
+                )
                 embedding = token_embedding
             embeddings.append(embedding)
 
@@ -77,7 +82,6 @@ class SymbolicMathProcessor(nn.Module):
         self, hidden_states: torch.Tensor, expressions: List[str]
     ) -> torch.Tensor:
         """Process mathematical expressions symbolically."""
-        #         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
         processed_states = []
 
         for i, expr_str in enumerate(expressions):
@@ -90,7 +94,9 @@ class SymbolicMathProcessor(nn.Module):
 
             # Tokenize and embed expression
             tokens = self.tokenize_expression(expr)
-            expr_embeddings = self.embed_expression(tokens, hidden_states[i : i + 1])
+            expr_embeddings = self.embed_expression(
+                tokens, hidden_states[i : i + 1]
+            )
 
             # Process expression structure
             processed_expr = self.structure_processor(expr_embeddings)

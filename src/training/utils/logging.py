@@ -9,13 +9,18 @@ class TrainingLogger:
         self.log_dir = log_dir
         os.makedirs(log_dir, exist_ok=True)
         self.log_file = os.path.join(
-            log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
+            log_dir,
+            f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl",
         )
         self.metrics_history = []
 
     def log_metrics(self, metrics: Dict[str, Any], step: int):
         """Log metrics for a training step"""
-        log_entry = {"step": step, "timestamp": datetime.now().isoformat(), **metrics}
+        log_entry = {
+            "step": step,
+            "timestamp": datetime.now().isoformat(),
+            **metrics,
+        }
         self.metrics_history.append(log_entry)
 
         # Write to file
@@ -36,10 +41,14 @@ class TrainingLogger:
         """Save a summary of the training run"""
         summary = {
             "start_time": (
-                self.metrics_history[0]["timestamp"] if self.metrics_history else None
+                self.metrics_history[0]["timestamp"]
+                if self.metrics_history
+                else None
             ),
             "end_time": (
-                self.metrics_history[-1]["timestamp"] if self.metrics_history else None
+                self.metrics_history[-1]["timestamp"]
+                if self.metrics_history
+                else None
             ),
             "total_steps": len(self.metrics_history),
             "final_metrics": self.get_latest_metrics(),

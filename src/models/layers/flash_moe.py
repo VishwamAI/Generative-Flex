@@ -39,9 +39,15 @@ class FlashAttention(torch.nn.Module):
             return x, None
 
         # Project and reshape
-        q = self.q_proj(x).reshape(batch_size, seq_len, self.num_heads, self.head_dim)
-        k = self.k_proj(x).reshape(batch_size, seq_len, self.num_heads, self.head_dim)
-        v = self.v_proj(x).reshape(batch_size, seq_len, self.num_heads, self.head_dim)
+        q = self.q_proj(x).reshape(
+            batch_size, seq_len, self.num_heads, self.head_dim
+        )
+        k = self.k_proj(x).reshape(
+            batch_size, seq_len, self.num_heads, self.head_dim
+        )
+        v = self.v_proj(x).reshape(
+            batch_size, seq_len, self.num_heads, self.head_dim
+        )
 
         # Transpose for attention computation
         q = q.transpose(1, 2)
@@ -73,7 +79,9 @@ class FlashAttention(torch.nn.Module):
                     attention_mask = attention_mask[..., :seq_len]
                 else:
                     pad_size = seq_len - attention_mask.size(-1)
-                    attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
+                    attention_mask = F.pad(
+                        attention_mask, (0, pad_size), value=0
+                    )
 
             # Expand mask efficiently for all attention heads
             attention_mask = attention_mask.expand(
@@ -89,7 +97,9 @@ class FlashAttention(torch.nn.Module):
 
         # Compute attention with better memory efficiency
         attn_weights = torch.matmul(q, k.transpose(-2, -1)) * self.scaling
-        attn_weights = attn_weights.masked_fill(attention_mask == 0, float("-inf"))
+        attn_weights = attn_weights.masked_fill(
+            attention_mask == 0, float("-inf")
+        )
 
         attn_weights = F.softmax(attn_weights, dim=-1)
         attn_weights_dropout = self.dropout(attn_weights)
@@ -97,7 +107,9 @@ class FlashAttention(torch.nn.Module):
         attn_output = torch.matmul(attn_weights_dropout, v)
 
         # Reshape and project output
-        attn_output = attn_output.transpose(1, 2).reshape(batch_size, seq_len, self.dim)
+        attn_output = attn_output.transpose(1, 2).reshape(
+            batch_size, seq_len, self.dim
+        )
         return self.out_proj(attn_output), attn_weights
 
 
@@ -157,7 +169,10 @@ class MixtureOfExperts(torch.nn.Module):
 
         # Add gating uncertainty loss
         router_entropy = (
-            -(F.softmax(router_logits, dim=-1) * F.log_softmax(router_logits, dim=-1))
+            -(
+                F.softmax(router_logits, dim=-1)
+                * F.log_softmax(router_logits, dim=-1)
+            )
             .sum(-1)
             .mean()
         )
@@ -173,7 +188,9 @@ class MixtureOfExperts(torch.nn.Module):
         )
 
         # Compute capacity
-        capacity = int(self.capacity_factor * (batch_size * seq_len) / self.num_experts)
+        capacity = int(
+            self.capacity_factor * (batch_size * seq_len) / self.num_experts
+        )
 
         # Initialize output tensor
         combined_output = torch.zeros_like(x)
@@ -198,7 +215,9 @@ class MixtureOfExperts(torch.nn.Module):
                 # Process tokens through expert
                 expert_output = self.experts[j](masked_input)
                 if isinstance(expert_output, tuple):
-                    expert_output = expert_output[0]  # Take the first element if tuple
+                    expert_output = expert_output[
+                        0
+                    ]  # Take the first element if tuple
 
                 # Weight output by router probability
                 weighted_output = expert_output * masked_probs
@@ -214,10 +233,14 @@ class EnhancedTransformerBlock(torch.nn.Module):
         super().__init__()
         # Extract dimensions from config
         self.hidden_size = (
-            config.hidden_size if hasattr(config, "hidden_size") else config.d_model
+            config.hidden_size
+            if hasattr(config, "hidden_size")
+            else config.d_model
         )
         self.num_heads = (
-            config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
+            config.num_attention_heads
+            if hasattr(config, "num_attention_heads")
+            else 8
         )
         self.max_seq_length = (
             config.max_position_embeddings
@@ -250,7 +273,11 @@ class EnhancedTransformerBlock(torch.nn.Module):
         mask: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, Dict]:
         # Initialize auxiliary info dictionary
-        aux_info = {"attention_weights": [], "router_probs": [], "layer_outputs": []}
+        aux_info = {
+            "attention_weights": [],
+            "router_probs": [],
+            "layer_outputs": [],
+        }
 
         # Handle input that might be a tuple
         if isinstance(x, tuple):

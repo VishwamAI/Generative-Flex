@@ -20,14 +20,22 @@ class MultiHeadAttention(nn.Module):
         qkv_features = self.num_heads * self.head_dim
 
         # Linear projections
-        query = nn.Dense(qkv_features, dtype=self.dtype, name="query")(inputs_q)
+        query = nn.Dense(qkv_features, dtype=self.dtype, name="query")(
+            inputs_q
+        )
         key = nn.Dense(qkv_features, dtype=self.dtype, name="key")(inputs_kv)
-        value = nn.Dense(qkv_features, dtype=self.dtype, name="value")(inputs_kv)
+        value = nn.Dense(qkv_features, dtype=self.dtype, name="value")(
+            inputs_kv
+        )
 
         # Reshape for multi-head attention
-        query = query.reshape(query.shape[:-1] + (self.num_heads, self.head_dim))
+        query = query.reshape(
+            query.shape[:-1] + (self.num_heads, self.head_dim)
+        )
         key = key.reshape(key.shape[:-1] + (self.num_heads, self.head_dim))
-        value = value.reshape(value.shape[:-1] + (self.num_heads, self.head_dim))
+        value = value.reshape(
+            value.shape[:-1] + (self.num_heads, self.head_dim)
+        )
 
         # Scaled dot-product attention
         depth = query.shape[-1]
@@ -50,7 +58,9 @@ class MultiHeadAttention(nn.Module):
         # Combine heads
         output = jnp.einsum("...hqk,...khd->...qhd", attention, value)
         output = output.reshape(output.shape[:-2] + (-1,))
-        return nn.Dense(inputs_q.shape[-1], dtype=self.dtype, name="output")(output)
+        return nn.Dense(inputs_q.shape[-1], dtype=self.dtype, name="output")(
+            output
+        )
 
 
 class TransformerBlock(nn.Module):

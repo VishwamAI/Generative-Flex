@@ -11,12 +11,20 @@ class MathematicalNotationProcessor(nn.Module):
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
         # Embedding layers for different notation types
-        self.latex_embedding = nn.Linear(config.hidden_size, config.hidden_size)
-        self.ascii_embedding = nn.Linear(config.hidden_size, config.hidden_size)
-        self.unicode_embedding = nn.Linear(config.hidden_size, config.hidden_size)
+        self.latex_embedding = nn.Linear(
+            config.hidden_size, config.hidden_size
+        )
+        self.ascii_embedding = nn.Linear(
+            config.hidden_size, config.hidden_size
+        )
+        self.unicode_embedding = nn.Linear(
+            config.hidden_size, config.hidden_size
+        )
 
         # Output projection
-        self.output_projection = nn.Linear(config.hidden_size, config.hidden_size)
+        self.output_projection = nn.Linear(
+            config.hidden_size, config.hidden_size
+        )
 
         # Layer normalization
         self.layer_norm = nn.LayerNorm(config.hidden_size)
@@ -25,11 +33,23 @@ class MathematicalNotationProcessor(nn.Module):
         self, hidden_states: torch.Tensor, notation_type: str = "latex"
     ) -> torch.Tensor:
         """Process mathematical notation
-        Args:
-            hidden_states: Input tensor of shape (batch_size, seq_length, hidden_size)
-            notation_type: Type of notation to process ('latex', 'ascii', 'unicode')
-        Returns:
-            Processed tensor of shape (batch_size, seq_length, hidden_size)
+                        Args:
+                hidden_states: Input tensor of shape(
+                                batch_size,
+                                seq_length,
+                                hidden_size
+                            )
+                notation_type: Type of notation to process(
+                                'latex',
+                                'ascii',
+                                'unicode'
+                            )
+                        Returns:
+        Processed tensor of shape(
+                                batch_size,
+                                seq_length,
+                                hidden_size
+                            )
         """
         if notation_type == "latex":
             embedded = self.latex_embedding(hidden_states)

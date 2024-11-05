@@ -62,7 +62,8 @@ class PositionalEncoding(nn.Module):
     def setup(self):
         position = jnp.arange(self.max_len)[:, None]
         div_term = jnp.exp(
-            jnp.arange(0, self.hidden_size, 2) * (-jnp.log(10000.0) / self.hidden_size)
+            jnp.arange(0, self.hidden_size, 2)
+            * (-jnp.log(10000.0) / self.hidden_size)
         )
         pe = jnp.zeros((self.max_len, self.hidden_size))
         pe = pe.at[:, 0::2].set(jnp.sin(position * div_term))

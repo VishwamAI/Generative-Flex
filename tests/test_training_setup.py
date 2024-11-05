@@ -27,7 +27,9 @@ class TestTrainingSetup(unittest.TestCase):
         # Test CUDA availability
         print(f"CUDA available: {torch.cuda.is_available()}")
         print(f"Device being used: {self.device}")
-        self.assertTrue(hasattr(self.accelerator, "gradient_accumulation_steps"))
+        self.assertTrue(
+            hasattr(self.accelerator, "gradient_accumulation_steps")
+        )
 
     def test_mmmu_dataset_loading(self):
         """Test MMMU dataset loading and processing"""
@@ -42,7 +44,9 @@ class TestTrainingSetup(unittest.TestCase):
                 batch_size=4,  # Small batch size for testing
             )
 
-            self.assertGreater(len(dataloaders), 0, "No dataloaders were created")
+            self.assertGreater(
+                len(dataloaders), 0, "No dataloaders were created"
+            )
 
             # Test at least one split
             for split, dataloader in dataloaders.items():
@@ -123,7 +127,9 @@ class TestTrainingSetup(unittest.TestCase):
 
         # Check if model is on correct device
         self.assertEqual(
-            next(model.parameters()).device, self.device, "Model not on correct device"
+            next(model.parameters()).device,
+            self.device,
+            "Model not on correct device",
         )
 
         # Test forward pass

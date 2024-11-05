@@ -34,7 +34,9 @@ class MathReasoningHead(nn.Module):
 
         # Enhanced attention with more heads
         self.num_attention_heads = (
-            config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
+            config.num_attention_heads
+            if hasattr(config, "num_attention_heads")
+            else 8
         )
         # Head dimension and sequence length configuration
         self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32
@@ -63,9 +65,13 @@ class MathReasoningHead(nn.Module):
         self.math_experts = MixtureOfExperts(
             input_dim=self.hidden_dim,
             expert_dim=(
-                config.mlp_dim if hasattr(config, "mlp_dim") else self.hidden_dim * 4
+                config.mlp_dim
+                if hasattr(config, "mlp_dim")
+                else self.hidden_dim * 4
             ),
-            num_experts=config.num_experts if hasattr(config, "num_experts") else 4,
+            num_experts=(
+                config.num_experts if hasattr(config, "num_experts") else 4
+            ),
             capacity_factor=(
                 config.expert_capacity_factor
                 if hasattr(config, "expert_capacity_factor")
@@ -164,7 +170,9 @@ class MathReasoningHead(nn.Module):
                     attention_mask = attention_mask[..., :seq_length]
                 else:
                     pad_size = seq_length - attention_mask.size(-1)
-                    attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
+                    attention_mask = F.pad(
+                        attention_mask, (0, pad_size), value=0
+                    )
 
         # Process with Flash Attention
         try:
@@ -194,7 +202,9 @@ class MathReasoningHead(nn.Module):
 
         # Router entropy for monitoring expert specialization
         router_entropy = (
-            -(router_probs * torch.log(router_probs + 1e-10)).sum(dim=-1).mean()
+            -(router_probs * torch.log(router_probs + 1e-10))
+            .sum(dim=-1)
+            .mean()
         )
 
         # Process symbolic mathematics if expressions are provided
@@ -278,7 +288,9 @@ class MathReasoningHead(nn.Module):
             math_accuracy = torch.tensor(0.0, device=logits.device)
 
         # Combine losses with proper weighting
-        total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
+        total_loss = (
+            loss + 0.1 * load_balance_loss
+        )  # Increased MoE loss weight
 
         # Return outputs and auxiliary information
         outputs = {
@@ -336,7 +348,9 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
 
     def gradient_checkpointing_enable(self):
         """Enables gradient checkpointing for memory efficiency"""
-        self.apply(lambda module: self._set_gradient_checkpointing(module, True))
+        self.apply(
+            lambda module: self._set_gradient_checkpointing(module, True)
+        )
 
     def _init_weights(self):
         # Initialize transformer weights
@@ -386,7 +400,11 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
 
         # Process through math reasoning head with labels
         math_outputs = self.math_head(
-            enhanced_states, attention_mask, expressions, labels=labels, **kwargs
+            enhanced_states,
+            attention_mask,
+            expressions,
+            labels=labels,
+            **kwargs,
         )
 
         # Calculate total loss with proper weighting
@@ -402,11 +420,15 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
             outputs["loss"] = math_outputs["loss"]
             outputs["math_accuracy"] = math_outputs.get("math_accuracy", None)
             outputs["moe_loss"] = math_outputs.get("moe_loss", None)
-            outputs["router_entropy"] = math_outputs.get("router_entropy", None)
+            outputs["router_entropy"] = math_outputs.get(
+                "router_entropy", None
+            )
 
         return outputs
 
-    def prepare_inputs_for_generation(self, input_ids, attention_mask=None, **kwargs):
+    def prepare_inputs_for_generation(
+        self, input_ids, attention_mask=None, **kwargs
+    ):
         """Prepare inputs for generation."""
         inputs = {"input_ids": input_ids, "attention_mask": attention_mask}
 
@@ -433,6 +455,8 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
         attention_mask = attention_mask * padding_mask.unsqueeze(-1)
 
         # Expand to batch size
-        attention_mask = attention_mask.expand(batch_size, seq_length, seq_length)
+        attention_mask = attention_mask.expand(
+            batch_size, seq_length, seq_length
+        )
 
         return attention_mask

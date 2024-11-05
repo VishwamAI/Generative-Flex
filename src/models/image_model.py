@@ -34,7 +34,8 @@ class PatchEmbedding(nn.Module):
         )
         # Reshape patches into sequence
         patches = jnp.reshape(
-            patches, (batch_size, -1, self.patch_size * self.patch_size * channels)
+            patches,
+            (batch_size, -1, self.patch_size * self.patch_size * channels),
         )
 
         # Project patches to hidden dimension
@@ -65,7 +66,9 @@ class ImageGenerationModel(nn.Module):
 
         # Convert image to patches and embed
         x = PatchEmbedding(
-            patch_size=self.patch_size, hidden_dim=self.hidden_dim, dtype=self.dtype
+            patch_size=self.patch_size,
+            hidden_dim=self.hidden_dim,
+            dtype=self.dtype,
         )(inputs)
 
         # Add learnable position embeddings
@@ -109,13 +112,22 @@ class ImageGenerationModel(nn.Module):
 
         # Final reshape to image dimensions
         x = jnp.reshape(
-            x, (batch_size, self.image_size[0], self.image_size[1], self.channels)
+            x,
+            (
+                batch_size,
+                self.image_size[0],
+                self.image_size[1],
+                self.channels,
+            ),
         )
 
         return x
 
     def generate(
-        self, rng: Any, condition: Optional[jnp.ndarray] = None, batch_size: int = 1
+        self,
+        rng: Any,
+        condition: Optional[jnp.ndarray] = None,
+        batch_size: int = 1,
     ):
         """Generate images."""
         # Initialize with random noise if no condition is provided
@@ -123,7 +135,12 @@ class ImageGenerationModel(nn.Module):
             rng, init_rng = jax.random.split(rng)
             x = jax.random.normal(
                 init_rng,
-                (batch_size, self.image_size[0], self.image_size[1], self.channels),
+                (
+                    batch_size,
+                    self.image_size[0],
+                    self.image_size[1],
+                    self.channels,
+                ),
                 dtype=self.dtype,
             )
         else:

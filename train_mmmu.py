@@ -6,6 +6,7 @@ from src.training.train_mmmu import MMUTrainer
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def main():
     # Initialize configuration
     config = TrainingConfig()
@@ -23,11 +24,12 @@ def main():
         gradient_accumulation_steps=config.gradient_accumulation_steps,
         max_grad_norm=config.max_grad_norm,
         warmup_steps=config.warmup_steps,
-        generation_config=config.generation_config
+        generation_config=config.generation_config,
     )
 
     # Start training
     trainer.train()
+
 
 if __name__ == "__main__":
     main()

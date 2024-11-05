@@ -2,6 +2,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+
 def format_files():
     """Format all Python files in the project using black."""
     files_to_format = [
@@ -36,7 +37,7 @@ def format_files():
         "tests/test_environment.py",
         "tests/test_models.py",
         "tests/test_features.py",
-        "tests/test_training_setup.py"
+        "tests/test_training_setup.py",
     ]
 
     # Ensure all files exist
@@ -53,6 +54,7 @@ def format_files():
             sys.exit(1)
 
     print("All files formatted successfully!")
+
 
 if __name__ == "__main__":
     format_files()

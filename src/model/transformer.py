@@ -30,7 +30,10 @@ class TransformerLayer(nn.Module):
 
         # Flash Attention for efficient self-attention
         self.self_attn = FlashAttention(
-            d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size
+            d_model=d_model,
+            n_heads=nhead,
+            dropout=dropout,
+            block_size=block_size,
         )
 
         # Mixture of Experts for specialized computation

@@ -6,19 +6,20 @@ from src.training.train_mmmu import MMUTrainer
 from src.config.training_config import TrainingConfig
 
 # Set up logging
-os.makedirs('logs', exist_ok=True)
-os.makedirs('outputs', exist_ok=True)
-os.makedirs('logs/monitoring', exist_ok=True)
+os.makedirs("logs", exist_ok=True)
+os.makedirs("outputs", exist_ok=True)
+os.makedirs("logs/monitoring", exist_ok=True)
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler('logs/training.log'),
-        logging.StreamHandler()
-    ]
+        logging.FileHandler("logs/training.log"),
+        logging.StreamHandler(),
+    ],
 )
 logger = logging.getLogger(__name__)
+
 
 def main():
     try:
@@ -43,7 +44,10 @@ def main():
         # Initialize trainer with memory-efficient settings for CPU
         trainer = MMUTrainer(
             model_name=model_name,
-            subjects=["Math", "Computer_Science"],  # Updated to match available subjects
+            subjects=[
+                "Math",
+                "Computer_Science",
+            ],  # Updated to match available subjects
             device="cpu",
             fp16=False,
             batch_size=1,
@@ -54,7 +58,7 @@ def main():
             warmup_steps=100,
             output_dir="outputs",
             config=base_config,
-            tokenizer=tokenizer  # Pass the tokenizer
+            tokenizer=tokenizer,  # Pass the tokenizer
         )
 
         # Start training with monitoring
@@ -64,6 +68,7 @@ def main():
     except Exception as e:
         logger.error(f"Training failed with error: {str(e)}")
         raise
+
 
 if __name__ == "__main__":
     main()

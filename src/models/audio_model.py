@@ -112,7 +112,10 @@ class AudioGenerationModel(nn.Module):
         return output
 
     def generate(
-        self, rng: Any, prompt: Optional[jnp.ndarray] = None, length: int = 16000
+        self,
+        rng: Any,
+        prompt: Optional[jnp.ndarray] = None,
+        length: int = 16000,
     ):  # Default 1 second at 16kHz
         """Generate audio."""
         if prompt is None:

@@ -59,7 +59,9 @@ def main():
 
     # Generate response
     logits = model.apply({"params": params}, input_tokens)
-    predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictions
+    predicted_tokens = jnp.argsort(logits)[-10:][
+        ::-1
+    ]  # Get top 10 predictions
 
     print("\nTop predicted responses:")
     for token in predicted_tokens:

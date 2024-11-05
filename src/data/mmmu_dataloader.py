@@ -1,14 +1,12 @@
-"""
-MMMU Dataset loader with multimodal support
-"""
+"""MMMU Dataset loader with multimodal support"""
 
-import logging
-from typing import List, Optional, Dict, Tuple, Union
-import torch
-from torch.utils.data import Dataset, DataLoader, ConcatDataset
-from torchvision import transforms
 from PIL import Image
 from datasets import load_dataset
+from torch.utils.data import Dataset, DataLoader, ConcatDataset
+from torchvision import transforms
+from typing import List, Optional, Dict, Tuple, Union
+import logging
+import torch
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -56,7 +54,9 @@ class MMUDataset(Dataset):
             try:
                 # Load dataset using HuggingFace datasets
                 dataset = load_dataset("MMMU/MMMU", subject, split=split)
-                logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
+                logger.info(
+                    f"Loading {subject} dataset with {len(dataset)} examples"
+                )
 
                 # Pre-process examples to ensure tensor conversion
                 processed_examples = []
@@ -92,34 +92,40 @@ class MMUDataset(Dataset):
                                 "attention_mask"
                             ].squeeze(0)
                             processed_example["labels"] = torch.tensor(
-                                ord(example["answer"]) - ord("A"), dtype=torch.long
+                                ord(example["answer"]) - ord("A"),
+                                dtype=torch.long,
                             )
 
-                        # Process images if available
-                        images = []
-                        for i in range(1, 8):
-                            img_key = f"image_{i}"
-                            if img_key in example and example[img_key] is not None:
-                                try:
-                                    image = example[img_key]
-                                    if isinstance(image, Image.Image):
-                                        image = self.transform(image)
-                                    images.append(image)
-                                except Exception as e:
-                                    logger.warning(
-                                        f"Failed to process {img_key}: {str(e)}"
-                                    )
+                            # Process images if available
+                            images = []
+                            for i in range(1, 8):
+                                img_key = f"image_{i}"
+                                if (
+                                    img_key in example
+                                    and example[img_key] is not None
+                                ):
+                                    try:
+                                        image = example[img_key]
+                                        if isinstance(image, Image.Image):
+                                            image = self.transform(image)
+                                            images.append(image)
+                                    except Exception as e:
+                                        logger.warning(
+                                            f"Failed to process {img_key}: {str(e)}"
+                                        )
+                                        images.append(torch.zeros(3, 224, 224))
+                                else:
                                     images.append(torch.zeros(3, 224, 224))
-                            else:
-                                images.append(torch.zeros(3, 224, 224))
 
-                        processed_example["images"] = torch.stack(
-                            images[:7]
-                        )  # Ensure exactly 7 images
-                        processed_examples.append(processed_example)
+                            processed_example["images"] = torch.stack(
+                                images[:7]
+                            )  # Ensure exactly 7 images
+                            processed_examples.append(processed_example)
 
                     except Exception as e:
-                        logger.error(f"Error processing example in {subject}: {str(e)}")
+                        logger.error(
+                            f"Error processing example in {subject}: {str(e)}"
+                        )
                         continue
 
                 self.datasets.append(processed_examples)
@@ -175,96 +181,104 @@ class MMUDataset(Dataset):
             # Return a default example in case of error
             return {
                 "input_ids": torch.zeros(self.max_length, dtype=torch.long),
-                "attention_mask": torch.zeros(self.max_length, dtype=torch.long),
+                "attention_mask": torch.zeros(
+                    self.max_length, dtype=torch.long
+                ),
                 "labels": torch.tensor(0, dtype=torch.long),
                 "images": torch.zeros(7, 3, 224, 224),
                 "metadata": {},
             }
 
-
-def collate_mmmu_batch(examples):
-    """Collate batch with proper tensor handling"""
-    try:
-        # Initialize batch dictionary
-        batch = {
-            "input_ids": [],
-            "attention_mask": [],
-            "labels": [],
-            "images": [],
-            "metadata": [],
-        }
-
-        # Collect tensors from each example
-        for example in examples:
-            try:
-                batch["input_ids"].append(example["input_ids"])
-                batch["attention_mask"].append(example["attention_mask"])
-                batch["labels"].append(example["labels"])
-                batch["images"].append(example["images"])
-                batch["metadata"].append(example["metadata"])
-            except Exception as e:
-                logger.error(f"Error processing example in batch: {str(e)}")
-                # Skip problematic examples
-                continue
-
-        # Stack tensors
-        if batch["input_ids"]:  # Only process if we have valid examples
-            return {
-                "input_ids": torch.stack(batch["input_ids"]),
-                "attention_mask": torch.stack(batch["attention_mask"]),
-                "labels": torch.stack(batch["labels"]),
-                "images": torch.stack(batch["images"]),
-                "metadata": batch["metadata"],
+    @staticmethod
+    def collate_mmmu_batch(examples):
+        """Collate batch with proper tensor handling"""
+        try:
+            # Initialize batch dictionary
+            batch = {
+                "input_ids": [],
+                "attention_mask": [],
+                "labels": [],
+                "images": [],
+                "metadata": [],
             }
-        else:
-            raise ValueError("No valid examples in batch")
 
-    except Exception as e:
-        logger.error(f"Error collating batch: {str(e)}")
-        raise
+            # Collect tensors from each example
+            for example in examples:
+                try:
+                    batch["input_ids"].append(example["input_ids"])
+                    batch["attention_mask"].append(example["attention_mask"])
+                    batch["labels"].append(example["labels"])
+                    batch["images"].append(example["images"])
+                    batch["metadata"].append(example["metadata"])
+                except Exception as e:
+                    logger.error(
+                        f"Error processing example in batch: {str(e)}"
+                    )
+                    # Skip problematic examples
+                    continue
 
+            # Stack tensors
+            if batch["input_ids"]:  # Only process if we have valid examples
+                return {
+                    "input_ids": torch.stack(batch["input_ids"]),
+                    "attention_mask": torch.stack(batch["attention_mask"]),
+                    "labels": torch.stack(batch["labels"]),
+                    "images": torch.stack(batch["images"]),
+                    "metadata": batch["metadata"],
+                }
+            else:
+                raise ValueError("No valid examples in batch")
 
-def create_mmmu_dataloaders(
-    subjects: Optional[List[str]] = None,
-    tokenizer=None,
-    batch_size: int = 16,
-    max_length: int = 512,
-    num_workers: int = 0,
-    pin_memory: bool = False,
-) -> Tuple[DataLoader, DataLoader, DataLoader]:
-    """Create dataloaders with proper tensor handling"""
-    if subjects is None:
-        subjects = MMMU_SUBJECTS
+        except Exception as e:
+            logger.error(f"Error collating batch: {str(e)}")
+            raise
 
-    try:
-        # Create datasets
-        datasets = {
-            split: MMUDataset(
-                subjects=subjects,
-                split=split,
-                tokenizer=tokenizer,
-                max_length=max_length,
+    @staticmethod
+    def create_mmmu_dataloaders(
+        subjects: Optional[List[str]] = None,
+        tokenizer=None,
+        batch_size: int = 16,
+        max_length: int = 512,
+        num_workers: int = 0,
+        pin_memory: bool = False,
+    ) -> Tuple[DataLoader, DataLoader, DataLoader]:
+        """Create dataloaders with proper tensor handling"""
+        if subjects is None:
+            subjects = MMMU_SUBJECTS
+
+        try:
+            # Create datasets
+            datasets = {
+                split: MMUDataset(
+                    subjects=subjects,
+                    split=split,
+                    tokenizer=tokenizer,
+                    max_length=max_length,
+                )
+                for split in ["dev", "validation", "test"]
+            }
+
+            # Create dataloaders
+            dataloaders = {}
+            for split in ["dev", "validation", "test"]:
+                dataloaders[split] = DataLoader(
+                    datasets[split],
+                    batch_size=batch_size,
+                    shuffle=(split == "train"),
+                    num_workers=num_workers,
+                    pin_memory=pin_memory,
+                    collate_fn=MMUDataset.collate_mmmu_batch,
+                )
+                logger.info(
+                    f"Created {split} dataloader with {len(datasets[split])} examples"
+                )
+
+            return (
+                dataloaders["dev"],
+                dataloaders["validation"],
+                dataloaders["test"],
             )
-            for split in ["dev", "validation", "test"]
-        }
 
-        # Create dataloaders
-        dataloaders = {}
-        for split in ["dev", "validation", "test"]:
-            dataloaders[split] = DataLoader(
-                datasets[split],
-                batch_size=batch_size,
-                shuffle=(split == "train"),
-                num_workers=num_workers,
-                pin_memory=pin_memory,
-                collate_fn=collate_mmmu_batch,
-            )
-            logger.info(
-                f"Created {split} dataloader with {len(datasets[split])} examples"
-            )
-
-        return dataloaders["dev"], dataloaders["validation"], dataloaders["test"]
-
-    except Exception as e:
-        logger.error(f"Error creating dataloaders: {str(e)}")
-        raise
+        except Exception as e:
+            logger.error(f"Error creating dataloaders: {str(e)}")
+            raise

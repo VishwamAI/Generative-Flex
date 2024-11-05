@@ -1,14 +1,15 @@
 import re
 
+
 def fix_text_to_anything():
-    with open('src/models/text_to_anything.py', 'r') as f:
+    with open("src/models/text_to_anything.py", "r") as f:
         content = f.readlines()
 
     # Add missing imports if not present
     imports = [
         "import jax.numpy as jnp\n",
         "from typing import Dict, List, Optional, Tuple, Union, Any\n",
-        "from flax import linen as nn\n"
+        "from flax import linen as nn\n",
     ]
 
     # Find where to insert imports
@@ -30,7 +31,14 @@ def fix_text_to_anything():
             continue
 
         # Skip duplicate imports
-        if any(imp in line for imp in ["import jax", "from typing import", "from flax import linen"]):
+        if any(
+            imp in line
+            for imp in [
+                "import jax",
+                "from typing import",
+                "from flax import linen",
+            ]
+        ):
             continue
 
         # Track when we're in __call__ method
@@ -41,9 +49,13 @@ def fix_text_to_anything():
             fixed_content.append("        self,")
             fixed_content.append("        inputs: Union[str, Dict[str, Any]],")
             fixed_content.append("        target_modality: str,")
-            fixed_content.append("        context: Optional[Dict[str, Any]] = None,")
+            fixed_content.append(
+                "        context: Optional[Dict[str, Any]] = None,"
+            )
             fixed_content.append("        training: bool = False")
-            fixed_content.append("    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n")
+            fixed_content.append(
+                "    ) -> Tuple[jnp.ndarray, Dict[str, Any]]:\n"
+            )
             skip_next_lines = 9  # Skip the original malformed signature
             continue
 
@@ -52,7 +64,9 @@ def fix_text_to_anything():
             continue
 
         if "batch_size = 1" in line and not batch_size_initialized:
-            fixed_content.append("        batch_size = 1  # Initialize with default value\n")
+            fixed_content.append(
+                "        batch_size = 1  # Initialize with default value\n"
+            )
             batch_size_initialized = True
             continue
 
@@ -69,7 +83,9 @@ def fix_text_to_anything():
         # Fix duplicate _adjust_sequence_length calls
         if "_adjust_sequence_length" in line:
             if "embedded = self._adjust_sequence_length(" in line:
-                fixed_content.append("            embedded = self._adjust_sequence_length(\n")
+                fixed_content.append(
+                    "            embedded = self._adjust_sequence_length(\n"
+                )
                 fixed_content.append("                embedded,\n")
                 fixed_content.append("                sequence_length\n")
                 fixed_content.append("            )\n")
@@ -81,8 +97,9 @@ def fix_text_to_anything():
             fixed_content.append(line)
 
     # Write the fixed content
-    with open('src/models/text_to_anything.py', 'w') as f:
+    with open("src/models/text_to_anything.py", "w") as f:
         f.writelines(fixed_content)
+
 
 if __name__ == "__main__":
     fix_text_to_anything()

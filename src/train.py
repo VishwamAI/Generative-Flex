@@ -32,7 +32,9 @@ def main():
     """Main training function"""
     # Parse arguments and load config
     parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
-    parser.add_argument("--config", type=str, default="configs/default_config.json")
+    parser.add_argument(
+        "--config", type=str, default="configs/default_config.json"
+    )
     parser.add_argument("--local_rank", type=int, default=-1)
     args = parser.parse_args()
 
@@ -71,8 +73,12 @@ def main():
         cache_dir=config.training.cache_dir,
     )
 
-    train_dataset = AdvancedDataset("data/train.json", tokenizer, data_config, True)
-    eval_dataset = AdvancedDataset("data/eval.json", tokenizer, data_config, False)
+    train_dataset = AdvancedDataset(
+        "data/train.json", tokenizer, data_config, True
+    )
+    eval_dataset = AdvancedDataset(
+        "data/eval.json", tokenizer, data_config, False
+    )
 
     train_dataloader = create_dataloader(
         train_dataset, data_config, args.local_rank != -1

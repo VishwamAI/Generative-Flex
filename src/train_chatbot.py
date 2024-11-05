@@ -57,7 +57,9 @@ def prepare_batch(
 
 def create_train_state(model, learning_rate: float):
     params = model.init(
-        jax.random.PRNGKey(0), jnp.ones((1, 32), dtype=jnp.int32), training=False
+        jax.random.PRNGKey(0),
+        jnp.ones((1, 32), dtype=jnp.int32),
+        training=False,
     )
     tx = optax.adam(learning_rate)
     return train_state.TrainState.create(
@@ -70,8 +72,12 @@ def create_train_state(model, learning_rate: float):
 @jax.jit
 def train_step(state, inputs, targets, rng):
     def loss_fn(params):
-        logits = state.apply_fn(params, inputs, training=True, rngs={"dropout": rng})
-        return optax.softmax_cross_entropy_with_integer_labels(logits, targets).mean()
+        logits = state.apply_fn(
+            params, inputs, training=True, rngs={"dropout": rng}
+        )
+        return optax.softmax_cross_entropy_with_integer_labels(
+            logits, targets
+        ).mean()
 
     grad_fn = jax.value_and_grad(loss_fn)
     loss, grads = grad_fn(state.params)
@@ -108,7 +114,10 @@ def main():
 
     # Prepare training data
     inputs, targets = prepare_batch(
-        conversations, vocab, batch_size=len(conversations), max_length=max_length
+        conversations,
+        vocab,
+        batch_size=len(conversations),
+        max_length=max_length,
     )
 
     # Initialize training state
@@ -134,7 +143,9 @@ def main():
 
     # Save model parameters
     with open("model_params.json", "w") as f:
-        json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
+        json.dump(
+            jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f
+        )
 
     print("Model parameters and vocabulary saved successfully!")
 

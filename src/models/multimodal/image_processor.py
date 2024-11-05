@@ -32,7 +32,9 @@ class ImageProcessor(nn.Module):
 
         # Project CNN features to transformer hidden size
         self.projector = nn.Sequential(
-            nn.Linear(64, hidden_size), nn.LayerNorm(hidden_size), nn.Dropout(0.1)
+            nn.Linear(64, hidden_size),
+            nn.LayerNorm(hidden_size),
+            nn.Dropout(0.1),
         )
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
@@ -68,7 +70,9 @@ class ImageProcessor(nn.Module):
             flat_images = images.view(-1, channels, height, width)
 
             # Process through CNN
-            cnn_features = self.cnn(flat_images)  # Shape: [batch_size * num_images, 64]
+            cnn_features = self.cnn(
+                flat_images
+            )  # Shape: [batch_size * num_images, 64]
 
             # Project to hidden size
             projected = self.projector(

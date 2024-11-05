@@ -13,15 +13,19 @@ from src.config.config import ModelConfig
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def load_mmmu_dataset():
     """Load the MMMU validation dataset"""
     try:
-        dataset = MMUDataset('Math', 'validation')
-        logger.info(f"Successfully loaded MMMU validation dataset with {len(dataset)} examples")
+        dataset = MMUDataset("Math", "validation")
+        logger.info(
+            f"Successfully loaded MMMU validation dataset with {len(dataset)} examples"
+        )
         return dataset
     except Exception as e:
         logger.error(f"Error loading dataset: {str(e)}")
         return None
+
 
 def analyze_problem_categories(dataset):
     """Analyze and categorize problems in the dataset"""
@@ -32,19 +36,25 @@ def analyze_problem_categories(dataset):
             sample = dataset[idx]
             if isinstance(sample, dict):
                 # Extract problem category/type
-                category = sample.get('subject_name', 'Unknown')
-                if 'algebra' in category.lower():
-                    main_category = 'Algebra'
-                elif 'calculus' in category.lower():
-                    main_category = 'Calculus'
-                elif 'probability' in category.lower() or 'statistics' in category.lower():
-                    main_category = 'Probability & Statistics'
-                elif 'geometry' in category.lower():
-                    main_category = 'Geometry'
-                elif 'number' in category.lower() or 'arithmetic' in category.lower():
-                    main_category = 'Number Theory'
+                category = sample.get("subject_name", "Unknown")
+                if "algebra" in category.lower():
+                    main_category = "Algebra"
+                elif "calculus" in category.lower():
+                    main_category = "Calculus"
+                elif (
+                    "probability" in category.lower()
+                    or "statistics" in category.lower()
+                ):
+                    main_category = "Probability & Statistics"
+                elif "geometry" in category.lower():
+                    main_category = "Geometry"
+                elif (
+                    "number" in category.lower()
+                    or "arithmetic" in category.lower()
+                ):
+                    main_category = "Number Theory"
                 else:
-                    main_category = 'Other'
+                    main_category = "Other"
 
                 categories[main_category].append(idx)
 
@@ -53,10 +63,13 @@ def analyze_problem_categories(dataset):
         logger.error(f"Error analyzing problem categories: {str(e)}")
         return None
 
+
 def load_validation_results():
     """Load validation results from the most recent training log"""
     log_dir = Path("logs")
-    training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
+    training_logs = sorted(
+        log_dir.glob("training_*.log"), key=os.path.getmtime
+    )
 
     if not training_logs:
         logger.error("No training logs found")
@@ -66,24 +79,24 @@ def load_validation_results():
     logger.info(f"Analyzing log file: {latest_log}")
 
     results = {
-        'overall_accuracy': None,
-        'best_validation_loss': None,
-        'category_performance': defaultdict(list)
+        "overall_accuracy": None,
+        "best_validation_loss": None,
+        "category_performance": defaultdict(list),
     }
 
     try:
-        with open(latest_log, 'r') as f:
+        with open(latest_log, "r") as f:
             for line in f:
                 if "Validation math accuracy:" in line:
                     try:
                         accuracy = float(line.split(":")[-1].strip())
-                        results['overall_accuracy'] = accuracy
+                        results["overall_accuracy"] = accuracy
                     except ValueError:
                         continue
                 elif "Best validation loss:" in line:
                     try:
                         loss = float(line.split(":")[-1].strip())
-                        results['best_validation_loss'] = loss
+                        results["best_validation_loss"] = loss
                     except ValueError:
                         continue
 
@@ -91,6 +104,7 @@ def load_validation_results():
     except Exception as e:
         logger.error(f"Error loading validation results: {str(e)}")
         return None
+
 
 def generate_performance_report(categories, results):
     """Generate a comprehensive performance report"""
@@ -102,10 +116,14 @@ def generate_performance_report(categories, results):
     report.append("=" * 50 + "\n")
 
     # Overall Performance
-    if results['overall_accuracy'] is not None:
-        report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-    if results['best_validation_loss'] is not None:
-        report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
+    if results["overall_accuracy"] is not None:
+        report.append(
+            f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}"
+        )
+    if results["best_validation_loss"] is not None:
+        report.append(
+            f"Best Validation Loss: {results['best_validation_loss']:.4f}\n"
+        )
 
     # Category Distribution
     report.append("\nProblem Category Distribution:")
@@ -121,8 +139,8 @@ def generate_performance_report(categories, results):
 
     # Save report
     report_path = "mmmu_performance_report.txt"
-    with open(report_path, 'w') as f:
-        f.write('\n'.join(report))
+    with open(report_path, "w") as f:
+        f.write("\n".join(report))
     logger.info(f"Performance report saved to {report_path}")
 
     # Generate visualization
@@ -138,6 +156,7 @@ def generate_performance_report(categories, results):
     viz_path = "mmmu_category_distribution.png"
     plt.savefig(viz_path)
     logger.info(f"Category distribution visualization saved to {viz_path}")
+
 
 def main():
     """Main analysis function"""
@@ -158,6 +177,7 @@ def main():
 
     # Generate comprehensive report
     generate_performance_report(categories, results)
+
 
 if __name__ == "__main__":
     main()

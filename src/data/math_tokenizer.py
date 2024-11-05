@@ -1,10 +1,10 @@
 """Specialized tokenizer for mathematical expressions and symbols."""
 
+from transformers import PreTrainedTokenizer
+from typing import List, Dict, Any, Optional
 import re
 import sympy
-from typing import List, Dict, Any, Optional
 import torch
-from transformers import PreTrainedTokenizer
 
 
 class MathTokenizer:
@@ -14,8 +14,7 @@ class MathTokenizer:
         """Initialize the math tokenizer.
 
         Args:
-            base_tokenizer: Base HuggingFace tokenizer to extend
-        """
+            base_tokenizer: Base HuggingFace tokenizer to extend"""
         self.base_tokenizer = base_tokenizer
         # Calculate available space for special tokens
         vocab_size = len(base_tokenizer)
@@ -56,7 +55,9 @@ class MathTokenizer:
             special_tokens = special_tokens[:available_tokens]
             # Update math_symbols to only include tokens we can add
             self.math_symbols = {
-                k: v for k, v in self.math_symbols.items() if v in special_tokens
+                k: v
+                for k, v in self.math_symbols.items()
+                if v in special_tokens
             }
 
         # Add special tokens to base tokenizer

@@ -35,7 +35,9 @@ class AdvancedTrainer:
             if not dist.is_initialized():
                 dist.init_process_group(backend="nccl")
             self.model = DistributedDataParallel(
-                self.model, device_ids=[self.local_rank], output_device=self.local_rank
+                self.model,
+                device_ids=[self.local_rank],
+                output_device=self.local_rank,
             )
 
         # Enable gradient checkpointing
@@ -134,7 +136,10 @@ class AdvancedTrainer:
                     )
 
                 # Evaluation
-                if eval_dataloader is not None and global_step % eval_steps == 0:
+                if (
+                    eval_dataloader is not None
+                    and global_step % eval_steps == 0
+                ):
                     eval_loss = self.evaluate(eval_dataloader)
                     logging.info(f"Eval Loss: {eval_loss:.4f}")
 
@@ -149,7 +154,9 @@ class AdvancedTrainer:
 
             # End of epoch
             avg_epoch_loss = epoch_loss / num_steps
-            logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")
+            logging.info(
+                f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}"
+            )
 
             # Save epoch checkpoint
             self.save_model(f"epoch-{epoch}")
@@ -166,7 +173,11 @@ class AdvancedTrainer:
 
                 with autocast():
                     outputs = self.model(**batch)
-                    loss = outputs["loss"] if isinstance(outputs, dict) else outputs
+                    loss = (
+                        outputs["loss"]
+                        if isinstance(outputs, dict)
+                        else outputs
+                    )
 
                 total_loss += loss.item()
                 num_steps += 1
@@ -181,7 +192,9 @@ class AdvancedTrainer:
 
             # Save model
             model_to_save = (
-                self.model.module if hasattr(self.model, "module") else self.model
+                self.model.module
+                if hasattr(self.model, "module")
+                else self.model
             )
             torch.save(model_to_save.state_dict(), save_path / "model.pt")
 
@@ -205,7 +218,9 @@ class AdvancedTrainer:
         if model_path.exists():
             state_dict = torch.load(model_path, map_location="cpu")
             model_to_load = (
-                self.model.module if hasattr(self.model, "module") else self.model
+                self.model.module
+                if hasattr(self.model, "module")
+                else self.model
             )
             model_to_load.load_state_dict(state_dict)
             logging.info(f"Model loaded from {model_path}")
