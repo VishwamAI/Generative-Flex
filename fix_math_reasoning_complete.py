@@ -1,5 +1,7 @@
 """Complete reconstruction of math_reasoning.py with proper syntax."""
+
 import re
+
 
 def fix_imports(content: str) -> str:
     """Fix and deduplicate imports."""
@@ -7,14 +9,15 @@ def fix_imports(content: str) -> str:
     seen = set()
 
     # Extract all imports from the content
-    for line in content.split('\n'):
-        if line.strip().startswith(('from ', 'import ')):
+    for line in content.split("\n"):
+        if line.strip().startswith(("from ", "import ")):
             cleaned = line.strip()
             if cleaned not in seen:
                 seen.add(cleaned)
                 imports.append(line)
 
-    return '\n'.join(imports) + '\n\n'
+    return "\n".join(imports) + "\n\n"
+
 
 def create_fixed_content() -> str:
     """Create properly formatted content for math_reasoning.py."""
@@ -283,16 +286,17 @@ class MathReasoningHead(nn.Module):
         self.apply(lambda module: self._set_gradient_checkpointing(module, True))
 '''
 
+
 def main():
     """Fix math_reasoning.py with complete reconstruction."""
-    file_path = 'src/models/reasoning/math_reasoning.py'
+    file_path = "src/models/reasoning/math_reasoning.py"
 
     try:
         # Create new content
         fixed_content = create_fixed_content()
 
         # Write the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, "w", encoding="utf-8") as f:
             f.write(fixed_content)
 
         print(f"Successfully reconstructed {file_path}")
@@ -300,5 +304,6 @@ def main():
     except Exception as e:
         print(f"Error processing {file_path}: {str(e)}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 import re
 
+
 def fix_imports():
     return '''"""MMMU Dataset loader with multimodal support."""
 from typing import Dict, List, Optional, Tuple, Any, Union
@@ -20,6 +21,7 @@ MMMU_SUBJECTS = [
     "biology",
     "computer_science",
 ]'''
+
 
 def fix_class_definition():
     return '''class MMUDataset(Dataset):
@@ -58,8 +60,9 @@ def fix_class_definition():
         self.lengths = []
         self.cumulative_lengths = []'''
 
+
 def fix_dataset_loading():
-    return '''        # Load datasets for each subject
+    return """        # Load datasets for each subject
         total_length = 0
         for subject in self.subjects:
             try:
@@ -133,7 +136,8 @@ def fix_dataset_loading():
                 logger.warning(f"Failed to load {subject}: {str(e)}")
 
         if not self.datasets:
-            raise RuntimeError("No datasets were successfully loaded")'''
+            raise RuntimeError("No datasets were successfully loaded")"""
+
 
 def fix_methods():
     return '''    def __len__(self) -> int:
@@ -265,18 +269,23 @@ def fix_methods():
             logger.error(f"Error creating dataloaders: {str(e)}")
             raise'''
 
+
 def main():
     # Combine all sections
     content = (
-        fix_imports() + "\n\n" +
-        fix_class_definition() + "\n\n" +
-        fix_dataset_loading() + "\n\n" +
-        fix_methods()
+        fix_imports()
+        + "\n\n"
+        + fix_class_definition()
+        + "\n\n"
+        + fix_dataset_loading()
+        + "\n\n"
+        + fix_methods()
     )
 
     # Write the fixed content
-    with open('src/data/mmmu_dataloader.py', 'w') as f:
+    with open("src/data/mmmu_dataloader.py", "w") as f:
         f.write(content)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

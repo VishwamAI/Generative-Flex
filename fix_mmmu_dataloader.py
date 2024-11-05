@@ -1,32 +1,33 @@
 import re
 
+
 def fix_mmmu_dataloader():
     # Read the original file
-    with open('src/data/mmmu_dataloader.py', 'r') as f:
+    with open("src/data/mmmu_dataloader.py", "r") as f:
         content = f.read()
 
     # Fix imports
     content = re.sub(
-        r'from typing import.*',
-        'from typing import Dict, List, Optional, Tuple, Any, Union\n'
-        'import torch\n'
-        'from torch.utils.data import Dataset, DataLoader\n'
-        'from datasets import load_dataset\n'
-        'from PIL import Image\n'
-        'import logging\n\n'
-        'logger = logging.getLogger(__name__)\n'
+        r"from typing import.*",
+        "from typing import Dict, List, Optional, Tuple, Any, Union\n"
+        "import torch\n"
+        "from torch.utils.data import Dataset, DataLoader\n"
+        "from datasets import load_dataset\n"
+        "from PIL import Image\n"
+        "import logging\n\n"
+        "logger = logging.getLogger(__name__)\n"
         'MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]',
-        content
+        content,
     )
 
     # Fix class definition and initialization
     content = re.sub(
-        r'class MMUDataset\(.*?\):.*?def __init__',
-        'class MMUDataset(Dataset):\n'
+        r"class MMUDataset\(.*?\):.*?def __init__",
+        "class MMUDataset(Dataset):\n"
         '    """MMMU Dataset loader with multimodal support."""\n\n'
-        '    def __init__',
+        "    def __init__",
         content,
-        flags=re.DOTALL
+        flags=re.DOTALL,
     )
 
     # Fix initialization method
@@ -54,15 +55,16 @@ def fix_mmmu_dataloader():
         self.cumulative_lengths = []'''
 
     content = re.sub(
-        r'def __init__.*?self\.cumulative_lengths = \[\]',
+        r"def __init__.*?self\.cumulative_lengths = \[\]",
         init_method,
         content,
-        flags=re.DOTALL
+        flags=re.DOTALL,
     )
 
     # Write the fixed content back
-    with open('src/data/mmmu_dataloader.py', 'w') as f:
+    with open("src/data/mmmu_dataloader.py", "w") as f:
         f.write(content)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     fix_mmmu_dataloader()

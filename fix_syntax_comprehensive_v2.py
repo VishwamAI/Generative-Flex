@@ -1,5 +1,6 @@
 import re
 
+
 def fix_imports():
     return '''"""MMMU Dataset loader with multimodal support."""
 from typing import Dict, List, Optional, Tuple, Any, Union
@@ -15,6 +16,7 @@ logger = logging.getLogger(__name__)
 # Default subjects for MMMU dataset
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 '''
+
 
 def fix_class_definition():
     return '''class MMUDataset(Dataset):
@@ -51,8 +53,9 @@ def fix_class_definition():
         self.cumulative_lengths = []
 '''
 
+
 def fix_dataset_loading():
-    return '''        # Load datasets for each subject
+    return """        # Load datasets for each subject
         total_length = 0
         for subject in self.subjects:
             try:
@@ -120,7 +123,8 @@ def fix_dataset_loading():
 
         if not self.datasets:
             raise RuntimeError("No datasets were successfully loaded")
-'''
+"""
+
 
 def fix_methods():
     return '''    def __len__(self) -> int:
@@ -242,16 +246,15 @@ def fix_methods():
             raise
 '''
 
+
 def main():
     content = (
-        fix_imports() +
-        fix_class_definition() +
-        fix_dataset_loading() +
-        fix_methods()
+        fix_imports() + fix_class_definition() + fix_dataset_loading() + fix_methods()
     )
 
-    with open('src/data/mmmu_dataloader.py', 'w') as f:
+    with open("src/data/mmmu_dataloader.py", "w") as f:
         f.write(content)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

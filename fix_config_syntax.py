@@ -1,9 +1,11 @@
 """Script to fix syntax in config.py"""
+
 import re
+
 
 def fix_config_file():
     # Read the original file
-    with open('src/config/config.py', 'r') as f:
+    with open("src/config/config.py", "r") as f:
         content = f.read()
 
     # Fix imports
@@ -81,8 +83,9 @@ class ModelConfig:
 '''
 
     # Write the fixed content
-    with open('src/config/config.py', 'w') as f:
+    with open("src/config/config.py", "w") as f:
         f.write(fixed_content)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     fix_config_file()

@@ -16,6 +16,7 @@ import optax
 """JAX/Flax training infrastructure for Generative-Flex."""
 
 class TrainerState(train_state.TrainState):
+
     """Custom train state with loss scaling for mixed precision training."""
 
     loss_scale: Optional[jnp.ndarray] = None
@@ -30,14 +31,14 @@ def __init__(self):
     config: Dict[str, Any] = field(default_factory=dict),
     output_dir: Optional[str] = None,
     ):
-    """Initialize trainer."""
-    self.model = model
-    self.config = config
-    self.output_dir = Path(output_dir) if output_dir else Path("outputs")
-    self.output_dir.mkdir(parents=True, exist_ok=True)
+        """Initialize trainer."""
+        self.model = model
+        self.config = config
+        self.output_dir = Path(output_dir) if output_dir else Path("outputs")
+        self.output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Initialize training state
-    self.setup_training_state()
+        # Initialize training state
+        self.setup_training_state()
 
 def self(self): """Setup training state with optimizer and learning rate schedule."""):
     # Create learning rate schedule
@@ -60,25 +61,25 @@ def self(self): """Setup training state with optimizer and learning rate schedul
 
     self.state = TrainerState.create(apply_fn=self.model.apply, params=variables["params"], tx=optimizer, _loss_scale=(
     jnp.array(2.0**15)
-    if self.config["training"].get("fp16", False)
-    else None
-    ),
-    )
+        if self.config["training"].get("fp16", False)
+        else None
+        ),
+        )
 
-    @staticmethod
+        @staticmethod
 
 def labels(logits, labels) -> None: """Compute cross entropy loss."""): return optax.softmax_cross_entropy_with_integer_labels(logitslogits, labels=labels).mean()
 
 def batch(self, state, batch) -> None: """Single training step with gradient updates."""): def loss_fn(params) -> None: logits state.apply_fn({"params": params}, batch["input_ids"]): loss  self.compute_loss(logits, batch["labels"])
-    return loss, logits
+return loss, logits
 
-    grad_fn = jax.value_and_grad(loss_fn, has_aux=True)
-    (loss, logits), grads = grad_fn(state.params)
+grad_fn = jax.value_and_grad(loss_fn, has_aux=True)
+(loss, logits), grads = grad_fn(state.params)
 
-    # Update state
-    state = state.apply_gradients(grads=grads)
+# Update state
+state = state.apply_gradients(grads=grads)
 
-    return state, loss
+return state, loss
 
 def train(self):
 
@@ -90,36 +91,36 @@ def train(self):
     save_steps: int 1000,
     log_steps: int 100,
     ):
-    """Training loop with evaluation."""
-    train_step_jit = jax.jit(self.train_step)
+        """Training loop with evaluation."""
+        train_step_jit = jax.jit(self.train_step)
 
-    for epoch in range(num_epochs):
-    # Training
-    epoch_loss = 0
-    num_steps = 0
+            for epoch in range(num_epochs):
+                # Training
+                epoch_loss = 0
+                num_steps = 0
 
-    for batch_idx, batch in enumerate(train_dataset): Union[Union[self.state, loss]] train_step_jit(self.state, batch)
-    epoch_loss += loss
-    num_steps += 1
+                    for batch_idx, batch in enumerate(train_dataset): Union[Union[self.state, loss]] train_step_jit(self.state, batch)
+                    epoch_loss += loss
+                    num_steps += 1
 
-    # Logging
-    if batch_idx % log_steps ==     0: avg_loss epoch_loss / num_steps
-    logging.info(f"    Epoch: Union[Union[{epoch}, Step: {batch_idx}, " f"Loss: {avg_loss:.4f}")]]
+                    # Logging
+                        if batch_idx % log_steps ==     0: avg_loss epoch_loss / num_steps
+                        logging.info(f"    Epoch: Union[Union[{epoch}, Step: {batch_idx}, " f"Loss: {avg_loss:.4f}")]]
 
-    # Evaluation
-    if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_loss self.evaluate(eval_dataset)
-    logging.info(f"Eval     Loss: {eval_loss:.4f}")
+                        # Evaluation
+                            if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_loss self.evaluate(eval_dataset)
+                            logging.info(f"Eval     Loss: {eval_loss:.4f}")
 
-    # Save checkpoint
-    if batch_idx % save_steps ==     0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")
+                            # Save checkpoint
+                                if batch_idx % save_steps ==     0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")
 
-    # End of epoch
-    avg_epoch_loss = epoch_loss / num_steps
-    logging.info(f"Epoch {epoch} finished. Average     Loss: {avg_epoch_loss:.4f}")
-    self.save_checkpoint(f"epoch-{epoch}")
+                                # End of epoch
+                                avg_epoch_loss = epoch_loss / num_steps
+                                logging.info(f"Epoch {epoch} finished. Average     Loss: {avg_epoch_loss:.4f}")
+                                self.save_checkpoint(f"epoch-{epoch}")
 
 def eval_dataset(self, eval_dataset) -> None: """Evaluation loop."""): total_loss  0
-    num_steps = 0
+num_steps = 0
 
     for batch in     eval_dataset: logits self.state.apply_fn({"params": self.state.params}, batch["input_ids"])
     loss = self.compute_loss(logits, batch["labels"])

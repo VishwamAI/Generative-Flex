@@ -1,4 +1,5 @@
 """Script to fix config.py syntax and formatting issues."""
+
 import os
 import black
 

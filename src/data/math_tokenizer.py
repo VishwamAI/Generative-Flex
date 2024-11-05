@@ -1,4 +1,5 @@
 """Specialized tokenizer for mathematical expressions and symbols."""
+
 from typing import Optional, Union, List, Dict, Any, Tuple
 import re
 from transformers import PreTrainedTokenizer
@@ -47,13 +48,19 @@ class MathTokenizer:
 
         # Ensure we don't exceed vocabulary size
         special_tokens = list(self.math_symbols.values())
-        if len(special_tokens) > available_tokens:  # Prioritize basic arithmetic symbols if we need to reduce tokens
+        if (
+            len(special_tokens) > available_tokens
+        ):  # Prioritize basic arithmetic symbols if we need to reduce tokens
             special_tokens = special_tokens[:available_tokens]
         # Update math_symbols to only include tokens we can add
-        self.math_symbols = {k: v for k, v in self.math_symbols.items() if v in special_tokens}
+        self.math_symbols = {
+            k: v for k, v in self.math_symbols.items() if v in special_tokens
+        }
 
         # Add special tokens to base tokenizer
-        self.base_tokenizer.add_special_tokens({"additional_special_tokens": special_tokens})
+        self.base_tokenizer.add_special_tokens(
+            {"additional_special_tokens": special_tokens}
+        )
 
     def _parse_math_expression(self, text: str) -> str:
         """Parse mathematical expressions using sympy."""

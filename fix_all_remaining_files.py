@@ -1,30 +1,35 @@
 """Fix syntax issues and apply black formatting to all remaining files."""
+
 import subprocess
 import sys
 from pathlib import Path
 
+
 def run_black(file_path):
     """Run black formatter on a file."""
     try:
-        subprocess.run(['black', '--target-version', 'py312', str(file_path)], check=True)
+        subprocess.run(
+            ["black", "--target-version", "py312", str(file_path)], check=True
+        )
         print(f"Successfully formatted {file_path}")
     except subprocess.CalledProcessError as e:
         print(f"Error formatting {file_path}: {e}")
         return False
     return True
 
+
 def fix_syntax_issues():
     """Fix common syntax issues in Python files."""
     files_to_fix = [
-        'src/config/config.py',
-        'src/config/training_config.py',
-        'src/data/mmmu_dataloader.py',
-        'src/models/apple_optimizations.py',
-        'src/models/reasoning/math_reasoning.py',
-        'src/models/text_to_anything.py',
-        'src/training/jax_trainer.py',
-        'tests/test_features.py',
-        'tests/test_models.py'
+        "src/config/config.py",
+        "src/config/training_config.py",
+        "src/data/mmmu_dataloader.py",
+        "src/models/apple_optimizations.py",
+        "src/models/reasoning/math_reasoning.py",
+        "src/models/text_to_anything.py",
+        "src/training/jax_trainer.py",
+        "tests/test_features.py",
+        "tests/test_models.py",
     ]
 
     success = True
@@ -42,30 +47,26 @@ def fix_syntax_issues():
         # Fix common syntax issues
         fixes = [
             # Fix dataclass field definitions
-            (r'field\(\)', r'field(default_factory=list)'),
-            (r'field\(default=\[\]\)', r'field(default_factory=list)'),
-            (r'field\(default=\{\}\)', r'field(default_factory=dict)'),
-
+            (r"field\(\)", r"field(default_factory=list)"),
+            (r"field\(default=\[\]\)", r"field(default_factory=list)"),
+            (r"field\(default=\{\}\)", r"field(default_factory=dict)"),
             # Fix type hints
-            (r'List\[Any\]', r'List[Any]'),
-            (r'Dict\[str,\s*Any\]', r'Dict[str, Any]'),
-            (r'Optional\[List\[str\]\]', r'Optional[List[str]]'),
-
+            (r"List\[Any\]", r"List[Any]"),
+            (r"Dict\[str,\s*Any\]", r"Dict[str, Any]"),
+            (r"Optional\[List\[str\]\]", r"Optional[List[str]]"),
             # Fix method definitions
-            (r'def\s+(\w+)\s*\(\s*self\s*\)\s*->\s*None:', r'def \1(self) -> None:'),
-
+            (r"def\s+(\w+)\s*\(\s*self\s*\)\s*->\s*None:", r"def \1(self) -> None:"),
             # Fix imports
-            (r'from typing import(\s+[^\\n]+)(?<!\\n)', r'from typing import\1\n'),
-
+            (r"from typing import(\s+[^\\n]+)(?<!\\n)", r"from typing import\1\n"),
             # Fix class inheritance
-            (r'class\s+(\w+)\s*\(\s*\):', r'class \1:'),
-
+            (r"class\s+(\w+)\s*\(\s*\):", r"class \1:"),
             # Fix docstrings
             (r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
         ]
 
         # Apply all fixes
         import re
+
         for pattern, replacement in fixes:
             content = re.sub(pattern, replacement, content)
 
@@ -78,7 +79,8 @@ def fix_syntax_issues():
 
     return success
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print("Starting syntax fixes and formatting...")
     if fix_syntax_issues():
         print("\nAll files processed successfully!")
