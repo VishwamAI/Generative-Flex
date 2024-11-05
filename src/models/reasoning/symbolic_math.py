@@ -3,9 +3,8 @@ from typing import Optional, List
 
 
 class SymbolicMathProcessor(nn.Module):
-    """Handles symbolic mathematics processing for enhanced mathematical"
-    reasoning.""""
-
+    """Handles symbolic mathematics processing for enhanced mathematical
+    reasoning."""
 def __init__(self, config):
         super().__init__()
         #         self.hidden_size =\
@@ -43,25 +42,25 @@ def __init__(self, config):
         )
 
 def parse_expression(self, expr_str: str) -> Optional[sympy.Expr]:
-        """Parse mathematical expression string into SymPy expression.""""
+        """Parse mathematical expression string into SymPy expression.
         try:
     return sympy.sympify(expr_str)
         except (sympy.SympifyError, ValueError):
     return None
 
 def tokenize_expression(self, expr: sympy.Expr) -> List[str]:
-        """Convert SymPy expression to token sequence.""""
+        """Convert SymPy expression to token sequence.""
     return str(expr).replace("(", " ( ").replace(")", " ) ").split()"
 
 def embed_expression(
     self, tokens: List[str], hidden_states: torch.Tensor
     ) -> torch.Tensor:
-    """Embed mathematical expression tokens.""""
+    """Embed mathematical expression tokens.
     embeddings = []
 
     for token in tokens:
-    if token in ["+", "-", "*", "/"]:"
-    op_idx = ["+", "-", "*", "/"].index(token)"
+    if token in ["+", "-", "*", "/"]:
+    op_idx = ["+", "-", "*", "/"].index(token)
     embedding = (
     self.operator_embeddings[op_idx]
     .unsqueeze(0)
@@ -78,7 +77,7 @@ return torch.stack(embeddings, dim=1)
 def forward(
     self, hidden_states: torch.Tensor, expressions: List[str]
     ) -> torch.Tensor:
-    """Process mathematical expressions symbolically.""""
+    """Process mathematical expressions symbolically.""
     processed_states = []
 
     for i, expr_str in enumerate(expressions):
@@ -104,8 +103,7 @@ return torch.stack(processed_states, dim=0)
 
 
 class MathematicalNotationProcessor(nn.Module):
-    """Processes mathematical notations and symbols.""""
-
+    """Processes mathematical notations and symbols.
 def __init__(self, config):
         super().__init__()
         #         self.hidden_size =\
@@ -122,14 +120,14 @@ def __init__(self, config):
         nhead=8,
         dim_feedforward=self.hidden_size * 4,
         dropout=0.1,
-        activation="gelu","
+        activation="gelu",
         batch_first=True,
         )
 
 def forward(
     self, hidden_states: torch.Tensor, notation_indices: torch.Tensor
     ) -> torch.Tensor:
-    """Process mathematical notations.""""
+    """Process mathematical notations.""
     # Embed special symbols
     notation_embeddings = self.special_symbol_embeddings[notation_indices]
 

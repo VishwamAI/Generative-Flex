@@ -1,7 +1,6 @@
 import os
-""""
+"""
 Image processor for handling multimodal inputs in the MMMU model.
-""""
 
 import torch
 
@@ -9,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class ImageProcessor(nn.Module):
-    """Process multiple images for multimodal transformer input.""""
-
+    """Process multiple images for multimodal transformer input.""
 def __init__(self, hidden_size: int):
         super().__init__()
         self.hidden_size = hidden_size
@@ -37,7 +35,7 @@ def __init__(self, hidden_size: int):
         )
 
 def forward(self, images: torch.Tensor) -> torch.Tensor:
-        """"
+        """
         Process batch of images.
         Args:
         images: Tensor of shape [batch_size, channels, height, width] or
@@ -45,7 +43,7 @@ def forward(self, images: torch.Tensor) -> torch.Tensor:
         Returns:
         Tensor of shape [batch_size, num_images, hidden_size] or
         [batch_size, 1, hidden_size] for single images
-        """"
+        
         try:
         # Handle both 4D and 5D inputs
         if len(images.shape) == 4:
@@ -57,13 +55,13 @@ def forward(self, images: torch.Tensor) -> torch.Tensor:
         batch_size, num_images, channels, height, width = images.shape
         else:
     raise ValueError(
-        f"Expected 4D or 5D input tensor, got shape {images.shape}""
+        f"Expected 4D or 5D input tensor, got shape {images.shape}
         )
 
         # Log input shape for debugging
         logger.info(
-        f"Processing image chunk {batch_size}/{num_images},""
-        shape: {images.shape}""
+        f"Processing image chunk {batch_size}/{num_images},
+        shape: {images.shape}
         )
 
         # Reshape for CNN processing
@@ -81,12 +79,12 @@ def forward(self, images: torch.Tensor) -> torch.Tensor:
         output = projected.view(batch_size, num_images, self.hidden_size)
 
         # Log output shape for debugging
-        logger.info(f"Final processed image shape: {output.shape}")"
+        logger.info(f"Final processed image shape: {output.shape}")
 
     return output
 
         except Exception as e:
-        logger.error(f"Error in ImageProcessor forward pass: {str(e)}")"
+        logger.error(f"Error in ImageProcessor forward pass: {str(e)}")
         # Return zero tensor of correct shape with proper device
         if len(images.shape) == 4:
     return torch.zeros(

@@ -1,12 +1,10 @@
 from typing import Tuple
-"""Specialized experts for mathematical reasoning.""""
-
+"""Specialized experts for mathematical reasoning.
 import torch
 
 
 class MathematicalExpert(nn.Module):
-    """Expert module specialized for mathematical operations.""""
-
+    """Expert module specialized for mathematical operations.""
 def __init__(self, hidden_size: int, intermediate_size: int = 2048):
         super().__init__()
         #         self.hidden_size = hidden_size  # TODO: Remove or use this variable
@@ -60,8 +58,7 @@ def forward(self, x: torch.Tensor) -> torch.Tensor:
 
 
 class EnhancedMathExpertLayer(nn.Module):
-    """Enhanced expert layer with specialized mathematical experts.""""
-
+    """Enhanced expert layer with specialized mathematical experts.
 def __init__(self, config):
         super().__init__()
         self.config = config
@@ -84,7 +81,7 @@ def __init__(self, config):
 def forward(
     self, x: torch.Tensor, training: bool = True
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-    """Forward pass with specialized mathematical processing.""""
+    """Forward pass with specialized mathematical processing.""
     #         batch_size, seq_length, hidden_size =\
     x.shape  # TODO: Remove or use this variable
 

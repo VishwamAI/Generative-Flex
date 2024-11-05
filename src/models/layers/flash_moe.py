@@ -91,7 +91,7 @@ return x, None
 
     # Compute attention with better memory efficiency
     attn_weights = torch.matmul(q, k.transpose(-2, -1)) * self.scaling
-    attn_weights = attn_weights.masked_fill(attention_mask == 0, float("-inf"))""
+    attn_weights = attn_weights.masked_fill(attention_mask == 0, float("-inf"))"
 
     attn_weights = F.softmax(attn_weights, dim=-1)
     attn_weights_dropout = self.dropout(attn_weights)
@@ -171,7 +171,7 @@ def forward(
     uniform_prob = torch.ones_like(mean_prob) / self.k
     # KL divergence for load balancing
     load_balance_loss = F.kl_div(
-    mean_prob.log(), uniform_prob, reduction="batchmean""
+    mean_prob.log(), uniform_prob, reduction="batchmean"
     )
 
     # Compute capacity

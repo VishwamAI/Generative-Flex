@@ -36,7 +36,7 @@ def forward(self, x, attention_mask=None, layer_id=None):
         v = v.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
 
         if self.cache_enabled and layer_id is not None:
-        cache_key = f"layer_{layer_id}""
+        cache_key = f"layer_{layer_id}"
         if cache_key in self.key_cache:
         k = torch.cat([self.key_cache[cache_key], k], dim=2)
         v = torch.cat([self.value_cache[cache_key], v], dim=2)
@@ -47,7 +47,7 @@ def forward(self, x, attention_mask=None, layer_id=None):
 
         if attention_mask is not None:
         attention_scores = attention_scores.masked_fill(
-        attention_mask == 0, float("-inf")"
+        attention_mask == 0, float("-inf")
         )
 
         attention_probs = torch.softmax(attention_scores, dim=-1)

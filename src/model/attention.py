@@ -1,8 +1,7 @@
 import os
-""""
+"""
 Flash Attention Implementation for Generative-Flex
 Optimized attention mechanism with O(N) memory complexity
-""""
 
 import torch
 import math
@@ -10,11 +9,10 @@ from typing import Optional
 
 
 class FlashAttention(nn.Module):
-    """"
+    """
     Flash Attention implementation with optimized memory usage and computation
-    Based on "Flash Attention: Fast and Memory-Efficient Exact Attention""
-    """"
-
+    Based on "Flash Attention: Fast and Memory-Efficient Exact Attention"
+    """
 def __init__(
     self,
     d_model: int,
@@ -23,8 +21,7 @@ def __init__(
     block_size: int = 1024,
     ):
     super().__init__()
-    assert d_model % n_heads == 0, "d_model must be divisible by n_heads""
-
+    assert d_model % n_heads == 0, "d_model must be divisible by n_heads
     self.d_model = d_model
     self.n_heads = n_heads
     self.d_head = d_model // n_heads
@@ -39,13 +36,13 @@ def __init__(
     self.dropout = nn.Dropout(dropout)
 
 def _split_heads(self, x: torch.Tensor) -> torch.Tensor:
-        """Split heads and reshape: (B, L, D) -> (B, H, L, D//H)""""
+        """Split heads and reshape: (B, L, D) -> (B, H, L, D//H)""
         B, L, D = x.shape
         x = x.view(B, L, self.n_heads, self.d_head)
     return x.transpose(1, 2)
 
 def _merge_heads(self, x: torch.Tensor) -> torch.Tensor:
-        """Merge heads: (B, H, L, D//H) -> (B, L, D)""""
+        """Merge heads: (B, H, L, D//H) -> (B, L, D)
         B, H, L, D = x.shape
         x = x.transpose(1, 2)
     return x.reshape(B, L, H * D)
@@ -77,7 +74,7 @@ def forward(
     mask_block = (
     mask[:, i:j_end, :] if mask.dim() == 3 else mask[i:j_end, :]
     )
-    scores = scores.masked_fill(~mask_block.unsqueeze(1), float("-inf"))""
+    scores = scores.masked_fill(~mask_block.unsqueeze(1), float("-inf"))
 
     attn_weights = F.softmax(scores, dim=-1)
     attn_weights = self.dropout(attn_weights)
