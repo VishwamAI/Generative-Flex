@@ -1,8 +1,12 @@
-"""Centralized configuration management for Generative-Flex."""
+"""Script to fix config.py syntax and formatting issues."""
+import os
+import black
 
-from typing import Optio
 
-nal, Union, List, Dict, Any, Tuple
+def fix_config_file():
+    """Fix the config.py file with proper syntax and formatting."""
+    config_content = '''"""Centralized configuration management for Generative-Flex."""
+from typing import Optional, Union, List, Dict, Any, Tuple
 from dataclasses import dataclass, field
 from pathlib import Path
 import json
@@ -121,18 +125,15 @@ class Config:
             json.dump(config_dict, f, indent=2)
 
     @classmethod
-    def get_config(
-        cls, model_type: str = "language", config_path: Optional[str] = None
-    ) -> "Config":
+    def get_config(cls, model_type: str = "language", config_path: Optional[str] = None) -> "Config":
         """Get configuration for a specific model type."""
         if config_path and Path(config_path).exists():
             return cls.from_json(config_path)
 
+
         valid_model_types = {"language", "image", "audio", "video"}
         if model_type not in valid_model_types:
-            raise ValueError(
-                f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
-            )
+            raise ValueError(f"Invalid model type: {model_type}. Must be one of {valid_model_types}")
 
         # Default configurations for different model types
         model_config = ModelConfig(model_type=model_type)
@@ -148,3 +149,31 @@ class Config:
             model_config.video_patch_size = (2, 16, 16)
 
         return cls(model=model_config, training=TrainingConfig())
+'''
+
+    # Write the content to config.py
+    config_path = "src/config/config.py"
+    with open(config_path, "w") as f:
+        f.write(config_content)
+
+    # Format with black
+    mode = black.Mode(
+        target_versions={black.TargetVersion.PY312},
+        line_length=100,
+        string_normalization=True,
+        is_pyi=False,
+    )
+
+    try:
+        with open(config_path, "rb") as f:
+            content = f.read()
+        formatted = black.format_file_contents(content, fast=False, mode=mode)
+        with open(config_path, "w") as f:
+            f.write(formatted)
+        print(f"Successfully formatted {config_path}")
+    except Exception as e:
+        print(f"Error formatting {config_path}: {e}")
+
+
+if __name__ == "__main__":
+    fix_config_file()

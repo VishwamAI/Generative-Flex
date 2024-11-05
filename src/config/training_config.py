@@ -1,43 +1,55 @@
-from dataclasses import dataclass
-from typing import List, Optional, Dict
+"""Training configuration for Generative-Flex."""
+
+from typing import List, Optio
+
+nal, Dict, Union, Any
+from dataclasses import dataclass, field
+
 
 @dataclass
-class     TrainingConfig: model_name: str= "facebook/opt-125m"
-        subjects: List[str]= None
-        batch_size: int= 4
-        learning_rate: float= 2e-5
-        num_epochs: int= 5
-        gradient_accumulation_steps: int= 8
-        max_grad_norm: float= 1.0
-        warmup_steps: int= 100
-        device: str= "cuda"  # Explicitly set device
-        fp16: bool= True  # Enable mixed precision
+class TrainingConfig:
+    """Configuration for model training."""
+
+    # Model configuration
+    model_name: str = field(default="facebook/opt-125m")
+    subjects: List[str] = field(default_factory=list)
+    batch_size: int = field(default=4)
+    learning_rate: float = field(default=2e-5)
+    num_epochs: int = field(default=5)
+    gradient_accumulation_steps: int = field(default=8)
+    max_grad_norm: float = field(default=1.0)
+    warmup_steps: int = field(default=100)
+    device: str = field(default="cuda")
+    fp16: bool = field(default=True)
 
     # Model architecture parameters
-        hidden_size: int= 256
-        num_attention_heads: int= 8
-        num_hidden_layers: int= 6
-        intermediate_size: int= 1024
-        max_position_embeddings: int= 512
-        num_experts: int= 4
-        expert_capacity_factor: float= 1.25
+    hidden_size: int = field(default=256)
+    num_attention_heads: int = field(default=8)
+    num_hidden_layers: int = field(default=6)
+    intermediate_size: int = field(default=1024)
+    max_position_embeddings: int = field(default=512)
+    num_experts: int = field(default=4)
+    expert_capacity_factor: float = field(default=1.25)
 
     # Training optimization parameters
-        weight_decay: float= 0.01
-        warmup_ratio: float= 0.1
-        eval_steps: int= 100
-        save_steps: int= 200
-        logging_steps: int= 20
+    weight_decay: float = field(default=0.01)
+    warmup_ratio: float = field(default=0.1)
+    eval_steps: int = field(default=100)
+    save_steps: int = field(default=200)
+    logging_steps: int = field(default=20)
 
-        generation_config: Dict= None
+    # Generation configuration
+    generation_config: Optional[Dict[str, Any]] = field(default=None)
 
-    def def __post_init__(self):
+    def __post_init__(self):
+        """Initialize default values after dataclass initialization."""
+        if not self.subjects:
+            self.subjects = ["Math", "Computer_Science"]
 
-            self._subjects = ["Math", "Computer_Science"]
-
-            if self.generation_config is     None: self._generation_config= {
-                    "do_sample": True,
-                    "temperature": 0.7,
-                    "top_p": 0.9,
-                    "max_length": 512,
-                }
+        if self.generation_config is None:
+            self.generation_config = {
+                "do_sample": True,
+                "temperature": 0.7,
+                "top_p": 0.9,
+                "max_length": 512,
+            }

@@ -1,4 +1,5 @@
 """Format Python files individually with black and fix specific issues."""
+
 import subprocess
 import sys
 from pathlib import Path
@@ -14,63 +15,65 @@ CORE_FILES = [
     "tests/test_features.py",
     "src/models/apple_optimizations.py",
     "src/data/mmmu_dataloader.py",
-    "src/config/config.py"
+    "src/config/config.py",
 ]
+
 
 def fix_dataclass_syntax(content: str) -> str:
     """Fix dataclass syntax issues."""
     # Fix dataclass field definitions
-    lines = content.split('\n')
+    lines = content.split("\n")
     fixed_lines = []
     in_dataclass = False
 
     for line in lines:
-        if '@dataclass' in line:
+        if "@dataclass" in line:
             in_dataclass = True
             fixed_lines.append(line)
             continue
 
-        if in_dataclass and ':' in line and '=' in line and 'field(' in line:
+        if in_dataclass and ":" in line and "=" in line and "field(" in line:
             # Fix field definition
-            parts = line.split(':', 1)
+            parts = line.split(":", 1)
             if len(parts) == 2:
                 name = parts[0].strip()
                 type_and_default = parts[1].strip()
 
                 # Clean up type hint and default value
-                type_hint = type_and_default.split('=')[0].strip()
-                default_value = type_and_default.split('=')[1].strip()
+                type_hint = type_and_default.split("=")[0].strip()
+                default_value = type_and_default.split("=")[1].strip()
 
                 # Format properly
                 fixed_lines.append(f"    {name}: {type_hint} = {default_value}")
                 continue
 
-        if line.strip() and not line.strip().startswith(('class', 'def')):
+        if line.strip() and not line.strip().startswith(("class", "def")):
             in_dataclass = False
 
         fixed_lines.append(line)
 
-    return '\n'.join(fixed_lines)
+    return "\n".join(fixed_lines)
+
 
 def fix_function_syntax(content: str) -> str:
     """Fix function definition syntax issues."""
-    lines = content.split('\n')
+    lines = content.split("\n")
     fixed_lines = []
 
     for line in lines:
-        if line.strip().startswith('def '):
+        if line.strip().startswith("def "):
             # Fix function definition
-            parts = line.split('(', 1)
+            parts = line.split("(", 1)
             if len(parts) == 2:
                 func_name = parts[0]
-                params = parts[1].rstrip('):')
+                params = parts[1].rstrip("):")
 
                 # Clean up parameters
                 param_list = []
-                for param in params.split(','):
+                for param in params.split(","):
                     param = param.strip()
-                    if ':' in param:
-                        name, type_hint = param.split(':', 1)
+                    if ":" in param:
+                        name, type_hint = param.split(":", 1)
                         param_list.append(f"{name.strip()}: {type_hint.strip()}")
                     else:
                         param_list.append(param)
@@ -81,23 +84,24 @@ def fix_function_syntax(content: str) -> str:
 
         fixed_lines.append(line)
 
-    return '\n'.join(fixed_lines)
+    return "\n".join(fixed_lines)
+
 
 def format_file(file_path: str) -> Tuple[bool, str]:
     """Format a single file with black and fix any issues."""
     try:
         # First try to format with black
         result = subprocess.run(
-            ['python3', '-m', 'black', '--target-version', 'py312', file_path],
+            ["python3", "-m", "black", "--target-version", "py312", file_path],
             capture_output=True,
-            text=True
+            text=True,
         )
 
         if result.returncode == 0:
             return True, f"Successfully formatted {file_path}"
 
         # If black fails, try to fix the file
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
 
         # Apply fixes
@@ -105,14 +109,14 @@ def format_file(file_path: str) -> Tuple[bool, str]:
         content = fix_function_syntax(content)
 
         # Write fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, "w", encoding="utf-8") as f:
             f.write(content)
 
         # Try black again
         result = subprocess.run(
-            ['python3', '-m', 'black', '--target-version', 'py312', file_path],
+            ["python3", "-m", "black", "--target-version", "py312", file_path],
             capture_output=True,
-            text=True
+            text=True,
         )
 
         if result.returncode == 0:
@@ -122,6 +126,7 @@ def format_file(file_path: str) -> Tuple[bool, str]:
 
     except Exception as e:
         return False, f"Error processing {file_path}: {str(e)}"
+
 
 def main() -> None:
     """Format core files individually."""
@@ -139,8 +144,10 @@ def main() -> None:
             else:
                 failed += 1
 
+    print(
+        f"\nFormatting complete: {successful} files successful, {failed} files failed"
+    )
 
-    print(f"\nFormatting complete: {successful} files successful, {failed} files failed")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
