@@ -2,6 +2,16 @@
 
 import pytest
 
+
+import jax
+import jax.numpy as jnp
+from typing import Dict, List, Optional, Tuple, Any
+
+# Test configuration
+batch_size = 4
+seq_length = 16
+hidden_size = 32
+
 from src.models.enhanced_transformer import EnhancedConfig, EnhancedTransformer
 from src.models.knowledge_retrieval import (
     KnowledgeConfig,
@@ -9,6 +19,16 @@ from src.models.knowledge_retrieval import (
 )
 from src.models.text_to_anything import GenerationConfig, TextToAnything
 from src.models.apple_optimizations import AppleOptimizedTransformer
+
+
+import jax
+import jax.numpy as jnp
+from typing import Dict, List, Optional, Tuple, Any
+
+# Test configuration
+batch_size = 4
+seq_length = 16
+hidden_size = 32
 
 
 @pytest.fixture

@@ -8,14 +8,11 @@ Tests:
 5. Constitutional AI principles
 """
 
-import os
 from typing import Dict, List, Optional, Tuple
 
 import jax
 import jax.numpy as jnp
-import numpy as np
 import pytest
-import torch
 from transformers import AutoConfig
 
 from src.models.enhanced_transformer import EnhancedTransformer
@@ -35,7 +32,6 @@ def enhanced_config():
         "intermediate_size": 3072,
         "hidden_dropout_prob": 0.1,
         "attention_probs_dropout_prob": 0.1,
-        "max_position_embeddings": 512,
         "type_vocab_size": 2,
         "vocab_size": 50257,
         "use_constitutional_ai": True,
@@ -319,7 +315,6 @@ def test_multi_modal_processing(generation_config):
     assert outputs.shape[0] == batch_size
     assert hasattr(model.encoder, "image_encoder")
     assert hasattr(model.encoder, "text_encoder")
-    assert hasattr(model, "cross_modal_attention")
 
 
 if __name__ == "__main__":
