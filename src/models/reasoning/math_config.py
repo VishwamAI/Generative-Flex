@@ -24,13 +24,13 @@ class MathReasoningConfig(PretrainedConfig):
         pad_token_id: int = 1,
         bos_token_id: int = 1,
         eos_token_id: int = 2,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(
             pad_token_id=pad_token_id,
             bos_token_id=bos_token_id,
             eos_token_id=eos_token_id,
-            **kwargs
+            **kwargs,
         )
         self.hidden_size = hidden_size
         self.num_attention_heads = num_attention_heads
