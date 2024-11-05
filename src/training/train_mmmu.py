@@ -1,6 +1,7 @@
 """
 Training script for MMMU dataset with enhanced model architecture.
 """
+
 import gc
 import logging
 import os
@@ -28,16 +29,16 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler("logs/training.log"),
-        logging.StreamHandler(sys.stdout)
-]
+        logging.StreamHandler(sys.stdout),
+    ],
 )
 logger = logging.getLogger(__name__)
 # Default subjects for MMMU dataset
 DEFAULT_SUBJECTS = ["Math", "Computer_Science"]
+
+
 def log_metrics(
-    metrics: Dict[str, float],
-    step: Optional[int] = None,
-    epoch: Optional[int] = None
+    metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] = None
 ) -> None:
     """Log training metrics to console and file"""
     metric_str = " - ".join(
@@ -52,12 +53,14 @@ def log_metrics(
         metric_str = f"Step {step} - {metric_str}"
     logger.info(metric_str)
 
+
 # Define MMMU subjects and splits
 MMMU_SUBJECTS = ["Math", "Computer_Science"]  # Exact subject names from MMMU
 MMMU_SPLITS = ["dev", "validation", "test"]  # Available splits in MMMU
 
+
 class EnhancedMMUModel(PreTrainedModel):
-    supports_gradient_checkpointing = True # Enable gradient checkpointing support
+    supports_gradient_checkpointing = True  # Enable gradient checkpointing support
 
     def __init__(self, config):
         super().__init__(config)
@@ -65,8 +68,12 @@ class EnhancedMMUModel(PreTrainedModel):
         self.config = config
 
         # Set model dimensions for mathematical reasoning while maintaining efficiency
-        config.hidden_size = min(config.hidden_size, 256)  # Reduced for memory efficiency
-        config.num_attention_heads = min(config.num_attention_heads, 4)  # Fewer heads for efficiency
+        config.hidden_size = min(
+            config.hidden_size, 256
+        )  # Reduced for memory efficiency
+        config.num_attention_heads = min(
+            config.num_attention_heads, 4
+        )  # Fewer heads for efficiency
         config.num_hidden_layers = min(config.num_hidden_layers, 3)  # Reduced layers
 
         # Base transformer with enhanced attention
@@ -75,7 +82,7 @@ class EnhancedMMUModel(PreTrainedModel):
             num_attention_heads=config.num_attention_heads,
             num_hidden_layers=config.num_hidden_layers,
             max_position_embeddings=config.max_position_embeddings,
-            vocab_size=config.vocab_size
+            vocab_size=config.vocab_size,
         )
 
         # Multimodal processing with reduced size
@@ -105,7 +112,9 @@ class EnhancedMMUModel(PreTrainedModel):
             logger.info(f"Processing image chunk 0/{batch_size}, shape: {images.shape}")
 
             # Ensure images are in the correct format
-            if len(images.shape) != 5:  # [batch_size, num_images, channels, height, width]
+            if (
+                len(images.shape) != 5
+            ):  # [batch_size, num_images, channels, height, width]
                 raise ValueError(f"Expected 5D input tensor, got shape {images.shape}")
 
             # Process images through the image processor
@@ -122,8 +131,7 @@ class EnhancedMMUModel(PreTrainedModel):
         try:
             # Process text inputs
             transformer_outputs = self.transformer(
-                input_ids=batch["input_ids"],
-                attention_mask=batch["attention_mask"]
+                input_ids=batch["input_ids"], attention_mask=batch["attention_mask"]
             )
             hidden_states = transformer_outputs["last_hidden_state"]
 
@@ -131,28 +139,24 @@ class EnhancedMMUModel(PreTrainedModel):
             if "images" in batch:
                 image_features = self.process_images(batch["images"])
                 # Combine text and image features
-                combined_features = torch.cat(
-                    [hidden_states, image_features],
-                    dim=-1
-                )
+                combined_features = torch.cat([hidden_states, image_features], dim=-1)
                 fused_features = self.fusion(combined_features)
             else:
                 fused_features = hidden_states
 
             # Get math reasoning outputs
-            math_outputs = self.math_head(
-                fused_features,
-                batch["attention_mask"]
-            )
+            math_outputs = self.math_head(fused_features, batch["attention_mask"])
 
             # Calculate losses
             if "labels" in batch:
                 loss_fct = nn.CrossEntropyLoss()
                 task_loss = loss_fct(
                     math_outputs["logits"].view(-1, self.num_labels),
-                    batch["labels"].view(-1)
+                    batch["labels"].view(-1),
                 )
-                moe_loss = math_outputs.get("moe_loss", torch.tensor(0.0, device=task_loss.device))
+                moe_loss = math_outputs.get(
+                    "moe_loss", torch.tensor(0.0, device=task_loss.device)
+                )
                 total_loss = task_loss + 0.01 * moe_loss
                 return total_loss
             return torch.tensor(0.0, requires_grad=True)
@@ -174,30 +178,39 @@ class EnhancedMMUModel(PreTrainedModel):
                 self.multimodal.gradient_checkpointing_enable(enable)
                 if hasattr(self.math_head, "gradient_checkpointing_enable"):
                     self.math_head.gradient_checkpointing_enable(enable)
+
                     def forward(
                         self,
                         input_ids: torch.Tensor,
                         attention_mask: torch.Tensor,
                         images: Optional[torch.Tensor] = None,
-                        labels: Optional[torch.Tensor] = None
+                        labels: Optional[torch.Tensor] = None,
                     ):
                         """Forward pass with proper error handling and memory management."""
                         try:
                             # Get batch size from input_ids
-                            batch_size = input_ids.size(0) if input_ids is not None else 0
-                            chunk_size = 1  # Process one image at a time if memory is limited
+                            batch_size = (
+                                input_ids.size(0) if input_ids is not None else 0
+                            )
+                            chunk_size = (
+                                1  # Process one image at a time if memory is limited
+                            )
                             # Process images if provided
                             if images is not None:
-                                logger.info(f"Starting image processing with batch size {batch_size}")
+                                logger.info(
+                                    f"Starting image processing with batch size {batch_size}"
+                                )
                                 try:
                                     # Try processing all images at once
                                     processed_images = self.process_images(images)
                                 except RuntimeError as e:
-                                    logger.warning(f"Memory error in batch processing: {str(e)}")
+                                    logger.warning(
+                                        f"Memory error in batch processing: {str(e)}"
+                                    )
                                     # Fall back to chunk processing
                                     processed_chunks = []
                                     for i in range(0, batch_size, chunk_size):
-                                        chunk = images[i: i + chunk_size]
+                                        chunk = images[i : i + chunk_size]
                                         logger.info(
                                             f"Processing image chunk {i}/{batch_size}, shape: {chunk.shape}"
                                         )
@@ -206,18 +219,22 @@ class EnhancedMMUModel(PreTrainedModel):
                                             processed_chunks.append(processed_chunk)
                                             torch.cuda.empty_cache()
                                         except RuntimeError as e:
-                                            logger.error(f"Error processing chunk {i}: {str(e)}")
+                                            logger.error(
+                                                f"Error processing chunk {i}: {str(e)}"
+                                            )
                                             return None
                                         else:
                                             gc.collect()
-                                            processed_images = torch.cat(processed_chunks, dim=0)
+                                            processed_images = torch.cat(
+                                                processed_chunks, dim=0
+                                            )
                             else:
                                 processed_images = None
                             # Get embeddings from transformer
                             hidden_states = self.transformer(
                                 input_ids=input_ids,
                                 attention_mask=attention_mask,
-                                images=processed_images
+                                images=processed_images,
                             )
                             # Clear memory
                             if torch.cuda.is_available():
@@ -228,13 +245,17 @@ class EnhancedMMUModel(PreTrainedModel):
                             math_outputs = self.math_head(
                                 hidden_states=hidden_states,
                                 attention_mask=attention_mask,
-                                labels=labels
+                                labels=labels,
                             )
                             # Combine outputs
                             result = {
                                 "logits": math_outputs["logits"],
-                                "router_entropy": math_outputs.get("router_entropy", 0.0),
-                                "expert_weights": math_outputs.get("expert_weights", None),
+                                "router_entropy": math_outputs.get(
+                                    "router_entropy", 0.0
+                                ),
+                                "expert_weights": math_outputs.get(
+                                    "expert_weights", None
+                                ),
                                 "last_hidden_state": hidden_states,
                                 "loss": None,  # Initialize loss as None
                             }
@@ -245,8 +266,10 @@ class EnhancedMMUModel(PreTrainedModel):
                             logger.error(f"Error in forward pass: {str(e)}")
                             raise
 
+
 class MMUTrainer:
     """Trainer class for MMMU model."""
+
     def __init__(
         self,
         model: nn.Module,
@@ -262,7 +285,7 @@ class MMUTrainer:
         generation_config: Optional[Dict] = None,
         output_dir: str = "outputs",
         config=None,
-        tokenizer=None
+        tokenizer=None,
     ):
         """Initialize the MMU trainer with Accelerate support."""
         try:
@@ -285,7 +308,7 @@ class MMUTrainer:
                 device_placement=True,
                 mixed_precision="fp16" if torch.cuda.is_available() else None,
                 gradient_accumulation_steps=gradient_accumulation_steps,
-                project_dir=output_dir
+                project_dir=output_dir,
             )
 
             # Set up model components with proper config
@@ -310,20 +333,19 @@ class MMUTrainer:
                         self.model.parameters(),
                         lr=learning_rate,
                         weight_decay=0.05,
-                        eps=1e-8
+                        eps=1e-8,
                     )
 
                 # Create learning rate scheduler if not provided
                 if scheduler is None:
-                    num_training_steps = 1000  # Default value, should be updated with dataloader length
-                    num_warmup_steps = min(
-                        warmup_steps,
-                        int(num_training_steps * 0.15)
+                    num_training_steps = (
+                        1000  # Default value, should be updated with dataloader length
                     )
+                    num_warmup_steps = min(warmup_steps, int(num_training_steps * 0.15))
                     self.scheduler = get_linear_schedule_with_warmup(
                         self.optimizer,
                         num_warmup_steps=num_warmup_steps,
-                        num_training_steps=num_training_steps
+                        num_training_steps=num_training_steps,
                     )
 
             # Move model to device
@@ -370,7 +392,7 @@ class MMUTrainer:
                                 logits = outputs["logits"]
                                 loss = loss_fct(
                                     logits.view(-1, self.model.num_labels),
-                                    batch["labels"].view(-1)
+                                    batch["labels"].view(-1),
                                 )
                         else:
                             loss = outputs.loss if hasattr(outputs, "loss") else None
@@ -386,8 +408,7 @@ class MMUTrainer:
 
                         if self.accelerator.sync_gradients:
                             self.accelerator.clip_grad_norm_(
-                                self.model.parameters(),
-                                self.max_grad_norm
+                                self.model.parameters(), self.max_grad_norm
                             )
 
                         self.optimizer.step()
@@ -403,7 +424,7 @@ class MMUTrainer:
                             current_lr = self.optimizer.param_groups[0]["lr"]
                             metrics = {
                                 "loss": loss.item() * self.gradient_accumulation_steps,
-                                "learning_rate": current_lr
+                                "learning_rate": current_lr,
                             }
 
                             if (
@@ -425,7 +446,9 @@ class MMUTrainer:
 
             # Skip epoch summary if no batches were processed
             if num_batches == 0:
-                logger.warning(f"Epoch {epoch} had no valid batches, skipping evaluation")
+                logger.warning(
+                    f"Epoch {epoch} had no valid batches, skipping evaluation"
+                )
                 continue
 
             # Compute average loss for epoch
@@ -476,7 +499,7 @@ class MMUTrainer:
                             input_ids=batch["input_ids"],
                             attention_mask=batch["attention_mask"],
                             images=batch.get("images", None),
-                            labels=batch.get("labels", None)
+                            labels=batch.get("labels", None),
                         )
 
                         # Calculate metrics
@@ -497,17 +520,11 @@ class MMUTrainer:
                 # Calculate final metrics
                 avg_loss = total_loss / len(eval_dataloader)
                 accuracy = total_correct / total_samples
-                return {
-                    "val_loss": avg_loss,
-                    "math_accuracy": accuracy
-                }
+                return {"val_loss": avg_loss, "math_accuracy": accuracy}
 
         except Exception as e:
             logger.error(f"Error during evaluation: {str(e)}")
-            return {
-                "val_loss": float("inf"),
-                "math_accuracy": 0.0
-            }
+            return {"val_loss": float("inf"), "math_accuracy": 0.0}
 
 
 if __name__ == "__main__":
@@ -520,7 +537,7 @@ if __name__ == "__main__":
             learning_rate=1e-5,  # Lower learning rate for stability
             num_epochs=5,
             gradient_accumulation_steps=8,  # More gradient accumulation for larger effective batch size
-            output_dir="outputs"
+            output_dir="outputs",
         )
 
         # Set device

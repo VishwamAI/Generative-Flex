@@ -56,9 +56,7 @@ class MMUDataset(Dataset):
             try:
                 # Load dataset using HuggingFace datasets
                 dataset = load_dataset("MMMU/MMMU", subject, split=split)
-                logger.info(
-                    f"Loading {subject} dataset with {len(dataset)} examples"
-                )
+                logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
 
                 # Pre-process examples to ensure tensor conversion
                 processed_examples = []
@@ -94,8 +92,7 @@ class MMUDataset(Dataset):
                                 "attention_mask"
                             ].squeeze(0)
                             processed_example["labels"] = torch.tensor(
-                                ord(example["answer"]) - ord("A"),
-                                dtype=torch.long
+                                ord(example["answer"]) - ord("A"), dtype=torch.long
                             )
 
                         # Process images if available
@@ -122,9 +119,7 @@ class MMUDataset(Dataset):
                         processed_examples.append(processed_example)
 
                     except Exception as e:
-                        logger.error(
-                            f"Error processing example in {subject}: {str(e)}"
-                        )
+                        logger.error(f"Error processing example in {subject}: {str(e)}")
                         continue
 
                 self.datasets.append(processed_examples)
@@ -180,10 +175,7 @@ class MMUDataset(Dataset):
             # Return a default example in case of error
             return {
                 "input_ids": torch.zeros(self.max_length, dtype=torch.long),
-                "attention_mask": torch.zeros(
-                    self.max_length,
-                    dtype=torch.long
-                ),
+                "attention_mask": torch.zeros(self.max_length, dtype=torch.long),
                 "labels": torch.tensor(0, dtype=torch.long),
                 "images": torch.zeros(7, 3, 224, 224),
                 "metadata": {},

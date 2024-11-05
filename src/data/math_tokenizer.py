@@ -56,8 +56,7 @@ class MathTokenizer:
             special_tokens = special_tokens[:available_tokens]
             # Update math_symbols to only include tokens we can add
             self.math_symbols = {
-                k: v for k, v in self.math_symbols.items()
-                if v in special_tokens
+                k: v for k, v in self.math_symbols.items() if v in special_tokens
             }
 
         # Add special tokens to base tokenizer

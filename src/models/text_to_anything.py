@@ -101,14 +101,22 @@ class GenerationConfig:
     # Optimization settings
     use_int4_quantization: bool = struct_field(default=True)
     use_kv_cache: bool = struct_field(default=True)
-    use_privacy_preserving: bool = struct_field(default=True)  # Added for privacy features
+    use_privacy_preserving: bool = struct_field(
+        default=True
+    )  # Added for privacy features
     block_size: int = struct_field(default=32)  # Added for quantization support
     num_key_value_heads: int = struct_field(default=8)  # Added for KV cache
     max_cache_size: int = struct_field(default=2048)  # Added for KV cache
     use_metal: bool = struct_field(default=True)  # Added for Apple Metal support
-    use_neural_engine: bool = struct_field(default=True)  # Added for Neural Engine support
-    noise_multiplier: float = struct_field(default=1.0)  # Added for privacy-preserving noise
-    l2_norm_clip: float = struct_field(default=1.0)  # Added for privacy gradient clipping
+    use_neural_engine: bool = struct_field(
+        default=True
+    )  # Added for Neural Engine support
+    noise_multiplier: float = struct_field(
+        default=1.0
+    )  # Added for privacy-preserving noise
+    l2_norm_clip: float = struct_field(
+        default=1.0
+    )  # Added for privacy gradient clipping
     # Cache settings
     cache_dtype: str = struct_field(default="float16")
     cache_size_multiplier: float = struct_field(default=1.5)
@@ -128,19 +136,13 @@ class ModalityEncoder(nn.Module):
         )
         self.text_encoder = nn.Dense(self.config.hidden_size)
         self.image_encoder = nn.Conv(
-            features=self.config.hidden_size,
-            kernel_size=(3, 3),
-            padding="SAME"
+            features=self.config.hidden_size, kernel_size=(3, 3), padding="SAME"
         )
         self.audio_encoder = nn.Conv(
-            features=self.config.hidden_size,
-            kernel_size=(7,),
-            padding="SAME"
+            features=self.config.hidden_size, kernel_size=(7,), padding="SAME"
         )
         self.video_encoder = nn.Conv(
-            features=self.config.hidden_size,
-            kernel_size=(3, 3, 3),
-            padding="SAME"
+            features=self.config.hidden_size, kernel_size=(3, 3, 3), padding="SAME"
         )
         self.code_encoder = nn.Dense(self.config.hidden_size)
 
@@ -150,7 +152,7 @@ class ModalityEncoder(nn.Module):
         """Adjust sequence length of input tensor through padding or truncation."""
         curr_length = tensor.shape[1]
         if curr_length > target_length:
-            return tensor[:,:target_length,:]
+            return tensor[:, :target_length, :]
         elif curr_length < target_length:
             padding = jnp.zeros(
                 (tensor.shape[0], target_length - curr_length, tensor.shape[2])
@@ -188,9 +190,7 @@ class ModalityEncoder(nn.Module):
                 embedded = self.embedding(
                     jnp.array([self.tokenizer.encode(t) for t in text_input])
                 )
-                embedded = self._adjust_sequence_length(
-                    embedded,
-                    sequence_length)
+                embedded = self._adjust_sequence_length(embedded, sequence_length)
                 encodings["text"] = self.text_encoder(embedded)
 
             # Process image input
@@ -206,9 +206,7 @@ class ModalityEncoder(nn.Module):
                     img_flat = img.reshape(
                         curr_batch_size, height * width, img.shape[-1]
                     )
-                    img_flat = self._adjust_sequence_length(
-                        img_flat,
-                        sequence_length)
+                    img_flat = self._adjust_sequence_length(img_flat, sequence_length)
                     encodings["image"] = self.image_encoder(img_flat)
 
             # Process audio input
@@ -219,10 +217,7 @@ class ModalityEncoder(nn.Module):
                     if batch_size is None:
                         batch_size = curr_batch_size
                     batch_size = curr_batch_size
-                    audio_flat = audio.reshape(
-                        curr_batch_size,
-                        -1,
-                        audio.shape[-1])
+                    audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
                     audio_flat = self._adjust_sequence_length(
                         audio_flat, sequence_length
                     )
@@ -231,7 +226,9 @@ class ModalityEncoder(nn.Module):
             # Process video input
             if "video" in inputs:
                 video = inputs["video"]
-                if len(video.shape) == 5:  # (batch_size, frames, height, width, channels)
+                if (
+                    len(video.shape) == 5
+                ):  # (batch_size, frames, height, width, channels)
                     curr_batch_size = video.shape[0]
                     if batch_size is None:
                         batch_size = curr_batch_size
@@ -257,9 +254,7 @@ class ModalityEncoder(nn.Module):
                 embedded = self.embedding(
                     jnp.array([self.tokenizer.encode(c) for c in code_input])
                 )
-                embedded = self._adjust_sequence_length(
-                    embedded,
-                    sequence_length)
+                embedded = self._adjust_sequence_length(embedded, sequence_length)
                 encodings["code"] = self.code_encoder(embedded)
 
         if not encodings:
@@ -401,7 +396,7 @@ class TextToAnything(nn.Module):
         if isinstance(inputs, str):
             tokens = self.tokenizer.encode(inputs)
             if len(tokens.shape) == 1:
-                tokens = tokens[None,:]
+                tokens = tokens[None, :]
             return tokens
         elif isinstance(inputs, dict):
             return self.encoder(inputs, training=training)
@@ -443,7 +438,7 @@ class TextToAnything(nn.Module):
 
         # Generate output in target modality
         output = self.decoder(
-encoded, target_modality=target_modality, context=context, training=training
+            encoded, target_modality=target_modality, context=context, training=training
         )
 
         # Prepare metadata

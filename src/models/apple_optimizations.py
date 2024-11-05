@@ -67,10 +67,7 @@ class BlockWiseQuantization(nn.Module):
         # Initialize state variable for original shape
         self.state = self.variable("state", "shape", lambda: None)
 
-    def quantize(
-        self,
-        x: jnp.ndarray
-    ) -> Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
+    def quantize(self, x: jnp.ndarray) -> Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
         """Quantize input tensor to int4 format."""
         # Store original shape in state
         self.state.value = x.shape
@@ -141,23 +138,13 @@ class StatefulKeyValueCache(nn.Module):
 
         # Use variables for stateful cache
         self.key_cache = self.variable(
-            "cache", "key", jnp.zeros, key_shape, dtype=getattr(
-                jnp,
-                self.dtype)
+            "cache", "key", jnp.zeros, key_shape, dtype=getattr(jnp, self.dtype)
         )
         self.value_cache = self.variable(
-            "cache", "value", jnp.zeros, value_shape, dtype=getattr(
-                jnp,
-                self.dtype)
+            "cache", "value", jnp.zeros, value_shape, dtype=getattr(jnp, self.dtype)
         )
         self.current_length = self.variable("cache", "length", lambda: 0)
-        self.valid_mask = self.variable(
-            "cache",
-            "mask",
-            jnp.zeros,
-            (max_length,
-            ),
-            bool)
+        self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length,), bool)
 
     def update(
         self, key: jnp.ndarray, value: jnp.ndarray, position: int = None
@@ -187,13 +174,12 @@ class StatefulKeyValueCache(nn.Module):
 
             # Update only the valid portion
             self.key_cache.value = self.key_cache.value.at[:, position:end_pos].set(
-                key[:,:actual_len]
+                key[:, :actual_len]
             )
             self.value_cache.value = self.value_cache.value.at[:, position:end_pos].set(
-                value[:,:actual_len]
+                value[:, :actual_len]
             )
-            self.valid_mask.value = self.valid_mask.value.at[
-                position:end_pos].set(True)
+            self.valid_mask.value = self.valid_mask.value.at[position:end_pos].set(True)
             self.current_length.value = end_pos
 
     def get(
@@ -211,11 +197,7 @@ class StatefulKeyValueCache(nn.Module):
         batch_size, seq_len, _ = key.shape
         key = key.reshape(batch_size, seq_len, self.num_heads, self.head_dim)
         key = jnp.transpose(key, (0, 2, 1, 3))
-        value = value.reshape(
-            batch_size,
-            seq_len,
-            self.num_heads,
-            self.head_dim)
+        value = value.reshape(batch_size, seq_len, self.num_heads, self.head_dim)
         value = jnp.transpose(value, (0, 2, 1, 3))
 
         return key, value
@@ -320,7 +302,7 @@ class FlexibleInputProcessor(nn.Module):
         # Create causal mask for decoder
         causal_mask = jnp.tril(jnp.ones((seq_length, seq_length)))
         attention_mask = (
-            attention_mask[:, None, None,:] * causal_mask[None, None,:,:]
+            attention_mask[:, None, None, :] * causal_mask[None, None, :, :]
         )
 
         return inputs + position_embeddings, attention_mask
@@ -339,7 +321,7 @@ class AppleOptimizedTransformer(nn.Module):
 
         # Initialize embedding layer
         self.embedding = nn.Embed(
-num_embeddings=self.config.vocab_size, features=self.config.hidden_size
+            num_embeddings=self.config.vocab_size, features=self.config.hidden_size
         )
 
         # Calculate attention dimensions
@@ -408,10 +390,8 @@ num_embeddings=self.config.vocab_size, features=self.config.hidden_size
 
         # Extract dimensions after embedding/projection
         batch_size = hidden_states.shape[0]
-        seq_length = min(
-            hidden_states.shape[1],
-            self.config.max_sequence_length)
-        hidden_states = hidden_states[:,:seq_length,:]
+        seq_length = min(hidden_states.shape[1], self.config.max_sequence_length)
+        hidden_states = hidden_states[:, :seq_length, :]
 
         # Apply layer norm
         hidden_states = self.layer_norm(hidden_states)
@@ -426,21 +406,9 @@ num_embeddings=self.config.vocab_size, features=self.config.hidden_size
         value = self.value_proj(hidden_states)
 
         # Reshape for attention heads with validated dimensions
-        query = query.reshape(
-            batch_size,
-            seq_length,
-            self.num_heads,
-            self.head_dim)
-        key = key.reshape(
-            batch_size,
-            seq_length,
-            self.num_heads,
-            self.head_dim)
-        value = value.reshape(
-            batch_size,
-            seq_length,
-            self.num_heads,
-            self.head_dim)
+        query = query.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
+        key = key.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
+        value = value.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
 
         # Transpose for attention computation
         query = jnp.transpose(
@@ -458,15 +426,13 @@ num_embeddings=self.config.vocab_size, features=self.config.hidden_size
             attention_mask = jnp.ones((batch_size, seq_length))
 
         # Expand attention mask for broadcasting
-        attention_mask = attention_mask[:, None, None,:
+        attention_mask = attention_mask[
+            :, None, None, :
         ]  # (batch_size, 1, 1, seq_length)
 
         # Compute attention scores with scaled dot product
         scale = jnp.sqrt(self.head_dim).astype(hidden_states.dtype)
-        attention_scores = jnp.matmul(
-            query,
-            jnp.transpose(key, (0, 1, 3, 2))
-        ) / scale
+        attention_scores = jnp.matmul(query, jnp.transpose(key, (0, 1, 3, 2))) / scale
 
         # Apply attention mask
         attention_scores = attention_scores + (1 - attention_mask) * -1e4
@@ -474,17 +440,12 @@ num_embeddings=self.config.vocab_size, features=self.config.hidden_size
 
         # Apply dropout during training
         if training:
-            attention_probs = self.dropout(
-                attention_probs,
-                deterministic=False)
+            attention_probs = self.dropout(attention_probs, deterministic=False)
 
         # Compute context layer
         context_layer = jnp.matmul(attention_probs, value)
         context_layer = jnp.transpose(context_layer, (0, 2, 1, 3))
-        context_layer = context_layer.reshape(
-            batch_size,
-            seq_length,
-            self.hidden_size)
+        context_layer = context_layer.reshape(batch_size, seq_length, self.hidden_size)
 
         # Project back to hidden size
         output = self.output_projection(context_layer)

@@ -1,20 +1,24 @@
 """Comprehensive tests for all model features."""
+
 import pytest
 import jax
 import jax.numpy as jnp
 from typing import Dict, List, Optional, Tuple, Any
 from src.models.enhanced_transformer import EnhancedTransformer
 from src.models.knowledge_retrieval import (
-KnowledgeIntegrator,
-KnowledgeAugmentedTransformer
+    KnowledgeIntegrator,
+    KnowledgeAugmentedTransformer,
 )
 from src.models.apple_optimizations import AppleOptimizedTransformer
 from src.models.text_to_anything import TextToAnything
 from src.config.config import EnhancedConfig
+
 # Test configuration
 batch_size = 2
 seq_length = 16
 hidden_size = 512  # Default size, will be overridden by configs when needed
+
+
 @pytest.fixture
 def config():
     """Fixture for enhanced transformer configuration."""
@@ -35,13 +39,15 @@ def config():
         "top_k": 50,
         "repetition_penalty": 1.2,
         "head_dim": 64,
-        "max_sequence_length": 2048
+        "max_sequence_length": 2048,
     }
+
 
 @pytest.fixture
 def knowledge_config():
     """Fixture for knowledge retrieval configuration."""
     return {"embedding_size": 768, "num_retrievers": 2}
+
 
 @pytest.fixture
 def text_to_anything_config():
@@ -52,8 +58,9 @@ def text_to_anything_config():
         "num_hidden_layers": 6,
         "vocab_size": 50257,
         "max_sequence_length": 2048,
-        "supported_modalities": ["text", "image", "audio", "video"]
+        "supported_modalities": ["text", "image", "audio", "video"],
     }
+
 
 def test_openai_features(config):
     """Test OpenAI-style features (GPT-4o, o1)."""
@@ -63,16 +70,10 @@ def test_openai_features(config):
     # Test input
     inputs = {
         "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0),
-            (batch_size, seq_length),
-            0,
-            config["vocab_size"]
+            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config["vocab_size"]
         ),
-        "position_ids": jnp.arange(seq_length)[None,:].repeat(
-            batch_size,
-            axis=0
-        ),
-        "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32)
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
     }
     # Initialize parameters
     params = model.init(jax.random.PRNGKey(0), inputs)
@@ -81,12 +82,10 @@ def test_openai_features(config):
     assert output.shape == (batch_size, seq_length, config["hidden_size"])
     # Test generation
     output_generated = model.apply(
-        params,
-        inputs,
-        method=model.generate,
-        max_new_tokens=5
+        params, inputs, method=model.generate, max_new_tokens=5
     )
     assert output_generated.shape[1] > seq_length
+
 
 def test_anthropic_features(config):
     """Test Anthropic-style features (Constitutional AI)."""
@@ -96,22 +95,17 @@ def test_anthropic_features(config):
     #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0),
-            (batch_size, seq_length),
-            0,
-            config.vocab_size
+            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
         ),
-        "position_ids": jnp.arange(seq_length)[None,:].repeat(
-            batch_size,
-            axis=0
-        ),
-        "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32)
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
     }
     # Initialize parameters
     params = model.init(jax.random.PRNGKey(0), inputs)
     # Test forward pass with constitutional layer
     output = model.apply(params, inputs, return_hidden=True)
     assert output.shape == (batch_size, seq_length, config.hidden_size)
+
 
 def test_meta_features(config):
     """Test Meta-style features (Flash Attention)."""
@@ -121,22 +115,17 @@ def test_meta_features(config):
     #     seq_length = 16  # TODO: Remove or use this variable
     inputs = {
         "input_ids": jax.random.randint(
-            jax.random.PRNGKey(0),
-            (batch_size, seq_length),
-            0,
-            config.vocab_size
+            jax.random.PRNGKey(0), (batch_size, seq_length), 0, config.vocab_size
         ),
-        "position_ids": jnp.arange(seq_length)[None,:].repeat(
-            batch_size,
-            axis=0
-        ),
-        "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32)
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
+        "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
     }
     # Initialize parameters
     params = model.init(jax.random.PRNGKey(0), inputs)
     # Test forward pass with flash attention
     output = model.apply(params, inputs, return_hidden=True)
     assert output.shape == (batch_size, seq_length, config.hidden_size)
+
 
 def test_grok_features(knowledge_config):
     """Test Grok-style features (Real-time updates)."""
@@ -147,17 +136,14 @@ def test_grok_features(knowledge_config):
     inputs = {
         "text": jax.random.normal(
             jax.random.PRNGKey(0),
-            (batch_size, seq_length, knowledge_config["embedding_size"])
+            (batch_size, seq_length, knowledge_config["embedding_size"]),
         )
     }
     # Initialize parameters
     params = model.init(jax.random.PRNGKey(0), inputs)
     # Test forward pass with knowledge integration
     output = model.apply(params, inputs)
-    assert output.shape == (
-        batch_size,
-        seq_length,
-        knowledge_config["embedding_size"])
+    assert output.shape == (batch_size, seq_length, knowledge_config["embedding_size"])
     # Test real-time updates
     new_knowledge = {
         "text": jax.random.normal(
@@ -165,6 +151,7 @@ def test_grok_features(knowledge_config):
         )
     }
     model.apply(params, inputs, context=new_knowledge)
+
 
 def test_gemini_features(text_to_anything_config):
     """Test Gemini-style features (Multi-modal)."""
@@ -177,15 +164,12 @@ def test_gemini_features(text_to_anything_config):
         "text": jax.random.normal(
             jax.random.PRNGKey(0), (batch_size, seq_length, hidden_size)
         ),
-        "position_ids": jnp.arange(seq_length)[None,:].repeat(
-            batch_size,
-            axis=0
-        ),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
         "image": jax.random.normal(
             jax.random.PRNGKey(1),
             (batch_size, seq_length, hidden_size),  # Match text dimensions
-        )
+        ),
     }
     # Initialize parameters
     params = model.init(jax.random.PRNGKey(0), inputs, target_modality="text")
@@ -194,7 +178,9 @@ def test_gemini_features(text_to_anything_config):
     assert output.shape == (
         batch_size,
         seq_length,
-        text_to_anything_config["hidden_size"])
+        text_to_anything_config["hidden_size"],
+    )
+
 
 def test_apple_optimizations():
     """Test Apple-style optimizations."""
@@ -211,20 +197,16 @@ def test_apple_optimizations():
         dropout_rate=0.1,
         use_privacy_preserving=True,
         vocab_size=50257,
-        embedding_size=512
+        embedding_size=512,
     )
     # Create input dictionary with proper formatting
     inputs = {
         "attention_mask": jnp.ones((batch_size, seq_length)),
-        "position_ids": jnp.arange(seq_length)[None,:].repeat(
-            batch_size,
-            axis=0
-        ),
+        "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
         "hidden_states": jax.random.normal(
-            jax.random.PRNGKey(1),
-            (batch_size, seq_length, config.hidden_size)
-        )
+            jax.random.PRNGKey(1), (batch_size, seq_length, config.hidden_size)
+        ),
     }
     # Initialize model with configuration
     model = AppleOptimizedTransformer(config)
@@ -235,6 +217,7 @@ def test_apple_optimizations():
     # Test forward pass with quantization
     output = model.apply(params, inputs, return_hidden=True)
     assert output.shape == (batch_size, seq_length, config.hidden_size)
+
 
 def test_text_to_anything_generation(text_to_anything_config):
     """Test text-to-anything generation capabilities."""
@@ -249,17 +232,11 @@ def test_text_to_anything_generation(text_to_anything_config):
                 jax.random.PRNGKey(0),
                 (batch_size, seq_length),
                 0,
-                text_to_anything_config.vocab_size
+                text_to_anything_config.vocab_size,
             ),
-            "position_ids": jnp.arange(seq_length)[None,:],
-            "token_type_ids": jnp.zeros(
-                (batch_size, seq_length),
-                dtype=jnp.int32
-            ),
-            "attention_mask": jnp.ones(
-                (batch_size, seq_length),
-                dtype=jnp.int32
-            )
+            "position_ids": jnp.arange(seq_length)[None, :],
+            "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
+            "attention_mask": jnp.ones((batch_size, seq_length), dtype=jnp.int32),
         }
     }
     params = model.init(jax.random.PRNGKey(0), inputs, target_modality="text")
@@ -273,19 +250,12 @@ def test_text_to_anything_generation(text_to_anything_config):
             )
         elif modality == "audio":
             inputs["audio"] = jax.random.normal(
-                jax.random.PRNGKey(2),
-                (batch_size, seq_length, hidden_size)
+                jax.random.PRNGKey(2), (batch_size, seq_length, hidden_size)
             )
         elif modality == "video":
             inputs["video"] = jax.random.normal(
                 jax.random.PRNGKey(3),
-                (
-                    batch_size,
-                    8,
-                    32,
-                    32,
-                    3
-                ),  # (batch, frames, height, width, channels)
+                (batch_size, 8, 32, 32, 3),  # (batch, frames, height, width, channels)
             )
 
         output, metadata = model.apply(
@@ -293,7 +263,7 @@ def test_text_to_anything_generation(text_to_anything_config):
             inputs,
             method=model.generate,
             target_modality=modality,
-            max_length=seq_length
+            max_length=seq_length,
         )
 
         # Verify output shapes based on modality

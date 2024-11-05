@@ -6,6 +6,7 @@ Tests cover:
 4. Text-to-anything generation
 5. Constitutional AI principles
 """
+
 import jax
 import jax.numpy as jnp
 import pytest
@@ -13,6 +14,8 @@ from src.models.enhanced_transformer import EnhancedTransformer
 from src.models.knowledge_retrieval import KnowledgeIntegrator
 from src.models.apple_optimizations import AppleOptimizedTransformer
 from src.models.text_to_anything import TextToAnything, GenerationConfig
+
+
 @pytest.fixture
 def enhanced_config():
     """Fixture for enhanced transformer configuration."""
@@ -33,9 +36,10 @@ def enhanced_config():
         "top_k": 50,
         "repetition_penalty": 1.2,
         "head_dim": 64,
-        "max_sequence_length": 2048
+        "max_sequence_length": 2048,
     }
     return config
+
 
 @pytest.fixture
 def knowledge_config():
@@ -49,9 +53,10 @@ def knowledge_config():
         "cache_size": 10000,
         "similarity_threshold": 0.85,
         "update_frequency": 100,
-        "max_tokens_per_batch": 4096
+        "max_tokens_per_batch": 4096,
     }
     return config
+
 
 @pytest.fixture
 def optimization_config():
@@ -71,9 +76,10 @@ def optimization_config():
         "max_grad_norm": 1.0,
         "num_train_epochs": 3,
         "warmup_steps": 500,
-        "gradient_accumulation_steps": 1
+        "gradient_accumulation_steps": 1,
     }
     return config
+
 
 @pytest.fixture
 def generation_config():
@@ -83,8 +89,9 @@ def generation_config():
         num_attention_heads=12,
         num_hidden_layers=6,
         max_sequence_length=512,
-        vocab_size=50257
+        vocab_size=50257,
     )
+
 
 def test_enhanced_transformer(enhanced_config):
     """Test enhanced transformer with features from major models."""
@@ -111,14 +118,11 @@ def test_enhanced_transformer(enhanced_config):
     assert hasattr(model, "flash_attention")
     assert hasattr(model, "constitutional_layer")
     # Test generation capability
-    generated = model.apply(
-        params,
-        inputs,
-        method=model.generate,
-        max_length=32
-    )
+    generated = model.apply(params, inputs, method=model.generate, max_length=32)
     assert isinstance(generated, jnp.ndarray)
     assert generated.shape[1] <= 32  # Max length check
+
+
 def test_knowledge_retrieval(knowledge_config):
     """Test knowledge retrieval system."""
     # Set up test variables
@@ -142,6 +146,8 @@ def test_knowledge_retrieval(knowledge_config):
     # Test real-time update
     new_knowledge = jnp.ones((1, embedding_size))
     model.apply(params, new_knowledge, method=model.update_knowledge)
+
+
 def test_apple_optimizations(optimization_config):
     """Test Apple-style optimizations."""
     # Set up test variables
@@ -164,6 +170,8 @@ def test_apple_optimizations(optimization_config):
     # Test optimizations
     assert hasattr(model, "quantization")
     assert hasattr(model, "privacy_layer")
+
+
 def test_text_to_anything(generation_config):
     """Test text-to-anything generation."""
     # Set up test variables
@@ -172,11 +180,7 @@ def test_text_to_anything(generation_config):
     # Initialize model
     model = TextToAnything(generation_config)
     # Create sample inputs
-    inputs = jnp.ones((
-        batch_size,
-        sequence_length,
-        generation_config["hidden_size"]
-    ))
+    inputs = jnp.ones((batch_size, sequence_length, generation_config["hidden_size"]))
     attention_mask = jnp.ones((batch_size, sequence_length))
     # Initialize parameters
     key = jax.random.PRNGKey(0)
@@ -196,6 +200,8 @@ def test_text_to_anything(generation_config):
         params, inputs, attention_mask, method=model.generate_audio
     )
     assert isinstance(audio_output, jnp.ndarray)
+
+
 def test_constitutional_principles(generation_config):
     """Test Constitutional AI principles."""
     # Set up test variables
@@ -216,11 +222,13 @@ def test_constitutional_principles(generation_config):
         inputs,
         attention_mask,
         method=model.generate_text,
-        constitutional_mode=True
+        constitutional_mode=True,
     )
     # Verify outputs
     assert isinstance(outputs, jnp.ndarray)
     assert outputs.shape[0] == batch_size
+
+
 def test_real_time_integration(knowledge_config):
     """Test real-time data integration (Grok-1 style)."""
     # Initialize model
@@ -234,6 +242,8 @@ def test_real_time_integration(knowledge_config):
     model.apply(params, new_data)
     # Verify update mechanism
     assert hasattr(model, "update_knowledge")
+
+
 def test_multi_modal_processing(generation_config):
     """Test multi-modal processing (Gemini style)."""
     # Set up test variables
@@ -245,7 +255,7 @@ def test_multi_modal_processing(generation_config):
     # Create sample inputs for different modalities
     inputs = {
         "text": jnp.ones((batch_size, sequence_length, hidden_size)),
-        "image": jnp.ones((batch_size, 256, 256, 3))
+        "image": jnp.ones((batch_size, 256, 256, 3)),
     }
     attention_mask = jnp.ones((batch_size, sequence_length))
     # Initialize parameters
@@ -260,5 +270,7 @@ def test_multi_modal_processing(generation_config):
     assert outputs.shape[0] == batch_size
     assert hasattr(model.encoder, "image_encoder")
     assert hasattr(model.encoder, "text_encoder")
+
+
 if __name__ == "__main__":
     pytest.main([__file__])
