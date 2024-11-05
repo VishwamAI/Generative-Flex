@@ -69,18 +69,14 @@ class BlockWiseQuantization(nn.Module):
 
     def quantize(
         self,
-        x: jnp.ndarray) -> Tuple[jnp.ndarray,
-        jnp.ndarray,
-        jnp.ndarray]:)
+        x: jnp.ndarray
+    ) -> Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
         """Quantize input tensor to int4 format."""
         # Store original shape in state
         self.state.value = x.shape
 
         # Compute statistics per block
-        x_reshaped = x.reshape(
-            -1,
-            self.block_size)  # Flatten to (N,
-            block_size)
+        x_reshaped = x.reshape(-1, self.block_size)  # Flatten to (N, block_size)
 
         # Compute statistics based on quantization mode
         if self.quantization_mode == "linear_symmetric":
@@ -190,14 +186,14 @@ class StatefulKeyValueCache(nn.Module):
             actual_len = end_pos - position
 
             # Update only the valid portion
-self.key_cache.value = self.key_cache.value.at[:, position:end_pos].set(
+            self.key_cache.value = self.key_cache.value.at[:, position:end_pos].set(
                 key[:,:actual_len]
             )
-self.value_cache.value = self.value_cache.value.at[:, position:end_pos].set(
+            self.value_cache.value = self.value_cache.value.at[:, position:end_pos].set(
                 value[:,:actual_len]
             )
             self.valid_mask.value = self.valid_mask.value.at[
-                position:end_pos].set(True)]
+                position:end_pos].set(True)
             self.current_length.value = end_pos
 
     def get(
@@ -208,17 +204,10 @@ self.value_cache.value = self.value_cache.value.at[:, position:end_pos].set(
             end = self.current_length.value
 
         # Get valid entries
-        key = self.key_cache.value[:, start:end]  # (
-            batch_size,
-            seq_len,
-            hidden_size)
+        key = self.key_cache.value[:, start:end]  # (batch_size, seq_len, hidden_size)
         value = self.value_cache.value[:, start:end]
 
-        # Reshape to attention format (
-            batch_size,
-            num_heads,
-            seq_len,
-            head_dim)
+        # Reshape to attention format (batch_size, num_heads, seq_len, head_dim)
         batch_size, seq_len, _ = key.shape
         key = key.reshape(batch_size, seq_len, self.num_heads, self.head_dim)
         key = jnp.transpose(key, (0, 2, 1, 3))
@@ -307,8 +296,7 @@ class FlexibleInputProcessor(nn.Module):
         batch_size, seq_length, hidden_size = inputs.shape
         if seq_length > self.config.max_sequence_length:
             raise ValueError(
-f"Input sequence length {seq_length} exceeds maximum
-                {self.config.max_sequence_length}"
+                f"Input sequence length {seq_length} exceeds maximum {self.config.max_sequence_length}"
             )
 
         # Generate position embeddings
@@ -433,10 +421,7 @@ num_embeddings=self.config.vocab_size, features=self.config.hidden_size
             hidden_states = self.quantization.quantize(hidden_states)[0]
 
         # Project query, key, value with correct dimensions
-        query = self.query_proj(
-            hidden_states)  # (batch_size,
-            seq_length,
-            qkv_dim)
+        query = self.query_proj(hidden_states)  # (batch_size, seq_length, qkv_dim)
         key = self.key_proj(hidden_states)
         value = self.value_proj(hidden_states)
 
@@ -480,11 +465,8 @@ num_embeddings=self.config.vocab_size, features=self.config.hidden_size
         scale = jnp.sqrt(self.head_dim).astype(hidden_states.dtype)
         attention_scores = jnp.matmul(
             query,
-            jnp.transpose(key,
-            (0,
-            1,
-            3,
-            2))) / scale)
+            jnp.transpose(key, (0, 1, 3, 2))
+        ) / scale
 
         # Apply attention mask
         attention_scores = attention_scores + (1 - attention_mask) * -1e4

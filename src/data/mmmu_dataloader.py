@@ -56,8 +56,9 @@ class MMUDataset(Dataset):
             try:
                 # Load dataset using HuggingFace datasets
                 dataset = load_dataset("MMMU/MMMU", subject, split=split)
-                logger.info(f"Loading {
-                    subject} dataset with {len(dataset)} examples")}
+                logger.info(
+                    f"Loading {subject} dataset with {len(dataset)} examples"
+                )
 
                 # Pre-process examples to ensure tensor conversion
                 processed_examples = []
@@ -73,7 +74,10 @@ class MMUDataset(Dataset):
                                     for i, opt in enumerate(example["options"])
                                 ]
                             )
-text = f"Question: {example['question']}\nOptions: {options_text}"
+                            text = (
+                                f"Question: {example['question']}\n"
+                                f"Options: {options_text}"
+                            )
 
                             # Convert to tensors
                             encoding = self.tokenizer(
@@ -90,16 +94,15 @@ text = f"Question: {example['question']}\nOptions: {options_text}"
                                 "attention_mask"
                             ].squeeze(0)
                             processed_example["labels"] = torch.tensor(
-                                ord(
-                                    example["answer"]) - ord("A"),
-                                    dtype=torch.long)
+                                ord(example["answer"]) - ord("A"),
+                                dtype=torch.long
                             )
 
                         # Process images if available
                         images = []
                         for i in range(1, 8):
                             img_key = f"image_{i}"
-if img_key in example and example[img_key] is not None:
+                            if img_key in example and example[img_key] is not None:
                                 try:
                                     image = example[img_key]
                                     if isinstance(image, Image.Image):
@@ -107,8 +110,7 @@ if img_key in example and example[img_key] is not None:
                                     images.append(image)
                                 except Exception as e:
                                     logger.warning(
-                                        f"Failed to process {
-                                            img_key}: {str(e)}"}
+                                        f"Failed to process {img_key}: {str(e)}"
                                     )
                                     images.append(torch.zeros(3, 224, 224))
                             else:
@@ -120,8 +122,9 @@ if img_key in example and example[img_key] is not None:
                         processed_examples.append(processed_example)
 
                     except Exception as e:
-                        logger.error(f"Error processing example in {
-                            subject}: {str(e)}")}
+                        logger.error(
+                            f"Error processing example in {subject}: {str(e)}"
+                        )
                         continue
 
                 self.datasets.append(processed_examples)
@@ -179,8 +182,8 @@ if img_key in example and example[img_key] is not None:
                 "input_ids": torch.zeros(self.max_length, dtype=torch.long),
                 "attention_mask": torch.zeros(
                     self.max_length,
-                    dtype=torch.long),
-                    )
+                    dtype=torch.long
+                ),
                 "labels": torch.tensor(0, dtype=torch.long),
                 "images": torch.zeros(7, 3, 224, 224),
                 "metadata": {},
@@ -265,11 +268,10 @@ def create_mmmu_dataloaders(
                 collate_fn=collate_mmmu_batch,
             )
             logger.info(
-                f"Created {
-                    split} dataloader with {len(datasets[split])} examples"}
+                f"Created {split} dataloader with {len(datasets[split])} examples"
             )
 
-return dataloaders["dev"], dataloaders["validation"], dataloaders["test"]
+        return dataloaders["dev"], dataloaders["validation"], dataloaders["test"]
 
     except Exception as e:
         logger.error(f"Error creating dataloaders: {str(e)}")
