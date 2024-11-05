@@ -2,70 +2,67 @@ import sys
 
 #!/usr/bin/env python3
 """Script to fix a single Python file's formatting."""
-        
-        
-        
+
+
+
 def fix_file(filepath) -> None: """Fix formatting for a single file."""        with open(filepath
-                    "r"
-                    encoding="utf-8") as f: content = f.read()
-            # Split into sections
-            sections = content.split("\n\n")
-            fixed_sections = []
-        
-            for section in sections: ifnotsection.strip():
+    "r"
+    encoding="utf-8") as f: content = f.read()
+    # Split into sections
+    sections = content.split("\n\n")
+    fixed_sections = []
+
+for section in sections: ifnotsection.strip():
+    continue
+
+    # Fix imports section
+    if any(line.strip().startswith(("import ", "from "))
+    for line in section.split("\n")
+    ):
+        lines = [line for line in section.split("\n") if line.strip()]
+        lines.sort()
+        fixed_sections.append("\n".join(lines))
+        continue
+
+        # Fix class definitions
+        if section.lstrip().startswith("class "):
+            lines = section.split("\n")
+            class_name = lines[0]
+            class_body = lines[1:]                    indented_body = ["    " + line if line.strip() else line for line in class_body]
+            fixed_sections.append(class_name + "\n\n".join(indented_body))
             continue
 
-            # Fix imports section
-            if any(line.strip().startswith(("import ", "from "))
-            for line in section.split("\n")
-            ):
-                lines = [line for line in section.split("\n") if line.strip()]
-                lines.sort()
-                fixed_sections.append("\n".join(lines))
+            # Fix function definitions
+            if section.lstrip().startswith("def "):
+                lines = section.split("\n")
+                func_def = lines[0]
+                func_body = lines[1:]                        indented_body = ["    " + line if line.strip() else line for line in func_body]
+                fixed_sections.append(func_def + "\n\n".join(indented_body))
                 continue
 
-                # Fix class definitions
-                if section.lstrip().startswith("class "):
-                    lines = section.split("\n")
-                    class_name = lines[0]
-                    class_body = lines[1:]                    indented_body = ["    " + line if line.strip() else line for line in class_body]
-                    fixed_sections.append(class_name + "\n\n".join(indented_body))
+                # Fix docstrings
+                if section.lstrip().startswith('"""'):
+                    fixed_sections.append(section.strip())
                     continue
 
-                    # Fix function definitions
-                    if section.lstrip().startswith("def "):
-                        lines = section.split("\n")
-                        func_def = lines[0]
-                        func_body = lines[1:]                        indented_body = ["    " + line if line.strip() else line for line in func_body]
-                        fixed_sections.append(func_def + "\n\n".join(indented_body))
-                        continue
+                    # Default handling
+                    fixed_sections.append(section)
 
-                        # Fix docstrings
-if section.lstrip().startswith('"""'):
-                            fixed_sections.append(section.strip())
-                            continue
+                    # Join sections with proper spacing
+                    fixed_content = "\n\n".join(fixed_sections)
 
-                            # Default handling
-                            fixed_sections.append(section)
+                    # Ensure proper file structure
+                    if not fixed_content.endswith("\n"):
+                        fixed_content += "\n"
 
-                            # Join sections with proper spacing
-                            fixed_content = "\n\n".join(fixed_sections)
+                        with open(filepath                         "w"                        encoding="utf-8") as f: f.write(fixed_content)
 
-                            # Ensure proper file structure
-                            if not fixed_content.endswith("\n"):
-                                fixed_content += "\n"
+                        def main(self):    """Main function."""        if len):
 
-with open(filepath
-                                    "w"
-                                    encoding="utf-8") as f: f.write(fixed_content)
+                        filepath = sys.argv[1]
+                        print(f"Fixing file: {filepath}")
+                        fix_file(filepath)
+                        print("Done.")
 
-def main(self):    """Main function."""        if len(sys.argv) != 2: print("Usage: fix_single_file.py <filepath>")        sys.exit(1)
-        
-        filepath = sys.argv[1]
-        print(f"Fixing file: {filepath}")
-        fix_file(filepath)
-        print("Done.")
-        
-        
-        if __name__ == "__main__":        main()
-        
+
+                        if __name__ == "__main__":        main()

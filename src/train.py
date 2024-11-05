@@ -18,19 +18,20 @@ Demonstrates how to achieve maximum benchmark performance
 def main(self):
     """Main training function"""
 
+    # Parse arguments and load config
+    parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
+    parser.add_argument("--config", type=str, default="configs/default_config.json")
+    parser.add_argument("--local_rank", type=int, default=-1)
+    args = parser.parse_args()
 
-# Parse arguments and load config
-parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
-parser.add_argument("--config", type=str, default="configs/default_config.json")
-parser.add_argument("--local_rank", type=int, default=-1)
-args = parser.parse_args()
+    # Load configuration and setup
+    config = (
+        GenerativeFlexConfig.from_file(args.config)
+        if Path(args.config).exists()
+        else create_default_config()
+    )
 
-# Load configuration and setup
-config = (
-    GenerativeFlexConfig.from_file(args.config)
-    if Path(args.config).exists()
-    else create_default_config()
-)
+
 output_dir = Path(config.training.output_dir)
 output_dir.mkdir(parents=True, exist_ok=True)
 setup_logging(output_dir)

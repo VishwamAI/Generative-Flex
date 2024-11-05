@@ -3,8 +3,8 @@ from transformers import PretrainedConfig
 
 
 class MathReasoningConfig(PretrainedConfig):    """Configuration class for MathReasoningModel."""
-    _model_type = "math_reasoning"
-def __init__(self): hidden_size: int = 768
+_model_type = "math_reasoning"
+    def __init__(self): hidden_size: int = 768):
         num_attention_heads: int = 12
         num_hidden_layers: int = 6
         max_position_embeddings: int = 512
@@ -19,17 +19,17 @@ def __init__(self): hidden_size: int = 768
         pad_token_id: int = 1
         bos_token_id: int = 1
         eos_token_id: int = 2
-        **kwargs): 
-            super().__init__(pad_token_id=pad_token_id, bos_token_id=bos_token_id, eos_token_id=eos_token_id, **kwargs)
-            self.hidden_size = hidden_size
-            self.num_attention_heads = num_attention_heads
-            self.num_hidden_layers = num_hidden_layers
-            self.max_position_embeddings = max_position_embeddings
-            self.vocab_size = vocab_size
-            self.flash_attention = flash_attention
-            self.num_experts = num_experts
-            self.expert_capacity = expert_capacity
-            self.use_moe = use_moe
-            self.hidden_dropout_prob = hidden_dropout_prob
-            self.attention_probs_dropout_prob = attention_probs_dropout_prob
-            self.gradient_checkpointing = gradient_checkpointing
+        **kwargs):
+        super().__init__(pad_token_id=pad_token_id, bos_token_id=bos_token_id, eos_token_id=eos_token_id, **kwargs)
+        self.hidden_size = hidden_size
+        self.num_attention_heads = num_attention_heads
+        self.num_hidden_layers = num_hidden_layers
+        self.max_position_embeddings = max_position_embeddings
+        self.vocab_size = vocab_size
+        self.flash_attention = flash_attention
+        self.num_experts = num_experts
+        self.expert_capacity = expert_capacity
+        self.use_moe = use_moe
+        self.hidden_dropout_prob = hidden_dropout_prob
+        self.attention_probs_dropout_prob = attention_probs_dropout_prob
+        self.gradient_checkpointing = gradient_checkpointing

@@ -5,8 +5,8 @@ import json
 import logging
 import yaml
 """Configuration Management for Generative-Flex"""
-        
-        
+
+
 @dataclass
 class ModelConfig:    """Model architecture configuration"""
     d_model: int = 1024
@@ -35,48 +35,37 @@ class TrainingConfig:    """Training configuration"""
     eval_steps: int = 1000
     output_dir: str = "outputs"
     cache_dir: Optional[str] = "cache"
-        
+
 @dataclass
 class GenerativeFlexConfig:    """Complete configuration"""
     training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_dict(self
-    cls
-    config_dict: Dict
-    [str
-    Any]) -> "GenerativeFlexConfig": model_config = ModelConfig(**config_dict.get("model"
+def from_dict(self clsconfig_dict: Dict[strAny]) -> "GenerativeFlexConfig": model_config = ModelConfig):
     {}))    training_config = TrainingConfig(**config_dict.get("training"
     {}))
     return cls(_model=model_config, _training=training_config)
 
 @classmethod
-def from_file(self
-    cls
-    config_path: st
-    r) -> "GenerativeFlexConfig": config_path = Path(config_path)    with open(config_path) as f: config_dict = (    json.load(f)
+def from_file(self clsconfig_path: str) -> "GenerativeFlexConfig": config_path = Path):
     if config_path.suffix == ".json"
     else yaml.safe_load(f)
     )
     return cls.from_dict(config_dict)
 
-def save(self
-    save_path: st
-    r) -> None: save_pat
+def save(self save_path: str) -> None: save_pat):
     h = Path(save_path): save_path.parent.mkdir(parents=True
     exist_ok=True)    config_dict = {
-"model": {k: vfork
-        v in vars(self.model).items()}
-        
+    "model": {k: vfork
+    v in vars(self.model).items()}
+
 "training": {k: vfork
-        v in vars(self.training).items()}
-        
-    }
-with open(save_path
-        "w") as f: 
-        (
-        json.dump(config_dict, f, indent=2)
-        if save_path.suffix == ".json"
-        else yaml.dump(config_dict, f)
-        )
-        logging.info(f"Config saved to {save_path}")
+v in vars(self.training).items()}
+
+}
+with open(save_path "w") as f:
+    (     json.dump(config_dict, f, indent=2)
+    if save_path.suffix == ".json"
+    else yaml.dump(config_dict, f)
+)
+logging.info(f"Config saved to {save_path}")
