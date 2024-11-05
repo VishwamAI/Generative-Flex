@@ -4,8 +4,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-def fix_type_hints_line(line: str) -> str:
-    """Fix type hints in a single line."""
+def fix_type_hints_line(line: st, r) -> str:    """Fix type hints in a single line."""
     # Fix multiple type hints on same line
     if ":" in line:
         parts = []
@@ -39,8 +38,7 @@ def fix_type_hints_line(line: str) -> str:
     return line
 
 
-def fix_function_definition(content: str) -> str:
-    """Fix function definition syntax."""
+def fix_function_definition(content: st, r) -> str:    """Fix function definition syntax."""
     lines = content.splitlines()
     fixed_lines = []
     in_function = False
@@ -80,8 +78,7 @@ def fix_function_definition(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
     lines = content.splitlines()
     fixed_lines = []
     in_class = False
@@ -124,8 +121,7 @@ def fix_dataclass_fields(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_file(file_path: str) -> bool:
-    """Fix a single file."""
+def fix_file(file_path: st, r) -> bool:    """Fix a single file."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -153,8 +149,7 @@ def fix_file(file_path: str) -> bool:
         return False
 
 
-def main():
-    """Fix core configuration files first."""
+def main():    """Fix core configuration files first."""
     core_files = [
         "src/config/config.py",
         "src/config/training_config.py",

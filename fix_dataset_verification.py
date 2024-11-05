@@ -16,8 +16,7 @@ import yaml
         
         
         
-                def fix_dataset_verification(self):
-                    """Fix syntax and formatting issues in dataset_verification_utils.py."""
+                def fix_dataset_verification(self):                    """Fix syntax and formatting issues in dataset_verification_utils.py."""
         content = """"""Dataset verification utilities for mapped datasets."""
         
         
@@ -32,14 +31,12 @@ import yaml
         logger = logging.getLogger(__name__)
         
         
-        class TimeoutException(Exception):
-    """Exception raised when a timeout occurs."""
+        class TimeoutException(Exception):    """Exception raised when a timeout occurs."""
         pass
         
         
         @contextlib.contextmanager
-def categorize_error(error: Exception) -> str:
-    """Categorize the type of error encountered during dataset verification."""
+def categorize_error(error: Exceptio, n) -> str:    """Categorize the type of error encountered during dataset verification."""
         error_str = str(error)
         
         if isinstance(error, TimeoutException):
@@ -54,8 +51,7 @@ def categorize_error(error: Exception) -> str:
         else: return"other"
         
         
-                def try_load_dataset(self):
-                dataset_id: str,
+                def try_load_dataset(self):                dataset_id: str,
                 config: Optional[str] = None,
                 streaming: bool = False,
                 trust_remote_code: bool = False,
@@ -107,8 +103,7 @@ def categorize_error(error: Exception) -> str:
                                                             except: passreturnFalse, e, None
 
 
-def format_verification_result(result: Dict[str, Any]) -> str:
-    """Format the verification result for logging."""
+def format_verification_result(result: Dict, [str, Any]) -> str:    """Format the verification result for logging."""
         status = result.get("status", "unknown")
         configs = result.get("configs", {})
         error = result.get("error")
@@ -135,8 +130,7 @@ def format_verification_result(result: Dict[str, Any]) -> str:
         return formatted
         
         
-                def log_verification_attempt(self):
-                logger: logging.Logger,
+                def log_verification_attempt(self):                logger: logging.Logger,
                 dataset_id: str,
                 attempt_type: str,
                 config: Optional[str] = None,
@@ -154,8 +148,7 @@ def format_verification_result(result: Dict[str, Any]) -> str:
                 logger.error(f"Error details: {error_msg}")
 
 
-                def cleanup_memory(self):
-                    """Perform aggressive memory cleanup."""
+                def cleanup_memory(self):                    """Perform aggressive memory cleanup."""
         gc.collect()
         try: iftorch.cuda.is_available():
         torch.cuda.empty_cache()

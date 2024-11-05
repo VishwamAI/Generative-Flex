@@ -10,12 +10,10 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 
 class SimpleSeq2SeqModel(nn.Module):
-
     vocab_size: int, hidden_size: int = 64, max_length: int = 32  # Maximum sequence length
 
 
-    def main(self):
-        # Create and save training data
+    def main(self):        # Create and save training data
         training_data = create_training_data()
         with open("data/chatbot/training_data_cot.json", "w") as f: json.dump(training_data, f, indent=2)
 
@@ -62,8 +60,7 @@ class SimpleSeq2SeqModel(nn.Module):
                 y = jnp.array(output_tokens)
 
 
-    def loss_fn(self, params)  -> None: logits = model.apply({"params": params}, x):
-                    return optax.softmax_cross_entropy_with_integer_labels(
+    def loss_fn(self, params) -> None: logit, s = model.apply({"params": params, }, x):                    return optax.softmax_cross_entropy_with_integer_labels(
                 logits=logits[:, : y.shape[0]], labels=y
                 ).mean()
 

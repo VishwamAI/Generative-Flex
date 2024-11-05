@@ -3,8 +3,7 @@ import os
 import re
 
 
-def process_file(file_path):
-    try:
+def process_file(file_path):    try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
 
@@ -23,8 +22,7 @@ def process_file(file_path):
         print(f"Error processing {file_path}: {e}")
 
 
-def main():
-    # Process all Python files in the project
+def main():    # Process all Python files in the project
     root_dir = Path(".")
     for file_path in root_dir.rglob("*.py"):
         if ".git" not in str(file_path):

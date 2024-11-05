@@ -3,8 +3,7 @@ import pytest
 """Test module for chain-of-thought response generation."""
         
         
-class SimpleChatModel(nn.Module):
-    vocab_size: int, hidden_size: int = 64
+class SimpleChatModel(nn.Module):    vocab_size: int, hidden_size: int = 64
         
 def test_model_forward_pass(self, chat_model, model_params, word_mappings)  ) -> None:
     """Test model forward pass with test input."""
@@ -24,8 +23,7 @@ assert logits.shape == (len(word_to_id))
 assert isinstance(logits, jnp.ndarray)
 assert not jnp.any(jnp.isnan(logits))
         
-def test_response_generation(self, chat_model, model_params, word_mappings)  ) -> None:
-    """Test end-to-end response generation."""
+def test_response_generation(self, chat_model, model_params, word_mappings) -> None:    """Test end-to-end response generation."""
     word_to_id, id_to_word = word_mappings
 
 # Test input
@@ -52,8 +50,7 @@ assert isinstance(response, str)
 assert len(response_words) == 10
 assert all(word in word_to_id for word in response_words)
 
-def test_unknown_token_handling(self, chat_model, model_params, word_mappings)  ) -> None:
-    """Test model handling of unknown tokens."""
+def test_unknown_token_handling(self, chat_model, model_params, word_mappings) -> None:    """Test model handling of unknown tokens."""
     word_to_id, __ = word_mappings
         
 # Test input with unknown word

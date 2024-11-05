@@ -4,8 +4,7 @@
     from pathlib import Path
     
     
-        def fix_math_tokenizer(content: str) -> str:
-            """Fix math_tokenizer.py specific issues."""
+        def fix_math_tokenizer(content: st, r) -> str:            """Fix math_tokenizer.py specific issues."""
     # Fix operator dictionary syntax
     operator_dict = {
     "<ADD>": "+",
@@ -42,8 +41,7 @@
                     return "\n".join(fixed_lines)
 
 
-def fix_test_files(content: str) -> str:
-    """Fix test files specific issues."""
+def fix_test_files(content: st, r) -> str:    """Fix test files specific issues."""
         lines = content.split("\n")
         fixed_lines = []
         
@@ -63,8 +61,7 @@ fixed_lines.append('        """Set up test environment."""')
         return "\n".join(fixed_lines)
         
         
-                def fix_config_files(content: str) -> str:
-                    """Fix config files specific issues."""
+                def fix_config_files(content: st, r) -> str:                    """Fix config files specific issues."""
         lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
@@ -108,8 +105,7 @@ fixed_lines.append('        """Set up test environment."""')
                                     return "\n".join(fixed_lines)
 
 
-def fix_jax_trainer(content: str) -> str:
-    """Fix jax_trainer.py specific issues."""
+def fix_jax_trainer(content: st, r) -> str:    """Fix jax_trainer.py specific issues."""
         lines = content.split("\n")
         fixed_lines = []
         
@@ -129,8 +125,7 @@ def fix_jax_trainer(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-                def fix_file(file_path: Path) -> None:
-                    """Apply specific fixes to each file."""
+                def fix_file(file_path: Pat, h) -> None:                    """Apply specific fixes to each file."""
         try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
         
                 if "math_tokenizer.py" in str(file_path):
@@ -150,8 +145,7 @@ def fix_jax_trainer(content: str) -> str:
                             except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-def main(self):
-    """Fix syntax issues in specific files."""
+def main(self):    """Fix syntax issues in specific files."""
         files_to_fix = [
         "src/data/math_tokenizer.py",
         "tests/test_features.py",

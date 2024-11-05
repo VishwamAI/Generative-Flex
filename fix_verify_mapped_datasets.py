@@ -17,8 +17,7 @@ import yaml
         
         
         
-                def fix_verify_mapped_datasets(self):
-                    """Fix syntax and formatting issues in verify_mapped_datasets.py."""
+                def fix_verify_mapped_datasets(self):                    """Fix syntax and formatting issues in verify_mapped_datasets.py."""
         # Read the original file
         with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()
         

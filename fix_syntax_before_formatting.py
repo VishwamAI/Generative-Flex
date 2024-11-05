@@ -4,8 +4,7 @@
     from pathlib import Path
     
     
-        def fix_file_syntax(file_path: str, content: str) -> str:
-        """Fix syntax issues in a specific file."""
+        def fix_file_syntax(file_path: st, r, content: st, r) -> str:        """Fix syntax issues in a specific file."""
 if "mmmu_dataloader.py" in file_path:
     # Fix import statement
     content = re.sub(r"from typi", "from typing", content)
@@ -59,8 +58,7 @@ s*\):", "def train(self):", content)
                     return content
 
 
-def main(self):
-    """Fix syntax in all Python files."""
+def main(self):    """Fix syntax in all Python files."""
         files_to_fix = [
         "src/data/mmmu_dataloader.py",
         "src/models/apple_optimizations.py",

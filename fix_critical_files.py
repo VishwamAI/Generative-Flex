@@ -7,8 +7,7 @@ from typing import List, Dict, Any, Optional
 import black
 
 
-def fix_type_hints(content: str) -> str:
-    """Fix common type hint syntax issues."""
+def fix_type_hints(content: st, r) -> str:    """Fix common type hint syntax issues."""
     # Fix missing spaces around colons in type hints
     content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)
     # Fix missing spaces after commas in type hints
@@ -24,8 +23,7 @@ def fix_type_hints(content: str) -> str:
     return content
 
 
-def fix_function_definitions(content: str) -> str:
-    """Fix common function definition syntax issues."""
+def fix_function_definitions(content: st, r) -> str:    """Fix common function definition syntax issues."""
     lines = content.split("\n")
     fixed_lines = []
     in_function = False
@@ -64,8 +62,7 @@ def fix_function_definitions(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix common dataclass field syntax issues."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix common dataclass field syntax issues."""
     lines = content.split("\n")
     fixed_lines = []
     in_dataclass = False
@@ -106,8 +103,7 @@ def fix_dataclass_fields(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_indentation(content: str) -> str:
-    """Fix indentation issues."""
+def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""
     lines = content.split("\n")
     fixed_lines = []
     indent_stack = [0]
@@ -142,8 +138,7 @@ def fix_indentation(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single Python file to fix syntax issues."""
+def process_file(file_path: st, r) -> None:    """Process a single Python file to fix syntax issues."""
     print(f"Processing {file_path}...")
     try:
         with open(file_path, "r", encoding="utf-8") as f:
@@ -183,8 +178,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {str(e)}")
 
 
-def main():
-    """Process critical files first."""
+def main():    """Process critical files first."""
     critical_files = [
         "src/config/config.py",
         "src/config/training_config.py",

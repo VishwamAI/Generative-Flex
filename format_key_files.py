@@ -4,8 +4,7 @@ import sys
 
 
 
-                def main(self):
-                root_dir = Path(__file__).parent
+                def main(self):                root_dir = Path(__file__).parent
                 
                 # Ensure black is installed with correct version
                 subprocess.run(["pip", "install", "black==23.12.1"], check=True)

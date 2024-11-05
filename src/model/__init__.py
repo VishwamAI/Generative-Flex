@@ -7,8 +7,7 @@ Core model architecture with state-of-the-art optimizations
 """
 
 
-class AdvancedGenerativeFlexModel(nn.Module):
-    """
+class AdvancedGenerativeFlexModel(nn.Module):    """
     Advanced transformer-based model with optimized architecture featuring:
         - Flash Attention for efficient O(N) memory complexity
         - Mixture of Experts for specialized computation paths
@@ -59,14 +58,12 @@ self.fc_out = nn.Linear(d_model, vocab_size)
 # Initialize parameters with scaled initialization
 self._init_parameters()
 
-def _init_parameters(self)  ) -> None:
-    """Initialize parameters with scaled initialization"""
+def _init_parameters(self) -> None:    """Initialize parameters with scaled initialization"""
     for p in self.parameters():
         if p.dim() > 1: nn.init.xavier_uniform_(p, gain=1 / math.sqrt(2)  # Scale for better gradient flow
         )
         
-        def forward(self):
-        x: torch.Tensor,
+        def forward(self):        x: torch.Tensor,
         mask: Optional[torch.Tensor] = None,
         return_attention_weights: bool = False) -> torch.Tensor:
         """

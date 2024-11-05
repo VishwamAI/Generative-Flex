@@ -11,8 +11,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def extract_problem_category(text) -> None:
-    """Extract mathematical category from problem text."""
+def extract_problem_category(text) -> None:    """Extract mathematical category from problem text."""
         text = text.lower()
         categories = {
         "Algebra": [
@@ -62,8 +61,7 @@ def extract_problem_category(text) -> None:
         return "Other"
         
         
-                def parse_validation_outputs(self):
-                    """Parse validation outputs from the training logs."""
+                def parse_validation_outputs(self):                    """Parse validation outputs from the training logs."""
         log_dir = Path("logs")
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
         
@@ -107,8 +105,7 @@ def extract_problem_category(text) -> None:
                             return results
 
 
-def generate_performance_report(results) -> None:
-    """Generate a comprehensive performance report."""
+def generate_performance_report(results) -> None:    """Generate a comprehensive performance report."""
         if not results: logger.error("No results data available")
         return
         
@@ -182,8 +179,7 @@ def generate_performance_report(results) -> None:
         logger.info(f"Performance visualization saved to {viz_path}")
         
         
-                def main(self):
-                    """Main analysis function."""
+                def main(self):                    """Main analysis function."""
         results = parse_validation_outputs()
         if results: generate_performance_report(results)
         

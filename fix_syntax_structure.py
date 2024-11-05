@@ -12,8 +12,7 @@ import torch
 import torch.nn as nn
 """Script to fix basic Python syntax structure in problematic files."""
         
-                def extract_validation_metrics() -> Dict[str, float]:
-                    """Extract metrics from validation logs."""
+                def extract_validation_metrics() -> Dict[str, float]:                    """Extract metrics from validation logs."""
         metrics = {}
         log_dir = "logs"
         
@@ -33,8 +32,7 @@ import torch.nn as nn
 """
                                                     with open('analyze_performance_by_category.py', 'w') as f: f.write(content)
                                                     
-def signal_handler(signum, frame) -> None: raiseTimeoutError(f"Operation timed out after {seconds} seconds")
-
+def signal_handler(signum, frame) -> None: raiseTimeoutError, (f"Operation timed out after {seconds} seconds")
     # Save the old handler
     old_handler = signal.signal(signal.SIGALRM, signal_handler)
     # Set the alarm
@@ -45,8 +43,7 @@ def signal_handler(signum, frame) -> None: raiseTimeoutError(f"Operation timed o
             signal.alarm(0)
             signal.signal(signal.SIGALRM, old_handler)
 
-                def main(self):
-                    """Main verification function."""
+                def main(self):                    """Main verification function."""
         datasets = [
         "mmlu-math",
         "mmlu-physics",
@@ -66,8 +63,7 @@ def signal_handler(signum, frame) -> None: raiseTimeoutError(f"Operation timed o
 """
                     with open('data/verify_mapped_datasets.py', 'w') as f: f.write(content)
                     
-def main(self):
-    """Main function to fix flake8 issues."""
+def main(self):    """Main function to fix flake8 issues."""
         python_files = []
         for root, _, files in os.walk("."):
         for file in files: iffile.endswith(".py"):
@@ -85,8 +81,7 @@ def main(self):
 """
                         with open('fix_flake8_comprehensive.py', 'w') as f: f.write(content)
 
-def fix_multiline_fstrings(filename: str) -> None:
-    """Fix multiline f-string formatting."""
+def fix_multiline_fstrings(filename: st, r) -> None:    """Fix multiline f-string formatting."""
         with open(filename, "r") as f: content = f.read()
         
         # Fix multiline f-strings
@@ -103,8 +98,7 @@ line = line.replace(""""", """"").replace('"""', '"""')
         
         with open(filename, "w") as f: f.write("\\n".join(fixed_lines))
         
-                def main(self):
-                    """Main function to fix string formatting."""
+                def main(self):                    """Main function to fix string formatting."""
         python_files = []
         for root, _, files in os.walk("."):
     for file in files: iffile.endswith(".py"):
@@ -117,8 +111,7 @@ line = line.replace(""""", """"").replace('"""', '"""')
 """
                             with open('fix_string_formatting.py', 'w') as f: f.write(content)
                             
-                                                        def fix_text_to_anything(self):
-                                                            """Fix the text-to-anything implementation."""
+                                                        def fix_text_to_anything(self):                                                            """Fix the text-to-anything implementation."""
                             with open("src/models/text_to_anything.py", "r") as f: content = f.read()
                             
                                 # Add necessary imports
@@ -127,8 +120,7 @@ line = line.replace(""""", """"").replace('"""', '"""')
                                         
                                         # Add class implementation
                             implementation = """
-                            class TextToAnything(nn.Module):
-        def forward(self, x: torch.Tensor) -> torch.Tensor:
+                            class TextToAnything(nn.Module):        def forward(self, x: torch.Tensor) -> torch.Tensor:
             # Implementation here
             return x
 """
@@ -151,8 +143,7 @@ line = line.replace(""""", """"").replace('"""', '"""')
                     
                     for file in files: withopen(file, 'w') as f: f.write(base_content)
                     
-                                        def main(self):
-                                            """Fix syntax structure in all problematic files."""
+                                        def main(self):                                            """Fix syntax structure in all problematic files."""
                     fix_analyze_performance()
                     fix_dataset_verification()
                     fix_verify_datasets()

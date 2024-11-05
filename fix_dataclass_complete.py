@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_imports_and_dataclass(self, content):
-    """Fix imports and dataclass field definitions."""
+def fix_imports_and_dataclass(self, content):    """Fix imports and dataclass field definitions."""
         # Split content into lines
         lines = content.split("\n")
         
@@ -82,8 +81,7 @@ if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
         return "\n".join(imports + [""] + fixed_lines)
         
         
-                def main(self):
-                # Read the original file
+                def main(self):                # Read the original file
                 with open("src/models/text_to_anything.py", "r") as f: content = f.read()
                 
                 # Fix the imports and dataclass fields

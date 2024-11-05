@@ -6,8 +6,7 @@ from typing import List, Tuple
 import black
 
 
-def detect_class_and_method_blocks(content: str) -> List[Tuple[int, int, int]]:
-    """Detect class and method blocks with their indentation levels."""
+def detect_class_and_method_blocks(content: st, r) -> List[Tuple[int, int, int]]:    """Detect class and method blocks with their indentation levels."""
     lines = content.split("\n")
     blocks = []
     current_indent = 0
@@ -25,8 +24,7 @@ def detect_class_and_method_blocks(content: str) -> List[Tuple[int, int, int]]:
     return blocks
 
 
-def fix_indentation_conservative(content: str) -> str:
-    """Fix indentation while preserving existing structure where possible."""
+def fix_indentation_conservative(content: st, r) -> str:    """Fix indentation while preserving existing structure where possible."""
     lines = content.split("\n")
     blocks = detect_class_and_method_blocks(content)
 
@@ -63,8 +61,7 @@ def fix_indentation_conservative(content: str) -> str:
     return "\n".join(lines)
 
 
-def fix_type_hints(content: str) -> str:
-    """Fix type hint syntax conservatively."""
+def fix_type_hints(content: st, r) -> str:    """Fix type hint syntax conservatively."""
     lines = content.split("\n")
     fixed_lines = []
 
@@ -82,8 +79,7 @@ def fix_type_hints(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single Python file to fix syntax issues."""
+def process_file(file_path: st, r) -> None:    """Process a single Python file to fix syntax issues."""
     print(f"Processing {file_path}...")
     try:
         with open(file_path, "r", encoding="utf-8") as f:
@@ -121,8 +117,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {str(e)}")
 
 
-def main():
-    """Process critical files with conservative fixes."""
+def main():    """Process critical files with conservative fixes."""
     critical_files = [
         "src/config/config.py",
         "src/config/training_config.py",

@@ -17,8 +17,7 @@ import unittest
         
         
         
-                def fix_file(file_path, content) -> None:
-                    """Write fixed content to file."""
+                def fix_file(file_path, content) -> None:                    """Write fixed content to file."""
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, "w", encoding="utf-8") as f: f.write(content)
             print(f"Fixed {file_path}")
@@ -29,11 +28,9 @@ import unittest
         
         
         
-        class MathematicalExpert(nn.Module):
-    """Expert module specialized for mathematical operations."""
+        class MathematicalExpert(nn.Module):    """Expert module specialized for mathematical operations."""
         
-                def forward(self, hidden_states: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
-            """Forward pass through the mathematical expert."""
+                def forward(self, hidden_states: torch, .Tensor) -> Tuple[torch.Tensor, torch.Tensor]:            """Forward pass through the mathematical expert."""
 intermediate_output = self.dense(hidden_states)
 intermediate_output = self.intermediate_act_fn(intermediate_output)
 
@@ -46,8 +43,7 @@ return layer_output, torch.mean(intermediate_output, dim=-1)
         
         
         
-class MathNotationProcessor(nn.Module):
-    """Processes mathematical notation and converts between different formats."""
+class MathNotationProcessor(nn.Module):    """Processes mathematical notation and converts between different formats."""
 
 def process_notation(self, input_text) -> None:
     """Process mathematical notation."""
@@ -58,11 +54,9 @@ def process_notation(self, input_text) -> None:
 
 
 
-class SymbolicMathProcessor(nn.Module):
-    """Processes symbolic mathematics expressions."""
+class SymbolicMathProcessor(nn.Module):    """Processes symbolic mathematics expressions."""
         
-                def train_epoch(self):
-                model: EnhancedTransformer,
+    def train_epoch(self):                model: EnhancedTransformer,
                 train_loader: DataLoader,
                 optimizer: torch.optim.Optimizer,
                 config: TrainingConfig) -> Dict[str, float]:
@@ -97,8 +91,7 @@ def evaluate(self):
                 return {"val_loss": total_loss / len(val_loader)}
                 
                 
-                                def log_metrics(self):
-                                metrics: Dict[str, float],
+                                def log_metrics(self):                                metrics: Dict[str, float],
                                 step: Optional[int] = None,
                                 epoch: Optional[int] = None) -> None:
                     """Log training metrics."""
@@ -108,8 +101,7 @@ def evaluate(self):
             else: logger.info(metric_str)
 
 
-def main(self):
-    """Main training function."""
+def main(self):    """Main training function."""
         config = TrainingConfig()
         model = EnhancedTransformer(config)
         train_loader, val_loader = create_mmmu_dataloaders(config)
@@ -135,8 +127,7 @@ def main(self):
 
 
 
-class TestModelFeatures(unittest.TestCase):
-    """Test suite for model features."""
+class TestModelFeatures(unittest.TestCase):    """Test suite for model features."""
         
 def test_text_to_anything(self) -> None:
     """Test TextToAnything model initialization and forward pass."""
@@ -154,8 +145,7 @@ def test_text_to_anything(self) -> None:
 
 
 
-class TestEnhancedTransformer(unittest.TestCase):
-    """Test cases for the enhanced transformer model."""
+class TestEnhancedTransformer(unittest.TestCase):    """Test cases for the enhanced transformer model."""
         
 def test_forward_pass(self) -> None:
     """Test forward pass through the model."""
@@ -172,8 +162,7 @@ def test_forward_pass(self) -> None:
 
 
 
-class TestTrainingSetup(unittest.TestCase):
-    """Test suite for training setup."""
+class TestTrainingSetup(unittest.TestCase):    """Test suite for training setup."""
         
         @classmethod
 def main(self):

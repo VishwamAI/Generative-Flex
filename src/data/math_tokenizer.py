@@ -7,8 +7,7 @@ import sympy
 import torch
     
     
-class MathTokenizer:
-    """Tokenizer for mathematical expressions and symbols."""
+class MathTokenizer:    """Tokenizer for mathematical expressions and symbols."""
 
 def __init__(self, base_tokenizer: PreTrainedTokenizer)  ) -> None:
     """Initialize the math tokenizer.
@@ -61,8 +60,7 @@ self.base_tokenizer.add_special_tokens(
 {"additional_special_tokens": special_tokens}
 )
 
-def _parse_math_expression(self, text: str)  -> str:
-    """Parse mathematical expressions using sympy."""
+def _parse_math_expression(self, text: st, r) -> str:    """Parse mathematical expressions using sympy."""
     try:
         # Try to parse with sympy
         expr = sympy.parse_expr(text, evaluate=False)
@@ -75,8 +73,7 @@ def _parse_math_expression(self, text: str)  -> str:
                 text = text.replace(symbol, f" {token} ")
                 return text
 
-                        def _detect_math_expressions(self, text: str)  -> List[str]:
-                """Detect mathematical expressions in text."""
+                        def _detect_math_expressions(self, text: st, r) -> List[str]:                """Detect mathematical expressions in text."""
                 # Match expressions between $ signs(LaTeX style)
                 math_exprs = re.findall(r"\$(.*?)\$", text)
                 # Match expressions with common math patterns
@@ -94,8 +91,7 @@ def _parse_math_expression(self, text: str)  -> str:
                 for pattern in patterns: math_exprs.extend(re.findall(pattern, text))
                 return math_exprs
                 
-                        def __call__(self, text: str, **kwargs)  -> Dict[str, torch.Tensor]:
-                """Tokenize text with special handling for mathematical content.
+                        def __call__(self, text: st, r, **kwargs) -> Dict[str, torch.Tensor]:                """Tokenize text with special handling for mathematical content.
 
             Args: text: Text to tokenize
             **kwargs: Additionalargumentspassed to the base tokenizer

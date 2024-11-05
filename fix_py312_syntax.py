@@ -18,8 +18,7 @@
     ]
     
     
-def fix_method(match: re.Match) -> str: indent = match.group(1)
-    def_keyword = match.group(2)
+def fix_method(match: re, .Match) -> str: inden, t = match.group(1)    def_keyword = match.group(2)
     method_name = match.group(3)
     params = match.group(4)
     return_hint = match.group(5) or ""
@@ -38,8 +37,7 @@ def fix_method(match: re.Match) -> str: indent = match.group(1)
                 return re.sub(pattern, fix_method, content, flags=re.MULTILINE)
 
 
-                def fix_params(match: re.Match) -> str: indent = match.group(1)
-                def_keyword = match.group(2)
+                def fix_params(match: re, .Match) -> str: inden, t = match.group(1)                def_keyword = match.group(2)
                 func_name = match.group(3)
                 params = match.group(4)
                 return_hint = match.group(5) or ""
@@ -75,8 +73,7 @@ def fix_method(match: re.Match) -> str: indent = match.group(1)
         return re.sub(pattern, fix_params, content, flags=re.MULTILINE)
         
         
-def fix_indentation_py312(content: str) -> str:
-    """Fix indentation issues for Python 3.12 compatibility."""
+def fix_indentation_py312(content: st, r) -> str:    """Fix indentation issues for Python 3.12 compatibility."""
         lines = content.split("\n")
         fixed_lines = []
         indent_stack = [0]
@@ -121,8 +118,7 @@ def fix_indentation_py312(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-def fix_hint(match: re.Match) -> str: var_name = match.group(1)
-    type_hint = match.group(2)
+def fix_hint(match: re, .Match) -> str: var_nam, e = match.group(1)    type_hint = match.group(2)
     value = match.group(3)
 
     # Clean up type hint
@@ -137,8 +133,7 @@ def fix_hint(match: re.Match) -> str: var_name = match.group(1)
             return re.sub(pattern, fix_hint, content)
 
 
-                def main() -> None:
-                    """Fix Python 3.12 syntax issues in core files."""
+                def main() -> None:                    """Fix Python 3.12 syntax issues in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

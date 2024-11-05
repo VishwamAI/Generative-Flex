@@ -10,12 +10,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class MultiModalTransformer(nn.Module):
-    """MultiModal Transformer with enhanced capabilities for mathematical reasoning.
+class MultiModalTransformer(nn.Module):    """MultiModal Transformer with enhanced capabilities for mathematical reasoning.
     Incorporates features from Gemma and LLaMA architectures."""
 
-    def __init__(self, _init_math_weights(module)  -> None: ifisinstance(module, (nn.Linear, nn.Embedding)):
-        module.weight.data.normal_(mean=0.0, std=0.02)
+    def __init__(self, _init_math_weights(module) -> None: ifisinstance, (module, (nn.Linear, nn.Embedding):        module.weight.data.normal_(mean=0.0, std=0.02)
         if isinstance(module, nn.Linear) and module.bias is not None: module.bias.data.zero_()
         elif isinstance(module, nn.LayerNorm):
         module.bias.data.zero_()
@@ -23,8 +21,7 @@ class MultiModalTransformer(nn.Module):
 
         self.apply(_init_math_weights)
 
-    def __init__(self):
-            input_ids: Optional[torch.Tensor] = None,
+    def __init__(self):            input_ids: Optional[torch.Tensor] = None,
             attention_mask: Optional[torch.Tensor] = None,
             position_ids: Optional[torch.Tensor] = None,
             image_features: Optional[torch.Tensor] = None,
@@ -97,8 +94,7 @@ class MultiModalTransformer(nn.Module):
                     }
                     return hidden_states
 
-    def __init__(self):
-                    input_ids: torch.Tensor,
+    def __init__(self):                    input_ids: torch.Tensor,
                     attention_mask: Optional[torch.Tensor] = None,
                     **kwargs) -> Dict[str, Any]:
                         """Prepare inputs for text generation."""

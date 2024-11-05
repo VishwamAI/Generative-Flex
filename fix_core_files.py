@@ -19,8 +19,7 @@
     ]
     
     
-def fix_params(match: re.Match) -> str: full_def = match.group(0)
-    def_start = match.group(1)
+def fix_params(match: re, .Match) -> str: full_de, f = match.group(0)    def_start = match.group(1)
     params = match.group(2)
     return_hint = match.group(3) or ""
 
@@ -57,8 +56,7 @@ def fix_params(match: re.Match) -> str: full_def = match.group(0)
                                             return re.sub(pattern, fix_params, content, flags=re.DOTALL)
 
 
-                def fix_indentation(content: str) -> str:
-                    """Fix indentation issues."""
+                def fix_indentation(content: st, r) -> str:                    """Fix indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         indent_stack = [0]
@@ -90,8 +88,7 @@ def fix_params(match: re.Match) -> str: full_def = match.group(0)
                                     return "\n".join(fixed_lines)
 
 
-def fix_dict(match: re.Match) -> str: dict_content = match.group(1)
-    items = []
+def fix_dict(match: re, .Match) -> str: dict_conten, t = match.group(1)    items = []
     current_item = []
     brace_level = 0
 
@@ -111,8 +108,7 @@ def fix_dict(match: re.Match) -> str: dict_content = match.group(1)
                         return re.sub(r"\{([^{}]*((\{[^{}]*\})[^{}]*)*)\}", fix_dict, content)
 
 
-                def main() -> None:
-                    """Process core files that need reformatting."""
+                def main() -> None:                    """Process core files that need reformatting."""
         print("Starting to process core files...")
         for file_path in CORE_FILES: ifPath(file_path).exists():
         print(f"\nProcessing {file_path}")

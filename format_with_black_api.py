@@ -5,8 +5,7 @@ import sys
         
         
         
-def main(self):
-    """Format all Python files in the project."""
+def main(self):    """Format all Python files in the project."""
         root_dir = Path(".")
         python_files = list(root_dir.rglob("*.py"))
         

@@ -6,8 +6,7 @@ import re
 
 
 
-def fix_line_length(content) -> None:
-    """Break long lines into multiple lines."""
+def fix_line_length(content) -> None:    """Break long lines into multiple lines."""
         
         
         
@@ -45,8 +44,7 @@ def fix_line_length(content) -> None:
         fixed_lines.append(line)
         return '\n'.join(fixed_lines)
         
-                def remove_unused_imports(content) -> None:
-                    """Remove unused imports identified by flake8."""
+                def remove_unused_imports(content) -> None:                    """Remove unused imports identified by flake8."""
         
         
         
@@ -60,8 +58,7 @@ def fix_line_length(content) -> None:
             # Filter out the unused imports
             return '\n'.join(line for line in lines if line.strip() not in imports_to_remove)
 
-                def remove_unused_variables(content) -> None:
-                    """Remove unused variable assignments."""
+                def remove_unused_variables(content) -> None:                    """Remove unused variable assignments."""
         
         
         
@@ -82,8 +79,7 @@ def fix_line_length(content) -> None:
 
                 return '\n'.join(fixed_lines)
 
-                def main(self):
-                    """Process all Python files in the project."""
+                def main(self):                    """Process all Python files in the project."""
         
         
         

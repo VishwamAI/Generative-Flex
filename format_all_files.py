@@ -3,8 +3,7 @@ import subprocess
 
 
 
-                def format_files(self):
-                    """Format all Python files in the repository."""
+                def format_files(self):                    """Format all Python files in the repository."""
         # First run our structure fix script
         print("Running structure fix script...")
         run_command("python3 fix_text_to_anything_structure_v2.py")

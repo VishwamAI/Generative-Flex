@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def main(self):
-                    """Process files with syntax pattern issues."""
+                def main(self):                    """Process files with syntax pattern issues."""
         files_to_fix = [
         "src/models/audio_model.py",
         "src/models/base_model.py",

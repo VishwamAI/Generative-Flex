@@ -3,8 +3,7 @@
     import re
     
     
-        def fix_imports(content: str) -> str:
-            """Fix and deduplicate imports."""
+        def fix_imports(content: st, r) -> str:            """Fix and deduplicate imports."""
     imports = []
     seen = set()
     
@@ -18,8 +17,7 @@
             return "\n".join(imports) + "\n\n"
 
 
-def create_fixed_content() -> str:
-    """Create properly formatted content for math_reasoning.py."""
+def create_fixed_content() -> str:    """Create properly formatted content for math_reasoning.py."""
         return '''from typing import Optional, Union, List, Dict, Any, Tuple
         import torch
         import torch.nn as nn
@@ -34,11 +32,9 @@ def create_fixed_content() -> str:
         
         logger = logging.getLogger(__name__)
         
-class MathReasoningHead(nn.Module):
-    """Math reasoning module for enhanced transformer model."""
+class MathReasoningHead(nn.Module):    """Math reasoning module for enhanced transformer model."""
 
-                def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None, expressions: Optional[List[str]] = None, **kwargs) -> Dict[str, torch.Tensor]:
-            """Forward pass of the math reasoning head.
+    def forward(self, hidden_states: torch, .Tensor, attention_mask: Optional, [torch.Tensor] = None, expressions: Optional, [List[str]] = None, **kwargs) -> Dict[str, torch.Tensor]:            """Forward pass of the math reasoning head.
                 
                 Args: hidden_states: Input tensor
                 attention_mask: Optionalattentionmask, expressions: Optionallistof mathematical expressions
@@ -159,8 +155,7 @@ class MathReasoningHead(nn.Module):
                                                                                     **aux_info,
                                                                                     }
 
-def _set_gradient_checkpointing(self, module: nn.Module, value: bool = False) -> , None:
-    """Enable or disable gradient checkpointing for a module.
+def _set_gradient_checkpointing(self, module: nn, .Module, value: boo, l = False) -> None:    """Enable or disable gradient checkpointing for a module.
                 
                 Args: module: PyTorch module
                 value: Whethertoenable gradient checkpointing
@@ -168,8 +163,7 @@ def _set_gradient_checkpointing(self, module: nn.Module, value: bool = False) ->
     if isinstance(module, (BaseTransformer, TransformerBlock)):
         module.gradient_checkpointing = value
 
-                def main(self):
-                    """Fix math_reasoning.py with complete reconstruction."""
+                def main(self):                    """Fix math_reasoning.py with complete reconstruction."""
         file_path = "src/models/reasoning/math_reasoning.py"
         
         try:

@@ -8,13 +8,11 @@ Image processor for multimodal inputs.
 
 
 
-class ImageProcessor(nn.Module):
-    """
+class ImageProcessor(nn.Module):    """
     Image processor for handling multimodal inputs in the MMMU model.
     """
 
-    def __init__(self):
-        image_size: int = 224,
+    def __init__(self):        image_size: int = 224,
         hidden_size: int = 768,
         dropout_rate: float = 0.1):
             """
@@ -44,8 +42,7 @@ class ImageProcessor(nn.Module):
 
             self.dropout = nn.Dropout(dropout_rate)
 
-    def forward(self):
-                images: torch.Tensor,
+    def forward(self):                images: torch.Tensor,
                 attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
                     """
                     Process images for multimodal input.

@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_indentation_issues(self, content):
-                    """Fix common indentation issues."""
+                def fix_indentation_issues(self, content):                    """Fix common indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
@@ -32,8 +31,7 @@ import re
                     return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Process all Python files that failed formatting."""
+                def main(self):                    """Process all Python files that failed formatting."""
         # List of files that failed formatting
         failed_files = [
         "src/models/multimodal/image_processor.py",

@@ -4,8 +4,7 @@ import sys
 
 
 
-def remove_unused_imports(file_path) -> None:
-    """Remove unused imports from a file."""
+def remove_unused_imports(file_path) -> None:    """Remove unused imports from a file."""
         with open(file_path, "r") as f: content = f.read()
         
         # Dictionary of files and their unused imports to remove
@@ -41,8 +40,7 @@ def remove_unused_imports(file_path) -> None:
         with open(file_path, "w") as f: f.write(content)
         
         
-def fix_line_length_manually(file_path) -> None:
-    """Fix remaining line length issues manually."""
+def fix_line_length_manually(file_path) -> None:    """Fix remaining line length issues manually."""
         with open(file_path, "r") as f: lines = f.readlines()
         
         fixed_lines = []
@@ -71,8 +69,7 @@ def fix_line_length_manually(file_path) -> None:
         with open(file_path, "w") as f: f.writelines(fixed_lines)
         
         
-def main(self):
-    files_to_process = [
+def main(self):    files_to_process = [
     "src/models/reasoning/symbolic_math.py",
     "src/models/text_to_anything.py",
     "src/training/train_mmmu.py",

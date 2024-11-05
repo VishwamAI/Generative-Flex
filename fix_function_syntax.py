@@ -5,8 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-def fix_function_definition(line: str) -> str:
-    """Fix function definition syntax."""
+def fix_function_definition(line: st, r) -> str:    """Fix function definition syntax."""
     # Remove extra parentheses
     line = re.sub(r'\)\s*\)', ')', line)
 
@@ -30,8 +29,7 @@ def fix_function_definition(line: str) -> str:
     return line
 
 
-def fix_class_definition(line: str) -> str:
-    """Fix class definition syntax."""
+def fix_class_definition(line: st, r) -> str:    """Fix class definition syntax."""
     # Fix inheritance syntax
     line = re.sub(r'class\s+(\w+)\s*\(\s*', r'class \1(', line)
     line = re.sub(r'\s+\):', r'):', line)
@@ -43,8 +41,7 @@ def fix_class_definition(line: str) -> str:
     return line
 
 
-def fix_method_definition(line: str, indent_level: int) -> str:
-    """Fix method definition syntax with proper indentation."""
+def fix_method_definition(line: st, r, indent_level: in, t) -> str:    """Fix method definition syntax with proper indentation."""
     # Apply basic function fixes
     line = fix_function_definition(line.strip())
 
@@ -52,8 +49,7 @@ def fix_method_definition(line: str, indent_level: int) -> str:
     return ' ' * (indent_level * 4) + line
 
 
-def process_file(file_path: str) -> bool:
-    """Process a single file."""
+def process_file(file_path: st, r) -> bool:    """Process a single file."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
@@ -92,8 +88,7 @@ def process_file(file_path: str) -> bool:
         return False
 
 
-def main():
-    """Fix syntax in all Python files."""
+def main():    """Fix syntax in all Python files."""
     python_files = []
 
     # Get all Python files

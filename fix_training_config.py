@@ -2,8 +2,7 @@
 """Script to fix training config formatting."""
         
         
-                def fix_training_config(self):
-                    """Fix the training config file formatting."""
+                def fix_training_config(self):                    """Fix the training config file formatting."""
         with open("src/config/training_config.py", "r", encoding="utf-8") as f: content = f.read()
         
             # Split into sections

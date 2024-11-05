@@ -4,8 +4,7 @@
     from pathlib import Path
     
     
-                def fix_math_tokenizer(self):
-                    """Fix syntax in math_tokenizer.py"""
+                def fix_math_tokenizer(self):                    """Fix syntax in math_tokenizer.py"""
         path = Path("src/data/math_tokenizer.py")
         with open(path, "r") as f: content = f.read()
         
@@ -40,8 +39,7 @@
     with open(path, "w") as f: f.write(content)
 
 
-def main(self):
-    """Fix syntax in all problematic files."""
+def main(self):    """Fix syntax in all problematic files."""
         print("Fixing config.py...")
         fix_config_py()
         print("Fixing training_config.py...")

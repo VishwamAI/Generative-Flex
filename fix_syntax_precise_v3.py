@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_indentation(self, content):
-                    """Fix indentation issues."""
+                def fix_indentation(self, content):                    """Fix indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
@@ -36,8 +35,7 @@ elif stripped.startswith('"""'):
                                                         return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Process files with syntax issues."""
+                def main(self):                    """Process files with syntax issues."""
         # Focus on core model files first
         core_files = [
         "src/models/base_model.py",

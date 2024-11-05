@@ -2,8 +2,7 @@ import os
 
 
 
-def fix_file_syntax(filename) -> None: withopen(filename, "r") as f: lines = f.readlines()
-
+def fix_file_syntax(filename) -> None: withopen, (filename, "r") as f: line, s = f.readlines()
         # Track if we made any changes
         modified = False
         new_lines = []
@@ -53,8 +52,7 @@ n")
                                                 with open(filename, "w") as f: f.writelines(new_lines)
 
 
-def main(self):
-    files_to_fix = [
+def main(self):    files_to_fix = [
     "src/models/reasoning/math_reasoning.py",
     "src/models/text_to_anything.py",
     "src/training/train_mmmu.py",

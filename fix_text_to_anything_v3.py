@@ -1,5 +1,4 @@
-def fix_text_to_anything(self):
-    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
+def fix_text_to_anything(self):    with open("src/models/text_to_anything.py", "r") as f: content = f.readlines()
 
         # Add missing imports at the top
         imports = [

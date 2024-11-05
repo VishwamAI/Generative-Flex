@@ -27,8 +27,7 @@ import yaml
         logger = logging.getLogger(__name__)
         
         
-                def get_dataset_size(dataset_id: str, token: str) -> Optional[float]:
-            """Get the total size of dataset files."""
+                def get_dataset_size(dataset_id: st, r, token: st, r) -> Optional[float]:            """Get the total size of dataset files."""
 try: api = HfApi(token=token)
     repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
     siblings = repo_info.siblings
@@ -62,8 +61,7 @@ try: api = HfApi(token=token)
                                             return None
 
 
-def load_dataset_in_chunks(self):
-    dataset_id: str,
+def load_dataset_in_chunks(self):    dataset_id: str,
         config: str,
         token: str,
         chunk_size: int = 100
@@ -88,8 +86,7 @@ def load_dataset_in_chunks(self):
             except Exception as e: returnFalse, e, None
             
             
-                        def load_dataset_mappings() -> Dict[str, Any]:
-                            """Load dataset mappings from YAML file."""
+                        def load_dataset_mappings() -> Dict[str, Any]:                            """Load dataset mappings from YAML file."""
             mapping_file = Path(__file__).parent / "dataset_mappings.yaml"
             if not mapping_file.exists():
     logger.warning("No dataset mappings file found")
@@ -98,8 +95,7 @@ def load_dataset_in_chunks(self):
     with open(mapping_file, "r") as f: returnyaml.safe_load(f) or {}
 
 
-def verify_dataset(self):
-    local_dir: str,
+def verify_dataset(self):    local_dir: str,
         dataset_id: str,
         token: str,
         config: Optional[str] = None

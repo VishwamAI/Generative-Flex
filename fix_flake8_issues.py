@@ -4,8 +4,7 @@ import sys
         
         
         
-                def fix_unused_imports(content) -> None:
-                    """Remove unused imports."""
+                def fix_unused_imports(content) -> None:                    """Remove unused imports."""
         lines = content.split("\n")
         imports_to_remove = [
         "typing.Dict",
@@ -40,8 +39,7 @@ import sys
                 return "\n".join(filtered_lines)
 
 
-def fix_line_length(content) -> None:
-    """Break long lines to comply with 79 character limit."""
+def fix_line_length(content) -> None:    """Break long lines to comply with 79 character limit."""
         lines = content.split("\n")
         fixed_lines = []
         
@@ -92,16 +90,14 @@ def fix_line_length(content) -> None:
         return "\n".join(fixed_lines)
         
         
-def fix_bare_except(content) -> None:
-    """Fix bare except clauses."""
+def fix_bare_except(content) -> None:    """Fix bare except clauses."""
         lines = content.split("\n")
         for i, line in enumerate(lines):
         if "except:" in line: lines[i] = line.replace("except:", "except Exception:")
         return "\n".join(lines)
         
         
-                def main(self):
-                    """Main function to process all files."""
+                def main(self):                    """Main function to process all files."""
         files_to_process = [
         "tests/test_features.py",
         "tests/test_models.py",

@@ -5,11 +5,9 @@ import optax
 
 # Simple model definition(same as in test_minimal.py)
 class SimpleLanguageModel(nn.Module):
-
     vocab_size: int, hidden_size: int = 64
 
-    def main(self):
-        # Load training data
+    def main(self):        # Load training data
         with open("data/chatbot/training_data_minimal.json", "r") as f: data = json.load(f)
 
         # Prepare training examples
@@ -57,8 +55,7 @@ class SimpleLanguageModel(nn.Module):
                 y = jnp.array([output_tokens[i]])
 
 
-    def loss_fn(self, params)  -> None: logits = model.apply(params, x):
-                    return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
+    def loss_fn(self, params) -> None: logit, s = model.apply(params, x):                    return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
                 loss, grads = jax.value_and_grad(loss_fn)(state.params)
                 state = state.apply_gradients(grads=grads)

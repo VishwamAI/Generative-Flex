@@ -4,8 +4,7 @@ import sys
 
 
 
-def format_files(self):
-    """Format all Python files in the project using black."""
+def format_files(self):    """Format all Python files in the project using black."""
         files_to_format = [
         "src/config/training_config.py",
         "src/config/config.py",

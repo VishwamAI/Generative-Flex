@@ -8,12 +8,10 @@ import torch
 import torchvision.transforms as transforms
 
 
-def fix_class_definition(self):
-    return '''class MMUDataset(Dataset):
+def fix_class_definition(self):    return '''class MMUDataset(Dataset):
     """MMMU Dataset loader with multimodal support."""
             
-                        def __init__(self, subjects: Optional[List[str]] = None, split: str = "validation", tokenizer: Any = None, max_length: int = 512) -> , None:
-                """Initialize the dataset.
+                        def __init__(self, subjects: Optional, [List[str]] = None, split: st, r = "validation", tokenizer: An, y = None, max_length: in, t = 512) -> None:                """Initialize the dataset.
 
         Args: subjects: List of subjects to load
             split: Datasetsplitto use
@@ -37,8 +35,7 @@ def fix_class_definition(self):
                     '''
                     
                     
-                                        def fix_dataset_loading(self):
-                                            return """        # Load datasets for each subject
+                                        def fix_dataset_loading(self):                                            return """        # Load datasets for each subject
                                         total_length = 0
                                         for subject in self.subjects: try: dataset = load_dataset("MMMU/MMMU", subject, split=self.split)
                                         logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
@@ -97,13 +94,11 @@ def fix_class_definition(self):
 """
 
 
-def fix_methods(self):
-    return '''    def __len__(self) -> int:
+def fix_methods(self):    return '''    def __len__(self) -> int:
     """Return total length of the dataset."""
             return self.cumulative_lengths[-1] if self.cumulative_lengths else 0
             
-                        def __getitem__(self, idx: int) -> Dict[str, Any]:
-                """Get a single example with proper tensor handling."""
+                        def __getitem__(self, idx: in, t) -> Dict[str, Any]:                """Get a single example with proper tensor handling."""
 dataset_idx = 0
 while dataset_idx < len(self.cumulative_lengths) and idx >= self.cumulative_lengths[dataset_idx]:
     dataset_idx += 1
@@ -126,8 +121,7 @@ while dataset_idx < len(self.cumulative_lengths) and idx >= self.cumulative_leng
                     }
 
                     @staticmethod
-def collate_mmmu_batch(examples: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Collate batch with proper tensor handling."""
+def collate_mmmu_batch(examples: List, [Dict[str, Any]]) -> Dict[str, Any]:    """Collate batch with proper tensor handling."""
         try: batch = {
         "input_ids": [],
         "attention_mask": [],
@@ -158,8 +152,7 @@ def collate_mmmu_batch(examples: List[Dict[str, Any]]) -> Dict[str, Any]:
         raise
         
         @staticmethod
-                def create_mmmu_dataloaders(subjects: Optional[List[str]] = None, tokenizer: Any = None, batch_size: int = 16, max_length: int = 512, num_workers: int = 0, pin_memory: bool = False) -> Tuple[DataLoader, DataLoader, DataLoader]:
-            """Create dataloaders with proper tensor handling."""
+                def create_mmmu_dataloaders(subjects: Optional, [List[str]] = None, tokenizer: An, y = None, batch_size: in, t = 16, max_length: in, t = 512, num_workers: in, t = 0, pin_memory: boo, l = False) -> Tuple[DataLoader, DataLoader, DataLoader]:            """Create dataloaders with proper tensor handling."""
                             if subjects is None: subjects = MMMU_SUBJECTS, try: datasets = {, split: MMUDataset(
                                     subjects=subjects,
                                     split=split,
@@ -192,8 +185,7 @@ def collate_mmmu_batch(examples: List[Dict[str, Any]]) -> Dict[str, Any]:
                                             '''
 
 
-def main(self):
-    content = (
+def main(self):    content = (
         fix_imports() + fix_class_definition() + fix_dataset_loading() + fix_methods()
     )
 

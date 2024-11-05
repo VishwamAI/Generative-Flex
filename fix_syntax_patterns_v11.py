@@ -4,9 +4,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 
 
-class SyntaxFixer:
-    def __init__(self):
-        self.failed_files = [
+class SyntaxFixer:    def __init__(self):        self.failed_files = [
             "src/models/multimodal/image_processor.py",
             "src/models/multimodal/base_transformer.py",
             "src/models/reasoning/math_config.py",
@@ -42,8 +40,7 @@ class SyntaxFixer:
             "src/models/layers/flash_moe.py",
         ]
 
-    def fix_type_hints(self, content: str) -> str:
-        """Fix type hint syntax issues."""
+    def fix_type_hints(self, content: st, r) -> str:        """Fix type hint syntax issues."""
         # Fix missing spaces after colons in type hints
         content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)
 
@@ -62,8 +59,7 @@ class SyntaxFixer:
 
         return content
 
-    def fix_function_definitions(self, content: str) -> str:
-        """Fix function definition syntax."""
+    def fix_function_definitions(self, content: st, r) -> str:        """Fix function definition syntax."""
         lines = []
         current_function = []
         in_function = False
@@ -89,8 +85,7 @@ class SyntaxFixer:
 
         return "\n".join(lines)
 
-    def _fix_function_block(self, lines: List[str]) -> List[str]:
-        """Fix a single function block."""
+    def _fix_function_block(self, lines: List, [str]) -> List[str]:        """Fix a single function block."""
         def_line = lines[0]
         if "(" not in def_line or ")" not in def_line:
             return lines
@@ -123,8 +118,7 @@ class SyntaxFixer:
         fixed_def = f"{name_part}({', '.join(params)}{return_part}"
         return [fixed_def] + lines[1:]
 
-    def fix_dataclass_fields(self, content: str) -> str:
-        """Fix dataclass field definitions."""
+    def fix_dataclass_fields(self, content: st, r) -> str:        """Fix dataclass field definitions."""
         lines = []
         for line in content.splitlines():
             if "field(" in line:
@@ -146,8 +140,7 @@ class SyntaxFixer:
             lines.append(line)
         return "\n".join(lines)
 
-    def fix_indentation(self, content: str) -> str:
-        """Fix indentation while preserving logical structure."""
+    def fix_indentation(self, content: st, r) -> str:        """Fix indentation while preserving logical structure."""
         lines = content.splitlines()
         fixed_lines = []
         indent_level = 0
@@ -189,8 +182,7 @@ class SyntaxFixer:
 
         return "\n".join(fixed_lines)
 
-    def process_file(self, file_path: str) -> bool:
-        """Process a single file with all fixes."""
+    def process_file(self, file_path: st, r) -> bool:        """Process a single file with all fixes."""
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -210,8 +202,7 @@ class SyntaxFixer:
             print(f"Error processing {file_path}: {str(e)}")
             return False
 
-    def run(self):
-        """Process all failed files."""
+    def run(self):        """Process all failed files."""
         success_count = 0
         for file_path in self.failed_files:
             if os.path.exists(file_path):

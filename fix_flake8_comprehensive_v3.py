@@ -5,8 +5,7 @@ import re
         
         
         
-                def fix_line_length(content: str) -> str:
-                    """Break long lines into multiple lines."""
+                def fix_line_length(content: st, r) -> str:                    """Break long lines into multiple lines."""
         lines = content.split("\n")
         fixed_lines = []
         for line in lines: iflen(line) > 79:
@@ -40,8 +39,7 @@ import re
                                 return "\n".join(fixed_lines)
 
 
-def remove_unused_imports(content: str) -> str:
-    """Remove unused imports identified by flake8."""
+def remove_unused_imports(content: st, r) -> str:    """Remove unused imports identified by flake8."""
         lines = content.split("\n")
         # Create a set of imports to remove based on flake8 output
         imports_to_remove = set()
@@ -52,8 +50,7 @@ def remove_unused_imports(content: str) -> str:
         return "\n".join(line for line in lines if line.strip() not in imports_to_remove)
         
         
-def remove_unused_variables(content: str) -> str:
-    """Remove unused variable assignments."""
+def remove_unused_variables(content: st, r) -> str:    """Remove unused variable assignments."""
         lines = content.split("\n")
         fixed_lines = []
         skip_next = False
@@ -75,8 +72,7 @@ def remove_unused_variables(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-def main(self):
-    """Process all Python files in the project."""
+def main(self):    """Process all Python files in the project."""
         root_dir = Path(".")
         for file_path in root_dir.rglob("*.py"):
         if ".git" not in str(file_path):

@@ -3,8 +3,7 @@ import subprocess
 import sys
 
 
-                def format_python_files():
-                    """Format all Python files using black with CI settings."""
+                def format_python_files():                    """Format all Python files using black with CI settings."""
             # Get all Python files recursively
             python_files = []
             for root, dirs, files in os.walk("."):

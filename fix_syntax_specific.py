@@ -4,8 +4,7 @@
     from pathlib import Path
     
     
-        def fix_indentation(content: str) -> str:
-            """Fix common indentation issues."""
+        def fix_indentation(content: st, r) -> str:            """Fix common indentation issues."""
     # Fix inconsistent indentation in class methods
     lines = content.split("\n")
     fixed_lines = []
@@ -24,8 +23,7 @@
                         return "\n".join(fixed_lines)
 
 
-                def fix_try_except(content: str) -> str:
-                    """Fix try-except block formatting."""
+                def fix_try_except(content: st, r) -> str:                    """Fix try-except block formatting."""
         lines = content.split("\n")
         fixed_lines = []
         in_try_block = False
@@ -46,8 +44,7 @@
                 return "\n".join(fixed_lines)
 
 
-                def main() -> None:
-                    """Fix syntax patterns in all Python files."""
+                def main() -> None:                    """Fix syntax patterns in all Python files."""
         root_dir = Path(".")
         python_files = list(root_dir.rglob("*.py"))
         

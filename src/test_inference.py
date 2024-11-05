@@ -2,8 +2,7 @@ from typing import Dict, Any
 
 
 # Define the same model architecture
-class SimpleGreetingModel(nn.Module):
-    vocab_size: int, hidden_size: int = 64
+class SimpleGreetingModel(nn.Module):    vocab_size: int, hidden_size: int = 64
 
 def main(self):
     # Load vocabulary

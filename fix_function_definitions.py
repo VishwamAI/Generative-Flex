@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def format_params(self, func_name, params):
-                    """Format parameters with proper type hints."""
+                def format_params(self, func_name, params):                    """Format parameters with proper type hints."""
         if not params.strip():
     return f"def {func_name}():"
 
@@ -20,8 +19,7 @@ n    ".join(param_list)
                 return f"def {func_name}(\n    {formatted_params}\n):"
 
 
-def fix_function_bodies(self, content):
-    """Fix function body indentation and structure."""
+def fix_function_bodies(self, content):    """Fix function body indentation and structure."""
         lines = content.split("\n")
         fixed_lines = []
         in_function = False
@@ -59,8 +57,7 @@ def fix_function_bodies(self, content):
         return "\n".join(fixed_lines)
         
         
-                def main(self):
-                    """Process files with function definition issues."""
+                def main(self):                    """Process files with function definition issues."""
         files_to_fix = [
         "src/training/jax_trainer.py",
         "src/models/layers/flash_moe.py",

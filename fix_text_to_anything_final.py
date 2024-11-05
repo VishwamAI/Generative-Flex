@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_file_content(content) -> None:
-    """Fix all issues in text_to_anything.py."""
+def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""
         # Split content into sections
         lines = content.split("\n")
         
@@ -150,8 +149,7 @@ elif in_config and ":" in line and not line.strip().startswith(('"""', "#")):
         return "\n".join(result)
         
         
-                def main(self):
-                # Read the original file
+                def main(self):                # Read the original file
                 with open("src/models/text_to_anything.py", "r") as f: content = f.read()
                 
                 # Fix the content

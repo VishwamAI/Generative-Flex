@@ -5,8 +5,7 @@ import jax.numpy as jnp
 import re
 
 
-def fix_test_features(self):
-    path = Path("tests/test_features.py")
+def fix_test_features(self):    path = Path("tests/test_features.py")
     if not path.exists():
         return
 
@@ -33,8 +32,7 @@ imports_to_add = """
             path.write_text(content)
             
             
-                        def fix_test_models(self):
-                        path = Path("tests/test_models.py")
+                        def fix_test_models(self):                        path = Path("tests/test_models.py")
                         if not path.exists():
             return
             

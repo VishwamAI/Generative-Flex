@@ -5,8 +5,7 @@ import subprocess
         
         
         
-                def format_files(self):
-                    """Format all Python files using black."""
+                def format_files(self):                    """Format all Python files using black."""
         # Get all Python files
         python_files = []
         for root, _, files in os.walk("."):

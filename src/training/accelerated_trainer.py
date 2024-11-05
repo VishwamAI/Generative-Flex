@@ -11,13 +11,11 @@ Accelerated trainer implementation.
 logger = logging.getLogger(__name__)
 
 
-class AcceleratedTrainer:
-    """
+class AcceleratedTrainer:    """
     Trainer class with accelerate support.
     """
 
-    def __init__(self):
-        model,
+    def __init__(self):        model,
         train_dataloader: DataLoader,
         eval_dataloader: Optional[DataLoader] = None,
         optimizer: Optional[torch.optim.Optimizer] = None,
@@ -52,8 +50,7 @@ class AcceleratedTrainer:
 
             # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
-    def train(self) ) -> None:
-                """
+    def train(self) -> None:                """
                 Train the model.
                 """
                 self.model.train()
@@ -80,8 +77,7 @@ class AcceleratedTrainer:
 
                             if self._step % self.save_steps == 0: self.save_checkpoint()
 
-    def evaluate(self) ) -> None: Dict[str, float]:
-                                """
+    def evaluate(self) -> None: Dict, [str, float]:                                """
                                 Evaluate the model.
                                 """
                                 if self.eval_dataloader is None: return{}
@@ -105,8 +101,7 @@ class AcceleratedTrainer:
 
                                     return metrics
 
-    def save_checkpoint(self, is_best: bool = False) ) -> None:
-                                    """
+    def save_checkpoint(self, is_best: boo, l = False) -> None:                                    """
                                     Save a model checkpoint.
                                     """
                                     checkpoint_name = f"checkpoint-{{self._step}}"
@@ -115,8 +110,7 @@ class AcceleratedTrainer:
                                     self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
                                     logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-    def log_metrics(self, metrics: Dict[str, float]) ) -> None:
-                                        """
+    def log_metrics(self, metrics: Dict, [str, float]) -> None:                                        """
                                         Log training metrics.
                                         """
                                         metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k, v in metrics.items())

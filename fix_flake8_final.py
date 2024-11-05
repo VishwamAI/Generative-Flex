@@ -6,8 +6,7 @@ import traceback
 
 
 
-def remove_unused_imports(content) -> None:
-    """Remove unused imports more aggressively."""
+def remove_unused_imports(content) -> None:    """Remove unused imports more aggressively."""
         lines = content.split("\n")
         new_lines = []
         skip_next = False
@@ -17,9 +16,7 @@ def remove_unused_imports(content) -> None:
         used_names = set()
         import_names = set()
         
-class NameCollector(ast.NodeVisitor):
-        def visit_Attribute(self, node) -> None: ifisinstance(node.value, ast.Name):
-            used_names.add(node.value.id)
+class NameCollector(ast.NodeVisitor):    def visit_Attribute(self, node) -> None: ifisinstance, (node.value, ast.Name):            used_names.add(node.value.id)
             self.generic_visit(node)
             
             NameCollector().visit(tree)
@@ -58,8 +55,7 @@ class NameCollector(ast.NodeVisitor):
         return "\n".join(new_lines)
         
         
-        def fix_line_length(self, content, max_length=88) -> None:
-            """Fix lines that are too long with better formatting."""
+    def fix_line_length(self, content, max_length=88) -> None:            """Fix lines that are too long with better formatting."""
     lines = content.split("\n")
     new_lines = []
     
@@ -122,15 +118,12 @@ def add_missing_imports(self, content) -> None:
         defined_names = set()
         used_names = set()
         
-class NameAnalyzer(ast.NodeVisitor):
-        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-            defined_names.add(node.id)
+class NameAnalyzer(ast.NodeVisitor):    def visit_Name(self, node) -> None: ifisinstance, (node.ctx, ast.Store):            defined_names.add(node.id)
             elif isinstance(node.ctx, ast.Load):
         used_names.add(node.id)
         self.generic_visit(node)
         
-        def visit_ImportFrom(self, node) -> None: foraliasin node.names: defined_names.add(alias.asname or alias.name)
-            self.generic_visit(node)
+    def visit_ImportFrom(self, node) -> None: foraliasi, n node.names: defined_names, .add(alias.asname or alias.name)            self.generic_visit(node)
             
             NameAnalyzer().visit(tree)
             
@@ -150,15 +143,12 @@ class NameAnalyzer(ast.NodeVisitor):
         return content
         
         
-        def fix_unused_variables(self, content) -> None:
-            """Fix unused variables by prefixing with underscore."""
+    def fix_unused_variables(self, content) -> None:            """Fix unused variables by prefixing with underscore."""
     tree = ast.parse(content)
     assigned_names = set()
     used_names = set()
     
-    class VariableAnalyzer(ast.NodeVisitor):
-        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-                assigned_names.add(node.id)
+    class VariableAnalyzer(ast.NodeVisitor):        def visit_Name(self, node) -> None: ifisinstance, (node.ctx, ast.Store):                assigned_names.add(node.id)
                 elif isinstance(node.ctx, ast.Load):
                 used_names.add(node.id)
                 self.generic_visit(node)
@@ -177,8 +167,7 @@ class NameAnalyzer(ast.NodeVisitor):
                         return content
 
 
-        def fix_import_order(self, content) -> None:
-            """Fix import order to follow PEP8."""
+        def fix_import_order(self, content) -> None:            """Fix import order to follow PEP8."""
             lines = content.split("\n")
             import_lines = []
             other_lines = []

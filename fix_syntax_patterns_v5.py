@@ -3,8 +3,7 @@ import os
 import re
 
 
-def fix_docstring_indentation(content: str) -> str:
-    """Fix docstring indentation issues."""
+def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation issues."""
         # Fix module-level docstrings
 content = re.sub(r'^\s*"""', '"""', content, flags=re.MULTILINE)
         
@@ -27,8 +26,7 @@ elif in_class and line.strip().startswith('"""'):
         return "\n".join(fixed_lines)
         
         
-def fix_method_params(match) -> str:
-    """Fix method parameter formatting."""
+def fix_method_params(match) -> str:    """Fix method parameter formatting."""
         method_name = match.group(1)
         params = match.group(2)
         
@@ -44,8 +42,7 @@ def fix_method_params(match) -> str:
         return f"def {method_name}({params}):"
         
         
-                def main(self):
-                    """Main function to process all Python files."""
+                def main(self):                    """Main function to process all Python files."""
             for root, _, files in os.walk("."):
         if ".git" in root or "venv" in root: continueforfile in files: iffile.endswith(".py"):
                 file_path = os.path.join(root, file)

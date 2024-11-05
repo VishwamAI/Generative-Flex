@@ -3,8 +3,7 @@ import re
 """Fix basic syntax issues before applying black formatting."""
         
         
-                def fix_indentation(self, content: str):
-            """Fix basic indentation issues."""
+                def fix_indentation(self, content: st, r):            """Fix basic indentation issues."""
 lines = content.split('\n')
 fixed_lines = []
 current_indent = 0
@@ -36,8 +35,7 @@ for line in lines: stripped = line.strip()
                             return '\n'.join(fixed_lines)
 
 
-def fix_function_definitions(self, content: str):
-    """Fix common function definition issues."""
+def fix_function_definitions(self, content: st, r):    """Fix common function definition issues."""
                 lines = content.split('\n')
                 fixed_lines = []
                 
@@ -58,8 +56,7 @@ def fix_function_definitions(self, content: str):
                 return '\n'.join(fixed_lines)
                 
                 
-                                def fix_imports(self, content: str):
-                    """Fix import statements."""
+                                def fix_imports(self, content: st, r):                    """Fix import statements."""
 lines = content.split('\n')
 import_lines = []
 other_lines = [] for line in lines: ifline.strip().startswith(('import ', 'from ')):
@@ -79,8 +76,7 @@ other_lines = [] for line in lines: ifline.strip().startswith(('import ', 'from 
                     return '\n'.join(import_lines + other_lines)
 
 
-def fix_string_literals(self, content: str):
-    """Fix string literal syntax."""
+def fix_string_literals(self, content: st, r):    """Fix string literal syntax."""
                 # Replace problematic f-string patterns
 content = re.sub(r""""", '"""', content)
 content = re.sub(r""""", '"""', content)
@@ -92,8 +88,7 @@ content = re.sub(r""""", '"""', content)
                 return content
                 
                 
-                                def process_file(self, file_path: Path):
-                    """Process a single file to fix syntax issues."""
+                                def process_file(self, file_path: Pat, h):                    """Process a single file to fix syntax issues."""
 try: withopen(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply fixes in sequence
@@ -108,8 +103,7 @@ try: withopen(file_path, 'r', encoding='utf-8') as f: content = f.read()
             except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-def main(self):
-    """Fix syntax in all Python files."""
+def main(self):    """Fix syntax in all Python files."""
         root_dir = Path('.')
         python_files = list(root_dir.rglob('*.py'))
         

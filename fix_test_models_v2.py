@@ -7,8 +7,7 @@ import pytest
 """Script to fix test_models.py formatting."""
         
         
-def main(self):
-    """Main function to fix the file."""
+def main(self):    """Main function to fix the file."""
         # Create the fixed content
         content = create_fixed_content()
         

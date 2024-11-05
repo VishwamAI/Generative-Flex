@@ -11,11 +11,9 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 # Simple model for chain-of-thought demonstration
 class SimpleCoTModel(nn.Module):
-
     vocab_size: int, hidden_size: int = 64
 
-    def main(self):
-        # Create minimal training data with chain-of-thought
+    def main(self):        # Create minimal training data with chain-of-thought
         training_data = {
         "conversations": [
         {
@@ -77,8 +75,7 @@ class SimpleCoTModel(nn.Module):
                 y = jnp.array([output_tokens[0]])
 
 
-    def loss_fn(self, params)  -> None: logits = model.apply({"params": params}, x):
-                    return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
+    def loss_fn(self, params) -> None: logit, s = model.apply({"params": params, }, x):                    return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
                 loss, grads = jax.value_and_grad(loss_fn)(state.params)
                 state = state.apply_gradients(grads=grads)

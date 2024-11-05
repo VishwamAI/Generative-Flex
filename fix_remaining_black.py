@@ -12,8 +12,7 @@ import torch.nn as nn
         
         
         
-                def fix_file(file_path, content) -> None:
-                    """Write fixed content to file."""
+                def fix_file(file_path, content) -> None:                    """Write fixed content to file."""
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, "w", encoding="utf-8") as f: f.write(content)
             print(f"Fixed {file_path}")
@@ -24,11 +23,9 @@ import torch.nn as nn
         
         
         
-        class FlashMoELayer(nn.Module):
-    """Flash Mixture of Experts layer implementation."""
+        class FlashMoELayer(nn.Module):    """Flash Mixture of Experts layer implementation."""
         
-                def __init__(self):
-                hidden_size: int,
+                def __init__(self):                hidden_size: int,
                 intermediate_size: int,
                 num_experts: int = 8,
                 dropout_rate: float = 0.1):
@@ -52,8 +49,7 @@ import torch.nn as nn
     # Router network
     self.router = nn.Linear(hidden_size, num_experts)
 
-def forward(self):
-        hidden_states: torch.Tensor,
+def forward(self):        hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
     """Forward pass through the FlashMoE layer."""
                 batch_size, seq_length, hidden_size = hidden_states.shape
@@ -76,11 +72,9 @@ def forward(self):
 
 
 
-class BaseTransformer(nn.Module):
-    """Base transformer model for multimodal processing."""
+class BaseTransformer(nn.Module):    """Base transformer model for multimodal processing."""
         
-                def __init__(self, config: Dict[str, Any]) -> None:
-            """Initialize the base transformer."""
+    def __init__(self, config: Dict, [str, Any]) -> None:            """Initialize the base transformer."""
     super().__init__()
     self.config = config
     self.hidden_size = config.get("hidden_size", 768)
@@ -109,11 +103,9 @@ def forward(self):
                 return hidden_states
                 
                 
-class TransformerLayer(nn.Module):
-    """Single transformer layer implementation."""
+class TransformerLayer(nn.Module):    """Single transformer layer implementation."""
 
-        def __init__(self, config: Dict[str, Any]) -> None:
-        """Initialize the transformer layer."""
+    def __init__(self, config: Dict, [str, Any]) -> None:        """Initialize the transformer layer."""
                 super().__init__()
                 self.attention = MultiHeadAttention(config)
                 self.intermediate = nn.Linear(config["hidden_size"], config["intermediate_size"])
@@ -122,8 +114,7 @@ class TransformerLayer(nn.Module):
                 self.norm1 = nn.LayerNorm(config["hidden_size"])
                 self.norm2 = nn.LayerNorm(config["hidden_size"])
                 
-                                def forward(self):
-                                hidden_states: torch.Tensor,
+    def forward(self):                                hidden_states: torch.Tensor,
                                 attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:
                     """Forward pass through the transformer layer."""
 attention_output = self.attention(hidden_states, attention_mask)
@@ -136,11 +127,9 @@ layer_output = self.dropout(layer_output)
 return self.norm2(hidden_states + layer_output)
 
 
-class MultiHeadAttention(nn.Module):
-    """Multi-head attention implementation."""
+class MultiHeadAttention(nn.Module):    """Multi-head attention implementation."""
         
-                def __init__(self, config: Dict[str, Any]) -> None:
-            """Initialize multi-head attention."""
+    def __init__(self, config: Dict, [str, Any]) -> None:            """Initialize multi-head attention."""
     super().__init__()
     self.num_attention_heads = config["num_attention_heads"]
     self.hidden_size = config["hidden_size"]
@@ -187,11 +176,9 @@ def forward(self):
 
 
 
-class ImageProcessor(nn.Module):
-    """Image processor for handling multimodal inputs in the MMMU model."""
+class ImageProcessor(nn.Module):    """Image processor for handling multimodal inputs in the MMMU model."""
         
-                def __init__(self):
-                image_size: int = 224,
+    def __init__(self):                image_size: int = 224,
                 hidden_size: int = 768,
                 dropout_rate: float = 0.1):
             """Initialize the image processor."""
@@ -248,12 +235,10 @@ def forward(self):
     logger = logging.getLogger(__name__)
 
 
-class AcceleratedTrainer:
-    """Trainer class with accelerate support."""
+class AcceleratedTrainer:    """Trainer class with accelerate support."""
         
         
-                def __init__(self):
-                model,
+    def __init__(self):                model,
                 train_dataloader: DataLoader,
                 eval_dataloader: Optional[DataLoader] = None,
                 optimizer: Optional[torch.optim.Optimizer] = None,
@@ -312,8 +297,7 @@ def train(self) -> None:
         
         if self._step % self.save_steps == 0: self.save_checkpoint()
         
-def evaluate(self) -> Dict[str, float]:
-    """Evaluate the model."""
+def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""
         if self.eval_dataloader is None: return{}
         
         self.model.eval()
@@ -335,16 +319,14 @@ def evaluate(self) -> Dict[str, float]:
         
         return metrics
         
-                def save_checkpoint(self, is_best: bool = False) -> , None:
-            """Save a model checkpoint."""
+                def save_checkpoint(self, is_best: boo, l = False) -> None:            """Save a model checkpoint."""
 checkpoint_name = f"checkpoint-{self._step}"
 if is_best: checkpoint_name = "best_model"
 
     self.accelerator.save_state(f"{self.output_dir}/{checkpoint_name}")
     logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-def log_metrics(self, metrics: Dict[str, float]) -> None:
-    """Log training metrics."""
+def log_metrics(self, metrics: Dict, [str, float]) -> None:    """Log training metrics."""
                 metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
                 logger.info(f"Step {self._step}: {metric_str}")
 """,
@@ -354,11 +336,9 @@ def log_metrics(self, metrics: Dict[str, float]) -> None:
 logger = logging.getLogger(__name__)
 
 
-class Trainer:
-    """Base trainer class."""
+class Trainer:    """Base trainer class."""
         
-                def __init__(self):
-                model,
+    def __init__(self):                model,
                 train_dataloader: DataLoader,
                 eval_dataloader: Optional[DataLoader] = None,
                 optimizer: Optional[torch.optim.Optimizer] = None,
@@ -413,8 +393,7 @@ def train(self) -> None:
         
         if self._step % self.save_steps == 0: self.save_checkpoint()
         
-def evaluate(self) -> Dict[str, float]:
-    """Evaluate the model."""
+def evaluate(self) -> Dict[str, float]:    """Evaluate the model."""
         if self.eval_dataloader is None: return{}
         
         self.model.eval()
@@ -436,8 +415,7 @@ def evaluate(self) -> Dict[str, float]:
         
         return metrics
         
-                def save_checkpoint(self, is_best: bool = False) -> , None:
-            """Save a model checkpoint."""
+                def save_checkpoint(self, is_best: boo, l = False) -> None:            """Save a model checkpoint."""
 checkpoint_name = f"checkpoint-{self._step}"
 if is_best: checkpoint_name = "best_model"
 
@@ -450,16 +428,14 @@ if is_best: checkpoint_name = "best_model"
     f"{self.output_dir}/{checkpoint_name}.pt")
     logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-def log_metrics(self, metrics: Dict[str, float]) -> None:
-    """Log training metrics."""
+def log_metrics(self, metrics: Dict, [str, float]) -> None:    """Log training metrics."""
                 metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
                 logger.info(f"Step {self._step}: {metric_str}")
 """,
     }
 
 
-def main(self):
-    """Fix black formatting issues in problematic files."""
+def main(self):    """Fix black formatting issues in problematic files."""
         for file_path, content in fixes.items():
         full_path = os.path.join(os.getcwd(), file_path)
         if os.path.exists(full_path):

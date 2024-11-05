@@ -7,8 +7,7 @@ import torch.nn as nn
         
         
         
-                def fix_docstrings_in_file(filename) -> None:
-                    """Fix docstring formatting in a file."""
+                def fix_docstrings_in_file(filename) -> None:                    """Fix docstring formatting in a file."""
         with open(filename, "r") as f: content = f.read()
         
             # Fix module-level docstrings
@@ -38,15 +37,13 @@ import torch.nn as nn
                             with open(filename, "w") as f: f.write("\n".join(fixed_lines))
 
 
-def fix_model_files(self):
-    """Fix model-specific files."""
+def fix_model_files(self):    """Fix model-specific files."""
         # Fix experts.py
 experts_content = """"""Mixture of Experts Implementation for Generative-Flex."""
         
         
         
-class MixtureOfExperts(nn.Module):
-    """Mixture of Experts layer implementation."""
+class MixtureOfExperts(nn.Module):    """Mixture of Experts layer implementation."""
 
 def forward(self, x) -> None:
     """Forward pass through the MoE layer."""
@@ -66,8 +63,7 @@ attention_content = """"""Flash Attention Implementation for Generative-Flex."""
 
 
 
-class FlashAttention(nn.Module):
-    """Efficient attention implementation using flash attention algorithm."""
+class FlashAttention(nn.Module):    """Efficient attention implementation using flash attention algorithm."""
         
 def main(self):
     """Fix formatting issues in all problematic files."""

@@ -4,8 +4,7 @@
     from pathlib import Path
     
     
-        def fix_dataclass_field_spacing(content: str) -> str:
-            """Fix dataclass field definitions with exact spacing."""
+        def fix_dataclass_field_spacing(content: st, r) -> str:            """Fix dataclass field definitions with exact spacing."""
     lines = content.split("\n")
     fixed_lines = []
     in_dataclass = False
@@ -52,8 +51,7 @@
                                     return "\n".join(fixed_lines)
 
 
-def fix_function_signatures(content: str) -> str:
-    """Fix function signatures with exact patterns."""
+def fix_function_signatures(content: st, r) -> str:    """Fix function signatures with exact patterns."""
         lines = content.split("\n")
         fixed_lines = []
         
@@ -98,8 +96,7 @@ def fix_function_signatures(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-                def fix_class_methods(content: str) -> str:
-                    """Fix class method definitions."""
+                def fix_class_methods(content: st, r) -> str:                    """Fix class method definitions."""
         lines = content.split("\n")
         fixed_lines = []
         in_class = False
@@ -138,8 +135,7 @@ if next_line.endswith('"""):'):
                                     return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Fix syntax issues in all Python files."""
+                def main(self):                    """Fix syntax issues in all Python files."""
         files_to_fix = [
         "src/config/training_config.py",
         "src/data/math_tokenizer.py",

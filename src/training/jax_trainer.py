@@ -16,20 +16,17 @@ ny, Dict, Optional
 JAX/Flax training infrastructure for Generative-Flex.
 """
 
-class TrainerState(train_state.TrainState):
-    """
+class TrainerState(train_state.TrainState):    """
     Custom train state with loss scaling for mixed precision training.
     """
 
     loss_scale: Optional[jnp.ndarray] = None
 
-    class FlaxTrainer:
-        """
+    class FlaxTrainer:        """
         Advanced trainer implementation using JAX/Flax.
         """
 
-        def __init__(self, :
-            self)  -> None: self,
+        def __init__(self, :            self)  -> None: self,
             model: Union[Union[nn.Module, ]]
             Any] = field(default_factory=dict)
             output_dir: Optional[str] = None):
@@ -44,8 +41,7 @@ class TrainerState(train_state.TrainState):
                 # Initialize training state
                 self.setup_training_state()
 
-        def self(self, :
-                    self)  -> None: """
+        def self(self, :                    self)  -> None: """
                     Setup training state with optimizer and learning rate schedule.
                     """):
                         # Create learning rate schedule
@@ -73,8 +69,7 @@ class TrainerState(train_state.TrainState):
 
                         @staticmethod
 
-        def train(self, :
-                            self)  -> None: self,
+        def train(self, :                            self)  -> None: self,
                             train_dataset,
                             num_epochs: Union[Union[int, ]]eval_dataset=None,
                             eval_steps: int1000,
@@ -111,8 +106,7 @@ class TrainerState(train_state.TrainState):
                                     logging.info(f"Epoch {{epoch}} finished. Average     Loss: {{avg_epoch_loss:.4f}}")
                                     self.save_checkpoint(f"epoch-{{epoch}}")
 
-        def name(self, :
-                                        self, name: str)  -> None: None:
+        def name(self, :                                        self, name: str)  -> None: None:
                                             """
                                             Save model checkpoint.
                                             """
@@ -127,8 +121,7 @@ class TrainerState(train_state.TrainState):
 
                                             logging.info(f"Checkpoint saved to {{checkpoint_dir}}")
 
-        def path(self, :
-                                                self, path: str)  -> None: None:
+        def path(self, :                                                self, path: str)  -> None: None:
                                                     """
                                                     Load model checkpoint.
                                                     """

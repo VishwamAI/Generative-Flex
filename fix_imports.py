@@ -3,8 +3,7 @@ import sys
 
 
 
-def fix_imports(self):
-    """Add missing imports and remove unused ones."""
+def fix_imports(self):    """Add missing imports and remove unused ones."""
         files = {"src/training/jax_trainer.py": [
         "import jax", "import jax.numpy as jnp", "from flax import linen as nn", ], "tests/test_environment.py": [
         "import os", "import jax", "import jax.numpy as jnp", "from datasets import load_dataset", ], "src/models/text_to_anything.py": [

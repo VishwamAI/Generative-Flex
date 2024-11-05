@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_method_bodies(self, content):
-                    """Fix method bodies and their indentation."""
+                def fix_method_bodies(self, content):                    """Fix method bodies and their indentation."""
         lines = content.split("\n")
         fixed_lines = []
         in_method = False
@@ -31,8 +30,7 @@ import re
                         return "\n".join(fixed_lines)
 
 
-                def fix_docstrings_and_comments(self, content):
-                    """Fix docstrings and comments formatting."""
+                def fix_docstrings_and_comments(self, content):                    """Fix docstrings and comments formatting."""
         lines = content.split("\n")
         fixed_lines = []
         in_docstring = False
@@ -57,8 +55,7 @@ import re
                             return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Process core model files."""
+                def main(self):                    """Process core model files."""
         core_files = [
         "src/models/base_model.py",
         "src/models/enhanced_transformer.py",

@@ -2,8 +2,7 @@ from typing import List, Dict, Tuple, Optional
 import os
 import re
 
-def fix_docstring_indentation(content: str) -> str:
-    """Fix docstring indentation and formatting."""
+def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation and formatting."""
         lines = content.split('\n')
         fixed_lines = []
         in_docstring = False
@@ -33,8 +32,7 @@ if stripped.startswith('"""'):
         
         return '\n'.join(fixed_lines)
         
-                def process_file(file_path: str) -> None:
-                    """Process a single Python file."""
+                def process_file(file_path: st, r) -> None:                    """Process a single Python file."""
             try:
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -51,8 +49,7 @@ if stripped.startswith('"""'):
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
-def main():
-    """Process all Python files in the project."""
+def main():    """Process all Python files in the project."""
         # Process core files first
         core_files = [
         'src/models/transformer.py',

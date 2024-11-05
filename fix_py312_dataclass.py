@@ -18,8 +18,7 @@
     ]
     
     
-def fix_field_def(match: re.Match) -> str: var_name = match.group(1)
-    type_hint = match.group(2)
+def fix_field_def(match: re, .Match) -> str: var_nam, e = match.group(1)    type_hint = match.group(2)
     field_args = match.group(3)
 
     # Clean up type hint
@@ -45,8 +44,7 @@ def fix_field_def(match: re.Match) -> str: var_name = match.group(1)
             return content
 
 
-                def fix_func_def(match: re.Match) -> str: indent = match.group(1)
-                def_line = match.group(2)
+                def fix_func_def(match: re, .Match) -> str: inden, t = match.group(1)                def_line = match.group(2)
                 body = match.group(3)
                 
                 # Clean up function definition
@@ -84,8 +82,7 @@ def fix_field_def(match: re.Match) -> str: var_name = match.group(1)
         return re.sub(pattern, fix_func_def, content, flags=re.MULTILINE)
         
         
-def fix_method(match: re.Match) -> str: indent = match.group(1)
-    decorator = match.group(2) or ""
+def fix_method(match: re, .Match) -> str: inden, t = match.group(1)    decorator = match.group(2) or ""
     method_def = match.group(3)
     body = match.group(4)
 
@@ -109,8 +106,7 @@ def fix_method(match: re.Match) -> str: indent = match.group(1)
                     return re.sub(pattern, fix_method, content, flags=re.MULTILINE)
 
 
-                def main() -> None:
-                    """Fix Python 3.12 dataclass and function definition issues in core files."""
+                def main() -> None:                    """Fix Python 3.12 dataclass and function definition issues in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

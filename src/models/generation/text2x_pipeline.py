@@ -3,15 +3,11 @@ import torch
 
 
 
-class ModalityProjection(nn.Module):
-    def forward(self, x)  -> None: x = self.dense(x):
-        x = self.activation(x)
+class ModalityProjection(nn.Module):    def forward(self, x) -> None: x = self.dense(x):        x = self.activation(x)
         return self.layer_norm(x)
 
 
-    class Text2XPipeline(nn.Module):
-        def __init__(self):
-            attention_mask=None,
+    class Text2XPipeline(nn.Module):        def __init__(self):            attention_mask=None,
             target_modality="text",
             position_ids=None):
                 # Add modality embedding to input embeddings
@@ -30,8 +26,7 @@ class ModalityProjection(nn.Module):
 
                 return {"output": output, "hidden_states": hidden_states}
 
-        def __init__(self):
-                attention_mask=None,
+        def __init__(self):                attention_mask=None,
                 target_modality="text",
                 _max_length=None,
                 temperature=1.0):

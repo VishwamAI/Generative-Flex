@@ -6,8 +6,7 @@
     from typing import List, Tuple
     
     
-        def fix_indentation(content: str) -> str:
-            """Fix common indentation issues."""
+        def fix_indentation(content: st, r) -> str:            """Fix common indentation issues."""
     lines = content.split("\n")
     fixed_lines = []
     indent_stack = [0]
@@ -44,8 +43,7 @@
                                         return "\n".join(fixed_lines)
 
 
-def process_batch(files: List[Path], batch_size: int = 10) -> , None:
-    """Process files in batches."""
+def process_batch(files: List, [Path], batch_size: in, t = 10) -> None:    """Process files in batches."""
                 total_files = len(files)
                 successful = 0
                 failed = 0
@@ -67,8 +65,7 @@ def process_batch(files: List[Path], batch_size: int = 10) -> , None:
                 sys.stdout.flush()
                 
                 
-                                def main() -> None:
-                                    """Fix syntax patterns in all Python files using batched processing."""
+                                def main() -> None:                                    """Fix syntax patterns in all Python files using batched processing."""
                 root_dir = Path(".")
                 python_files = [
                 f

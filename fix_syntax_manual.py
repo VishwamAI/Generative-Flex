@@ -4,8 +4,7 @@ import re
         
         
         
-                def fix_indentation(content) -> None:
-                    """Fix indentation issues."""
+                def fix_indentation(content) -> None:                    """Fix indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
@@ -33,8 +32,7 @@ import re
                             return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Fix syntax errors in problematic files."""
+                def main(self):                    """Fix syntax errors in problematic files."""
         problem_files = [
         "src/models/multimodal/image_processor.py",
         "src/models/multimodal/base_transformer.py",

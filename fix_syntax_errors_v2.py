@@ -3,8 +3,7 @@ import re
 
 
 
-                def fix_indentation_issues(content) -> None:
-                    """Fix indentation issues."""
+                def fix_indentation_issues(content) -> None:                    """Fix indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
@@ -29,8 +28,7 @@ if not stripped.startswith(('"""', """"")):
                             return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Fix syntax errors in files that failed black formatting."""
+                def main(self):                    """Fix syntax errors in files that failed black formatting."""
         files_to_fix = [
         "analyze_performance_by_category.py",
         "data/dataset_verification_utils.py",

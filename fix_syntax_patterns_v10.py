@@ -6,8 +6,7 @@ import ast
 from typing import List, Dict, Any, Optional
 
 
-def fix_basic_syntax(content: str) -> str:
-    """Fix basic syntax issues."""
+def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""
     # Remove extra spaces around colons in type hints
     content = re.sub(r"\s*:\s*(\w+)", r": \1", content)
 
@@ -20,8 +19,7 @@ def fix_basic_syntax(content: str) -> str:
     return content
 
 
-def fix_function_def(content: str) -> str:
-    """Fix function definition syntax."""
+def fix_function_def(content: st, r) -> str:    """Fix function definition syntax."""
     lines = content.split("\n")
     fixed_lines = []
     in_def = False
@@ -61,8 +59,7 @@ def fix_function_def(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_parameter_list(func_name: str, params: str, return_type: Optional[str]) -> str:
-    """Fix parameter list formatting."""
+def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [str]) -> str:    """Fix parameter list formatting."""
     if not params:
         if return_type:
             return f"def {func_name}() -> {return_type.strip()}:"
@@ -93,8 +90,7 @@ def fix_parameter_list(func_name: str, params: str, return_type: Optional[str]) 
     return f"def {func_name}({params_str}):"
 
 
-def fix_class_def(content: str) -> str:
-    """Fix class definition syntax."""
+def fix_class_def(content: st, r) -> str:    """Fix class definition syntax."""
     lines = content.split("\n")
     fixed_lines = []
     in_class = False
@@ -126,8 +122,7 @@ def fix_class_def(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
     if "@dataclass" not in content:
         return content
 
@@ -175,8 +170,7 @@ def fix_dataclass_fields(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single file applying fixes one at a time."""
+def process_file(file_path: st, r) -> None:    """Process a single file applying fixes one at a time."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -210,8 +204,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:
-    """Process all Python files in the project."""
+def main() -> None:    """Process all Python files in the project."""
     # Process core files first
     core_files = [
         "src/config/config.py",

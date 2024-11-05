@@ -11,11 +11,9 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 
 class SimpleChatModel(nn.Module):
-
     vocab_size: int, hidden_size: int = 64
 
-    def main(self):
-        # Create and save training data
+    def main(self):        # Create and save training data
         training_data = create_training_data()
         with open("data/chatbot/training_data_cot.json", "w") as f: json.dump(training_data, f, indent=2)
 
@@ -52,8 +50,7 @@ class SimpleChatModel(nn.Module):
             print("\nTraining simple chain-of-thought model...")
 
             @jax.jit
-    def train_step(self, state, x, y)  -> None: defloss_fn(params) -> None: logits = model.apply({"params": params}, x):
-                return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None, :], labels=y[0: 1]).mean()
+    def train_step(self, state, x, y) -> None: defloss_fn, (params) -> None: logit, s = model.apply({"params": params, }, x):                return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None, :], labels=y[0: 1]).mean()
 
             loss, grads = jax.value_and_grad(loss_fn)(state.params)
             return state.apply_gradients(grads=grads), loss

@@ -5,22 +5,19 @@ import jax
 
 
 
-def load_data(self):
-    file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:
+def load_data(self):    file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:
         with open(file_path, "r") as f: data = json.load(f)
         return data["conversations"]
 
 
-        def create_vocabulary(conversations: List[Dict[str, str]]) -> Dict[str, int]:
-        vocab = {"<pad>": 0, "<start>": 1, "<end>": 2, "<unk>": 3}
+        def create_vocabulary(conversations: List, [Dict[str, str]]) -> Dict[str, int]:        vocab = {"<pad>": 0, "<start>": 1, "<end>": 2, "<unk>": 3}
         for conv in conversations: fortextin [conv["input"], conv["response"]]:
             for token in text.lower().split():
                 if token not in vocab: vocab[token] = len(vocab)
                 return vocab
 
 
-                        def main(self):
-                # Load and prepare data
+                        def main(self):                # Load and prepare data
                 conversations = load_data("data/chatbot/training_data.json")
                 vocab = create_vocabulary(conversations)
 

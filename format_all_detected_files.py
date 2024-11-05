@@ -4,8 +4,7 @@ import subprocess
         
         
         
-                def format_files(self):
-                    """Format all detected files using black."""
+                def format_files(self):                    """Format all detected files using black."""
         files_to_format = [
         "src/config/training_config.py",
         "src/config/config.py",

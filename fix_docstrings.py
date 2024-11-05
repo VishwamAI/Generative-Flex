@@ -3,8 +3,7 @@ import re
 
 
 
-def fix_docstrings_and_strings(content) -> None:
-    """Fix docstring and string literal issues."""
+def fix_docstrings_and_strings(content) -> None:    """Fix docstring and string literal issues."""
         # Fix docstrings with extra quotes
 content = re.sub(r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | re.DOTALL
         )
@@ -48,8 +47,7 @@ and not line.strip().endswith('"""')
         return "\n".join(fixed_lines)
         
         
-def main(self):
-    """Fix docstring issues in problematic files."""
+def main(self):    """Fix docstring issues in problematic files."""
         problem_files = [
         "src/models/multimodal/image_processor.py",
         "src/models/multimodal/base_transformer.py",

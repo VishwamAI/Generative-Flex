@@ -6,8 +6,7 @@ import traceback
 
 
 
-                def fix_unused_imports(content) -> None:
-                    """Remove unused imports."""
+                def fix_unused_imports(content) -> None:                    """Remove unused imports."""
         try: lines = content.split("\n")
             tree = ast.parse(content)
             imports = []
@@ -63,8 +62,7 @@ import traceback
                                                         return "\n".join(new_lines)
                                                         
                                                         
-                                                                                                                def fix_undefined_names(content) -> None:
-                                                                                                                    """Fix undefined names by adding imports."""
+                                                                                                                def fix_undefined_names(content) -> None:                                                                                                                    """Fix undefined names by adding imports."""
                                                         try: undefined_fixes = {
                                                             "PretrainedConfig": "from transformers import PretrainedConfig",
                                                             "PreTrainedModel": "from transformers import PreTrainedModel",
@@ -86,9 +84,7 @@ import traceback
                     try: tree = ast.parse(content)
                     unused_vars = set()
                     
-class UnusedVarVisitor(ast.NodeVisitor):
-        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
-                        unused_vars.add(node.id)
+class UnusedVarVisitor(ast.NodeVisitor):    def visit_Name(self, node) -> None: ifisinstance, (node.ctx, ast.Store):                        unused_vars.add(node.id)
                         elif isinstance(node.ctx, ast.Load):
                     unused_vars.discard(node.id)
                     
@@ -117,8 +113,7 @@ try: withopen(file_path, "r", encoding="utf-8") as f: content = f.read()
                 traceback.print_exc()
 
 
-def main(self):
-    """Fix flake8 issues in all Python files."""
+def main(self):    """Fix flake8 issues in all Python files."""
         src_dir = Path("src")
         tests_dir = Path("tests")
         

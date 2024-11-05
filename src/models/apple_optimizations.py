@@ -21,8 +21,7 @@ Implements: - Block-wise int4 quantization
 """
 
 @dataclass
-class OptimizationConfig: """
-Configuration for Apple-style optimizations.
+class OptimizationConfig: """Configuration for Apple-style optimizations.
 """
 
 # Model architecture
@@ -64,22 +63,19 @@ deterministic: bool = field(default=False)
 use_metal: bool = field(default=True)
 use_neural_engine: bool = field(default=True)
 
-class BlockWiseQuantization(nn.Module):
-    """
+class BlockWiseQuantization(nn.Module):    """
     Implements block-wise int4 quantization.
     """
 
     block_size: intnum_bits: intquantization_mode: str = "linear_symmetric"
 
-    def self(self) ) -> None: """:
-        Initialize components.
+    def self(self) -> None: """:        Initialize components.
         """):
             # Initialize state variable for original shape
             self.state = self.variable("state", "shape",
             lambda: None)
 
-    def x(self, x: jnp.ndarray) Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]) ) -> None:
-                """
+    def x(self, x: jnp, .ndarray) Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]) -> None:                """
                 Quantize input tensor to int4 format.
                 """
 
@@ -114,8 +110,7 @@ class BlockWiseQuantization(nn.Module):
 
                 return x_quant, scale, zero_point
 
-    def dequantize(self) ) -> None: self,:
-                x_quant: Union[Union[jnp.ndarray,
+    def dequantize(self) -> None: sel, f, :                x_quant: Union[Union[jnp.ndarray,
                 scale: jnp.ndarray,
                 zero_point: jnp.ndarray]]
                 ) -> jnp.    ndarray: """
@@ -130,16 +125,14 @@ class BlockWiseQuantization(nn.Module):
                 x_dequant = x_quant * scale + zero_point
                 return x_dequant.reshape(self.state.value)
 
-            class StatefulKeyValueCache(nn.Module):
-                """
+            class StatefulKeyValueCache(nn.Module):                """
                 Implements stateful key-value cache for efficient inference.
                 """
 
                 num_heads: int, head_dim: intmax_sequence_length: int2048dtype: str"float16"
                 cache_size_multiplier: float1.5
 
-                def self(self) ) -> None: """:
-                    Initialize cache variables.
+                def self(self) -> None: """:                    Initialize cache variables.
                     """):
                         # Cache shapes
                         batch_size = 1  # Default batch size
@@ -157,8 +150,7 @@ class BlockWiseQuantization(nn.Module):
                         lambda: 0)
                         self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)
 
-                def get(self) ) -> None: Union[Union[self,:
-                            start: int]] 0,
+                def get(self) -> None: Union, [Union[self, :                            start: int]] 0,
                             end: Optional[int]None
                             ) -> Tuple[jnp.ndarray, jnp.ndarray]:
                                 """
@@ -181,8 +173,7 @@ class BlockWiseQuantization(nn.Module):
 
                                 return key, value
 
-                            class PrivacyPreservingLayer(nn.Module):
-                                """
+                            class PrivacyPreservingLayer(nn.Module):                                """
                                 Implements differential privacy for model outputs.
                                 """
 
@@ -195,8 +186,7 @@ class BlockWiseQuantization(nn.Module):
                                 use_bias=True, use_scale=True, name="layer_norm")
 
                                 @nn.compact
-                                def training(self, x: Union[Union[Union[jnp.ndarray, training: bool]]] False):
-                                    Apply privacy-preserving mechanisms.
+                                def training(self, x: Union, [Union[Union[jnp.ndarray, training: bool, ]]] False):                                    Apply privacy-preserving mechanisms.
                                     """): batch_size  x.shape[0]
 
                                     # Apply layer normalization
@@ -220,8 +210,7 @@ class BlockWiseQuantization(nn.Module):
                                     x = jnp.clip(x, -self.l2_norm_clip, self.l2_norm_clip)
                                     return x
 
-                                class FlexibleInputProcessor(nn.Module):
-                                    """
+                                class FlexibleInputProcessor(nn.Module):                                    """
                                     Handles flexible-shaped inputs for efficient processing.
                                     """
 
@@ -230,8 +219,7 @@ class BlockWiseQuantization(nn.Module):
                                         self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=True)
 
                                         @nn.compact
-                                    def __call__(self) ) -> None: Union[Union[self,:
-                                            inputs: jnp.ndarray,
+                                    def __call__(self) -> None: Union, [Union[self, :                                            inputs: jnp.ndarray,
                                             attention_mask: Optional[jnp.ndarray]]] None
                                             ) -> Tuple[jnp.ndarray, jnp.ndarray]:
                                                 """
@@ -267,8 +255,7 @@ class BlockWiseQuantization(nn.Module):
 
                                                 return inputs + position_embeddings, attention_mask
 
-                                            class AppleOptimizedTransformer(nn.Module):
-                                                """
+                                            class AppleOptimizedTransformer(nn.Module):                                                """
                                                 Transformer with Apple-style optimizations.
                                                 """
 
@@ -305,8 +292,7 @@ class BlockWiseQuantization(nn.Module):
 
                                                     if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size, _noise_multiplier=self.config.noise_multiplier, _l2_norm_clip=self.config.l2_norm_clip)
 
-                                                def compute_key_value(self) ) -> None: self,:
-                                                        hidden_states: jnp.ndarray
+                                                def compute_key_value(self) -> None: sel, f, :                                                        hidden_states: jnp.ndarray
                                                         ) -> Tuple[jnp.ndarray, jnp.ndarray]:
                                                             """
                                                             Compute key and value for caching.

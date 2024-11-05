@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_nested_blocks(self, content):
-                    """Fix indentation in nested blocks."""
+                def fix_nested_blocks(self, content):                    """Fix indentation in nested blocks."""
         lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
@@ -54,8 +53,7 @@ import re
                                                 return "\n".join(fixed_lines)
 
 
-def fix_imports(self, content):
-    """Fix import statement formatting."""
+def fix_imports(self, content):    """Fix import statement formatting."""
         lines = content.split("\n")
         fixed_lines = []
         import_block = []
@@ -81,8 +79,7 @@ def fix_imports(self, content):
         return "\n".join(fixed_lines)
         
         
-def main(self):
-    """Process files with indentation and string formatting issues."""
+def main(self):    """Process files with indentation and string formatting issues."""
         # Focus on files with known issues
         files_to_fix = [
         "src/models/audio_model.py",

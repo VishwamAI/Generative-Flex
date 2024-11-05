@@ -5,8 +5,7 @@
     from typing import List, Dict, Set
     
     
-        def fix_imports(content: str) -> str:
-            """Fix and deduplicate imports, especially dataclass-related ones."""
+        def fix_imports(content: st, r) -> str:            """Fix and deduplicate imports, especially dataclass-related ones."""
     lines = content.split("\n")
     fixed_lines = []
     seen_imports = set()
@@ -23,8 +22,7 @@
                 return "\n".join(fixed_lines)
 
 
-                def fix_function_definitions(content: str) -> str:
-                    """Fix malformed function definitions."""
+                def fix_function_definitions(content: st, r) -> str:                    """Fix malformed function definitions."""
         lines = content.split("\n")
         fixed_lines = []
         
@@ -50,8 +48,7 @@
             return "\n".join(fixed_lines)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
         lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
@@ -70,8 +67,7 @@ def fix_dataclass_fields(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-def main(self):
-    """Fix syntax issues in all Python files."""
+def main(self):    """Fix syntax issues in all Python files."""
         files_to_fix = [
         "src/config/training_config.py",
         "src/data/math_tokenizer.py",

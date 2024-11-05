@@ -4,8 +4,7 @@ import re
         
         
         
-def main(self):
-    """Fix formatting issues in specific files."""
+def main(self):    """Fix formatting issues in specific files."""
         # Files with file operation issues
         file_op_files = [
         "fix_text_to_anything.py",

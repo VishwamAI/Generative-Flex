@@ -3,11 +3,9 @@ import json
 
 
 class SimpleChatModel(nn.Module):
-
     vocab_size: int, hidden_size: int = 64
 
-    def main(self):
-        # Load vocabulary
+    def main(self):        # Load vocabulary
         with open("data/chatbot/vocab.json", "r") as f: vocab = json.load(f)
 
         # Create token mappings

@@ -15,15 +15,13 @@ Implements efficient data loading and preprocessing with dynamic batching
 
 
 @dataclass
-class DataConfig:
-    """Configuration for data processing"""
+class DataConfig:    """Configuration for data processing"""
         
 max_seq_length: int = 2048, batch_size: int = 32, num_workers: int = 4, shuffle: bool = True, cache_dir: Optional[str] = None
 preprocessing_num_workers: int= 4, streaming: bool = False
         
         
-class AdvancedDataset(Dataset):
-    """
+class AdvancedDataset(Dataset):    """
     Advanced dataset implementation with efficient data loading and caching
     """
         
@@ -44,8 +42,7 @@ def __init__(self):
 # Load or create cache
 self.load_and_cache_data()
         
-def load_and_cache_data(self)  ) -> None:
-    """Load and preprocess data with caching"""
+def load_and_cache_data(self) -> None:    """Load and preprocess data with caching"""
     cache_path = (
     self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
     )
@@ -66,8 +63,7 @@ with h5py.File(cache_path, "w") as f: forkey, value in processed_data.items():
 
 self.length = len(processed_data["input_ids"])
 
-def process_raw_data(self)  -> Dict[str, np.ndarray]:
-    """Process raw data into model inputs"""
+def process_raw_data(self) -> Dict[str, np.ndarray]:    """Process raw data into model inputs"""
     processed_data = {"input_ids": [], "attention_mask": [], "labels": []}
         
 # Read and process data
@@ -86,8 +82,7 @@ if "label" in item: processed_data["labels"].append(item["label"])
 # Convert to numpy arrays
 return {k: np.array(v) for k, v in processed_data.items()}
         
-def __getitem__(self, idx: int)  -> Dict[str, torch.Tensor]:
-    """Get a single example"""
+def __getitem__(self, idx: in, t) -> Dict[str, torch.Tensor]:    """Get a single example"""
     item = {
     "input_ids": torch.tensor(self.data["input_ids"][idx]),
     "attention_mask": torch.tensor(self.data["attention_mask"][idx]),
@@ -98,8 +93,7 @@ if "labels" in self.data: item["labels"] = torch.tensor(self.data["labels"][idx]
 return item
 
 
-def create_dataloader(self):
-    dataset: AdvancedDataset,
+def create_dataloader(self):    dataset: AdvancedDataset,
     config: DataConfig,
     is_distributed: bool = False
     ) -> DataLoader:

@@ -11,8 +11,7 @@ import requests
 logging.basicConfig(level=logging.DEBUG)
 
 
-def stream_json_objects(self):
-    url: str,
+def stream_json_objects(self):    url: str,
         token: Optional[str] = None,
         chunk_size: int = 1024 * 1024
     ) -> Generator[Dict[str, Any], None, None]:
@@ -48,8 +47,7 @@ def stream_json_objects(self):
             raise
             
             
-                        def verify_dataset(dataset_id: str, token: Optional[str] = None) -> Dict[str, Any]:
-                """Verify a dataset using streaming JSON parsing."""
+                        def verify_dataset(dataset_id: st, r, token: Optional, [str] = None) -> Dict[str, Any]:                """Verify a dataset using streaming JSON parsing."""
 try: api = HfApi()
     logging.info(f"Verifying dataset: {dataset_id}")
 

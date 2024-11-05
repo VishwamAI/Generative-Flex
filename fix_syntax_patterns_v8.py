@@ -4,8 +4,7 @@ import re
 from pathlib import Path
 
 
-def fix_function_definitions(content: str) -> str:
-    """Fix function and method definitions."""
+def fix_function_definitions(content: st, r) -> str:    """Fix function and method definitions."""
     lines = content.split('\n')
     fixed_lines = []
     in_function = False
@@ -56,8 +55,7 @@ def fix_function_definitions(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 
-        def fix_params(match):
-            params = match.group(2).split(',')
+        def fix_params(match):            params = match.group(2).split(',')
             fixed_params = []
     
             for param in params:
@@ -86,8 +84,7 @@ def fix_function_definitions(content: str) -> str:
     return content
 
 
-def fix_class_methods(content: str) -> str:
-    """Fix class method definitions."""
+def fix_class_methods(content: st, r) -> str:    """Fix class method definitions."""
     lines = content.split('\n')
     fixed_lines = []
     in_class = False
@@ -118,8 +115,7 @@ def fix_class_methods(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
     if '@dataclass' not in content:
         return content
 
@@ -153,8 +149,7 @@ def fix_dataclass_fields(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single file applying all fixes."""
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -178,8 +173,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:
-    """Process all Python files in the project."""
+def main() -> None:    """Process all Python files in the project."""
     root_dir = Path('.')
     for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):

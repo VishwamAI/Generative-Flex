@@ -10,7 +10,6 @@ import warnings
 
 
 class TestEnvironment(unittest.TestCase):
-
 def test_hardware_acceleration(self):
     ) -> None: """Test if hardware acceleration is available"""
     # Test PyTorch
@@ -40,8 +39,7 @@ x = tf.random.normal((5, 5))
 y = tf.matmul(x, x, transpose_b=True)
 self.assertEqual(y.shape, (5, 5), "TensorFlow basic operations failed")
 
-def test_model_loading(self):
-    ) -> None: """Test if environment can load and initialize models"""
+def test_model_loading(self):    ) -> None: """Test if environment can load and initialize models"""
     try:
         # Use a small, publicly available model
         model_name = "gpt2"  # Using smallest GPT-2 for testing
@@ -60,8 +58,7 @@ with torch.no_grad():
     self.assertTrue(len(generated_text) > 0, "Model failed to generate text")
     except Exception as e: self.fail(f"Failed to load model components: {str(e)}")
 
-def test_mmlu_dataset_access(self):
-    ) -> None: """Test if environment can access MMLU dataset"""
+def test_mmlu_dataset_access(self):    ) -> None: """Test if environment can access MMLU dataset"""
     try:
         # Try loading high school mathematics dataset
         dataset_hs = load_dataset("cais/mmlu", "high_school_mathematics", split="validation[:10]")
@@ -81,8 +78,7 @@ required_keys = ["question", "choices", "answer"]
 for key in required_keys: self.assertIn(key, example, f"Dataset missing required key: {key}")
 except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}")
 
-def test_flax_functionality(self):
-    ) -> None: """Test Flax functionality"""
+def test_flax_functionality(self):    ) -> None: """Test Flax functionality"""
     try:
         # Test basic Flax operations
         key = jax.random.PRNGKey(0)
@@ -90,8 +86,7 @@ def test_flax_functionality(self):
         self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 
     # Test basic model operations
-        def model_fn(self):
-        ) -> None: returnjnp.mean(x)
+        def model_fn(self):        ) -> None: returnjnp.mean(x)
 
     grad_fn = jax.grad(model_fn)
     grad = grad_fn(x)

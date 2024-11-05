@@ -4,8 +4,7 @@ import re
 
 
 
-def fix_docstring_placement(content: str) -> str:
-    """Fix docstring placement and indentation."""
+def fix_docstring_placement(content: st, r) -> str:    """Fix docstring placement and indentation."""
     # Remove extra indentation from module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
@@ -46,8 +45,7 @@ if '"""' in line:
     return '\n'.join(fixed_lines)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
     if '@dataclass' not in content:
         return content
 
@@ -84,8 +82,7 @@ def fix_dataclass_fields(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 
-def fix_imports(content: str) -> str:
-    """Fix import statement formatting."""
+def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""
     lines = content.split('\n')
     import_lines = []
     other_lines = []
@@ -108,8 +105,7 @@ def fix_imports(content: str) -> str:
     return '\n'.join(import_lines + other_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single file applying all fixes."""
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -132,8 +128,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:
-    """Process all Python files in the project."""
+def main() -> None:    """Process all Python files in the project."""
     root_dir = Path('.')
     for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):

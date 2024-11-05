@@ -5,8 +5,7 @@ import pytest
         
         
 @pytest.fixture
-def test_parameter_shapes(self):
-    ) -> None: """Test all parameter arrays have consistent shapes."""
+def test_parameter_shapes(self):    ) -> None: """Test all parameter arrays have consistent shapes."""
     for module in test_params.values():
         if isinstance(module, dict):
             for param_array in module.values():

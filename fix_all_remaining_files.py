@@ -5,8 +5,7 @@
     from pathlib import Path
     
     
-def fix_syntax_issues(self):
-    """Fix common syntax issues in Python files."""
+def fix_syntax_issues(self):    """Fix common syntax issues in Python files."""
         files_to_fix = [
         "src/config/config.py",
         "src/config/training_config.py",

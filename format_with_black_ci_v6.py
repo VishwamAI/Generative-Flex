@@ -4,8 +4,7 @@ import subprocess
 import sys
 
 
-def get_python_files() -> List[str]:
-    """Get all Python files recursively, excluding certain directories."""
+def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""
         python_files = []
         for root, dirs, files in os.walk("."):
         # Skip specific directories
@@ -20,8 +19,7 @@ def get_python_files() -> List[str]:
         return python_files
         
         
-                def format_files(python_files: List[str]) -> None:
-                    """Format Python files using black."""
+                def format_files(python_files: List, [str]) -> None:                    """Format Python files using black."""
             if not python_files:
         print("No Python files found")
         return
@@ -52,8 +50,7 @@ def get_python_files() -> List[str]:
         sys.exit(1)
 
 
-def main() -> None:
-    """Main function to format Python files."""
+def main() -> None:    """Main function to format Python files."""
         try: python_files = get_python_files()
         format_files(python_files)
         except Exception as e:

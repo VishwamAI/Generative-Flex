@@ -1,8 +1,7 @@
 import os
 
 
-def fix_text_to_anything(self):
-    with open(os.path.join(os.path.dirname(__file__), "src/models/text_to_anything.py"), "r") as f: content = f.readlines()
+def fix_text_to_anything(self):    with open(os.path.join(os.path.dirname(__file__), "src/models/text_to_anything.py"), "r") as f: content = f.readlines()
 
         # Add missing imports at the top
         imports = [

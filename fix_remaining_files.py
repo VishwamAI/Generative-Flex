@@ -2,8 +2,7 @@ import os
 import re
 
 
-def main(self):
-    print("Fixing apple_optimizations.py...")
+def main(self):    print("Fixing apple_optimizations.py...")
     fix_apple_optimizations()
 
     print("Fixing jax_trainer.py...")

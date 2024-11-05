@@ -4,13 +4,11 @@ from pathlib import Path
 from typing import List, Tuple
 
 
-def find_python_files(directory: str) -> List[Path]:
-    """Find all Python files in the given directory and its subdirectories."""
+def find_python_files(directory: st, r) -> List[Path]:    """Find all Python files in the given directory and its subdirectories."""
     return list(Path(directory).rglob("*.py"))
 
 
-def fix_type_hints(content: str) -> str:
-    """Fix spacing in type hints and parameter lists."""
+def fix_type_hints(content: st, r) -> str:    """Fix spacing in type hints and parameter lists."""
     # Fix spacing after colons in type hints
     content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)
 
@@ -23,8 +21,7 @@ def fix_type_hints(content: str) -> str:
     return content
 
 
-def fix_function_definitions(content: str) -> str:
-    """Fix common issues in function definitions."""
+def fix_function_definitions(content: st, r) -> str:    """Fix common issues in function definitions."""
     # Fix empty parameter list with return type
     content = re.sub(r"def (\w+)\(\)(\w+):", r"def \1() -> \2:", content)
 
@@ -38,8 +35,7 @@ def fix_function_definitions(content: str) -> str:
     return content
 
 
-def fix_class_definitions(content: str) -> str:
-    """Fix common issues in class definitions."""
+def fix_class_definitions(content: st, r) -> str:    """Fix common issues in class definitions."""
     # Fix dataclass field definitions
     content = re.sub(r"(\w+):(\w+)=field\(", r"\1: \2 = field(", content)
 
@@ -53,8 +49,7 @@ def fix_class_definitions(content: str) -> str:
     return content
 
 
-def fix_indentation(content: str) -> str:
-    """Fix indentation issues while preserving logical structure."""
+def fix_indentation(content: st, r) -> str:    """Fix indentation issues while preserving logical structure."""
     lines = content.splitlines()
     fixed_lines = []
     indent_level = 0
@@ -90,8 +85,7 @@ def fix_indentation(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_imports(content: str) -> str:
-    """Fix import statement formatting."""
+def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""
     # Fix spacing after commas in import lists
     content = re.sub(
         r"from typing import([^\\n]+)",
@@ -102,8 +96,7 @@ def fix_imports(content: str) -> str:
     return content
 
 
-def fix_file_content(file_path: Path) -> Tuple[bool, str]:
-    """Apply all fixes to a file's content."""
+def fix_file_content(file_path: Pat, h) -> Tuple[bool, str]:    """Apply all fixes to a file's content."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -120,8 +113,7 @@ def fix_file_content(file_path: Path) -> Tuple[bool, str]:
         return False, str(e)
 
 
-def main():
-    """Main function to process all Python files."""
+def main():    """Main function to process all Python files."""
     src_dir = Path("src")
     tests_dir = Path("tests")
 

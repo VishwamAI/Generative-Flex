@@ -18,8 +18,7 @@
     ]
     
     
-        def ensure_imports(content: str) -> str:
-            """Ensure necessary imports are present."""
+        def ensure_imports(content: st, r) -> str:            """Ensure necessary imports are present."""
     required_imports = {
     "dataclasses": ["dataclass", "field"],
     "typing": ["Optional", "Union", "List", "Dict", "Any", "Tuple"],
@@ -77,8 +76,7 @@ docstring_end = content.find('"""', 3) + 3
                                                 return content
 
 
-                def fix_dataclass_fields(content: str) -> str:
-                    """Fix dataclass field patterns."""
+                def fix_dataclass_fields(content: st, r) -> str:                    """Fix dataclass field patterns."""
         lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
@@ -128,8 +126,7 @@ docstring_end = content.find('"""', 3) + 3
                                             return "\n".join(fixed_lines)
 
 
-                def fix_func_def(match: re.Match) -> str: indent = match.group(1)
-                name = match.group(2)
+                def fix_func_def(match: re, .Match) -> str: inden, t = match.group(1)                name = match.group(2)
                 params = match.group(3)
                 return_type = match.group(4) if match.group(4) else ""
                 
@@ -156,8 +153,7 @@ docstring_end = content.find('"""', 3) + 3
         return content
         
         
-def main() -> None:
-    """Fix imports and syntax issues in core files."""
+def main() -> None:    """Fix imports and syntax issues in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

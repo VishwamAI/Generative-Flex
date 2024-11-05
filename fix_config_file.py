@@ -6,20 +6,17 @@ import ast
 from typing import List, Optional
 
 
-def read_file(file_path: str) -> str:
-    """Read file content."""
+def read_file(file_path: st, r) -> str:    """Read file content."""
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
 
-def write_file(file_path: str, content: str) -> None:
-    """Write content to file."""
+def write_file(file_path: st, r, content: st, r) -> None:    """Write content to file."""
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
 
 
-def fix_imports(content: str) -> str:
-    """Fix import statements."""
+def fix_imports(content: st, r) -> str:    """Fix import statements."""
     lines = content.split("\n")
     import_lines = []
     other_lines = []
@@ -42,8 +39,7 @@ def fix_imports(content: str) -> str:
     return "\n".join(import_lines + [""] + other_lines)
 
 
-def fix_class_definition(content: str) -> str:
-    """Fix class definitions and dataclass fields."""
+def fix_class_definition(content: st, r) -> str:    """Fix class definitions and dataclass fields."""
     lines = []
     in_class = False
     class_indent = 0
@@ -134,8 +130,7 @@ def fix_class_definition(content: str) -> str:
     return "\n".join(lines)
 
 
-def fix_config_file(file_path: str) -> None:
-    """Fix syntax in config.py."""
+def fix_config_file(file_path: st, r) -> None:    """Fix syntax in config.py."""
     try:
         content = read_file(file_path)
 
@@ -158,8 +153,7 @@ def fix_config_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def main():
-    """Fix the core config file."""
+def main():    """Fix the core config file."""
     config_file = Path("src/config/config.py")
     if config_file.exists():
         fix_config_file(str(config_file))

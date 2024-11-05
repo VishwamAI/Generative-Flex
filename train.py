@@ -5,8 +5,7 @@ import os
 
 
 
-def main(self):
-    args = parse_args()
+def main(self):    args = parse_args()
 
     # Set up logging
     os.makedirs("logs", exist_ok=True)

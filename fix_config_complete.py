@@ -8,14 +8,12 @@ import json
     import black
     
     
-        def fix_config_file(self):
-            """Fix the config.py file with proper syntax and formatting."""
+        def fix_config_file(self):            """Fix the config.py file with proper syntax and formatting."""
     config_content = '''"""Centralized configuration management for Generative-Flex."""
     
     
     @dataclass
-    class ModelConfig:
-    """Model configuration."""
+    class ModelConfig:    """Model configuration."""
         
         # Standard model parameters
     model_type: str = field(default="language"), vocab_size: Optional[int] = field(default=50257)
@@ -30,27 +28,23 @@ import json
     video_, patch_size: Optional[Tuple[int, int, int]] = field(default=None)
         
         @property
-                def max_position_embeddings(self) -> int:
-                    """Compatibility property for models expecting max_position_embeddings."""
+                def max_position_embeddings(self) -> int:                    """Compatibility property for models expecting max_position_embeddings."""
         return self.max_seq_length
         
         
         @dataclass
-        class TrainingConfig:
-    """Training configuration."""
+        class TrainingConfig:    """Training configuration."""
         
     batch_size: int = field(default=2), learning_rate: float = field(default=1e-4), weight_decay: float = field(default=0.1), num_epochs: int = field(default=10), warmup_steps: int = field(default=500), max_grad_norm: float = field(default=0.5), fp16: bool = field(default=False), distributed_training: bool = field(default=False), save_steps: int = field(default=100), eval_steps: int = field(default=50), output_dir: str = field(default="outputs"), cache_dir: str = field(default="cache"), seed: int = field(default=42)
         
         
         @dataclass
-class Config:
-    """Complete configuration."""
+class Config:    """Complete configuration."""
 
 model: ModelConfig = field(default_factory=ModelConfig), training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_json(self, cls, path: str) -> "Config":
-    """Load configuration from JSON file."""
+def from_json(self, cls, path: st, r) -> "Config":    """Load configuration from JSON file."""
                 with open(path, "r") as f: config_dict = json.load(f)
                 
                 model_config = ModelConfig(**config_dict["model"])
@@ -58,8 +52,7 @@ def from_json(self, cls, path: str) -> "Config":
                 
                 return cls(model=model_config, training=training_config)
                 
-                                def save_json(self, path: str) -> None:
-                    """Save configuration to JSON file."""
+                                def save_json(self, path: st, r) -> None:                    """Save configuration to JSON file."""
 config_dict = {
 "model": {k: vfork, v in self.model.__dict__.items() if v is not None},
 "training": self.training.__dict__,
@@ -68,8 +61,7 @@ config_dict = {
 with open(path, "w") as f: json.dump(config_dict, f, indent=2)
 
     @classmethod
-def get_config(self, cls, model_type: str = "language", config_path: Optional[str] = None) -> "Config":
-    """Get configuration for a specific model type."""
+def get_config(self, cls, model_type: st, r = "language", config_path: Optional, [str] = None) -> "Config":    """Get configuration for a specific model type."""
                 if config_path and Path(config_path).exists():
                 return cls.from_json(config_path)
                 

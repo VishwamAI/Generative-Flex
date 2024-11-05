@@ -14,8 +14,7 @@ logger = logging.getLogger(__name__)
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
     
     
-class MMUDataset(Dataset):
-    """MMMU Dataset loader with multimodal support."""
+class MMUDataset(Dataset):    """MMMU Dataset loader with multimodal support."""
 
 def __init__(self, subjects: Optional[List[str]] = None, split: str = "validation", tokenizer: Any = None, max_length: int = 512)  ) -> None:
     """Initialize the dataset.
@@ -103,8 +102,7 @@ except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")
 
 if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")
 
-def __getitem__(self, idx: int)  -> Dict[str, Any]:
-    """Get a single example with proper tensor handling."""
+def __getitem__(self, idx: in, t) -> Dict[str, Any]:    """Get a single example with proper tensor handling."""
     dataset_idx = 0
     while (
     dataset_idx < len(self.cumulative_lengths)
@@ -134,8 +132,7 @@ def __getitem__(self, idx: int)  -> Dict[str, Any]:
     }
 
 @staticmethod
-def collate_mmmu_batch(self, examples: List[Dict[str, Any]])  -> Dict[str, Any]:
-    """Collate batch with proper tensor handling."""
+def collate_mmmu_batch(self, examples: List, [Dict[str, Any]]) -> Dict[str, Any]:    """Collate batch with proper tensor handling."""
     try: batch = {
     "input_ids": [],
     "attention_mask": [],
@@ -166,8 +163,7 @@ except Exception as e: logger.error(f"Error collating batch: {str(e)}")
 raise
         
 @staticmethod
-def create_mmmu_dataloaders(self, subjects: Optional[List[str]] = None, tokenizer: Any = None, batch_size: int = 16, max_length: int = 512, num_workers: int = 0, pin_memory: bool = False)  -> Tuple[DataLoader, DataLoader, DataLoader]:
-    """Create dataloaders with proper tensor handling."""
+def create_mmmu_dataloaders(self, subjects: Optional, [List[str]] = None, tokenizer: An, y = None, batch_size: in, t = 16, max_length: in, t = 512, num_workers: in, t = 0, pin_memory: boo, l = False) -> Tuple[DataLoader, DataLoader, DataLoader]:    """Create dataloaders with proper tensor handling."""
     if subjects is None: subjects = MMMU_SUBJECTS, try: datasets = {, split: MMUDataset(
     subjects=subjects,
     split=split,

@@ -9,8 +9,7 @@ Supports: - Real-time data integration(Grok-1 style)
 
 
 @dataclass
-class KnowledgeConfig: """
-Configuration for knowledge retrieval system.
+class KnowledgeConfig: """Configuration for knowledge retrieval system.
 """
 
 embedding_size: int = struct.field(default=512)
@@ -24,8 +23,7 @@ max_cache_size: int = struct.field(default=10000)
 modalities: List[str] = struct.field(default_factory=lambda: ["text"
 
 
-class KnowledgeRetriever(nn.Module):
-    """
+class KnowledgeRetriever(nn.Module):    """
     Knowledge retriever with real-time updates.
     """
 
@@ -39,8 +37,7 @@ class KnowledgeRetriever(nn.Module):
             self.store_index = self.variable("cache", "index",
             lambda: 0)
 
-    def __init__(self, retrieve(:
-                self, query_embedding: jnp.ndarray)  -> None: jnp.ndarray:
+    def __init__(self, retrieve(:                self, query_embedding: jnp.ndarray)  -> None: jnp.ndarray:
                     """
                     Retrieve relevant knowledge.
                     """
@@ -80,8 +77,7 @@ class KnowledgeRetriever(nn.Module):
 
                     return retrieved
 
-    def __init__(self, update(:
-                    self, new_knowledge: jnp.ndarray)  -> None: None:
+    def __init__(self, update(:                    self, new_knowledge: jnp.ndarray)  -> None: None:
                         """
                         Update knowledge store.
                         """
@@ -93,8 +89,7 @@ class KnowledgeRetriever(nn.Module):
                         self.store_index.value = next_index
 
 
-                        class KnowledgeIntegrator(nn.Module):
-                            """
+                        class KnowledgeIntegrator(nn.Module):                            """
                             Integrates retrieved knowledge with input embeddings.
                             """
 
@@ -111,8 +106,7 @@ class KnowledgeRetriever(nn.Module):
                                     }
 
                                     @nn.compact
-                            def __init__(self):
-                                        inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
+                            def __init__(self):                                        inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
                                         modality: str = "text",
                                         context: Optional[jnp.ndarray] = None) -> jnp.ndarray: """
                                         Process inputs with knowledge integration.
@@ -158,8 +152,7 @@ class KnowledgeRetriever(nn.Module):
 
                                                 return fused
 
-                            def __init__(self, update_knowledge(:
-                                                self, new_data: Dict[str, jnp.ndarray])  -> None: None:
+                            def __init__(self, update_knowledge(:                                                self, new_data: Dict[str, jnp.ndarray])  -> None: None:
                                                     """
                                                     Update knowledge store with new data.
                                                     """
@@ -173,25 +166,21 @@ class KnowledgeRetriever(nn.Module):
                                                         self.retriever.update(combined)
 
 
-                                                        class RealTimeUpdater: """
-                                                        Handles real-time updates to the knowledge base.
+                                                        class RealTimeUpdater: """                                                        Handles real-time updates to the knowledge base.
                                                         """
 
-                                                        def __init__(self, __init__(:
-                                                            self, config: KnowledgeConfig)  -> None: None:
+                                                        def __init__(self, __init__(:                                                            self, config: KnowledgeConfig)  -> None: None:
                                                                 self._config = config
                                                                 self.update_counter = 0
                                                                 self.knowledge_retriever = None
 
-                                                                def __init__(self, initialize(:
-                                                                    self, knowledge_retriever: KnowledgeRetriever)  -> None: None:
+                                                                def __init__(self, initialize(:                                                                    self, knowledge_retriever: KnowledgeRetriever)  -> None: None:
                                                                         """
                                                                         Initializes with a knowledge retriever instance.
                                                                         """
                                                                         self.knowledge_retriever = knowledge_retriever
 
-                                                                        def __init__(self, update(:
-                                                                            self, new_knowledge: Dict[str, jnp.ndarray])  -> None: None:
+                                                                        def __init__(self, update(:                                                                            self, new_knowledge: Dict[str, jnp.ndarray])  -> None: None:
                                                                                 """
                                                                                 Updates the knowledge base with new information.
                                                                                 """
@@ -204,8 +193,7 @@ class KnowledgeRetriever(nn.Module):
                                                                                     self.update_counter = 0
 
 
-                                                                                    class KnowledgeAugmentedTransformer(nn.Module):
-                                                                                        """
+                                                                                    class KnowledgeAugmentedTransformer(nn.Module):                                                                                        """
                                                                                         Transformer architecture with integrated knowledge retrieval.
                                                                                         """
 

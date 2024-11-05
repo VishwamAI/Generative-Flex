@@ -7,8 +7,7 @@ import json
 
 
 @dataclass
-class ModelConfig:
-    """Model configuration."""
+class ModelConfig:    """Model configuration."""
 
 # Standard model parameters
 model_type: str = field(default="language")
@@ -42,14 +41,12 @@ int,
 int]] = field(default=None)
 
 @property
-def max_position_embeddings(self):
-    """Compatibility property for models expecting max_position_embeddings."""
+def max_position_embeddings(self):    """Compatibility property for models expecting max_position_embeddings."""
     return self.max_seq_length
 
 
 @dataclass
-class TrainingConfig:
-    """Training configuration."""
+class TrainingConfig:    """Training configuration."""
 
 batch_size: int = field(default=2)
 learning_rate: float = field(default=1e-4)
@@ -67,15 +64,13 @@ seed: int = field(default=42)
 
 
 @dataclass
-class Config:
-    """Complete configuration."""
+class Config:    """Complete configuration."""
 
 model: ModelConfig = field(default_factory=ModelConfig)
 training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_json(cls,
-path: str):
+def from_json(cls,path: str):
     """Load configuration from JSON file."""
 with open(path,
 "r") as f: 
@@ -86,8 +81,7 @@ with open(path,
 
 return cls(model=model_config, training=training_config)
 
-def save_json(self,
-path: str):
+def save_json(self,path: str):
     """Save configuration to JSON file."""
     config_dict = {
 "model": {k: v for k,
@@ -100,8 +94,7 @@ with open(path,
     json.dump(config_dict, f, indent=2)
 
 @classmethod
-def get_config(cls,
-model_type: str = "language",
+def get_config(cls,model_type: str = "language",
 config_path: Optional[str] = None):
     """Get configuration for a specific model type."""
 if config_path and Path(config_path).exists():

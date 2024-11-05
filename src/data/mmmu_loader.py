@@ -7,8 +7,7 @@ import torch
 """MMMU dataset loader implementation."""
         
         
-class MMMUDataset(Dataset):
-    """Dataset class for MMMU data."""
+class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
 
 def __init__(self):
     data_dir: str,
@@ -27,8 +26,7 @@ def __init__(self):
     self.image_size = image_size
     self.examples = self._load_examples()
 
-def _load_examples(self)  -> List[Dict]:
-    """Load examples from dataset files.
+def _load_examples(self) -> List[Dict]:    """Load examples from dataset files.
         
 Returns: Listofexamples with text and image data
 """
@@ -42,8 +40,7 @@ for item in data: ifself._validate_example(item):
 
 return examples
 
-def _validate_example(self, example: Dict)  -> bool:
-    """Validate that an example has required fields.
+def _validate_example(self, example: Dic, t) -> bool:    """Validate that an example has required fields.
                 
 Args: example: Example dictionary to validate
                 
@@ -52,8 +49,7 @@ Returns: Trueifexample is valid, False otherwise
 required_fields = ["input_ids", "attention_mask", "labels"]
 return all(field in example for field in required_fields)
 
-def __getitem__(self, idx: int)  -> Dict:
-    """Get an example from the dataset.
+def __getitem__(self, idx: in, t) -> Dict:    """Get an example from the dataset.
 
 Args: idx: Index of example to get
 
@@ -73,8 +69,7 @@ if "image" in example: item["image"] = self._process_image(example["image"])
                 
 return item
                 
-def _process_image(self, image_path: str)  -> torch.Tensor:
-    """Process image data.
+def _process_image(self, image_path: st, r) -> torch.Tensor:    """Process image data.
 
 Args: image_path: Path to image file
 
@@ -87,8 +82,7 @@ image = tf.cast(image, tf.float32) / 255.0
 return torch.from_numpy(image.numpy())
                 
                 
-def create_dataloader(self):
-    dataset: MMMUDataset,
+def create_dataloader(self):    dataset: MMMUDataset,
     batch_size: int = 32,
     shuffle: bool = True,
     num_workers: int = 4) -> , DataLoader:

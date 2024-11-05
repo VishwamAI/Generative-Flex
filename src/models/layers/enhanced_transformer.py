@@ -5,8 +5,7 @@ Enhanced transformer layer implementations.
 """
 
 
-class EnhancedTransformerLayer(nn.Module):
-    """
+class EnhancedTransformerLayer(nn.Module):    """
     Enhanced transformer layer with advanced features.
     """
 
@@ -22,8 +21,7 @@ Any]def setup(self) -> None: """
     self.layer_norm2 = nn.LayerNorm()
     self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
-def __init__(self):
-hidden_states: jnp.ndarray,
+def __init__(self):hidden_states: jnp.ndarray,
 attention_mask: Optional[jnp.ndarray] = None,
 deterministic: bool = True,
 output_attentions: bool = False) -> Dict[str,

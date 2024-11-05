@@ -18,8 +18,7 @@
     ]
     
     
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass fields with proper formatting."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass fields with proper formatting."""
         lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
@@ -67,8 +66,7 @@ def fix_dataclass_fields(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-        def fix_params(match: re.Match) -> str: indent = match.group(1)
-        func_name = match.group(2)
+        def fix_params(match: re, .Match) -> str: inden, t = match.group(1)        func_name = match.group(2)
         params = match.group(3)
         return_hint = match.group(4) if match.group(4) else ""
     
@@ -96,8 +94,7 @@ def fix_dataclass_fields(content: str) -> str:
                                 return content
 
 
-                def fix_union(match: re.Match) -> str: types = match.group(1)
-                if ", " in types and not (
+                def fix_union(match: re, .Match) -> str: type, s = match.group(1)                if ", " in types and not (
                 "List[" in types or "Dict[" in types or "Tuple[" in types
                 ):
         type_list = [t.strip() for t in types.split(", ")]
@@ -112,8 +109,7 @@ def fix_dataclass_fields(content: str) -> str:
         return content
         
         
-def main() -> None:
-    """Fix syntax issues in core files."""
+def main() -> None:    """Fix syntax issues in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

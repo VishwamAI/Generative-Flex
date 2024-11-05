@@ -5,8 +5,7 @@
     from typing import List, Tuple
     
     
-        def fix_method_definition(content: str) -> str:
-            """Fix method definition syntax with proper handling of docstrings."""
+        def fix_method_definition(content: st, r) -> str:            """Fix method definition syntax with proper handling of docstrings."""
     lines = content.split("\n")
     fixed_lines = []
     in_method = False
@@ -85,8 +84,7 @@ if '"""' in stripped and not stripped.startswith('"""'):
                                                                                         return "\n".join(fixed_lines)
 
 
-def main(self):
-    """Fix method definition syntax in math_reasoning.py."""
+def main(self):    """Fix method definition syntax in math_reasoning.py."""
         file_path = "src/models/reasoning/math_reasoning.py"
         
         try:

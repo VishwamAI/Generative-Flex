@@ -4,8 +4,7 @@ import sys
 
 
 
-def format_with_exact_ci_settings(self):
-    """Format files using exact CI command and settings."""
+def format_with_exact_ci_settings(self):    """Format files using exact CI command and settings."""
         try:
         # Install black with specific version to match CI
         subprocess.run([

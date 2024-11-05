@@ -3,8 +3,7 @@ import os
 import re
 
 
-                def fix_class_structure(self, content):
-                    """Fix class structure and method indentation."""
+                def fix_class_structure(self, content):                    """Fix class structure and method indentation."""
         lines = content.split("\n")
         fixed_lines = []
         in_class = False
@@ -45,8 +44,7 @@ import re
                     return "\n".join(fixed_lines)
 
 
-def main(self):
-    """Process files with method definition and class structure issues."""
+def main(self):    """Process files with method definition and class structure issues."""
         files_to_fix = [
         "src/models/audio_model.py",
         "src/models/base_model.py",

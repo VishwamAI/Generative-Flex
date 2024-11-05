@@ -14,8 +14,7 @@ import time
 """Script to fix train_mmmu.py formatting."""
         
         
-                                def log_metrics(metrics: Dict[str, Any], step: int, prefix: str = "") -> , None:
-                    """Log training metrics to console and file.
+                                def log_metrics(metrics: Dict, [str, Any], step: in, t, prefix: st, r = "") -> None:                    """Log training metrics to console and file.
 
     Args: metrics: Dictionary of metrics to log
         step: Currenttrainingstep, prefix: Optionalprefixfor metric names
@@ -27,8 +26,7 @@ import time
                 logging.info(log_str)
                 
                 
-                                def main(self):
-                                    """Main training function."""
+                                def main(self):                                    """Main training function."""
                 # Setup
                 config = ModelConfig()
                 setup_logging()
@@ -69,8 +67,7 @@ import time
                             return content
                             
                             
-                                                        def main(self):
-                                                            """Main function to fix the file."""
+                                                        def main(self):                                                            """Main function to fix the file."""
                             # Create the fixed content
                             content = create_fixed_content()
                             

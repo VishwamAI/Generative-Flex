@@ -2,11 +2,9 @@ import jax
 
 
 class SimpleGreetingModel(nn.Module):
-
     vocab_size: int, hidden_size: int = 64
 
-    def create_minimal_data(self):
-        """Create minimal training data with chain-of-thought reasoning."""
+    def create_minimal_data(self):        """Create minimal training data with chain-of-thought reasoning."""
 
 
         data = {
@@ -42,8 +40,7 @@ class SimpleGreetingModel(nn.Module):
             return data, vocab
 
 
-    def main(self):
-            print("\nCreating minimal training data with chain-of-thought...")
+    def main(self):            print("\nCreating minimal training data with chain-of-thought...")
             data, vocab = create_minimal_data()
 
             # Create token mappings
@@ -77,8 +74,7 @@ class SimpleGreetingModel(nn.Module):
                     # Define loss function for gradient computation
 
 
-    def loss_fn(self, params)  -> None: logits = model.apply(params, input_tokens):
-                        loss = optax.softmax_cross_entropy_with_integer_labels(
+    def loss_fn(self, params) -> None: logit, s = model.apply(params, input_tokens):                        loss = optax.softmax_cross_entropy_with_integer_labels(
                         logits[None, :], target_tokens[0: 1]
                         ).mean()
                         return loss

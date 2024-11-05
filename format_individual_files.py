@@ -19,8 +19,7 @@
     ]
     
     
-        def fix_dataclass_syntax(content: str) -> str:
-            """Fix dataclass syntax issues."""
+        def fix_dataclass_syntax(content: st, r) -> str:            """Fix dataclass syntax issues."""
     # Fix dataclass field definitions
     lines = content.split("\n")
     fixed_lines = []
@@ -52,8 +51,7 @@
                     return "\n".join(fixed_lines)
 
 
-def fix_function_syntax(content: str) -> str:
-    """Fix function definition syntax issues."""
+def fix_function_syntax(content: st, r) -> str:    """Fix function definition syntax issues."""
         lines = content.split("\n")
         fixed_lines = []
         
@@ -80,8 +78,7 @@ def fix_function_syntax(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-                def format_file(file_path: str) -> Tuple[bool, str]:
-                    """Format a single file with black and fix any issues."""
+                def format_file(file_path: st, r) -> Tuple[bool, str]:                    """Format a single file with black and fix any issues."""
         try:
     # First try to format with black
     result = subprocess.run(
@@ -113,8 +110,7 @@ def fix_function_syntax(content: str) -> str:
                         except Exception as e: returnFalse, f"Error processing {file_path}: {str(e)}"
 
 
-def main() -> None:
-    """Format core files individually."""
+def main() -> None:    """Format core files individually."""
         print("Starting to format core files...")
         successful = 0
         failed = 0

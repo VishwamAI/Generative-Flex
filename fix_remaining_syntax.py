@@ -5,8 +5,7 @@ import re
 """Script to fix syntax issues in remaining problematic files."""
         
         
-def fix_multiline_fstrings(filename: str) -> None:
-    """Fix multiline f-strings formatting."""
+def fix_multiline_fstrings(filename: st, r) -> None:    """Fix multiline f-strings formatting."""
         with open(filename, 'r') as f: content = f.read()
         
         # Fix multiline f-strings
@@ -30,8 +29,7 @@ if(stripped.endswith(""""") or stripped.endswith('"""')) and not stripped.starts
         with open(filename, 'w') as f: f.write('\\n'.join(fixed_lines))
         
         
-def main(self):
-    """Process all Python files in the project."""
+def main(self):    """Process all Python files in the project."""
         root_dir = Path('.')
         for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):
@@ -45,8 +43,7 @@ def main(self):
         with open('fix_string_formatting.py', 'w') as f: f.write(content)
 
 
-                def fix_text_to_anything(self):
-                    """Fix text to anything conversion code."""
+                def fix_text_to_anything(self):                    """Fix text to anything conversion code."""
         files_to_process = [
         'src/models/text_to_anything.py',
         'tests/test_features.py',
@@ -72,8 +69,7 @@ def main(self):
             with open(file_path, 'w') as f: f.write(content)
 
 
-                def fix_imports(content: str) -> str:
-                    """Fix import statements."""
+                def fix_imports(content: st, r) -> str:                    """Fix import statements."""
         lines = content.split('\\n')
         import_lines = []
         other_lines = []
@@ -89,12 +85,10 @@ def main(self):
             return '\\n'.join(import_lines + [''] + other_lines)
 
 
-def fix_function_definitions(content: str) -> str:
-    """Fix function definitions."""
+def fix_function_definitions(content: st, r) -> str:    """Fix function definitions."""
         try: tree = ast.parse(content)
         except SyntaxError: returncontentclass FunctionVisitor(ast.NodeTransformer):
-                def visit_FunctionDef(self, node) -> None:
-                # Add return type hints if missing
+                def visit_FunctionDef(self, node) -> None:                # Add return type hints if missing
                 if node.returns is None: node.returns = ast.Name(id='None', ctx=ast.Load())
                 return node
                 
@@ -118,8 +112,7 @@ def fix_function_definitions(content: str) -> str:
                         ))
 
 
-def fix_basic_syntax(content: str) -> str:
-    """Fix basic syntax issues."""
+def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""
         # Fix indentation
         lines = content.split('\\n')
         fixed_lines = []
@@ -136,12 +129,10 @@ def fix_basic_syntax(content: str) -> str:
         return '\\n'.join(fixed_lines)
         
         
-                def fix_advanced_syntax(content: str) -> str:
-                    """Fix advanced syntax issues."""
+                def fix_advanced_syntax(content: st, r) -> str:                    """Fix advanced syntax issues."""
         try: tree = ast.parse(content)
             except SyntaxError: returncontentclass SyntaxFixer(ast.NodeTransformer):
-        def visit_FunctionDef(self, node) -> None:
-            # Ensure function has docstring
+        def visit_FunctionDef(self, node) -> None:            # Ensure function has docstring
             if not(node.body and isinstance(node.body[0], ast.Expr) and
             isinstance(node.body[0].value, ast.Str)):
             node.body.insert(0, ast.Expr(
@@ -155,8 +146,7 @@ def fix_basic_syntax(content: str) -> str:
             return ast.unparse(new_tree)
 
 
-def main(self):
-    """Process all Python files in the project."""
+def main(self):    """Process all Python files in the project."""
         root_dir = Path('.')
         for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):
@@ -170,8 +160,7 @@ def main(self):
         with open('fix_syntax_structure.py', 'w') as f: f.write(content)
 
 
-def main(self):
-    """Fix all remaining files with syntax issues."""
+def main(self):    """Fix all remaining files with syntax issues."""
         fix_string_formatting()
         fix_text_to_anything()
         fix_syntax_structure()

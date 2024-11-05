@@ -3,8 +3,7 @@ import os
 #!/usr/bin/env python3
 
 
-def fix_flake8_comprehensive(self):
-    content = read_file("fix_flake8_comprehensive.py")
+def fix_flake8_comprehensive(self):    content = read_file("fix_flake8_comprehensive.py")
     if content:
         # Fix indentation
         lines = content.split("\n")
@@ -22,8 +21,7 @@ def fix_flake8_comprehensive(self):
                             write_file("fix_flake8_comprehensive.py", "\n".join(fixed_lines))
 
 
-def fix_analyze_performance(self):
-    content = read_file("analyze_performance_by_category.py")
+def fix_analyze_performance(self):    content = read_file("analyze_performance_by_category.py")
     if content:
         # Fix indentation and f-strings
         lines = content.split("\n")
@@ -38,8 +36,7 @@ def fix_analyze_performance(self):
                         write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
 
 
-def fix_dataset_verification(self):
-    content = read_file("data/dataset_verification_utils.py")
+def fix_dataset_verification(self):    content = read_file("data/dataset_verification_utils.py")
     if content:
         # Fix indentation and string formatting
         lines = content.split("\n")
@@ -50,8 +47,7 @@ def fix_dataset_verification(self):
                     write_file("data/dataset_verification_utils.py", "\n".join(fixed_lines))
 
 
-def fix_verify_mapped_datasets(self):
-    content = read_file("data/verify_mapped_datasets.py")
+def fix_verify_mapped_datasets(self):    content = read_file("data/verify_mapped_datasets.py")
     if content:
         # Fix f-string formatting
         content = content.replace('logger.warning(f"High memory usage detected: {memory_percent:.1f}%")',
@@ -59,8 +55,7 @@ def fix_verify_mapped_datasets(self):
         write_file("data/verify_mapped_datasets.py", content)
 
 
-def fix_text_to_anything_files(self):
-    for version in ["", "_v6", "_v7", "_v8"]:
+def fix_text_to_anything_files(self):    for version in ["", "_v6", "_v7", "_v8"]:
         filepath = f"fix_text_to_anything{version}.py"
         content = read_file(filepath)
         if content:
@@ -72,8 +67,7 @@ def fix_text_to_anything_files(self):
                         write_file(filepath, "\n".join(fixed_lines))
 
 
-def fix_mmmu_loader(self):
-    content = read_file("src/data/mmmu_loader.py")
+def fix_mmmu_loader(self):    content = read_file("src/data/mmmu_loader.py")
     if content:
         # Fix indentation
         lines = content.split("\n")
@@ -87,8 +81,7 @@ def fix_mmmu_loader(self):
                             write_file("src/data/mmmu_loader.py", "\n".join(fixed_lines))
 
 
-def fix_apple_optimizations(self):
-    content = read_file("src/models/apple_optimizations.py")
+def fix_apple_optimizations(self):    content = read_file("src/models/apple_optimizations.py")
     if content:
         # Fix imports and indentation
         lines = content.split("\n")
@@ -100,8 +93,7 @@ def fix_apple_optimizations(self):
                         write_file("src/models/apple_optimizations.py", "\n".join(fixed_lines))
 
 
-def main(self):
-    """Fix syntax issues in specific files that failed black formatting."""
+def main(self):    """Fix syntax issues in specific files that failed black formatting."""
         print("Applying precise fixes to problematic files...")
         
         fix_flake8_comprehensive()

@@ -1,8 +1,7 @@
 import re
 
 
-def fix_file_structure(content) -> None:
-    """Fix the structure of text_to_anything.py, particularly the GenerationConfig class."""
+def fix_file_structure(content) -> None:    """Fix the structure of text_to_anything.py, particularly the GenerationConfig class."""
         
         
         # Split content into lines
@@ -118,8 +117,7 @@ lines[i].rstrip().endswith('"""') and i > 0
         )
         
         
-                def main(self):
-                # Read the original file
+                def main(self):                # Read the original file
             with open("src/models/text_to_anything.py", "r") as f: content = f.read()
                 
                 # Fix the structure

@@ -2,8 +2,7 @@ import subprocess
 import sys
 
 
-def run_black_and_flake8(self):
-    """Run black and flake8 on modified files."""
+def run_black_and_flake8(self):    """Run black and flake8 on modified files."""
         
         
         # List of files to format

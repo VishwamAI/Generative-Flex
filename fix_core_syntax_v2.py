@@ -5,8 +5,7 @@ from pathlib import Path
 import ast
 
 
-def fix_indentation_and_spacing(content: str) -> str:
-    """Fix basic indentation and spacing issues."""
+def fix_indentation_and_spacing(content: st, r) -> str:    """Fix basic indentation and spacing issues."""
     lines = []
     current_indent = 0
 
@@ -37,11 +36,9 @@ def fix_indentation_and_spacing(content: str) -> str:
     return "\n".join(lines)
 
 
-def fix_function_definition(content: str) -> str:
-    """Fix function definition syntax."""
+def fix_function_definition(content: st, r) -> str:    """Fix function definition syntax."""
 
-    def fix_single_def(match):
-        name = match.group(1)
+    def fix_single_def(match):        name = match.group(1)
         params = match.group(2) or ""
         return_type = match.group(3)
 
@@ -70,11 +67,9 @@ def fix_function_definition(content: str) -> str:
     return re.sub(pattern, fix_single_def, content, flags=re.DOTALL)
 
 
-def fix_class_definition(content: str) -> str:
-    """Fix class definition syntax."""
+def fix_class_definition(content: st, r) -> str:    """Fix class definition syntax."""
 
-    def fix_single_class(match):
-        name = match.group(1)
+    def fix_single_class(match):        name = match.group(1)
         bases = match.group(2)
 
         if bases:
@@ -86,8 +81,7 @@ def fix_class_definition(content: str) -> str:
     return re.sub(pattern, fix_single_class, content)
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
     if "@dataclass" not in content:
         return content
 
@@ -126,8 +120,7 @@ def fix_dataclass_fields(content: str) -> str:
     return "\n".join(lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single file applying fixes."""
+def process_file(file_path: st, r) -> None:    """Process a single file applying fixes."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -158,8 +151,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def main():
-    """Process core configuration files."""
+def main():    """Process core configuration files."""
     core_files = [
         "src/config/config.py",
         "src/config/training_config.py",

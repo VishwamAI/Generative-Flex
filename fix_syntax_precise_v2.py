@@ -4,8 +4,7 @@
     from typing import List, Tuple
     
     
-        def split_into_blocks(content: str) -> List[Tuple[str, str, int]]:
-            """Split content into blocks (imports, classes, functions) with their indentation."""
+        def split_into_blocks(content: st, r) -> List[Tuple[str, str, int]]:            """Split content into blocks (imports, classes, functions) with their indentation."""
     lines = content.split("\n")
     blocks = []
     current_block = []
@@ -43,8 +42,7 @@
                                             return blocks
 
 
-                def fix_class_definition(block: str) -> str:
-                    """Fix class definition syntax."""
+                def fix_class_definition(block: st, r) -> str:                    """Fix class definition syntax."""
         lines = block.split("\n")
         fixed_lines = []
         
@@ -58,8 +56,7 @@
             return "\n".join(fixed_lines)
 
 
-def fix_method_definition(block: str) -> str:
-    """Fix method definition syntax."""
+def fix_method_definition(block: st, r) -> str:    """Fix method definition syntax."""
         lines = block.split("\n")
         fixed_lines = []
         in_def = False
@@ -98,8 +95,7 @@ def fix_method_definition(block: str) -> str:
         return "\n".join(fixed_lines)
         
         
-                def fix_indentation(content: str) -> str:
-                    """Fix indentation issues."""
+                def fix_indentation(content: st, r) -> str:                    """Fix indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
@@ -125,8 +121,7 @@ def fix_method_definition(block: str) -> str:
                                 return "\n".join(fixed_lines)
 
 
-def main(self):
-    """Fix syntax issues in math_reasoning.py."""
+def main(self):    """Fix syntax issues in math_reasoning.py."""
         file_path = "src/models/reasoning/math_reasoning.py"
         
         try:

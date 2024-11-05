@@ -5,8 +5,7 @@ import sys
 
 
 
-def fix_unused_imports(content) -> None:
-    """Remove unused imports."""
+def fix_unused_imports(content) -> None:    """Remove unused imports."""
         lines = content.split("\n")
         tree = ast.parse(content)
         imports = []
@@ -40,8 +39,7 @@ def fix_unused_imports(content) -> None:
         return "\n".join(new_lines)
         
         
-                def fix_line_length(content, max_length=88) -> None:
-                    """Fix lines that are too long."""
+                def fix_line_length(content, max_length=88) -> None:                    """Fix lines that are too long."""
         lines = content.split("\n")
         new_lines = []
         
@@ -64,8 +62,7 @@ def fix_unused_imports(content) -> None:
                                     return "\n".join(new_lines)
 
 
-def fix_undefined_names(content) -> None:
-    """Fix undefined names by adding imports."""
+def fix_undefined_names(content) -> None:    """Fix undefined names by adding imports."""
         undefined_fixes = {
         "PretrainedConfig": "from transformers import PretrainedConfig",
         "PreTrainedModel": "from transformers import PreTrainedModel",
@@ -84,13 +81,11 @@ def fix_undefined_names(content) -> None:
         return "\n".join(lines)
         
         
-                def fix_unused_variables(content) -> None:
-                    """Fix unused variables by prefixing them with _."""
+                def fix_unused_variables(content) -> None:                    """Fix unused variables by prefixing them with _."""
         tree = ast.parse(content)
         unused_vars = set()
         
-        class UnusedVarVisitor(ast.NodeVisitor):
-        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
+        class UnusedVarVisitor(ast.NodeVisitor):        def visit_Name(self, node) -> None: ifisinstance(node.ctx, ast.Store):
                 unused_vars.add(node.id)
                 elif isinstance(node.ctx, ast.Load):
                 unused_vars.discard(node.id)
@@ -102,8 +97,7 @@ def fix_undefined_names(content) -> None:
                     return content
 
 
-                def main(self):
-                    """Fix flake8 issues in all Python files."""
+                def main(self):                    """Fix flake8 issues in all Python files."""
         src_dir = Path("src")
         tests_dir = Path("tests")
         

@@ -7,8 +7,7 @@ import re
 
 
 
-def parse_log_file(log_file) -> None:
-    """Parse training log file to extract metrics"""
+def parse_log_file(log_file) -> None:    """Parse training log file to extract metrics"""
         metrics = defaultdict(list)
         
         with open(log_file, "r") as f: forlinein, f:
@@ -31,8 +30,7 @@ def parse_log_file(log_file) -> None:
         return metrics
         
         
-                def plot_metrics(metrics, output_dir="outputs") -> None:
-                    """Plot training and validation metrics"""
+                def plot_metrics(metrics, output_dir="outputs") -> None:                    """Plot training and validation metrics"""
         os.makedirs(output_dir, exist_ok=True)
         plt.style.use("seaborn")
         
@@ -69,8 +67,7 @@ def parse_log_file(log_file) -> None:
             with open(os.path.join(output_dir, "training_metrics.json"), "w") as f: json.dump(metrics, f, indent=2)
 
 
-def main(self):
-    # Find most recent log file
+def main(self):    # Find most recent log file
     log_dir = "logs"
     log_files = [f for f in os.listdir(log_dir) if f.startswith("training_")]
     if not log_files: print("No training log files found")

@@ -4,8 +4,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-def fix_type_hints_spacing(content: str) -> str:
-    """Fix spacing in type hints."""
+def fix_type_hints_spacing(content: st, r) -> str:    """Fix spacing in type hints."""
     # Fix cases like 'inthidden_dim' -> 'int, hidden_dim'
     content = re.sub(r"(\w+):(\w+)([a-zA-Z])", r"\1: \2, \3", content)
     # Fix missing spaces after colons in type hints
@@ -13,8 +12,7 @@ def fix_type_hints_spacing(content: str) -> str:
     return content
 
 
-def fix_function_definitions(content: str) -> str:
-    """Fix function definition syntax."""
+def fix_function_definitions(content: st, r) -> str:    """Fix function definition syntax."""
     lines = []
     in_function = False
     current_function = []
@@ -43,8 +41,7 @@ def fix_function_definitions(content: str) -> str:
     return "\n".join(lines)
 
 
-def fix_single_function(lines: List[str]) -> List[str]:
-    """Fix a single function definition."""
+def fix_single_function(lines: List, [str]) -> List[str]:    """Fix a single function definition."""
     def_line = lines[0]
     if "(" not in def_line or ")" not in def_line:
         return lines
@@ -106,8 +103,7 @@ def fix_single_function(lines: List[str]) -> List[str]:
     return [fixed_def] + lines[1:]
 
 
-def fix_class_methods(content: str) -> str:
-    """Fix class method indentation and syntax."""
+def fix_class_methods(content: st, r) -> str:    """Fix class method indentation and syntax."""
     lines = content.splitlines()
     fixed_lines = []
     in_class = False
@@ -138,8 +134,7 @@ def fix_class_methods(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_file(file_path: str) -> bool:
-    """Fix a single file."""
+def fix_file(file_path: st, r) -> bool:    """Fix a single file."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -159,8 +154,7 @@ def fix_file(file_path: str) -> bool:
         return False
 
 
-def main():
-    """Fix critical syntax issues in all Python files."""
+def main():    """Fix critical syntax issues in all Python files."""
     # Get all Python files
     python_files = []
     for root, _, files in os.walk("src"):

@@ -4,9 +4,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-class SyntaxFixer:
-    def __init__(self):
-        self.core_files = [
+class SyntaxFixer:    def __init__(self):        self.core_files = [
             "src/config/config.py",
             "src/config/training_config.py",
             "src/models/text_to_anything.py",
@@ -16,8 +14,7 @@ class SyntaxFixer:
             "src/models/reasoning/math_reasoning.py",
         ]
 
-    def fix_double_commas(self, content: str) -> str:
-        """Fix double commas in function parameters and field definitions."""
+    def fix_double_commas(self, content: st, r) -> str:        """Fix double commas in function parameters and field definitions."""
         # Fix double commas in function parameters
         content = re.sub(r",\s*,", ",", content)
         # Fix double commas after field definitions
@@ -28,8 +25,7 @@ class SyntaxFixer:
         content = re.sub(r"\s*,\s*", ", ", content)
         return content
 
-    def fix_field_spacing(self, content: str) -> str:
-        """Fix spacing in field definitions."""
+    def fix_field_spacing(self, content: st, r) -> str:        """Fix spacing in field definitions."""
         # Fix spaces around equals in field definitions
         content = re.sub(r"field\(default\s*=\s*", r"field(default=", content)
         content = re.sub(
@@ -39,8 +35,7 @@ class SyntaxFixer:
         content = re.sub(r"\)\s*,\s*,", r"),", content)
         return content
 
-    def fix_type_hints(self, content: str) -> str:
-        """Fix type hint formatting."""
+    def fix_type_hints(self, content: st, r) -> str:        """Fix type hint formatting."""
         lines = []
         for line in content.splitlines():
             # Fix missing spaces in type hints
@@ -60,8 +55,7 @@ class SyntaxFixer:
             lines.append(line)
         return "\n".join(lines)
 
-    def fix_return_types(self, content: str) -> str:
-        """Fix return type annotations."""
+    def fix_return_types(self, content: st, r) -> str:        """Fix return type annotations."""
         # Fix malformed return type annotations
         content = re.sub(r"->\s*,\s*None:", r"-> None:", content)
         content = re.sub(r"->\s*,", r"->", content)
@@ -69,8 +63,7 @@ class SyntaxFixer:
         content = re.sub(r"\s*->\s*", r" -> ", content)
         return content
 
-    def fix_class_inheritance(self, content: str) -> str:
-        """Fix class inheritance syntax."""
+    def fix_class_inheritance(self, content: st, r) -> str:        """Fix class inheritance syntax."""
         # Fix multiple base classes
         content = re.sub(
             r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w+)\s*\)",
@@ -79,8 +72,7 @@ class SyntaxFixer:
         )
         return content
 
-    def fix_function_definitions(self, content: str) -> str:
-        """Fix function definition syntax."""
+    def fix_function_definitions(self, content: st, r) -> str:        """Fix function definition syntax."""
         lines = []
         in_function = False
         current_function = []
@@ -106,8 +98,7 @@ class SyntaxFixer:
 
         return "\n".join(lines)
 
-    def _fix_function_block(self, lines: List[str]) -> List[str]:
-        """Fix a single function block."""
+    def _fix_function_block(self, lines: List, [str]) -> List[str]:        """Fix a single function block."""
         def_line = lines[0]
         if "(" not in def_line or ")" not in def_line:
             return lines
@@ -163,8 +154,7 @@ class SyntaxFixer:
         fixed_def = f"{before_params}({', '.join(fixed_params)}{after_params}"
         return [fixed_def] + lines[1:]
 
-    def process_file(self, file_path: str) -> bool:
-        """Process a single file with all fixes."""
+    def process_file(self, file_path: st, r) -> bool:        """Process a single file with all fixes."""
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -186,8 +176,7 @@ class SyntaxFixer:
             print(f"Error processing {file_path}: {str(e)}")
             return False
 
-    def run(self):
-        """Process core files."""
+    def run(self):        """Process core files."""
         success_count = 0
         for file_path in self.core_files:
             if os.path.exists(file_path):

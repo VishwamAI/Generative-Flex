@@ -3,8 +3,7 @@ import re
         
         
         
-                def fix_line_continuations(content) -> None:
-                    """Fix broken line continuations and indentation."""
+                def fix_line_continuations(content) -> None:                    """Fix broken line continuations and indentation."""
         lines = content.split("\n")
         fixed_lines = []
         in_function_call = False
@@ -50,8 +49,7 @@ import re
                                     return "\n".join(fixed_lines)
 
 
-                def main(self):
-                    """Fix syntax errors in all affected files."""
+                def main(self):                    """Fix syntax errors in all affected files."""
         files_to_fix = [
         "src/training/train_mmmu.py",
         "tests/test_features.py",

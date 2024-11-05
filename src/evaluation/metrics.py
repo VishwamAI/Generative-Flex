@@ -11,15 +11,13 @@ Implements essential metrics for model evaluation and benchmarking
 
 
 @dataclass
-class EvalMetrics:
-    """Collection of evaluation metrics"""
+class EvalMetrics:    """Collection of evaluation metrics"""
         
 perplexity: floatbleu: Optional[float] = None
 rouge: Optional[Dict[str, float]] = None
         
         
-class CoreEvaluator:
-    """Core evaluator with essential metrics"""
+class CoreEvaluator:    """Core evaluator with essential metrics"""
 
 def compute_metrics(self):
     predictions: torch.Tensor,
@@ -41,8 +39,7 @@ metrics["rouge"] = {k: v.item() for k, v in rouge_scores.items()}
 
 return EvalMetrics(**metrics)
 
-def log_metrics(self, metrics: EvalMetrics, step: int)  ) -> None:
-    """Log metrics to console"""
+def log_metrics(self, metrics: EvalMetric, s, step: in, t) -> None:    """Log metrics to console"""
     logging.info(f"Step {step} Evaluation Metrics:")
     logging.info(f"Perplexity: {metrics.perplexity:.4f}")
                 

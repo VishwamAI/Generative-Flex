@@ -3,25 +3,21 @@ from typing import Tuple
 """Base model classes for different types of generative models."""
 
 
-class BaseModel(nn.Module,
-ABC): 
+class BaseModel(nn.Module,ABC): 
     """Abstract base class for all generative models."""
 
     @abstractmethod
-def init_weights(self,
-rng: jnp.ndarray):
+def init_weights(self,rng: jnp.ndarray):
         pass
 
 
-class TransformerBlock(nn.Module):
-        """Basic Transformer block for reuse across different model types."""
+class TransformerBlock(nn.Module):        """Basic Transformer block for reuse across different model types."""
 
 hidden_size: intnum_heads: int,
 dropout_rate: float = 0.1
 
         @nn.compact
-def __call__(self,
-x,
+def __call__(self,x,
 training: bool = False):
             attention_output = nn.MultiHeadDotProductAttention(_num_heads=self.num_heads, _dropout_rate=self.dropout_rate)(x, x)
             x = nn.LayerNorm()(x + attention_output)
@@ -34,8 +30,7 @@ training: bool = False):
             return nn.LayerNorm()(x + dense_output)
 
 
-class PositionalEncoding(nn.Module):
-            """Positional encoding for sequence models."""
+class PositionalEncoding(nn.Module):            """Positional encoding for sequence models."""
 
 max_len: int,
 hidden_size: intdef setup(self) -> None: position = jnp.arange(self.max_len)[:,
@@ -51,19 +46,16 @@ self.pe = pe[None,
 : ,
 : ]
 
-def __call__(self,
-x): 
+def __call__(self,x): 
 
 
-class BaseLanguageModel(BaseModel):
-                    """Base class for language models."""
+class BaseLanguageModel(BaseModel):                    """Base class for language models."""
 
 vocab_size: int,
 hidden_size: intnum_layers: intnum_heads: intmax_sequence_length: int,
 dropout_rate: float = 0.1
 
-def __call__(self,
-x,
+def __call__(self,x,
 training: bool = False):
                         x = self.pos_encoding(x)
 
@@ -73,16 +65,14 @@ training = training)
                         return self.output(x)
 
 
-class BaseImageModel(BaseModel):
-                        """Base class for image generation models."""
+class BaseImageModel(BaseModel):                        """Base class for image generation models."""
 
 image_size: Tuple[int,
 int]hidden_size: intnum_layers: intnum_heads: int,
 dropout_rate: float = 0.1
 
                         @abstractmethod
-def __call__(self,
-x,
+def __call__(self,x,
 training: bool = False):
                             """Base class for audio generation models."""
 
@@ -91,8 +81,7 @@ hidden_size: intnum_layers: intnum_heads: int,
 dropout_rate: float = 0.1
 
                             @abstractmethod
-def __call__(self,
-x,
+def __call__(self,x,
 training: bool = False):
                                 """Base class for video generation models."""
 

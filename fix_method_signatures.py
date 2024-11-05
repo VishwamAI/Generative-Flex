@@ -3,8 +3,7 @@ import os
 import re
 
 
-def main(self):
-    """Process all Python files with method signature issues."""
+def main(self):    """Process all Python files with method signature issues."""
         files_to_fix = [
         "src/models/audio_model.py",
         "src/models/base_model.py",

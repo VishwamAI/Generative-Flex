@@ -4,8 +4,7 @@ import re
 
 
 
-def fix_docstring_indentation(content: str) -> str:
-    """Fix docstring indentation issues."""
+def fix_docstring_indentation(content: st, r) -> str:    """Fix docstring indentation issues."""
     # Fix module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
@@ -32,8 +31,7 @@ if in_class and '"""' in line: current_indent = len(re.match(r'^\s*', line).grou
     return '\n'.join(fixed_lines)
 
 
-def fix_class_definitions(content: str) -> str:
-    """Fix class definition formatting."""
+def fix_class_definitions(content: st, r) -> str:    """Fix class definition formatting."""
     # Fix class inheritance
     content = re.sub(r'class\s+(\w+)\s*\(\s*(\w+)\s*\):', r'class \1(\2):', content)
 
@@ -56,8 +54,7 @@ def fix_class_definitions(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single file applying all fixes."""
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -74,8 +71,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def main() -> None:
-    """Process all Python files in the project."""
+def main() -> None:    """Process all Python files in the project."""
     root_dir = Path('.')
     for file_path in root_dir.rglob('*.py'):
         if '.git' not in str(file_path):

@@ -2,8 +2,7 @@ from pathlib import Path
 import os
 import re
 
-def fix_basic_indentation(self, content):
-    """Fix basic indentation issues."""
+def fix_basic_indentation(self, content):    """Fix basic indentation issues."""
         lines = content.split('\n')
         fixed_lines = []
         indent_level = 0
@@ -29,8 +28,7 @@ elif stripped.endswith(('"""', "'''")):
         
         return '\n'.join(fixed_lines)
         
-                def main(self):
-                    """Process all Python files with basic syntax issues."""
+                def main(self):                    """Process all Python files with basic syntax issues."""
         # Get all Python files
         python_files = []
         for root, _, files in os.walk('.'):

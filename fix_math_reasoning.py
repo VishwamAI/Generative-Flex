@@ -3,8 +3,7 @@
     import re
     
     
-                def fix_imports(content: str) -> str:
-                    """Fix and deduplicate imports."""
+                def fix_imports(content: st, r) -> str:                    """Fix and deduplicate imports."""
         # Remove duplicate imports
         seen_imports = set()
         fixed_lines = []
@@ -18,8 +17,7 @@
                 return "\n".join(fixed_lines)
 
 
-def fix_indentation(content: str) -> str:
-    """Fix indentation issues."""
+def fix_indentation(content: st, r) -> str:    """Fix indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
@@ -50,8 +48,7 @@ def fix_indentation(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-                def main(self):
-                    """Fix syntax issues in math_reasoning.py."""
+                def main(self):                    """Fix syntax issues in math_reasoning.py."""
         file_path = "src/models/reasoning/math_reasoning.py"
         
         try:

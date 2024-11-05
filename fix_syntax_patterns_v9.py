@@ -6,8 +6,7 @@ from typing import List, Dict, Any
 import ast
 
 
-def fix_indentation(content: str) -> str:
-    """Fix indentation issues in the file."""
+def fix_indentation(content: st, r) -> str:    """Fix indentation issues in the file."""
     lines = content.split("\n")
     fixed_lines = []
     indent_level = 0
@@ -37,11 +36,9 @@ def fix_indentation(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_function_definition(content: str) -> str:
-    """Fix function definition formatting."""
+def fix_function_definition(content: st, r) -> str:    """Fix function definition formatting."""
 
-    def fix_params(match: re.Match) -> str:
-        """Fix parameter formatting within a function definition."""
+    def fix_params(match: re, .Match) -> str:        """Fix parameter formatting within a function definition."""
         func_name = match.group(1)
         params = match.group(2)
         return_type = match.group(3) if match.group(3) else ""
@@ -78,11 +75,9 @@ def fix_function_definition(content: str) -> str:
     return content
 
 
-def fix_class_definition(content: str) -> str:
-    """Fix class definition formatting."""
+def fix_class_definition(content: st, r) -> str:    """Fix class definition formatting."""
 
-    def fix_class_def(match: re.Match) -> str:
-        """Fix class definition formatting."""
+    def fix_class_def(match: re, .Match) -> str:        """Fix class definition formatting."""
         class_name = match.group(1)
         inheritance = match.group(2)
 
@@ -98,8 +93,7 @@ def fix_class_definition(content: str) -> str:
     return content
 
 
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field definitions."""
     if "@dataclass" not in content:
         return content
 
@@ -137,8 +131,7 @@ def fix_dataclass_fields(content: str) -> str:
     return "\n".join(fixed_lines)
 
 
-def fix_imports(content: str) -> str:
-    """Fix import statement formatting."""
+def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""
     lines = content.split("\n")
     import_lines = []
     other_lines = []
@@ -169,8 +162,7 @@ def fix_imports(content: str) -> str:
     return "\n".join(import_lines + other_lines)
 
 
-def process_file(file_path: str) -> None:
-    """Process a single file applying all fixes."""
+def process_file(file_path: st, r) -> None:    """Process a single file applying all fixes."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -202,8 +194,7 @@ def process_file(file_path: str) -> None:
         print(f"Error processing {file_path}: {e}")
 
 
-def process_files_in_order() -> None:
-    """Process files in a specific order to handle dependencies."""
+def process_files_in_order() -> None:    """Process files in a specific order to handle dependencies."""
     root_dir = Path(".")
 
     # Define processing order

@@ -3,8 +3,7 @@
     import re
     
     
-        def fix_config_file(self):
-        # Read the original file
+        def fix_config_file(self):        # Read the original file
         with open("src/config/config.py", "r") as f: content = f.read()
         
         # Fix imports
@@ -19,8 +18,7 @@
         
         # Fix ModelConfig class
         fixed_content += '''@dataclass
-    class ModelConfig:
-    """Model configuration."""
+    class ModelConfig:    """Model configuration."""
 
 model_type: str = field(default="language")  # 'language', 'image', 'audio', 'video'
 vocab_size: Optional[int] = field(default=50257)  # For language models
@@ -35,8 +33,7 @@ video_size: Optional[Tuple[int, int, int]] = field(default=None)  # For video mo
 video_, patch_size: Optional[Tuple[int, int, int]] = field(default=None)  # For video models
 
 @property
-def max_position_embeddings(self) -> int:
-    """Compatibility property for models expecting max_position_embeddings."""
+def max_position_embeddings(self) -> int:    """Compatibility property for models expecting max_position_embeddings."""
         return self.max_seq_length
         '''
         

@@ -4,8 +4,7 @@ import re
 #!/usr/bin/env python3
 
 
-def fix_indentation(lines) -> None:
-    """Fix indentation while preserving structure."""
+def fix_indentation(lines) -> None:    """Fix indentation while preserving structure."""
         fixed_lines = []
         indent_stack = [0]  # Stack to track indent levels
         
@@ -39,8 +38,7 @@ def fix_indentation(lines) -> None:
         return fixed_lines
         
         
-                def fix_docstrings(lines) -> None:
-                    """Fix docstring formatting."""
+                def fix_docstrings(lines) -> None:                    """Fix docstring formatting."""
         fixed_lines = []
         in_docstring = False
         docstring_indent = 0
@@ -63,8 +61,7 @@ def fix_indentation(lines) -> None:
                         return fixed_lines
 
 
-def fix_imports(lines) -> None:
-    """Fix import statements and their order."""
+def fix_imports(lines) -> None:    """Fix import statements and their order."""
         import_lines = []
         other_lines = []
         current_section = other_lines
@@ -82,8 +79,7 @@ def fix_imports(lines) -> None:
         return import_lines + other_lines
         
         
-def main(self):
-    """Fix syntax issues in all problematic files."""
+def main(self):    """Fix syntax issues in all problematic files."""
         problem_files = [
         "fix_flake8_comprehensive.py",
         "analyze_performance_by_category.py",

@@ -13,8 +13,7 @@ import seaborn as sns
         logger = logging.getLogger(__name__)
         
         
-                def analyze_performance(self):
-                    """Analyze performance across mathematical categories."""
+                def analyze_performance(self):                    """Analyze performance across mathematical categories."""
         metrics = extract_validation_metrics()
         category_stats = load_category_distribution()
         
@@ -52,8 +51,7 @@ import seaborn as sns
         return analysis
 
 
-                def generate_report(analysis) -> None:
-                    """Generate comprehensive performance report."""
+                def generate_report(analysis) -> None:                    """Generate comprehensive performance report."""
         if not analysis: logger.error("No analysis data available")
             return
         
@@ -105,8 +103,7 @@ import seaborn as sns
                 with open(report_path, "w") as f: f.write("\n".join(report))
                     logger.info(f"Performance analysis saved to {report_path}")
 
-def main(self):
-    """Main analysis function."""
+def main(self):    """Main analysis function."""
         analysis = analyze_performance()
         if analysis: generate_visualization(analysis)
         generate_report(analysis)

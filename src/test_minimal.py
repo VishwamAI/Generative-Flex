@@ -2,8 +2,7 @@ import json
 
 
 # Simple model definition
-class SimpleLanguageModel(nn.Module):
-    vocab_size: int, hidden_size: int = 64
+class SimpleLanguageModel(nn.Module):    vocab_size: int, hidden_size: int = 64
 
 def main(self):
     print("\nTesting model responses:")

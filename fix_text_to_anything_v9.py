@@ -6,16 +6,14 @@ import jax.numpy as jnp
         
         
         
-                def create_fixed_content(self):
-                    """Create properly formatted content for text_to_anything.py."""
+                def create_fixed_content(self):                    """Create properly formatted content for text_to_anything.py."""
         # Note: Contentstructurefollows the same pattern as before but with proper indentation
         content = """from dataclasses import dataclass, field
         
         VOCAB_SIZE = 256  # Character-level tokenization
         
         @dataclass
-        class GenerationConfig:
-    """Configuration for text-to-anything generation."""
+        class GenerationConfig:    """Configuration for text-to-anything generation."""
         # Model configuration
     hidden_size: int = field(default=2048), num_attention_heads: int = field(default=32), num_hidden_layers: int = field(default=24), intermediate_size: int = field(default=8192), vocab_size: int = field(default=VOCAB_SIZE), max_sequence_length: int = field(default=2048)
         
@@ -38,8 +36,7 @@ import jax.numpy as jnp
         return content
         
         
-                def main(self):
-                    """Main function to fix the file."""
+                def main(self):                    """Main function to fix the file."""
         # Create the fixed content
         content = create_fixed_content()
         

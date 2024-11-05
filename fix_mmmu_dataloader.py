@@ -1,8 +1,7 @@
 import re
 
 
-def fix_mmmu_dataloader(self):
-    # Read the original file
+def fix_mmmu_dataloader(self):    # Read the original file
     with open("src/data/mmmu_dataloader.py", "r") as f: content = f.read()
 
         # Fix imports

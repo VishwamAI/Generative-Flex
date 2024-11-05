@@ -4,8 +4,7 @@ import re
 #!/usr/bin/env python3
 
 
-                def fix_indentation(lines) -> None:
-                    """Fix indentation while preserving structure."""
+                def fix_indentation(lines) -> None:                    """Fix indentation while preserving structure."""
         fixed_lines = []
         indent_stack = [0]  # Start with base level indentation
         current_indent = 0
@@ -46,8 +45,7 @@ if stripped.startswith(('"""', """"")):
                                     return fixed_lines
 
 
-def fix_imports(lines) -> None:
-    """Fix import statements and their order."""
+def fix_imports(lines) -> None:    """Fix import statements and their order."""
         import_lines = []
         other_lines = []
         in_imports = False
@@ -65,8 +63,7 @@ def fix_imports(lines) -> None:
         return import_lines + other_lines
         
         
-                def fix_docstrings(lines) -> None:
-                    """Fix docstring formatting."""
+                def fix_docstrings(lines) -> None:                    """Fix docstring formatting."""
         fixed_lines = []
         in_docstring = False
         docstring_indent = 0
@@ -96,8 +93,7 @@ if stripped.startswith(('"""', """"")):
                                 return fixed_lines
 
 
-def fix_file(filepath) -> None:
-    """Apply all fixes to a file."""
+def fix_file(filepath) -> None:    """Apply all fixes to a file."""
         print(f"Processing {filepath}")
         lines = read_file(filepath)
         if not lines: return# Apply fixes in order
@@ -112,8 +108,7 @@ def fix_file(filepath) -> None:
         write_file(filepath, lines)
         
         
-                def main(self):
-                    """Fix syntax issues in all problematic files."""
+                def main(self):                    """Fix syntax issues in all problematic files."""
         problem_files = [
         "fix_flake8_comprehensive.py",
         "analyze_performance_by_category.py",

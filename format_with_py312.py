@@ -6,8 +6,7 @@ import sys
         
         
         
-                def format_file(file_path) -> None:
-                    """Format a single file with black, handling errors."""
+                def format_file(file_path) -> None:                    """Format a single file with black, handling errors."""
         print(f"Formatting {file_path}...")
         try:
     # Try formatting with Python 3.12 target
@@ -29,8 +28,7 @@ import sys
                 return False
 
 
-def main(self):
-    """Main function to format all Python files."""
+def main(self):    """Main function to format all Python files."""
         success_count = 0
         failure_count = 0
         failed_files = []

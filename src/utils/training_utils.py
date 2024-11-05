@@ -8,15 +8,13 @@ import os
 """Utility functions for model training."""
 
 
-class TrainState(train_state.TrainState):
-    """Extended TrainState for training."""
+class TrainState(train_state.TrainState):    """Extended TrainState for training."""
 
     batch_stats: Optional[Dict[str, Any]] = None
     metrics: Dict[str, Any]= None
 
 
-    def restore_checkpoint(self):
-        state: TrainState,
+    def restore_checkpoint(self):        state: TrainState,
         checkpoint_dir: str) -> Tuple[TrainState, int]:
             """Restores model from checkpoint."""
             restored_state = checkpoints.restore_checkpoint(ckpt_dir=checkpoint_dir, target=state)
@@ -24,8 +22,7 @@ class TrainState(train_state.TrainState):
             return restored_state or state, step
 
 
-    def compute_metrics(self):
-            labels: jnp.ndarray
+    def compute_metrics(self):            labels: jnp.ndarray
             ) -> Dict[str, float]:
                 """Computes metrics for evaluation."""
                 loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
@@ -35,8 +32,7 @@ class TrainState(train_state.TrainState):
                 return {"loss": loss, "accuracy": accuracy}
 
 
-    def create_input_pipeline(self):
-                data_dir: str,
+    def create_input_pipeline(self):                data_dir: str,
                 batch_size: int,
                 train_split: float = 0.8,
                 val_split: float = 0.1,

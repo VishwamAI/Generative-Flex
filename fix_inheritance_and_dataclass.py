@@ -18,8 +18,7 @@
     ]
     
     
-def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field patterns."""
+def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field patterns."""
         lines = content.split("\n")
         fixed_lines = []
         in_dataclass = False
@@ -69,8 +68,7 @@ def fix_dataclass_fields(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-                def main() -> None:
-                    """Fix inheritance and dataclass patterns in core files."""
+                def main() -> None:                    """Fix inheritance and dataclass patterns in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

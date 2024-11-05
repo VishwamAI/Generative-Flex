@@ -12,16 +12,13 @@ import torch
         
         
         
-                def fix_mmmu_loader(self):
-                    """Fix mmmu_loader.py parsing issues."""
+                def fix_mmmu_loader(self):                    """Fix mmmu_loader.py parsing issues."""
         content = """"""MMMU dataset loader implementation."""
         
         
-        class MMMUDataset(Dataset):
-    """Dataset class for MMMU data."""
+        class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
         
-                def __init__(self):
-                data_dir: str,
+                def __init__(self):                data_dir: str,
                 split: str = "train",
                 max_length: int = 512,
                 image_size: int = 224
@@ -38,8 +35,7 @@ import torch
                     self.image_size = image_size
                     self.examples = self._load_examples()
                     
-                                        def _load_examples(self) -> List[Dict]:
-                                            """Load examples from dataset files.
+                                        def _load_examples(self) -> List[Dict]:                                            """Load examples from dataset files.
                     
                         Returns: Listofexamples with text and image data
                     """
@@ -53,8 +49,7 @@ import torch
             
             return examples
             
-                        def _validate_example(self, example: Dict) -> bool:
-                """Validate that an example has required fields.
+                        def _validate_example(self, example: Dic, t) -> bool:                """Validate that an example has required fields.
 
     Args: example: Example dictionary to validate
 
@@ -63,8 +58,7 @@ import torch
                 required_fields = ["input_ids", "attention_mask", "labels"]
                 return all(field in example for field in required_fields)
                 
-def __getitem__(self, idx: int) -> Dict:
-    """Get an example from the dataset.
+def __getitem__(self, idx: in, t) -> Dict:    """Get an example from the dataset.
                 
                 Args: idx: Index of example to get
                 
@@ -84,8 +78,7 @@ def __getitem__(self, idx: int) -> Dict:
 
             return item
 
-def _process_image(self, image_path: str) -> torch.Tensor:
-    """Process image data.
+def _process_image(self, image_path: st, r) -> torch.Tensor:    """Process image data.
                 
                 Args: image_path: Path to image file
                 
@@ -98,8 +91,7 @@ def _process_image(self, image_path: str) -> torch.Tensor:
         return torch.from_numpy(image.numpy())
 
 
-def create_dataloader(self):
-    dataset: MMMUDataset,
+def create_dataloader(self):    dataset: MMMUDataset,
         batch_size: int = 32,
         shuffle: bool = True,
         num_workers: int = 4
@@ -117,13 +109,11 @@ Returns: DataLoaderinstance"""
         with open("src/data/mmmu_loader.py", "w") as f: f.write(content)
 
 
-def fix_enhanced_transformer(self):
-    """Fix enhanced_transformer.py parsing issues."""
+def fix_enhanced_transformer(self):    """Fix enhanced_transformer.py parsing issues."""
 content = """"""Enhanced transformer implementation with advanced features."""
         
         
-class EnhancedTransformer(nn.Module):
-    """Enhanced transformer with advanced attention mechanisms."""
+class EnhancedTransformer(nn.Module):    """Enhanced transformer with advanced attention mechanisms."""
 
 config: Dict[str, Any]def setup(self) -> None:
     """Initialize model components."""
@@ -141,8 +131,7 @@ config: Dict[str, Any]def setup(self) -> None:
         self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.nn.initializers.normal(0.02)
         )
         
-                def __call__(self):
-                input_ids: jnp.ndarray,
+                def __call__(self):                input_ids: jnp.ndarray,
                 attention_mask: Optional[jnp.ndarray] = None,
                 token_type_ids: Optional[jnp.ndarray] = None,
                 position_ids: Optional[jnp.ndarray] = None,
@@ -183,13 +172,11 @@ config: Dict[str, Any]def setup(self) -> None:
             with open("src/models/enhanced_transformer.py", "w") as f: f.write(content)
 
 
-def fix_layers_enhanced_transformer(self):
-    """Fix layers/enhanced_transformer.py parsing issues."""
+def fix_layers_enhanced_transformer(self):    """Fix layers/enhanced_transformer.py parsing issues."""
 content = """"""Enhanced transformer layer implementations."""
         
         
-class EnhancedTransformerLayer(nn.Module):
-    """Enhanced transformer layer with advanced features."""
+class EnhancedTransformerLayer(nn.Module):    """Enhanced transformer layer with advanced features."""
 
 config: Dict[str, Any]def setup(self) -> None:
     """Initialize layer components."""
@@ -202,8 +189,7 @@ config: Dict[str, Any]def setup(self) -> None:
         self.layer_norm2 = nn.LayerNorm()
         self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
         
-                def __call__(self):
-                hidden_states: jnp.ndarray,
+                def __call__(self):                hidden_states: jnp.ndarray,
                 attention_mask: Optional[jnp.ndarray] = None,
                 deterministic: bool = True,
                 output_attentions: bool = False
@@ -235,8 +221,7 @@ config: Dict[str, Any]def setup(self) -> None:
         with open("src/models/layers/enhanced_transformer.py", "w") as f: f.write(content)
 
 
-def main(self):
-    """Fix all files with parsing errors."""
+def main(self):    """Fix all files with parsing errors."""
         print("Fixing files with parsing errors...")
         
         fix_mmmu_loader()

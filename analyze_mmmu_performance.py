@@ -15,8 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-                def analyze_problem_categories(dataset) -> None:
-                    """Analyze and categorize problems in the dataset"""
+                def analyze_problem_categories(dataset) -> None:                    """Analyze and categorize problems in the dataset"""
         categories = defaultdict(list)
         
         try: foridxin range(len(dataset)):
@@ -46,8 +45,7 @@ logger = logging.getLogger(__name__)
                                         return None
 
 
-                def generate_performance_report(categories, results) -> None:
-                    """Generate a comprehensive performance report"""
+                def generate_performance_report(categories, results) -> None:                    """Generate a comprehensive performance report"""
         if not results or not categories: logger.error("Missing results or categories data")
             return
         
@@ -90,8 +88,7 @@ logger = logging.getLogger(__name__)
                     logger.info(f"Category distribution visualization saved to {viz_path}")
 
 
-def main(self):
-    """Main analysis function"""
+def main(self):    """Main analysis function"""
         # Load dataset
         dataset = load_mmmu_dataset()
         if not dataset: return# Analyze problem categories

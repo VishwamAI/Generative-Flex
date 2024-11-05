@@ -14,16 +14,13 @@ import time
 __device_config = setup_device_config()
 
 
-def test_flax_installation() -> Dict[str, Any]:
-    """Test Flax installation with a simple model."""
+def test_flax_installation() -> Dict[str, Any]:    """Test Flax installation with a simple model."""
     print("\n=== Testing Flax Installation ===")
 
     # Create a small test model
     class SimpleModel(nn.Module):
-
         @nn.compact
-        def main(self):
-            """Run all environment tests."""
+        def main(self):            """Run all environment tests."""
             try: # Test JAX
             jax_results = test_jax_installation()
             print("JAX test completed successfully")

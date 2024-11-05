@@ -11,8 +11,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def parse_validation_results(self):
-    """Parse validation results from training logs"""
+def parse_validation_results(self):    """Parse validation results from training logs"""
         log_dir = Path("logs")
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
         
@@ -54,8 +53,7 @@ def parse_validation_results(self):
         except Exception: continuereturnresults
         
         
-                def generate_performance_report(results) -> None:
-                    """Generate a comprehensive performance report"""
+                def generate_performance_report(results) -> None:                    """Generate a comprehensive performance report"""
         if not results: logger.error("No results data available")
             return
         
@@ -114,8 +112,7 @@ def parse_validation_results(self):
                                     logger.info(f"Performance visualization saved to {viz_path}")
 
 
-def main(self):
-    """Main analysis function"""
+def main(self):    """Main analysis function"""
         results = parse_validation_results()
         if results: generate_performance_report(results)
         

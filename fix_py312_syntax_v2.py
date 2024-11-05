@@ -3,8 +3,7 @@ import os
 import re
 
 
-def fix_docstrings(content: str) -> str:
-    """Fix docstring formatting and placement."""
+def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting and placement."""
         lines = content.split("\n")
         fixed_lines = []
         in_class = False
@@ -41,8 +40,7 @@ if not line.strip() == '"""':
         return "\n".join(fixed_lines)
         
         
-                def main():
-                    """Process all Python files in the project."""
+                def main():                    """Process all Python files in the project."""
             for root, _, files in os.walk("."):
         if ".git" in root or "venv" in root or "__pycache__" in root: continueforfile in files: iffile.endswith(".py"):
                 file_path = os.path.join(root, file)

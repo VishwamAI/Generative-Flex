@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_indentation(content) -> None:
-    """Fix indentation issues in the content."""
+def fix_indentation(content) -> None:    """Fix indentation issues in the content."""
         # Split content into lines
         lines = content.split("\n")
         
@@ -70,8 +69,7 @@ def fix_indentation(content) -> None:
         return "\n".join(fixed_lines)
         
         
-                def main(self):
-                # Read the original file
+                def main(self):                # Read the original file
                 with open("src/models/text_to_anything.py", "r") as f: content = f.read()
                 
                 # Fix indentation

@@ -18,8 +18,7 @@
     ]
     
     
-def ensure_imports(content: str) -> str:
-    """Ensure necessary imports are present at the top."""
+def ensure_imports(content: st, r) -> str:    """Ensure necessary imports are present at the top."""
         required_imports = {
         "from dataclasses import dataclass, field",
         "from typing import Optional, Union, List, Dict, Any, Tuple",
@@ -66,8 +65,7 @@ if content.startswith('"""'):
         return content
         
         
-def main() -> None:
-    """Fix syntax patterns in core files."""
+def main() -> None:    """Fix syntax patterns in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

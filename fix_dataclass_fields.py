@@ -2,8 +2,7 @@ import re
 
 
 
-def fix_dataclass_fields(content) -> None:
-    """Fix dataclass field definitions to proper Python syntax."""
+def fix_dataclass_fields(content) -> None:    """Fix dataclass field definitions to proper Python syntax."""
         # Split content into lines
         lines = content.split("\n")
         
@@ -56,8 +55,7 @@ if in_config and line.strip() and not line.strip().startswith(('"""', "#")):
         return "\n".join(fixed_lines)
         
         
-                def main(self):
-                # Read the original file
+                def main(self):                # Read the original file
                 with open("src/models/text_to_anything.py", "r") as f: content = f.read()
                 
                 # Fix the dataclass fields

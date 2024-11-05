@@ -5,8 +5,7 @@ import sys
         
         
         
-def main(self):
-    """Main function to format files."""
+def main(self):    """Main function to format files."""
         files_to_format = [
         "src/config/training_config.py",
         "src/config/config.py",

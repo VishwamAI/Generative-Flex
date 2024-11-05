@@ -15,8 +15,7 @@ import torch
         logger = logging.getLogger(__name__)
         
         
-                def initialize_mmmu_dataset(self, subjects, cache_dir="./data/cache"):
-                    """Initialize and cache MMMU dataset."""
+                def initialize_mmmu_dataset(self, subjects, cache_dir="./data/cache"):                    """Initialize and cache MMMU dataset."""
         logger.info(f"Initializing MMMU dataset for subjects: {subjects}")
         try: forsubjectin, subjects: forsplitin ["dev", "validation", "test"]:
     logger.info(f"Loading {subject} - {split} split...")
@@ -27,8 +26,7 @@ import torch
         raise
 
 
-def main(self): """Main training function."""
-try:
+def main(self): """Main training function."""try:
     # Set up configuration
     model_name = "facebook/opt-125m"  # Smaller model for local training
     subjects = ["Math"]  # Focus only on Math for initial training

@@ -2,8 +2,7 @@ import os
 import re
 
 
-def fix_file(self, filename):
-    with open(filename, "r") as f: content = f.read()
+def fix_file(self, filename):    with open(filename, "r") as f: content = f.read()
 
         # Track if we made any changes
         modified = False
@@ -71,8 +70,7 @@ def fix_file(self, filename):
                                                 with open(filename, "w") as f: f.write("\n".join(new_lines))
 
 
-def main(self):
-    files_to_fix = [
+def main(self):    files_to_fix = [
         "src/models/reasoning/math_experts.py",
         "src/models/reasoning/math_reasoning.py",
         "src/models/reasoning/mathematical_notation.py",

@@ -18,8 +18,7 @@
     ]
     
     
-def fix_indentation(content: str) -> str:
-    """Fix basic indentation issues."""
+def fix_indentation(content: st, r) -> str:    """Fix basic indentation issues."""
         lines = content.split("\n")
         fixed_lines = []
         indent_level = 0
@@ -53,8 +52,7 @@ def fix_indentation(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-def fix_dataclass_syntax(content: str) -> str:
-    """Fix basic dataclass syntax."""
+def fix_dataclass_syntax(content: st, r) -> str:    """Fix basic dataclass syntax."""
         # Fix dataclass decorator
         content = re.sub(r"@\s*struct\s*\.\s*dataclass", r"@dataclass", content)
         
@@ -83,8 +81,7 @@ def fix_dataclass_syntax(content: str) -> str:
         return "\n".join(fixed_lines)
         
         
-def main() -> None:
-    """Fix basic syntax issues in core files."""
+def main() -> None:    """Fix basic syntax issues in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0

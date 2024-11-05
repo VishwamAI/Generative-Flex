@@ -6,8 +6,7 @@ import re
 
 
 
-def fix_multiline_fstrings(filename) -> None: withopen(filename, "r") as f: content = f.read()
-
+def fix_multiline_fstrings(filename) -> None: withopen, (filename, "r") as f: conten, t = f.read()
         # Fix the specific problematic f-strings
         fixes = [
         (

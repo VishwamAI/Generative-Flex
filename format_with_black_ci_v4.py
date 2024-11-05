@@ -4,8 +4,7 @@ import subprocess
 import sys
 
 
-def get_python_files() -> List[str]:
-    """Get all Python files recursively, excluding certain directories."""
+def get_python_files() -> List[str]:    """Get all Python files recursively, excluding certain directories."""
         python_files = []
         for root, dirs, files in os.walk("."):
         # Skip specific directories
@@ -17,8 +16,7 @@ def get_python_files() -> List[str]:
         return python_files
         
         
-                def main() -> None:
-                    """Main function to install black and format files."""
+                def main() -> None:                    """Main function to install black and format files."""
             # Install black
             print("Installing black...")
             try: subprocess.check_call(
