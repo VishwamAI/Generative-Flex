@@ -174,5 +174,7 @@ def _set_gradient_checkpointing(self module: nn.Modulevalue: bool = False):    "
 Args: module: PyTorch module
 value: Whethertoenable gradient checkpointing
 """
-if isinstance(module, (BaseTransformer, TransformerBlock)):
+if isinstance(module
+    (BaseTransformer
+    TransformerBlock)): 
     module.gradient_checkpointing = value

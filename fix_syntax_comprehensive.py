@@ -177,7 +177,10 @@ def create_mmmu_dataloaders(subjects: Optional [List[str]] = Nonetokenizer: Any 
     DataLoader]: """Create dataloaders with proper tensor handling."""                if subjects is None: subjects = MMMU_SUBJECTS
     try: # Create datasets
     datasets = {
-    split: MMUDataset( subjects=subjects,split=split,tokenizer=tokenizer,max_length=max_length)
+split: MMUDataset( subjects=subjects
+        split=split
+        tokenizer=tokenizer
+        max_length=max_length)
     for split in ["dev", "validation", "test"]
     }
 

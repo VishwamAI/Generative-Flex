@@ -11,7 +11,8 @@ def fix_dataclass_field_spacing(content: st r) -> str: """Fix dataclass field de
 for line in lines: if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
 continue
 
-if ( in_dataclassand ":" in lineand not line.strip().startswith(("def", "class"))
+if ( in_dataclassand ": " in lineand not line.strip().startswith(("def"
+    "class"))
 ):
     # Split into name and type parts
     name_part

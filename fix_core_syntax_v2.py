@@ -91,7 +91,9 @@ for line in content.split("\n"):
                                                             lines.append(line)
                                                             continue
 
-                                                            if (                                                             in_class                                                            and ":" in line                                                            and not line.strip().startswith(("def", "class", "@"))
+if (                                                             in_class                                                            and ": " in line                                                            and not line.strip().startswith(("def"
+                                                                "class"
+                                                                "@"))
                                                             ):
                                                                 # Fix field definition
                                                                 stripped = line.strip()

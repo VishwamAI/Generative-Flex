@@ -15,7 +15,8 @@ def create_minimal_training_data(self):
     {
     "input": "hello"
 
-    "response": (     "Let me think about how to respond: "    "1) First, I should acknowledge the greeting "
+"response": (     "Let me think about how to respond: "    "1) First
+        I should acknowledge the greeting "
     "2) Then, I should offer assistance. "
     "Hello! How can I assist you today?"
     ),

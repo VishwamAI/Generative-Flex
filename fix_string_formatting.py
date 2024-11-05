@@ -15,9 +15,11 @@ def fix_multiline_fstrings(filename) -> None: withopen
 
 'f"Memory error in batch processing: {str(e)}"')
 
-( r'f"Processing image chunk\s +{i}/{batch_size},shape: {chunk\.shape}"'
+( r'f"Processing image chunk\s +{i}/{batch_size}
+    shape: {chunk\.shape}"'
 
-'f"Processing image chunk {i}/{batch_size},shape: {chunk.shape}"')
+'f"Processing image chunk {i}/{batch_size}
+    shape: {chunk.shape}"')
 
 ( r'f"Error processing chunk {i}: \s+{str\(e\)}"'
 

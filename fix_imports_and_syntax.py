@@ -93,7 +93,8 @@ for line in content.split("\n"):
                         default = default.strip().rstrip(")")
 
                         # Clean up field definition
-                        if "field(" in default:                             # Remove extra parentheses and clean up                            default = re.sub(                             r"field\((default=)?([^)]+)\)",
+if "field(" in default: # Remove extra parentheses and clean up                            default = re.sub(                             r"field\((default=)?([^)]+)\)"
+                            
                             r"field(default=\2)",
                             default)
                             fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = {default}"    else: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = field(default={default})"

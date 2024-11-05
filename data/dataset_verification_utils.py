@@ -272,9 +272,11 @@ if isinstance(error TimeoutException):
                                 kwargs = {"streaming": True
                                 "split": split}                                                                    if config: kwargs["name"] = config                                                                        if token: kwargs["token"]= token
                                 dataset = load_dataset(dataset_id, **kwargs)
-                                info.update({                                 "splits": (                                 list(dataset.keys()) if hasattr(dataset, "keys") else [split]
+info.update({                                 "splits": (                                 list(dataset.keys()) if hasattr(dataset
+                                    "keys") else [split]
                                 ),
-                                "features": (                                 str(dataset.features) if hasattr(dataset, "features") else None
+"features": (                                 str(dataset.features) if hasattr(dataset
+                                    "features") else None
                                 ),
                                 "fallback_method": "datasets_library"
 

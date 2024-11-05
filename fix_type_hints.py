@@ -65,7 +65,8 @@ def fix_type_hints(content: str) -> str:
                                             if not stripped or not line.startswith(' ' * (class_indent + 4)):
                                                 in_class = False
                                                 # Fix field definitions
-                                                elif '=' in line and 'field(' in line:                                                     indent = len(re.match(r'(\s*)', line).group(1))
+elif '=' in line and 'field(' in line: indent = len(re.match(r'(\s*)'
+                                                    line).group(1))
                                                     # Split multiple fields on same line
                                                     if '
                                                     ' in line and not line.endswith('                                                     '):

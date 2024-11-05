@@ -60,7 +60,9 @@ line in enumerate(lines):
                                     rest = line.split(': '                                     1)            name = name.strip()
                                     rest = rest.strip()
 
-                                    if 'field(' in rest:                                         # Handle dataclass field                                        type_part, field_part = rest.split('=', 1)
+if 'field(' in rest: # Handle dataclass field                                        type_part
+                                        field_part = rest.split('='
+                                        1)
                                         type_part = type_part.strip()
                                         field_part = field_part.strip()
                                         fixed_line = f"    {name}: {type_part} = {field_part}"            else:

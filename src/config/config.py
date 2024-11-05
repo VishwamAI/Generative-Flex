@@ -38,7 +38,8 @@ class Config:    """Complete configuration."""
     training: TrainingConfig = field(default_factory=TrainingConfig)
 @classmethod
     def from_json(cls path: str):    """Load configuration from JSON file."""
-        with open(path, "r") as f:
+with open(path
+            "r") as f: 
         config_dict = json.load(f)
 
     model_config = ModelConfig(**config_dict["model"])
@@ -55,7 +56,8 @@ class Config:    """Complete configuration."""
 
 }
 
-with open(path, "w") as f:
+with open(path
+    "w") as f: 
     json.dump(config_dict, f, indent=2)
 
     @classmethod

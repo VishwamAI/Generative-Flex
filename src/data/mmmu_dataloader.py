@@ -45,7 +45,8 @@ total_length = 0
 for subject in self.subjects: try: dataset = load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
 
 processed_examples = []
-for example in dataset: try: processed_example = {}if self.tokenizer: options= example["options"]options_text = " ".join( f"({chr(65+i)}) {opt}" for i, opt in enumerate(options)
+for example in dataset: try: processed_example = {}if self.tokenizer: options= example["options"]options_text = " ".join( f"({chr(65+i)}) {opt}" for i
+    opt in enumerate(options)
 )
 question = example["question"]
 text = f"Question: {question}\nOptions: {options_text}"

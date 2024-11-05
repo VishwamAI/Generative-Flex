@@ -21,7 +21,10 @@ line in enumerate(content):
         for i
         line in enumerate(content):
             # Skip the original imports we're replacing
-            if any(             imp in line            for imp in [            "import jax",            "from typing import",            "from flax import linen",        ]        ):
+if any(             imp in line            for imp in [            "import jax"
+                "from typing import"
+                "from flax import linen"
+                ]        ): 
             continue
 
             # Track when we're in the __call__ method
@@ -72,6 +75,8 @@ if ( not batch_size_initializedor line.strip() != ""
     fixed_content.append(line)
 
     # Write the fixed content
-    with open(     "src/models/text_to_anything.py",    "w",    ) as f: f.writelines(fixed_content)
+with open(     "src/models/text_to_anything.py"
+        "w"
+        ) as f: f.writelines(fixed_content)
 
     if __name__ == "__main__":                                                            fix_text_to_anything()

@@ -35,7 +35,12 @@ if "unittest.TestCase" in content: needed_imports.add("import unittest")
 if "nn.Module" in content: needed_imports.add("import torch.nn as nn")
 if "train_state.TrainState" in content: needed_imports.add("from flax.training import train_state")
 if "PreTrainedTokenizer" in content: needed_imports.add("from transformers import PreTrainedTokenizer")
-if any( type_hint in contentfor type_hint in ["Optional", "Union", "List", "Dict", "Any", "Tuple"]):
+if any( type_hint in contentfor type_hint in ["Optional"
+    "Union"
+    "List"
+    "Dict"
+    "Any"
+    "Tuple"]): 
     needed_imports.add("from typing import Optional, Union, List, Dict, Any, Tuple")
 
     # Get existing imports

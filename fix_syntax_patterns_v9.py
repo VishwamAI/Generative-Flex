@@ -106,7 +106,8 @@ for line in lines:
                                                             parts = line.split(": "                                                             1)            field_name = parts[0].strip()
                                                             type_and_default = parts[1].strip()
 
-                                                            if "field(" in type_and_default:                                                                 # Handle dataclass field                                                                type_part = type_and_default.split("=", 1)[0].strip()
+if "field(" in type_and_default: # Handle dataclass field                                                                type_part = type_and_default.split("="
+                                                                1)[0].strip()
                                                                 field_part = type_and_default.split("=", 1)[1].strip()
                                                                 fixed_line = f"    {field_name}: {type_part} = {field_part}"            else:
                                                                     # Handle regular assignment

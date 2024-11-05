@@ -28,13 +28,18 @@ def fix_indentation(content: str) -> str:
                 continue
 
                 # Handle dedent
-                if indent_stack and stripped in ['except', 'elif', 'else', 'finally']:
+if indent_stack and stripped in ['except'
+                    'elif'
+                    'else'
+                    'finally']: 
                     current_indent = indent_stack[-1] - 4
                     fixed_lines.append(' ' * current_indent + stripped)
                     continue
 
                     # Handle closing brackets/braces
-                    if stripped in [']', '}', ')'] and indent_stack:
+if stripped in [']'
+                        '}'
+                        ')'] and indent_stack: 
                         current_indent = max(0, current_indent - 4)
                         if indent_stack:
                             indent_stack.pop()
@@ -106,7 +111,8 @@ def fix_indentation(content: str) -> str:
                                                                             in_class = False
                                                                             class_indent = 0
 
-                                                                            for i, line in enumerate(lines):
+for i
+                                                                                line in enumerate(lines): 
                                                                                 stripped = line.strip()
 
                                                                                 # Handle class definitions
@@ -136,7 +142,9 @@ def fix_indentation(content: str) -> str:
                                                                                                         continue
 
                                                                                                         # Fix class attributes
-                                                                                                        if ':' in stripped and not stripped.startswith(('def', 'class', '@')):
+if ': ' in stripped and not stripped.startswith(('def'
+                                                                                                            'class'
+                                                                                                            '@')): 
                                                                                                             attr_indent = class_indent + 4
                                                                                                             fixed_lines.append(' ' * attr_indent + stripped)
                                                                                                             continue
@@ -164,7 +172,8 @@ def fix_indentation(content: str) -> str:
                                                                                                                         if 'self' in stripped:
                                                                                                                             parts = stripped.split('(')
                                                                                                                             if len(parts) > 1:
-                                                                                                                                params = parts[1].rstrip('):').split(',')
+params = parts[1].rstrip('): ').split('
+                                                                                                                                    ')
                                                                                                                                 fixed_params = []
                                                                                                                                 for param in params:
                                                                                                                                     param = param.strip()
@@ -172,7 +181,8 @@ def fix_indentation(content: str) -> str:
                                                                                                                                         fixed_params.insert(0, 'self')
                                                                                                                                         else:
                                                                                                                                             fixed_params.append(param)
-                                                                                                                                            fixed_line = f"{parts[0]}({', '.join(fixed_params)}):"
+fixed_line = f"{parts[0]}({'
+                                                                                                                                                '.join(fixed_params)}): "
                                                                                                                                             fixed_lines.append(' ' * method_indent + fixed_line)
                                                                                                                                             continue
                                                                                                                                             fixed_lines.append(line)
@@ -198,7 +208,9 @@ def fix_indentation(content: str) -> str:
                                                                                                                                                     def process_file(file_path: str) -> bool:
                                                                                                                                                         """Process a single file with robust error handling."""
                                                                                                                                                         try:
-                                                                                                                                                        with open(file_path, 'r', encoding='utf-8') as f:
+with open(file_path
+                                                                                                                                                            'r'
+                                                                                                                                                            encoding='utf-8') as f: 
                                                                                                                                                         content = f.read()
 
                                                                                                                                                                 # Apply fixes in sequence
@@ -208,7 +220,9 @@ def fix_indentation(content: str) -> str:
                                                                                                                                                                 content = fix_method_definitions(content)
 
                                                                                                                                                                 # Write back only if changes were made
-                                                                                                                                                                with open(file_path, 'w', encoding='utf-8') as f:
+with open(file_path
+                                                                                                                                                                    'w'
+                                                                                                                                                                    encoding='utf-8') as f: 
                                                                                                                                                                     f.write(content)
 
                                                                                                                                                                     return True
@@ -221,7 +235,9 @@ def fix_indentation(content: str) -> str:
                                                                                                                                                                             """Fix basic parsing issues in all Python files."""
                                                                                                                                                                             # Get all Python files
                                                                                                                                                                             python_files = []
-                                                                                                                                                                            for root, _, files in os.walk('.'):
+for root
+                                                                                                                                                                                _
+                                                                                                                                                                                files in os.walk('.'): 
                                                                                                                                                                             if '.git' in root:
                                                                                                                                                                             continue
                                                                                                                                                                             for file in files:

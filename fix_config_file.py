@@ -62,7 +62,9 @@ for line in lines:
                                         continue
 
                                         # Handle dataclass fields
-                                        if (                                         in_class                                        and ":" in stripped                                        and not stripped.startswith(("def", "class", "@"))
+if (                                         in_class                                        and ": " in stripped                                        and not stripped.startswith(("def"
+                                            "class"
+                                            "@"))
                                         ):
                                             field_indent = class_indent + 4
                                             name

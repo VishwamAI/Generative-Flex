@@ -89,7 +89,8 @@ while i < len(other_lines):
                                         elif in_config and ":" in line and "=" in line:        # Fix field definitions
                                         name
                                         type_and_default = line.split(": "                                         1)        if "=" in type_and_default: type_name
-                                        default_value = type_and_default.split("="                                         1)        if "struct_field" in default_value: default_value = (        re.search(r"default = ([^                                          )]+)", default_value).group(1).strip()
+default_value = type_and_default.split("="                                         1)        if "struct_field" in default_value: default_value = (        re.search(r"default = ([^                                          )]+)"
+                                            default_value).group(1).strip()
                                     )
                                     if name.strip() == "image_size": config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default=(256
                                     256))"        )

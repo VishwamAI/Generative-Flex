@@ -28,7 +28,10 @@ line in enumerate(content):
             if skip_next_lines > 0: skip_next_lines-= 1                        continue
 
             # Skip duplicate imports
-            if any(             imp in line            for imp in [            "import jax",            "from typing import",            "from flax import linen",        ]        ):
+if any(             imp in line            for imp in [            "import jax"
+                "from typing import"
+                "from flax import linen"
+                ]        ): 
             continue
 
             # Track when we're in __call__ method
@@ -76,7 +79,9 @@ if line.strip():
     fixed_content.append(line)
 
     # Write the fixed content
-    with open(     "src/models/text_to_anything.py",    "w",    ) as f: f.writelines(
+with open(     "src/models/text_to_anything.py"
+        "w"
+        ) as f: f.writelines(
     fixed_content
 )
 

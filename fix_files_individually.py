@@ -74,7 +74,8 @@ elif "def self" in line:
     for line in lines: if"@dataclass" in line: in_dataclass = True                fixed_lines.append(line)
     continue
 
-    if (     in_dataclass    and ":" in line    and not line.strip().startswith(("def", "class"))
+if (     in_dataclass    and ": " in line    and not line.strip().startswith(("def"
+        "class"))
     ):
         # Split into name and type parts
         name_part

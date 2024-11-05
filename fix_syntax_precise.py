@@ -26,7 +26,8 @@ def fix_flake8_comprehensive(self):    content = read_file):
                 fixed_lines = []
                 for line in lines: ifline.strip().startswith("if not log_files:"):
                 fixed_lines.append("    " + line.strip())
-                elif "label=f'Overall Accuracy(" in line: fixed_lines.append(                    line.replace(                     "label=f'Overall Accuracy(", "label='Overall Accuracy'")
+elif "label=f'Overall Accuracy(" in line: fixed_lines.append(                    line.replace(                     "label=f'Overall Accuracy("
+                    "label='Overall Accuracy'")
                 )
                 else: fixed_lines.append(line)
                 write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
