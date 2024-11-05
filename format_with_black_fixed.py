@@ -1,8 +1,7 @@
-"""Format Python files using black's Python API."""
+"""Format Python files using black's Python API with correct target version."""
 
-import sys
 from pathlib import Path
-from black import FileMode, format_file_contents, InvalidInput
+from black import FileMode, format_file_contents, InvalidInput, TargetVersion
 
 
 def format_file(file_path: Path) -> None:
@@ -13,7 +12,7 @@ def format_file(file_path: Path) -> None:
 
         try:
             mode = FileMode(
-                target_versions={sys.version_info[:2]},
+                target_versions={TargetVersion.PY312},
                 line_length=88,
                 string_normalization=True,
                 is_pyi=file_path.suffix == ".pyi",
