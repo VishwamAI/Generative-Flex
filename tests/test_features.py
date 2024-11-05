@@ -6,7 +6,10 @@ import jax.numpy as jnp
 from typing import Dict, List, Optional, Tuple, Any
 
 from src.models.enhanced_transformer import EnhancedTransformer
-from src.models.knowledge_retrieval import KnowledgeIntegrator, KnowledgeAugmentedTransformer
+from src.models.knowledge_retrieval import (
+    KnowledgeIntegrator,
+    KnowledgeAugmentedTransformer,
+)
 from src.models.apple_optimizations import AppleOptimizedTransformer
 from src.models.text_to_anything import TextToAnything
 from src.config.config import EnhancedConfig
