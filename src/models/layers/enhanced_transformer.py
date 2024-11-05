@@ -1,183 +1,73 @@
-from transformers import PretrainedConfig
-from typing import Optional, Tuple
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+"""Enhanced transformer layer implementations."""
+
+from typing import Optional, Dict, Any
+import jax
+import jax.numpy as jnp
+from flax import linen as nn
 
 
+class EnhancedTransformerLayer(nn.Module):
+    """Enhanced transformer layer with advanced features."""
 
+    config: Dict[str, Any]
 
-class EnhancedTransformerBlock(nn.Module):
-    """Enhanced transformer block with additional capabilities for mathematical reasoning"""
+    def setup(self):
+        """Initialize layer components."""
+        self.attention = nn.MultiHeadDotProductAttention(
+            num_heads=self.config["num_attention_heads"],
+            dropout_rate=self.config["attention_dropout_rate"],
+        )
 
+        self.mlp = nn.Dense(
+            features=self.config["intermediate_size"],
+            kernel_init=jax.nn.initializers.normal(0.02),
+        )
 
-    def __init__(self, config: PretrainedConfig, dropout: float = 0.1):
-    super().__init__()
-    self.hidden_size = config.hidden_size
-    self.num_attention_heads = config.num_attention_heads
-    self.dropout_prob = dropout
+        self.layer_norm1 = nn.LayerNorm()
+        self.layer_norm2 = nn.LayerNorm()
+        self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
-    # Multi-head attention
-    self.attention = nn.MultiheadAttention(
-    embed_dim=config.hidden_size,
-    num_heads=config.num_attention_heads,
-    dropout=dropout,
-    batch_first=True,
-    )
+    def __call__(
+        self,
+        hidden_states: jnp.ndarray,
+        attention_mask: Optional[jnp.ndarray] = None,
+        deterministic: bool = True,
+        output_attentions: bool = False,
+    ) -> Dict[str, jnp.ndarray]:
+        """Forward pass of the layer.
 
-    # Feed-forward network
-    self.feed_forward = nn.Sequential(
-    nn.Linear(config.hidden_size, config.hidden_size * 4),
-    nn.GELU(),
-    nn.Dropout(dropout),
-    nn.Linear(config.hidden_size * 4, config.hidden_size),
-    nn.Dropout(dropout),
-    )
+        Args:
+            hidden_states: Input hidden states
+            attention_mask: Attention mask
+            deterministic: Whether to use deterministic behavior
+            output_attentions: Whether to output attention weights
 
-    # Layer normalization
-    self.attention_norm = nn.LayerNorm(config.hidden_size)
-    self.feed_forward_norm = nn.LayerNorm(config.hidden_size)
+        Returns:
+            Dictionary containing layer outputs
+        """
+        # Self attention
+        normed_hidden_states = self.layer_norm1(hidden_states)
+        attention_output = self.attention(
+            normed_hidden_states,
+            normed_hidden_states,
+            mask=attention_mask,
+            deterministic=deterministic,
+            output_attentions=output_attentions,
+        )
 
-    # Optional: Flash Attention support
-    self.use_flash_attention = getattr(config, "flash_attention", False)
+        hidden_states = hidden_states + self.dropout(
+            attention_output["hidden_states"], deterministic=deterministic
+        )
 
-    # Gradient checkpointing
-    self.gradient_checkpointing = False
+        # MLP
+        normed_hidden_states = self.layer_norm2(hidden_states)
+        mlp_output = self.mlp(normed_hidden_states)
+        hidden_states = hidden_states + self.dropout(
+            mlp_output, deterministic=deterministic
+        )
 
-    def forward(
-    self,
-    hidden_states: torch.Tensor,
-    attention_mask: Optional[torch.Tensor] = None,
-    layer_past: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,
-    use_cache: bool = False,
-    ) -> Tuple[torch.Tensor, dict]:
-    """Forward pass for the enhanced transformer block
-    Args:
-    hidden_states: Input tensor of shape(
-    batch_size,
-    seq_length,
-    hidden_size
-    )
-    attention_mask: Optional attention mask
-    layer_past: Optional past key/value states for incremental decoding
-    use_cache: Whether to use past key/value states
-    Returns:
-    Tuple of (output tensor, auxiliary info dictionary)"""
+        outputs = {"hidden_states": hidden_states}
+        if output_attentions:
+            outputs["attentions"] = attention_output["attentions"]
 
-    # Prepare attention mask
-    if attention_mask is not None:
-    # Convert mask to float and proper shape for nn.MultiheadAttention
-    # MultiheadAttention expects mask of shape(
-    batch_size,
-    seq_length,
-    seq_length
-    )
-    batch_size, seq_length = hidden_states.shape[:2]
-
-    # Handle different input mask shapes
-    if attention_mask.dim() == 2:
-    attention_mask = attention_mask.unsqueeze(1)
-    elif attention_mask.dim() > 3:
-    attention_mask = attention_mask.squeeze()
-    while attention_mask.dim() > 3:
-    attention_mask = attention_mask.squeeze(1)
-
-    # Ensure proper size by truncating or padding
-    if attention_mask.size(-1) != seq_length:
-    if attention_mask.size(-1) > seq_length:
-    attention_mask = attention_mask[...,:seq_length]
-    else:
-    pad_size = seq_length - attention_mask.size(-1)
-    attention_mask = F.pad(
-    attention_mask, (0, pad_size), value=0
-    )
-
-    # Create causal mask of matching size
-    causal_mask = torch.triu(
-    torch.ones(
-    seq_length, seq_length, device=hidden_states.device
-    ),
-    diagonal=1,
-    ).bool()
-
-    # Ensure attention mask has correct shape before applying causal mask
-    attention_mask = attention_mask.expand(
-    batch_size, seq_length, seq_length
-    )
-    attention_mask = attention_mask.masked_fill(
-    causal_mask,
-    0
-    )
-
-    # Convert to float and proper values for attention
-    attention_mask = attention_mask.to(dtype=hidden_states.dtype)
-    attention_mask = (1.0 - attention_mask) * -10000.0
-
-    # Reshape attention mask for multi-head attention
-    attention_mask = attention_mask.repeat(
-    self.num_attention_heads, 1, 1
-    )
-
-    # Self-attention
-    residual = hidden_states
-    hidden_states = self.attention_norm(hidden_states)
-
-    if self.gradient_checkpointing and self.training:
-
-    def create_custom_forward(module):
-    def custom_forward(*inputs):
-    return module(*inputs)
-
-    return custom_forward
-
-    attn_output, attn_weights = torch.utils.checkpoint.checkpoint(
-    create_custom_forward(self.attention),
-    hidden_states,
-    hidden_states,
-    hidden_states,
-    attention_mask,
-    None,
-    )
-    else:
-    attn_output, attn_weights = self.attention(
-    query=hidden_states,
-    key=hidden_states,
-    value=hidden_states,
-    attn_mask=(
-    attention_mask if attention_mask is not None else None
-    ),
-    need_weights=True,  # Get attention weights
-    is_causal=True,  # Enable causal masking
-    )
-
-    hidden_states = residual + attn_output
-
-    # Feed-forward network
-    residual = hidden_states
-    hidden_states = self.feed_forward_norm(hidden_states)
-
-    if self.gradient_checkpointing and self.training:
-    hidden_states = torch.utils.checkpoint.checkpoint(
-    create_custom_forward(
-    self.feed_forward),
-    hidden_states
-    )
-    )
-    else:
-    hidden_states = self.feed_forward(hidden_states)
-
-    hidden_states = residual +
-    hidden_states
-
-    # Return both hidden states and auxiliary information
-    auxiliary_info = {
-    "attention_weights": attn_weights,
-    "attention_output": attn_output,
-    "intermediate_states": hidden_states.detach(
-    ),
-
-    )
-    "layer_past": layer_past,
-    }
-
-    return hidden_states, auxiliary_info
+        return outputs
