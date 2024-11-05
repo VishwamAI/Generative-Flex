@@ -8,12 +8,9 @@ Tests:
 5. Constitutional AI principles
 """
 
-from typing import Dict, List, Optional, Tuple
-
 import jax
 import jax.numpy as jnp
 import pytest
-from transformers import AutoConfig
 
 from src.models.enhanced_transformer import EnhancedTransformer
 from src.models.knowledge_retrieval import KnowledgeIntegrator

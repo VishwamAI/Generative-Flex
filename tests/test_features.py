@@ -1,70 +1,63 @@
 """Comprehensive tests for all model features."""
 
 import pytest
-
-
 import jax
 import jax.numpy as jnp
 from typing import Dict, List, Optional, Tuple, Any
 
-# Test configuration
-batch_size = 4
-seq_length = 16
-hidden_size = 32
-
-from src.models.enhanced_transformer import EnhancedConfig, EnhancedTransformer
-from src.models.knowledge_retrieval import (
-    KnowledgeConfig,
-    KnowledgeAugmentedTransformer,
-)
-from src.models.text_to_anything import GenerationConfig, TextToAnything
+from src.models.enhanced_transformer import EnhancedTransformer
+from src.models.knowledge_retrieval import KnowledgeIntegrator, KnowledgeAugmentedTransformer
 from src.models.apple_optimizations import AppleOptimizedTransformer
-
-
-import jax
-import jax.numpy as jnp
-from typing import Dict, List, Optional, Tuple, Any
+from src.models.text_to_anything import TextToAnything
+from src.config.config import EnhancedConfig
 
 # Test configuration
-batch_size = 4
+batch_size = 2
 seq_length = 16
-hidden_size = 32
+hidden_size = 512  # Default size, will be overridden by configs when needed
 
 
 @pytest.fixture
 def config():
-    return EnhancedConfig(
-        hidden_size=512,
-        num_attention_heads=8,
-        num_hidden_layers=4,
-        use_flash_attention=True,
-        use_constitutional_ai=True,
-        num_experts=8,
-        safety_threshold=0.8,
-        use_int4_quantization=True,
-        use_neural_engine=True,
-    )
+    """Fixture for enhanced transformer configuration."""
+    return {
+        "hidden_size": 768,
+        "num_attention_heads": 8,
+        "num_hidden_layers": 6,
+        "intermediate_size": 3072,
+        "hidden_dropout_prob": 0.1,
+        "attention_probs_dropout_prob": 0.1,
+        "type_vocab_size": 2,
+        "vocab_size": 50257,
+        "use_constitutional_ai": True,
+        "use_retrieval": True,
+        "max_new_tokens": 512,
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 50,
+        "repetition_penalty": 1.2,
+        "head_dim": 64,
+        "max_sequence_length": 2048,
+    }
 
 
 @pytest.fixture
 def knowledge_config():
-    return KnowledgeConfig(
-        embedding_size=512, num_retrievers=2, max_chunks=10, update_frequency=100
-    )
+    """Fixture for knowledge retrieval configuration."""
+    return {"embedding_size": 768, "num_retrievers": 2}
 
 
 @pytest.fixture
 def text_to_anything_config():
-    return GenerationConfig(
-        hidden_size=512,
-        num_attention_heads=8,
-        num_hidden_layers=4,
-        supported_modalities=["text", "image", "audio", "video"],
-        use_constitutional_ai=True,
-        safety_threshold=0.8,
-        use_int4_quantization=True,
-        use_neural_engine=True,
-    )
+    """Fixture for text-to-anything configuration."""
+    return {
+        "hidden_size": 768,
+        "num_attention_heads": 12,
+        "num_hidden_layers": 6,
+        "vocab_size": 50257,
+        "max_sequence_length": 2048,
+        "supported_modalities": ["text", "image", "audio", "video"],
+    }
 
 
 def test_openai_features(config):
