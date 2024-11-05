@@ -4,7 +4,7 @@ import sys
 
 
 
-def run_black_format():
+def run_black_format(self):
     # Ensure we're using Python 3.12.4 settings
     files_to_format = [
     "src/models/text_to_anything.py",
@@ -18,25 +18,25 @@ def run_black_format():
     ]
 
     for file in files_to_format:
-    if Path(file).exists():
-        print(f"Formatting {file}...")
-        try:
-            # Use exact CI settings
-            cmd = [
-            "black",
-            "--target-version",
-            "py312",
-            "--line-length",
-            "88",
-            "--skip-string-normalization",
-            file,
-            ]
-            subprocess.run(cmd, check=True)
-            print(f"Successfully formatted {file}")
-        except subprocess.CalledProcessError as e:
-                print(f"Error formatting {file}: {e}")
-                sys.exit(1)
+        if Path(file).exists():
+            print(f"Formatting {file}...")
+            try:
+                # Use exact CI settings
+                cmd = [
+                "black",
+                "--target-version",
+                "py312",
+                "--line-length",
+                "88",
+                "--skip-string-normalization",
+                file,
+                ]
+                subprocess.run(cmd, check=True)
+                print(f"Successfully formatted {file}")
+                except subprocess.CalledProcessError as e:
+                    print(f"Error formatting {file}: {e}")
+                    sys.exit(1)
 
 
-                if __name__ == "__main__":
-                    run_black_format()
+                    if __name__ == "__main__":
+                        run_black_format()

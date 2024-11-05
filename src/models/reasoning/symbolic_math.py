@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-"""Symbolic mathematics processing module."""
+    """Symbolic mathematics processing module."""
 
 
 class SymbolicMathProcessor(nn.Module):
@@ -12,6 +12,6 @@ class SymbolicMathProcessor(nn.Module):
         self.dropout_prob = getattr(config, "hidden_dropout_prob", 0.1)
         self.dropout = nn.Dropout(self.dropout_prob)
 
-        def forward(self, x) -> None:
-            """Forward pass for symbolic math processing."""
-            return self.dropout(x)
+def forward(self, x) -> None:
+    """Forward pass for symbolic math processing."""
+return self.dropout(x)

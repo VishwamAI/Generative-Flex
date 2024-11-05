@@ -2,7 +2,7 @@ from typing import Tuple
 import torch
 import torch.nn as nn
 
-"""Specialized experts for mathematical reasoning."""
+    """Specialized experts for mathematical reasoning."""
 
 
 class MathematicalExpert(nn.Module):
@@ -19,13 +19,13 @@ class MathematicalExpert(nn.Module):
         self.dense_output = nn.Linear(self.intermediate_size, self.hidden_size)
 
         def forward(
-            self, hidden_states: torch.Tensor
+        self, hidden_states: torch.Tensor
         ) -> Tuple[torch.Tensor, torch.Tensor]:
             """Forward pass through the mathematical expert."""
-            intermediate_output = self.dense(hidden_states)
-            intermediate_output = self.intermediate_act_fn(intermediate_output)
+        intermediate_output = self.dense(hidden_states)
+        intermediate_output = self.intermediate_act_fn(intermediate_output)
 
-            layer_output = self.dense_output(intermediate_output)
-            layer_output = self.dropout(layer_output)
+        layer_output = self.dense_output(intermediate_output)
+        layer_output = self.dropout(layer_output)
 
-            return layer_output, torch.mean(intermediate_output, dim=-1)
+        return layer_output, torch.mean(intermediate_output, dim=-1)

@@ -2,41 +2,41 @@ import os
 import subprocess
 import sys
 
-"""Script to format remaining files according to CI settings."""
+    """Script to format remaining files according to CI settings."""
 
 
 
 def run_black_on_file(file_path) -> None:
     """Run black formatter on a single file."""
-    try:
-        subprocess.run([
-        "black", "--target-version", "py312", "--line-length", "88", "--skip-string-normalization", file_path, ], check=True, )
-        print(f"Successfully formatted {file_path}")
+try:
+    subprocess.run([
+    "black", "--target-version", "py312", "--line-length", "88", "--skip-string-normalization", file_path, ], check=True)
+    print(f"Successfully formatted {file_path}")
     except subprocess.CalledProcessError as e:
-            print(f"Error formatting {file_path}: {e}")
-            return False
+        print(f"Error formatting {file_path}: {e}")
+        return False
         return True
 
 
-    def main():
-        """Main function to format files."""
-        files_to_format = [
-        "src/config/training_config.py",
-        "src/config/config.py",
-        "src/data/math_tokenizer.py",
-        "src/data/mmmu_dataloader.py",
-        "src/models/apple_optimizations.py",
-        "src/models/text_to_anything.py",
-        "src/training/train_mmmu.py",
-        "tests/test_models.py",
-        "tests/test_features.py",
-        ]
+def main(self):
+    """Main function to format files."""
+files_to_format = [
+"src/config/training_config.py",
+"src/config/config.py",
+"src/data/math_tokenizer.py",
+"src/data/mmmu_dataloader.py",
+"src/models/apple_optimizations.py",
+"src/models/text_to_anything.py",
+"src/training/train_mmmu.py",
+"tests/test_models.py",
+"tests/test_features.py",
+]
 
-        success = True
-        for file_path in files_to_format:
-        if not os.path.exists(file_path):
-            print(f"Warning: File {file_path} does not exist")
-            continue
+success = True
+for file_path in files_to_format:
+    if not os.path.exists(file_path):
+        print(f"Warning: File {file_path} does not exist")
+        continue
         if not run_black_on_file(file_path):
             success = False
 

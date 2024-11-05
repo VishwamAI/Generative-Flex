@@ -24,68 +24,73 @@ class SimpleGreetingModel(nn.Module):
             bias_init=nn.initializers.zeros,
         )
 
-        def __call__(self, x) -> None:
-            x = self.embedding(x)
-            x = nn.relu(self.dense1(x))
-            x = self.dense2(x)
-            return x
 
-        def load_params(file_path: str) -> Dict[str, Any]:
-            """Load and process model parameters from JSON file."""
-            with open(file_path, "r") as f:
-                params = json.load(f)
-                # Convert nested dictionaries to arrays
-                return jax.tree_util.tree_map(
-                    lambda x: np.array(x) if isinstance(x, list) else x, params
-                )
+def __call__(self, x) -> None:
+    x = self.embedding(x)
+    x = nn.relu(self.dense1(x))
+    x = self.dense2(x)
+    return x
 
-            def main():
-                # Load vocabulary
-                with open("data/chatbot/minimal_vocab.json", "r") as f:
-                    vocab_list = json.load(f)
-                    # Create word to id mapping
-                    word_to_id = {word: idx for idx, word in enumerate(vocab_list)}
-                    # Create id to word mapping
-                    id_to_word = {idx: word for idx, word in enumerate(vocab_list)}
 
-                    # Initialize model and create initial parameters
-                    model = SimpleGreetingModel(_vocab_size=len(word_to_id))
-                    key = jax.random.PRNGKey(0)
-                    dummy_input = jnp.zeros((1,), dtype=jnp.int32)
-                    ___ = model.init(key, dummy_input)
+def load_params(file_path: str) -> Dict[str, Any]:
+    """Load and process model parameters from JSON file."""
 
-                    # Load trained parameters
-                    trained_params = load_params("model_params_minimal.json")
 
-                    # Test input
-                    test_input = "hi"
-                    input_tokens = jnp.array(
-                        [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
-                    )
+with open(file_path, "r") as f:
+    params = json.load(f)
+    # Convert nested dictionaries to arrays
+    return jax.tree_util.tree_map(
+        lambda x: np.array(x) if isinstance(x, list) else x, params
+    )
 
-                    # Get model output
-                    logits = model.apply(trained_params, input_tokens)
-                    predicted_tokens = jnp.argmax(logits, axis=-1)
 
-                    # Convert predictions to words
-                    predicted_words = [
-                        id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens
-                    ]
-                    response = " ".join(predicted_words)
+def main(self):
+    # Load vocabulary
+    with open("data/chatbot/minimal_vocab.json", "r") as f:
+        vocab_list = json.load(f)
+        # Create word to id mapping
+        word_to_id = {word: idx for idx, word in enumerate(vocab_list)}
+        # Create id to word mapping
+        id_to_word = {idx: word for idx, word in enumerate(vocab_list)}
 
-                    # Demonstrate chain-of-thought reasoning
-                    print("\nDemonstrating Chain-of-Thought LLM capabilities:")
-                    print("Input:", test_input)
-                    print("\nChain-of-Thought Steps:")
-                    print("1. Recognize greeting:", test_input)
-                    print("2. Process through embedding layer")
-                    print("3. Apply neural network transformations")
-                    print("4. Generate response tokens")
-                    print("\nReasoning:")
-                    print("- Input recognized as informal greeting")
-                    print("- Formulating polite response")
-                    print("- Adding offer of assistance")
-                    print("\nModel Response:", response)
+        # Initialize model and create initial parameters
+        model = SimpleGreetingModel(_vocab_size=len(word_to_id))
+        key = jax.random.PRNGKey(0)
+        dummy_input = jnp.zeros((1), dtype=jnp.int32)
+        ___ = model.init(key, dummy_input)
 
-                    if __name__ == "__main__":
-                        main()
+        # Load trained parameters
+        trained_params = load_params("model_params_minimal.json")
+
+        # Test input
+        test_input = "hi"
+        input_tokens = jnp.array(
+            [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
+        )
+
+        # Get model output
+        logits = model.apply(trained_params, input_tokens)
+        predicted_tokens = jnp.argmax(logits, axis=-1)
+
+        # Convert predictions to words
+        predicted_words = [
+            id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens
+        ]
+        response = " ".join(predicted_words)
+
+        # Demonstrate chain-of-thought reasoning
+        print("\nDemonstrating Chain-of-Thought LLM capabilities:")
+        print("Input:", test_input)
+        print("\nChain-of-Thought Steps:")
+        print("1. Recognize greeting:", test_input)
+        print("2. Process through embedding layer")
+        print("3. Apply neural network transformations")
+        print("4. Generate response tokens")
+        print("\nReasoning:")
+        print("- Input recognized as informal greeting")
+        print("- Formulating polite response")
+        print("- Adding offer of assistance")
+        print("\nModel Response:", response)
+
+        if __name__ == "__main__":
+            main()

@@ -15,12 +15,11 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 handlers=[
 logging.FileHandler("logs/training.log"),
 logging.StreamHandler(),
-],
-)
+])
 logger = logging.getLogger(__name__)
 
 
-def main():
+def main(self):
     try:
         # Initialize model configuration and tokenizer
         model_name = "facebook/opt-125m"
@@ -48,7 +47,7 @@ def main():
         # Start training with monitoring
         logger.info("Starting training process with monitoring")
         trainer.train()
-    except Exception as e:
+        except Exception as e:
             logger.error(f"Training failed with error: {str(e)}")
             raise
 
