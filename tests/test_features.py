@@ -218,9 +218,8 @@ def test_apple_optimizations():
         "position_ids": jnp.arange(seq_length)[None, :].repeat(batch_size, axis=0),
         "token_type_ids": jnp.zeros((batch_size, seq_length), dtype=jnp.int32),
         "hidden_states": jax.random.normal(
-            jax.random.PRNGKey(1),
-            (batch_size, seq_length, config.hidden_size)
-        )
+            jax.random.PRNGKey(1), (batch_size, seq_length, config.hidden_size)
+        ),
     }
 
     # Initialize model with configuration
