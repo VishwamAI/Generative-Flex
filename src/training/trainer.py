@@ -1,223 +1,132 @@
-import os
-"""
-Advanced Training Infrastructure for Generative-Flex
-Implements distributed training, gradient checkpointing, and dynamic optimization
-"""
+"""Base trainer implementation."""
 
 import torch
-from torch.nn.parallel import DistributedDataParallel
-from torch.cuda.amp import autocast, GradScaler
-from typing import Optional, Dict, Any
 import logging
-from pathlib import Path
+from typing import Dict, Optional
+from torch.utils.data import DataLoader
+
+logger = logging.getLogger(__name__)
 
 
-class AdvancedTrainer:
-    """Advanced trainer with distributed training and mixed precision"""
+class Trainer:
+    """Base trainer class."""
 
     def __init__(
         self,
-        model: nn.Module,
-        config: Dict[str, Any],
-        local_rank: int = -1,
-        output_dir: Optional[str] = None,
-    ):
-        self.model = model
-        self.config = config
-        self.local_rank = local_rank
-        self.output_dir = Path(output_dir) if output_dir else Path("outputs")
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-
-        # Setup distributed training
-        if self.local_rank != -1:
-            if not dist.is_initialized():
-                dist.init_process_group(backend="nccl")
-            self.model = DistributedDataParallel(
-                self.model,
-                device_ids=[self.local_rank],
-                output_device=self.local_rank,
-            )
-
-        # Enable gradient checkpointing
-        if hasattr(self.model, "gradient_checkpointing_enable"):
-            self.model.gradient_checkpointing_enable()
-
-        # Setup mixed precision and optimization
-        self.scaler = GradScaler()
-        self.setup_optimization()
-
-    def setup_optimization(self):
-        """Setup optimizer and scheduler with weight decay"""
-        # Separate parameters for weight decay
-        decay_params = []
-        no_decay_params = []
-        for name, param in self.model.named_parameters():
-            if any(nd in name for nd in ["bias", "LayerNorm.weight"]):
-                no_decay_params.append(param)
-            else:
-                decay_params.append(param)
-
-        # Create optimizer with weight decay
-        self.optimizer = optim.AdamW(
-            [
-                {
-                    "params": decay_params,
-                    "weight_decay": self.config.get("weight_decay", 0.01),
-                },
-                {"params": no_decay_params, "weight_decay": 0.0},
-            ],
-            lr=self.config.get("learning_rate", 1e-4),
-        )
-
-        # Create scheduler with warmup
-        num_steps = self.config.get("num_training_steps", 100000)
-        num_warmup = self.config.get("num_warmup_steps", 10000)
-        self.scheduler = optim.lr_scheduler.OneCycleLR(
-            self.optimizer,
-            max_lr=self.config.get("learning_rate", 1e-4),
-            total_steps=num_steps,
-            pct_start=num_warmup / num_steps,
-        )
-
-    def train_step(self, batch: Dict[str, torch.Tensor]) -> float:
-        """Single training step with mixed precision"""
-        self.model.train()
-
-        # Forward pass with mixed precision
-        with autocast():
-            outputs = self.model(**batch)
-            loss = outputs["loss"] if isinstance(outputs, dict) else outputs
-
-        # Backward pass with gradient scaling
-        self.scaler.scale(loss).backward()
-        self.scaler.step(self.optimizer)
-        self.scaler.update()
-        self.optimizer.zero_grad()
-        self.scheduler.step()
-
-        return loss.item()
-
-    def train(
-        self,
-        train_dataloader: torch.utils.data.DataLoader,
-        num_epochs: int,
-        eval_dataloader: Optional[torch.utils.data.DataLoader] = None,
-        eval_steps: int = 1000,
+        model,
+        train_dataloader: DataLoader,
+        eval_dataloader: Optional[DataLoader] = None,
+        optimizer: Optional[torch.optim.Optimizer] = None,
+        lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None,
+        num_epochs: int = 10,
+        gradient_accumulation_steps: int = 1,
+        max_grad_norm: float = 1.0,
+        logging_steps: int = 100,
+        evaluation_steps: int = 500,
         save_steps: int = 1000,
-        log_steps: int = 100,
+        output_dir: str = "outputs",
     ):
-        """Full training loop with evaluation"""
-        global_step = 0
-        _best_eval_loss = float("inf")"
+        """Initialize the trainer."""
+        self.model = model
+        self.train_dataloader = train_dataloader
+        self.eval_dataloader = eval_dataloader
+        self.optimizer = optimizer or torch.optim.AdamW(model.parameters())
+        self.lr_scheduler = lr_scheduler
+        self.num_epochs = num_epochs
+        self.gradient_accumulation_steps = gradient_accumulation_steps
+        self.max_grad_norm = max_grad_norm
+        self.logging_steps = logging_steps
+        self.evaluation_steps = evaluation_steps
+        self.save_steps = save_steps
+        self.output_dir = output_dir
 
-        for epoch in range(num_epochs):
-            epoch_loss = 0
-            num_steps = 0
+        self._step = 0
+        self._epoch = 0
+        self._best_eval_loss = float("inf")
 
-            for batch in train_dataloader:
-                # Move batch to device
-                batch = {k: v.to(self.local_rank) for k, v in batch.items()}
+    def train(self):
+        """Train the model."""
+        self.model.train()
+        total_loss = 0
 
-                # Training step
-                loss = self.train_step(batch)
-                epoch_loss += loss
-                num_steps += 1
-                global_step += 1
+        for epoch in range(self.num_epochs):
+            self._epoch = epoch
+            logger.info(f"Starting epoch {epoch}")
 
-                # Logging
-                if global_step % log_steps == 0:
-                    avg_loss = epoch_loss / num_steps
-                    lr = self.scheduler.get_last_lr()[0]
-                    logging.info(
-                        f"Epoch: {epoch}, Step: {global_step}, "
-                        f"Loss: {avg_loss:.4f}, LR: {lr:.2e}"
-                    )
+            for step, batch in enumerate(self.train_dataloader):
+                loss = self.training_step(batch)
+                total_loss += loss.item()
 
-                # Evaluation
-                if eval_dataloader is not None and global_step % eval_steps == 0:
-                    eval_loss = self.evaluate(eval_dataloader)
-                    logging.info(f"Eval Loss: {eval_loss:.4f}")
+                if step % self.gradient_accumulation_steps == 0:
+                    self.optimizer.step()
+                    if self.lr_scheduler is not None:
+                        self.lr_scheduler.step()
+                    self.optimizer.zero_grad()
+                    self._step += 1
 
-                    # Save best model
-                    if eval_loss < best_eval_loss:
-                        _best_eval_loss = eval_loss
-                        self.save_model("best_model")
+                    if self._step % self.logging_steps == 0:
+                        self.log_metrics({"loss": total_loss / self.logging_steps})
+                        total_loss = 0
 
-                # Regular checkpoint saving
-                if global_step % save_steps == 0:
-                    self.save_model(f"checkpoint-{global_step}")
+                    if self._step % self.evaluation_steps == 0:
+                        self.evaluate()
 
-            # End of epoch
-            avg_epoch_loss = epoch_loss / num_steps
-            logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")
+                    if self._step % self.save_steps == 0:
+                        self.save_checkpoint()
 
-            # Save epoch checkpoint
-            self.save_model(f"epoch-{epoch}")
+    def training_step(self, batch) -> torch.Tensor:
+        """Perform a single training step."""
+        outputs = self.model(**batch)
+        loss = outputs.loss
+        loss.backward()
+        if self.max_grad_norm > 0:
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
+        return loss
 
-    def evaluate(self, eval_dataloader: torch.utils.data.DataLoader) -> float:
-        """Evaluation loop"""
+    def evaluate(self) -> Dict[str, float]:
+        """Evaluate the model."""
+        if self.eval_dataloader is None:
+            return {}
+
         self.model.eval()
         total_loss = 0
-        num_steps = 0
 
-        with torch.no_grad():
-            for batch in eval_dataloader:
-                batch = {k: v.to(self.local_rank) for k, v in batch.items()}
-
-                with autocast():
-                    outputs = self.model(**batch)
-                    loss = outputs["loss"] if isinstance(outputs, dict) else outputs
-
+        for batch in self.eval_dataloader:
+            with torch.no_grad():
+                outputs = self.model(**batch)
+                loss = outputs.loss
                 total_loss += loss.item()
-                num_steps += 1
 
-        return total_loss / num_steps
+        eval_loss = total_loss / len(self.eval_dataloader)
+        self.model.train()
 
-    def save_model(self, name: str):
-        """Save model checkpoint"""
-        if self.local_rank in [-1, 0]:  # Save only on main process
-            save_path = self.output_dir / name
-            save_path.mkdir(parents=True, exist_ok=True)
+        metrics = {"eval_loss": eval_loss}
+        self.log_metrics(metrics)
 
-            # Save model
-            model_to_save = (
-                self.model.module if hasattr(self.model, "module") else self.model
-            )
-            torch.save(model_to_save.state_dict(), save_path / "model.pt")
+        if eval_loss < self._best_eval_loss:
+            self._best_eval_loss = eval_loss
+            self.save_checkpoint(is_best=True)
 
-            # Save optimizer
-            torch.save(self.optimizer.state_dict(), save_path / "optimizer.pt")
+        return metrics
 
-            # Save scheduler
-            torch.save(self.scheduler.state_dict(), save_path / "scheduler.pt")
+    def save_checkpoint(self, is_best: bool = False):
+        """Save a model checkpoint."""
+        checkpoint_name = f"checkpoint-{self._step}"
+        if is_best:
+            checkpoint_name = "best_model"
 
-            # Save config
-            torch.save(self.config, save_path / "config.pt")
+        torch.save(
+            {
+                "model_state_dict": self.model.state_dict(),
+                "optimizer_state_dict": self.optimizer.state_dict(),
+                "step": self._step,
+                "epoch": self._epoch,
+            },
+            f"{self.output_dir}/{checkpoint_name}.pt",
+        )
+        logger.info(f"Saved checkpoint: {checkpoint_name}")
 
-            logging.info(f"Model saved to {save_path}")
-
-    def load_model(self, path: str):
-        """Load model checkpoint"""
-        load_path = Path(path)
-
-        # Load model
-        model_path = load_path / "model.pt"
-        if model_path.exists():
-            state_dict = torch.load(model_path, map_location="cpu")
-            model_to_load = (
-                self.model.module if hasattr(self.model, "module") else self.model
-            )
-            model_to_load.load_state_dict(state_dict)
-            logging.info(f"Model loaded from {model_path}")
-
-        # Load optimizer
-        optimizer_path = load_path / "optimizer.pt"
-        if optimizer_path.exists():
-            self.optimizer.load_state_dict(torch.load(optimizer_path))
-            logging.info(f"Optimizer loaded from {optimizer_path}")
-
-        # Load scheduler
-        scheduler_path = load_path / "scheduler.pt"
-        if scheduler_path.exists():
-            self.scheduler.load_state_dict(torch.load(scheduler_path))
-            logging.info(f"Scheduler loaded from {scheduler_path}")
+    def log_metrics(self, metrics: Dict[str, float]):
+        """Log training metrics."""
+        metric_str = " ".join(f"{k}: {v:.4f}" for k, v in metrics.items())
+        logger.info(f"Step {self._step}: {metric_str}")
