@@ -3,7 +3,7 @@ from contextlib import contextmanager
 import logging
 import platform
 
-logger = logging.getLogger(__name__)
+__logger = logging.getLogger(__name__)
 
 
 class TimeoutException(Exception):

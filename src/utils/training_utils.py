@@ -1,15 +1,13 @@
+from typing import Tuple
 """Utility functions for model training."""
 
 import os
 from typing import Any, Dict, Iterator, Optional, Tuple
 
 import jax
-import jax.numpy as jnp
-import flax
 import optax
 from flax.training import train_state
 from flax.training import checkpoints
-import tensorflow as tf
 
 
 class TrainState(train_state.TrainState):
@@ -36,8 +34,8 @@ def create_train_state(
         apply_fn=model.apply,
         params=variables["params"],
         tx=tx,
-        batch_stats=variables.get("batch_stats"),
-        metrics={"loss": 0.0, "accuracy": 0.0},
+        _batch_stats=variables.get("batch_stats"),
+        _metrics={"loss": 0.0, "accuracy": 0.0},
     )
 
 

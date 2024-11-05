@@ -2,8 +2,6 @@
 
 from typing import Optional, Dict, Any
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 
 
 class EnhancedTransformerLayer(nn.Module):

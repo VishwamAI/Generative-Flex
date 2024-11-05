@@ -1,8 +1,7 @@
+import os
 """Audio generation model implementation using JAX and Flax."""
 
 from typing import Any, Optional
-import jax.numpy as jnp
-import flax.linen as nn
 
 from src.models.transformer import TransformerBlock
 
@@ -33,7 +32,7 @@ class AudioEmbedding(nn.Module):
         frames = frames * window[None, None, :]
 
         # Project to hidden dimension
-        return nn.Dense(self.hidden_dim, dtype=self.dtype)(frames)
+        return nn.Dense(self.hidden_dim, _dtype=self.dtype)(frames)
 
 
 class AudioGenerationModel(nn.Module):
@@ -60,10 +59,10 @@ class AudioGenerationModel(nn.Module):
 
         # Convert audio to embeddings
         x = AudioEmbedding(
-            hidden_dim=self.hidden_dim,
-            frame_size=self.frame_size,
-            hop_length=self.hop_length,
-            dtype=self.dtype,
+            _hidden_dim=self.hidden_dim,
+            _frame_size=self.frame_size,
+            _hop_length=self.hop_length,
+            _dtype=self.dtype,
         )(inputs)
 
         # Add positional embeddings
@@ -78,15 +77,15 @@ class AudioGenerationModel(nn.Module):
         # Apply transformer blocks
         for _ in range(self.num_layers):
             x = TransformerBlock(
-                num_heads=self.num_heads,
-                head_dim=self.head_dim,
-                mlp_dim=self.mlp_dim,
-                dropout_rate=self.dropout_rate,
-                dtype=self.dtype,
+                _num_heads=self.num_heads,
+                _head_dim=self.head_dim,
+                _mlp_dim=self.mlp_dim,
+                _dropout_rate=self.dropout_rate,
+                _dtype=self.dtype,
             )(x, deterministic=not training)
 
         # Project back to audio frame space
-        x = nn.Dense(self.frame_size, dtype=self.dtype)(x)
+        x = nn.Dense(self.frame_size, _dtype=self.dtype)(x)
 
         # Overlap-add synthesis
         # Calculate output length to match input frames

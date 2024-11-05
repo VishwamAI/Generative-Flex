@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from typing import List, Optional, Dict
 
@@ -35,10 +36,10 @@ class TrainingConfig:
 
     def __post_init__(self):
         if self.subjects is None:
-            self.subjects = ["Math", "Computer_Science"]
+            self._subjects = ["Math", "Computer_Science"]
 
         if self.generation_config is None:
-            self.generation_config = {
+            self._generation_config = {
                 "do_sample": True,
                 "temperature": 0.7,
                 "top_p": 0.9,

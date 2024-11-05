@@ -1,11 +1,11 @@
+import os
 from transformers import PretrainedConfig
-from typing import Optional, List
 
 
 class MathReasoningConfig(PretrainedConfig):
     """Configuration class for MathReasoningModel."""
 
-    model_type = "math_reasoning"
+    _model_type = "math_reasoning"
 
     def __init__(
         self,

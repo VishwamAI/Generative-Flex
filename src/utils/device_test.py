@@ -1,8 +1,6 @@
 """Test script to verify JAX device configuration and GPU support."""
 
 import jax
-import jax.numpy as jnp
-import flax
 import optax
 
 

@@ -1,7 +1,5 @@
-import json
+import os
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from flax.training import train_state
 import optax
 
@@ -63,7 +61,7 @@ def main():
     ]
 
     # Initialize model and optimizer
-    model = SimpleLanguageModel(vocab_size=len(vocab))
+    model = SimpleLanguageModel(_vocab_size=len(vocab))
     learning_rate = 0.01
     optimizer = optax.adam(learning_rate)
 

@@ -1,9 +1,10 @@
+import os
+from typing import Tuple
 """Centralized configuration management for Generative-Flex."""
 
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Dict, Any, Tuple, Type
 
 
 @dataclass
@@ -105,7 +106,7 @@ class Config:
         model_config = ModelConfig(**config_dict["model"])
         training_config = TrainingConfig(**config_dict["training"])
 
-        return cls(model=model_config, training=training_config)
+        return cls(_model=model_config, _training=training_config)
 
     def to_json(self, path: str):
         """Save configuration to JSON file."""
@@ -132,13 +133,13 @@ class Config:
         model_config = ModelConfig(model_type=model_type)
 
         if model_type == "image":
-            model_config.image_size = (256, 256)
-            model_config.patch_size = (16, 16)
+            model_config._image_size = (256, 256)
+            model_config._patch_size = (16, 16)
         elif model_type == "audio":
-            model_config.audio_sample_rate = 16000
-            model_config.frame_size = 1024
+            model_config._audio_sample_rate = 16000
+            model_config._frame_size = 1024
         elif model_type == "video":
-            model_config.video_size = (16, 256, 256)
-            model_config.video_patch_size = (2, 16, 16)
+            model_config._video_size = (16, 256, 256)
+            model_config._video_patch_size = (2, 16, 16)
 
-        return Config(model=model_config, training=TrainingConfig())
+        return Config(_model=model_config, _training=TrainingConfig())

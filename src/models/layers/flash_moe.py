@@ -1,3 +1,5 @@
+import os
+from typing import Tuple
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -89,7 +91,7 @@ class FlashAttention(torch.nn.Module):
 
         # Compute attention with better memory efficiency
         attn_weights = torch.matmul(q, k.transpose(-2, -1)) * self.scaling
-        attn_weights = attn_weights.masked_fill(attention_mask == 0, float("-inf"))
+        attn_weights = attn_weights.masked_fill(attention_mask == 0, float("-inf"))"
 
         attn_weights = F.softmax(attn_weights, dim=-1)
         attn_weights_dropout = self.dropout(attn_weights)

@@ -1,10 +1,9 @@
+import os
 """Base model classes for different types of generative models."""
 
 from abc import ABC, abstractmethod
 from typing import Tuple
 
-import flax.linen as nn
-import jax.numpy as jnp
 
 
 class BaseModel(nn.Module, ABC):
@@ -36,7 +35,7 @@ class TransformerBlock(nn.Module):
     def __call__(self, x, training: bool = False):
         # Multi-head attention
         attention_output = nn.MultiHeadDotProductAttention(
-            num_heads=self.num_heads, dropout_rate=self.dropout_rate
+            _num_heads=self.num_heads, _dropout_rate=self.dropout_rate
         )(x, x)
         x = nn.LayerNorm()(x + attention_output)
 
@@ -88,13 +87,13 @@ class BaseLanguageModel(BaseModel):
             num_embeddings=self.vocab_size, features=self.hidden_size
         )
         self.pos_encoding = PositionalEncoding(
-            max_len=self.max_sequence_length, hidden_size=self.hidden_size
+            _max_len=self.max_sequence_length, _hidden_size=self.hidden_size
         )
         self.transformer_blocks = [
             TransformerBlock(
-                hidden_size=self.hidden_size,
-                num_heads=self.num_heads,
-                dropout_rate=self.dropout_rate,
+                _hidden_size=self.hidden_size,
+                _num_heads=self.num_heads,
+                _dropout_rate=self.dropout_rate,
             )
             for _ in range(self.num_layers)
         ]

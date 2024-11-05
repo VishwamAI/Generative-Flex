@@ -1,11 +1,11 @@
+import os
+from typing import Tuple
 """MMMU Dataset loader with multimodal support"""
 
 from PIL import Image
 from datasets import load_dataset
 from torch.utils.data import Dataset, DataLoader, ConcatDataset
 from torchvision import transforms
-from typing import List, Optional, Dict, Tuple, Union
-import logging
 import torch
 
 # Set up logging

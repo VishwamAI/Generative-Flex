@@ -1,14 +1,13 @@
+import os
+from typing import Tuple
 """
 MultiModal Transformer implementation with features inspired by Gemma and LLaMA.
 """
 
 import logging
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from typing import Optional, Tuple, Dict, Any
 from ..layers.flash_moe import EnhancedTransformerBlock
-from ..enhanced_transformer import EnhancedTransformer
 from .image_processor import ImageProcessor
 
 # Set up logging

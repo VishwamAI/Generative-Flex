@@ -1,8 +1,4 @@
-import jax
-import jax.numpy as jnp
-import json
-from flax import linen as nn
-import numpy as np
+import os
 from typing import Dict, Any
 
 
@@ -56,10 +52,10 @@ def main():
         id_to_word = {idx: word for idx, word in enumerate(vocab_list)}
 
     # Initialize model and create initial parameters
-    model = SimpleGreetingModel(vocab_size=len(word_to_id))
+    model = SimpleGreetingModel(_vocab_size=len(word_to_id))
     key = jax.random.PRNGKey(0)
     dummy_input = jnp.zeros((1,), dtype=jnp.int32)
-    _ = model.init(key, dummy_input)
+    ___ = model.init(key, dummy_input)
 
     # Load trained parameters
     trained_params = load_params("model_params_minimal.json")

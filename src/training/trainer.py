@@ -1,14 +1,12 @@
+import os
 """
 Advanced Training Infrastructure for Generative-Flex
 Implements distributed training, gradient checkpointing, and dynamic optimization
 """
 
 import torch
-import torch.nn as nn
-import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 from torch.cuda.amp import autocast, GradScaler
-import torch.optim as optim
 from typing import Optional, Dict, Any
 import logging
 from pathlib import Path
@@ -110,7 +108,7 @@ class AdvancedTrainer:
     ):
         """Full training loop with evaluation"""
         global_step = 0
-        best_eval_loss = float("inf")
+        _best_eval_loss = float("inf")"
 
         for epoch in range(num_epochs):
             epoch_loss = 0
@@ -142,7 +140,7 @@ class AdvancedTrainer:
 
                     # Save best model
                     if eval_loss < best_eval_loss:
-                        best_eval_loss = eval_loss
+                        _best_eval_loss = eval_loss
                         self.save_model("best_model")
 
                 # Regular checkpoint saving

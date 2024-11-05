@@ -1,9 +1,9 @@
+import os
+from typing import Tuple
 """Image generation model implementation using JAX and Flax."""
 
 from typing import Any, Optional, Tuple
 import jax
-import jax.numpy as jnp
-import flax.linen as nn
 
 from src.models.transformer import TransformerBlock
 
@@ -39,7 +39,7 @@ class PatchEmbedding(nn.Module):
         )
 
         # Project patches to hidden dimension
-        return nn.Dense(self.hidden_dim, dtype=self.dtype)(patches)
+        return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 
 
 class ImageGenerationModel(nn.Module):
@@ -66,9 +66,9 @@ class ImageGenerationModel(nn.Module):
 
         # Convert image to patches and embed
         x = PatchEmbedding(
-            patch_size=self.patch_size,
-            hidden_dim=self.hidden_dim,
-            dtype=self.dtype,
+            _patch_size=self.patch_size,
+            _hidden_dim=self.hidden_dim,
+            _dtype=self.dtype,
         )(inputs)
 
         # Add learnable position embeddings
@@ -85,16 +85,16 @@ class ImageGenerationModel(nn.Module):
         # Apply transformer blocks
         for _ in range(self.num_layers):
             x = TransformerBlock(
-                num_heads=self.num_heads,
-                head_dim=self.head_dim,
-                mlp_dim=self.mlp_dim,
-                dropout_rate=self.dropout_rate,
-                dtype=self.dtype,
+                _num_heads=self.num_heads,
+                _head_dim=self.head_dim,
+                _mlp_dim=self.mlp_dim,
+                _dropout_rate=self.dropout_rate,
+                _dtype=self.dtype,
             )(x, deterministic=not training)
 
         # Project back to patch space
         x = nn.Dense(
-            self.patch_size * self.patch_size * self.channels, dtype=self.dtype
+            self.patch_size * self.patch_size * self.channels, _dtype=self.dtype
         )(x)
 
         # Reshape back to image
@@ -141,7 +141,7 @@ class ImageGenerationModel(nn.Module):
                     self.image_size[1],
                     self.channels,
                 ),
-                dtype=self.dtype,
+                _dtype=self.dtype,
             )
         else:
             x = condition

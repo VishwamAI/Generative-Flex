@@ -29,9 +29,9 @@ class CoreEvaluator:
 
     def setup_metrics(self):
         """Setup core evaluation metrics"""
-        self.perplexity = Perplexity(ignore_index=-100).to(self.device)
-        self.bleu = BLEUScore(n_gram=4).to(self.device)
-        self.rouge = ROUGEScore().to(self.device)
+        self._perplexity = Perplexity(ignore_index=-100).to(self.device)
+        self._bleu = BLEUScore(n_gram=4).to(self.device)
+        self._rouge = ROUGEScore().to(self.device)
 
     def compute_metrics(
         self,

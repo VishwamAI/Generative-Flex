@@ -1,8 +1,6 @@
 """Specialized tokenizer for mathematical expressions and symbols."""
 
 from transformers import PreTrainedTokenizer
-from typing import List, Dict, Any, Optional
-import re
 import sympy
 import torch
 

@@ -1,10 +1,9 @@
+import os
 """Tests for the language model chatbot implementation."""
 
 from typing import Dict, List
 
 import jax
-import jax.numpy as jnp
-import pytest
 
 from src.models.language_model import LanguageModel
 

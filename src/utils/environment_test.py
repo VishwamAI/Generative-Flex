@@ -1,11 +1,7 @@
 """Test script to verify JAX/Flax/Optax installation."""
 
 import jax
-import jax.numpy as jnp
-import flax
 import optax
-import tensorflow_datasets as tfds
-import numpy as np
 import transformers
 
 

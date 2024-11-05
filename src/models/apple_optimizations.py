@@ -1,3 +1,5 @@
+import os
+from typing import Tuple
 """Apple-style optimizations for on-device ML performance.
 
 Implements:
@@ -9,9 +11,6 @@ Implements:
 
 from flax import struct
 from typing import Optional, Tuple
-import flax.linen as nn
-import jax
-import jax.numpy as jnp
 
 
 @struct.dataclass
@@ -80,7 +79,7 @@ class BlockWiseQuantization(nn.Module):
         x_reshaped = x.reshape(-1, self.block_size)  # Flatten to (N, block_size)
 
         # Compute statistics based on quantization mode
-        if self.quantization_mode == "linear_symmetric":
+        if self._quantization_mode == "linear_symmetric":
             max_abs = jnp.max(jnp.abs(x_reshaped), axis=1, keepdims=True)
             scale = max_abs / (2 ** (self.num_bits - 1) - 1)
             zero_point = jnp.zeros_like(scale)
@@ -134,7 +133,7 @@ class StatefulKeyValueCache(nn.Module):
         """Initialize cache variables."""
         # Cache shapes
         batch_size = 1  # Default batch size
-        hidden_size = self.num_heads * self.head_dim
+        __hidden_size = self.num_heads * self.head_dim
         max_length = int(self.max_sequence_length * self.cache_size_multiplier)
 
         # Initialize cache tensors
@@ -147,14 +146,14 @@ class StatefulKeyValueCache(nn.Module):
             "key",
             jnp.zeros,
             key_shape,
-            dtype=getattr(jnp, self.dtype),
+            _dtype=getattr(jnp, self.dtype),
         )
         self.value_cache = self.variable(
             "cache",
             "value",
             jnp.zeros,
             value_shape,
-            dtype=getattr(jnp, self.dtype),
+            _dtype=getattr(jnp, self.dtype),
         )
         self.current_length = self.variable("cache", "length", lambda: 0)
         self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length,), bool)
@@ -226,7 +225,7 @@ class PrivacyPreservingLayer(nn.Module):
         """Initialize privacy components."""
         self.dropout = nn.Dropout(rate=0.1)  # Default dropout rate
         self.dense = nn.Dense(self.hidden_size)
-        self.use_privacy_preserving = True  # Always enabled for this layer
+        self._use_privacy_preserving = True  # Always enabled for this layer
         self.layer_norm = nn.LayerNorm(
             epsilon=1e-12,  # Default epsilon
             use_bias=True,
@@ -246,7 +245,7 @@ class PrivacyPreservingLayer(nn.Module):
         x = self.dense(x)
 
         # Apply dropout with deterministic flag
-        x = self.dropout(x, deterministic=not training)
+        x = self.dropout(x, _deterministic=not training)
 
         # Add noise only during training with differential privacy
         if training and self.use_privacy_preserving:
@@ -342,7 +341,7 @@ class AppleOptimizedTransformer(nn.Module):
         # Calculate attention dimensions
         self.num_heads = self.config.num_attention_heads
         self.head_dim = self.config.hidden_size // self.num_heads
-        self.hidden_size = self.config.hidden_size
+        self.__hidden_size = self.config.hidden_size
 
         # QKV projections with correct output dimensions
         qkv_dim = self.head_dim * self.num_heads
@@ -357,23 +356,23 @@ class AppleOptimizedTransformer(nn.Module):
         # Optional components based on config
         if self.config.use_int4_quantization:
             self.quantization = BlockWiseQuantization(
-                block_size=self.config.block_size, num_bits=4
+                _block_size=self.config.block_size, _num_bits=4
             )
 
         if self.config.use_kv_cache:
             self.kv_cache = StatefulKeyValueCache(
                 num_heads=self.num_heads,
                 head_dim=self.head_dim,
-                max_sequence_length=self.config.max_sequence_length,
-                dtype=self.config.cache_dtype,
-                cache_size_multiplier=self.config.cache_size_multiplier,
+                _max_sequence_length=self.config.max_sequence_length,
+                _dtype=self.config.cache_dtype,
+                _cache_size_multiplier=self.config.cache_size_multiplier,
             )
 
         if self.config.use_privacy_preserving:
             self.privacy_layer = PrivacyPreservingLayer(
-                hidden_size=self.config.hidden_size,
-                noise_multiplier=self.config.noise_multiplier,
-                l2_norm_clip=self.config.l2_norm_clip,
+                __hidden_size=self.config.hidden_size,
+                _noise_multiplier=self.config.noise_multiplier,
+                _l2_norm_clip=self.config.l2_norm_clip,
             )
 
     def __call__(
@@ -454,7 +453,7 @@ class AppleOptimizedTransformer(nn.Module):
 
         # Apply dropout during training
         if training:
-            attention_probs = self.dropout(attention_probs, deterministic=False)
+            attention_probs = self.dropout(attention_probs, _deterministic=False)
 
         # Compute context layer
         context_layer = jnp.matmul(attention_probs, value)

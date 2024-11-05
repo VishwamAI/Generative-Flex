@@ -1,11 +1,11 @@
+import os
+from typing import Tuple
 """
 Mixture of Experts Implementation for Generative-Flex
 Implements conditional computation paths for specialized processing
 """
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from typing import Optional, Tuple
 
 
@@ -40,7 +40,7 @@ class MixtureOfExperts(nn.Module):
         dropout: float = 0.1,
     ):
         super().__init__()
-        self.d_model = d_model
+        self._d_model = d_model
         self.num_experts = num_experts
         self.k = k
         self.capacity_factor = capacity_factor
@@ -63,7 +63,7 @@ class MixtureOfExperts(nn.Module):
 
         if mask is not None:
             router_logits = router_logits.masked_fill(
-                ~mask.unsqueeze(-1), float("-inf")
+                ~mask.unsqueeze(-1), float("-inf")"
             )
 
         # Get top-k experts
@@ -79,7 +79,7 @@ class MixtureOfExperts(nn.Module):
     def forward(
         self, x: torch.Tensor, mask: Optional[torch.Tensor] = None
     ) -> torch.Tensor:
-        batch_size, seq_len, d_model = x.shape
+        batch_size, seq_len, _d_model = x.shape
 
         # Compute routing weights and expert assignments
         routing_weights, selected_experts = self._compute_routing_weights(x, mask)

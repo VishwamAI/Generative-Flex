@@ -2,10 +2,7 @@
 
 import json
 import jax
-import jax.numpy as jnp
-import numpy as np
 import pytest
-from flax import linen as nn
 
 
 class SimpleModel(nn.Module):
@@ -103,14 +100,14 @@ def model_params(tmp_path, vocab_list):
 @pytest.fixture
 def simple_model(vocab_list):
     """Fixture providing initialized SimpleModel."""
-    return SimpleModel(vocab_size=len(vocab_list))
+    return SimpleModel(_vocab_size=len(vocab_list))
 
 
 def test_model_initialization(simple_model, vocab_list):
     """Test that model initializes with correct parameters."""
     assert isinstance(simple_model, SimpleModel)
-    assert simple_model.vocab_size == len(vocab_list)
-    assert simple_model.hidden_size == 64
+    assert simple_model._vocab_size == len(vocab_list)
+    assert simple_model._hidden_size == 64
 
 
 def test_init_model_state(simple_model, vocab_list):
@@ -126,7 +123,7 @@ def test_init_model_state(simple_model, vocab_list):
 
 def test_model_forward_pass(simple_model, model_params, word_mappings):
     """Test model forward pass with test input."""
-    word_to_id, _ = word_mappings
+    word_to_id, __ = word_mappings
     test_input = "hi"
     input_token = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])])
 

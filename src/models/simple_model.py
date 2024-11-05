@@ -1,9 +1,7 @@
+import os
 """Simple language model for demonstration purposes."""
 
 import jax
-import jax.numpy as jnp
-import flax.linen as nn
-import numpy as np
 
 
 class SimpleLanguageModel(nn.Module):

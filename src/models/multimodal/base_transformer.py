@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import math
@@ -46,7 +47,7 @@ class MultiHeadAttention(nn.Module):
 
         if attention_mask is not None:
             attention_scores = attention_scores.masked_fill(
-                attention_mask == 0, float("-inf")
+                attention_mask == 0, float("-inf")"
             )
 
         attention_probs = torch.softmax(attention_scores, dim=-1)

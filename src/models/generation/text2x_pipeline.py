@@ -1,6 +1,5 @@
+import os
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from ..multimodal.base_transformer import BaseTransformer
 
 
@@ -53,7 +52,7 @@ class Text2XPipeline(nn.Module):
     def get_modality_embedding(self, modality):
         modality_idx = list(self.modality_projections.keys()).index(modality)
         return self.modality_embeddings(
-            torch.tensor(modality_idx, device=self.transformer.embedding.weight.device)
+            torch.tensor(modality_idx, _device=self.transformer.embedding.weight.device)
         )
 
     def forward(
@@ -85,14 +84,14 @@ class Text2XPipeline(nn.Module):
         input_ids,
         attention_mask=None,
         target_modality="text",
-        max_length=None,
+        _max_length=None,
         temperature=1.0,
     ):
         if max_length is None:
-            max_length = self.config.max_position_embeddings
+            _max_length = self.config.max_position_embeddings
 
-        device = input_ids.device
-        batch_size = input_ids.shape[0]
+        _device = input_ids.device
+        _batch_size = input_ids.shape[0]
 
         with torch.no_grad():
             outputs = self.forward(input_ids, attention_mask, target_modality)

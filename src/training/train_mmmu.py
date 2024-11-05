@@ -1,3 +1,5 @@
+from typing import Tuple
+import os
 """Training script for MMMU dataset using enhanced transformer model.
 
 This module implements the training loop and evaluation logic for the
@@ -6,12 +8,8 @@ Understanding)
 dataset. It includes logging, checkpointing, and performance monitoring.
 """
 
-import time
-import logging
 from typing import Dict, Any
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from flax.training import train_state
 import optax
 
@@ -30,8 +28,8 @@ def setup_training(config: ModelConfig):
     Returns:
         Tuple of (model, optimizer, initial_state)
     """
-    model = EnhancedTransformer(config=config)
-    optimizer = optax.adamw(
+    __model = EnhancedTransformer(config=config)
+    __optimizer = optax.adamw(
         learning_rate=config.learning_rate, weight_decay=config.weight_decay
     )
     initial_state = train_state.TrainState.create(

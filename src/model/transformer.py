@@ -4,7 +4,6 @@ Combines Flash Attention and Mixture of Experts for optimal performance
 """
 
 import torch
-import torch.nn as nn
 from typing import Optional
 
 from .attention import FlashAttention

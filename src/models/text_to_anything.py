@@ -1,7 +1,5 @@
+from typing import Tuple
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple, Union
-import flax.linen as nn
-import jax.numpy as jnp
 
 VOCAB_SIZE = 256  # Character-level tokenization
 

@@ -1,7 +1,5 @@
-import flax
+import os
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from typing import Any, Dict, Optional
 import optax
 from flax.training import train_state
@@ -73,7 +71,7 @@ class FlaxTrainer:
             apply_fn=self.model.apply,
             params=variables["params"],
             tx=optimizer,
-            loss_scale=(
+            _loss_scale=(
                 jnp.array(2.0**15)
                 if self.config["training"].get("fp16", False)
                 else None

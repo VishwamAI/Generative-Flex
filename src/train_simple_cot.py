@@ -1,7 +1,5 @@
 import json
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from flax.training import train_state
 import optax
 import os
@@ -74,7 +72,7 @@ def main():
     )
 
     # Initialize model and optimizer
-    model = SimpleChatModel(vocab_size=len(vocab))
+    model = SimpleChatModel(_vocab_size=len(vocab))
     key = jax.random.PRNGKey(0)
     params = model.init(key, input_tokens)
 

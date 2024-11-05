@@ -1,7 +1,5 @@
 import json
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 
 
 class SimpleChatModel(nn.Module):
@@ -42,7 +40,7 @@ def main():
 
     # Initialize model with same key as training
     key = jax.random.PRNGKey(0)
-    model = SimpleChatModel(vocab_size=len(vocab))
+    model = SimpleChatModel(_vocab_size=len(vocab))
 
     # Convert input to tokens
     input_tokens = jnp.array(
@@ -50,7 +48,7 @@ def main():
     )
 
     # Initialize with same structure as training
-    _ = model.init(key, input_tokens)
+    ___ = model.init(key, input_tokens)
 
     # Load trained parameters
     with open("model_params.json", "r") as f:

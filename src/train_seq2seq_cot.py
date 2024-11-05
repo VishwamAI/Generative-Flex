@@ -1,7 +1,5 @@
 import json
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from flax.training import train_state
 import optax
 import os
@@ -87,7 +85,7 @@ def main():
     ]
 
     # Initialize model
-    model = SimpleSeq2SeqModel(vocab_size=len(vocab))
+    model = SimpleSeq2SeqModel(_vocab_size=len(vocab))
 
     # Initialize training state
     key = jax.random.PRNGKey(0)

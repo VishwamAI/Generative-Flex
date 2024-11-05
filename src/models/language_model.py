@@ -1,9 +1,8 @@
+import os
 """Language model implementation using JAX and Flax."""
 
 from typing import Any
 import jax
-import jax.numpy as jnp
-import flax.linen as nn
 
 from src.models.transformer import TransformerBlock
 
@@ -21,12 +20,12 @@ class PositionalEncoding(nn.Module):
         seq_length = inputs.shape[1]
         dim = inputs.shape[-1]
 
-        position = jnp.arange(0, seq_length, dtype=self.dtype)[None, :, None]
+        position = jnp.arange(0, seq_length, _dtype=self.dtype)[None, :, None]
         div_term = jnp.exp(
-            jnp.arange(0, dim, 2, dtype=self.dtype) * (-jnp.log(10000.0) / dim)
+            jnp.arange(0, dim, 2, _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
         )
 
-        pe = jnp.zeros((1, seq_length, dim), dtype=self.dtype)
+        pe = jnp.zeros((1, seq_length, dim), _dtype=self.dtype)
         pe = pe.at[:, :, 0::2].set(jnp.sin(position * div_term))
         pe = pe.at[:, :, 1::2].set(jnp.cos(position * div_term))
 
@@ -56,11 +55,11 @@ class LanguageModel(nn.Module):
         x = nn.Embed(
             num_embeddings=self.vocab_size,
             features=self.hidden_dim,
-            dtype=self.dtype,
+            _dtype=self.dtype,
         )(inputs)
 
         # Add positional encoding
-        x = PositionalEncoding(max_len=self.max_seq_len, dtype=self.dtype)(x)
+        x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
 
         # Create causal mask for autoregressive attention
         batch_size = inputs.shape[0]
@@ -76,20 +75,20 @@ class LanguageModel(nn.Module):
         # Apply transformer blocks
         for _ in range(self.num_layers):
             x = TransformerBlock(
-                num_heads=self.num_heads,
-                head_dim=self.head_dim,
-                mlp_dim=self.mlp_dim,
-                dropout_rate=self.dropout_rate,
-                dtype=self.dtype,
+                _num_heads=self.num_heads,
+                _head_dim=self.head_dim,
+                _mlp_dim=self.mlp_dim,
+                _dropout_rate=self.dropout_rate,
+                _dtype=self.dtype,
             )(x, mask=causal_mask, deterministic=not training)
 
         # Final layer normalization
-        x = nn.LayerNorm(dtype=self.dtype)(x)
+        x = nn.LayerNorm(_dtype=self.dtype)(x)
 
         # Output projection
         logits = nn.Dense(
             self.vocab_size,
-            dtype=self.dtype,
+            _dtype=self.dtype,
             kernel_init=nn.initializers.normal(stddev=0.02),
         )(x)
 

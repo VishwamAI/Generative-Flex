@@ -5,16 +5,12 @@ import sys
 from typing import Dict, Any
 
 import jax
-import jax.numpy as jnp
-import flax.linen as nn
-from flax import __version__ as flax_version
-import optax
 from tensorboardX import SummaryWriter
 
 from src.utils.device_config import setup_device_config
 
 # Set up device configuration
-device_config = setup_device_config()
+__device_config = setup_device_config()
 
 
 def test_jax_installation() -> Dict[str, Any]:
@@ -25,7 +21,7 @@ def test_jax_installation() -> Dict[str, Any]:
     print(f"Default backend: {jax.default_backend()}")
 
     # Test basic operations
-    x = jnp.ones((1000, 1000))
+    __x = jnp.ones((1000, 1000))
     y = jnp.ones((1000, 1000))
 
     # Time matrix multiplication
@@ -51,9 +47,9 @@ def test_flax_installation() -> Dict[str, Any]:
     class SimpleModel(nn.Module):
         @nn.compact
         def __call__(self, x):
-            x = nn.Dense(features=32)(x)
-            x = nn.relu(x)
-            x = nn.Dense(features=1)(x)
+            __x = nn.Dense(features=32)(x)
+            __x = nn.relu(x)
+            __x = nn.Dense(features=1)(x)
             return x
 
     # Initialize model

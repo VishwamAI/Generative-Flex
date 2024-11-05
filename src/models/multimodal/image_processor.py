@@ -1,10 +1,9 @@
+import os
 """
 Image processor for handling multimodal inputs in the MMMU model.
 """
 
 import torch
-import torch.nn as nn
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +62,8 @@ class ImageProcessor(nn.Module):
 
             # Log input shape for debugging
             logger.info(
-                f"Processing image chunk {batch_size}/{num_images}, shape: {images.shape}"
+                                f"Processing image chunk {batch_size}/{num_images},,
+                    shape: {images.shape}"
             )
 
             # Reshape for CNN processing

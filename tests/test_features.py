@@ -1,11 +1,9 @@
+import os
 """Comprehensive tests for all model features."""
 
 import pytest
 import jax
-import jax.numpy as jnp
-from typing import Dict, List, Optional, Tuple, Any
 from src.models.enhanced_transformer import EnhancedTransformer
-from src.models.knowledge_retrieval import (
     KnowledgeIntegrator,
     KnowledgeAugmentedTransformer,
 )

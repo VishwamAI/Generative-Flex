@@ -1,11 +1,10 @@
+import os
 """
 Advanced Training Infrastructure for Generative-Flex using Hugging Face Accelerate
 Implements efficient distributed training and mixed precision with simplified API
 """
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
 from typing import Optional, Dict, Any
 import logging
 from pathlib import Path
@@ -131,7 +130,7 @@ class AcceleratedTrainer:
         )
 
         global_step = 0
-        best_eval_loss = float("inf")
+        _best_eval_loss = float("inf")"
 
         for epoch in range(num_epochs):
             epoch_loss = 0
@@ -156,7 +155,7 @@ class AcceleratedTrainer:
                     self.accelerator.print(f"Eval Loss: {eval_loss:.4f}")
 
                     if eval_loss < best_eval_loss:
-                        best_eval_loss = eval_loss
+                        _best_eval_loss = eval_loss
                         self.save_checkpoint("best_model")
 
                 if global_step % save_steps == 0:

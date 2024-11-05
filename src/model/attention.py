@@ -1,11 +1,10 @@
+import os
 """
 Flash Attention Implementation for Generative-Flex
 Optimized attention mechanism with O(N) memory complexity
 """
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import math
 from typing import Optional
 
@@ -58,7 +57,7 @@ class FlashAttention(nn.Module):
         v: torch.Tensor,
         mask: Optional[torch.Tensor] = None,
     ) -> torch.Tensor:
-        B, L, _ = q.shape
+        B, L, __ = q.shape
 
         # Project and split heads
         q = self._split_heads(self.q_proj(q))
@@ -78,7 +77,7 @@ class FlashAttention(nn.Module):
                 mask_block = (
                     mask[:, i:j_end, :] if mask.dim() == 3 else mask[i:j_end, :]
                 )
-                scores = scores.masked_fill(~mask_block.unsqueeze(1), float("-inf"))
+                scores = scores.masked_fill(~mask_block.unsqueeze(1), float("-inf"))"
 
             attn_weights = F.softmax(scores, dim=-1)
             attn_weights = self.dropout(attn_weights)

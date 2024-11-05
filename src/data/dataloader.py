@@ -6,7 +6,6 @@ Implements efficient data loading and preprocessing with dynamic batching
 import torch
 from torch.utils.data import Dataset, DataLoader
 from typing import Dict, Optional, Union
-import numpy as np
 from pathlib import Path
 import json
 import logging
@@ -47,7 +46,7 @@ class AdvancedDataset(Dataset):
         self.is_training = is_training
 
         # Setup caching
-        self.cache_dir = Path(config.cache_dir) if config.cache_dir else None
+        self._cache_dir = Path(config.cache_dir) if config.cache_dir else None
         if self.cache_dir:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
 
@@ -134,9 +133,9 @@ def create_dataloader(
     # Create dataloader
     dataloader = DataLoader(
         dataset,
-        batch_size=config.batch_size,
-        num_workers=config.num_workers,
-        shuffle=(not is_distributed) and config.shuffle,
+        _batch_size=config.batch_size,
+        _num_workers=config.num_workers,
+        _shuffle=(not is_distributed) and config.shuffle,
         sampler=sampler,
         pin_memory=True,
         drop_last=True,

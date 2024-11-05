@@ -1,7 +1,5 @@
 import json
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from flax.training import train_state
 import optax
 import os
@@ -69,7 +67,7 @@ def main():
     ]
 
     # Initialize model and train
-    model = SimpleCoTModel(vocab_size=len(vocab))
+    model = SimpleCoTModel(_vocab_size=len(vocab))
     optimizer = optax.adam(0.01)
 
     key = jax.random.PRNGKey(0)

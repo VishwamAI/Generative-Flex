@@ -1,9 +1,9 @@
+import os
+from typing import Tuple
 """Video generation model implementation using JAX and Flax."""
 
 from typing import Any, Optional, Tuple
 import jax
-import jax.numpy as jnp
-import flax.linen as nn
 
 from src.models.transformer import TransformerBlock
 
@@ -37,7 +37,7 @@ class VideoEmbedding(nn.Module):
                 self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * c,
             ),
         )
-        return nn.Dense(self.hidden_dim, dtype=self.dtype)(patches)
+        return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 
 
 class VideoGenerationModel(nn.Module):
@@ -65,9 +65,9 @@ class VideoGenerationModel(nn.Module):
         )
 
         x = VideoEmbedding(
-            hidden_dim=self.hidden_dim,
-            patch_size=self.patch_size,
-            dtype=self.dtype,
+            _hidden_dim=self.hidden_dim,
+            _patch_size=self.patch_size,
+            _dtype=self.dtype,
         )(inputs)
 
         num_patches = (
@@ -85,11 +85,11 @@ class VideoGenerationModel(nn.Module):
 
         for _ in range(self.num_layers):
             x = TransformerBlock(
-                num_heads=self.num_heads,
-                head_dim=self.head_dim,
-                mlp_dim=self.mlp_dim,
-                dropout_rate=self.dropout_rate,
-                dtype=self.dtype,
+                _num_heads=self.num_heads,
+                _head_dim=self.head_dim,
+                _mlp_dim=self.mlp_dim,
+                _dropout_rate=self.dropout_rate,
+                _dtype=self.dtype,
             )(x, deterministic=not training)
 
         x = nn.Dense(

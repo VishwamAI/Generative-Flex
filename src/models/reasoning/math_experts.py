@@ -1,8 +1,7 @@
+from typing import Tuple
 """Specialized experts for mathematical reasoning."""
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 
 
 class MathematicalExpert(nn.Module):
@@ -66,7 +65,8 @@ class EnhancedMathExpertLayer(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config
-        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size =\
+            config.hidden_size  # TODO: Remove or use this variable
         self.num_experts = config.num_experts
 
         # Initialize specialized experts
@@ -85,7 +85,8 @@ class EnhancedMathExpertLayer(nn.Module):
         self, x: torch.Tensor, training: bool = True
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """Forward pass with specialized mathematical processing."""
-        #         batch_size, seq_length, hidden_size = x.shape  # TODO: Remove or use this variable
+        #         batch_size, seq_length, hidden_size =\
+            x.shape  # TODO: Remove or use this variable
 
         # Normalize input
         normalized_input = self.layer_norm(x)

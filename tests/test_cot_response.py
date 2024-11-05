@@ -2,8 +2,6 @@
 
 import pytest
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 
 
 class SimpleChatModel(nn.Module):
@@ -66,19 +64,19 @@ def model_params(vocab, chat_model):
 @pytest.fixture
 def chat_model(vocab):
     """Fixture providing initialized SimpleChatModel."""
-    return SimpleChatModel(vocab_size=len(vocab))
+    return SimpleChatModel(_vocab_size=len(vocab))
 
 
 def test_model_initialization(chat_model, vocab):
     """Test that model initializes with correct parameters."""
     assert isinstance(chat_model, SimpleChatModel)
-    assert chat_model.vocab_size == len(vocab)
-    assert chat_model.hidden_size == 64
+    assert chat_model._vocab_size == len(vocab)
+    assert chat_model._hidden_size == 64
 
 
 def test_model_forward_pass(chat_model, model_params, word_mappings):
     """Test model forward pass with test input."""
-    word_to_id, _ = word_mappings
+    word_to_id, __ = word_mappings
 
     # Test input
     test_input = "hi"
@@ -121,7 +119,7 @@ def test_response_generation(chat_model, model_params, word_mappings):
 
 def test_unknown_token_handling(chat_model, model_params, word_mappings):
     """Test model handling of unknown tokens."""
-    word_to_id, _ = word_mappings
+    word_to_id, __ = word_mappings
 
     # Test input with unknown word
     test_input = "unknown_word"

@@ -1,7 +1,5 @@
 import json
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 
 
 # Simple model definition
@@ -35,7 +33,7 @@ def main():
     id_to_word = {i: word for i, word in enumerate(vocab)}
 
     # Initialize model
-    model = SimpleLanguageModel(vocab_size=len(vocab))
+    model = SimpleLanguageModel(_vocab_size=len(vocab))
 
     # Load parameters
     with open("model_params.json", "r") as f:

@@ -1,3 +1,5 @@
+import os
+from typing import Tuple
 """
 Knowledge Retrieval System for real-time information integration.
 Supports:
@@ -7,9 +9,6 @@ Supports:
 """
 
 from typing import Dict, List, Optional, Tuple, Union
-import jax
-import jax.numpy as jnp
-from flax import linen as nn
 from flax import struct
 
 
@@ -199,7 +198,7 @@ class RealTimeUpdater:
     """Handles real-time updates to the knowledge base."""
 
     def __init__(self, config: KnowledgeConfig):
-        self.config = config
+        self._config = config
         self.update_counter = 0
         self.knowledge_retriever = None
 

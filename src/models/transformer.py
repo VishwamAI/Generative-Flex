@@ -2,8 +2,6 @@
 
 from typing import Any
 import jax
-import jax.numpy as jnp
-import flax.linen as nn
 
 
 class MultiHeadAttention(nn.Module):
@@ -20,9 +18,9 @@ class MultiHeadAttention(nn.Module):
         qkv_features = self.num_heads * self.head_dim
 
         # Linear projections
-        query = nn.Dense(qkv_features, dtype=self.dtype, name="query")(inputs_q)
-        key = nn.Dense(qkv_features, dtype=self.dtype, name="key")(inputs_kv)
-        value = nn.Dense(qkv_features, dtype=self.dtype, name="value")(inputs_kv)
+        query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)
+        key = nn.Dense(qkv_features, _dtype=self.dtype, name="key")(inputs_kv)
+        value = nn.Dense(qkv_features, _dtype=self.dtype, name="value")(inputs_kv)
 
         # Reshape for multi-head attention
         query = query.reshape(query.shape[:-1] + (self.num_heads, self.head_dim))
@@ -50,7 +48,7 @@ class MultiHeadAttention(nn.Module):
         # Combine heads
         output = jnp.einsum("...hqk,...khd->...qhd", attention, value)
         output = output.reshape(output.shape[:-2] + (-1,))
-        return nn.Dense(inputs_q.shape[-1], dtype=self.dtype, name="output")(output)
+        return nn.Dense(inputs_q.shape[-1], _dtype=self.dtype, name="output")(output)
 
 
 class TransformerBlock(nn.Module):
@@ -66,22 +64,22 @@ class TransformerBlock(nn.Module):
     def __call__(self, inputs, mask=None, deterministic=True):
         """Applies Transformer block to the input data."""
         # Self-attention
-        x = nn.LayerNorm(dtype=self.dtype)(inputs)
+        x = nn.LayerNorm(_dtype=self.dtype)(inputs)
         x = MultiHeadAttention(
-            num_heads=self.num_heads,
-            head_dim=self.head_dim,
-            dropout_rate=self.dropout_rate,
-            dtype=self.dtype,
+            _num_heads=self.num_heads,
+            _head_dim=self.head_dim,
+            _dropout_rate=self.dropout_rate,
+            _dtype=self.dtype,
         )(x, x, mask, deterministic)
         x = nn.Dropout(rate=self.dropout_rate)(x, deterministic=deterministic)
         x = x + inputs
 
         # Feed-forward network
-        y = nn.LayerNorm(dtype=self.dtype)(x)
-        y = nn.Dense(self.mlp_dim, dtype=self.dtype)(y)
+        y = nn.LayerNorm(_dtype=self.dtype)(x)
+        y = nn.Dense(self.mlp_dim, _dtype=self.dtype)(y)
         y = nn.gelu(y)
         y = nn.Dropout(rate=self.dropout_rate)(y, deterministic=deterministic)
-        y = nn.Dense(inputs.shape[-1], dtype=self.dtype)(y)
+        y = nn.Dense(inputs.shape[-1], _dtype=self.dtype)(y)
         y = nn.Dropout(rate=self.dropout_rate)(y, deterministic=deterministic)
 
         return x + y

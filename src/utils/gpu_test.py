@@ -1,8 +1,6 @@
 """Test script to verify GPU configuration and CUDA support in JAX."""
 
 import jax
-import jax.numpy as jnp
-import time
 
 
 def test_gpu_configuration():

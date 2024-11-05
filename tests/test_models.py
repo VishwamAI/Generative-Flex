@@ -1,3 +1,4 @@
+import os
 """Test module for enhanced transformer models.
 
 This module contains test cases for the enhanced transformer architecture,
@@ -6,8 +7,6 @@ including configuration validation and model behavior verification.
 
 import pytest
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 
 from src.models.enhanced_transformer import EnhancedTransformer
 from src.config.config import ModelConfig

@@ -1,13 +1,11 @@
+import os
 """
 Math reasoning module for enhanced transformer model.
 """
 
 import logging
-from typing import Dict, List, Optional, Tuple, Union
 
 import torch
-import torch.nn as nn
-from torch.nn import functional as F
 from transformers import PreTrainedModel, GenerationMixin
 
 from ..layers.flash_moe import FlashAttention, MixtureOfExperts
@@ -245,7 +243,7 @@ class MathReasoningHead(nn.Module):
         )  # [batch_size, seq_len, hidden_dim]
 
         # Calculate expert entropy for monitoring
-        expert_entropy = (
+        _expert_entropy = (
             -(
                 routing_weights.squeeze(-1)
                 * torch.log(routing_weights.squeeze(-1) + 1e-10)
@@ -272,10 +270,10 @@ class MathReasoningHead(nn.Module):
             labels = kwargs["labels"]
             loss = F.cross_entropy(logits, labels)
             predictions = torch.argmax(logits, dim=-1)
-            math_accuracy = (predictions == labels).float().mean()
+            _math_accuracy = (predictions == labels).float().mean()
         else:
             loss = logits.mean()  # Fallback for generation
-            math_accuracy = torch.tensor(0.0, device=logits.device)
+            _math_accuracy = torch.tensor(0.0, device=logits.device)
 
         # Combine losses with proper weighting
         total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
@@ -303,7 +301,7 @@ from transformers import PreTrainedModel
 
 
 class MathReasoningModel(PreTrainedModel, GenerationMixin):
-    supports_gradient_checkpointing = (
+    _supports_gradient_checkpointing = (
         True  # Class attribute required by PreTrainedModel
     )
 

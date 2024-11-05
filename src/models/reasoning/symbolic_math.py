@@ -1,6 +1,4 @@
 import torch
-import torch.nn as nn
-import sympy
 from typing import Optional, List
 
 
@@ -10,7 +8,8 @@ class SymbolicMathProcessor(nn.Module):
 
     def __init__(self, config):
         super().__init__()
-        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size =\
+            config.hidden_size  # TODO: Remove or use this variable
         self.dropout_prob = getattr(config, "hidden_dropout_prob", 0.1)
 
         # Symbolic expression embedding
@@ -109,7 +108,8 @@ class MathematicalNotationProcessor(nn.Module):
 
     def __init__(self, config):
         super().__init__()
-        #         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
+        #         self.hidden_size =\
+            config.hidden_size  # TODO: Remove or use this variable
 
         # Special symbol embeddings (e.g., ∫, ∑, ∏, etc.)
         self.special_symbol_embeddings = nn.Parameter(

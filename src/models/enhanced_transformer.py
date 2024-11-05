@@ -1,9 +1,8 @@
+import os
 """Enhanced transformer implementation with advanced features."""
 
 from typing import Optional, Dict, Any
 import jax
-import jax.numpy as jnp
-from flax import linen as nn
 
 
 class EnhancedTransformer(nn.Module):

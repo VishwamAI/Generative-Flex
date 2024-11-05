@@ -1,7 +1,6 @@
 """Device configuration utility for handling both CPU and GPU environments."""
 
 import jax
-import jax.numpy as jnp
 from typing import Dict, Any
 import os
 

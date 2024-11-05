@@ -1,8 +1,5 @@
-import json
+import os
 import jax
-import jax.numpy as jnp
-import optax
-from flax import linen as nn
 
 
 class SimpleGreetingModel(nn.Module):
@@ -71,7 +68,7 @@ def main():
     word_to_id = {word: i for i, word in enumerate(vocab)}
 
     # Initialize model and optimizer
-    model = SimpleGreetingModel(vocab_size=len(vocab))
+    model = SimpleGreetingModel(_vocab_size=len(vocab))
     learning_rate = 0.01
     optimizer = optax.adam(learning_rate)
 

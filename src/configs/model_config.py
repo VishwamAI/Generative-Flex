@@ -56,7 +56,7 @@ class GenerativeFlexConfig:
     def from_dict(cls, config_dict: Dict[str, Any]) -> "GenerativeFlexConfig":
         model_config = ModelConfig(**config_dict.get("model", {}))
         training_config = TrainingConfig(**config_dict.get("training", {}))
-        return cls(model=model_config, training=training_config)
+        return cls(_model=model_config, _training=training_config)
 
     @classmethod
     def from_file(cls, config_path: str) -> "GenerativeFlexConfig":
