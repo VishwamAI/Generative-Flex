@@ -14,8 +14,7 @@ class FlashMoELayer(nn.Module):
     """
 
     def __init__():
-    self,
-    hidden_size: int,
+    self,    hidden_size: int,
     intermediate_size: int,
     num_experts: int  = 8,
     dropout_rate: float  = 0.1,
@@ -44,9 +43,8 @@ class FlashMoELayer(nn.Module):
         # Router network
         self.router = nn.Linear(hidden_size, num_experts)
 
-    def __init__(self, forward():
-    self,
-    hidden_states: torch.Tensor,
+    def __init__(self):
+    self,    hidden_states: torch.Tensor,
     attention_mask: Optional[torch.Tensor]  = None,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """

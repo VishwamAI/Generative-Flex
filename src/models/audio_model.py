@@ -15,7 +15,8 @@ class AudioEmbedding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-                def __call__(self, audio) -> None: """Convert audio signal to embeddings."""
+                def __call__(self, x) -> None:
+        """Convert audio signal to embeddings."""
         batch_size, signal_length = audio.shape
         
         # Frame the audio signal
@@ -49,7 +50,8 @@ class AudioEmbedding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-                def __call__(self, inputs, training: bool = True) -> None: """Forward pass of the audio generation model."""
+                def __call__(self, x) -> None:
+        """Forward pass of the audio generation model."""
         batch_size, signal_length = inputs.shape
         assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"
         
@@ -93,8 +95,7 @@ class AudioEmbedding(nn.Module):
         return output
         
         def generate():
-        self,
-        rng: Any,
+        self,        rng: Any,
         prompt: Optional[jnp.ndarray] = None,
         length: int = 16000):  # Default 1 second at 16kHz
         """Generate audio."""

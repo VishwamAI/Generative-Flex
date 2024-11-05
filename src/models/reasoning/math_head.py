@@ -39,9 +39,8 @@ class MathReasoningHead(nn.Module):
     # Mathematical operation detection
     self.operation_detector = nn.Linear(config.hidden_size, 5)  # +, -, *, /, other
     
-    def __init__(self, forward():
-    self,
-    hidden_states: torch.Tensor,
+    def __init__(self):
+    self,    hidden_states: torch.Tensor,
     attention_mask: Optional[torch.Tensor]  = None) -> Dict[str, torch.Tensor]:
             """Forward pass with expert routing and mathematical operation detection"""
                 try: batch_size, seq_length, _hidden_size  = hidden_states.shape

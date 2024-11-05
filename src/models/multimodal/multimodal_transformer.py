@@ -70,9 +70,8 @@ class MultiModalTransformer(nn.Module):
                 position_ids = position_ids.unsqueeze(0)
                 return self.position_embeddings(position_ids)
                 
-                def __init__(self, forward():
-                self,
-                input_ids: Optional[torch.Tensor]  = None,
+                def __init__(self):
+                self,                input_ids: Optional[torch.Tensor]  = None,
                 attention_mask: Optional[torch.Tensor]  = None,
                 position_ids: Optional[torch.Tensor]  = None,
                 image_features: Optional[torch.Tensor]  = None,
@@ -146,8 +145,7 @@ class MultiModalTransformer(nn.Module):
                                                 return hidden_states
 
                 def __init__(self, prepare_inputs_for_generation():
-        self,
-        input_ids: torch.Tensor,
+        self,        input_ids: torch.Tensor,
         attention_mask: Optional[torch.Tensor]  = None,
         **kwargs) -> Dict[str, Any]:
             """Prepare inputs for text generation."""

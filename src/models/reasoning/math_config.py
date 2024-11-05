@@ -10,8 +10,7 @@ class MathReasoningConfig(PretrainedConfig):
     _model_type = "math_reasoning"
     
     def __init__():
-    self,
-    hidden_size: int  = 768,
+    self,    hidden_size: int  = 768,
     num_attention_heads: int  = 12,
     num_hidden_layers: int  = 6,
     max_position_embeddings: int  = 512,

@@ -45,8 +45,7 @@ Supports: - Real-time data integration(Grok-1 style)
         self.store_index = self.variable("cache", "index", lambda: 0)
 
     def __init__(self, retrieve(:
-    self,
-    query_embedding: jnp.ndarray
+    self,    query_embedding: jnp.ndarray
     ): -> None: jnp.ndarray:
         """
         Retrieve relevant knowledge.
@@ -88,8 +87,7 @@ Supports: - Real-time data integration(Grok-1 style)
         return retrieved
 
     def __init__(self, update(:
-    self,
-    new_knowledge: jnp.ndarray
+    self,    new_knowledge: jnp.ndarray
     ): -> None: None:
         """
         Update knowledge store.
@@ -124,8 +122,7 @@ Supports: - Real-time data integration(Grok-1 style)
 
         @nn.compact
     def __init__(self, __call__():
-    self,
-    inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
+    self,    inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
     modality: str  = "text",
     context: Optional[jnp.ndarray]  = None,
     ) -> jnp.ndarray: """
@@ -173,8 +170,7 @@ Supports: - Real-time data integration(Grok-1 style)
                                                             return fused
 
     def __init__(self, update_knowledge(:
-    self,
-    new_data: Dict[str,
+    self,    new_data: Dict[str,
     jnp.ndarray]
     ): -> None: None:
         """
@@ -195,16 +191,14 @@ Supports: - Real-time data integration(Grok-1 style)
                         """
 
     def __init__(self, __init__(:
-    self,
-    config: KnowledgeConfig
+    self,    config: KnowledgeConfig
     ): -> None: None:
         self._config = config
         self.update_counter = 0
         self.knowledge_retriever = None
 
     def __init__(self, initialize(:
-    self,
-    knowledge_retriever: KnowledgeRetriever
+    self,    knowledge_retriever: KnowledgeRetriever
     ): -> None: None:
         """
         Initializes with a knowledge retriever instance.
@@ -212,8 +206,7 @@ Supports: - Real-time data integration(Grok-1 style)
         self.knowledge_retriever = knowledge_retriever
 
     def __init__(self, update(:
-    self,
-    new_knowledge: Dict[str,
+    self,    new_knowledge: Dict[str,
     jnp.ndarray]
     ): -> None: None:
         """
@@ -243,8 +236,7 @@ Supports: - Real-time data integration(Grok-1 style)
         self.updater.initialize(self.knowledge_integrator.retriever)
 
     def __init__(self, __call__():
-    self,
-    inputs: Dict[str, jnp.ndarray],
+    self,    inputs: Dict[str, jnp.ndarray],
     context: Optional[Dict[str, jnp.ndarray]]  = None,
     ) -> jnp.ndarray: # Integrate knowledge with inputs
         enhanced_embedding = self.knowledge_integrator(inputs, context)

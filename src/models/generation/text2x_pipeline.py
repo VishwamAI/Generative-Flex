@@ -44,9 +44,8 @@ class Text2XPipeline(nn.Module):
         return self.modality_embeddings(torch.tensor(modality_idx, _device=self.transformer.embedding.weight.device)
         )
 
-    def __init__(self, forward():
-        self,
-        input_ids,
+    def __init__(self):
+        self,        input_ids,
         attention_mask=None,
         target_modality="text",
         position_ids=None):
@@ -67,8 +66,7 @@ class Text2XPipeline(nn.Module):
                     return {"output": output, "hidden_states": hidden_states}
 
     def __init__(self, generate():
-        self,
-        input_ids,
+        self,        input_ids,
         attention_mask=None,
         target_modality="text",
         _max_length=None,

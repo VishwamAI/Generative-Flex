@@ -69,8 +69,7 @@ class VideoGenerationModel(nn.Module):
     return x
     
     def generate():
-    self,
-    rng: Any,
+    self,    rng: Any,
     prompt: Optional[jnp.ndarray] = None,
     num_frames: int = 16):
             """Generate video frames."""

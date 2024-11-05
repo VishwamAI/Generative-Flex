@@ -164,8 +164,7 @@ class StatefulKeyValueCache(nn.Module):
         self.current_length = self.variable("cache", "length",     lambda: 0)
         self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length, ), bool)
 
-    def update(self) -> None: self,
-    key: Union[Union[jnp.ndarray, ]]
+    def update(self) -> None: self,    key: Union[Union[jnp.ndarray, ]]
     value: Union[Union[jnp.ndarray, ]]
     position: Optional[int] None,
     ) ->     None: """
@@ -346,8 +345,7 @@ class AppleOptimizedTransformer(nn.Module):
 
                     if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size, _noise_multiplier=self.config.noise_multiplier, _l2_norm_clip=self.config.l2_norm_clip, )
 
-    def __call__(self) -> None: self,
-    hidden_states: Union[Union[jnp.ndarray, ]]
+    def __call__(self) -> None: self,    hidden_states: Union[Union[jnp.ndarray, ]]
     attention_mask: Optional[jnp.ndarray] None,
     training: bool False,
     ) -> jnp.    ndarray: """

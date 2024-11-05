@@ -26,9 +26,8 @@ class BaseTransformer(nn.Module):
     self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.num_hidden_layers)]
     )
     
-    def __init__(self, forward():
-    self,
-    hidden_states: torch.Tensor,
+    def __init__(self):
+    self,    hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor]  = None) -> torch.Tensor: """Forward pass through the base transformer."""
             # Apply embeddings and dropout
             hidden_states = self.embeddings(hidden_states)
@@ -53,9 +52,8 @@ class TransformerLayer(nn.Module):
         self.norm1 = nn.LayerNorm(config["hidden_size"])
         self.norm2 = nn.LayerNorm(config["hidden_size"])
 
-    def __init__(self, forward():
-        self,
-        hidden_states: torch.Tensor,
+    def __init__(self):
+        self,        hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor]  = None) -> torch.Tensor: """Forward pass through the transformer layer."""
         attention_output = self.attention(hidden_states, attention_mask)
         hidden_states = self.norm1(hidden_states + attention_output)
@@ -82,9 +80,8 @@ class TransformerLayer(nn.Module):
     self.value = nn.Linear(self.hidden_size, self.hidden_size)
     self.dropout = nn.Dropout(config["hidden_dropout_prob"])
     
-    def __init__(self, forward():
-    self,
-    hidden_states: torch.Tensor,
+    def __init__(self):
+    self,    hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor]  = None) -> torch.Tensor: """Forward pass through multi-head attention."""
             batch_size = hidden_states.size(0)
 

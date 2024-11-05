@@ -26,8 +26,7 @@ class EnhancedTransformerLayer(nn.Module):
         self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
     def __init__(self, __call__():
-        self,
-        hidden_states: jnp.ndarray,
+        self,        hidden_states: jnp.ndarray,
         attention_mask: Optional[jnp.ndarray]  = None,
         deterministic: bool  = True,
         output_attentions: bool  = False) -> Dict[str, jnp.ndarray]:

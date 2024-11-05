@@ -48,8 +48,7 @@ def test_jax_installation() -> Dict[str, Any]:
     class SimpleModel(nn.Module):
     
     @nn.compact
-    def __call__(:
-    self,
+    def __call__():self,
     x
     ): -> None: None:
     __x = nn.Dense(features=32)(x)

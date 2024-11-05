@@ -13,7 +13,8 @@ class BaseModel(nn.Module, ABC):
     pass
     
     @abstractmethod
-        def __call__(self, x, training: bool  = False) -> None: """Forward pass of the model."""
+    def __call__(self, x) -> None:
+        """Forward pass of the model."""
         pass
 
     def init_weights(self, rng: jnp.ndarray) -> None: """Initialize model weights."""

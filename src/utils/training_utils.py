@@ -26,20 +26,19 @@ class TrainState(train_state.TrainState):
     learning_rate: float,
     weight_decay: float,
     ) -> TrainState: """Creates initial training state."""
-        variables = model.init(rng, jnp.ones(input_shape))
-        
-        # Create Adam optimizer with weight decay
-        tx = optax.adamw(learning_rate=learning_rate, weight_decay=weight_decay)
-        
-        return TrainState.create(apply_fn=model.apply, params=variables["params"], tx=tx, _batch_stats=variables.get("batch_stats"),
-        _metrics={"loss": 0.0, "accuracy": 0.0},
-        )
-        
-        
-        def save_checkpoint(:
-        state: TrainState,
-        checkpoint_dir: str,
-        step: int
+    variables = model.init(rng, jnp.ones(input_shape))
+    
+    # Create Adam optimizer with weight decay
+    tx = optax.adamw(learning_rate=learning_rate, weight_decay=weight_decay)
+    
+    return TrainState.create(apply_fn=model.apply, params=variables["params"], tx=tx, _batch_stats=variables.get("batch_stats"),
+    _metrics={"loss": 0.0, "accuracy": 0.0},
+    )
+    
+    
+    def save_checkpoint():state: TrainState,
+    checkpoint_dir: str,
+    step: int
         ): -> None: """Saves model checkpoint."""
         os.makedirs(checkpoint_dir, exist_ok=True)
         checkpoints.save_checkpoint(ckpt_dir=checkpoint_dir, target=state, step=step, keep=3)
@@ -71,8 +70,7 @@ class TrainState(train_state.TrainState):
         return iterator()
 
 
-                def compute_metrics(:
-    logits: jnp.ndarray,
+                def compute_metrics():logits: jnp.ndarray,
     labels: jnp.ndarray
     ): -> Dict[str, float]:
         """Computes metrics for evaluation."""
