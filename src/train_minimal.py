@@ -88,9 +88,7 @@ def main():
 
             def loss_fn(params):
                 logits = model.apply(params, x)
-                return optax.softmax_cross_entropy_with_integer_labels(
-                    logits, y
-                ).mean()
+                return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
             loss, grads = jax.value_and_grad(loss_fn)(state.params)
             state = state.apply_gradients(grads=grads)
@@ -102,9 +100,7 @@ def main():
 
     # Save model parameters
     with open("model_params.json", "w") as f:
-        json.dump(
-            jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f
-        )
+        json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
 
     print("Model parameters and vocabulary saved successfully!")
 

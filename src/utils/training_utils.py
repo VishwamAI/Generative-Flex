@@ -80,9 +80,7 @@ def create_data_iterator(
     return iterator()
 
 
-def compute_metrics(
-    logits: jnp.ndarray, labels: jnp.ndarray
-) -> Dict[str, float]:
+def compute_metrics(logits: jnp.ndarray, labels: jnp.ndarray) -> Dict[str, float]:
     """Computes metrics for evaluation."""
     loss = optax.softmax_cross_entropy_with_integer_labels(
         logits=logits, labels=labels
@@ -130,6 +128,4 @@ def create_input_pipeline(
     """Creates input pipeline for training, validation and testing."""
     # This is a placeholder - implement actual data loading logic
     # based on your specific dataset and requirements
-    raise NotImplementedError(
-        "Implement data loading logic specific to your dataset"
-    )
+    raise NotImplementedError("Implement data loading logic specific to your dataset")

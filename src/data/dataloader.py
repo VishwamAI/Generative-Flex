@@ -57,9 +57,7 @@ class AdvancedDataset(Dataset):
     def load_and_cache_data(self):
         """Load and preprocess data with caching"""
         cache_path = (
-            self.cache_dir / f"{self.data_path.stem}.h5"
-            if self.cache_dir
-            else None
+            self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
         )
 
         if cache_path and cache_path.exists():
@@ -101,9 +99,7 @@ class AdvancedDataset(Dataset):
             )
 
             processed_data["input_ids"].append(tokenized["input_ids"][0])
-            processed_data["attention_mask"].append(
-                tokenized["attention_mask"][0]
-            )
+            processed_data["attention_mask"].append(tokenized["attention_mask"][0])
 
             # Process labels if available
             if "label" in item:

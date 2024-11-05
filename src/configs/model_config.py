@@ -63,9 +63,7 @@ class GenerativeFlexConfig:
         config_path = Path(config_path)
         with open(config_path) as f:
             config_dict = (
-                json.load(f)
-                if config_path.suffix == ".json"
-                else yaml.safe_load(f)
+                json.load(f) if config_path.suffix == ".json" else yaml.safe_load(f)
             )
         return cls.from_dict(config_dict)
 

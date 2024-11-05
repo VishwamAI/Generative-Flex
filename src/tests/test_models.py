@@ -118,9 +118,7 @@ def test_image_model_forward(image_model):
     images = jnp.ones((BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32)
 
     variables = image_model.init(rng, images, training=False)
-    output = image_model.apply(
-        variables, images, training=False, rngs={"dropout": rng}
-    )
+    output = image_model.apply(variables, images, training=False, rngs={"dropout": rng})
 
     assert output.shape == (BATCH_SIZE, *IMAGE_SIZE, CHANNELS)
 
@@ -152,9 +150,7 @@ def test_audio_model_forward(audio_model):
     audio = jnp.ones((BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32)
 
     variables = audio_model.init(rng, audio, training=False)
-    output = audio_model.apply(
-        variables, audio, training=False, rngs={"dropout": rng}
-    )
+    output = audio_model.apply(variables, audio, training=False, rngs={"dropout": rng})
 
     # Account for frame size and hop length in output shape
     expected_samples = (
@@ -197,9 +193,7 @@ def test_video_model_forward(video_model):
     )
 
     variables = video_model.init(rng, video, training=False)
-    output = video_model.apply(
-        variables, video, training=False, rngs={"dropout": rng}
-    )
+    output = video_model.apply(variables, video, training=False, rngs={"dropout": rng})
 
     assert output.shape == (BATCH_SIZE, VIDEO_FRAMES, *IMAGE_SIZE, CHANNELS)
 

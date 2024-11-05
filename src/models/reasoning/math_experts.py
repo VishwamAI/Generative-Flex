@@ -39,9 +39,7 @@ class MathematicalExpert(nn.Module):
         )
 
         # Gate for combining different processing paths
-        self.gate = nn.Linear(
-            hidden_size, 3
-        )  # 3 paths: symbol, numerical, equation
+        self.gate = nn.Linear(hidden_size, 3)  # 3 paths: symbol, numerical, equation
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # Process input through different specialized paths
@@ -73,17 +71,12 @@ class EnhancedMathExpertLayer(nn.Module):
 
         # Initialize specialized experts
         self.experts = nn.ModuleList(
-            [
-                MathematicalExpert(config.hidden_size)
-                for _ in range(self.num_experts)
-            ]
+            [MathematicalExpert(config.hidden_size) for _ in range(self.num_experts)]
         )
 
         # Router network with temperature scaling
         self.router = nn.Linear(config.hidden_size, config.num_experts)
-        self.temperature = nn.Parameter(
-            torch.ones(1) * 0.07
-        )  # Learnable temperature
+        self.temperature = nn.Parameter(torch.ones(1) * 0.07)  # Learnable temperature
 
         # Layer normalization for stability
         self.layer_norm = nn.LayerNorm(config.hidden_size)
@@ -114,9 +107,7 @@ class EnhancedMathExpertLayer(nn.Module):
         expert_outputs = torch.stack(expert_outputs, dim=2)
 
         # Compute weighted sum of expert outputs
-        combined_output = torch.sum(
-            expert_outputs * router_probs.unsqueeze(-1), dim=2
-        )
+        combined_output = torch.sum(expert_outputs * router_probs.unsqueeze(-1), dim=2)
 
         # Compute router entropy for monitoring
         router_entropy = (

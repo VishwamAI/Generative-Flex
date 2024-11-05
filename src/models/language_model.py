@@ -107,21 +107,15 @@ class LanguageModel(nn.Module):
 
         for _ in range(max_length - prompt.shape[1]):
             # Get predictions for next token
-            logits = self.apply(
-                {"params": self.params}, generated, training=False
-            )
+            logits = self.apply({"params": self.params}, generated, training=False)
 
             # Sample from the distribution
             next_token_logits = logits[:, -1, :] / temperature
             rng, sample_rng = jax.random.split(rng)
-            next_token = jax.random.categorical(
-                sample_rng, next_token_logits, axis=-1
-            )
+            next_token = jax.random.categorical(sample_rng, next_token_logits, axis=-1)
 
             # Append new token
-            generated = jnp.concatenate(
-                [generated, next_token[:, None]], axis=1
-            )
+            generated = jnp.concatenate([generated, next_token[:, None]], axis=1)
 
             # Stop if we hit the end token (implementation specific)
             if jnp.all(

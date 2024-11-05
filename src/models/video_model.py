@@ -34,10 +34,7 @@ class VideoEmbedding(nn.Module):
             (
                 b,
                 -1,
-                self.patch_size[0]
-                * self.patch_size[1]
-                * self.patch_size[2]
-                * c,
+                self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * c,
             ),
         )
         return nn.Dense(self.hidden_dim, dtype=self.dtype)(patches)
@@ -96,10 +93,7 @@ class VideoGenerationModel(nn.Module):
             )(x, deterministic=not training)
 
         x = nn.Dense(
-            self.patch_size[0]
-            * self.patch_size[1]
-            * self.patch_size[2]
-            * self.channels
+            self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * self.channels
         )(x)
 
         # Reshape back to video dimensions
@@ -122,11 +116,7 @@ class VideoGenerationModel(nn.Module):
 
         generated = prompt
         while generated.shape[1] < num_frames:
-            next_frame = self.apply(
-                {"params": self.params}, generated, training=False
-            )
-            generated = jnp.concatenate(
-                [generated, next_frame[:, -1:]], axis=1
-            )
+            next_frame = self.apply({"params": self.params}, generated, training=False)
+            generated = jnp.concatenate([generated, next_frame[:, -1:]], axis=1)
 
         return generated[:, :num_frames]

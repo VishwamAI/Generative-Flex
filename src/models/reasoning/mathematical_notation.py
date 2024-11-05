@@ -11,20 +11,12 @@ class MathematicalNotationProcessor(nn.Module):
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
         # Embedding layers for different notation types
-        self.latex_embedding = nn.Linear(
-            config.hidden_size, config.hidden_size
-        )
-        self.ascii_embedding = nn.Linear(
-            config.hidden_size, config.hidden_size
-        )
-        self.unicode_embedding = nn.Linear(
-            config.hidden_size, config.hidden_size
-        )
+        self.latex_embedding = nn.Linear(config.hidden_size, config.hidden_size)
+        self.ascii_embedding = nn.Linear(config.hidden_size, config.hidden_size)
+        self.unicode_embedding = nn.Linear(config.hidden_size, config.hidden_size)
 
         # Output projection
-        self.output_projection = nn.Linear(
-            config.hidden_size, config.hidden_size
-        )
+        self.output_projection = nn.Linear(config.hidden_size, config.hidden_size)
 
         # Layer normalization
         self.layer_norm = nn.LayerNorm(config.hidden_size)

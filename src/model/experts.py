@@ -72,9 +72,7 @@ class MixtureOfExperts(nn.Module):
         )
 
         # Normalize weights
-        routing_weights = routing_weights / routing_weights.sum(
-            dim=-1, keepdim=True
-        )
+        routing_weights = routing_weights / routing_weights.sum(dim=-1, keepdim=True)
 
         return routing_weights, selected_experts
 
@@ -84,17 +82,13 @@ class MixtureOfExperts(nn.Module):
         batch_size, seq_len, d_model = x.shape
 
         # Compute routing weights and expert assignments
-        routing_weights, selected_experts = self._compute_routing_weights(
-            x, mask
-        )
+        routing_weights, selected_experts = self._compute_routing_weights(x, mask)
 
         # Initialize output tensor
         output = torch.zeros_like(x)
 
         # Compute capacity
-        capacity = int(
-            self.capacity_factor * (batch_size * seq_len) / self.num_experts
-        )
+        capacity = int(self.capacity_factor * (batch_size * seq_len) / self.num_experts)
 
         # Process tokens through selected experts
         for i in range(self.k):
@@ -115,9 +109,7 @@ class MixtureOfExperts(nn.Module):
                 # Apply capacity constraint
                 if expert_input.size(0) > capacity:
                     # Randomly drop tokens that exceed capacity
-                    perm = torch.randperm(
-                        expert_input.size(0), device=x.device
-                    )
+                    perm = torch.randperm(expert_input.size(0), device=x.device)
                     expert_input = expert_input[perm[:capacity]]
                     expert_mask[expert_mask.clone()] = False
                     expert_mask[expert_mask.clone()][perm[:capacity]] = True
@@ -126,8 +118,6 @@ class MixtureOfExperts(nn.Module):
                 expert_output = self.experts[expert_idx](expert_input)
 
                 # Combine expert output with routing weights
-                output[expert_mask] += (
-                    expert_output * expert_weights[expert_mask]
-                )
+                output[expert_mask] += expert_output * expert_weights[expert_mask]
 
         return self.dropout(output)

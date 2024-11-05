@@ -76,13 +76,9 @@ class FlashAttention(nn.Module):
 
             if mask is not None:
                 mask_block = (
-                    mask[:, i:j_end, :]
-                    if mask.dim() == 3
-                    else mask[i:j_end, :]
+                    mask[:, i:j_end, :] if mask.dim() == 3 else mask[i:j_end, :]
                 )
-                scores = scores.masked_fill(
-                    ~mask_block.unsqueeze(1), float("-inf")
-                )
+                scores = scores.masked_fill(~mask_block.unsqueeze(1), float("-inf"))
 
             attn_weights = F.softmax(scores, dim=-1)
             attn_weights = self.dropout(attn_weights)

@@ -41,14 +41,10 @@ class TrainingLogger:
         """Save a summary of the training run"""
         summary = {
             "start_time": (
-                self.metrics_history[0]["timestamp"]
-                if self.metrics_history
-                else None
+                self.metrics_history[0]["timestamp"] if self.metrics_history else None
             ),
             "end_time": (
-                self.metrics_history[-1]["timestamp"]
-                if self.metrics_history
-                else None
+                self.metrics_history[-1]["timestamp"] if self.metrics_history else None
             ),
             "total_steps": len(self.metrics_history),
             "final_metrics": self.get_latest_metrics(),

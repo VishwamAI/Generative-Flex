@@ -19,9 +19,7 @@ class TestEnvironment(unittest.TestCase):
         """Test if hardware acceleration is available"""
         # Test PyTorch
         if not torch.cuda.is_available():
-            warnings.warn(
-                "PyTorch GPU support not available, falling back to CPU"
-            )
+            warnings.warn("PyTorch GPU support not available, falling back to CPU")
         # Test basic PyTorch operations
         x = torch.randn(5, 5)
         y = torch.matmul(x, x.t())
@@ -37,9 +35,7 @@ class TestEnvironment(unittest.TestCase):
 
         # Test TensorFlow
         physical_devices = tf.config.list_physical_devices()
-        self.assertTrue(
-            len(physical_devices) > 0, "No TensorFlow devices found"
-        )
+        self.assertTrue(len(physical_devices) > 0, "No TensorFlow devices found")
         # Only set memory growth for GPU devices
         gpu_devices = tf.config.list_physical_devices("GPU")
         if gpu_devices:
@@ -75,12 +71,8 @@ class TestEnvironment(unittest.TestCase):
             inputs = tokenizer(text, return_tensors="pt")
             with torch.no_grad():
                 outputs = model.generate(**inputs, max_length=20)
-            generated_text = tokenizer.decode(
-                outputs[0], skip_special_tokens=True
-            )
-            self.assertTrue(
-                len(generated_text) > 0, "Model failed to generate text"
-            )
+            generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            self.assertTrue(len(generated_text) > 0, "Model failed to generate text")
 
         except Exception as e:
             self.fail(f"Failed to load model components: {str(e)}")
@@ -115,9 +107,7 @@ class TestEnvironment(unittest.TestCase):
             example = dataset_hs[0]
             required_keys = ["question", "choices", "answer"]
             for key in required_keys:
-                self.assertIn(
-                    key, example, f"Dataset missing required key: {key}"
-                )
+                self.assertIn(key, example, f"Dataset missing required key: {key}")
 
         except Exception as e:
             self.fail(f"Failed to access MMLU dataset: {str(e)}")
@@ -128,9 +118,7 @@ class TestEnvironment(unittest.TestCase):
             # Test basic Flax operations
             key = jax.random.PRNGKey(0)
             x = jax.random.normal(key, (5, 5))
-            self.assertEqual(
-                x.shape, (5, 5), "Flax array operations not working"
-            )
+            self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 
             # Test basic model operations
             def model_fn(x):

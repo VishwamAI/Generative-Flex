@@ -86,10 +86,7 @@ def main():
         # Convert input to tokens
         for conv in data["conversations"]:
             input_tokens = jnp.array(
-                [
-                    word_to_id.get(w, word_to_id["<unk>"])
-                    for w in conv["input"].split()
-                ]
+                [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
             )
             target_tokens = jnp.array(
                 [

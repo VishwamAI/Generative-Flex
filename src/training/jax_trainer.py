@@ -57,9 +57,7 @@ class FlaxTrainer:
 
         # Create optimizer
         optimizer = optax.chain(
-            optax.clip_by_global_norm(
-                self.config["training"]["max_grad_norm"]
-            ),
+            optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),
             optax.adamw(
                 learning_rate=schedule_fn,
                 weight_decay=self.config["training"]["weight_decay"],
@@ -131,8 +129,7 @@ class FlaxTrainer:
                 if batch_idx % log_steps == 0:
                     avg_loss = epoch_loss / num_steps
                     logging.info(
-                        f"Epoch: {epoch}, Step: {batch_idx}, "
-                        f"Loss: {avg_loss:.4f}"
+                        f"Epoch: {epoch}, Step: {batch_idx}, " f"Loss: {avg_loss:.4f}"
                     )
 
                 # Evaluation
@@ -146,9 +143,7 @@ class FlaxTrainer:
 
             # End of epoch
             avg_epoch_loss = epoch_loss / num_steps
-            logging.info(
-                f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}"
-            )
+            logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")
             self.save_checkpoint(f"epoch-{epoch}")
 
     def evaluate(self, eval_dataset):

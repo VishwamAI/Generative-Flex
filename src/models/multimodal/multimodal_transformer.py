@@ -27,9 +27,7 @@ class MultiModalTransformer(nn.Module):
         self.config = config
 
         # Text embedding components
-        self.word_embeddings = nn.Embedding(
-            config.vocab_size, config.hidden_size
-        )
+        self.word_embeddings = nn.Embedding(config.vocab_size, config.hidden_size)
         self.position_embeddings = nn.Embedding(
             config.max_position_embeddings, config.hidden_size
         )
@@ -45,10 +43,7 @@ class MultiModalTransformer(nn.Module):
 
         # Enhanced transformer blocks with expert routing
         self.transformer_blocks = nn.ModuleList(
-            [
-                EnhancedTransformerBlock(config)
-                for _ in range(config.num_hidden_layers)
-            ]
+            [EnhancedTransformerBlock(config) for _ in range(config.num_hidden_layers)]
         )
 
         # Cross-modal attention
@@ -113,9 +108,7 @@ class MultiModalTransformer(nn.Module):
         Forward pass with support for text and image inputs.
         """
         batch_size = (
-            input_ids.size(0)
-            if input_ids is not None
-            else image_features.size(0)
+            input_ids.size(0) if input_ids is not None else image_features.size(0)
         )
         device = next(self.parameters()).device
         embeddings = None
@@ -146,16 +139,12 @@ class MultiModalTransformer(nn.Module):
 
                 if embeddings is not None:
                     # Combine text and image embeddings along sequence dimension
-                    embeddings = torch.cat(
-                        [embeddings, image_embeddings], dim=1
-                    )
+                    embeddings = torch.cat([embeddings, image_embeddings], dim=1)
                 else:
                     embeddings = image_embeddings
 
             except Exception as e:
-                logger.error(
-                    f"Error processing images in transformer: {str(e)}"
-                )
+                logger.error(f"Error processing images in transformer: {str(e)}")
                 if embeddings is None:
                     embeddings = torch.zeros(
                         batch_size, 1, self.config.hidden_size, device=device
@@ -193,9 +182,7 @@ class MultiModalTransformer(nn.Module):
         # Apply mathematical reasoning enhancement
         math_gate = torch.sigmoid(self.math_gate(hidden_states))
         math_hidden = self.math_transform(hidden_states)
-        hidden_states = (
-            math_gate * math_hidden + (1 - math_gate) * hidden_states
-        )
+        hidden_states = math_gate * math_hidden + (1 - math_gate) * hidden_states
 
         # Final layer norm
         hidden_states = self.layer_norm(hidden_states)
@@ -203,9 +190,7 @@ class MultiModalTransformer(nn.Module):
         if return_dict:
             return {
                 "last_hidden_state": hidden_states,
-                "pooler_output": hidden_states[
-                    :, 0
-                ],  # Use first token for pooling
+                "pooler_output": hidden_states[:, 0],  # Use first token for pooling
                 "math_gate": math_gate,
                 "router_probs": router_probs_list,
             }

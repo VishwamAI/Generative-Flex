@@ -15,9 +15,7 @@ class SimpleLanguageModel(nn.Module):
     @nn.compact
     def __call__(self, inputs, training: bool = True):
         # Simple embedding layer
-        x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim)(
-            inputs
-        )
+        x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim)(inputs)
 
         # Single dense layer
         x = nn.Dense(features=self.hidden_dim)(x)

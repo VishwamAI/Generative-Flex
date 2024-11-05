@@ -70,9 +70,7 @@ class ImageProcessor(nn.Module):
             flat_images = images.view(-1, channels, height, width)
 
             # Process through CNN
-            cnn_features = self.cnn(
-                flat_images
-            )  # Shape: [batch_size * num_images, 64]
+            cnn_features = self.cnn(flat_images)  # Shape: [batch_size * num_images, 64]
 
             # Project to hidden size
             projected = self.projector(

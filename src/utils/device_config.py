@@ -32,9 +32,7 @@ def setup_device_config(
             os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = str(memory_fraction)
 
     if config["device_count"] > 1:
-        os.environ[
-            "XLA_FLAGS"
-        ] = "--xla_force_host_platform_device_count={}".format(
+        os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count={}".format(
             config["device_count"]
         )
 

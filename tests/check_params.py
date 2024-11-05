@@ -87,10 +87,7 @@ def test_parameter_shapes(test_params):
                     # Verify 2D arrays have consistent inner dimensions
                     if param_array and isinstance(param_array[0], list):
                         first_inner_len = len(param_array[0])
-                        error_msg = (
-                            "Inconsistent inner dimensions in parameter array"
-                        )
+                        error_msg = "Inconsistent inner dimensions in parameter array"
                         assert all(
-                            len(inner) == first_inner_len
-                            for inner in param_array
+                            len(inner) == first_inner_len for inner in param_array
                         ), error_msg

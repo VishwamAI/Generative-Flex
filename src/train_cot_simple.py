@@ -60,10 +60,7 @@ def main():
         for conv in training_data["conversations"]
     ]
     output_tokens = [
-        [
-            word_to_id.get(w, word_to_id["<unk>"])
-            for w in conv["response"].split()
-        ]
+        [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["response"].split()]
         for conv in training_data["conversations"]
     ]
 
@@ -89,9 +86,7 @@ def main():
 
         def loss_fn(params):
             logits = model.apply({"params": params}, x)
-            return optax.softmax_cross_entropy_with_integer_labels(
-                logits, y
-            ).mean()
+            return optax.softmax_cross_entropy_with_integer_labels(logits, y).mean()
 
         loss, grads = jax.value_and_grad(loss_fn)(state.params)
         state = state.apply_gradients(grads=grads)
@@ -101,9 +96,7 @@ def main():
 
     # Save model parameters
     with open("model_params.json", "w") as f:
-        json.dump(
-            jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f
-        )
+        json.dump(jax.tree_util.tree_map(lambda x: x.tolist(), state.params), f)
     print("\nTraining completed! Model saved.")
 
 

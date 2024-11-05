@@ -128,9 +128,7 @@ def test_model_forward_pass(simple_model, model_params, word_mappings):
     """Test model forward pass with test input."""
     word_to_id, _ = word_mappings
     test_input = "hi"
-    input_token = jnp.array(
-        [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
-    )
+    input_token = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])])
 
     # Get model output
     logits = simple_model.apply(model_params, input_token)
@@ -145,9 +143,7 @@ def test_end_to_end_inference(simple_model, model_params, word_mappings):
     """Test end-to-end inference pipeline."""
     word_to_id, id_to_word = word_mappings
     test_input = "hi"
-    input_token = jnp.array(
-        [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
-    )
+    input_token = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])])
 
     # Get model output
     logits = simple_model.apply(model_params, input_token)

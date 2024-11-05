@@ -30,15 +30,9 @@ class MultiHeadAttention(nn.Module):
         k = self.k_proj(x)
         v = self.v_proj(x)
 
-        q = q.view(batch_size, -1, self.num_heads, self.head_dim).transpose(
-            1, 2
-        )
-        k = k.view(batch_size, -1, self.num_heads, self.head_dim).transpose(
-            1, 2
-        )
-        v = v.view(batch_size, -1, self.num_heads, self.head_dim).transpose(
-            1, 2
-        )
+        q = q.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
+        k = k.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
+        v = v.view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
 
         if self.cache_enabled and layer_id is not None:
             cache_key = f"layer_{layer_id}"
@@ -95,9 +89,7 @@ class TransformerBlock(nn.Module):
             return self.feed_forward(self.feed_forward_norm(x))
 
         if self.gradient_checkpointing and self.training:
-            attention_output = torch.utils.checkpoint.checkpoint(
-                attention_module, x
-            )
+            attention_output = torch.utils.checkpoint.checkpoint(attention_module, x)
             x = x + attention_output
             feed_forward_output = torch.utils.checkpoint.checkpoint(
                 feed_forward_module, x
@@ -144,9 +136,7 @@ class BaseTransformer(nn.Module):
 
         for i, layer in enumerate(self.layers):
             if self.gradient_checkpointing and self.training:
-                x = torch.utils.checkpoint.checkpoint(
-                    layer, x, attention_mask, i
-                )
+                x = torch.utils.checkpoint.checkpoint(layer, x, attention_mask, i)
             else:
                 x = layer(x, attention_mask, layer_id=i)
 

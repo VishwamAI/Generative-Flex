@@ -90,9 +90,7 @@ class AcceleratedTrainer:
             },
         ]
 
-        self.optimizer = optim.AdamW(
-            params, lr=self.config.get("learning_rate", 1e-4)
-        )
+        self.optimizer = optim.AdamW(params, lr=self.config.get("learning_rate", 1e-4))
         self.scheduler = get_linear_schedule_with_warmup(
             self.optimizer,
             num_warmup_steps=self.config.get("num_warmup_steps", 10000),
@@ -153,10 +151,7 @@ class AcceleratedTrainer:
                         f"Loss: {avg_loss:.4f}, LR: {lr:.2e}"
                     )
 
-                if (
-                    eval_dataloader is not None
-                    and global_step % eval_steps == 0
-                ):
+                if eval_dataloader is not None and global_step % eval_steps == 0:
                     eval_loss = self.evaluate(eval_dataloader)
                     self.accelerator.print(f"Eval Loss: {eval_loss:.4f}")
 
@@ -182,9 +177,7 @@ class AcceleratedTrainer:
         for batch in eval_dataloader:
             with torch.no_grad():
                 outputs = self.model(**batch)
-                loss = (
-                    outputs["loss"] if isinstance(outputs, dict) else outputs
-                )
+                loss = outputs["loss"] if isinstance(outputs, dict) else outputs
                 total_loss += loss.item()
                 num_steps += 1
 

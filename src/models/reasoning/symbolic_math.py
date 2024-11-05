@@ -70,9 +70,7 @@ class SymbolicMathProcessor(nn.Module):
                 )
             else:
                 # Use symbol embedder for numbers and variables
-                token_embedding = self.symbol_embedder(
-                    hidden_states.mean(dim=1)
-                )
+                token_embedding = self.symbol_embedder(hidden_states.mean(dim=1))
                 embedding = token_embedding
             embeddings.append(embedding)
 
@@ -94,9 +92,7 @@ class SymbolicMathProcessor(nn.Module):
 
             # Tokenize and embed expression
             tokens = self.tokenize_expression(expr)
-            expr_embeddings = self.embed_expression(
-                tokens, hidden_states[i : i + 1]
-            )
+            expr_embeddings = self.embed_expression(tokens, hidden_states[i : i + 1])
 
             # Process expression structure
             processed_expr = self.structure_processor(expr_embeddings)

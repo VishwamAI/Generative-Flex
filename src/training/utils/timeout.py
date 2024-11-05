@@ -18,9 +18,7 @@ def timeout(seconds, description="Operation"):
         seconds = seconds * 4
 
     def timeout_handler(signum, frame):
-        raise TimeoutException(
-            f"{description} timed out after {seconds} seconds"
-        )
+        raise TimeoutException(f"{description} timed out after {seconds} seconds")
 
     # Only use SIGALRM on Unix-like systems
     if platform.system() != "Windows":

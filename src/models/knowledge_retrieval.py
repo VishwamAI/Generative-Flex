@@ -49,18 +49,12 @@ class KnowledgeRetriever(nn.Module):
     def retrieve(self, query_embedding: jnp.ndarray) -> jnp.ndarray:
         """Retrieve relevant knowledge."""
         batch_size = query_embedding.shape[0]
-        seq_length = (
-            query_embedding.shape[1] if len(query_embedding.shape) == 3 else 1
-        )
+        seq_length = query_embedding.shape[1] if len(query_embedding.shape) == 3 else 1
 
         # Ensure query_embedding has correct shape (batch_size, embedding_size)
-        if (
-            len(query_embedding.shape) == 3
-        ):  # (batch_size, seq_len, embedding_size)
+        if len(query_embedding.shape) == 3:  # (batch_size, seq_len, embedding_size)
             # Reshape to (batch_size * seq_len, embedding_size)
-            query_flat = query_embedding.reshape(
-                -1, self.config.embedding_size
-            )
+            query_flat = query_embedding.reshape(-1, self.config.embedding_size)
         elif len(query_embedding.shape) == 1:  # (embedding_size,)
             query_flat = query_embedding[None, :]  # Add batch dimension
         else:  # (batch_size, embedding_size)
@@ -73,9 +67,7 @@ class KnowledgeRetriever(nn.Module):
         knowledge_norm = jnp.linalg.norm(
             self.knowledge_store.value, axis=-1, keepdims=True
         )
-        normalized_knowledge = self.knowledge_store.value / (
-            knowledge_norm + 1e-6
-        )
+        normalized_knowledge = self.knowledge_store.value / (knowledge_norm + 1e-6)
 
         # Compute similarity scores
         similarity = jnp.einsum(
@@ -85,9 +77,7 @@ class KnowledgeRetriever(nn.Module):
         )
 
         # Get top-k chunks
-        top_k = jnp.argsort(similarity, axis=-1)[
-            ..., -self.config.max_chunks :
-        ]
+        top_k = jnp.argsort(similarity, axis=-1)[..., -self.config.max_chunks :]
         retrieved = jnp.take(self.knowledge_store.value, top_k, axis=0)
 
         # Average across chunks
@@ -108,9 +98,9 @@ class KnowledgeRetriever(nn.Module):
         next_index = (current_index + 1) % self.config.max_chunks
 
         # Update knowledge store
-        self.knowledge_store.value = self.knowledge_store.value.at[
-            current_index
-        ].set(new_knowledge)
+        self.knowledge_store.value = self.knowledge_store.value.at[current_index].set(
+            new_knowledge
+        )
         self.store_index.value = next_index
 
 

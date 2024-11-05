@@ -53,8 +53,7 @@ def main():
 
     # Tokenize input
     input_tokens = [
-        word_to_id.get(word, word_to_id["<unk>"])
-        for word in test_input.split()
+        word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
     ]
     input_array = jnp.array([input_tokens])
 

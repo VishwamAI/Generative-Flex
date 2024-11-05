@@ -55,9 +55,7 @@ def train_step(state, batch, config):
     """
 
     def loss_fn(params):
-        logits = state.apply_fn(
-            params, batch["input_ids"], batch["attention_mask"]
-        )
+        logits = state.apply_fn(params, batch["input_ids"], batch["attention_mask"])
         loss = optax.softmax_cross_entropy_with_integer_labels(
             logits=logits, labels=batch["labels"]
         ).mean()
@@ -91,9 +89,7 @@ def evaluate(state, eval_ds, config):
         metrics.append({"loss": loss})
 
     # Average metrics across batches
-    avg_metrics = {
-        k: jnp.mean([m[k] for m in metrics]) for k in metrics[0].keys()
-    }
+    avg_metrics = {k: jnp.mean([m[k] for m in metrics]) for k in metrics[0].keys()}
     return avg_metrics
 
 
@@ -145,9 +141,7 @@ def main():
 
         # Save checkpoint
         if step % config.save_every == 0:
-            checkpoint_dir = os.path.join(
-                config.output_dir, f"checkpoint_{step}"
-            )
+            checkpoint_dir = os.path.join(config.output_dir, f"checkpoint_{step}")
             state.save(checkpoint_dir)
 
     logging.info("Training complete!")

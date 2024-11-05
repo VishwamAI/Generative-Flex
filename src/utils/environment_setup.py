@@ -64,9 +64,7 @@ def test_flax_installation() -> Dict[str, Any]:
 
     return {
         "flax_version": flax_version,
-        "model_params": sum(
-            x.size for x in jax.tree_util.tree_leaves(variables)
-        ),
+        "model_params": sum(x.size for x in jax.tree_util.tree_leaves(variables)),
     }
 
 

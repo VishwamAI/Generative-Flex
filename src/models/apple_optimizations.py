@@ -70,18 +70,14 @@ class BlockWiseQuantization(nn.Module):
         # Initialize state variable for original shape
         self.state = self.variable("state", "shape", lambda: None)
 
-    def quantize(
-        self, x: jnp.ndarray
-    ) -> Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
+    def quantize(self, x: jnp.ndarray) -> Tuple[jnp.ndarray, jnp.ndarray, jnp.ndarray]:
         """Quantize input tensor to int4 format."""
 
         # Store original shape in state
         self.state.value = x.shape
 
         # Compute statistics per block
-        x_reshaped = x.reshape(
-            -1, self.block_size
-        )  # Flatten to (N, block_size)
+        x_reshaped = x.reshape(-1, self.block_size)  # Flatten to (N, block_size)
 
         # Compute statistics based on quantization mode
         if self.quantization_mode == "linear_symmetric":
@@ -161,9 +157,7 @@ class StatefulKeyValueCache(nn.Module):
             dtype=getattr(jnp, self.dtype),
         )
         self.current_length = self.variable("cache", "length", lambda: 0)
-        self.valid_mask = self.variable(
-            "cache", "mask", jnp.zeros, (max_length,), bool
-        )
+        self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length,), bool)
 
     def update(
         self,
@@ -191,15 +185,13 @@ class StatefulKeyValueCache(nn.Module):
             actual_len = end_pos - position
 
             # Update only the valid portion
-            self.key_cache.value = self.key_cache.value.at[
-                :, position:end_pos
-            ].set(key[:, :actual_len])
-            self.value_cache.value = self.value_cache.value.at[
-                :, position:end_pos
-            ].set(value[:, :actual_len])
-            self.valid_mask.value = self.valid_mask.value.at[
-                position:end_pos
-            ].set(True)
+            self.key_cache.value = self.key_cache.value.at[:, position:end_pos].set(
+                key[:, :actual_len]
+            )
+            self.value_cache.value = self.value_cache.value.at[:, position:end_pos].set(
+                value[:, :actual_len]
+            )
+            self.valid_mask.value = self.valid_mask.value.at[position:end_pos].set(True)
             self.current_length.value = end_pos
 
     def get(
@@ -217,9 +209,7 @@ class StatefulKeyValueCache(nn.Module):
         batch_size, seq_len = key.shape[:2]
         key = key.reshape(batch_size, seq_len, self.num_heads, self.head_dim)
         key = jnp.transpose(key, (0, 2, 1, 3))
-        value = value.reshape(
-            batch_size, seq_len, self.num_heads, self.head_dim
-        )
+        value = value.reshape(batch_size, seq_len, self.num_heads, self.head_dim)
         value = jnp.transpose(value, (0, 2, 1, 3))
 
         return key, value
@@ -416,9 +406,7 @@ class AppleOptimizedTransformer(nn.Module):
 
         # Extract dimensions after embedding/projection
         batch_size = hidden_states.shape[0]
-        seq_length = min(
-            hidden_states.shape[1], self.config.max_sequence_length
-        )
+        seq_length = min(hidden_states.shape[1], self.config.max_sequence_length)
         hidden_states = hidden_states[:, :seq_length, :]
 
         # Apply layer norm
@@ -429,22 +417,14 @@ class AppleOptimizedTransformer(nn.Module):
             hidden_states = self.quantization.quantize(hidden_states)[0]
 
         # Project query, key, value with correct dimensions
-        query = self.query_proj(
-            hidden_states
-        )  # [batch_size, seq_length, qkv_dim]
+        query = self.query_proj(hidden_states)  # [batch_size, seq_length, qkv_dim]
         key = self.key_proj(hidden_states)
         value = self.value_proj(hidden_states)
 
         # Reshape for attention heads with validated dimensions
-        query = query.reshape(
-            batch_size, seq_length, self.num_heads, self.head_dim
-        )
-        key = key.reshape(
-            batch_size, seq_length, self.num_heads, self.head_dim
-        )
-        value = value.reshape(
-            batch_size, seq_length, self.num_heads, self.head_dim
-        )
+        query = query.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
+        key = key.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
+        value = value.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
 
         # Transpose for attention computation
         query = jnp.transpose(query, (0, 2, 1, 3))
@@ -474,16 +454,12 @@ class AppleOptimizedTransformer(nn.Module):
 
         # Apply dropout during training
         if training:
-            attention_probs = self.dropout(
-                attention_probs, deterministic=False
-            )
+            attention_probs = self.dropout(attention_probs, deterministic=False)
 
         # Compute context layer
         context_layer = jnp.matmul(attention_probs, value)
         context_layer = jnp.transpose(context_layer, (0, 2, 1, 3))
-        context_layer = context_layer.reshape(
-            batch_size, seq_length, self.hidden_size
-        )
+        context_layer = context_layer.reshape(batch_size, seq_length, self.hidden_size)
 
         # Project back to hidden size
         output = self.output_projection(context_layer)
