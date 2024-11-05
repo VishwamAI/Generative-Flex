@@ -1,119 +1,123 @@
 """Fix function syntax issues that are preventing black formatting."""
-    import re
-    from pathlib import Path
-    
-    
-        def fix_function_parameters(self, content: str):
-        """Fix function parameter formatting."""
-# Fix self parameter definitions
-content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*self\s* \
-s*\)',
-r'def \1(self):',
-content
-)
-
-# Fix parameter lists with type hints
-content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*self\s* \
-s*([^)]+)\)',
-lambda m: f'def {m.group(1)}(self, {", ".join(p.strip() for p in m.group(2).split(", "))}):',
-content
-)
-
-# Fix empty parameter lists
-content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*\)\s*:',
-r'def \1():',
-content
-)
-
-return content
+import re
+import os
+from pathlib import Path
+from typing import List, Dict, Any, Optional
 
 
-def fix_method_calls(self, content: str):
-    """Fix method call formatting."""
-                # Fix TransformerBlock calls
-                content = re.sub(r'x\s*=\s*TransformerBlock\([^)]+\)\s*\(\s*x\s* \
-                s*[^)]+\)',
-                lambda m: m.group(0).replace('\n', ' ').replace('  ', ' '),
-                content
-                )
-                
-                # Fix other method calls with multiple parameters
-                content = re.sub(r'([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*([^)]+)\s*\)',
-                lambda m: f'{m.group(1)}({", ".join(p.strip() for p in m.group(2).split(", "))})',
-                content
-                )
-                
-                return content
-                
-                
-                                def fix_indentation(self, content: str):
-                    """Fix indentation issues."""
-lines = content.split('\n')
-fixed_lines = []
-current_indent = 0 for line in lines: stripped = line.lstrip()
-    if not stripped:  # Empty line
-    fixed_lines.append('')
-    continue
+def fix_function_definition(line: str) -> str:
+    """Fix function definition syntax."""
+    # Remove extra parentheses
+    line = re.sub(r'\)\s*\)', ')', line)
 
-    # Adjust indentation for blocks
-    if stripped.startswith(('def ', 'class ', 'if ', 'else:', 'elif ', 'try:', 'except ', 'finally:', 'for ', 'while ')):
-        if stripped.endswith(':'):
-            indent = '    ' * current_indent
-            fixed_lines.append(indent + stripped)
-            current_indent += 1
-            else: indent = '    ' * current_indent
-                fixed_lines.append(indent + stripped)
-                else: ifstripped.startswith(('return ', 'raise ', 'break', 'continue', 'pass')):
-                        current_indent = max(0, current_indent - 1)
-                        indent = '    ' * current_indent
-                        fixed_lines.append(indent + stripped)
+    # Fix return type annotations
+    line = re.sub(r'\s*->\s*,?\s*([^:]+):', r' -> \1:', line)
 
-                        return '\n'.join(fixed_lines)
+    # Fix parameter spacing
+    line = re.sub(r'def\s+(\w+)\s*\(\s*', r'def \1(', line)
+    line = re.sub(r'\s+\)', ')', line)
+
+    # Fix type hint spacing
+    line = re.sub(r':\s*(\w+)([^,\s)])', r': \1, \2', line)
+    line = re.sub(r'(\w+):(\w+)', r'\1: \2', line)
+
+    # Fix spaces after commas
+    line = re.sub(r',([^\s])', r', \1', line)
+
+    # Remove trailing commas before closing parenthesis
+    line = re.sub(r',\s*\)', ')', line)
+
+    return line
 
 
-def fix_dict_formatting(self, content: str):
-    """Fix dictionary formatting."""
-                # Fix dictionary comprehensions
-                content = re.sub(r'\{\s*([^:]+)\s*:\s*([^}]+)\s+for\s+([^}]+)\s*\}',
-                r'{\1: \2 for \3}',
-                content
-                )
-                
-                # Fix multiline dictionary definitions
-                content = re.sub(r'\{\s*([^}]+)\s*\}',
-                lambda m: '{' + ', '.join(p.strip() for p in m.group(1).split(', ')) + '}',
-                content
-                )
-                
-                return content
-                
-                
-                                def process_file(self, file_path: Path):
-                    """Process a single file to fix syntax patterns."""
-try: withopen(file_path, 'r', encoding='utf-8') as f: content = f.read()
+def fix_class_definition(line: str) -> str:
+    """Fix class definition syntax."""
+    # Fix inheritance syntax
+    line = re.sub(r'class\s+(\w+)\s*\(\s*', r'class \1(', line)
+    line = re.sub(r'\s+\):', r'):', line)
 
-        # Apply fixes in sequence
-        content = fix_function_parameters(content)
-        content = fix_method_calls(content)
-        content = fix_indentation(content)
-        content = fix_dict_formatting(content)
+    # Remove extra commas in inheritance
+    line = re.sub(r',\s*,', ',', line)
+    line = re.sub(r',\s*\)', ')', line)
 
-        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
-
-            print(f"Successfully fixed syntax in {file_path}")
-            except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+    return line
 
 
-def main(self):
+def fix_method_definition(line: str, indent_level: int) -> str:
+    """Fix method definition syntax with proper indentation."""
+    # Apply basic function fixes
+    line = fix_function_definition(line.strip())
+
+    # Ensure proper indentation
+    return ' ' * (indent_level * 4) + line
+
+
+def process_file(file_path: str) -> bool:
+    """Process a single file."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+
+        fixed_lines = []
+        in_class = False
+        class_indent = 0
+
+        for line in lines:
+            stripped = line.strip()
+            indent = len(line) - len(line.lstrip())
+            indent_level = indent // 4
+
+            if stripped.startswith('class '):
+                in_class = True
+                class_indent = indent_level
+                fixed_lines.append(' ' * indent + fix_class_definition(stripped))
+            elif in_class and indent <= class_indent * 4 and stripped:
+                in_class = False
+                fixed_lines.append(line)
+            elif in_class and stripped.startswith('def '):
+                # Fix method definition with class indentation + 1
+                fixed_lines.append(fix_method_definition(stripped, class_indent + 1))
+            elif stripped.startswith('def '):
+                # Fix function definition
+                fixed_lines.append(' ' * indent + fix_function_definition(stripped))
+            else:
+                fixed_lines.append(line)
+
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.writelines(fixed_lines)
+
+        return True
+    except Exception as e:
+        print(f"Error processing {file_path}: {str(e)}")
+        return False
+
+
+def main():
     """Fix syntax in all Python files."""
-        root_dir = Path('.')
-        python_files = list(root_dir.rglob('*.py'))
-        
-        print(f"Found {len(python_files)} Python files")
-        for file_path in python_files: if'.git' not in str(file_path):
-        process_file(file_path)
-        
-        
-        if __name__ == '__main__':
-        main()
+    python_files = []
+
+    # Get all Python files
+    for root, _, files in os.walk('.'):
+        for file in files:
+            if file.endswith('.py'):
+                python_files.append(os.path.join(root, file))
+
+    success_count = 0
+    for file_path in python_files:
+        print(f"Processing {file_path}...")
+        if process_file(file_path):
+            print(f"Successfully fixed {file_path}")
+            success_count += 1
+        else:
+            print(f"Failed to fix {file_path}")
+
+    print(f"\nFixed {success_count}/{len(python_files)} files")
+
+    # Run black formatter
+    print("\nRunning black formatter...")
+    os.system("python3 -m black .")
+
+
+if __name__ == '__main__':
+    main()
         
