@@ -1,4 +1,12 @@
-"""Dataset verification utilities for mapped datasets."""
+"""Script to fix syntax and formatting issues in dataset_verification_utils.py."""
+
+import os
+from pathlib import Path
+
+
+def fix_dataset_verification():
+    """Fix syntax and formatting issues in dataset_verification_utils.py."""
+    content = '''"""Dataset verification utilities for mapped datasets."""
 
 import gc
 import itertools
@@ -30,7 +38,6 @@ logger = logging.getLogger(__name__)
 
 class TimeoutException(Exception):
     """Exception raised when a timeout occurs."""
-
     pass
 
 
@@ -147,27 +154,27 @@ def format_verification_result(result: Dict[str, Any]) -> str:
     error = result.get("error")
     attempts = result.get("attempts", [])
 
-    formatted = f"Status: {status}\n"
+    formatted = f"Status: {status}\\n"
 
     if configs:
-        formatted += "Configurations:\n"
+        formatted += "Configurations:\\n"
         for config, config_status in configs.items():
-            formatted += f"  - {config}: {config_status}\n"
+            formatted += f"  - {config}: {config_status}\\n"
 
     if attempts:
-        formatted += "\nVerification Attempts:\n"
+        formatted += "\\nVerification Attempts:\\n"
         for attempt in attempts:
-            formatted += f"  Strategy: {attempt['strategy']}\n"
-            formatted += f"  Config: {attempt['config']}\n"
-            formatted += f"  Success: {attempt['success']}\n"
+            formatted += f"  Strategy: {attempt['strategy']}\\n"
+            formatted += f"  Config: {attempt['config']}\\n"
+            formatted += f"  Success: {attempt['success']}\\n"
             if attempt.get("error"):
-                formatted += f"  Error: {attempt['error']}\n"
-                formatted += f"  Error Category: {attempt['error_category']}\n"
-            formatted += "\n"
+                formatted += f"  Error: {attempt['error']}\\n"
+                formatted += f"  Error Category: {attempt['error_category']}\\n"
+            formatted += "\\n"
 
     if error:
-        formatted += f"\nFinal Error: {error}\n"
-        formatted += f"Error Category: {categorize_error(Exception(error))}\n"
+        formatted += f"\\nFinal Error: {error}\\n"
+        formatted += f"Error Category: {categorize_error(Exception(error))}\\n"
 
     return formatted
 
@@ -184,9 +191,7 @@ def log_verification_attempt(
     """Log a verification attempt with detailed information."""
     config_str = f" (config: {config})" if config else ""
     if success:
-        logger.info(
-            f"Successfully verified {dataset_id}{config_str} using {attempt_type}"
-        )
+        logger.info(f"Successfully verified {dataset_id}{config_str} using {attempt_type}")
         if info:
             logger.info(f"Dataset info: {info}")
     else:
@@ -253,20 +258,12 @@ def load_dataset_in_chunks(
             api = HfApi()
             logging.debug(f"Getting repo info for {dataset_id}")
             file_info = api.repo_info(repo_id=dataset_id, repo_type="dataset")
-            filename = (
-                "glaive_code_assistant_v3.json"
-                if "glaive" in dataset_id
-                else "dataset.json"
-            )
-            file_url = hf_hub_url(
-                repo_id=dataset_id, filename=filename, repo_type="dataset"
-            )
+            filename = "glaive_code_assistant_v3.json" if "glaive" in dataset_id else "dataset.json"
+            file_url = hf_hub_url(repo_id=dataset_id, filename=filename, repo_type="dataset")
 
             # Get file size
             headers = {"Authorization": f"Bearer {token}"} if token else {}
-            head_response = requests.head(
-                file_url, headers=headers, allow_redirects=True
-            )
+            head_response = requests.head(file_url, headers=headers, allow_redirects=True)
             file_size = int(head_response.headers.get("content-length", 0))
             logging.info(f"File size: {file_size / (1024*1024):.2f} MB")
 
@@ -288,35 +285,29 @@ def load_dataset_in_chunks(
                             f"Downloading bytes {start_byte}-{end_byte} "
                             f"({(end_byte-start_byte + 1)/(1024*1024):.2f} MB)"
                         )
-                        response = requests.get(
-                            file_url, headers=headers, stream=True, timeout=30
-                        )
+                        response = requests.get(file_url, headers=headers, stream=True, timeout=30)
 
                         if response.status_code == 206:  # Partial Content
                             chunk_data = response.content.decode("utf-8")
                         else:
-                            logging.warning(
-                                f"Unexpected status code: {response.status_code}"
-                            )
+                            logging.warning(f"Unexpected status code: {response.status_code}")
                             retry_count += 1
                     except Exception as download_error:
                         logging.warning(f"Download error: {str(download_error)}")
                         retry_count += 1
                         if retry_count >= max_retries:
-                            raise Exception(
-                                f"Failed to download chunk after {max_retries} retries"
-                            )
+                            raise Exception(f"Failed to download chunk after {max_retries} retries")
 
                 info["download_retries"] += retry_count
                 info["bytes_processed"] = start_byte
 
                 # Handle partial lines from previous chunk
                 chunk_data = partial_line + chunk_data
-                lines = chunk_data.split("\n")
+                lines = chunk_data.split("\\n")
 
                 # Save last partial line for next chunk
-                partial_line = lines[-1] if not chunk_data.endswith("\n") else ""
-                lines = lines[:-1] if not chunk_data.endswith("\n") else lines
+                partial_line = lines[-1] if not chunk_data.endswith("\\n") else ""
+                lines = lines[:-1] if not chunk_data.endswith("\\n") else lines
 
                 # Process complete lines
                 for line in lines:
@@ -331,30 +322,22 @@ def load_dataset_in_chunks(
                             total_examples += len(line_buffer)
                             chunks_processed += 1
                             cleanup_counter += 1
-                            logging.debug(
-                                f"Processed chunk {chunks_processed} ({total_examples} examples)"
-                            )
+                            logging.debug(f"Processed chunk {chunks_processed} ({total_examples} examples)")
                             line_buffer = []
 
                             current_memory = get_memory_usage()
-                            if (
-                                current_memory > memory_threshold
-                                or cleanup_counter >= 3
-                            ):
+                            if current_memory > memory_threshold or cleanup_counter >= 3:
                                 cleanup_memory()
                                 cleanup_counter = 0
                                 info["memory_cleanups"] += 1
 
-                            info.update(
-                                {
-                                    "chunks_processed": chunks_processed,
-                                    "total_examples": total_examples,
-                                    "error_count": error_count,
-                                    "last_memory_usage": current_memory,
-                                    "progress_percentage": (start_byte / file_size)
-                                    * 100,
-                                }
-                            )
+                            info.update({
+                                "chunks_processed": chunks_processed,
+                                "total_examples": total_examples,
+                                "error_count": error_count,
+                                "last_memory_usage": current_memory,
+                                "progress_percentage": (start_byte / file_size) * 100,
+                            })
 
                             if max_chunks and chunks_processed >= max_chunks:
                                 return True, None, info
@@ -364,18 +347,14 @@ def load_dataset_in_chunks(
                         info["parse_errors"] += 1
                         logging.warning(f"JSON parse error: {str(je)[:100]}...")
                         if error_count > chunks_processed * 0.1:  # Allow 10% error rate
-                            raise Exception(
-                                f"Too many JSON parse errors: {error_count}/{chunks_processed}"
-                            )
+                            raise Exception(f"Too many JSON parse errors: {error_count}/{chunks_processed}")
                         continue
 
                 start_byte = end_byte + 1
 
         except requests.exceptions.RequestException as re:
             # Only fall back for network-related errors
-            logging.warning(
-                f"Network error, falling back to datasets library: {str(re)}"
-            )
+            logging.warning(f"Network error, falling back to datasets library: {str(re)}")
             kwargs = {"streaming": True, "split": split}
             if config:
                 kwargs["name"] = config
@@ -383,17 +362,11 @@ def load_dataset_in_chunks(
                 kwargs["token"] = token
 
             dataset = load_dataset(dataset_id, **kwargs)
-            info.update(
-                {
-                    "splits": (
-                        list(dataset.keys()) if hasattr(dataset, "keys") else [split]
-                    ),
-                    "features": (
-                        str(dataset.features) if hasattr(dataset, "features") else None
-                    ),
-                    "fallback_method": "datasets_library",
-                }
-            )
+            info.update({
+                "splits": list(dataset.keys()) if hasattr(dataset, "keys") else [split],
+                "features": str(dataset.features) if hasattr(dataset, "features") else None,
+                "fallback_method": "datasets_library",
+            })
 
             for batch in dataset.iter(batch_size=chunk_size):
                 try:
@@ -411,14 +384,12 @@ def load_dataset_in_chunks(
                         cleanup_counter = 0
                         info["memory_cleanups"] += 1
 
-                    info.update(
-                        {
-                            "chunks_processed": chunks_processed,
-                            "total_examples": total_examples,
-                            "error_count": error_count,
-                            "last_memory_usage": current_memory,
-                        }
-                    )
+                    info.update({
+                        "chunks_processed": chunks_processed,
+                        "total_examples": total_examples,
+                        "error_count": error_count,
+                        "last_memory_usage": current_memory,
+                    })
 
                     if max_chunks and chunks_processed >= max_chunks:
                         break
@@ -429,9 +400,7 @@ def load_dataset_in_chunks(
                     info["last_error"] = str(chunk_error)
 
                     if error_count > chunks_processed * 0.1:
-                        raise Exception(
-                            f"Too many chunk processing errors: {error_count}/{chunks_processed}"
-                        )
+                        raise Exception(f"Too many chunk processing errors: {error_count}/{chunks_processed}")
 
             return True, None, info
 
@@ -448,3 +417,13 @@ def load_dataset_in_chunks(
     finally:
         # Final cleanup
         cleanup_memory()
+'''
+
+    # Write the fixed content to the file
+    file_path = Path("data/dataset_verification_utils.py")
+    with open(file_path, "w") as f:
+        f.write(content)
+
+
+if __name__ == "__main__":
+    fix_dataset_verification()

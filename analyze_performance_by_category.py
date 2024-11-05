@@ -1,4 +1,5 @@
 """Script to analyze performance across mathematical categories."""
+
 from collections import defaultdict
 import json
 import logging
@@ -25,18 +26,14 @@ def extract_validation_metrics():
     metrics = {
         "overall_accuracy": None,
         "validation_loss": None,
-        "category_performance": defaultdict(
-            lambda: {"correct": 0, "total": 0}
-        ),
+        "category_performance": defaultdict(lambda: {"correct": 0, "total": 0}),
     }
 
     with open(os.path.join(log_dir, latest_log), "r") as f:
         content = f.read()
 
     # Extract overall accuracy
-    accuracy_matches = re.findall(
-        r"Validation math accuracy: ([\d.]+)", content
-    )
+    accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)", content)
     if accuracy_matches:
         metrics["overall_accuracy"] = float(accuracy_matches[-1])
 
@@ -124,14 +121,13 @@ def generate_visualization(analysis):
         x=analysis["overall_metrics"]["accuracy"] * 100,
         color="r",
         linestyle="--",
-        label=f'Overall Accuracy ({analysis["overall_metrics"]["accuracy"]*100:.1f}%)'
+        label=f'Overall Accuracy ({analysis["overall_metrics"]["accuracy"]*100:.1f}%)',
     )
     plt.legend()
     plt.tight_layout()
 
     plt.savefig("performance_by_category.png")
     plt.close()
-
 
     def generate_report(analysis):
         """Generate comprehensive performance report."""
@@ -205,14 +201,12 @@ def generate_visualization(analysis):
             f.write("\n".join(report))
         logger.info(f"Performance analysis saved to {report_path}")
 
-
     def main():
         """Main analysis function."""
         analysis = analyze_performance()
         if analysis:
             generate_visualization(analysis)
             generate_report(analysis)
-
 
     if __name__ == "__main__":
         main()

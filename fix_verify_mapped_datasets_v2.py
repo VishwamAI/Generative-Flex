@@ -1,4 +1,12 @@
-"""Dataset verification utilities for mapped datasets."""
+"""Script to fix syntax and formatting issues in verify_mapped_datasets.py."""
+
+import os
+from pathlib import Path
+
+
+def fix_verify_mapped_datasets():
+    """Fix syntax and formatting issues in verify_mapped_datasets.py."""
+    content = '''"""Dataset verification utilities for mapped datasets."""
 
 import gc
 import itertools
@@ -70,34 +78,24 @@ def get_dataset_size(dataset_id: str, token: str) -> Optional[float]:
         for sibling in siblings:
             try:
                 filepath = getattr(sibling, "rfilename", None)
-                if filepath and any(
-                    filepath.lower().endswith(ext) for ext in data_extensions
-                ):
+                if filepath and any(filepath.lower().endswith(ext) for ext in data_extensions):
                     size = getattr(sibling, "size", None)
                     if size is not None:
                         total_size += size
-                        logger.debug(
-                            f"Added size for file {filepath}: {size/1024/1024:.2f} MB"
-                        )
+                        logger.debug(f"Added size for file {filepath}: {size/1024/1024:.2f} MB")
                     else:
                         skipped_files += 1
-                        logger.warning(
-                            f"Skipped file {filepath} due to missing size information"
-                        )
+                        logger.warning(f"Skipped file {filepath} due to missing size information")
             except AttributeError as attr_error:
                 skipped_files += 1
-                logger.warning(
-                    f"Missing required attributes for file in {dataset_id}: {str(attr_error)}"
-                )
+                logger.warning(f"Missing required attributes for file in {dataset_id}: {str(attr_error)}")
             except Exception as file_error:
                 skipped_files += 1
                 name = getattr(sibling, "rfilename", "unknown")
                 logger.warning(f"Failed to process file {name}: {str(file_error)}")
 
         if total_size > 0:
-            logger.info(
-                f"Total dataset size: {total_size/1024/1024:.2f} MB (skipped {skipped_files} files)"
-            )
+            logger.info(f"Total dataset size: {total_size/1024/1024:.2f} MB (skipped {skipped_files} files)")
             return total_size / 1024  # Convert to KB
         return None
     except Exception as e:
@@ -149,6 +147,7 @@ def load_dataset_mappings() -> Dict[str, Any]:
         logger.warning("No dataset mappings file found")
         return {}
 
+
     with open(mapping_file, "r") as f:
         return yaml.safe_load(f) or {}
 
@@ -174,17 +173,13 @@ def verify_dataset(
     try:
         # Create temporary cache directory
         with tempfile.TemporaryDirectory() as cache_dir:
-            logger.info(f"\nVerifying dataset: {dataset_id}")
-            logger.info(
-                f"Initial memory usage: {psutil.Process().memory_percent():.1f}%"
-            )
+            logger.info(f"\\nVerifying dataset: {dataset_id}")
+            logger.info(f"Initial memory usage: {psutil.Process().memory_percent():.1f}%")
 
             # Check dataset organization and structure
             try:
                 api = HfApi(token=token)
-                repo_info = api.repo_info(
-                    repo_id=dataset_id, repo_type="dataset", token=token
-                )
+                repo_info = api.repo_info(repo_id=dataset_id, repo_type="dataset", token=token)
 
                 # Log dataset structure
                 if repo_info.siblings:
@@ -197,18 +192,12 @@ def verify_dataset(
                                 current = structure
                                 for part in path_parts[:-1]:
                                     current = current.setdefault(part, {})
-                                current[path_parts[-1]] = getattr(
-                                    sibling, "size", "unknown size"
-                                )
+                                current[path_parts[-1]] = getattr(sibling, "size", "unknown size")
                         except Exception as e:
-                            logger.warning(
-                                f"Failed to process file structure: {str(e)}"
-                            )
+                            logger.warning(f"Failed to process file structure: {str(e)}")
 
                     result["organization"]["structure"] = structure
-                    logger.info(
-                        f"Dataset structure:\n{json.dumps(structure, indent=2)}"
-                    )
+                    logger.info(f"Dataset structure:\\n{json.dumps(structure, indent=2)}")
 
                 # Detect dataset format
                 formats = set()
@@ -217,14 +206,7 @@ def verify_dataset(
                         filepath = getattr(sibling, "rfilename", None)
                         if filepath:
                             ext = os.path.splitext(filepath)[1].lower()
-                            if ext in [
-                                ".parquet",
-                                ".json",
-                                ".csv",
-                                ".txt",
-                                ".jsonl",
-                                ".arrow",
-                            ]:
+                            if ext in [".parquet", ".json", ".csv", ".txt", ".jsonl", ".arrow"]:
                                 formats.add(ext)
                     except Exception as e:
                         logger.warning(f"Failed to detect file format: {str(e)}")
@@ -247,21 +229,9 @@ def verify_dataset(
                             compliance_details["has_readme"] = True
                         elif filepath.endswith(".md"):
                             compliance_details["has_documentation"] = True
-                        elif any(
-                            filepath.endswith(ext)
-                            for ext in [
-                                ".parquet",
-                                ".json",
-                                ".csv",
-                                ".txt",
-                                ".jsonl",
-                                ".arrow",
-                            ]
-                        ):
+                        elif any(filepath.endswith(ext) for ext in [".parquet", ".json", ".csv", ".txt", ".jsonl", ".arrow"]):
                             compliance_details["has_data_files"] = True
-                        if any(
-                            d in filepath for d in ["train/", "test/", "validation/"]
-                        ):
+                        if any(d in filepath for d in ["train/", "test/", "validation/"]):
                             compliance_details["has_standard_dirs"] = True
                     except Exception as e:
                         logger.warning(f"Failed to check compliance: {str(e)}")
@@ -292,9 +262,7 @@ def verify_dataset(
             try:
                 dataset_size = get_dataset_size(dataset_id, token)
                 if dataset_size and dataset_size > 1024 * 1024:  # If > 1GB
-                    success, error, details = load_dataset_in_chunks(
-                        dataset_id, config or "train", token
-                    )
+                    success, error, details = load_dataset_in_chunks(dataset_id, config or "train", token)
                     if not success:
                         raise error or Exception("Failed to load dataset in chunks")
                 else:
@@ -314,3 +282,13 @@ def verify_dataset(
         result["error"] = str(e)
 
     return result
+'''
+
+    # Write the fixed content to the file
+    file_path = Path("data/verify_mapped_datasets.py")
+    with open(file_path, "w") as f:
+        f.write(content)
+
+
+if __name__ == "__main__":
+    fix_verify_mapped_datasets()
