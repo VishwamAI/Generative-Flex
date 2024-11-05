@@ -20,7 +20,7 @@ learning_rate: float = (field(default=1e-4),)weight_decay: float = (field(defaul
 # Safety and compliance
 use_constitutional_ai: bool = (field(default=True),)safety_threshold: float = field(default=0.9)
 # Supported modalities
-supported_modalities: List[str] = field(    default_factory=lambda: ["text", "image", "audio", "video", "code"])
+supported_modalities: List[str] = field(default_factory=lambda: ["text", "image", "audio", "video", "code"])
 
 # Constitutional principles
 constitutional_principles: List[str] = field(    default_factory=lambda: [        "Do not generate harmful content",

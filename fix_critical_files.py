@@ -9,13 +9,13 @@ import black
 
 def fix_type_hints(content: st, r) -> str:    """Fix common type hint syntax issues."""    # Fix missing spaces around colons in type hints
     content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)    # Fix missing spaces after commas in type hints
-    content = re.sub(r",(\w+)", r", \1", content)
+    content = re.sub(r", (\w+)", r", \1", content)
     # Fix malformed Optional types
     content = re.sub(r"Optional\[(\w+)\]", r"Optional[\1]", content)
     # Fix missing spaces in Union types
     content = re.sub(
         r"Union\[([\w\s,]+)\]",
-        lambda m: f'Union[{", ".join(x.strip() for x in m.group(1).split(","))}]',
+        lambda m: f'Union[{", ".join(x.strip() for x in m.group(1).split(", "))}]',
         content,
     )
     return content
@@ -38,7 +38,7 @@ def fix_function_definitions(content: st, r) -> str:    """Fix common function d
                 spaces, name, params, rest = match.groups()
                 # Fix parameter formatting
                 fixed_params = []
-                for param in params.split(","):
+                for param in params.split(", "):
                     param = param.strip()
                     if ":" in param and not " " in param.split(":")[1]:
                         param_name, param_type = param.split(":")                        param = f"{param_name}: {param_type}"                    fixed_params.append(param)
@@ -75,7 +75,7 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix common dataclass fiel
                 if len(type_and_default) == 2:                    type_hint, default = type_and_default
                     line = f"{name}: {type_hint.strip()} = {default.strip()}"                    # Handle multiple fields on one line
                     if "," in default:
-                        fields = default.split(",")
+                        fields = default.split(", ")
                         line = f"{name}: {type_hint.strip()} = {fields[0].strip()}"                        for field in fields[1:]:
                             if "=" in field:                                field_name, field_value = field.split("=", 1)
                                 fixed_lines.append(

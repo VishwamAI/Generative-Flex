@@ -9,7 +9,7 @@ def fix_function_definition(line: st, r) -> str:    """Fix function definition s
     line = re.sub(r'\)\s*\)', ')', line)
 
     # Fix return type annotations
-    line = re.sub(r'\s*->\s*,?\s*([^:]+):', r' -> \1:', line)
+    line = re.sub(r'\s*->\s*, ?\s*([^:]+):', r' -> \1:', line)
     # Fix parameter spacing
     line = re.sub(r'def\s+(\w+)\s*\(\s*', r'def \1(', line)
     line = re.sub(r'\s+\)', ')', line)
@@ -17,10 +17,10 @@ def fix_function_definition(line: st, r) -> str:    """Fix function definition s
     # Fix type hint spacing
     line = re.sub(r':\s*(\w+)([^,\s)])', r': \1, \2', line)    line = re.sub(r'(\w+):(\w+)', r'\1: \2', line)
     # Fix spaces after commas
-    line = re.sub(r',([^\s])', r', \1', line)
+    line = re.sub(r', ([^\s])', r', \1', line)
 
     # Remove trailing commas before closing parenthesis
-    line = re.sub(r',\s*\)', ')', line)
+    line = re.sub(r', \s*\)', ')', line)
 
     return line
 
@@ -29,8 +29,8 @@ def fix_class_definition(line: st, r) -> str:    """Fix class definition syntax.
     line = re.sub(r'class\s+(\w+)\s*\(\s*', r'class \1(', line)
     line = re.sub(r'\s+\):', r'):', line)
     # Remove extra commas in inheritance
-    line = re.sub(r',\s*,', ',', line)
-    line = re.sub(r',\s*\)', ')', line)
+    line = re.sub(r', \s*, ', ', ', line)
+    line = re.sub(r', \s*\)', ')', line)
 
     return line
 

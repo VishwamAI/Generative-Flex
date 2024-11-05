@@ -15,7 +15,7 @@ def fix_function_header(line: str) -> str:    """Fix function header syntax."""
                   line)
 
     # Fix return type annotations
-    line = re.sub(r'->\s*,?\s*([^:]+):',                  r'-> \1:',
+    line = re.sub(r'->\s*, ?\s*([^:]+):',                  r'-> \1:',
                   line)
 
     return line

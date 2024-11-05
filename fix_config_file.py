@@ -21,7 +21,7 @@ def fix_imports(content: st, r) -> str:    """Fix import statements."""    lines
             # Fix spacing after commas in imports
             if "," in line:
                 parts = line.split(" import ")
-                if len(parts) == 2:                    imports = [i.strip() for i in parts[1].split(",")]
+                if len(parts) == 2:                    imports = [i.strip() for i in parts[1].split(", ")]
                     line = f"{parts[0]} import {', '.join(imports)}"
             import_lines.append(line)
         else:
@@ -47,7 +47,7 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definitions and
             # Fix class definition
             if "(" in stripped:
                 class_name = stripped[6 : stripped.find("(")].strip()                bases = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if bases:
-                    bases = ", ".join(b.strip() for b in bases.split(","))
+                    bases = ", ".join(b.strip() for b in bases.split(", "))
                     lines.append(f"{' ' * class_indent}class {class_name}({bases}):")
                 else:
                     lines.append(f"{' ' * class_indent}class {class_name}:")
@@ -79,7 +79,7 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definitions and
             # Fix parameter formatting
             if params:
                 param_parts = []
-                for param in params.split(","):
+                for param in params.split(", "):
                     param = param.strip()
                     if ":" in param and "=" in param:                        p_name, rest = param.split(":", 1)                        type_hint, default = rest.split("=", 1)
                         param = (

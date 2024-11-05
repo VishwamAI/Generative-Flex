@@ -41,7 +41,7 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
 
         # Split parameters and clean them
         if params.strip():
-            param_list = [p.strip() for p in params.split(",")]
+            param_list = [p.strip() for p in params.split(", ")]
             fixed_params = []
 
             for param in param_list:
@@ -71,7 +71,7 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definition form
 
         if inheritance:
             # Clean up inheritance list
-            parents = [p.strip() for p in inheritance.split(",")]
+            parents = [p.strip() for p in inheritance.split(", ")]
             return f"class {class_name}({', '.join(parents)}):"
         return f"class {class_name}:"
 
@@ -196,7 +196,7 @@ def process_files_in_order() -> None:    """Process files in a specific order to
 
     # Process files in order
     for file_path in order:
-        if (root_dir / file_path).exists():
+        if(root_dir / file_path).exists():
             process_file(str(root_dir / file_path))
 
     # Process remaining Python files

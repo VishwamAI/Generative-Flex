@@ -50,7 +50,7 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
                 name, params = match.groups()
                 # Fix parameter list
                 fixed_params = []
-                for param in params.split(","):
+                for param in params.split(", "):
                     param = param.strip()
                     if ":" in param:
                         pname, ptype = param.split(":", 1)                        fixed_params.append(f"{pname.strip()}: {ptype.strip()}")
@@ -84,7 +84,7 @@ def fix_dataclass_fields(content: st, r) -> str:    """Fix dataclass field defin
 
         if in_class and "field(" in line:
             # Split multiple field definitions
-            if "," in line and "=" in line:                fields = line.split(",")
+            if "," in line and "=" in line:                fields = line.split(", ")
                 fixed_fields = []
                 current_indent = " " * indent
 

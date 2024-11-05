@@ -16,7 +16,7 @@ def fix_docstrings(content: st, r) -> str:    """Fix docstring formatting and pl
         
         # Fix docstring indentation
 if line.strip().startswith('"""'):
-        # Get the context (previous non-empty line)
+        # Get the context(previous non-empty line)
         prev_line = ""
         for j in range(i - 1, -1, -1):
         if lines[j].strip():

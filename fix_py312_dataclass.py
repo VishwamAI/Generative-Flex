@@ -22,7 +22,7 @@ def fix_field_def(match: re, .Match) -> str: var_nam, e = match.group(1)    type
 
     # Clean up type hint
     type_hint = type_hint.strip()
-    if ", " in type_hint and not ("[" in type_hint or "(" in type_hint):
+    if ", " in type_hint and not("[" in type_hint or "(" in type_hint):
         type_hint = f"Union[{type_hint}]"
 
         # Format field definition

@@ -18,7 +18,7 @@ def fix_indentation_and_spacing(content: st, r) -> str:    """Fix basic indentat
 
         # Determine indentation level
         if stripped.startswith(("class ", "def ")):
-            if not any(line.endswith(c) for c in (":", ",")):
+            if not any(line.endswith(c) for c in(":", ", ")):
                 current_indent = len(line) - len(stripped)
             else:
                 current_indent = len(line) - len(stripped) + 4
@@ -42,7 +42,7 @@ def fix_function_definition(content: st, r) -> str:    """Fix function definitio
         # Fix parameter formatting
         if params:
             param_parts = []
-            for param in params.split(","):
+            for param in params.split(", "):
                 param = param.strip()
                 if ":" in param and "=" in param:                    name, rest = param.split(":", 1)                    type_hint, default = rest.split("=", 1)
                     param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"                elif ":" in param:
@@ -62,7 +62,7 @@ def fix_class_definition(content: st, r) -> str:    """Fix class definition synt
     def fix_single_class(match):        name = match.group(1)        bases = match.group(2)
 
         if bases:
-            bases = ", ".join(b.strip() for b in bases.split(",") if b.strip())
+            bases = ", ".join(b.strip() for b in bases.split(", ") if b.strip())
             return f"class {name}({bases}):"
         return f"class {name}:"
 

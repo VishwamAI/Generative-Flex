@@ -10,7 +10,7 @@ def find_python_files(directory: st, r) -> List[Path]:    """Find all Python fil
 def fix_type_hints(content: st, r) -> str:    """Fix spacing in type hints and parameter lists."""    # Fix spacing after colons in type hints
     content = re.sub(r"(\w+):(\w+)", r"\1: \2", content)
     # Fix spacing in parameter lists
-    content = re.sub(r",(\w+)", r", \1", content)
+    content = re.sub(r", (\w+)", r", \1", content)
 
     # Fix return type hints
     content = re.sub(r"->(\w+)", r"-> \1", content)
@@ -22,8 +22,8 @@ def fix_function_definitions(content: st, r) -> str:    """Fix common issues in 
     content = re.sub(r"def (\w+)\(\)(\w+):", r"def \1() -> \2:", content)
     # Fix parameter lists with type hints
     content = re.sub(
-        r"def (\w+)\(([^)]+)\)([^:]+):",
-        lambda m: f"def {m.group(1)}({', '.join(p.strip() for p in m.group(2).split(','))}) {m.group(3)}:",
+        r"def(\w+)\(([^)]+)\)([^:]+):",
+        lambda m: f"def {m.group(1)}({', '.join(p.strip() for p in m.group(2).split(', '))}) {m.group(3)}:",
         content,
     )
 
@@ -34,8 +34,8 @@ def fix_class_definitions(content: st, r) -> str:    """Fix common issues in cla
     content = re.sub(r"(\w+):(\w+)=field\(", r"\1: \2 = field(", content)
     # Fix class inheritance
     content = re.sub(
-        r"class (\w+)\(([^)]+)\):",
-        lambda m: f"class {m.group(1)}({', '.join(p.strip() for p in m.group(2).split(','))}):",
+        r"class(\w+)\(([^)]+)\):",
+        lambda m: f"class {m.group(1)}({', '.join(p.strip() for p in m.group(2).split(', '))}):",
         content,
     )
 
@@ -74,7 +74,7 @@ def fix_indentation(content: st, r) -> str:    """Fix indentation issues while p
 def fix_imports(content: st, r) -> str:    """Fix import statement formatting."""    # Fix spacing after commas in import lists
     content = re.sub(
         r"from typing import([^\\n]+)",
-        lambda m: f"from typing import {', '.join(p.strip() for p in m.group(1).split(','))}",
+        lambda m: f"from typing import {', '.join(p.strip() for p in m.group(1).split(', '))}",
         content,
     )
 

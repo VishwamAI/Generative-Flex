@@ -66,7 +66,7 @@ def fix_single_function(lines: List, [str]) -> List[str]:    """Fix a single fun
     for param in params:
         param = param.strip()
         # Remove extra commas
-        param = re.sub(r",+", ",", param)
+        param = re.sub(r", +", ", ", param)
         # Fix type hint spacing
         if ":" in param:
             name, type_hint = param.split(":", 1)            param = f"{name.strip()}: {type_hint.strip()}"        fixed_params.append(param)
@@ -74,7 +74,7 @@ def fix_single_function(lines: List, [str]) -> List[str]:    """Fix a single fun
     # Fix return type
     if "->" in return_part:
         # Remove extra commas in return type
-        return_part = re.sub(r"->\s*,\s*", "-> ", return_part)
+        return_part = re.sub(r"->\s*, \s*", "-> ", return_part)
         # Fix None return type
         return_part = re.sub(r"-> None:", r") -> None:", return_part)        # Fix general return type format
         if not return_part.endswith(":"):
@@ -103,7 +103,7 @@ def fix_class_methods(content: st, r) -> str:    """Fix class method indentation
             if "(" in stripped:
                 class_def = stripped.split("(", 1)
                 if ",," in class_def[1]:
-                    class_def[1] = class_def[1].replace(",,", ",")
+                    class_def[1] = class_def[1].replace(", ", ", ")
                 line = " " * current_indent + "(".join(class_def)
         elif in_class and current_indent <= class_indent and stripped:            in_class = False
 

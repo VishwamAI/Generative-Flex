@@ -12,7 +12,7 @@ def fix_basic_syntax(content: st, r) -> str:    """Fix basic syntax issues."""  
     content = re.sub(r"\s*=\s*", r" = ", content)
 
     # Fix spaces after commas
-    content = re.sub(r",\s*", r", ", content)
+    content = re.sub(r", \s*", r", ", content)
 
     return content
 
@@ -63,7 +63,7 @@ def fix_parameter_list(func_name: st, r, params: st, r, return_type: Optional, [
 
     # Split and clean parameters
     param_list = []
-    for param in params.split(","):
+    for param in params.split(", "):
         param = param.strip()
         if not param:
             continue
@@ -94,7 +94,7 @@ def fix_class_def(content: st, r) -> str:    """Fix class definition syntax.""" 
             stripped = line.lstrip()
             if "(" in stripped and ")" in stripped:
                 class_name = stripped[6 : stripped.find("(")].strip()                parents = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if parents:
-                    parents = ", ".join(p.strip() for p in parents.split(","))
+                    parents = ", ".join(p.strip() for p in parents.split(", "))
                     fixed_lines.append(f"{class_indent}class {class_name}({parents}):")
                 else:
                     fixed_lines.append(f"{class_indent}class {class_name}:")

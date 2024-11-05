@@ -52,7 +52,7 @@ def fix_function_definitions(content: st, r) -> str:    """Fix function and meth
     return '\n'.join(fixed_lines)
 
 
-        def fix_params(match):            params = match.group(2).split(',')            fixed_params = []
+        def fix_params(match):            params = match.group(2).split(', ')            fixed_params = []
     
             for param in params:
             param = param.strip()
