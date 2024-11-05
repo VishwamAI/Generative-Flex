@@ -12,9 +12,11 @@ import jax.numpy as jnp
 from flax import linen as nn
 from flax import struct
 
+
 @struct.dataclass
 class KnowledgeConfig:
     """Configuration for knowledge retrieval system."""
+
     embedding_size: int = struct.field(default=512)
     num_retrievers: int = struct.field(default=2)
     max_chunks: int = struct.field(default=10)
@@ -27,16 +29,20 @@ class KnowledgeConfig:
         default_factory=lambda: ['text', 'image', 'audio', 'video']
     )
 
+
 class KnowledgeRetriever(nn.Module):
     """Knowledge retriever with real-time updates."""
+
     config: KnowledgeConfig
 
     def setup(self):
         """Initialize components."""
         self.embedder = nn.Dense(self.config.embedding_size)
         self.knowledge_store = self.variable(
-            'cache', 'knowledge',
-            jnp.zeros, (self.config.max_chunks, self.config.embedding_size)
+            'cache',
+            'knowledge',
+            jnp.zeros,
+            (self.config.max_chunks, self.config.embedding_size),
         )
         self.store_index = self.variable('cache', 'index', lambda: 0)
 
@@ -58,29 +64,31 @@ class KnowledgeRetriever(nn.Module):
         query_norm = jnp.linalg.norm(query_flat, axis=-1, keepdims=True)
         query_normalized = query_flat / (query_norm + 1e-6)
 
-        knowledge_norm = jnp.linalg.norm(self.knowledge_store.value, axis=-1, keepdims=True)
+        knowledge_norm = jnp.linalg.norm(
+            self.knowledge_store.value, axis=-1, keepdims=True
+        )
         normalized_knowledge = self.knowledge_store.value / (knowledge_norm + 1e-6)
 
         # Compute similarity scores
         similarity = jnp.einsum(
             'be,ke->bk',
             query_normalized,  # (batch_size * seq_len, embedding_size)
-            normalized_knowledge  # (max_chunks, embedding_size)
+            normalized_knowledge,  # (max_chunks, embedding_size)
         )
 
         # Get top-k chunks
-        top_k = jnp.argsort(similarity, axis=-1)[..., -self.config.max_chunks:]
-        retrieved = jnp.take(
-            self.knowledge_store.value,
-            top_k,
-            axis=0
-        )
+        top_k = jnp.argsort(similarity, axis=-1)[..., -self.config.max_chunks :]
+        retrieved = jnp.take(self.knowledge_store.value, top_k, axis=0)
 
         # Average across chunks
-        retrieved = jnp.mean(retrieved, axis=1)  # (batch_size * seq_len, embedding_size)
+        retrieved = jnp.mean(
+            retrieved, axis=1
+        )  # (batch_size * seq_len, embedding_size)
 
         # Reshape back to include sequence dimension
-        retrieved = retrieved.reshape(batch_size, seq_length, self.config.embedding_size)
+        retrieved = retrieved.reshape(
+            batch_size, seq_length, self.config.embedding_size
+        )
 
         return retrieved
 
@@ -95,8 +103,10 @@ class KnowledgeRetriever(nn.Module):
         )
         self.store_index.value = next_index
 
+
 class KnowledgeIntegrator(nn.Module):
     """Integrates retrieved knowledge with input embeddings."""
+
     config: KnowledgeConfig
 
     def setup(self):
@@ -113,7 +123,7 @@ class KnowledgeIntegrator(nn.Module):
         self,
         inputs: Union[Dict[str, jnp.ndarray], jnp.ndarray],
         modality: str = 'text',
-        context: Optional[jnp.ndarray] = None
+        context: Optional[jnp.ndarray] = None,
     ) -> jnp.ndarray:
         """Process inputs with knowledge integration."""
         # Handle dictionary inputs
@@ -133,7 +143,9 @@ class KnowledgeIntegrator(nn.Module):
                 # Combine embeddings from different modalities
                 inputs = jnp.mean(jnp.stack(embeddings), axis=0)
             else:
-                raise ValueError(f"No valid modalities found in input. Expected one of {self.config.modalities}")
+                raise ValueError(
+                    f"No valid modalities found in input. Expected one of {self.config.modalities}"
+                )
         else:
             # Single modality input
             # Ensure 3D shape (batch, seq, hidden)
@@ -160,8 +172,7 @@ class KnowledgeIntegrator(nn.Module):
             knowledge = knowledge[:, None, :]  # Add sequence dimension
         if knowledge.shape[0] != batch_size:
             knowledge = jnp.broadcast_to(
-                knowledge,
-                (batch_size, seq_length, knowledge.shape[-1])
+                knowledge, (batch_size, seq_length, knowledge.shape[-1])
             )
 
         # Fuse knowledge with input
@@ -182,6 +193,7 @@ class KnowledgeIntegrator(nn.Module):
         if embeddings:
             combined = jnp.mean(jnp.stack(embeddings), axis=0)
             self.retriever.update(combined)
+
 
 class RealTimeUpdater:
     """Handles real-time updates to the knowledge base."""
@@ -206,8 +218,10 @@ class RealTimeUpdater:
                 self.knowledge_retriever.update_cache(key, new_knowledge)
             self.update_counter = 0
 
+
 class KnowledgeAugmentedTransformer(nn.Module):
     """Transformer architecture with integrated knowledge retrieval."""
+
     config: KnowledgeConfig
 
     def setup(self):
@@ -215,9 +229,11 @@ class KnowledgeAugmentedTransformer(nn.Module):
         self.updater = RealTimeUpdater(self.config)
         self.updater.initialize(self.knowledge_integrator.retriever)
 
-    def __call__(self,
-                 inputs: Dict[str, jnp.ndarray],
-                 context: Optional[Dict[str, jnp.ndarray]] = None) -> jnp.ndarray:
+    def __call__(
+        self,
+        inputs: Dict[str, jnp.ndarray],
+        context: Optional[Dict[str, jnp.ndarray]] = None,
+    ) -> jnp.ndarray:
         # Integrate knowledge with inputs
         enhanced_embedding = self.knowledge_integrator(inputs, context)
 

@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import math
 
+
 class MultiHeadAttention(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -44,7 +45,9 @@ class MultiHeadAttention(nn.Module):
         attention_scores = torch.matmul(q, k.transpose(-2, -1)) / self.scale
 
         if attention_mask is not None:
-            attention_scores = attention_scores.masked_fill(attention_mask == 0, float('-inf'))
+            attention_scores = attention_scores.masked_fill(
+                attention_mask == 0, float('-inf')
+            )
 
         attention_probs = torch.softmax(attention_scores, dim=-1)
         attention_probs = self.dropout(attention_probs)
@@ -55,16 +58,19 @@ class MultiHeadAttention(nn.Module):
 
         return self.o_proj(context)
 
+
 class TransformerBlock(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.attention = MultiHeadAttention(config)
         self.feed_forward = nn.Sequential(
-            nn.Linear(config.hidden_size, config.hidden_size * 4),  # Standard MLP dimension is 4x hidden size
+            nn.Linear(
+                config.hidden_size, config.hidden_size * 4
+            ),  # Standard MLP dimension is 4x hidden size
             nn.GELU(),
             nn.Dropout(config.hidden_dropout_prob),
             nn.Linear(config.hidden_size * 4, config.hidden_size),
-            nn.Dropout(config.hidden_dropout_prob)
+            nn.Dropout(config.hidden_dropout_prob),
         )
         self.attention_norm = nn.LayerNorm(config.hidden_size)
         self.feed_forward_norm = nn.LayerNorm(config.hidden_size)
@@ -73,7 +79,9 @@ class TransformerBlock(nn.Module):
     def forward(self, x, attention_mask=None, layer_id=None, use_cache=True):
         # Make forward compatible with gradient checkpointing
         def attention_module(x):
-            return self.attention(self.attention_norm(x), attention_mask, layer_id if use_cache else None)
+            return self.attention(
+                self.attention_norm(x), attention_mask, layer_id if use_cache else None
+            )
 
         def feed_forward_module(x):
             return self.feed_forward(self.feed_forward_norm(x))
@@ -81,7 +89,9 @@ class TransformerBlock(nn.Module):
         if self.gradient_checkpointing and self.training:
             attention_output = torch.utils.checkpoint.checkpoint(attention_module, x)
             x = x + attention_output
-            feed_forward_output = torch.utils.checkpoint.checkpoint(feed_forward_module, x)
+            feed_forward_output = torch.utils.checkpoint.checkpoint(
+                feed_forward_module, x
+            )
         else:
             attention_output = attention_module(x)
             x = x + attention_output
@@ -89,16 +99,19 @@ class TransformerBlock(nn.Module):
 
         return x + feed_forward_output
 
+
 class BaseTransformer(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config
         self.embedding = nn.Embedding(config.vocab_size, config.hidden_size)
-        self.position_embedding = nn.Embedding(config.max_position_embeddings, config.hidden_size)
+        self.position_embedding = nn.Embedding(
+            config.max_position_embeddings, config.hidden_size
+        )
 
-        self.layers = nn.ModuleList([
-            TransformerBlock(config) for _ in range(config.num_hidden_layers)
-        ])
+        self.layers = nn.ModuleList(
+            [TransformerBlock(config) for _ in range(config.num_hidden_layers)]
+        )
 
         self.final_norm = nn.LayerNorm(config.hidden_size)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
@@ -108,7 +121,9 @@ class BaseTransformer(nn.Module):
         batch_size, seq_length = input_ids.shape
 
         if position_ids is None:
-            position_ids = torch.arange(seq_length, dtype=torch.long, device=input_ids.device)
+            position_ids = torch.arange(
+                seq_length, dtype=torch.long, device=input_ids.device
+            )
             position_ids = position_ids.unsqueeze(0).expand(batch_size, -1)
 
         embeddings = self.embedding(input_ids)
@@ -119,12 +134,7 @@ class BaseTransformer(nn.Module):
 
         for i, layer in enumerate(self.layers):
             if self.gradient_checkpointing and self.training:
-                x = torch.utils.checkpoint.checkpoint(
-                    layer,
-                    x,
-                    attention_mask,
-                    i
-                )
+                x = torch.utils.checkpoint.checkpoint(layer, x, attention_mask, i)
             else:
                 x = layer(x, attention_mask, layer_id=i)
 

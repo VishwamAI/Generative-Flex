@@ -1,6 +1,7 @@
 """
 MMMU Dataset loader with multimodal support
 """
+
 import os
 import json
 import logging
@@ -18,27 +19,34 @@ logger = logging.getLogger(__name__)
 # Constants
 MMMU_SUBJECTS = ["Math", "Computer_Science"]
 
+
 class MMUDataset(Dataset):
     """Dataset class for MMMU with multimodal support"""
 
     def __init__(
         self,
         subjects: List[str] = None,
-        split: str = 'validation',
+        split: str = "validation",
         max_length: int = 512,
-        tokenizer = None
+        tokenizer=None,
     ):
         if subjects is None:
             subjects = MMMU_SUBJECTS
 
         self.tokenizer = tokenizer
         self.max_length = max_length
-        self.transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Lambda(lambda x: x.repeat(3, 1, 1) if x.shape[0] == 1 else x),  # Handle grayscale images
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
+        self.transform = transforms.Compose(
+            [
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Lambda(
+                    lambda x: x.repeat(3, 1, 1) if x.shape[0] == 1 else x
+                ),  # Handle grayscale images
+                transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+                ),
+            ]
+        )
 
         self.datasets = []
         self.lengths = []
@@ -60,25 +68,36 @@ class MMUDataset(Dataset):
 
                         # Process text data
                         if self.tokenizer:
-                            options_text = " ".join([f"({chr(65+i)}) {opt}" for i, opt in enumerate(example['options'])])
+                            options_text = " ".join(
+                                [
+                                    f"({chr(65+i)}) {opt}"
+                                    for i, opt in enumerate(example["options"])
+                                ]
+                            )
                             text = f"Question: {example['question']}\nOptions: {options_text}"
 
                             # Convert to tensors
                             encoding = self.tokenizer(
                                 text,
                                 max_length=self.max_length,
-                                padding='max_length',
+                                padding="max_length",
                                 truncation=True,
-                                return_tensors='pt'
+                                return_tensors="pt",
                             )
-                            processed_example['input_ids'] = encoding['input_ids'].squeeze(0)
-                            processed_example['attention_mask'] = encoding['attention_mask'].squeeze(0)
-                            processed_example['labels'] = torch.tensor(ord(example['answer']) - ord('A'), dtype=torch.long)
+                            processed_example["input_ids"] = encoding[
+                                "input_ids"
+                            ].squeeze(0)
+                            processed_example["attention_mask"] = encoding[
+                                "attention_mask"
+                            ].squeeze(0)
+                            processed_example["labels"] = torch.tensor(
+                                ord(example["answer"]) - ord("A"), dtype=torch.long
+                            )
 
                         # Process images if available
                         images = []
                         for i in range(1, 8):
-                            img_key = f'image_{i}'
+                            img_key = f"image_{i}"
                             if img_key in example and example[img_key] is not None:
                                 try:
                                     image = example[img_key]
@@ -86,12 +105,16 @@ class MMUDataset(Dataset):
                                         image = self.transform(image)
                                     images.append(image)
                                 except Exception as e:
-                                    logger.warning(f"Failed to process {img_key}: {str(e)}")
+                                    logger.warning(
+                                        f"Failed to process {img_key}: {str(e)}"
+                                    )
                                     images.append(torch.zeros(3, 224, 224))
                             else:
                                 images.append(torch.zeros(3, 224, 224))
 
-                        processed_example['images'] = torch.stack(images[:7])  # Ensure exactly 7 images
+                        processed_example["images"] = torch.stack(
+                            images[:7]
+                        )  # Ensure exactly 7 images
                         processed_examples.append(processed_example)
 
                     except Exception as e:
@@ -119,7 +142,10 @@ class MMUDataset(Dataset):
         """Get a single example with proper tensor handling"""
         # Find the correct dataset and local index
         dataset_idx = 0
-        while dataset_idx < len(self.cumulative_lengths) and idx >= self.cumulative_lengths[dataset_idx]:
+        while (
+            dataset_idx < len(self.cumulative_lengths)
+            and idx >= self.cumulative_lengths[dataset_idx]
+        ):
             dataset_idx += 1
 
         if dataset_idx == 0:
@@ -133,56 +159,61 @@ class MMUDataset(Dataset):
 
             # Ensure all tensors are on CPU
             return {
-                'input_ids': example['input_ids'].cpu(),
-                'attention_mask': example['attention_mask'].cpu(),
-                'labels': example['labels'].cpu(),
-                'images': example['images'].cpu() if 'images' in example else torch.zeros(7, 3, 224, 224),
-                'metadata': example.get('metadata', {})
+                "input_ids": example["input_ids"].cpu(),
+                "attention_mask": example["attention_mask"].cpu(),
+                "labels": example["labels"].cpu(),
+                "images": (
+                    example["images"].cpu()
+                    if "images" in example
+                    else torch.zeros(7, 3, 224, 224)
+                ),
+                "metadata": example.get("metadata", {}),
             }
         except Exception as e:
             logger.error(f"Error retrieving example {idx}: {str(e)}")
             # Return a default example in case of error
             return {
-                'input_ids': torch.zeros(self.max_length, dtype=torch.long),
-                'attention_mask': torch.zeros(self.max_length, dtype=torch.long),
-                'labels': torch.tensor(0, dtype=torch.long),
-                'images': torch.zeros(7, 3, 224, 224),
-                'metadata': {}
+                "input_ids": torch.zeros(self.max_length, dtype=torch.long),
+                "attention_mask": torch.zeros(self.max_length, dtype=torch.long),
+                "labels": torch.tensor(0, dtype=torch.long),
+                "images": torch.zeros(7, 3, 224, 224),
+                "metadata": {},
             }
+
 
 def collate_mmmu_batch(examples):
     """Collate batch with proper tensor handling"""
     try:
         # Initialize batch dictionary
         batch = {
-            'input_ids': [],
-            'attention_mask': [],
-            'labels': [],
-            'images': [],
-            'metadata': []
+            "input_ids": [],
+            "attention_mask": [],
+            "labels": [],
+            "images": [],
+            "metadata": [],
         }
 
         # Collect tensors from each example
         for example in examples:
             try:
-                batch['input_ids'].append(example['input_ids'])
-                batch['attention_mask'].append(example['attention_mask'])
-                batch['labels'].append(example['labels'])
-                batch['images'].append(example['images'])
-                batch['metadata'].append(example['metadata'])
+                batch["input_ids"].append(example["input_ids"])
+                batch["attention_mask"].append(example["attention_mask"])
+                batch["labels"].append(example["labels"])
+                batch["images"].append(example["images"])
+                batch["metadata"].append(example["metadata"])
             except Exception as e:
                 logger.error(f"Error processing example in batch: {str(e)}")
                 # Skip problematic examples
                 continue
 
         # Stack tensors
-        if batch['input_ids']:  # Only process if we have valid examples
+        if batch["input_ids"]:  # Only process if we have valid examples
             return {
-                'input_ids': torch.stack(batch['input_ids']),
-                'attention_mask': torch.stack(batch['attention_mask']),
-                'labels': torch.stack(batch['labels']),
-                'images': torch.stack(batch['images']),
-                'metadata': batch['metadata']
+                "input_ids": torch.stack(batch["input_ids"]),
+                "attention_mask": torch.stack(batch["attention_mask"]),
+                "labels": torch.stack(batch["labels"]),
+                "images": torch.stack(batch["images"]),
+                "metadata": batch["metadata"],
             }
         else:
             raise ValueError("No valid examples in batch")
@@ -191,13 +222,14 @@ def collate_mmmu_batch(examples):
         logger.error(f"Error collating batch: {str(e)}")
         raise
 
+
 def create_mmmu_dataloaders(
     subjects: Optional[List[str]] = None,
-    tokenizer = None,
+    tokenizer=None,
     batch_size: int = 16,
     max_length: int = 512,
     num_workers: int = 0,
-    pin_memory: bool = False
+    pin_memory: bool = False,
 ) -> Tuple[DataLoader, DataLoader, DataLoader]:
     """Create dataloaders with proper tensor handling"""
     if subjects is None:
@@ -210,28 +242,28 @@ def create_mmmu_dataloaders(
                 subjects=subjects,
                 split=split,
                 tokenizer=tokenizer,
-                max_length=max_length
+                max_length=max_length,
             )
-            for split in ['dev', 'validation', 'test']
+            for split in ["dev", "validation", "test"]
         }
 
         # Create dataloaders
         dataloaders = {}
-        for split in ['dev', 'validation', 'test']:
+        for split in ["dev", "validation", "test"]:
             dataloaders[split] = DataLoader(
                 datasets[split],
                 batch_size=batch_size,
-                shuffle=(split == 'train'),
+                shuffle=(split == "train"),
                 num_workers=num_workers,
                 pin_memory=pin_memory,
-                collate_fn=collate_mmmu_batch
+                collate_fn=collate_mmmu_batch,
             )
-            logger.info(f"Created {split} dataloader with {len(datasets[split])} examples")
+            logger.info(
+                f"Created {split} dataloader with {len(datasets[split])} examples"
+            )
 
-        return dataloaders['dev'], dataloaders['validation'], dataloaders['test']
+        return dataloaders["dev"], dataloaders["validation"], dataloaders["test"]
 
     except Exception as e:
         logger.error(f"Error creating dataloaders: {str(e)}")
         raise
-
-

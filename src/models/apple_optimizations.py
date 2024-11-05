@@ -14,9 +14,11 @@ import flax.linen as nn
 from flax import struct
 import numpy as np
 
+
 @struct.dataclass
 class OptimizationConfig:
     """Configuration for Apple-style optimizations."""
+
     # Model architecture
     hidden_size: int = struct.field(default=512)
     num_attention_heads: int = struct.field(default=8)
@@ -53,8 +55,10 @@ class OptimizationConfig:
     use_metal: bool = struct.field(default=True)
     use_neural_engine: bool = struct.field(default=True)
 
+
 class BlockWiseQuantization(nn.Module):
     """Implements block-wise int4 quantization."""
+
     block_size: int
     num_bits: int
     quantization_mode: str = 'linear_symmetric'
@@ -75,7 +79,7 @@ class BlockWiseQuantization(nn.Module):
         # Compute statistics based on quantization mode
         if self.quantization_mode == 'linear_symmetric':
             max_abs = jnp.max(jnp.abs(x_reshaped), axis=1, keepdims=True)
-            scale = max_abs / (2**(self.num_bits - 1) - 1)
+            scale = max_abs / (2 ** (self.num_bits - 1) - 1)
             zero_point = jnp.zeros_like(scale)
         else:  # linear
             x_min = jnp.min(x_reshaped, axis=1, keepdims=True)
@@ -91,25 +95,31 @@ class BlockWiseQuantization(nn.Module):
         scale = jnp.where(scale == 0, 1.0, scale)
 
         # Quantize
-        x_quant = jnp.clip(jnp.round((x_reshaped - zero_point) / scale),
-                          -2**(self.num_bits - 1),
-                          2**(self.num_bits - 1) - 1)
+        x_quant = jnp.clip(
+            jnp.round((x_reshaped - zero_point) / scale),
+            -(2 ** (self.num_bits - 1)),
+            2 ** (self.num_bits - 1) - 1,
+        )
         x_quant = x_quant.astype(jnp.int8)
 
         return x_quant, scale, zero_point
 
-    def dequantize(self, x_quant: jnp.ndarray, scale: jnp.ndarray, zero_point: jnp.ndarray) -> jnp.ndarray:
+    def dequantize(
+        self, x_quant: jnp.ndarray, scale: jnp.ndarray, zero_point: jnp.ndarray
+    ) -> jnp.ndarray:
         """Dequantize int4 tensor back to float."""
         # Reshape scale and zero_point to match x_quant dimensions
         scale = scale.reshape(-1, 1)  # (N, 1)
         zero_point = zero_point.reshape(-1, 1)  # (N, 1)
 
         # Dequantize and reshape back to original shape
-        x_dequant = (x_quant * scale + zero_point)
+        x_dequant = x_quant * scale + zero_point
         return x_dequant.reshape(self.state.value)
+
 
 class StatefulKeyValueCache(nn.Module):
     """Implements stateful key-value cache for efficient inference."""
+
     num_heads: int
     head_dim: int
     max_sequence_length: int = 2048
@@ -128,12 +138,18 @@ class StatefulKeyValueCache(nn.Module):
         value_shape = (batch_size, max_length, hidden_size)
 
         # Use variables for stateful cache
-        self.key_cache = self.variable('cache', 'key', jnp.zeros, key_shape, dtype=getattr(jnp, self.dtype))
-        self.value_cache = self.variable('cache', 'value', jnp.zeros, value_shape, dtype=getattr(jnp, self.dtype))
+        self.key_cache = self.variable(
+            'cache', 'key', jnp.zeros, key_shape, dtype=getattr(jnp, self.dtype)
+        )
+        self.value_cache = self.variable(
+            'cache', 'value', jnp.zeros, value_shape, dtype=getattr(jnp, self.dtype)
+        )
         self.current_length = self.variable('cache', 'length', lambda: 0)
         self.valid_mask = self.variable('cache', 'mask', jnp.zeros, (max_length,), bool)
 
-    def update(self, key: jnp.ndarray, value: jnp.ndarray, position: int = None) -> None:
+    def update(
+        self, key: jnp.ndarray, value: jnp.ndarray, position: int = None
+    ) -> None:
         """Update cache with new key-value pairs."""
         if position is None:
             position = self.current_length.value
@@ -159,13 +175,17 @@ class StatefulKeyValueCache(nn.Module):
 
             # Update only the valid portion
             self.key_cache.value = self.key_cache.value.at[:, position:end_pos].set(
-                key[:, :actual_len])
+                key[:, :actual_len]
+            )
             self.value_cache.value = self.value_cache.value.at[:, position:end_pos].set(
-                value[:, :actual_len])
+                value[:, :actual_len]
+            )
             self.valid_mask.value = self.valid_mask.value.at[position:end_pos].set(True)
             self.current_length.value = end_pos
 
-    def get(self, start: int = 0, end: Optional[int] = None) -> Tuple[jnp.ndarray, jnp.ndarray]:
+    def get(
+        self, start: int = 0, end: Optional[int] = None
+    ) -> Tuple[jnp.ndarray, jnp.ndarray]:
         """Retrieve cached key-value pairs."""
         if end is None:
             end = self.current_length.value
@@ -183,8 +203,10 @@ class StatefulKeyValueCache(nn.Module):
 
         return key, value
 
+
 class PrivacyPreservingLayer(nn.Module):
     """Implements differential privacy for model outputs."""
+
     noise_multiplier: float
     l2_norm_clip: float
     hidden_size: int
@@ -198,7 +220,7 @@ class PrivacyPreservingLayer(nn.Module):
             epsilon=1e-12,  # Default epsilon
             use_bias=True,
             use_scale=True,
-            name='layer_norm'
+            name='layer_norm',
         )
 
     @nn.compact
@@ -218,36 +240,35 @@ class PrivacyPreservingLayer(nn.Module):
         # Add noise only during training with differential privacy
         if training and self.use_privacy_preserving:
             # Generate noise with matching batch size
-            noise = jax.random.normal(
-                self.make_rng('dropout'),
-                x.shape
-            ) * self.noise_multiplier
+            noise = (
+                jax.random.normal(self.make_rng('dropout'), x.shape)
+                * self.noise_multiplier
+            )
             x = x + noise
 
         # Clip gradients while maintaining batch dimension
         x = jnp.clip(x, -self.l2_norm_clip, self.l2_norm_clip)
         return x
 
+
 class FlexibleInputProcessor(nn.Module):
     """Handles flexible-shaped inputs for efficient processing."""
+
     config: OptimizationConfig
 
     def setup(self):
         self.position_embedding = nn.Embed(
             num_embeddings=self.config.max_sequence_length,
-            features=self.config.head_dim
+            features=self.config.head_dim,
         )
         # Initialize projection layer in setup
         self.position_projection = nn.Dense(
-            features=self.config.hidden_size,
-            use_bias=True
+            features=self.config.hidden_size, use_bias=True
         )
 
     @nn.compact
     def __call__(
-        self,
-        inputs: jnp.ndarray,
-        attention_mask: Optional[jnp.ndarray] = None
+        self, inputs: jnp.ndarray, attention_mask: Optional[jnp.ndarray] = None
     ) -> Tuple[jnp.ndarray, jnp.ndarray]:
         """Process inputs with flexible shapes."""
         # Handle variable sequence length
@@ -257,17 +278,20 @@ class FlexibleInputProcessor(nn.Module):
 
         batch_size, seq_length, hidden_size = inputs.shape
         if seq_length > self.config.max_sequence_length:
-            raise ValueError(f"Input sequence length {seq_length} exceeds maximum {self.config.max_sequence_length}")
+            raise ValueError(
+                f"Input sequence length {seq_length} exceeds maximum {self.config.max_sequence_length}"
+            )
 
         # Generate position embeddings
         positions = jnp.arange(seq_length)
         position_embeddings = self.position_embedding(positions)
         # Reshape position embeddings to match input shape
-        position_embeddings = position_embeddings.reshape(1, seq_length, self.config.head_dim)
+        position_embeddings = position_embeddings.reshape(
+            1, seq_length, self.config.head_dim
+        )
         # Broadcast to match input dimensions
         position_embeddings = jnp.broadcast_to(
-            position_embeddings,
-            (batch_size, seq_length, self.config.head_dim)
+            position_embeddings, (batch_size, seq_length, self.config.head_dim)
         )
         # Project position embeddings to match input hidden size
         position_embeddings = self.position_projection(position_embeddings)
@@ -278,12 +302,16 @@ class FlexibleInputProcessor(nn.Module):
 
         # Create causal mask for decoder
         causal_mask = jnp.tril(jnp.ones((seq_length, seq_length)))
-        attention_mask = attention_mask[:, None, None, :] * causal_mask[None, None, :, :]
+        attention_mask = (
+            attention_mask[:, None, None, :] * causal_mask[None, None, :, :]
+        )
 
         return inputs + position_embeddings, attention_mask
 
+
 class AppleOptimizedTransformer(nn.Module):
     """Transformer with Apple-style optimizations."""
+
     config: OptimizationConfig
 
     def setup(self):
@@ -294,8 +322,7 @@ class AppleOptimizedTransformer(nn.Module):
 
         # Initialize embedding layer
         self.embedding = nn.Embed(
-            num_embeddings=self.config.vocab_size,
-            features=self.config.hidden_size
+            num_embeddings=self.config.vocab_size, features=self.config.hidden_size
         )
 
         # Calculate attention dimensions
@@ -316,8 +343,7 @@ class AppleOptimizedTransformer(nn.Module):
         # Optional components based on config
         if self.config.use_int4_quantization:
             self.quantization = BlockWiseQuantization(
-                block_size=self.config.block_size,
-                num_bits=4
+                block_size=self.config.block_size, num_bits=4
             )
 
         if self.config.use_kv_cache:
@@ -326,18 +352,22 @@ class AppleOptimizedTransformer(nn.Module):
                 head_dim=self.head_dim,
                 max_sequence_length=self.config.max_sequence_length,
                 dtype=self.config.cache_dtype,
-                cache_size_multiplier=self.config.cache_size_multiplier
+                cache_size_multiplier=self.config.cache_size_multiplier,
             )
 
         if self.config.use_privacy_preserving:
             self.privacy_layer = PrivacyPreservingLayer(
                 hidden_size=self.config.hidden_size,
                 noise_multiplier=self.config.noise_multiplier,
-                l2_norm_clip=self.config.l2_norm_clip
+                l2_norm_clip=self.config.l2_norm_clip,
             )
 
-    def __call__(self, hidden_states: jnp.ndarray, attention_mask: Optional[jnp.ndarray] = None,
-                 training: bool = False) -> jnp.ndarray:
+    def __call__(
+        self,
+        hidden_states: jnp.ndarray,
+        attention_mask: Optional[jnp.ndarray] = None,
+        training: bool = False,
+    ) -> jnp.ndarray:
         """Forward pass with optimizations."""
         # Handle dictionary input
         if isinstance(hidden_states, dict):
@@ -346,7 +376,9 @@ class AppleOptimizedTransformer(nn.Module):
             elif 'text' in hidden_states:
                 hidden_states = hidden_states['text']
             else:
-                raise ValueError("Input dictionary must contain 'input_ids' or 'text' key")
+                raise ValueError(
+                    "Input dictionary must contain 'input_ids' or 'text' key"
+                )
 
         # Get input dimensions and reshape if necessary
         if len(hidden_states.shape) == 2:
@@ -380,7 +412,9 @@ class AppleOptimizedTransformer(nn.Module):
         value = value.reshape(batch_size, seq_length, self.num_heads, self.head_dim)
 
         # Transpose for attention computation
-        query = jnp.transpose(query, (0, 2, 1, 3))  # (batch_size, num_heads, seq_length, head_dim)
+        query = jnp.transpose(
+            query, (0, 2, 1, 3)
+        )  # (batch_size, num_heads, seq_length, head_dim)
         key = jnp.transpose(key, (0, 2, 1, 3))
         value = jnp.transpose(value, (0, 2, 1, 3))
 
@@ -393,7 +427,9 @@ class AppleOptimizedTransformer(nn.Module):
             attention_mask = jnp.ones((batch_size, seq_length))
 
         # Expand attention mask for broadcasting
-        attention_mask = attention_mask[:, None, None, :]  # (batch_size, 1, 1, seq_length)
+        attention_mask = attention_mask[
+            :, None, None, :
+        ]  # (batch_size, 1, 1, seq_length)
 
         # Compute attention scores with scaled dot product
         scale = jnp.sqrt(self.head_dim).astype(hidden_states.dtype)
@@ -421,7 +457,9 @@ class AppleOptimizedTransformer(nn.Module):
 
         return output
 
-    def compute_key_value(self, hidden_states: jnp.ndarray) -> Tuple[jnp.ndarray, jnp.ndarray]:
+    def compute_key_value(
+        self, hidden_states: jnp.ndarray
+    ) -> Tuple[jnp.ndarray, jnp.ndarray]:
         """Compute key and value for caching."""
         key = self.key(hidden_states)
         value = self.value(hidden_states)

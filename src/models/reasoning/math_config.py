@@ -1,6 +1,7 @@
 from transformers import PretrainedConfig
 from typing import Optional, List
 
+
 class MathReasoningConfig(PretrainedConfig):
     """Configuration class for MathReasoningModel."""
 

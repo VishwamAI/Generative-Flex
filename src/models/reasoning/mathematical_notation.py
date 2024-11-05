@@ -3,8 +3,10 @@ import torch.nn as nn
 from typing import Dict, Optional, List
 from transformers import PretrainedConfig
 
+
 class MathematicalNotationProcessor(nn.Module):
     """Processes mathematical notation and converts between different formats"""
+
     def __init__(self, config: PretrainedConfig):
         super().__init__()
         self.hidden_size = config.hidden_size
@@ -21,7 +23,9 @@ class MathematicalNotationProcessor(nn.Module):
         # Layer normalization
         self.layer_norm = nn.LayerNorm(config.hidden_size)
 
-    def forward(self, hidden_states: torch.Tensor, notation_type: str = 'latex') -> torch.Tensor:
+    def forward(
+        self, hidden_states: torch.Tensor, notation_type: str = 'latex'
+    ) -> torch.Tensor:
         """Process mathematical notation
         Args:
             hidden_states: Input tensor of shape (batch_size, seq_length, hidden_size)

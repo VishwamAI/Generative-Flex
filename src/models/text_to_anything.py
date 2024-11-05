@@ -22,9 +22,13 @@ from .apple_optimizations import AppleOptimizedTransformer
 # Add vocabulary size to support tokenization
 VOCAB_SIZE = 256  # Character-level tokenization
 
+
 class TextTokenizer:
     """Simple character-level tokenizer for text input."""
-    def __init__(self, max_length: int = 512, vocab_size: int = 50257):  # Added vocab_size parameter
+
+    def __init__(
+        self, max_length: int = 512, vocab_size: int = 50257
+    ):  # Added vocab_size parameter
         self.max_length = max_length
         self.vocab_size = vocab_size
         self.pad_token = 0
@@ -33,7 +37,9 @@ class TextTokenizer:
     def encode(self, text: str) -> jnp.ndarray:
         """Convert text to token indices."""
         # Convert to character-level tokens
-        tokens = [ord(c) % (self.vocab_size - 2) + 2 for c in text[:self.max_length-1]]  # Reserve 0,1 for pad/eos
+        tokens = [
+            ord(c) % (self.vocab_size - 2) + 2 for c in text[: self.max_length - 1]
+        ]  # Reserve 0,1 for pad/eos
         # Add EOS token
         tokens.append(self.eos_token)
         # Pad if necessary
@@ -45,11 +51,13 @@ class TextTokenizer:
 
     def decode(self, tokens: jnp.ndarray) -> str:
         """Convert token indices back to text."""
-        return ''.join(chr(t-2) for t in tokens if t > 1)  # Skip pad and eos tokens
+        return ''.join(chr(t - 2) for t in tokens if t > 1)  # Skip pad and eos tokens
+
 
 @struct.dataclass
 class GenerationConfig:
     """Configuration for text-to-anything generation."""
+
     # Model configuration
     hidden_size: int = struct.field(default=2048)
     num_attention_heads: int = struct.field(default=32)
@@ -59,11 +67,15 @@ class GenerationConfig:
     layer_norm_eps: float = struct.field(default=1e-12)  # Added for layer normalization
     deterministic: bool = struct.field(default=False)  # Added for dropout behavior
     vocab_size: int = struct.field(default=50257)  # Added for output projection
-    max_position_embeddings: int = struct.field(default=2048)  # Added to match max_sequence_length
+    max_position_embeddings: int = struct.field(
+        default=2048
+    )  # Added to match max_sequence_length
     type_vocab_size: int = struct.field(default=2)  # Added for token type embeddings
 
     # Sequence configuration
-    max_sequence_length: int = struct.field(default=2048)  # Added for position embeddings
+    max_sequence_length: int = struct.field(
+        default=2048
+    )  # Added for position embeddings
     min_sequence_length: int = struct.field(default=1)
     default_sequence_length: int = struct.field(default=512)
 
@@ -88,21 +100,29 @@ class GenerationConfig:
         default_factory=lambda: [
             "Do not generate harmful content",
             "Respect privacy and intellectual property",
-            "Be transparent about AI-generated content"
+            "Be transparent about AI-generated content",
         ]
     )
 
     # Optimization settings
     use_int4_quantization: bool = struct.field(default=True)
     use_kv_cache: bool = struct.field(default=True)
-    use_privacy_preserving: bool = struct.field(default=True)  # Added for privacy features
+    use_privacy_preserving: bool = struct.field(
+        default=True
+    )  # Added for privacy features
     block_size: int = struct.field(default=32)  # Added for quantization support
     num_key_value_heads: int = struct.field(default=8)  # Added for KV cache
     max_cache_size: int = struct.field(default=2048)  # Added for KV cache
     use_metal: bool = struct.field(default=True)  # Added for Apple Metal support
-    use_neural_engine: bool = struct.field(default=True)  # Added for Neural Engine support
-    noise_multiplier: float = struct.field(default=1.0)  # Added for privacy-preserving noise
-    l2_norm_clip: float = struct.field(default=1.0)  # Added for privacy gradient clipping
+    use_neural_engine: bool = struct.field(
+        default=True
+    )  # Added for Neural Engine support
+    noise_multiplier: float = struct.field(
+        default=1.0
+    )  # Added for privacy-preserving noise
+    l2_norm_clip: float = struct.field(
+        default=1.0
+    )  # Added for privacy gradient clipping
 
     # Cache settings
     cache_dtype: str = struct.field(default='float16')
@@ -111,41 +131,40 @@ class GenerationConfig:
     # Runtime state (mutable)
     original_shape: Optional[Tuple[int, ...]] = struct.field(default=None)
 
+
 class ModalityEncoder(nn.Module):
     """Encodes different modalities into a unified representation."""
+
     config: GenerationConfig
 
     def setup(self):
         self.tokenizer = TextTokenizer(max_length=self.config.max_length)
         self.embedding = nn.Embed(
-            num_embeddings=VOCAB_SIZE,
-            features=self.config.hidden_size
+            num_embeddings=VOCAB_SIZE, features=self.config.hidden_size
         )
         self.text_encoder = nn.Dense(self.config.hidden_size)
         self.image_encoder = nn.Conv(
-            features=self.config.hidden_size,
-            kernel_size=(3, 3),
-            padding='SAME'
+            features=self.config.hidden_size, kernel_size=(3, 3), padding='SAME'
         )
         self.audio_encoder = nn.Conv(
-            features=self.config.hidden_size,
-            kernel_size=(7,),
-            padding='SAME'
+            features=self.config.hidden_size, kernel_size=(7,), padding='SAME'
         )
         self.video_encoder = nn.Conv(
-            features=self.config.hidden_size,
-            kernel_size=(3, 3, 3),
-            padding='SAME'
+            features=self.config.hidden_size, kernel_size=(3, 3, 3), padding='SAME'
         )
         self.code_encoder = nn.Dense(self.config.hidden_size)
 
-    def _adjust_sequence_length(self, tensor: jnp.ndarray, target_length: int) -> jnp.ndarray:
+    def _adjust_sequence_length(
+        self, tensor: jnp.ndarray, target_length: int
+    ) -> jnp.ndarray:
         """Adjust sequence length of input tensor through padding or truncation."""
         curr_length = tensor.shape[1]
         if curr_length > target_length:
             return tensor[:, :target_length, :]
         elif curr_length < target_length:
-            padding = jnp.zeros((tensor.shape[0], target_length - curr_length, tensor.shape[2]))
+            padding = jnp.zeros(
+                (tensor.shape[0], target_length - curr_length, tensor.shape[2])
+            )
             return jnp.concatenate([tensor, padding], axis=1)
         return tensor
 
@@ -157,9 +176,15 @@ class ModalityEncoder(nn.Module):
         # Calculate proper sequence length (ensure it's a multiple of attention heads)
         target_seq_length = min(
             self.config.max_sequence_length,
-            ((self.config.default_sequence_length + self.config.num_attention_heads - 1)
-             // self.config.num_attention_heads
-             * self.config.num_attention_heads)
+            (
+                (
+                    self.config.default_sequence_length
+                    + self.config.num_attention_heads
+                    - 1
+                )
+                // self.config.num_attention_heads
+                * self.config.num_attention_heads
+            ),
         )
 
         if 'text' in inputs:
@@ -219,7 +244,9 @@ class ModalityEncoder(nn.Module):
                     batch_size = curr_batch_size
 
                 frames, height, width = video.shape[1:4]
-                video_flat = video.reshape(curr_batch_size, frames * height * width, video.shape[-1])
+                video_flat = video.reshape(
+                    curr_batch_size, frames * height * width, video.shape[-1]
+                )
                 video_flat = self._adjust_sequence_length(video_flat, target_seq_length)
                 encodings['video'] = self.video_encoder(video_flat)
 
@@ -247,7 +274,9 @@ class ModalityEncoder(nn.Module):
         for encoding in encodings.values():
             # Ensure consistent batch size
             if encoding.shape[0] == 1 and batch_size > 1:
-                encoding = jnp.broadcast_to(encoding, (batch_size,) + encoding.shape[1:])
+                encoding = jnp.broadcast_to(
+                    encoding, (batch_size,) + encoding.shape[1:]
+                )
 
             # Ensure consistent hidden size
             if encoding.shape[-1] != self.config.hidden_size:
@@ -259,36 +288,30 @@ class ModalityEncoder(nn.Module):
 
         # Stack and average across modalities
         combined = jnp.stack(encoded_list)
-        return jnp.mean(combined, axis=0)  # Shape: (batch_size, seq_length, hidden_size)
+        return jnp.mean(
+            combined, axis=0
+        )  # Shape: (batch_size, seq_length, hidden_size)
+
 
 class ModalityDecoder(nn.Module):
     """Decodes unified representation into different modalities."""
+
     config: GenerationConfig
 
     def setup(self):
         self.text_decoder = nn.Dense(self.config.hidden_size)
         self.image_decoder = nn.ConvTranspose(
-            features=3,  # RGB channels
-            kernel_size=(3, 3),
-            padding='SAME'
+            features=3, kernel_size=(3, 3), padding='SAME'  # RGB channels
         )
         self.audio_decoder = nn.ConvTranspose(
-            features=1,  # Mono audio
-            kernel_size=(7,),
-            padding='SAME'
+            features=1, kernel_size=(7,), padding='SAME'  # Mono audio
         )
         self.video_decoder = nn.ConvTranspose(
-            features=3,  # RGB channels
-            kernel_size=(3, 3, 3),
-            padding='SAME'
+            features=3, kernel_size=(3, 3, 3), padding='SAME'  # RGB channels
         )
         self.code_decoder = nn.Dense(self.config.hidden_size)
 
-    def __call__(
-        self,
-        hidden_states: jnp.ndarray,
-        target_modality: str
-    ) -> jnp.ndarray:
+    def __call__(self, hidden_states: jnp.ndarray, target_modality: str) -> jnp.ndarray:
         if target_modality == 'text':
             return self.text_decoder(hidden_states)
         elif target_modality == 'image':
@@ -302,8 +325,10 @@ class ModalityDecoder(nn.Module):
         else:
             raise ValueError(f"Unsupported target modality: {target_modality}")
 
+
 class ConstitutionalChecker(nn.Module):
     """Implements Constitutional AI principles for content safety."""
+
     config: GenerationConfig
 
     def setup(self):
@@ -314,7 +339,9 @@ class ConstitutionalChecker(nn.Module):
         self.alignment_layer = nn.Dense(self.config.hidden_size)
 
     @nn.compact
-    def __call__(self, content: jnp.ndarray, training: bool = False) -> Tuple[jnp.ndarray, bool]:
+    def __call__(
+        self, content: jnp.ndarray, training: bool = False
+    ) -> Tuple[jnp.ndarray, bool]:
         """Check content against constitutional principles."""
         # Analyze content for safety
         safety_features = self.content_filter(content)
@@ -325,9 +352,7 @@ class ConstitutionalChecker(nn.Module):
 
         # If unsafe, apply alignment transformation
         aligned_content = jnp.where(
-            is_safe[:, None],
-            content,
-            self.alignment_layer(content)
+            is_safe[:, None], content, self.alignment_layer(content)
         )
 
         return aligned_content, is_safe.squeeze()
@@ -337,30 +362,30 @@ class ConstitutionalChecker(nn.Module):
         safety_features = self.content_filter(content)
         return self.safety_scorer(safety_features)
 
-    def filter_content(self, content: jnp.ndarray, safety_scores: jnp.ndarray) -> jnp.ndarray:
+    def filter_content(
+        self, content: jnp.ndarray, safety_scores: jnp.ndarray
+    ) -> jnp.ndarray:
         """Filter or modify content based on safety analysis."""
         unsafe_mask = safety_scores <= self.safety_threshold
         aligned_content = jnp.where(
-            unsafe_mask[:, None],
-            self.alignment_layer(content),
-            content
+            unsafe_mask[:, None], self.alignment_layer(content), content
         )
         return aligned_content
 
+
 class TextToAnything(nn.Module):
     """Text-to-anything generation model."""
+
     config: GenerationConfig
 
     def setup(self):
         """Initialize components."""
         # Core components
         self.tokenizer = TextTokenizer(
-            max_length=self.config.max_length,
-            vocab_size=self.config.vocab_size
+            max_length=self.config.max_length, vocab_size=self.config.vocab_size
         )
         self.embeddings = nn.Embed(
-            num_embeddings=self.config.vocab_size,
-            features=self.config.hidden_size
+            num_embeddings=self.config.vocab_size, features=self.config.hidden_size
         )
         self.input_projection = nn.Dense(self.config.hidden_size)
         self.output_projection = nn.Dense(self.config.vocab_size)
@@ -406,7 +431,7 @@ class TextToAnything(nn.Module):
         inputs: Union[str, Dict[str, Any]],
         target_modality: str,
         context: Optional[Dict[str, Any]] = None,
-        training: bool = False
+        training: bool = False,
     ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         # Validate target modality
         if target_modality not in self.config.supported_modalities:
@@ -420,7 +445,7 @@ class TextToAnything(nn.Module):
             inputs = {
                 'text': inputs['input_ids'],
                 'position_ids': inputs.get('position_ids'),
-                'token_type_ids': inputs.get('token_type_ids')
+                'token_type_ids': inputs.get('token_type_ids'),
             }
 
         # Process multi-modal inputs with proper shape handling
@@ -433,7 +458,9 @@ class TextToAnything(nn.Module):
             # Ensure proper shape (batch_size, seq_length, hidden_size)
             if len(text_hidden.shape) == 2:
                 batch_size = text_hidden.shape[0] // self.config.max_sequence_length
-                text_hidden = text_hidden.reshape(batch_size, -1, self.config.hidden_size)
+                text_hidden = text_hidden.reshape(
+                    batch_size, -1, self.config.hidden_size
+                )
             hidden_states_list.append(text_hidden)
 
         # Encode image input if present
@@ -443,7 +470,9 @@ class TextToAnything(nn.Module):
             if len(image_hidden.shape) == 4:  # (batch_size, height, width, channels)
                 if batch_size is None:
                     batch_size = image_hidden.shape[0]
-                image_hidden = image_hidden.reshape(batch_size, -1, self.config.hidden_size)
+                image_hidden = image_hidden.reshape(
+                    batch_size, -1, self.config.hidden_size
+                )
             hidden_states_list.append(image_hidden)
 
         # Combine hidden states with shape validation
@@ -467,7 +496,9 @@ class TextToAnything(nn.Module):
                     encoded_context = self.encoder({modality: data})
                     # Ensure proper shape
                     if len(encoded_context.shape) == 2:
-                        encoded_context = encoded_context.reshape(batch_size, -1, self.config.hidden_size)
+                        encoded_context = encoded_context.reshape(
+                            batch_size, -1, self.config.hidden_size
+                        )
                     context_states.append(encoded_context)
 
             if context_states:
@@ -488,27 +519,23 @@ class TextToAnything(nn.Module):
         # Ensure sequence length is compatible with attention heads
         target_seq_length = min(
             self.config.max_sequence_length,
-            ((seq_length + num_heads - 1) // num_heads) * num_heads
+            ((seq_length + num_heads - 1) // num_heads) * num_heads,
         )
 
         # Adjust hidden states to target sequence length
         if seq_length < target_seq_length:
-            padding = jnp.zeros((batch_size, target_seq_length - seq_length, self.config.hidden_size))
+            padding = jnp.zeros(
+                (batch_size, target_seq_length - seq_length, self.config.hidden_size)
+            )
             hidden_states = jnp.concatenate([hidden_states, padding], axis=1)
         else:
             hidden_states = hidden_states[:, :target_seq_length, :]
 
         # Apply transformer with optimizations
-        hidden_states = self.apple_optimizations(
-            hidden_states,
-            training=training
-        )
+        hidden_states = self.apple_optimizations(hidden_states, training=training)
 
         # Apply constitutional AI checks
-        output, compliant = self.constitutional_checker(
-            hidden_states,
-            target_modality
-        )
+        output, compliant = self.constitutional_checker(hidden_states, target_modality)
 
         # Generate content in target modality
         output = self.decoder(output, target_modality)
@@ -521,8 +548,8 @@ class TextToAnything(nn.Module):
             'generation_params': {
                 'temperature': self.config.temperature,
                 'top_k': self.config.top_k,
-                'top_p': self.config.top_p
-            }
+                'top_p': self.config.top_p,
+            },
         }
 
         return output, metadata
@@ -532,29 +559,21 @@ class TextToAnything(nn.Module):
         text_prompt: str,
         target_modality: str,
         context: Optional[Dict[str, Any]] = None,
-        max_length: Optional[int] = None
+        max_length: Optional[int] = None,
     ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         """Generate content with specified parameters."""
         if max_length is None:
             max_length = self.config.max_length
 
         # Initial generation
-        output, metadata = self(
-            text_prompt,
-            target_modality,
-            context,
-            training=False
-        )
+        output, metadata = self(text_prompt, target_modality, context, training=False)
 
         # Apply safety checks and regenerate if needed
         if not metadata['constitutional_compliant']:
             # Regenerate with stronger safety constraints
             self.config.safety_threshold *= 1.2
             output, metadata = self(
-                text_prompt,
-                target_modality,
-                context,
-                training=False
+                text_prompt, target_modality, context, training=False
             )
 
         return output, metadata

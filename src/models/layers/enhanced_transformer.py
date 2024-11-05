@@ -4,8 +4,10 @@ import torch.nn.functional as F
 from typing import Optional, Tuple
 from transformers import PretrainedConfig
 
+
 class EnhancedTransformerBlock(nn.Module):
     """Enhanced transformer block with additional capabilities for mathematical reasoning"""
+
     def __init__(self, config: PretrainedConfig, dropout: float = 0.1):
         super().__init__()
         self.hidden_size = config.hidden_size
@@ -17,7 +19,7 @@ class EnhancedTransformerBlock(nn.Module):
             embed_dim=config.hidden_size,
             num_heads=config.num_attention_heads,
             dropout=dropout,
-            batch_first=True
+            batch_first=True,
         )
 
         # Feed-forward network
@@ -26,7 +28,7 @@ class EnhancedTransformerBlock(nn.Module):
             nn.GELU(),
             nn.Dropout(dropout),
             nn.Linear(config.hidden_size * 4, config.hidden_size),
-            nn.Dropout(dropout)
+            nn.Dropout(dropout),
         )
 
         # Layer normalization
@@ -44,7 +46,7 @@ class EnhancedTransformerBlock(nn.Module):
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
         layer_past: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,
-        use_cache: bool = False
+        use_cache: bool = False,
     ) -> Tuple[torch.Tensor, dict]:
         """
         Forward pass for the enhanced transformer block
@@ -79,7 +81,10 @@ class EnhancedTransformerBlock(nn.Module):
                     attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
 
             # Create causal mask of matching size
-            causal_mask = torch.triu(torch.ones(seq_length, seq_length, device=hidden_states.device), diagonal=1).bool()
+            causal_mask = torch.triu(
+                torch.ones(seq_length, seq_length, device=hidden_states.device),
+                diagonal=1,
+            ).bool()
 
             # Ensure attention mask has correct shape before applying causal mask
             attention_mask = attention_mask.expand(batch_size, seq_length, seq_length)
@@ -97,15 +102,20 @@ class EnhancedTransformerBlock(nn.Module):
         hidden_states = self.attention_norm(hidden_states)
 
         if self.gradient_checkpointing and self.training:
+
             def create_custom_forward(module):
                 def custom_forward(*inputs):
                     return module(*inputs)
+
                 return custom_forward
 
             attn_output, attn_weights = torch.utils.checkpoint.checkpoint(
                 create_custom_forward(self.attention),
-                hidden_states, hidden_states, hidden_states,
-                attention_mask, None
+                hidden_states,
+                hidden_states,
+                hidden_states,
+                attention_mask,
+                None,
             )
         else:
             attn_output, attn_weights = self.attention(
@@ -114,7 +124,7 @@ class EnhancedTransformerBlock(nn.Module):
                 value=hidden_states,
                 attn_mask=attention_mask if attention_mask is not None else None,
                 need_weights=True,  # Get attention weights
-                is_causal=True  # Enable causal masking
+                is_causal=True,  # Enable causal masking
             )
 
         hidden_states = residual + attn_output
@@ -125,8 +135,7 @@ class EnhancedTransformerBlock(nn.Module):
 
         if self.gradient_checkpointing and self.training:
             hidden_states = torch.utils.checkpoint.checkpoint(
-                create_custom_forward(self.feed_forward),
-                hidden_states
+                create_custom_forward(self.feed_forward), hidden_states
             )
         else:
             hidden_states = self.feed_forward(hidden_states)
@@ -138,7 +147,7 @@ class EnhancedTransformerBlock(nn.Module):
             'attention_weights': attn_weights,
             'attention_output': attn_output,
             'intermediate_states': hidden_states.detach(),
-            'layer_past': layer_past
+            'layer_past': layer_past,
         }
 
         return hidden_states, auxiliary_info

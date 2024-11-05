@@ -12,6 +12,7 @@ from pathlib import Path
 
 class TrainerState(train_state.TrainState):
     """Custom train state with loss scaling for mixed precision training."""
+
     loss_scale: Optional[jnp.ndarray] = None
 
 
@@ -39,17 +40,18 @@ class FlaxTrainer:
         warmup_fn = optax.linear_schedule(
             init_value=0.0,
             end_value=self.config["training"]["learning_rate"],
-            transition_steps=self.config["training"]["warmup_steps"]
+            transition_steps=self.config["training"]["warmup_steps"],
         )
 
         decay_fn = optax.cosine_decay_schedule(
             init_value=self.config["training"]["learning_rate"],
-            decay_steps=self.config["training"]["num_epochs"] * self.config["training"]["steps_per_epoch"]
+            decay_steps=self.config["training"]["num_epochs"]
+            * self.config["training"]["steps_per_epoch"],
         )
 
         schedule_fn = optax.join_schedules(
             schedules=[warmup_fn, decay_fn],
-            boundaries=[self.config["training"]["warmup_steps"]]
+            boundaries=[self.config["training"]["warmup_steps"]],
         )
 
         # Create optimizer
@@ -57,8 +59,8 @@ class FlaxTrainer:
             optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),
             optax.adamw(
                 learning_rate=schedule_fn,
-                weight_decay=self.config["training"]["weight_decay"]
-            )
+                weight_decay=self.config["training"]["weight_decay"],
+            ),
         )
 
         # Initialize state
@@ -70,19 +72,23 @@ class FlaxTrainer:
             apply_fn=self.model.apply,
             params=variables["params"],
             tx=optimizer,
-            loss_scale=jnp.array(2.0**15) if self.config["training"].get("fp16", False) else None
+            loss_scale=(
+                jnp.array(2.0**15)
+                if self.config["training"].get("fp16", False)
+                else None
+            ),
         )
 
     @staticmethod
     def compute_loss(logits, labels):
         """Compute cross entropy loss."""
         return optax.softmax_cross_entropy_with_integer_labels(
-            logits=logits,
-            labels=labels
+            logits=logits, labels=labels
         ).mean()
 
     def train_step(self, state, batch):
         """Single training step with gradient updates."""
+
         def loss_fn(params):
             logits = state.apply_fn({"params": params}, batch["input_ids"])
             loss = self.compute_loss(logits, batch["labels"])
@@ -122,8 +128,7 @@ class FlaxTrainer:
                 if batch_idx % log_steps == 0:
                     avg_loss = epoch_loss / num_steps
                     logging.info(
-                        f"Epoch: {epoch}, Step: {batch_idx}, "
-                        f"Loss: {avg_loss:.4f}"
+                        f"Epoch: {epoch}, Step: {batch_idx}, " f"Loss: {avg_loss:.4f}"
                     )
 
                 # Evaluation
@@ -147,8 +152,7 @@ class FlaxTrainer:
 
         for batch in eval_dataset:
             logits = self.state.apply_fn(
-                {"params": self.state.params},
-                batch["input_ids"]
+                {"params": self.state.params}, batch["input_ids"]
             )
             loss = self.compute_loss(logits, batch["labels"])
             total_loss += loss

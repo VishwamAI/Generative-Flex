@@ -5,8 +5,10 @@ import platform
 
 logger = logging.getLogger(__name__)
 
+
 class TimeoutException(Exception):
     pass
+
 
 @contextmanager
 def timeout(seconds, description="Operation"):

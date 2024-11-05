@@ -9,13 +9,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 class TestTrainingSetup(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test environment"""
         cls.accelerator = Accelerator(
             gradient_accumulation_steps=4,
-            mixed_precision='fp16' if torch.cuda.is_available() else 'no'
+            mixed_precision='fp16' if torch.cuda.is_available() else 'no',
         )
         cls.device = cls.accelerator.device
         # Initialize tokenizer for MMMU dataset using an open source model
@@ -40,7 +41,7 @@ class TestTrainingSetup(unittest.TestCase):
             dataloaders = create_mmmu_dataloaders(
                 subjects=['Math', 'Physics', 'Computer_Science'],
                 tokenizer=self.tokenizer,
-                batch_size=4  # Small batch size for testing
+                batch_size=4,  # Small batch size for testing
             )
 
             self.assertGreater(len(dataloaders), 0, "No dataloaders were created")
@@ -48,7 +49,9 @@ class TestTrainingSetup(unittest.TestCase):
             # Test at least one split
             for split, dataloader in dataloaders.items():
                 print(f"\nTesting {split} split dataloader:")
-                self.assertIsNotNone(dataloader, f"Dataloader for {split} split is None")
+                self.assertIsNotNone(
+                    dataloader, f"Dataloader for {split} split is None"
+                )
 
                 # Get one batch
                 batch = next(iter(dataloader))
@@ -83,7 +86,7 @@ class TestTrainingSetup(unittest.TestCase):
         self.assertEqual(
             self.accelerator.gradient_accumulation_steps,
             4,
-            "Gradient accumulation steps not set correctly"
+            "Gradient accumulation steps not set correctly",
         )
 
         # Simulate training with gradient accumulation
@@ -105,13 +108,13 @@ class TestTrainingSetup(unittest.TestCase):
             self.assertEqual(
                 self.accelerator.mixed_precision,
                 'fp16',
-                "Mixed precision not set correctly for GPU"
+                "Mixed precision not set correctly for GPU",
             )
         else:
             self.assertEqual(
                 self.accelerator.mixed_precision,
                 'no',
-                "Mixed precision should be disabled for CPU"
+                "Mixed precision should be disabled for CPU",
             )
 
     def test_model_device_compatibility(self):
@@ -122,9 +125,7 @@ class TestTrainingSetup(unittest.TestCase):
 
         # Check if model is on correct device
         self.assertEqual(
-            next(model.parameters()).device,
-            self.device,
-            "Model not on correct device"
+            next(model.parameters()).device, self.device, "Model not on correct device"
         )
 
         # Test forward pass
@@ -132,12 +133,11 @@ class TestTrainingSetup(unittest.TestCase):
         try:
             outputs = model(inputs)
             self.assertEqual(
-                outputs.device,
-                self.device,
-                "Output not on correct device"
+                outputs.device, self.device, "Output not on correct device"
             )
         except Exception as e:
             self.fail(f"Forward pass failed: {str(e)}")
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

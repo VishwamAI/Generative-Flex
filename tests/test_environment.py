@@ -10,6 +10,7 @@ import flax
 import os
 import warnings
 
+
 class TestEnvironment(unittest.TestCase):
     def setUp(self):
         warnings.filterwarnings('ignore')
@@ -49,7 +50,11 @@ class TestEnvironment(unittest.TestCase):
     def test_mixed_precision(self):
         """Test mixed precision support"""
         accelerator = Accelerator(mixed_precision='fp16')
-        self.assertEqual(accelerator.mixed_precision, 'fp16', "Mixed precision not properly configured")
+        self.assertEqual(
+            accelerator.mixed_precision,
+            'fp16',
+            "Mixed precision not properly configured",
+        )
 
     def test_model_loading(self):
         """Test if environment can load and initialize models"""
@@ -77,14 +82,26 @@ class TestEnvironment(unittest.TestCase):
         """Test if environment can access MMLU dataset"""
         try:
             # Try loading high school mathematics dataset
-            dataset_hs = load_dataset("cais/mmlu", "high_school_mathematics", split="validation[:10]")
-            self.assertIsNotNone(dataset_hs, "Failed to load high school mathematics dataset")
-            self.assertTrue(len(dataset_hs) > 0, "High school mathematics dataset is empty")
+            dataset_hs = load_dataset(
+                "cais/mmlu", "high_school_mathematics", split="validation[:10]"
+            )
+            self.assertIsNotNone(
+                dataset_hs, "Failed to load high school mathematics dataset"
+            )
+            self.assertTrue(
+                len(dataset_hs) > 0, "High school mathematics dataset is empty"
+            )
 
             # Try loading college mathematics dataset
-            dataset_college = load_dataset("cais/mmlu", "college_mathematics", split="validation[:10]")
-            self.assertIsNotNone(dataset_college, "Failed to load college mathematics dataset")
-            self.assertTrue(len(dataset_college) > 0, "College mathematics dataset is empty")
+            dataset_college = load_dataset(
+                "cais/mmlu", "college_mathematics", split="validation[:10]"
+            )
+            self.assertIsNotNone(
+                dataset_college, "Failed to load college mathematics dataset"
+            )
+            self.assertTrue(
+                len(dataset_college) > 0, "College mathematics dataset is empty"
+            )
 
             # Check dataset structure using high school dataset
             example = dataset_hs[0]
@@ -106,12 +123,16 @@ class TestEnvironment(unittest.TestCase):
             # Test basic model operations
             def model_fn(x):
                 return jnp.mean(x)
+
             grad_fn = jax.grad(model_fn)
             grad = grad_fn(x)
-            self.assertEqual(grad.shape, (5, 5), "Flax gradient computation not working")
+            self.assertEqual(
+                grad.shape, (5, 5), "Flax gradient computation not working"
+            )
 
         except Exception as e:
             self.fail(f"Failed to test Flax functionality: {str(e)}")
+
 
 if __name__ == '__main__':
     unittest.main()

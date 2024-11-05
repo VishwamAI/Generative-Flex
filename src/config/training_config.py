@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional, Dict
 
+
 @dataclass
 class TrainingConfig:
     model_name: str = "facebook/opt-125m"
@@ -12,7 +13,7 @@ class TrainingConfig:
     max_grad_norm: float = 1.0
     warmup_steps: int = 100
     device: str = "cuda"  # Explicitly set device
-    fp16: bool = True    # Enable mixed precision
+    fp16: bool = True  # Enable mixed precision
 
     # Model architecture parameters
     hidden_size: int = 256
@@ -41,5 +42,5 @@ class TrainingConfig:
                 "do_sample": True,
                 "temperature": 0.7,
                 "top_p": 0.9,
-                "max_length": 512
+                "max_length": 512,
             }

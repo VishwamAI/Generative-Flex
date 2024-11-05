@@ -9,17 +9,18 @@ from pathlib import Path
 @dataclass
 class ModelConfig:
     """Model configuration."""
+
     model_type: str  # 'language', 'image', 'audio', 'video'
     vocab_size: Optional[int] = 50257  # For language models
     hidden_dim: int = 768  # Reduced from 1024 for memory efficiency
-    num_heads: int = 12    # Reduced from 16 for memory efficiency
-    num_layers: int = 8    # Reduced from 12 for memory efficiency
+    num_heads: int = 12  # Reduced from 16 for memory efficiency
+    num_layers: int = 8  # Reduced from 12 for memory efficiency
     head_dim: int = 64
-    mlp_dim: int = 3072   # Reduced from 4096 for memory efficiency
+    mlp_dim: int = 3072  # Reduced from 4096 for memory efficiency
     dropout_rate: float = 0.1
     max_seq_length: int = 512  # Reduced from 1024 for memory efficiency
     attention_block_size: int = 256  # Reduced from 512 for memory efficiency
-    num_experts: int = 4   # Reduced from 8 for memory efficiency
+    num_experts: int = 4  # Reduced from 8 for memory efficiency
     expert_capacity_factor: float = 1.0  # Reduced from 1.25 for memory efficiency
     use_flash_attention: bool = True
     use_mixture_of_experts: bool = True
@@ -72,6 +73,7 @@ class ModelConfig:
 @dataclass
 class TrainingConfig:
     """Training configuration."""
+
     batch_size: int = 2  # Reduced for larger model
     learning_rate: float = 1e-4  # Increased for better optimization
     weight_decay: float = 0.1  # Increased for better regularization
@@ -90,31 +92,29 @@ class TrainingConfig:
 @dataclass
 class Config:
     """Complete configuration."""
+
     model: ModelConfig
     training: TrainingConfig
 
     @classmethod
-    def from_json(cls, path: str) -> 'Config':
+    def from_json(cls, path: str) -> "Config":
         """Load configuration from JSON file."""
-        with open(path, 'r') as f:
+        with open(path, "r") as f:
             config_dict = json.load(f)
 
-        model_config = ModelConfig(**config_dict['model'])
-        training_config = TrainingConfig(**config_dict['training'])
+        model_config = ModelConfig(**config_dict["model"])
+        training_config = TrainingConfig(**config_dict["training"])
 
         return cls(model=model_config, training=training_config)
 
     def to_json(self, path: str):
         """Save configuration to JSON file."""
         config_dict = {
-            'model': {
-                k: v for k, v in self.model.__dict__.items()
-                if v is not None
-            },
-            'training': self.training.__dict__
+            "model": {k: v for k, v in self.model.__dict__.items() if v is not None},
+            "training": self.training.__dict__,
         }
 
-        with open(path, 'w') as f:
+        with open(path, "w") as f:
             json.dump(config_dict, f, indent=2)
 
 
@@ -123,24 +123,23 @@ def get_config(model_type: str, config_path: Optional[str] = None) -> Config:
     if config_path and Path(config_path).exists():
         return Config.from_json(config_path)
 
-    valid_model_types = {'language', 'image', 'audio', 'video'}
+    valid_model_types = {"language", "image", "audio", "video"}
     if model_type not in valid_model_types:
-        raise ValueError(f"Invalid model type: {model_type}. Must be one of {valid_model_types}")
+        raise ValueError(
+            f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
+        )
 
     # Default configurations for different model types
     model_config = ModelConfig(model_type=model_type)
 
-    if model_type == 'image':
+    if model_type == "image":
         model_config.image_size = (256, 256)
         model_config.patch_size = (16, 16)
-    elif model_type == 'audio':
+    elif model_type == "audio":
         model_config.audio_sample_rate = 16000
         model_config.frame_size = 1024
-    elif model_type == 'video':
+    elif model_type == "video":
         model_config.video_size = (16, 256, 256)
         model_config.video_patch_size = (2, 16, 16)
 
-    return Config(
-        model=model_config,
-        training=TrainingConfig()
-    )
+    return Config(model=model_config, training=TrainingConfig())

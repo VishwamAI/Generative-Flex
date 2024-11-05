@@ -1,6 +1,7 @@
 """
 MultiModal Transformer implementation with features inspired by Gemma and LLaMA.
 """
+
 import logging
 import torch
 import torch.nn as nn
@@ -14,18 +15,22 @@ from .image_processor import ImageProcessor
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 class MultiModalTransformer(nn.Module):
     """
     MultiModal Transformer with enhanced capabilities for mathematical reasoning.
     Incorporates features from Gemma and LLaMA architectures.
     """
+
     def __init__(self, config):
         super().__init__()
         self.config = config
 
         # Text embedding components
         self.word_embeddings = nn.Embedding(config.vocab_size, config.hidden_size)
-        self.position_embeddings = nn.Embedding(config.max_position_embeddings, config.hidden_size)
+        self.position_embeddings = nn.Embedding(
+            config.max_position_embeddings, config.hidden_size
+        )
 
         # Image processing components
         self.image_processor = ImageProcessor(config.hidden_size)
@@ -33,37 +38,42 @@ class MultiModalTransformer(nn.Module):
         # Image feature projection
         self.image_projection = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size),
-            nn.LayerNorm(config.hidden_size)
+            nn.LayerNorm(config.hidden_size),
         )
 
         # Enhanced transformer blocks with expert routing
-        self.transformer_blocks = nn.ModuleList([
-            EnhancedTransformerBlock(config) for _ in range(config.num_hidden_layers)
-        ])
+        self.transformer_blocks = nn.ModuleList(
+            [EnhancedTransformerBlock(config) for _ in range(config.num_hidden_layers)]
+        )
 
         # Cross-modal attention
         self.cross_modal_attention = nn.MultiheadAttention(
             config.hidden_size,
             config.num_attention_heads,
-            dropout=getattr(config, 'dropout', 0.1)  # Use OPT's dropout or default to 0.1
+            dropout=getattr(
+                config, 'dropout', 0.1
+            ),  # Use OPT's dropout or default to 0.1
         )
 
         # Output components
         self.layer_norm = nn.LayerNorm(config.hidden_size)
-        self.dropout = nn.Dropout(getattr(config, 'dropout', 0.1))  # Use OPT's dropout or default to 0.1
+        self.dropout = nn.Dropout(
+            getattr(config, 'dropout', 0.1)
+        )  # Use OPT's dropout or default to 0.1
 
         # Mathematical reasoning specific components
         self.math_gate = nn.Linear(config.hidden_size, 1)
         self.math_transform = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size * 2),
             nn.GELU(),
-            nn.Linear(config.hidden_size * 2, config.hidden_size)
+            nn.Linear(config.hidden_size * 2, config.hidden_size),
         )
 
         self.init_weights()
 
     def init_weights(self):
         """Initialize weights with specific initialization for mathematical operations."""
+
         def _init_math_weights(module):
             if isinstance(module, (nn.Linear, nn.Embedding)):
                 module.weight.data.normal_(mean=0.0, std=0.02)
@@ -78,7 +88,9 @@ class MultiModalTransformer(nn.Module):
     def _get_position_embeddings(self, position_ids, seq_length):
         """Get position embeddings with support for relative positions."""
         if position_ids is None:
-            position_ids = torch.arange(seq_length, dtype=torch.long, device=self.word_embeddings.weight.device)
+            position_ids = torch.arange(
+                seq_length, dtype=torch.long, device=self.word_embeddings.weight.device
+            )
             position_ids = position_ids.unsqueeze(0)
         return self.position_embeddings(position_ids)
 
@@ -88,19 +100,23 @@ class MultiModalTransformer(nn.Module):
         attention_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None,
         image_features: Optional[torch.Tensor] = None,
-        return_dict: bool = True
+        return_dict: bool = True,
     ) -> Dict[str, torch.Tensor]:
         """
         Forward pass with support for text and image inputs.
         """
-        batch_size = input_ids.size(0) if input_ids is not None else image_features.size(0)
+        batch_size = (
+            input_ids.size(0) if input_ids is not None else image_features.size(0)
+        )
         device = next(self.parameters()).device
         embeddings = None
         total_sequence_length = 0
 
         # Process text inputs
         if input_ids is not None:
-            text_embeddings = self.word_embeddings(input_ids)  # [batch_size, seq_len, hidden_size]
+            text_embeddings = self.word_embeddings(
+                input_ids
+            )  # [batch_size, seq_len, hidden_size]
             total_sequence_length += text_embeddings.size(1)
             embeddings = text_embeddings
 
@@ -108,10 +124,14 @@ class MultiModalTransformer(nn.Module):
         if image_features is not None:
             try:
                 # Process images through ImageProcessor
-                processed_images = self.image_processor(image_features)  # [batch_size, num_images, hidden_size]
+                processed_images = self.image_processor(
+                    image_features
+                )  # [batch_size, num_images, hidden_size]
 
                 # Project image features
-                image_embeddings = self.image_projection(processed_images)  # [batch_size, num_images, hidden_size]
+                image_embeddings = self.image_projection(
+                    processed_images
+                )  # [batch_size, num_images, hidden_size]
 
                 total_sequence_length += image_embeddings.size(1)
 
@@ -124,18 +144,24 @@ class MultiModalTransformer(nn.Module):
             except Exception as e:
                 logger.error(f"Error processing images in transformer: {str(e)}")
                 if embeddings is None:
-                    embeddings = torch.zeros(batch_size, 1, self.config.hidden_size, device=device)
+                    embeddings = torch.zeros(
+                        batch_size, 1, self.config.hidden_size, device=device
+                    )
                     total_sequence_length += 1
 
         # Add position embeddings
-        position_ids = torch.arange(total_sequence_length, dtype=torch.long, device=device)
+        position_ids = torch.arange(
+            total_sequence_length, dtype=torch.long, device=device
+        )
         position_ids = position_ids.unsqueeze(0).expand(batch_size, -1)
         position_embeddings = self.position_embeddings(position_ids)
 
         # Add token type embeddings (0 for text, 1 for image)
-        token_type_ids = torch.zeros((batch_size, total_sequence_length), dtype=torch.long, device=device)
+        token_type_ids = torch.zeros(
+            (batch_size, total_sequence_length), dtype=torch.long, device=device
+        )
         if input_ids is not None and image_features is not None:
-            token_type_ids[:, input_ids.size(1):] = 1
+            token_type_ids[:, input_ids.size(1) :] = 1
         token_type_embeddings = self.token_type_embeddings(token_type_ids)
 
         # Combine all embeddings
@@ -162,7 +188,7 @@ class MultiModalTransformer(nn.Module):
                 'last_hidden_state': hidden_states,
                 'pooler_output': hidden_states[:, 0],  # Use first token for pooling
                 'math_gate': math_gate,
-                'router_probs': router_probs_list
+                'router_probs': router_probs_list,
             }
         return hidden_states
 
@@ -170,7 +196,7 @@ class MultiModalTransformer(nn.Module):
         self,
         input_ids: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
-        **kwargs
+        **kwargs,
     ) -> Dict[str, Any]:
         """Prepare inputs for text generation."""
         position_ids = kwargs.get('position_ids', None)
@@ -182,5 +208,5 @@ class MultiModalTransformer(nn.Module):
             'input_ids': input_ids,
             'attention_mask': attention_mask,
             'position_ids': position_ids,
-            'image_features': kwargs.get('image_features', None)
+            'image_features': kwargs.get('image_features', None),
         }

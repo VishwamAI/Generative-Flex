@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class MathHeadConfig:
     """Configuration for the math reasoning head"""
+
     hidden_size: int = 2048  # OPT-1.3B hidden size
     num_attention_heads: int = 32
     dropout: float = 0.1

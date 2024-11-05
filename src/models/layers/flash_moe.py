@@ -7,13 +7,20 @@ import logging
 # Set up logging
 logger = logging.getLogger(__name__)
 
+
 class FlashAttention(torch.nn.Module):
-    def __init__(self, dim: int, num_heads: int = 8, dropout: float = 0.1, max_seq_length: int = 512):
+    def __init__(
+        self,
+        dim: int,
+        num_heads: int = 8,
+        dropout: float = 0.1,
+        max_seq_length: int = 512,
+    ):
         super().__init__()
         self.dim = dim
         self.num_heads = num_heads
         self.head_dim = dim // num_heads
-        self.scaling = self.head_dim ** -0.5
+        self.scaling = self.head_dim**-0.5
         self.max_seq_length = max_seq_length
 
         self.q_proj = torch.nn.Linear(dim, dim)
@@ -22,7 +29,9 @@ class FlashAttention(torch.nn.Module):
         self.out_proj = torch.nn.Linear(dim, dim)
         self.dropout = torch.nn.Dropout(dropout)
 
-    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, torch.Tensor]:
+    def forward(
+        self, x: torch.Tensor, mask: Optional[torch.Tensor] = None
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
         batch_size, seq_len, _ = x.shape
 
         # Early return for empty tensors
@@ -67,12 +76,16 @@ class FlashAttention(torch.nn.Module):
                     attention_mask = F.pad(attention_mask, (0, pad_size), value=0)
 
             # Expand mask efficiently for all attention heads
-            attention_mask = attention_mask.expand(batch_size, self.num_heads, seq_len, seq_len)
+            attention_mask = attention_mask.expand(
+                batch_size, self.num_heads, seq_len, seq_len
+            )
 
         except Exception as e:
             logger.error(f"Error processing attention mask: {e}")
             # Fallback to basic mask
-            attention_mask = torch.ones(batch_size, self.num_heads, seq_len, seq_len, device=x.device)
+            attention_mask = torch.ones(
+                batch_size, self.num_heads, seq_len, seq_len, device=x.device
+            )
 
         # Compute attention with better memory efficiency
         attn_weights = torch.matmul(q, k.transpose(-2, -1)) * self.scaling
@@ -87,6 +100,7 @@ class FlashAttention(torch.nn.Module):
         attn_output = attn_output.transpose(1, 2).reshape(batch_size, seq_len, self.dim)
         return self.out_proj(attn_output), attn_weights
 
+
 class MixtureOfExperts(torch.nn.Module):
     def __init__(
         self,
@@ -95,7 +109,7 @@ class MixtureOfExperts(torch.nn.Module):
         num_experts: int = 4,
         capacity_factor: float = 1.25,
         dropout: float = 0.1,
-        k: int = 2  # Top-k routing
+        k: int = 2,  # Top-k routing
     ):
         super().__init__()
         self.input_dim = input_dim
@@ -108,16 +122,21 @@ class MixtureOfExperts(torch.nn.Module):
         self.router = torch.nn.Linear(input_dim, num_experts)
 
         # Create experts (simple feed-forward networks)
-        self.experts = torch.nn.ModuleList([
-            torch.nn.Sequential(
-                torch.nn.Linear(input_dim, expert_dim),
-                torch.nn.GELU(),
-                torch.nn.Dropout(dropout),
-                torch.nn.Linear(expert_dim, input_dim)
-            ) for _ in range(num_experts)
-        ])
+        self.experts = torch.nn.ModuleList(
+            [
+                torch.nn.Sequential(
+                    torch.nn.Linear(input_dim, expert_dim),
+                    torch.nn.GELU(),
+                    torch.nn.Dropout(dropout),
+                    torch.nn.Linear(expert_dim, input_dim),
+                )
+                for _ in range(num_experts)
+            ]
+        )
 
-    def forward(self, x: Union[torch.Tensor, Tuple[torch.Tensor, Any]]) -> Tuple[torch.Tensor, torch.Tensor]:
+    def forward(
+        self, x: Union[torch.Tensor, Tuple[torch.Tensor, Any]]
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
         # Handle input that might be a tuple from previous layer
         if isinstance(x, tuple):
             x, _ = x  # Take the first element (output tensor)
@@ -137,7 +156,11 @@ class MixtureOfExperts(torch.nn.Module):
         router_probs = F.softmax(top_k_logits, dim=-1)  # Normalize only top-k
 
         # Add gating uncertainty loss
-        router_entropy = -(F.softmax(router_logits, dim=-1) * F.log_softmax(router_logits, dim=-1)).sum(-1).mean()
+        router_entropy = (
+            -(F.softmax(router_logits, dim=-1) * F.log_softmax(router_logits, dim=-1))
+            .sum(-1)
+            .mean()
+        )
 
         # Compute load balancing loss
         # Mean probability of routing to each expert
@@ -164,7 +187,7 @@ class MixtureOfExperts(torch.nn.Module):
             # Process each expert
             for j in range(self.num_experts):
                 # Get tokens assigned to this expert
-                expert_mask = (expert_indices == j)  # [batch_size, seq_len]
+                expert_mask = expert_indices == j  # [batch_size, seq_len]
                 if not expert_mask.any():
                     continue
 
@@ -187,16 +210,20 @@ class MixtureOfExperts(torch.nn.Module):
 
 
 class EnhancedTransformerBlock(torch.nn.Module):
-    def __init__(
-        self,
-        config,
-        dropout: float = 0.1
-    ):
+    def __init__(self, config, dropout: float = 0.1):
         super().__init__()
         # Extract dimensions from config
-        self.hidden_size = config.hidden_size if hasattr(config, 'hidden_size') else config.d_model
-        self.num_heads = config.num_attention_heads if hasattr(config, 'num_attention_heads') else 8
-        self.max_seq_length = config.max_position_embeddings if hasattr(config, 'max_position_embeddings') else 512
+        self.hidden_size = (
+            config.hidden_size if hasattr(config, 'hidden_size') else config.d_model
+        )
+        self.num_heads = (
+            config.num_attention_heads if hasattr(config, 'num_attention_heads') else 8
+        )
+        self.max_seq_length = (
+            config.max_position_embeddings
+            if hasattr(config, 'max_position_embeddings')
+            else 512
+        )
         self.num_experts = getattr(config, 'num_experts', 4)
 
         # Calculate expert dimension
@@ -208,22 +235,22 @@ class EnhancedTransformerBlock(torch.nn.Module):
             dim=self.hidden_size,
             num_heads=self.num_heads,
             dropout=dropout,
-            max_seq_length=self.max_seq_length
+            max_seq_length=self.max_seq_length,
         )
         self.moe = MixtureOfExperts(
             input_dim=self.hidden_size,
             expert_dim=expert_dim,
-            num_experts=self.num_experts
+            num_experts=self.num_experts,
         )
         self.dropout = torch.nn.Dropout(dropout)
 
-    def forward(self, x: Union[torch.Tensor, Tuple[torch.Tensor, Any]], mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor, Dict]:
+    def forward(
+        self,
+        x: Union[torch.Tensor, Tuple[torch.Tensor, Any]],
+        mask: Optional[torch.Tensor] = None,
+    ) -> Tuple[torch.Tensor, Dict]:
         # Initialize auxiliary info dictionary
-        aux_info = {
-            'attention_weights': [],
-            'router_probs': [],
-            'layer_outputs': []
-        }
+        aux_info = {'attention_weights': [], 'router_probs': [], 'layer_outputs': []}
 
         # Handle input that might be a tuple
         if isinstance(x, tuple):

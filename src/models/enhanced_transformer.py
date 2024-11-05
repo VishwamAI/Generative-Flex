@@ -8,8 +8,10 @@ from dataclasses import dataclass
 from transformers import PreTrainedModel, PretrainedConfig
 from transformers.modeling_utils import ModuleUtilsMixin
 
+
 class EnhancedConfig(PretrainedConfig):
     """Configuration for enhanced transformer."""
+
     model_type = "enhanced_transformer"
 
     def __init__(
@@ -26,7 +28,6 @@ class EnhancedConfig(PretrainedConfig):
         type_vocab_size: int = 2,
         vocab_size: int = 50265,  # Updated to match OPT-125m tokenizer
         embedding_size: int = 256,  # Reduced from 512
-
         # Advanced features
         num_experts: int = 4,  # Reduced from 8
         expert_capacity: int = 16,  # Reduced from 32
@@ -36,19 +37,16 @@ class EnhancedConfig(PretrainedConfig):
         use_privacy_preserving: bool = True,  # Privacy-preserving features
         noise_multiplier: float = 0.1,  # For privacy-preserving noise
         l2_norm_clip: float = 1.0,  # For gradient clipping in privacy
-
         # Constitutional AI parameters
         safety_threshold: float = 0.8,  # Threshold for content filtering
         alignment_factor: float = 0.9,  # Weight for value alignment
         context_window: int = 512,  # Reduced from 1024
-
         # Generation parameters
         max_new_tokens: int = 256,  # Reduced from 512
         temperature: float = 0.7,
         top_p: float = 0.9,
         top_k: int = 50,
         repetition_penalty: float = 1.2,
-
         # Optimization
         head_dim: int = 32,  # Reduced from 64
         max_sequence_length: int = 512,  # Reduced from 2048
@@ -61,10 +59,9 @@ class EnhancedConfig(PretrainedConfig):
         num_bits: int = 4,  # For quantization precision
         cache_dtype: str = 'float16',  # Cache data type
         cache_size_multiplier: float = 1.5,  # Cache size multiplier
-
         # Modality-specific parameters
         image_input_size: int = 96,  # Input dimension for image features
-        **kwargs
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.hidden_size = hidden_size
@@ -107,50 +104,65 @@ class EnhancedConfig(PretrainedConfig):
         self.cache_size_multiplier = cache_size_multiplier
         self.image_input_size = image_input_size
 
+
 class MultiModalEmbedding(nn.Module):
     """Multi-modal embedding layer supporting text, image, audio, and video."""
+
     def __init__(self, config: EnhancedConfig):
         super().__init__()
         self.config = config
 
         # Text embeddings
         self.text_embeddings = nn.Embedding(config.vocab_size, config.hidden_size)
-        self.position_embeddings = nn.Embedding(config.max_position_embeddings, config.hidden_size)
-        self.token_type_embeddings = nn.Embedding(config.type_vocab_size, config.hidden_size)
+        self.position_embeddings = nn.Embedding(
+            config.max_position_embeddings, config.hidden_size
+        )
+        self.token_type_embeddings = nn.Embedding(
+            config.type_vocab_size, config.hidden_size
+        )
 
         # Modality-specific projections
         self.image_projection = nn.Sequential(
-            nn.Linear(256, config.hidden_size),  # Match input size to processed image size
+            nn.Linear(
+                256, config.hidden_size
+            ),  # Match input size to processed image size
             nn.ReLU(),
             nn.LayerNorm(config.hidden_size),
-            nn.Dropout(config.hidden_dropout_prob)
+            nn.Dropout(config.hidden_dropout_prob),
         )
         self.audio_projection = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size),
-            nn.LayerNorm(config.hidden_size)
+            nn.LayerNorm(config.hidden_size),
         )
         self.video_projection = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size),
-            nn.LayerNorm(config.hidden_size)
+            nn.LayerNorm(config.hidden_size),
         )
 
         # Normalization and dropout
         self.layer_norm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
-    def forward(self, inputs: Dict[str, torch.Tensor], training: bool = True) -> torch.Tensor:
+    def forward(
+        self, inputs: Dict[str, torch.Tensor], training: bool = True
+    ) -> torch.Tensor:
         """Process multi-modal inputs."""
         import logging
+
         logger = logging.getLogger(__name__)
 
-        logger.info(f"Starting MultiModalEmbedding forward pass with input modalities: {list(inputs.keys())}")
+        logger.info(
+            f"Starting MultiModalEmbedding forward pass with input modalities: {list(inputs.keys())}"
+        )
         batch_size = None
         seq_length = 0  # Initialize to 0 to accumulate total sequence length
         embeddings = []
 
         try:
             for modality, data in inputs.items():
-                logger.info(f"Processing {modality} modality, input shape: {data.shape}")
+                logger.info(
+                    f"Processing {modality} modality, input shape: {data.shape}"
+                )
 
                 if modality == 'text':
                     try:
@@ -168,9 +180,15 @@ class MultiModalEmbedding(nn.Module):
 
                         # Verify text embeddings have correct hidden size
                         if text_embeddings.size(-1) != self.config.hidden_size:
-                            text_embeddings = nn.Linear(text_embeddings.size(-1), self.config.hidden_size, device=text_embeddings.device)(text_embeddings)
+                            text_embeddings = nn.Linear(
+                                text_embeddings.size(-1),
+                                self.config.hidden_size,
+                                device=text_embeddings.device,
+                            )(text_embeddings)
                         embeddings.append(text_embeddings)
-                        logger.info(f"Memory after text processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+                        logger.info(
+                            f"Memory after text processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+                        )
                     except Exception as e:
                         logger.error(f"Error processing text input: {str(e)}")
                         raise
@@ -182,16 +200,24 @@ class MultiModalEmbedding(nn.Module):
                         image_embeddings = self.image_projection(data)
                         if batch_size is None:
                             batch_size = image_embeddings.shape[0]
-                        logger.info(f"Image embeddings shape after projection: {image_embeddings.shape}")
+                        logger.info(
+                            f"Image embeddings shape after projection: {image_embeddings.shape}"
+                        )
 
                         # Verify and project to correct hidden size if needed
                         if image_embeddings.size(-1) != self.config.hidden_size:
-                            image_embeddings = nn.Linear(image_embeddings.size(-1), self.config.hidden_size, device=image_embeddings.device)(image_embeddings)
+                            image_embeddings = nn.Linear(
+                                image_embeddings.size(-1),
+                                self.config.hidden_size,
+                                device=image_embeddings.device,
+                            )(image_embeddings)
 
                         # Add sequence length from image embeddings
                         seq_length += image_embeddings.size(1)
                         embeddings.append(image_embeddings)
-                        logger.info(f"Memory after image processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+                        logger.info(
+                            f"Memory after image processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+                        )
                     except Exception as e:
                         logger.error(f"Error processing image input: {str(e)}")
                         raise
@@ -203,12 +229,18 @@ class MultiModalEmbedding(nn.Module):
                             batch_size = audio_embeddings.shape[0]
                         # Verify and project to correct hidden size if needed
                         if audio_embeddings.size(-1) != self.config.hidden_size:
-                            audio_embeddings = nn.Linear(audio_embeddings.size(-1), self.config.hidden_size, device=audio_embeddings.device)(audio_embeddings)
+                            audio_embeddings = nn.Linear(
+                                audio_embeddings.size(-1),
+                                self.config.hidden_size,
+                                device=audio_embeddings.device,
+                            )(audio_embeddings)
                         # Reshape to match text embedding dimensions (batch_size, seq_length, hidden_size)
                         audio_embeddings = audio_embeddings.unsqueeze(1)
                         seq_length += 1  # Add one token for audio
                         embeddings.append(audio_embeddings)
-                        logger.info(f"Memory after audio processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+                        logger.info(
+                            f"Memory after audio processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+                        )
                     except Exception as e:
                         logger.error(f"Error processing audio input: {str(e)}")
                         raise
@@ -221,17 +253,25 @@ class MultiModalEmbedding(nn.Module):
                             batch_size = video_embeddings.shape[0]
                         # Verify and project to correct hidden size if needed
                         if video_embeddings.size(-1) != self.config.hidden_size:
-                            video_embeddings = nn.Linear(video_embeddings.size(-1), self.config.hidden_size, device=video_embeddings.device)(video_embeddings)
+                            video_embeddings = nn.Linear(
+                                video_embeddings.size(-1),
+                                self.config.hidden_size,
+                                device=video_embeddings.device,
+                            )(video_embeddings)
                         # Reshape to match text embedding dimensions (batch_size, seq_length, hidden_size)
                         video_embeddings = video_embeddings.unsqueeze(1)
                         seq_length += 1  # Add one token for video
                         embeddings.append(video_embeddings)
-                        logger.info(f"Memory after video processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+                        logger.info(
+                            f"Memory after video processing: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+                        )
                     except Exception as e:
                         logger.error(f"Error processing video input: {str(e)}")
                         raise
 
-            logger.info(f"Total sequence length after processing all modalities: {seq_length}")
+            logger.info(
+                f"Total sequence length after processing all modalities: {seq_length}"
+            )
 
             # Add position embeddings
             device = next(iter(inputs.values())).device
@@ -243,7 +283,9 @@ class MultiModalEmbedding(nn.Module):
             logger.info(f"Position embeddings shape: {position_embeddings.shape}")
 
             # Add token type embeddings (0 for all tokens in this case)
-            token_type_ids = torch.zeros((batch_size, seq_length), dtype=torch.int64, device=device)
+            token_type_ids = torch.zeros(
+                (batch_size, seq_length), dtype=torch.int64, device=device
+            )
             token_type_embeddings = self.token_type_embeddings(token_type_ids)
             logger.info(f"Token type embeddings shape: {token_type_embeddings.shape}")
 
@@ -252,13 +294,21 @@ class MultiModalEmbedding(nn.Module):
                 # Verify all embeddings have correct hidden size before concatenation
                 for i, emb in enumerate(embeddings):
                     if emb.size(-1) != self.config.hidden_size:
-                        raise ValueError(f"Embedding {i} has incorrect hidden size: {emb.size(-1)} != {self.config.hidden_size}")
+                        raise ValueError(
+                            f"Embedding {i} has incorrect hidden size: {emb.size(-1)} != {self.config.hidden_size}"
+                        )
                     if len(emb.shape) != 3:
-                        raise ValueError(f"Embedding {i} has incorrect number of dimensions: {len(emb.shape)} != 3")
+                        raise ValueError(
+                            f"Embedding {i} has incorrect number of dimensions: {len(emb.shape)} != 3"
+                        )
 
                 # Concatenate along sequence dimension
-                combined = torch.cat(embeddings, dim=1)  # [batch_size, seq_length, hidden_size]
-                logger.info(f"Combined embeddings shape after concatenation: {combined.shape}")
+                combined = torch.cat(
+                    embeddings, dim=1
+                )  # [batch_size, seq_length, hidden_size]
+                logger.info(
+                    f"Combined embeddings shape after concatenation: {combined.shape}"
+                )
             else:
                 raise ValueError("No valid inputs provided")
 
@@ -268,13 +318,19 @@ class MultiModalEmbedding(nn.Module):
 
             # Add position and token type embeddings
             combined = combined + position_embeddings + token_type_embeddings
-            logger.info(f"Final combined shape after adding positional and token type embeddings: {combined.shape}")
+            logger.info(
+                f"Final combined shape after adding positional and token type embeddings: {combined.shape}"
+            )
 
             # Layer normalization and dropout
             combined = self.layer_norm(combined)
             combined = self.dropout(combined) if training else combined
-            logger.info(f"Final output shape after normalization and dropout: {combined.shape}")
-            logger.info(f"Final memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+            logger.info(
+                f"Final output shape after normalization and dropout: {combined.shape}"
+            )
+            logger.info(
+                f"Final memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+            )
 
             return combined
 
@@ -282,18 +338,26 @@ class MultiModalEmbedding(nn.Module):
             logger.error(f"Error in MultiModalEmbedding forward pass: {str(e)}")
             raise
 
+
 class FlashAttention(nn.Module):
     """Efficient attention implementation with O(N) complexity."""
+
     def __init__(self, config: EnhancedConfig):
         super().__init__()
         self.config = config
 
-    def forward(self, q: torch.Tensor, k: torch.Tensor, v: torch.Tensor,
-                mask: Optional[torch.Tensor] = None, training: bool = True) -> torch.Tensor:
+    def forward(
+        self,
+        q: torch.Tensor,
+        k: torch.Tensor,
+        v: torch.Tensor,
+        mask: Optional[torch.Tensor] = None,
+        training: bool = True,
+    ) -> torch.Tensor:
         """Compute efficient attention."""
         # Get dimensions
         batch_size, seq_length, num_heads, head_dim = q.shape
-        scale = head_dim ** -0.5
+        scale = head_dim**-0.5
 
         # Reshape for efficient computation
         q = q.reshape(batch_size, seq_length, num_heads, head_dim)
@@ -313,8 +377,12 @@ class FlashAttention(nn.Module):
             qk = qk + mask * -1e9
         else:
             # Default causal mask
-            causal_mask = torch.triu(torch.ones((seq_length, seq_length), device=q.device), diagonal=1)
-            causal_mask = causal_mask.unsqueeze(0).unsqueeze(0)  # Add batch and head dims
+            causal_mask = torch.triu(
+                torch.ones((seq_length, seq_length), device=q.device), diagonal=1
+            )
+            causal_mask = causal_mask.unsqueeze(0).unsqueeze(
+                0
+            )  # Add batch and head dims
             qk = qk + causal_mask * -1e9
 
         # Apply attention dropout
@@ -323,24 +391,28 @@ class FlashAttention(nn.Module):
             attention_weights = F.dropout(
                 attention_weights,
                 p=self.config.attention_dropout_prob,
-                training=training
+                training=training,
             )
 
         # Compute attention output
         attention_output = torch.einsum('bhqk,bkhd->bqhd', attention_weights, v)
         return attention_output
 
+
 class ExpertLayer(nn.Module):
     """Mixture of Experts layer for specialized processing."""
+
     def __init__(self, config: EnhancedConfig):
         super().__init__()
         self.config = config
 
         # Initialize experts
-        self.experts = nn.ModuleList([
-            nn.Linear(config.hidden_size, config.hidden_size)
-            for _ in range(config.num_experts)
-        ])
+        self.experts = nn.ModuleList(
+            [
+                nn.Linear(config.hidden_size, config.hidden_size)
+                for _ in range(config.num_experts)
+            ]
+        )
 
         # Router network
         self.router = nn.Linear(config.hidden_size, config.num_experts)
@@ -355,9 +427,7 @@ class ExpertLayer(nn.Module):
         # Apply dropout to routing weights during training
         if training:
             routing_weights = F.dropout(
-                routing_weights,
-                p=self.config.dropout_rate,
-                training=training
+                routing_weights, p=self.config.dropout_rate, training=training
             )
 
         # Expert processing with capacity limiting
@@ -367,11 +437,15 @@ class ExpertLayer(nn.Module):
             expert_outputs.append(expert_out)
 
         expert_outputs = torch.stack(expert_outputs, dim=2)
-        combined_output = torch.sum(expert_outputs * routing_weights.unsqueeze(-1), dim=2)
+        combined_output = torch.sum(
+            expert_outputs * routing_weights.unsqueeze(-1), dim=2
+        )
         return combined_output
+
 
 class ConstitutionalLayer(nn.Module):
     """Implementation of Constitutional AI principles."""
+
     def __init__(self, config: EnhancedConfig):
         super().__init__()
         self.config = config
@@ -380,11 +454,15 @@ class ConstitutionalLayer(nn.Module):
         self.alignment_dense = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size // 4),
             nn.GELU(),
-            nn.Linear(config.hidden_size // 4, 1)
+            nn.Linear(config.hidden_size // 4, 1),
         )
 
-    def forward(self, x: torch.Tensor, context: Optional[torch.Tensor] = None,
-                training: bool = True) -> torch.Tensor:
+    def forward(
+        self,
+        x: torch.Tensor,
+        context: Optional[torch.Tensor] = None,
+        training: bool = True,
+    ) -> torch.Tensor:
         # Value alignment scoring
         alignment_score = self.alignment_dense(x)
 
@@ -400,20 +478,28 @@ class ConstitutionalLayer(nn.Module):
 
         return x
 
+
 class EnhancedTransformerBlock(nn.Module):
     """Enhanced transformer block with features from major models."""
+
     def __init__(self, config: EnhancedConfig):
         super().__init__()
         self.config = config
 
         # Layer normalization
-        self.attention_layernorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
+        self.attention_layernorm = nn.LayerNorm(
+            config.hidden_size, eps=config.layer_norm_eps
+        )
         self.ffn_layernorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
-        self.final_layernorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
+        self.final_layernorm = nn.LayerNorm(
+            config.hidden_size, eps=config.layer_norm_eps
+        )
 
         # Multi-head attention
         self.qkv_proj = nn.Linear(config.hidden_size, 3 * config.hidden_size)
-        self.flash_attention = FlashAttention(config) if config.use_flash_attention else None
+        self.flash_attention = (
+            FlashAttention(config) if config.use_flash_attention else None
+        )
         self.output_projection = nn.Linear(config.hidden_size, config.hidden_size)
 
         # Feed-forward network with expert routing
@@ -423,7 +509,7 @@ class EnhancedTransformerBlock(nn.Module):
             self.ffn = nn.Sequential(
                 nn.Linear(config.hidden_size, config.intermediate_size),
                 nn.GELU() if config.hidden_act == 'gelu' else nn.ReLU(),
-                nn.Linear(config.intermediate_size, config.hidden_size)
+                nn.Linear(config.intermediate_size, config.hidden_size),
             )
 
         # Constitutional AI layer
@@ -433,15 +519,24 @@ class EnhancedTransformerBlock(nn.Module):
         # Dropout
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
-    def forward(self, inputs: torch.Tensor, attention_mask: Optional[torch.Tensor] = None, training: bool = True, use_cache: bool = False) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[torch.Tensor]]:
+    def forward(
+        self,
+        inputs: torch.Tensor,
+        attention_mask: Optional[torch.Tensor] = None,
+        training: bool = True,
+        use_cache: bool = False,
+    ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[torch.Tensor]]:
         """Forward pass with advanced features."""
         import logging
+
         logger = logging.getLogger(__name__)
 
         try:
             logger.info("Starting EnhancedTransformerBlock forward pass")
             batch_size, seq_length, hidden_size = inputs.shape
-            logger.info(f"Input shape: batch_size={batch_size}, seq_length={seq_length}, hidden_size={hidden_size}")
+            logger.info(
+                f"Input shape: batch_size={batch_size}, seq_length={seq_length}, hidden_size={hidden_size}"
+            )
             num_heads = self.config.num_attention_heads
             head_dim = hidden_size // num_heads
             logger.info(f"Attention config: num_heads={num_heads}, head_dim={head_dim}")
@@ -449,7 +544,9 @@ class EnhancedTransformerBlock(nn.Module):
             # Layer normalization
             logger.info("Applying attention layer normalization")
             x = self.attention_layernorm(inputs)
-            logger.info(f"Memory after layer norm: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+            logger.info(
+                f"Memory after layer norm: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+            )
 
             # Project to query, key, value
             logger.info("Computing QKV projections")
@@ -465,8 +562,12 @@ class EnhancedTransformerBlock(nn.Module):
                 attention_mask = attention_mask.unsqueeze(1)
                 # Ensure mask has correct sequence length
                 if attention_mask.size(-1) != seq_length:
-                    logger.info(f"Padding attention mask from {attention_mask.size(-1)} to {seq_length}")
-                    attention_mask = F.pad(attention_mask, (0, seq_length - attention_mask.size(-1)))
+                    logger.info(
+                        f"Padding attention mask from {attention_mask.size(-1)} to {seq_length}"
+                    )
+                    attention_mask = F.pad(
+                        attention_mask, (0, seq_length - attention_mask.size(-1))
+                    )
                 logger.info(f"Final attention mask shape: {attention_mask.shape}")
 
             # Initialize attention weights
@@ -476,17 +577,17 @@ class EnhancedTransformerBlock(nn.Module):
             if self.config.use_flash_attention:
                 logger.info("Using Flash Attention")
                 attention_output = self.flash_attention(
-                    q, k, v,
-                    mask=attention_mask,
-                    training=training
+                    q, k, v, mask=attention_mask, training=training
                 )
                 # Reshape from (batch, seq, heads, dim) to (batch, seq, hidden_size)
-                attention_output = attention_output.reshape(batch_size, seq_length, hidden_size)
+                attention_output = attention_output.reshape(
+                    batch_size, seq_length, hidden_size
+                )
                 logger.info(f"Flash attention output shape: {attention_output.shape}")
             else:
                 logger.info("Using standard attention")
                 # Fallback to standard attention
-                scale = head_dim ** -0.5
+                scale = head_dim**-0.5
                 attention_scores = torch.matmul(q, k.transpose(-2, -1)) * scale
                 logger.info(f"Attention scores shape: {attention_scores.shape}")
                 if attention_mask is not None:
@@ -494,18 +595,30 @@ class EnhancedTransformerBlock(nn.Module):
                 attention_probs = F.softmax(attention_scores, dim=-1)
                 attention_weights = attention_probs  # Store attention weights
                 if training:
-                    attention_probs = F.dropout(attention_probs, p=self.config.attention_dropout_prob, training=True)
+                    attention_probs = F.dropout(
+                        attention_probs,
+                        p=self.config.attention_dropout_prob,
+                        training=True,
+                    )
                 attention_output = torch.matmul(attention_probs, v)
-                attention_output = attention_output.reshape(batch_size, seq_length, hidden_size)
-                logger.info(f"Standard attention output shape: {attention_output.shape}")
+                attention_output = attention_output.reshape(
+                    batch_size, seq_length, hidden_size
+                )
+                logger.info(
+                    f"Standard attention output shape: {attention_output.shape}"
+                )
 
             # Project output
             logger.info("Projecting attention output")
             attention_output = self.output_projection(attention_output)
-            logger.info(f"Memory after attention: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+            logger.info(
+                f"Memory after attention: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+            )
 
             # Residual connection with dropout
-            attention_output = self.dropout(attention_output) if training else attention_output
+            attention_output = (
+                self.dropout(attention_output) if training else attention_output
+            )
             x = inputs + attention_output
             logger.info(f"Shape after residual connection: {x.shape}")
 
@@ -536,24 +649,38 @@ class EnhancedTransformerBlock(nn.Module):
             logger.info("Applying final layer normalization")
             x = self.final_layernorm(x)
             logger.info(f"Final output shape: {x.shape}")
-            logger.info(f"Final memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+            logger.info(
+                f"Final memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+            )
 
-            return x, attention_weights, None  # hidden_states, attention_weights, present_key_value
+            return (
+                x,
+                attention_weights,
+                None,
+            )  # hidden_states, attention_weights, present_key_value
 
         except Exception as e:
             logger.error(f"Error in EnhancedTransformerBlock forward pass: {str(e)}")
             raise
 
+
 class EnhancedTransformer(PreTrainedModel):
     """Enhanced transformer model with features from major AI models."""
-    def __init__(self, hidden_size, num_attention_heads, num_hidden_layers,
-                 max_position_embeddings, vocab_size):
+
+    def __init__(
+        self,
+        hidden_size,
+        num_attention_heads,
+        num_hidden_layers,
+        max_position_embeddings,
+        vocab_size,
+    ):
         config = EnhancedConfig(
             hidden_size=hidden_size,
             num_attention_heads=num_attention_heads,
             num_hidden_layers=num_hidden_layers,
             max_position_embeddings=max_position_embeddings,
-            vocab_size=vocab_size
+            vocab_size=vocab_size,
         )
         super().__init__(config)
         self.config = config
@@ -566,22 +693,29 @@ class EnhancedTransformer(PreTrainedModel):
         self.embeddings = MultiModalEmbedding(self.config)
 
         # Transformer blocks
-        self.blocks = nn.ModuleList([
-            EnhancedTransformerBlock(self.config)
-            for _ in range(self.config.num_hidden_layers)
-        ])
+        self.blocks = nn.ModuleList(
+            [
+                EnhancedTransformerBlock(self.config)
+                for _ in range(self.config.num_hidden_layers)
+            ]
+        )
 
         # Final layer normalization
-        self.final_layernorm = nn.LayerNorm(self.config.hidden_size, eps=self.config.layer_norm_eps)
+        self.final_layernorm = nn.LayerNorm(
+            self.config.hidden_size, eps=self.config.layer_norm_eps
+        )
 
         # Output projection
-        self.output_projection = nn.Linear(self.config.hidden_size, self.config.vocab_size)
+        self.output_projection = nn.Linear(
+            self.config.hidden_size, self.config.vocab_size
+        )
 
         # Initialize weights
         self.apply(self._init_weights)
 
         # Setup logging
         import logging
+
         self.logger = logging.getLogger(__name__)
 
     def _init_weights(self, module):
@@ -613,7 +747,9 @@ class EnhancedTransformer(PreTrainedModel):
             self.logger.info("Getting embeddings from multimodal embedding layer")
             hidden_states = self.embeddings(inputs, training=self.training)
             self.logger.info(f"Embeddings shape: {hidden_states.shape}")
-            self.logger.info(f"Memory after embeddings: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+            self.logger.info(
+                f"Memory after embeddings: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+            )
 
             # Process through transformer blocks
             all_hidden_states = () if output_hidden_states else None
@@ -627,6 +763,7 @@ class EnhancedTransformer(PreTrainedModel):
                     use_cache = False
 
                 for i, block in enumerate(self.blocks):
+
                     def custom_forward(hidden_states, attention_mask):
                         return block(hidden_states, attention_mask)
 
@@ -634,7 +771,7 @@ class EnhancedTransformer(PreTrainedModel):
                         custom_forward,
                         hidden_states,
                         attention_mask,
-                        use_reentrant=False
+                        use_reentrant=False,
                     )
                     hidden_states = layer_outputs[0]
                     if output_attentions:
@@ -643,9 +780,13 @@ class EnhancedTransformer(PreTrainedModel):
                         all_hidden_states = all_hidden_states + (hidden_states,)
 
                     self.logger.info(f"Block {i+1} output shape: {hidden_states.shape}")
-                    self.logger.info(f"Memory after block {i+1}: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+                    self.logger.info(
+                        f"Memory after block {i+1}: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+                    )
             else:
-                self.logger.info("Processing transformer blocks without gradient checkpointing")
+                self.logger.info(
+                    "Processing transformer blocks without gradient checkpointing"
+                )
                 for i, block in enumerate(self.blocks):
                     try:
                         self.logger.info(f"Processing block {i+1}/{len(self.blocks)}")
@@ -657,8 +798,12 @@ class EnhancedTransformer(PreTrainedModel):
                         if output_hidden_states:
                             all_hidden_states = all_hidden_states + (hidden_states,)
 
-                        self.logger.info(f"Block {i+1} output shape: {hidden_states.shape}")
-                        self.logger.info(f"Memory after block {i+1}: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+                        self.logger.info(
+                            f"Block {i+1} output shape: {hidden_states.shape}"
+                        )
+                        self.logger.info(
+                            f"Memory after block {i+1}: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+                        )
                     except Exception as e:
                         self.logger.error(f"Error in transformer block {i+1}: {str(e)}")
                         raise
@@ -681,9 +826,13 @@ class EnhancedTransformer(PreTrainedModel):
                 shift_labels = labels[..., 1:].contiguous()
                 # Calculate cross entropy loss
                 loss_fct = nn.CrossEntropyLoss()
-                loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
+                loss = loss_fct(
+                    shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1)
+                )
 
-            self.logger.info(f"Final memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f}MB")
+            self.logger.info(
+                f"Final memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f}MB"
+            )
 
             if not return_dict:
                 output = (logits,) + (hidden_states,)
@@ -708,7 +857,7 @@ class EnhancedTransformer(PreTrainedModel):
         temperature: float = None,
         top_k: int = None,
         top_p: float = None,
-        training: bool = False
+        training: bool = False,
     ) -> torch.Tensor:
         """Generate text using the model."""
         # Use config defaults if not specified
@@ -723,7 +872,9 @@ class EnhancedTransformer(PreTrainedModel):
 
         # Initialize position IDs and token type IDs
         position_ids = torch.arange(max_length, device=device)[None, :]
-        token_type_ids = torch.zeros((batch_size, max_length), dtype=torch.int64, device=device)
+        token_type_ids = torch.zeros(
+            (batch_size, max_length), dtype=torch.int64, device=device
+        )
 
         # Initialize list to store generated tokens
         generated_tokens = []
@@ -741,17 +892,28 @@ class EnhancedTransformer(PreTrainedModel):
 
             # Apply top-k filtering
             if top_k > 0:
-                indices_to_remove = next_token_logits < torch.topk(next_token_logits, top_k)[0][..., -1, None]
+                indices_to_remove = (
+                    next_token_logits
+                    < torch.topk(next_token_logits, top_k)[0][..., -1, None]
+                )
                 next_token_logits[indices_to_remove] = float('-inf')
 
             # Apply top-p (nucleus) filtering
             if top_p < 1.0:
-                sorted_logits, sorted_indices = torch.sort(next_token_logits, descending=True)
-                cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+                sorted_logits, sorted_indices = torch.sort(
+                    next_token_logits, descending=True
+                )
+                cumulative_probs = torch.cumsum(
+                    F.softmax(sorted_logits, dim=-1), dim=-1
+                )
                 sorted_indices_to_remove = cumulative_probs > top_p
-                sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+                sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[
+                    ..., :-1
+                ].clone()
                 sorted_indices_to_remove[..., 0] = 0
-                indices_to_remove = sorted_indices_to_remove.scatter(1, sorted_indices, sorted_indices_to_remove)
+                indices_to_remove = sorted_indices_to_remove.scatter(
+                    1, sorted_indices, sorted_indices_to_remove
+                )
                 next_token_logits[indices_to_remove] = float('-inf')
 
             # Sample next token
@@ -760,7 +922,9 @@ class EnhancedTransformer(PreTrainedModel):
 
             # Update inputs for next iteration
             if 'text' in current_input:
-                current_input['text'] = torch.cat([current_input['text'], next_token], dim=1)
+                current_input['text'] = torch.cat(
+                    [current_input['text'], next_token], dim=1
+                )
             else:
                 current_input = {'text': next_token}
 

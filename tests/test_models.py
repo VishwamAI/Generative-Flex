@@ -18,6 +18,7 @@ from src.models.knowledge_retrieval import KnowledgeIntegrator, KnowledgeConfig
 from src.models.apple_optimizations import AppleOptimizedTransformer, OptimizationConfig
 from src.models.text_to_anything import TextToAnything, GenerationConfig
 
+
 @pytest.fixture
 def enhanced_config():
     return EnhancedConfig(
@@ -39,8 +40,9 @@ def enhanced_config():
         top_k=50,
         repetition_penalty=1.2,
         head_dim=64,
-        max_sequence_length=2048
+        max_sequence_length=2048,
     )
+
 
 @pytest.fixture
 def knowledge_config():
@@ -53,8 +55,9 @@ def knowledge_config():
         use_cache=True,
         update_frequency=100,
         max_cache_size=10000,
-        modalities=['text', 'image', 'audio', 'video']
+        modalities=['text', 'image', 'audio', 'video'],
     )
+
 
 @pytest.fixture
 def optimization_config():
@@ -73,8 +76,9 @@ def optimization_config():
         use_kv_cache=True,
         deterministic=False,  # Added for attention layer
         num_key_value_heads=8,  # Added for KV cache
-        max_cache_size=2048  # Added for KV cache
+        max_cache_size=2048,  # Added for KV cache
     )
+
 
 @pytest.fixture
 def generation_config():
@@ -95,9 +99,10 @@ def generation_config():
         supported_modalities=['text', 'image', 'audio', 'video', 'code'],
         constitutional_principles=[
             'Respect privacy',
-            'Be transparent about AI-generated content'
-        ]
+            'Be transparent about AI-generated content',
+        ],
     )
+
 
 def test_enhanced_transformer(enhanced_config):
     """Test enhanced transformer with features from major models."""
@@ -127,14 +132,10 @@ def test_enhanced_transformer(enhanced_config):
     assert hasattr(model, 'constitutional_layer')
 
     # Test generation capability
-    generated = model.apply(
-        params,
-        inputs,
-        method=model.generate,
-        max_length=32
-    )
+    generated = model.apply(params, inputs, method=model.generate, max_length=32)
     assert isinstance(generated, jnp.ndarray)
     assert generated.shape[1] <= 32  # Max length check
+
 
 def test_knowledge_retrieval(knowledge_config):
     """Test knowledge retrieval system."""
@@ -161,6 +162,7 @@ def test_knowledge_retrieval(knowledge_config):
     new_knowledge = jnp.ones((1, embedding_size))
     model.apply(params, new_knowledge, method=model.update_knowledge)
 
+
 def test_apple_optimizations(optimization_config):
     """Test Apple-style optimizations."""
     # Initialize model
@@ -186,6 +188,7 @@ def test_apple_optimizations(optimization_config):
     assert hasattr(model, 'quantization')
     assert hasattr(model, 'privacy_layer')
 
+
 def test_text_to_anything(generation_config):
     """Test text-to-anything generation pipeline."""
     # Initialize model
@@ -197,7 +200,9 @@ def test_text_to_anything(generation_config):
 
     # Create sample input with correct shape
     batch_size = 1
-    seq_length = generation_config.num_attention_heads * 8  # Multiple of attention heads
+    seq_length = (
+        generation_config.num_attention_heads * 8
+    )  # Multiple of attention heads
     hidden_size = generation_config.hidden_size
 
     # Initialize parameters
@@ -205,11 +210,7 @@ def test_text_to_anything(generation_config):
     params = model.init(key, text_prompt, target_modality)
 
     # Generate content
-    output, metadata = model.apply(
-        params,
-        text_prompt,
-        target_modality
-    )
+    output, metadata = model.apply(params, text_prompt, target_modality)
 
     # Verify output shape and metadata
     assert isinstance(output, jnp.ndarray)
@@ -219,6 +220,7 @@ def test_text_to_anything(generation_config):
     # Test supported modalities
     for modality in generation_config.supported_modalities:
         assert modality in ['text', 'image', 'audio', 'video', 'code']
+
 
 def test_constitutional_principles(generation_config):
     """Test Constitutional AI principles."""
@@ -231,7 +233,9 @@ def test_constitutional_principles(generation_config):
 
     # Create sample input with correct shape
     batch_size = 1
-    seq_length = generation_config.num_attention_heads * 8  # Multiple of attention heads
+    seq_length = (
+        generation_config.num_attention_heads * 8
+    )  # Multiple of attention heads
     hidden_size = generation_config.hidden_size
 
     # Initialize parameters
@@ -239,11 +243,7 @@ def test_constitutional_principles(generation_config):
     params = model.init(key, text_prompt, target_modality)
 
     # Generate content
-    output, metadata = model.apply(
-        params,
-        text_prompt,
-        target_modality
-    )
+    output, metadata = model.apply(params, text_prompt, target_modality)
 
     # Verify safety checks
     assert metadata['constitutional_compliant'] in [True, False]
@@ -251,15 +251,14 @@ def test_constitutional_principles(generation_config):
     assert 'safety_score' in metadata
     assert 'filtered_content' in metadata
 
+
 def test_real_time_integration(knowledge_config):
     """Test real-time data integration (Grok-1 style)."""
     # Initialize model
     model = KnowledgeIntegrator(knowledge_config)
 
     # Test real-time update
-    new_data = {
-        'text': jnp.ones((1, knowledge_config.embedding_size))
-    }
+    new_data = {'text': jnp.ones((1, knowledge_config.embedding_size))}
 
     # Initialize parameters
     key = jax.random.PRNGKey(0)
@@ -270,6 +269,7 @@ def test_real_time_integration(knowledge_config):
 
     # Verify update mechanism
     assert hasattr(model, 'update_knowledge')
+
 
 def test_multi_modal_processing(generation_config):
     """Test multi-modal processing (Gemini style)."""
@@ -282,12 +282,14 @@ def test_multi_modal_processing(generation_config):
 
     # Create sample inputs with correct shapes
     batch_size = 2
-    text_seq_length = generation_config.num_attention_heads * 8  # Multiple of attention heads
+    text_seq_length = (
+        generation_config.num_attention_heads * 8
+    )  # Multiple of attention heads
     hidden_size = generation_config.hidden_size
 
     inputs = {
         'text': jnp.ones((batch_size, text_seq_length, hidden_size)),
-        'image': jnp.ones((batch_size, 256, 256, 3))
+        'image': jnp.ones((batch_size, 256, 256, 3)),
     }
 
     # Initialize parameters
@@ -295,12 +297,7 @@ def test_multi_modal_processing(generation_config):
     params = model.init(key, text_prompt, target_modality)
 
     # Process multi-modal input
-    output, metadata = model.apply(
-        params,
-        text_prompt,
-        target_modality,
-        context=inputs
-    )
+    output, metadata = model.apply(params, text_prompt, target_modality, context=inputs)
 
     # Verify multi-modal capabilities
     assert isinstance(output, jnp.ndarray)
@@ -309,6 +306,7 @@ def test_multi_modal_processing(generation_config):
     assert hasattr(model.encoder, 'image_encoder')
     assert hasattr(model.encoder, 'text_encoder')
     assert hasattr(model, 'cross_modal_attention')
+
 
 if __name__ == '__main__':
     pytest.main([__file__])

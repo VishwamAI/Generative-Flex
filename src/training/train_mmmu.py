@@ -9,7 +9,7 @@ from transformers import (
     PreTrainedModel,
     AutoConfig,
     AutoTokenizer,
-    get_cosine_schedule_with_warmup
+    get_cosine_schedule_with_warmup,
 )
 from accelerate import Accelerator
 from typing import Dict, List, Optional, Tuple, Union
@@ -26,31 +26,35 @@ os.makedirs('logs', exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('logs/training.log')
-    ]
+    handlers=[logging.StreamHandler(), logging.FileHandler('logs/training.log')],
 )
 logger = logging.getLogger(__name__)
 
 # Default subjects for MMMU dataset
 DEFAULT_SUBJECTS = ['Math', 'Computer_Science']
 
-def log_metrics(metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] = None):
+
+def log_metrics(
+    metrics: Dict[str, float], step: Optional[int] = None, epoch: Optional[int] = None
+):
     """Log training metrics to console and file"""
-    metric_str = ' - '.join([
-        f'{k}: {v:.4f}' if isinstance(v, (float, int)) else f'{k}: {v}'
-        for k, v in metrics.items()
-    ])
+    metric_str = ' - '.join(
+        [
+            f'{k}: {v:.4f}' if isinstance(v, (float, int)) else f'{k}: {v}'
+            for k, v in metrics.items()
+        ]
+    )
     if epoch is not None:
         metric_str = f'Epoch {epoch} - {metric_str}'
     if step is not None:
         metric_str = f'Step {step} - {metric_str}'
     logger.info(metric_str)
 
+
 # Define MMMU subjects and splits
 MMMU_SUBJECTS = ['Math', 'Computer_Science']  # Exact subject names from MMMU dataset
 MMMU_SPLITS = ['dev', 'validation', 'test']  # Available splits in MMMU
+
 
 class EnhancedMMUModel(PreTrainedModel):
     supports_gradient_checkpointing = True  # Enable gradient checkpointing support
@@ -61,8 +65,12 @@ class EnhancedMMUModel(PreTrainedModel):
         self.config = config
 
         # Set model dimensions for mathematical reasoning while maintaining efficiency
-        config.hidden_size = min(config.hidden_size, 256)  # Reduced for memory efficiency
-        config.num_attention_heads = min(config.num_attention_heads, 4)  # Fewer heads for efficiency
+        config.hidden_size = min(
+            config.hidden_size, 256
+        )  # Reduced for memory efficiency
+        config.num_attention_heads = min(
+            config.num_attention_heads, 4
+        )  # Fewer heads for efficiency
         config.num_hidden_layers = min(config.num_hidden_layers, 3)  # Reduced layers
 
         # Base transformer with enhanced attention
@@ -71,7 +79,7 @@ class EnhancedMMUModel(PreTrainedModel):
             num_attention_heads=config.num_attention_heads,
             num_hidden_layers=config.num_hidden_layers,
             max_position_embeddings=config.max_position_embeddings,
-            vocab_size=config.vocab_size
+            vocab_size=config.vocab_size,
         )
 
         # Multimodal processing with reduced size
@@ -96,7 +104,9 @@ class EnhancedMMUModel(PreTrainedModel):
             logger.info(f"Processing image chunk 0/{batch_size}, shape: {images.shape}")
 
             # Ensure images are in the correct format
-            if len(images.shape) != 5:  # [batch_size, num_images, channels, height, width]
+            if (
+                len(images.shape) != 5
+            ):  # [batch_size, num_images, channels, height, width]
                 raise ValueError(f"Expected 5D input tensor, got shape {images.shape}")
 
             # Process images through the image processor
@@ -113,8 +123,7 @@ class EnhancedMMUModel(PreTrainedModel):
         try:
             # Process text inputs
             transformer_outputs = self.transformer(
-                input_ids=batch['input_ids'],
-                attention_mask=batch['attention_mask']
+                input_ids=batch['input_ids'], attention_mask=batch['attention_mask']
             )
 
             hidden_states = transformer_outputs['last_hidden_state']
@@ -134,9 +143,13 @@ class EnhancedMMUModel(PreTrainedModel):
             # Calculate losses
             if 'labels' in batch:
                 loss_fct = nn.CrossEntropyLoss()
-                task_loss = loss_fct(math_outputs['logits'].view(-1, self.num_labels),
-                                   batch['labels'].view(-1))
-                moe_loss = math_outputs.get('moe_loss', torch.tensor(0.0, device=task_loss.device))
+                task_loss = loss_fct(
+                    math_outputs['logits'].view(-1, self.num_labels),
+                    batch['labels'].view(-1),
+                )
+                moe_loss = math_outputs.get(
+                    'moe_loss', torch.tensor(0.0, device=task_loss.device)
+                )
                 total_loss = task_loss + 0.01 * moe_loss
                 return total_loss
 
@@ -164,7 +177,7 @@ class EnhancedMMUModel(PreTrainedModel):
         input_ids: torch.Tensor,
         attention_mask: torch.Tensor,
         images: Optional[torch.Tensor] = None,
-        labels: Optional[torch.Tensor] = None
+        labels: Optional[torch.Tensor] = None,
     ):
         # Format inputs for transformer
         inputs = {'text': input_ids}  # Keep input_ids as integers
@@ -176,9 +189,11 @@ class EnhancedMMUModel(PreTrainedModel):
                 processed_chunks = []
 
                 for i in range(0, batch_size, chunk_size):
-                    chunk = images[i:i+chunk_size]
+                    chunk = images[i : i + chunk_size]
                     # Log input chunk shape
-                    logger.info(f"Processing image chunk {i}/{batch_size}, shape: {chunk.shape}")
+                    logger.info(
+                        f"Processing image chunk {i}/{batch_size}, shape: {chunk.shape}"
+                    )
                     # Ensure images are float32 and downsized before processing
                     chunk = chunk.to(torch.float32)
                     # Process chunk
@@ -186,7 +201,11 @@ class EnhancedMMUModel(PreTrainedModel):
                     processed_chunks.append(processed_chunk)
                     # Clear memory
                     del chunk
-                    torch.cuda.empty_cache() if torch.cuda.is_available() else gc.collect()
+                    (
+                        torch.cuda.empty_cache()
+                        if torch.cuda.is_available()
+                        else gc.collect()
+                    )
 
                 # Concatenate processed chunks
                 processed_images = torch.cat(processed_chunks, dim=0)
@@ -207,13 +226,12 @@ class EnhancedMMUModel(PreTrainedModel):
             if self.training and self.transformer.gradient_checkpointing:
                 # Use checkpointing during training if enabled
                 transformer_outputs = torch.utils.checkpoint.checkpoint(
-                    self.transformer,
-                    inputs,
-                    attention_mask,
-                    use_reentrant=False
+                    self.transformer, inputs, attention_mask, use_reentrant=False
                 )
             else:
-                transformer_outputs = self.transformer(inputs, attention_mask=attention_mask)
+                transformer_outputs = self.transformer(
+                    inputs, attention_mask=attention_mask
+                )
 
             hidden_states = transformer_outputs['last_hidden_state']
 
@@ -226,7 +244,7 @@ class EnhancedMMUModel(PreTrainedModel):
                 'router_entropy': math_outputs.get('router_entropy', 0.0),
                 'expert_weights': math_outputs.get('expert_weights', None),
                 'last_hidden_state': hidden_states,
-                'loss': None  # Initialize loss as None
+                'loss': None,  # Initialize loss as None
             }
 
             if labels is not None:
@@ -236,10 +254,16 @@ class EnhancedMMUModel(PreTrainedModel):
                 if len(logits.shape) == 2:  # [batch_size, num_labels]
                     task_loss = loss_fct(logits, labels)
                 else:  # Handle unexpected shapes
-                    logger.warning(f"Unexpected logits shape: {logits.shape}, reshaping...")
-                    task_loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
+                    logger.warning(
+                        f"Unexpected logits shape: {logits.shape}, reshaping..."
+                    )
+                    task_loss = loss_fct(
+                        logits.view(-1, self.num_labels), labels.view(-1)
+                    )
 
-                moe_loss = math_outputs.get('moe_loss', torch.tensor(0.0, device=task_loss.device))
+                moe_loss = math_outputs.get(
+                    'moe_loss', torch.tensor(0.0, device=task_loss.device)
+                )
                 result['loss'] = task_loss + 0.01 * moe_loss  # Scale MoE loss
                 result['task_loss'] = task_loss
                 result['moe_loss'] = moe_loss
@@ -253,6 +277,7 @@ class EnhancedMMUModel(PreTrainedModel):
             if 'transformer_outputs' in locals():
                 del transformer_outputs
             torch.cuda.empty_cache() if torch.cuda.is_available() else gc.collect()
+
 
 class MMUTrainer:
     def __init__(
@@ -269,8 +294,8 @@ class MMUTrainer:
         warmup_steps: int = 100,
         generation_config: Optional[Dict] = None,
         output_dir: str = "outputs",
-        config = None,
-        tokenizer = None
+        config=None,
+        tokenizer=None,
     ):
         """Initialize the MMU trainer with Accelerate support."""
         self.model_name = model_name
@@ -291,7 +316,7 @@ class MMUTrainer:
             mixed_precision="fp16" if fp16 and device != "cpu" else None,
             gradient_accumulation_steps=gradient_accumulation_steps,
             log_with="all",
-            project_dir=output_dir
+            project_dir=output_dir,
         )
 
         # Set up model components with proper config
@@ -311,17 +336,12 @@ class MMUTrainer:
 
         # Create optimizer
         self.optimizer = torch.optim.AdamW(
-            self.model.parameters(),
-            lr=learning_rate,
-            weight_decay=0.05,
-            eps=1e-8
+            self.model.parameters(), lr=learning_rate, weight_decay=0.05, eps=1e-8
         )
 
         # Create dataloaders with tokenizer
         train_dataloader, val_dataloader = create_mmmu_dataloaders(
-            subjects=subjects,
-            batch_size=batch_size,
-            tokenizer=self.tokenizer
+            subjects=subjects, batch_size=batch_size, tokenizer=self.tokenizer
         )
 
         # Create learning rate scheduler
@@ -330,12 +350,22 @@ class MMUTrainer:
         self.lr_scheduler = get_cosine_schedule_with_warmup(
             self.optimizer,
             num_warmup_steps=num_warmup_steps,
-            num_training_steps=num_training_steps
+            num_training_steps=num_training_steps,
         )
 
         # Prepare for training with accelerator
-        self.model, self.optimizer, self.lr_scheduler, train_dataloader, val_dataloader = self.accelerator.prepare(
-            self.model, self.optimizer, self.lr_scheduler, train_dataloader, val_dataloader
+        (
+            self.model,
+            self.optimizer,
+            self.lr_scheduler,
+            train_dataloader,
+            val_dataloader,
+        ) = self.accelerator.prepare(
+            self.model,
+            self.optimizer,
+            self.lr_scheduler,
+            train_dataloader,
+            val_dataloader,
         )
 
         self.train_dataloader = train_dataloader
@@ -343,8 +373,12 @@ class MMUTrainer:
 
         # Create output directory
         os.makedirs(output_dir, exist_ok=True)
-        logger.info(f"Initialized MMUTrainer with {self.accelerator.device} device and fp16={fp16}")
-        logger.info(f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}")
+        logger.info(
+            f"Initialized MMUTrainer with {self.accelerator.device} device and fp16={fp16}"
+        )
+        logger.info(
+            f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}"
+        )
 
     def train(self):
         """Training loop with proper error handling and logging"""
@@ -372,12 +406,18 @@ class MMUTrainer:
                         # Handle loss calculation
                         if isinstance(outputs, dict):
                             loss = outputs.get('loss')
-                            if loss is None and 'logits' in outputs and 'labels' in batch:
+                            if (
+                                loss is None
+                                and 'logits' in outputs
+                                and 'labels' in batch
+                            ):
                                 # Calculate loss if not provided by model
                                 loss_fct = torch.nn.CrossEntropyLoss()
                                 logits = outputs['logits']
-                                loss = loss_fct(logits.view(-1, self.model.num_labels),
-                                             batch['labels'].view(-1))
+                                loss = loss_fct(
+                                    logits.view(-1, self.model.num_labels),
+                                    batch['labels'].view(-1),
+                                )
                         else:
                             loss = outputs.loss if hasattr(outputs, 'loss') else None
 
@@ -392,7 +432,9 @@ class MMUTrainer:
                         self.accelerator.backward(loss)
 
                         if self.accelerator.sync_gradients:
-                            self.accelerator.clip_grad_norm_(self.model.parameters(), self.max_grad_norm)
+                            self.accelerator.clip_grad_norm_(
+                                self.model.parameters(), self.max_grad_norm
+                            )
 
                         self.optimizer.step()
                         self.lr_scheduler.step()
@@ -409,7 +451,11 @@ class MMUTrainer:
                                 'loss': loss.item() * self.gradient_accumulation_steps,
                                 'learning_rate': current_lr,
                             }
-                            if isinstance(outputs, dict) and 'logits' in outputs and 'labels' in batch:
+                            if (
+                                isinstance(outputs, dict)
+                                and 'logits' in outputs
+                                and 'labels' in batch
+                            ):
                                 predictions = torch.argmax(outputs['logits'], dim=-1)
                                 correct = (predictions == batch['labels']).sum().item()
                                 total = batch['labels'].size(0)
@@ -425,7 +471,9 @@ class MMUTrainer:
 
             # Skip epoch summary if no batches were processed
             if num_batches == 0:
-                logger.warning(f"Epoch {epoch} had no valid batches, skipping evaluation")
+                logger.warning(
+                    f"Epoch {epoch} had no valid batches, skipping evaluation"
+                )
                 continue
 
             # Compute average loss for epoch
@@ -474,18 +522,22 @@ class MMUTrainer:
                         input_ids=batch['input_ids'],
                         attention_mask=batch['attention_mask'],
                         labels=batch['labels'],
-                        images=batch.get('images', None)  # Make images optional
+                        images=batch.get('images', None),  # Make images optional
                     )
 
                     # Handle dictionary outputs
                     if isinstance(outputs, dict):
                         loss = outputs.get('loss', 0.0)
                         if loss is not None:
-                            total_loss += loss.item() if isinstance(loss, torch.Tensor) else loss
+                            total_loss += (
+                                loss.item() if isinstance(loss, torch.Tensor) else loss
+                            )
                         logits = outputs.get('logits')
                     else:
                         loss = getattr(outputs, 'loss', 0.0)
-                        total_loss += loss.item() if isinstance(loss, torch.Tensor) else loss
+                        total_loss += (
+                            loss.item() if isinstance(loss, torch.Tensor) else loss
+                        )
                         logits = getattr(outputs, 'logits', None)
 
                     steps += 1
@@ -503,16 +555,16 @@ class MMUTrainer:
 
         # Calculate metrics
         avg_loss = total_loss / steps if steps > 0 else float('inf')
-        math_accuracy = total_math_correct / total_math_samples if total_math_samples > 0 else 0
+        math_accuracy = (
+            total_math_correct / total_math_samples if total_math_samples > 0 else 0
+        )
 
         # Log metrics
         logger.info(f"Validation loss: {avg_loss:.4f}")
         logger.info(f"Validation math accuracy: {math_accuracy:.4f}")
 
-        return {
-            'val_loss': avg_loss,
-            'math_accuracy': math_accuracy
-        }
+        return {'val_loss': avg_loss, 'math_accuracy': math_accuracy}
+
 
 if __name__ == "__main__":
     try:
@@ -524,7 +576,7 @@ if __name__ == "__main__":
             learning_rate=1e-5,  # Lower learning rate for stability
             num_epochs=5,
             gradient_accumulation_steps=8,  # More gradient accumulation for larger effective batch
-            output_dir="outputs"
+            output_dir="outputs",
         )
 
         # Set device

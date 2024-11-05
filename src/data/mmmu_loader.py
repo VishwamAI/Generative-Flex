@@ -1,4 +1,5 @@
 """MMMU dataset loader for mathematical reasoning tasks."""
+
 import os
 import gc
 from typing import List, Dict, Any, Tuple
@@ -9,10 +10,13 @@ from PIL import Image
 import requests
 from io import BytesIO
 
+
 class MMUDataset(Dataset):
     """Dataset class for MMMU benchmark."""
 
-    def __init__(self, subject: str, split: str = 'dev', tokenizer=None, max_length: int = 512):
+    def __init__(
+        self, subject: str, split: str = "dev", tokenizer=None, max_length: int = 512
+    ):
         """Initialize the dataset.
 
         Args:
@@ -23,7 +27,9 @@ class MMUDataset(Dataset):
         """
         print(f"Loading MMMU dataset for subject: {subject}, split: {split}")
         try:
-            self.dataset = load_dataset('MMMU/MMMU', subject, split=split, cache_dir='./data/cache')
+            self.dataset = load_dataset(
+                "MMMU/MMMU", subject, split=split, cache_dir="./data/cache"
+            )
             print(f"Successfully loaded {len(self.dataset)} examples")
         except Exception as e:
             print(f"Error loading dataset: {e}")
@@ -33,8 +39,9 @@ class MMUDataset(Dataset):
         self.max_length = max_length
 
         # Initialize specialized math tokenizer if subject is Math
-        if subject == 'Math':
+        if subject == "Math":
             from .math_tokenizer import MathTokenizer
+
             self.tokenizer = MathTokenizer(tokenizer)
         else:
             self.tokenizer = tokenizer
@@ -48,7 +55,9 @@ class MMUDataset(Dataset):
         """Return the number of items in the dataset."""
         return len(self.dataset)
 
-    def preprocess_text(self, question: str, options: List[str]) -> Dict[str, torch.Tensor]:
+    def preprocess_text(
+        self, question: str, options: List[str]
+    ) -> Dict[str, torch.Tensor]:
         """Tokenize question and options with special handling for mathematical content."""
         if self.tokenizer is None:
             raise ValueError("Tokenizer not provided")
@@ -59,26 +68,26 @@ class MMUDataset(Dataset):
             text += f"{chr(65+i)}. {opt}\n"
 
         # Use specialized math tokenizer for Math subject
-        if self.subject == 'Math':
+        if self.subject == "Math":
             encoding = self.tokenizer.tokenize(
                 text,
                 max_length=self.max_length,
-                padding='max_length',
+                padding="max_length",
                 truncation=True,
-                return_tensors='pt'
+                return_tensors="pt",
             )
         else:
             encoding = self.tokenizer(
                 text,
                 max_length=self.max_length,
-                padding='max_length',
+                padding="max_length",
                 truncation=True,
-                return_tensors='pt'
+                return_tensors="pt",
             )
 
         return {
-            'input_ids': encoding['input_ids'].squeeze(0),
-            'attention_mask': encoding['attention_mask'].squeeze(0)
+            "input_ids": encoding["input_ids"].squeeze(0),
+            "attention_mask": encoding["attention_mask"].squeeze(0),
         }
 
     def preprocess_image(self, image: Image.Image) -> torch.Tensor:
@@ -87,8 +96,8 @@ class MMUDataset(Dataset):
         image = image.resize(self.image_size, Image.BILINEAR)
 
         # Preserve color information for mathematical diagrams
-        if image.mode != 'RGB':
-            image = image.convert('RGB')
+        if image.mode != "RGB":
+            image = image.convert("RGB")
 
         # Convert to tensor with full precision, ensuring 3 channels
         image_data = torch.FloatTensor(list(image.getdata()))
@@ -98,7 +107,7 @@ class MMUDataset(Dataset):
 
         # Apply basic normalization while preserving color information
         mean = [0.485, 0.456, 0.406]  # ImageNet means
-        std = [0.229, 0.224, 0.225]   # ImageNet stds
+        std = [0.229, 0.224, 0.225]  # ImageNet stds
         for c in range(3):
             image[c] = (image[c] - mean[c]) / std[c]
 
@@ -130,23 +139,23 @@ class MMUDataset(Dataset):
         item = self.dataset[idx]
 
         # Process text
-        text_inputs = self.preprocess_text(item['question'], item['options'])
+        text_inputs = self.preprocess_text(item["question"], item["options"])
 
         # Process images if present
         image_tensor = None
-        if 'image' in item and item['image']:
+        if "image" in item and item["image"]:
             try:
-                if isinstance(item['image'], str):
+                if isinstance(item["image"], str):
                     # Check cache first
                     if idx in self.image_cache:
                         image_tensor = self.image_cache[idx]
                     else:
                         # Load and process image
-                        if item['image'].startswith('http'):
-                            response = requests.get(item['image'], timeout=5)
+                        if item["image"].startswith("http"):
+                            response = requests.get(item["image"], timeout=5)
                             img = Image.open(BytesIO(response.content))
                         else:
-                            img = Image.open(item['image'])
+                            img = Image.open(item["image"])
 
                         image_tensor = self.preprocess_image(img)
 
@@ -159,14 +168,18 @@ class MMUDataset(Dataset):
                         del img
             except Exception as e:
                 print(f"Error loading image: {e}")
-                image_tensor = torch.zeros(3, *self.image_size, dtype=torch.float32)  # 3 channels for RGB
+                image_tensor = torch.zeros(
+                    3, *self.image_size, dtype=torch.float32
+                )  # 3 channels for RGB
 
         if image_tensor is None:
-            image_tensor = torch.zeros(3, *self.image_size, dtype=torch.float32)  # 3 channels for RGB
+            image_tensor = torch.zeros(
+                3, *self.image_size, dtype=torch.float32
+            )  # 3 channels for RGB
 
         # Convert answer to tensor if available, ensure valid bounds (0-3 for A-D)
         try:
-            answer_idx = ord(item.get('answer', 'A')) - ord('A')
+            answer_idx = ord(item.get("answer", "A")) - ord("A")
             # Ensure label is within valid bounds (0-3)
             if 0 <= answer_idx <= 3:
                 labels = torch.tensor(answer_idx)
@@ -178,19 +191,16 @@ class MMUDataset(Dataset):
         # Force garbage collection
         gc.collect()
 
-        return {
-            **text_inputs,
-            'images': image_tensor,
-            'labels': labels
-        }
+        return {**text_inputs, "images": image_tensor, "labels": labels}
+
 
 def create_mmmu_dataloaders(
-    subjects: List[str] = ['Math', 'Computer_Science'],
+    subjects: List[str] = ["Math", "Computer_Science"],
     batch_size: int = 1,  # Reduced batch size for memory efficiency
     num_workers: int = 0,  # Disabled multiprocessing
-    tokenizer = None,
+    tokenizer=None,
     max_length: int = 512,
-    max_examples: int = 5  # Limit number of examples per split
+    max_examples: int = 5,  # Limit number of examples per split
 ) -> Tuple[DataLoader, DataLoader]:
     """Create dataloaders for training and validation.
 
@@ -211,13 +221,21 @@ def create_mmmu_dataloaders(
     for subject in subjects:
         try:
             # Load development set (for few-shot learning)
-            train_dataset = MMUDataset(subject, split='dev', tokenizer=tokenizer, max_length=max_length)
-            train_dataset.dataset = train_dataset.dataset.select(range(min(max_examples, len(train_dataset.dataset))))
+            train_dataset = MMUDataset(
+                subject, split="dev", tokenizer=tokenizer, max_length=max_length
+            )
+            train_dataset.dataset = train_dataset.dataset.select(
+                range(min(max_examples, len(train_dataset.dataset)))
+            )
             train_datasets.append(train_dataset)
 
             # Load validation set
-            val_dataset = MMUDataset(subject, split='validation', tokenizer=tokenizer, max_length=max_length)
-            val_dataset.dataset = val_dataset.dataset.select(range(min(max_examples, len(val_dataset.dataset))))
+            val_dataset = MMUDataset(
+                subject, split="validation", tokenizer=tokenizer, max_length=max_length
+            )
+            val_dataset.dataset = val_dataset.dataset.select(
+                range(min(max_examples, len(val_dataset.dataset)))
+            )
             val_datasets.append(val_dataset)
 
         except Exception as e:
@@ -225,7 +243,9 @@ def create_mmmu_dataloaders(
             continue
 
     # Combine datasets
-    train_dataset = torch.utils.data.ConcatDataset(train_datasets) if train_datasets else None
+    train_dataset = (
+        torch.utils.data.ConcatDataset(train_datasets) if train_datasets else None
+    )
     val_dataset = torch.utils.data.ConcatDataset(val_datasets) if val_datasets else None
 
     if train_dataset is None or val_dataset is None:
@@ -239,7 +259,7 @@ def create_mmmu_dataloaders(
         num_workers=0,  # Disable multiprocessing
         pin_memory=False,  # Disable pinned memory
         persistent_workers=False,  # Disable persistent workers
-        prefetch_factor=None  # Disable prefetching
+        prefetch_factor=None,  # Disable prefetching
     )
 
     val_loader = DataLoader(
@@ -249,14 +269,15 @@ def create_mmmu_dataloaders(
         num_workers=0,  # Disable multiprocessing
         pin_memory=False,  # Disable pinned memory
         persistent_workers=False,  # Disable persistent workers
-        prefetch_factor=None  # Disable prefetching
+        prefetch_factor=None,  # Disable prefetching
     )
 
     return train_loader, val_loader
 
+
 if __name__ == "__main__":
     # Test the dataset loader
-    subjects = ['Math', 'Computer_Science']
+    subjects = ["Math", "Computer_Science"]
     train_loader, val_loader, test_loader = create_mmmu_dataloaders(subjects)
 
     print(f"Number of training batches: {len(train_loader)}")
