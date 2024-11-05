@@ -1,69 +1,45 @@
-"""Configuration for model training."""
-
 from dataclasses import dataclass
-from typing import Optional, Dict, Any
-
-
-@dataclass
-class ModelConfig:
-    """Base configuration for all models."""
-
-    model_type: str  # 'language', 'image', 'audio', 'video'
-    hidden_size: int = 768
-    num_layers: int = 12
-    num_heads: int = 12
-    dropout_rate: float = 0.1
-    max_sequence_length: int = 1024
-    vocab_size: Optional[int] = None  # For language models
-    image_size: Optional[tuple] = None  # For image models
-    audio_sample_rate: Optional[int] = None  # For audio models
-    video_frames: Optional[int] = None  # For video models
-
+from typing import List, Optional, Dict
 
 @dataclass
 class TrainingConfig:
-    """Training configuration."""
+    model_name: str = "facebook/opt-125m"
+    subjects: List[str] = None
+    batch_size: int = 4
+    learning_rate: float = 2e-5
+    num_epochs: int = 5
+    gradient_accumulation_steps: int = 8
+    max_grad_norm: float = 1.0
+    warmup_steps: int = 100
+    device: str = "cuda"  # Explicitly set device
+    fp16: bool = True    # Enable mixed precision
 
-    batch_size: int = 32
-    learning_rate: float = 1e-4
+    # Model architecture parameters
+    hidden_size: int = 256
+    num_attention_heads: int = 8
+    num_hidden_layers: int = 6
+    intermediate_size: int = 1024
+    max_position_embeddings: int = 512
+    num_experts: int = 4
+    expert_capacity_factor: float = 1.25
+
+    # Training optimization parameters
     weight_decay: float = 0.01
-    num_epochs: int = 100
-    warmup_steps: int = 1000
-    gradient_clip_norm: float = 1.0
-    checkpoint_dir: str = "checkpoints"
-    log_every_n_steps: int = 100
-    eval_every_n_steps: int = 1000
-    save_every_n_steps: int = 5000
+    warmup_ratio: float = 0.1
+    eval_steps: int = 100
+    save_steps: int = 200
+    logging_steps: int = 20
 
+    generation_config: Dict = None
 
-@dataclass
-class DataConfig:
-    """Data configuration."""
+    def __post_init__(self):
+        if self.subjects is None:
+            self.subjects = ["Math", "Computer_Science"]
 
-    data_dir: str = "data"
-    train_split: float = 0.8
-    val_split: float = 0.1
-    test_split: float = 0.1
-    shuffle_buffer_size: int = 10000
-    prefetch_size: int = 2
-
-
-def get_default_config(model_type: str) -> Dict[str, Any]:
-    """Get default configuration for a specific model type."""
-    base_config = {
-        "model": ModelConfig(model_type=model_type),
-        "training": TrainingConfig(),
-        "data": DataConfig(),
-    }
-
-    # Model-specific configurations
-    if model_type == "language":
-        base_config["model"].vocab_size = 50257  # GPT-2 vocabulary size
-    elif model_type == "image":
-        base_config["model"].image_size = (256, 256)
-    elif model_type == "audio":
-        base_config["model"].audio_sample_rate = 16000
-    elif model_type == "video":
-        base_config["model"].video_frames = 16
-
-    return base_config
+        if self.generation_config is None:
+            self.generation_config = {
+                "do_sample": True,
+                "temperature": 0.7,
+                "top_p": 0.9,
+                "max_length": 512
+            }
