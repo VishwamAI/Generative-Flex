@@ -111,8 +111,7 @@ class MMUDataset(Dataset):
                                             images.append(image)
                                     except Exception as e:
                                         logger.warning(
-                                            f"Failed to process {
-                                                img_key}: {str(e)}"}
+                                            f"Failed to process {img_key}: {str(e)}"
                                         )
                                         images.append(torch.zeros(3, 224, 224))
                                 else:
@@ -271,8 +270,7 @@ class MMUDataset(Dataset):
                     collate_fn=MMUDataset.collate_mmmu_batch,
                 )
                 logger.info(
-                    f"Created {
-                        split} dataloader with {len(datasets[split])} examples"}
+                    f"Created {split} dataloader with {len(datasets[split])} examples"
                 )
 
             return (

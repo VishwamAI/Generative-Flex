@@ -1,8 +1,9 @@
 """Centralized configuration management for Generative-Flex."""
 
+import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Dict, Any, Tuple
+from typing import Optional, Dict, Any, Tuple, Type
 
 
 @dataclass
@@ -67,7 +68,7 @@ class ModelConfig:
 
     @property
     def max_position_embeddings(self) -> int:
-"""Compatibility property for models expecting max_position_embeddings."""
+        """Compatibility property for models expecting max_position_embeddings."""
         return self.max_seq_length
 
 
@@ -122,7 +123,7 @@ class Config:
 
     def get_config(
         model_type: str, config_path: Optional[str] = None
-    ) -> Config:
+    ) -> "Config":
         """Get configuration for a specific model type."""
         if config_path and Path(config_path).exists():
             return Config.from_json(config_path)

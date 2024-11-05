@@ -299,8 +299,7 @@ class FlexibleInputProcessor(nn.Module):
         batch_size, seq_length = inputs.shape[:2]
         if seq_length > self.config.max_sequence_length:
             raise ValueError(
-f"Input sequence length {seq_length} exceeds maximum
-                {self.config.max_sequence_length}"
+                f"Input sequence length {seq_length} exceeds maximum {self.config.max_sequence_length}"
             )
 
         # Generate position embeddings
