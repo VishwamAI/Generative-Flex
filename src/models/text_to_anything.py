@@ -168,103 +168,95 @@ class ModalityEncoder(nn.Module):
     def __call__(self, inputs: Dict[str, Union[str, jnp.ndarray]]) -> jnp.ndarray:
         """Encode inputs into a unified representation."""
         encodings = {}
+        batch_size = 1  # Initialize with default value
+        curr_batch_size = 1  # Initialize with default value
 #         batch_size = None  # TODO: Remove or use this variable
-
         # Calculate proper sequence length (ensure it's a multiple of attention heads)
         sequence_length = min(
             self.config.max_sequence_length,
             ((self.config.default_sequence_length + self.config.num_attention_heads - 1)
              // self.config.num_attention_heads * self.config.num_attention_heads)
         )
-
         if "text" in inputs:
             if isinstance(inputs["text"], str):
                 # Tokenize and embed text
                 tokens = self.tokenizer.encode(inputs["text"])
                 tokens = tokens.reshape(1, -1)  # Add batch dimension
                 embedded = self.embedding(tokens)
-#                 curr_batch_size = 1  # TODO: Remove or use this variable
+                 curr_batch_size = 1   
             else:
                 # Handle pre-tokenized input
                 input_tensor = inputs["text"]
                 if len(input_tensor.shape) == 2:
                     embedded = self.embedding(input_tensor)
-#                     curr_batch_size = embedded.shape[0]  # TODO: Remove or use this variable
+                     curr_batch_size = embedded.shape[0]   
                 else:
                     embedded = input_tensor
-#                     curr_batch_size = input_tensor.shape[0]  # TODO: Remove or use this variable
-
+                     curr_batch_size = input_tensor.shape[0]   
             # Update global batch size
             if batch_size is None:
-#                 batch_size = curr_batch_size  # TODO: Remove or use this variable
-
+                batch_size = curr_batch_size
+                 batch_size = curr_batch_size   
             # Ensure proper sequence length
             embedded = self._adjust_sequence_length(
                 embedded,
                 sequence_length
             )
             encodings["text"] = self.text_encoder(embedded)
-
         if "image" in inputs:
             img = inputs["image"]
             if len(img.shape) == 4:  # (batch_size, height, width, channels)
-#                 curr_batch_size = img.shape[0]  # TODO: Remove or use this variable
+                 curr_batch_size = img.shape[0]   
                 if batch_size is None:
-#                     batch_size = curr_batch_size  # TODO: Remove or use this variable
-
+                batch_size = curr_batch_size
+                     batch_size = curr_batch_size   
                 # Flatten spatial dimensions
                 height, width = img.shape[1:3]
                 img_flat = img.reshape(curr_batch_size, height * width, img.shape[-1])
                 img_flat = self._adjust_sequence_length(img_flat, sequence_length)
                 encodings["image"] = self.image_encoder(img_flat)
-
         if "audio" in inputs:
             audio = inputs["audio"]
             if len(audio.shape) == 3:  # (batch_size, time, features)
-#                 curr_batch_size = audio.shape[0]  # TODO: Remove or use this variable
+                 curr_batch_size = audio.shape[0]   
                 if batch_size is None:
-#                     batch_size = curr_batch_size  # TODO: Remove or use this variable
-
+                batch_size = curr_batch_size
+                     batch_size = curr_batch_size   
                 audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
                 audio_flat = self._adjust_sequence_length(audio_flat, sequence_length)
                 encodings["audio"] = self.audio_encoder(audio_flat)
-
         if "video" in inputs:
             video = inputs["video"]
             if len(video.shape) == 5:  # (batch_size, frames, height, width, channels)
-#                 curr_batch_size = video.shape[0]  # TODO: Remove or use this variable
+                 curr_batch_size = video.shape[0]   
                 if batch_size is None:
-#                     batch_size = curr_batch_size  # TODO: Remove or use this variable
-
+                batch_size = curr_batch_size
+                     batch_size = curr_batch_size   
                 frames, height, width = video.shape[1:4]
                 video_flat = video.reshape(
                     curr_batch_size, frames * height * width, video.shape[-1]
                 )
                 video_flat = self._adjust_sequence_length(video_flat, sequence_length)
                 encodings["video"] = self.video_encoder(video_flat)
-
         if "code" in inputs:
             if isinstance(inputs["code"], str):
                 tokens = self.tokenizer.encode(inputs["code"])
                 tokens = tokens.reshape(1, -1)
                 embedded = self.embedding(tokens)
-#                 curr_batch_size = 1  # TODO: Remove or use this variable
+                 curr_batch_size = 1   
             else:
                 embedded = inputs["code"]
-#                 curr_batch_size = embedded.shape[0]  # TODO: Remove or use this variable
-
+                 curr_batch_size = embedded.shape[0]   
             if batch_size is None:
-#                 batch_size = curr_batch_size  # TODO: Remove or use this variable
-
+                batch_size = curr_batch_size
+                 batch_size = curr_batch_size   
             embedded = self._adjust_sequence_length(
                 embedded,
                 sequence_length
             )
             encodings["code"] = self.code_encoder(embedded)
-
         if not encodings:
             raise ValueError("No supported modality found in inputs")
-
         # Combine all encodings
         encoded_list = []
         for encoding in encodings.values():
@@ -273,27 +265,20 @@ class ModalityEncoder(nn.Module):
                 encoding = jnp.broadcast_to(
                     encoding, (batch_size,) + encoding.shape[1:]
                 )
-
             # Ensure consistent hidden size
             if encoding.shape[-1] != self.config.hidden_size:
                 encoding = nn.Dense(self.config.hidden_size)(encoding)
-
             # Ensure consistent sequence length
             encoding = self._adjust_sequence_length(encoding, sequence_length)
             encoded_list.append(encoding)
-
         # Stack and average across modalities
         combined = jnp.stack(encoded_list)
         return jnp.mean(
             combined, axis=0
         )  # Shape: (batch_size, seq_length, hidden_size)
-
-
 class ModalityDecoder(nn.Module):
     """Decodes unified representation into different modalities."""
-
     config: GenerationConfig
-
     def setup(self):
         self.text_decoder = nn.Dense(self.config.hidden_size)
         self.image_decoder = nn.ConvTranspose(
@@ -306,7 +291,6 @@ class ModalityDecoder(nn.Module):
             features=3, kernel_size=(3, 3, 3), padding="SAME"  # RGB channels
         )
         self.code_decoder = nn.Dense(self.config.hidden_size)
-
     def __call__(self, hidden_states: jnp.ndarray, target_modality: str) -> jnp.ndarray:
         if target_modality == "text":
             return self.text_decoder(hidden_states)
@@ -320,20 +304,15 @@ class ModalityDecoder(nn.Module):
             return self.code_decoder(hidden_states)
         else:
             raise ValueError(f"Unsupported target modality: {target_modality}")
-
-
 class ConstitutionalChecker(nn.Module):
     """Implements Constitutional AI principles for content safety."""
-
     config: GenerationConfig
-
     def setup(self):
         """Initialize components."""
         self.safety_threshold = 0.7
         self.content_filter = nn.Dense(self.config.hidden_size)
         self.safety_scorer = nn.Dense(1)
         self.alignment_layer = nn.Dense(self.config.hidden_size)
-
     @nn.compact
     def __call__(
         self, content: jnp.ndarray, training: bool = False
@@ -342,22 +321,17 @@ class ConstitutionalChecker(nn.Module):
         # Analyze content for safety
         safety_features = self.content_filter(content)
         safety_score = self.safety_scorer(safety_features)
-
         # Apply safety threshold
         is_safe = safety_score > self.safety_threshold
-
         # If unsafe, apply alignment transformation
         aligned_content = jnp.where(
             is_safe[:, None], content, self.alignment_layer(content)
         )
-
         return aligned_content, is_safe.squeeze()
-
     def analyze_safety(self, content: jnp.ndarray) -> jnp.ndarray:
         """Analyze content for potential safety issues."""
         safety_features = self.content_filter(content)
         return self.safety_scorer(safety_features)
-
     def filter_content(
         self, content: jnp.ndarray, safety_scores: jnp.ndarray
     ) -> jnp.ndarray:
@@ -367,13 +341,9 @@ class ConstitutionalChecker(nn.Module):
             unsafe_mask[:, None], self.alignment_layer(content), content
         )
         return aligned_content
-
-
 class TextToAnything(nn.Module):
     """Text-to-anything generation model."""
-
     config: GenerationConfig
-
     def setup(self):
         """Initialize components."""
         # Core components
@@ -387,40 +357,30 @@ class TextToAnything(nn.Module):
         self.output_projection = nn.Dense(self.config.vocab_size)
         self.layer_norm = nn.LayerNorm(epsilon=self.config.layer_norm_eps)
         self.dropout = nn.Dropout(rate=self.config.dropout_rate)
-
         # Initialize modality-specific components
         self.encoder = ModalityEncoder(self.config)
         self.decoder = ModalityDecoder(self.config)
-
         # Initialize transformer and optimizations
         self.transformer = EnhancedTransformer(self.config)
         self.apple_optimizations = AppleOptimizedTransformer(self.config)
-
         # Initialize safety components
         self.constitutional_checker = ConstitutionalChecker(self.config)
-
         # Initialize knowledge integration
         self.knowledge_integrator = KnowledgeIntegrator(self.config)
-
     def encode_input(self, text_prompt: str) -> jnp.ndarray:
         """Encode input text into hidden states."""
         # Tokenize input
         tokens = self.tokenizer.encode(text_prompt)
-
         # Add batch dimension if needed
         if len(tokens.shape) == 1:
             tokens = tokens[None, :]
-
         # Get embeddings
         hidden_states = self.embeddings(tokens)
-
         # Ensure proper shape for attention
 #         batch_size, seq_length = hidden_states.shape[:2]  # TODO: Remove or use this variable
         if hidden_states.shape[-1] != self.config.hidden_size:
             hidden_states = self.input_projection(hidden_states)
-
         return hidden_states
-
     @nn.compact
     def __call__(
         self,
@@ -436,7 +396,6 @@ class TextToAnything(nn.Module):
         # Validate target modality
         if target_modality not in self.config.supported_modalities:
             raise ValueError(f"Unsupported target modality: {target_modality}")
-
         # Handle string input by converting to dict
         if isinstance(inputs, str):
             inputs = {"text": inputs}
@@ -449,11 +408,9 @@ class TextToAnything(nn.Module):
                         "token_type_ids": inputs.get("token_type_ids"),
                     )
                     }
-
         # Process multi-modal inputs with proper shape handling
         hidden_states_list = []
 #         batch_size = None  # TODO: Remove or use this variable
-
         # Encode text input with shape validation
         if "text" in inputs:
             text_hidden = self.encoder({"text": inputs["text"]})
@@ -466,7 +423,6 @@ sequence_length = (
                     batch_size, -1, self.config.hidden_size
                 )
             hidden_states_list.append(text_hidden)
-
         # Encode image input if present
         if "image" in inputs:
             image_hidden = self.encoder({"image": inputs["image"]})
@@ -478,7 +434,6 @@ sequence_length = (
                     batch_size, -1, self.config.hidden_size
                 )
             hidden_states_list.append(image_hidden)
-
         # Combine hidden states with shape validation
         if len(hidden_states_list) > 1:
             # Ensure all hidden states have same sequence length
@@ -490,7 +445,6 @@ sequence_length = (
             hidden_states = jnp.concatenate(hidden_states_list, axis=1)
         else:
             hidden_states = hidden_states_list[0]
-
         # Process context if provided
         if context is not None:
             context_states = []
@@ -504,7 +458,6 @@ sequence_length = (
                             batch_size, -1, self.config.hidden_size
                         )
                     context_states.append(encoded_context)
-
             if context_states:
                 # Ensure context states have same sequence length
                 max_ctx_len = max(c.shape[1] for c in context_states)
@@ -514,12 +467,10 @@ sequence_length = (
                 ]
                 context_hidden = jnp.concatenate(context_states, axis=1)
                 hidden_states = jnp.concatenate([hidden_states, context_hidden], axis=1)
-
         # Calculate proper sequence length for attention
 #         seq_length = hidden_states.shape[1]  # TODO: Remove or use this variable
         num_heads = self.config.num_attention_heads
 #         head_dim = self.config.hidden_size // num_heads  # TODO: Remove or use this variable
-
         # Ensure sequence length is compatible with attention heads
 #         target_seq_length = min(  # TODO: Remove or use this variable
             sequence_length = (
@@ -527,7 +478,6 @@ sequence_length = (
             )
                 ((seq_length + num_heads - 1) // num_heads) * num_heads,
         )
-
         # Adjust hidden states to target sequence length
         if seq_length < target_seq_length:
             padding = jnp.zeros(
@@ -536,16 +486,12 @@ sequence_length = (
             hidden_states = jnp.concatenate([hidden_states, padding], axis=1)
         else:
             hidden_states = hidden_states[:, :target_seq_length, :]
-
         # Apply transformer with optimizations
         hidden_states = self.apple_optimizations(hidden_states, training=training)
-
         # Apply constitutional AI checks
         output, compliant = self.constitutional_checker(hidden_states, target_modality)
-
         # Generate content in target modality
         output = self.decoder(output, target_modality)
-
         # Prepare metadata
         metadata = {
             "modality": target_modality,
@@ -563,9 +509,7 @@ sequence_length = (
                         },
                         }
                     )
-
         return output, metadata
-
     def generate(
         self,
             (
@@ -580,10 +524,8 @@ sequence_length = (
         """Generate content with specified parameters."""
         if max_length is None:
             max_length = self.config.max_length
-
         # Initial generation
         output, metadata = self(text_prompt, target_modality, context, training=False)
-
         # Apply safety checks and regenerate if needed
         if not metadata["constitutional_compliant"]:
             # Regenerate with stronger safety constraints
@@ -591,5 +533,4 @@ sequence_length = (
             output, metadata = self(
                 text_prompt, target_modality, context, training=False
             )
-
         return output, metadata
