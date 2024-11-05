@@ -1,7 +1,5 @@
 import torch
 import torch.nn as nn
-from typing import Dict, Optional, List
-from transformers import PretrainedConfig
 
 
 class MathematicalNotationProcessor(nn.Module):
@@ -9,7 +7,7 @@ class MathematicalNotationProcessor(nn.Module):
 
     def __init__(self, config: PretrainedConfig):
         super().__init__()
-        self.hidden_size = config.hidden_size
+#         self.hidden_size = config.hidden_size  # TODO: Remove or use this variable
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
         # Embedding layers for different notation types

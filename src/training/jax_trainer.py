@@ -1,10 +1,8 @@
+import flax
 """JAX/Flax training infrastructure for Generative-Flex."""
 
 from typing import Any, Dict, Optional
-import jax
-import jax.numpy as jnp
 import optax
-import flax.linen as nn
 from flax.training import train_state
 import logging
 from pathlib import Path

@@ -1,10 +1,7 @@
-import os
 import gc
 import logging
 import torch
 import torch.nn as nn
-from torch.optim.lr_scheduler import CosineAnnealingLR
-from torch.utils.checkpoint import checkpoint
 from transformers import (
     PreTrainedModel,
     AutoConfig,
@@ -12,7 +9,6 @@ from transformers import (
     get_cosine_schedule_with_warmup,
 )
 from accelerate import Accelerator
-from typing import Dict, List, Optional, Tuple, Union
 from tqdm.auto import tqdm
 
 from ..models.enhanced_transformer import EnhancedTransformer
@@ -65,7 +61,7 @@ class EnhancedMMUModel(PreTrainedModel):
         self.config = config
 
         # Set model dimensions for mathematical reasoning while maintaining efficiency
-        config.hidden_size = min(
+#         config.hidden_size = min(  # TODO: Remove or use this variable
             config.hidden_size, 256
         )  # Reduced for memory efficiency
         config.num_attention_heads = min(
@@ -100,7 +96,7 @@ class EnhancedMMUModel(PreTrainedModel):
     def process_images(self, images: torch.Tensor) -> torch.Tensor:
         """Process batch of images with proper error handling and reshaping"""
         try:
-            batch_size = images.size(0)
+#             batch_size = images.size(0)  # TODO: Remove or use this variable
             logger.info(f"Processing image chunk 0/{batch_size}, shape: {images.shape}")
 
             # Ensure images are in the correct format
@@ -184,7 +180,7 @@ class EnhancedMMUModel(PreTrainedModel):
         if images is not None:
             try:
                 # Process images through image processor in smaller chunks
-                batch_size = images.size(0)
+#                 batch_size = images.size(0)  # TODO: Remove or use this variable
                 chunk_size = 1  # Process one image at a time
                 processed_chunks = []
 
@@ -300,7 +296,7 @@ class MMUTrainer:
         """Initialize the MMU trainer with Accelerate support."""
         self.model_name = model_name
         self.subjects = subjects
-        self.batch_size = batch_size
+#         self.batch_size = batch_size  # TODO: Remove or use this variable
         self.learning_rate = learning_rate
         self.num_epochs = num_epochs
         self.gradient_accumulation_steps = gradient_accumulation_steps
@@ -322,7 +318,7 @@ class MMUTrainer:
         # Set up model components with proper config
         if config is None:
             config = AutoConfig.from_pretrained(model_name)
-            config.hidden_size = 256
+#             config.hidden_size = 256  # TODO: Remove or use this variable
             config.num_attention_heads = 4
             config.num_hidden_layers = 3
             config.intermediate_size = 512
@@ -374,7 +370,8 @@ class MMUTrainer:
         # Create output directory
         os.makedirs(output_dir, exist_ok=True)
         logger.info(
-            f"Initialized MMUTrainer with {self.accelerator.device} device and fp16={fp16}"
+f"Initialized MMUTrainer with {self.accelerator.device} device and fp16=\
+    {fp16}"
         )
         logger.info(
             f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}"
@@ -575,7 +572,8 @@ if __name__ == "__main__":
             batch_size=1,  # Smaller batch size for larger model
             learning_rate=1e-5,  # Lower learning rate for stability
             num_epochs=5,
-            gradient_accumulation_steps=8,  # More gradient accumulation for larger effective batch
+gradient_accumulation_steps=\
+    8,  # More gradient accumulation for larger effective batch
             output_dir="outputs",
         )
 

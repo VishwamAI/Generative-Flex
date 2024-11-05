@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint
-from typing import Dict, Optional, Tuple, List
-from sympy import sympify, solve
 from transformers import PreTrainedModel, GenerationMixin, PretrainedConfig
 from ..multimodal.base_transformer import BaseTransformer, TransformerBlock
 from ..layers.flash_moe import FlashAttention, MixtureOfExperts
@@ -34,8 +32,8 @@ class MathReasoningHead(nn.Module):
         self.num_attention_heads = (
             config.num_attention_heads if hasattr(config, "num_attention_heads") else 8
         )
-        self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32
-        self.max_seq_length = (
+#         self.head_dim = config.head_dim if hasattr(config, "head_dim") else 32  # TODO: Remove or use this variable
+#         self.max_seq_length = (  # TODO: Remove or use this variable
             config.max_position_embeddings
             if hasattr(config, "max_position_embeddings")
             else 512
@@ -123,8 +121,8 @@ class MathReasoningHead(nn.Module):
         expressions: Optional[List[str]] = None,
         **kwargs,
     ) -> Dict[str, torch.Tensor]:
-        batch_size = hidden_states.size(0)
-        seq_length = hidden_states.size(1)
+#         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
+#         seq_length = hidden_states.size(1)  # TODO: Remove or use this variable
         hidden_dim = hidden_states.size(2)
 
         # Project input to correct dimension
@@ -199,7 +197,7 @@ class MathReasoningHead(nn.Module):
 
         # Route through enhanced subfield-specific experts
         expert_outputs = []
-        expert_weights = []
+#         expert_weights = []  # TODO: Remove or use this variable
 
         # Get routing weights for all tokens
         token_features = hidden_states.view(
@@ -352,7 +350,7 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
         self, hidden_states: torch.Tensor
     ) -> torch.Tensor:
         """Process mathematical expressions using symbolic processor."""
-        batch_size = hidden_states.size(0)
+#         batch_size = hidden_states.size(0)  # TODO: Remove or use this variable
 
         # Create empty expressions list when no expressions are provided
         expressions = [""] * batch_size
@@ -419,7 +417,7 @@ class MathReasoningModel(PreTrainedModel, GenerationMixin):
     def create_attention_mask(input_ids, padding_idx=0):
         """Create attention mask from input_ids."""
         # Create initial attention mask
-        batch_size, seq_length = input_ids.shape
+#         batch_size, seq_length = input_ids.shape  # TODO: Remove or use this variable
         mask = (input_ids != padding_idx).float()
 
         # Create 2D attention mask of shape (seq_length, seq_length)

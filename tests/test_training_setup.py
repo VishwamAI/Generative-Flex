@@ -1,9 +1,7 @@
 import unittest
 import torch
-from datasets import load_dataset
 from accelerate import Accelerator
 from transformers import AutoTokenizer
-import os
 import logging
 
 logging.basicConfig(level=logging.INFO)

@@ -9,9 +9,6 @@ Tests:
 """
 
 import pytest
-import jax
-import jax.numpy as jnp
-import numpy as np
 
 from src.models.enhanced_transformer import EnhancedTransformer, EnhancedConfig
 from src.models.knowledge_retrieval import KnowledgeIntegrator, KnowledgeConfig
@@ -110,9 +107,9 @@ def test_enhanced_transformer(enhanced_config):
     model = EnhancedTransformer(enhanced_config)
 
     # Create sample input with correct shape
-    batch_size = 2
-    seq_length = 16  # Multiple of attention heads
-    hidden_size = enhanced_config.hidden_size
+#     batch_size = 2  # TODO: Remove or use this variable
+#     seq_length = 16  # Multiple of attention heads  # TODO: Remove or use this variable
+#     hidden_size = enhanced_config.hidden_size  # TODO: Remove or use this variable
     inputs = jnp.ones((batch_size, seq_length, hidden_size))
 
     # Initialize parameters
@@ -143,8 +140,8 @@ def test_knowledge_retrieval(knowledge_config):
     model = KnowledgeIntegrator(knowledge_config)
 
     # Create sample input with correct shape
-    batch_size = 2
-    seq_length = 16
+#     batch_size = 2  # TODO: Remove or use this variable
+#     seq_length = 16  # TODO: Remove or use this variable
     embedding_size = knowledge_config.embedding_size
     inputs = jnp.ones((batch_size, seq_length, embedding_size))
 
@@ -169,9 +166,9 @@ def test_apple_optimizations(optimization_config):
     model = AppleOptimizedTransformer(optimization_config)
 
     # Create sample input with correct shape
-    batch_size = 2
-    seq_length = 16
-    hidden_size = optimization_config.hidden_size
+#     batch_size = 2  # TODO: Remove or use this variable
+#     seq_length = 16  # TODO: Remove or use this variable
+#     hidden_size = optimization_config.hidden_size  # TODO: Remove or use this variable
     inputs = jnp.ones((batch_size, seq_length, hidden_size))
 
     # Initialize parameters
@@ -199,11 +196,11 @@ def test_text_to_anything(generation_config):
     target_modality = "image"
 
     # Create sample input with correct shape
-    batch_size = 1
-    seq_length = (
+#     batch_size = 1  # TODO: Remove or use this variable
+#     seq_length = (  # TODO: Remove or use this variable
         generation_config.num_attention_heads * 8
     )  # Multiple of attention heads
-    hidden_size = generation_config.hidden_size
+#     hidden_size = generation_config.hidden_size  # TODO: Remove or use this variable
 
     # Initialize parameters
     key = jax.random.PRNGKey(0)
@@ -232,11 +229,11 @@ def test_constitutional_principles(generation_config):
     target_modality = "text"
 
     # Create sample input with correct shape
-    batch_size = 1
-    seq_length = (
+#     batch_size = 1  # TODO: Remove or use this variable
+#     seq_length = (  # TODO: Remove or use this variable
         generation_config.num_attention_heads * 8
     )  # Multiple of attention heads
-    hidden_size = generation_config.hidden_size
+#     hidden_size = generation_config.hidden_size  # TODO: Remove or use this variable
 
     # Initialize parameters
     key = jax.random.PRNGKey(0)
@@ -281,11 +278,11 @@ def test_multi_modal_processing(generation_config):
     target_modality = "text"
 
     # Create sample inputs with correct shapes
-    batch_size = 2
-    text_seq_length = (
+#     batch_size = 2  # TODO: Remove or use this variable
+#     text_seq_length = (  # TODO: Remove or use this variable
         generation_config.num_attention_heads * 8
     )  # Multiple of attention heads
-    hidden_size = generation_config.hidden_size
+#     hidden_size = generation_config.hidden_size  # TODO: Remove or use this variable
 
     inputs = {
         "text": jnp.ones((batch_size, text_seq_length, hidden_size)),

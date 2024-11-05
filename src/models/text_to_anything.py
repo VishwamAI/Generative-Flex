@@ -8,12 +8,7 @@ Incorporates features from:
 - Google (Gemini): Multi-modal fusion
 """
 
-from typing import Dict, List, Optional, Tuple, Union, Any
-import jax
-import jax.numpy as jnp
-import flax.linen as nn
 from flax import struct
-import numpy as np
 
 from .enhanced_transformer import EnhancedTransformer
 from .knowledge_retrieval import KnowledgeIntegrator
@@ -171,10 +166,10 @@ class ModalityEncoder(nn.Module):
     def __call__(self, inputs: Dict[str, Union[str, jnp.ndarray]]) -> jnp.ndarray:
         """Encode inputs into a unified representation."""
         encodings = {}
-        batch_size = None
+#         batch_size = None  # TODO: Remove or use this variable
 
         # Calculate proper sequence length (ensure it's a multiple of attention heads)
-        target_seq_length = min(
+#         target_seq_length = min(  # TODO: Remove or use this variable
             self.config.max_sequence_length,
             (
                 (
@@ -193,20 +188,20 @@ class ModalityEncoder(nn.Module):
                 tokens = self.tokenizer.encode(inputs["text"])
                 tokens = tokens.reshape(1, -1)  # Add batch dimension
                 embedded = self.embedding(tokens)
-                curr_batch_size = 1
+#                 curr_batch_size = 1  # TODO: Remove or use this variable
             else:
                 # Handle pre-tokenized input
                 input_tensor = inputs["text"]
                 if len(input_tensor.shape) == 2:
                     embedded = self.embedding(input_tensor)
-                    curr_batch_size = embedded.shape[0]
+#                     curr_batch_size = embedded.shape[0]  # TODO: Remove or use this variable
                 else:
                     embedded = input_tensor
-                    curr_batch_size = input_tensor.shape[0]
+#                     curr_batch_size = input_tensor.shape[0]  # TODO: Remove or use this variable
 
             # Update global batch size
             if batch_size is None:
-                batch_size = curr_batch_size
+#                 batch_size = curr_batch_size  # TODO: Remove or use this variable
 
             # Ensure proper sequence length
             embedded = self._adjust_sequence_length(embedded, target_seq_length)
@@ -215,9 +210,9 @@ class ModalityEncoder(nn.Module):
         if "image" in inputs:
             img = inputs["image"]
             if len(img.shape) == 4:  # (batch_size, height, width, channels)
-                curr_batch_size = img.shape[0]
+#                 curr_batch_size = img.shape[0]  # TODO: Remove or use this variable
                 if batch_size is None:
-                    batch_size = curr_batch_size
+#                     batch_size = curr_batch_size  # TODO: Remove or use this variable
 
                 # Flatten spatial dimensions
                 height, width = img.shape[1:3]
@@ -228,9 +223,9 @@ class ModalityEncoder(nn.Module):
         if "audio" in inputs:
             audio = inputs["audio"]
             if len(audio.shape) == 3:  # (batch_size, time, features)
-                curr_batch_size = audio.shape[0]
+#                 curr_batch_size = audio.shape[0]  # TODO: Remove or use this variable
                 if batch_size is None:
-                    batch_size = curr_batch_size
+#                     batch_size = curr_batch_size  # TODO: Remove or use this variable
 
                 audio_flat = audio.reshape(curr_batch_size, -1, audio.shape[-1])
                 audio_flat = self._adjust_sequence_length(audio_flat, target_seq_length)
@@ -239,9 +234,9 @@ class ModalityEncoder(nn.Module):
         if "video" in inputs:
             video = inputs["video"]
             if len(video.shape) == 5:  # (batch_size, frames, height, width, channels)
-                curr_batch_size = video.shape[0]
+#                 curr_batch_size = video.shape[0]  # TODO: Remove or use this variable
                 if batch_size is None:
-                    batch_size = curr_batch_size
+#                     batch_size = curr_batch_size  # TODO: Remove or use this variable
 
                 frames, height, width = video.shape[1:4]
                 video_flat = video.reshape(
@@ -255,13 +250,13 @@ class ModalityEncoder(nn.Module):
                 tokens = self.tokenizer.encode(inputs["code"])
                 tokens = tokens.reshape(1, -1)
                 embedded = self.embedding(tokens)
-                curr_batch_size = 1
+#                 curr_batch_size = 1  # TODO: Remove or use this variable
             else:
                 embedded = inputs["code"]
-                curr_batch_size = embedded.shape[0]
+#                 curr_batch_size = embedded.shape[0]  # TODO: Remove or use this variable
 
             if batch_size is None:
-                batch_size = curr_batch_size
+#                 batch_size = curr_batch_size  # TODO: Remove or use this variable
 
             embedded = self._adjust_sequence_length(embedded, target_seq_length)
             encodings["code"] = self.code_encoder(embedded)
@@ -419,7 +414,7 @@ class TextToAnything(nn.Module):
         hidden_states = self.embeddings(tokens)
 
         # Ensure proper shape for attention
-        batch_size, seq_length = hidden_states.shape[:2]
+#         batch_size, seq_length = hidden_states.shape[:2]  # TODO: Remove or use this variable
         if hidden_states.shape[-1] != self.config.hidden_size:
             hidden_states = self.input_projection(hidden_states)
 
@@ -450,14 +445,14 @@ class TextToAnything(nn.Module):
 
         # Process multi-modal inputs with proper shape handling
         hidden_states_list = []
-        batch_size = None
+#         batch_size = None  # TODO: Remove or use this variable
 
         # Encode text input with shape validation
         if "text" in inputs:
             text_hidden = self.encoder({"text": inputs["text"]})
             # Ensure proper shape (batch_size, seq_length, hidden_size)
             if len(text_hidden.shape) == 2:
-                batch_size = text_hidden.shape[0] // self.config.max_sequence_length
+#                 batch_size = text_hidden.shape[0] // self.config.max_sequence_length  # TODO: Remove or use this variable
                 text_hidden = text_hidden.reshape(
                     batch_size, -1, self.config.hidden_size
                 )
@@ -469,7 +464,7 @@ class TextToAnything(nn.Module):
             # Ensure proper shape for image features
             if len(image_hidden.shape) == 4:  # (batch_size, height, width, channels)
                 if batch_size is None:
-                    batch_size = image_hidden.shape[0]
+#                     batch_size = image_hidden.shape[0]  # TODO: Remove or use this variable
                 image_hidden = image_hidden.reshape(
                     batch_size, -1, self.config.hidden_size
                 )
@@ -512,12 +507,12 @@ class TextToAnything(nn.Module):
                 hidden_states = jnp.concatenate([hidden_states, context_hidden], axis=1)
 
         # Calculate proper sequence length for attention
-        seq_length = hidden_states.shape[1]
+#         seq_length = hidden_states.shape[1]  # TODO: Remove or use this variable
         num_heads = self.config.num_attention_heads
-        head_dim = self.config.hidden_size // num_heads
+#         head_dim = self.config.hidden_size // num_heads  # TODO: Remove or use this variable
 
         # Ensure sequence length is compatible with attention heads
-        target_seq_length = min(
+#         target_seq_length = min(  # TODO: Remove or use this variable
             self.config.max_sequence_length,
             ((seq_length + num_heads - 1) // num_heads) * num_heads,
         )
