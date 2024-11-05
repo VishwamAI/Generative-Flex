@@ -1,7 +1,3 @@
-import jax.numpy as jnp
-from typing import Dict, List, Optional, Tuple, Union, Any
-from flax import linen as nn
-from flax import struct
 """
 Text-to-Anything Generation Pipeline.
 Incorporates features from:
@@ -149,7 +145,7 @@ class ModalityEncoder(nn.Module):
         inputs: Union[str, Dict[str, Any]],
         target_modality: str,
         context: Optional[Dict[str, Any]] = None,
-        training: bool = False
+        training: bool = False,
     ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         ((self.config.default_sequence_length + self.config.num_attention_heads - 1)
         // self.config.num_attention_heads * self.config.num_attention_heads)
@@ -177,7 +173,7 @@ class ModalityEncoder(nn.Module):
         # Ensure proper sequence length
         embedded = self._adjust_sequence_length(
             embedded,
-            sequence_length
+            sequence_length,
         )
         encodings["text"] = self.text_encoder(embedded)
         if "image" in inputs:
@@ -228,7 +224,7 @@ class ModalityEncoder(nn.Module):
         batch_size = curr_batch_size
         embedded = self._adjust_sequence_length(
             embedded,
-            sequence_length
+            sequence_length,
         )
         encodings["code"] = self.code_encoder(embedded)
         if not encodings:
@@ -272,7 +268,7 @@ class ModalityDecoder(nn.Module):
         inputs: Union[str, Dict[str, Any]],
         target_modality: str,
         context: Optional[Dict[str, Any]] = None,
-        training: bool = False
+        training: bool = False,
     ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         return self.code_decoder(hidden_states)
         else:
@@ -292,7 +288,7 @@ class ConstitutionalChecker(nn.Module):
         inputs: Union[str, Dict[str, Any]],
         target_modality: str,
         context: Optional[Dict[str, Any]] = None,
-        training: bool = False
+        training: bool = False,
     ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         aligned_content = jnp.where(
         is_safe[:, None], content, self.alignment_layer(content)
@@ -357,7 +353,7 @@ class TextToAnything(nn.Module):
         inputs: Union[str, Dict[str, Any]],
         target_modality: str,
         context: Optional[Dict[str, Any]] = None,
-        training: bool = False
+        training: bool = False,
     ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         ) -> Tuple[jnp.ndarray, Dict[str, Any]]:
         # Validate target modality
