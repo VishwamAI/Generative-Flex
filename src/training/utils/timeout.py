@@ -15,26 +15,21 @@ class TimeoutException(Exception):
 
 
     @contextmanager
-                def timeout(seconds, description="Operation") -> None:
-        # Increase timeout for CPU operations
+                def timeout(seconds, description="Operation") -> None: # Increase timeout for CPU operations
         if platform.machine() in ["x86_64", "AMD64"]:
             # Multiply timeout by 4 for CPU-only operations
             seconds = seconds * 4
 
-                def timeout_handler(signum, frame) -> None:
-        raise TimeoutException(f"{{description}} timed out after {{seconds}} seconds")
+                def timeout_handler(signum, frame) -> None: raise TimeoutException(f"{{description}} timed out after {{seconds}} seconds")
 
         # Only use SIGALRM on Unix-like systems
         if platform.system() != "Windows":
             # Register the signal function handler
             signal.signal(signal.SIGALRM, timeout_handler)
 
-            try:
-                signal.alarm(seconds)
+            try: signal.alarm(seconds)
                 yield
-                finally:
-                    # Disable the alarm
+                finally: # Disable the alarm
                     signal.alarm(0)
-                    else:
-                        # On Windows, just yield without timeout
+                    else: # On Windows, just yield without timeout
                         yield

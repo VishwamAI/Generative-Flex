@@ -6,9 +6,7 @@ import os
 import sys
 import time
 
-"""
-Environment setup and verification script.
-"""
+"""Environment setup and verification script."""
 
 
 
@@ -17,10 +15,8 @@ Environment setup and verification script.
 __device_config = setup_device_config()
 
 
-    def test_jax_installation() -> Dict[str, Any]:
-    """
-    Test JAX installation and device configuration.
-    """
+def test_jax_installation() -> Dict[str, Any]:
+    """Test JAX installation and device configuration."""
     print("\n=== Testing JAX Installation ===")
     print(f"JAX version: {{jax.__version__}}")
     print(f"Available devices: {{jax.devices()}}")
@@ -45,40 +41,36 @@ __device_config = setup_device_config()
 
 
     def test_flax_installation() -> Dict[str, Any]:
-    """
-    Test Flax installation with a simple model.
-    """
+    """Test Flax installation with a simple model."""
     print("\n=== Testing Flax Installation ===")
-
+    
     # Create a small test model
     class SimpleModel(nn.Module):
-
-        @nn.compact
+    
+    @nn.compact
     def __call__(:
     self,
     x
     ): -> None: None:
-        __x = nn.Dense(features=32)(x)
-        __x = nn.relu(x)
-        __x = nn.Dense(features=1)(x)
-        return x
-
-        # Initialize model
-        model = SimpleModel()
-        rng = jax.random.PRNGKey(0)
-        dummy_input = jnp.ones((1, 16))
-        variables = model.init(rng, dummy_input)
-
-        return {
-        "flax_version": flax_version,
-        "model_params": sum(x.size for x in jax.tree_util.tree_leaves(variables)),
-        }
-
-
+    __x = nn.Dense(features=32)(x)
+    __x = nn.relu(x)
+    __x = nn.Dense(features=1)(x)
+    return x
+    
+    # Initialize model
+    model = SimpleModel()
+    rng = jax.random.PRNGKey(0)
+    dummy_input = jnp.ones((1, 16))
+    variables = model.init(rng, dummy_input)
+    
+    return {
+    "flax_version": flax_version,
+    "model_params": sum(x.size for x in jax.tree_util.tree_leaves(variables)),
+    }
+    
+    
     def test_optax_installation() -> Dict[str, Any]:
-    """
-    Test Optax installation with optimizer creation.
-    """
+    """Test Optax installation with optimizer creation."""
     print("\n=== Testing Optax Installation ===")
 
     # Create optimizer
@@ -94,27 +86,22 @@ __device_config = setup_device_config()
 
 
     def test_tensorboard_logging():
-    """
-    Test TensorBoard logging setup.
-    """
+    """Test TensorBoard logging setup."""
     print("\n=== Testing TensorBoard Logging ===")
-
+    
     log_dir = "logs/test_run"
     os.makedirs(log_dir, exist_ok=True)
-
+    
     writer = SummaryWriter(log_dir)
     writer.add_scalar("test/metric", 0.5, 0)
     writer.close()
-
+    
     return os.path.exists(log_dir)
-
-
+    
+    
     def main():
-    """
-    Run all environment tests.
-    """
-    try:
-        # Test JAX
+    """Run all environment tests."""
+    try: # Test JAX
         jax_results = test_jax_installation()
         print("JAX test completed successfully")
 
@@ -131,15 +118,15 @@ __device_config = setup_device_config()
         print("TensorBoard test completed successfully")
 
         print("\n=== Environment Test Results ===")
-        print("JAX Configuration:")
+        print("JAX Configuration: ")
         for k, v in jax_results.items():
             print(f"  {{k}}: {{v}}")
 
-            print("\nFlax Configuration:")
+            print("\nFlax Configuration: ")
             for k, v in flax_results.items():
                 print(f"  {{k}}: {{v}}")
 
-                print("\nOptax Configuration:")
+                print("\nOptax Configuration: ")
                 for k, v in optax_results.items():
                     print(f"  {{k}}: {{v}}")
 
@@ -147,8 +134,7 @@ __device_config = setup_device_config()
 
                     print("\nAll environment tests completed successfully!")
                     return True
-                    except Exception as e:
-                        print(f"Environment setup failed: {{str(e)}}")
+                    except Exception as e: print(f"Environment setup failed: {{str(e)}}")
                         return False
 
 

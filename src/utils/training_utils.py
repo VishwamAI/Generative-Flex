@@ -25,24 +25,22 @@ class TrainState(train_state.TrainState):
     input_shape: Tuple[int, ...],
     learning_rate: float,
     weight_decay: float,
-    ) -> TrainState:
-        """Creates initial training state."""
+    ) -> TrainState: """Creates initial training state."""
         variables = model.init(rng, jnp.ones(input_shape))
-
+        
         # Create Adam optimizer with weight decay
         tx = optax.adamw(learning_rate=learning_rate, weight_decay=weight_decay)
-
+        
         return TrainState.create(apply_fn=model.apply, params=variables["params"], tx=tx, _batch_stats=variables.get("batch_stats"),
         _metrics={"loss": 0.0, "accuracy": 0.0},
         )
-
-
-                def save_checkpoint(:
-    state: TrainState,
-    checkpoint_dir: str,
-    step: int
-    ): -> None:
-        """Saves model checkpoint."""
+        
+        
+        def save_checkpoint(:
+        state: TrainState,
+        checkpoint_dir: str,
+        step: int
+        ): -> None: """Saves model checkpoint."""
         os.makedirs(checkpoint_dir, exist_ok=True)
         checkpoints.save_checkpoint(ckpt_dir=checkpoint_dir, target=state, step=step, keep=3)
 
@@ -54,23 +52,21 @@ class TrainState(train_state.TrainState):
         restored_state = checkpoints.restore_checkpoint(ckpt_dir=checkpoint_dir, target=state)
         step = 0 if restored_state is None else restored_state.step
         return restored_state or state, step
-
-
-                def create_data_iterator():
-    dataset: tf.data.Dataset,
-    batch_size: int,
-    shuffle: bool = True,
-    seed: Optional[int] = None,
-    ) -> Iterator:
-        """Creates data iterator from tensorflow dataset."""
+        
+        
+        def create_data_iterator():
+        dataset: tf.data.Dataset,
+        batch_size: int,
+        shuffle: bool = True,
+        seed: Optional[int] = None,
+        ) -> Iterator: """Creates data iterator from tensorflow dataset."""
         if shuffle: dataset = dataset.shuffle(10000, seed=seed)
 
         dataset = dataset.batch(batch_size, drop_remainder=True)
         dataset = dataset.prefetch(tf.data.AUTOTUNE)
 
                 def iterator():
-                    for batch in dataset:
-        yield jax.tree_map(lambda x: x.numpy(), batch)
+                    for batch in dataset: yield jax.tree_map(lambda x: x.numpy(), batch)
 
         return iterator()
 
@@ -81,19 +77,18 @@ class TrainState(train_state.TrainState):
     ): -> Dict[str, float]:
         """Computes metrics for evaluation."""
         loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
-
+        
         accuracy = jnp.mean(jnp.argmax(logits, axis=-1) == labels)
-
+        
         return {"loss": loss, "accuracy": accuracy}
-
-
-                def create_learning_rate_scheduler():
-    base_learning_rate: float,
-    num_epochs: int,
-    steps_per_epoch: int,
-    warmup_epochs: int = 5,
-    ) -> optax.Schedule:
-        """Creates learning rate scheduler with warmup and cosine decay."""
+        
+        
+        def create_learning_rate_scheduler():
+        base_learning_rate: float,
+        num_epochs: int,
+        steps_per_epoch: int,
+        warmup_epochs: int = 5,
+        ) -> optax.Schedule: """Creates learning rate scheduler with warmup and cosine decay."""
         warmup_steps = warmup_epochs * steps_per_epoch
         total_steps = num_epochs * steps_per_epoch
 
@@ -117,3 +112,4 @@ class TrainState(train_state.TrainState):
         # This is a placeholder - implement actual data loading logic
         # based on your specific dataset and requirements
         raise NotImplementedError("Implement data loading logic specific to your dataset")
+        

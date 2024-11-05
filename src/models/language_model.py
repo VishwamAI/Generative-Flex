@@ -14,27 +14,26 @@ class PositionalEncoding(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-                def __call__(self, inputs) -> None:
-        """Add positional encodings to the input embeddings."""
+                def __call__(self, inputs) -> None: """Add positional encodings to the input embeddings."""
         batch_size = inputs.shape[0]
         seq_length = inputs.shape[1]
         dim = inputs.shape[-1]
-
+        
         position = jnp.arange(0, seq_length, _dtype=self.dtype)[None, :, None]
         div_term = jnp.exp(jnp.arange(0, dim, 2, _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
         )
-
+        
         pe = jnp.zeros((1, seq_length, dim), _dtype=self.dtype)
-        pe = pe.at[:, :, 0::2].set(jnp.sin(position * div_term))
-        pe = pe.at[:, :, 1::2].set(jnp.cos(position * div_term))
-
+        pe = pe.at[:, :, 0: :2].set(jnp.sin(position * div_term))
+        pe = pe.at[:, :, 1: :2].set(jnp.cos(position * div_term))
+        
         # Broadcast positional encoding to batch dimension
         pe = jnp.broadcast_to(pe, (batch_size, seq_length, dim))
-
+        
         return inputs + pe
-
-
-class LanguageModel(nn.Module):
+        
+        
+        class LanguageModel(nn.Module):
     """Autoregressive language model based on the transformer architecture."""
 
     vocab_size: int
@@ -48,14 +47,13 @@ class LanguageModel(nn.Module):
     dtype: Any = jnp.float32
 
     @nn.compact
-                def __call__(self, inputs, training: bool = True) -> None:
-        """Forward pass of the language model."""
+                def __call__(self, inputs, training: bool = True) -> None: """Forward pass of the language model."""
         # Token embeddings
         x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
-
+        
         # Add positional encoding
         x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
-
+        
         # Create causal mask for autoregressive attention
         batch_size = inputs.shape[0]
         seq_len = inputs.shape[1]
@@ -65,20 +63,20 @@ class LanguageModel(nn.Module):
         causal_mask = causal_mask[None, None, :, :]
         causal_mask = jnp.broadcast_to(causal_mask, (batch_size, self.num_heads, seq_len, seq_len)
         )
-
+        
         # Apply transformer blocks
         for _ in range(self.num_layers):
-            x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, mask=causal_mask, deterministic=not training)
-
-            # Final layer normalization
-            x = nn.LayerNorm(_dtype=self.dtype)(x)
-
-            # Output projection
-            logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02))(x)
-
-            return logits
-
-                def generate():
+        x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, mask=causal_mask, deterministic=not training)
+        
+        # Final layer normalization
+        x = nn.LayerNorm(_dtype=self.dtype)(x)
+        
+        # Output projection
+        logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02))(x)
+        
+        return logits
+        
+        def generate():
         self,
         rng: Any,
         prompt: jnp.ndarray,
