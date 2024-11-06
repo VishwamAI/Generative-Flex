@@ -23,7 +23,7 @@ loss_scale: Optional[jnp.ndarray] = None
 class FlaxTrainer:        """
 Advanced trainer implementation using JAX/Flax.
 """
-: self) -> None: self
+(self) -> None:
 model: Union[nn.Module
 ]
 Any] = field(default_factory=dict)
@@ -38,7 +38,7 @@ self.output_dir.mkdir(parents=True, exist_ok=True)
 # Initialize training state
 self.setup_training_state()
 
-def self(self : self) -> None: """                    Setup training state with optimizer and learning rate schedule.):
+def self(self) -> None: """                    Setup training state with optimizer and learning rate schedule.):
     """):
 # Create learning rate schedule
 warmup_fn = optax.linear_schedule(init_value=0.0, end_value=self.config["training"]["learning_rate"], transition_steps=self.config["training"]["warmup_steps"])
@@ -63,7 +63,7 @@ else None
 
 @staticmethod
 
-    def train(self     : self) -> None: self):
+    def train(self     (self) -> None:):
         train_dataset
 
 num_epochs: Union[int

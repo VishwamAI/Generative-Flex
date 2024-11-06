@@ -11,8 +11,7 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-def train_epoch(self, model: EnhancedTransformer):
-train_loader: DataLoader
+def train_epoch(self, model: EnhancedTransformer):train_loader: DataLoader
 
 optimizer: torch.optim.Optimizer
 
@@ -33,9 +32,7 @@ total_loss += loss.item()
 return {"loss": total_loss / len(train_loader)}
 
 
-    def evaluate(self, model: EnhancedTransformer):
-        val_loader: DataLoader) -> Dict[str
-        float]:
+    def evaluate(self, model: EnhancedTransformer):        val_loader: DataLoader) -> Dict[str        float]:
         """Evaluate the model."""
         model.eval()
         total_loss = 0.0
@@ -48,10 +45,7 @@ return {"loss": total_loss / len(train_loader)}
         return {"val_loss": total_loss / len(val_loader)}
 
 
-            def main(self)::                """Main training function."""                config = TrainingConfig):
-                model = EnhancedTransformer(config)
-                train_loader, val_loader = create_mmmu_dataloaders(config)
-                optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
+            def main(self)::                """Main training function."""                config = TrainingConfig):                model = EnhancedTransformer(config)                train_loader, val_loader = create_mmmu_dataloaders(config)                optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 
         best_val_loss = float("inf")
 
