@@ -1,7 +1,9 @@
 from typing import Optional, Tuple
 import torch
 import torch.nn as nn
-"""Flash Mixture of Experts implementation."""
+"""
+
+Flash Mixture of Experts implementation."""
 
 
 """Module docstring."""
@@ -44,7 +46,10 @@ hidden_size),
 """# Router network"""
 
 self.router = nn.Linear(hidden_size, num_experts)
-""""""
+"""
+
+"""
+
 
 def __init__(self): hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 """Module docstring."""

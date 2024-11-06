@@ -1,7 +1,7 @@
 import jax
 
 
-(nn.Module): hidden_size: in = 64
+(nn.Module): hidden_size: int = 64
     def create_minimal_data(self):
         
     """Create minimal training data with chain-of-thought reasoning."""

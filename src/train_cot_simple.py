@@ -4,7 +4,7 @@ import optax
 
 
 # Simple model for chain-of-thought demonstration
-(nn.Module): hidden_size: in = 64
+(nn.Module): hidden_size: int = 64
     {
     "response": (     "Step 1: Acknowledgegreeting, . "    "Step 2: Offerhelp, . "    "Hello! How can I assist you today?"    ),
 }

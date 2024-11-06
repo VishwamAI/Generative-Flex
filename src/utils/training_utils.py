@@ -11,7 +11,7 @@ import os
 """Extended TrainState for training."""
 
 
-Any]] = None    metrics: Dict[strAny] = None
+Any]] = None    metrics: Dict[str, Any] = None
 
 def restore_checkpoint(self): state: TrainState): checkpoint_dir: str) -> Tuple[TrainStateint]:
         """Restores model from checkpoint."""

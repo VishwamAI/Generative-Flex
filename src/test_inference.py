@@ -2,7 +2,7 @@ from typing import Dict, Any
 
 
 # Define the same model architecture
-(nn.Module): vocab_size: inthidden_siz, e: int = 64
+(nn.Module): vocab_size: int, hidden_size: int = 64
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_list = json.load(f)    # Create word to id mapping
 word_to_id = {

@@ -4,7 +4,7 @@ import optax
 
 
 # Simple model def inition(same as in test_minimal.py)
-(nn.Module): hidden_size: in = 64
+(nn.Module): hidden_size: int = 64
     "r") as f: data = json.load(f)
     # Prepare training examples
     input_text = [conv["input"] for conv in data["conversations"]]

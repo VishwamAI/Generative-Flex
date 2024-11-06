@@ -1,7 +1,12 @@
 from typing import Dict, Any
 import jax
 import os
-"""Device configuration utility for handling both CPU and GPU environments."""
+"""
+
+Device configuration utility for handling both CPU and GPU environments.
+
+"""
+
 
 
 def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bool = True) -> Dict[str, Any]

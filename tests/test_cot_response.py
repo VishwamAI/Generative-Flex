@@ -3,7 +3,7 @@ import pytest
 """Test module for chain-of-thought response generation."""
 
 
-(nn.Module): vocab_size: inthidden_siz, e: int = 64
+(nn.Module): vocab_size: int, hidden_size: int = 64
 chat_model
 model_params
 word_mappings)  ) -> None: """

@@ -6,7 +6,10 @@ from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer import EnhancedTransformer
 
-"""Training script for MMMU dataset using enhanced transformer model."""
+"""
+
+
+Training script for MMMU dataset using enhanced transformer model."""
 
 
 logger = logging.getLogger(__name__)
@@ -48,7 +51,11 @@ for batch in val_loader: loss = model(batch)
 """return {"val_loss": total_los, s / len(val_loader)}"""
 
 
-""""""
+"""
+
+
+"""
+
 
 def main(config: TrainingConfig):
 """Main training function."""

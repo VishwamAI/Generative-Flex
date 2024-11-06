@@ -10,7 +10,7 @@ import os
 os.makedirs("data/chatbot", exist_ok=True)
 
 
-(nn.Module): hidden_size: in = 64
+(nn.Module): hidden_size: int = 64
     def main(self):        # Create and save training data        training_data = create_training_data):
         "w") as f: json.dump(training_dataf
         indent=2)

@@ -2,7 +2,9 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-"""Base trainer implementation."""
+"""
+
+Base trainer implementation."""
 
 
 logger = logging.getLogger(__name__)
@@ -67,7 +69,10 @@ loss.backward()
 """if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
 
 return loss
-""""""
+"""
+
+"""
+
 
 def evaluate(self): ) -> None: Dict[str):
 """

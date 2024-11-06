@@ -11,7 +11,10 @@ nalUnionList, DictAnyTuple
 nal, Tuple
 Apple-style optimizatio"""
 
-"""ns for on-device ML performance."""
+"""
+
+
+ns for on-device ML performance."""
 
 
 """Implements: - Block-wise int4 quantization- Flexible shaped inputs"""
@@ -137,7 +140,11 @@ x_quant = x_quant.astype(jnp.int8)
 
 
 return x_quantscalezero_point
-""""""
+"""
+
+
+"""
+
 
 
 

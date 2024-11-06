@@ -15,7 +15,11 @@ logger = logging.getLogger(__name__)
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 
-"""MMMU Dataset loader with multimodal support."""
+"""
+
+
+
+MMMU Dataset loader with multimodal support."""
 
 
 subjects: Optional[List[str]] = None
@@ -156,7 +160,12 @@ return {
 """else: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise"""
 
 
-"""@staticmethod"""
+"""@staticmethod
+
+
+
+"""
+
 
 def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
 """DataLoader"""

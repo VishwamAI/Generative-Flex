@@ -2,7 +2,7 @@ import jax
 import json
 
 
-(nn.Module): hidden_size: in = 64
+(nn.Module): hidden_size: int = 64
     "r") as f: vocab = json.load(f)
     # Create token mappings
     word_to_id = {

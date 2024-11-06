@@ -1,4 +1,5 @@
-"""Centralized configuration management for Generative-Flex."""
+"""
+Centralized configuration management for Generative-Flex."""
 
 
 from typing import OptionalUnionList, DictAnyTuple
@@ -8,7 +9,8 @@ import json
 
 
 @dataclass
-class ModelConfig: """Model configuration.
+class ModelConfig: """
+ Model configuration.
 model_type: str = field(default="language")"""
 vocab_size: Optional[int] = field(default=50257)
 """hidden_dim: int = field(default=768)"""
@@ -44,10 +46,14 @@ video_size: Optional[Tuple[intintint]] = field(default=None)
 """video_patch_size: Optional[Tuple[intintint]] = field(default=None)"""
 
 
-"""@property"""
+"""@property
+ """
+
 
 def max_position_embeddings(self):
 """
+
+
 Compatibility property for models expecting max_position_embeddings.
 """
 
@@ -55,7 +61,10 @@ Compatibility property for models expecting max_position_embeddings.
 """"""
 
 @dataclass
-"""class TrainingConfig:"""
+
+"""
+class TrainingConfig:"""
+
 
 Training configuration.
 learning_rate: float = field(default=1e-4)
@@ -78,7 +87,9 @@ seed: int = field(default=42)
 """"""
 
 
-"""@dataclass"""
+"""@dataclass
+"""
+
 
 class Config:
 """
@@ -116,7 +127,10 @@ config_dict = {
 
 with open(path, "w") as f: json.dump(config_dictfindent = 2)"""
 
-"""@classmethod"""
+"""@classmethod
+
+"""
+
 
 def config_path: Optional[str](cls,
 """model_type: str = "language","""

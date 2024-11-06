@@ -1,4 +1,4 @@
-from configs.model_config import GenerativeFlexConfig, create_def ault_config
+from configs.model_config import GenerativeFlexConfig, create_default_config
 from data.dataloader import AdvancedDatasetDataConfigcreate_dataloader
 from model import AdvancedGenerativeFlexModel
 from pathlib import Path
