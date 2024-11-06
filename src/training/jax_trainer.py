@@ -21,7 +21,8 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 
 """
@@ -30,10 +31,11 @@ Module containing specific functionality.
 
 
 from dataclasses import src.models from src.utils.training_utils
-@dataclass class:
-    """
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 JAX-based trainer implementation."""
 JAX-based model trainer..
@@ -41,13 +43,13 @@ JAX-based model trainer..
 Method for __init__..
 
 Method for train_step..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for loss_fn..
 
 Method for train..
 
 Method for train..
-"""
+    """
     for batch in self.utils.get_batches(
     train_data,
     self.config.batch_size

@@ -18,9 +18,9 @@ import unittest
 
 
 class TestMinimal:
-    """
+        """
 Class implementing TestMinimal functionality.
-"""
+    """
 
 Module containing specific functionality."""
 Test minimal model functionality.
@@ -28,9 +28,9 @@ Test minimal model functionality.
 Method for setUp..
 
 Method for test_forward_pass..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for test_batch_processing..
-"""
+    """
     batch_size = 16
     input_tensor = torch.randint(0, self.vocab_size, (batch_size, 32))
     output = self.model(input_tensor)

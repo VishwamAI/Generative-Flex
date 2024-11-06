@@ -12,14 +12,15 @@ import torch
 import torch.nn as nn
 from dataclasses import dataclass
 from typing import Optional
-@dataclass class:
-    """
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 Module containing specific functionality."""
 A simple neural network model..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Forward pass through the model.
 
         Args:
@@ -27,6 +28,6 @@ Forward pass through the model.
 
         Returns:
             Output tensor
-"""
+    """
         for layer in self.layers: x = self.dropout(torch.relu(layer(x)))
         return x

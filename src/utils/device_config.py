@@ -31,7 +31,7 @@ Set up compute device.
 
         Returns:
             Configured device
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Place tensor on configured device.
 
         Args:

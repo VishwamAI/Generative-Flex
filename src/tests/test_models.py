@@ -21,7 +21,8 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 import torch.nn as nn
 
@@ -31,9 +32,9 @@ import unittest
 
 
 class TestModels:
-    """
+        """
 Class implementing TestModels functionality.
-"""
+    """
 
 Module for implementing specific functionality."""
 Method for setUp..
@@ -41,7 +42,7 @@ Method for setUp..
 Method for test_transformer_model..
 
 Method for test_model_forward..
-"""
+    """
     model = TransformerModel(self.config)
     batch_size = 2
     seq_length = 10

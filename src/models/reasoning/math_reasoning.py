@@ -18,10 +18,11 @@ import torch.nn as nn
 
 from dataclasses import dataclass
 
-@dataclass class:
-    """
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 Module containing specific functionality."""
 Configuration for mathematical reasoning..
@@ -29,11 +30,11 @@ Configuration for mathematical reasoning..
 Class for MathReasoning..
 
 Mathematical reasoning module..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for __init__..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for forward..
-"""
+    """
         # Route input to experts
         router_logits = self.router(hidden_states)
         routing_weights = torch.softmax(router_logits, dim=-1)

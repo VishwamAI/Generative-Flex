@@ -21,7 +21,8 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 """
 Module containing specific functionality.
@@ -49,7 +50,7 @@ Class implementing from functionality.
 
 Module for implementing specific functionality."""
 Configuration for minimal model training.
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for main..
 """
 config = MinimalConfig()

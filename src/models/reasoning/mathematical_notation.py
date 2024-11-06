@@ -13,9 +13,9 @@ import torch.nn as nn
 from typing import List, Optional, Tuple
 
 class MathematicalNotation:
-    """
+        """
 Class implementing MathematicalNotation functionality.
-"""
+    """
 
 Module containing specific functionality."""
 Process mathematical notation.
@@ -25,6 +25,6 @@ Process mathematical notation.
 
         Returns:
             Processed notation embeddings
-"""
+    """
         embeddings = self.notation_embeddings(notation_ids)
         return self.symbol_processor(embeddings)

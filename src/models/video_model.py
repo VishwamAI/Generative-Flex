@@ -21,7 +21,8 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 from typing import List, Optional, Tuple
 
@@ -29,10 +30,11 @@ import torch.nn as nn
 
 from dataclasses import dataclass
 
-@dataclass class:
-    """
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 Module for implementing specific functionality."""
 Video processing model.
@@ -40,7 +42,7 @@ Video processing model.
 Method for __init__..
 
 Method for forward..
-"""
+    """
     # Spatial encoding
     x = self.spatial_encoder(x.transpose(1, 2))
 

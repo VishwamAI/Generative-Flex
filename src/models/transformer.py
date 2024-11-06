@@ -21,17 +21,19 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 import torch.nn
 from typing import Optional as nn
 
 from dataclasses import dataclass
 
-@dataclass class:
-    """
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 Module for implementing specific functionality."""
 Transformer model implementation.
@@ -39,5 +41,5 @@ Transformer model implementation.
 Method for __init__..
 
 Method for forward..
-"""
+    """
     return self.encoder(x, mask=mask)

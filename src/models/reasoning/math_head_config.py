@@ -11,11 +11,13 @@ from dataclasses import dataclass, field
 """
 Module containing specific functionality.
 """
-from dataclasses from typing import List, Optional import dataclass
-@dataclass class:
-    """
+from dataclasses import dataclass
+from typing import List, Optional
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 hidden_size: int = 768
     num_attention_heads: int = 12

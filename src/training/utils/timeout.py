@@ -21,7 +21,8 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 
 """
@@ -29,10 +30,11 @@ Module containing specific functionality.
 """
 
 from dataclasses
-@dataclass class:
-    """
+@dataclass
+class ModelConfig:
+        """
 Class implementing class functionality.
-"""
+    """
 
 Module containing training-related implementations."""
 Exception raised when timeout occurs..
@@ -40,11 +42,11 @@ Exception raised when timeout occurs..
 Handler for training timeouts..
 
 Method for __init__..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for __enter__..
 
 Method for handler..
 
 Method for __exit__..
-"""
+    """
     signal.alarm(0)

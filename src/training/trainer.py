@@ -21,7 +21,8 @@ from dataclasses import dataclass, field
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import os
-from pathlib import Path import logging
+from pathlib import Path
+import logging
 
 
 """
@@ -33,9 +34,9 @@ from tqdm
 
 
 class Trainer:
-    """
+        """
 Class implementing Trainer functionality.
-"""
+    """
 
 Base trainer implementation."""
 Method for __init__..
@@ -43,9 +44,9 @@ Method for __init__..
 Method for train_step..
 
 Method for evaluate..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for train..
-"""
+    """
         self.step = 0
         best_val_loss = float("inf")
 

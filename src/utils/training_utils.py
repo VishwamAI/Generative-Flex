@@ -33,7 +33,7 @@ Get optimizer for model.
 
         Returns:
             Configured optimizer
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Get learning rate scheduler.
 
         Args:

@@ -18,9 +18,9 @@ import unittest
 
 
 class TestSimpleCot:
-    """
+        """
 Class implementing TestSimpleCot functionality.
-"""
+    """
 
 Module containing specific functionality."""
 Test simple chain-of-thought model.
@@ -28,9 +28,9 @@ Test simple chain-of-thought model.
 Method for setUp..
 
 Method for test_cot_generation..
-"""Module containing specific functionality."""
+"""Module for handling specific functionality."""
 Method for test_cot_batch..
-"""
+    """
     batch_size = 16
     input_tensor = torch.randint(0, 1000, (batch_size, 32))
     output = self.model(input_tensor)
