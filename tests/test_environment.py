@@ -1,6 +1,6 @@
 from accelerate import Accelerator
 from datasets import load_dataset
-from transformers import AutoTokenizer,
+from transformers import AutoTokenizer
     AutoModelForCausalLM
 import jax
 import os
@@ -81,7 +81,12 @@ x = jax.random.normal(key, (5, 5))
 self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 
 # Test basic model operations
-def def model_fn(self):
+def def model_fn():
+
+    """
+
+     
+
     """ with parameters."""
 
     ) -> None: returnjnp.mean): grad_f, n = jax.grad(model_fn)

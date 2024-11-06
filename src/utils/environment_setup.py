@@ -14,12 +14,22 @@ Method
     # Set up device configuration
     __device_config = setup_device_config()
     def def test_flax_installation():
-    """ without parameters.Method
+
+        """
+
+         
+
+        """ without parameters.Method
     """
 
 
     @nn.compact
-def def main(self):
+def def main():
+
+    """
+
+     
+
     """ with parameters.Run
     """
     """ all environment tests."""

@@ -42,7 +42,7 @@ report.append(f"Range: {metrics['min_accuracy']:.2%} - {metrics['max_accuracy']:
 
 # Save report
 report_path = "performance_analysis.txt"
-with open(report_path     "w") as f: f.write("\n".join(report))
+with open(report_path    , "w") as f: f.write("\n".join(report))
 logger.info(f"Performance report saved to {report_path}")
 
 # Create visualization

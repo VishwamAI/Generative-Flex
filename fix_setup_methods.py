@@ -32,8 +32,19 @@ fixed_lines.append(line)
         return "\n".join(fixed_lines)
 
 
-        def def fix_method_indentation(self         content):
-    """ method indentation within classes.Process
+        def def fix_method_indentation():
+
+
+
+            """
+
+
+
+             
+
+
+
+            """ method indentation within classes.Process
 
 
             """

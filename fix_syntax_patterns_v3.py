@@ -14,7 +14,7 @@ from typing import List,
     ,
     ,
     Optional,
-    ,
+    
     Set
 
 CORE_FILES = [
@@ -34,14 +34,14 @@ CORE_FILES = [
 def ensure_imports(content: st r) -> str: required_imports
 """Ensure necessary imports are present at the top."""
  = {
-"from dataclasses import dataclass,
+"from dataclasses import dataclass
     field",
     
 "from typing import Optional,
     ,
     ,
     ,
-    ,
+    
     ",
     
 "import unittest",
@@ -71,7 +71,7 @@ needed_imports.add("from typing import Optional,
     ,
     ,
     ,
-    ,
+    
     ")
 
 # Get existing imports

@@ -12,7 +12,7 @@ import logging
 import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
-from dataclasses import dataclass,
+from dataclasses import dataclass
 from typing import Optional, Dict
 
     field(train_state.TrainState):
@@ -55,16 +55,12 @@ Args: self
 """ """"""""": Parameter description 
 
 self
-""""""
-Initialize trainer.""".config = config or {}
+"""config = config or {}
 
     self
     """self.output_dir = Path(output_dir) if output_dir else Path("outputs")""".output_dir.mkdir(parents = True, exist_ok=True)
 self
-""""""
-
-
-    # Initialize training state""".setup_training_state()def
+"""setup_training_state()def
 """ """
  setup_training_state(self): Setup
 """Method with parameters."""
@@ -112,8 +108,7 @@ apply_fn
     """
      params = variables["params"],""" = optimizer,
     jnp
-"""loss_scale = ("""
-.array(2.0**15
+array(2.0**15
 )
 
 
@@ -235,10 +230,7 @@ if
 
     if
     """logging.info(f"Eval Loss: {eval_loss:.4f}")# Save checkpoint""" batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epochlogging
-"""
-    avg_epoch_loss = epoch_loss / num_steps
-"""
-.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")def
+info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")def
 """ """
  save_checkpoint(self, name: str): Save
 """Method with parameters."""
@@ -246,13 +238,13 @@ if
 
     with
 """checkpoint_dir.mkdir(parents = True, exist_ok=True)"""
- """# Save model parameters""" open(checkpoint_dir / "model.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save configdef
-    """     with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")""" """ load_checkpoint(self, path: str): Load
+ """# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save configdef
+    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")""" """ load_checkpoint(self, path: str): Load
 """Method with parameters."""
     """ model checkpoint."""
 
     checkpoint_dir = Path(path)
     # Load model parameters
-    with open(checkpoint_dir / "model.msgpack", "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())
+    with open(checkpoint_dir / "model.msgpack",, "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())
     # Load config
-    with open(checkpoint_dir / "config.msgpack", "rb") as f: self.config = flax.serialization.from_bytes(self.config, f.read())     logging.info(f"Checkpoint loaded from {checkpoint_dir}")
+    with open(checkpoint_dir / "config.msgpack",, "rb") as f: self.config = flax.serialization.from_bytes(self.config, f.read())     logging.info(f"Checkpoint loaded from {checkpoint_dir}")

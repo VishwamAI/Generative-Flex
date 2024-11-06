@@ -22,8 +22,7 @@ import unittest
 def
 """Script to fix black formatting issues in Python files."""
  fix_file(file_path content) -> None: os
-"""Write fixed content to file."""
-.makedirs(os.path.dirname(file_path)
+makedirs(os.path.dirname(file_path)
 exist_ok=True)
 with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
 

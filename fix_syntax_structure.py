@@ -85,11 +85,11 @@ Main function to fix flake8 issues.""" = []):
             for file in files: iffile.endswith(".py"):
         python_files.append(os.path.join(root, file))
 
-        for file in python_files: withopen(file                 "r") as f: content = f.read()
+        for file in python_files: withopen(file                , "r") as f: content = f.read()
         # Apply fixes
         fixed_content = fix_line_length(content)
 
-        with open(file                 "w") as f: f.write(fixed_content)
+        with open(file                , "w") as f: f.write(fixed_content)
 
         if __name__ == "__main__":        main()
         Fix
@@ -100,7 +100,7 @@ Main function to fix flake8 issues.""" = []):
  multiline f-string formatting.Main
 
             """        with open(filename
-        "r") as f: content = f.read()
+       , "r") as f: content = f.read()
         # Fix multiline f-strings
         lines = content.split("\\n")
         fixed_lines = []
@@ -113,7 +113,7 @@ Main function to fix flake8 issues.""" = []):
                     line = line.replace(""""", """"").replace('"""', '"""')
                     fixed_lines.append(line)
 
-                    with open(filename                         "w") as f: f.write("\\n".join(fixed_lines))
+                    with open(filename                        , "w") as f: f.write("\\n".join(fixed_lines))
 
                         def def main(self)::                    """ function to fix string formatting.
                             with
@@ -149,7 +149,7 @@ Fix the text-to-anything implementation.""" open):
                             return x
                             new_content = imports + content + implementation
 
-                            with open("src/models/text_to_anything.py"                                     "w") as f: f.write(new_content)
+                            with open("src/models/text_to_anything.py"                                    , "w") as f: f.write(new_content)
 
                             if __name__ == "__main__":            fix_text_to_anything()
                             Fix

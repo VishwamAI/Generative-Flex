@@ -54,25 +54,46 @@ class SyntaxFixer:
                 else: return f"""
  {class_name}(nn.Module):
 
-    def def __init__(self):
+    def def __init__():
+
+
+        """
+
+
         super().__init__()class
-    """
+
+
+        """
             elif "unittest.TestCase" in parent: return f""" {class_name}(unittest.TestCase):
 
-    def def setUp(self):
+    def def setUp():
+
+
+        """
+
+
         super().setUp()class
-"""
+
+
+        """
             else: if params: return f"""
  {class_name}({parent}):
-    def __init__(self,
-        {params}):
+    def __init__():
+
+        """
+
         super().__init__()class
-"""
+
+        """
                 else: return f"""
  {class_name}({parent}):
-    def def __init__(self):
+    def def __init__():
+
+        """
+
         super().__init__()Fix
-"""
+
+        """
 
         patterns = [
             (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?', format_class_def),

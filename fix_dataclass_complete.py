@@ -2,7 +2,21 @@ import re
 
 
 
-def def fix_imports_and_dataclass(self content):
+def def fix_imports_and_dataclass():
+
+
+
+
+    """
+
+
+
+
+     
+
+
+
+
     """Fix imports and dataclass field definitions."""
         # Split content into lines):
     lines = content.split("\n")
@@ -19,7 +33,7 @@ else: other_lines.append(line)
 
 # Ensure we have the field import
     if not any("from dataclasses import" in imp and "field" in imp for imp in imports):
-        imports.append("from dataclasses import dataclass,
+        imports.append("from dataclasses import dataclass
     field")
 
         # Fix dataclass definition
@@ -84,7 +98,7 @@ else: other_lines.append(line)
                                                 fixed_content = fix_imports_and_dataclass(content)
 
                                         # Write the fixed content back
-                                        with open("src/models/text_to_anything.py"                                             "w") as f:
+                                        with open("src/models/text_to_anything.py"                                            , "w") as f:
     f.write(fixed_content)
 
                                         print("Imports and dataclass fields fixed in text_to_anything.py")

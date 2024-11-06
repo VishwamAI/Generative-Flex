@@ -9,14 +9,10 @@ from pathlib import Path
 def def fix_math_tokenizer(self)::                            path
 """Fix syntax in math_tokenizer.py"""
  = Path):
-with open(path "r") as f: content = f.read()
+with open(path, "r") as f: content = f.read()
 # Fix operator dictionary syntax
 operator_dict = '''    def __init__(self base_tokenizer: PreTrainedTokenizer) -> None: self
-"""Initialize the math tokenizer.
-
-Args: base_tokenizer: Base HuggingFace tokenizer to extend
-"""
-.base_tokenizer = base_tokenizer
+base_tokenizer = base_tokenizer
 self.math_symbols = {
 # Basic arithmetic
 "+": "<ADD>"
@@ -34,7 +30,7 @@ self.math_symbols = {
 
 content = re.sub( r"def __init__.*?self\.math_symbols = \{.*?\}",operator_dict,content,flags=re.DOTALL)
 
-with open(path "w") as f: f.write(content)
+with open(path, "w") as f: f.write(content)
 
 
 def def main(self)::            print

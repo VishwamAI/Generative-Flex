@@ -6,7 +6,7 @@ from typing import Tuple
 
     ,
     ,
-    ,
+    
     Tupleimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport tempfileimport timeimport yaml
 def
 """Script to fix syntax and formatting issues in verify_mapped_datasets.py."""
@@ -79,7 +79,7 @@ Optional[Dict[str
         return {}
 
 
-        with open(mapping_file                 "r") as f: returnyaml.safe_load(f) or {}
+        with open(mapping_file                , "r") as f: returnyaml.safe_load(f) or {}
 
 
                 def def verify_dataset(self):: local_dir: str):
@@ -200,7 +200,7 @@ Optional[Dict[str
 
                                     # Write the fixed content to the file
                                     file_path = Path("data/verify_mapped_datasets.py")
-                                    with open(file_path                                         "w") as f: f.write(content)
+                                    with open(file_path                                        , "w") as f: f.write(content)
 
 
                                     if __name__ == "__main__":                                                                                                                            fix_verify_mapped_datasets()

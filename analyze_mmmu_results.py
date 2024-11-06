@@ -31,7 +31,7 @@ results = {
 
 current_problem = None
 
-with open(latest_log "r") as f: forlinein
+with open(latest_log, "r") as f: forlinein
 f:
 # Extract overall metrics
 if "Validation math accuracy:" in line: try: accuracy = float(line.split(":")[-1].strip())        results["overall_accuracy"] = accuracy
@@ -86,7 +86,7 @@ except ValueError: continue# Look for problem type indicators in the input text
 
                 # Save report
                 report_path = "mmmu_performance_report.txt"
-                with open(report_path                 "w") as f: f.write("\n".join(report))
+                with open(report_path                , "w") as f: f.write("\n".join(report))
                 logger.info(f"Performance report saved to {report_path}")
 
                 # Generate visualization

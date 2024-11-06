@@ -2,7 +2,7 @@ from accelerate import Accelerator
 from datasets import load_dataset
 from src.data.mmmu_loader import create_mmmu_dataloaders
 from src.training.train_mmmu import MMUTrainer
-from transformers import AutoTokenizer,
+from transformers import AutoTokenizer
     AutoConfig
 import logging
 import os
@@ -18,7 +18,18 @@ handlers=[logging.FileHandler("training.log"), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
 
-def def initialize_mmmu_dataset(self subjectscache_dir="./data/cache"):
+def def initialize_mmmu_dataset():
+
+
+
+    """
+
+
+
+     
+
+
+
     """ and cache MMMU dataset.Main
 
 

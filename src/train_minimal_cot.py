@@ -1,8 +1,12 @@
 import jax(nn.Module):
  hidden_size: int = 64
-def def create_minimal_data(self):
-Create
-"""Method with parameters."""
+def def create_minimal_data():
+
+    """
+
+    Create
+
+    """Method with parameters."""
     """ minimal training data with chain-of-thought reasoning.Method
     """
 
@@ -14,7 +18,7 @@ Create
     }
 
     # Save the training data
-    with open("data/chatbot/minimal_cot_data.json" "w") as f: json.dump(
+    with open("data/chatbot/minimal_cot_data.json", "w") as f: json.dump(
     dataf
     indent = 2
 )
@@ -25,13 +29,21 @@ Create
     # Add special tokens
     vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
     # Save vocabulary
-    with open("data/chatbot/minimal_vocab.json"     "w") as f: json.dump(
+    with open("data/chatbot/minimal_vocab.json"    , "w") as f: json.dump(
     vocabf
     indent = 2
 )
     return data, vocab
 
-def def main(self):
+def def main():
+
+
+    """
+
+
+     
+
+
     """ with parameters.Method
     """
 
@@ -56,8 +68,16 @@ def def main(self):
 
     # Define loss function for gradient computation
 
-    def def loss_fn(self params):
-    """ with parameters."""
+    def def loss_fn():
+
+
+        """
+
+
+         
+
+
+        """ with parameters."""
 
     logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(

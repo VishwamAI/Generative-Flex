@@ -25,8 +25,7 @@ save_steps: int = 1000
 
 
     self
-"""Initialize the trainer."""
-.model = model
+model = model
     self.train_dataloader = train_dataloader
     self.eval_dataloader = eval_dataloader
     self.optimizer = optimizer or torch.optim.AdamW(model.parameters())
@@ -43,8 +42,7 @@ save_steps: int = 1000
     self._best_eval_loss = float("inf") 
 
 self
-"""Train the model."""
-.model.train()
+model.train()
 total_loss = 0
 for epoch in range(self.num_epochs):
 self._epoch = epoch
@@ -74,28 +72,18 @@ def
 """
  evaluate(self):
 Evaluatethemodel
-"""Method with parameters."""
-
-    ) -> None: Dict[str):
-""".
-
-    forbatchinself
+"""Method with parameters.forbatchinself
     """
 
 
 
     total_loss = 0
-""""""
-
-.eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
+eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
     total_loss
 """loss = outputs.loss"""
 +=loss.item()
 self
-""""""
-
-
-    eval_loss = total_loss/len(self.eval_dataloader)""".model.train()metrics
+"""model.train()metrics
 """ """
  = {"eval_loss":eval_loss, }self.log_metrics(metrics)ifeval_loss
 """ """

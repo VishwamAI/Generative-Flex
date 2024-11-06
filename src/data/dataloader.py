@@ -21,31 +21,21 @@ Placeholder
 tokenizer
 """Advanced dataset implementation with efficient data loading and caching"""
     """: PreTrainedTokenizerconfiself
-"""
-
-self.tokenizer = tokenizer
-"""
-.config = configself
+config = configself
 """
 
     self.is_training = is_training
 """
-"""
-
-
-# Setup caching"""._cache_dir = Path(config.cache_dir) if config.cache_dir else None
+_cache_dir = Path(config.cache_dir) if config.cache_dir else None
 
 self
 """
     if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
-"""
-# Load or create cache"""
-.load_and_cache_data()
+load_and_cache_data()
 
 
     self
-"""Load and preprocess data with caching"""
-.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
+cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
     )
 
     if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from {cache_path}")     self.data = h5py.File(cache_path, "r")     self.length = len(self.data["input_ids"])     else: logging.info(f"Processing data from {self.data_path}")# Process data
@@ -56,7 +46,7 @@ self
 """Process raw data into model inputs"""
 
 
-"attention_mask": [] "labels": []}  # Read and process data with open(self.data_path        , "r") as f: raw_data = json.load(f)
+"attention_mask": [] "labels": []}  # Read and process data with open(self.data_path        ,, "r") as f: raw_data = json.load(f)
 for item in raw_data: # Tokenize texttokenized = self.tokenizer(
     item["text"],max_length = self.config.max_seq_length,padding = "max_length",truncation = True,return_tensors = "np"
 )
@@ -79,8 +69,16 @@ return {
     if "labels" in self.data: item, ["labels"] = torch.tensor(self.data["labels"][idx])
     return item
 
-    def def create_dataloader(self):
-    """ with parameters.Create
+    def def create_dataloader():
+
+
+        """
+
+
+         
+
+
+        """ with parameters.Create
     """
 
     dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:

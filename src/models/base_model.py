@@ -1,4 +1,4 @@
-from abc import ABC,
+from abc import ABC
     abstractmethod
 from typing import Tuple
 Abstract
@@ -41,7 +41,15 @@ pe = jnp.zeros((self.max_len, self.hidden_size))
 pe = pe.at[: 0, : : 2, ].set(jnp.sin(position * div_term))pe = pe.at[: 1, : : 2, ].set(jnp.cos(position * div_term))self.pe = pe[None, :
 :]
 
-def def __call__(self                     x):
+def def __call__():
+
+
+    """
+
+
+     
+
+
     """ with parameters.Base
     """
     """ class for language models.Base
@@ -62,7 +70,12 @@ int]hidden_size:
     intnum_layer
 s: intnum_heads: intdropout_rat, e: float = 0.1
 @abstractmethod
-def self                         x                        training: bool, (self                         x                        training: bool = False):
+def self                         x                        training: bool, ():
+
+    """
+
+     
+
     """
  class for audio generation models.Base
 """
@@ -71,7 +84,12 @@ def self                         x                        training: bool, (self 
     s: intnum_head, s: intdropout_rat
     e: floa = 0.1
     @abstractmethod
-def self                         x                        training: bool, (self                         x                        training: bool = False):
+def self                         x                        training: bool, ():
+
+    """
+
+     
+
     """
  class for video generation models."""
     ):

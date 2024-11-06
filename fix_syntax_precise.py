@@ -80,7 +80,7 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
                                     lines = content.split("\n")
                                     fixed_lines = []
                                         for line in lines: ifline.strip().startswith("from typing import"):
-                                    fixed_lines.append("from typing import Optional,
+                                    fixed_lines.append("from typing import Optional
     ")
                                     elif "batch_size
                                     " in line: fixed_lines.append("            batch_size                                             ")

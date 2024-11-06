@@ -16,13 +16,9 @@ Image processor for handling multimodal inputs in the MMMU model.
  """
  the image processor.     super().__init__()
 self
-"""self.image_size = image_size"""
-.hidden_size = hidden_size
+hidden_size = hidden_size
 self
-""""""
-
-
-    # Image preprocessing""".transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
+"""transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
 """
 transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 """
@@ -30,33 +26,12 @@ transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 
 
     )
-""""""
-
-
-
-# CNN backbone""".backbone = nn.Sequential(nn.Conv2d(364kernel_size=7, stride=2, padding=3),nn
-"""
-    nn.ReLU(inplace = True),
-"""
-.MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
-"""
-
-nn.Conv2d(64192kernel_size = 3, padding=1),
-"""
-.ReLU(inplace = True),nn
-"""
-
-    nn.MaxPool2d(kernel_size = 3, stride=2, padding=1),
-"""
-.Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
-"""
-
-nn.ReLU(inplace = True),
-"""
-.AdaptiveAvgPool2d((1, 1)))self
-"""
- """
-.dropout = nn.Dropout(dropout_rate)def
+"""backbone = nn.Sequential(nn.Conv2d(364kernel_size=7, stride=2, padding=3),nn
+MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
+ReLU(inplace = True),nn
+Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
+AdaptiveAvgPool2d((1, 1)))self
+dropout = nn.Dropout(dropout_rate)def
 """ """
  forward(self):  images
 """Method with parameters."""

@@ -15,28 +15,16 @@ Flash Mixture of Experts layer implementation.
  """
  the FlashMoE layer.     super().__init__()
 self
-"""self.hidden_size = hidden_size"""
-.intermediate_size = intermediate_size
+intermediate_size = intermediate_size
 
     self
-"""self.num_experts = num_experts"""
-.dropout = nn.Dropout(dropout_rate)
+dropout = nn.Dropout(dropout_rate)
 self
-""""""
-
-
-# Expert network""".experts = nn.ModuleList(     [nn.Sequential(intermediate_size
+"""experts = nn.ModuleList(     [nn.Sequential(intermediate_size
 """     nn.Linear(hidden_size,"""
  ), nn
-"""
-
-nn.GELU(), """
-.Linear(     intermediate_size,nn
-"""
-
-    hidden_size
-), """
-.Dropout(dropout_rate)for
+Linear(     intermediate_size,nn
+Dropout(dropout_rate)for
 """
 
 )
@@ -46,12 +34,23 @@ nn.GELU(), """
 self
 """
 ] """
-)""" """# Router network""".router = nn.Linear(hidden_size, num_experts)
+)""" router = nn.Linear(hidden_size, num_experts)
 Method
 """"""
 
 
-def def __init__(self):
+def def __init__():
+
+
+
+    """
+
+
+
+     
+
+
+
     """ with parameters.Module
     """
 

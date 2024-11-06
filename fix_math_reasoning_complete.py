@@ -42,7 +42,7 @@ if line.strip().startswith(("from "
         from .multimodal.base_transformer import BaseTransformer, TransformerBlock
         from .mathematical_notation import MathematicalNotationProcessor
         from .symbolic_math import SymbolicMathProcessor
-        from transformers import PreTrainedModel,
+        from transformers import PreTrainedModel
     GenerationMixin
         import logging
 

@@ -16,7 +16,7 @@ imports = [
     ,
     ,
     ,
-    ,
+    
     \n",
     
 "from flax import linen as nn\n",

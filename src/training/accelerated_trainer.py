@@ -40,44 +40,14 @@ max_grad_norm: float = 1.0
 Placeholder docstring.
 """
  the accelerated trainer.self
-"""
-
-
-    self.model = model
-"""
-.train_dataloader = train_dataloaderself
-"""
-
-self.eval_dataloader = eval_dataloader
-"""
-.optimizer = optimizer or torch.optim.AdamW(model.parameters())self
-"""
-
-    self.lr_scheduler = lr_scheduler
-"""
-.num_epochs = num_epochsself
-"""
-
-self.gradient_accumulation_steps = gradient_accumulation_steps
-"""
-.max_grad_norm = max_grad_normself
-"""
-
-    self.logging_steps = logging_steps
-"""
-.evaluation_steps = evaluation_stepsself
-"""
-
-self.save_steps = save_steps
-"""
-.output_dir = output_dirself
-"""
-    """
-._step = 0self
-"""
-self._epoch = 0
-"""
-._best_eval_loss = float("inf")
+train_dataloader = train_dataloaderself
+optimizer = optimizer or torch.optim.AdamW(model.parameters())self
+num_epochs = num_epochsself
+max_grad_norm = max_grad_normself
+evaluation_steps = evaluation_stepsself
+output_dir = output_dirself
+_step = 0self
+_best_eval_loss = float("inf")
 
 Train
 """ """
@@ -99,7 +69,9 @@ Train
     self._step += 1
 
     if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                            total_loss = 0
-    if self._step % self.evaluation_steps = = 0: self.evaluate()if self._step % self.save_steps == 0: self.save_checkpoint()def evaluate(self):
+    if self._step % self.evaluation_steps = = 0: self.evaluate()if self._step % self.save_steps == 0: self.save_checkpoint()def evaluate():
+    """
+     
     """ with parameters.Evaluate
     """
 

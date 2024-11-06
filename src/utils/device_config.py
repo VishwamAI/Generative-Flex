@@ -36,8 +36,16 @@ Returns: Dict containing device configurationConfigure
     if config["has_gpu"]: os, .environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = (         "false" if gpu_allow_growth else "true"    )     if not gpu_allow_growth: os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = str(memory_fraction)     if config["device_count"] > 1: os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count = {}".format(config["device_count"])
     return config
 
-    def def get_compute_dtype(self):
-    """ with parameters.Get
+    def def get_compute_dtype():
+
+
+        """
+
+
+         
+
+
+        """ with parameters.Get
     """
     """ optimal compute dtype based on available hardware."""
 

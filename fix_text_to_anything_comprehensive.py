@@ -120,7 +120,7 @@ return "\n".join(result)
                                         fixed_content = fix_file_content(content)
 
 # Write the fixed content back
-with open("src/models/text_to_anything.py"                                     "w") as f: f.write(fixed_content)
+with open("src/models/text_to_anything.py"                                    , "w") as f: f.write(fixed_content)
 
 print("Comprehensive fixes applied to text_to_anything.py")
 

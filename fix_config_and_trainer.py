@@ -5,23 +5,29 @@ import re
 from pathlib import Path
 
 def def fix_config_file():
-    
+
+
+    """
+
+
     config_path
-"""Fix syntax issues in config.py"""
+
+
+    """Fix syntax issues in config.py"""
  = Path("src/config/config.py")
-    with open(config_path, "r") as f: content = f.read()
+    with open(config_path,, "r") as f: content = f.read()
 
     # Remove duplicate imports
     content = re.sub(r"from typing import Dict,
     ,
-    ,
+    
     \n.*?from typing import Dict,
-    ,
+    
     \n",
     
                     "from typing import Dict,
     ,
-    ,
+    
     \n",
     content,
     flags=re.DOTALL)
@@ -32,7 +38,7 @@ def def fix_config_file():
 from
 """Centralized configuration management for Generative-Flex."""
  typing import Optional, Union, List, Dict, Any, Tuple
-from dataclasses import dataclass,
+from dataclasses import dataclass
     field
 from pathlib import Path
 import json
@@ -104,7 +110,7 @@ class Config:
         
         with
 """Load configuration from JSON file."""
- open(path, "r") as f: config_dict = json.load(f)
+ open(path,, "r") as f: config_dict = json.load(f)
 
         model_config = ModelConfig(**config_dict["model"])
         training_config = TrainingConfig(**config_dict["training"])
@@ -120,7 +126,7 @@ class Config:
             "training": self.training.__dict__,
         }
 
-        with open(path, "w") as f: json.dump(config_dict, f, indent=2)
+        with open(path,, "w") as f: json.dump(config_dict, f, indent=2)
 
     @classmethod
     def get_config(cls, model_type: str = "language", config_path: Optional[str] = None) -> "Config":
@@ -151,20 +157,26 @@ class Config:
         return cls(model=model_config, training=TrainingConfig())
 '''
 
-    with open(config_path, "w") as f: f.write(fixed_content)
+    with open(config_path,, "w") as f: f.write(fixed_content)
 
 def def fix_jax_trainer():
-    
+
+
+    """
+
+
     trainer_path
-"""Fix syntax issues in jax_trainer.py"""
+
+
+    """Fix syntax issues in jax_trainer.py"""
  = Path("src/training/jax_trainer.py")
-    with open(trainer_path, "r") as f: content = f.read()
+    with open(trainer_path,, "r") as f: content = f.read()
 
     # Fix function signatures and type hints
     content = re.sub(r"def __init__\(self\) -> None: model: Union\[nn\.Module",
                     "def __init__(self, model: Union[nn.Module, None]) -> None:", content)
 
-    with open(trainer_path, "w") as f: f.write(content)
+    with open(trainer_path,, "w") as f: f.write(content)
 
 if __name__ == "__main__":
     fix_config_file()

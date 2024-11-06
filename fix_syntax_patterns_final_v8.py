@@ -51,8 +51,7 @@ class SyntaxFixer:
  __init__(self):
         
         self
-"""Initialize the syntax fixer."""
-.docstring_fixer = DocstringFixer()
+docstring_fixer = DocstringFixer()
 
     def fix_file_content(self, content: str) -> str: Fix
 """Fix all syntax issues in the file content."""
@@ -99,28 +98,35 @@ class SyntaxFixer:
             elif
 """{indent}class {class_name}(nn.Module):
 
-{indent}    def __init__(self):
-{indent}        super().__init__()"""
+{indent}    def __init__():
+        """
+        {indent}        super().__init__()
+        """
  "unittest.TestCase" in parent: return f
             else
 """{indent}class {class_name}(unittest.TestCase):
 
-{indent}    def setUp(self):
-{indent}        super().setUp()"""
+{indent}    def setUp():
+        """
+        {indent}        super().setUp()
+        """
 :
                 if params: return f
                 else
 """{indent}class {class_name}({parent}):
-{indent}    def __init__(self,
-        {params}):
-{indent}        super().__init__()"""
+{indent}    def __init__():
+        """
+        {indent}        super().__init__()
+        """
 :
                     return f
 
         pattern
 """{indent}class {class_name}({parent}):
-{indent}    def __init__(self):
-{indent}        super().__init__()"""
+{indent}    def __init__():
+        """
+        {indent}        super().__init__()
+        """
  = r'^(\s*)class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?'
         content = re.sub(pattern, format_class_def, content, flags=re.MULTILINE)
         return content

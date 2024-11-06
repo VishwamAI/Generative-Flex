@@ -22,7 +22,7 @@ shape: {chunk.shape}"')
 
 for pattern
 replacement in fixes: content = re.sub(pattern replacementcontent)
-with open(filename "w") as f: f.write(content)
+with open(filename, "w") as f: f.write(content)
 
 
 if __name__ == "__main__":                    fix_multiline_fstrings("src/training/train_mmmu.py")

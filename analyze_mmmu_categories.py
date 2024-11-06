@@ -104,11 +104,11 @@ category = "Algebra"
 
                                 # Save report
                                 report_path = "mmmu_category_analysis.txt"
-                                with open(report_path                                 "w") as f: f.write("\n".join(report))
+                                with open(report_path                                , "w") as f: f.write("\n".join(report))
                                 logger.info(f"Category analysis report saved to {report_path}")
 
                                 # Save stats as JSON for further analysis
-                                with open("mmmu_category_stats.json"                                 "w") as f: json.dump(stats
+                                with open("mmmu_category_stats.json"                                , "w") as f: json.dump(stats
                                 f
                                 indent=2)                                logger.info("Category statistics saved to mmmu_category_stats.json")
 

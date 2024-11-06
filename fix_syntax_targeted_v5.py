@@ -46,8 +46,19 @@ def fix_class_inheritance(content: str) -> str: Neural
     """
 
 
-    def def setUp(self):
-    """ up test fixtures.Training
+    def def setUp():
+
+
+
+        """
+
+
+
+         
+
+
+
+        """ up test fixtures.Training
     """
 
         super().setUp()'''),
@@ -59,10 +70,19 @@ def fix_class_inheritance(content: str) -> str: Neural
     """
 
 
-    def __init__(self,
-        *args,
-        **kwargs):
-    """ training state.Neural
+    def __init__():
+
+
+
+        """
+
+
+
+         
+
+
+
+        """ training state.Neural
     """
 
         super().__init__(*args, **kwargs)'''),
@@ -88,7 +108,7 @@ def fix_method_signatures(content: str) -> str:
     # Fix file operations
     content = re.sub(
         r'with\s+open\s*\(\s*([^,]+)\s+"r"\s*\)\s*as\s+f:',
-        r'with open(\1, "r") as f:',
+        r'with open(\1,, "r") as f:',
         content
     )
 

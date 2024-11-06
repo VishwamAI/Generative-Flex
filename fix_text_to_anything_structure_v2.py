@@ -14,14 +14,14 @@ lines = content.split("\n")
 
 # Prepare the fixed content sections
 fixed_imports = [
-"from dataclasses import dataclass,
+"from dataclasses import dataclass
     field",
     
 "from typing import Any,
     ,
     ,
     ,
-    ,
+    
     ",
     
 "import flax.linen as nn",
@@ -111,7 +111,7 @@ if "@dataclass" in line or "class GenerationConfig" in line:
                 fixed_content = fix_file_content(content)
 
                 # Write the fixed content back
-                with open("src/models/text_to_anything.py"                 "w") as f: f.write(fixed_content)
+                with open("src/models/text_to_anything.py"                , "w") as f: f.write(fixed_content)
 
                 print("Structural fixes applied to text_to_anything.py")
 

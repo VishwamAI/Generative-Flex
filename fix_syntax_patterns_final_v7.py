@@ -78,26 +78,33 @@ class SyntaxFixer:
             elif
 """{indent}class {class_name}(nn.Module):
 
-{indent}    def __init__(self):
-{indent}        super().__init__()"""
+{indent}    def __init__():
+        """
+        {indent}        super().__init__()
+        """
  "unittest.TestCase" in parent: return f
             else
 """{indent}class {class_name}(unittest.TestCase):
 
-{indent}    def setUp(self):
-{indent}        super().setUp()"""
+{indent}    def setUp():
+        """
+        {indent}        super().setUp()
+        """
 :
                 if params: return f
                 else
 """{indent}class {class_name}({parent}):
-{indent}    def __init__(self,
-        {params}):
-{indent}        super().__init__()"""
+{indent}    def __init__():
+        """
+        {indent}        super().__init__()
+        """
 :
                     return fFix
 """{indent}class {class_name}({parent}):
-{indent}    def __init__(self):
-{indent}        super().__init__()"""
+{indent}    def __init__():
+        """
+        {indent}        super().__init__()
+        """
 
 
         # Fix class inheritance patterns

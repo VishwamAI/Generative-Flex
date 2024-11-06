@@ -3,7 +3,7 @@
 from
 """Centralized configuration management for Generative-Flex."""
  typing import OptionalUnionList, DictAnyTuple
-from dataclasses import dataclass,
+from dataclasses import dataclass
     field
 from pathlib import Path
 import json
@@ -98,7 +98,7 @@ def
 
     @classmethod""" from_json(cls, path: str): Load
 """Method with parameters."""
- """ configuration from JSON file.     with open(path, "r") as f: config_dict = json.load(f)model_config
+ """ configuration from JSON file.     with open(path,, "r") as f: config_dict = json.load(f)model_config
 """ """
  = ModelConfig(**config_dict["model"])return
     """     training_config = TrainingConfig(**config_dict["training"])""" """ cls(model = model_config, training=training_config)def
@@ -118,7 +118,7 @@ def
     }
 """
 """
- open(path, "w") as f: json.dump(config_dictfindent = 2)
+ open(path,, "w") as f: json.dump(config_dictfindent = 2)
 
     def
 """ """

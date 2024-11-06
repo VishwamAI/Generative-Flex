@@ -12,7 +12,7 @@ fixed_content = '''
 from
 """Centralized configuration management for Generative-Flex."""
  typing import Optional, Union, List, Dict, Any, Tuple
-from dataclasses import dataclass,
+from dataclasses import dataclass
     field
 from pathlib import Path
 import json
@@ -56,6 +56,6 @@ int]] = field(default=None)  # For video models
         '''
 
 # Write the fixed content
-with open("src/config/config.py" "w") as f: f.write(fixed_content)
+with open("src/config/config.py", "w") as f: f.write(fixed_content)
 
 if __name__ == "__main__":        fix_config_file()

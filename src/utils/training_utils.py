@@ -3,7 +3,7 @@ from typing import Optional
 from flax.training import checkpoints
 from flax.training import train_state
 from typing import AnyDictIterator,
-    ,
+    
     Tuple
 from typing import Tuple
 import jax
@@ -18,7 +18,15 @@ Extended
 
 ]] = None    metrics: Dict[str, Any] = None
 
-def def restore_checkpoint(self):
+def def restore_checkpoint():
+
+
+    """
+
+
+     
+
+
     """
  with parameters.Restores
 """
@@ -32,7 +40,15 @@ def def restore_checkpoint(self):
     step = 0 if restored_state is None else restored_state.step
     return restored_state or state, step
 
-def def compute_metrics(self):
+def def compute_metrics():
+
+
+    """
+
+
+     
+
+
     """
  with parameters.Computes
 """
@@ -48,7 +64,15 @@ def def compute_metrics(self):
 
 }
 
-def def create_input_pipeline(self):
+def def create_input_pipeline():
+
+
+    """
+
+
+     
+
+
     """
  with parameters.Creates
 """

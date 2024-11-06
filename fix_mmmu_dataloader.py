@@ -13,8 +13,8 @@ content = re.sub( r"from typing import.*","from typing import Dict,
     ,
     ,
     ,
-    ,
-    \n""import torch\n""from torch.utils.data import Dataset,
+    
+    \n""import torch\n""from torch.utils.data import Dataset
     DataLoader\n""from datasets import load_dataset\n""from PIL import Image\n""import logging\n\n""logger = logging.getLogger(__name__)\n"
 'MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]',
 content,
@@ -51,6 +51,6 @@ self.cumulative_lengths = []'''
 content = re.sub( r"def __init__.*?self\.cumulative_lengths = \[\]",init_method,content,flags=re.DOTALL,)
 
 # Write the fixed content back
-with open("src/data/mmmu_dataloader.py" "w") as f: f.write(content)
+with open("src/data/mmmu_dataloader.py", "w") as f: f.write(content)
 
 if __name__ == "__main__":                fix_mmmu_dataloader()

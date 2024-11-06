@@ -12,12 +12,13 @@ from src.models.enhanced_transformer import EnhancedTransformer
 logger
 """Training script for MMMU dataset using enhanced transformer model."""
  = logging.getLogger(__name__)
-def train_epoch(model: EnhancedTransformertrain_loade
-dataloader: DataLoader,
-        optimizer: torch.optim.Optimizer,
-        config: TrainingConfig):
-Train
-"""Method with multiple parameters.
+def train_epoch():
+
+    """
+
+    Train
+
+    """Method with multiple parameters.
 
 Args: model: Parameter description
 optimizer: Parameter description

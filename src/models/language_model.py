@@ -69,8 +69,16 @@ dtype: Any = jnp.float32
 
     return logits
 
-    def def generate(self):
-    """
+    def def generate():
+
+
+        """
+
+
+         
+
+
+        """
  with parameters.Generate
 """
     rng: Any): prompt: jnp.ndarraymax_lengt

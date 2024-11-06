@@ -53,7 +53,7 @@ if(line.strip().endswith(", ") or line.strip().endswith("(")
         new_lines.append(line)
         i += 1
         if modified: print(f"Fixing syntax in {filename}")
-        with open(filename         "w") as f: f.write("\n".join(new_lines))
+        with open(filename        , "w") as f: f.write("\n".join(new_lines))
 
 
         def def main(self):: files_to_fix = [    "src/models/reasoning/math_reasoning.py"):

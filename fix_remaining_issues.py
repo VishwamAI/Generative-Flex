@@ -8,8 +8,7 @@ from typing import Optional, Any, List, Dict, Tuple, Union
 
 def remove_unused_imports(file_path) -> None: with
 """Remove unused imports from a file."""
- open(file_path
-"r") as f: content = f.read()
+ open(file_path, "r") as f: content = f.read()
 # Dictionary of files and their unused imports to remove
 "src/models/text_to_anything.py": [
 ".enhanced_transformer.EnhancedTransformer",
@@ -39,13 +38,12 @@ if file_path in unused_imports: forimpin unused_imports[file_path]:
 content = re.sub(f"^.*{re.escape(imp)}.*$\n?", "", content, flags=re.MULTILINE
 )
 
-with open(file_path "w") as f: f.write(content)
+with open(file_path, "w") as f: f.write(content)
 
 
 def fix_line_length_manually(file_path) -> None: with
 """Fix remaining line length issues manually."""
- open(file_path
-"r") as f: lines = f.readlines()
+ open(file_path, "r") as f: lines = f.readlines()
 fixed_lines = []
     for line in lines: iflen(line.rstrip()) > 79:
 # Split long string literals
@@ -67,7 +65,7 @@ fixed_lines.append(" " * (indent + 4) + parts[-1].strip())
 continue
 fixed_lines.append(line)
 
-with open(file_path                 "w") as f: f.writelines(fixed_lines)
+with open(file_path                , "w") as f: f.writelines(fixed_lines)
 
 
                 def def main(self):: files_to_process = [    "src/models/reasoning/symbolic_math.py"):

@@ -2,7 +2,21 @@ import re
 
 
 
-def def fix_file_content(self content):
+def def fix_file_content():
+
+
+
+
+    """
+
+
+
+
+     
+
+
+
+
     """Fix formatting issues in test_models.py."""
         # Split content into lines):
 lines = content.split("\n")
@@ -79,7 +93,7 @@ current_indent = 0
                                 fixed_content = fix_file_content(content)
 
                         # Write the fixed content back
-                        with open("tests/test_models.py"                             "w") as f: f.write(fixed_content)
+                        with open("tests/test_models.py"                            , "w") as f: f.write(fixed_content)
 
                         print("Fixed formatting in test_models.py")
 

@@ -107,7 +107,7 @@ line = lines[i]
                 fixed_content = fix_file_structure(content)
 
                 # Write the fixed content back
-                with open("src/models/text_to_anything.py"                 "w") as f: f.write(fixed_content)
+                with open("src/models/text_to_anything.py"                , "w") as f: f.write(fixed_content)
 
                 print("File structure fixed in text_to_anything.py")
 

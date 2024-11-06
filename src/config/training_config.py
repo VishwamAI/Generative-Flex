@@ -3,7 +3,7 @@
 from
 """Training configuration for Generative-Flex."""
  typing import ListOptionalDict, Union, Any
-from dataclasses import dataclass,
+from dataclasses import dataclass
 from typing import Optional, Any, Dict, Union
 
     field

@@ -151,7 +151,18 @@ stripped = line.strip()
 
 
                                                                                             def def main():
-    """ critical syntax issues in all Python files."""
+
+
+
+                                                                                                """
+
+
+
+                                                                                                 
+
+
+
+                                                                                                """ critical syntax issues in all Python files."""
     # Get all Python files
                                                                                             python_files = []
                                                                                             for root

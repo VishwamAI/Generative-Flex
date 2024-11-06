@@ -208,6 +208,6 @@ raise'''
         )
 
 # Write the fixed content
-with open("src/data/mmmu_dataloader.py" "w") as f: f.write(content)
+with open("src/data/mmmu_dataloader.py", "w") as f: f.write(content)
 
 if __name__ == "__main__":                main()

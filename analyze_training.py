@@ -11,7 +11,7 @@ def parse_log_file(log_file) -> None: metrics
 """Parse training log file to extract metrics"""
  = defaultdict(list)
 
-with open(log_file "r") as f: forlinein
+with open(log_file, "r") as f: forlinein
 f:
 # Skip tqdm progress lines
 if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(line.split("Validation     loss: ")[1].strip())        metrics["val_loss"].append(val_loss)
@@ -30,8 +30,7 @@ if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(lin
 
 
                 def plot_metrics(metrics                 output_dir="outputs") -> None: os
-"""Plot training and validation metrics"""
-.makedirs(output_dir
+makedirs(output_dir
                 exist_ok=True)
                 plt.style.use("seaborn")
 
@@ -65,7 +64,7 @@ if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(lin
                         plt.close()
 
                         # Save metrics to JSON
-                        with open(os.path.join(output_dir                             "training_metrics.json")
+                        with open(os.path.join(output_dir                            , "training_metrics.json")
                         "w") as f: json.dump(metrics
                         f
                         indent=2)

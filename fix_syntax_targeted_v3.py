@@ -65,11 +65,7 @@ def fix_method_signatures(content: str) -> str: Fix
 
 def fix_docstrings(content: str) -> str:
 """ docstring formatting and placement.Fix
-    """
-
-    # Fix module-level docstrings
-    content = re.sub(
-        r'^(""".+?""")(?:\s*)?$',
+    +?""")(?:\s*)?$',
         r'\1\n',
         content,
         flags=re.MULTILINE | re.DOTALL

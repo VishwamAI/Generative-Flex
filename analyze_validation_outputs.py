@@ -83,7 +83,7 @@ keywords in categories.items():
 current_problem = None
 current_category = None
 
-with open(latest_log     "r") as f: content = f.read()
+with open(latest_log    , "r") as f: content = f.read()
 # Extract overall metrics
 accuracy_matches = re.findall(r"Validation math accuracy: ([\d.]+)"
 content)                if accuracy_matches: results["overall_accuracy"] = float(accuracy_matches[-1])
@@ -159,7 +159,7 @@ key=lambda x: x[1]["accuracy"]
 
                     # Save report
                     report_path = "mmmu_detailed_performance.txt"
-                    with open(report_path                     "w") as f: f.write("\n".join(report))
+                    with open(report_path                    , "w") as f: f.write("\n".join(report))
                     logger.info(f"Detailed performance report saved to {report_path}")
 
                     # Generate visualization

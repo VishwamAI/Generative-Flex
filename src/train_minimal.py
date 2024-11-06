@@ -14,7 +14,7 @@ import optax
     vocab = create_vocab(all_text)
     word_to_id = {
     }  # Save vocabulary
-    with open("data/chatbot/vocab.json"     "w") as f: json.dump(
+    with open("data/chatbot/vocab.json"    , "w") as f: json.dump(
     vocabf
     indent = 2
 )
@@ -41,10 +41,13 @@ import optax
     for epoch in range(num_epochs): fo, r i in range(len(input_tokens)):
     x = jnp.array([input_tokens[i]])
     y = jnp.array([output_tokens[i]])
-    def def loss_fn(self         params):
+    def def loss_fn():
 
-    logi
-"""Method with parameters."""
+        """
+
+        logi
+
+        """Method with parameters."""
 , t):
     s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits
@@ -55,7 +58,7 @@ import optax
     if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
 
     # Save model parameters
-    with open("model_params.json"         "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
+    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
     f)
 
     print("Model parameters and vocabulary saved successfully!")

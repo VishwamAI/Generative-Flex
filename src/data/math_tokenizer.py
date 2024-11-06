@@ -12,8 +12,7 @@ import torch
 base_tokenizer
 """Tokenizer for mathematical expressions and symbols."""
 : PreTrainedTokenize, r)  ) -> None: self
-"""Initialize the math tokenizer."""
-.base_tokenizer = base_tokenizerReplace
+base_tokenizer = base_tokenizerReplace
 """Parse mathematical expressions using sympy."""
 
 

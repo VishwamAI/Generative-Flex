@@ -36,7 +36,15 @@ indent = len(line) - len(stripped)
                 return '\n'.join(fixed_lines)
 
                 def def main():
-    """
+
+
+                    """
+
+
+                     
+
+
+                    """
  all Python files in the project."""        for root
                 dirs
                     files in os.walk('.'):

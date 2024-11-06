@@ -16,7 +16,7 @@ content = re.sub(r"embedded = self\._adjust_sequence_length\( embedded, sequence
 content)
 
 # Write the fixed content back
-with open("src/models/text_to_anything.py" "w") as f: f.write(content)
+with open("src/models/text_to_anything.py", "w") as f: f.write(content)
 
 
 if __name__ == "__main__":                fix_text_to_anything()

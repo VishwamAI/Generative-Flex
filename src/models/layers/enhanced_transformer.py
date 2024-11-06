@@ -19,20 +19,14 @@ num_heads = self.config["num_attention_heads"],""" = self.config["attention_drop
     self
 """
 )
-"""
-"""
-.mlp = nn.Dense(
+mlp = nn.Dense(
     
 kernel_init
     """features = self.config["intermediate_size"],""" = jax.nn.initializers.normal(0.02
 )
 self
-""")"""
-    """.layer_norm1 = nn.LayerNorm()self
-"""
-self.layer_norm2 = nn.LayerNorm()
-"""
-.dropout = nn.Dropout(rate=self.config["dropout_rate"])def
+""")layer_norm1 = nn.LayerNorm()self
+dropout = nn.Dropout(rate=self.config["dropout_rate"])def
 """ """
  __init__(self):  hidden_states
 """Method with parameters."""

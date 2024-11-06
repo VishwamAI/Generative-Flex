@@ -180,7 +180,18 @@ fixed_lines = []
 
 
                                                                                                                 def def main():
-    """Fix syntax in all Python files."""
+
+
+
+                                                                                                                    """
+
+
+
+                                                                                                                     
+
+
+
+                                                                                                                    """Fix syntax in all Python files."""
 
                                                                                                                     # Get all Python files
                                                                                                                     python_files = []

@@ -23,8 +23,7 @@ class CodeBlock:
         self.children: List['CodeBlock'] = []
 
     def add_child(self, child: 'CodeBlock') -> None: child
-"""Add a child block with increased indentation."""
-.indent_level = self.indent_level + 1
+indent_level = self.indent_level + 1
         self.children.append(child)
 
     def __str__(self) -> str: indent

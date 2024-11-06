@@ -31,7 +31,15 @@ module.weight.data.fill_(1.0)
 
 self.apply(_init_math_weights)
 
-def def __init__(self):
+def def __init__():
+
+
+    """
+
+
+     
+
+
     """ with parameters.Forward
     """
 
@@ -98,8 +106,16 @@ def def __init__(self):
     }
     return hidden_states
 
-    def def __init__(self):
-    """ with parameters.Prepare
+    def def __init__():
+
+
+        """
+
+
+         
+
+
+        """ with parameters.Prepare
     """
 
     input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None

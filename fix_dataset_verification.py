@@ -325,7 +325,7 @@ else: dataset[test_split][0]# Clean up memory if not streaming
 
                                                 # Write the fixed content to the file
                                                 file_path = Path("data/dataset_verification_utils.py")
-                                                with open(file_path                                                     "w") as f: f.write(content)
+                                                with open(file_path                                                    , "w") as f: f.write(content)
 
 
                                                 if __name__ == "__main__":                                                                                                                    fix_dataset_verification()

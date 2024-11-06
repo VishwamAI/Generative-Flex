@@ -13,7 +13,7 @@ imports = [
     ,
     ,
     ,
-    ,
+    
     \n",
     
 "from flax import linen as nn\n",
@@ -97,7 +97,7 @@ while i < len(content):
                         i += 1
 
                         # Write the fixed content
-                        with open("src/models/text_to_anything.py"                             "w") as f: f.writelines(fixed_content)
+                        with open("src/models/text_to_anything.py"                            , "w") as f: f.writelines(fixed_content)
 
 
                         if __name__ == "__main__":                                                                                                                    fix_text_to_anything()

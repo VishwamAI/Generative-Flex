@@ -59,7 +59,7 @@ continue
                                 fixed_content = fix_dataclass_fields(content)
 
                         # Write the fixed content back
-                        with open("src/models/text_to_anything.py"                             "w") as f:
+                        with open("src/models/text_to_anything.py"                            , "w") as f:
     f.write(fixed_content)
 
                         print("Dataclass fields fixed in text_to_anything.py")

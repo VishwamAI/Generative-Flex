@@ -102,7 +102,7 @@ v in self.model.__dict__.items() if v is not None}
 
 }
 
-with open(path "w") as f: json.dump(config_dict
+with open(path, "w") as f: json.dump(config_dict
 f
 indent=2)
 @classmethod
@@ -128,15 +128,15 @@ return cls(model=model_config, training=TrainingConfig())
 
 # Write the content to config.py
 config_path = "src/config/config.py"
-with open(config_path     "w") as f: f.write(config_content)
+with open(config_path    , "w") as f: f.write(config_content)
 
 # Format with black
 mode = black.Mode(     target_versions={black.TargetVersion.PY312},    line_length=100,    string_normalization=True,    is_pyi=False)
 
-try: withopen(config_path     "rb") as f: content = f.read()                formatted = black.format_file_contents(content
+try: withopen(config_path    , "rb") as f: content = f.read()                formatted = black.format_file_contents(content
 fast=False
 mode=mode)
-with open(config_path     "w") as f: f.write(formatted)
+with open(config_path    , "w") as f: f.write(formatted)
 print(f"Successfully formatted {config_path}")
 except Exception as e: print(f"Error formatting {config_path}: {e}")
 

@@ -26,8 +26,7 @@ docstring_files = [
 module_files = ["src/model/experts.py", "src/model/attention.py"]
 
 # Fix datasets import issue
-with open("data/verify_mapped_datasets.py" "r") as f: content = f.read()        with open("data/verify_mapped_datasets.py"
-"w") as f: f.write("try:\n    from datasets import load_dataset\nexcept ImportError:\n    pass\n\n"
+with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()        with open("data/verify_mapped_datasets.py", "w") as f: f.write("try:\n    from datasets import load_dataset\nexcept ImportError:\n    pass\n\n"
 + content[content.find("\n") + 1 :]
 )
 

@@ -13,7 +13,12 @@ patch_size: Tuple[intint
 int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
-def def __call__(self video):
+def def __call__():
+
+    """
+
+     
+
     """
  with parameters.Transformer
 """
@@ -70,7 +75,15 @@ def self inputstraining: bool, (self inputstraining: bool = True): b):
     x = jnp.reshape(x, (bth, w, c))
     return x
 
-def def generate(self):
+def def generate():
+
+
+    """
+
+
+     
+
+
     """ with parameters.Generate
     """
 

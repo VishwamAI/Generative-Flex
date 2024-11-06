@@ -10,8 +10,7 @@ import seaborn as sns
 
 
 logging
-"""Script to analyze performance across mathematical categories."""
-.basicConfig(level=logging.INFO)
+basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -106,7 +105,7 @@ for diff
 
         # Save report
         report_path = "performance_analysis.txt"
-        with open(report_path         "w") as f: f.write("\n".join(report))
+        with open(report_path        , "w") as f: f.write("\n".join(report))
         logger.info(f"Performance analysis saved to {report_path}")
 
         def def main(self)::            analysis

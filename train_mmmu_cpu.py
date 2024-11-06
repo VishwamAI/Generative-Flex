@@ -1,7 +1,7 @@
 from accelerate import Accelerator
 from src.config.training_config import TrainingConfig
 from src.training.train_mmmu import MMUTrainer
-from transformers import AutoConfig,
+from transformers import AutoConfig
     AutoTokenizer
 import logging
 import os

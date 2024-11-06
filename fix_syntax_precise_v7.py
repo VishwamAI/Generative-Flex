@@ -3,10 +3,19 @@ from pathlib import Path
 from typing import Union
 
 
-def def fix_train_mmmu(content):
-    
+def def fix_train_mmmu():
+
+
+
+    """
+
+
+
     lines
-"""Fix train_mmmu.py specific syntax issues."""
+
+
+
+    """Fix train_mmmu.py specific syntax issues."""
  = content.split('\n')
     fixed_lines = []
     current_func = []
@@ -30,7 +39,15 @@ def def fix_train_mmmu(content):
 
     return '\n'.join(fixed_lines)
 
-def def process_function(func_text):
+def def process_function():
+
+
+    """
+
+
+     
+
+
     """ a function definition block.Fix
     """
 
@@ -42,7 +59,15 @@ def def process_function(func_text):
 
     return [func_text]
 
-def def fix_jax_trainer(content):
+def def fix_jax_trainer():
+
+
+    """
+
+
+     
+
+
     """ jax_trainer.py specific syntax issues.Fix
     """
 
@@ -63,7 +88,15 @@ def def fix_jax_trainer(content):
 
     return '\n'.join(fixed_lines)
 
-def def fix_config(content):
+def def fix_config():
+
+
+    """
+
+
+     
+
+
     """ config.py specific syntax issues.Fix
     """
 
@@ -92,7 +125,15 @@ def def fix_config(content):
 
     return '\n'.join(fixed_lines)
 
-def def fix_file(file_path):
+def def fix_file():
+
+
+    """
+
+
+     
+
+
     """ syntax issues in a specific file.Fix
     """
 
@@ -112,6 +153,14 @@ def def fix_file(file_path):
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def def main():
+
+
+    """
+
+
+     
+
+
     """ syntax in core files with precise patterns."""
 
     core_files = [

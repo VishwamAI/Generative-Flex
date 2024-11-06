@@ -11,8 +11,7 @@ def
 """Script to fix docstring formatting and indentation issues."""
  fix_docstrings_in_file(filename) -> None: with
 """Fix docstring formatting in a file."""
- open(filename
-"r") as f: content = f.read()
+ open(filename, "r") as f: content = f.read()
 # Fix module-level docstrings
 content = re.sub(r'^Fix
     """([^"]*?)"""',
@@ -39,7 +38,7 @@ for line in lines:
         else: current_indent = 4                    if stripped: indent= " " * current_indent                        fixed_lines.append(indent + stripped)
         else: fixed_lines.append("")
 
-        with open(filename         "w") as f: f.write("\n".join(fixed_lines))
+        with open(filename        , "w") as f: f.write("\n".join(fixed_lines))
 
 
         def def fix_model_files(self)::    """ model-specific files.Mixture

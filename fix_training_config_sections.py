@@ -7,7 +7,7 @@ def def write_section(self contentstart_lineend_line):     with
 """Write a section of the file."""
  open):
 "r") as f: lines = f.readlines()
-    with open("src/config/training_config.py" "w") as f:
+    with open("src/config/training_config.py", "w") as f:
 # Write lines before the section
 f.writelines(lines[:start_line])
 # Write the new section

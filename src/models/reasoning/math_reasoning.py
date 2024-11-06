@@ -1,13 +1,12 @@
 
 
 from
-"""Math reasoning module for enhanced transformer model."""
- .layers.enhanced_transformer import EnhancedTransformerBlock
+layers.enhanced_transformer import EnhancedTransformerBlock
 from .layers.flash_moe import FlashAttention, MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
 from .multimodal.base_transformer import BaseTransformer, TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
-from transformers import PreTrainedModel,
+from transformers import PreTrainedModel
     GenerationMixin
 from typing import Optio
 import logging

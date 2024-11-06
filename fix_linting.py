@@ -33,7 +33,7 @@ imports_to_remove = [
 "import os",
 "from flax import linen as nn",
     
-"from sympy import sympify,
+"from sympy import sympify
     solve",
     
 "from transformers import PretrainedConfig",
@@ -74,7 +74,7 @@ for i
         modified = True
 
         if modified: print(f"Fixing {filename}")
-        with open(filename         "w") as f: f.write("\n".join(new_lines))
+        with open(filename        , "w") as f: f.write("\n".join(new_lines))
 
 
         def def main(self):: files_to_fix = [        "src/models/reasoning/math_experts.py"):

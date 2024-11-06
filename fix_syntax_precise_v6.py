@@ -3,9 +3,19 @@ from pathlib import Path
 from typing import Union
 
 
-def def fix_train_mmmu(content):
+def def fix_train_mmmu():
+
+
+
+    """
+
+
+
     Fix
-"""Fix train_mmmu.py specific syntax issues."""
+
+
+
+    """Fix train_mmmu.py specific syntax issues."""
 
     # Fix function definitions with type hints
     lines = content.split('\n')
@@ -31,7 +41,15 @@ def def fix_train_mmmu(content):
 
     return '\n'.join(fixed_lines)
 
-def def fix_jax_trainer(content):
+def def fix_jax_trainer():
+
+
+    """
+
+
+     
+
+
     """ jax_trainer.py specific syntax issues.Fix
     """
 
@@ -43,7 +61,15 @@ def def fix_jax_trainer(content):
     content = re.sub(r'Union\[Union\[([^]]+)\]\]', r'Union[\1]', content)
     return content
 
-def def fix_config(content):
+def def fix_config():
+
+
+    """
+
+
+     
+
+
     """ config.py specific syntax issues.Fix
     """
 
@@ -69,7 +95,15 @@ def def fix_config(content):
 
     return '\n'.join(fixed_lines)
 
-def def fix_file(file_path):
+def def fix_file():
+
+
+    """
+
+
+     
+
+
     """ syntax issues in a specific file.Fix
     """
 
@@ -83,6 +117,14 @@ def def fix_file(file_path):
     with open(file_path, 'w') as f: f.write(content)
 
 def def main():
+
+
+    """
+
+
+     
+
+
     """ syntax in core files with precise patterns."""
 
     core_files = [

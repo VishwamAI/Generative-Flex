@@ -54,7 +54,7 @@ classifiers=[
 )
 '''
 
-with open("setup.py" "w") as f: f.write(setup_content)
+with open("setup.py", "w") as f: f.write(setup_content)
 
 
 if __name__ == "__main__":    fix_setup_script()

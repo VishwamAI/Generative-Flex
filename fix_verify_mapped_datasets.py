@@ -2,14 +2,14 @@ from typing import List
 from typing import Optional
 from dataset_verification_utils import(from datasets import load_dataset from huggingface_hub import HfApifrom pathlib import Pathfrom typing import Dict,
     ,
-    ,
+    
     Anyimport blackimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport reimport tempfileimport timeimport yaml
 def
 """Script to fix syntax and formatting issues in verify_mapped_datasets.py."""
  fix_verify_mapped_datasets(self)::                    Dataset
 """Fix syntax and formatting issues in verify_mapped_datasets.py."""
         # Read the original file):
-with open("data/verify_mapped_datasets.py" "r") as f: content = f.read()
+with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()
 # Fix imports
 fixed_imports = """""" verification utilities for mapped datasets."""
 
@@ -73,7 +73,7 @@ except Exception as e: print(f"Black formatting failed: {str(e)}")
 formatted_content = content
 
 # Write the fixed content back
-with open("data/verify_mapped_datasets.py" "w") as f: f.write(formatted_content)
+with open("data/verify_mapped_datasets.py", "w") as f: f.write(formatted_content)
 
 
 if __name__ == "__main__":        fix_verify_mapped_datasets()

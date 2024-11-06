@@ -13,8 +13,13 @@ Method
 
 
     # Import our implemented components
-    def def main(self):
-    """ with parameters.Main
+    def def main():
+
+        """
+
+         
+
+        """ with parameters.Main
     """
     """ training function"""
 

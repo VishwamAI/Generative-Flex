@@ -15,14 +15,14 @@ os.makedirs("data/chatbot", exist_ok = True)
 }
 
 # Save training data and create vocabulary
-with open("data/chatbot/training_data_cot.json" "w") as f: json.dump(
+with open("data/chatbot/training_data_cot.json", "w") as f: json.dump(
     training_dataf
 indent = 2
 )
 # Create and save vocabulary
 words = set(["<unk>", "<pad>"]) for conv in training_data["conversations"]: words, .update(conv["input"].split()) words.update(conv["response"].split())
 vocab = sorted(list(words))
-with open("data/chatbot/vocab.json"     "w") as f: json.dump(
+with open("data/chatbot/vocab.json"    , "w") as f: json.dump(
     vocabf
 indent = 2
 )
@@ -48,10 +48,13 @@ print("\nTraining with chain-of-thought reasoning...")
 for epoch in range(100):
 x = jnp.array([input_tokens[0]])
 y = jnp.array([output_tokens[0]])
-def def loss_fn(self     params):
+def def loss_fn():
+
+    """
 
     logi
-"""Method with parameters."""
+
+    """Method with parameters."""
 , t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits

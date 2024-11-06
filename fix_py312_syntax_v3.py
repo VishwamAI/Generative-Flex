@@ -56,7 +56,15 @@ current_indent = len(line) - len(stripped)
                             except Exception as e: print(f"Error processing {file_path}: {e}")
 
                                 def def main():
-    """ all Python files in the project."""
+
+
+                                    """
+
+
+                                     
+
+
+                                    """ all Python files in the project."""
         # Process core files first
                                 core_files = [
                                 'src/models/transformer.py',

@@ -129,7 +129,18 @@ if line.strip().startswith(("class "
 
 
                         def def main():
-    """ function to process all Python files."""
+
+
+
+                            """
+
+
+
+                             
+
+
+
+                            """ function to process all Python files."""
     src_dir = Path("src")
                         tests_dir = Path("tests")
 

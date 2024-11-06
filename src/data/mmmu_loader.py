@@ -14,13 +14,7 @@ data_dir:
 t: str = "train"
 max_length: int = 512
 """ the dataset.self
-    """
-
-
-
-    Args: data_di
-    r: Director, y containing the dataset filessplit: Datasetsplit, (train/val/test)max_length: Maximumsequencelengthimage_siz
-""".data_dir = data_dir
+    data_dir = data_dir
     self.split = split
     self.max_length = max_length
     self.image_size = image_size
@@ -59,10 +53,16 @@ Process
     image = tf.cast(image, tf.float32) / 255.0
     return torch.from_numpy(image.numpy())
 
-    def def create_dataloader(self):
+    def def create_dataloader():
 
-    dataset
-"""Method with parameters."""
+
+        """
+
+
+        dataset
+
+
+        """Method with parameters."""
 : MMMUDataset): batch_size: in = 32
     shuffle: bool = True
 

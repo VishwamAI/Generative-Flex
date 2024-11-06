@@ -1,4 +1,4 @@
-from dataclasses import dataclass,
+from dataclasses import dataclass
     field
 from flax import struct
 from typing import Optio
@@ -75,8 +75,7 @@ use_neural_engine: bool = field(default=True)
 
 
 self
-"""# Store original shape in state"""
-.state.value = x.shape
+state.value = x.shape
 x_reshaped
 """"""
 
@@ -128,8 +127,19 @@ return
 """"""
 
 
-    def def dequantize(self):
-    """ with parameters.
+    def def dequantize():
+
+
+
+        """
+
+
+
+         
+
+
+
+        """ with parameters.
 
     Module
     """
@@ -176,15 +186,12 @@ Module
 
     self
 """value_shape = (batch_sizemax_lengthhidden_size)"""
- """# Use variables for stateful cache""".key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype)) self
+ key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype)) self
     """ self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""".current_length = self.variable("cache", "length", lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)def
 """ """
  get(self): jnp
 """Method with parameters."""
- -> None: Unio, n):[Union[self"""
-
-: start: int]] 0end: Optional[int]None) -> Tuple[jnp.ndarray
-""".ndarray]:key
+ -> None: Unio, n):[Union[selfndarray]:key
     """
 
 
@@ -228,11 +235,7 @@ Initialize
 
 
 Module docstring.""" privacy components.self
-"""
-
-    self.dense = nn.Dense(self.hidden_size)
-"""
-._use_privacy_preserving = True  # Always enabled for this layerepsilon
+_use_privacy_preserving = True  # Always enabled for this layerepsilon
 """
 
 self.layer_norm = nn.LayerNorm(

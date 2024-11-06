@@ -44,10 +44,13 @@ def
     if
 """Initialize parameters with scaled initialization"""
  p.dim() > 1: nn.init.xavier_uniform_(pgain = 1 / math.sqrt(2)  # Scale for better gradient flow)
-def def forward(self):
+def def forward():
+
+    """
 
     x
-"""Method with parameters."""
+
+    """Method with parameters."""
 : torch.Tensor): mask: Optional[torch.Tensor] = None
 
 

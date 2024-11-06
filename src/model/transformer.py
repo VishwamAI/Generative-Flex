@@ -17,14 +17,10 @@ num_experts
 """expert_capacity_factor: float = 1.25"""
 : int = 1024): super, ().__init__()
 self
-""""""
-
-
-# Flash Attention for efficient self-attention""".self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)
+"""self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)
 
 self
-""" """
-# Mixture of Experts for specialized computation""".moe = MixtureOfExperts(
+""" moe = MixtureOfExperts(
          d_ff
 """d_model = d_model,"""
  = dim_feedforward, capacity_factor
@@ -33,15 +29,8 @@ self
 """dropout = dropout"""
 
 )
-""""""
-
-
-
-# Layer normalization and dropout""".norm1 = nn.LayerNorm(d_model)self
-"""
-    self.norm2 = nn.LayerNorm(d_model)
-"""
-.dropout = nn.Dropout(dropout)def
+"""norm1 = nn.LayerNorm(d_model)self
+dropout = nn.Dropout(dropout)def
 """
  """
  forward(self):  x

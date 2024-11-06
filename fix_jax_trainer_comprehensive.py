@@ -4,9 +4,18 @@ import black
 
 
 def def fix_imports():
-    
+
+
+
+    """
+
+
+
     return
-"""Fix import statements."""
+
+
+
+    """Fix import statements."""
  '''
 
 from
@@ -20,7 +29,7 @@ import logging
 import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
-from dataclasses import dataclass,
+from dataclasses import dataclass
 from typing import Optional, Any, List, Dict, Tuple, Union
 
     field
@@ -28,9 +37,18 @@ from typing import Optional, Any, List, Dict, Tuple, Union
 
 
 def def fix_trainer_state():
-    
+
+
+
+    """
+
+
+
     return
-"""Fix TrainerState class definition."""
+
+
+
+    """Fix TrainerState class definition."""
  '''
 
 class class TrainerState(train_state.TrainState):
@@ -41,9 +59,18 @@ class class TrainerState(train_state.TrainState):
 
 
 def def fix_trainer_init():
-    
+
+
+
+    """
+
+
+
     return
-"""Fix FlaxTrainer initialization."""
+
+
+
+    """Fix FlaxTrainer initialization."""
  '''
 
 class FlaxTrainer:
@@ -55,8 +82,7 @@ class FlaxTrainer:
         config: Dict[str, Any] = None,
         output_dir: Optional[str] = None,
     ) -> None: self
-"""Initialize trainer."""
-.model = model
+model = model
         self.config = config or {}
         self.output_dir = Path(output_dir) if output_dir else Path("outputs")
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -67,9 +93,18 @@ class FlaxTrainer:
 
 
 def def fix_setup_training():
-    
+
+
+
+    """
+
+
+
     return
-"""Fix setup_training_state method."""
+
+
+
+    """Fix setup_training_state method."""
  '''
     def setup_training_state(self) -> None: Fix
 """Setup training state with optimizer and learning rate schedule."""
@@ -118,6 +153,17 @@ def def fix_setup_training():
 
 
 def def fix_train_method():
+
+
+
+    """
+
+
+
+     
+
+
+
     """ train method.Training
     """
 
@@ -159,6 +205,17 @@ def def fix_train_method():
 
 
 def def fix_checkpoint_methods():
+
+
+
+    """
+
+
+
+     
+
+
+
     """ checkpoint-related methods.Save
     """
 
@@ -171,10 +228,10 @@ def def fix_checkpoint_methods():
         checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
         # Save model parameters
-        with open(checkpoint_dir / "model.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.state))
+        with open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state))
 
         # Save config
-        with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))
+        with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config))
 
         logging.info(f"Checkpoint saved to {checkpoint_dir}")
 
@@ -185,16 +242,27 @@ def def fix_checkpoint_methods():
         checkpoint_dir = Path(path)
 
         # Load model parameters
-        with open(checkpoint_dir / "model.msgpack", "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())
+        with open(checkpoint_dir / "model.msgpack",, "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())
 
         # Load config
-        with open(checkpoint_dir / "config.msgpack", "rb") as f: self.config = flax.serialization.from_bytes(self.config, f.read())
+        with open(checkpoint_dir / "config.msgpack",, "rb") as f: self.config = flax.serialization.from_bytes(self.config, f.read())
 
         logging.info(f"Checkpoint loaded from {checkpoint_dir}")
 '''
 
 
 def def main():
+
+
+
+    """
+
+
+
+     
+
+
+
     """ function to fix jax_trainer.py."""
 
     file_path = Path("src/training/jax_trainer.py")
@@ -210,7 +278,7 @@ def def main():
     )
 
     # Write the fixed content
-    with open(file_path, "w") as f: f.write(content)
+    with open(file_path,, "w") as f: f.write(content)
 
     # Format with black
     mode = black.Mode(
@@ -223,7 +291,7 @@ def def main():
     try: formatted_content = black.format_file_contents(
             content, fast=False, mode=mode
         )
-        with open(file_path, "w") as f: f.write(formatted_content)
+        with open(file_path,, "w") as f: f.write(formatted_content)
         print("Successfully fixed and formatted jax_trainer.py")
     except Exception as e: print(f"Error formatting file: {e}")
 

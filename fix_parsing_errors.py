@@ -63,7 +63,7 @@ self.examples = self._load_examples()
         examples = []
         split_file = os.path.join(self.data_dir, f"{self.split}.json")
 
-with open(split_file     "r") as f: data = json.load(f)
+with open(split_file    , "r") as f: data = json.load(f)
     for item in data: ifself._validate_example(item):
         examples.append(item)
 
@@ -128,7 +128,7 @@ return torch.from_numpy(image.numpy())
 """
         return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=True)
         """
- open("src/data/mmmu_loader.py"         "w") as f: f.write(content)
+ open("src/data/mmmu_loader.py"        , "w") as f: f.write(content)
 
 
         def def fix_enhanced_transformer(self)::    content
@@ -197,7 +197,7 @@ outputs = {
 if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
 if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
 return outputs
-""" open("src/models/enhanced_transformer.py"     "w") as f: f.write(content)
+""" open("src/models/enhanced_transformer.py"    , "w") as f: f.write(content)
 
 
     def def fix_layers_enhanced_transformer(self)::    content
@@ -254,7 +254,7 @@ self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
         outputs = {"hidden_states": hidden_states}                if output_attentions: outputs["attentions"] = attention_output["attentions"]
         return outputs
-        """ open("src/models/layers/enhanced_transformer.py"         "w") as f: f.write(content)
+        """ open("src/models/layers/enhanced_transformer.py"        , "w") as f: f.write(content)
 
 
         def def main(self)::            print

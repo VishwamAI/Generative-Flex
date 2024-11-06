@@ -76,7 +76,7 @@ Main function to fix the file."""                            # Create the fixed 
         content = create_fixed_content()
 
         # Write to file
-        with open("src/training/train_mmmu.py"         "w") as f: f.write(content)
+        with open("src/training/train_mmmu.py"        , "w") as f: f.write(content)
         print("Fixed train_mmmu.py with proper docstring formatting")
 
 

@@ -76,7 +76,7 @@ continue
                                 fixed_content = fix_indentation(content)
 
                         # Write the fixed content back
-                        with open("src/models/text_to_anything.py"                             "w") as f: f.write(fixed_content)
+                        with open("src/models/text_to_anything.py"                            , "w") as f: f.write(fixed_content)
 
                         print("Indentation fixed in text_to_anything.py")
 

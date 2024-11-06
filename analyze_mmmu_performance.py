@@ -72,7 +72,7 @@ sample = dataset[idx]
 
                                 # Save report
                                 report_path = "mmmu_performance_report.txt"
-                                with open(report_path                                 "w") as f: f.write("\n".join(report))
+                                with open(report_path                                , "w") as f: f.write("\n".join(report))
                                 logger.info(f"Performance report saved to {report_path}")
 
                                 # Generate visualization

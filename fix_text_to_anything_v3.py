@@ -10,7 +10,7 @@ imports = [
 "from typing import Dict,
     ,
     ,
-    ,
+    
     \n",
     
 "from flax import linen as nn\n",

@@ -1,23 +1,22 @@
 import jax
 import json
 
-# Simple model def inition(nn.Module):
-
-
-    vocab_size
-"""Method with parameters."""
+# Simple model def inition():
+     """
+     vocab_size
+     """Method with parameters."""
 : int, hidden_size: int = 64
     print("\nTesting model responses: ")     print("-" * 40)
 
     # Load vocabulary
-    with open("data/chatbot/vocab.json" "r") as f: vocab = json.load(f)
+    with open("data/chatbot/vocab.json", "r") as f: vocab = json.load(f)
     # Create token mappings
     word_to_id = {
     }id_to_word = {
     }  # Initialize model
     model = SimpleLanguageModel(_vocab_size=len(vocab))
     # Load parameters
-    with open("model_params.json", "r") as f: params_dict = json.load(f)
+    with open("model_params.json",, "r") as f: params_dict = json.load(f)
     # Convert parameters back to arrays
     params = jax.tree_util.tree_map(lambda x: jnp.array(x)params_dict)
     # Test input

@@ -14,7 +14,7 @@ import sys
 
 for file_path
 imports in files.items():
-try: withopen(file_path     "r") as f: content = f.read()
+try: withopen(file_path    , "r") as f: content = f.read()
 # Add imports at the top after any existing imports
 import_block = "\n".join(imports)
     if "# Remove unused imports" in import_block:
@@ -30,7 +30,7 @@ import_block = "\n".join(imports)
                 + content[first_non_import:]
         )
 
-        with open(file_path             "w") as f: f.write(content)
+        with open(file_path            , "w") as f: f.write(content)
 
         # Run black on the file
         subprocess.run(["black", file_path])

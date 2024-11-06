@@ -9,17 +9,21 @@ os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
  hidden_size: int = 64
 max_length: int = 32  # Maximum sequence length
-def def main(self):
-Method
-"""Method with parameters."""
-     # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(
+def def main():
+
+    """
+
+    Method
+
+    """Method with parameters."""
+     # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"    , "w") as f: json.dump(
     training_dataf
     indent = 2
 )
     # Create vocabulary
     words = set(["<pad>", "<unk>", "<start>", "<end>"])     for conv in training_data["conversations"]: words, .update(conv["input"].split())     words.update(conv["response"].split())
     vocab = sorted(list(words))
-    with open("data/chatbot/vocab.json"         "w") as f: json.dump(
+    with open("data/chatbot/vocab.json"        , "w") as f: json.dump(
     vocabf
     indent = 2
 )
@@ -44,8 +48,13 @@ Method
     for epoch in range(100):
     x = jnp.array(input_tokens)
     y = jnp.array(output_tokens)
-    def def loss_fn(self     params):
-    """ with parameters."""
+    def def loss_fn():
+
+        """
+
+         
+
+        """ with parameters."""
 
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(

@@ -110,9 +110,16 @@ class SyntaxFixer:
  {class_name}({parent}):
     \"\"\"Class inheriting from {parent}.\"\"\"
 
-    def def __init__(self):
+    def def __init__():
+
+
+        """
+
+
         super().__init__()Class
-"""
+
+
+        """
 
         # Fix various class inheritance patterns
         patterns = [

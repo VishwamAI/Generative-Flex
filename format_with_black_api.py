@@ -1,5 +1,5 @@
 from black import FileMode,
-    format_file_contents,
+    format_file_contents
     InvalidInput
 from pathlib import Path
 import sys

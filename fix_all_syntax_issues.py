@@ -39,7 +39,7 @@ stripped.endswith(""""")
         # Regular line
         else: fixed_lines.append(line)
 
-        with open(filename         "w") as f: f.write("\\n".join(fixed_lines))
+        with open(filename        , "w") as f: f.write("\\n".join(fixed_lines))
 
 
         def def format_fstring(self         lines: lis        t): """ a multiline f-string.Process
@@ -71,7 +71,7 @@ stripped.endswith(""""")
 
 
         if __name__ == "__main__":        main()
-        """ open("fix_string_formatting.py"                 "w") as f: f.write(content)
+        """ open("fix_string_formatting.py"                , "w") as f: f.write(content)
 
 
                 def def fix_text_to_anything(self)::                            files_to_process
@@ -87,7 +87,7 @@ stripped.endswith(""""")
                 continue
 
                 print(f"Processing {file_path}")
-                with open(file_path                 "r") as f: content = f.read()
+                with open(file_path                , "r") as f: content = f.read()
                 # Fix syntax issues
                 content = fix_syntax_issues(content)
 
@@ -97,7 +97,7 @@ stripped.endswith(""""")
                 # Fix function definitions
                 content = fix_function_definitions(content)
 
-                with open(file_path                 "w") as f: f.write(content)
+                with open(file_path                , "w") as f: f.write(content)
 
 
                 def def fix_syntax_issues(self                 content: st                r): Fix
@@ -144,11 +144,11 @@ stripped.endswith(""""")
                 """
 
                 # Write base version
-                with open("fix_text_to_anything.py"                     "w") as f: f.write(base_content)
+                with open("fix_text_to_anything.py"                    , "w") as f: f.write(base_content)
 
                 # Write variants with specific fixes
                 variants = ["v6", "v7", "v8"]
-                for variant in variants: withopen(f"fix_text_to_anything_{variant}.py"                     "w") as f: f.write(base_content.replace(
+                for variant in variants: withopen(f"fix_text_to_anything_{variant}.py"                    , "w") as f: f.write(base_content.replace(
                 "Fix text to anything conversion utilities", f"Fix text to anything conversion utilities (variant {variant})"
                 ))
 
@@ -164,7 +164,7 @@ stripped.endswith(""""")
                 # Fix advanced syntax issues
                 content = fix_advanced_syntax(content)
 
-                with open(filename                     "w") as f: f.write(content)
+                with open(filename                    , "w") as f: f.write(content)
 
 
                     def def fix_basic_syntax(self                     content: st                    r): """ basic syntax issues.Fix
@@ -216,7 +216,7 @@ stripped.endswith(""""")
 
 
                                         if __name__ == "__main__":            main()
-                                        """ open("fix_syntax_structure.py"                                             "w") as f: f.write(content)
+                                        """ open("fix_syntax_structure.py"                                            , "w") as f: f.write(content)
 
 
                                             def def main(self)::                                                                write_fixed_string_formatting

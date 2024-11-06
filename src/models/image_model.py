@@ -28,8 +28,7 @@ height
 ( batch_size,""" // self.patch_size,
 
     self
-"""width // self.patch_size,"""
-.patch_size,
+patch_size,
 
 channels
 """self.patch_size,"""
@@ -92,7 +91,15 @@ x = jnp.reshape(
 x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], self.channels))
 return x
 
-def def generate(self):
+def def generate():
+
+
+    """
+
+
+     
+
+
     """ with parameters.Placeholder
     """
 

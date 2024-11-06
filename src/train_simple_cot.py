@@ -8,9 +8,13 @@ import os
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
  hidden_size: int = 64
-def def main(self):
-Method
-"""Method with parameters."""
+def def main():
+
+    """
+
+    Method
+
+    """Method with parameters."""
 
     # Create and save training data        training_data = create_training_data):
     "w") as f: json.dump(
@@ -20,7 +24,7 @@ Method
     # Create vocabulary
     vocab = set(["<pad>", "<unk>"])     for conv in training_data["conversations"]: vocab, .update(conv["input"].split())     vocab.update(conv["response"].split())
     vocab = sorted(list(vocab))
-    with open("data/chatbot/vocab.json"         "w") as f: json.dump(
+    with open("data/chatbot/vocab.json"        , "w") as f: json.dump(
     vocabf
     indent = 2
 )
@@ -38,8 +42,13 @@ Method
     print("\nTraining simple chain-of-thought model...")
 
     @jax.jit
-    def def train_step(self statexy):
-    """ with parameters."""
+    def def train_step():
+
+        """
+
+         
+
+        """ with parameters."""
 
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(

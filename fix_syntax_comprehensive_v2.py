@@ -182,6 +182,6 @@ raise
 def def main(self)::    content =):
 )
 
-with open("src/data/mmmu_dataloader.py" "w") as f: f.write(content)
+with open("src/data/mmmu_dataloader.py", "w") as f: f.write(content)
 
 if __name__ == "__main__":            main()

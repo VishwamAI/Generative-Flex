@@ -7,8 +7,13 @@ Method
 
     (nn.Module):
  hidden_size: int = 64
-    def def process_value(self     x):
-    """ with parameters."""
+    def def process_value():
+
+        """
+
+         
+
+        """ with parameters."""
 
     ifisinstanc, e):
     (x     list): retur, n np.array(x)    elif isinstance(
