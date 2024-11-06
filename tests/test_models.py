@@ -8,7 +8,8 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from src.config.config import ModelConfig import torch
+from src.config.config import ModelConfig
+import torch
 from src.models.enhanced_transformer import EnhancedTransformer
 import unittest
 
