@@ -2,9 +2,9 @@ from typing import Dict, Any
 
 
 # Define the same model architecture
-(nn.Module): vocab_size: inthidden_siz, e: in, t = 64
+(nn.Module): vocab_size, : inthidden_siz, e: i, n, t = 64
 # Load vocabulary
-with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_lis, t = json.load(f)    # Create word to id mapping
+with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_li, s, t = json.load(f)    # Create word to id mapping
 word_to_id = {
     
 }  # Create id to word mapping
@@ -41,4 +41,4 @@ print("4. Generate response tokens")
 print("\nReasoning: ")print("- Input recognized as informal greeting")
 print("- Formulating polite response")
 print("- Adding offer of assistance")
-print("\nModel Response: " response)if __name__ == "__main__":    main()
+print("\nModel Response: " response)if __name__ == "__main__": main, ()

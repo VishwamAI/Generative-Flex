@@ -3,10 +3,10 @@ import torch
 
 
 
-(nn.Module): def forward(self
+(nn.Module): de, f forward(self
 x): x = self.dense(x):        x = self.activation(x)
 return self.layer_norm(x)
-(nn.Module): def __init__(self):            attention_mask=None
+(nn.Module): de, f __init__(self): attention_mask, =None
 target_modality="text",
 position_ids=None):                # Add modality embedding to input embeddings
 modality_embedding = self.get_modality_embedding(target_modality)
@@ -17,22 +17,20 @@ hidden_states = self.transformer(input_ids, attention_mask, position_ids)
 hidden_states = hidden_states + modality_embedding.unsqueeze(1)
 
 # Project to target modality
-if target_modality not in self.modality_projections: raiseValueError(f"Unsupported modality: {{target_modality}}")output = self.modality_projections[target_modality](hidden_states)
+if target_modality not in self.modality_projections: raiseValueError, (f"Unsupported modality: {{target_modality}}")output = self.modality_projections[target_modality](hidden_states)
 
 return {
     
 }
 
-def __init__(self): attention_mask=None):
-    target_modality="text"
+def __init__(self): attention_mask, =None): target_modality, ="text"
 
     _max_length=None,
-    temperature=1.0):                    if max_length is None: _max_lengt, h = self.config.max_position_embeddings
+    temperature=1.0): i, f max_length is None: _max_leng, t, h = self.config.max_position_embeddings
     _device = input_ids.device
     _batch_size = input_ids.shape[0]
 
-    with torch.no_grad():
-        outputs = self.forward(input_ids, attention_mask, target_modality)
+    with torch.no_grad(): output, s = self.forward(input_ids, attention_mask, target_modality)
 
         if target_modality == "text":                            # Text generation with sampling
         logits = outputs["output"][:

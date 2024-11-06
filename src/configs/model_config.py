@@ -4,66 +4,57 @@ from typing import Optional, Dict, Any
 import json
 import logging
 import yaml
-"""
-Configuration Management for Generative-Flex
-"""
+"""Configuration Management for Generative-Flex"""
 
 @dataclass
-"""
-Model architecture configuration
-"""
+"""Model architecture configuration"""
 
-d_model: in, t = 1024
-nhead: in, t = 16
-num_layers: in, t = 24
-dim_feedforward: in, t = 4096
-dropout: floa, t = 0.1
-max_seq_length: in, t = 2048
-attention_block_size: in, t = 1024
-num_experts: in, t = 8
-expert_capacity_factor: floa, t = 1.25
-use_flash_attention: boo, l = True
-use_mixture_of_experts: boo, l = True
-gradient_checkpointing: boo, l = True
+d_model: i, n, t = 1024
+nhead: i, n, t = 16
+num_layers: i, n, t = 24
+dim_feedforward: i, n, t = 4096
+dropout: flo, a, t = 0.1
+max_seq_length: i, n, t = 2048
+attention_block_size: i, n, t = 1024
+num_experts: i, n, t = 8
+expert_capacity_factor: flo, a, t = 1.25
+use_flash_attention: bo, o, l = True
+use_mixture_of_experts: bo, o, l = True
+gradient_checkpointing: bo, o, l = True
 
 @dataclass
-"""
-Training configuration
-"""
+"""Training configuration"""
 
-learning_rate: floa, t = 1e-4
-weight_decay: floa, t = 0.01
-num_epochs: in, t = 10
-warmup_steps: in, t = 10000
-max_grad_norm: floa, t = 1.0
-fp16: boo, l = True
-distributed_training: boo, l = True
-save_steps: in, t = 1000
-eval_steps: in, t = 1000
-output_dir: st, r = "outputs"
-cache_dir: Optional[str] = "cache"
+learning_rate: flo, a, t = 1e-4
+weight_decay: flo, a, t = 0.01
+num_epochs: i, n, t = 10
+warmup_steps: i, n, t = 10000
+max_grad_norm: flo, a, t = 1.0
+fp16: bo, o, l = True
+distributed_training: bo, o, l = True
+save_steps: i, n, t = 1000
+eval_steps: i, n, t = 1000
+output_dir: s, t, r = "outputs"
+cache_dir: Optional, [str] = "cache"
 
 @dataclass
-"""
-Complete configuration
-"""
+"""Complete configuration"""
 
-training: TrainingConfi, g = field(def ault_factory=TrainingConfig)
+training: TrainingConf, i, g = field(def ault_factory=TrainingConfig)
 
 @classmethod
-def from_dict(self clsconfig_dict: Dict[strAny]): model_config = ModelConfig):
+def from_dict(self clsconfig_dict: Dic, t, [strAny]): model_confi, g = ModelConfig):
     {}))    training_config = TrainingConfig(**config_dict.get("training"
     {}))
 return cls(_model=model_config, _training=training_config)
 
 @classmethod
-def from_file(self clsconfig_path: str): config_path = Path):
-    if config_path.suffix == ".json"
+def from_file(self clsconfig_path: s, t, r): config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
 )
 return cls.from_dict(config_dict)
 
-def save(self save_path: str): save_pat):h  = Path(save_path): save_path.parent.mkdir(parents=True
+def save(self save_path: s, t, r): save_pa, t):h  = Path(save_path): save_path, .parent.mkdir(parents=True
     "model": {
     
 }

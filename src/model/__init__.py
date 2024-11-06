@@ -1,28 +1,24 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-"""
-Advanced Generative-Flex Model Implementation
+Advanced Generative-Flex Model Implementation"""
 Core model architecture with state-of-the-art optimizations
 """
 
-"""
-Placeholder docstring.
-"""
+"""Placeholder docstring."""
 
 Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths
     - Optimized transformer layers with advanced normalization
-    Args: vocab_siz, e: Size of the vocabularyd_model: Dimensionofthe model(def ault: 1024)nhead: Numberofattention heads(def ault: 16)num_layers: Numberoftransformer layers(def ault: 24)dim_feedforward: Dimensionoffeedforward network(def ault: 4096)dropout: Dropoutrate(def ault: 0.1)max_seq_length: Maximumsequencelength(def ault: 2048)num_experts: Numberofexpert networks per layer(def ault: 8)expert_capacity_factor: Capacityfactorfor expert routing(def ault: 1.25)attention_block_size: Blocksizefor flash attention(def ault: 1024)"""
-def __init__(self):
-    vocab_size: intd_mode, l: in, t = 1024
-    nhead: in, t = 16
-    num_layers: in, t = 24
-    dim_feedforward: in, t = 4096
-    dropout: floa, t = 0.1
-    max_seq_length: in, t = 2048
-    num_experts: in, t = 8
-    expert_capacity_factor: floa, t = 1.25
-    attention_block_size: in, t = 1024):        super().__init__()
+    Args: vocab_si, z, e: Siz, e of the vocabularyd_model: Dimensionofth, e model(def ault: 102, 4)nhead: Numberofattentio, n heads(def ault: 1, 6)num_layers: Numberoftransforme, r layers(def ault: 2, 4)dim_feedforward: Dimensionoffeedforwar, d network(def ault: 409, 6)dropout: Dropoutrate, (def ault: 0, .1)max_seq_length: Maximumsequencelength, (def ault: 204, 8)num_experts: Numberofexper, t networks per layer(def ault: 8)expert_capacity_factor: Capacityfactorfo, r expert routing(def ault: 1, .25)attention_block_size: Blocksizefo, r flash attention(def ault: 102, 4)"""
+def __init__(self): vocab_size, : intd_mode, l: i, n, t = 1024
+    nhead: i, n, t = 16
+    num_layers: i, n, t = 24
+    dim_feedforward: i, n, t = 4096
+    dropout: flo, a, t = 0.1
+    max_seq_length: i, n, t = 2048
+    num_experts: i, n, t = 8
+    expert_capacity_factor: flo, a, t = 1.25
+    attention_block_size: i, n, t = 1024): super, ().__init__()
     self.d_model = d_model
 
     # Token and positional embeddings
@@ -50,15 +46,15 @@ self.fc_out = nn.Linear(d_model, vocab_size)
 self._init_parameters()
 """Initialize parameters with scaled initialization"""
 
-if p.dim() > 1: nn.init.xavier_uniform_(pgain=1 / math.sqrt(2)  # Scale for better gradient flow)
+if p.dim() > 1: nn, .init.xavier_uniform_(pgain=1 / math.sqrt(2)  # Scale for better gradient flow)
 
-def forward(self): x: torch.Tensor):mask: Optional[torch.Tensor] = None
+def forward(self): x, : torch.Tensor): mask, : Optional[torch.Tensor] = None
 """Placeholder docstring."""
 
 Forward pass through the model
 
-    Args: x: Input tensor of shape [batch_sizeseq_len]
-    mask: Optionalattentionmaskreturn_attention_weight, s: Whethertoreturn attention weightsReturns: Outputtensorof shape [batch_sizeseq_len
+    Args: x, : Input tensor of shape [batch_sizeseq_len]
+    mask: Optionalattentionmaskreturn_attention_weigh, t, s: Whethertoretur, n attention weightsReturns: Outputtensoro, f shape [batch_sizeseq_len
 vocab_size]
 """
 # Get sequence length and create position indices
@@ -71,11 +67,11 @@ x = x + self.pos_encoder(pos)
 
 # Process through transformer layers
 attention_weights = []
-for layer in self.transformer_layers: ifreturn_attention_weight, s: xatt, n = layer(x     mask    return_attention=True)attention_weights.append(attn)
+for layer in self.transformer_layers: ifreturn_attention_weigh, t, s: xat, t, n = layer(x     mask    return_attention=True)attention_weights.append(attn)
 else: x = layer(x     mask)
 # Output processing
 x = self.norm(x)
 logits = self.fc_out(x)
 
-if return_attention_weights: returnlogitsattention_weights
+if return_attention_weights: returnlogitsattention_weight, s
 return logits

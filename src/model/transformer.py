@@ -2,46 +2,42 @@ from attention import FlashAttention
 from experts import MixtureOfExperts
 from typing import Optional
 import torch
-"""
-Advanced Transformer Layer Implementation for Generative-Flex
+Advanced Transformer Layer Implementation for Generative-Flex"""
 Combines Flash Attention and Mixture of Experts for optimal performance
 """
 
-"""
-Placeholder docstring.
-"""
+"""Placeholder docstring."""
 
 Advanced transformer layer combining Flash Attention and Mixture of Experts
+d_model: intnhe, a, d: intdim_feedforward, : intdropou, t: flo, a, t = 0.1"""
+num_experts: i, n, t = 8"""
+expert_capacity_factor: flo, a, t = 1.25"""
+block_size: i, n, t = 1024): super, ().__init__()"""
 """
-d_model: intnhea, d: intdim_feedforward: intdropou, t: floa, t = 0.1
-num_experts: in, t = 8
-expert_capacity_factor: floa, t = 1.25
-block_size: in, t = 1024):        super().__init__()
-
-# Flash Attention for efficient self-attention
-self.self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)
-
-# Mixture of Experts for specialized computation
-self.moe = MixtureOfExperts(
-    d_model=d_model,
-    d_ff=dim_feedforward,
-    num_experts=num_experts,
-    capacity_factor=expert_capacity_factor,
-    dropout=dropout
-)
-
-# Layer normalization and dropout
-self.norm1 = nn.LayerNorm(d_model)
-self.norm2 = nn.LayerNorm(d_model)
-self.dropout = nn.Dropout(dropout)
-
-def forward(self): x: torch.Tensor):mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:
+# Flash Attention for efficient self-attention"""
+self.self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)"""
+"""
+# Mixture of Experts for specialized computation"""
+self.moe = MixtureOfExperts("""
+d_model=d_model,"""
+d_ff=dim_feedforward,"""
+num_experts=num_experts,"""
+capacity_factor=expert_capacity_factor,"""
+dropout=dropout"""
+)"""
+"""
+# Layer normalization and dropout"""
+self.norm1 = nn.LayerNorm(d_model)"""
+self.norm2 = nn.LayerNorm(d_model)"""
+self.dropout = nn.Dropout(dropout)"""
+"""
+def forward(self): x, : torch.Tensor): mask, : Optional[torch.Tensor] = None    ) -> torch.Tensor:
 """
 
         Forward pass combining attention and expert computation
-        Args: x: Input tensor of shape [batch_sizeseq_len
+        Args: x, : Input tensor of shape [batch_sizeseq_len
         d_model]
-        mask: OptionalattentionmaskReturn, s: Outputtensorof shape [batch_sizeseq_len
+        mask: OptionalattentionmaskRetur, n, s: Outputtensoro, f shape [batch_sizeseq_len
         d_model]
         """
         # Self-attention with residual connection

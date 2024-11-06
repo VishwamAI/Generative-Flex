@@ -1,29 +1,21 @@
 from src.models.transformer import TransformerBlock
 from typing import Any, Optional
-"""
-Audio generation model implementation using JAX and Flax.
-"""
+"""Audio generation model implementation using JAX and Flax."""
 
-"""
-Audio signal to embedding.
-"""
+"""Audio signal to embedding."""
 
-hop_length: in, t = 256
-dtype: An, y = jnp.float32
+hop_length: i, n, t = 256
+dtype: A, n, y = jnp.float32
 @nn.compact
-"""
-Convert audio signal to embeddings.
-"""
+"""Convert audio signal to embeddings."""
 
 signal_length = audio.shape
 
 # Frame the audio signal
 num_frames = (signal_length - self.frame_size) // self.hop_length + 1
-+ jnp.arange(num_frames)[:
-    None] * self.hop_length
++ jnp.arange(num_frames)[: None, ] * self.hop_length
 )
-frames = audio[:
-        indices]
+frames = audio[: indices, ]
         # Apply windowing
         window = jnp.hanning(self.frame_size)
         frames = frames * window[None
@@ -33,19 +25,15 @@ frames = audio[:
 return nn.Dense(self.hidden_dim, _dtype=self.dtype)(frames)
 
 
-"""
-Transformer-based audio generation model.
-"""
+"""Transformer-based audio generation model."""
 
-head_dim: intmlp_di, m: intframe_size: in, t = 1024
-hop_length: in, t = 256
-max_length: in, t = 65536  # Maximum audio length in samples
-dropout_rate: floa, t = 0.1
-dtype: An, y = jnp.float32
+head_dim: intmlp_d, i, m: intframe_size, : in, t = 1024
+hop_length: i, n, t = 256
+max_length: i, n, t = 65536  # Maximum audio length in samples
+dropout_rate: flo, a, t = 0.1
+dtype: A, n, y = jnp.float32
 @nn.compact
-"""
-Forward pass of the audio generation model.
-"""
+"""Forward pass of the audio generation model."""
 
 signal_length = inputs.shape
 assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"
@@ -89,17 +77,14 @@ for _ in range(self.num_layers):
 output = jnp.zeros((batch_size, output_length))
 
 window = jnp.hanning(self.frame_size)
-+ jnp.arange(num_frames)[:
-                None] * self.hop_length
++ jnp.arange(num_frames)[: None, ] * self.hop_length
 )
 
 # Apply windowing and overlap-add
-output = output.at[:
-                    indices].add(x * window[None             None            : ])
+output = output.at[: indices, ].add(x * window[None             None            : ])
                     # Normalize by window overlap
                     divisor = jnp.zeros_like(output)
-                    divisor = divisor.at[:
-                        indices].add(window[None                 None                : ] ** 2)                output = jnp.where(divisor > 1e-8
+                    divisor = divisor.at[: indices, ].add(window[None                 None                : ] ** 2)                output = jnp.where(divisor > 1e-8
                         output / divisor
                         output)
 

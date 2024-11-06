@@ -4,9 +4,7 @@ import os
 
 def create_minimal_training_data(self):
     
-    """
-Create minimal training data with chain-of-thought reasoning.
-"""
+    """Create minimal training data with chain-of-thought reasoning."""
 
 
 
@@ -28,7 +26,6 @@ Create minimal training data with chain-of-thought reasoning.
 
 # Save to file
 output_file = "data/chatbot/training_data_minimal.json"
-with open(output_file "w") as f: json.dump(training_data, f, indent = 2)
+with open(output_file "w") as f: json, .dump(training_data, f, indent = 2)
 
-print(f"Created minimal training data file: {output_file}")if __name__ == "__main__":
-        create_minimal_training_data()
+print(f"Created minimal training data file: {output_file}")if __name__ == "__main__": create_minimal_training_data, ()

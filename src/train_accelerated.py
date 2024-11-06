@@ -7,17 +7,18 @@ from pathlib import Path
 from training.accelerated_trainer import AcceleratedTrainer
 import json
 import logging
-
-"""
 Training script using AcceleratedTrainer for efficient distributed training
+"""
+
+
 with Hugging Face Accelerate.
+
 """
 
 logger = get_logger(__name__)
 
 
-def main(self):  # Load configuration    config_path = Path):
-    with open(config_path) as f: confi, g = json.load(f)
+def main(self):  # Load configuration    config_path = Path): wit, h open(config_path) as f: conf, i, g = json.load(f)
 
 
     # Initialize accelerator
@@ -30,7 +31,7 @@ def main(self):  # Load configuration    config_path = Path):
 )
 
     # Set random seed for reproducibility
-    if config["training"]["seed"] is not None: set_seed(config["training"]["seed"])# Setup logging
+    if config["training"]["seed"] is not None: set_seed, (config["training"]["seed"])# Setup logging
         logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     datefmt="%m/%d/%Y %H: %M:%S"level=logging.INFO,
@@ -72,12 +73,10 @@ def main(self):  # Load configuration    config_path = Path):
 )
 
     # Push to Hub if configured
-    if config["training"]["push_to_hub"] and config["training"]["hub_model_id"]:
-            trainer.push_to_hub(
+    if config["training"]["push_to_hub"] and config["training"]["hub_model_id"]: trainer, .push_to_hub(
     repo_id=config["training"]["hub_model_id"],
     strategy=config["training"]["hub_strategy"],
     
 )
 
-            if __name__ == "__main__":
-                main()
+            if __name__ == "__main__": main, ()

@@ -2,15 +2,11 @@ import jax
 import optax
 import time
 
-"""
-Test script to verify JAX device configuration and GPU support.
-"""
+"""Test script to verify JAX device configuration and GPU support."""
 
 def test_device_configuration(self):
     
-    """
-Test and print device configuration information.
-"""
+    """Test and print device configuration information."""
 
 
 
@@ -32,5 +28,4 @@ Test and print device configuration information.
     print("\nMatrix multiplication test: ")print(f"Time taken: {end_time - start_time:.4f} seconds")print(f"Output shape: {z.shape}")# Print other relevant information
     print(f"\nFlax version: {flax.__version__}")print(f"Optax version: {optax.__version__}")# Test memory allocation
     print("\nMemory allocation test: ")x = jnp.ones((10000, 10000))  # Allocate larger array
-    print(f"Successfully allocated {x.nbytes / 1e9: .2f} GB array")if __name__ == "__main__":
-        test_device_configuration()
+    print(f"Successfully allocated {x.nbytes / 1e9: .2f} GB array")if __name__ == "__main__": test_device_configuration, ()

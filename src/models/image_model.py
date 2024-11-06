@@ -2,50 +2,91 @@ from src.models.transformer import TransformerBlock
 from typing import Any, Optional, Tuple
 from typing import Tuple
 import jax
-"""
-Image generation model implementation using JAX and Flax.
-"""
+"""Image generation model implementation using JAX and Flax."""
 
-"""
-Placeholder docstring.
-"""
+"""Placeholder docstring."""
 
 Image to patch embedding.
-"""
-patch_size: inthidden_di, m: intdtype: An, y = jnp.float32
+patch_size: inthidden_d, i, m: intdtype, : An, y = jnp.float32"""
 @nn.compact
 """Convert images to patch embeddings."""
+batch_size, height, width, channels = images.shape
+"""
 
-"""batch_size, height, width, channels = images.shape
+
+
+"""
+
 
 # Reshape image into patches
+"""
+
+
 patches = jnp.reshape(
-    images,
-    ( batch_size,
-    height // self.patch_size,
-    width // self.patch_size,
-    self.patch_size,
-    self.patch_size,
-    channels)
+"""
+
+
+images,
+"""
+
+
+( batch_size,
+"""
+
+
+height // self.patch_size,
+"""
+
+
+width // self.patch_size,
+"""
+
+
+self.patch_size,
+"""
+
+
+self.patch_size,
+"""
+
+
+channels)
+"""
+
+
 )
+"""
+
+
 # Reshape patches into sequence
+"""
+
+
 patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
+"""
+
+
+
+"""
+
 
 # Project patches to hidden dimension
+"""
+
+
 return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
+
 """
 
 Placeholder docstring.
-"""
-Transformer-based image generation model.
-"""
+"""Transformer-based image generation model."""
 
 int]# (height width)
-patch_size: inthidden_di, m: intnum_layers: intnum_head, s: inthead_dim: intmlp_di, m: intchannels: in, t = 3
-dropout_rate: floa, t = 0.1
-dtype: An, y = jnp.float32
+patch_size: inthidden_d, i, m: intnum_layers, : intnum_head, s: inthead_dim, : intmlp_di, m: intchannels, : in, t = 3
+dropout_rate: flo, a, t = 0.1
+dtype: A, n, y = jnp.float32
 @nn.compact
-"""Forward pass of the image generation model.) -> None: """"""
+"""Forward pass of the image generation model.) -> None:""""""
 # Input shape validation
 batch_size, height, width, channels = inputs.shape
 assert height == self.image_size[0] and width == self.image_size[1]
@@ -96,16 +137,13 @@ for _ in range(self.num_layers):
 
 return x
 
-def generate(self): rng: Any):condition: Optional[jnp.ndarray] = None
-    """
-
-Placeholder docstring.
-"""
+def generate(self): rng, : Any): condition, : Optional[jnp.ndarray] = None
+    """Placeholder docstring."""
     Generate images.
     """
 
     # Initialize with random noise if no condition is provided
-    if condition is None: rnginit_rn, g = jax.random.split(rng)                    x = jax.random.normal(
+    if condition is None: rnginit_r, n, g = jax.random.split(rng)                    x = jax.random.normal(
     init_rng
     (     batch_size,
     self.image_size[0],
@@ -115,4 +153,4 @@ Placeholder docstring.
 )
     else: x = condition
     # Generate image
-return self.apply({"params": self.params}     x    training=False)
+return self.apply({"params": self, .params}     x    training=False)

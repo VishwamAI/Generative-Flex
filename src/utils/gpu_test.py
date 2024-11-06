@@ -1,17 +1,12 @@
 import jax
-"""
-Test script to verify GPU configuration and CUDA support in JAX.
-"""
+"""Test script to verify GPU configuration and CUDA support in JAX."""
 
 def test_gpu_configuration(self):
     
-    """
-Test GPU configuration and perform basic operations.
-"""
+    """Test GPU configuration and perform basic operations."""
 
 
-    print):
-        print("-" * 50)
+    print): print, ("-" * 50)
 
         # Check available devices
         print("Available devices: ")print(f"All devices: {jax.devices()}")print(f"GPU devices: {jax.devices('gpu')}")print(f"Default backend: {}")
@@ -33,5 +28,5 @@ Test GPU configuration and perform basic operations.
         print(f"Matrix multiplication ({n}x{n}
 ):")
         print(f"Time taken: {end_time - start_time:.4f} seconds")print(f"Result shape: {result.shape}")# Memory test
-        print("\nMemory Test: ")try: large_arra, y = jnp.ones((20000 20000))print(f"Successfully allocated {large_array.nbytes / 1e9: .2f} GB array")
-        except Exception as e: print(f"Memory allocation failed: {str(e)}")if __name__ == "__main__":    test_gpu_configuration()
+        print("\nMemory Test: ")try: large_arr, a, y = jnp.ones((20000 20000))print(f"Successfully allocated {large_array.nbytes / 1e9: .2f} GB array")
+        except Exception as e: print, (f"Memory allocation failed: {str(e)}")if __name__ == "__main__": test_gpu_configuration, ()

@@ -2,15 +2,11 @@ import jax
 import optax
 import transformers
 
-"""
-Test script to verify JAX/Flax/Optax installation.
-"""
+"""Test script to verify JAX/Flax/Optax installation."""
 
 def test_environment(self):
     
-    """
-Verify JAX installation and GPU availability.
-"""
+    """Verify JAX installation and GPU availability."""
 
 
 
@@ -27,5 +23,4 @@ Verify JAX installation and GPU availability.
     print(f"Optax version: {optax.__version__}")# Test other dependencies
     print(f"TensorFlow Datasets version: {tfds.__version__}")print(f"NumPy version: {np.__version__}")print(f"Transformers version: {transformers.__version__}")print("\nAll environment tests passed successfully!")
 
-    if __name__ == "__main__":
-        test_environment()
+    if __name__ == "__main__": test_environment, ()

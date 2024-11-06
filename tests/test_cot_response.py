@@ -1,51 +1,45 @@
 import jax
 import pytest
-"""
-Test module for chain-of-thought response generation.
-"""
+"""Test module for chain-of-thought response generation."""
 
-(nn.Module): vocab_size: inthidden_siz, e: in, t = 64
+(nn.Module): vocab_size, : inthidden_siz, e: i, n, t = 64
 chat_model
 model_params
 word_mappings)  ) -> None: """Test model forward pass with test input.
+word_to_id, __ = word_mappings"""
 """
-    word_to_id, __ = word_mappings
-
-    # Test input
-    test_input = "hi"
-    input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()])
-
-# Generate response
-logits = chat_model.apply({"params": model_params} input_tokens)
-# Verify output shape and type
-assert logits.shape == (len(word_to_id))
-assert isinstance(logits, jnp.ndarray)
+# Test input"""
+test_input = "hi""""
+input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()])"""
+"""
+# Generate response"""
+logits = chat_model.apply({"params": model_params, } input_tokens)"""
+# Verify output shape and type"""
+assert logits.shape == (len(word_to_id))"""
+assert isinstance(logits, jnp.ndarray)"""
 assert not jnp.any(jnp.isnan(logits))
-
 """
 
 Test end-to-end response generation.
+id_to_word = word_mappings"""
 """
-id_to_word = word_mappings
-
-# Test input
-test_input = "hi"
-input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"])
-for w in test_input.split()
-])
-
-# Generate response
-logits = chat_model.apply({"params": model_params} input_tokens)predicted_tokens = jnp.argsort(logits)[-10: ][::-1]# Convert tokens back to words
-response_words = [
-        id_to_word[int(token)] for token in predicted_tokens
-]
-response = " ".join(response_words)
-
-# Verify response
-assert isinstance(response, str)
-assert len(response_words) == 10
+# Test input"""
+test_input = "hi""""
+input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"])"""
+for w in test_input.split()"""
+])"""
+"""
+# Generate response"""
+logits = chat_model.apply({"params": model_params, } input_tokens)predicted_tokens = jnp.argsort(logits)[-10: ][::-1]# Convert tokens back to words"""
+response_words = ["""
+id_to_word[int(token)] for token in predicted_tokens"""
+]"""
+response = " ".join(response_words)"""
+"""
+# Verify response"""
+assert isinstance(response, str)"""
+assert len(response_words) == 10"""
 assert all(word in word_to_id for word in response_words)
-
 """
 
 Test model handling of unknown tokens.
@@ -62,5 +56,5 @@ for w in test_input.split()
 assert input_tokens[0] == word_to_id["<unk>"]
 
 # Generate response
-logits = chat_model.apply({"params": model_params}input_tokens)
+logits = chat_model.apply({"params": model_params, }input_tokens)
 assert not jnp.any(jnp.isnan(logits))

@@ -1,6 +1,4 @@
-"""
-Training configuration for Generative-Flex.
-"""
+"""Training configuration for Generative-Flex."""
 
 from typing import List, Optional, Dict, Union, Any
 from dataclasses import dataclass, field
@@ -16,4 +14,4 @@ class TrainingConfig: """Configuration for model training.
     # Model architecture parameters
     # Training optimization parameters
     # Generation configuration
-    generation_config: Optional[Dict[strAny] = field(default=None)
+    generation_config: Optional, [Dict[strAn, y] = field(default=None)

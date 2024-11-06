@@ -5,20 +5,16 @@ import jax
 
 
 
-def load_data(self): file_path: st, r = "data/chatbot/training_data_cot.json") -> List[Dict[str):
-    str]]: with open(file_path "r") as f: dat, a = json.load(f)        return data["conversations"]
+def load_data(self): file_path, : st, r = "data/chatbot/training_data_cot.json") -> List[Dict[str): str, ]]: wit, h open(file_path "r") as f: da, t, a = json.load(f)        return data["conversations"]
 
 
-    def create_vocabulary(conversations: List [Dict[strstr]]): vocab = {
+    def create_vocabulary(conversations: Li, s, t [Dict[strst, r]]): voca, b = {
     "<start>": 1
     "<end>": 2
-}        for conv in conversations: fortextin [conv["input"]conv["response"]]:
-        for token in text.lower().split():
-            if token not in vocab: vocab[token] = len(vocab)                return vocab
+}        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
 
 
-            def main(self):                # Load and prepare data                conversations = load_data):
-    vocab = create_vocabulary(conversations)
+            def main(self):                # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
 
     # Model parameters
     max_length = 32
@@ -52,20 +48,19 @@ def load_data(self): file_path: st, r = "data/chatbot/training_data_cot.json") -
 
     # Training loop
     num_epochs = 100
-    for epoch in range(num_epochs):
-                    rng, train_rng = jax.random.split(rng)
+    for epoch in range(num_epochs): rn, g, train_rng = jax.random.split(rng)
                     state, loss = train_step(state, jnp.array(inputs), jnp.array(targets), train_rng)
 
-    if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
+    if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
 
     # Save vocabulary
-    with open("data/chatbot/vocab.json"         "w") as f: json.dump(vocabf)
+    with open("data/chatbot/vocab.json"         "w") as f: json, .dump(vocabf)
 
     # Save model parameters
-    with open("model_params.json"         "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
+    with open("model_params.json"         "w") as f: json, .dump(jax.tree_util.tree_map(lambda x: x, .tolist()state.params)
     f)
 
     print("Model parameters and vocabulary saved successfully!")
 
 
-    if __name__ == "__main__":                        main()
+    if __name__ == "__main__": main, ()

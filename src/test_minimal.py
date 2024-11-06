@@ -2,7 +2,7 @@ import json
 
 
 # Simple model def inition
-(nn.Module): vocab_size: inthidden_siz, e: in, t = 64
+(nn.Module): vocab_size, : inthidden_siz, e: i, n, t = 64
 print("\nTesting model responses: ")print("-" * 40)
 
 # Load vocabulary and create token mappings
@@ -33,4 +33,4 @@ output_tokens = jnp.argmax(output_logits, axis=-1)
 response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
 print(f"Response: {response}")print("-" * 40)
 
-if __name__ == "__main__":    main()
+if __name__ == "__main__": main, ()
