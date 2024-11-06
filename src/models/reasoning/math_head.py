@@ -1,57 +1,81 @@
-from typing import Optional
-from typing import Dict
+"""Mathematical reasoning head module."""
+
 import torch
-logger = logging.getLogger(__name__)
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
+@dataclass
+class MathHeadConfig:
+    """Configuration for mathematical reasoning head."""
 
-attention_mask
-"""Mathematical reasoning head with mixture of experts for enhanced capabilities..."""
-: Optional[torch.Tensor] = None) -> Dict[str
+    hidden_size: int = 768
+    intermediate_size: int = 3072
+    num_attention_heads: int = 12
+    dropout: float = 0.1
+    num_experts: int = 4
 
+class MathHead(nn.Module):
+    """Mathematical reasoning head module."""
 
-try
-"""Forward pass with expert routing and mathematical operation detection..."""
-: batch_sizeseq_lengt, h
-_hidden_size = hidden_states.shape
-# Apply layer norm
-hidden_states = self.layer_norm(hidden_states)
-# Get router logits and probabilities
-router_logits = self.router(hidden_states[: 0, ])  # Use CLS token            router_probs = torch.softmax(
-router_logits
-dim = -1
-)
-router_probs = self.router_dropout(router_probs)
-# Calculate router entropy for monitoring
-router_entropy = (     -(router_probs * torch.log(router_probs + 1e-10)).sum(-1).mean()
-)
+    def __init__(self, config: Optional[MathHeadConfig] = None):
+        """Initialize math head.
 
-# Initialize expert outputs
-expert_outputs = torch.zeros_like(hidden_states)
-expert_weights = []
-# Process through experts
-for i
-expert in enumerate(self.experts):
-    # Get expert weight for this token
-    expert_weight = router_probs[: i, ].unsqueeze(1).unsqueeze(2)                expert_weights.append(expert_weight)
-    # Apply expert
-    expert_output = expert(hidden_states)
-    expert_outputs += expert_weight * expert_output
-    
-    # Detect mathematical operations
-    operation_logits = self.operation_detector(hidden_states)
-    operation_probs = torch.softmax(operation_logits, dim=-1)
-    # Final class ification
-    pooled_output = torch.mean(expert_outputs, dim=1)
-    pooled_output = self.dropout(pooled_output)
-    logits = self.(pooled_output)
-    # Calculate auxiliary losses
-    expert_weights = torch.stack(expert_weights, dim=1)
-    load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
-    outputs = {
-    "logits": ,
-    logit, s "router_entropy": router_entrop, y "expert_weights": expert_weight, s "operation_probs": operation_prob, s "moe_loss": load_balancing_los, s
-    }
-    
-    return outputs
-    except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {}}"{}}"raise
-    
+        Args:
+            config: Optional head configuration
+        """
+        super().__init__()
+        self.config = config or MathHeadConfig()
+        self.setup_layers()
+
+    def setup_layers(self):
+        """Set up neural network layers."""
+        self.attention = nn.MultiheadAttention(
+            embed_dim=self.config.hidden_size,
+            num_heads=self.config.num_attention_heads,
+            dropout=self.config.dropout
+        )
+        self.feed_forward = nn.Sequential(
+            nn.Linear(self.config.hidden_size, self.config.intermediate_size),
+            nn.GELU(),
+            nn.Dropout(self.config.dropout),
+            nn.Linear(self.config.intermediate_size, self.config.hidden_size),
+            nn.Dropout(self.config.dropout)
+        )
+        self.layer_norm1 = nn.LayerNorm(self.config.hidden_size)
+        self.layer_norm2 = nn.LayerNorm(self.config.hidden_size)
+        self.dropout = nn.Dropout(self.config.dropout)
+
+    def forward(
+        self,
+        hidden_states: torch.Tensor,
+        attention_mask: Optional[torch.Tensor] = None
+    ) -> Dict[str, torch.Tensor]:
+        """Process input through math head.
+
+        Args:
+            hidden_states: Input hidden states
+            attention_mask: Optional attention mask
+
+        Returns:
+            Dictionary containing processed hidden states
+        """
+        # Self-attention
+        residual = hidden_states
+        hidden_states = self.layer_norm1(hidden_states)
+        hidden_states, _ = self.attention(
+            hidden_states,
+            hidden_states,
+            hidden_states,
+            key_padding_mask=attention_mask
+        )
+        hidden_states = self.dropout(hidden_states)
+        hidden_states = residual + hidden_states
+
+        # Feed-forward
+        residual = hidden_states
+        hidden_states = self.layer_norm2(hidden_states)
+        hidden_states = self.feed_forward(hidden_states)
+        hidden_states = residual + hidden_states
+
+        return {"hidden_states": hidden_states}
