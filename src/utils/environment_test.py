@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -21,6 +22,7 @@ import unittest
 
 
 
+
 class TestEnvironment:
     """
     Class implementing TestEnvironment functionality.
@@ -28,10 +30,8 @@ class TestEnvironment:
 
     Module containing specific functionality.
     Set up test environment...
-    
+
     Test environment setup...
-    
+
     Test CUDA setup...
     """
-        if torch.cuda.is_available():
-            self.assertTrue(self.env.setup_cuda())

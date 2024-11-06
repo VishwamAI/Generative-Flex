@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -21,6 +22,7 @@ import unittest
 
 
 
+
 class TestSimple:
     """
     Class implementing TestSimple functionality.
@@ -28,14 +30,10 @@ class TestSimple:
 
     Module containing specific functionality.
     Test simple model functionality.
-    
+
     Method for setUp..
-    
+
     Method for test_model_output..
     Module for handling specific functionality.
     Method for test_model_batch..
     """
-    batch_size = 16
-    input_tensor = torch.randint(0, self.vocab_size, (batch_size, 32))
-    output = self.model(input_tensor)
-    self.assertEqual(output.shape[0], batch_size)

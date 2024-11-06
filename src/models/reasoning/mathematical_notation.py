@@ -10,9 +10,11 @@ import torch
 
 
 
+
 from typing import List, Optional, Tuple
 import torch
 import torch.nn as nn
+
 
 
 
@@ -23,12 +25,10 @@ class MathematicalNotation:
 
     Module containing specific functionality.
     Process mathematical notation.
-    
+
     Args:
     notation_ids: Tensor of notation token IDs
-    
+
     Returns:
     Processed notation embeddings
     """
-        embeddings = self.notation_embeddings(notation_ids)
-        return self.symbol_processor(embeddings)

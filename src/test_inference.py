@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -21,6 +22,7 @@ import unittest
 
 
 
+
 class TestInference:
     """
     Class implementing TestInference functionality.
@@ -28,14 +30,10 @@ class TestInference:
 
     Module containing specific functionality.
     Test inference functionality.
-    
+
     Method for setUp..
-    
+
     Method for test_inference..
     Module for handling specific functionality.
     Method for test_batch_inference..
     """
-    batch_size = 16
-    input_tensor = torch.randn(batch_size, 32)
-    output = self.model(input_tensor)
-    self.assertEqual(output.shape[0], batch_size)

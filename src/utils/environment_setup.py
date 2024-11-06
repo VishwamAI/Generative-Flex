@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -19,11 +20,14 @@ import os
 
 
 
+
 from dataclasses import dataclass
+
 
 
 """
 Class implementing import functionality.
+
 
 
 """
@@ -47,7 +51,3 @@ Get kwargs for DataLoader.
 Returns:
 DataLoader configuration
 """
-        return {
-            "num_workers": self.config.num_workers,
-            "pin_memory": self.config.pin_memory
-        }

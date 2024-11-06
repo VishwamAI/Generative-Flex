@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -18,11 +19,14 @@ from typing import Optional
 
 
 
+
 from dataclasses import dataclass
+
 
 
 """
 Class implementing import functionality.
+
 
 
 """
@@ -48,4 +52,3 @@ tensor: Input tensor
 Returns:
 Tensor on configured device
 """
-        return tensor.to(self.device)

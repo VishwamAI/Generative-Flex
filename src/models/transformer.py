@@ -10,6 +10,7 @@ import torch
 
 
 
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader, Dataset
@@ -22,6 +23,7 @@ import torch
 
 
 
+
 from pathlib import Path
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -30,12 +32,15 @@ import os
 
 
 
+
 from typing import Optional as nn
 import torch.nn
 
 
 
+
 from dataclasses import dataclass
+
 
 
 
@@ -47,9 +52,8 @@ class ModelConfig:
 
     Module for implementing specific functionality.
     Transformer model implementation.
-    
+
     Method for __init__..
-    
+
     Method for forward..
     """
-    return self.encoder(x, mask=mask)

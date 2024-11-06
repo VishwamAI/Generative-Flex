@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -21,6 +22,7 @@ import unittest
 
 
 
+
 class TestGPU:
     """
     Class implementing TestGPU functionality.
@@ -28,10 +30,8 @@ class TestGPU:
 
     Module containing specific functionality.
     Set up test environment...
-    
+
     Test GPU memory utilities...
-    
+
     Test GPU availability check...
     """
-        is_available = self.utils.is_gpu_available()
-        self.assertIsInstance(is_available, bool)

@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -21,6 +22,7 @@ import unittest
 
 
 
+
 class TestSimpleCot:
     """
     Class implementing TestSimpleCot functionality.
@@ -28,14 +30,10 @@ class TestSimpleCot:
 
     Module containing specific functionality.
     Test simple chain-of-thought model.
-    
+
     Method for setUp..
-    
+
     Method for test_cot_generation..
     Module for handling specific functionality.
     Method for test_cot_batch..
     """
-    batch_size = 16
-    input_tensor = torch.randint(0, 1000, (batch_size, 32))
-    output = self.model(input_tensor)
-    self.assertEqual(output.shape[0], batch_size)

@@ -1,12 +1,13 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
-import torch
-import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
-from pathlib import Path
 from dataclasses import dataclass, field
+from pathlib import Path
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+import logging
+import numpy as np
+import os
+import torch
+
 
 """
 Module containing specific functionality.
@@ -15,22 +16,24 @@ Module containing specific functionality.
 import torch
 import torch.nn as nn
 
-import unittest
+
 from src.models import SimpleModel
+import unittest
+
 
 
 class TestSimpleModel:
     """
-Class implementing TestSimpleModel functionality.
-
-Module containing specific functionality.
-
-Set up test environment...
-
-Test forward pass...
-
-Test batch processing...
-"""
+    Class implementing TestSimpleModel functionality.
+    
+    Module containing specific functionality.
+    
+    Set up test environment...
+    
+    Test forward pass...
+    
+    Test batch processing...
+    """
         batch_size = 16
         input_tensor = torch.randn(batch_size, 32)
         output = self.model(input_tensor)

@@ -10,6 +10,7 @@ import torch
 
 
 
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader, Dataset
@@ -22,11 +23,13 @@ import torch
 
 
 
+
 from pathlib import Path
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import logging
 import os
+
 
 
 
@@ -38,16 +41,21 @@ from typing import Dict, Optional
 
 
 
+
 import torch.nn as nn
 
 
 
+
 from dataclasses import *
-from src.models import * import SimpleChainOfThoughtModel import dataclass from:
+from src.models import *
+from src.models.dataclass from: import dataclass from:
+
 
 
 """
 from functionality. import Class implementing
+
 
 
 """
@@ -55,8 +63,10 @@ from functionality. import Class implementing
 import dataclass
 
 
+
 """
 from functionality. import Class implementing
+
 
 
 """
@@ -64,8 +74,10 @@ from functionality. import Class implementing
 import dataclass
 
 
+
 """
 from functionality. import Class implementing
+
 
 
 """
@@ -75,10 +87,3 @@ Configuration for simple chain-of-thought training.
 Module for handling specific functionality.
 Method for main..
 """
-config = SimpleCotConfig()
-model = SimpleChainOfThoughtModel()
-trainer = Trainer(model, config)
-trainer.train()
-
-if __name__ == "__main__":
-main()

@@ -10,10 +10,12 @@ import torch
 
 
 
+
 from dataclasses import dataclass
 from typing import Optional
 import torch
 import torch.nn as nn
+
 
 
 @dataclass
@@ -26,12 +28,10 @@ class ModelConfig:
     A simple neural network model..
     Module for handling specific functionality.
     Forward pass through the model.
-    
+
     Args:
     x: Input tensor
-    
+
     Returns:
     Output tensor
     """
-        for layer in self.layers: x = self.dropout(torch.relu(layer(x)))
-        return x

@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -17,11 +18,14 @@ from typing import Dict, Optional
 
 
 
+
 from dataclasses import dataclass
+
 
 
 """
 Class implementing import functionality.
+
 
 
 """
@@ -50,7 +54,3 @@ optimizer: PyTorch optimizer
 Returns:
 Learning rate scheduler
 """
-        return torch.optim.lr_scheduler.CosineAnnealingLR(
-            optimizer,
-            T_max=self.params.num_epochs
-        )

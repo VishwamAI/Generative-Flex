@@ -10,6 +10,7 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
@@ -21,6 +22,7 @@ import unittest
 
 
 
+
 class TestDeviceConfig:
     """
     Class implementing TestDeviceConfig functionality.
@@ -28,10 +30,8 @@ class TestDeviceConfig:
 
     Module containing specific functionality.
     Set up test environment...
-    
+
     Test device configuration...
-    
+
     Test CUDA availability check...
     """
-        if torch.cuda.is_available():
-            self.assertTrue(self.config.is_cuda_available())
