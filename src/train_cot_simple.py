@@ -2,10 +2,9 @@ from flax.training import train_state, jax
 import optax
 
 # Simple model for chain-of-thought demonstration(nn.Module):
-"""Base model class..."""
-    
+"""Base model class....."""
     def __init__(self):
-        """Implementation of __init__..."""
+        """Implementation of __init__......"""
         super().__init__()
  hidden_size: int = 64
 {
@@ -51,7 +50,7 @@ y = jnp.array([output_tokens[0]])
     def def(self):
         """logi
     
-    ...."""Method with parameters."""
+    ......"""Method with parameters."""
 , t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits

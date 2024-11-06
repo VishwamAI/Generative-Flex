@@ -3,7 +3,7 @@ import optax
 
 # Simple model def inition(same as in test_minimal.py)
 (nn.Module) -> None: hidden_size
-"""Method with parameters...."""
+"""Method with parameters......"""
 : int = 64
     "r") as f: data = json.load(f)
     # Prepare training examples
@@ -43,7 +43,7 @@ import optax
         def def(self):
         """logi
     
-        ...."""Method with parameters."""
+        ......"""Method with parameters."""
 , t):
     s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits

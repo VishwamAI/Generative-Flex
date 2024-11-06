@@ -3,15 +3,14 @@ from torchvision import transforms
 from typing import Optional, torch
 from typing, torch.nn as nn
 Placeholder
-"""Image processor for multimodal inputs.."""
-"""docstring.hidden_size."""
-
+"""Image processor for multimodal inputs...."""
+"""docstring.hidden_size..."""
 Image processor for handling multimodal inputs in the MMMU model.
-""": int = 768Initialize."""
+""": int = 768Initialize..."""
 """the image processor.     super().__init__()
 self.hidden_size = hidden_size
-self."""transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
-"""transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),."""
+self.."""transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
+"""transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),..."""
 ]"""
 
 
@@ -20,11 +19,11 @@ self."""transform = transforms.Compose([transforms.Resize((image_size, image_siz
 MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
 ReLU(inplace = True),nn
 Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
-AdaptiveAvgPool2d((1, 1)))self.dropout = nn.Dropout(dropout_rate)def.""" """
+AdaptiveAvgPool2d((1, 1)))self.dropout = nn.Dropout(dropout_rate)def..""" """
  forward(self):  images
-"""Method with parameters.."""
+"""Method with parameters...."""
 : torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.TensorProcess
-"""Placeholder docstring.."""
+"""Placeholder docstring...."""
  images for multimodal input."""
 
 

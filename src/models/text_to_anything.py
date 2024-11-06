@@ -6,10 +6,7 @@ from typing import List, Tuple
 from typing, DictAnyTuple
 VOCAB_SIZE = 256  # Character-level tokenization
 @dataclass
-"""Configuration for text-to-anything generation...."""
-
-
-
+"""Configuration for text-to-anything generation......"""
 # Model configuration
 # Generation parameters
 # Modality-specific settings

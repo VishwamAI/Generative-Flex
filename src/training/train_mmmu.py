@@ -4,14 +4,14 @@ from torch.utils.data import DataLoader, torch
 import logging
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
-from src.models.enhanced_transformer import EnhancedTransformer
+from src.models.enhanced_transformer, EnhancedTransformer
 from src.utils.logging, logger
-"""Training script for MMMU dataset using enhanced transformer model...."""
+"""Training script for MMMU dataset using enhanced transformer model......"""
 = logging.getLogger(__name__)
     def train_epoch(self):
         """Train
         
-        ...."""Method with multiple parameters.
+        ......"""Method with multiple parameters.
         
         Args: model: Parameter description
         optimizer: Parameter description
@@ -34,21 +34,20 @@ def evaluate(model: EnhancedTransformerval_loade
 """the model.
     model.eval()
     correct
-    ..."""
-    
+    ....."""
 total_loss = 0.0""" = 0
 with
     ."""total = 0"""
     .""" torch.no_grad() -> None: for
-"""Method with parameters...."""
+"""Method with parameters......"""
 """batch in val_loader: loss = model(batch)return
-            ..."""total_loss += loss.item()"""
+            ...."""total_loss += loss.item()"""
             .""" {"val_loss": total_los, s / len(val_loader)}
                 
-            def """.."""
+            def """..."""
 """main(config: TrainingConfig):
                     Main
-                        ..."""Method with parameters."""
+                        ...."""Method with parameters."""
                         .""" training function."""
                     
                     model = EnhancedTransformer(config)

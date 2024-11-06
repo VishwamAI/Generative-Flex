@@ -10,7 +10,7 @@ with open(
     def create_vocabulary(self):
         """voca
 
-    ...."""Method with multiple parameters.
+    ......"""Method with multiple parameters.
 
     Args: self: Parameter description
     file_path: Parameter description
@@ -19,7 +19,7 @@ with open(
     "<start>": 1     "<end>": 2     }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
     
 def def(self):
-        """...."""Method with parameters."""
+        """......"""Method with parameters."""
 
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
     # Model parameters

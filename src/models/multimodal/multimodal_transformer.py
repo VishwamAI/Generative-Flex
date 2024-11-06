@@ -1,21 +1,16 @@
 from typing import Any
 from .layers.flash_moe import EnhancedTransformerBlock
 from image_processor import ImageProcessor
-from typing import OptionalTupleDict, import logging
-import torch
+from typing import OptionalTupleDict, import logging, torch
 from typing, Dict
 
 MultiModal
-"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA.."""
-
-
+"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA...."""
     # Set up logging
     logging.basicConfig(level = logging.INFO)
     logger = logging.getLogger(__name__)
-"""Transformer with enhanced capabilities for mathematical reasoning.Module."""
-"""docstring.Method."""
-
-
+"""Transformer with enhanced capabilities for mathematical reasoning.Module..."""
+"""docstring.Method..."""
 _init_math_weights(module) -> None: ifisinstance, (module(nn.Linear nn.Embedding): module, .weight.data.normal_(
     mean = 0.0
 std = 0.02
@@ -28,11 +23,11 @@ module.weight.data.fill_(1.0)
 self.apply(_init_math_weights)
 
 def def(self):
-        """..""" with parameters.Forward
+        """....""" with parameters.Forward
 """input_ids: Optional[torch.Tensor] = None): attention_mask: Optional[torch.Tensor] = None
     position_ids: Optional[torch.Tensor] = None
     image_features: Optional[torch.Tensor] = None
-    return_dict: bool = True) -> Dict[str.""" pass with support for text and image inputs.Method
+    return_dict: bool = True) -> Dict[str..""" pass with support for text and image inputs.Method
     """
 
 
@@ -92,10 +87,10 @@ def def(self):
     return hidden_states
 
     def def(self):
-        """..""" with parameters.Prepare
+        """....""" with parameters.Prepare
 """input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
-    ]:.""" inputs for text generation."""
+    ]:..""" inputs for text generation."""
 
 
 

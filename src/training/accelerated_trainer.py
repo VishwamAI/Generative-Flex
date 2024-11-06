@@ -5,28 +5,28 @@ from typing import Dict, import logging, torch
 
 
     logger
-"""Accelerated trainer implementation...."""
+"""Accelerated trainer implementation......"""
  = logging.getLogger(__name__)
 
 
 Trainer
-"""Placeholder docstring...."""
+"""Placeholder docstring......"""
  class with accelerate support.
 train_dataloader: DataLoadereval_dataloade
 lr_scheduler
-"""optimizer: Optional[torch.optim.Optimizer] = None..."""
+"""optimizer: Optional[torch.optim.Optimizer] = None....."""
 : Optional[torch.optim.lr_scheduler._LRScheduler] = Nonegradient_accumulation_steps
 """num_epochs: int = 10
-..."""
+....."""
 : int = 1logging_steps
 """max_grad_norm: float = 1.0
-..."""
+....."""
 : int = 100save_steps
 """evaluation_steps: int = 500
-..."""
+....."""
 : int = 1000Initialize
 """Placeholder docstring.
-..."""
+....."""
  the accelerated trainer.self
 train_dataloader = train_dataloaderself
 optimizer = optimizer or torch.optim.AdamW(model.parameters())self
@@ -38,7 +38,7 @@ _step = 0self
 _best_eval_loss = float("inf")
 
 Train
-"""..."""
+"""....."""
 # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)""" the model.) -> None: Method
 .""""""
 
@@ -58,19 +58,19 @@ Train
 
     if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                            total_loss = 0
     if self._step % self.evaluation_steps = = 0: self.evaluate()if self._step % self.save_steps == 0: self.save_checkpoint()def evaluate():
-        """....""" with parameters.Evaluate
+        """......""" with parameters.Evaluate
 """-> None: Dic, t):[str
-    ...""" the model.total_loss
+    ....""" the model.total_loss
 """if self.eval_dataloader is None: return, {}self.model.eval()
-    ...""" = 0for
-"""...""" batch in self.eval_dataloader: withtorch.no_grad(): output, s = self.model(**batch)total_loss
+    ....""" = 0for
+"""....""" batch in self.eval_dataloader: withtorch.no_grad(): output, s = self.model(**batch)total_loss
 """loss = outputs.loss
-    ...""" += loss.item()eval_loss
-"""...""" = total_loss / len(self.eval_dataloader)
+    ....""" += loss.item()eval_loss
+"""....""" = total_loss / len(self.eval_dataloader)
 
     metrics
 """self.model.train()
-...""""""
+....""""""
 
  = {"eval_loss": eval_loss, }                                    self.log_metrics(metrics)
 
@@ -87,5 +87,5 @@ Train
 
     metric_str
 """Log training metrics.) -> None:
-    ..."""
+    ....."""
 """ = " ".join(f"{{k}}: {{v: .4f}}" for k                 v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

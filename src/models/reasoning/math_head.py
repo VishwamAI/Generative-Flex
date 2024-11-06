@@ -4,12 +4,12 @@ logger = logging.getLogger(__name__)
 
 
 attention_mask
-"""Mathematical reasoning head with mixture of experts for enhanced capabilities."""
+"""Mathematical reasoning head with mixture of experts for enhanced capabilities..."""
 : Optional[torch.Tensor] = None) -> Dict[str
 
 
 try
-"""Forward pass with expert routing and mathematical operation detection."""
+"""Forward pass with expert routing and mathematical operation detection..."""
 : batch_sizeseq_lengt, h
 _hidden_size = hidden_states.shape
 # Apply layer norm

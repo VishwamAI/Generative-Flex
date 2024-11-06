@@ -4,46 +4,42 @@ from typing import Tuple, jax
 from typing, Optional
 
 Placeholder
-"""Image generation model implementation using JAX and Flax.."""
-"""docstring.Convert."""
-
+"""Image generation model implementation using JAX and Flax...."""
+"""docstring.Convert..."""
 Image to patch embedding.
 patch_size: int
-"""@nn.compact."""
+"""@nn.compact..."""
  images to patch embeddings.patches
-"""batch_sizeheightwidth, channels = images.shape."""
-"""# Reshape image into patches.""" = jnp.reshape(     
+"""batch_sizeheightwidth, channels = images.shape..."""
+"""# Reshape image into patches..""" = jnp.reshape(     
 
 height
-"""images,."""
+"""images,..."""
 ( batch_size,""" // self.patch_size,
 
     self
 patch_size,
 
 channels
-"""self.patch_size,."""
-
+"""self.patch_size,..."""
 )
 patches
-""")."""
-
-
+""")..."""
     # Reshape patches into sequence
 """= jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
-    return."""
-"""# Project patches to hidden dimension."""
+    return..."""
+"""# Project patches to hidden dimension..."""
  nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
 Transformer
-"""Placeholder docstring.."""
+"""Placeholder docstring...."""
 -based image generation model.
 
 
     Forward
-"""int]# (height width)."""
+"""int]# (height width)..."""
  pass of the image generation model.) -> None: Method
 """"""
 
@@ -82,8 +78,8 @@ x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], sel
 return x
 
 def def(self):
-        """..""" with parameters.Placeholder
-"""rng: Any): condition: Optional[jnp.ndarray] = None.""" docstring."""
+        """....""" with parameters.Placeholder
+"""rng: Any): condition: Optional[jnp.ndarray] = None..""" docstring."""
 
 
 

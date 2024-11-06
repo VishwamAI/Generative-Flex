@@ -6,17 +6,16 @@ import os
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
-"""Base model class..."""
-    
+"""Base model class....."""
     def __init__(self):
-        """Implementation of __init__..."""
+        """Implementation of __init__......"""
         super().__init__()
  hidden_size: int = 64
 max_length: int = 32  # Maximum sequence length
     def def(self):
         """Method
     
-    ...."""Method with parameters."""
+    ......"""Method with parameters."""
      # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"    , "w") as f: json.dump(
     training_dataf
     indent = 2
@@ -50,7 +49,7 @@ max_length: int = 32  # Maximum sequence length
     x = jnp.array(input_tokens)
     y = jnp.array(output_tokens)
         def def(self):
-        """....""" with parameters."""
+        """......""" with parameters."""
 
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
