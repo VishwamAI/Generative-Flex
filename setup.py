@@ -1,4 +1,4 @@
-from setuptools import setup,
+from setuptools import setup
     find_packages
 
 
@@ -30,6 +30,7 @@ setup
         "flake8>=6.0.0",
         "pytest>=7.3.1",
         "pytest-cov>=4.1.0",
+        
     ],
     extras_require={
         "dev": [
