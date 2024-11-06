@@ -1,4 +1,18 @@
-"""Enhanced transformer layer implementation with advanced features."""
+import re
+import os
+
+def fix_enhanced_transformer():
+    """Fix enhanced_transformer.py syntax issues."""
+    file_path = "src/models/layers/enhanced_transformer.py"
+    if not os.path.exists(file_path):
+        print(f"File {file_path} not found!")
+        return
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    # Fix docstring and class definition
+    fixed_content = '''"""Enhanced transformer layer implementation with advanced features."""
 from typing import Optional, Dict, Union, Tuple
 import torch
 import torch.nn as nn
@@ -64,3 +78,63 @@ class EnhancedTransformer(nn.Module):
         output = self.layer_norm(output + hidden_states)
 
         return output, attention_probs
+'''
+
+    with open(file_path, 'w') as f:
+        f.write(fixed_content)
+
+def fix_multimodal_transformer():
+    """Fix multimodal_transformer.py syntax issues."""
+    file_path = "src/models/multimodal/multimodal_transformer.py"
+    if not os.path.exists(file_path):
+        print(f"File {file_path} not found!")
+        return
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    # Fix indentation and method implementation
+    content = re.sub(
+        r'(\s+)word_embeds = self\.text_embeddings\["word_embeddings"\]\(input_ids\)',
+        r'\1word_embeds = self.text_embeddings["word_embeddings"](input_ids)',
+        content
+    )
+
+    # Fix class structure and method definitions
+    content = re.sub(
+        r'class MultiModalTransformer\(.*?\):',
+        'class MultiModalTransformer(nn.Module):',
+        content,
+        flags=re.DOTALL
+    )
+
+    with open(file_path, 'w') as f:
+        f.write(content)
+
+def fix_trainer():
+    """Fix trainer.py syntax issues."""
+    file_path = "src/training/trainer.py"
+    if not os.path.exists(file_path):
+        print(f"File {file_path} not found!")
+        return
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    # Fix indentation in training loop
+    content = re.sub(
+        r'(\s+)loss = outputs\.loss / self\.config\.gradient_accumulation_steps',
+        lambda m: ' ' * 20 + 'loss = outputs.loss / self.config.gradient_accumulation_steps',
+        content
+    )
+
+    with open(file_path, 'w') as f:
+        f.write(content)
+
+if __name__ == "__main__":
+    print("Fixing enhanced_transformer.py...")
+    fix_enhanced_transformer()
+    print("Fixing multimodal_transformer.py...")
+    fix_multimodal_transformer()
+    print("Fixing trainer.py...")
+    fix_trainer()

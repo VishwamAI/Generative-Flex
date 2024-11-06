@@ -59,11 +59,9 @@ class Trainer:
             for step, batch in enumerate(self.train_dataloader):
                 if self.config.mixed_precision:
                     with torch.cuda.amp.autocast():
-                        outputs = self.model(**batch)
-                        loss = outputs.loss / self.config.gradient_accumulation_steps
+                        outputs = self.model(**batch)                    loss = outputs.loss / self.config.gradient_accumulation_steps
                     self.scaler.scale(loss).backward()
-                else: outputs = self.model(**batch)
-                    loss = outputs.loss / self.config.gradient_accumulation_steps
+                else: outputs = self.model(**batch)                    loss = outputs.loss / self.config.gradient_accumulation_steps
                     loss.backward()
 
                 if (step + 1) % self.config.gradient_accumulation_steps == 0:
