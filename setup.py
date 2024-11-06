@@ -1,7 +1,6 @@
-from setuptools import setup, find_packages
 """Setup script for Generative-Flex."""
 
-
+from setuptools import setup, find_packages
 
 setup(
     name="generative_flex",
@@ -31,8 +30,14 @@ setup(
         "pytest-cov>=4.1.0"
     ],
     extras_require={
-    "dev": [
-},
+        "dev": [
+            "pytest>=7.3.1",
+            "pytest-cov>=4.1.0",
+            "black>=23.3.0",
+            "isort>=5.12.0",
+            "flake8>=6.0.0"
+        ]
+    },
     python_requires=">=3.8",
     classifiers=[
         "Development Status :: 3 - Alpha",
