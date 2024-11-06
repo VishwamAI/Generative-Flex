@@ -6,5 +6,5 @@ import torch.nn as nn
 
 
 class MathNotationProcessor(nn.Module):
-    """Processes mathematical notation and converts between different formats.
-    """
+    """Processes mathematical notation and converts between different formats."""
+    

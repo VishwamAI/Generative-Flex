@@ -6,5 +6,5 @@ import torch.nn as nn
 
 
 class MixtureOfExperts(nn.Module):
-    """Mixture of Experts layer implementation.
-    """
+    """Mixture of Experts layer implementation."""
+    

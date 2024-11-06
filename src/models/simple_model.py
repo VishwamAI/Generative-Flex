@@ -3,7 +3,7 @@ import jax
 """
 
 
-    """A minimal language model for demonstration."""
+"""A minimal language model for demonstration."""
 vocab_size: inthidden_dim: int = 32
 
 

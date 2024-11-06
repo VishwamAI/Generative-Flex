@@ -5,9 +5,9 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-    """Mathematical reasoning head with mixture of experts for enhanced capabilities"""
+"""Mathematical reasoning head with mixture of experts for enhanced capabilities"""
 attention_mask: Optional[torch.Tensor] = None) -> Dict[str
-    """Forward pass with expert routing and mathematical operation detection"""
+"""Forward pass with expert routing and mathematical operation detection"""
 try: batch_size
 seq_length
 _hidden_size  = hidden_states.shape
@@ -30,35 +30,35 @@ expert_weights = []
 # Process through experts
 for i
 expert in enumerate(self.experts):
-# Get expert weight for this token
+    # Get expert weight for this token
     expert_weight = router_probs[:
-i].unsqueeze(1).unsqueeze(2)                expert_weights.append(expert_weight)
-
-# Apply expert
-expert_output = expert(hidden_states)
-expert_outputs += expert_weight * expert_output
-
-# Detect mathematical operations
-operation_logits = self.operation_detector(hidden_states)
-operation_probs = torch.softmax(operation_logits, dim=-1)
-
-# Final class ification
-pooled_output = torch.mean(expert_outputs, dim=1)
-pooled_output = self.dropout(pooled_output)
-logits = self.class ifier(pooled_output)
-
-# Calculate auxiliary losses
-expert_weights = torch.stack(expert_weights, dim=1)
-load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
-
-outputs = {
-"logits": logits
-"router_entropy": router_entropy
-"expert_weights": expert_weights
-"operation_probs": operation_probs
-"moe_loss": load_balancing_loss
-}
-
-return outputs
-except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
-raise
+        i].unsqueeze(1).unsqueeze(2)                expert_weights.append(expert_weight)
+        
+        # Apply expert
+        expert_output = expert(hidden_states)
+        expert_outputs += expert_weight * expert_output
+        
+        # Detect mathematical operations
+        operation_logits = self.operation_detector(hidden_states)
+        operation_probs = torch.softmax(operation_logits, dim=-1)
+        
+        # Final class ification
+        pooled_output = torch.mean(expert_outputs, dim=1)
+        pooled_output = self.dropout(pooled_output)
+        logits = self.class ifier(pooled_output)
+        
+        # Calculate auxiliary losses
+        expert_weights = torch.stack(expert_weights, dim=1)
+        load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
+        
+        outputs = {
+        "logits": logits
+        "router_entropy": router_entropy
+        "expert_weights": expert_weights
+        "operation_probs": operation_probs
+        "moe_loss": load_balancing_loss
+        }
+        
+        return outputs
+        except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
+        raise

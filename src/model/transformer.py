@@ -7,7 +7,7 @@ Combines Flash Attention and Mixture of Experts for optimal performance
 """
 
 
-    """Placeholder docstring."""
+"""Placeholder docstring."""
 Advanced transformer layer combining Flash Attention and Mixture of Experts
 """d_model: int
 
@@ -33,26 +33,26 @@ self.dropout = nn.Dropout(dropout)
 
 def forward(self): x: torch.Tensor):
     mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:
-"""
-Forward pass combining attention and expert computation
-Args: x: Input tensor of shape [batch_size
-seq_len
-d_model]
-mask: Optionalattentionmask
-Returns: Outputtensorof shape [batch_size
-seq_len
-d_model]
-"""
-# Self-attention with residual connection
-residual = x
-x = self.norm1(x)
-x = self.self_attn(x, x, x, mask)
-x = residual + self.dropout(x)
-
-# Mixture of Experts with residual connection
-residual = x
-x = self.norm2(x)
-x = self.moe(x, mask)
-x = residual + self.dropout(x)
-
-return x
+        """
+        Forward pass combining attention and expert computation
+        Args: x: Input tensor of shape [batch_size
+        seq_len
+        d_model]
+        mask: Optionalattentionmask
+        Returns: Outputtensorof shape [batch_size
+        seq_len
+        d_model]
+        """
+        # Self-attention with residual connection
+        residual = x
+        x = self.norm1(x)
+        x = self.self_attn(x, x, x, mask)
+        x = residual + self.dropout(x)
+        
+        # Mixture of Experts with residual connection
+        residual = x
+        x = self.norm2(x)
+        x = self.moe(x, mask)
+        x = residual + self.dropout(x)
+        
+        return x

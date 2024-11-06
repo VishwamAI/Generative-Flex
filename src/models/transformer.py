@@ -4,12 +4,12 @@ import jax
 """
 
 
-    """Multi-head attention mechanism."""
+"""Multi-head attention mechanism."""
 head_dim: int
 dropout_rate: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-        """Applies multi-head attention on the input data."""
+"""Applies multi-head attention on the input data."""
 
 # Linear projections
 query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)
@@ -28,25 +28,25 @@ attention = jnp.einsum("...qhd, ...khd->...hqk", query, key)
 if mask is not None: # Add broadcasting dimensions to mask for heads
 while mask.ndim < attention.ndim: mask = mask[...
 None
-    :
-: ]        # Broadcast mask to attention shape
-mask = jnp.broadcast_to(mask, attention.shape)
-attention = jnp.where(mask, attention, -1e30)
-
-attention = jax.nn.softmax(attention)
-attention = nn.Dropout(rate=self.dropout_rate)(
-attention, deterministic=deterministic
-)
-
-# Combine heads
-output = jnp.einsum("...hqk, ...khd->...qhd", attention, value)
-output = output.reshape(output.shape[: -2] + (-1))        return nn.Dense(inputs_q.shape[-1]
-_dtype=self.dtype
-name="output")(output)
-
-
+:
+    : ]        # Broadcast mask to attention shape
+    mask = jnp.broadcast_to(mask, attention.shape)
+    attention = jnp.where(mask, attention, -1e30)
+    
+    attention = jax.nn.softmax(attention)
+    attention = nn.Dropout(rate=self.dropout_rate)(
+    attention, deterministic=deterministic
+    )
+    
+    # Combine heads
+    output = jnp.einsum("...hqk, ...khd->...qhd", attention, value)
+    output = output.reshape(output.shape[: -2] + (-1))        return nn.Dense(inputs_q.shape[-1]
+    _dtype=self.dtype
+    name="output")(output)
+    
+    
     """Transformer block with self-attention and feed-forward layers."""
-head_dim: intmlp_dim: int
-dropout_rate: float = 0.1
-dtype: Any = jnp.float32
-@nn.compact
+    head_dim: intmlp_dim: int
+    dropout_rate: float = 0.1
+    dtype: Any = jnp.float32
+    @nn.compact
