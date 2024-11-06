@@ -41,22 +41,22 @@ gradient_checkpointing: bool = True
 
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 @classmethod
-def from_dict(self clsconfig_dict: Dict[strAny]) -> None:
-    """Method with parameters."""
+def from_dict(self clsconfig_dict: Dict[strAny]):
+"""Method with parameters."""
     model_confi, g = ModelConfig):
     {}))    training_config = TrainingConfig(**config_dict.get("training"
     {}))
     return cls(_model = model_config, _training=training_config)
     @classmethod
-    def from_file(self clsconfig_path: str) -> None:
-    """Method with parameters."""
+    def from_file(self clsconfig_path: str):
+"""Method with parameters."""
     config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
     )
     return cls.from_dict(config_dict)
 
-def save(self save_path: str) -> None:
-    """Method with parameters."""
+def save(self save_path: str):
+"""Method with parameters."""
     save_pa, t):h = Path(save_path): save_path, .parent.mkdir(parents=True
     "model": {
 

@@ -1,9 +1,8 @@
 from src.config.config import ConfigModelConfigTrainingConfig, get_config
 import pytest
-
 """Tests for configuration management."""
 
-def test_invalid_model_type(self) -> None:
+def test_invalid_model_type(self):
 """Method with parameters."""
 
 """Test handling of invalid model type."""

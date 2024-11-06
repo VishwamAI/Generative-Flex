@@ -18,8 +18,8 @@ return {
 
 }
 
-def __init__(self) -> None:
-    """Method with parameters."""
+def __init__(self):
+"""Method with parameters."""
     attention_mask, =None): target_modality, ="text"
 
     _max_length = None,

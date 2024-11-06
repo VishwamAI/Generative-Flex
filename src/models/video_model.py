@@ -10,8 +10,8 @@ patch_size: Tuple[intint
 int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
-def __call__(self video) -> None:
-    """Method with parameters."""
+def __call__(self video):
+"""Method with parameters."""
     b):
     t
     h
@@ -66,8 +66,8 @@ def self inputstraining: bool, (self inputstraining: bool = True): b):
     x = jnp.reshape(x, (bth, w, c))
     return x
 
-def generate(self) -> None:
-    """Method with parameters."""
+def generate(self):
+"""Method with parameters."""
     rng: Any): prompt: Optional[jnp.ndarray] = None
     """Generate video frames."""
 

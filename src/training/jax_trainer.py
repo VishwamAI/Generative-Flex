@@ -18,27 +18,23 @@ from dataclasses import dataclass, field
 loss_scale: Optional[jnp.ndarray] = None
 
 """Advanced trainer implementation using JAX/Flax.
-def __init__(
+def __init__(""""""
+
+""""""
+
+"""self, """
+
 """"""
 
 """"""
 
-"""self,
-"""
-
-""""""
-
-""""""
-
-    model: Optional[nn.Module] = None,
-    """"""
+    model: Optional[nn.Module] = None, """"""
 
     """"""
 
 """config: Dict[str, """
 
-    Any] = None,
-    """"""
+    Any] = None, """"""
 
     """"""
 
@@ -46,8 +42,7 @@ def __init__(
 
 """"""
 
-""""""
-) -> None:
+""""""):
 """Method with multiple parameters.
 
 Args:
@@ -88,7 +83,7 @@ self.config = config or {}
     # Initialize training state
     """self.setup_training_state()"""
 
-"""def setup_training_state(self) -> None:
+"""def setup_training_state(self):
 """Method with parameters."""
     """
 
@@ -147,40 +142,29 @@ self.config = config or {}
     )
     """"""
 
-def train(
-    """"""
+def train(""""""
 
-    self,
-    """"""
+    self, """"""
 
-    train_dataset: Any,
-    """"""
+    train_dataset: Any, """"""
 
-    num_epochs: int,
-    """"""
+    num_epochs: int, """"""
 
-    eval_dataset: Optional[Any] = None,
-    """"""
+    eval_dataset: Optional[Any] = None, """"""
 
-    eval_steps: in,
-    """"""
+    eval_steps: in, """"""
 
-    t = 1000,
-    """"""
+    t = 1000, """"""
 
-    save_steps: in,
-    """"""
+    save_steps: in, """"""
 
-    t = 1000,
-    """"""
+    t = 1000, """"""
 
-    log_steps: in,
-    """"""
+    log_steps: in, """"""
 
     t = 100
-    """"""
-    ) -> None:
-    """Method with multiple parameters.
+    """"""):
+"""Method with multiple parameters.
 
     Args:
     """"""
@@ -244,8 +228,8 @@ if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.e
     avg_epoch_loss = epoch_loss / num_steps
     """logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")"""
 
-    """def save_checkpoint(self, name: str) -> None:
-    """Method with parameters."""
+    """def save_checkpoint(self, name: str):
+"""Method with parameters."""
     """
 
     Save model checkpoint.
@@ -256,7 +240,7 @@ if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.e
     with open(checkpoint_dir / "model.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save config"""
     with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")"""
 
-"""def load_checkpoint(self, path: str) -> None:
+"""def load_checkpoint(self, path: str):
 """Method with parameters."""
     """
 

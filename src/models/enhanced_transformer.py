@@ -1,6 +1,6 @@
 from typing import OptionalDictAny
 import jax
-    """Enhanced transformer implementation with advanced features."""
+"""Enhanced transformer implementation with advanced features."""
 
     """Enhanced transformer with advanced attention mechanisms."""
 
@@ -25,7 +25,7 @@ features = self.config["num_labels"],
 kernel_init = jax.nn.initializers.normal(0.02)
 )
 
-def __init__(self) -> None:
+def __init__(self):
 """Method with parameters."""
     input_ids: jnp.ndarray): attention_mask: Optional[jnp.ndarray] = None
     token_type_ids: Optional[jnp.ndarray] = None

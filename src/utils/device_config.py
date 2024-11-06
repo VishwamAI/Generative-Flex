@@ -3,12 +3,8 @@ import jax
 import os
     """Device configuration utility for handling both CPU and GPU environments."""
 
-    def setup_device_config(
-    self,
-    memory_fraction: float = 0.8,
-    gpu_allow_growth: bool = True
-    ) -> None:
-    """Method with multiple parameters.
+    def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bool = True):
+"""Method with multiple parameters.
 
     Args: self: Parameter description
     memory_fraction: Parameter description
@@ -32,8 +28,8 @@ Any]:
     if config["device_count"] > 1: os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count = {}".format(config["device_count"])
     return config
 
-    def get_compute_dtype(self) -> None:
-    """Method with parameters."""
+    def get_compute_dtype(self):
+"""Method with parameters."""
 
 """Get optimal compute dtype based on available hardware."""
 

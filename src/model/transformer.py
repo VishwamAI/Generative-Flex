@@ -29,8 +29,8 @@ capacity_factor = expert_capacity_factor,
     """self.norm1 = nn.LayerNorm(d_model)"""
     self.norm2 = nn.LayerNorm(d_model)
     """self.dropout = nn.Dropout(dropout)"""
-    """def forward(self) -> None:
-    """Method with parameters."""
+    """def forward(self):
+"""Method with parameters."""
 x: torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""
 
 Forward pass combining attention and expert computation

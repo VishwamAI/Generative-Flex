@@ -8,8 +8,8 @@ import os
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module): hidden_size: int = 64
 max_length: int = 32  # Maximum sequence length
-def main(self) -> None:
-    """Method with parameters."""
+def main(self):
+"""Method with parameters."""
     # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(training_dataf
     indent = 2)
     # Create vocabulary
@@ -42,8 +42,8 @@ def main(self) -> None:
     for epoch in range(100):
     x = jnp.array(input_tokens)
     y = jnp.array(output_tokens)
-    def loss_fn(self     params) -> None:
-    """Method with parameters."""
+    def loss_fn(self     params):
+"""Method with parameters."""
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits=logits[:
     : y, .shape[0]]

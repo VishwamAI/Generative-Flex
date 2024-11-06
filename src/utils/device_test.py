@@ -4,7 +4,7 @@ import time
 
 """Test script to verify JAX device configuration and GPU support."""
 
-def test_device_configuration(self) -> None:
+def test_device_configuration(self):
 """Method with parameters."""
 
 """Test and print device configuration information."""

@@ -78,8 +78,8 @@ x = jax.random.normal(key, (5, 5))
 self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 
 # Test basic model operations
-def model_fn(self) -> None:
-    """Method with parameters."""
+def model_fn(self):
+"""Method with parameters."""
     ) -> None: returnjnp.mean): grad_f, n = jax.grad(model_fn)
     grad = grad_fn(x)
     self.assertEqual(grad.shape, (5, 5), "Flax gradient computation not working")

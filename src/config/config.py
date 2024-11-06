@@ -34,8 +34,8 @@ class ModelConfig:
     """video_patch_size: Optional[Tuple[intintint]] = field(default = None)"""
     """@property"""
 
-def max_position_embeddings(self) -> None:
-    """Method with parameters."""
+def max_position_embeddings(self):
+"""Method with parameters."""
 
     """Compatibility property for models expecting max_position_embeddings."""
 
@@ -69,8 +69,8 @@ class Config:
     """"""
 
     @classmethod
-    """def from_json(cls, path: str) -> None:
-    """Method with parameters."""
+    """def from_json(cls, path: str):
+"""Method with parameters."""
     """
 
     Load configuration from JSON file.
@@ -78,8 +78,8 @@ class Config:
     """model_config = ModelConfig(**config_dict["model"])"""
     training_config = TrainingConfig(**config_dict["training"])"""
     """return cls(model = model_config, training=training_config)"""
-    """def save_json(self, path: str) -> None:
-    """Method with parameters."""
+    """def save_json(self, path: str):
+"""Method with parameters."""
     """
 
     Save configuration to JSON file.

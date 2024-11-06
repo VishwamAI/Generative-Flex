@@ -41,8 +41,8 @@ Process image data.):
     image = tf.cast(image, tf.float32) / 255.0
     return torch.from_numpy(image.numpy())
 
-    def create_dataloader(self) -> None:
-    """Method with parameters."""
+    def create_dataloader(self):
+"""Method with parameters."""
     dataset: MMMUDataset): batch_size: in = 32
     shuffle: bool = True
     """Create a DataLoader for the dataset."""

@@ -72,8 +72,8 @@ return {
     if "labels" in self.data: item, ["labels"] = torch.tensor(self.data["labels"][idx])
     return item
 
-    def create_dataloader(self) -> None:
-    """Method with parameters."""
+    def create_dataloader(self):
+"""Method with parameters."""
     dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:
     """Create dataloader with optional distributed training support"""
 

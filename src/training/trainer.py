@@ -57,8 +57,8 @@ loss.backward()
     return loss
     """"""
 
-def evaluate(self) -> None:
-    """Method with parameters."""
+def evaluate(self):
+"""Method with parameters."""
     ) -> None: Dict[str):
     """Evaluatethemodel."""
 

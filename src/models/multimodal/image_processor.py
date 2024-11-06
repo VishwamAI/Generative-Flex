@@ -33,8 +33,8 @@ nn.ReLU(inplace = True),
     """nn.AdaptiveAvgPool2d((1, 1)))"""
 
     """self.dropout = nn.Dropout(dropout_rate)"""
-    """def forward(self) -> None:
-    """Method with parameters."""
+    """def forward(self):
+"""Method with parameters."""
 images: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor"""
 
 Placeholder docstring.

@@ -1,6 +1,6 @@
 from src.models.transformer import TransformerBlock
 from typing import Any, Optional
-    """Audio generation model implementation using JAX and Flax."""
+"""Audio generation model implementation using JAX and Flax."""
 
     """Audio signal to embedding."""
 

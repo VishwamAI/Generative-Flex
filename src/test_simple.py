@@ -1,8 +1,8 @@
 import jax
 import json
 
-# Simple model def inition(nn.Module) -> None:
-    """Method with parameters."""
+# Simple model def inition(nn.Module):
+"""Method with parameters."""
     vocab_size: int, hidden_size: int = 64
     print("\nTesting model responses: ")
     print("-" * 40)

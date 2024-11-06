@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Tuple
-    """Base model classes for different types of generative models."""
+"""Base model classes for different types of generative models."""
 
     (nn.Module ABC):
 
@@ -32,8 +32,8 @@ pe = jnp.zeros((self.max_len, self.hidden_size))
 pe = pe.at[: 0, : : 2, ].set(jnp.sin(position * div_term))pe = pe.at[: 1, : : 2, ].set(jnp.cos(position * div_term))self.pe = pe[None, :
 :]
 
-def __call__(self                     x) -> None:
-    """Method with parameters."""
+def __call__(self                     x):
+"""Method with parameters."""
 
     """Base class for language models."""
 

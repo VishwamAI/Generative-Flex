@@ -82,8 +82,8 @@ self.channels)
 x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], self.channels))
 return x
 
-def generate(self) -> None:
-    """Method with parameters."""
+def generate(self):
+"""Method with parameters."""
     rng: Any): condition: Optional[jnp.ndarray] = None
     """Placeholder docstring."""
 

@@ -1,6 +1,6 @@
 import jax
 import pytest
-    """Test module for chain-of-thought response generation."""
+"""Test module for chain-of-thought response generation."""
 
     (nn.Module): vocab_size: int, hidden_size: int = 64
     chat_model

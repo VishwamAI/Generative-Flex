@@ -9,12 +9,12 @@ import time
 
     # Set up device configuration
     __device_config = setup_device_config()
-    def test_flax_installation() -> None:
-    """Method without parameters."""
+    def test_flax_installation():
+"""Method without parameters."""
 
     @nn.compact
-def main(self) -> None:
-    """Method with parameters."""
+def main(self):
+"""Method with parameters."""
 
     """Run all environment tests."""
 

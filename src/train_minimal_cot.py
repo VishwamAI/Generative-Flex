@@ -1,8 +1,8 @@
 import jax
 
 (nn.Module): hidden_size: int = 64
-def create_minimal_data(self) -> None:
-    """Method with parameters."""
+def create_minimal_data(self):
+"""Method with parameters."""
 
     """Create minimal training data with chain-of-thought reasoning."""
 
@@ -31,8 +31,8 @@ def create_minimal_data(self) -> None:
     indent = 2)
     return data, vocab
 
-def main(self) -> None:
-    """Method with parameters."""
+def main(self):
+"""Method with parameters."""
     prin, t): voca, b = create_minimal_data()
     # Create token mappings
     word_to_id = {
@@ -57,8 +57,8 @@ def main(self) -> None:
 
     # Define loss function for gradient computation
 
-    def loss_fn(self params) -> None:
-    """Method with parameters."""
+    def loss_fn(self params):
+"""Method with parameters."""
     logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(logits[None
     :]
