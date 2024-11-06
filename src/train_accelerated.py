@@ -11,15 +11,15 @@ Training script using AcceleratedTrainer for efficient distributed training
 
 
     logger
-"""with Hugging Face Accelerate."""
+    """with Hugging Face Accelerate.."""
  = get_logger(__name__)
     def def main():
 
         """
-
+    
          
 
-        """Method with parameters."""
+        ."""Method with parameters."""
 
     # Load configuration    config_path = Path): wit, h open(config_path) as f: config = json.load(f)
     # Initialize accelerator

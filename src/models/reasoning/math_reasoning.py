@@ -5,7 +5,7 @@ from .layers.flash_moe import FlashAttention, MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
 from .multimodal.base_transformer import BaseTransformer, TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
-from transformers import PreTrainedModel import GenerationMixin
+from transformers import PreTrainedModel, GenerationMixin
 from typing import Optio
 import logging
 import torch
@@ -16,16 +16,16 @@ logger = logging.getLogger(__name__)
 
 
 hidden_states
-"""Math reasoning module for enhanced transformer model."""
+    """Math reasoning module for enhanced transformer model.."""
 : torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
     Args
-    """Forward pass of the math reasoning head."""
-        """: hidden_state
+        """Forward pass of the math reasoning head.."""
+            """: hidden_state
         Args
-        """
+        ."""
         
         # Get input dimensions
         batch_size = hidden_states.size(0)
@@ -134,7 +134,7 @@ expressions: Optional[List[str]] = None
 def module: nn.Modulevalu
 e: bool, (self, module: nn.Modulevalu
 e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """""": modul
-"""
+."""
 
 (BaseTransformer
 TransformerBlock)): module, .gradient_checkpointing = value

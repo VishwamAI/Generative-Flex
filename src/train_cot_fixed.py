@@ -53,8 +53,8 @@ def def loss_fn():
     """
 
     logi
-
-    """Method with parameters."""
+    
+    ."""Method with parameters."""
 , t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits

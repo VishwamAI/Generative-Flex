@@ -6,19 +6,19 @@ import logging
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer import EnhancedTransformer import logger
-"""Training script for MMMU dataset using enhanced transformer model."""
+    """Training script for MMMU dataset using enhanced transformer model.."""
 = logging.getLogger(__name__)
 def train_epoch():
     """
     
     Train
-    
-        """Method with multiple parameters.
+        
+        ."""Method with multiple parameters.
         
         Args: model: Parameter description
         optimizer: Parameter description
     config: Parameter description"""
-        """ for one epoch.Evaluate
+            .""" for one epoch.Evaluate
         """
         
         model.train()
@@ -33,26 +33,26 @@ def train_epoch():
         return {"loss": total_los, s / len(train_loader)}
         
 def evaluate(model: EnhancedTransformerval_loade
-    """ the model.
+        """ the model.
     model.eval()
     correct
-    """
+    ."""
     
 total_loss = 0.0""" = 0
 with
-"""total = 0"""
-    """ torch.no_grad() -> None: for
-    """Method with parameters."""
+    ."""total = 0"""
+    .""" torch.no_grad() -> None: for
+        """Method with parameters.."""
         """ batch in val_loader: loss = model(batch)return
-        """total_loss += loss.item()"""
-            """ {"val_loss": total_los, s / len(val_loader)}
+            ."""total_loss += loss.item()"""
+            .""" {"val_loss": total_los, s / len(val_loader)}
             
             def
-            """ """
+                """ ."""
                 """ main(config: TrainingConfig):
                     Main
-                    """Method with parameters."""
-                    """ training function."""
+                        ."""Method with parameters."""
+                        .""" training function."""
                     
                     model = EnhancedTransformer(config)
                     train_loader, val_loader = create_mmmu_dataloaders(config)

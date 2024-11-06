@@ -15,7 +15,7 @@ def create_vocabulary():
 
     voca
 
-    """Method with multiple parameters.
+    ."""Method with multiple parameters.
 
     Args: self: Parameter description
     file_path: Parameter description
@@ -27,12 +27,12 @@ def def main():
 
 
     """
-
+    
 
      
 
 
-    """Method with parameters."""
+    ."""Method with parameters."""
 
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
     # Model parameters

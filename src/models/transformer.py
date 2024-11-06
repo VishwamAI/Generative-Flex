@@ -1,17 +1,17 @@
 from typing import Any
 import jax
 Multi
-"""Core transformer architecture implementation using JAX and Flax."""
-    """-head attention mechanism.Applies
-"""
+    """Core transformer architecture implementation using JAX and Flax.."""
+        """-head attention mechanism.Applies
+."""
 
 head_dim: intdropout_rat
 e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-"""
- multi-head attention on the input data.Transformer
     """
+ multi-head attention on the input data.Transformer
+    ."""
 
 
     # Linear projections
@@ -50,7 +50,7 @@ dtype: Any = jnp.float32
     _dtype = self.dtype
     name = "output"
 )(output)
-""" block with self-attention and feed-forward layers."""
+    """ block with self-attention and feed-forward layers.."""
 
 
 

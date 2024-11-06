@@ -14,8 +14,8 @@ def def main():
     """
 
     Method
-
-    """Method with parameters."""
+    
+    ."""Method with parameters."""
      # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"    , "w") as f: json.dump(
     training_dataf
     indent = 2
@@ -51,10 +51,10 @@ def def main():
     def def loss_fn():
 
         """
-
+    
          
 
-        """ with parameters."""
+        .""" with parameters."""
 
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(

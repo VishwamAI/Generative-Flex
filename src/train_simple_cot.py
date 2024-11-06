@@ -13,8 +13,8 @@ def def main():
     """
 
     Method
-
-    """Method with parameters."""
+    
+    ."""Method with parameters."""
 
     # Create and save training data        training_data = create_training_data):
     "w") as f: json.dump(
@@ -45,10 +45,10 @@ def def main():
     def def train_step():
 
         """
-
+    
          
 
-        """ with parameters."""
+        .""" with parameters."""
 
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(

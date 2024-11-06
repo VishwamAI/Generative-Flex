@@ -5,9 +5,9 @@ def def create_minimal_data():
     """
 
     Create
-
-    """Method with parameters."""
-    """ minimal training data with chain-of-thought reasoning.Method
+    
+    ."""Method with parameters."""
+        .""" minimal training data with chain-of-thought reasoning.Method
     """
 
     ):
@@ -39,12 +39,12 @@ def def main():
 
 
     """
-
+    
 
      
 
 
-    """ with parameters.Method
+    .""" with parameters.Method
     """
 
     prin, t): voca, b = create_minimal_data()
@@ -72,12 +72,12 @@ def def main():
 
 
         """
-
+    
 
          
 
 
-        """ with parameters."""
+        .""" with parameters."""
 
     logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(
