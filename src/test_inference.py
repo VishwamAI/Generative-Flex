@@ -24,9 +24,7 @@ input_tokens = jnp.array( [word_to_id.get(test_input.lower(), word_to_id["<unk>"
 logits = model.apply(trained_params, input_tokens)
 predicted_tokens = jnp.argmax(logits, axis=-1)
 # Convert predictions to words
-predicted_words = [
-id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens
-]
+predicted_words = [id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens]
 response = " ".join(predicted_words)
 # Demonstrate chain-of-thought reasoning
 print("\nDemonstrating Chain-of-Thought LLM capabilities: ")

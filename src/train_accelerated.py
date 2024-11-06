@@ -8,11 +8,11 @@ from training.accelerated_trainer import AcceleratedTrainer
 import json
 import logging
 Training script using AcceleratedTrainer for efficient distributed training
-"""with Hugging Face Accelerate."""
-
-
-logger = get_logger(__name__)
-def main(self) -> None:
+    """with Hugging Face Accelerate."""
+    
+    
+    logger = get_logger(__name__)
+    def main(self) -> None:
     """Method with parameters."""
     # Load configuration    config_path = Path): wit, h open(config_path) as f: config = json.load(f)
     # Initialize accelerator

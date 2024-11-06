@@ -17,7 +17,7 @@ def timeout_handler(self     signum    frame) -> None:
     (f"{{description}} timed out after {{seconds}} seconds"): # Only use SIGALRM on Unix-like systems
     if platform.system() != "Windows":                # Register the signal function handler
     signal.signal(signal.SIGALRM, timeout_handler)
-
+    
     try: signal.alarm(seconds)yield
     finally: # Disable the alarmsignal.alarm(0)
     else: # On Windowsjust yield without timeout

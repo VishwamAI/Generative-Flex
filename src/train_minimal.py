@@ -5,45 +5,43 @@ import optax
 
 # Simple model def inition(same as in test_minimal.py)
 (nn.Module) -> None:
-"""Method with parameters."""
-hidden_size: int = 64
-"r") as f: data = json.load(f)
-# Prepare training examples
-input_text = [conv["input"] for conv in data["conversations"]]
-output_text = [conv["response"] for conv in data["conversations"]]
-# Create vocabulary
-all_text = input_text + output_text
-vocab = create_vocab(all_text)
-word_to_id = {
-}  # Save vocabulary
-with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
-indent = 2)
-# Convert text to tokens
-input_tokens = [
-[word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
-for text in input_text
-]
-output_tokens = [
-[word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
-for text in output_text
-]
-
-# Initialize model and optimizer
-model = SimpleLanguageModel(_vocab_size=len(vocab))
-learning_rate = 0.01
-optimizer = optax.adam(learning_rate)
-# Initialize parameters
-key = jax.random.PRNGKey(0)
-dummy_input = jnp.ones((1, 5), dtype=jnp.int32)
-params = model.init(key, dummy_input)
-# Create train state
-state = train_state.TrainState.create(apply_fn=model.apply, params=params, tx=optimizer)
-# Training loop
-num_epochs = 100
-for epoch in range(num_epochs): fo, r i in range(len(input_tokens)):
-x = jnp.array([input_tokens[i]])
-y = jnp.array([output_tokens[i]])
-def loss_fn(self         params) -> None:
+    """Method with parameters."""
+    hidden_size: int = 64
+    "r") as f: data = json.load(f)
+    # Prepare training examples
+    input_text = [conv["input"] for conv in data["conversations"]]
+    output_text = [conv["response"] for conv in data["conversations"]]
+    # Create vocabulary
+    all_text = input_text + output_text
+    vocab = create_vocab(all_text)
+    word_to_id = {
+    }  # Save vocabulary
+    with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
+    indent = 2)
+    # Convert text to tokens
+    input_tokens = [[word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
+    for text in input_text
+    ]
+    output_tokens = [[word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
+    for text in output_text
+    ]
+    
+    # Initialize model and optimizer
+    model = SimpleLanguageModel(_vocab_size=len(vocab))
+    learning_rate = 0.01
+    optimizer = optax.adam(learning_rate)
+    # Initialize parameters
+    key = jax.random.PRNGKey(0)
+    dummy_input = jnp.ones((1, 5), dtype=jnp.int32)
+    params = model.init(key, dummy_input)
+    # Create train state
+    state = train_state.TrainState.create(apply_fn=model.apply, params=params, tx=optimizer)
+    # Training loop
+    num_epochs = 100
+    for epoch in range(num_epochs): fo, r i in range(len(input_tokens)):
+    x = jnp.array([input_tokens[i]])
+    y = jnp.array([output_tokens[i]])
+    def loss_fn(self         params) -> None:
     """Method with parameters."""
     logi, t):
     s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits

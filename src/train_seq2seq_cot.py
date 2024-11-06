@@ -25,13 +25,11 @@ def main(self) -> None:
     }  # Prepare training data
     input_text = training_data["conversations"][0]["input"]
     output_text = training_data["conversations"][0]["response"]
-    input_tokens = [
-    word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()
+    input_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()
     ]
-    output_tokens = [
-    word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
+    output_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
     ]
-
+    
     # Initialize model
     model = SimpleSeq2SeqModel(_vocab_size=len(vocab))
     # Initialize training state
@@ -45,7 +43,7 @@ def main(self) -> None:
     for epoch in range(100):
     x = jnp.array(input_tokens)
     y = jnp.array(output_tokens)
-def loss_fn(self     params) -> None:
+    def loss_fn(self     params) -> None:
     """Method with parameters."""
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits=logits[:

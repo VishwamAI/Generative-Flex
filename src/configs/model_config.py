@@ -4,11 +4,11 @@ from typing import OptionalDictAny
 import json
 import logging
 import yaml
-"""Configuration Management for Generative-Flex"""
-
-
-@dataclass
-"""Model architecture configuration"""
+    """Configuration Management for Generative-Flex"""
+    
+    
+    @dataclass
+    """Model architecture configuration"""
 
 
 d_model: int = 1024
@@ -24,23 +24,23 @@ use_flash_attention: bool = True
 use_mixture_of_experts: bool = True
 gradient_checkpointing: bool = True
 @dataclass
-"""Training configuration"""
-
-
-learning_rate: float = 1e-4
-weight_decay: float = 0.01
-num_epochs: int = 10
-warmup_steps: int = 10000
-max_grad_norm: float = 1.0
-fp16: bool = True
-distributed_training: bool = True
-save_steps: int = 1000
-eval_steps: int = 1000
-output_dir: str = "outputs"
-cache_dir: Optional[str] = "cache"
-
-@dataclass
-"""Complete configuration"""
+    """Training configuration"""
+    
+    
+    learning_rate: float = 1e-4
+    weight_decay: float = 0.01
+    num_epochs: int = 10
+    warmup_steps: int = 10000
+    max_grad_norm: float = 1.0
+    fp16: bool = True
+    distributed_training: bool = True
+    save_steps: int = 1000
+    eval_steps: int = 1000
+    output_dir: str = "outputs"
+    cache_dir: Optional[str] = "cache"
+    
+    @dataclass
+    """Complete configuration"""
 
 
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
@@ -51,8 +51,8 @@ def from_dict(self clsconfig_dict: Dict[strAny]) -> None:
     {}))    training_config = TrainingConfig(**config_dict.get("training"
     {}))
     return cls(_model = model_config, _training=training_config)
-@classmethod
-def from_file(self clsconfig_path: str) -> None:
+    @classmethod
+    def from_file(self clsconfig_path: str) -> None:
     """Method with parameters."""
     config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
@@ -63,13 +63,13 @@ def save(self save_path: str) -> None:
     """Method with parameters."""
     save_pa, t):h = Path(save_path): save_path, .parent.mkdir(parents=True
     "model": {
-
+    
     }
-
+    
     "training": {
-
+    
     }
-
+    
     }
     with open(save_path "w") as f: (     json.dump(config_dictfindent = 2)
     if save_path.suffix = = ".json"

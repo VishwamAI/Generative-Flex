@@ -3,11 +3,11 @@ import torch
 
 
 logger = logging.getLogger(__name__)
-"""Mathematical reasoning head with mixture of experts for enhanced capabilities"""
-
-
-attention_mask: Optional[torch.Tensor] = None) -> Dict[str
-"""Forward pass with expert routing and mathematical operation detection"""
+    """Mathematical reasoning head with mixture of experts for enhanced capabilities"""
+    
+    
+    attention_mask: Optional[torch.Tensor] = None) -> Dict[str
+    """Forward pass with expert routing and mathematical operation detection"""
 
 
 try: batch_sizeseq_lengt, h

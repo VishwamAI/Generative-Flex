@@ -2,10 +2,10 @@ from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
-"""Video generation model implementation using JAX and Flax."""
-
-
-"""Video to embedding conversion."""
+    """Video generation model implementation using JAX and Flax."""
+    
+    
+    """Video to embedding conversion."""
 
 
 patch_size: Tuple[intint
@@ -26,7 +26,7 @@ def __call__(self video) -> None:
     self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * c)
     )
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
-"""Transformer-based video generation model."""
+    """Transformer-based video generation model."""
 
 
 int
@@ -80,6 +80,6 @@ def generate(self) -> None:
     generated = prompt
     while generated.shape[1] < num_frames: next_frame = self.apply({"params": self, .params}     generated    training=False)                    generated = jnp.concatenate([generated
     next_frame[:
-    -1: ]]axis = 1)
+    -1:]]axis = 1)
     return generated[:
 : num_frames, ]

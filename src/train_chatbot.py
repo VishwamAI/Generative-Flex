@@ -7,16 +7,13 @@ import jax
 
 def load_data(
     self,
-    file_path: str = "data/chatbot/training_data_cot.json")  -> List[Dict[str,
-    str]]: with open(file_path,
+    file_path: str = "data/chatbot/training_data_cot.json")  -> List[Dict[str, str]]: with open(file_path,
     "r") as f: data = json.load(f)        return data["conversations"]
-def create_vocabulary(conversations: List[Dict[strst,
-    r]]
+def create_vocabulary(conversations: List[Dict[strst, r]]
     ) -> None:
     """Method with multiple parameters.
-
-    Args:
-    self: Parameter description
+    
+    Args: self: Parameter description
     file_path: Parameter description
     str]]: Parameter description
     "r") as f: Parameter description
@@ -51,7 +48,7 @@ def main(self) -> None:
     dropout_rate = dropout_rate,
     max_seq_len = max_length
     )
-
+    
     # Prepare training data
     inputs, targets = prepare_batch(conversationsvocabbatch_size=len(conversations),
     max_length = max_length)
@@ -63,15 +60,15 @@ def main(self) -> None:
     for epoch in range(num_epochs): rngtrain_rng = jax.random.split(rng)
     state, loss = train_step(state, jnp.array(inputs), jnp.array(targets), train_rng)
     if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
-
+    
     # Save vocabulary
     with open("data/chatbot/vocab.json"         "w") as f: json.dump(vocabf)
-
+    
     # Save model parameters
     with open("model_params.json"         "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
     f)
-
+    
     print("Model parameters and vocabulary saved successfully!")
-
-
+    
+    
     if __name__ == "__main__": main, ()

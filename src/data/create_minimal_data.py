@@ -4,8 +4,8 @@ import os
 
 def create_minimal_training_data(self) -> None:
     """Method with parameters."""
-
-
+    
+    
     """Create minimal training data with chain-of-thought reasoning."""
 
 

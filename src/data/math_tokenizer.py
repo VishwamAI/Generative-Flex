@@ -20,10 +20,10 @@ base_tokenizer: PreTrainedTokenize, r)  ) -> None:
 
 text = text.replace(symbol, f" {token} ")"""
 return text
-"""Detect mathematical expressions in text."""
-
-# Match expressions with common math patterns
-"""patterns = ["""
+    """Detect mathematical expressions in text."""
+    
+    # Match expressions with common math patterns
+    """patterns = ["""
 r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic"""
 r"\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments"""
 r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication"""
@@ -34,15 +34,15 @@ r"\bπ\b",  # Pi"""
 r"\b∫.*dx\b",  # Integrals"""
 r"\b∑.*\b",  # Summations"""
 ]
-"""for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs"""
-
-
-"""def __call__(self         text: st        r        **kwargs) -> None:
-"""Method with parameters."""
-"""
-
-Tokenize text with special handling for mathematical content.
-"""Args: tex"""
+    """for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs"""
+    
+    
+    """def __call__(self         text: st        r        **kwargs) -> None:
+    """Method with parameters."""
+    """
+    
+    Tokenize text with special handling for mathematical content.
+    """Args: tex"""
 
 
 # Detect and parse mathematical expressions

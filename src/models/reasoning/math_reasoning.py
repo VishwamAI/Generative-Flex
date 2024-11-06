@@ -13,14 +13,14 @@ import torch.nn.functional as F
 nalUnionList, DictAnyTuple
 
 logger = logging.getLogger(__name__)
-"""Math reasoning module for enhanced transformer model."""
-
-
-hidden_states: torch.Tensorattention_mas
-k: Optional[torch.Tensor] = None
-expressions: Optional[List[str]] = None
-**kwargs):
-"""Forward pass of the math reasoning head."""
+    """Math reasoning module for enhanced transformer model."""
+    
+    
+    hidden_states: torch.Tensorattention_mas
+    k: Optional[torch.Tensor] = None
+    expressions: Optional[List[str]] = None
+    **kwargs):
+    """Forward pass of the math reasoning head."""
 
 """Args: hidden_state"""
 
@@ -78,44 +78,44 @@ for name,
 expert in self.subfield_experts.items():
 # Ensure attention mask matches sequence length for each expert
 if attention_mask is not None: expert_mask = attention_mask[:
-    : seq_lengt, h: seq_length, ]
-    else: expert_mask = None    expert_out
-    _ = expert(hidden_states         expert_mask)
-    expert_outputs.append(expert_out)
+: seq_lengt, h: seq_length, ]
+else: expert_mask = None    expert_out
+_ = expert(hidden_states         expert_mask)
+expert_outputs.append(expert_out)
 
-    # Stack expert outputs
-    expert_stack = torch.stack(expert_outputs, dim=2)  # [batch_sizeseq_lennum_experts, hidden_dim]
-    # Apply routing weights
-    routing_weights = routing_weights.unsqueeze(-1)  # [batch_sizeseq_lennum_experts, 1]
-    combined_expert = torch.sum(expert_stack * routing_weights, dim=2)  # [batch_sizeseq_lenhidden_dim]
-    # Calculate expert entropy for monitoring
-    expert_entropy = (         -(         routing_weights.squeeze(-1)
-    * torch.log(routing_weights.squeeze(-1) + 1e-10)
-    )
-    .sum(-1)
-    .mean()
-    )
+# Stack expert outputs
+expert_stack = torch.stack(expert_outputs, dim=2)  # [batch_sizeseq_lennum_experts, hidden_dim]
+# Apply routing weights
+routing_weights = routing_weights.unsqueeze(-1)  # [batch_sizeseq_lennum_experts, 1]
+combined_expert = torch.sum(expert_stack * routing_weights, dim=2)  # [batch_sizeseq_lenhidden_dim]
+# Calculate expert entropy for monitoring
+expert_entropy = (         -(         routing_weights.squeeze(-1)
+* torch.log(routing_weights.squeeze(-1) + 1e-10)
+)
+.sum(-1)
+.mean()
+)
 
-    # Residual connection with expert output
-    hidden_states = hidden_states + self.dropout(combined_expert)
-    # Final processing
-    hidden_states = self.layer_norm(hidden_states)
-    pooled = hidden_states.mean(dim=1)  # Global average pooling
-    # Classification and loss calculation
-    x = self.dense(pooled)
-    x = self.activation(x)
-    x = self.dropout(x)
-    logits = self.(x)
-    # Calculate cross entropy loss and math accuracy
-    if "labels" in kwargs: labels = kwargs["labels"]loss = F.cross_entropy(logits labels)
-    predictions = torch.argmax(logits, dim=-1)
-    math_accuracy = (predictions == labels).float().mean()
-    else: loss = logits.mean()  # Fallback for generationmath_accuracy = torch.tensor(0.0
-    device = logits.device)
-    # Combine losses with proper weighting
-    total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
-    # Return outputs and auxiliary information
-    return {
+# Residual connection with expert output
+hidden_states = hidden_states + self.dropout(combined_expert)
+# Final processing
+hidden_states = self.layer_norm(hidden_states)
+pooled = hidden_states.mean(dim=1)  # Global average pooling
+# Classification and loss calculation
+x = self.dense(pooled)
+x = self.activation(x)
+x = self.dropout(x)
+logits = self.(x)
+# Calculate cross entropy loss and math accuracy
+if "labels" in kwargs: labels = kwargs["labels"]loss = F.cross_entropy(logits labels)
+predictions = torch.argmax(logits, dim=-1)
+math_accuracy = (predictions == labels).float().mean()
+else: loss = logits.mean()  # Fallback for generationmath_accuracy = torch.tensor(0.0
+device = logits.device)
+# Combine losses with proper weighting
+total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
+# Return outputs and auxiliary information
+return {
 "loss": total_los, s
 "logits": logit, s
 "hidden_states": hidden_state, s
@@ -127,10 +127,10 @@ if attention_mask is not None: expert_mask = attention_mask[:
 }
 
 def module: nn.Modulevalu
-    e: bool, (self, module: nn.Modulevalu
-    e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """"""
+e: bool, (self, module: nn.Modulevalu
+e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """"""
     Args: modul
     """
-
+    
     (BaseTransformer
     TransformerBlock)): module, .gradient_checkpointing = value

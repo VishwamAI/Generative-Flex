@@ -4,8 +4,8 @@ import jax
 (nn.Module): hidden_size: int = 64
 def create_minimal_data(self) -> None:
     """Method with parameters."""
-
-
+    
+    
     """Create minimal training data with chain-of-thought reasoning."""
 
 
@@ -55,20 +55,19 @@ def main(self) -> None:
     # Convert input to tokens
     for conv in data["conversations"]: input_token, s = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()])
     target_tokens = jnp.array(
-    [        word_to_id.get(w,
-    word_to_id["<unk>"])
+    [word_to_id.get(w, word_to_id["<unk>"])
     for w in conv["response"].split()
     ]
     )
-
+    
     # Define loss function for gradient computation
-
-
-def loss_fn(self params) -> None:
+    
+    
+    def loss_fn(self params) -> None:
     """Method with parameters."""
     logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(logits[None
-    : ]
+    :]
     target_tokens[0: 1, ]).mean()
     return loss
 

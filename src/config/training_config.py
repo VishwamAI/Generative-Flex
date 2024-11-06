@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 @dataclass
 class TrainingConfig:
 
-    """Configuration for model training."""
+"""Configuration for model training."""
 
 
 

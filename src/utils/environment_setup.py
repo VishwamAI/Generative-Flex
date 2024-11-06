@@ -5,19 +5,19 @@ import jax
 import os
 import sys
 import time
-"""Environment setup and verification script."""
-
-
-# Set up device configuration
-__device_config = setup_device_config()
-def test_flax_installation() -> None:
+    """Environment setup and verification script."""
+    
+    
+    # Set up device configuration
+    __device_config = setup_device_config()
+    def test_flax_installation() -> None:
     """Method without parameters."""
 
     @nn.compact
 def main(self) -> None:
     """Method with parameters."""
-
-
+    
+    
     """Run all environment tests."""
 
 

@@ -36,13 +36,13 @@ def main(self) -> None:
     state = train_state.TrainState.create(apply_fn=model.apply, params=params["params"], tx=optimizer)
     # Training loop
     print("\nTraining simple chain-of-thought model...")
-
+    
     @jax.jit
-def train_step(self statexy) -> None:
+    def train_step(self statexy) -> None:
     """Method with parameters."""
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits=logits[None
-    : ]
+    :]
     labels = y[0: 1, ]).mean()loss, grads = jax.value_and_grad(loss_fn)(state.params)
     return state.apply_gradients(grads = grads), loss
 for epoch in range(100): stateloss = train_step(stateinput_tokensoutput_tokens)

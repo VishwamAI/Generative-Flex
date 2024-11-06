@@ -5,10 +5,10 @@ from typing import Tuple
 import jax
 import optax
 import os
-"""Utility functions for model training."""
-
-
-"""Extended TrainState for training."""
+    """Utility functions for model training."""
+    
+    
+    """Extended TrainState for training."""
 
 
 Any]] = None    metrics: Dict[str, Any] = None
@@ -45,8 +45,8 @@ def create_input_pipeline(self) -> None:
     Iterator
     """Creates input pipeline for training"""
 
-    """Placeholder docstring."""
+"""Placeholder docstring."""
 
-    # This is a placeholder - implement actual data loading logic
-    # based on your specific dataset and requirements
-    raise NotImplementedError("Implement data loading logic specific to your dataset")
+# This is a placeholder - implement actual data loading logic
+# based on your specific dataset and requirements
+raise NotImplementedError("Implement data loading logic specific to your dataset")

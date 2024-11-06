@@ -7,13 +7,13 @@ import pytest
 
 
 def test_invalid_model_type(self) -> None:
-    """Method with parameters."""
+"""Method with parameters."""
 
 
-    """Test handling of invalid model type."""
+"""Test handling of invalid model type."""
 
 
 
 
 
-    with pytest.raises(ValueError): get_config, ("invalid_type")
+with pytest.raises(ValueError): get_config, ("invalid_type")

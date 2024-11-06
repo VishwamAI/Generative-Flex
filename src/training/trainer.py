@@ -2,11 +2,11 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-"""Base trainer implementation."""
-
-
-logger = logging.getLogger(__name__)
-"""Base trainer class."""
+    """Base trainer implementation."""
+    
+    
+    logger = logging.getLogger(__name__)
+    """Base trainer class."""
 
 
 eval_dataloader: Optional[DataLoader] = None
@@ -18,25 +18,25 @@ max_grad_norm: float = 1.0
 logging_steps: int = 100
 evaluation_steps: int = 500
 save_steps: int = 1000
-"""Initialize the trainer."""
-
-
-self.model = model
-self.train_dataloader = train_dataloader
-self.eval_dataloader = eval_dataloader
-self.optimizer = optimizer or torch.optim.AdamW(model.parameters())
-self.lr_scheduler = lr_scheduler
-self.num_epochs = num_epochs
-self.gradient_accumulation_steps = gradient_accumulation_steps
-self.max_grad_norm = max_grad_norm
-self.logging_steps = logging_steps
-self.evaluation_steps = evaluation_steps
-self.save_steps = save_steps
-self.output_dir = output_dir
-self._step = 0
-self._epoch = 0
-self._best_eval_loss = float("inf")
-"""Train the model."""
+    """Initialize the trainer."""
+    
+    
+    self.model = model
+    self.train_dataloader = train_dataloader
+    self.eval_dataloader = eval_dataloader
+    self.optimizer = optimizer or torch.optim.AdamW(model.parameters())
+    self.lr_scheduler = lr_scheduler
+    self.num_epochs = num_epochs
+    self.gradient_accumulation_steps = gradient_accumulation_steps
+    self.max_grad_norm = max_grad_norm
+    self.logging_steps = logging_steps
+    self.evaluation_steps = evaluation_steps
+    self.save_steps = save_steps
+    self.output_dir = output_dir
+    self._step = 0
+    self._epoch = 0
+    self._best_eval_loss = float("inf")
+    """Train the model."""
 
 
 self.model.train()
@@ -53,13 +53,13 @@ if step % self.gradient_accumulation_steps = = 0: self.optimizer.step()         
 self._step += 1
 
 if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                        total_loss = 0
-"""Perform a single training step.
-outputs = self.model(**batch)"""loss = outputs.loss"""
+    """Perform a single training step.
+    outputs = self.model(**batch)"""loss = outputs.loss"""
 loss.backward()
-"""if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
-
-return loss
-""""""
+    """if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
+    
+    return loss
+    """"""
 
 
 
@@ -70,28 +70,28 @@ def evaluate(self) -> None:
 
     total_loss = 0
     """"""
-
+    
     forbatchinself.eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
     """loss = outputs.loss"""
     total_loss+=loss.item()
     """"""
-
+    
     eval_loss = total_loss/len(self.eval_dataloader)
     """self.model.train()"""
 
 
-    """metrics = {"eval_loss":eval_loss, }self.log_metrics(metrics)"""
-    """ifeval_loss<self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)"""
+"""metrics = {"eval_loss":eval_loss, }self.log_metrics(metrics)"""
+"""ifeval_loss<self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)"""
     """returnmetrics"""
-
-
-    """defsave_checkpoint(self):is_best:boo = False)->None:Non, e)->None:"""
+    
+    
+    """defsave_checkpoint(self):is_best:boo = False) -> None:Non, e) -> None:"""
     Saveamodelcheckpoint.
     checkpoint_name = f"checkpoint-{{self._step}}""""
     ifis_best:checkpoint_name = "best_model""""
     torch.save(
     """{"""
-
+    
     "optimizer_state_dict":self, .optimizer.state_dict()"""
     "step":self, ._step"""
     "epoch":self, ._epoch"""
@@ -99,7 +99,7 @@ def evaluate(self) -> None:
     "
     )
     """logger.info(f"Savedcheckpoint:{{checkpoint_name}}")deflog_metrics(self):metrics:Dict[str):float, ]"""
-
+    
     ) -> None: None:
     """Log training metrics."""
 

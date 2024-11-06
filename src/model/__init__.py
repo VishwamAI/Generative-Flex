@@ -1,10 +1,10 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-"""Core model architecture with state-of-the-art optimizations""""""
-
-Placeholder docstring.
-"""Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths"""
+    """Core model architecture with state-of-the-art optimizations""""""
+    
+    Placeholder docstring.
+    """Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths"""
 
 
 
@@ -25,17 +25,10 @@ def __init__(self) -> None:
     self.pos_encoder = nn.Embedding(max_seq_length, d_model)
     # Advanced transformer layers with Flash Attention and MoE
     self.transformer_layers = nn.ModuleList(
-    [         TransformerLayer(         d_model = d_model,
-    nhead = nhead,
-    dim_feedforward = dim_feedforward,
-    dropout = dropout,
-    num_experts = num_experts,
-    expert_capacity_factor = expert_capacity_factor,
-    block_size = attention_block_size)
-    for _ in range(num_layers)
-    ]
+    [TransformerLayer(         d_model = d_model, nhead = nhead, dim_feedforward = dim_feedforward, dropout = dropout, num_experts = num_experts, expert_capacity_factor = expert_capacity_factor, block_size = attention_block_size)
+    for _ in range(num_layers)]
     )
-
+    
     # Output layers
     self.norm = nn.LayerNorm(d_model)
     self.fc_out = nn.Linear(d_model, vocab_size)

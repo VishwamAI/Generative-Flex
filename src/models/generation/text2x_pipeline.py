@@ -23,7 +23,7 @@ return {
 def __init__(self) -> None:
     """Method with parameters."""
     attention_mask, =None): target_modality, ="text"
-
+    
     _max_length = None,
     temperature = 1.0): i, f max_length is None: _max_length = self.config.max_position_embeddings
     _device = input_ids.device
@@ -32,9 +32,9 @@ def __init__(self) -> None:
     if target_modality = = "text":                            # Text generation with sampling
     logits = outputs["output"][:
     -1
-    : ] / temperature                            probs = F.softmax(logits         dim=-1)
+    :] / temperature                            probs = F.softmax(logits         dim=-1)
     next_token = torch.multinomial(probs, num_samples=1)
     return next_token
-else: # Direct generation for other modalitiesreturn outputs["output"]
-
-@staticmethod
+    else: # Direct generation for other modalitiesreturn outputs["output"]
+    
+    @staticmethod

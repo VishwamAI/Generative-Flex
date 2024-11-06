@@ -7,7 +7,7 @@ from transformers import PretrainedConfig
 
 _model_type = "math_reasoning"
 def __init__(self) -> None:
-    """Method with parameters."""
+"""Method with parameters."""
     hidden_size: in = 768): num_attention_heads: in, t = 12
     num_hidden_layers: int = 6
     max_position_embeddings: int = 512

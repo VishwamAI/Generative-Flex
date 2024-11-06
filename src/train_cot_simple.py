@@ -22,14 +22,12 @@ vocab = sorted(list(words))
 with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
 indent = 2)
 # Convert to tokens and train
-[
-word_to_id.get(w, word_to_id["<unk>"])
+[word_to_id.get(w, word_to_id["<unk>"])
 for w in conv["input"].split()
 ]
 for conv in training_data["conversations"]
 ]
-[
-word_to_id.get(w, word_to_id["<unk>"])
+[word_to_id.get(w, word_to_id["<unk>"])
 for w in conv["response"].split()
 ]
 for conv in training_data["conversations"]
@@ -58,5 +56,5 @@ def loss_fn(self     params) -> None:
     with open("model_params.json" "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
     f)
     print("\nTraining completed! Model saved.")
-
+    
     if __name__ == "__main__": main, ()
