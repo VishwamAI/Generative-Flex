@@ -5,6 +5,7 @@ import unittest
 
 
 
+
 class TestEnvironment(unittest.TestCase):
     """Test suite for module functionality."""
 
@@ -19,13 +20,17 @@ class TestEnvironment(unittest.TestCase):
         if torch.cuda.is_available():
             device = torch.device("cuda")
         else:
-        device = torch.device("cpu")
+            device = torch.device("cpu")
         self.assertIsNotNone(device)
         if torch.cuda.is_available():
         self.assertTrue(torch.cuda.is_initialized())
         if __name__ == "__main__":
+
+if __name__ == "__main__":
     unittest.main()
 
 
         if __name__ == "__main__":
+
+if __name__ == "__main__":
     unittest.main()

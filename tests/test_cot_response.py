@@ -5,6 +5,7 @@ import unittest
 
 
 
+
 class TestTestCotResponse(unittest.TestCase):
     """Test suite for module functionality."""
 
@@ -23,4 +24,6 @@ class TestTestCotResponse(unittest.TestCase):
 
 
         if __name__ == "__main__":
+
+if __name__ == "__main__":
     unittest.main()

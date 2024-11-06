@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 
+
 from pathlib import Path
+
 
 from torch.utils.data import DataLoader, Dataset
 
+
 from tqdm import tqdm
 
+
 from typing import Dict, Any, Optional, List, Union, Tuple
+
 
 import logging
 import numpy as np
@@ -15,13 +20,15 @@ import torch
 
 
 
+
 """
 Module containing specific functionality.
 """
+from src.models import SimpleModel
 import torch
 import torch.nn as nn
-from src.models import SimpleModel
 import unittest
+
 class TestSimpleModel:
 """
 Class implementing TestSimpleModel functionality.

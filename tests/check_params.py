@@ -5,6 +5,7 @@ import unittest
 
 
 
+
 class TestParameters(unittest.TestCase):
     """Test suite for module functionality."""
 
@@ -26,8 +27,12 @@ class TestParameters(unittest.TestCase):
         }
         self.assertFalse(self.validator.validate(params))
         if __name__ == "__main__":
+
+if __name__ == "__main__":
     unittest.main()
 
 
         if __name__ == "__main__":
+
+if __name__ == "__main__":
     unittest.main()
