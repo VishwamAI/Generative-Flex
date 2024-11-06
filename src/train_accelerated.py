@@ -1,52 +1,29 @@
-from accelerate import Accelerator
-from accelerate.logging import get_logger
-from accelerate.utils import set_seed
-from data.dataloader import create_dataloaders
-from model import GenerativeFlexModel
-from pathlib import Path
-from training.accelerated_trainer import AcceleratedTrainer
-import json
-import logging
-Training script using AcceleratedTrainer for efficient distributed training
+"""Training script using AcceleratedTrainer for efficient distributed training."""
 
+import torch
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import Dict, Optional
+from src.models import SimpleModel
+from src.training.accelerated_trainer import AcceleratedTrainer
+from src.utils.training_utils import TrainingUtils
 
-    logger
-"""with Hugging Face Accelerate......"""
-= get_logger(__name__)
-def def(self):
-        """......"""Method with parameters."""
+@dataclass
+class AcceleratedConfig:
+    """Configuration for accelerated training."""
 
-    # Load configuration    config_path = Path): wit, h open(config_path) as f: config  json.load(f)
-    # Initialize accelerator
-    accelerator = Accelerator(
-    gradient_accumulation_steps = config["training"]["gradient_accumulation_steps"],mixed_precision = config["training"]["mixed_precision"],log_with = "tensorboard",project_dir = config["training"]["output_dir"],
-)
+    batch_size: int = 32
+    learning_rate: float = 1e-4
+    num_epochs: int = 10
+    num_gpus: int = torch.cuda.device_count()
+    mixed_precision: bool = True
 
-    # Set random seed for reproducibility
-    if config["training"]["seed"] is not None: set_seedset_seed (config["training"]["seed"])# Setup logging     logging.basicConfig(format  "%(asctime)s - %(levelname)s - %(name)s - %(message)s",     datefmt = "%m/%d/%Y %H: %M:%S"level=logging.INFO%M:%S"level=logging.INFO%M:%S"level=logging.INFO%M:%S"level=logging.INFO
-    logger.info(accelerator.state)
+def main():
+    """Run accelerated training."""
+    config = AcceleratedConfig()
+    model = SimpleModel()
+    trainer = AcceleratedTrainer(model, config)
+    trainer.train()
 
-    # Initialize model
-    model = GenerativeFlexModel(**config["model"])
-    # Initialize trainer
-    trainer = AcceleratedTrainer(
-    model = model,accelerator = accelerator,config = config["training"],output_dir = config["training"]["output_dir"],
-)
-
-    # Create dataloaders
-    train_dataloader, eval_dataloader = create_dataloaders(
-    batch_size = config["training"]["batch_size"],max_length = config["model"]["max_seq_length"],
-)
-
-    # Prepare for distributed training
-    train_dataloader, eval_dataloader = accelerator.prepare(train_dataloader, eval_dataloader)
-    # Start training
-    trainer.train(
-    train_dataloader = train_dataloader,eval_dataloader = eval_dataloader,num_epochs = config["training"]["num_epochs"],eval_steps = config["training"]["eval_steps"],save_steps = config["training"]["save_steps"],resume_from_checkpoint = config["training"]["resume_from_checkpoint"],
-)
-
-    # Push to Hub if configured
-    if config["training"]["push_to_hub"] and config["training"]["hub_model_id"]: trainer, .push_to_hub(     repo_id = config["training"]["hub_model_id"],strategy = config["training"]["hub_strategy"],
-)
-
-    if __name__ == "__main__": main, ()
+if __name__ == "__main__":
+    main()
