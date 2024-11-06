@@ -1,4 +1,85 @@
-"""Mathematical expert modules."""
+import os
+
+def fix_image_processor():
+    """Fix syntax in image_processor.py."""
+    content = '''"""Image processor for multimodal transformer."""
+
+import torch
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
+from transformers import AutoImageProcessor
+
+@dataclass
+class ImageProcessorConfig:
+    """Configuration for image processor."""
+
+    image_size: int = 224
+    patch_size: int = 16
+    num_channels: int = 3
+    hidden_size: int = 768
+    intermediate_size: int = 3072
+    num_attention_heads: int = 12
+    dropout: float = 0.1
+
+class ImageProcessor(nn.Module):
+    """Image processor module."""
+
+    def __init__(self, config: Optional[ImageProcessorConfig] = None):
+        """Initialize image processor.
+
+        Args:
+            config: Optional processor configuration
+        """
+        super().__init__()
+        self.config = config or ImageProcessorConfig()
+        self.processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
+        self.setup_layers()
+
+    def setup_layers(self):
+        """Set up neural network layers."""
+        self.patch_embed = nn.Conv2d(
+            self.config.num_channels,
+            self.config.hidden_size,
+            kernel_size=self.config.patch_size,
+            stride=self.config.patch_size
+        )
+        self.position_embed = nn.Parameter(
+            torch.zeros(1, self.get_num_patches(), self.config.hidden_size)
+        )
+        self.dropout = nn.Dropout(self.config.dropout)
+
+    def get_num_patches(self) -> int:
+        """Calculate number of patches.
+
+        Returns:
+            Number of patches
+        """
+        patches_per_side = self.config.image_size // self.config.patch_size
+        return patches_per_side * patches_per_side
+
+    def forward(self, images: torch.Tensor) -> torch.Tensor:
+        """Process images.
+
+        Args:
+            images: Input images
+
+        Returns:
+            Processed image features
+        """
+        batch_size = images.shape[0]
+        x = self.patch_embed(images)
+        x = x.flatten(2).transpose(1, 2)
+        x = x + self.position_embed
+        x = self.dropout(x)
+        return x
+'''
+    with open('src/models/multimodal/image_processor.py', 'w') as f:
+        f.write(content)
+
+def fix_math_experts():
+    """Fix syntax in math_experts.py."""
+    content = '''"""Mathematical expert modules."""
 
 import torch
 import torch.nn as nn
@@ -116,3 +197,17 @@ class MathExpertMoE(nn.Module):
         # Combine expert outputs
         combined_output = sum(expert_outputs)
         return combined_output
+'''
+    with open('src/models/reasoning/math_experts.py', 'w') as f:
+        f.write(content)
+
+def main():
+    """Fix syntax in multimodal and reasoning files."""
+    print("Fixing image_processor.py...")
+    fix_image_processor()
+
+    print("Fixing math_experts.py...")
+    fix_math_experts()
+
+if __name__ == '__main__':
+    main()

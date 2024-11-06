@@ -1,43 +1,71 @@
-from typing import Tuple
-from torchvision import transforms
-from typing import Optional
+"""Image processor for multimodal transformer."""
+
 import torch
-from typing import torch.nn as nn
-Placeholder
-"""Image processor for multimodal inputs....""""""docstring.hidden_size..."""
-Image processor for handling multimodal inputs in the MMMU model.
-""": int = 768Initialize..."""
-"""the image processor.     super().__init__()
-self.hidden_size = hidden_size
-self.."""transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
-"""transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),..."""
-]"""
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
+from transformers import AutoImageProcessor
 
+@dataclass
+class ImageProcessorConfig:
+    """Configuration for image processor."""
 
-    )
-"""backbone = nn.Sequential(nn.Conv2d(364kernel_size=7, stride=2, padding=3),nn
-MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
-ReLU(inplace = True),nn
-Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
-AdaptiveAvgPool2d((1, 1)))self.dropout = nn.Dropout(dropout_rate)def..""" """
- forward(self):  images
-"""Method with parameters...."""
-: torch.Tensor): attention_mask: Optional[torch.Tensor]  None) -> Tuple[torch.TensorProcess
-"""Placeholder docstring...."""
- images for multimodal input."""
- 
- 
- # Apply preprocessing
- if images.dim() == 3: images  images.unsqueeze(0)
- batch_size = images.size(0)
- processed_images = []
- for i in range(batch_size): processe, d = self.transform(images[i])
- processed_images.append(processed)
- 
- processed_images = torch.stack(processed_images)
- # Extract features
- features = self.backbone(processed_images)
- features = features.view(batch_size, self.hidden_size)
- features = self.dropout(features)
- return features, attention_mask
- 
+    image_size: int = 224
+    patch_size: int = 16
+    num_channels: int = 3
+    hidden_size: int = 768
+    intermediate_size: int = 3072
+    num_attention_heads: int = 12
+    dropout: float = 0.1
+
+class ImageProcessor(nn.Module):
+    """Image processor module."""
+
+    def __init__(self, config: Optional[ImageProcessorConfig] = None):
+        """Initialize image processor.
+
+        Args:
+            config: Optional processor configuration
+        """
+        super().__init__()
+        self.config = config or ImageProcessorConfig()
+        self.processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
+        self.setup_layers()
+
+    def setup_layers(self):
+        """Set up neural network layers."""
+        self.patch_embed = nn.Conv2d(
+            self.config.num_channels,
+            self.config.hidden_size,
+            kernel_size=self.config.patch_size,
+            stride=self.config.patch_size
+        )
+        self.position_embed = nn.Parameter(
+            torch.zeros(1, self.get_num_patches(), self.config.hidden_size)
+        )
+        self.dropout = nn.Dropout(self.config.dropout)
+
+    def get_num_patches(self) -> int:
+        """Calculate number of patches.
+
+        Returns:
+            Number of patches
+        """
+        patches_per_side = self.config.image_size // self.config.patch_size
+        return patches_per_side * patches_per_side
+
+    def forward(self, images: torch.Tensor) -> torch.Tensor:
+        """Process images.
+
+        Args:
+            images: Input images
+
+        Returns:
+            Processed image features
+        """
+        batch_size = images.shape[0]
+        x = self.patch_embed(images)
+        x = x.flatten(2).transpose(1, 2)
+        x = x + self.position_embed
+        x = self.dropout(x)
+        return x
