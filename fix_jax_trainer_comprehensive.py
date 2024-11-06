@@ -1,4 +1,11 @@
-"""JAX/Flax training infrastructure for Generative-Flex."""
+import re
+from pathlib import Path
+import black
+
+
+def fix_imports():
+    """Fix import statements."""
+    return '''"""JAX/Flax training infrastructure for Generative-Flex."""
 
 from typing import Dict, Any, List, Optional, Union, Tuple
 import jax
@@ -10,13 +17,23 @@ import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
 from dataclasses import dataclass, field
+'''
 
+
+def fix_trainer_state():
+    """Fix TrainerState class definition."""
+    return '''
 
 class TrainerState(train_state.TrainState):
     """Custom train state with loss scaling for mixed precision training."""
 
     loss_scale: Optional[jnp.ndarray] = None
+'''
 
+
+def fix_trainer_init():
+    """Fix FlaxTrainer initialization."""
+    return '''
 
 class FlaxTrainer:
     """Advanced trainer implementation using JAX/Flax."""
@@ -35,7 +52,12 @@ class FlaxTrainer:
 
         # Initialize training state
         self.setup_training_state()
+'''
 
+
+def fix_setup_training():
+    """Fix setup_training_state method."""
+    return '''
     def setup_training_state(self) -> None:
         """Setup training state with optimizer and learning rate schedule."""
         # Create learning rate schedule
@@ -74,13 +96,16 @@ class FlaxTrainer:
             apply_fn=self.model.apply,
             params=variables["params"],
             tx=optimizer,
-            loss_scale=(
-                jnp.array(2.0**15)
-                if self.config["training"].get("fp16", False)
-                else None
-            ),
+            loss_scale=jnp.array(2.0**15)
+            if self.config["training"].get("fp16", False)
+            else None,
         )
+'''
 
+
+def fix_train_method():
+    """Fix train method."""
+    return '''
     def train(
         self,
         train_dataset: Any,
@@ -123,7 +148,12 @@ class FlaxTrainer:
             avg_epoch_loss = epoch_loss / num_steps
             logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")
             self.save_checkpoint(f"epoch-{epoch}")
+'''
 
+
+def fix_checkpoint_methods():
+    """Fix checkpoint-related methods."""
+    return '''
     def save_checkpoint(self, name: str) -> None:
         """Save model checkpoint."""
         checkpoint_dir = self.output_dir / name
@@ -152,3 +182,45 @@ class FlaxTrainer:
             self.config = flax.serialization.from_bytes(self.config, f.read())
 
         logging.info(f"Checkpoint loaded from {checkpoint_dir}")
+'''
+
+
+def main():
+    """Main function to fix jax_trainer.py."""
+    file_path = Path("src/training/jax_trainer.py")
+
+    # Combine all fixed parts
+    content = (
+        fix_imports()
+        + fix_trainer_state()
+        + fix_trainer_init()
+        + fix_setup_training()
+        + fix_train_method()
+        + fix_checkpoint_methods()
+    )
+
+    # Write the fixed content
+    with open(file_path, "w") as f:
+        f.write(content)
+
+    # Format with black
+    mode = black.Mode(
+        target_versions={black.TargetVersion.PY312},
+        line_length=88,
+        string_normalization=True,
+        is_pyi=False,
+    )
+
+    try:
+        formatted_content = black.format_file_contents(
+            content, fast=False, mode=mode
+        )
+        with open(file_path, "w") as f:
+            f.write(formatted_content)
+        print("Successfully fixed and formatted jax_trainer.py")
+    except Exception as e:
+        print(f"Error formatting file: {e}")
+
+
+if __name__ == "__main__":
+    main()

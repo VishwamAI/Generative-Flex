@@ -1,4 +1,18 @@
-"""Centralized configuration management for Generative-Flex."""
+import re
+from pathlib import Path
+
+def fix_config_file():
+    """Fix syntax issues in config.py"""
+    config_path = Path("src/config/config.py")
+    with open(config_path, "r") as f:
+        content = f.read()
+
+    # Remove duplicate imports
+    content = re.sub(r"from typing import Dict, Any, List, Optional\n.*?from typing import Dict, Any, List\n",
+                    "from typing import Dict, Any, List, Optional\n", content, flags=re.DOTALL)
+
+    # Fix class definitions and indentation
+    fixed_content = '''"""Centralized configuration management for Generative-Flex."""
 
 from typing import Optional, Union, List, Dict, Any, Tuple
 from dataclasses import dataclass, field
@@ -79,7 +93,9 @@ class Config:
     def save_json(self, path: str) -> None:
         """Save configuration to JSON file."""
         config_dict = {
-            "model": {k: v for k, v in self.model.__dict__.items() if v is not None},
+            "model": {
+                k: v for k, v in self.model.__dict__.items() if v is not None
+            },
             "training": self.training.__dict__,
         }
 
@@ -114,3 +130,25 @@ class Config:
             model_config.video_patch_size = (2, 16, 16)
 
         return cls(model=model_config, training=TrainingConfig())
+'''
+
+    with open(config_path, "w") as f:
+        f.write(fixed_content)
+
+def fix_jax_trainer():
+    """Fix syntax issues in jax_trainer.py"""
+    trainer_path = Path("src/training/jax_trainer.py")
+    with open(trainer_path, "r") as f:
+        content = f.read()
+
+    # Fix function signatures and type hints
+    content = re.sub(r"def __init__\(self\) -> None: model: Union\[nn\.Module",
+                    "def __init__(self, model: Union[nn.Module, None]) -> None:", content)
+
+    with open(trainer_path, "w") as f:
+        f.write(content)
+
+if __name__ == "__main__":
+    fix_config_file()
+    fix_jax_trainer()
+    print("Files fixed successfully!")
