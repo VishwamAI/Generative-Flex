@@ -1,39 +1,24 @@
 from typing import Any
 from src.utils.device_config import setup_device_config
 from tensorboardX import SummaryWriter
-from typing import Dict,
-    
-import jax
+from typing import Dict, import jax
 import os
-import sys
-import time
+import sys, time
 Method
-"""Environment setup and verification script."""
+"""Environment setup and verification script.."""
 
 
     # Set up device configuration
-    def __init__:
-
-        """Implementation of __init__."""
-        """Initialize environment setup."""
+    def __init__(self):
+        """Implementation of __init__..."""
+"""Initialize environment setup.."""
         self.__device_config = self.setup_device_config()
-    def def:
-
-        """
-
-         
-
-        """ without parameters.Method
-"""
-
-
-    @nn.compact
-def def:
-
-    """
-""" with parameters.Run
-    """
-""" all environment tests."""
+    def def(self):
+        """..""" without parameters.Method
+"""@nn.compact
+def def(self):."""
+"""with parameters.Run."""
+"""all environment tests.."""
 
     try: # Test JAX): jax_result, s = test_jax_installation()
     print("JAX test completed successfully")

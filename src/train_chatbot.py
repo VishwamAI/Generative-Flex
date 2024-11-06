@@ -1,19 +1,16 @@
 from typing import List
 from flax.training import train_state
 from src.models.language_model import LanguageModel
-from typing import Dict,
-    
-import jax
+from typing import Dict,  , jax
     
 def load_data(self,
         file_path: str = "data/chatbot/training_data_cot.json"):
 with open(
     file_path,"r" ) as f: data = json.load(f)        return data["conversations"]
-    def create_vocabulary:
-
+    def create_vocabulary(self):
         """voca
 
-    .."""Method with multiple parameters.
+    ...."""Method with multiple parameters.
 
     Args: self: Parameter description
     file_path: Parameter description
@@ -21,10 +18,8 @@ with open(
     "r") as f: Parameter description     r]]: Parameter description""", b = {
     "<start>": 1     "<end>": 2     }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
     
-def def:
-
-    
-    """.."""Method with parameters."""
+def def(self):
+        """...."""Method with parameters."""
 
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
     # Model parameters

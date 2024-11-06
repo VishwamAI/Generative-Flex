@@ -2,19 +2,17 @@ from abc import ABC
     abstractmethod
 from typing import Tuple
 Abstract
-"""Base model classes for different types of generative models."""
+"""Base model classes for different types of generative models.."""
 
 
     (nn.Module ABC):
-""" base class for all generative models.Basic
-    """
+"""base class for all generative models.Basic."""
 
 
 
 @abstractmethod
 rng: jnp.ndarray): pas, s
-""" Transformer block for reuse across different model types.Positional
-    """
+"""Transformer block for reuse across different model types.Positional."""
 
 
 
@@ -28,8 +26,7 @@ dense_output = nn.Sequential([nn.Dense(features = 4 * self.hidden_size), nn.gelu
 )(x)
 
 return nn.LayerNorm()(x + dense_output)
-""" encoding for sequence models.Method
-    """
+"""encoding for sequence models.Method."""
 
 
 
@@ -40,50 +37,27 @@ pe = jnp.zeros((self.max_len, self.hidden_size))
 pe = pe.at[: 0, : : 2, ].set(jnp.sin(position * div_term))pe = pe.at[: 1, : : 2, ].set(jnp.cos(position * div_term))self.pe = pe[None, :
 :]
 
-def def:
-
-
-    """
-
-
-     
-
-
-    """ with parameters.Base
-"""
-    """ class for language models.Base
-"""
-
-    hidden_size: intnum_layer
+def def(self):
+        """..""" with parameters.Base
+""".""" class for language models.Base
+"""hidden_size: intnum_layer
     s: intnum_heads: intmax_sequence_lengt, h: intdropout_rat
     e: floa = 0.1
 def self                         x                        training: bool, (self                         x                        training: bool = False):                        x = self.pos_encoding): fo, r block in self.transformer_blocks: x = block(x                         training = training)
-    return self.output(x)
-"""
+    return self.output(x)."""
  class for image generation models.Base
-"""
-
-
-int]hidden_size: intnum_layer
+"""int]hidden_size: intnum_layer
 s: intnum_heads: intdropout_rat, e: float = 0.1
 @abstractmethod
-def self                         x                        training: bool, ():
-
-    """
-"""
- class for audio generation models.Base
-"""
+def self                         x                        training: bool, ():."""
+"""class for audio generation models.Base."""
     ):
     sample_rate: inthidden_siz, e: intnum_layer
     s: intnum_head, s: intdropout_rat
     e: floa = 0.1
     @abstractmethod
 def self                         x                        training: bool, ():
-"""
-
-     
-
-    """
+"""."""
  class for video generation models."""
     ):
     num_frames: intframe_siz, e: Tuple[intint]hidden_size: intnum_layer

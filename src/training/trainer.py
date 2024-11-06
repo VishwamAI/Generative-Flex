@@ -1,16 +1,13 @@
 from typing import Optional
 from torch.utils.data import DataLoader
-from typing import Dict,
-    
-import logging
-import torch
+from typing import Dict, import logging, torch
     logger
-"""Base trainer implementation..."""
+"""Base trainer implementation...."""
  = logging.getLogger(__name__)
 
 
 eval_dataloader
-"""Base trainer class..."""
+"""Base trainer class...."""
 : Optional[DataLoader] = None
 optimizer: Optional[torch.optim.Optimizer] = None
 lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
@@ -55,33 +52,33 @@ self._step += 1
 if self._step % self.logging_steps = = 0: self.log_metrics({
     "loss": total_los, s / self.logging_steps
 })                        total_loss = 0 loss
-"""Perform a single training step.     outputs = self.model(**batch).."""
+"""Perform a single training step.     outputs = self.model(**batch)..."""
  = outputs.lossif
 """loss.backward()
-.."""
+..."""
  self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)
     
 def """return loss
 .."""
 """evaluate(self):
 Evaluatethemodel
-    .."""Method with parameters.forbatchinself
+    ..."""Method with parameters.forbatchinself
 """total_loss = 0
 eval_dataloader: withtorch.no_grad():output, s = self.model(**batch)
     total_loss
-    .."""loss = outputs.loss"""
+    ..."""loss = outputs.loss"""
 +=loss.item()
 self
 ."""model.train()metrics
-""".."""
+"""..."""
  = {
      "eval_loss": eval_loss,
  }self.log_metrics(metrics)ifeval_loss
-""".."""
+"""..."""
 <self._best_eval_loss: self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)returnmetrics
-""".."""
+"""..."""
 defsave_checkpoint
-""".."""
+"""..."""
 (self):is_best: boo = False) -> None: Non, e) -> None: ifis_best
     """
     Saveamodelcheckpoint.
@@ -95,7 +92,7 @@ defsave_checkpoint
     )
 """.info(f"Savedcheckpoint:{}}")deflog_metrics(self):metrics: Dict[str):float, ]Log
 """) -> None: None:
-.."""
+..."""
  training metrics."""
 
 

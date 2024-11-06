@@ -3,24 +3,24 @@ from torchmetrics import Perplexity
 from torchmetrics.text import BLEUScore, ROUGEScore
 from typing import DictListOptional, logging
 from typing import torch
-from typing import Optional
+from typing, Optional
     Collection
-"""Implements essential metrics for model evaluation and benchmarking"""
+"""Implements essential metrics for model evaluation and benchmarking."""
 @dataclass""" of evaluation metrics
 
 
 Core
 """rouge:
-    [Dict[strfloa, t]] = None"""
+    [Dict[strfloa, t]] = None."""
  evaluator with essential metrics
 
 
     Compute
-"""predictions: torch.Tensorlabel"""
+"""predictions: torch.Tensorlabel."""
  core evaluation metrics
 
 Log
-"""metrics = {}"""
+"""metrics = {}."""
  metrics to console
     """
 

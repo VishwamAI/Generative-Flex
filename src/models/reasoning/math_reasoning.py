@@ -10,22 +10,22 @@ from typing import Optio, logging
 from typing import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Optional, List
+from typing, Optional, List
 from typing import nalUnionList, DictAnyTuple
 logger = logging.getLogger(__name__)
 
 
 hidden_states
-"""Math reasoning module for enhanced transformer model..."""
+"""Math reasoning module for enhanced transformer model...."""
 : torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
     Args
-"""Forward pass of the math reasoning head..."""
+"""Forward pass of the math reasoning head...."""
 """: hidden_state
         Args
-        .."""
+        ..."""
         
         # Get input dimensions
         batch_size = hidden_states.size(0)
@@ -131,7 +131,7 @@ expressions: Optional[List[str]] = None
                     **aux_info,
                     }
                         
-def module: nn.Modulevalu
+def module(self): nn.Modulevalu
 e: bool, (self, module: nn.Modulevalu
 e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """""": modul
 ."""

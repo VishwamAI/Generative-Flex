@@ -1,15 +1,12 @@
 from src.models.transformer import TransformerBlock
 from typing import Any, jax
 Sinusoidal
-"""Language model implementation using JAX and Flax."""
-""" positional encoding.Add
-"""
+"""Language model implementation using JAX and Flax.."""
+"""positional encoding.Add."""
 
 dtype: Any = jnp.float32
 @nn.compact
-"""
- positional encodings to the input embeddings.Autoregressive
-"""
+"""positional encodings to the input embeddings.Autoregressive."""
 
 
     seq_length = inputs.shape[1]
@@ -23,9 +20,7 @@ dtype: Any = jnp.float32
     : 1, : : 2, ].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
     pe = jnp.broadcast_to(pe, (batch_sizeseq_lengthdim))
     return inputs + pe
-"""
- language model based on the transformer architecture.Forward
-"""
+"""language model based on the transformer architecture.Forward."""
 
 
 head_dim: intmlp_di
@@ -33,9 +28,7 @@ m: intmax_seq_len: in = 2048
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
-"""
- pass of the language model.Method
-"""
+"""pass of the language model.Method."""
 
 
     x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
@@ -68,20 +61,10 @@ dtype: Any = jnp.float32
 
     return logits
 
-    def def:
-
-
-        """
-
-
-         
-
-
-        """
+    def def(self):
+        """.."""
  with parameters.Generate
-"""
-    rng: Any): prompt: jnp.ndarraymax_lengt
-"""
+"""rng: Any): prompt: jnp.ndarraymax_lengt."""
  text autoregressively."""
 
     generated = prompt

@@ -20,16 +20,8 @@ return {
 
 }
 
-def def:
-
-
-    """
-
-
-    attention_mask
-
-
-    """Method with parameters."""
+def def(self):
+        """attention_mask.."""Method with parameters."""
 , =None): target_modality, ="text"
 
     _max_length = None,

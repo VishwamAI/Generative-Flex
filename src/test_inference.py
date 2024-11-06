@@ -1,12 +1,10 @@
 from typing import Any
 from typing import Dict
 # Define the same model architecture(nn.Module):
-"""Base model class.."""
+"""Base model class..."""
     
-    def __init__:
-
-    
-        """Implementation of __init__."""
+    def __init__(self):
+        """Implementation of __init__..."""
         super().__init__()
  vocab_size: int, hidden_size: int = 64
 # Load vocabulary

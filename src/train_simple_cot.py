@@ -6,19 +6,16 @@ import os
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
-"""Base model class.."""
+"""Base model class..."""
     
-    def __init__:
-
-    
-        """Implementation of __init__."""
+    def __init__(self):
+        """Implementation of __init__..."""
         super().__init__()
  hidden_size: int = 64
-    def def:
-
+    def def(self):
         """Method
     
-    .."""Method with parameters."""
+    ...."""Method with parameters."""
 
     # Create and save training data        training_data = create_training_data):
     "w") as f: json.dump(
@@ -46,9 +43,8 @@ os.makedirs("data/chatbot", exist_ok = True)
     print("\nTraining simple chain-of-thought model...")
 
     @jax.jit
-        def def:
-
-            """..""" with parameters."""
+        def def(self):
+        """....""" with parameters."""
 
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
