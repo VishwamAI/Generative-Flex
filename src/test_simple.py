@@ -2,9 +2,8 @@ import jax
 import json
 
 # Simple model def inition():
-     """
-     vocab_size
-         ."""Method with parameters."""
+    """vocab_size
+         .."""Method with parameters."""
 : int, hidden_size: int = 64
     print("\nTesting model responses: ")     print("-" * 40)
 

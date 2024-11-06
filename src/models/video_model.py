@@ -5,24 +5,18 @@ import jax
 from typing import Optional
 
 Video
-    """Video generation model implementation using JAX and Flax.."""
-        """ to embedding conversion.Method
-."""
+    """Video generation model implementation using JAX and Flax..."""
+    """to embedding conversion.Method
+.."""
 
 patch_size: Tuple[intint
 int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
-def def __call__():
-    
-    """
-
-     
-
-    ."""
+    def def __call__():
+    """.."""
  with parameters.Transformer
-    """
-    b):
+    """b):
     t
     h
     w
@@ -34,7 +28,7 @@ def def __call__():
 )
     )
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
-."""
+.."""
 -based video generation model.Method
     """
 
@@ -49,7 +43,7 @@ m: intchannel, s: int = 3
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
-def self inputstraining: bool, (self inputstraining: bool = True): b):
+    def self inputstraining: bool, (self inputstraining: bool = True): b):
     t
     h
     w
@@ -74,21 +68,11 @@ def self inputstraining: bool, (self inputstraining: bool = True): b):
     # Reshape back to video dimensions
     x = jnp.reshape(x, (bth, w, c))
     return x
-
-def def generate():
-
-
-    """
     
-
-     
-
-
-    .""" with parameters.Generate
-    """
-
-    rng: Any): prompt: Optional[jnp.ndarray] = None
-    .""" video frames."""
+def def generate():
+    """..""" with parameters.Generate
+    """rng: Any): prompt: Optional[jnp.ndarray] = None
+    ..""" video frames."""
 
 
 

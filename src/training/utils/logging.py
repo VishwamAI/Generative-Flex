@@ -5,24 +5,22 @@ import json
 import os
 
 class TrainingLogger:
-        """Class docstring.."""
+    """Class docstring..."""
     pass
-def __init__(self, log_dir: str = "logs"): 
-
+    def __init__(self, log_dir: str = "logs"): 
+    
 def __init__(self):
-        """Initialize logger."""
+    """Initialize logger.."""
         super().__init__()
         self.logger = logging.getLogger(__name__)
 log_dir = log_dir
 os.makedirs(log_dir, exist_ok = True)
 self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
 self.metrics_history = []
-def log_metrics():
-    """
-    
-    Log
+    def log_metrics():
+    """Log
         
-        ."""Method with multiple parameters.
+        .."""Method with multiple parameters.
         
         Args: self: Parameter description
         metrics: Parameter description

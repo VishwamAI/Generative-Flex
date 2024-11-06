@@ -1,12 +1,13 @@
 import jax(nn.Module):
- hidden_size: int = 64
-def def create_minimal_data():
-
-    """
-
-    Create
+    """Base model class.."""
     
-    ."""Method with parameters."""
+    def __init__(self):
+        super().__init__()
+ hidden_size: int = 64
+    def def create_minimal_data():
+    """Create
+    
+    .."""Method with parameters."""
         .""" minimal training data with chain-of-thought reasoning.Method
     """
 
@@ -34,17 +35,9 @@ def def create_minimal_data():
     indent = 2
 )
     return data, vocab
-
-def def main():
-
-
-    """
     
-
-     
-
-
-    .""" with parameters.Method
+def def main():
+    """..""" with parameters.Method
     """
 
     prin, t): voca, b = create_minimal_data()
@@ -67,17 +60,9 @@ def def main():
     )
 
     # Define loss function for gradient computation
-
-    def def loss_fn():
-
-
-        """
     
-
-         
-
-
-        .""" with parameters."""
+    def def loss_fn():
+    """..""" with parameters."""
 
     logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(

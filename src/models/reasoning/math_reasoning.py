@@ -16,16 +16,16 @@ logger = logging.getLogger(__name__)
 
 
 hidden_states
-    """Math reasoning module for enhanced transformer model.."""
+    """Math reasoning module for enhanced transformer model..."""
 : torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
     Args
-        """Forward pass of the math reasoning head.."""
-            """: hidden_state
+    """Forward pass of the math reasoning head..."""
+    """: hidden_state
         Args
-        ."""
+        .."""
         
         # Get input dimensions
         batch_size = hidden_states.size(0)
@@ -130,7 +130,7 @@ expressions: Optional[List[str]] = None
                     "loss": total_los, s "logits": logit, s "hidden_states": hidden_state, s "math_accuracy": math_accurac, y "expert_entropy": expert_entrop, y "router_entropy": router_entrop, y "load_balance_loss": load_balance_los, s,
                     **aux_info,
                     }
-                    
+                        
 def module: nn.Modulevalu
 e: bool, (self, module: nn.Modulevalu
 e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """""": modul

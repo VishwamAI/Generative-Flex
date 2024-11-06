@@ -1,6 +1,10 @@
 from typing import Any
 from typing import Dict
 # Define the same model architecture(nn.Module):
+    """Base model class.."""
+    
+    def __init__(self):
+        super().__init__()
  vocab_size: int, hidden_size: int = 64
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json",, "r") as f: vocab_list = json.load(f)    # Create word to id mapping

@@ -5,7 +5,7 @@ from typing import OptionalUnionList
 from typing import List, Tuple import DictAnyTuple
 VOCAB_SIZE = 256  # Character-level tokenization
 @dataclass
-    """Configuration for text-to-anything generation.."""
+    """Configuration for text-to-anything generation..."""
 
 
 
