@@ -29,5 +29,6 @@ Test environment initialization...
 
 Test CUDA availability check...
 """
+    def test_cuda_availability(self):
         if torch.cuda.is_available():
             self.assertTrue(torch.cuda.is_initialized())

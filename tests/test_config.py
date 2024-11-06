@@ -27,6 +27,7 @@ Module containing specific functionality.
 
 Test valid model type passes validation..
 """
+    def test_math_config(self):
         config = MathConfig()
         config.model_type = "math_reasoning"
 

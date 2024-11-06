@@ -31,6 +31,7 @@ Test response generation...
 
 Test batch response generation...
 """
+    def test_batch_size(self):
         batch_size = 16
         input_tensor = torch.randint(0, 1000, (batch_size, 32))
         output = self.model(input_tensor)

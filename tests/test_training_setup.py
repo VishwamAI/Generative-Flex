@@ -29,6 +29,7 @@ Test training initialization...
 
 Test single training step...
 """
+    def test_batch_creation(self):
         batch = torch.randn(16, 32)
         loss = self.trainer.training_step(batch)
         self.assertIsInstance(loss, torch.Tensor)
