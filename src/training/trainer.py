@@ -1,104 +1,97 @@
-from typing import Optional
-from torch.utils.data import DataLoader
-from typing import Dict
+"""Base trainer module."""
+
 import logging
 import torch
-    logger
-"""Base trainer implementation......"""
-= logging.getLogger(__name__)
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
+logger = logging.getLogger(__name__)
 
-eval_dataloader
-"""Base trainer class......"""
-: Optional[DataLoader] = None
-optimizer: Optional[torch.optim.Optimizer]  None
-lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler]  None
-num_epochs: int  10
-gradient_accumulation_steps: int  1
-max_grad_norm: float  1.0
-logging_steps: int  100
-evaluation_steps: int  500
-save_steps: int  1000
+@dataclass
+class TrainerConfig:
+    """Configuration for base trainer."""
 
+    learning_rate: float = 5e-5
+    weight_decay: float = 0.01
+    num_train_epochs: int = 3
+    max_steps: int = -1
+    gradient_accumulation_steps: int = 1
+    max_grad_norm: float = 1.0
+    device: str = "cuda"
+    mixed_precision: bool = False
 
-    self.model = model
-    self.train_dataloader = train_dataloader
-    self.eval_dataloader = eval_dataloader
-    self.optimizer = optimizer or torch.optim.AdamW(model.parameters())
-    self.lr_scheduler = lr_scheduler
-    self.num_epochs = num_epochs
-    self.gradient_accumulation_steps = gradient_accumulation_steps
-    self.max_grad_norm = max_grad_norm
-    self.logging_steps = logging_steps
-    self.evaluation_steps = evaluation_steps
-    self.save_steps = save_steps
-    self.output_dir = output_dir
-    self._step = 0
-    self._epoch = 0
-    self._best_eval_loss = float("inf") 
+class Trainer:
+    """Base trainer class."""
 
-self
-model.train()
-total_loss = 0
-for epoch in range(self.num_epochs):
-self._epoch = epoch
-logger.info(f"Starting epoch {}}")
+    def __init__(self, config: Optional[TrainerConfig] = None):
+        """Initialize trainer.
 
-for step
-batch in enumerate(self.train_dataloader): los, s = self.training_step(batch)
-total_loss += loss.item()
+        Args:
+            config: Optional trainer configuration
+        """
+        self.config = config or TrainerConfig()
+        self.setup_training()
 
-if step % self.gradient_accumulation_steps = = 0: self.optimizer.step(self.optimizer.step(                        if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad(self.lr_scheduler.step(self.lr_scheduler.step(self.optimizer.zero_grad(self.lr_scheduler.step(self.optimizer.zero_grad(
-self._step += 1
+    def setup_training(self):
+        """Set up training components."""
+        logger.info("Setting up training...")
+        self.optimizer = None
+        self.scheduler = None
+        self.model = None
+        self.train_dataloader = None
+        self.scaler = torch.cuda.amp.GradScaler() if self.config.mixed_precision else None
 
-if self._step % self.logging_steps = = 0: self.log_metrics({
-    "loss": total_los, s / self.logging_steps
-})                        total_loss = 0 loss
-"""Perform a single training step.     outputs = self.model(**batch)....."""
-= outputs.lossif
-"""loss.backward()
-....."""
-self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_normtorch.nn.utils.clip_grad_norm_(self.model.parameters(torch.nn.utils.clip_grad_norm_(self.model.parameters(self.max_grad_normtorch.nn.utils.clip_grad_norm_(self.model.parameters(self.max_grad_norm
+    def train(self):
+        """Run training loop."""
+        if not all([
+            self.model,
+            self.optimizer,
+            self.train_dataloader
+        ]):
+            raise ValueError(
+                "Model, optimizer, and dataloader must be set before training"
+            )
 
-def """return loss
-..."""
-"""evaluate(self):
-Evaluatethemodel
-    ...."""Method with parameters.forbatchinself
-"""total_loss = 0
-eval_dataloader: withtorch.no_grad():outputwithtorch.no_grad(withtorch.no_grad(:outputwithtorch.no_grad(:output s  self.model(**batch)
-    total_loss
-    ...."""loss = outputs.loss"""
-    +=loss.item()
-    self
-."""model.train()metrics
-"""....."""
-= {
-"eval_loss": eval_loss,
-}self.log_metrics(metrics)ifeval_loss
-"""....."""
-<self._best_eval_loss: self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)returnmetrics
-"""....."""
-defsave_checkpoint
-"""....."""
-(self):is_best: boo = False) -> None: NonNon e) -> None: ifis_best
-    """
-    Saveamodelcheckpoint.
-    checkpoint_name = f"checkpoint-{}}"""":checkpoint_name = "best_modelf
-    """"
-    torch.save(
-."""{
-    "optimizer_state_dict": self,.optimizer.state_dict( )"""     "step":self, ._step"""     "epoch":self, ._epoch"""
-}, .""""{}}/{}}.ptlogger
-    """     "
-    )
-""".info(f"Savedcheckpoint: {}}")deflog_metrics(self{}}"{}}"deflog_metrics(self{}}"deflog_metrics(self:metrics: Dict[str):floatDict[strDict[str:floatDict[str:float ]Log
-""") -> None: None:
-....."""
- training metrics."""
- 
- 
- metric_str = " ".join(f"{}}: {
- {v: .4f
- }}" for k                         v in metrics.items())                                                    logger.info(f"Step {}}: {}}")
- 
+        logger.info("Starting training...")
+        self.model.train()
+        completed_steps = 0
+
+        for epoch in range(self.config.num_train_epochs):
+            for step, batch in enumerate(self.train_dataloader):
+                if self.config.mixed_precision:
+                    with torch.cuda.amp.autocast():
+                        outputs = self.model(**batch)
+                        loss = outputs.loss / self.config.gradient_accumulation_steps
+                    self.scaler.scale(loss).backward()
+                else:
+                    outputs = self.model(**batch)
+                    loss = outputs.loss / self.config.gradient_accumulation_steps
+                    loss.backward()
+
+                if (step + 1) % self.config.gradient_accumulation_steps == 0:
+                    if self.config.max_grad_norm > 0:
+                        if self.config.mixed_precision:
+                            self.scaler.unscale_(self.optimizer)
+                        torch.nn.utils.clip_grad_norm_(
+                            self.model.parameters(),
+                            self.config.max_grad_norm
+                        )
+
+                    if self.config.mixed_precision:
+                        self.scaler.step(self.optimizer)
+                        self.scaler.update()
+                    else:
+                        self.optimizer.step()
+
+                    if self.scheduler is not None:
+                        self.scheduler.step()
+                    self.optimizer.zero_grad()
+                    completed_steps += 1
+
+                if self.config.max_steps > 0 and completed_steps >= self.config.max_steps:
+                    break
+
+            if self.config.max_steps > 0 and completed_steps >= self.config.max_steps:
+                break
+
+        logger.info("Training completed")
