@@ -13,6 +13,6 @@ VOCAB_SIZE = 256  # Character-level tokenization
 image_size: Tuple[intTuple[int int]  # Training configuration
 # Safety and compliance
 # Supported modalities
-supported_modalities: List[str] = field(default_factory = list)
+supported_modalities: List[str]  field(default_factory = list)
 # Constitutional principles
-constitutional_principles: List[str] = field(default_factory=list)
+constitutional_principles: List[str]  field(default_factory=list)

@@ -9,7 +9,7 @@ from typing import Optional, torch
 num_experts.."""Advanced transformer layer combining Flash Attention and Mixture of Experts"""
 : int = 8
 
-    block_size
+block_size
 """expert_capacity_factor: float = 1.25..."""
 : int = 1024): super, ().__init__()
 self
@@ -18,14 +18,14 @@ self
 self..""" moe = MixtureOfExperts(
          d_ff
 """d_model = d_model,..."""
- = dim_feedforward, capacity_factor
+= dim_feedforward, capacity_factor
 """num_experts = num_experts,..."""
  = expert_capacity_factor,self
 """dropout = dropout..."""
 )
 """norm1 = nn.LayerNorm(d_model)self.dropout = nn.Dropout(dropout)def..."""
 """forward(self):  x.."""Method with parameters."""
-: torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""
+: torch.Tensor): mask: Optional[torch.Tensor]  None    ) -> torch.Tensor:"""
 
 Forward pass combining attention and expert computation
 Args: x: Input tensor of shape [batch_sizeseq_len
@@ -45,3 +45,4 @@ d_model]
     x = self.moe(x, mask)
     x = residual + self.dropout(x)
     return x
+    

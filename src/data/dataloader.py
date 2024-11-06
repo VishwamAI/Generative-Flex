@@ -14,7 +14,8 @@ import torch
 @dataclass""" for data processing
 
 Placeholder
-"""batch_size: int = 32..."""
+"""batch_size:
+    """int = 32..."""
  docstring.
 tokenizer
 """Advanced dataset implementation with efficient data loading and caching..."""""": PreTrainedTokenizerconfiself
@@ -33,13 +34,13 @@ cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
 
     if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from {cache_path}")     self.data = h5py.File(cache_path, "r")     self.length = len(self.data["input_ids"])     else: logging.info(f"Processing data from {self.data_path}")# Process data
     processed_data = self.process_raw_data()
-    if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvaluforkeyvalu e in processed_data.items(): f, .create_dataset(key, data = value)     self.data = h5py.File(cache_path, "r")
-    else: self.data = processed_data
+    if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvaluforkeyvalu e in processed_data.items(): f, .create_dataset(key, data  value)     self.data = h5py.File(cache_path, "r")
+    else: self.data  processed_data
     self.length = len(processed_data["input_ids"]) Get
 """Process raw data into model inputs..."""
-"attention_mask": [] "labels": []}  # Read and process data with open(self.data_path        ,, "r") as f: raw_data = json.load(f)
-for item in raw_data: # Tokenize texttokenized = self.tokenizer(
-    item["text"],max_length = self.config.max_seq_length,padding = "max_length",truncation = True,return_tensors = "np"
+"attention_mask": [] "labels": []}  # Read and process data with open(self.data_path        ,, "r") as f: raw_data  json.load(f)
+for item in raw_data: # Tokenize texttokenized  self.tokenizer(
+item["text"],max_length = self.config.max_seq_length,padding = "max_length",truncation = True,return_tensors = "np"
 )
 
 processed_data["input_ids"].append(tokenized["input_ids"][0]) processed_data["attention_mask"].append(tokenized["attention_mask"][0])
@@ -58,7 +59,7 @@ return {
 
     def def(self):
         """....""" with parameters.Create
-"""dataset: AdvancedDatasetAdvancedDataset: config: DataConfigis_distributeDataConfigis_distribute d: bool = False    ) -> DataLoader:..""" dataloader with optional distributed training support"""
+"""dataset: AdvancedDatasetAdvancedDataset: config: DataConfigis_distributeDataConfigis_distribute d: bool  False    ) -> DataLoader:..""" dataloader with optional distributed training support"""
 
 
 

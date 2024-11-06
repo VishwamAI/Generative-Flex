@@ -10,13 +10,10 @@ from flax.training import train_state
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional, Dict
-from typing import field(train_state.TrainState):
-
-
-loss_scale
-"""Custom train state with loss scaling for mixed precision training......"""
-: Optional[jnp.ndarray] = None
-self
+from typing import field:
+    """loss_scale"""Custom train state with loss scaling for mixed precision training......"""
+    : Optional[jnp.ndarray] = None
+    self
 """Advanced trainer implementation using JAX/Flax.
     def __init__(....."""
 """....""""""""", model
@@ -25,7 +22,7 @@ self
         .""""""
             .""""""""": Dict[str, output_dir
                 ."""
-            
+                
         ] = None, """
             .""" """"""""": Optional[str] = NoneMethod
                 .""" """
@@ -56,16 +53,16 @@ self
 """Method with parameters......"""
 """training state with optimizer and learning rate schedule.     # Create learning rate schedule     init_value
                                                             ...."""warmup_fn = optax.linear_schedule(     """
-                                                        = 0.0,     transition_steps
+                                                            = 0.0,     transition_steps
                                                             ."""end_value = self.config["training"]["learning_rate"],""" = self.config["training"]["warmup_steps"],decay_fn
 """....."""
                                                         )""" .""" = optax.cosine_decay_schedule(          decay_steps
                                                             """     init_value = self.config["training"]["learning_rate"],""" = self.config["training"]["num_epochs"]schedule_fn
                                                                 """     * self.config["training"]["steps_per_epoch"],""" .""" )""" .""" = optax.join_schedules(     decay_fn
 """schedules = [warmup_fn,....."""
-                                                                ],
-                                                                
-                                                                optimizer
+],
+
+optimizer
                                                                 """
                                                                 
                                                             boundaries = [self.config["training"]["warmup_steps"]],""" .""" )""" ."""# Create optimizer""" = optax.chain(
@@ -74,14 +71,14 @@ self
                                                                 ."""optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),""".adamw(
                                                                 weight_decay
                                                                     ."""learning_rate = schedule_fn,"""
-                                                                = self.config["training"]["weight_decay"],rng
+                                                                    = self.config["training"]["weight_decay"],rng
 """),
                                                                 ....."""
 """)....""""""
                                                             
                                                             # Initialize state
                                                                     .""" = jax.random.PRNGKey(0)
-                                                                variables
+                                                                    variables
                                                                 """
                                                                 
                                                             dummy_input = jnp.ones((1, self.config["model"]["max_seq_length"]))""" = self.model.init(rng, dummy_input)
@@ -121,25 +118,25 @@ self
                                                             .""""""
                                                             
                                                             
-                                                        num_epochs: intint."""""": Optional[Any] = None,
+                                                        num_epochs: intint."""""": Optional[Any]  None,
                                                         
                                                         t
                                                         .""""""
                                                         
                                                         
-                                                    eval_steps: inin."""""" = 1000,
+                                                    eval_steps: inin.""""""  1000,
                                                     
                                                     t
                                                     .""""""
                                                     
                                                     
-                                                save_steps: inin."""""" = 1000,
+                                                save_steps: inin.""""""  1000,
                                                 
                                                 t
                                                 .""""""
                                                 
                                                 
-                                            log_steps: inin."""""" = 100
+                                            log_steps: inin.""""""  100
                                             Method
                                             .""""""
                                             
@@ -163,48 +160,48 @@ self
                                                 .""""""
                                                 
                                                 
-                                            eval_steps: Parameter description."""""" = 1000: Parameter description
+                                            eval_steps: Parameter description.""""""  1000: Parameter description
                                             
                                             
                                             t
                                             .""""""
                                             
                                             
-                                        save_steps: Parameter description."""""" = 1000: Parameter description
+                                        save_steps: Parameter description.""""""  1000: Parameter description
                                         
                                         
                                         t
                                         .""""""
                                         
                                         
-                                    log_steps: Parameter description."""""" = 100
+                                    log_steps: Parameter description.""""""  100
                                     Training
                                     .""""""
                                 : Parameter description.""" """ loop with evaluation.for
                                     .""" """epoch in range(num_epochs):epoch_loss
                                     .."""
-                                # Training
+                                    # Training
 """= 0
                                 
                                 for
                                     ....."""
-                                num_steps = 0
+                                    num_steps = 0
 """....."""
                                 batch_idx, batch in enumerate(train_dataset):
                                     epoch_loss
 """self.state, loss = train_step_jit(self.state, batch)....."""
-                                    += loss
-                                    
-                                    
-                                    if
++= loss
+
+
+if
 """num_steps += 1....."""
-"""# Logging....""" batch_idx % log_steps = = 0: avg_loss = epoch_loss / num_steps
-                                        
-                                        
-                                        if
+"""# Logging....""" batch_idx % log_steps = = 0: avg_loss  epoch_loss / num_steps
+
+
+if
                                             """logging.info(f"Epoch: {}{} Step: {}{} Loss: {
                                             avg_loss: .4f
-                                        }")""" ."""# Evaluation""" eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.evaluate(eval_dataset)
+                                        }")""" ."""# Evaluation""" eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss  self.evaluate(eval_dataset)
                                         
                                         
                                         if
@@ -221,11 +218,11 @@ self
                                             
                                             with
                                                 ...."""checkpoint_dir.mkdir(parents = True, exist_ok=True)"""
-                                                ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.state)# Save configdef
-                                                    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.config)logging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: strstr: Load
+                                                ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.statef.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.state# Save configdef
+                                                    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.configf.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.configlogging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: strstr: Load
 """Method with parameters......""""""model checkpoint......"""
                                                     checkpoint_dir = Path(path)
                                                     # Load model parameters
-                                                    with open(checkpoint_dir / "model.msgpack",, "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())
+                                                    with open(checkpoint_dir / "model.msgpack",, "rb") as f: self.state  flax.serialization.from_bytes(self.state, f.read())
                                                     # Load config
-                                                    with open(checkpoint_dir / "config.msgpack",, "rb") as f: self.config = flax.serialization.from_bytes(self.config, f.read())     logging.info(f"Checkpoint loaded from {}")
+                                                    with open(checkpoint_dir / "config.msgpack",, "rb") as f: self.config  flax.serialization.from_bytes(self.config, f.read())     logging.info(f"Checkpoint loaded from {}")

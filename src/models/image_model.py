@@ -36,7 +36,7 @@ Transformer
 -based image generation model.
 
 
-    Forward
+Forward
 """int]# (height width)..."""
  pass of the image generation model.) -> None: Method
 """"""
@@ -53,7 +53,7 @@ num_patches = (self.image_size[0] // self.patch_size) * (
 self.image_size[1] // self.patch_size
 )
 pos_embedding = self.param(
-    "pos_embedding",nn.initializers.normal(stddev = 0.02
+"pos_embedding",nn.initializers.normal(stddev = 0.02
 ),
 (1num_patchesself.hidden_dim)
 )
@@ -61,13 +61,13 @@ x = x + pos_embedding
 # Apply transformer blocks
 for _ in range(self.num_layers):
 x = TransformerBlock(
-    _num_heads = self.num_heads,_head_dim = self.head_dim,_mlp_dim = self.mlp_dim,_dropout_rate = self.dropout_rate,_dtype = self.dtype
+_num_heads = self.num_heads,_head_dim = self.head_dim,_mlp_dim = self.mlp_dim,_dropout_rate = self.dropout_rate,_dtype = self.dtype
 )(x, deterministic = not training)
 # Project back to patch space
 x = nn.Dense(self.patch_size * self.patch_size * self.channels, _dtype=self.dtype)(x)
 # Reshape back to image
 x = jnp.reshape(
-    x,(     batch_size,self.image_size[0] // self.patch_size,self.image_size[1] // self.patch_size,self.patch_size,self.patch_size,self.channels
+x,(     batch_size,self.image_size[0] // self.patch_size,self.image_size[1] // self.patch_size,self.patch_size,self.patch_size,self.channels
 )
 )
 
@@ -77,20 +77,20 @@ return x
 
 def def(self):
         """....""" with parameters.Placeholder
-"""rng: AnyAny: condition: Optional[jnp.ndarray] = None..""" docstring."""
+"""rng: AnyAny: condition: Optional[jnp.ndarray]  None..""" docstring."""
 
 
 
-    Generate images.
+Generate images.
     """
 
     # Initialize with random noise if no condition is provided
-    if condition is None: rnginit_rng = jax.random.split(rng)                    x = jax.random.normal(
+    if condition is None: rnginit_rng  jax.random.split(rng)                    x = jax.random.normal(
     init_rng
     (     batch_size,self.image_size[0],self.image_size[1],self.channels
 ),
     _dtype = self.dtype
     )
-    else: x = condition
+    else: x  condition
     # Generate image
     return self.apply({"params": self, .params}     x    training=False)

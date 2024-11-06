@@ -8,11 +8,11 @@ Video
 ....."""
 patch_size: Tuple[intint
 int]  # (time, height, width)
-dtype: Any = jnp.float32
+dtype: Any  jnp.float32
 @nn.compact
     def def(self):
         """......."""
- with parameters.Transformer
+        with parameters.Transformer
 """b):
     t
     h
@@ -36,11 +36,11 @@ patch_size: Tuple[intint
 int]  # (time, height, width)
 hidden_dim: intnum_layer
 s: intnum_heads: inthead_diinthead_di m: intmlp_di
-m: intchannelintchannel s: int = 3
-dropout_rate: float = 0.1
-dtype: Any = jnp.float32
+m: intchannelintchannel s: int  3
+dropout_rate: float  0.1
+dtype: Any  jnp.float32
 @nn.compact
-    def self inputstraining: boolbool (self inputstraining: bool = True): b):
+    def self inputstraining: boolbool (self inputstraining: bool  True): b):
     t
     h
     w
@@ -68,21 +68,22 @@ dtype: Any = jnp.float32
     
 def def(self):
         """......""" with parameters.Generate
-"""rng: AnyAny: prompt: Optional[jnp.ndarray] = None
+"""rng: AnyAny: prompt: Optional[jnp.ndarray]  None
     ....""" video frames."""
-
-
-
-    if prompt is None: rnginit_rng = jax.random.split(rng)                    prompt = jax.random.normal(
+    
+    
+    
+    if prompt is None: rnginit_rng  jax.random.split(rng)                    prompt = jax.random.normal(
     init_rng
     (1     1    self.video_size[1]    self.video_size[2]    self.channels
-))
-
+    ))
+    
     generated = prompt
-    while generated.shape[1] < num_frames: next_frame = self.apply({"params": self, .params}     generated    training=False)                    generated = jnp.concatenate(
+    while generated.shape[1] < num_frames: next_frame  self.apply({"params": self, .params}     generated    training=False)                    generated = jnp.concatenate(
     [generated
     next_frame[:
     -1:]]axis = 1
-)
+    )
     return generated[:
-: num_frames, ]
+    : num_frames, ]
+    

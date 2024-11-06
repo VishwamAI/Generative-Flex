@@ -17,13 +17,13 @@ self.classifier = nn.Dense(
 
 def def(self):
         """....""" with parameters.
-    Args
-"""input_ids: jnp.ndarrayjnp.ndarray: attention_mask: Optional[jnp.ndarray] = None
-    token_type_ids: Optional[jnp.ndarray] = None
-    position_ids: Optional[jnp.ndarray] = None
-    deterministic: bool = True
-    output_attentions: bool = False
-    output_hidden_states: bool = False) -> Dict[str
+        Args
+"""input_ids: jnp.ndarrayjnp.ndarray: attention_mask: Optional[jnp.ndarray]  None
+    token_type_ids: Optional[jnp.ndarray]  None
+    position_ids: Optional[jnp.ndarray]  None
+    deterministic: bool  True
+    output_attentions: bool  False
+    output_hidden_states: bool  False) -> Dict[str
     jnp.ndarray]: Forwar, d pass of the model..."""""": input_id
 """Placeholder docstring...."""
     # Get embeddings
@@ -40,5 +40,5 @@ def def(self):
     "logits": logit, s     "pooled_output": poole, d     "last_hidden_state": encoder_outputs, ["last_hidden_state"]
     }
 
-    if output_attentions: outputsoutputs ["attentions"] = encoder_outputs["attentions"]     if output_hidden_states: outputsoutputs ["hidden_states"] = encoder_outputs["hidden_states"]
+    if output_attentions: outputsoutputs ["attentions"]  encoder_outputs["attentions"]     if output_hidden_states: outputsoutputs ["hidden_states"]  encoder_outputs["hidden_states"]
     return outputs

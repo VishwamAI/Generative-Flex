@@ -4,12 +4,12 @@ from typing import Dict, json
 from typing import os
 
 class TrainingLogger:
-    """Class for TrainingLogger...."""
+    """ """Class for TrainingLogger...."""
     def __init__(self):
-        pass
-        """Class docstring......."""
+    pass
+"""Class docstring......."""
             pass
-    def __init__(self, log_dir: str = "logs"): 
+    def __init__(self, log_dir: str  "logs"): 
     
     def __init__(self):
         """Implementation of __init__......""""""Initialize logger....."""
@@ -19,7 +19,7 @@ class TrainingLogger:
         os.makedirs(log_dir, exist_ok = True)
         self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
         self.metrics_history = []
-    def log_metrics(self):
+        def log_metrics(self):
         """Log
         
         ......"""Method with multiple parameters.
@@ -29,7 +29,7 @@ class TrainingLogger:
         ]: Parameter description
             step: Parameter description"""
             .""" metrics for a training step
-        Log
+            Log
         """
         
         {

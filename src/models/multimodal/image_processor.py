@@ -21,21 +21,22 @@ Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
 AdaptiveAvgPool2d((1, 1)))self.dropout = nn.Dropout(dropout_rate)def..""" """
  forward(self):  images
 """Method with parameters...."""
-: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.TensorProcess
+: torch.Tensor): attention_mask: Optional[torch.Tensor]  None) -> Tuple[torch.TensorProcess
 """Placeholder docstring...."""
  images for multimodal input."""
-
-
-    # Apply preprocessing
-    if images.dim() == 3: images = images.unsqueeze(0)
-    batch_size = images.size(0)
-    processed_images = []
-    for i in range(batch_size): processe, d = self.transform(images[i])
-    processed_images.append(processed)
-
-    processed_images = torch.stack(processed_images)
-    # Extract features
-    features = self.backbone(processed_images)
-    features = features.view(batch_size, self.hidden_size)
-    features = self.dropout(features)
-    return features, attention_mask
+ 
+ 
+ # Apply preprocessing
+ if images.dim() == 3: images  images.unsqueeze(0)
+ batch_size = images.size(0)
+ processed_images = []
+ for i in range(batch_size): processe, d = self.transform(images[i])
+ processed_images.append(processed)
+ 
+ processed_images = torch.stack(processed_images)
+ # Extract features
+ features = self.backbone(processed_images)
+ features = features.view(batch_size, self.hidden_size)
+ features = self.dropout(features)
+ return features, attention_mask
+ 

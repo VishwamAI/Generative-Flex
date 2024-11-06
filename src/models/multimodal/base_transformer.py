@@ -11,7 +11,7 @@ for layer in self.layers: hidden_states = layer(hidden_states attention_mask)
 return hidden_states..."""
  transformer layer implementation.Forward
 """..."""
- pass through the transformer layer.Multi
+pass through the transformer layer.Multi
 """attention_mask)
 hidden_states = self.norm1(hidden_states + attention_output)
 intermediate_output = self.intermediate(hidden_states)

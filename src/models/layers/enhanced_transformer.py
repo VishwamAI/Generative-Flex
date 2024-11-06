@@ -11,7 +11,7 @@ num_heads = self.config["num_attention_heads"],""" = self.config["attention_drop
     self
 """)
 mlp = nn.Dense(
-    
+
 kernel_init.."""features = self.config["intermediate_size"],""" = jax.nn.initializers.normal(0.02
 )
 self
@@ -19,7 +19,7 @@ self
 """..."""
  __init__(self):  hidden_states
 """Method with parameters...."""
-: jnp.ndarray): attention_mask: Optional[jnp.ndarray] = Noneoutput_attentions
+: jnp.ndarray): attention_mask: Optional[jnp.ndarray]  Noneoutput_attentions
 """deterministic: bool = True..."""
 : bool = False) -> Dict[strForward
 """jnp.ndarray]:..."""
@@ -39,5 +39,5 @@ mlp_output = self.mlp(normed_hidden_states)
 hidden_states = hidden_states + self.dropout(mlp_output, deterministic=deterministic)
 outputs = {
      "hidden_states": hidden_states,
- }if output_attentions: outputsoutputs ["attentions"] = attention_output["attentions"]
+ }if output_attentions: outputsoutputs ["attentions"]  attention_output["attentions"]
 return outputs

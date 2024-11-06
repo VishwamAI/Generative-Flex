@@ -11,19 +11,18 @@ Training script using AcceleratedTrainer for efficient distributed training
 
     logger
 """with Hugging Face Accelerate......"""
- = get_logger(__name__)
-        def def(self):
+= get_logger(__name__)
+def def(self):
         """......"""Method with parameters."""
 
-    # Load configuration    config_path = Path): wit, h open(config_path) as f: config = json.load(f)
+    # Load configuration    config_path = Path): wit, h open(config_path) as f: config  json.load(f)
     # Initialize accelerator
     accelerator = Accelerator(
     gradient_accumulation_steps = config["training"]["gradient_accumulation_steps"],mixed_precision = config["training"]["mixed_precision"],log_with = "tensorboard",project_dir = config["training"]["output_dir"],
 )
 
     # Set random seed for reproducibility
-    if config["training"]["seed"] is not None: set_seedset_seed (config["training"]["seed"])# Setup logging     logging.basicConfig(format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s",     datefmt = "%m/%d/%Y %H: %M:%S"level=logging.INFO%M:%S"level=logging.INFO
-    )
+    if config["training"]["seed"] is not None: set_seedset_seed (config["training"]["seed"])# Setup logging     logging.basicConfig(format  "%(asctime)s - %(levelname)s - %(name)s - %(message)s",     datefmt = "%m/%d/%Y %H: %M:%S"level=logging.INFO%M:%S"level=logging.INFO%M:%S"level=logging.INFO%M:%S"level=logging.INFO
     logger.info(accelerator.state)
 
     # Initialize model

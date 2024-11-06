@@ -3,8 +3,8 @@ Multi
 """Core transformer architecture implementation using JAX and Flax......""""""-head attention mechanism.Applies
 ....."""
 head_dim: intdropout_rat
-e: float = 0.0
-dtype: Any = jnp.float32
+e: float  0.0
+dtype: Any  jnp.float32
 @nn.compact
 """multi-head attention on the input data.Transformer
     ....."""
@@ -24,7 +24,7 @@ dtype: Any = jnp.float32
     attention = jnp.einsum(
     "...qhd,...khd->...hqk",query,key
 )
-    if mask is not None: # Add broadcasting dimensions to mask for headswhile mask.ndim < attention.ndim: mask = mask[...
+    if mask is not None: # Add broadcasting dimensions to mask for headswhile mask.ndim < attention.ndim: mask  mask[...
     None
     :
     :]        # Broadcast mask to attention shape
@@ -46,6 +46,6 @@ dtype: Any = jnp.float32
 )(output)
 """block with self-attention and feed-forward layers......"""
 head_dim: intmlp_di
-m: intdropout_rate: floa = 0.1
-dtype: Any = jnp.float32
+m: intdropout_rate: floa  0.1
+dtype: Any  jnp.float32
 @nn.compact

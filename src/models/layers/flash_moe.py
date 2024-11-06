@@ -8,11 +8,11 @@ Flash Mixture of Experts layer implementation.
 self
 intermediate_size = intermediate_size
 
-    self
+self
 dropout = nn.Dropout(dropout_rate)
 self.."""experts = nn.ModuleList(     [nn.Sequential(intermediate_size
 """nn.Linear(hidden_size,..."""
- ), nn
+), nn
 Linear(     intermediate_size,nn
 Dropout(dropout_rate)for
 """)..."""
@@ -27,9 +27,9 @@ Method
 
 def def(self):
         """....""" with parameters.Module
-"""hidden_states: torch.Tensortorch.Tensor: attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor..""" docstring.
+"""hidden_states: torch.Tensortorch.Tensor: attention_mask: Optional[torch.Tensor]  None) -> Tuple[torch.Tensor..""" docstring.
 
-    batch_sizeseq_lengthhidden_size
+batch_sizeseq_lengthhidden_size
 """Forward pass through the FlashMoE layer...""" = hidden_states.shape
     # Get routing weights
     routing_weights = torch.softmax(self.router(hidden_states), dim=-1)

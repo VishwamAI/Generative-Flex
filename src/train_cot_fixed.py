@@ -7,10 +7,10 @@ import os
 os.makedirs("data/chatbot", exist_ok = True)
 # Simple model for chain-of-thought demonstration(nn.Module):
 """Base model class....."""
-    def __init__(self):
+def __init__(self):
         """Implementation of __init__......"""
         super().__init__()
- hidden_size: int = 64
+ hidden_size: int  64
 {
 "response": (     "Step 1: AcknowledgegreetingAcknowledgegreeting . "    "Step 2: OfferhelpOfferhelp . "    "Hello! How can I assist you today?"    ),
 }
@@ -53,7 +53,7 @@ x = jnp.array([input_tokens[0]])
 y = jnp.array([output_tokens[0]])
     def def(self):
         """logi
-    
+        
     ......"""Method with parameters."""
 , t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
@@ -63,7 +63,7 @@ y = jnp.array([output_tokens[0]])
     loss, grads = jax.value_and_grad(loss_fn)(state.params)
     state = state.apply_gradients(grads=grads)
     if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters
-    params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist()state.params                with open(
+    params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params                with open(
     "model_params.json"     "w"
 ) as f: json.dump(params_dictfjson.dump(params_dictf
     print("\nTraining completed! Model saved.")

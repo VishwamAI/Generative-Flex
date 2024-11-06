@@ -4,21 +4,21 @@ from src.models.language_model import LanguageModel
 from typing import Dict, jax
     
 def load_data(self,
-        file_path: str = "data/chatbot/training_data_cot.json"):
+        file_path: str  "data/chatbot/training_data_cot.json"):
 with open(
-    file_path,"r" ) as f: data = json.load(f)        return data["conversations"]
+    file_path,"r" ) as f: data  json.load(f)        return data["conversations"]
     def create_vocabulary(self):
         """voca
-
+        
     ......"""Method with multiple parameters.
 
     Args: self: Parameter description
     file_path: Parameter description
     str]]: Parameter description
-    "r") as f: Parameter description     r]]: Parameter description""", b = {
-    "<start>": 1     "<end>": 2     }        for conv in conversations: fortextifortexti n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocabvocab [token] = len(vocab)                return vocab
+    "r") as f: Parameter description     r]]: Parameter description""", b  {
+    "<start>": 1     "<end>": 2     }        for conv in conversations: fortextifortexti n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocabvocab [token]  len(vocab)                return vocab
     
-def def(self):
+    def def(self):
         """......"""Method with parameters."""
 
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
@@ -52,7 +52,7 @@ def def(self):
     with open("data/chatbot/vocab.json"        , "w") as f: json.dump(vocabfjson.dump(vocabf
 
     # Save model parameters
-    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist()state.params
+    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params
     f)
 
     print("Model parameters and vocabulary saved successfully!")

@@ -7,13 +7,13 @@ import os
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
 """Base model class....."""
-    def __init__(self):
+def __init__(self):
         """Implementation of __init__......"""
         super().__init__()
- hidden_size: int = 64
+ hidden_size: int  64
     def def(self):
         """Method
-    
+        
     ......"""Method with parameters."""
 
     # Create and save training data        training_data = create_training_data):
@@ -44,20 +44,20 @@ os.makedirs("data/chatbot", exist_ok = True)
     @jax.jit
         def def(self):
         """......""" with parameters."""
-
-    de, f loss_fn):
-    (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
-    logits=logits[None
-    :]
-    labels = y[0: 11]
-).mean()loss, grads = jax.value_and_grad(loss_fn)(state.params)
-    return state.apply_gradients(grads = grads), loss
-for epoch in range(100): stateloss = train_step(stateinput_tokensoutput_tokens)
-if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters
-params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist()state.params            with open(
-    "model_params.json" "w"
-) as f: json.dump(params_dictfjson.dump(params_dictf
-
-print("\nTraining completed! Model saved.")
-
-if __name__ == "__main__": main, ()
+        
+        de, f loss_fn):
+        (params) -> None: logits  model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
+        logits=logits[None
+        :]
+        labels = y[0: 11]11].mean()loss, grads = jax.value_and_grad(loss_fn)(state.params)
+        return state.apply_gradients(grads = grads), loss
+        for epoch in range(100): stateloss = train_step(stateinput_tokensoutput_tokens)
+        if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters
+        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params            with open(
+        "model_params.json" "w"
+        ) as f: json.dump(params_dictfjson.dump(params_dictf
+        
+        print("\nTraining completed! Model saved.")
+        
+        if __name__ == "__main__": main, ()
+        

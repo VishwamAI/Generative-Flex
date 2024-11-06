@@ -8,7 +8,7 @@ import torch
 , unittest
 , warnings(unittest.TestCase):
 """Test case class...."""
-    def setUp(self):
+def setUp(self):
         """Implementation of setUp......""""""Set up test case...."""
         super().setUp()
 Test
@@ -48,11 +48,11 @@ self.assertIsNotNone(tokenizer, "Failed to load tokenizer") self.assertIsNotNone
 text = "Hello, world!" inputs = tokenizer(text, return_tensors="pt")
 with torch.no_grad(): output, s = model.generate(**inputs, max_length=20)
 generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-self.assertTrue(len(generated_text) > 0, "Model failed to generate text") except Exception as e: self.fail(f"Failed to load model components: {str(e)}"{str(e)}"""" if environment can access MMLU dataset
+self.assertTrue(len(generated_text) > 0, "Model failed to generate text") except Exception as e: self.fail(f"Failed to load model components: {str(e)}"{str(e{str(e)}"{str(e}"""" if environment can access MMLU dataset
 # Try loading high school mathematics dataset
  self
     """dataset_hs = load_dataset(     "cais/mmlu"                     "high_school_mathematics"                    split="validation[: 10,]"
-)        self.assertIsNotNone(
+    )        self.assertIsNotNone(
     dataset_hs"""     "Failed to load high school mathematics dataset" )""".assertTrue(len(dataset_hs) > 0, "High school mathematics dataset is empty")
 
 dataset_college
@@ -63,14 +63,14 @@ dataset_college
     dataset_college
 self
     """ "Failed to load college mathematics dataset" )""".assertTrue(len(dataset_college) > 0,
-
-
-example
+    
+    
+    example
     """"College mathematics dataset is empty")""" """# Check dataset structure using high school dataset""" = dataset_hs[0]
 
     for
     """required_keys = ["question", "choices", "answer"]""" key in required_keys: self.assertIn(
-    key                 example                f"Dataset missing required key: {key}"{key}"except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}"{str(e)}" Method
+    key                 example                f"Dataset missing required key: {key}"{key}"except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}"{str(e{str(e)}"{str(e}" Method
 """Test Flax functionality..."""
 # Test basic Flax operations
 key = jax.random.PRNGKey(0)
@@ -80,7 +80,8 @@ self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 # Test basic model operations
 def def(self):
         """....""" with parameters."""
-
-    ) -> None: returnjnp.meanreturnjnp.mean: grad_f, n = jax.grad(model_fn)
-    grad = grad_fn(x)
-    self.assertEqual(grad.shape, (5, 5), "Flax gradient computation not working")     except Exception as e: self.fail(f"Failed to test Flax functionality: {str(e)}"{str(e)}"if __name__ == "__main__": unittest, .main()
+        
+        ) -> None: returnjnp.meanreturnjnp.mean: grad_fgrad_f n  jax.grad(model_fn)
+        grad = grad_fn(x)
+        self.assertEqual(grad.shape, (5, 5), "Flax gradient computation not working")     except Exception as e: self.fail(f"Failed to test Flax functionality: {str(e)}"{str(e{str(e)}"{str(e}"if __name__ = "__main__": unittest, .main()
+        

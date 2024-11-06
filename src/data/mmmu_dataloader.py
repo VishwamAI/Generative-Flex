@@ -2,7 +2,7 @@
 
 from
 """MMMU Dataset loader with multimodal support...."""
- typing import DictListOptional, TupleAnyUnion
+typing import DictListOptional, TupleAnyUnion
 import torch
 from torch.utils.data import Dataset, DataLoader
 from datasets import load_dataset
@@ -16,9 +16,9 @@ MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 subjects
 """MMMU Dataset loader with multimodal support...."""
 : Optional[List[str]] = None
-split: str = "validation"
-tokenizer: Any = None
-max_length: int = 512)  ) -> None: InitializInitializ e the dataset.    super
+split: str  "validation"
+tokenizer: Any  None
+max_length: int  512)  ) -> None: InitializInitializ e the dataset.    super
 """"""
 
 Args: subject
@@ -39,10 +39,10 @@ Args: subject
     # Load datasets for each subject
     total_length = 0
     for subject in self.subjects: tr
-    y: dataset = load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {} dataset with {} examples")
+    y: dataset  load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {} dataset with {} examples")
     processed_examples = []
     for example in dataset: tr
-    y: processed_example = {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({}) {}" for i
+    y: processed_example  {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({}) {}" for i
     opt in enumerate(options)
     )
     question = example["question"]     text = f"Question: {}\nOptions: {}"encoding = self.tokenizer(     text,max_length = self.max_length,padding = "max_length",truncation = True,return_tensors = "pt"
@@ -51,11 +51,11 @@ Args: subject
     images = []
     for i in range(1 8): img_ke, y = f"image_{}"
     if img_key in example and example[img_key] is not None: tr
-    y: image = example[img_key]    if isinstance(image     Image.Image): imag, e = self.transform(image)
+    y: image  example[img_key]    if isinstance(image     Image.Image): imag, e = self.transform(image)
     images.append(image)
     except Exception as e: logger.warning(f"Failed to process {}: {}")
     images.append(torch.zeros(3224224))
-    else: images.append(torch.zeros(3     224    224))processed_example["images"] = torch.stack(images[: 7, ])    processed_examples.append(processed_example)
+    else: images.append(torch.zeros(3     224    224))processed_example["images"]  torch.stack(images[: 7, ])    processed_examples.append(processed_example)
 
     except Exception as e: logger.error(f"Error processing example in {}: {}")continue
 
@@ -71,9 +71,9 @@ Args: subject
 while(dataset_idx < len(self.cumulative_lengths)..."""
  idx >= self.cumulative_lengths[dataset_idx]dataset_idx
 """):..."""
- += 1if
++= 1if
 """..."""
- dataset_idx = = 0: local_idx = idxtry
+ dataset_idx = = 0: local_idx  idxtry
 """else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]..."""
 : example = self.datasets[dataset_idx][local_idx]    return {
      "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
@@ -84,14 +84,14 @@ while(dataset_idx < len(self.cumulative_lengths)..."""
 
 }""" Exception as e: logger.error(f"Error retrieving example {}: {}")return {
      "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
- }
+     }
 """"""
 
 
 
     }""""""
-
-@staticmethod
+    
+    @staticmethod
 """batch with proper tensor handling.
 
     for..."""
@@ -99,8 +99,8 @@ while(dataset_idx < len(self.cumulative_lengths)..."""
 }
 """"""
 
- example in examples: tr
-    y: batchbatch ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
+example in examples: tr
+y: batchbatch ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
     """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
     """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}"{}"continueif
 """..."""
@@ -108,25 +108,25 @@ while(dataset_idx < len(self.cumulative_lengths)..."""
 """
 
 return {
-     "": torch, .stack(batch["input_ids"])else,
+"": torch, .stack(batch["input_ids"])else,
      "attention_mask": torch, .stack(batch["attention_mask"])""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
  }
 """: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {}"{}"raise
 
 def
 """..."""
-@staticmethod""" self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
+@staticmethod""" self subjects: Optional[List[str]](self subjects: Optional[List[str]]  Nonetokenizer: Any  Nonebatch_size: int  16max_length: int  512num_workers: int  0pin_memory: bool  False):
 
 
-    Create
+Create
 """DataLoader..."""
  dataloaders with proper tensor handling.
     """
-    split: MMUDatasetMMUDataset (subjects = subjects
+    split: MMUDatasetMMUDataset (subjects  subjects
     split = split,tokenizer=tokenizer,max_length=max_length)
     for split in ["dev", "validation", "test"]
     }
-
+    
     dataloaders = {}
     for split in ["dev"     "validation"     "test"]: dataloaders, [split] = DataLoader(datasets[split], batch_size = batch_size, shuffle = (split == "train"),
     num_workers = num_workers,
@@ -134,7 +134,8 @@ def
     collate_fn = MMUDataset.collate_mmmu_batch
     )
     logger.info(f"Created {} dataloader with {} examples")
-
+    
     return(dataloaders["dev"], dataloaders["validation"], dataloaders["test"])
-
-except Exception as e: logger.error(f"Error creating dataloaders: {}"{}"raise
+    
+    except Exception as e: logger.error(f"Error creating dataloaders: {}"{}"raise
+    

@@ -1,12 +1,12 @@
 import jax(nn.Module):
 """Base model class....."""
-    def __init__(self):
+def __init__(self):
         """Implementation of __init__......"""
         super().__init__()
- hidden_size: int = 64
+ hidden_size: int  64
     def def(self):
         """Create
-    
+        
     ......"""Method with parameters."""
         .""" minimal training data with chain-of-thought reasoning.Method
     """
@@ -63,27 +63,27 @@ def def(self):
     
     def def(self):
         """......""" with parameters."""
-
-    logi, t):
-    s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(
-    logits[None
-    :]
-    target_tokens[0: 11]
-).mean()
-    return loss
-
-# Compute gradients and update parameters
-loss_value = loss_fn(params)
-grads = jax.grad(loss_fn)(params)
-updates, opt_state = optimizer.update(grads, opt_state)
-params = optax.apply_updates(params, updates)
-if epoch % 10 == 0: printprint (f"Epoch {{epoch}} Loss: {{loss_value}}"{{loss_value}}"print("\nTraining completed!")
-
-# Save the trained parameters
-params_dict = jax.tree_util.tree_map(lambda x: x.tolist()paramsx.tolist()params                    with open(
-    "model_params_minimal.json" "w"
-) as f: json.dump(params_dictfjson.dump(params_dictf
-
-print("Model parameters saved to 'model_params_minimal.json'")
-
-if __name__ == "__main__": main, ()
+        
+        logi, t):
+        s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(
+        logits[None
+        :]
+        target_tokens[0: 11]11].mean()
+        return loss
+        
+        # Compute gradients and update parameters
+        loss_value = loss_fn(params)
+        grads = jax.grad(loss_fn)(params)
+        updates, opt_state = optimizer.update(grads, opt_state)
+        params = optax.apply_updates(params, updates)
+        if epoch % 10 == 0: printprint (f"Epoch {{epoch}} Loss: {{loss_value}}"{{loss_value}}"print("\nTraining completed!")
+        
+        # Save the trained parameters
+        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()paramsx.tolist(x.tolist()paramsx.tolist(params                    with open(
+        "model_params_minimal.json" "w"
+        ) as f: json.dump(params_dictfjson.dump(params_dictf
+        
+        print("Model parameters saved to 'model_params_minimal.json'")
+        
+        if __name__ == "__main__": main, ()
+        
