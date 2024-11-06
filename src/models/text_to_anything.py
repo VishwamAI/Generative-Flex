@@ -15,7 +15,13 @@ image_size: Tuple[int
 # Safety and compliance
 # Supported modalities
 supported_modalities: List[str] = field(
-        default_factory=lambda: ["text", "image", "audio", "video", "code"]
+        default_factory=lambda: [
+            "text",
+            "image",
+            "audio",
+            "video",
+            "code"
+        ]
     )
 
 # Constitutional principles
