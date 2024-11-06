@@ -9,16 +9,18 @@ import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
 from dataclasses, dataclass
-from typing, Optional, Dict
+from typing import Optional, Dict
 from typing import field(train_state.TrainState):
 
 
 loss_scale
 """Custom train state with loss scaling for mixed precision training......"""
+
 : Optional[jnp.ndarray] = None
 self
 """Advanced trainer implementation using JAX/Flax.
     def __init__(....."""
+
 """....""""""""", model
         .""" """
         .""""""""": Optional[nn.Module] = None, config
@@ -52,17 +54,21 @@ self
                                                 self
                                                     ."""setup_training_state()def
 """....."""
+
                                                     setup_training_state(self): Setup
 """Method with parameters......"""
+
 """training state with optimizer and learning rate schedule.     # Create learning rate schedule     init_value
                                                             ...."""warmup_fn = optax.linear_schedule(     """
                                                         = 0.0,     transition_steps
                                                             ."""end_value = self.config["training"]["learning_rate"],""" = self.config["training"]["warmup_steps"],decay_fn
 """....."""
+
                                                         )""" .""" = optax.cosine_decay_schedule(          decay_steps
                                                             """     init_value = self.config["training"]["learning_rate"],""" = self.config["training"]["num_epochs"]schedule_fn
                                                                 """     * self.config["training"]["steps_per_epoch"],""" .""" )""" .""" = optax.join_schedules(     decay_fn
 """schedules = [warmup_fn,....."""
+
                                                                 ],
                                                                 
                                                                 optimizer
@@ -77,6 +83,7 @@ self
                                                                 = self.config["training"]["weight_decay"],rng
 """),
                                                                 ....."""
+
 """)....""""""
                                                             
                                                             # Initialize state
@@ -148,6 +155,7 @@ self
                                                     
                                                     Args: train_dataset
 """....."""
+
                                                 self: Parameter description"""
                                                     .""": Parameter description
                                                     
@@ -188,16 +196,20 @@ self
                                 
                                 for
                                     ....."""
+
                                 num_steps = 0
 """....."""
+
                                 batch_idx, batch in enumerate(train_dataset):
                                     epoch_loss
 """self.state, loss = train_step_jit(self.state, batch)....."""
+
                                     += loss
                                     
                                     
                                     if
 """num_steps += 1....."""
+
 """# Logging....""" batch_idx % log_steps = = 0: avg_loss = epoch_loss / num_steps
                                         
                                         
@@ -215,8 +227,10 @@ self
                                         avg_epoch_loss: .4f
                                         }")self.save_checkpoint(f"epoch-{}")def
 """....."""
+
                                         save_checkpoint(self, name: str): Save
 """Method with parameters......"""
+
 """model checkpoint.     checkpoint_dir = self.output_dir / name
                                             
                                             with
@@ -224,7 +238,9 @@ self
                                                 ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save configdef
                                                     """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: str): Load
 """Method with parameters......"""
+
 """model checkpoint......"""
+
                                                     checkpoint_dir = Path(path)
                                                     # Load model parameters
                                                     with open(checkpoint_dir / "model.msgpack",, "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())

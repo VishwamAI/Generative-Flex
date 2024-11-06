@@ -2,15 +2,18 @@ from typing import Any
 from .layers.flash_moe import EnhancedTransformerBlock
 from image_processor import ImageProcessor
 from typing import OptionalTupleDict, import logging, torch
-from typing, Dict
+from typing import Dict
 
 MultiModal
 """MultiModal Transformer implementation with features inspired by Gemma and LLaMA...."""
+
     # Set up logging
     logging.basicConfig(level = logging.INFO)
     logger = logging.getLogger(__name__)
 """Transformer with enhanced capabilities for mathematical reasoning.Module..."""
+
 """docstring.Method..."""
+
 _init_math_weights(module) -> None: ifisinstance, (module(nn.Linear nn.Embedding): module, .weight.data.normal_(
     mean = 0.0
 std = 0.02

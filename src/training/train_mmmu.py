@@ -7,6 +7,7 @@ from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer, EnhancedTransformer
 from src.utils.logging, logger
 """Training script for MMMU dataset using enhanced transformer model......"""
+
 = logging.getLogger(__name__)
     def train_epoch(self):
         """Train
@@ -35,11 +36,13 @@ def evaluate(model: EnhancedTransformerval_loade
     model.eval()
     correct
     ....."""
+
 total_loss = 0.0""" = 0
 with
     ."""total = 0"""
     .""" torch.no_grad() -> None: for
 """Method with parameters......"""
+
 """batch in val_loader: loss = model(batch)return
             ...."""total_loss += loss.item()"""
             .""" {"val_loss": total_los, s / len(val_loader)}

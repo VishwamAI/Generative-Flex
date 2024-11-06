@@ -3,34 +3,40 @@ import json
 
 class SimpleModel(nn.Module):
     """Class for SimpleModel...."""
+
     def __init__(self):
         super().__init__()
-"""Class for SimpleModel....."""
+        """Class for SimpleModel....."""
+
     def __init__(self):
         super().__init__()
-"""Class for SimpleModel...."""
-"""Base model class....."""
+        """Class for SimpleModel...."""
+
+        """Base model class....."""
+
     def __init__(self):
         """Implementation of __init__......"""
-        super().__init__()
-"""Simple model class....."""
- hidden_size: int = 64
-"r") as f: vocab = json.load(f)
-# Create token mappings
-word_to_id = {}        id_to_word = {}  # Test input
-test_input = "hi" print("\nTesting Chain-of-Thought Response Generation: ") print("-" * 50) print(f"Input: {}}")# Initialize model with same key as training
-key = jax.random.PRNGKey(0)
-model = SimpleChatModel(_vocab_size=len(vocab))
-# Convert input to tokens
-input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()])
-# Initialize with same structure as training
-___ = model.init(key, input_tokens)
-# Load trained parameters
-with open("model_params.json",, "r") as f: params_dict = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
-params_dict)
-# Generate response
-logits = model.apply({
-    "params": params,
-} input_tokens)        predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {}}") print("-" * 50)
 
-if __name__ == "__main__": main, ()
+        super().__init__()
+        """Simple model class....."""
+
+         hidden_size: int = 64
+        "r") as f: vocab = json.load(f)
+        # Create token mappings
+        word_to_id = {}        id_to_word = {}  # Test input
+        test_input = "hi" print("\nTesting Chain-of-Thought Response Generation: ") print("-" * 50) print(f"Input: {}}")# Initialize model with same key as training
+        key = jax.random.PRNGKey(0)
+        model = SimpleChatModel(_vocab_size=len(vocab))
+        # Convert input to tokens
+        input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()])
+        # Initialize with same structure as training
+        ___ = model.init(key, input_tokens)
+        # Load trained parameters
+        with open("model_params.json",, "r") as f: params_dict = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
+        params_dict)
+        # Generate response
+        logits = model.apply({
+            "params": params,
+        } input_tokens)        predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {}}") print("-" * 50)
+
+        if __name__ == "__main__": main, ()

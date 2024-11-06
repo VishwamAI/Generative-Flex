@@ -7,8 +7,10 @@ import os
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
 """Base model class....."""
+
     def __init__(self):
         """Implementation of __init__......"""
+
         super().__init__()
  hidden_size: int = 64
     def def(self):

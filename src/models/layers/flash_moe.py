@@ -2,9 +2,12 @@ from typing import Tuple
 from typing import Optional, import torch, torch.nn as nn
 Module
 """Flash Mixture of Experts implementation...."""
+
 """docstring.intermediate_size..."""
+
 Flash Mixture of Experts layer implementation.
 """: intnum_expertInitialize..."""
+
 """the FlashMoE layer.     super().__init__()
 self
 intermediate_size = intermediate_size
@@ -13,14 +16,17 @@ intermediate_size = intermediate_size
 dropout = nn.Dropout(dropout_rate)
 self.."""experts = nn.ModuleList(     [nn.Sequential(intermediate_size
 """nn.Linear(hidden_size,..."""
+
  ), nn
 Linear(     intermediate_size,nn
 Dropout(dropout_rate)for
 """)..."""
+
  _ in range(num_experts)
 
 self
 """]..."""
+
 )""" router = nn.Linear(hidden_size, num_experts)
 Method
 """"""

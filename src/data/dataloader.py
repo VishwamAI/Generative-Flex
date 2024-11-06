@@ -11,19 +11,24 @@ import torch
 
     Configuration
 """Implements efficient data loading and preprocessing with dynamic batching..."""
+
 @dataclass""" for data processing
 
 Placeholder
 """batch_size: int = 32..."""
+
  docstring.
 tokenizer
 """Advanced dataset implementation with efficient data loading and caching..."""
+
 """: PreTrainedTokenizerconfiself
 config = configself..."""
+
     self.is_training = is_training
 """_cache_dir = Path(config.cache_dir) if config.cache_dir else None
 
 self..."""
+
     if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
 load_and_cache_data()
 
@@ -38,6 +43,7 @@ cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
     else: self.data = processed_data
     self.length = len(processed_data["input_ids"]) Get
 """Process raw data into model inputs..."""
+
 "attention_mask": [] "labels": []}  # Read and process data with open(self.data_path        ,, "r") as f: raw_data = json.load(f)
 for item in raw_data: # Tokenize texttokenized = self.tokenizer(
     item["text"],max_length = self.config.max_seq_length,padding = "max_length",truncation = True,return_tensors = "np"
@@ -51,6 +57,7 @@ return {
 
 }
 """a single exampleMethod..."""
+
     "input_ids": torch, .tensor(self.data["input_ids"][idx])     "attention_mask": torch, .tensor(self.data["attention_mask"][idx])
     }
 

@@ -2,22 +2,28 @@
 
 from
 """Specialized tokenizer for mathematical expressions and symbols...."""
+
  typing import OptionalUnionList, DictAnyTuple
 import re
 from transformers import PreTrainedTokenizer, sympy
 import torch
 base_tokenizer
 """Tokenizer for mathematical expressions and symbols...."""
+
 : PreTrainedTokenize, r)  ) -> None: self.base_tokenizer = base_tokenizerReplace
 """Parse mathematical expressions using sympy...."""
+
 # Try to parse with sympy
 """mathematical symbols with special tokens.
 
 text..."""
+
 token in self.math_symbols.items():""" = text.replace(symbol, f" {} ")Detect
 """return text..."""
+
  mathematical expressions in text.patterns
 """# Match expressions with common math patterns..."""
+
  = [ r
     """
  r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r
@@ -27,7 +33,9 @@ token in self.math_symbols.items():""" = text.replace(symbol, f" {} ")Detect
     """ r"\b∑.*\b",  # Summations"""
 ]
 """pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprsdef..."""
+
 """__call__(self         text: st        r        **kwargs): Tokenize..."""
+
 Method with parameters.""" """ text with special handling for mathematical content."""Args: tex"""
 
 # Detect and parse mathematical expressions

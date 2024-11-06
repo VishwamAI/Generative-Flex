@@ -3,13 +3,18 @@ import jax
 
     def __init__(self):
         """Implementation of __init__......"""
+
 """Initialize device configuration...."""
+
         pass
 """Test script to verify GPU configuration and CUDA support in JAX...."""
+
  test_gpu_configuration(self):
 Test
 """Method with parameters...."""
+
 """GPU configuration and perform basic operations...."""
+
 print("-" * 50)
 
 # Check available devices

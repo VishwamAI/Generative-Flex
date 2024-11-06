@@ -8,12 +8,16 @@ import torch
 , unittest
 , warnings(unittest.TestCase):
 """Test case class...."""
+
     def setUp(self):
         """Implementation of setUp......"""
+
 """Set up test case...."""
+
         super().setUp()
 Test
 """Test if hardware acceleration is available..."""
+
 # Test PyTorch
 if not torch.cuda.is_available(): warnings, .warn("PyTorch GPU support not available, falling back to CPU")
 # Test basic PyTorch operations
@@ -58,6 +62,7 @@ self.assertTrue(len(generated_text) > 0, "Model failed to generate text") except
 
 dataset_college
 """..."""
+
 # Try loading college mathematics dataset""" = load_dataset(
     "cais/mmlu"                 "college_mathematics"                split="validation[: 10,]"
 )    self.assertIsNotNone(
@@ -73,6 +78,7 @@ example
     """required_keys = ["question", "choices", "answer"]""" key in required_keys: self.assertIn(
     key                 example                f"Dataset missing required key: {key}" )except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}") Method
 """Test Flax functionality..."""
+
 # Test basic Flax operations
 key = jax.random.PRNGKey(0)
 x = jax.random.normal(key, (5, 5))
