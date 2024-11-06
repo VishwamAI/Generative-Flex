@@ -30,21 +30,31 @@ import torch
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_mmmu_loader(self)::                            content
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Dataset
-"""Module containing specific functionality."""
-MMMU dataset loader implementation."""):
+"""
+Module containing specific functionality.
+"""
+MMMU dataset loader implementation."""
+):
 
 
-class class:"""Class implementing class functionality."""
+class class:
+"""Class implementing class functionality."""
 
 split:
     str = "train"
 max_length: int = 512
     image_size: int = 224                ):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
 self.data_dir = data_dir
@@ -53,9 +63,11 @@ self.max_length = max_length
 self.image_size = image_size
 self.examples = self._load_examples()
 
-    def def _load_examples(self): -> List[Dict]:                                            """examples from dataset files.):
+    def def _load_examples(self): -> List[Dict]:                                            """
+examples from dataset files.):
         Returns: Listofexamples with text and image data
-        Validate"""
+        Validate
+"""
         examples = []
         split_file = os.path.join(self.data_dir, f"{}.json")
 
@@ -65,20 +77,24 @@ with open(split_file    , "r") as f: data = json.load(f)
 
         return examples
 
-        def def _validate_example(self         example: Dic        t) -> bool: """that an example has required fields.):
+        def def _validate_example(self         example: Dic        t) -> bool: """
+that an example has required fields.):
         Args: example: Example dictionary to validate
 
         Returns: Trueifexample is valid
         False otherwise
-        Get"""
+        Get
+"""
         required_fields = ["input_ids", "attention_mask", "labels"]
         return all(field in example for field in required_fields)
 
-        def def __getitem__(self         idx: in        t) -> Dict: """an example from the dataset.):
+        def def __getitem__(self         idx: in        t) -> Dict: """
+an example from the dataset.):
         Args: idx: Index of example to get
 
         Returns: Dictionarycontainingexample data
-        Process"""
+        Process
+"""
         example = self.examples[idx]
 
         # Convert to tensor format
@@ -92,11 +108,14 @@ with open(split_file    , "r") as f: data = json.load(f)
 if "image" in example: item["image"] = self._process_image(example["image"])
 return item
 
-    def def _process_image(self     image_path: st    r) -> torch.Tensor: """image data.):
+    def def _process_image(self     image_path: st    r) -> torch.Tensor: """
+image data.):
         Args: image_path: Path to image file
 
 Returns: Processedimagetensor
-Create"""Module containing specific functionality."""a DataLoader for the dataset.
+Create
+"""Module containing specific functionality."""
+a DataLoader for the dataset.
 
         Args: dataset: Dataset to create loader for
         batch_size: Batchsizefor loading data
@@ -104,18 +123,27 @@ Create"""Module containing specific functionality."""a DataLoader for the datase
         num_workers: Numberofworker processes
 
         Returns: DataLoaderinstance
-        with"""Module containing specific functionality."""
+        with
+"""Module containing specific functionality."""
  open("src/data/mmmu_loader.py"        , "w") as f: f.write(content)
 
 
         def def fix_enhanced_transformer(self)::    content
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Enhanced
+"""
+Module containing specific functionality.
+"""
+Enhanced transformer implementation with advanced features."""
+):
+
+
+        class class:
+"""Class implementing class functionality."""
+]def setup(self): -> None:
 """Module containing specific functionality."""
-Enhanced transformer implementation with advanced features."""):
-
-
-        class class:"""Class implementing class functionality."""]def setup(self): -> None:"""Module containing specific functionality."""
 
         self.embed_dim = self.config["hidden_size"]
         self.num_heads = self.config["num_attention_heads"]
@@ -138,7 +166,8 @@ Enhanced transformer implementation with advanced features."""):
         deterministic: bool = True
         output_attentions: bool = False
         output_hidden_states: bool = False) -> Dict[str
-        jnp.ndarray]: """pass of the model.
+        jnp.ndarray]: """
+pass of the model.
 
 Args: input_ids: Input token IDs
 attention_mask: Attentionmasktoken_type_ids: TokentypeIDs
@@ -148,7 +177,8 @@ output_hidden_states: Whethertooutput hidden states
 
 Returns: Dictionarycontainingmodel outputs
 
-with"""
+with
+"""
 # Get embeddings
 hidden_states = self.embeddings(input_ids)
 
@@ -167,14 +197,24 @@ outputs = {
 if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
 if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
 return outputs
-"""Module containing specific functionality."""Fix layers/enhanced_transformer.py parsing issues."""= Enhanced"""Module containing specific functionality."""Enhanced transformer layer implementations."""):
+"""
+Module containing specific functionality.
+"""Fix layers/enhanced_transformer.py parsing issues."""
+= Enhanced
+"""Module containing specific functionality."""
+Enhanced transformer layer implementations.
+"""):
 
 
 class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 ]def setup(self): -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
 self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
@@ -191,7 +231,9 @@ self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
         deterministic: bool = True
         output_attentions: bool = False                ) -> Dict[str
         jnp.ndarray]:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         # Self attention
         normed_hidden_states = self.layer_norm1(hidden_states)
@@ -212,7 +254,9 @@ self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
 
         def def main(self)::            print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):
 
         fix_mmmu_loader()

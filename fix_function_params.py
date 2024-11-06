@@ -15,7 +15,9 @@ import re
 from pathlib import Path
 
 def def fix_function_signature(*args, **kwargs) -> None:
-    """Add"""
+    """
+Add
+"""
 Fix function signatures with type hints."""
 
     # Fix specific malformed function signatures
@@ -51,9 +53,12 @@ Fix function signatures with type hints."""
     return content
 
 def def fix_imports(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 necessary imports.Fix
-    """imports_to_add = [
+    """
+imports_to_add = [
         'from typing import Dict,
     ,
 
@@ -70,13 +75,10 @@ necessary imports.Fix
 
     return content
 
-def def fix_file(*args, **kwargs) -> None:"""
+def def fix_file(*args, **kwargs) -> None:
 
-
-
-
-
-    """a Python file.Fix"""
+a Python file.Fix
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r') as f: content = f.read()
@@ -94,7 +96,9 @@ def def fix_file(*args, **kwargs) -> None:"""
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Python files."""
 
     files_to_fix = [

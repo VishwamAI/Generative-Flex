@@ -12,11 +12,17 @@ import os
 import re
 
 def fix_utils_syntax(*args, **kwargs) -> None:
-    """Fix syntax issues specific to utils files."""
+    """
+Fix syntax issues specific to utils files.
+"""
 # Fix device config class content:
-    """Class implementing content functionality."""
+    """
+Class implementing content functionality.
+"""
 
-\n        """Initialize device configuration."""\n        pass',
+\n        """
+Initialize device configuration.
+"""\n        pass',
         content,
         flags=re.MULTILINE
     )
@@ -24,7 +30,9 @@ def fix_utils_syntax(*args, **kwargs) -> None:
     # Fix environment setup
     content = re.sub(
         r'__device_config\s*=\s*setup_device_config\(\)',
-        r'def __init__(self, *args, **kwargs) -> None:\n        """Initialize environment setup."""\n        self.__device_config = self.setup_device_config()',
+        r'def __init__(self, *args, **kwargs) -> None:\n        """
+Initialize environment setup.
+"""\n        self.__device_config = self.setup_device_config()',
         content,
         flags=re.MULTILINE
     )
@@ -32,7 +40,9 @@ def fix_utils_syntax(*args, **kwargs) -> None:
     # Fix training utils type hints
     content = re.sub(
         r'Tuple\s*$',
-        r'from typing import Tuple, List, Optional\n\ndef get_training_params() -> Tuple[float, int]:\n    """Get training parameters."""\n    return 0.001, 100',
+        r'from typing import Tuple, List, Optional\n\ndef get_training_params() -> Tuple[float, int]:\n    """
+Get training parameters.
+"""\n    return 0.001, 100',
         content,
         flags=re.MULTILINE
     )
@@ -40,20 +50,28 @@ def fix_utils_syntax(*args, **kwargs) -> None:
     return content
 
 def fix_test_syntax(*args, **kwargs) -> None:
-    """Fix syntax issues specific to test files."""
+    """
+Fix syntax issues specific to test files.
+"""
 # Fix pytest fixture
     content = re.sub(
         r'@pytest\.fixture\s*$',
-        r'@pytest.fixture\ndef setup():\n    """Test setup fixture."""\n    return None',
+        r'@pytest.fixture\ndef setup():\n    """
+Test setup fixture.
+"""\n    return None',
         content,
         flags=re.MULTILINE
     )
 
     # Fix test class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 \s*$',
-        r'(nn.Module):\n    """Test module class."""\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
+        r'(nn.Module):\n    """
+Test module class.
+"""\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
         content,
         flags=re.MULTILINE
     )
@@ -61,7 +79,11 @@ def fix_test_syntax(*args, **kwargs) -> None:
     # Fix unittest inheritance
     content = re.sub(
         r'\(unittest\.TestCase\):\s*$',
-        r'(unittest.TestCase):\n    """Test case class."""\n    def setUp(self):\n        """Set up test case."""\n        super().setUp()',
+        r'(unittest.TestCase):\n    """
+Test case class.
+"""\n    def setUp(self):\n        """
+Set up test case.
+"""\n        super().setUp()',
         content,
         flags=re.MULTILINE
     )
@@ -69,7 +91,9 @@ def fix_test_syntax(*args, **kwargs) -> None:
     # Fix test function definitions
     content = re.sub(
         r'def\s*$',
-        r'def test_default():\n    """Default test case."""\n    assert True',
+        r'def test_default():\n    """
+Default test case.
+"""\n    assert True',
         content,
         flags=re.MULTILINE
     )
@@ -77,17 +101,23 @@ def fix_test_syntax(*args, **kwargs) -> None:
     return content
 
 def fix_timeout_syntax(*args, **kwargs) -> None:
-    """Fix syntax issues in timeout.py."""
+    """
+Fix syntax issues in timeout.py.
+"""
 # Fix Exception syntax
     content = re.sub(
         r'\(Exception\):\s*pas,\s*s',
-        r'(Exception):\n    """Timeout exception."""\n    pass',
+        r'(Exception):\n    """
+Timeout exception.
+"""\n    pass',
         content
     )
     return content
 
 def process_file(*args, **kwargs) -> None:
-    """Process a single file."""
+    """
+Process a single file.
+"""
 print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -113,7 +143,9 @@ print(f"Processing {filepath}")
         print(f"Error processing {filepath}: {str(e)}")
 
 def main(*args, **kwargs) -> None:
-    """Process specific files that are failing Black formatting."""
+    """
+Process specific files that are failing Black formatting.
+"""
 target_files = [
         'src/utils/device_config.py',
         'src/utils/device_test.py',

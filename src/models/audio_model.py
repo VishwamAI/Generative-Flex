@@ -12,11 +12,17 @@ from typing import Optional
 from src.models.transformer import TransformerBlock
 from typing import Any
 Audio
-"""Module containing specific functionality.""""""signal to embedding.Convert...."""
+"""
+Module containing specific functionality.
+
+signal to embedding.Convert....
+"""
 hop_length: int  256
 dtype: Any  jnp.float32
 @nn.compact
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     signal_length = audio.shape
     # Frame the audio signal
     num_frames = (signal_length - self.frame_size) // self.hop_length + 1
@@ -30,7 +36,9 @@ dtype: Any  jnp.float32
     :]
     # Project to hidden dimension
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(frames)
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 head_dim: intmlp_di
 m: intframe_size: in  1024
 hop_length: int  256
@@ -38,7 +46,9 @@ max_length: int  65536  # Maximum audio length in samples
 dropout_rate: float  0.1
 dtype: Any  jnp.float32
 @nn.compact
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     signal_length = inputs.shape
     assert(signal_length <= self.max_length), f"Audio length {}} exceeds maximum {}}"
 

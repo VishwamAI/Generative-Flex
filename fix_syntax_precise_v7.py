@@ -14,8 +14,11 @@ from typing import Union
 
 
 def def fix_train_mmmu(*args, **kwargs) -> None:
-    """lines"""
-Fix train_mmmu.py specific syntax issues."""= content.split('\n')
+    """
+lines
+"""
+Fix train_mmmu.py specific syntax issues."""
+= content.split('\n')
     fixed_lines = []
     current_func = []
     in_func = False
@@ -26,7 +29,8 @@ Fix train_mmmu.py specific syntax issues."""= content.split('\n')
                 current_func = []
             in_func = True
             current_func.append(line)
-        elif in_func: if stripped.startswith(('Process"""', "'''")) or not stripped: fixed_lines.extend(process_function(''.join(current_func)))
+        elif in_func: if stripped.startswith(('Process
+"""', "'''")) or not stripped: fixed_lines.extend(process_function(''.join(current_func)))
                 current_func = []
                 in_func = False
                 fixed_lines.append(line)
@@ -38,9 +42,12 @@ Fix train_mmmu.py specific syntax issues."""= content.split('\n')
     return '\n'.join(fixed_lines)
 
 def def process_function(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 a function definition block.Fix
-    """# Fix double colons
+    """
+# Fix double colons
     func_text = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*:', r'def \1(self):', func_text)
 
     # Fix parameter type hints
@@ -48,13 +55,10 @@ a function definition block.Fix
 
     return [func_text]
 
-def def fix_jax_trainer(*args, **kwargs) -> None:"""
+def def fix_jax_trainer(*args, **kwargs) -> None:
 
-
-
-
-
-    """jax_trainer.py specific syntax issues.Fix"""
+jax_trainer.py specific syntax issues.Fix
+"""
 
     lines = content.split('\n')
     fixed_lines = []
@@ -74,9 +78,12 @@ def def fix_jax_trainer(*args, **kwargs) -> None:"""
     return '\n'.join(fixed_lines)
 
 def def fix_config(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 config.py specific syntax issues.Fix
-    """lines = content.split('\n')
+    """
+lines = content.split('\n')
     fixed_lines = []
     class_indent = 0
     in_class = False
@@ -87,7 +94,8 @@ config.py specific syntax issues.Fix
             in_class = True
             class_indent = len(line) - len(stripped)
             fixed_lines.append(line)
-        elif in_class and:"""Class implementing and functionality."""
+        elif in_class and:
+"""Class implementing and functionality."""
 
 ' in line and '=' in line and 'field(' in line:
             # Split field definitions
@@ -104,7 +112,9 @@ config.py specific syntax issues.Fix
     return '\n'.join(fixed_lines)
 
 def def fix_file(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax issues in a specific file.Fix
     """
 
@@ -124,7 +134,9 @@ syntax issues in a specific file.Fix
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax in core files with precise patterns."""
 
     core_files = [

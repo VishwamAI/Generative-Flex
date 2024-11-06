@@ -11,14 +11,20 @@ from dataclasses import dataclass, field
 import os
 
 def fix_accelerated_trainer(*args, **kwargs) -> None:
-    """Fix syntax in accelerated_trainer.py."""
-content = '''"""Accelerated trainer module."""
+    """
+Fix syntax in accelerated_trainer.py.
+"""
+content = '''"""
+Accelerated trainer module.
+"""
 
 import logging
 import torch
 from accelerate import Accelerator
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass logger:
-    """Class implementing logger functionality."""
+    """
+Class implementing logger functionality.
+"""
 
 learning_rate: float = 5e-5
     weight_decay: float = 0.01
@@ -30,13 +36,17 @@ learning_rate: float = 5e-5
     device: str = "cuda"
 
 class AcceleratedTrainer:
-    """Class implementing AcceleratedTrainer functionality."""
+    """
+Class implementing AcceleratedTrainer functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize accelerated trainer.
+    """
+Initialize accelerated trainer.
 
         Args:
-            config: Optional trainer configuration"""
+            config: Optional trainer configuration
+"""
 self.config = config or AcceleratedTrainerConfig()
         self.accelerator = Accelerator(
             mixed_precision=self.config.mixed_precision,
@@ -45,7 +55,9 @@ self.config = config or AcceleratedTrainerConfig()
         self.setup_training()
 
     def setup_training(*args, **kwargs) -> None:
-    """Set up training components."""
+    """
+Set up training components.
+"""
 logger.info("Setting up accelerated training...")
         self.optimizer = None
         self.scheduler = None
@@ -53,7 +65,9 @@ logger.info("Setting up accelerated training...")
         self.train_dataloader = None
 
     def train(*args, **kwargs) -> None:
-    """Run training loop."""
+    """
+Run training loop.
+"""
 if not all([
             self.model,
             self.optimizer,
@@ -98,11 +112,17 @@ if not all([
         f.write(content)
 
 def fix_trainer(*args, **kwargs) -> None:
-    """Fix syntax in trainer.py."""
-content = '''"""Base trainer module."""
+    """
+Fix syntax in trainer.py.
+"""
+content = '''"""
+Base trainer module.
+"""
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
 learning_rate: float = 5e-5
     weight_decay: float = 0.01
@@ -114,18 +134,24 @@ learning_rate: float = 5e-5
     mixed_precision: bool = False
 
 class Trainer:
-    """Class implementing Trainer functionality."""
+    """
+Class implementing Trainer functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize trainer.
+    """
+Initialize trainer.
 
         Args:
-            config: Optional trainer configuration"""
+            config: Optional trainer configuration
+"""
 self.config = config or TrainerConfig()
         self.setup_training()
 
     def setup_training(*args, **kwargs) -> None:
-    """Set up training components."""
+    """
+Set up training components.
+"""
 logger.info("Setting up training...")
         self.optimizer = None
         self.scheduler = None
@@ -134,7 +160,9 @@ logger.info("Setting up training...")
         self.scaler = torch.cuda.amp.GradScaler() if self.config.mixed_precision else None
 
     def train(*args, **kwargs) -> None:
-    """Run training loop."""
+    """
+Run training loop.
+"""
 if not all([
             self.model,
             self.optimizer,
@@ -192,8 +220,12 @@ if not all([
         f.write(content)
 
 def fix_train_mmmu(*args, **kwargs) -> None:
-    """Fix syntax in train_mmmu.py."""
-content = '''"""MMMU training script."""
+    """
+Fix syntax in train_mmmu.py.
+"""
+content = '''"""
+MMMU training script.
+"""
 
 from src.data.mmmu_dataloader import MMUDataLoader
 from src.models.reasoning.math_head import MathHead
@@ -202,7 +234,9 @@ from src.training.trainer import Trainer, TrainerConfig
 logger = logging.getLogger(__name__)
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 batch_size: int = 32
     max_length: int = 512
@@ -211,7 +245,9 @@ batch_size: int = 32
     math_head_hidden_size: int = 768
 
 def main(*args, **kwargs) -> None:
-    """Run MMMU training."""
+    """
+Run MMMU training.
+"""
 # Setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -256,7 +292,9 @@ if __name__ == "__main__":
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in trainer files."""
+    """
+Fix syntax in trainer files.
+"""
 print("Fixing accelerated_trainer.py...")
     fix_accelerated_trainer()
 

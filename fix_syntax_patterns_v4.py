@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def main(self)::                            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
 "src/models/audio_model.py",
 "src/models/base_model.py",

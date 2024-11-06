@@ -11,7 +11,9 @@ from dataclasses import dataclass, field
 import subprocess
 from pathlib import Path
 import sys
-def def fix_line_length(self)::    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length):
+def def fix_line_length(self)::    """
+Fix line length issues using black with proper configuration.
+"""        # Configure black with 79 character line length):
 black_args = ["--line-length", "79"]
 
 # Files to process

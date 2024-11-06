@@ -11,12 +11,16 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Optional
 def fix_dataclass_field_spacing(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -54,7 +58,9 @@ in_dataclass = False
 fixed_lines.append(line)
 return "\n".join(fixed_lines)
 def fix_function_signatures(content: st     r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 
@@ -103,7 +109,9 @@ fixed_lines = []
 
 
                 def fix_class_methods(content: st                 r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
                 fixed_lines = []
                 in_class = False
@@ -121,7 +129,9 @@ fixed_lines = []
                 )
                 fixed_lines.append(line)
                     elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Fix method definition
                         stripped = line.strip()
@@ -131,7 +141,9 @@ fixed_lines = []
                         stripped = stripped[:-1] + " -> None:"
                         # Fix docstring if it's malformed
                             if i + 1 < len(lines) and 'Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):'):
                                 lines[i + 1] = next_line[:-2] + '"'
                                 # Ensure proper indentation
@@ -143,7 +155,9 @@ fixed_lines = []
                                         return "\n".join(fixed_lines)
 
 
-                                        def def main(self)::                    """syntax issues in all Python files."""        files_to_fix = [):
+                                        def def main(self)::                    """
+syntax issues in all Python files.
+"""        files_to_fix = [):
                                         "src/config/training_config.py",
                                         "src/data/math_tokenizer.py",
                                         "src/config/config.py",

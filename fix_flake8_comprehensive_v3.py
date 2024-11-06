@@ -12,9 +12,13 @@ import os
 from pathlib import Path
 import re
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_line_length(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
     for line in lines: iflen(line) > 79:
@@ -47,7 +51,9 @@ return "\n".join(fixed_lines)
 
 
 def remove_unused_imports(content: st         r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 # Create a set of imports to remove based on flake8 output
 imports_to_remove = set()
@@ -59,7 +65,9 @@ return "\n".join(line for line in lines if line.strip() not in imports_to_remove
 
 
 def remove_unused_variables(content: st             r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 skip_next = False
@@ -81,7 +89,9 @@ for i
 
 
                     def def main(self)::            root_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
                         for file_path in root_dir.rglob("*.py"):
                         if ".git" not in str(file_path):

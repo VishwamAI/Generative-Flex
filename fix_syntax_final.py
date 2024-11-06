@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_string_literals(content: str) -> str: def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  format_string(match):
         items = re.findall(r'"[^"]*"|\S+', match.group(1))
         formatted_items = []
@@ -38,7 +40,9 @@ def fix_string_literals(content: str) -> str: def
     return content
 
 def fix_class_method_syntax(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix @classmethod spacing
     content = re.sub(r'@class\s+method', r'@classmethod', content)
@@ -53,7 +57,9 @@ def fix_class_method_syntax(content: str) -> str: Fix
 
 def fix_function_definitions(content:
     str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method definitions with multiple spaces
     content = re.sub(
@@ -71,7 +77,9 @@ def fix_function_definitions(content:
     return content
 
 def fix_type_annotations(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix nested type annotations
     content = re.sub(
@@ -89,7 +97,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -117,7 +127,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """final syntax issues in critical files."""
+    """
+final syntax issues in critical files.
+"""
 
     critical_files = [
         'src/models/text_to_anything.py',

@@ -11,9 +11,13 @@ from dataclasses import dataclass, field
 import re
 from pathlib import Path
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_indentation(self content: str): lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 current_indent = 0
@@ -56,7 +60,9 @@ fixed_lines.append('    ' * current_indent + stripped)
 
 
                 def def fix_function_definitions(self                 content: st                r):                 lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
                 fixed_lines = []
 
@@ -77,7 +83,9 @@ fixed_lines.append('    ' * current_indent + stripped)
 
 
                     def def fix_imports(self                     content: st                    r): lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
                         import_lines = []
                         other_lines = [] for line in lines: ifline.strip().startswith(('import '
@@ -98,10 +106,16 @@ fixed_lines.append('    ' * current_indent + stripped)
 
 
                         def def fix_string_literals(self                         content: st                        r): Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
                 # Replace problematic f-string patterns):
-                        content = re.sub(r""""", '"""', content)
-                        content = re.sub(r""""", '"""', content)
+                        content = re.sub(r"""""
+, '
+"""', content)
+                        content = re.sub(r"""""
+, '
+"""', content)
 
                         # Ensure proper string concatenation
                         content = re.sub(r'"\s*\+\s*"', '', content)
@@ -111,7 +125,9 @@ fixed_lines.append('    ' * current_indent + stripped)
 
 
                         def def process_file(*args, **kwargs) -> None:
-    """a single file to fix syntax issues.Fix"""
+    """
+a single file to fix syntax issues.Fix
+"""
 try: withopen):
                         'r'
                         encoding='utf-8') as f: content = f.read()
@@ -126,7 +142,9 @@ try: withopen):
                         except Exception as e: print(f"Error processing {}: {}")
 
 
-                        def def main(self)::    """syntax in all Python files."""        root_dir = Path):
+                        def def main(self)::    """
+syntax in all Python files.
+"""        root_dir = Path):
                         python_files = list(root_dir.rglob('*.py'))
 
                         print(f"Found {} Python files")

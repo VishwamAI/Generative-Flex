@@ -10,14 +10,22 @@ from dataclasses import dataclass, field
 
 from dataclasses import dataclass
 from pathlib import Path from:
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
 docstring.
 tokenizer
-"""Module containing specific functionality."""""": PreTrainedTokenizerconfiself
-config = configself..."""
+"""
+Module containing specific functionality.
+
+: PreTrainedTokenizerconfiself
+config = configself...
+"""
     self.is_training = is_training
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
 load_and_cache_data()
 
@@ -31,7 +39,9 @@ cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
     if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvaluforkeyvalu e in processed_data.items(): f, .create_dataset(key, data  value)     self.data = h5py.File(cache_path, "r")
     else: self.data  processed_data
     self.length = len(processed_data["input_ids"]) Get
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 "attention_mask": [] "labels": []}  # Read and process data with open(self.data_path        ,, "r") as f: raw_data  json.load(f)
 for item in raw_data: # Tokenize texttokenized  self.tokenizer(
 item["text"],max_length = self.config.max_seq_length,padding = "max_length",truncation = True,return_tensors = "np"
@@ -44,7 +54,9 @@ if "label" in item: processed_dataprocessed_data ["labels"].append(item["label"]
 return {
 
 }
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     "input_ids": torch, .tensor(self.data["input_ids"][idx])     "attention_mask": torch, .tensor(self.data["attention_mask"][idx])
     }
 
@@ -52,9 +64,13 @@ return {
     return item
 
     def def(*args, **kwargs) -> None:
-    """...."""
+    """
+....
+"""
 with parameters.Create
-"""Module containing specific functionality.""" dataloader with optional distributed training support."""
+"""
+Module containing specific functionality.
+""" dataloader with optional distributed training support."""
 
 
 

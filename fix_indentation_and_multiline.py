@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -23,7 +25,9 @@ from typing import List,
 
 
 def fix_indentation_levels(content: str) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
     fixed_lines = []
     indent_stack = [0]  # Stack to track indentation levels
@@ -54,7 +58,9 @@ def fix_indentation_levels(content: str) -> str: lines
     return '\n'.join(fixed_lines)
 
 def fix_multiline_statements(content: str) -> str: Format
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method definitions with multiple parameters
     content = re.sub(
@@ -72,15 +78,21 @@ def fix_multiline_statements(content: str) -> str: Format
 
     # Fix multi-line string assignments
     content = re.sub(
-        r'("""|\'\'\')\s*([\s\S]*?)\s*("""|\'\'\')',
-        lambda m: f'"""\n{m.group(2).strip()}\n"""',
+        r'("""
+|\'\'\')\s*([\s\S]*?)\s*(
+"""|\'\'\')',
+        lambda m: f'"""
+\n{m.group(2).strip()}\n
+"""',
         content
     )
 
     return content
 
 def format_method_def(name: str, params: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     params = params.strip()
     if ',' not in params: return f'def {name}({params}):'
@@ -93,7 +105,9 @@ def format_method_def(name: str, params: str) -> str:
     return f'def {name}(\n' + '\n'.join(formatted_params) + '\n):'
 
 def format_comprehension(comp: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     parts = comp.strip().split('\n')
     if len(parts) == 1: return comp
@@ -105,14 +119,18 @@ def format_comprehension(comp: str) -> str:
     return '[\n    ' + '\n    '.join(cleaned_parts[1:-1]) + '\n]'
 
 def fix_file_content(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     content = fix_indentation_levels(content)
     content = fix_multiline_statements(content)
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -127,7 +145,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

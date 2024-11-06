@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_indentation(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 current_indent = 0
@@ -44,7 +46,9 @@ fixed_lines.append(line)
                 return "\n".join(fixed_lines)
 
 
-                def def main(self)::                    """files with syntax issues."""        # Focus on core model files first):
+                def def main(self)::                    """
+files with syntax issues.
+"""        # Focus on core model files first):
                 core_files = [
                 "src/models/base_model.py",
                 "src/models/enhanced_transformer.py",

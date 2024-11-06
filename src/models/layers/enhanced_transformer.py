@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import Optional, Dict, Union, Tuple
 
 import torch
@@ -17,9 +19,19 @@ import torch.nn.functional as F
 
 
 class EnhancedTransformer:
-    """Class implementing EnhancedTransformer functionality."""
+    """
+Class implementing EnhancedTransformer functionality.
+"""
 
-Module containing specific functionality."""Enhanced transformer layer with advanced attention mechanisms."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for transpose_for_scores.."""Module containing specific functionality."""Method for forward.."""
+Module containing specific functionality."""
+Enhanced transformer layer with advanced attention mechanisms.
+
+Method for __init__..
+
+Method for transpose_for_scores..
+"""Module containing specific functionality."""
+Method for forward..
+"""
         query_layer = self.transpose_for_scores(self.query(hidden_states))
         key_layer = self.transpose_for_scores(self.key(hidden_states))
         value_layer = self.transpose_for_scores(self.value(hidden_states))

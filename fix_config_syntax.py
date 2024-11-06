@@ -11,7 +11,9 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 
 
@@ -20,13 +22,19 @@ def def fix_config_file(self):: # Read the original file        with open):
 # Fix imports
 fixed_content = '''
 from
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  typing import Optional, Union, List, Dict, Any, Tuple
 from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 Compatibility
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 'image'
 'audio'
@@ -52,7 +60,9 @@ patch_size: Optional[Tuple[int
 int
 int]] = field(default=None)  # For video models
 @property
-    def def max_position_embeddings(self): -> int:    """property for models expecting max_position_embeddings."""        return self.max_seq_length):
+    def def max_position_embeddings(self): -> int:    """
+property for models expecting max_position_embeddings.
+"""        return self.max_seq_length):
         '''
 
 # Write the fixed content

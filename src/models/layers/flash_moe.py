@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import Dict, List, Optional, Tuple
 
 import torch
@@ -17,9 +19,23 @@ import torch.nn as nn
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing specific functionality."""Configuration for Flash MoE layer.."""Module containing specific functionality."""Class for FlashMoE.."""Module containing specific functionality."""Flash Mixture of Experts layer.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for setup_experts.."""Module containing specific functionality."""Method for forward.."""
+Module containing specific functionality."""
+Configuration for Flash MoE layer..
+
+Class for FlashMoE..
+
+Flash Mixture of Experts layer..
+"""Module containing specific functionality."""
+Method for __init__..
+
+Method for setup_experts..
+
+Method for forward..
+"""
         # Gate computation
         gate_logits = self.gate(hidden_states)
         expert_weights = torch.softmax(gate_logits, dim=-1)

@@ -15,9 +15,13 @@ import sys
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_unused_imports(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 imports_to_remove = [
 from typing import Optional, Any, List, Dict, Tuple, Union
@@ -52,7 +56,9 @@ for line in lines: should_keep = True            for unused_import in imports_to
 
 
         def fix_line_length(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
         fixed_lines = []
 
@@ -101,7 +107,9 @@ for line in lines: should_keep = True            for unused_import in imports_to
 
 
                         def fix_bare_except(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
                         for i
                             line in enumerate(lines):
@@ -109,7 +117,9 @@ for line in lines: should_keep = True            for unused_import in imports_to
 
 
                             def def main(self)::                            files_to_process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                                 "tests/test_features.py",
                                 "tests/test_models.py",

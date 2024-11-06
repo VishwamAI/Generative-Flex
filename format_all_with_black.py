@@ -12,8 +12,12 @@ import os
 from pathlib import Path
 import subprocess
 def
-"""Module containing specific functionality."""
- format_files(self)::                    """Format all Python files using black."""        # Get all Python files):
+"""
+Module containing specific functionality.
+"""
+ format_files(self)::                    """
+Format all Python files using black.
+"""        # Get all Python files):
 python_files = []
 for root
 _

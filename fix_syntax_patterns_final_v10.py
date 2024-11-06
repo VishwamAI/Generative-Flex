@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -23,7 +25,9 @@ from typing import Dict,
 
 
 def fix_docstring_indentation(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Find all docstrings with their indentation
     docstring_pattern = re.compile(r'^(\s+)?["\']"\'"?.*?["\']"\'"?\s*$', re.MULTILINE | re.DOTALL)
@@ -31,12 +35,16 @@ def fix_docstring_indentation(content: str) -> str: Fix
     def process_docstring(match) -> str: docstring = match.group(0).strip()
         # If it's a single-line docstring, convert to triple quotes
         if docstring.startswith("'") or docstring.startswith('"'):
-            docstring = f'"""{docstring.strip("\'\"").strip()}"""'
+            docstring = f'"""{docstring.strip("\'\"").strip()}"""
+'
         return docstring + '\n'
 
     return docstring_pattern.sub(process_docstring, content)
 
-def fix_class_inheritance(content: str) -> str:"""Module containing specific functionality."""# Pattern to match class definitions:"""Class implementing definitions functionality."""
+def fix_class_inheritance(content: str) -> str:
+"""Module containing specific functionality."""
+# Pattern to match class definitions:
+"""Class implementing definitions functionality."""
 
 \s*([^:\n]*?)(?=\s*(?:class|\Z|\n\S))',
         re.DOTALL
@@ -47,7 +55,9 @@ def fix_class_inheritance(content: str) -> str:"""Module containing specific fun
         params = match.group(3).strip() if match.group(3) else ""
 
         # Handle class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 return f"class {class_name}({parent_class}):\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()\n\n"
 
@@ -65,12 +75,16 @@ return f"class {class_name}({parent_class}):\n    def __init__(self, *args, **kw
             for p in param_list
         )
 
-        return f"""{class_name}({parent_class}):
+        return f"""
+{class_name}({parent_class}):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__()
         {assignments}
 
-Fix"""Module containing specific functionality."""method signature formatting and type hints.Fix"""
+Fix
+"""Module containing specific functionality."""
+method signature formatting and type hints.Fix
+"""
     # Pattern to match method definitions with type hints and return types
     method_pattern = re.compile(
         r'def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?:->[\s\w\[\],\s]*)?:\s*',
@@ -96,7 +110,9 @@ Fix"""Module containing specific functionality."""method signature formatting an
     return method_pattern.sub(process_method, content)
 
 def fix_multiline_statements(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix multiline method parameters
     content = re.sub(
@@ -107,7 +123,9 @@ def fix_multiline_statements(content: str) -> str:
     )
 
     # Fix multiline class parameters:
-    """Class implementing parameters functionality."""
+    """
+Class implementing parameters functionality.
+"""
 
 \s*$',
         lambda m: f"class {m.group(1)}({', '.join(p.strip() for p in m.group(2).split(','))}):\n",
@@ -118,7 +136,9 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def process_file(file_path: str) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -140,7 +160,9 @@ def process_file(file_path: str) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

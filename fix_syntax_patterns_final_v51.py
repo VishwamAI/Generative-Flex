@@ -12,7 +12,9 @@ import os
 import re
 
 def fix_import_statements(*args, **kwargs) -> None:
-    """Fix malformed import statements with precise patterns."""
+    """
+Fix malformed import statements with precise patterns.
+"""
 # Fix specific malformed import patterns
     patterns = {
         r'from\s+accelerate\s+from\s+dataclasses': 'from dataclasses import dataclass\nfrom accelerate import Accelerator',
@@ -41,26 +43,38 @@ def fix_import_statements(*args, **kwargs) -> None:
     return '\n'.join(new_lines)
 
 def fix_docstrings(*args, **kwargs) -> None:
-    """Fix docstring formatting issues."""
+    """
+Fix docstring formatting issues.
+"""
 # Fix module-level docstrings
     content = re.sub(
-        r'^""".*?"""',
-        '"""Module containing specific functionality."""',
+        r'^"""
+.*?
+"""',
+        '"""
+Module containing specific functionality.
+"""',
         content,
         flags=re.MULTILINE | re.DOTALL
     )
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]*:(\s*"""[^"]*""")?\s*',
-        lambda m: f'class {m.group(1)}:\n"""Class implementing {m.group(1)} functionality."""\n\n',
+]*:(\s*"""[^"]*"""
+)?\s*',
+        lambda m: f'class {m.group(1)}:\n
+"""Class implementing {m.group(1)} functionality."""
+\n\n',
         content
     )
 
     return content
 
-def fix_main_calls(*args, **kwargs) -> None:"""Fix main function calls at end of file."""
+def fix_main_calls(*args, **kwargs) -> None:
+"""Fix main function calls at end of file."""
 if 'def main()' in content:
         # Ensure proper main function definition and call
         content = re.sub(
@@ -71,7 +85,9 @@ if 'def main()' in content:
     return content
 
 def process_file(*args, **kwargs) -> None:
-    """Process a single file to fix syntax issues."""
+    """
+Process a single file to fix syntax issues.
+"""
 print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
@@ -110,7 +126,9 @@ print(f"Processing {file_path}...")
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Process all files with syntax issues."""
+    """
+Process all files with syntax issues.
+"""
 files_to_process = [
         "src/training/accelerated_trainer.py",
         "src/training/jax_trainer.py",

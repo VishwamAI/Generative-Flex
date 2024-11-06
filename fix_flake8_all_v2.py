@@ -14,7 +14,9 @@ import re
 import sys
 import traceback
 def fix_unused_imports(content) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : lines = content.split("\n")            tree = ast.parse(content)
 imports = []
 used_names = set()
@@ -47,7 +49,9 @@ for node in ast.walk(tree):
 
                         return "\n".join(new_lines)
                         except SyntaxError: returncontentdef fix_line_length(content                             max_length=88) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
                         new_lines = []
 
@@ -71,7 +75,9 @@ for node in ast.walk(tree):
 
 
                                 def fix_undefined_names(content) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : undefined_fixes = {
      "PretrainedConfig": "from transformers import PretrainedConfig",
      "PreTrainedModel": "from transformers import PreTrainedModel",
@@ -90,11 +96,15 @@ for node in ast.walk(tree):
 
                                 return "\n".join(lines)
                                 except Exception: returncontentdef fix_unused_variables(content) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : tree = ast.parse(content)                    unused_vars = set()
 
                                 class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 def visit_Name(self
                                 node) -> None: ifisinstance
@@ -108,7 +118,9 @@ def visit_Name(self
                                 content)
                                 return content
                                         except SyntaxError: returncontentdef process_file(file_path) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : withopen(file_path                                             "r"                                            encoding="utf-8") as f: content = f.read()
 
                                             # First fix syntax errors
@@ -127,7 +139,9 @@ def visit_Name(self
 
 
                                             def def main(self)::            src_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
                                             tests_dir = Path("tests")
 

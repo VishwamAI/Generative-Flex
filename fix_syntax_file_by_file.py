@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -25,10 +27,14 @@ from typing import Any
 
 
 def fix_symbolic_math(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 ',
         lambda m: f'class {m.group(1)}(nn.Module):
@@ -38,7 +44,9 @@ def fix_symbolic_math(content: str) -> str: Fix
     return content
 
 def fix_text_to_anything(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix type hints
     content = re.sub(
@@ -49,7 +57,9 @@ def fix_text_to_anything(content: str) -> str:
     return content
 
 def fix_train_mmmu(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method signatures
     content = re.sub(
@@ -60,7 +70,9 @@ def fix_train_mmmu(content: str) -> str:
     return content
 
 def fix_device_test(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix multi-line statements
     content = re.sub(
@@ -71,10 +83,14 @@ def fix_device_test(content: str) -> str:
     return content
 
 def fix_test_environment(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 ',
         lambda m: f'class {m.group(1)}(unittest.TestCase):
@@ -84,13 +100,17 @@ def fix_test_environment(content: str) -> str:
     return content
 
 def fix_training_logger(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method definitions
     content = re.sub(
         r'class\s+TrainingLogger:\s*de,\s*f\s*log_dir:\s*str,\s*\(self,\s*log_dir:\s*str\s*=\s*"logs"\):\s*self,\s*\.log_dir\s*=\s*log_dir',
         'class TrainingLogger:
-    """Class implementing TrainingLogger functionality."""
+    """
+Class implementing TrainingLogger functionality.
+"""
 
 \n    def __init__(self, *args, **kwargs) -> None:\n        self.log_dir = log_dir',
         content
@@ -98,10 +118,14 @@ def fix_training_logger(content: str) -> str:
     return content
 
 def fix_timeout(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 \s*pas,\s*s',
         lambda m: f'class {m.group(1)}(Exception):\n    pass',
@@ -110,7 +134,9 @@ def fix_timeout(content: str) -> str:
     return content
 
 def fix_device_config(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method signatures
     content = re.sub(
@@ -121,7 +147,9 @@ def fix_device_config(content: str) -> str:
     return content
 
 def fix_simple_model(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix parameter definitions
     content = re.sub(
@@ -132,7 +160,9 @@ def fix_simple_model(content: str) -> str:
     return content
 
 def fix_video_model(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix type hints
     content = re.sub(
@@ -143,7 +173,9 @@ def fix_video_model(content: str) -> str:
     return content
 
 def fix_train_chatbot(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method signatures
     content = re.sub(
@@ -154,7 +186,9 @@ def fix_train_chatbot(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -190,7 +224,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

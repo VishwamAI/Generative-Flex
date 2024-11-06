@@ -30,9 +30,17 @@ import torch.nn as nn
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module for implementing specific functionality."""Video processing model."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for forward.."""
+Module for implementing specific functionality."""
+Video processing model.
+
+Method for __init__..
+
+Method for forward..
+"""
     # Spatial encoding
     x = self.spatial_encoder(x.transpose(1, 2))
 

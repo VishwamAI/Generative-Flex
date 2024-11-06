@@ -24,16 +24,28 @@ import os
 from pathlib import Path import logging
 
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 from torch.utils.data
 from tqdm
 
 
 class Trainer:
-    """Class implementing Trainer functionality."""
+    """
+Class implementing Trainer functionality.
+"""
 
-Base trainer implementation."""Method for __init__.."""Module containing specific functionality."""Method for train_step.."""Module containing specific functionality."""Method for evaluate.."""Module containing specific functionality."""Method for train.."""
+Base trainer implementation."""
+Method for __init__..
+
+Method for train_step..
+
+Method for evaluate..
+"""Module containing specific functionality."""
+Method for train..
+"""
         self.step = 0
         best_val_loss = float("inf")
 

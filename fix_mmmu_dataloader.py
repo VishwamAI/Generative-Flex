@@ -28,16 +28,22 @@ content,
 )
 
 # Fix class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 .*?def __init__"
 
 "class MMUDataset:
-    """Class implementing MMUDataset functionality."""
+    """
+Class implementing MMUDataset functionality.
+"""
 
 \n"
 '    Initialize
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 \n\n'
 "    def __init__",
 content,
@@ -45,7 +51,9 @@ flags=re.DOTALL,
 )
 
 # Fix initialization method
-init_method = '''    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """the dataset."""
+init_method = '''    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """
+the dataset.
+"""
 super().__init__()
 self.subjects = subjects if subjects else MMMU_SUBJECTS
 self.split = split

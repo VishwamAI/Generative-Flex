@@ -1,7 +1,9 @@
 import re
 
 def fix_setup_py():
-    """Fix setup.py to properly handle dependencies."""
+    """
+Fix setup.py to properly handle dependencies.
+"""
     with open('setup.py', 'r') as f:
         content = f.read()
 

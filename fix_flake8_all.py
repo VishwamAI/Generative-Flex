@@ -13,7 +13,9 @@ from pathlib import Path
 import re
 import sys
 def fix_unused_imports(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 tree = ast.parse(content)
 imports = []
@@ -49,7 +51,9 @@ for node in ast.walk(tree):
 
 
                         def fix_line_length(content                             max_length=88) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
                         new_lines = []
 
@@ -73,7 +77,9 @@ for node in ast.walk(tree):
 
 
                                 def fix_undefined_names(content) -> None: undefined_fixes
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {
      "PretrainedConfig": "from transformers import PretrainedConfig",
      "PreTrainedModel": "from transformers import PreTrainedModel",
@@ -94,12 +100,16 @@ for node in ast.walk(tree):
 
 
                                 def fix_unused_variables(content) -> None: tree
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = ast.parse(content)
                                 unused_vars = set()
 
                                 class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 def visit_Name(self
                                 node) -> None: ifisinstance(node.ctx
@@ -116,7 +126,9 @@ def visit_Name(self
 
 
                                         def def main(self)::                            src_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
                                         tests_dir = Path("tests")
 

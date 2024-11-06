@@ -13,9 +13,13 @@ import os
 from pathlib import Path
 import re
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_multiline_fstrings(self filename: str):                 with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open):
 "r") as f: content = f.read()
 # Fix multiline f-strings
@@ -26,14 +30,18 @@ current_fstring = []
 
 for line in lines: stripped = line.strip()                # Check for f-string start
 if not in_fstring and(stripped.startswith('Format
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 "")
 ):
 in_fstring = True
 current_fstring = [line]
 # Check for f-string end
-elif in_fstring and(stripped.endswith('"""') or
-stripped.endswith(""""")
+elif in_fstring and(stripped.endswith('"""
+') or
+stripped.endswith(
+""""")
     ):
         in_fstring = False
         current_fstring.append(line)
@@ -49,7 +57,9 @@ stripped.endswith(""""")
 
 
         def def format_fstring(*args, **kwargs) -> None:
-    """a multiline f-string.Process"""
+    """
+a multiline f-string.Process
+"""
 indent = len):
         base_indent = " " * indent
 
@@ -66,8 +76,10 @@ indent = len):
         return [(base_indent + line) if i > 0 else line for i, line in enumerate(formatted_lines)]
 
 
-        def def main(self)::    """all Python files in the project.
-        with"""        root_dir = Path):
+        def def main(self)::    """
+all Python files in the project.
+        with
+"""        root_dir = Path):
             for file_path in root_dir.rglob("*.py"):
             if ".git" not in str(file_path):
         print(f"Processing {}")
@@ -79,7 +91,9 @@ indent = len):
 
 
                 def def fix_text_to_anything(self)::                            files_to_process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                     "src/models/text_to_anything.py",
                     "tests/test_features.py",
@@ -105,7 +119,9 @@ indent = len):
 
 
                 def def fix_syntax_issues(self                 content: st                r): Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
                 # Fix trailing commas):
                 content = re.sub(r"                  \s*\\)", ")", content)
 
@@ -119,7 +135,9 @@ indent = len):
 
 
                 def def fix_imports(*args, **kwargs) -> None:
-    """import statements.Fix"""
+    """
+import statements.Fix
+"""
 lines = content.split):
                 import_lines = []
                 other_lines = [] for line in lines: ifline.startswith(("import "                 "from ")): import_lines.append(line)
@@ -133,7 +151,9 @@ lines = content.split):
 
 
                 def def fix_function_definitions(*args, **kwargs) -> None:
-    """function definitions.Fix"""
+    """
+function definitions.Fix
+"""
 try: tree = ast.parse):
                     def def visit_FunctionDef(self                     node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
                         ctx=ast.Load())                return node
@@ -158,7 +178,9 @@ try: tree = ast.parse):
 
 
                     def def fix_syntax_structure(*args, **kwargs) -> None:
-    """syntax structure issues in a Python file.Fix"""
+    """
+syntax structure issues in a Python file.Fix
+"""
 with open):
                         "r") as f: content = f.read()
                         # Fix basic syntax issues
@@ -171,7 +193,9 @@ with open):
 
 
                     def def fix_basic_syntax(*args, **kwargs) -> None:
-    """basic syntax issues.Fix"""
+    """
+basic syntax issues.Fix
+"""
 # Fix indentation):
                         lines = content.split("\\n")
                         fixed_lines = []
@@ -194,7 +218,9 @@ with open):
 
 
                             def def fix_advanced_syntax(*args, **kwargs) -> None:
-    """advanced syntax issues.Process"""
+    """
+advanced syntax issues.Process
+"""
 try: tree = ast.parse):
                                 def def visit_FunctionDef(self                                 node) -> None: # Ensure function has docstring                if not):
                                 ast.Expr) and
@@ -209,8 +235,10 @@ try: tree = ast.parse):
                                 return ast.unparse(new_tree)
 
 
-                                    def def main(self)::                                    """all Python files in the project.
-                                        with"""                root_dir = Path):
+                                    def def main(self)::                                    """
+all Python files in the project.
+                                        with
+"""                root_dir = Path):
                                         for file_path in root_dir.rglob("*.py"):
                                         if ".git" not in str(file_path):
                                         print(f"Processing {}")
@@ -222,7 +250,9 @@ try: tree = ast.parse):
 
 
                                             def def main(self)::                                                                write_fixed_string_formatting
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):
                                                 write_text_to_anything_fixes()
                                                 write_syntax_structure_fix()

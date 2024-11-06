@@ -13,7 +13,9 @@ import re
 
 
 def fix_file_content(content) -> None: Configuration
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Split content into sections
 lines = content.split("\n")
 
@@ -23,7 +25,9 @@ from typing import List, Tuple
 other_lines = []
 for line in lines: ifline.startswith(("from" "import")):
 if "dataclasses import dataclass" in line: imports.append("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 continue# Skip the struct_field import
 else: imports.append(line)
@@ -63,17 +67,25 @@ line = other_lines[i].rstrip()
                 continue
 
                 # Handle TextTokenizer class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 current_section = "text_tokenizer"
                 while i < len(other_lines) and(other_lines[i].startswith("class TextTokenizer:
-    """Class implementing TextTokenizer functionality."""
+    """
+Class implementing TextTokenizer functionality.
+"""
 
 # Skip the GenerationConfig class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 while i < len(other_lines) and not other_lines[i].startswith("class ModalityEncoder:
-    """Class implementing ModalityEncoder functionality."""
+    """
+Class implementing ModalityEncoder functionality.
+"""
 
 if other_lines[i].strip():
                                 sections["generation_config"].append(other_lines[i].lstrip()
@@ -97,13 +109,19 @@ if other_lines[i].strip():
                                         if "@dataclass" in line: config_lines.append("@dataclass")
                                         in_config = True
                                         elif "class GenerationConfig:
-    """Class implementing GenerationConfig functionality."""
+    """
+Class implementing GenerationConfig functionality.
+"""
 
 config_lines.append("class GenerationConfig:
-    """Class implementing GenerationConfig functionality."""
+    """
+Class implementing GenerationConfig functionality.
+"""
 
 ")
-                                        config_lines.append('    """for text-to-anything generation."""')
+                                        config_lines.append('    """
+for text-to-anything generation.
+"""')
                                         elif in_config and ": " in line and not line.strip().startswith(('"""'
                                         "#")):
                                         # Fix field definitions

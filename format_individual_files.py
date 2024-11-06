@@ -13,7 +13,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  subprocess
 import sys
 from pathlib import Path
@@ -36,15 +38,21 @@ CORE_FILES = [
 
 
 def fix_dataclass_syntax(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
 continue
 
 if in_dataclass and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 " in line and " = " in line and "field(" in line:            # Fix field definition parts = line.split(": " 1)    if len(parts) == 2: name = parts[0].strip()                type_and_default = parts[1].strip()
 
@@ -64,7 +72,9 @@ fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-def fix_function_syntax(content: st     r) -> str: """function definition syntax issues.Format"""        lines = content.split("\n")
+def fix_function_syntax(content: st     r) -> str: """
+function definition syntax issues.Format
+"""        lines = content.split("\n")
 fixed_lines = []
 
     for line in lines: ifline.strip().startswith("def "):
@@ -89,7 +99,9 @@ fixed_lines = []
 
 
         def format_file(file_path: st             r) -> Tuple[bool
-            str]: """a single file with black and fix any issues.Format"""        try:
+            str]: """
+a single file with black and fix any issues.Format
+"""        try:
                 # First try to format with black
                 result = subprocess.run(                 ["python3", "-m", "black", "--target-version", "py312", file_path],                capture_output=True,                text=True)
 
@@ -115,7 +127,9 @@ fixed_lines = []
 
 
                 def main() -> None:
-    """core files individually."""
+    """
+core files individually.
+"""
         print("Starting to format core files...")
                 successful = 0
                 failed = 0

@@ -11,11 +11,15 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 def fix_function_definitions(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
 fixed_lines = []
 in_function = False
@@ -96,7 +100,9 @@ for line in lines: stripped = line.lstrip()
 
 
         def fix_class_methods(content: st             r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
         fixed_lines = []
         in_class = False
@@ -106,7 +112,9 @@ for line in lines: stripped = line.lstrip()
     stripped = line.lstrip()
 
                 # Track class context:
-    """Class implementing context functionality."""
+    """
+Class implementing context functionality.
+"""
 
 in_class = True
                 class_indent = len(line) - len(stripped)
@@ -127,7 +135,9 @@ in_class = True
 
 
                                     def fix_dataclass_fields(content: st                                     r) -> str: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  '@dataclass' not in content:
     return content
 
@@ -157,7 +167,9 @@ in_class = True
 
 
                                                         def process_file(file_path: st                                                         r) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 :
                                                         with open(file_path                                                             'r'                                                            encoding='utf-8') as f: content = f.read()
 
@@ -179,7 +191,9 @@ in_class = True
 
 
                                                                 def main() -> None: root_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path('.')
                                                                         for file_path in root_dir.rglob('*.py'):
                                                                         if '.git' not in str(file_path):

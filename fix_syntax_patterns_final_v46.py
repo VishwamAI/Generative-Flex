@@ -12,33 +12,48 @@ import os
 import re
 
 def fix_module_docstrings(*args, **kwargs) -> None:
-    """Fix module-level docstring formatting."""
+    """
+Fix module-level docstring formatting.
+"""
 # Fix module docstrings with extra dots
     content = re.sub(
-        r'^"""(.+?)\.+"""$',
-        lambda m: f'"""{"".join(m.group(1).strip().rstrip("."))}."""',
+        r'^"""
+(.+?)\.+
+"""$',
+        lambda m: f'"""{"".join(m.group(1).strip().rstrip("."))}."""
+',
         content,
         flags=re.MULTILINE
     )
 
     # Fix empty module docstrings
     content = re.sub(
-        r'^"""\s*"""$',
-        '"""Module for handling model functionality."""',
+        r'^
+"""\s*"""
+$',
+        '
+"""Module for handling model functionality."""
+',
         content,
         flags=re.MULTILINE
     )
 
     return content
 
-def fix_class_docstrings(*args, **kwargs) -> None:"""Fix class-level docstring formatting."""
+def fix_class_docstrings(*args, **kwargs) -> None:
+"""Fix class-level docstring formatting."""
 def format_class_docstring(match):
         indent = match.group(1)
         class_name = match.group(2)
         docstring = match.group(3) if match.group(3) else f"Class for {class_name}."
-        return f'{indent}class {class_name}:\n{indent}    """{docstring.strip().rstrip(".")}."""'
+        return f'{indent}class {class_name}:\n{indent}    """{docstring.strip().rstrip(".")}."""
+'
 
-    # Fix class definitions:"""Class implementing definitions functionality."""\([^)]*\))?\s*:\s*(?:"""(.+?)\.+""")?\s*',
+    # Fix class definitions:
+"""Class implementing definitions functionality."""
+\([^)]*\))?\s*:\s*(?:
+"""(.+?)\.+"""
+)?\s*',
         format_class_docstring,
         content,
         flags=re.DOTALL
@@ -46,7 +61,8 @@ def format_class_docstring(match):
 
     return content
 
-def fix_method_docstrings(*args, **kwargs) -> None:"""Fix method-level docstring formatting."""
+def fix_method_docstrings(*args, **kwargs) -> None:
+"""Fix method-level docstring formatting."""
 def format_method_docstring(match):
         indent = match.group(1)
         method_name = match.group(2)
@@ -60,13 +76,19 @@ def format_method_docstring(match):
 
         # Add return type if present
         if return_type:
-            return f'{indent}def {method_name}({params}) -> {return_type.strip()}:\n{indent}    """{docstring}"""'
+            return f'{indent}def {method_name}({params}) -> {return_type.strip()}:\n{indent}    """
+{docstring}
+"""'
         else:
-            return f'{indent}def {method_name}({params}):\n{indent}    """{docstring}"""'
+            return f'{indent}def {method_name}({params}):\n{indent}    """
+{docstring}
+"""'
 
     # Fix method definitions and their docstrings
     content = re.sub(
-        r'(\s*)def\s+(\w+)\s*\((.*?)\)\s*(?:->(.+?))?\s*:\s*(?:""".*?""")?',
+        r'(\s*)def\s+(\w+)\s*\((.*?)\)\s*(?:->(.+?))?\s*:\s*(?:"""
+.*?
+""")?',
         format_method_docstring,
         content,
         flags=re.DOTALL
@@ -75,7 +97,9 @@ def format_method_docstring(match):
     return content
 
 def fix_file(*args, **kwargs) -> None:
-    """Process a single file to fix syntax issues."""
+    """
+Process a single file to fix syntax issues.
+"""
 print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
@@ -98,7 +122,9 @@ print(f"Processing {file_path}...")
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Process all files that need fixing."""
+    """
+Process all files that need fixing.
+"""
 files_to_fix = [
         "src/test_simple.py",
         "src/test_simple_cot.py",

@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_nested_blocks(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 indent_level = 0
@@ -26,14 +28,18 @@ if not stripped: fixed_lines.append("")
 continue
 
 # Track class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_class = True
         indent_level = 0
         elif stripped.startswith("def "):
         in_function = True
         indent_level = 4 if in_class else:
-    """Class implementing else functionality."""
+    """
+Class implementing else functionality.
+"""
 
 "):
                 if any(                 stripped.startswith(keyword)
@@ -57,21 +63,27 @@ in_class = True
                         ):
                         indent_level -= 1
                         if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 indent_level = 1                                        elif in_function and indent_level < 1: in_function= False
                         # Add line with proper indentation
                         fixed_lines.append("    " * indent_level + stripped)
 
                         # Reset tracking if we're at class end:
-    """Class implementing end functionality."""
+    """
+Class implementing end functionality.
+"""
 
 in_class = False
                         return "\n".join(fixed_lines)
 
 
                             def def fix_imports(self                             content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
                                 fixed_lines = []
                                 import_block = []
@@ -96,7 +108,9 @@ in_class = False
                                 return "\n".join(fixed_lines)
 
 
-                                    def def main(self)::    """Process files with indentation and string formatting issues."""        # Focus on files with known issues):
+                                    def def main(self)::    """
+Process files with indentation and string formatting issues.
+"""        # Focus on files with known issues):
                                         files_to_fix = [
                                         "src/models/audio_model.py",
                                         "src/models/video_model.py",

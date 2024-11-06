@@ -11,13 +11,17 @@ from dataclasses import dataclass, field
 import os
 
 def fix_mathematical_notation(*args, **kwargs) -> None:
-    """Fix syntax in mathematical_notation.py."""
+    """
+Fix syntax in mathematical_notation.py.
+"""
 content = '''import torch
 import torch.nn as nn
 from typing import List, Optional, Tuple
 
 class MathematicalNotation:
-    """Class implementing MathematicalNotation functionality."""
+    """
+Class implementing MathematicalNotation functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -25,13 +29,15 @@ def __init__(self, *args, **kwargs) -> None:
         self.symbol_processor = nn.Linear(512, 512)
 
     def forward(self, notation_ids: torch.Tensor) -> torch.Tensor:
-        """Process mathematical notation.
+        """
+Process mathematical notation.
 
         Args:
             notation_ids: Tensor of notation token IDs
 
         Returns:
-            Processed notation embeddings"""
+            Processed notation embeddings
+"""
         embeddings = self.notation_embeddings(notation_ids)
         return self.symbol_processor(embeddings)
 '''
@@ -39,12 +45,16 @@ def __init__(self, *args, **kwargs) -> None:
         f.write(content)
 
 def fix_symbolic_math(*args, **kwargs) -> None:
-    """Fix syntax in symbolic_math.py."""
+    """
+Fix syntax in symbolic_math.py.
+"""
 content = '''import torch
 from typing import Dict, List, Optional
 
 class SymbolicMath:
-    """Class implementing SymbolicMath functionality."""
+    """
+Class implementing SymbolicMath functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -57,14 +67,16 @@ def __init__(self, *args, **kwargs) -> None:
         symbols: torch.Tensor,
         operations: torch.Tensor
     ) -> torch.Tensor:
-        """Process symbolic mathematics.
+        """
+Process symbolic mathematics.
 
         Args:
             symbols: Tensor of symbol IDs
             operations: Tensor of operation IDs
 
         Returns:
-            Processed symbolic mathematics"""
+            Processed symbolic mathematics
+"""
         symbol_embeds = self.symbol_embeddings(symbols)
         operation_embeds = self.operation_embeddings(operations)
         combined = torch.cat([symbol_embeds, operation_embeds], dim=-1)
@@ -74,13 +86,19 @@ def __init__(self, *args, **kwargs) -> None:
         f.write(content)
 
 def fix_text_to_anything(*args, **kwargs) -> None:
-    """Fix syntax in text_to_anything.py."""
-content = '''"""Configuration for text-to-anything generation."""
+    """
+Fix syntax in text_to_anything.py.
+"""
+content = '''"""
+Configuration for text-to-anything generation.
+"""
 
 from dataclasses from typing import List, Optional, Dict import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 max_length: int = 1024
     min_length: int = 0
@@ -93,7 +111,9 @@ max_length: int = 1024
     do_sample: bool = True
 
 class TextToAnything:
-    """Class implementing TextToAnything functionality."""
+    """
+Class implementing TextToAnything functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         self.config = config or GenerationConfig()
@@ -104,7 +124,8 @@ def __init__(self, *args, **kwargs) -> None:
         target_modality: str,
         **kwargs: Dict
     ) -> List[str]:
-        """Generate content in target modality from input text.
+        """
+Generate content in target modality from input text.
 
         Args:
             text: Input text to convert
@@ -112,7 +133,8 @@ def __init__(self, *args, **kwargs) -> None:
             **kwargs: Additional generation parameters
 
         Returns:
-            List of generated outputs"""
+            List of generated outputs
+"""
         # Implementation details
         return []
 '''
@@ -120,20 +142,26 @@ def __init__(self, *args, **kwargs) -> None:
         f.write(content)
 
 def fix_simple_model(*args, **kwargs) -> None:
-    """Fix syntax in simple_model.py."""
+    """
+Fix syntax in simple_model.py.
+"""
 content = '''import torch
 from dataclasses import dataclass
 from typing import Optional
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_dim: int = 32
     num_layers: int = 2
     dropout: float = 0.1
 
 class SimpleModel:
-    """Class implementing SimpleModel functionality."""
+    """
+Class implementing SimpleModel functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -146,13 +174,15 @@ def __init__(self, *args, **kwargs) -> None:
         self.dropout = nn.Dropout(self.config.dropout)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass through the model.
+        """
+Forward pass through the model.
 
         Args:
             x: Input tensor
 
         Returns:
-            Output tensor"""
+            Output tensor
+"""
         for layer in self.layers:
             x = self.dropout(torch.relu(layer(x)))
         return x
@@ -161,11 +191,15 @@ def __init__(self, *args, **kwargs) -> None:
         f.write(content)
 
 def fix_transformer(*args, **kwargs) -> None:
-    """Fix syntax in transformer.py."""
+    """
+Fix syntax in transformer.py.
+"""
 content = '''import torch
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_attention_heads: int = 12
@@ -175,7 +209,9 @@ hidden_size: int = 768
     attention_probs_dropout_prob: float = 0.1
 
 class Transformer:
-    """Class implementing Transformer functionality."""
+    """
+Class implementing Transformer functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -193,26 +229,32 @@ def __init__(self, *args, **kwargs) -> None:
         )
 
     def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """Forward pass through the transformer.
+        """
+Forward pass through the transformer.
 
         Args:
             x: Input tensor
             mask: Optional attention mask
 
         Returns:
-            Output tensor"""
+            Output tensor
+"""
         return self.encoder(x, mask=mask)
 '''
     with open('src/models/transformer.py', 'w') as f:
         f.write(content)
 
 def fix_video_model(*args, **kwargs) -> None:
-    """Fix syntax in video_model.py."""
+    """
+Fix syntax in video_model.py.
+"""
 content = '''import torch
 from dataclasses from typing import List, Optional, Tuple import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 input_channels: int = 3
     hidden_dim: int = 64
@@ -220,7 +262,9 @@ input_channels: int = 3
     frame_size: Tuple[int, int] = (224, 224)
 
 class VideoModel:
-    """Class implementing VideoModel functionality."""
+    """
+Class implementing VideoModel functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -244,13 +288,15 @@ def __init__(self, *args, **kwargs) -> None:
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Process video input.
+        """
+Process video input.
 
         Args:
             x: Input video tensor [batch, time, channels, height, width]
 
         Returns:
-            Processed video features"""
+            Processed video features
+"""
         # Spatial encoding
         x = self.spatial_encoder(x.transpose(1, 2))
 
@@ -266,7 +312,9 @@ def __init__(self, *args, **kwargs) -> None:
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in critical files."""
+    """
+Fix syntax in critical files.
+"""
 print("Fixing mathematical_notation.py...")
     fix_mathematical_notation()
 

@@ -8,13 +8,17 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-import """Module
-from typing import Tuple containing specific functionality."""
+import """
+Module
+from typing import Tuple containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List
 def fix_method_definition(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_method = False
@@ -35,7 +39,9 @@ indent = len(line) - len(stripped)
         if "def self" in stripped:
         # Handle special case of malformed self methods
             if 'Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
                 "def __init__")
                 if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
@@ -66,12 +72,14 @@ indent = len(line) - len(stripped)
                         else: fixed_lines.append(line)
 
                         # Check for docstring in next line
-                            if i + 1 < len(lines) and '"""' in lines[i + 1].strip():
+                            if i + 1 < len(lines) and '"""
+' in lines[i + 1].strip():
                                 docstring_started = True
 
                                 elif docstring_started:
                                 # Handle docstring
-                                    if '"""' in stripped and not stripped.startswith('"""'):
+                                    if '
+"""' in stripped and not stripped.startswith('"""'):
                                         # End of docstring
                                         docstring_started = False
                                         fixed_lines.append(line)
@@ -90,7 +98,9 @@ indent = len(line) - len(stripped)
                                         return "\n".join(fixed_lines)
 
 
-                                            def def main(self)::    """method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                                            def def main(self)::    """
+method definition syntax in math_reasoning.py.
+"""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                                             try:
                                                 # Read the file

@@ -13,7 +13,9 @@ import re
 
 
 def fix_indentation(content) -> None:
-    """Fix indentation issues in the content."""
+    """
+Fix indentation issues in the content.
+"""
         # Split content into lines
 lines = content.split("\n")
 
@@ -38,7 +40,9 @@ else: fixed_lines.append(stripped)
 continue
 
 # Detect class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 if not previous_was_decorator: current_indent = 0        in_class = True
         fixed_lines.append(" " * current_indent + stripped)
@@ -64,7 +68,9 @@ if not previous_was_decorator: current_indent = 0        in_class = True
                 continue
 
                 # Handle class body:
-    """Class implementing body functionality."""
+    """
+Class implementing body functionality.
+"""
 
 ifnotre.match(r"^(class|def|@)\s*\w+"
                     stripped):

@@ -16,8 +16,10 @@ def fix_setup_py():
 
     # Move docstring to top
     content = re.sub(
-        r'from setuptools import setup, find_packages\n"""([^"]*)"""',
-        r'"""Setup script for Generative-Flex."""\n\nfrom setuptools import setup, find_packages',
+        r'from setuptools import setup, find_packages\n"""([^"]*)"""
+',
+        r'
+"""Setup script for Generative-Flex."""\n\nfrom setuptools import setup, find_packages',
         content
     )
 

@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 import os
 from pathlib import Path
@@ -23,7 +25,9 @@ from typing import List,
 
 def fix_type_hints(content:
     str) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.splitlines()
 fixed_lines = []
 
@@ -58,7 +62,9 @@ fixed_lines = []
 
 
                             def fix_dataclass_fields(content: str) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.splitlines()
                                 fixed_lines = []
                                 in_class = False
@@ -66,7 +72,9 @@ fixed_lines = []
 
                                 for line in lines:
                                 # Detect class start:
-    """Class implementing start functionality."""
+    """
+Class implementing start functionality.
+"""
 
 in_class = True
                                         class_indent = len(re.match(r'(\s*)', line).group(1))
@@ -75,7 +83,9 @@ in_class = True
 
                                         if in_class: stripped = line.strip()
                                         # End of class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 in_class = False
                                                 # Fix field definitions
@@ -106,7 +116,9 @@ if '
 
 
                                                                                         def fix_class_attributes(content: str) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.splitlines()
                                                                                             fixed_lines = []
                                                                                             in_class = False
@@ -114,7 +126,9 @@ if '
 
                                                                                             for line in lines:
                                                                                             # Detect class start:
-    """Class implementing start functionality."""
+    """
+Class implementing start functionality.
+"""
 
 in_class = True
                                                                                                     class_indent = len(re.match(r'(\s*)', line).group(1))
@@ -123,7 +137,9 @@ in_class = True
 
                                                                                                     if in_class: stripped = line.strip()
                                                                                                     # End of class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 in_class = False
                                                                                                             # Fix attribute definitions
@@ -149,7 +165,9 @@ in_class = False
 
 
                                                                                                                                                 def process_file(file_path: str) -> bool: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 :
                                                                                                                                                     with open(file_path                                                                                                                                                         'r'                                                                                                                                                        encoding='utf-8') as f: content = f.read()
 
@@ -167,9 +185,13 @@ in_class = False
 
 
                                                                                                                                                                     def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Fix type hints and dataclass fields:
-    """Class implementing fields functionality."""
+    """
+Class implementing fields functionality.
+"""
 
 if '.git' in root: continue
                                                                                                                                                                         for file in files: if file.endswith('.py'):

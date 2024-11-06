@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_imports(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix split dataclasses import
     content = re.sub(r'from\s+dataclass\s+es\s+import', 'from dataclasses import', content)
@@ -33,34 +35,53 @@ def fix_imports(content: str) -> str: Fix
     return content
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]*:)\s*"""([^"]+)"""',
-        r'\1\n"""\2"""',
+]*:)\s*"""([^"]+)"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     # Fix function docstrings
     content = re.sub(
-        r'(def\s+\w+[^:]*:)\s*"""([^"]+)"""',
-        r'\1\n"""\2"""',
+        r'(def\s+\w+[^:]*:)\s*
+"""([^"]+)"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     # Fix empty docstrings
-    content = re.sub(r'""""""', '""" docstring.Fix
-"""Module containing specific functionality."""
+    content = re.sub(r'
+
+', '
+""" docstring.Fix
+"""
+Module containing specific functionality.
+"""
 ',
-        r'\1\n        """',
+        r'\1\n        """
+',
         content
     )
 
     return content
 
-def fix_type_hints(content: str) -> str:"""Module containing specific functionality."""# Fix return type hints
+def fix_type_hints(content: str) -> str:
+"""Module containing specific functionality."""
+# Fix return type hints
     content = re.sub(r'\)\s*->\s*(\w+):', r') -> \1:', content)
     content = re.sub(r'\)\s*->\s*Optional\[([^]]+)\]:', r') -> Optional[\1]:', content)
 
@@ -70,7 +91,8 @@ def fix_type_hints(content: str) -> str:"""Module containing specific functional
 
     return content
 
-def process_file(file_path: Path) -> None:"""Module containing specific functionality."""
+def process_file(file_path: Path) -> None:
+"""Module containing specific functionality."""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -97,7 +119,9 @@ def process_file(file_path: Path) -> None:"""Module containing specific function
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """import and docstring issues in critical files."""
+    """
+import and docstring issues in critical files.
+"""
 
     critical_files = [
         'src/models/text_to_anything.py',

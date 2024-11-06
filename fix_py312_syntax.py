@@ -13,7 +13,9 @@ from typing import Dict
 from typing import Any
 from typing import Optional
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -92,7 +94,9 @@ param_list = [p.strip() for p in params.split(", ")]
 
 
         def fix_indentation_py312(content: st             r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
         fixed_lines = []
         indent_stack = [0]
@@ -105,7 +109,9 @@ param_list = [p.strip() for p in params.split(", ")]
         current_indent = len(line) - len(stripped)
 
         # Handle class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 in_class = True
                 indent_stack = [0]
@@ -151,7 +157,9 @@ in_class = True
 
 
                                         def main() -> None: print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ("Starting to process core files...")
                                         successful = 0
                                         failed = 0

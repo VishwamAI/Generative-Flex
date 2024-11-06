@@ -11,8 +11,12 @@ from dataclasses import dataclass, field
 import os
 
 def fix_jax_trainer(*args, **kwargs) -> None:
-    """Fix syntax in jax_trainer.py."""
-content = '''"""JAX-based trainer implementation."""
+    """
+Fix syntax in jax_trainer.py.
+"""
+content = '''"""
+JAX-based trainer implementation.
+"""
 
 import jax
 import jax.numpy as jnp
@@ -22,7 +26,9 @@ from src.models import BaseModel
 from src.utils.training_utils import TrainingUtils
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 learning_rate: float = 1e-4
     batch_size: int = 32
@@ -33,27 +39,33 @@ learning_rate: float = 1e-4
     optimizer_params: Dict = field(default_factory=dict)
 
 class JaxTrainer:
-    """Class implementing JaxTrainer functionality."""
+    """
+Class implementing JaxTrainer functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize JAX trainer.
+    """
+Initialize JAX trainer.
 
         Args:
             model: Model to train
-            config: Optional trainer configuration"""
+            config: Optional trainer configuration
+"""
 self.model = model
         self.config = config or JaxTrainerConfig()
         self.utils = TrainingUtils()
 
     def train_step(self, state: Dict, batch: Dict) -> Tuple[Dict, float]:
-        """Perform single training step.
+        """
+Perform single training step.
 
         Args:
             state: Current training state
             batch: Batch of training data
 
         Returns:
-            Updated state and loss value"""
+            Updated state and loss value
+"""
         def loss_fn(params):
             logits = self.model.apply(params, batch["input_ids"])
             loss = jnp.mean(
@@ -80,13 +92,15 @@ self.model = model
         return state, loss
 
     def train(self, train_data: Dict) -> Dict:
-        """Train model on provided data.
+        """
+Train model on provided data.
 
         Args:
             train_data: Training dataset
 
         Returns:
-            Training metrics"""
+            Training metrics
+"""
         state = self.utils.init_training_state(
             self.model,
             self.config
@@ -112,29 +126,41 @@ self.model = model
         f.write(content)
 
 def fix_logging(*args, **kwargs) -> None:
-    """Fix syntax in logging.py."""
-content = '''"""Training logger implementation."""
+    """
+Fix syntax in logging.py.
+"""
+content = '''"""
+Training logger implementation.
+"""
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
 log_file: str = "training.log"
     console_level: str = "INFO"
     file_level: str = "DEBUG"
 
 class TrainingLogger:
-    """Class implementing TrainingLogger functionality."""
+    """
+Class implementing TrainingLogger functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize training logger.
+    """
+Initialize training logger.
 
         Args:
-            config: Optional logger configuration"""
+            config: Optional logger configuration
+"""
 self.config = config or LoggerConfig()
         self._setup_logger()
 
     def _setup_logger(*args, **kwargs) -> None:
-    """Set up logging configuration."""
+    """
+Set up logging configuration.
+"""
 self.logger = logging.getLogger("training")
         self.logger.setLevel(logging.DEBUG)
 
@@ -149,19 +175,23 @@ self.logger = logging.getLogger("training")
         self.logger.addHandler(file_handler)
 
     def log_metrics(*args, **kwargs) -> None:
-    """Log training metrics.
+    """
+Log training metrics.
 
         Args:
-            metrics: Dictionary of metrics to log"""
+            metrics: Dictionary of metrics to log
+"""
 for name, value in metrics.items():
             self.logger.info(f"{name}: {value}")
 
     def log_event(*args, **kwargs) -> None:
-    """Log training event.
+    """
+Log training event.
 
         Args:
             event: Event description
-            level: Logging level"""
+            level: Logging level
+"""
 log_fn = getattr(self.logger, level.lower())
         log_fn(event)
 '''
@@ -169,32 +199,46 @@ log_fn = getattr(self.logger, level.lower())
         f.write(content)
 
 def fix_timeout(*args, **kwargs) -> None:
-    """Fix syntax in timeout.py."""
-content = '''"""Timeout utilities for training."""
+    """
+Fix syntax in timeout.py.
+"""
+content = '''"""
+Timeout utilities for training.
+"""
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
 timeout_seconds: int = 3600
     callback: Optional[Callable] = None
 
 class TimeoutError:
-    """Class implementing TimeoutError functionality."""
+    """
+Class implementing TimeoutError functionality.
+"""
 
 pass
 
 class TimeoutHandler:
-    """Class implementing TimeoutHandler functionality."""
+    """
+Class implementing TimeoutHandler functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize timeout handler.
+    """
+Initialize timeout handler.
 
         Args:
-            config: Optional timeout configuration"""
+            config: Optional timeout configuration
+"""
 self.config = config or TimeoutConfig()
 
     def __enter__(*args, **kwargs) -> None:
-    """Set up timeout handler."""
+    """
+Set up timeout handler.
+"""
 def handler(signum, frame):
             if self.config.callback:
                 self.config.callback()
@@ -204,34 +248,48 @@ def handler(signum, frame):
         signal.alarm(self.config.timeout_seconds)
 
     def __exit__(*args, **kwargs) -> None:
-    """Clean up timeout handler."""
+    """
+Clean up timeout handler.
+"""
 signal.alarm(0)
 '''
     with open('src/training/utils/timeout.py', 'w') as f:
         f.write(content)
 
 def fix_device_test(*args, **kwargs) -> None:
-    """Fix syntax in device_test.py."""
-content = '''"""Test device configuration functionality."""
+    """
+Fix syntax in device_test.py.
+"""
+content = '''"""
+Test device configuration functionality.
+"""
 
 import unittest
 import torch
 from src.utils.device_config import DeviceConfig
 
 class TestDeviceConfig:
-    """Class implementing TestDeviceConfig functionality."""
+    """
+Class implementing TestDeviceConfig functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.config = DeviceConfig()
 
     def test_device_configuration(*args, **kwargs) -> None:
-    """Test device configuration."""
+    """
+Test device configuration.
+"""
 device = self.config.get_device()
         self.assertIsNotNone(device)
 
     def test_cuda_availability(*args, **kwargs) -> None:
-    """Test CUDA availability check."""
+    """
+Test CUDA availability check.
+"""
 if torch.cuda.is_available():
             self.assertTrue(self.config.is_cuda_available())
 '''
@@ -239,26 +297,38 @@ if torch.cuda.is_available():
         f.write(content)
 
 def fix_environment_test(*args, **kwargs) -> None:
-    """Fix syntax in environment_test.py."""
-content = '''"""Test environment setup functionality."""
+    """
+Fix syntax in environment_test.py.
+"""
+content = '''"""
+Test environment setup functionality.
+"""
 
 import torch
 from src.utils.environment_setup import EnvironmentSetup
 
 class TestEnvironment:
-    """Class implementing TestEnvironment functionality."""
+    """
+Class implementing TestEnvironment functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.env = EnvironmentSetup()
 
     def test_environment(*args, **kwargs) -> None:
-    """Test environment setup."""
+    """
+Test environment setup.
+"""
 self.assertIsNotNone(self.env)
         self.env.setup()
 
     def test_cuda_setup(*args, **kwargs) -> None:
-    """Test CUDA setup."""
+    """
+Test CUDA setup.
+"""
 if torch.cuda.is_available():
             self.assertTrue(self.env.setup_cuda())
 '''
@@ -266,27 +336,39 @@ if torch.cuda.is_available():
         f.write(content)
 
 def fix_gpu_test(*args, **kwargs) -> None:
-    """Fix syntax in gpu_test.py."""
-content = '''"""Test GPU utilities functionality."""
+    """
+Fix syntax in gpu_test.py.
+"""
+content = '''"""
+Test GPU utilities functionality.
+"""
 
 import torch
 from src.utils.gpu_utils import GPUUtils
 
 class TestGPU:
-    """Class implementing TestGPU functionality."""
+    """
+Class implementing TestGPU functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.utils = GPUUtils()
 
     def test_gpu_memory(*args, **kwargs) -> None:
-    """Test GPU memory utilities."""
+    """
+Test GPU memory utilities.
+"""
 if torch.cuda.is_available():
             memory_info = self.utils.get_memory_info()
             self.assertIsNotNone(memory_info)
 
     def test_gpu_availability(*args, **kwargs) -> None:
-    """Test GPU availability check."""
+    """
+Test GPU availability check.
+"""
 is_available = self.utils.is_gpu_available()
         self.assertIsInstance(is_available, bool)
 '''
@@ -294,21 +376,31 @@ is_available = self.utils.is_gpu_available()
         f.write(content)
 
 def fix_check_params(*args, **kwargs) -> None:
-    """Fix syntax in check_params.py."""
-content = '''"""Test parameter validation functionality."""
+    """
+Fix syntax in check_params.py.
+"""
+content = '''"""
+Test parameter validation functionality.
+"""
 
 import torch
 from src.utils.param_validator import ParamValidator
 
 class TestParamValidation:
-    """Class implementing TestParamValidation functionality."""
+    """
+Class implementing TestParamValidation functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.validator = ParamValidator()
 
     def test_param_validation(*args, **kwargs) -> None:
-    """Test parameter validation."""
+    """
+Test parameter validation.
+"""
 params = {
             "learning_rate": 1e-4,
             "batch_size": 32
@@ -316,7 +408,9 @@ params = {
         self.assertTrue(self.validator.validate(params))
 
     def test_invalid_params(*args, **kwargs) -> None:
-    """Test invalid parameter detection."""
+    """
+Test invalid parameter detection.
+"""
 params = {
             "learning_rate": -1,
             "batch_size": 0
@@ -327,28 +421,40 @@ params = {
         f.write(content)
 
 def fix_simple_test(*args, **kwargs) -> None:
-    """Fix syntax in simple_test.py."""
-content = '''"""Test simple model functionality."""
+    """
+Fix syntax in simple_test.py.
+"""
+content = '''"""
+Test simple model functionality.
+"""
 
 import torch
 import torch.nn as nn
 from src.models import SimpleModel
 
 class TestSimpleModel:
-    """Class implementing TestSimpleModel functionality."""
+    """
+Class implementing TestSimpleModel functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.model = SimpleModel()
 
     def test_forward_pass(*args, **kwargs) -> None:
-    """Test forward pass."""
+    """
+Test forward pass.
+"""
 input_tensor = torch.randn(1, 32)
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
 
     def test_batch_processing(*args, **kwargs) -> None:
-    """Test batch processing."""
+    """
+Test batch processing.
+"""
 batch_size = 16
         input_tensor = torch.randn(batch_size, 32)
         output = self.model(input_tensor)
@@ -358,7 +464,9 @@ batch_size = 16
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in utility and test files."""
+    """
+Fix syntax in utility and test files.
+"""
 print("Fixing jax_trainer.py...")
     fix_jax_trainer()
 

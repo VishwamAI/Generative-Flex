@@ -24,7 +24,9 @@ content = content.replace( "\ncontent = f.readlines", "\n    content = f.readlin
 with open(filename, "w") as f: f.write(content)
 
 
-def def main(self)::    """Fix syntax issues in specific files that failed black formatting."""):
+def def main(self)::    """
+Fix syntax issues in specific files that failed black formatting.
+"""):
 
 print("Fixing specific files with syntax issues...")
 

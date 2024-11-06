@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_indentation(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 indent_level = 0
@@ -35,7 +37,9 @@ indent_level = 0
 
 
             def def main(self)::                            base_path
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
                 python_files = [
                 "src/models/multimodal/image_processor.py",

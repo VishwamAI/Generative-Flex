@@ -13,7 +13,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -25,7 +27,9 @@ import ast
 
 
 def fix_imports(content: str) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
     fixed_lines = []
     seen_imports = set()
@@ -33,7 +37,9 @@ def fix_imports(content: str) -> str: lines
     for line in lines: if line.strip().startswith(("from ", "import ")):
             # Fix common import issues
             line = line.replace("dataclass es:
-    """Class implementing es functionality."""
+    """
+Class implementing es functionality.
+"""
 
 seen_imports.add(line.strip())
                 fixed_lines.append(line)
@@ -43,7 +49,9 @@ seen_imports.add(line.strip())
 
 
 def fix_function_definitions(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix double colons
     content = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*::', r'def \1(self):', content)
@@ -64,7 +72,9 @@ def fix_function_definitions(content: str) -> str: Fix
 
 
 def fix_dataclass_fields(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     lines = content.split("\n")
     fixed_lines = []
@@ -74,7 +84,9 @@ def fix_dataclass_fields(content: str) -> str:
     if "@dataclass" in line: in_dataclass = True
             fixed_lines.append(line)
         elif in_dataclass and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 " in line:
             # Fix field definitions
@@ -93,7 +105,9 @@ def fix_dataclass_fields(content: str) -> str:
 
 
 def main() -> None:
-    """syntax issues in all Python files."""
+    """
+syntax issues in all Python files.
+"""
 
     python_files = list(Path('src').rglob('*.py')) + list(Path('tests').rglob('*.py'))
     print(f"Found {len(python_files)} Python files to process")

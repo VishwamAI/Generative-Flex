@@ -14,8 +14,11 @@ import re
 from pathlib import Path
 
 def def fix_type_annotations(*args, **kwargs) -> None:
-    """Process"""
-Fix malformed type annotations in Python files."""# Fix function signatures with type hints
+    """
+Process
+"""
+Fix malformed type annotations in Python files."""
+# Fix function signatures with type hints
     lines = content.split('\n')
     fixed_lines = []
     in_function = False
@@ -33,7 +36,8 @@ Fix malformed type annotations in Python files."""# Fix function signatures with
         elif in_function and (stripped.endswith((':', ',')) or '->' in stripped):
             function_lines.append(line)
         # End of function definition
-        elif in_function and (not stripped or stripped.startswith(('"""', "'''"))):
+        elif in_function and (not stripped or stripped.startswith(('
+"""', "'''"))):
             if function_lines: fixed_lines.extend(process_function_definition(function_lines))
             fixed_lines.append(line)
             in_function = False
@@ -47,9 +51,12 @@ Fix malformed type annotations in Python files."""# Fix function signatures with
     return '\n'.join(fixed_lines)
 
 def def process_function_definition(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 and fix a function definition.Add
-    """joined = ' '.join(line.strip() for line in lines)
+    """
+joined = ' '.join(line.strip() for line in lines)
 
     # Fix return type annotations
     joined = re.sub(r'\)\s*->\s*Dict\[str\s*$', ') -> Dict[str, Any]:', joined)
@@ -86,13 +93,10 @@ and fix a function definition.Add
 
     return [' ' * indent + joined]
 
-def def fix_imports(*args, **kwargs) -> None:"""
+def def fix_imports(*args, **kwargs) -> None:
 
-
-
-
-
-    """missing imports.Fix"""
+missing imports.Fix
+"""
 
     if 'Dict' in content and 'from typing import Dict' not in content: content = 'from typing import Dict,
 
@@ -100,7 +104,9 @@ def def fix_imports(*args, **kwargs) -> None:"""
     return content
 
 def def fix_file(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 type annotations in a file.Fix
     """
 
@@ -119,7 +125,9 @@ type annotations in a file.Fix
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 type annotations in Python files."""
 
     files_to_fix = [

@@ -13,7 +13,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 import ast
@@ -22,15 +24,21 @@ from typing import List,
 
 
 class SyntaxFixer:
-    """Class implementing SyntaxFixer functionality."""
+    """
+Class implementing SyntaxFixer functionality.
+"""
 
 Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     @staticmethod
     def fix_docstring_position(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         lines = content.splitlines()
         fixed_lines = []
@@ -45,7 +53,9 @@ Fix
             stripped = line.lstrip()
 
             # Track class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_class = True
                 class_indent = len(line) - len(stripped)
@@ -86,7 +96,9 @@ in_class = True
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         def format_class_def(match) -> str:
     class_name = match.group(1)
@@ -116,17 +128,27 @@ in_class = True
     ):
         super().__init__()
         {chr(10).join(f'        self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}class
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  {class_name}({parent}):
     \"\"\"Class inheriting from {parent}.\"\"\"
 
     def def __init__(*args, **kwargs) -> None:
-    """super().__init__()Class"""
+    """
+super().__init__()Class
+"""
 # Fix various class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 \.\w+)*)\s*\)\s*:\s*([^:\n]+)?', format_class_def),
-            (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:', r'class \1(\2):\n    """inheriting from \2.Fix"""Module containing specific functionality."""method signatures and parameter formatting.def"""
+            (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:', r'class \1(\2):\n    """
+inheriting from \2.Fix
+"""Module containing specific functionality."""
+method signatures and parameter formatting.def
+"""
         def format_method_def(match) -> str: method_name = match.group(1)
             params = match.group(2)
 
@@ -166,7 +188,9 @@ Fix
 
     @staticmethod
     def fix_indentation(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         lines = content.splitlines()
         fixed_lines = []
@@ -210,7 +234,9 @@ Fix
         return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -230,7 +256,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

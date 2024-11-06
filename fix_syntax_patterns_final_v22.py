@@ -12,39 +12,56 @@ import os
 import re
 
 def fix_docstring_indentation(*args, **kwargs) -> None:
-    """Fix docstring indentation and placement."""
+    """
+Fix docstring indentation and placement.
+"""
 # Remove docstrings from import lines
     content = re.sub(
-        r'from\s+"""[^"]+"""\s+import',
+        r'from\s+"""[^"]+"""
+\s+import',
         'from',
         content
     )
 
     # Fix module-level docstrings
     content = re.sub(
-        r'^(\s*)"""([^"]+)"""',
-        r'"""\2"""',
+        r'^(\s*)
+"""([^"]+)"""
+',
+        r'
+"""\2"""
+',
         content,
         flags=re.MULTILINE
     )
 
     # Fix class-level docstrings
     content = re.sub(
-        r'(class\s+\w+[^:]*:)\s*"""([^"]+)"""',
-        r'\1\n"""\2"""',
+        r'(class\s+\w+[^:]*:)\s*
+"""([^"]+)"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     # Fix method-level docstrings
     content = re.sub(
-        r'(def\s+\w+[^:]*:)\s*"""([^"]+)"""',
-        r'\1\n"""\2"""',
+        r'(def\s+\w+[^:]*:)\s*
+"""([^"]+)"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     return content
 
-def fix_import_statements(*args, **kwargs) -> None:"""Fix import statement formatting."""# Fix multiple imports on same line
+def fix_import_statements(*args, **kwargs) -> None:
+"""Fix import statement formatting."""
+# Fix multiple imports on same line
     content = re.sub(
         r'from\s+(\w+(?:\.\w+)*)\s+import\s+(\w+)\s+import\s+(\w+)',
         r'from \1 import \2, \3',
@@ -60,27 +77,38 @@ def fix_import_statements(*args, **kwargs) -> None:"""Fix import statement forma
 
     # Fix imports with docstrings
     content = re.sub(
-        r'"""[^"]+"""\s*import',
+        r'
+"""[^"]+"""
+\s*import',
         'import',
         content
     )
 
     return content
 
-def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definition:
-    """Class implementing definition functionality."""
+def fix_class_definitions(*args, **kwargs) -> None:
+"""Fix class definition:
+    """
+Class implementing definition functionality.
+"""
 
 \.\w+)*)\s*\)\s*:\s*$',
-        lambda m: f'class {m.group(1)}({m.group(2)}):\n    """Class for {m.group(1)}."""',
+        lambda m: f'class {m.group(1)}({m.group(2)}):\n    """
+Class for {m.group(1)}.
+"""',
         content,
         flags=re.MULTILINE
     )
 
     # Fix class method:
-    """Class implementing method functionality."""
+    """
+Class implementing method functionality.
+"""
 
 \s*$',
-        lambda m: f'{m.group(1)}def {m.group(2)}(self):\n{m.group(1)}    """Implementation of {m.group(2)}."""',
+        lambda m: f'{m.group(1)}def {m.group(2)}(self):\n{m.group(1)}    """
+Implementation of {m.group(2)}.
+"""',
         content,
         flags=re.MULTILINE
     )
@@ -88,25 +116,34 @@ def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definition:
     return content
 
 def fix_method_definitions(*args, **kwargs) -> None:
-    """Fix method definition formatting."""
+    """
+Fix method definition formatting.
+"""
 # Fix method parameters with type hints
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*([^)]+)\s*\)\s*->\s*(\w+)\s*:\s*$',
-        lambda m: f'def {m.group(1)}({m.group(2).strip()}) -> {m.group(3)}:\n    """Method {m.group(1)}."""',
+        lambda m: f'def {m.group(1)}({m.group(2).strip()}) -> {m.group(3)}:\n    """
+Method {m.group(1)}.
+"""',
         content,
         flags=re.MULTILINE
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(\s+)def\s+(\w+)[^:]+:\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}def {m.group(2)}:\n{m.group(1)}"""{m.group(3)}"""',
+        r'(\s+)def\s+(\w+)[^:]+:\s*"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}def {m.group(2)}:\n{m.group(1)}
+"""{m.group(3)}"""
+',
         content
     )
 
     return content
 
-def fix_type_hints(*args, **kwargs) -> None:"""Fix type hint formatting."""# Fix type hint spacing
+def fix_type_hints(*args, **kwargs) -> None:
+"""Fix type hint formatting."""
+# Fix type hint spacing
     content = re.sub(
         r'(\w+)\s*:\s*(\w+(?:\[[\w\[\], ]+\])?)',
         r'\1: \2',
@@ -122,7 +159,8 @@ def fix_type_hints(*args, **kwargs) -> None:"""Fix type hint formatting."""# Fix
 
     return content
 
-def process_file(*args, **kwargs) -> None:"""Process a single file."""
+def process_file(*args, **kwargs) -> None:
+"""Process a single file."""
 print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -148,7 +186,9 @@ print(f"Processing {filepath}")
         print(f"Error processing {filepath}: {str(e)}")
 
 def main(*args, **kwargs) -> None:
-    """Process files with syntax errors."""
+    """
+Process files with syntax errors.
+"""
 # Get all Python files recursively
     python_files = []
     for root, _, files in os.walk('src'):

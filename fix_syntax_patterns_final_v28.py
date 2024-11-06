@@ -12,7 +12,9 @@ import os
 import re
 
 def fix_import_statements(*args, **kwargs) -> None:
-    """Fix import statement formatting."""
+    """
+Fix import statement formatting.
+"""
 # Fix multiple imports from typing with comma separation
     content = re.sub(
         r'from\s+typing,\s*([^,\n]+)(?:,\s*([^,\n]+))?(?:,\s*([^,\n]+))?',
@@ -65,26 +67,35 @@ def fix_import_statements(*args, **kwargs) -> None:
     return content
 
 def fix_class_definitions(*args, **kwargs) -> None:
-    """Fix class definition:"""
-Class implementing definition functionality."""\s*$',
+    """
+Fix class definition:
+"""
+Class implementing definition functionality."""
+\s*$',
         r'class \1(nn.Module):',
         content,
         flags=re.MULTILINE
     )
 
-    # Fix class inheritance:"""Class implementing inheritance functionality."""\s*$',
+    # Fix class inheritance:
+"""Class implementing inheritance functionality."""
+\s*$',
         r'class \1(unittest.TestCase):',
         content,
         flags=re.MULTILINE
     )
 
-    # Fix class inheritance:"""Class implementing inheritance functionality."""\s*$',
+    # Fix class inheritance:
+"""Class implementing inheritance functionality."""
+\s*$',
         r'class \1(Exception):',
         content,
         flags=re.MULTILINE
     )
 
-    # Fix class inheritance:"""Class implementing inheritance functionality."""\s*$',
+    # Fix class inheritance:
+"""Class implementing inheritance functionality."""
+\s*$',
         r'class \1:',
         content,
         flags=re.MULTILINE
@@ -92,36 +103,54 @@ Class implementing definition functionality."""\s*$',
 
     return content
 
-def fix_docstrings(*args, **kwargs) -> None:"""Fix docstring formatting and placement."""# Fix floating docstrings at file level
+def fix_docstrings(*args, **kwargs) -> None:
+"""Fix docstring formatting and placement."""
+# Fix floating docstrings at file level
     content = re.sub(
-        r'^(\s*)"""([^"]+)"""\s*$',
-        r'"""\2"""',
+        r'^(\s*)
+"""([^"]+)"""
+\s*$',
+        r'
+"""\2"""
+',
         content,
         flags=re.MULTILINE
     )
 
     # Fix docstring indentation in classes
     content = re.sub(
-        r'(class\s+\w+[^:]*:)\s*"""',
-        r'\1\n    """',
+        r'(class\s+\w+[^:]*:)\s*
+"""',
+        r'\1\n    """
+',
         content
     )
 
     # Fix docstring indentation in methods
     content = re.sub(
-        r'(def\s+\w+[^:]*:)\s*"""',
-        r'\1\n        """',
+        r'(def\s+\w+[^:]*:)\s*
+"""',
+        r'\1\n        """
+',
         content
     )
 
-    # Fix docstring placement after class definition:"""Class implementing definition functionality."""]*:)\s*([^\n"""]+)\s*"""',
-        r'\1\n"""\2"""',
+    # Fix docstring placement after class definition:
+"""Class implementing definition functionality."""
+]*:)\s*([^\n
+"""]+)\s*"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     return content
 
-def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions and parameters."""# Fix __init__ methods without parentheses
+def fix_method_definitions(*args, **kwargs) -> None:
+"""Fix method definitions and parameters."""
+# Fix __init__ methods without parentheses
     content = re.sub(
         r'(\s+)def\s+__init__\s*:',
         r'\1def __init__(self, *args, **kwargs) -> None:',
@@ -155,7 +184,9 @@ def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions an
 
     return content
 
-def fix_type_hints(*args, **kwargs) -> None:"""Fix type hint formatting."""# Fix return type hints
+def fix_type_hints(*args, **kwargs) -> None:
+"""Fix type hint formatting."""
+# Fix return type hints
     content = re.sub(
         r'def\s+(\w+)\s*\([^)]*\)\s*->\s*([^:]+):',
         lambda m: f'def {m.group(1)}({m.group(2).strip()}):',
@@ -169,14 +200,18 @@ def fix_type_hints(*args, **kwargs) -> None:"""Fix type hint formatting."""# Fix
         content
     )
 
-    # Fix type hints in class attributes:"""Class implementing attributes functionality."""\s*([^=\n]+)(?:=|$)',
+    # Fix type hints in class attributes:
+"""Class implementing attributes functionality."""
+\s*([^=\n]+)(?:=|$)',
         r'\1\2: \3',
         content
     )
 
     return content
 
-def fix_indentation(*args, **kwargs) -> None:"""Fix indentation issues."""lines = content.split('\n')
+def fix_indentation(*args, **kwargs) -> None:
+"""Fix indentation issues."""
+lines = content.split('\n')
     fixed_lines = []
     class_level = False
     method_level = False
@@ -187,7 +222,8 @@ def fix_indentation(*args, **kwargs) -> None:"""Fix indentation issues."""lines 
         stripped = line.lstrip()
 
         # Handle docstrings
-        if '"""' in line:
+        if '
+"""' in line:
             if not in_docstring:
                 in_docstring = True
                 docstring_indent = len(line) - len(stripped)
@@ -218,7 +254,9 @@ def fix_indentation(*args, **kwargs) -> None:"""Fix indentation issues."""lines 
     return '\n'.join(fixed_lines)
 
 def process_file(*args, **kwargs) -> None:
-    """Process a single file."""
+    """
+Process a single file.
+"""
 print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -245,7 +283,9 @@ print(f"Processing {filepath}")
         print(f"Error processing {filepath}: {str(e)}")
 
 def main(*args, **kwargs) -> None:
-    """Process files with syntax errors."""
+    """
+Process files with syntax errors.
+"""
 # Get all Python files recursively
     python_files = []
     for root, _, files in os.walk('src'):

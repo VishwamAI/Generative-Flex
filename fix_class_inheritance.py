@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -26,10 +28,14 @@ from typing import Any
 
 def fix_nn_module_class(content:
     str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 \s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
          lambda m: f'''class {m.group(1)}(nn.Module):
@@ -37,17 +43,23 @@ def fix_nn_module_class(content:
 
 
     def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self, vocab_size: int, hidden_size: int = 64):
 
         super
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ().__init__()
         self.vocab_size = vocab_size
         self.hidden_size = hidden_size'''),
 
         # Fix class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 \s*hidden_size:\s*int\s*=\s*64',
          lambda m: f'''class {m.group(1)}(nn.Module):
@@ -55,11 +67,15 @@ def fix_nn_module_class(content:
 
 
     def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self, hidden_size: int = 64):
 
         super
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ().__init__()
         self.hidden_size = hidden_size'''),
 
@@ -70,11 +86,15 @@ def fix_nn_module_class(content:
 
 
     def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self):
 
         super
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ().__init__(){m.group(2)}''')
     ]
 
@@ -82,38 +102,52 @@ def fix_nn_module_class(content:
     return content
 
 def fix_unittest_class(content: str) -> str: pattern
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:'
     replacement = lambda m: f'''class {m.group(1)}(unittest.TestCase):
 
 
 
     def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  setUp(self):
 
         super
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ().setUp()'''
     return re.sub(pattern, replacement, content)
 
 def fix_train_state_class(content: str) -> str: pattern
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = r'class\s+(\w+)\s*\(\s*train_state\.TrainState\s*\)\s*:'
     replacement = lambda m: f'''class {m.group(1)}(train_state.TrainState):
 
 
     def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self, *args, **kwargs):
 
         super
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ().__init__(*args, **kwargs)'''
     return re.sub(pattern, replacement, content)
 
 def fix_method_signatures(content: str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix forward method
         (r'def\s+forward\s*\(\s*self,\s*([^)]*)\)\s*:\s*\*\*kwargs\):\s*Forwar,\s*d\s*pass',
@@ -126,7 +160,9 @@ def fix_method_signatures(content: str) -> str: patterns
             **kwargs: Additional arguments
 
         Returns: Network output
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  up device configuration.
 
         Args: memory_fraction: Fraction of GPU memory to allocate
@@ -139,7 +175,9 @@ def fix_method_signatures(content: str) -> str: patterns
         # Fix load_data method
         (r'def\s+load_data\s*\(\s*self,\s*file_path:\s*str\s*=\s*"[^"]+"\s*\)\s*->\s*List\[Dict\[str,\s*str\]\]:\s*wit,\s*h',
          lambda m: '''def load_data(self, file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         with''')
     ]
@@ -148,7 +186,9 @@ def fix_method_signatures(content: str) -> str: patterns
     return content
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     patterns = [
         # Fix Tuple type hints
@@ -168,7 +208,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -187,7 +229,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

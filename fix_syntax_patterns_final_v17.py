@@ -22,8 +22,10 @@ def fix_imports(content):
 def fix_docstrings(content):
     # Fix docstring placement and format
     content = re.sub(r'(\s*)"""[^"]*"""\s*\.\s*', r'\1', content)  # Remove malformed docstrings
-    content = re.sub(r'(\s*)def\s+([^\n(]+)\([^)]*\):\s*\n\s*([^"\n]+)\s*"""',
-                    r'\1def \2():\n\1"""\n\1    \3\n\1    """',
+    content = re.sub(r'(\s*)def\s+([^\n(]+)\([^)]*\):\s*\n\s*([^"\n]+)\s*"""
+',
+                    r'\1def \2():\n\1
+"""\n\1    \3\n\1    """',
                     content)
     return content
 

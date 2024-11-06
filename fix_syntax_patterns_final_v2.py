@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -26,10 +28,14 @@ from typing import Tuple
 
 def fix_class_inheritance(content:
     str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix basic class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 \.\w+)*)\s*\)\s*:',
         r'class \1(\2):',
@@ -55,7 +61,9 @@ def fix_class_inheritance(content:
     return content
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix basic type hints
     content = re.sub(
@@ -95,7 +103,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     def def format_params(match):
         indent = match.group(1)
@@ -135,7 +145,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix print statements
     content = re.sub(
@@ -146,14 +158,18 @@ def fix_multiline_statements(content: str) -> str:
 
     # Fix multi-line string literals
     content = re.sub(
-        r'"""([^"]*?)"""',
-        lambda m: '"""\n' + m.group(1).strip() + '\n"""',
+        r'"""([^"]*?)"""
+',
+        lambda m: '
+"""\n' + m.group(1).strip() + '\n"""
+',
         content
     )
 
     return content
 
-def process_file(file_path: Path) -> None:"""Module containing specific functionality."""
+def process_file(file_path: Path) -> None:
+"""Module containing specific functionality."""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -171,7 +187,9 @@ def process_file(file_path: Path) -> None:"""Module containing specific function
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

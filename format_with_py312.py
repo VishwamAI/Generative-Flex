@@ -13,9 +13,13 @@ from pathlib import Path
 import subprocess
 import sys
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  format_file(file_path) -> None: print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 (f"Formatting {}...")
     try:
 # Try formatting with Python 3.12 target
@@ -35,7 +39,9 @@ return False
 
 
     def def main(self)::            success_count
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = 0):
         failure_count = 0
         failed_files = []

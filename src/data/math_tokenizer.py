@@ -9,7 +9,9 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 from
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 typing import OptionalUnionList
 from transformers import PreTrainedTokenizer
 import re
@@ -20,26 +22,44 @@ import DictAnyTuple
 import sympy
 
 base_tokenizer
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : PreTrainedTokenize, r)  ) -> None: self.base_tokenizer  base_tokenizerReplace
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 # Try to parse with sympy
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 token in self.math_symbols.items():""" = text.replace(symbol, f" {} ")Detect
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 mathematical expressions in text.patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [ r
     """
  r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r
     """ r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication""""\b\d*\.?\d+\s*÷\s*\d*\.?\d+\b",  # Division r
     """ r"\b√\d+\b",  # Square roots""""\b\d+²\b",  # Squares r
     """ r"\bπ\b",  # Pi""""\b∫.*dx\b",  # Integralsfor
-    """ r"\b∑.*\b",  # Summations"""]."""Module containing specific functionality.""""""
+    """ r"\b∑.*\b",  # Summations"""
+].
+"""Module containing specific functionality."""
+
+"""
 __call__(self         text: st        r        **kwargs): Tokenize.....
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 .
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 Args: tex..
 """
 

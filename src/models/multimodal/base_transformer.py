@@ -8,17 +8,28 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 import torch
 import torch.nn as nn
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing specific functionality."""Base transformer model.."""Module containing specific functionality."""Initialize base transformer.
+Module containing specific functionality."""
+Base transformer model..
+
+Initialize base transformer.
 
         Args:
-            config: Optional model configuration"""Module containing specific functionality."""Set up transformer layers.."""Module containing specific functionality."""Process input through transformer.
+            config: Optional model configuration
+
+Set up transformer layers..
+"""Module containing specific functionality."""
+Process input through transformer.
 
 
         Args:
@@ -27,7 +38,8 @@ Module containing specific functionality."""Base transformer model.."""Module co
             position_ids: Optional position IDs
 
         Returns:
-            Dictionary containing hidden states"""
+            Dictionary containing hidden states
+"""
         # Embedding
         if position_ids is None: position_ids = torch.arange(
                 input_ids.size(1),

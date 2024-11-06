@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_class_structure(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
     fixed_lines = []
 in_class = False
@@ -25,7 +27,9 @@ stripped = line.lstrip()
 current_indent = len(line) - len(stripped)
 
 # Handle class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 in_class = True
         class_indent = current_indent
@@ -35,7 +39,9 @@ in_class = True
 
         # Handle method definitions
         if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Ensure proper method indentation
         fixed_lines.append(" " * method_indent + stripped)
@@ -43,7 +49,9 @@ in_class = True
 
         # Handle method body
             if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Maintain relative indentation for method body
                 relative_indent = current_indent - class_indent
@@ -51,7 +59,9 @@ in_class = True
                 continue
 
                 # Handle class end:
-    """Class implementing end functionality."""
+    """
+Class implementing end functionality.
+"""
 
 in_class = False
 
@@ -61,7 +71,9 @@ in_class = False
 
 
                 def def main(self)::            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                 "src/models/audio_model.py",
                 "src/models/base_model.py",

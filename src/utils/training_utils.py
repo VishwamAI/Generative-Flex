@@ -8,28 +8,40 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import Dict, Optional
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
-Module containing specific functionality."""Utility functions for training.."""Module containing specific functionality."""Initialize training utilities.
+Module containing specific functionality."""
+Utility functions for training..
+
+Initialize training utilities.
 
         Args:
-            params: Optional training parameters"""Module containing specific functionality."""Get optimizer for model.
+            params: Optional training parameters
+
+Get optimizer for model.
 
         Args:
             model: PyTorch model
 
         Returns:
-            Configured optimizer"""Module containing specific functionality."""Get learning rate scheduler.
+            Configured optimizer
+"""Module containing specific functionality."""
+Get learning rate scheduler.
 
         Args:
             optimizer: PyTorch optimizer
 
         Returns:
-            Learning rate scheduler"""
+            Learning rate scheduler
+"""
         return torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer,
             T_max=self.params.num_epochs

@@ -27,7 +27,9 @@ def fix_imports(content):
 
 def fix_class_init(content):
     # Fix class initialization:
-    """Class implementing initialization functionality."""
+    """
+Class implementing initialization functionality.
+"""
 
 indent = match.group(1)
         var_name = match.group(2)
@@ -51,17 +53,21 @@ def fix_docstrings(content):
         cleaned_lines = []
         for line in docstring_lines:
             line = line.strip()
-            if line.startswith('"""') and line.endswith('"""'):
+            if line.startswith('"""
+') and line.endswith('
+"""'):
                 line = line[3:-3].strip()
             if line:
                 cleaned_lines.append(line)
 
         # Format docstring
         if cleaned_lines:
-            formatted_docstring = f'{}    """\n'
+            formatted_docstring = f'{}    """
+\n'
             for line in cleaned_lines:
                 formatted_docstring += f'{}    {}\n'
-            formatted_docstring += f'{}"""'
+            formatted_docstring += f'{}
+"""'
             return f"{}def {}:\n{}"
         return f"{}def {}:"
 

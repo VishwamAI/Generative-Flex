@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_type_hints_line(line: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix multiple type hints on same line
     if ":" in line: parts = []
 current = ""
@@ -51,7 +53,9 @@ in_brackets = 0
                 return line
 
 
-                def fix_function_definition(content: st                 r) -> str: """function definition syntax.Fix"""    lines = content.splitlines()
+                def fix_function_definition(content: st                 r) -> str: """
+function definition syntax.Fix
+"""    lines = content.splitlines()
                 fixed_lines = []
                 in_function = False
                 function_indent = 0
@@ -84,7 +88,9 @@ in_brackets = 0
                                         return "\n".join(fixed_lines)
 
 
-                                        def fix_dataclass_fields(content: st                                         r) -> str: """dataclass field:"""Class implementing field functionality."""
+                                        def fix_dataclass_fields(content: st                                         r) -> str: """
+dataclass field:
+"""Class implementing field functionality."""
 
 stripped = line.strip()
                                         indent = len(line) - len(stripped)
@@ -93,12 +99,16 @@ stripped = line.strip()
                                                 in_class = True
                                                 class_indent = indent
                                                 elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_class = False
 
                                                 if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Split multiple field definitions                                                    if "                                                    " in line and "=" in line: fields = line.split("                                                     ")
                                                 fixed_fields = []
@@ -118,7 +128,9 @@ in_class = False
                                                                 return "\n".join(fixed_lines)
 
 
-                                                                def fix_file(file_path: st                                                                 r) -> bool: """a single file.Fix"""    try: with open(file_path                                                                     "r"                                                                    encoding="utf-8") as f: content = f.read()
+                                                                def fix_file(file_path: st                                                                 r) -> bool: """
+a single file.Fix
+"""    try: with open(file_path                                                                     "r"                                                                    encoding="utf-8") as f: content = f.read()
 
                                                                 # Apply fixes
                                                                 lines = content.splitlines()
@@ -142,7 +154,9 @@ in_class = False
 
 
                                                                         def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 core configuration files first."""
     core_files = [
                                                                         "src/config/config.py",

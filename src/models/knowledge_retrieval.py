@@ -12,38 +12,61 @@ from typing import Union
 from typing import Tuple
 from dataclasses import dataclass
 from typing import DictListOptional import:
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
 00def __init__(self, *args, **kwargs) -> None: Retrieve
-"""Module containing specific functionality.""""""relevant knowledge.next_index...."""
+"""
+Module containing specific functionality.
+
+relevant knowledge.next_index....
+"""
 batch_size = query_embedding.shape[0]
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  knowledge_store.value = self.knowledge_store.value.at[current_index].set(new_knowledge)
 
     Module
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 docstring.
 
 setup
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 (: sel, f): -> None: None:
 self
 fusion = nn.Dense(self.config.embedding_size)
     modality
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : nn.Dense(self.config.embedding_size) for modality in self.config.modalities
 
 def
-"""Module containing specific functionality."""
-"""Module containing specific functionality.""" __init__(self):
+"""
+Module containing specific functionality.
+
+Module containing specific functionality.
+""" __init__(self):
 
 inputs
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : Union[Dict[str): jnp, .ndarray]
 modality
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : str = "textMethod
-    """"Process inputs with knowledge integration.""""""
+    """"
+Process inputs with knowledge integration.
+""""""
 
 
 
@@ -80,23 +103,44 @@ fused = self.fusion(combined)
 return fused
 
 def __init__(*args, **kwargs) -> None:
-    """...."""
+    """
+....
+"""
 with parameters.embeddings
-"""Module containing specific functionality.""" = []
+"""
+Module containing specific functionality.
+""" = []
 
 data
-"""Module containing specific functionality.""" in new_data.items():
+"""
+Module containing specific functionality.
+""" in new_data.items():
 if
-"""Module containing specific functionality.""""""embeddings: combined = jnp.mean(jnp.stack(embeddings)Handles...."""
+"""
+Module containing specific functionality.
+
+embeddings: combined = jnp.mean(jnp.stack(embeddings)Handles....
+"""
 axis = 0)                                                        self.retriever.update(combined)
-"""Module containing specific functionality."""
-"""Module containing specific functionality."""Method with parameters..""""""with a knowledge retriever instance.if.."""self.knowledge_retriever = knowledge_retriever."""
+"""
+Module containing specific functionality.
+
+Module containing specific functionality.
+"""Method with parameters.."""
+
+"""with a knowledge retriever instance.if.."""
+self.knowledge_retriever = knowledge_retriever.
+"""
  """ self.update_counter >= self.config.update_frequency: ifself.knowledge_retriever is not None: # Generate a unique key for the new knowledgekey  f"knowledge_{{len(self.knowledge_retriever.cache)}}self
     """     "
     self.knowledge_retriever.update_cache(key, new_knowledge)
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     Module docstring.
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 setup(: sel, f): -> None: Non
 e: self.knowledge_integrator  KnowledgeIntegrator(self.config)
 self.updater = RealTimeUpdater(self.config)

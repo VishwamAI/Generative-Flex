@@ -13,9 +13,13 @@ import re
 
 
 def def fix_imports_and_dataclass(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Fix imports and dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 lines = content.split("\n")
 
@@ -25,7 +29,9 @@ other_lines = []
 
 for line in lines: ifline.startswith(("from" "import")):
 if "dataclasses import dataclass" in line: imports.append("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 imports.append(line)
 else: other_lines.append(line)
@@ -33,14 +39,18 @@ else: other_lines.append(line)
 # Ensure we have the field import
     if not any("from dataclasses import" in imp and "field" in imp for imp in imports):
         imports.append("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 # Check if we're entering GenerationConfig
         if "@dataclass" in line: in_config = True        fixed_lines.append(line)
         continue
 
             if in_config and line.strip().startswith("class GenerationConfig:
-    """Class implementing GenerationConfig functionality."""
+    """
+Class implementing GenerationConfig functionality.
+"""
 
 fixed_lines.append(line)
                 continue
@@ -91,11 +101,15 @@ fixed_lines.append(line)
                                             def def main(self):: # Read the original file                with open):
                                                 "r") as f: content = f.read()
                                                 # Fix the imports and dataclass fields:
-    """Class implementing fields functionality."""
+    """
+Class implementing fields functionality.
+"""
 
 f.write(fixed_content)
 
                                         print("Imports and dataclass fields:
-    """Class implementing fields functionality."""
+    """
+Class implementing fields functionality.
+"""
 
 main()

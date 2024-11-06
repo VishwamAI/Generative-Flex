@@ -24,14 +24,30 @@ import os
 from pathlib import Path import logging
 
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
 from dataclasses import src.models from src.utils.training_utils
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-JAX-based trainer implementation."""JAX-based model trainer.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for train_step.."""Module containing specific functionality."""Method for loss_fn.."""Module containing specific functionality."""Method for train.."""Module containing specific functionality."""Method for train.."""
+JAX-based trainer implementation."""
+JAX-based model trainer..
+
+Method for __init__..
+
+Method for train_step..
+"""Module containing specific functionality."""
+Method for loss_fn..
+
+Method for train..
+
+Method for train..
+"""
     for batch in self.utils.get_batches(
     train_data,
     self.config.batch_size

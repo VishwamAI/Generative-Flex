@@ -15,31 +15,56 @@ import jax
 from typing import Optional
 
 Placeholder
-"""Module containing specific functionality.""""""docstring.Convert...."""
+"""
+Module containing specific functionality.
+
+docstring.Convert....
+"""
 Image to patch embedding.
 patch_size: int
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  images to patch embeddings.patches
-"""Module containing specific functionality."""
-"""Module containing specific functionality.""" = jnp.reshape(
+"""
+Module containing specific functionality.
+
+Module containing specific functionality.
+""" = jnp.reshape(
 
 height
-"""Module containing specific functionality."""
-( batch_size,"""// self.patch_size,
+"""
+Module containing specific functionality.
+"""
+( batch_size,"""
+// self.patch_size,
 
     self
 patch_size,
 
-channels"""self.patch_size,....""")
-patches""")...."""# Reshape patches into sequence"""= jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
+channels
+"""self.patch_size,...."""
+)
+patches
+""")...."""
+# Reshape patches into sequence
+"""= jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
-    return...""""""# Project patches to hidden dimension...."""nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
+    return..."""
+
+"""# Project patches to hidden dimension...."""
+nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
-Transformer"""Placeholder docstring....."""-based image generation model.
+Transformer
+"""Placeholder docstring....."""
+-based image generation model.
 
 
-Forward"""int]# (height width)...."""pass of the image generation model.) -> None: Method""""""
+Forward
+"""int]# (height width)...."""
+pass of the image generation model.) -> None: Method
+""""""
 
 
 # Input shape validation
@@ -76,9 +101,15 @@ x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], sel
 return x
 
 def def(*args, **kwargs) -> None:
-    """...."""
+    """
+....
+"""
 with parameters.Placeholder
-"""Module containing specific functionality.""" docstring.."""Generate images."""
+"""
+Module containing specific functionality.
+""" docstring.."""
+Generate images.
+"""
 
     # Initialize with random noise if no condition is provided
     if condition is None: rnginit_rng  jax.random.split(rng)                    x = jax.random.normal(

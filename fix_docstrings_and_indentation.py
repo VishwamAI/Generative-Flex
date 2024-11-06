@@ -18,23 +18,35 @@ import torch.nn as nn
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_docstrings_in_file(filename) -> None: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(filename, "r") as f: content = f.read()
 # Fix module-level docstrings
 content = re.sub(r'^Fix
-    """([^"]*?)"""',
-lambda m: '"""' + m.group(1).strip() + '"""\n'
+    """([^"]*?)"""
+',
+lambda m: '
+"""' + m.group(1).strip() + '"""
+\n'
 
 content,
 flags=re.MULTILINE)
 
-# Fix class and:"""Class implementing and functionality."""m.group(1) + '"""' + m.group(2).strip() + '"""\n' + m.group(1)
+# Fix class and:
+"""Class implementing and functionality."""
+m.group(1) + '
+"""' + m.group(2).strip() + '"""
+\n' + m.group(1)
 
 content)
 
-# Ensure proper indentation for class methods:"""Class implementing methods functionality."""
+# Ensure proper indentation for class methods:
+"""Class implementing methods functionality."""
 
 stripped = line.lstrip()                if stripped.startswith("class ") or stripped.startswith("def "):
     if stripped.startswith("class "):
@@ -45,16 +57,30 @@ stripped = line.lstrip()                if stripped.startswith("class ") or stri
         with open(filename        , "w") as f: f.write("\n".join(fixed_lines))
 
 
-        def def fix_model_files(self)::    """model-specific files.Mixture"""Module containing specific functionality.""""""Module containing specific functionality."""class class:"""Class implementing class functionality."""Module containing specific functionality."""
+        def def fix_model_files(self)::    """
+model-specific files.Mixture
+
+class class:
+"""Class implementing class functionality."""
+Module containing specific functionality.
+"""
  pass through the MoE layer.Flash
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
         # Fix attention.py
-        attention_content = """""" Attention Implementation for Generative-Flex.Efficient
-"""Module containing specific functionality."""
+        attention_content = """
+
+""" Attention Implementation for Generative-Flex.Efficient
+"""
+Module containing specific functionality.
+"""
  attention implementation using flash attention algorithm.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  formatting issues in all problematic files."""
         # Fix model files first
         fix_model_files()

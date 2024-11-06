@@ -24,16 +24,30 @@ import os
 from pathlib import Path import logging
 
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
 from accelerate import dataclasses
 
 logger = logging.getLogger(__name__)
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing training-related implementations."""Accelerated trainer class.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for setup_training.."""Module containing specific functionality."""Method for train.."""Module containing specific functionality."""Method for __init__.."""raise ValueError(
+Module containing training-related implementations."""
+Accelerated trainer class..
+
+Method for __init__..
+
+Method for setup_training..
+"""Module containing specific functionality."""
+Method for train..
+"""Module containing specific functionality."""
+Method for __init__..
+"""raise ValueError(
     "Model, optimizer, and dataloader must be set before training"
     )
 

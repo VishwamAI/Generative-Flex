@@ -15,9 +15,13 @@ import subprocess
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  format_files(self)::                            files_to_format
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
 "src/config/training_config.py",
 "src/config/config.py",

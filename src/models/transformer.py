@@ -29,7 +29,15 @@ from typing import Optional as nn
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module for implementing specific functionality."""Transformer model implementation."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for forward.."""
+Module for implementing specific functionality."""
+Transformer model implementation.
+
+Method for __init__..
+
+Method for forward..
+"""
     return self.encoder(x, mask=mask)

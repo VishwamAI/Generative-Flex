@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 import os
 from pathlib import Path
@@ -22,7 +24,9 @@ from typing import List,
 
 
 def fix_method_definition(line: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 # Fix self parameter on its own line
 if re.match(r'\s*self\s*
@@ -51,7 +55,9 @@ return line
 
 
 def fix_parameter_types(line: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 # Fix missing spaces after colons in type hints
 line = re.sub(r'(\w+): (\w+)'
@@ -75,7 +81,9 @@ return line
 
 
 def fix_return_type(line: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 # Fix return type annotations
     if '->' in line:
@@ -94,7 +102,9 @@ return line
 
 
 def fix_class_method(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 lines = content.splitlines()
 fixed_lines = []
@@ -107,7 +117,9 @@ i = 0
         stripped = line.strip()
 
         # Start of class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 in_class = True
         class_indent = len(re.match(r'(\s*)', line).group(1))
@@ -116,7 +128,9 @@ in_class = True
         continue
 
         # Inside class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 # Method definition
             if stripped.startswith('def '):
@@ -144,7 +158,9 @@ fixed_lines.extend(method_lines)
             else: fixed_lines.append(line)
 
 # End of class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 in_class = False
         else: fixed_lines.append(line)
@@ -155,7 +171,9 @@ return '\n'.join(fixed_lines)
 
 
 def process_file(file_path: str) -> bool:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     try: with open(file_path
 'r'
@@ -186,7 +204,9 @@ return False
 
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 method patterns in all Python files."""
 
 # Get all Python files

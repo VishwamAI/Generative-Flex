@@ -15,18 +15,26 @@ from typing import Dict,
 
     Anyimport blackimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport reimport tempfileimport timeimport yaml
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_verify_mapped_datasets(self)::                    Dataset
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Read the original file):
 with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()
 # Fix imports
-fixed_imports = """""" verification utilities for mapped datasets."""try_load_dataset,
+fixed_imports = """
+
+""" verification utilities for mapped datasets."""
+try_load_dataset,
 timeout,
 TimeoutException,
 categorize_error,
 format_verification_result,
-log_verification_attempt)"""Module containing specific functionality."""
+log_verification_attempt)
+"""Module containing specific functionality."""
 
     # Basic strategies with memory monitoring
 basic_strategies = [
@@ -34,7 +42,9 @@ basic_strategies = [
 ("basic", False, False, 300),
 ("basic_trusted", False, True, 300),
 ]
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Dataset configurations that require specific handling
 "MMMU/MMMU": [

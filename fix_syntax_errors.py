@@ -14,9 +14,13 @@ import re
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_line_continuations(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_function_call = False
@@ -59,7 +63,9 @@ if("[" in line     and "]" not in line    and not any(x in line for x in ["[None
 
 
                         def def main(self)::                            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                         "src/training/train_mmmu.py",
                         "tests/test_features.py",

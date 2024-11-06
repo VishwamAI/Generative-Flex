@@ -15,19 +15,29 @@ from pathlib import Path
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_docstring_placement(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Remove extra indentation from module-level docstrings
-content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
+content = re.sub(r'^\s+"""
+', '
+"""', content, flags=re.MULTILINE)
 
 # Fix class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 stripped = line.lstrip()
 
 # Track function/class context:
-    """Class implementing context functionality."""
+    """
+Class implementing context functionality.
+"""
 
 in_class = True
         in_def = False
@@ -40,8 +50,11 @@ in_class = True
                 in_class = False
 
                 # Fix docstring
-                if '"""' in line: if i > 0 and lines[i-1].strip().endswith(':'):
-                        # This is a docstring following a function/class definition:"""Class implementing definition functionality."""# This is a module-level docstring
+                if '"""
+' in line: if i > 0 and lines[i-1].strip().endswith(':'):
+                        # This is a docstring following a function/class definition:
+"""Class implementing definition functionality."""
+# This is a module-level docstring
                         fixed_line = stripped
                         else: fixed_line = line
                         fixed_lines.append(fixed_line)
@@ -49,8 +62,11 @@ in_class = True
                         return '\n'.join(fixed_lines)
 
 
-                            def fix_dataclass_fields(content: st                             r) -> str:""" dataclass field:
-    """Class implementing field functionality."""
+                            def fix_dataclass_fields(content: st                             r) -> str:
+""" dataclass field:
+    """
+Class implementing field functionality.
+"""
 
 return content
 
@@ -62,7 +78,9 @@ return content
                                 continue
 
                                 if in_dataclass and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 ' in line and '=' in line:            # Fix field definition
                                 name
@@ -83,7 +101,11 @@ return content
                                             return '\n'.join(fixed_lines)
 
 
-                                            def fix_imports(content: st                                                 r) -> str: """import statement formatting.Process"""Module containing specific functionality."""a single file applying all fixes.Process"""    try: with open(file_path                                                                     'r'                                                                    encoding='utf-8') as f: content = f.read()
+                                            def fix_imports(content: st                                                 r) -> str: """
+import statement formatting.Process
+"""Module containing specific functionality."""
+a single file applying all fixes.Process
+"""    try: with open(file_path                                                                     'r'                                                                    encoding='utf-8') as f: content = f.read()
                                                                     # Skip empty files
                                                                     if not content.strip():
                                                                     return
@@ -102,7 +124,9 @@ return content
 
 
                                                                             def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
     root_dir = Path('.')
                                                                                 for file_path in root_dir.rglob('*.py'):
                                                                                 if '.git' not in str(file_path):

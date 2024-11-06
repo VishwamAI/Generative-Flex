@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 import black
@@ -24,7 +26,9 @@ from typing import List,
 
 
 def fix_default_factory_list(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix the specific pattern in text_to_anything.py
     pattern = r'supported_modalities:\s*List\[str\]\s*=\s*field\(default_factory=[^)]+\)'
@@ -33,7 +37,9 @@ def fix_default_factory_list(content: str) -> str: Fix
     return content
 
 def fix_type_annotations(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix incomplete type annotations in training_config.py
     content = re.sub(
@@ -51,20 +57,28 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]+:)(\s*)"""',
-        r'\1\n"""',
+]+:)(\s*)"""
+',
+        r'\1\n
+"""',
         content
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(def\s+[^:]+:)(\s*)"""',
-        r'\1\n"""',
+        r'(def\s+[^:]+:)(\s*)"""
+',
+        r'\1\n
+"""',
         content
     )
 
@@ -75,8 +89,10 @@ def fix_docstrings(content: str) -> str:
     indent_level = 0
 
     for line in lines: stripped = line.lstrip()
-        if stripped.startswith('"""'):
-            if line.count('"""') == 1:  # Opening or closing quote
+        if stripped.startswith('"""
+'):
+            if line.count('
+"""') == 1:  # Opening or closing quote
                 in_docstring = not in_docstring
                 if in_docstring:  # Opening quote
                     indent_level = len(line) - len(stripped)
@@ -89,7 +105,9 @@ def fix_docstrings(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -116,7 +134,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """files with syntax issues."""
+    """
+files with syntax issues.
+"""
 
     critical_files = [
         'src/models/text_to_anything.py',

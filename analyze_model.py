@@ -19,7 +19,9 @@ os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 
 def format_size(size_bytes) -> None: for
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  unit in ["B"
 "KB"
 "MB"

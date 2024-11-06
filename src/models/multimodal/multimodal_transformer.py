@@ -23,7 +23,9 @@ from tqdm import tqdm
 import os
 from pathlib import Path import logging
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import Dict, List, Optional, Tuple
 
 import torch.nn as nn
@@ -31,9 +33,25 @@ import torch.nn as nn
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module for implementing specific functionality."""Configuration for multimodal transformer.."""Module containing specific functionality."""Class for MultiModalTransformer.."""Module containing specific functionality."""Multimodal transformer model.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for setup_layers.."""Module containing specific functionality."""Method for _init_weights.."""Module containing specific functionality."""Method for forward.."""
+Module for implementing specific functionality."""
+Configuration for multimodal transformer..
+
+Class for MultiModalTransformer..
+
+Multimodal transformer model..
+"""Module containing specific functionality."""
+Method for __init__..
+
+Method for setup_layers..
+
+Method for _init_weights..
+"""Module containing specific functionality."""
+Method for forward..
+"""
         hidden_states_list = []
 
         # Process text if provided

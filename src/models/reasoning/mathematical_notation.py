@@ -13,14 +13,18 @@ import torch.nn as nn
 from typing import List, Optional, Tuple
 
 class MathematicalNotation:
-    """Class implementing MathematicalNotation functionality."""
+    """
+Class implementing MathematicalNotation functionality.
+"""
 
-Module containing specific functionality."""Process mathematical notation.
+Module containing specific functionality."""
+Process mathematical notation.
 
         Args:
             notation_ids: Tensor of notation token IDs
 
         Returns:
-            Processed notation embeddings"""
+            Processed notation embeddings
+"""
         embeddings = self.notation_embeddings(notation_ids)
         return self.symbol_processor(embeddings)

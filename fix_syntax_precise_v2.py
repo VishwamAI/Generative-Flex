@@ -8,14 +8,18 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-import """Module
-from typing import Tuple containing specific functionality."""
+import """
+Module
+from typing import Tuple containing specific functionality.
+"""
  re
 from typing import List
 def split_into_blocks(content: st r) -> List[Tuple[str
 str
 int]]:     lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 blocks = []
 current_block = []
@@ -55,7 +59,9 @@ current_block.append(line)
 
 
         def fix_class_definition(block: st             r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = block.split("\n")
         fixed_lines = []
 
@@ -72,7 +78,9 @@ current_block.append(line)
 
 
         def fix_method_definition(block: st             r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = block.split("\n")
         fixed_lines = []
         in_def = False
@@ -111,7 +119,9 @@ current_block.append(line)
 
 
                                 def fix_indentation(content: st                                 r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
                                 fixed_lines = []
                                 indent_level = 0
@@ -137,7 +147,9 @@ current_block.append(line)
 
 
                                                 def def main(self)::            file_path
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = "src/models/reasoning/math_reasoning.py"):
 
                                                 try:

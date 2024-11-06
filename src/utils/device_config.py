@@ -8,24 +8,36 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 from typing import Optional
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
-Module containing specific functionality."""Manage device configuration and placement..."""Module containing specific functionality."""Initialize device manager.
+Module containing specific functionality."""
+Manage device configuration and placement...
+
+Initialize device manager.
 
         Args:
-            config: Optional device configuration"""Module containing specific functionality."""Set up compute device.
+            config: Optional device configuration
+
+Set up compute device.
 
         Returns:
-            Configured device"""Module containing specific functionality."""Place tensor on configured device.
+            Configured device
+"""Module containing specific functionality."""
+Place tensor on configured device.
 
         Args:
             tensor: Input tensor
 
         Returns:
-            Tensor on configured device"""
+            Tensor on configured device
+"""
         return tensor.to(self.device)

@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -23,25 +25,40 @@ from typing import List,
 
 
 def fix_class_docstrings(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class-level docstrings
     content = re.sub(
-        r'(class\s+[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""\n',
+        r'(class\s+[^:]+:)\s*"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+\n',
         content
     )
     return content
 
-def fix_method_docstrings(content: str) -> str:"""Module containing specific functionality."""# Fix method-level docstrings
+def fix_method_docstrings(content: str) -> str:
+"""Module containing specific functionality."""
+# Fix method-level docstrings
     content = re.sub(
-        r'(def\s+[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""\n',
+        r'(def\s+[^:]+:)\s*
+"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+\n',
         content
     )
     return content
 
-def fix_type_annotations(content: str) -> str:"""Module containing specific functionality."""# Fix dataclass field:"""Class implementing field functionality."""\s*List\[[^\]]+\]\s*=\s*field\(default_factory=[^)]+\)',
+def fix_type_annotations(content: str) -> str:
+"""Module containing specific functionality."""
+# Fix dataclass field:
+"""Class implementing field functionality."""
+\s*List\[[^\]]+\]\s*=\s*field\(default_factory=[^)]+\)',
         r'\1: List[str] = field(default_factory=list)',
         content
     )
@@ -61,7 +78,8 @@ def fix_type_annotations(content: str) -> str:"""Module containing specific func
     )
     return content
 
-def format_method_signature(name: str, params: str, return_type: str) -> str:"""Module containing specific functionality."""
+def format_method_signature(name: str, params: str, return_type: str) -> str:
+"""Module containing specific functionality."""
 
     formatted_params = []
     for param in params.split(','):
@@ -73,7 +91,9 @@ def format_method_signature(name: str, params: str, return_type: str) -> str:"""
     return f'def {name}({", ".join(formatted_params)}) -> {return_type.strip()}:'
 
 def fix_dictionary_comprehensions(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix basic dictionary comprehensions
     content = re.sub(
@@ -84,7 +104,9 @@ def fix_dictionary_comprehensions(content: str) -> str:
     return content
 
 def fix_line_continuations(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix multi-line method calls
     content = re.sub(
@@ -95,7 +117,9 @@ def fix_line_continuations(content: str) -> str:
     return content
 
 def fix_imports(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix import line breaks and spacing
     content = re.sub(
@@ -106,7 +130,9 @@ def fix_imports(content: str) -> str:
     return content
 
 def fix_indentation(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     lines = content.split('\n')
     fixed_lines = []
@@ -128,7 +154,9 @@ def fix_indentation(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -149,7 +177,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

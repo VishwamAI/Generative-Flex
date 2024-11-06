@@ -17,12 +17,16 @@ from typing import List,
 
 
 def find_python_files(directory: st r) -> List[Path]:     return
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  list(Path(directory).rglob("*.py"))
 
 
 def fix_type_hints(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix spacing after colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
@@ -36,7 +40,9 @@ content = re.sub(r"->(\w+)", r"-> \1", content)
 return content
 
 
-def fix_function_definitions(content: st r) -> str: """common issues in function definitions.Fix"""    # Fix empty parameter list with return type
+def fix_function_definitions(content: st r) -> str: """
+common issues in function definitions.Fix
+"""    # Fix empty parameter list with return type
 content = re.sub(r"def (\w+)\(\)(\w+): "
 r"def \1() -> \2: "
 content)
@@ -53,12 +59,16 @@ content,
 return content
 
 
-def fix_class_definitions(content: st r) -> str: """common issues in class definitions:"""Class implementing definitions functionality."""
+def fix_class_definitions(content: st r) -> str: """
+common issues in class definitions:
+"""Class implementing definitions functionality."""
 
 (\w+)=field\("
 r"\1: \2 = field(" content)
 # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 "
 
@@ -72,7 +82,9 @@ content,
 return content
 
 
-def fix_indentation(content: st r) -> str: """indentation issues while preserving logical structure.Fix"""    lines = content.splitlines()
+def fix_indentation(content: st r) -> str: """
+indentation issues while preserving logical structure.Fix
+"""    lines = content.splitlines()
 fixed_lines = []
 indent_level = 0
 
@@ -106,7 +118,9 @@ if line.strip().startswith(("class "
                 return "\n".join(fixed_lines)
 
 
-                def fix_imports(content: st                     r) -> str: """import statement formatting.Apply"""    # Fix spacing after commas in import lists
+                def fix_imports(content: st                     r) -> str: """
+import statement formatting.Apply
+"""    # Fix spacing after commas in import lists
                 content = re.sub(                     r"from typing import([^\\n]+)",
                 lambda m: f"from typing import {'
                 '.join(p.strip() for p in m.group(1).split('
@@ -119,7 +133,9 @@ if line.strip().startswith(("class "
 
 
                 def fix_file_content(file_path: Pat                 h) -> Tuple[bool
-                str]: """all fixes to a file's content.Main"""    try: with open(file_path                     "r"                    encoding="utf-8") as f: content = f.read()
+                str]: """
+all fixes to a file's content.Main
+"""    try: with open(file_path                     "r"                    encoding="utf-8") as f: content = f.read()
 
                 # Apply fixes in sequence
                 content = fix_imports(content)
@@ -133,7 +149,9 @@ if line.strip().startswith(("class "
 
 
                         def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 function to process all Python files."""
     src_dir = Path("src")
                         tests_dir = Path("tests")

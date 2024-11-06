@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -23,10 +25,13 @@ from typing import Dict,
 
 
 def fix_docstring_indentation(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Find all docstrings with their indentation
-    docstring_pattern = re.compile(r'^(\s+)"""[^"]*"""\s*$', re.MULTILINE)
+    docstring_pattern = re.compile(r'^(\s+)"""[^"]*"""
+\s*$', re.MULTILINE)
     matches = list(docstring_pattern.finditer(content))
 
     # Process matches from last to first to avoid position shifts
@@ -43,7 +48,10 @@ def fix_docstring_indentation(content: str) -> str: Fix
 
     return content
 
-def fix_class_inheritance(content: str) -> str:"""Module containing specific functionality."""# Pattern to match class definitions:"""Class implementing definitions functionality."""
+def fix_class_inheritance(content: str) -> str:
+"""Module containing specific functionality."""
+# Pattern to match class definitions:
+"""Class implementing definitions functionality."""
 
 \s*([^:\n]*?)(?=\s*(?:class|\Z|\n\S))',
         re.DOTALL
@@ -68,12 +76,16 @@ def fix_class_inheritance(content: str) -> str:"""Module containing specific fun
             for p in param_list
         )
 
-        return f"""{class_name}({parent_class}):
+        return f"""
+{class_name}({parent_class}):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__()
         {assignments}
 
-Fix"""Module containing specific functionality."""method signature formatting.Process"""
+Fix
+"""Module containing specific functionality."""
+method signature formatting.Process
+"""
     # Pattern to match method definitions
     method_pattern = re.compile(
         r'def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?:->[\s\w\[\],]*)?:\s*',
@@ -97,7 +109,9 @@ Fix"""Module containing specific functionality."""method signature formatting.Pr
     return method_pattern.sub(process_method_match, content)
 
 def process_file(file_path: str) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -118,7 +132,9 @@ def process_file(file_path: str) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

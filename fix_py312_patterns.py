@@ -19,7 +19,9 @@ import os
 import re
 
 def fix_docstrings(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
 fixed_lines = []
 indent_stack = []
@@ -30,13 +32,11 @@ stripped = line.lstrip()
 indent = len(line) - len(stripped)
 
     if stripped.startswith('Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
 
-
-
-
-
-                    """all Python files in the project."""        for root
+all Python files in the project.
+"""        for root
                 _
                     files in os.walk('.'):
                     if any(skip in root for skip in ['.git'                     'venv'                    '__pycache__']):

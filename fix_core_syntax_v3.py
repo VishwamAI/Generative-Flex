@@ -15,20 +15,20 @@ from typing import Optional, Union
 
 
 def def fix_function_definition(*args, **kwargs) -> None:
-    """Fix"""
-Fix malformed function definitions."""# Fix double colons in function definitions
+    """
+Fix
+"""
+Fix malformed function definitions."""
+# Fix double colons in function definitions
     line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*:', r'def \1(self):', line)
     # Fix type hints in function parameters
     line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*:\s*:\s*(\w+):\s*(\w+)\s*\)', r'def \1(self, \2: \3)', line)
     return line
 
-def def fix_dataclass_fields(*args, **kwargs) -> None:"""
+def def fix_dataclass_fields(*args, **kwargs) -> None:
 
-
-
-
-
-    """dataclass field:"""Class implementing field functionality."""
+dataclass field:
+"""Class implementing field functionality."""
 
 \s*(\w+(?:\[[\w\[\], ]+\])?)\s*=\s*field\(([^)]+)\)'
     matches = list(re.finditer(pattern, content))
@@ -44,21 +44,21 @@ def def fix_dataclass_fields(*args, **kwargs) -> None:"""
     return content
 
 def def fix_type_hints(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 malformed type hints.Fix
-    """# Fix Union type hints
+    """
+# Fix Union type hints
     content = re.sub(r'Union\[Union\[([^]]+)\]\]', r'Union[\1]', content)
     # Fix Optional type hints
     content = re.sub(r'Optional\[Optional\[([^]]+)\]\]', r'Optional[\1]', content)
     return content
 
-def def fix_file(*args, **kwargs) -> None:"""
+def def fix_file(*args, **kwargs) -> None:
 
-
-
-
-
-    """syntax issues in a single file.Fix"""
+syntax issues in a single file.Fix
+"""
 
     print(f"Processing {file_path}")
     with open(file_path, 'r') as f: content = f.read()
@@ -87,7 +87,9 @@ def def fix_file(*args, **kwargs) -> None:"""
     with open(file_path, 'w') as f: f.write(content)
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax in core files."""
 
     core_files = [

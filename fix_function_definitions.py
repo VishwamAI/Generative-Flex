@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def format_params(self func_nameparams):         if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not params.strip):
 return f"def {}():"
 
@@ -28,7 +30,9 @@ param_list = []
 
 
         def def fix_function_bodies(self         content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
         fixed_lines = []
         in_function = False
@@ -64,7 +68,9 @@ param_list = []
 
 
                     def def main(self)::                            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                         "src/training/jax_trainer.py",
                         "src/models/layers/flash_moe.py",

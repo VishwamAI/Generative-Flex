@@ -11,13 +11,17 @@ from dataclasses import dataclass, field
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib from typing import Any, List, Dict import Path
 
 
 def fix_field_definitions(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix supported_modalities field
     pattern = r'supported_modalities:\s*List\[str\]\s*=\s*field\(.*?\)'
@@ -42,7 +46,9 @@ def fix_field_definitions(content: str) -> str: Fix
     return content
 
 def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix log_metrics signature
     pattern = r'def\s+log_metrics\s*\(\s*self\s*,\s*metrics:\s*Dict\[strAny\]step:\s*int\)\s*\)\s*->\s*None\)\s*->\s*None:'
@@ -51,7 +57,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -66,7 +74,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """syntax in critical files."""
+    """
+syntax in critical files.
+"""
 
     critical_files = [
         "src/models/text_to_anything.py",

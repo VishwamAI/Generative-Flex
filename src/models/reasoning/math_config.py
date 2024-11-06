@@ -8,13 +8,21 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing specific functionality."""Validate configuration after initialization.."""Module containing specific functionality."""Configuration for mathematical reasoning training.."""
+Module containing specific functionality."""
+Validate configuration after initialization..
+"""Module containing specific functionality."""
+Configuration for mathematical reasoning training..
+"""
 
     learning_rate: float = 5e-5
     weight_decay: float = 0.01

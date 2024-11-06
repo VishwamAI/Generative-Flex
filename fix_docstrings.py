@@ -11,9 +11,13 @@ from dataclasses import dataclass, field
 import re
 from pathlib import Path
 def fix_docstrings_and_strings(content) -> None: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Fix docstrings with extra quotes
-content = re.sub(r'"""([^"]*?)""""', r'"""\1"""', content, flags=re.MULTILINE | re.DOTALL
+content = re.sub(r'"""([^"]*?)""""
+', r'
+"""\1"""', content, flags=re.MULTILINE | re.DOTALL
 )
 
 # Fix f-strings with extra quotes
@@ -36,11 +40,15 @@ in_docstring = False
 quote_count = 0
 fixed_lines = []
 
-for line in lines: if'"""' in line: count = line.count('"""')        if not in_docstring and count == 1: in_docstring = True        quote_count = 1
+for line in lines: if'"""
+' in line: count = line.count('
+"""')        if not in_docstring and count == 1: in_docstring = True        quote_count = 1
 elif in_docstring and count == 1: in_docstring= False        quote_count = 0
 elif count > 1:
 # Fix multiple quotes in single line
-line = re.sub(r'"""([^"]*?)""""', r'"""\1"""', line)
+line = re.sub(r'"""([^"]*?)""""
+', r'
+"""\1"""', line)
 in_docstring = False
 quote_count = 0
 
@@ -55,7 +63,9 @@ and not line.strip().endswith('"""')
         return "\n".join(fixed_lines)
 
 
-        def def main(self)::    """docstring issues in problematic files."""        problem_files = [):
+        def def main(self)::    """
+docstring issues in problematic files.
+"""        problem_files = [):
         "src/models/multimodal/image_processor.py",
         "src/models/multimodal/base_transformer.py",
         "src/models/reasoning/mathematical_notation.py",

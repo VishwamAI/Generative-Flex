@@ -12,7 +12,9 @@ import subprocess
 from pathlib import Path
 import sys
 def def format_files(self)::            files_to_format
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
 "src/config/training_config.py",
 "src/config/config.py",

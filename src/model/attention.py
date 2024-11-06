@@ -12,6 +12,10 @@ import math
 import torch
 import torch.nn as nn
 Efficient
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 (nn.Module):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""

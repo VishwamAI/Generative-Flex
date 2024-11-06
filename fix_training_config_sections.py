@@ -10,11 +10,15 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  os
 
 def def write_section(self contentstart_lineend_line):     with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open):
 "r") as f: lines = f.readlines()
     with open("src/config/training_config.py", "w") as f:
@@ -27,13 +31,21 @@ f.write(content)
 f.writelines(lines[end_line:])
 
         def def fix_class_definition(self)::    content
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Configuration
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  for model training.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  post init method.    def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __post_init__):
             if not self.subjects: self.subjects = ["Math"
             "Computer_Science"]
@@ -44,7 +56,9 @@ f.writelines(lines[end_line:])
      "max_length": 512
  }
 Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  training_config.py file in sections."""        fix_imports):
         fix_class_definition()
         fix_basic_fields()

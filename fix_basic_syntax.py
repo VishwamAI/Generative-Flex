@@ -15,7 +15,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -39,7 +41,9 @@ CORE_FILES = [
 
 
 def fix_indentation(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 indent_level = 0
@@ -71,15 +75,21 @@ continue
 
 
                 def fix_dataclass_syntax(content: st                 r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Fix dataclass decorator:
-    """Class implementing decorator functionality."""
+    """
+Class implementing decorator functionality.
+"""
 
 if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
                 continue
 
                 if in_dataclass and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 " in line:
                 # Fix field definition
@@ -96,7 +106,9 @@ if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
 
 
                         def main() -> None:
-    """basic syntax issues in core files."""
+    """
+basic syntax issues in core files.
+"""
         print("Starting to process core files...")
                         successful = 0
                         failed = 0

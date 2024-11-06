@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import Dict, List, Optional, Tuple
 
 import torch
@@ -17,9 +19,21 @@ import torch.nn as nn
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing specific functionality."""Configuration for mathematical reasoning.."""Module containing specific functionality."""Class for MathReasoning.."""Module containing specific functionality."""Mathematical reasoning module.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for forward.."""
+Module containing specific functionality."""
+Configuration for mathematical reasoning..
+
+Class for MathReasoning..
+
+Mathematical reasoning module..
+"""Module containing specific functionality."""
+Method for __init__..
+"""Module containing specific functionality."""
+Method for forward..
+"""
         # Route input to experts
         router_logits = self.router(hidden_states)
         routing_weights = torch.softmax(router_logits, dim=-1)

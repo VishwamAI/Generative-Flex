@@ -13,7 +13,9 @@ import re
 from pathlib import Path
 
 def fix_import_statements(*args, **kwargs) -> None:
-    """Fix malformed import statements with precise patterns."""
+    """
+Fix malformed import statements with precise patterns.
+"""
 # Fix specific malformed import patterns
     patterns = {
         r'from\s+accelerate\s+from\s+dataclasses': 'from dataclasses import dataclass\nfrom accelerate import Accelerator',
@@ -43,33 +45,50 @@ def fix_import_statements(*args, **kwargs) -> None:
     return '\n'.join(new_lines)
 
 def fix_docstrings(*args, **kwargs) -> None:
-    """Fix docstring formatting issues."""
+    """
+Fix docstring formatting issues.
+"""
 # Fix module-level docstrings
     content = re.sub(
-        r'^""".*?"""',
-        '"""Module containing specific functionality."""',
+        r'^"""
+.*?
+"""',
+        '"""
+Module containing specific functionality.
+"""',
         content,
         flags=re.MULTILINE | re.DOTALL
     )
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]*:(\s*"""[^"]*""")?\s*',
-        lambda m: f'class {m.group(1)}:\n"""Class implementing {m.group(1)} functionality."""\n\n',
+]*:(\s*"""[^"]*"""
+)?\s*',
+        lambda m: f'class {m.group(1)}:\n
+"""Class implementing {m.group(1)} functionality."""
+\n\n',
         content
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'def\s+(\w+)\([^)]*\):\s*"""([^"]*)"""\s*',
-        lambda m: f'def {m.group(1)}(*args, **kwargs) -> None:\n"""{m.group(2)}"""\n',
+        r'def\s+(\w+)\([^)]*\):\s*
+"""([^"]*)"""
+\s*',
+        lambda m: f'def {m.group(1)}(*args, **kwargs) -> None:\n
+"""{m.group(2)}"""
+\n',
         content
     )
 
     return content
 
-def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions and their type hints."""# Add proper type hints to common methods
+def fix_method_definitions(*args, **kwargs) -> None:
+"""Fix method definitions and their type hints."""
+# Add proper type hints to common methods
     method_patterns = {
         r'def __init__\([^)]*\)': 'def __init__(self, *args, **kwargs) -> None',
         r'def forward\([^)]*\)': 'def forward(self, *args, **kwargs) -> Any',
@@ -84,8 +103,11 @@ def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions an
 
     return content
 
-def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definitions:
-    """Class implementing definitions functionality."""
+def fix_class_definitions(*args, **kwargs) -> None:
+"""Fix class definitions:
+    """
+Class implementing definitions functionality.
+"""
 
 ',
         lambda m: f'class {m.group(1)}({", ".join(x.strip() for x in m.group(2).split(","))}):\n',
@@ -93,7 +115,9 @@ def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definitions:
     )
 
     # Fix dataclass definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 ]*:',
         lambda m: f'@dataclass\nclass {m.group(1)}:\n',
@@ -103,7 +127,9 @@ def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definitions:
     return content
 
 def fix_main_calls(*args, **kwargs) -> None:
-    """Fix main function calls at end of file."""
+    """
+Fix main function calls at end of file.
+"""
 if 'def main()' in content:
         # Ensure proper main function definition and call
         content = re.sub(
@@ -115,16 +141,22 @@ if 'def main()' in content:
 
 
 def fix_multiline_strings(*args, **kwargs) -> None:
-    """Fix multiline string formatting."""
+    """
+Fix multiline string formatting.
+"""
 # Fix triple-quoted strings
     content = re.sub(
-        r'"""([^"]*)"""',
-        lambda m: f'"""{m.group(1).strip()}"""',
+        r'"""([^"]*)"""
+',
+        lambda m: f'
+"""{m.group(1).strip()}"""
+',
         content
     )
     return content
 
-def process_file(*args, **kwargs) -> None:"""Process a single file to fix syntax issues."""
+def process_file(*args, **kwargs) -> None:
+"""Process a single file to fix syntax issues."""
 print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
@@ -166,7 +198,9 @@ print(f"Processing {file_path}...")
         f.write(content)
 
 def find_python_files(*args, **kwargs) -> None:
-    """Find all Python files in the project."""
+    """
+Find all Python files in the project.
+"""
 python_files = []
     for root, _, files in os.walk('.'):
         for file in files:
@@ -175,7 +209,9 @@ python_files = []
     return python_files
 
 def main(*args, **kwargs) -> None:
-    """Process all Python files."""
+    """
+Process all Python files.
+"""
 python_files = find_python_files()
     for file_path in python_files:
         process_file(file_path)

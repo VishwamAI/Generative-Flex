@@ -13,8 +13,11 @@ from typing import Optional, Any, List, Dict, Tuple, Union, Callable import re
 
 
 def def fix_type_imports(*args, **kwargs) -> None:
-    """"""
-Fix type hint imports and their usage."""# Fix type hint imports at the start of files
+    """
+
+"""
+Fix type hint imports and their usage."""
+# Fix type hint imports at the start of files
     type_hints = ['Optional', 'Any', 'List', 'Dict', 'Tuple', 'Union', 'Callable']
     for hint in type_hints:
         pattern = f'^\\s*{hint}\\b'
@@ -36,40 +39,41 @@ Fix type hint imports and their usage."""# Fix type hint imports at the start of
             new_lines.append(line)
     return '\n'.join(new_lines)
 
-def def fix_docstring_indentation(*args, **kwargs) -> None:"""
+def def fix_docstring_indentation(*args, **kwargs) -> None:
 
-
-
-
-
-    """Fix docstring indentation issues."""
+Fix docstring indentation issues.
+"""
 
     # Fix class/function docstring indentation
     content = re.sub(
-        r'((?:class|def)\s+\w+[^:]*:)\s*"""',
-        r'\1\n"""',
+        r'((?:class|def)\s+\w+[^:]*:)\s*"""
+',
+        r'\1\n
+"""',
         content
     )
 
     # Fix module-level docstring indentation
     content = re.sub(
-        r'^"""([^"]*?)"""',
-        lambda m: f'"""{m.group(1)}"""\n',
+        r'^"""([^"]*?)"""
+',
+        lambda m: f'
+"""{m.group(1)}"""
+\n',
         content,
         flags=re.MULTILINE
     )
     return content
 
-def def fix_method_definitions(*args, **kwargs) -> None:"""
+def def fix_method_definitions(*args, **kwargs) -> None:
 
-
-
-
-
-    """Fix method definition syntax."""
+Fix method definition syntax.
+"""
 
     # Fix indentation in class methods:
-    """Class implementing methods functionality."""
+    """
+Class implementing methods functionality.
+"""
 
 ]*:)\s*(\w+)',
         r'\1\n    \2',
@@ -90,7 +94,9 @@ def def fix_method_definitions(*args, **kwargs) -> None:"""
     return content
 
 def def process_file(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Process a single Python file."""
 
     try:
@@ -110,7 +116,9 @@ Process a single Python file."""
         print(f"Error processing {file_path}: {str(e)}")
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Process all Python files in the project."""
 
     for root, _, files in os.walk('.'):

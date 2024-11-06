@@ -12,7 +12,9 @@ import re
 import os
 
 def fix_enhanced_transformer(*args, **kwargs) -> None:
-    """Fix enhanced_transformer.py syntax issues."""
+    """
+Fix enhanced_transformer.py syntax issues.
+"""
 file_path = "src/models/layers/enhanced_transformer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
@@ -22,7 +24,9 @@ file_path = "src/models/layers/enhanced_transformer.py"
         content = f.read()
 
     # Fix docstring and class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 def __init__(self, *args, **kwargs) -> None:
         super().__init__()
@@ -39,7 +43,9 @@ def __init__(self, *args, **kwargs) -> None:
         self.layer_norm = nn.LayerNorm(hidden_size, eps=layer_norm_eps)
 
     def transpose_for_scores(self, x: torch.Tensor) -> torch.Tensor:
-        """Transpose and reshape tensor for attention computation."""
+        """
+Transpose and reshape tensor for attention computation.
+"""
         new_x_shape = x.size()[:-1] + (self.num_attention_heads, self.attention_head_size)
         x = x.view(new_x_shape)
         return x.permute(0, 2, 1, 3)
@@ -49,7 +55,9 @@ def __init__(self, *args, **kwargs) -> None:
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Forward pass of the enhanced transformer layer."""
+        """
+Forward pass of the enhanced transformer layer.
+"""
         query_layer = self.transpose_for_scores(self.query(hidden_states))
         key_layer = self.transpose_for_scores(self.key(hidden_states))
         value_layer = self.transpose_for_scores(self.value(hidden_states))
@@ -80,7 +88,9 @@ def __init__(self, *args, **kwargs) -> None:
         f.write(fixed_content)
 
 def fix_multimodal_transformer(*args, **kwargs) -> None:
-    """Fix multimodal_transformer.py syntax issues."""
+    """
+Fix multimodal_transformer.py syntax issues.
+"""
 file_path = "src/models/multimodal/multimodal_transformer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
@@ -97,11 +107,15 @@ file_path = "src/models/multimodal/multimodal_transformer.py"
     )
 
     # Fix class structure:
-    """Class implementing structure functionality."""
+    """
+Class implementing structure functionality.
+"""
 
 ',
         'class MultiModalTransformer:
-    """Class implementing MultiModalTransformer functionality."""
+    """
+Class implementing MultiModalTransformer functionality.
+"""
 
 ',
         content,
@@ -112,7 +126,9 @@ file_path = "src/models/multimodal/multimodal_transformer.py"
         f.write(content)
 
 def fix_trainer(*args, **kwargs) -> None:
-    """Fix trainer.py syntax issues."""
+    """
+Fix trainer.py syntax issues.
+"""
 file_path = "src/training/trainer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")

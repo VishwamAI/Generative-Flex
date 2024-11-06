@@ -18,9 +18,13 @@ from typing import Tuple
 
     Tupleimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport tempfileimport timeimport yaml
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  get_dataset_size(dataset_id: st rtoken: str) -> Optional[float]:                 try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : api = HfApi(token=token)                repo_info = api.repo_info(repo_id=dataset_id
 repo_type="dataset"
 token=token)
@@ -62,7 +66,9 @@ Optional[Dict[str
     ]]]:
 
         try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : dataset = load_dataset(dataset_id         config        streaming=True        trust_remote_code=True        token=token)        chunks_tested = 0
         max_chunks = 5  # Test up to 5 chunks
 
@@ -89,7 +95,9 @@ Optional[Dict[str
 
         def load_dataset_mappings() -> Dict[str
         ]:         mapping_file
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path(__file__).parent / "dataset_mappings.yaml"
                 if not mapping_file.exists():
         logger.warning("No dataset mappings file found")
@@ -108,7 +116,9 @@ Optional[Dict[str
                 ]:
 
                     result
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {
      "status": "failed",
      "error": None,

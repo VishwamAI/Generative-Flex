@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 import os
 from pathlib import Path
@@ -22,7 +24,9 @@ from typing import List,
 
 
 def fix_method_definition_syntax(line: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 # Fix method with self parameter on wrong line
     if re.match(r'\s*def\s+\w+\s*\(\s*$', line):
@@ -39,7 +43,9 @@ return line
 
 
 def fix_multiline_statement(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 lines = content.splitlines()
 fixed_lines = []
@@ -82,7 +88,9 @@ return '\n'.join(fixed_lines)
 
 
 def fix_line_continuation(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 lines = content.splitlines()
 fixed_lines = []
@@ -128,7 +136,9 @@ return '\n'.join(fixed_lines)
 
 
 def fix_indentation(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 lines = content.splitlines()
 fixed_lines = []
@@ -162,7 +172,9 @@ return '\n'.join(fixed_lines)
 
 
 def process_file(file_path: str) -> bool:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -186,7 +198,9 @@ def process_file(file_path: str) -> bool:
 
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 fundamental syntax issues in all Python files."""
 
 # Get all Python files

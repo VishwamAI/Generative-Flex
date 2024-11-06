@@ -12,7 +12,9 @@ import re
 import os
 
 def fix_trainer(*args, **kwargs) -> None:
-    """Fix trainer.py syntax issues."""
+    """
+Fix trainer.py syntax issues.
+"""
 file_path = "src/training/trainer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
@@ -22,7 +24,11 @@ file_path = "src/training/trainer.py"
         content = f.read()
 
     # Fix the specific parsing error at line 72:73
-    fixed_content = '''"""Trainer class for:"""Class implementing for functionality."""def __init__(*args, **kwargs) -> None:"""Initialize the trainer.
+    fixed_content = '''"""
+Trainer class for:
+"""Class implementing for functionality."""
+def __init__(*args, **kwargs) -> None:
+"""Initialize the trainer.
 
         Args:
             model: The model to train
@@ -40,13 +46,15 @@ self.model = model
         self.model.to(self.device)
 
     def train_step(self, batch: Dict[str, torch.Tensor]) -> Dict[str, float]:
-        """Perform a single training step.
+        """
+Perform a single training step.
 
         Args:
             batch: The input batch of data
 
         Returns:
-            Dict containing the loss values"""
+            Dict containing the loss values
+"""
         self.model.train()
         batch = {k: v.to(self.device) for k, v in batch.items()}
 
@@ -69,10 +77,12 @@ self.model = model
         return {"loss": loss.item() * self.config.gradient_accumulation_steps}
 
     def evaluate(self) -> Dict[str, float]:
-        """Evaluate the model on the validation set.
+        """
+Evaluate the model on the validation set.
 
         Returns:
-            Dict containing evaluation metrics"""
+            Dict containing evaluation metrics
+"""
         if not self.val_dataloader:
             return {}
 
@@ -90,13 +100,15 @@ self.model = model
         return {"val_loss": total_loss / num_batches}
 
     def train(self, num_epochs: int) -> Dict[str, float]:
-        """Train the model for the specified number of epochs.
+        """
+Train the model for the specified number of epochs.
 
         Args:
             num_epochs: Number of epochs to train for
 
         Returns:
-            Dict containing training metrics"""
+            Dict containing training metrics
+"""
         self.step = 0
         best_val_loss = float("inf")
 
@@ -146,7 +158,9 @@ self.model = model
         f.write(fixed_content)
 
 def fix_failing_files(*args, **kwargs) -> None:
-    """Process files that are failing to reformat."""
+    """
+Process files that are failing to reformat.
+"""
 failing_files = [
         "src/training/trainer.py",
         "src/models/text_to_anything.py",
@@ -202,7 +216,9 @@ failing_files = [
             )
 
             # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 \([^)]*\))?\s*:',
                 lambda m: f'class {m.group(1)}:',

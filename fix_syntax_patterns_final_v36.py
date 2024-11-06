@@ -11,13 +11,19 @@ from dataclasses import dataclass, field
 import os
 
 def fix_image_processor(*args, **kwargs) -> None:
-    """Fix syntax in image_processor.py."""
-content = '''"""Image processor for multimodal transformer."""
+    """
+Fix syntax in image_processor.py.
+"""
+content = '''"""
+Image processor for multimodal transformer.
+"""
 
 import torch
 import torch.nn as nn
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass from:
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
 image_size: int = 224
     patch_size: int = 16
@@ -28,20 +34,26 @@ image_size: int = 224
     dropout: float = 0.1
 
 class ImageProcessor:
-    """Class implementing ImageProcessor functionality."""
+    """
+Class implementing ImageProcessor functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize image processor.
+    """
+Initialize image processor.
 
         Args:
-            config: Optional processor configuration"""
+            config: Optional processor configuration
+"""
 super().__init__()
         self.config = config or ImageProcessorConfig()
         self.processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
         self.setup_layers()
 
     def setup_layers(*args, **kwargs) -> None:
-    """Set up neural network layers."""
+    """
+Set up neural network layers.
+"""
 self.patch_embed = nn.Conv2d(
             self.config.num_channels,
             self.config.hidden_size,
@@ -54,21 +66,25 @@ self.patch_embed = nn.Conv2d(
         self.dropout = nn.Dropout(self.config.dropout)
 
     def get_num_patches(self) -> int:
-        """Calculate number of patches.
+        """
+Calculate number of patches.
 
         Returns:
-            Number of patches"""
+            Number of patches
+"""
         patches_per_side = self.config.image_size // self.config.patch_size
         return patches_per_side * patches_per_side
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
-        """Process images.
+        """
+Process images.
 
         Args:
             images: Input images
 
         Returns:
-            Processed image features"""
+            Processed image features
+"""
         batch_size = images.shape[0]
         x = self.patch_embed(images)
         x = x.flatten(2).transpose(1, 2)
@@ -80,12 +96,18 @@ self.patch_embed = nn.Conv2d(
         f.write(content)
 
 def fix_math_experts(*args, **kwargs) -> None:
-    """Fix syntax in math_experts.py."""
-content = '''"""Mathematical expert modules."""
+    """
+Fix syntax in math_experts.py.
+"""
+content = '''"""
+Mathematical expert modules.
+"""
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     intermediate_size: int = 3072
@@ -94,19 +116,25 @@ hidden_size: int = 768
     num_experts: int = 4
 
 class MathExpert:
-    """Class implementing MathExpert functionality."""
+    """
+Class implementing MathExpert functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize math expert.
+    """
+Initialize math expert.
 
         Args:
-            config: Optional expert configuration"""
+            config: Optional expert configuration
+"""
 super().__init__()
         self.config = config or MathExpertConfig()
         self.setup_layers()
 
     def setup_layers(*args, **kwargs) -> None:
-    """Set up neural network layers."""
+    """
+Set up neural network layers.
+"""
 self.attention = nn.MultiheadAttention(
             embed_dim=self.config.hidden_size,
             num_heads=self.config.num_attention_heads,
@@ -123,13 +151,15 @@ self.attention = nn.MultiheadAttention(
         self.layer_norm2 = nn.LayerNorm(self.config.hidden_size)
 
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
-        """Process input through expert.
+        """
+Process input through expert.
 
         Args:
             hidden_states: Input hidden states
 
         Returns:
-            Processed hidden states"""
+            Processed hidden states
+"""
         # Self-attention
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)
@@ -149,13 +179,17 @@ self.attention = nn.MultiheadAttention(
         return hidden_states
 
 class MathExpertMoE:
-    """Class implementing MathExpertMoE functionality."""
+    """
+Class implementing MathExpertMoE functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize mixture of experts.
+    """
+Initialize mixture of experts.
 
         Args:
-            config: Optional configuration"""
+            config: Optional configuration
+"""
 super().__init__()
         self.config = config or MathExpertConfig()
         self.experts = nn.ModuleList([
@@ -165,13 +199,15 @@ super().__init__()
         self.router = nn.Linear(self.config.hidden_size, self.config.num_experts)
 
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
-        """Process input through mixture of experts.
+        """
+Process input through mixture of experts.
 
         Args:
             hidden_states: Input hidden states
 
         Returns:
-            Processed hidden states"""
+            Processed hidden states
+"""
         # Calculate routing weights
         routing_weights = torch.softmax(
             self.router(hidden_states),
@@ -194,7 +230,9 @@ super().__init__()
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in multimodal and reasoning files."""
+    """
+Fix syntax in multimodal and reasoning files.
+"""
 print("Fixing image_processor.py...")
     fix_image_processor()
 

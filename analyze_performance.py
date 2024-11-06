@@ -23,7 +23,9 @@ logger = logging.getLogger(__name__)
 
 
 def def analyze_performance(self)::                            try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : results = load_validation_results):
 # Calculate statistics per category
 stats = {}

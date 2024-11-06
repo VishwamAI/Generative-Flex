@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import Dict, List, Optional, Tuple
 
 import torch
@@ -17,9 +19,23 @@ import torch.nn as nn
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing specific functionality."""Configuration for mathematical reasoning head.."""Module containing specific functionality."""Class for MathHead.."""Module containing specific functionality."""Mathematical reasoning head module.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for setup_layers.."""Module containing specific functionality."""Method for forward.."""
+Module containing specific functionality."""
+Configuration for mathematical reasoning head..
+
+Class for MathHead..
+
+Mathematical reasoning head module..
+"""Module containing specific functionality."""
+Method for __init__..
+
+Method for setup_layers..
+
+Method for forward..
+"""
         # Self-attention
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)

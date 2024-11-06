@@ -12,7 +12,9 @@ import re
 import os
 
 def fix_file_syntax(*args, **kwargs) -> None:
-    """Fix common syntax issues in Python files."""
+    """
+Fix common syntax issues in Python files.
+"""
 # Fix import statements
     content = re.sub(
         r'from typing import [\w\s,]+\bas\b',
@@ -21,7 +23,9 @@ def fix_file_syntax(*args, **kwargs) -> None:
     )
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 ',
         r'class \1(object):',
@@ -38,15 +42,22 @@ def fix_file_syntax(*args, **kwargs) -> None:
 
     # Fix docstring formatting
     content = re.sub(
-        r'"""([^"\n]+)\.?"""\n',
-        r'"""\1."""\n',
+        r'"""([^"\n]+)\.?"""
+\n',
+        r'
+"""\1."""
+\n',
         content
     )
 
     # Fix multiline string formatting
     content = re.sub(
-        r'"""([^"]*)"""',
-        lambda m: '"""' + m.group(1).strip() + '"""',
+        r'
+"""([^"]*)"""
+',
+        lambda m: '
+"""' + m.group(1).strip() + '"""
+',
         content,
         flags=re.DOTALL
     )
@@ -60,7 +71,8 @@ def fix_file_syntax(*args, **kwargs) -> None:
 
     return content
 
-def process_directory(*args, **kwargs) -> None:"""Process all Python files in the directory recursively."""
+def process_directory(*args, **kwargs) -> None:
+"""Process all Python files in the directory recursively."""
 for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith('.py'):

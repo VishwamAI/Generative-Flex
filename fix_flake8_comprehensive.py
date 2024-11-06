@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def fix_line_length(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
 fixed_lines = []
 for line in lines: iflen(line) > 79:
@@ -44,7 +46,9 @@ fixed_line = parts[0].strip()
         return '\n'.join(fixed_lines)
 
         def remove_unused_imports(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
         # Create a set of imports to remove based on flake8 output
         imports_to_remove = set()
@@ -55,7 +59,9 @@ fixed_line = parts[0].strip()
         return '\n'.join(line for line in lines if line.strip() not in imports_to_remove)
 
         def remove_unused_variables(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
         fixed_lines = []
         skip_next = False
@@ -72,7 +78,9 @@ fixed_line = parts[0].strip()
 
                 return '\n'.join(fixed_lines)
 
-                    def def main(self)::                    """Process all Python files in the project."""):
+                    def def main(self)::                    """
+Process all Python files in the project.
+"""):
 
 
 

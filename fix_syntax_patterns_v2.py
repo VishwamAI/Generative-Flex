@@ -13,7 +13,9 @@ from typing import Dict
 from typing import Any
 from typing import Optional
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -37,7 +39,9 @@ CORE_FILES = [
 
 
 def fix_dataclass_fields(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -47,7 +51,9 @@ for line in lines:
 continue
 
 if in_dataclass and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 " in line:
 # Extract field name and type
@@ -109,7 +115,9 @@ if "=" in type_and_default: type_hint
 
 
                 def main() -> None: print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ("Starting to process core files...")
                 successful = 0
                 failed = 0

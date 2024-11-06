@@ -12,7 +12,9 @@ import re
 from pathlib import Path
 from typing import Optional, Any, List, Dict, Tuple, Union import sys
 def remove_unused_imports(file_path) -> None: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(file_path, "r") as f: content = f.read()
 # Dictionary of files and their unused imports to remove
 "src/models/text_to_anything.py": [
@@ -47,7 +49,9 @@ with open(file_path, "w") as f: f.write(content)
 
 
 def fix_line_length_manually(file_path) -> None: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(file_path, "r") as f: lines = f.readlines()
 fixed_lines = []
     for line in lines: iflen(line.rstrip()) > 79:

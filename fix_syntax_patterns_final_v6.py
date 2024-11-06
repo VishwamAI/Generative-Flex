@@ -15,7 +15,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 import ast
@@ -26,15 +28,21 @@ from typing import List,
 
 
 class SyntaxFixer:
-    """Class implementing SyntaxFixer functionality."""
+    """
+Class implementing SyntaxFixer functionality.
+"""
 
 Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         def format_class_def(match:
     re.Match) -> str: class_name = match.group(1)
@@ -61,29 +69,42 @@ Fix
     ):
         super().__init__()
         {chr(10).join(f'        self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}class
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  {class_name}(nn.Module):
 
     def def __init__(*args, **kwargs) -> None:
-    """super().__init__()class"""
-elif "unittest.TestCase" in parent: return f"""{class_name}(unittest.TestCase):
+    """
+super().__init__()class
+"""
+elif "unittest.TestCase" in parent: return f"""
+{class_name}(unittest.TestCase):
 
-    def def setUp(*args, **kwargs) -> None:"""
+    def def setUp(*args, **kwargs) -> None:
+"""
 
 
         super().setUp()class
 
 
-        """else: if params: return f"""
+        """
+else: if params: return f
+"""
  {class_name}({parent}):
     def __init__(*args, **kwargs) -> None:
-    """super().__init__()class"""
-else: return f"""{class_name}({parent}):
-    def def __init__(*args, **kwargs) -> None:"""
+    """
+super().__init__()class
+"""
+else: return f"""
+{class_name}({parent}):
+    def def __init__(*args, **kwargs) -> None:
+"""
 
         super().__init__()Fix
 
-        """patterns = [
+        """
+patterns = [
             (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?', format_class_def),
             (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:', lambda m: format_class_def(m)),
         ]
@@ -92,9 +113,12 @@ else: return f"""{class_name}({parent}):
         return content
 
     @staticmethod
-    def fix_docstrings(content: str) -> str:"""
+    def fix_docstrings(content: str) -> str:
+"""
  docstring positioning and formatting.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ') or stripped.startswith("'''"):
                 # Find the end of the docstring
                 docstring_lines = [line]
@@ -126,7 +150,9 @@ else: return f"""{class_name}({parent}):
 
     @staticmethod
     def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         def format_method_params(match: re.Match) -> str: indent = match.group(1)
             method_name = match.group(2)
@@ -155,7 +181,9 @@ else: return f"""{class_name}({parent}):
 
     @staticmethod
     def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         # Fix type hint spacing
         content = re.sub(r'(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*(?:\[[^\]]+\])?)', r'\1: \2', content)
@@ -167,7 +195,9 @@ else: return f"""{class_name}({parent}):
         return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -187,7 +217,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

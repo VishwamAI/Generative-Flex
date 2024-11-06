@@ -8,15 +8,23 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 import unittest
 from src.models.reasoning.math_config import MathConfig
 
 
 class TestMathConfig:
-    """Class implementing TestMathConfig functionality."""
+    """
+Class implementing TestMathConfig functionality.
+"""
 
-Module containing specific functionality."""Test invalid model type raises ValueError.."""Module containing specific functionality."""Test valid model type passes validation.."""
+Module containing specific functionality."""
+Test invalid model type raises ValueError..
+"""Module containing specific functionality."""
+Test valid model type passes validation..
+"""
         config = MathConfig()
         config.model_type = "math_reasoning"
 

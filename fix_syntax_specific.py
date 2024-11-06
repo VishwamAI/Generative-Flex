@@ -11,15 +11,21 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 
 
 def fix_indentation(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix inconsistent indentation in class methods:
-    """Class implementing methods functionality."""
+    """
+Class implementing methods functionality.
+"""
 
 stripped = line.lstrip()        if stripped.startswith("class "):
 current_indent = 0
@@ -33,7 +39,9 @@ current_indent = 0
         return "\n".join(fixed_lines)
 
 
-        def fix_try_except(content: st             r) -> str: """try-except block formatting.Fix"""        lines = content.split("\n")
+        def fix_try_except(content: st             r) -> str: """
+try-except block formatting.Fix
+"""        lines = content.split("\n")
         fixed_lines = []
         in_try_block = False
         try_indent = 0
@@ -52,7 +60,9 @@ current_indent = 0
 
 
                 def main() -> None:
-    """syntax patterns in all Python files."""
+    """
+syntax patterns in all Python files.
+"""
         root_dir = Path(".")
                 python_files = list(root_dir.rglob("*.py"))
 

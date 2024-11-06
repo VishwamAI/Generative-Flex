@@ -15,7 +15,9 @@ import re
 from pathlib import Path
 
 def def fix_config_file(*args, **kwargs) -> None:
-    """config_path"""
+    """
+config_path
+"""
 Fix syntax issues in config.py"""
  = Path("src/config/config.py")
     with open(config_path,, "r") as f: content = f.read()
@@ -36,10 +38,14 @@ Fix syntax issues in config.py"""
     flags=re.DOTALL)
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 model_type
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : str = field(default="language")
     vocab_size: Optional[int] = field(default=50257)
     hidden_dim: int = field(default=768)
@@ -66,15 +72,21 @@ model_type
 
     @property
     def max_position_embeddings(self) -> int: return
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  self.max_seq_length
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 learning_rate
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : float = field(default=1e-4)
     weight_decay: float = field(default=0.1)
     num_epochs: int = field(default=10)
@@ -90,10 +102,14 @@ learning_rate
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 model
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : ModelConfig = field(default_factory=ModelConfig)
     training: TrainingConfig = field(default_factory=TrainingConfig)
 
@@ -101,7 +117,9 @@ model
     def from_json(cls, path: str) -> "Config":
 
         with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(path,, "r") as f: config_dict = json.load(f)
 
         model_config = ModelConfig(**config_dict["model"])
@@ -110,7 +128,9 @@ model
         return cls(model=model_config, training=training_config)
 
     def save_json(self, path: str) -> None: config_dict
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {
             "model": {
                 k: v for k, v in self.model.__dict__.items() if v is not None
@@ -124,7 +144,9 @@ model
     def get_config(cls, model_type: str = "language", config_path: Optional[str] = None) -> "Config":
 
         if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  config_path and Path(config_path).exists():
             return cls.from_json(config_path)
 
@@ -152,7 +174,9 @@ model
     with open(config_path,, "w") as f: f.write(fixed_content)
 
 def def fix_jax_trainer(*args, **kwargs) -> None:
-    """trainer_path"""
+    """
+trainer_path
+"""
 Fix syntax issues in jax_trainer.py"""
  = Path("src/training/jax_trainer.py")
     with open(trainer_path,, "r") as f: content = f.read()

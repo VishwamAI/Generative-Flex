@@ -15,7 +15,9 @@ import sys
 
 
 def get_python_files() -> List[str]:         python_files
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = []
 for root
 dirs
@@ -31,7 +33,9 @@ return python_files
 
 
 def main() -> None:
-    """Main function to install black and format files."""
+    """
+Main function to install black and format files.
+"""
             # Install black
 print("Installing black...")
 try: subprocess.check_call(         [sys.executable

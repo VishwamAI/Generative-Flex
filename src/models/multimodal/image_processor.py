@@ -8,12 +8,16 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 import torch
 import torch.nn as nn
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass from:
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
 image_size: int = 224
     patch_size: int = 16
@@ -24,20 +28,26 @@ image_size: int = 224
     dropout: float = 0.1
 
 class ImageProcessor:
-    """Class implementing ImageProcessor functionality."""
+    """
+Class implementing ImageProcessor functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize image processor.
+    """
+Initialize image processor.
 
         Args:
-            config: Optional processor configuration"""
+            config: Optional processor configuration
+"""
 super().__init__()
         self.config = config or ImageProcessorConfig()
         self.processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
         self.setup_layers()
 
     def setup_layers(*args, **kwargs) -> None:
-    """Set up neural network layers.."""
+    """
+Set up neural network layers..
+"""
 self.patch_embed = nn.Conv2d(
             self.config.num_channels,
             self.config.hidden_size,
@@ -50,21 +60,25 @@ self.patch_embed = nn.Conv2d(
         self.dropout = nn.Dropout(self.config.dropout)
 
     def get_num_patches(self) -> int:
-        """Calculate number of patches.
+        """
+Calculate number of patches.
 
         Returns:
-            Number of patches"""
+            Number of patches
+"""
         patches_per_side = self.config.image_size // self.config.patch_size
         return patches_per_side * patches_per_side
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
-        """Process images.
+        """
+Process images.
 
         Args:
             images: Input images
 
         Returns:
-            Processed image features"""
+            Processed image features
+"""
         batch_size = images.shape[0]
         x = self.patch_embed(images)
         x = x.flatten(2).transpose(1, 2)

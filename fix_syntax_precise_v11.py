@@ -12,7 +12,9 @@ import os
 import re
 
 def fix_imports(*args, **kwargs) -> None:
-    """Fix import statements."""
+    """
+Fix import statements.
+"""
 # Fix split imports and remove trailing commas
     content = re.sub(
         r'from\s+([^\n]+),\s*$',
@@ -39,30 +41,48 @@ def fix_imports(*args, **kwargs) -> None:
     return content
 
 def fix_docstrings(*args, **kwargs) -> None:
-    """Fix docstring placement and formatting."""
+    """
+Fix docstring placement and formatting.
+"""
 # Fix module docstrings
     content = re.sub(
-        r'^from\s+"""([^"]*)"""',
-        r'""""\1"""\n\nfrom',
+        r'^from\s+"""([^"]*)"""
+',
+        r'
+""""\1"""
+\n\nfrom',
         content
     )
 
-    # Fix class docstrings:"""Class implementing docstrings functionality."""]*:)\s*"""([^"]*)"""',
-        r'\1\n"""\2"""',
+    # Fix class docstrings:
+"""Class implementing docstrings functionality."""
+]*:)\s*
+"""([^"]*)"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(def\s+\w+[^:]*:)\s*"""([^"]*)"""',
-        r'\1\n"""\2"""',
+        r'(def\s+\w+[^:]*:)\s*
+"""([^"]*)"""
+',
+        r'\1\n
+"""\2"""
+',
         content
     )
 
     return content
 
-def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definition:
-    """Class implementing definition functionality."""
+def fix_class_definitions(*args, **kwargs) -> None:
+"""Fix class definition:
+    """
+Class implementing definition functionality.
+"""
 
 ',
         lambda m: f'class {m.group(1)}({m.group(2).strip()}):',
@@ -70,10 +90,14 @@ def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definition:
     )
 
     # Fix empty class bodies:
-    """Class implementing bodies functionality."""
+    """
+Class implementing bodies functionality.
+"""
 
 \s*$',
-        r'class \1:\n    """Class docstring."""\n    pass',
+        r'class \1:\n    """
+Class docstring.
+"""\n    pass',
         content,
         flags=re.MULTILINE
     )
@@ -81,7 +105,9 @@ def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definition:
     return content
 
 def fix_method_definitions(*args, **kwargs) -> None:
-    """Fix method definition syntax."""
+    """
+Fix method definition syntax.
+"""
 # Fix method parameters
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*:',
@@ -99,7 +125,9 @@ def fix_method_definitions(*args, **kwargs) -> None:
     return content
 
 def fix_indentation(*args, **kwargs) -> None:
-    """Fix indentation issues."""
+    """
+Fix indentation issues.
+"""
 lines = content.split('\n')
     fixed_lines = []
     indent_level = 0
@@ -108,9 +136,13 @@ lines = content.split('\n')
         stripped = line.lstrip()
         if stripped.startswith('class ') or stripped.startswith('def '):
             indent_level = 0
-        elif stripped.startswith('"""') and not line.strip().endswith('"""'):
+        elif stripped.startswith('"""
+') and not line.strip().endswith('
+"""'):
             indent_level += 1
-        elif '"""' in stripped and not stripped.startswith('"""'):
+        elif '"""
+' in stripped and not stripped.startswith('
+"""'):
             indent_level -= 1
 
         fixed_lines.append('    ' * indent_level + stripped)
@@ -121,7 +153,9 @@ lines = content.split('\n')
     return '\n'.join(fixed_lines)
 
 def process_file(*args, **kwargs) -> None:
-    """Process a file with all fixes."""
+    """
+Process a file with all fixes.
+"""
 print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -147,7 +181,9 @@ print(f"Processing {filepath}")
         print(f"Error processing {filepath}: {str(e)}")
 
 def main(*args, **kwargs) -> None:
-    """Main function to process all target files."""
+    """
+Main function to process all target files.
+"""
 target_files = [
         'src/models/reasoning/math_head.py',
         'src/models/reasoning/math_reasoning.py',

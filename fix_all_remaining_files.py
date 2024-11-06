@@ -11,12 +11,16 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  subprocess
 import sys
 from pathlib import Path
 def def fix_syntax_issues(self)::            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
 "src/config/config.py",
 "src/config/training_config.py",
@@ -42,7 +46,9 @@ content = file_path.read_text()
 # Fix common syntax issues
 fixes = [
 # Fix dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 "
 r"def \1(self) -> None: ")
@@ -50,13 +56,21 @@ r"def \1(self) -> None: ")
 # Fix imports
 (r"from typing import(\s+[^\\n]+)(?<!\\n)", r"from typing import\1\n"),
 # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 "
 r"class \1: ")
 
 # Fix docstrings
-(r'"""([^"""]*)"""\n\s*"""', r'"""\1"""'),
+(r'"""
+([^
+"""]*)"""
+\n\s*
+"""', r'"""
+\1
+"""'),
 ]
 
 # Apply all fixes

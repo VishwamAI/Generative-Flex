@@ -2,7 +2,9 @@ import os
 from setuptools import setup, find_packages
 
 def read_requirements(filename):
-    """Read requirements from file."""
+    """
+Read requirements from file.
+"""
     try:
         with open(filename, 'r', encoding='utf-8') as f:
             return [line.strip() for line in f if line.strip() and not line.startswith('#')]
@@ -11,7 +13,8 @@ def read_requirements(filename):
 
 # Create requirements files
 with open('requirements.txt', 'w', encoding='utf-8') as f:
-    f.write("""torch>=2.0.0
+    f.write("""
+torch>=2.0.0
 numpy>=1.20.0
 tqdm>=4.65.0
 transformers>=4.30.0
@@ -27,7 +30,8 @@ tensorboard>=2.13.0
 """)
 
 with open('requirements-dev.txt', 'w', encoding='utf-8') as f:
-    f.write("""pytest>=7.3.0
+    f.write("""
+pytest>=7.3.0
 black>=23.3.0
 flake8>=6.0.0
 isort>=5.12.0

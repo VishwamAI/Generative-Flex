@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 import os
 from pathlib import Path
@@ -22,7 +24,9 @@ from typing import List,
 
 
 def fix_function_header(line: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 # Fix self parameter with type hints
 line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*
@@ -48,7 +52,12 @@ line)
 return line
 
 
-def fix_type_hints(line: str) -> str:    """type hint formatting.Fix"""Module containing specific functionality."""class method:"""Class implementing method functionality."""with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
+def fix_type_hints(line: str) -> str:    """
+type hint formatting.Fix
+"""Module containing specific functionality."""
+class method:
+"""Class implementing method functionality."""
+with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
 
 fixed_lines = []
 in_class = False
@@ -64,16 +73,23 @@ for i
         in_class = True
         class_indent = indent_level
         fixed_lines.append(line)
-        elif in_class and:"""Class implementing and functionality."""in_class = False
+        elif in_class and:
+"""Class implementing and functionality."""
+in_class = False
         fixed_lines.append(line)
-            elif in_class and:"""Class implementing and functionality."""# Fix method definition with class indentation:"""Class implementing indentation functionality."""
+            elif in_class and:
+"""Class implementing and functionality."""
+# Fix method definition with class indentation:
+"""Class implementing indentation functionality."""
 
 # Fix function definition
                 fixed = fix_function_header(stripped)
                 fixed = fix_type_hints(fixed)
                 fixed_lines.append(' ' * indent + fixed)
                 elif ': ' in stripped and '=' in stripped and not stripped.startswith(('#'                     '"'                    "'")): # Likely a dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 fixed_lines.append(line)
 
@@ -86,7 +102,9 @@ fixed_lines.append(line)
 
 
                         def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax in all Python files."""
 
                         python_files = []

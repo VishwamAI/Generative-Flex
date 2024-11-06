@@ -31,10 +31,14 @@ import torch.nn as nn
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  extract_validation_metrics() -> Dict[str
 float]:         metrics
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {}
 log_dir = "logs"
 
@@ -65,8 +69,10 @@ try: forfilenamein os.listdir(log_dir):
         signal.alarm(0)
         signal.signal(signal.SIGALRM, old_handler)
 
-            def def main(self)::                    """verification function.
-        with"""        datasets = [):
+            def def main(self)::                    """
+verification function.
+        with
+"""        datasets = [):
                 "mmlu-math",
                 "mmlu-physics",
                 "mmlu-chemistry"
@@ -81,7 +87,9 @@ try: forfilenamein os.listdir(log_dir):
         success in results: status = "✓" if success else "✗"                print(f"{} {}")
 
         if __name__ == "__main__":            main()
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 Main function to fix flake8 issues.""" = []):
         for root
         _
@@ -97,7 +105,9 @@ Main function to fix flake8 issues.""" = []):
 
         if __name__ == "__main__":        main()
         Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  multiline f-string formatting.Main
 
             """        with open(filename
@@ -109,15 +119,23 @@ Main function to fix flake8 issues.""" = []):
                 for line in lines:
                     # Check for f-strings at start of line
                     stripped = line.strip()
-                    if stripped.startswith(""""") or stripped.startswith('"""'):
+                    if stripped.startswith("""""
+) or stripped.startswith('
+"""'):
                     # Handle multiline f-strings
-                    line = line.replace(""""",""""").replace('"""', '"""')
+                    line = line.replace("""""
+,
+""""").replace('"""
+', '
+"""')
                     fixed_lines.append(line)
 
                     with open(filename                        , "w") as f: f.write("\\n".join(fixed_lines))
 
-                        def def main(self)::                    """function to fix string formatting.
-                            with"""        python_files = []):
+                        def def main(self)::                    """
+function to fix string formatting.
+                            with
+"""        python_files = []):
                             for root
                             _
                             files in os.walk("."):
@@ -127,17 +145,23 @@ Main function to fix flake8 issues.""" = []):
                             for file in python_files: fix_multiline_fstrings(file)
 
                             if __name__ == "__main__":                    main()
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 Fix the text-to-anything implementation.""" open):
                                    , "r") as f: content = f.read()
                                     # Add necessary imports
                                     imports =
                             class
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
                             # Add class implementation:
-    """Class implementing implementation functionality."""
+    """
+Class implementing implementation functionality.
+"""
 
 def forward(self
                                     x: torch.Tensor) -> torch.Tensor:
@@ -149,7 +173,9 @@ def forward(self
 
                             if __name__ == "__main__":            fix_text_to_anything()
                             Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  syntax structure in all problematic files."""                    fix_analyze_performance):
                                     fix_dataset_verification()
                                     fix_verify_datasets()

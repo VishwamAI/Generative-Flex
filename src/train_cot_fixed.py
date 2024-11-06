@@ -23,7 +23,9 @@ from tqdm import tqdm
 import os
 from pathlib import Path import logging
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 from typing import Dict, Optional
 
@@ -31,15 +33,25 @@ import torch.nn as nn
 
 from dataclasses import *
 from src.models import * import ChainOfThoughtModel import dataclass from:
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
 import dataclass
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
 import dataclass
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
-Module for implementing specific functionality."""Configuration for chain-of-thought training."""Module containing specific functionality."""Method for main.."""
+Module for implementing specific functionality."""
+Configuration for chain-of-thought training.
+"""Module containing specific functionality."""
+Method for main..
+"""
 config = CotConfig()
 model = ChainOfThoughtModel()
 trainer = Trainer(model, config)

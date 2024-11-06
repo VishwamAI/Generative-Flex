@@ -18,7 +18,9 @@ import re
 
 
 def parse_log_file(log_file) -> None: metrics
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = defaultdict(list)
 
 with open(log_file, "r") as f: forlinein

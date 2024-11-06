@@ -20,7 +20,9 @@ import re
 
 
 def fix_docstrings(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_class = False
@@ -29,7 +31,9 @@ class_indent = 0
 for i
 line in enumerate(lines):
 # Detect class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 in_class = True
         class_indent = len(re.match(r"^\s*", line).group())
@@ -59,7 +63,9 @@ in_class = True
 
 
                         def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 all Python files in the project."""
             for root
                         _

@@ -27,7 +27,9 @@ import torch.nn as nn
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_file(file_path content) -> None: os
 makedirs(os.path.dirname(file_path)
 exist_ok=True)
@@ -48,7 +50,9 @@ def def forward(self, *args, **kwargs) -> Any:: hidden_states: torch.Tensor):
 attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 torch.Tensor]:
 batch_size
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 , seq_length, hidden_size = hidden_states.shape
 
 # Get routing weights
@@ -67,10 +71,16 @@ i: i+1] * expert_output
 return combined_output, routing_weights
 Base
     """,
-"src/models/multimodal/base_transformer.py": """""" transformer implementation for multimodal processing.Base
-"""Module containing specific functionality."""
+"src/models/multimodal/base_transformer.py": """
+
+""" transformer implementation for multimodal processing.Base
+"""
+Module containing specific functionality.
+"""
  transformer model for multimodal processing.Initialize
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  the base transformer.Forward
     """    super().__init__()
 self.config = config
@@ -89,7 +99,13 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
     def def forward(self, *args, **kwargs) -> Any::
         hidden_states: torch.Tensor
 
-        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """pass through the base transformer.Single"""Module containing specific functionality."""transformer layer implementation.Initialize"""Module containing specific functionality."""the transformer layer.Forward"""                super().__init__()
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """
+pass through the base transformer.Single
+
+transformer layer implementation.Initialize
+
+the transformer layer.Forward
+"""                super().__init__()
         self.attention = MultiHeadAttention(config)
         self.intermediate = nn.Linear(config["hidden_size"], config["intermediate_size"])
         self.output = nn.Linear(config["intermediate_size"], config["hidden_size"])
@@ -98,7 +114,13 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         self.norm2 = nn.LayerNorm(config["hidden_size"])
 
         def def forward(self, *args, **kwargs) -> Any:: hidden_states: torch.Tensor):
-        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:                    """pass through the transformer layer.Multi"""Module containing specific functionality."""-head attention implementation.Initialize"""Module containing specific functionality."""multi-head attention.Forward"""    super().__init__()
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:                    """
+pass through the transformer layer.Multi
+
+-head attention implementation.Initialize
+
+multi-head attention.Forward
+"""    super().__init__()
         self.num_attention_heads = config["num_attention_heads"]
         self.hidden_size = config["hidden_size"]
         self.attention_head_size = self.hidden_size // self.num_attention_heads
@@ -111,21 +133,39 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         def def forward(self, *args, **kwargs) -> Any::
         hidden_states: torch.Tensor
 
-        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """pass through multi-head attention.Image"""Module containing specific functionality."""
-,
-        "src/models/multimodal/image_processor.py": """""" processor for multimodal inputs.Image
+        attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """
+pass through multi-head attention.Image
 """Module containing specific functionality."""
+,
+        "src/models/multimodal/image_processor.py": """
+
+""" processor for multimodal inputs.Image
+"""
+Module containing specific functionality.
+"""
  processor for handling multimodal inputs in the MMMU model.Initialize
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  the image processor.Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  images for multimodal input.Accelerated
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ,
-                "src/training/accelerated_trainer.py": """""" trainer implementation.Trainer
-"""Module containing specific functionality."""
+                "src/training/accelerated_trainer.py": """
+
+""" trainer implementation.Trainer
+"""
+Module containing specific functionality.
+"""
  class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 : model):
                         train_dataloader: DataLoader
@@ -139,7 +179,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                 logging_steps: int = 100
                 evaluation_steps: int = 500
                 save_steps: int = 1000
-                output_dir: str = "outputs"):            """the accelerated trainer.Train"""
+                output_dir: str = "outputs"):            """
+the accelerated trainer.Train
+"""
                 self.accelerator = Accelerator()
                 self.model = model
                 self.train_dataloader = train_dataloader
@@ -161,7 +203,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                 # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
                 def def train(self, *args, **kwargs) -> None: -> None):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
                 self.model.train()
                 total_loss = 0
@@ -187,7 +231,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 if self._step % self.evaluation_steps == 0: self.evaluate()
                                 if self._step % self.save_steps == 0: self.save_checkpoint()
                                 def def evaluate(self, *args, **kwargs) -> Dict[str, Any]: -> Dict[str):
-                                float]: """the model.Save"""        if self.eval_dataloader is None: return{}
+                                float]: """
+the model.Save
+"""        if self.eval_dataloader is None: return{}
 
                                 self.model.eval()
                                 total_loss = 0
@@ -208,16 +254,24 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                 return metrics
 
-                                    def save_checkpoint(self                                     is_best: boo                                    l = False) -> None: """a model checkpoint.Log"""checkpoint_name = f"checkpoint-{}"):
+                                    def save_checkpoint(self                                     is_best: boo                                    l = False) -> None: """
+a model checkpoint.Log
+"""checkpoint_name = f"checkpoint-{}"):
                                         if is_best: checkpoint_name = "best_model"
                                         self.accelerator.save_state(f"{}/{}")
                                         logger.info(f"Saved checkpoint: {}")
 
-                                    def log_metrics(self                                     metrics: Dict                                    [str                                    float]) -> None: """training metrics.Base"""                metric_str = " ".join):
+                                    def log_metrics(self                                     metrics: Dict                                    [str                                    float]) -> None: """
+training metrics.Base
+"""                metric_str = " ".join):
                                         v in metrics.items())                logger.info(f"Step {}: {}")
                                         """,
-                                        "src/training/trainer.py": """""" trainer implementation.Base
-"""Module containing specific functionality."""
+                                        "src/training/trainer.py": """
+
+""" trainer implementation.Base
+"""
+Module containing specific functionality.
+"""
  trainer class.Initialize
 
 
@@ -233,7 +287,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 logging_steps: int = 100
                                 evaluation_steps: int = 500
                                 save_steps: int = 1000
-                                output_dir: str = "outputs"):            """the trainer.Train"""
+                                output_dir: str = "outputs"):            """
+the trainer.Train
+"""
                                 self.model = model
                                 self.train_dataloader = train_dataloader
                                 self.eval_dataloader = eval_dataloader
@@ -252,7 +308,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 self._best_eval_loss = float("inf")
 
                                     def def train(self, *args, **kwargs) -> None: -> None):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
                                         self.model.train()
                                         total_loss = 0
@@ -277,7 +335,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                                 if self._step % self.evaluation_steps == 0: self.evaluate()
                                                 if self._step % self.save_steps == 0: self.save_checkpoint()
                                                 def def evaluate(self, *args, **kwargs) -> Dict[str, Any]: -> Dict[str):
-                                                float]: """the model.Save"""        if self.eval_dataloader is None: return{}
+                                                float]: """
+the model.Save
+"""        if self.eval_dataloader is None: return{}
 
                                                 self.model.eval()
                                                 total_loss = 0
@@ -298,7 +358,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                                 return metrics
 
-                                                    def save_checkpoint(self                                                     is_best: boo                                                    l = False) -> None: """a model checkpoint.Log"""checkpoint_name = f"checkpoint-{}"):
+                                                    def save_checkpoint(self                                                     is_best: boo                                                    l = False) -> None: """
+a model checkpoint.Log
+"""checkpoint_name = f"checkpoint-{}"):
                                                         if is_best: checkpoint_name = "best_model"
                                                         torch.save({
     "model_state_dict": self.model.state_dict(),
@@ -309,9 +371,13 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                                 f"{}/{}.pt")
                                                 logger.info(f"Saved checkpoint: {}")
 
-                                                    def log_metrics(self                                                     metrics: Dict                                                    [str                                                    float]) -> None: """training metrics.Fix"""                metric_str = " ".join):
+                                                    def log_metrics(self                                                     metrics: Dict                                                    [str                                                    float]) -> None: """
+training metrics.Fix
+"""                metric_str = " ".join):
                                                         v in metrics.items())                logger.info(f"Step {}: {}")
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  black formatting issues in problematic files."""        for file_path):
                                                     content in fixes.items():
                                                 full_path = os.path.join(os.getcwd(), file_path)

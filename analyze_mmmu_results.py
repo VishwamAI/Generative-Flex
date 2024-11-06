@@ -22,7 +22,9 @@ logger = logging.getLogger(__name__)
 
 
 def def parse_validation_results(self)::            log_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
 training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
@@ -59,7 +61,9 @@ except ValueError: continue# Look for problem type indicators in the input text
 
 
         def generate_performance_report(results) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not results: logger.error("No results data available")
         return
 
@@ -125,7 +129,9 @@ except ValueError: continue# Look for problem type indicators in the input text
 
 
                 def def main(self)::            results
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = parse_validation_results):
                 if results: generate_performance_report(results)
 

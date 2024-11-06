@@ -13,7 +13,9 @@ import sys
 
 
 def def format_with_ci_settings(self)::            try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):
 # Install black with specific version to match CI
 subprocess.run(     [    sys.executable,    "-m",    "pip",    "install",    "--force-reinstall",    "black==23.11.0",    ],    check=True)

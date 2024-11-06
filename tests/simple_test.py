@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 import torch
 import torch.nn as nn
@@ -18,9 +20,17 @@ from src.models import SimpleModel
 
 
 class TestSimpleModel:
-    """Class implementing TestSimpleModel functionality."""
+    """
+Class implementing TestSimpleModel functionality.
+"""
 
-Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test forward pass..."""Module containing specific functionality."""Test batch processing..."""
+Module containing specific functionality."""
+Set up test environment...
+
+Test forward pass...
+
+Test batch processing...
+"""
         batch_size = 16
         input_tensor = torch.randn(batch_size, 32)
         output = self.model(input_tensor)

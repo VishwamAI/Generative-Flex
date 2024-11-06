@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_type_hints_spacing(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix cases like 'inthidden_dim' -> 'int
 hidden_dim'
 content = re.sub(r"(\w+): (\w+)([a-zA-Z])"
@@ -33,7 +35,9 @@ r"\1: \2"
 content)    return content
 
 
-def fix_function_definitions(content: st r) -> str: """function definition syntax.Fix"""    lines = []
+def fix_function_definitions(content: st r) -> str: """
+function definition syntax.Fix
+"""    lines = []
 in_function = False
 current_function = []
 
@@ -57,7 +61,9 @@ stripped = line.strip()
                         return "\n".join(lines)
 
 
-                        def fix_single_function(lines: List                             [str]) -> List[str]: """a single function definition.Fix"""    def_line = lines[0]
+                        def fix_single_function(lines: List                             [str]) -> List[str]: """
+a single function definition.Fix
+"""    def_line = lines[0]
                                 if "(" not in def_line or ")" not in def_line: return lines
 
                         # Extract function components
@@ -104,7 +110,9 @@ stripped = line.strip()
                                                                     return [fixed_def] + lines[1:]
 
 
-                                                                    def fix_class_methods(content: st                                                                     r) -> str: """class method:"""Class implementing method functionality."""
+                                                                    def fix_class_methods(content: st                                                                     r) -> str: """
+class method:
+"""Class implementing method functionality."""
 
 stripped = line.strip()
                                                                     current_indent = len(line) - len(stripped)
@@ -113,7 +121,9 @@ stripped = line.strip()
                                                                             in_class = True
                                                                             class_indent = current_indent
                                                                             # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 class_def = stripped.split("(", 1)
                                                                             if "
@@ -122,12 +132,16 @@ class_def = stripped.split("(", 1)
                                                                                     class_def[1] = class_def[1].replace(", ", ", ")
                                                                                     line = " " * current_indent + "(".join(class_def)
                                                                                     elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_class = False
 
                                                                                     if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Ensure method is properly indented
                                                                                     line = " " * (class_indent + 4) + stripped
@@ -137,7 +151,9 @@ in_class = False
                                                                                     return "\n".join(fixed_lines)
 
 
-                                                                                        def fix_file(file_path: st                                                                                         r) -> bool: """a single file.Fix"""    try: with open(file_path                                                                                             "r"                                                                                            encoding="utf-8") as f: content = f.read()
+                                                                                        def fix_file(file_path: st                                                                                         r) -> bool: """
+a single file.Fix
+"""    try: with open(file_path                                                                                             "r"                                                                                            encoding="utf-8") as f: content = f.read()
 
                                                                                             # Apply fixes
                                                                                             content = fix_type_hints_spacing(content)
@@ -153,7 +169,9 @@ in_class = False
 
 
                                                                                             def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 critical syntax issues in all Python files."""
     # Get all Python files
                                                                                             python_files = []

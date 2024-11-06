@@ -15,9 +15,13 @@ import re
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_indentation(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 indent_level = 0
@@ -45,7 +49,9 @@ indent_level += 1
 
 
                     def def main(self)::                            problem_files
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                         "src/models/multimodal/image_processor.py",
                         "src/models/multimodal/base_transformer.py",

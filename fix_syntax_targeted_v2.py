@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -23,33 +25,48 @@ from typing import List,
 
 
 def fix_docstring_indentation(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class-level docstrings
     content = re.sub(
-        r'(class\s+[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}\n    """',
+        r'(class\s+[^:]+:)\s*"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}\n    """
+',
         content
     )
 
     # Fix method-level docstrings
     content = re.sub(
-        r'(def\s+[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}\n        """',
+        r'(def\s+[^:]+:)\s*
+"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}\n        """
+',
         content
     )
 
     # Fix module-level docstrings
     content = re.sub(
-        r'^"""([^"]+)"""',
-        lambda m: f'"""{m.group(1).strip()}\n"""',
+        r'^
+"""([^"]+)"""
+',
+        lambda m: f'
+"""{m.group(1).strip()}\n"""
+',
         content,
         flags=re.MULTILINE
     )
 
     return content
 
-def fix_type_hints(content: str) -> str:"""Module containing specific functionality."""# Fix method parameter type hints
+def fix_type_hints(content: str) -> str:
+
+# Fix method parameter type hints
     content = re.sub(
         r'def\s+([^(]+)\(\s*self\s*,\s*([^)]+)\)\s*->\s*([^:]+):',
         lambda m: (
@@ -69,7 +86,9 @@ def fix_type_hints(content: str) -> str:"""Module containing specific functional
 
     return content
 
-def fix_method_definitions(content: str) -> str:"""Module containing specific functionality."""# Fix method signatures
+def fix_method_definitions(content: str) -> str:
+
+# Fix method signatures
     content = re.sub(
         r'def\s+([^(]+)\(\s*([^)]+)\s*\)\s*->\s*([^:]+):',
         lambda m: (
@@ -82,7 +101,9 @@ def fix_method_definitions(content: str) -> str:"""Module containing specific fu
 
     return content
 
-def fix_dataclass_fields(content: str) -> str:"""Module containing specific functionality."""# Fix list fields
+def fix_dataclass_fields(content: str) -> str:
+"""Module containing specific functionality."""
+# Fix list fields
     content = re.sub(
         r'supported_modalities:\s*List\[str\]\s*=\s*field\(default_factory=[^)]+\)',
         'supported_modalities: List[str] = field(default_factory=list)',
@@ -98,7 +119,8 @@ def fix_dataclass_fields(content: str) -> str:"""Module containing specific func
 
     return content
 
-def process_file(file_path: Path) -> None:"""Module containing specific functionality."""
+def process_file(file_path: Path) -> None:
+"""Module containing specific functionality."""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -115,7 +137,9 @@ def process_file(file_path: Path) -> None:"""Module containing specific function
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """syntax in specific failing files."""
+    """
+syntax in specific failing files.
+"""
 
     failing_files = [
         "src/models/reasoning/math_experts.py",

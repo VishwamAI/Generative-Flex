@@ -23,7 +23,9 @@ from typing import List,
 
 
 def fix_function_definitions(content: str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix double colons in method definitions
         (r'def\s+(\w+)\s*\(\s*self\s*\)\s*::', r'def \1(self):'),
@@ -45,7 +47,9 @@ def fix_function_definitions(content: str) -> str: patterns
 
         # Fix missing return types with docstrings
         (r'def\s+(\w+)\s*\((.*?)\):\s*Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 '),
     ]
 
@@ -55,7 +59,9 @@ def fix_function_definitions(content: str) -> str: patterns
 
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     patterns = [
         # Fix basic type hints
@@ -83,7 +89,9 @@ def fix_type_hints(content: str) -> str:
 
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     lines = content.split('\n')
     fixed_lines = []
@@ -98,10 +106,18 @@ def fix_docstrings(content: str) -> str:
             in_function = True
 
         # Fix docstring indentation
-        if '"""' in line and not line.strip().startswith('"""'):
+        if '"""
+' in line and not line.strip().startswith('
+"""'):
             indent = len(line) - len(line.lstrip())
-            if in_function: line = ' ' * (indent + 4) + '"""' + line.split('"""')[1].strip() + '"""'
-            elif in_class: line = ' ' * (indent + 4) + '"""' + line.split('"""')[1].strip() + '"""'
+            if in_function: line = ' ' * (indent + 4) + '"""
+' + line.split('
+"""')[1].strip() + '"""
+'
+            elif in_class: line = ' ' * (indent + 4) + '
+"""' + line.split('"""
+')[1].strip() + '
+"""'
 
         fixed_lines.append(line)
 
@@ -109,7 +125,9 @@ def fix_docstrings(content: str) -> str:
 
 
 def fix_dataclass_fields(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     lines = content.split('\n')
     fixed_lines = []
@@ -121,7 +139,9 @@ def fix_dataclass_fields(content: str) -> str:
             continue
 
         if in_dataclass and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 ' in line and not line.strip().startswith(('"""', "'''", '#')):
             # Fix field definitions
@@ -139,7 +159,9 @@ def fix_dataclass_fields(content: str) -> str:
 
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     try: print(f"Processing {file_path}")
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -168,7 +190,9 @@ def process_file(file_path: Path) -> None:
 
 
 def main() -> None:
-    """syntax issues in all Python files."""
+    """
+syntax issues in all Python files.
+"""
 
     # Get all Python files
     python_files = list(Path('src').rglob('*.py')) + list(Path('tests').rglob('*.py'))

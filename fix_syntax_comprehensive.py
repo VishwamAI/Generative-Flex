@@ -27,10 +27,14 @@ import torchvision.transforms as transforms
 
 
 def def fix_class_definition(self)::    return '''class MMUDataset:
-    """Class implementing MMUDataset functionality."""
+    """
+Class implementing MMUDataset functionality.
+"""
 
 def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: super
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ().__init__()
 self.subjects = subjects if subjects else MMMU_SUBJECTS
 self.split = split
@@ -98,11 +102,13 @@ img_key = f"image_{}"
 
         except Exception as e: logger.warning(f"Failed to load {}: {}")
 
-        if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")"""fix_methods(self)::                                        return '''    def __len__):
+        if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")"""
+fix_methods(self)::                                        return '''    def __len__):
         return self.cumulative_lengths[-1] if self.cumulative_lengths else 0
 
         def def __getitem__(self         idx: in        t) -> Dict[str):
-        ]: Collate"""Module containing specific functionality."""
+        ]: Collate
+"""Module containing specific functionality."""
                 # Find the correct dataset and local index
         dataset_idx = 0
         while dataset_idx < len(self.cumulative_lengths) and idx >= self.cumulative_lengths[dataset_idx]:                dataset_idx += 1
@@ -137,7 +143,9 @@ return {
 
 @staticmethod
 def collate_mmmu_batch(examples: List [Dict[strAny]]) -> Dict[str
-    ]: """batch with proper tensor handling.Create"""                try:
+    ]: """
+batch with proper tensor handling.Create
+"""                try:
 # Initialize batch dictionary
 batch = {
      "input_ids": [],
@@ -173,7 +181,9 @@ raise
 @staticmethod
 def create_mmmu_dataloaders(subjects: Optional [List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False) -> Tuple[DataLoader
 DataLoader
-DataLoader]: """dataloaders with proper tensor handling."""                if subjects is None: subjects = MMMU_SUBJECTS
+DataLoader]: """
+dataloaders with proper tensor handling.
+"""                if subjects is None: subjects = MMMU_SUBJECTS
 try: # Create datasets
 split: MMUDataset( subjects=subjects
 split=split

@@ -23,14 +23,24 @@ from tqdm import tqdm
 import os
 from pathlib import Path import logging
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from typing import List, Optional, Dict
 
 from dataclasses import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module for implementing specific functionality."""Text-to-anything generation model."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for generate.."""
+Module for implementing specific functionality."""
+Text-to-anything generation model.
+
+Method for __init__..
+
+Method for generate..
+"""
     # Implementation details
     return []

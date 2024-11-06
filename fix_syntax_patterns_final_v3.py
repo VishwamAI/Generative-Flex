@@ -11,16 +11,22 @@ from dataclasses import dataclass, field
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib from typing import Any, List, Dict, Tuple import Path
 
 
 def fix_nn_module_inheritance(content: str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 \s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
         lambda m: f'''class {m.group(1)}(nn.Module):
@@ -31,7 +37,9 @@ def fix_nn_module_inheritance(content: str) -> str: patterns
         self.hidden_size = hidden_size'''),
 
         # Fix class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 \s*hidden_size:\s*int\s*=\s*64',
         lambda m: f'''class {m.group(1)}(nn.Module):
@@ -41,7 +49,9 @@ def fix_nn_module_inheritance(content: str) -> str: patterns
         self.hidden_size = hidden_size'''),
 
         # Fix basic class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 (\s*$|\s+[^\n])',
         lambda m: f'''class {m.group(1)}(nn.Module):
@@ -54,7 +64,9 @@ def fix_nn_module_inheritance(content: str) -> str: patterns
     return content
 
 def fix_unittest_inheritance(content: str) -> str: pattern
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:'
     replacement = lambda m: f'''class {m.group(1)}(unittest.TestCase):
 
@@ -63,7 +75,9 @@ def fix_unittest_inheritance(content: str) -> str: pattern
     return re.sub(pattern, replacement, content)
 
 def fix_method_signatures(content: str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix dataloader method signature
         (r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*dataloader:\s*DataLoader,\s*optimizer:\s*torch\.optim\.Optimizer,\s*config:\s*TrainingConfig\)\s*:',
@@ -82,7 +96,9 @@ def fix_method_signatures(content: str) -> str: patterns
     return content
 
 def fix_type_hints(content: str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix Tuple type hints
         (r'(\s+)([a-zA-Z_][a-zA-Z0-9_]*):\s*Tuple\[([^\]]+)\](\s*#[^\n]*)?',
@@ -101,7 +117,9 @@ def fix_type_hints(content: str) -> str: patterns
     return content
 
 def fix_multiline_statements(content: str) -> str: patterns
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
         # Fix print statements
         (r'(\s*)print\s*\(\s*f"([^"]+)"\s*\)',
@@ -116,26 +134,36 @@ def fix_multiline_statements(content: str) -> str: patterns
     return content
 
 def fix_docstrings(content: str) -> str: Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix module docstrings
     content = re.sub(
-        r'^"""([^"]*?)"""',
-        lambda m: f'"""{m.group(1).strip()}"""',
+        r'^"""([^"]*?)"""
+',
+        lambda m: f'
+"""{m.group(1).strip()}"""
+',
         content,
         flags=re.MULTILINE
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(\s+)"""([^"]*?)"""',
-        lambda m: f'{m.group(1)}"""{m.group(2).strip()}"""',
+        r'(\s+)
+"""([^"]*?)"""
+',
+        lambda m: f'{m.group(1)}
+"""{m.group(2).strip()}"""
+',
         content
     )
 
     return content
 
-def process_file(file_path: Path) -> None:"""Module containing specific functionality."""
+def process_file(file_path: Path) -> None:
+"""Module containing specific functionality."""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -155,7 +183,9 @@ def process_file(file_path: Path) -> None:"""Module containing specific function
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

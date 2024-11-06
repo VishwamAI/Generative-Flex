@@ -8,8 +8,10 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-import """Module
-from typing import Tuple containing specific functionality."""
+import """
+Module
+from typing import Tuple containing specific functionality.
+"""
  os
 import ast
 from typing import List,
@@ -18,7 +20,9 @@ import black
 def detect_class_and_method_blocks(content: st r) -> List[Tuple[int
 int
 int]]:     lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 blocks = []
 current_indent = 0
@@ -37,7 +41,9 @@ line in enumerate(lines):
 
 
         def fix_indentation_conservative(content: st             r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
         blocks = detect_class_and_method_blocks(content)
 
@@ -73,7 +79,9 @@ line in enumerate(lines):
 
 
                         def fix_type_hints(content: st                         r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
                         fixed_lines = []
 
@@ -89,7 +97,9 @@ line in enumerate(lines):
 
 
                                 def process_file(file_path: st                                     r) -> None: print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 (f"Processing {}...")
                                         try: with open(file_path                                         "r"                                        encoding="utf-8") as f: content = f.read()
 
@@ -115,7 +125,9 @@ line in enumerate(lines):
 
 
                                                     def def main():        critical_files
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
                                                     "src/config/config.py",
                                                     "src/config/training_config.py",

@@ -14,7 +14,9 @@ import re
 
 
 def def fix_setup_methods(self content): Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Fix setup method definitions):
 content = re.sub( r"(\s*)def setup\(self\)(\s*->|\s*: )"
 r"\1def setup(self): -> None: "
@@ -34,10 +36,14 @@ in_class = True
 class_indent = current_indent
 fixed_lines.append(line)
     elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Ensure setup method is indented properly within class fixed_lines:
-    """Class implementing fixed_lines functionality."""
+    """
+Class implementing fixed_lines functionality.
+"""
 
 fixed_lines.append(line)
 
@@ -45,7 +51,9 @@ fixed_lines.append(line)
 
 
         def def fix_method_indentation(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 method indentation within classes.Process
 
 
@@ -64,10 +72,14 @@ method indentation within classes.Process
         method_indent = class_indent + 4
         fixed_lines.append(line)
             elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 # Ensure methods are properly indented within class fixed_lines:
-    """Class implementing fixed_lines functionality."""
+    """
+Class implementing fixed_lines functionality.
+"""
 
 # Maintain indentation for method bodies
                 fixed_lines.append(" " * current_indent + stripped)
@@ -76,7 +88,9 @@ method indentation within classes.Process
                 return "\n".join(fixed_lines)
 
 
-                def def main(self)::    """files with setup method and function definition issues."""        files_to_fix = [):
+                def def main(self)::    """
+files with setup method and function definition issues.
+"""        files_to_fix = [):
                 "src/train_chatbot.py",
                 "src/train_cot_fixed.py",
                 "src/train_cot_simple.py",

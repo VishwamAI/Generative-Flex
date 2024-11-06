@@ -11,14 +11,20 @@ from dataclasses import dataclass, field
 import os
 
 def fix_math_config(*args, **kwargs) -> None:
-    """Fix syntax in math_config.py."""
-content = '''"""Configuration for mathematical reasoning module."""
+    """
+Fix syntax in math_config.py.
+"""
+content = '''"""
+Configuration for mathematical reasoning module.
+"""
 
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 model_type: str = "math_reasoning"
     hidden_size: int = 768
@@ -48,7 +54,9 @@ model_type: str = "math_reasoning"
     use_return_dict: bool = True
 
     def __post_init__(*args, **kwargs) -> None:
-    """Validate configuration after initialization."""
+    """
+Validate configuration after initialization.
+"""
 if self.model_type != "math_reasoning":
             raise ValueError(
                 f"Invalid model_type: {self.model_type}. "
@@ -56,7 +64,9 @@ if self.model_type != "math_reasoning":
             )
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 learning_rate: float = 5e-5
     weight_decay: float = 0.01
@@ -111,15 +121,21 @@ learning_rate: float = 5e-5
         f.write(content)
 
 def fix_math_head(*args, **kwargs) -> None:
-    """Fix syntax in math_head.py."""
-content = '''"""Mathematical reasoning head module."""
+    """
+Fix syntax in math_head.py.
+"""
+content = '''"""
+Mathematical reasoning head module.
+"""
 
 import torch
 import torch.nn as nn
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     intermediate_size: int = 3072
@@ -128,19 +144,25 @@ hidden_size: int = 768
     num_experts: int = 4
 
 class MathHead:
-    """Class implementing MathHead functionality."""
+    """
+Class implementing MathHead functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize math head.
+    """
+Initialize math head.
 
         Args:
-            config: Optional head configuration"""
+            config: Optional head configuration
+"""
 super().__init__()
         self.config = config or MathHeadConfig()
         self.setup_layers()
 
     def setup_layers(*args, **kwargs) -> None:
-    """Set up neural network layers."""
+    """
+Set up neural network layers.
+"""
 self.attention = nn.MultiheadAttention(
             embed_dim=self.config.hidden_size,
             num_heads=self.config.num_attention_heads,
@@ -162,14 +184,16 @@ self.attention = nn.MultiheadAttention(
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None
     ) -> Dict[str, torch.Tensor]:
-        """Process input through math head.
+        """
+Process input through math head.
 
         Args:
             hidden_states: Input hidden states
             attention_mask: Optional attention mask
 
         Returns:
-            Dictionary containing processed hidden states"""
+            Dictionary containing processed hidden states
+"""
         # Self-attention
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)
@@ -194,7 +218,9 @@ self.attention = nn.MultiheadAttention(
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in math configuration and head files."""
+    """
+Fix syntax in math configuration and head files.
+"""
 print("Fixing math_config.py...")
     fix_math_config()
 

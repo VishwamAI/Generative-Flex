@@ -12,13 +12,17 @@ from typing import Union
 from typing import Tuple
 from typing import Dict
 from typing import List
-import """Module
-from typing import Any containing specific functionality."""
+import """
+Module
+from typing import Any containing specific functionality.
+"""
  re
 
 
 def fix_imports(content: st r) -> str: imports
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = []
 seen = set()
 
@@ -34,7 +38,9 @@ if line.strip().startswith(("from "
 
 
         def create_fixed_content() -> str: return
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  '''import torch
 import torch
 from typing import Optional.nn as nn
@@ -49,10 +55,14 @@ from .symbolic_math import SymbolicMathProcessor
         logger = logging.getLogger(__name__)
 
         class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_states
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : torch
         .Tensor
         attention_mask: Optional
@@ -61,7 +71,9 @@ hidden_states
         [List[str]] = None
         **kwargs) -> Dict[str
         torch.Tensor]: Enable
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         # Get input dimensions
         batch_size = hidden_states.size(0)
@@ -181,10 +193,14 @@ hidden_states
      **aux_info,
  }
 
-            def def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """or disable gradient checkpointing for a module.):
+            def def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """
+or disable gradient checkpointing for a module.):
                 Args: module: PyTorch module
                 value: Whethertoenable gradient checkpointing
-                Fix"""Module containing specific functionality."""math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                Fix
+"""Module containing specific functionality."""
+math_reasoning.py with complete reconstruction.
+"""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                 try:
                 # Create new content

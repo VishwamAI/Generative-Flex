@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_method_bodies(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 in_method = False
@@ -38,7 +40,9 @@ method_indent = current_indent
 
 
             def def fix_docstrings_and_comments(self             content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
                 fixed_lines = []
                 in_docstring = False
@@ -47,7 +51,9 @@ method_indent = current_indent
         for line in lines: stripped = line.lstrip()            current_indent = len(line) - len(stripped)
 
         if 'Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 '):
                 # Multi-line docstring start
                 fixed_lines.append(line)
@@ -61,7 +67,9 @@ method_indent = current_indent
                 return "\n".join(fixed_lines)
 
 
-                    def def main(self)::                    """core model files."""        core_files = [):
+                    def def main(self)::                    """
+core model files.
+"""        core_files = [):
                         "src/models/base_model.py",
                         "src/models/enhanced_transformer.py",
                         "src/models/transformer.py",

@@ -24,16 +24,24 @@ import os
 from pathlib import Path import logging
 
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from src.models.reasoning.math_head
 
 from dataclasses import src.data.mmmu_dataloader from src.training.trainer
 
 logger = logging.getLogger(__name__)
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing training-related implementations."""Configuration for MMMU training.."""Module containing specific functionality."""Method for main.."""
+Module containing training-related implementations."""
+Configuration for MMMU training..
+"""Module containing specific functionality."""
+Method for main..
+"""
 # Setup logging
 logging.basicConfig(
 format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",

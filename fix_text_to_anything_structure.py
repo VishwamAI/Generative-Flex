@@ -12,8 +12,10 @@ import re
 
 
 def fix_file_structure(content) -> None:
-    """Fix the structure of text_to_anything.py
-particularly the GenerationConfig class."""
+    """
+Fix the structure of text_to_anything.py
+particularly the GenerationConfig class.
+"""
 
 
 # Split content into lines
@@ -42,8 +44,10 @@ line = lines[i]
         continue
 
         # Handle docstring
-        if line.startswith('"""') and not docstring: current_section = docstring        while i < len(lines) and not (
-        lines[i].rstrip().endswith('"""') and i > 0
+        if line.startswith('"""
+') and not docstring: current_section = docstring        while i < len(lines) and not (
+        lines[i].rstrip().endswith('
+"""') and i > 0
         ):
         current_section.append(lines[i])
         i += 1
@@ -53,20 +57,28 @@ line = lines[i]
                 continue
 
                 # Handle TextTokenizer class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 current_section = text_tokenizer
                 while i < len(lines) and (
                 lines[i].strip().startswith("class TextTokenizer:
-    """Class implementing TextTokenizer functionality."""
+    """
+Class implementing TextTokenizer functionality.
+"""
 
 # Skip the GenerationConfig class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 while i < len(lines) and (
                         len(lines[i].strip()) == 0
                         or not lines[i].startswith(                             "class ModalityEncoder:
-    """Class implementing ModalityEncoder functionality."""
+    """
+Class implementing ModalityEncoder functionality.
+"""
 
 if lines[i].strip():
                                 generation_config.append(lines[i].lstrip())
@@ -97,10 +109,14 @@ if lines[i].strip():
                         result.append("")
 
                         # Add GenerationConfig as a top-level class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 # Add @dataclass decorator:
-    """Class implementing decorator functionality."""
+    """
+Class implementing decorator functionality.
+"""
 
 result.append(                                 "@dataclass"                            )
                         result.extend(                             generation_config                        )

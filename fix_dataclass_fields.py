@@ -13,14 +13,18 @@ import re
 
 
 def fix_dataclass_fields(content) -> None:
-    """Fix dataclass field:"""Class implementing field functionality."""
+    """
+Fix dataclass field:
+"""Class implementing field functionality."""
 
 # Check if we're entering GenerationConfig
 if "@dataclass" in line: in_config = True        fixed_lines.append(line)
 continue
 
     if in_config and line.strip().startswith("class GenerationConfig:
-    """Class implementing GenerationConfig functionality."""
+    """
+Class implementing GenerationConfig functionality.
+"""
 
 fixed_lines.append(line)
         continue
@@ -61,11 +65,15 @@ fixed_lines.append(line)
                             def def main(self):: # Read the original file                with open):
                                 "r") as f: content = f.read()
                                 # Fix the dataclass fields:
-    """Class implementing fields functionality."""
+    """
+Class implementing fields functionality.
+"""
 
 f.write(fixed_content)
 
                         print("Dataclass fields:
-    """Class implementing fields functionality."""
+    """
+Class implementing fields functionality.
+"""
 
 main()

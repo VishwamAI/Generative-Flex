@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -25,10 +27,14 @@ from typing import Any
 
 
 class CodeBlock:
-    """Class implementing CodeBlock functionality."""
+    """
+Class implementing CodeBlock functionality.
+"""
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self, content: str, indent_level: int = 0):
         self.content = content
         self.indent_level = indent_level
@@ -39,35 +45,47 @@ indent_level = self.indent_level + 1
         self.children.append(child)
 
     def __str__(self) -> str: indent
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = "    " * self.indent_level
         result = [indent + self.content]
         for child in self.children: result.append(str(child))
         return "\n".join(result)
 
 def create_class_block(class_name: str, parent_class: str, docstring: str) -> CodeBlock: class_def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = f"class {class_name}({parent_class}):"
     block = CodeBlock(class_def)
     doc_block = CodeBlock(f'Create
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ')
     block.add_child(doc_block)
     return block
 
 def create_method_block(method_name: str, params: str, docstring: str, body: str = "pass") -> CodeBlock:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     method_def = f"def {method_name}({params}):"
     block = CodeBlock(method_def)
-    if docstring: doc_block = CodeBlock(f'"""{docstring}"""')
+    if docstring: doc_block = CodeBlock(f'"""
+{docstring}
+"""')
         block.add_child(doc_block)
     body_block = CodeBlock(body)
     block.add_child(body_block)
     return block
 
 def fix_class_definitions(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix nn.Module classes
     content = re.sub(
@@ -96,7 +114,9 @@ def fix_class_definitions(content: str) -> str:
     return content
 
 def fix_method_definitions(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix forward method
     content = re.sub(
@@ -118,26 +138,36 @@ def fix_method_definitions(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix module docstrings
     content = re.sub(
-        r'^"""([^"]*?)"""',
-        lambda m: f'"""\n{m.group(1).strip()}\n"""',
+        r'^"""([^"]*?)"""
+',
+        lambda m: f'
+"""\n{m.group(1).strip()}\n"""
+',
         content,
         flags=re.MULTILINE
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(\s+)"""([^"]*?)"""',
-        lambda m: f'{m.group(1)}"""\n{m.group(1)}{m.group(2).strip()}\n{m.group(1)}"""',
+        r'(\s+)
+"""([^"]*?)"""
+',
+        lambda m: f'{m.group(1)}
+"""\n{m.group(1)}{m.group(2).strip()}\n{m.group(1)}"""
+',
         content
     )
 
     return content
 
-def fix_type_hints(content: str) -> str:"""Module containing specific functionality."""
+def fix_type_hints(content: str) -> str:
+"""Module containing specific functionality."""
 
     # Fix Tuple type hints
     content = re.sub(
@@ -156,7 +186,9 @@ def fix_type_hints(content: str) -> str:"""Module containing specific functional
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -174,7 +206,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

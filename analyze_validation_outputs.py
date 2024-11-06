@@ -22,7 +22,9 @@ logger = logging.getLogger(__name__)
 
 
 def extract_problem_category(text) -> None: text
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = text.lower()
 "Algebra": [
 "algebra",
@@ -73,7 +75,9 @@ keywords in categories.items():
 
 
         def def parse_validation_outputs(self)::                            log_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
@@ -115,7 +119,9 @@ return results
 
 
 def generate_performance_report(results) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not results: logger.error("No results data available")
 return
 
@@ -203,7 +209,9 @@ key=lambda x: x[1]["accuracy"]
 
 
                     def def main(self)::                            results
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = parse_validation_outputs):
                     if results: generate_performance_report(results)
 

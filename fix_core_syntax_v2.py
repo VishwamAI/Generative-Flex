@@ -11,12 +11,16 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 import ast
 from pathlib import Path
 def fix_indentation_and_spacing(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = []
 current_indent = 0
 
@@ -48,7 +52,9 @@ stripped = line.lstrip()
 
 
                         def fix_function_definition(content: st                             r) -> str: def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_single_def(match):        name = match.group(1)        params = match.group(2) or ""
                         return_type = match.group(3)
 
@@ -75,7 +81,9 @@ stripped = line.lstrip()
 
 
                                         def fix_class_definition(content: st                                             r) -> str: def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_single_class(match):
     name = match.group(1)        bases = match.group(2)
 
@@ -85,10 +93,14 @@ stripped = line.lstrip()
 
                                                 pattern = r"class\s+(\w+)\s*(?: \((.*?)\))?\s*:"    return re.sub(pattern
                                                 fix_single_class content:
-    """Class implementing content functionality."""
+    """
+Class implementing content functionality.
+"""
 
 st                                                 r) -> str: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  "@dataclass" not in content:
     return content
 
@@ -101,7 +113,9 @@ st                                                 r) -> str: if
                                                         continue
 
 if (                                                             in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 " in line                                                            and not line.strip().startswith(("def"
 "class"
@@ -119,7 +133,9 @@ if (                                                             in_class and:
                                                                 lines.append(line)
 
                                                                 # Check if we're leaving the class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 in_class = False
 
@@ -127,7 +143,9 @@ in_class = False
 
 
                                                                         def process_file(file_path: st                                                                         r) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 :
                                                                         with open(file_path                                                                             "r"                                                                            encoding="utf-8") as f: content = f.read()
 
@@ -154,7 +172,9 @@ in_class = False
 
 
                                                                                         def def main():        core_files
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [
                                                                                         "src/config/config.py",
                                                                                         "src/config/training_config.py",

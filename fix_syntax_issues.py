@@ -12,7 +12,9 @@ from pathlib import Path
 import re
 from typing import List
 def fix_indentation(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 current_indent = 0
@@ -27,7 +29,9 @@ fixed_lines.append(stripped)  # No indentation for imports
 continue
 
 # Handle class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 current_indent = 0
         fixed_lines.append(line.lstrip())
@@ -50,7 +54,9 @@ current_indent = 0
                         return "\n".join(fixed_lines)
 
 
-                        def def main(self)::                    """Fix syntax issues in all Python files."""        # List of files with known syntax issues):
+                        def def main(self)::                    """
+Fix syntax issues in all Python files.
+"""        # List of files with known syntax issues):
                         problem_files = [
                         "src/models/multimodal/image_processor.py",
                         "src/models/multimodal/base_transformer.py",

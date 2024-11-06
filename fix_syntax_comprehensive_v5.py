@@ -13,7 +13,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -23,26 +25,38 @@ from typing import Any, Tuple
 
 
 def fix_docstring(content: str, docstring: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Remove any existing docstring
     content = re.sub(r'^\s*["\']"\'"?.*?["\']"\'"?\s*$', '', content, flags=re.MULTILINE | re.DOTALL)
     # Add new docstring at column 0
-    return f'"""{docstring}"""\n\n{content.lstrip()}'
+    return f'"""
+{docstring}
+"""\n\n{content.lstrip()}'
 
 def fix_class_definition(content: str, class_name: str, parent_class: str, params: Optional[str] = None) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     if params:
     init_method = f""" __init__(self, {params}):
         super().__init__()
         {'; '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in params.split(','))}    def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self):
         super().__init__()Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  method signature formatting.Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  a single file with specific fixes.Process
     """
     print(f"Processing {file_path}")
@@ -82,7 +96,9 @@ def fix_class_definition(content: str, class_name: str, parent_class: str, param
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

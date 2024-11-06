@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -25,7 +27,9 @@ from typing import Tuple
 
 
 def fix_type_hints(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix basic type hints with incorrect comma spacing
     content = re.sub(
@@ -65,7 +69,9 @@ def fix_type_hints(content: str) -> str: Fix
     return content
 
 def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     def def format_params(match):
         indent = match.group(1)
@@ -97,10 +103,14 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_class_inheritance(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 \.\w+)*)\s*\)\s*:',
         r'class \1(\2):',
@@ -110,7 +120,9 @@ def fix_class_inheritance(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -127,7 +139,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

@@ -15,7 +15,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -70,13 +72,19 @@ for line in content.split("\n"):
         # Add missing imports at the top
         new_imports = []
         if "field(" in content and "from dataclasses import field" not in existing_imports: new_imports.append("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 if "from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 new_imports.append("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 new_imports.append("import unittest")
 
@@ -89,14 +97,18 @@ new_imports.append("import unittest")
                 new_imports.append("from transformers import PreTrainedTokenizer")
 
                     if new_imports: import_block = "\n".join(new_imports)if content.startswith('Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ', 3) + 3
                         content = (                         content[:docstring_end]                        + "\n\n"                        + import_block                        + "\n"                        + content[docstring_end:]                    )
                 else: content = import_block + "\n\n" + content
                 return content
 
 
-                def fix_dataclass_fields(content: st                     r) -> str: """dataclass field:"""Class implementing field functionality."""
+                def fix_dataclass_fields(content: st                     r) -> str: """
+dataclass field:
+"""Class implementing field functionality."""
 
 stripped = line.lstrip()
                 if "@dataclass" in stripped: in_dataclass = True                class_indent = len(line) - len(stripped)
@@ -159,7 +171,9 @@ return_type = match.group(4) if match.group(4) else ""
 
 
                             def main() -> None:
-    """imports and syntax issues in core files."""
+    """
+imports and syntax issues in core files.
+"""
         print("Starting to process core files...")
                             successful = 0
                             failed = 0

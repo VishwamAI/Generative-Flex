@@ -1,7 +1,9 @@
 import re
 
 def fix_setup_py():
-    """Fix setup.py to handle dependencies without importing them during setup."""
+    """
+Fix setup.py to handle dependencies without importing them during setup.
+"""
     setup_content = '''
 import os
 from setuptools import setup, find_packages

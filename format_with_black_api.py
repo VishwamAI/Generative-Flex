@@ -14,9 +14,13 @@ from black import FileMode,
 import sys
 from pathlib import Path
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  main(self)::            root_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
 python_files = list(root_dir.rglob("*.py"))
 

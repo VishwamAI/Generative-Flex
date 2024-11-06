@@ -31,9 +31,17 @@ import unittest
 
 
 class TestModels:
-    """Class implementing TestModels functionality."""
+    """
+Class implementing TestModels functionality.
+"""
 
-Module for implementing specific functionality."""Method for setUp.."""Module containing specific functionality."""Method for test_transformer_model.."""Module containing specific functionality."""Method for test_model_forward.."""
+Module for implementing specific functionality."""
+Method for setUp..
+
+Method for test_transformer_model..
+
+Method for test_model_forward..
+"""
     model = TransformerModel(self.config)
     batch_size = 2
     seq_length = 10

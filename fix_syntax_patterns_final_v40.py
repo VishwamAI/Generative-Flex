@@ -24,17 +24,25 @@ def fix_enhanced_transformer():
 
     # Fix docstring syntax
     content = re.sub(
-        r'"""Enhanced transformer layer with advanced features\."""',
-        '"""Enhanced transformer layer implementation with advanced features."""',
+        r'"""
+Enhanced transformer layer with advanced features\.
+"""',
+        '"""
+Enhanced transformer layer implementation with advanced features.
+"""',
         content
     )
 
     # Fix class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 ',
         'class EnhancedTransformer:
-    """Class implementing EnhancedTransformer functionality."""
+    """
+Class implementing EnhancedTransformer functionality.
+"""
 
 ',
         content,
@@ -42,15 +50,20 @@ def fix_enhanced_transformer():
     )
 
     # Ensure proper import statements
-    imports = """from typing import Optional, Tuple, Union
+    imports = """
+from typing import Optional, Tuple, Union
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from dataclasses import dataclass"""Module containing specific functionality."""import unittest
+from dataclasses import dataclass
+"""Module containing specific functionality."""
+import unittest
 from src.models.transformer import TransformerModel
 from src.config.config import ModelConfig
 
-class TestModels:"""Class implementing TestModels functionality."""def setUp(self):
+class TestModels:
+"""Class implementing TestModels functionality."""
+def setUp(self):
         self.config = ModelConfig(
             hidden_size=64,
             num_attention_heads=4,
@@ -71,7 +84,8 @@ class TestModels:"""Class implementing TestModels functionality."""def setUp(sel
         self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size))
 
 if __name__ == '__main__':
-    unittest.main()"""
+    unittest.main()
+"""
 
     with open(file_path, 'w') as f:
         f.write(fixed_content)

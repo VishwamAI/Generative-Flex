@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 import os
 from pathlib import Path
@@ -22,7 +24,9 @@ from typing import List,
 
 
 def fix_function_definition(line: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Remove extra parentheses
 line = re.sub(r'\)\s*\)', ')', line)
 
@@ -51,7 +55,10 @@ line = re.sub(r', \s*\)', ')', line)
 return line
 
 
-def fix_class_definition(line: st r) -> str: """class definition:"""Class implementing definition functionality."""with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
+def fix_class_definition(line: st r) -> str: """
+class definition:
+"""Class implementing definition functionality."""
+with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
 
 fixed_lines = []
 in_class = False
@@ -65,9 +72,14 @@ class_indent = 0
         in_class = True
         class_indent = indent_level
         fixed_lines.append(' ' * indent + fix_class_definition(stripped))
-        elif in_class and:"""Class implementing and functionality."""in_class = False
+        elif in_class and:
+"""Class implementing and functionality."""
+in_class = False
         fixed_lines.append(line)
-            elif in_class and:"""Class implementing and functionality."""# Fix method definition with class indentation:"""Class implementing indentation functionality."""
+            elif in_class and:
+"""Class implementing and functionality."""
+# Fix method definition with class indentation:
+"""Class implementing indentation functionality."""
 
 # Fix function definition
                 fixed_lines.append(' ' * indent + fix_function_definition(stripped))
@@ -81,7 +93,9 @@ class_indent = 0
 
 
                         def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax in all Python files."""
     python_files = []
 

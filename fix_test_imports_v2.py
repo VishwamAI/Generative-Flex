@@ -32,8 +32,10 @@ def fix_import_statements(content):
 def fix_docstring_formatting(content):
     # Fix multiple docstrings issue
     content = re.sub(
-        r'"""([^"]*)""""{3}([^"]*)""""{3}([^"]*)"""',
-        lambda m: '"""\n' + '\n'.join(s.strip() for s in [m.group(1), m.group(2), m.group(3)] if s.strip()) + '\n"""',
+        r'"""([^"]*)""""{3}([^"]*)""""{3}([^"]*)"""
+',
+        lambda m: '
+"""\n' + '\n'.join(s.strip() for s in [m.group(1), m.group(2), m.group(3)] if s.strip()) + '\n"""',
         content
     )
     return content

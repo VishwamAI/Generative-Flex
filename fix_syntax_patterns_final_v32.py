@@ -11,13 +11,19 @@ from dataclasses import dataclass, field
 import os
 
 def fix_math_head_config(*args, **kwargs) -> None:
-    """Fix syntax in math_head_config.py."""
-content = '''"""Configuration for mathematical reasoning head."""
+    """
+Fix syntax in math_head_config.py.
+"""
+content = '''"""
+Configuration for mathematical reasoning head.
+"""
 
 from dataclasses from typing import List, Optional import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_attention_heads: int = 12
@@ -32,15 +38,21 @@ hidden_size: int = 768
         f.write(content)
 
 def fix_math_reasoning(*args, **kwargs) -> None:
-    """Fix syntax in math_reasoning.py."""
-content = '''"""Mathematical reasoning module."""
+    """
+Fix syntax in math_reasoning.py.
+"""
+content = '''"""
+Mathematical reasoning module.
+"""
 
 import torch
 import torch.nn as nn
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_attention_heads: int = 12
@@ -50,13 +62,17 @@ hidden_size: int = 768
     dropout_prob: float = 0.1
 
 class MathReasoning:
-    """Class implementing MathReasoning functionality."""
+    """
+Class implementing MathReasoning functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize mathematical reasoning module.
+    """
+Initialize mathematical reasoning module.
 
         Args:
-            config: Optional configuration"""
+            config: Optional configuration
+"""
 super().__init__()
         self.config = config or MathReasoningConfig()
 
@@ -78,14 +94,16 @@ super().__init__()
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None
     ) -> Dict[str, torch.Tensor]:
-        """Forward pass through mathematical reasoning module.
+        """
+Forward pass through mathematical reasoning module.
 
         Args:
             hidden_states: Input hidden states
             attention_mask: Optional attention mask
 
         Returns:
-            Dictionary containing output tensors"""
+            Dictionary containing output tensors
+"""
         # Route input to experts
         router_logits = self.router(hidden_states)
         routing_weights = torch.softmax(router_logits, dim=-1)
@@ -110,28 +128,40 @@ super().__init__()
         f.write(content)
 
 def fix_test_inference(*args, **kwargs) -> None:
-    """Fix syntax in test_inference.py."""
-content = '''"""Test inference functionality."""
+    """
+Fix syntax in test_inference.py.
+"""
+content = '''"""
+Test inference functionality.
+"""
 
 import unittest
 import torch
 from src.models import SimpleModel
 
 class TestInference:
-    """Class implementing TestInference functionality."""
+    """
+Class implementing TestInference functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.model = SimpleModel()
 
     def test_inference(*args, **kwargs) -> None:
-    """Test basic inference."""
+    """
+Test basic inference.
+"""
 input_tensor = torch.randn(1, 32)
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
 
     def test_batch_inference(*args, **kwargs) -> None:
-    """Test batch inference."""
+    """
+Test batch inference.
+"""
 batch_size = 16
         input_tensor = torch.randn(batch_size, 32)
         output = self.model(input_tensor)
@@ -141,26 +171,38 @@ batch_size = 16
         f.write(content)
 
 def fix_test_minimal(*args, **kwargs) -> None:
-    """Fix syntax in test_minimal.py."""
-content = '''"""Test minimal model functionality."""
+    """
+Fix syntax in test_minimal.py.
+"""
+content = '''"""
+Test minimal model functionality.
+"""
 
 
 class TestMinimal:
-    """Class implementing TestMinimal functionality."""
+    """
+Class implementing TestMinimal functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.model = SimpleModel()
         self.vocab_size = 1000
 
     def test_forward_pass(*args, **kwargs) -> None:
-    """Test forward pass through the model."""
+    """
+Test forward pass through the model.
+"""
 input_tensor = torch.randint(0, self.vocab_size, (1, 32))
         output = self.model(input_tensor)
         self.assertEqual(output.shape[0], 1)
 
     def test_batch_processing(*args, **kwargs) -> None:
-    """Test batch processing."""
+    """
+Test batch processing.
+"""
 batch_size = 16
         input_tensor = torch.randint(0, self.vocab_size, (batch_size, 32))
         output = self.model(input_tensor)
@@ -170,26 +212,38 @@ batch_size = 16
         f.write(content)
 
 def fix_test_simple(*args, **kwargs) -> None:
-    """Fix syntax in test_simple.py."""
-content = '''"""Test simple model functionality."""
+    """
+Fix syntax in test_simple.py.
+"""
+content = '''"""
+Test simple model functionality.
+"""
 
 
 class TestSimple:
-    """Class implementing TestSimple functionality."""
+    """
+Class implementing TestSimple functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.model = SimpleModel()
         self.vocab_size = 1000
 
     def test_model_output(*args, **kwargs) -> None:
-    """Test model output dimensions."""
+    """
+Test model output dimensions.
+"""
 input_tensor = torch.randint(0, self.vocab_size, (1, 32))
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
 
     def test_model_batch(*args, **kwargs) -> None:
-    """Test model batch processing."""
+    """
+Test model batch processing.
+"""
 batch_size = 16
         input_tensor = torch.randint(0, self.vocab_size, (batch_size, 32))
         output = self.model(input_tensor)
@@ -199,26 +253,38 @@ batch_size = 16
         f.write(content)
 
 def fix_test_simple_cot(*args, **kwargs) -> None:
-    """Fix syntax in test_simple_cot.py."""
-content = '''"""Test simple chain-of-thought model."""
+    """
+Fix syntax in test_simple_cot.py.
+"""
+content = '''"""
+Test simple chain-of-thought model.
+"""
 
 
 class TestSimpleCot:
-    """Class implementing TestSimpleCot functionality."""
+    """
+Class implementing TestSimpleCot functionality.
+"""
 
 def setUp(*args, **kwargs) -> None:
-    """Set up test environment."""
+    """
+Set up test environment.
+"""
 self.model = SimpleModel()
 
     def test_cot_generation(*args, **kwargs) -> None:
-    """Test chain-of-thought generation."""
+    """
+Test chain-of-thought generation.
+"""
 input_text = "What is 2+2?"
         input_tensor = torch.randint(0, 1000, (1, 32))
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
 
     def test_cot_batch(*args, **kwargs) -> None:
-    """Test batch chain-of-thought generation."""
+    """
+Test batch chain-of-thought generation.
+"""
 batch_size = 16
         input_tensor = torch.randint(0, 1000, (batch_size, 32))
         output = self.model(input_tensor)
@@ -228,7 +294,9 @@ batch_size = 16
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in critical files."""
+    """
+Fix syntax in critical files.
+"""
 print("Fixing math_head_config.py...")
     fix_math_head_config()
 

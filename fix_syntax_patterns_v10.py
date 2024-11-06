@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 from pathlib import Path
 import ast
@@ -22,7 +24,9 @@ from typing import List,
 
 
 def fix_basic_syntax(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Remove extra spaces around colons in type hints
 content = re.sub(r"\s*: \s*(\w+)"
 r": \1"
@@ -36,7 +40,9 @@ content = re.sub(r", \s*", r", ", content)
 return content
 
 
-def fix_function_def(content: st r) -> str: """function definition syntax.Fix"""    lines = content.split("\n")
+def fix_function_def(content: st r) -> str: """
+function definition syntax.Fix
+"""    lines = content.split("\n")
 fixed_lines = []
 in_def = False
 def_lines = []
@@ -75,7 +81,9 @@ for line in lines: if line.lstrip().startswith("def "):
                 return "\n".join(fixed_lines)
 
 
-                def fix_parameter_list(func_name: st                 r                params: st                r                return_type: Optional                [str]) -> str: """parameter list formatting.Fix"""    if not params: if return_type: return f"def {func_name}() -> {return_type.strip()}:"
+                def fix_parameter_list(func_name: st                 r                params: st                r                return_type: Optional                [str]) -> str: """
+parameter list formatting.Fix
+"""    if not params: if return_type: return f"def {func_name}() -> {return_type.strip()}:"
                 return f"def {func_name}():"
 
                 # Split and clean parameters
@@ -98,13 +106,17 @@ for line in lines: if line.lstrip().startswith("def "):
                                     return f"def {func_name}({params_str}):"
 
 
-                                    def fix_class_def(content: st                                         r) -> str: """class definition:"""Class implementing definition functionality."""
+                                    def fix_class_def(content: st                                         r) -> str: """
+class definition:
+"""Class implementing definition functionality."""
 
 if line.lstrip().startswith("class "):
                                             in_class = True
                                             class_indent = " " * (len(line) - len(line.lstrip()))
                                             # Fix class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 class_name = stripped[6 : stripped.find("(")].strip()                parents = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if parents: parents = ", ".join(p.strip() for p in parents.split(", "))
                                                     fixed_lines.append(f"{class_indent}class {class_name}({parents}):")
@@ -113,7 +125,9 @@ class_name = stripped[6 : stripped.find("(")].strip()                parents = s
                                                             continue
 
                                                                 if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_class = False
                                                                     fixed_lines.append(line)
@@ -121,7 +135,9 @@ in_class = False
                                                                     return "\n".join(fixed_lines)
 
 
-                                                                    def fix_dataclass_fields(content: st                                                                     r) -> str: """dataclass field:"""Class implementing field functionality."""
+                                                                    def fix_dataclass_fields(content: st                                                                     r) -> str: """
+dataclass field:
+"""Class implementing field functionality."""
 
 return content
 
@@ -159,7 +175,9 @@ return content
                                                                                                             return "\n".join(fixed_lines)
 
 
-                                                                                                            def process_file(file_path: st                                                                                                             r) -> None: """a single file applying fixes one at a time.Process"""    try: with open(file_path                                                                                                                 "r"                                                                                                                encoding="utf-8") as f: content = f.read()
+                                                                                                            def process_file(file_path: st                                                                                                             r) -> None: """
+a single file applying fixes one at a time.Process
+"""    try: with open(file_path                                                                                                                 "r"                                                                                                                encoding="utf-8") as f: content = f.read()
 
                                                                                                             # Skip empty files
                                                                                                                 if not content.strip():
@@ -187,7 +205,9 @@ return content
 
 
                                                                                                                                     def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
     # Process core files first
                                                                                                                                     core_files = [
                                                                                                                                     "src/config/config.py",

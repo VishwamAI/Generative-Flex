@@ -18,8 +18,12 @@ import pytest
 
 
 def
-"""Module containing specific functionality."""
- main(self)::    """Main function to fix the file."""        # Create the fixed content):
+"""
+Module containing specific functionality.
+"""
+ main(self)::    """
+Main function to fix the file.
+"""        # Create the fixed content):
 content = create_fixed_content()
 
 # Write to file

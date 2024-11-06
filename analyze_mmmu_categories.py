@@ -22,7 +22,9 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_validation_set(dataset) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
 return None
 
@@ -81,7 +83,9 @@ category = "Algebra"
 
 
                 def generate_report(stats) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not stats: logger.error("No statistics available for report generation")
                 return
 
@@ -131,7 +135,9 @@ category = "Algebra"
 
 
                                 def def main(self)::            dataset
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = load_mmmu_dataset):
                                 if dataset: stats = analyze_validation_set(dataset)        if stats: generate_visualization(stats)
                                 generate_report(stats)

@@ -13,7 +13,9 @@ import re
 
 
 def def fix_file_content(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Fix formatting issues in test_models.py."""
         # Split content into lines):
 lines = content.split("\n")
@@ -37,9 +39,13 @@ current_indent = 0
         continue
 
         # Fix docstring formatting
-            if line.strip().startswith('"""'):
+            if line.strip().startswith('"""
+'):
                 # If this is a single-line docstring
-                if line.strip().endswith('"""') and len(line.strip()) > 3: fixed_lines.append(" " * current_indent + '"""' + line.strip()[3:-3].strip() + '"""'
+                if line.strip().endswith('
+"""') and len(line.strip()) > 3: fixed_lines.append(" " * current_indent + '"""
+' + line.strip()[3:-3].strip() + '
+"""'
         )
             else:
                 # Multi-line docstring
@@ -57,7 +63,9 @@ current_indent = 0
                 continue
 
                 # Handle class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 in_function = False
                 current_indent = 0

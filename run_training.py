@@ -18,7 +18,9 @@ import logging
 import os
 import torch
 Initialize
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
 
@@ -29,7 +31,9 @@ logger = logging.getLogger(__name__)
 
 
 def def initialize_mmmu_dataset(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 and cache MMMU dataset.Main
 
 
@@ -47,7 +51,9 @@ except Exception as e: logger.error(f"Error initializing dataset: {e}")
 raise
 
 
-    def def main(self):: """training function."""try:    # Set up configuration):
+    def def main(self):: """
+training function.
+"""try:    # Set up configuration):
         model_name = "facebook/opt-125m"  # Smaller model for local training
         subjects = ["Math"]  # Focus only on Math for initial training
         batch_size = 1  # Minimal batch size for memory efficiency

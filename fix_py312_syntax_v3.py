@@ -19,7 +19,9 @@ import os
 import re
 
 def fix_docstring_indentation(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\n')
 fixed_lines = []
 in_docstring = False
@@ -31,7 +33,9 @@ stripped = line.lstrip()
 current_indent = len(line) - len(stripped)
 
     if stripped.startswith('Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  a single Python file.Process
 
                             """            try: with open(file_path                             'r'                            encoding='utf-8') as f: content = f.read()
@@ -47,7 +51,9 @@ current_indent = len(line) - len(stripped)
                             except Exception as e: print(f"Error processing {file_path}: {e}")
 
                                 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 all Python files in the project."""
         # Process core files first
                                 core_files = [

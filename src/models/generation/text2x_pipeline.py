@@ -31,7 +31,9 @@ return {
 }
 
 def def(*args, **kwargs) -> None:
-    """attention_mask...."""
+    """
+attention_mask....
+"""
 Method with parameters.."""
         , =None): target_modality, ="text"
 

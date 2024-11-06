@@ -15,7 +15,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 import ast
@@ -26,15 +28,21 @@ from typing import List,
 
 
 class SyntaxFixer:
-    """Class implementing SyntaxFixer functionality."""
+    """
+Class implementing SyntaxFixer functionality.
+"""
 
 Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     @staticmethod
     def fix_module_docstring(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         lines = content.splitlines()
         if not lines: return content
@@ -54,16 +62,20 @@ Fix
             lines.pop(first_non_empty)
             # Add it back at the top with proper formatting
             docstring = docstring_match.group(1).strip()
-            lines.insert(0, '"""')
+            lines.insert(0, '"""
+')
             lines.insert(1, docstring)
-            lines.insert(2, '"""')
+            lines.insert(2, '
+"""')
             lines.insert(3, '')
 
         return "\n".join(lines)
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         def format_class_def(match:
     re.Match) -> str: indent = match.group(1)
@@ -82,26 +94,42 @@ Fix
 
 {indent}    def __init__(self, {', '.join(param_list)}):
 {indent}        super().__init__()
-{indent}        {chr(10) + indent + '        '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}""":
+{indent}        {chr(10) + indent + '        '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}"""
+:
                     return f
-            elif"""Module containing specific functionality."""{indent}        super().__init__()"""
+            elif
+"""Module containing specific functionality."""
+{indent}        super().__init__()
+"""
  "unittest.TestCase" in parent: return f
             else
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         {indent}        super().setUp()
-        """:
+        """
+:
                 if params: return f
-                else"""Module containing specific functionality."""{indent}        super().__init__()"""
+                else
+"""Module containing specific functionality."""
+{indent}        super().__init__()
+"""
 :
                     return fFix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         {indent}        super().__init__()
-        """# Fix class inheritance:"""Class implementing inheritance functionality."""\.\w+)*)\s*\)\s*:\s*([^:\n]+)?'
+        """
+# Fix class inheritance:
+"""Class implementing inheritance functionality."""
+\.\w+)*)\s*\)\s*:\s*([^:\n]+)?'
         content = re.sub(pattern, format_class_def, content, flags=re.MULTILINE)
         return content
 
     @staticmethod
-    def fix_method_signatures(content: str) -> str:"""Module containing specific functionality."""
+    def fix_method_signatures(content: str) -> str:
+"""Module containing specific functionality."""
 
         def format_method_def(match: re.Match) -> str: indent = match.group(1)
             method_name = match.group(2)
@@ -130,7 +158,9 @@ Fix
 
     @staticmethod
     def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         # Fix type hint spacing
         content = re.sub(r'(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*(?:\[[^\]]+\])?)', r'\1: \2', content)
@@ -147,7 +177,9 @@ Fix
         return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -167,7 +199,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

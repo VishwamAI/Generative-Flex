@@ -13,8 +13,11 @@ from typing import Optional, Any, List, Dict, Tuple, Union, Callable, Type impor
 
 
 def def fix_type_imports(*args, **kwargs) -> None:
-    """"""
-Fix type hint imports and their usage."""# Add typing imports at the top if needed
+    """
+
+"""
+Fix type hint imports and their usage."""
+# Add typing imports at the top if needed
     type_hints = ['Optional', 'Any', 'List', 'Dict', 'Tuple', 'Union', 'Callable', 'Type']
     imports_needed = []
 
@@ -45,32 +48,36 @@ Fix type hint imports and their usage."""# Add typing imports at the top if need
 
     return content
 
-def def fix_docstring_indentation(*args, **kwargs) -> None:"""
+def def fix_docstring_indentation(*args, **kwargs) -> None:
 
-
-
-
-
-    """Fix docstring indentation and placement."""
+Fix docstring indentation and placement.
+"""
 
     # Fix module-level docstrings
     content = re.sub(
-        r'^(\s*)"""([^"]*?)"""',
-        r'"""\2"""\n',
+        r'^(\s*)"""([^"]*?)"""
+',
+        r'
+"""\2"""
+\n',
         content,
         flags=re.MULTILINE
     )
 
     # Fix class/method docstrings
     content = re.sub(
-        r'((?:class|def)\s+\w+[^:]*:)\s*"""',
-        r'\1\n    """',
+        r'((?:class|def)\s+\w+[^:]*:)\s*
+"""',
+        r'\1\n    """
+',
         content
     )
 
     # Fix indented docstrings
     content = re.sub(
-        r'^\s+"""([^"]*?)"""$',
+        r'^\s+
+"""([^"]*?)"""
+$',
         lambda m: '    ' + m.group().lstrip(),
         content,
         flags=re.MULTILINE
@@ -78,13 +85,10 @@ def def fix_docstring_indentation(*args, **kwargs) -> None:"""
 
     return content
 
-def def fix_method_definitions(*args, **kwargs) -> None:"""
+def def fix_method_definitions(*args, **kwargs) -> None:
 
-
-
-
-
-    """Fix method definition syntax and parameter formatting."""
+Fix method definition syntax and parameter formatting.
+"""
 
     def def fix_params(match):
         indent = match.group(1)
@@ -115,9 +119,13 @@ def def fix_method_definitions(*args, **kwargs) -> None:"""
     return content
 
 def def fix_class_definitions(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Fix class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 indent = match.group(1)
         class_name = match.group(2)
@@ -137,7 +145,9 @@ indent = match.group(1)
             return f'{indent}class {class_name}:'
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 ',
         fix_class_def,
@@ -148,7 +158,9 @@ indent = match.group(1)
     return content
 
 def def process_file(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Process a single Python file."""
 
     try:
@@ -176,7 +188,9 @@ Process a single Python file."""
         print(f"Error processing {file_path}: {str(e)}")
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Process all Python files in the project."""
 
     for root, _, files in os.walk('.'):

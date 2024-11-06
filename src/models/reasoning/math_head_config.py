@@ -8,10 +8,14 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 from dataclasses from typing import List, Optional import dataclass
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_attention_heads: int = 12

@@ -13,9 +13,13 @@ import os
 from pathlib import Path
 import re
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_multiline_fstrings(filename: st r) -> None: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(filename
 'r') as f: content = f.read()
 # Fix multiline f-strings
@@ -25,12 +29,16 @@ in_fstring = False
 current_fstring = []
 
 for line in lines: stripped = line.strip()if not in_fstring: ifstripped.startswith(Process
-    """"") or stripped.startswith('"""'):
+    """""
+) or stripped.startswith('
+"""'):
 in_fstring = True
 current_fstring = [line]
 else: fixed_lines.append(line)
 else: current_fstring.append(line)
-    if(stripped.endswith(""""") or stripped.endswith('"""')) and not stripped.startswith('f'):
+    if(stripped.endswith("""""
+) or stripped.endswith('
+"""')) and not stripped.startswith('f'):
         in_fstring = False
         fixed_fstring = format_fstring(current_fstring)
         fixed_lines.extend(fixed_fstring)
@@ -39,8 +47,10 @@ else: current_fstring.append(line)
         with open(filename         'w') as f: f.write('\\n'.join(fixed_lines))
 
 
-        def def main(self)::    """all Python files in the project.
-        with"""        root_dir = Path):
+        def def main(self)::    """
+all Python files in the project.
+        with
+"""        root_dir = Path):
             for file_path in root_dir.rglob('*.py'):
             if '.git' not in str(file_path):
         print(f"Processing {}")
@@ -48,7 +58,9 @@ else: current_fstring.append(line)
 
 
         if __name__ == '__main__':        main()
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 Fix text to anything conversion code.""" = [):
                     'src/models/text_to_anything.py',
                     'tests/test_features.py',
@@ -74,7 +86,9 @@ Fix text to anything conversion code.""" = [):
 
 
                 def fix_imports(content: st                 r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split('\\n')
                 import_lines = []
                 other_lines = []
@@ -91,9 +105,13 @@ Fix text to anything conversion code.""" = [):
 
 
                     def fix_function_definitions(content: st                     r) -> str: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : tree = ast.parse(content)        except SyntaxError: returncontentclass FunctionVisitor:
-    """Class implementing FunctionVisitor functionality."""
+    """
+Class implementing FunctionVisitor functionality.
+"""
 
 def def visit_FunctionDef(self                         node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
                         ctx=ast.Load())                return node
@@ -106,11 +124,17 @@ def def visit_FunctionDef(self                         node) -> None: # Add retu
 
                         if __name__ == '__main__':        fix_text_to_anything()
                         Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  basic syntax issues.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  advanced syntax issues.Process
-    """try: tree = ast.parse(content)            except SyntaxError: returncontentclass SyntaxFixer:"""Class implementing SyntaxFixer functionality."""
+    """
+try: tree = ast.parse(content)            except SyntaxError: returncontentclass SyntaxFixer:
+"""Class implementing SyntaxFixer functionality."""
 
 def def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
                                         ast.Expr) and
@@ -125,8 +149,10 @@ def def visit_FunctionDef(self                                     node) -> None
                                         return ast.unparse(new_tree)
 
 
-                                        def def main(self)::    """all Python files in the project.
-                                        with"""        root_dir = Path):
+                                        def def main(self)::    """
+all Python files in the project.
+                                        with
+"""        root_dir = Path):
                                             for file_path in root_dir.rglob('*.py'):
                                             if '.git' not in str(file_path):
                                         print(f"Processing {}")
@@ -134,7 +160,9 @@ def def visit_FunctionDef(self                                     node) -> None
 
 
                                         if __name__ == '__main__':        main()
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 Fix all remaining files with syntax issues."""):
                                                     fix_text_to_anything()
                                                     fix_syntax_structure()

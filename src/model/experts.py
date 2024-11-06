@@ -11,6 +11,10 @@ from dataclasses import dataclass, field
 import torch
 import torch.nn as nn
 Mixture
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 (nn.Module):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""

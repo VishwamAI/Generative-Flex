@@ -28,10 +28,12 @@ return
 content = path.read_text()
 
 # Add missing imports
-imports_to_add = """# Test configuration
+imports_to_add = """
+# Test configuration
 batch_size = 4
 seq_length = 16
-hidden_size = 32"""
+hidden_size = 32
+"""
 
 
 # Add imports at the beginning of the file after existing imports

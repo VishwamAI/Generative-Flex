@@ -2,7 +2,9 @@ import re
 import os
 
 def fix_test_files():
-    """Fix import statements and docstrings in test files."""
+    """
+Fix import statements and docstrings in test files.
+"""
     test_files = [
         'tests/test_environment.py',
         'tests/test_features.py',
@@ -41,8 +43,18 @@ def fix_test_files():
 
         # Fix docstrings
         content = re.sub(
-            r'"""([^"]*?)"""([^"]*?)"""([^"]*?)"""([^"]*?)"""([^"]*?)"""',
-            r'"""\1"""\n\n"""\2"""\n\n"""\3"""\n\n"""\4"""\n\n"""\5"""',
+            r'"""([^"]*?)"""([^"]*?)"""([^"]*?)"""([^"]*?)"""([^"]*?)"""
+',
+            r'
+"""\1"""
+\n\n
+"""\2"""
+\n\n
+"""\3"""
+\n\n
+"""\4"""
+\n\n
+"""\5"""',
             content
         )
 

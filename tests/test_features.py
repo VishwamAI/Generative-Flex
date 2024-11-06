@@ -16,4 +16,6 @@ from src.config.config import ModelConfig
 from src.models.text_to_anything import TextToAnything
 
 nalUnionList, DictAnyTuple
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""

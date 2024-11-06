@@ -14,7 +14,9 @@ import re
 
 
 def fix_indentation_issues(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 current_indent = 0
@@ -30,7 +32,9 @@ for line in lines: stripped = line.lstrip()            if stripped:
 
                 # Apply proper indentation
                     if not stripped.startswith(('Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 "")):
                         line = " " * current_indent + stripped
 
@@ -39,7 +43,9 @@ for line in lines: stripped = line.lstrip()            if stripped:
                         return "\n".join(fixed_lines)
 
 
-                        def def main(self)::                    """syntax errors in files that failed black formatting."""        files_to_fix = [):
+                        def def main(self)::                    """
+syntax errors in files that failed black formatting.
+"""        files_to_fix = [):
                         "analyze_performance_by_category.py",
                         "data/dataset_verification_utils.py",
                         "fix_flake8_comprehensive.py",

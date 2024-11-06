@@ -13,7 +13,9 @@ from typing import Dict
 from typing import Any
 from typing import Optional
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -53,7 +55,9 @@ fix_field_def
 content)
 
 # Fix dataclass decorator:
-    """Class implementing decorator functionality."""
+    """
+Class implementing decorator functionality.
+"""
 
 (     "@dataclass(frozen=True)" if "frozen=True" in m.group(1) else "@dataclass"
 ),
@@ -118,7 +122,9 @@ flags=re.MULTILINE)
 
 
 def main() -> None: print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ("Starting to process core files...")
 successful = 0
 failed = 0

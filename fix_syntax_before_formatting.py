@@ -11,11 +11,15 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib from typing import Optional, Any, List, Dict, Tuple import Path
 def fix_file_syntax(file_path: st rcontent: str) -> str: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  "mmmu_dataloader.py" in file_path:
 # Fix import statement
 content = re.sub(r"from typi", "from typing", content)
@@ -51,7 +55,9 @@ content = re.sub(r"from typi", "from typing", content)
         # Common fixes for all files
         fixes = [
         # Fix dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 "
         r"def \1(self): ")
@@ -59,15 +65,23 @@ content = re.sub(r"from typi", "from typing", content)
         # Fix imports
         (r"from typing import(\s+[^\\n]+)(?<!\\n)", r"from typing import\1\n"),
         # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 "
         r"class \1: ")
 
         # Fix docstrings
         (r'Fix
-"""Module containing specific functionality."""
-]*)"""\n\s*"""', r'"""\1"""'),
+"""
+Module containing specific functionality.
+"""
+]*)"""
+\n\s*
+"""', r'"""
+\1
+"""'),
 ]
 
 # Apply all common fixes
@@ -76,7 +90,9 @@ replacement in fixes: content = re.sub(pattern     replacement    content)
 return content
 
 
-    def def main(self)::    """syntax in all Python files."""        files_to_fix = [):
+    def def main(self)::    """
+syntax in all Python files.
+"""        files_to_fix = [):
         "src/data/mmmu_dataloader.py",
         "src/models/apple_optimizations.py",
         "src/training/jax_trainer.py",

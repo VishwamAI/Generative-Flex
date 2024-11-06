@@ -15,7 +15,9 @@ import re
 
 
 def fix_line_length(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
     for line in lines: iflen(line) > 79:
@@ -48,7 +50,9 @@ return "\n".join(fixed_lines)
 
 
 def remove_unused_imports(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 imports_to_remove = set()
             for line in lines: ifline.startswith("import ") or line.startswith("from "):
@@ -57,7 +61,9 @@ return "\n".join(line for line in lines if line.strip() not in imports_to_remove
 
 
 def remove_unused_variables(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 skip_next = False
@@ -72,7 +78,9 @@ return "\n".join(fixed_lines)
 
 
                     def def main(self)::                            root_dir
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
                         for file_path in root_dir.rglob("*.py"):
                         if ".git" not in str(file_path):

@@ -24,20 +24,28 @@ from typing import Optional,
 
 import json
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  os
 import black
 
 
 def def fix_config_file(self)::                config_content
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = '''Model
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 # Standard model parameters
 vocab_size: Optional[int] = field(default=50257)
@@ -62,7 +70,11 @@ patch_size: Optional[Tuple[int
 int
 int]] = field(default=None)
 @property
-    def def max_position_embeddings(self): -> int:                    """property for models expecting max_position_embeddings.Training"""Module containing specific functionality."""configuration.Complete"""
+    def def max_position_embeddings(self): -> int:                    """
+property for models expecting max_position_embeddings.Training
+"""Module containing specific functionality."""
+configuration.Complete
+"""
 learning_rate: float = field(default=1e-4)
 weight_decay: float = field(default=0.1)
 num_epochs: int = field(default=10)
@@ -78,12 +90,16 @@ seed: int = field(default=42)
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_json(self clspath: str) -> "Config": """configuration from JSON file.Get"""                with open):
+def from_json(self clspath: str) -> "Config": """
+configuration from JSON file.Get
+"""                with open):
 "r") as f: config_dict = json.load(f)
 model_config = ModelConfig(**config_dict["model"])
 training_config = TrainingConfig(**config_dict["training"])
@@ -102,7 +118,9 @@ with open(path, "w") as f: json.dump(config_dict
 f
 indent=2)
 @classmethod
-def def get_config(self clsmodel_type: str = "language"config_path: Optional[str] = None) -> "Config": """configuration for a specific model type."""                if config_path and Path):
+def def get_config(self clsmodel_type: str = "language"config_path: Optional[str] = None) -> "Config": """
+configuration for a specific model type.
+"""                if config_path and Path):
 return cls.from_json(config_path)
 
 

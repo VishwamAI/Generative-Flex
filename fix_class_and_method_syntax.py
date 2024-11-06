@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -24,10 +26,14 @@ from typing import List,
 
 def fix_class_inheritance(content:
     str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 ',
         r'class \1(nn.Module):
@@ -36,7 +42,9 @@ def fix_class_inheritance(content:
     )
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 ',
         r'class \1(unittest.TestCase):
@@ -45,7 +53,9 @@ def fix_class_inheritance(content:
     )
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 \.\w+)*)\s*\)\s*:',
         r'class \1(\2):',
@@ -55,7 +65,9 @@ def fix_class_inheritance(content:
     return content
 
 def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     def def format_signature(match):
         indent = match.group(1)
@@ -104,12 +116,17 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix single-line docstrings
     content = re.sub(
-        r'"""([^"\n]+)"""',
-        r'"""\1"""',
+        r'"""([^"\n]+)"""
+',
+        r'
+"""\1"""
+',
         content
     )
 
@@ -120,16 +137,21 @@ def fix_docstrings(content: str) -> str:
 
         # Clean up content
         lines = content.strip().split('\n')
-        if len(lines) == 1: return f'{indent}"""{lines[0].strip()}"""'
+        if len(lines) == 1: return f'{indent}
+"""{lines[0].strip()}"""'
 
         formatted_lines = [lines[0].strip()]
         for line in lines[1:]:
             formatted_lines.append(f"{indent}{line.strip()}")
 
-        return f'{indent}"""\n{indent}'.join(formatted_lines) + f'\n{indent}"""'
+        return f'{indent}"""
+\n{indent}'.join(formatted_lines) + f'\n{indent}
+"""'
 
     content = re.sub(
-        r'^(\s*)"""(.*?)"""',
+        r'^(\s*)"""
+(.*?)
+"""',
         format_multiline_docstring,
         content,
         flags=re.MULTILINE | re.DOTALL
@@ -138,7 +160,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix basic type hints
     content = re.sub(
@@ -171,7 +195,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -189,7 +215,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

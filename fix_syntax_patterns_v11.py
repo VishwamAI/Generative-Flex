@@ -20,7 +20,9 @@ from typing import List,
     ,
 
 class SyntaxFixer:
-    """Class implementing SyntaxFixer functionality."""
+    """
+Class implementing SyntaxFixer functionality.
+"""
 
 def def __init__(self, *args, **kwargs) -> None::        self.failed_files = [
 "src/models/multimodal/image_processor.py",
@@ -59,7 +61,9 @@ def def __init__(self, *args, **kwargs) -> None::        self.failed_files = [
 ]
 content: st
 r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Fix missing spaces after colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
@@ -82,7 +86,9 @@ content = re.sub(r"List\[(\w+)\]", r"List[\1]", content)
 
 return content
 
-def fix_function_definitions(self content: str) -> str: """function definition syntax.Fix"""        lines = []):
+def fix_function_definitions(self content: str) -> str: """
+function definition syntax.Fix
+"""        lines = []):
 current_function = []
 in_function = False
 
@@ -103,7 +109,9 @@ for line in content.splitlines():
 
                         return "\n".join(lines)
 
-                            def _fix_function_block(self                             lines: List                            [str]) -> List[str]: """a single function block.Fix"""        def_line = lines[0]):
+                            def _fix_function_block(self                             lines: List                            [str]) -> List[str]: """
+a single function block.Fix
+"""        def_line = lines[0]):
                                 if "(" not in def_line or ")" not in def_line: return lines
 
                                 # Extract function components
@@ -123,7 +131,9 @@ for line in content.splitlines():
                                                         fixed_def = f"{}({}{}"
                                                         return [fixed_def] + lines[1:]
 
-                                                        def fix_dataclass_fields(self                                                         content: st                                                        r) -> str: """dataclass field:"""Class implementing field functionality."""
+                                                        def fix_dataclass_fields(self                                                         content: st                                                        r) -> str: """
+dataclass field:
+"""Class implementing field functionality."""
 
 for line in content.splitlines():
                                                         if "field(" in line:                                                                 # Split multiple field definitions on the same line                                                                if "                                                                " in line and "=" in line: parts = line.split("                                                                 ")
@@ -137,7 +147,9 @@ for line in content.splitlines():
                                                         lines.append(line)
                                                         return "\n".join(lines)
 
-                                                                                def fix_indentation(self                                                                                 content: st                                                                                r) -> str: """indentation while preserving logical structure.Process"""        lines = content.splitlines):
+                                                                                def fix_indentation(self                                                                                 content: st                                                                                r) -> str: """
+indentation while preserving logical structure.Process
+"""        lines = content.splitlines):
                                                                                     fixed_lines = []
                                                                                     indent_level = 0
 
@@ -173,7 +185,9 @@ for line in content.splitlines():
 
                                                                                                                             return "\n".join(fixed_lines)
 
-                                                                                                                            def process_file(self                                                                                                                             file_path: st                                                                                                                            r) -> bool: """a single file with all fixes.Process"""        try):
+                                                                                                                            def process_file(self                                                                                                                             file_path: st                                                                                                                            r) -> bool: """
+a single file with all fixes.Process
+"""        try):
                                                                                                                             with open(file_path                                                                                                                                 "r"                                                                                                                                encoding="utf-8") as f: content = f.read()
 
                                                                                                                             # Apply fixes
@@ -189,7 +203,9 @@ for line in content.splitlines():
                                                                                                                                 except Exception as e: print(f"Error processing {}: {}")
                                                                                                                                     return False
 
-                                                                                                                                    def def run(self)::        """all failed files."""        success_count = 0):
+                                                                                                                                    def def run(self)::        """
+all failed files.
+"""        success_count = 0):
                                                                                                                                         for file_path in self.failed_files: if os.path.exists(file_path):
                                                                                                                                     print(f"Processing {}...")
                                                                                                                                         if self.process_file(file_path):

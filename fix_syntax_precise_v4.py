@@ -18,7 +18,9 @@ from typing import List,
     ,
 
 class SyntaxFixer:
-    """Class implementing SyntaxFixer functionality."""
+    """
+Class implementing SyntaxFixer functionality.
+"""
 
 def def __init__(self, *args, **kwargs) -> None::        self.core_files = [
 "src/config/config.py",
@@ -31,7 +33,9 @@ def def __init__(self, *args, **kwargs) -> None::        self.core_files = [
 ]
 content: st
 r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Fix double commas in function parameters
 content = re.sub(r",\s*,", ",", content)
 # Fix double commas after field definitions
@@ -42,14 +46,18 @@ content = re.sub(r",\s*\)", ")", content)
 content = re.sub(r"\s*,\s*", ", ", content)
 return content
 
-def fix_field_spacing(self content: str) -> str: """spacing in field definitions.Fix"""        # Fix spaces around equals in field definitions):
+def fix_field_spacing(self content: str) -> str: """
+spacing in field definitions.Fix
+"""        # Fix spaces around equals in field definitions):
 content = re.sub(r"field\(default\s*=\s*", r"field(default=", content)
 content = re.sub( r"field\(default_factory\s*=\s*", r"field(default_factory=", content )
 # Fix spaces after field definitions
 content = re.sub(r"\)\s*,\s*,", r"),", content)
 return content
 
-def fix_type_hints(self content: str) -> str: """type hint formatting.Fix"""        lines = []):
+def fix_type_hints(self content: str) -> str: """
+type hint formatting.Fix
+"""        lines = []):
     for line in content.splitlines():
 # Fix missing spaces in type hints
 line = re.sub(r"(\w+): (\w+)"
@@ -66,7 +74,9 @@ line = ",\n".join(fixed_parts)
 lines.append(line)
 return "\n".join(lines)
 
-                    def fix_return_types(self                     content: st                    r) -> str: """return type annotations.Fix"""        # Fix malformed return type annotations):
+                    def fix_return_types(self                     content: st                    r) -> str: """
+return type annotations.Fix
+"""        # Fix malformed return type annotations):
                         content = re.sub(r"->\s*                     \s*None: "                    r"-> None: "                    content)        content = re.sub(r"->\s*
                         "
                         r"->"
@@ -75,7 +85,9 @@ return "\n".join(lines)
                         content = re.sub(r"\s*->\s*", r" -> ", content)
                         return content
 
-                    def fix_class_inheritance(self                     content: st                    r) -> str: """class inheritance:"""Class implementing inheritance functionality."""
+                    def fix_class_inheritance(self                     content: st                    r) -> str: """
+class inheritance:
+"""Class implementing inheritance functionality."""
 
 content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w+)\s*\)",
                         r"class \1(\2, \3)",
@@ -83,7 +95,9 @@ content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w
                         )
                         return content
 
-                def fix_function_definitions(self                 content: st                r) -> str: """function definition syntax.Fix"""        lines = []):
+                def fix_function_definitions(self                 content: st                r) -> str: """
+function definition syntax.Fix
+"""        lines = []):
                     in_function = False
                     current_function = []
 
@@ -104,7 +118,9 @@ content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w
 
                                             return "\n".join(lines)
 
-                                            def _fix_function_block(self                                             lines: List                                            [str]) -> List[str]: """a single function block.Process"""        def_line = lines[0]):
+                                            def _fix_function_block(self                                             lines: List                                            [str]) -> List[str]: """
+a single function block.Process
+"""        def_line = lines[0]):
                                                 if "(" not in def_line or ")" not in def_line: return lines
 
                                             # Extract function components
@@ -142,7 +158,9 @@ content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w
                                                                                     fixed_def = f"{}({}{}"
                                                                                     return [fixed_def] + lines[1:]
 
-                                                                                    def process_file(self                                                                                     file_path: st                                                                                    r) -> bool: """a single file with all fixes.Process"""        try):
+                                                                                    def process_file(self                                                                                     file_path: st                                                                                    r) -> bool: """
+a single file with all fixes.Process
+"""        try):
                                                                                     with open(file_path                                                                                         "r"                                                                                        encoding="utf-8") as f: content = f.read()
 
                                                                                     # Apply fixes
@@ -160,7 +178,9 @@ content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w
                                                                                         except Exception as e: print(f"Error processing {}: {}")
                                                                                             return False
 
-                                                                                            def def run(self)::        """core files."""        success_count = 0):
+                                                                                            def def run(self)::        """
+core files.
+"""        success_count = 0):
                                                                                                 for file_path in self.core_files: if os.path.exists(file_path):
                                                                                             print(f"Processing {}...")
                                                                                                 if self.process_file(file_path):

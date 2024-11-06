@@ -12,20 +12,33 @@ import os
 import re
 
 def fix_jax_trainer(*args, **kwargs) -> None:
-    """Fix syntax issues in jax_trainer.py."""
+    """
+Fix syntax issues in jax_trainer.py.
+"""
 # Fix module docstring
     content = re.sub(
-        r'^""".*?"""',
-        '"""JAX-based trainer implementation."""',
+        r'^"""
+.*?
+"""',
+        '"""
+JAX-based trainer implementation.
+"""',
         content,
         flags=re.MULTILINE | re.DOTALL
     )
 
     # Fix class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
-]*:(\s*"""[^"]*""")?\s*',
-        'class JaxTrainer:"""Class implementing JaxTrainer functionality."""\n"""JAX trainer for model optimization."""\n\n',
+]*:(\s*"""[^"]*"""
+)?\s*',
+        'class JaxTrainer:
+"""Class implementing JaxTrainer functionality."""
+\n
+"""JAX trainer for model optimization."""
+\n\n',
         content
     )
 
@@ -43,26 +56,47 @@ def fix_jax_trainer(*args, **kwargs) -> None:
     }
 
     for method, desc in methods.items():
-        pattern = rf'def {method}\([^)]*\)(\s*->[\s\w\[\],]*)?:\s*(?:"""[^"]*""")?\s*'
+        pattern = rf'def {method}\([^)]*\)(\s*->[\s\w\[\],]*)?:\s*(?:
+"""[^"]*"""
+)?\s*'
         if method == '__init__':
-            replacement = f'def {method}(self, model, optimizer, config):\n"""{desc}"""\n'
+            replacement = f'def {method}(self, model, optimizer, config):\n
+"""{desc}"""
+\n'
         else:
-            replacement = f'def {method}(self, *args, **kwargs):\n"""{desc}"""\n'
+            replacement = f'def {method}(self, *args, **kwargs):\n
+"""{desc}"""
+\n'
         content = re.sub(pattern, replacement, content)
 
     return content
 
-def fix_trainer(*args, **kwargs) -> None:"""Fix syntax issues in trainer.py."""# Fix module docstring
+def fix_trainer(*args, **kwargs) -> None:
+"""Fix syntax issues in trainer.py."""
+# Fix module docstring
     content = re.sub(
-        r'^""".*?"""',
-        '"""Base trainer implementation."""',
+        r'^
+""".*?"""
+',
+        '
+"""Base trainer implementation."""
+',
         content,
         flags=re.MULTILINE | re.DOTALL
     )
 
-    # Fix class definition:"""Class implementing definition functionality."""]*:(\s*"""[^"]*""")?\s*',
-        'class Trainer:"""Class implementing Trainer functionality."""\n"""Base trainer class for:
-    """Class implementing for functionality."""
+    # Fix class definition:
+"""Class implementing definition functionality."""
+]*:(\s*
+"""[^"]*"""
+)?\s*',
+        'class Trainer:
+"""Class implementing Trainer functionality."""
+\n
+"""Base trainer class for:
+    """
+Class implementing for functionality.
+"""
 
 ('Initialize the trainer.', 'def __init__(self, model: torch.nn.Module, config: Any, optimizer: torch.optim.Optimizer, train_dataloader: DataLoader, val_dataloader: Optional[DataLoader] = None) -> None:'),
         'train': ('Train the model.', 'def train(self, epochs: int) -> None:'),
@@ -72,13 +106,17 @@ def fix_trainer(*args, **kwargs) -> None:"""Fix syntax issues in trainer.py."""#
     }
 
     for method, (desc, signature) in methods.items():
-        pattern = rf'def {method}\([^)]*\)(\s*->[\s\w\[\],]*)?:\s*(?:"""[^"]*""")?\s*'
-        replacement = f'{signature}\n"""{desc}"""\n'
+        pattern = rf'def {method}\([^)]*\)(\s*->[\s\w\[\],]*)?:\s*(?:"""[^"]*"""
+)?\s*'
+        replacement = f'{signature}\n
+"""{desc}"""
+\n'
         content = re.sub(pattern, replacement, content)
 
     return content
 
-def process_file(*args, **kwargs) -> None:"""Process a single file to fix syntax issues."""
+def process_file(*args, **kwargs) -> None:
+"""Process a single file to fix syntax issues."""
 print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
@@ -101,7 +139,9 @@ print(f"Processing {file_path}...")
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Process trainer files to fix syntax issues."""
+    """
+Process trainer files to fix syntax issues.
+"""
 files_to_fix = [
         "src/training/jax_trainer.py",
         "src/training/trainer.py"

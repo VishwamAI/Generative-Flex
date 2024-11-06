@@ -102,7 +102,9 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
 
 
                                             def def main(self)::            print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):
 
                                     fix_flake8_comprehensive()

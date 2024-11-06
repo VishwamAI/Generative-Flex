@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 import torch
 from src.models import SimpleModel
@@ -16,9 +18,19 @@ import unittest
 
 
 class TestInference:
-    """Class implementing TestInference functionality."""
+    """
+Class implementing TestInference functionality.
+"""
 
-Module containing specific functionality."""Test inference functionality."""Module containing specific functionality."""Method for setUp.."""Module containing specific functionality."""Method for test_inference.."""Module containing specific functionality."""Method for test_batch_inference.."""
+Module containing specific functionality."""
+Test inference functionality.
+
+Method for setUp..
+
+Method for test_inference..
+"""Module containing specific functionality."""
+Method for test_batch_inference..
+"""
     batch_size = 16
     input_tensor = torch.randn(batch_size, 32)
     output = self.model(input_tensor)

@@ -26,7 +26,9 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_problem_categories(dataset) -> None: categories
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = defaultdict(list)
 
 try: foridxin range(len(dataset)):
@@ -56,7 +58,9 @@ sample = dataset[idx]
 
 
                         def generate_performance_report(categories                             results) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not results or not categories: logger.error("Missing results or categories data")
                         return
 
@@ -106,7 +110,9 @@ sample = dataset[idx]
                                 logger.info(f"Category distribution visualization saved to {}")
 
 
-                                def def main(self)::    """Main analysis function"""        # Load dataset):
+                                def def main(self)::    """
+Main analysis function
+"""        # Load dataset):
                                 dataset = load_mmmu_dataset()
                                 if not dataset: return# Analyze problem categories
                                 categories = analyze_problem_categories(dataset)

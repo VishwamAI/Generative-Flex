@@ -29,9 +29,17 @@ import torch.nn as nn
 
 
 class SymbolicMath:
-    """Class implementing SymbolicMath functionality."""
+    """
+Class implementing SymbolicMath functionality.
+"""
 
-Module for implementing specific functionality."""Handles symbolic mathematics operations.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for forward.."""
+Module for implementing specific functionality."""
+Handles symbolic mathematics operations..
+
+Method for __init__..
+
+Method for forward..
+"""
         symbol_embeds = self.symbol_embeddings(symbols)
         operation_embeds = self.operation_embeddings(operations)
         combined = torch.cat([symbol_embeds, operation_embeds], dim=-1)

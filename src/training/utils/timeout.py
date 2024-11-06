@@ -24,11 +24,27 @@ import os
 from pathlib import Path import logging
 
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 from dataclasses
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing training-related implementations."""Exception raised when timeout occurs.."""Module containing specific functionality."""Handler for training timeouts.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for __enter__.."""Module containing specific functionality."""Method for handler.."""Module containing specific functionality."""Method for __exit__.."""
+Module containing training-related implementations."""
+Exception raised when timeout occurs..
+
+Handler for training timeouts..
+
+Method for __init__..
+"""Module containing specific functionality."""
+Method for __enter__..
+
+Method for handler..
+
+Method for __exit__..
+"""
     signal.alarm(0)

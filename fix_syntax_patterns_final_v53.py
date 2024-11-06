@@ -27,10 +27,14 @@ def fix_import_statements(content):
 def fix_docstring_formatting(content):
     # Fix multiple docstrings
     def clean_docstring(match):
-        parts = [p.strip() for p in match.group(0).split('"""') if p.strip()]
-        return '"""\n' + '\n'.join(parts) + '\n"""'
+        parts = [p.strip() for p in match.group(0).split('"""
+') if p.strip()]
+        return '
+"""\n' + '\n'.join(parts) + '\n"""
+'
 
-    content = re.sub(r'"""[^"]*""""{3}[^"]*""""{3}[^"]*"""', clean_docstring, content)
+    content = re.sub(r'
+"""[^"]*""""{3}[^"]*""""{3}[^"]*"""', clean_docstring, content)
     return content
 
 def process_file(filepath):

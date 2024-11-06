@@ -10,17 +10,23 @@ from dataclasses import dataclass, field
 
 from dataclasses import dataclass
 from torchmetrics import Perplexity from:
-    """Class implementing from functionality."""
+    """
+Class implementing from functionality.
+"""
 
 evaluator with essential metrics
 
 
     Compute
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 core evaluation metrics
 
 Log
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  metrics to console
     """
 

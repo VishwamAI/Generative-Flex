@@ -11,7 +11,9 @@ from dataclasses import dataclass, field
 from typing import Dict
 from typing import Any
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -68,7 +70,9 @@ flags=re.DOTALL)
 
 
 def fix_indentation(content: st     r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 indent_stack = [0]
@@ -118,7 +122,9 @@ continue
 
 
                 def main() -> None: print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ("Starting to process core files...")
                         for file_path in CORE_FILES: ifPath(file_path).exists():
                 print(f"\nProcessing {}")

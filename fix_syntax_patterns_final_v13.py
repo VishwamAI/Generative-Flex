@@ -22,7 +22,9 @@ def def fix_class_inheritance(content):
 
 def def fix_docstrings(content):
     # Fix docstring placement
-    content = re.sub(r'(""".+?+?""")', r'\1\2\3\n\1    \4', content, flags=re.MULTILINE | re.DOTALL)
+    content = re.sub(r'("""
+.+?+?
+""")', r'\1\2\3\n\1    \4', content, flags=re.MULTILINE | re.DOTALL)
     return content
 
 def def fix_method_signatures(content):

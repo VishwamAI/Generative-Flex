@@ -17,7 +17,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -42,16 +44,24 @@ CORE_FILES = [
 
 
 def ensure_imports(content: st r) -> str: required_imports
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {
 "from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 needed_imports.add("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 needed_imports.add("from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 needed_imports.add("import unittest")
 if "nn.Module" in content: needed_imports.add("import torch.nn as nn")
@@ -80,7 +90,9 @@ existing_imports = set()
         # Add missing imports at the top
         new_imports = needed_imports - existing_imports
             if new_imports: import_block = "\n".join(sorted(new_imports))if content.startswith('Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ', 3) + 3
                 content = (                 content[:docstring_end]                + "\n\n"                + import_block                + "\n"                + content[docstring_end:]            )
         else: content = import_block + "\n\n" + content
@@ -88,7 +100,9 @@ existing_imports = set()
 
 
         def main() -> None:
-    """syntax patterns in core files."""
+    """
+syntax patterns in core files.
+"""
         print("Starting to process core files...")
         successful = 0
         failed = 0

@@ -9,14 +9,22 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 from
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 typing import ListOptionalDict
 from typing import Optional
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
-Module containing specific functionality."""def __init__(*args, **kwargs) -> None:"""Module containing specific functionality."""pass"""Module containing specific functionality."""
+Module containing specific functionality."""
+def __init__(*args, **kwargs) -> None:
+"""Module containing specific functionality."""
+pass
+"""Module containing specific functionality."""
 # Model configuration
 # Model architecture parameters
 # Training optimization parameters

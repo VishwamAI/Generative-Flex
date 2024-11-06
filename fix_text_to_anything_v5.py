@@ -40,7 +40,9 @@ in_class = False
 in_method = False
 method_indent = "        "  # 8 spaces for method content
 class_indent = "    "  # 4 spaces for class content:
-    """Class implementing content functionality."""
+    """
+Class implementing content functionality.
+"""
 
 line = content[i]
 
@@ -50,7 +52,9 @@ line = content[i]
         continue
 
         # Handle class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 in_class = True
         in_method = False
@@ -60,7 +64,9 @@ in_class = True
 
         # Handle method definitions
             if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_method = True
                 # Special handling for __call__ method
@@ -98,7 +104,9 @@ in_method = True
                         else: fixed_content.append(f"{}{}\n")
                         else: fixed_content.append("\n")
                         # Handle class content:
-    """Class implementing content functionality."""
+    """
+Class implementing content functionality.
+"""
 
 stripped = line.strip()                                                                                        if stripped: fixed_content.append(f"{}{}\n")
                         else: fixed_content.append("\n")

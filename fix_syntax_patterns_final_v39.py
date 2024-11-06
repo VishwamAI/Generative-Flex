@@ -11,15 +11,21 @@ from dataclasses import dataclass, field
 import os
 
 def fix_flash_moe(*args, **kwargs) -> None:
-    """Fix syntax in flash_moe.py."""
-content = '''"""Flash Mixture of Experts layer implementation."""
+    """
+Fix syntax in flash_moe.py.
+"""
+content = '''"""
+Flash Mixture of Experts layer implementation.
+"""
 
 import torch
 import torch.nn as nn
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_experts: int = 4
@@ -28,19 +34,25 @@ hidden_size: int = 768
     activation: str = "gelu"
 
 class FlashMoE:
-    """Class implementing FlashMoE functionality."""
+    """
+Class implementing FlashMoE functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize Flash MoE layer.
+    """
+Initialize Flash MoE layer.
 
         Args:
-            config: Optional layer configuration"""
+            config: Optional layer configuration
+"""
 super().__init__()
         self.config = config or FlashMoEConfig()
         self.setup_experts()
 
     def setup_experts(*args, **kwargs) -> None:
-    """Set up expert networks."""
+    """
+Set up expert networks.
+"""
 self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
         self.experts = nn.ModuleList([
             nn.Sequential(
@@ -57,14 +69,16 @@ self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None
     ) -> Dict[str, torch.Tensor]:
-        """Process input through Flash MoE layer.
+        """
+Process input through Flash MoE layer.
 
         Args:
             hidden_states: Input hidden states
             attention_mask: Optional attention mask
 
         Returns:
-            Dictionary containing processed hidden states"""
+            Dictionary containing processed hidden states
+"""
         # Gate computation
         gate_logits = self.gate(hidden_states)
         expert_weights = torch.softmax(gate_logits, dim=-1)
@@ -85,12 +99,18 @@ self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
         f.write(content)
 
 def fix_base_transformer(*args, **kwargs) -> None:
-    """Fix syntax in base_transformer.py."""
-content = '''"""Base transformer implementation."""
+    """
+Fix syntax in base_transformer.py.
+"""
+content = '''"""
+Base transformer implementation.
+"""
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_attention_heads: int = 12
@@ -102,19 +122,25 @@ hidden_size: int = 768
     max_position_embeddings: int = 512
 
 class BaseTransformer:
-    """Class implementing BaseTransformer functionality."""
+    """
+Class implementing BaseTransformer functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize base transformer.
+    """
+Initialize base transformer.
 
         Args:
-            config: Optional model configuration"""
+            config: Optional model configuration
+"""
 super().__init__()
         self.config = config or BaseTransformerConfig()
         self.setup_layers()
 
     def setup_layers(*args, **kwargs) -> None:
-    """Set up transformer layers."""
+    """
+Set up transformer layers.
+"""
 self.embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
                 30522,  # Default vocab size
@@ -146,7 +172,8 @@ self.embeddings = nn.ModuleDict({
         attention_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None
     ) -> Dict[str, torch.Tensor]:
-        """Process input through transformer.
+        """
+Process input through transformer.
 
 
         Args:
@@ -155,7 +182,8 @@ self.embeddings = nn.ModuleDict({
             position_ids: Optional position IDs
 
         Returns:
-            Dictionary containing hidden states"""
+            Dictionary containing hidden states
+"""
         # Embedding
         if position_ids is None:
             position_ids = torch.arange(
@@ -183,12 +211,18 @@ self.embeddings = nn.ModuleDict({
         f.write(content)
 
 def fix_multimodal_transformer(*args, **kwargs) -> None:
-    """Fix syntax in multimodal_transformer.py."""
-content = '''"""Multimodal transformer implementation."""
+    """
+Fix syntax in multimodal_transformer.py.
+"""
+content = '''"""
+Multimodal transformer implementation.
+"""
 
 
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 hidden_size: int = 768
     num_attention_heads: int = 12
@@ -203,19 +237,25 @@ hidden_size: int = 768
     num_channels: int = 3
 
 class MultiModalTransformer:
-    """Class implementing MultiModalTransformer functionality."""
+    """
+Class implementing MultiModalTransformer functionality.
+"""
 
 def __init__(*args, **kwargs) -> None:
-    """Initialize multimodal transformer.
+    """
+Initialize multimodal transformer.
 
         Args:
-            config: Optional model configuration"""
+            config: Optional model configuration
+"""
 super().__init__()
         self.config = config or MultiModalTransformerConfig()
         self.setup_layers()
 
     def setup_layers(*args, **kwargs) -> None:
-    """Set up transformer layers."""
+    """
+Set up transformer layers.
+"""
 # Text embeddings
         self.text_embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
@@ -256,10 +296,12 @@ super().__init__()
         self.dropout = nn.Dropout(self.config.dropout)
 
     def _init_weights(self, module: nn.Module) -> None:
-        """Initialize module weights.
+        """
+Initialize module weights.
 
         Args:
-            module: Module to initialize"""
+            module: Module to initialize
+"""
         if isinstance(module, (nn.Linear, nn.Embedding)):
             module.weight.data.normal_(mean=0.0, std=0.02)
         if isinstance(module, nn.Linear) and module.bias is not None:
@@ -272,7 +314,8 @@ super().__init__()
         pixel_values: Optional[torch.Tensor] = None,
         pixel_mask: Optional[torch.Tensor] = None
     ) -> Dict[str, torch.Tensor]:
-        """Process input through transformer.
+        """
+Process input through transformer.
 
         Args:
             input_ids: Optional input token IDs
@@ -281,7 +324,8 @@ super().__init__()
             pixel_mask: Optional pixel mask
 
         Returns:
-            Dictionary containing hidden states"""
+            Dictionary containing hidden states
+"""
         hidden_states_list = []
 
         # Process text if provided
@@ -358,17 +402,25 @@ super().__init__()
         f.write(content)
 
 def fix_test_config(*args, **kwargs) -> None:
-    """Fix syntax in test_config.py."""
-content = '''"""Test configuration module."""
+    """
+Fix syntax in test_config.py.
+"""
+content = '''"""
+Test configuration module.
+"""
 
 import unittest
 from src.models.reasoning.math_config import MathConfig
 
 class TestMathConfig:
-    """Class implementing TestMathConfig functionality."""
+    """
+Class implementing TestMathConfig functionality.
+"""
 
 def test_invalid_model_type(*args, **kwargs) -> None:
-    """Test invalid model type raises ValueError."""
+    """
+Test invalid model type raises ValueError.
+"""
 config = MathConfig()
         config.model_type = "invalid_type"
 
@@ -376,7 +428,9 @@ config = MathConfig()
             config.__post_init__()
 
     def test_valid_model_type(*args, **kwargs) -> None:
-    """Test valid model type passes validation."""
+    """
+Test valid model type passes validation.
+"""
 config = MathConfig()
         config.model_type = "math_reasoning"
 
@@ -392,7 +446,9 @@ if __name__ == "__main__":
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Fix syntax in critical files."""
+    """
+Fix syntax in critical files.
+"""
 print("Fixing flash_moe.py...")
     fix_flash_moe()
 

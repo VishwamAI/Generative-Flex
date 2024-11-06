@@ -15,7 +15,9 @@ import re
 
 
 def fix_indentation(lines) -> None: fixed_lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = []
 indent_stack = [0]  # Start with base level indentation
 current_indent = 0
@@ -29,7 +31,9 @@ continue
 
 # Special handling for docstrings
     if stripped.startswith(('Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 "")):
         fixed_lines.append(" " * current_indent + stripped)
         continue
@@ -41,7 +45,9 @@ continue
         current_indent = indent_stack[-1]
 
         # Handle class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 while len(indent_stack) > 1: indent_stack.pop()
                 current_indent = indent_stack[-1]
@@ -59,7 +65,9 @@ while len(indent_stack) > 1: indent_stack.pop()
 
 
                 def fix_imports(lines) -> None:
-    """import statements and their order.Fix"""
+    """
+import statements and their order.Fix
+"""
         import_lines = []
                 other_lines = []
                 in_imports = False
@@ -78,7 +86,9 @@ while len(indent_stack) > 1: indent_stack.pop()
 
 
                         def fix_docstrings(lines) -> None:
-    """docstring formatting.Apply"""
+    """
+docstring formatting.Apply
+"""
         fixed_lines = []
                         in_docstring = False
                         docstring_indent = 0
@@ -88,7 +98,9 @@ while len(indent_stack) > 1: indent_stack.pop()
                                 stripped = line.lstrip()
 
                                 # Handle docstring start/end
-                                if stripped.startswith(('"""'""""")):
+                                if stripped.startswith(('"""
+'
+""""")):
                                     if not in_docstring:
                                         # Start of docstring
                                         in_docstring = True
@@ -110,7 +122,9 @@ while len(indent_stack) > 1: indent_stack.pop()
 
 
                                                 def fix_file(filepath) -> None:
-    """all fixes to a file.Fix"""
+    """
+all fixes to a file.Fix
+"""
         print(f"Processing {filepath}")
                                                 lines = read_file(filepath)
                                                 if not lines: return# Apply fixes in order
@@ -125,7 +139,9 @@ while len(indent_stack) > 1: indent_stack.pop()
                                                 write_file(filepath, lines)
 
 
-                                                    def def main(self)::                    """syntax issues in all problematic files."""        problem_files = [):
+                                                    def def main(self)::                    """
+syntax issues in all problematic files.
+"""        problem_files = [):
                                                         "fix_flake8_comprehensive.py",
                                                         "analyze_performance_by_category.py",
                                                         "data/dataset_verification_utils.py",

@@ -14,9 +14,13 @@ import re
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_indentation(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 indent_level = 0
@@ -29,7 +33,9 @@ if not stripped: fixed_lines.append("")
 continue
 
 # Handle indentation for class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 " stripped):
 indent_level = 0
@@ -67,7 +73,9 @@ continue
                 continue
 
                 # Handle function/class body:
-    """Class implementing body functionality."""
+    """
+Class implementing body functionality.
+"""
 
 fixed_lines.append("    " * indent_level + stripped)
                 else: fixed_lines.append(stripped)
@@ -80,7 +88,9 @@ fixed_lines.append("    " * indent_level + stripped)
 
 
                         def def main(self)::                            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                         "src/training/train_mmmu.py",
                         "tests/test_features.py",

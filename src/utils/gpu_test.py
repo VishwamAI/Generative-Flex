@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 import torch
 from src.utils.gpu_utils import GPUUtils
@@ -16,8 +18,16 @@ import unittest
 
 
 class TestGPU:
-    """Class implementing TestGPU functionality."""
+    """
+Class implementing TestGPU functionality.
+"""
 
-Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test GPU memory utilities..."""Module containing specific functionality."""Test GPU availability check..."""
+Module containing specific functionality."""
+Set up test environment...
+
+Test GPU memory utilities...
+
+Test GPU availability check...
+"""
         is_available = self.utils.is_gpu_available()
         self.assertIsInstance(is_available, bool)

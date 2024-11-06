@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -25,10 +27,14 @@ from typing import Any
 
 
 def fix_class_inheritance(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 ', r'class \1(nn.Module):
 \n'),
@@ -42,7 +48,9 @@ def fix_class_inheritance(content: str) -> str: Fix
     return content
 
 def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method signatures with proper spacing and type hints
     patterns = [
@@ -66,7 +74,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix type hints with proper spacing and formatting
     patterns = [
@@ -85,18 +95,24 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix docstrings with proper indentation and formatting
     patterns = [
         # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
 content = re.sub(pattern, replacement, content, flags=re.DOTALL)
     return content
 
 def fix_multiline_statements(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix multi-line statements with proper indentation
     patterns = [
@@ -115,7 +131,9 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def fix_imports(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix import statements with proper spacing
     patterns = [
@@ -128,7 +146,9 @@ def fix_imports(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -148,7 +168,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

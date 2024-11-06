@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_dataclass_fields(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix multiple fields on one line
     pattern = r'(\w+):\s*(\w+)\s*=\s*field\(([^)]+)\)(\w+):'
@@ -37,7 +39,9 @@ def fix_dataclass_fields(content: str) -> str: Fix
     return content
 
 def fix_function_definitions(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix missing parentheses in function definitions
     content = re.sub(r'def\s+(\w+)\s+\(', r'def \1(', content)
@@ -53,19 +57,27 @@ def fix_function_definitions(content: str) -> str:
     content = re.sub(r'\)\s*->(\w)', r') -> \1', content)
 
     # Fix self parameter in class methods:
-    """Class implementing methods functionality."""
+    """
+Class implementing methods functionality.
+"""
 
 str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix inheritance syntax
     content = re.sub(r'class\s+(\w+)\(([^)]+)\):', lambda m: f"class {m.group(1)}({', '.join(x.strip() for x in m.group(2).split(','))}):", content)
 
     # Fix missing spaces after class keyword:
-    """Class implementing keyword functionality."""
+    """
+Class implementing keyword functionality.
+"""
 
 str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix Optional syntax
     content = re.sub(r'Optional\[([^]]+)\]', lambda m: f"Optional[{m.group(1).strip()}]", content)
@@ -79,7 +91,9 @@ str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -107,7 +121,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """syntax issues in critical files."""
+    """
+syntax issues in critical files.
+"""
 
     critical_files = [
         'src/models/text_to_anything.py',

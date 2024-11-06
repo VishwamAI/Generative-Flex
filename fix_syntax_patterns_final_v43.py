@@ -12,7 +12,9 @@ import re
 import os
 
 def fix_file_syntax(*args, **kwargs) -> None:
-    """Fix syntax issues in a specific file."""
+    """
+Fix syntax issues in a specific file.
+"""
 print(f"Processing {file_path}...")
 
     with open(file_path, 'r') as f:
@@ -20,13 +22,18 @@ print(f"Processing {file_path}...")
 
     # Fix multiline string indentation
     content = re.sub(
-        r'"""(?:\s*\n\s*)?([^"]*)"""',
-        lambda m: '"""\n' + m.group(1).strip() + '\n"""',
+        r'"""(?:\s*\n\s*)?([^"]*)"""
+',
+        lambda m: '
+"""\n' + m.group(1).strip() + '\n"""
+',
         content,
         flags=re.DOTALL
     )
 
-    # Fix class inheritance:"""Class implementing inheritance functionality."""',
+    # Fix class inheritance:
+"""Class implementing inheritance functionality."""
+',
         r'class \1(object):',
         content
     )
@@ -56,7 +63,8 @@ print(f"Processing {file_path}...")
     with open(file_path, 'w') as f:
         f.write(content)
 
-def process_failing_files(*args, **kwargs) -> None:"""Process files that are failing to reformat."""
+def process_failing_files(*args, **kwargs) -> None:
+"""Process files that are failing to reformat."""
 failing_files = [
         "src/models/layers/enhanced_transformer.py",
         "src/models/multimodal/multimodal_transformer.py",

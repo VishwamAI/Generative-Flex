@@ -24,12 +24,28 @@ import os
 from pathlib import Path import logging
 
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 from dataclasses
 @dataclass class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
-Module containing training-related implementations."""Logger for training metrics and events.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for _setup_logger.."""Module containing specific functionality."""Method for log_metrics.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for log_event.."""
+Module containing training-related implementations."""
+Logger for training metrics and events..
+
+Method for __init__..
+
+Method for _setup_logger..
+"""Module containing specific functionality."""
+Method for log_metrics..
+
+Method for __init__..
+
+Method for log_event..
+"""
     log_fn = getattr(self.logger, level.lower())
     log_fn(event)

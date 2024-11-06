@@ -16,9 +16,13 @@ import sys
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  main(self)::            files_to_format
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
 "src/config/training_config.py",
 "src/config/config.py",

@@ -8,9 +8,8 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
-
 """
+Module containing specific functionality.
 
 import torch
 from src.models import SimpleModel
@@ -19,15 +18,17 @@ from src.training.trainer import Trainer
 
 
 class TestTrainingSetup:
-    """
 
-"""Class implementing TestTrainingSetup functionality."""
+Class implementing TestTrainingSetup functionality.
 
+Module containing specific functionality.
+
+Set up test environment...
+
+Test training initialization...
+
+Test single training step...
 """
-
-Module containing specific functionality."""
-
-"""Set up test environment..."""Module containing specific functionality."""Test training initialization..."""Module containing specific functionality."""Test single training step..."""
         batch = torch.randn(16, 32)
         loss = self.trainer.training_step(batch)
         self.assertIsInstance(loss, torch.Tensor)

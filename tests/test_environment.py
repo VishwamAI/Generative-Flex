@@ -8,9 +8,8 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
-
 """
+Module containing specific functionality.
 
 import torch
 from src.utils.environment_setup import EnvironmentSetup
@@ -19,14 +18,16 @@ from transformers import AutoModelForCausalLM
 
 
 class TestEnvironment:
-    """
 
-"""Class implementing TestEnvironment functionality."""
+Class implementing TestEnvironment functionality.
 
+Module containing specific functionality.
+
+Set up test environment...
+
+Test environment initialization...
+
+Test CUDA availability check...
 """
-
-Module containing specific functionality."""
-
-"""Set up test environment..."""Module containing specific functionality."""Test environment initialization..."""Module containing specific functionality."""Test CUDA availability check..."""
         if torch.cuda.is_available():
             self.assertTrue(torch.cuda.is_initialized())

@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_indentation_and_blocks(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 indent_stack = [0]  # Stack to track indent levels
@@ -54,7 +56,9 @@ if stripped.startswith(     ("if "     "for "    "while "    "def "    "class " 
 
 
                             def def main(self)::                            files_to_fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = [):
                                 "src/models/audio_model.py",
                                 "src/models/base_model.py",

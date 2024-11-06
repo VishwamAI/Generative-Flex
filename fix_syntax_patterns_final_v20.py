@@ -12,7 +12,9 @@ import os
 import re
 
 def fix_model_imports(*args, **kwargs) -> None:
-    """Fix import statements in model files."""
+    """
+Fix import statements in model files.
+"""
 # Fix transformers import
     content = re.sub(
         r'import GenerationMixin',
@@ -22,12 +24,16 @@ from transformers import PreTrainedModel
     )
 
     # Fix dataclass imports:
-    """Class implementing imports functionality."""
+    """
+Class implementing imports functionality.
+"""
 
 # Fix nn.Module inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*$',
-        lambda m: f'class {m.group(1)}(nn.Module):\n    """Class for {m.group(1)}."""\n\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
+        lambda m: f'class {m.group(1)}(nn.Module):\n    """
+Class for {m.group(1)}.
+"""\n\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
         content,
         flags=re.MULTILINE
     )
@@ -35,7 +41,9 @@ from transformers import PreTrainedModel
     # Fix unittest inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:\s*$',
-        lambda m: f'class {m.group(1)}(unittest.TestCase):\n    """Test cases for {m.group(1)}."""\n\n    def setUp(self):\n        super().setUp()',
+        lambda m: f'class {m.group(1)}(unittest.TestCase):\n    """
+Test cases for {m.group(1)}.
+"""\n\n    def setUp(self):\n        super().setUp()',
         content,
         flags=re.MULTILINE
     )
@@ -43,10 +51,13 @@ from transformers import PreTrainedModel
     return content
 
 def fix_docstrings(*args, **kwargs) -> None:
-    """Fix docstring formatting and placement."""
+    """
+Fix docstring formatting and placement.
+"""
 # Fix misplaced docstrings
     content = re.sub(
-        r'^\s*"""[^"]+"""\s*$',
+        r'^\s*"""[^"]+"""
+\s*$',
         lambda m: '    ' + m.group(0),
         content,
         flags=re.MULTILINE
@@ -54,14 +65,20 @@ def fix_docstrings(*args, **kwargs) -> None:
 
     # Fix docstring quotes
     content = re.sub(
-        r'"""([^"]+)\.?"""',
-        lambda m: f'"""{m.group(1)}."""',
+        r'
+"""([^"]+)\.?"""
+',
+        lambda m: f'
+"""{m.group(1)}."""
+',
         content
     )
 
     return content
 
-def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions and parameters."""# Fix parameter definitions
+def fix_method_definitions(*args, **kwargs) -> None:
+"""Fix method definitions and parameters."""
+# Fix parameter definitions
     content = re.sub(
         r'(\w+)\s*:\s*(\w+)\s*=\s*(\d+)',
         r'\1: \2 = \3',
@@ -71,21 +88,28 @@ def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions an
     # Fix method definitions
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*self\s*\)\s*:\s*$',
-        lambda m: f'def {m.group(1)}(self):\n"""Implementation of {m.group(1)}."""',
+        lambda m: f'def {m.group(1)}(self):\n
+"""Implementation of {m.group(1)}."""
+',
         content,
         flags=re.MULTILINE
     )
 
     return content
 
-def fix_logger_initialization(*args, **kwargs) -> None:"""Fix logger initialization."""content = re.sub(
+def fix_logger_initialization(*args, **kwargs) -> None:
+"""Fix logger initialization."""
+content = re.sub(
         r'self\.logger\s*=\s*logging\.getLogger\(__name__\)',
-        'def __init__(self, *args, **kwargs) -> None:\n"""Initialize logger."""\n        super().__init__()\n        self.logger = logging.getLogger(__name__)',
+        'def __init__(self, *args, **kwargs) -> None:\n
+"""Initialize logger."""
+\n        super().__init__()\n        self.logger = logging.getLogger(__name__)',
         content
     )
     return content
 
-def process_file(*args, **kwargs) -> None:"""Process a single file."""
+def process_file(*args, **kwargs) -> None:
+"""Process a single file."""
 print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -111,7 +135,9 @@ print(f"Processing {filepath}")
         print(f"Error processing {filepath}: {str(e)}")
 
 def main(*args, **kwargs) -> None:
-    """Process files with syntax errors."""
+    """
+Process files with syntax errors.
+"""
 problem_files = [
         'src/models/reasoning/mathematical_notation.py',
         'src/models/reasoning/symbolic_math.py',

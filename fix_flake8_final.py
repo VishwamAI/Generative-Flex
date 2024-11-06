@@ -17,7 +17,9 @@ import traceback
 
 
 def remove_unused_imports(content) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 new_lines = []
 skip_next = False
@@ -28,7 +30,9 @@ used_names = set()
 import_names = set()
 
 class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 def visit_Attribute(self
 node) -> None: ifisinstance
@@ -70,7 +74,9 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
 
 
                             def fix_line_length(self                             content                            max_length=88) -> None: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
                                 new_lines = []
 
@@ -116,7 +122,9 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                 def def add_missing_imports(self                                                 content) -> None):
 
                                                 required_imports
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {
                                                 "Tuple": "from typing import Tuple"
                                                 "Optional": "from typing import Optional"
@@ -135,7 +143,9 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                 used_names = set()
 
                                                 class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 def visit_Name(self
                                                 node) -> None: ifisinstance
@@ -156,7 +166,9 @@ def visit_Name(self
 
                                                 # Add imports at the top, after any module docstring
                                                     if import_lines: docstring_end = 0    if lines and lines[0].startswith('Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ' in line: docstring_end = i + 1        break
 
                                                         return "\n".join(lines[:docstring_end] + import_lines + [""] + lines[docstring_end:])
@@ -164,13 +176,17 @@ def visit_Name(self
 
 
                                                             def fix_unused_variables(self                                                             content) -> None:
-    """unused variables by prefixing with underscore.Fix"""
+    """
+unused variables by prefixing with underscore.Fix
+"""
     tree = ast.parse):
                                                                 assigned_names = set()
                                                                 used_names = set()
 
                                                         class class:
-    """Class implementing class functionality."""
+    """
+Class implementing class functionality.
+"""
 
 def visit_Name(self
                                                         node) -> None: ifisinstance
@@ -193,7 +209,9 @@ def visit_Name(self
 
 
                                                                     def fix_import_order(self                                                                     content) -> None:
-    """import order to follow PEP8.Fix"""
+    """
+import order to follow PEP8.Fix
+"""
             lines = content.split):
                                                                     import_lines = []
                                                                     other_lines = []
@@ -212,7 +230,9 @@ def visit_Name(self
 
 
                                                                         def def main(self)::
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
                                                                             src_dir = Path("src")
                                                                             tests_dir = Path("tests")

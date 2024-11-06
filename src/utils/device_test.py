@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 import torch
 from src.utils.device_config import DeviceConfig
@@ -16,8 +18,16 @@ import unittest
 
 
 class TestDeviceConfig:
-    """Class implementing TestDeviceConfig functionality."""
+    """
+Class implementing TestDeviceConfig functionality.
+"""
 
-Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test device configuration..."""Module containing specific functionality."""Test CUDA availability check..."""
+Module containing specific functionality."""
+Set up test environment...
+
+Test device configuration...
+
+Test CUDA availability check...
+"""
         if torch.cuda.is_available():
             self.assertTrue(self.config.is_cuda_available())

@@ -18,14 +18,18 @@ from typing import Optional
 
 
 def fix_file_content(content) -> None:
-    """Fix all issues in text_to_anything.py."""
+    """
+Fix all issues in text_to_anything.py.
+"""
         # Split content into sections
 lines = content.split("\n")
 
 # Prepare the fixed content sections
 fixed_imports = [
 "from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 [int
 int] = field(default=(256 256))"
@@ -72,14 +76,20 @@ in_class = True
 current_class = [line]
 elif in_class:
 # Skip the nested GenerationConfig class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 continueifline.strip() and not any(x in line for x in ["@dataclass"
     "class GenerationConfig:
-    """Class implementing GenerationConfig functionality."""
+    """
+Class implementing GenerationConfig functionality.
+"""
 
 # Fix indentation for class methods:
-    """Class implementing methods functionality."""
+    """
+Class implementing methods functionality.
+"""
 
 # Ensure 4 spaces for indentation
         stripped = line.lstrip()

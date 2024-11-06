@@ -8,21 +8,37 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 from typing import Dict, Optional
 import os
 
 from dataclasses import dataclass
-    """Class implementing import functionality."""
+    """
+Class implementing import functionality.
+"""
 
-Module containing specific functionality."""Set up training environment..."""Module containing specific functionality."""Initialize environment setup.
+Module containing specific functionality."""
+Set up training environment...
+
+Initialize environment setup.
 
         Args:
-            config: Optional environment configuration"""Module containing specific functionality."""Set up training environment..."""Module containing specific functionality."""Set random seeds for reproducibility..."""Module containing specific functionality."""Configure PyTorch settings..."""Module containing specific functionality."""Get kwargs for DataLoader.
+            config: Optional environment configuration
+
+Set up training environment...
+"""Module containing specific functionality."""
+Set random seeds for reproducibility...
+
+Configure PyTorch settings...
+
+Get kwargs for DataLoader.
 
         Returns:
-            DataLoader configuration"""
+            DataLoader configuration
+"""
         return {
             "num_workers": self.config.num_workers,
             "pin_memory": self.config.pin_memory

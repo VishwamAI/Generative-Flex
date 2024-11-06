@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -25,30 +27,54 @@ from typing import Any
 
 
 def fix_symbolic_math(content: str) -> str: Base
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 12
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:',
         r'class \1(nn.Module):
-\n    """class for:"""Class implementing for functionality."""\n""" pass of the math reasoning head.Fix
-"""Module containing specific functionality."""
+\n    """
+class for:
+"""Class implementing for functionality."""
+\n
+""" pass of the math reasoning head.Fix
+"""
+Module containing specific functionality.
+"""
  syntax in text_to_anything.py.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  syntax in transformer.py.Applies
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 \s+multi-head\s+attention\s+on\s+the\s+input\s+data\.Applies
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  multi-head attention on the input data.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  syntax in test files.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  syntax in training files.Fix
-"""Module containing specific functionality."""
-([^"]*?)"""(\s*class|\s*def)', r'"""\n\1\n"""\n\2'),
+"""
+Module containing specific functionality.
+"""
+([^"]*?)"""
+(\s*class|\s*def)', r'
+"""\n\1\n"""\n\2'),
         (r'def\s+load_data\(self,\s*file_path:\s*str\s*=\s*"[^"]+"\)\s*->\s*List\[Dict\[str,\s*str\]\]:\s*wit,\s*h',
          r'def load_data(self, file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:\n        with'),
     ]
@@ -56,7 +82,9 @@ def fix_symbolic_math(content: str) -> str: Base
     return content
 
 def fix_utils_files(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix print statements and type hints
     patterns = [
@@ -69,7 +97,9 @@ def fix_utils_files(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -97,7 +127,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

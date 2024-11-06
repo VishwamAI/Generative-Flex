@@ -13,7 +13,9 @@ import subprocess
 import sys
 
 def def format_python_files(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 Format all Python files using black with CI settings."""
             # Get all Python files recursively
 python_files = []

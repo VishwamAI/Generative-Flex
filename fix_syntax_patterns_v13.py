@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -23,7 +25,9 @@ from typing import List,
 
 
 def fix_method_signatures(content: str) -> str: Format
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method signatures with type annotations
     patterns = [
@@ -42,7 +46,9 @@ def fix_method_signatures(content: str) -> str: Format
     return content
 
 def format_method_signature(name: str, params: str, return_type: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     params = params.strip()
     if len(params.split(',')) > 3:
@@ -65,31 +71,48 @@ def format_method_signature(name: str, params: str, return_type: str) -> str:
         return f'def {name}({", ".join(formatted_params)}) -> {return_type.strip()}:'
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class-level docstrings
     content = re.sub(
-        r'(class\s+[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""\n',
+        r'(class\s+[^:]+:)\s*"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+\n',
         content
     )
 
     # Fix method-level docstrings
     content = re.sub(
-        r'(def\s+[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""\n',
+        r'(def\s+[^:]+:)\s*
+"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+\n',
         content
     )
 
     # Fix module-level docstrings
     content = re.sub(
-        r'^"""([^"]+)"""',
-        lambda m: f'"""{m.group(1).strip()}"""\n',
+        r'^
+"""([^"]+)"""
+',
+        lambda m: f'
+"""{m.group(1).strip()}"""
+\n',
         content
     )
     return content
 
-def fix_type_annotations(content: str) -> str:"""Module containing specific functionality."""# Fix dataclass field:"""Class implementing field functionality."""\s*List\[[^\]]+\]\s*=\s*field\(default_factory=[^)]+\)',
+def fix_type_annotations(content: str) -> str:
+"""Module containing specific functionality."""
+# Fix dataclass field:
+"""Class implementing field functionality."""
+\s*List\[[^\]]+\]\s*=\s*field\(default_factory=[^)]+\)',
         lambda m: f'    {m.group(1)}: List[str] = field(default_factory=list)',
         content
     )
@@ -109,7 +132,9 @@ def fix_type_annotations(content: str) -> str:"""Module containing specific func
     )
     return content
 
-def fix_line_continuations(content: str) -> str:"""Module containing specific functionality."""# Fix multi-line method calls
+def fix_line_continuations(content: str) -> str:
+
+# Fix multi-line method calls
     content = re.sub(
         r'([^,\s]+)\s*,\s*\n\s*([^,\s]+)\s*,\s*\n\s*([^,\s]+)',
         lambda m: f'{m.group(1)},\n        {m.group(2)},\n        {m.group(3)}',
@@ -124,7 +149,9 @@ def fix_line_continuations(content: str) -> str:"""Module containing specific fu
     )
     return content
 
-def fix_indentation(content: str) -> str:"""Module containing specific functionality."""lines = content.split('\n')
+def fix_indentation(content: str) -> str:
+
+lines = content.split('\n')
     fixed_lines = []
     indent_level = 0
     in_class = False
@@ -132,7 +159,9 @@ def fix_indentation(content: str) -> str:"""Module containing specific functiona
 
     for line in lines: stripped = line.strip()
 
-        # Handle class definitions:"""Class implementing definitions functionality."""in_class = True
+        # Handle class definitions:
+"""Class implementing definitions functionality."""
+in_class = True
             indent_level = 0
             fixed_lines.append(stripped)
             if stripped.endswith(':'):
@@ -149,7 +178,8 @@ def fix_indentation(content: str) -> str:"""Module containing specific functiona
             continue
 
         # Handle docstrings
-        if stripped.startswith('"""'):
+        if stripped.startswith('
+"""'):
             if in_method: fixed_lines.append('    ' * (indent_level + 1) + stripped)
             elif in_class: fixed_lines.append('    ' + stripped)
             else: fixed_lines.append(stripped)
@@ -168,7 +198,9 @@ def fix_indentation(content: str) -> str:"""Module containing specific functiona
     return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -187,7 +219,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

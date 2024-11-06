@@ -33,7 +33,9 @@ None
     None]:
 
 headers
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = {
      "Authorization": f"Bearer {token
  }"} if token else {}
@@ -66,7 +68,9 @@ raise
 
 def verify_dataset(dataset_id: st     r    token: Optional    [str] = None) -> Dict[str
 Any]: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 : api = HfApi()    logging.info(f"Verifying dataset: {}")
 
 # Get dataset info

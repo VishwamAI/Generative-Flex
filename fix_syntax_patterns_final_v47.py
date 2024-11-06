@@ -12,52 +12,78 @@ import os
 from typing import List, Optional import re
 
 def fix_empty_docstrings(content: str) -> str:
-    """Fix empty docstrings with meaningful content."""
+    """
+Fix empty docstrings with meaningful content.
+"""
     # Fix empty module docstrings
     content = re.sub(
-        r'^"""\s*"""',
-        '"""Module for handling model functionality."""',
+        r'^"""
+\s*
+"""',
+        '"""
+Module for handling model functionality.
+"""',
         content,
         flags=re.MULTILINE
     )
 
     # Fix empty class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-f'{m.group(1)}"""Class for implementing model functionality."""',
+f'{m.group(1)}"""
+Class for implementing model functionality.
+"""',
         content
     )
 
     # Fix empty method docstrings
     content = re.sub(
-        r'(\s+)def\s+(\w+)\s*\([^)]*\)\s*(?:->.*?)?\s*:\s*"""\s*"""',
-        lambda m: f'{m.group(1)}def {m.group(2)}({m.group(3) if len(m.groups()) > 2 else ""}):\n{m.group(1)}    """Method for {m.group(2)}."""',
+        r'(\s+)def\s+(\w+)\s*\([^)]*\)\s*(?:->.*?)?\s*:\s*"""
+\s*
+"""',
+        lambda m: f'{m.group(1)}def {m.group(2)}({m.group(3) if len(m.groups()) > 2 else ""}):\n{m.group(1)}    """
+Method for {m.group(2)}.
+"""',
         content
     )
 
     return content
 
 def fix_docstring_format(content: str) -> str:
-    """Fix docstring formatting to match Black's requirements."""
+    """
+Fix docstring formatting to match Black's requirements.
+"""
     # Fix single-line docstrings
     content = re.sub(
-        r'"""([^"\n]+)"""',
-        lambda m: f'"""{m.group(1).strip()}."""',
+        r'"""([^"\n]+)"""
+',
+        lambda m: f'
+"""{m.group(1).strip()}."""
+',
         content
     )
 
     # Fix multi-line docstrings
     content = re.sub(
-        r'"""([^"]+)"""',
-        lambda m: f'"""\n{m.group(1).strip()}\n"""',
+        r'
+"""([^"]+)"""
+',
+        lambda m: f'
+"""\n{m.group(1).strip()}\n"""
+',
         content,
         flags=re.DOTALL
     )
 
     return content
 
-def fix_class_definitions(content: str) -> str:"""Fix class definition:
-    """Class implementing definition functionality."""
+def fix_class_definitions(content: str) -> str:
+"""Fix class definition:
+    """
+Class implementing definition functionality.
+"""
 
 indent = match.group(1)
         name = match.group(2)
@@ -65,18 +91,24 @@ indent = match.group(1)
 
         if bases:
             bases = ", ".join(b.strip() for b in bases.split(",") if b.strip())
-            return f'{indent}class {name}({bases}):\n{indent}    """Class for {name}."""'
-        return f'{indent}class {name}:\n{indent}    """Class for {name}."""'
+            return f'{indent}class {name}({bases}):\n{indent}    """
+Class for {name}.
+"""'
+        return f'{indent}class {name}:\n{indent}    """
+Class for {name}.
+"""'
 
     content = re.sub(
-        r'(\s*)class\s+(\w+)(?:\((.*?)\))?\s*:(?!\s*""")',
+        r'(\s*)class\s+(\w+)(?:\((.*?)\))?\s*:(?!\s*"""
+)',
         format_class,
         content
     )
 
     return content
 
-def fix_method_definitions(content: str) -> str:"""Fix method definition formatting."""
+def fix_method_definitions(content: str) -> str:
+"""Fix method definition formatting."""
     def format_method(match):
         indent = match.group(1)
         name = match.group(2)
@@ -89,18 +121,25 @@ def fix_method_definitions(content: str) -> str:"""Fix method definition formatt
 
         # Add return type if present
         if return_type:
-            return f'{indent}def {name}({params}) -> {return_type.strip()}:\n{indent}    """Method for {name}."""'
-        return f'{indent}def {name}({params}):\n{indent}    """Method for {name}."""'
+            return f'{indent}def {name}({params}) -> {return_type.strip()}:\n{indent}    """
+Method for {name}.
+"""'
+        return f'{indent}def {name}({params}):\n{indent}    """
+Method for {name}.
+"""'
 
     content = re.sub(
-        r'(\s*)def\s+(\w+)\s*\((.*?)\)\s*(?:->(.+?))?\s*:(?!\s*""")',
+        r'(\s*)def\s+(\w+)\s*\((.*?)\)\s*(?:->(.+?))?\s*:(?!\s*"""
+)',
         format_method,
         content
     )
 
     return content
 
-def fix_imports(content: str) -> str:"""Fix import statement formatting."""# Group imports
+def fix_imports(content: str) -> str:
+"""Fix import statement formatting."""
+# Group imports
     stdlib_imports = []
     third_party_imports = []
     local_imports = []
@@ -143,7 +182,8 @@ def fix_imports(content: str) -> str:"""Fix import statement formatting."""# Gro
 
     return content
 
-def process_file(file_path: str) -> None:"""Process a single file to fix syntax issues."""
+def process_file(file_path: str) -> None:
+"""Process a single file to fix syntax issues."""
     print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
@@ -171,7 +211,9 @@ def process_file(file_path: str) -> None:"""Process a single file to fix syntax 
         print(f"Error processing {file_path}: {str(e)}")
 
 def main() -> None:
-    """Process all files that need fixing."""
+    """
+Process all files that need fixing.
+"""
     files_to_fix = [
         "src/test_simple.py",
         "src/test_simple_cot.py",

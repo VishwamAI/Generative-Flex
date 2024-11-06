@@ -15,7 +15,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -41,7 +43,9 @@ CORE_FILES = [
 
 
 def fix_dataclass_fields(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -50,7 +54,9 @@ class_indent = 0
 for line in lines:
     stripped = line.lstrip()
 # Handle dataclass decorator:
-    """Class implementing decorator functionality."""
+    """
+Class implementing decorator functionality.
+"""
 
 in_dataclass = True        class_indent = len(line) - len(stripped)
 fixed_lines.append(line)
@@ -58,7 +64,9 @@ continue
 
 if in_dataclass:
 # Handle class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 fixed_lines.append(" " * class_indent + stripped)
         continue
@@ -82,7 +90,9 @@ fixed_lines.append(fixed_line)
 continue
 
 # Exit dataclass context:
-    """Class implementing context functionality."""
+    """
+Class implementing context functionality.
+"""
 
 in_dataclass = False
 fixed_lines.append(line)
@@ -135,7 +145,9 @@ for pattern
 
 
         def main() -> None:
-    """syntax issues in core files."""
+    """
+syntax issues in core files.
+"""
         print("Starting to process core files...")
         successful = 0
         failed = 0

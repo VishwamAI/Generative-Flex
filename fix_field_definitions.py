@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_field_definitions(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix split "default" keyword
     content = re.sub(r'field\(def\s+ault', r'field(default', content)
@@ -45,33 +47,49 @@ def fix_field_definitions(content: str) -> str: Fix
     return content
 
 def fix_docstring_placement(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]*:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""',
+]*:)\s*"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+',
         content
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(def\s+\w+[^:]*:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""',
+        r'(def\s+\w+[^:]*:)\s*
+"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+',
         content
     )
 
     # Fix docstrings after return type hints
     content = re.sub(
-        r'(\)\s*->\s*[^:]+:)\s*"""([^"]+)"""',
-        lambda m: f'{m.group(1)}\n"""{m.group(2).strip()}"""',
+        r'(\)\s*->\s*[^:]+:)\s*
+"""([^"]+)"""
+',
+        lambda m: f'{m.group(1)}\n
+"""{m.group(2).strip()}"""
+',
         content
     )
 
     return content
 
-def process_file(file_path: Path) -> None:"""Module containing specific functionality."""
+def process_file(file_path: Path) -> None:
+"""Module containing specific functionality."""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -97,7 +115,9 @@ def process_file(file_path: Path) -> None:"""Module containing specific function
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """field definitions and docstring placement in critical files."""
+    """
+field definitions and docstring placement in critical files.
+"""
 
     critical_files = [
         'src/models/text_to_anything.py',

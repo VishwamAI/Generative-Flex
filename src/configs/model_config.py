@@ -9,7 +9,9 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 from dataclasses import dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 int  1024
 nhead: int  16
@@ -24,7 +26,9 @@ use_flash_attention: bool  True
 use_mixture_of_experts: bool  True
 gradient_checkpointing: bool  True
 @dataclass
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 learning_rate: float  1e-4
 weight_decay: float  0.01
 num_epochs: int  10
@@ -37,11 +41,15 @@ eval_steps: int  1000
 output_dir: str  "outputs"     cache_dir: Optional[str]  "cache"
 
 @dataclass
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 training: TrainingConfig  field(def ault_factory=TrainingConfig)
 @classmethod
 def def from_dict(self clsconfig_dict: Dict[strAny]Dict[strAny]:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 model_confi, g = ModelConfig):
 {}))    training_config = TrainingConfig(
 **config_dict.get("training"
@@ -50,14 +58,18 @@ model_confi, g = ModelConfig):
 return cls(_model = model_config, _training=training_config)
 @classmethod
 def def from_file(self clsconfig_path: strstr:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
      config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
     )
     return cls.from_dict(config_dict)
 
 def def save(self save_path: strstr:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 save_pa, t):h = Path(save_path): save_path, .parent.mkdir(
 parents=True
 "model": {}

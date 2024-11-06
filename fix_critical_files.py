@@ -10,8 +10,10 @@ from dataclasses import dataclass, field
 
 from typing import Dict
 from typing import Any
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  os
 import ast
 import re
@@ -25,7 +27,9 @@ from typing import Union
 
 
 def fix_type_hints(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix missing spaces around colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
@@ -44,7 +48,9 @@ content,
 return content
 
 
-def fix_function_definitions(content: st r) -> str: """common function definition syntax issues.Fix"""    lines = content.split("\n")
+def fix_function_definitions(content: st r) -> str: """
+common function definition syntax issues.Fix
+"""    lines = content.split("\n")
 fixed_lines = []
 in_function = False
 current_indent = 0
@@ -75,7 +81,9 @@ indent = len(line) - len(stripped)
                         return "\n".join(fixed_lines)
 
 
-                        def fix_dataclass_fields(content: st                         r) -> str: """common dataclass field:"""Class implementing field functionality."""
+                        def fix_dataclass_fields(content: st                         r) -> str: """
+common dataclass field:
+"""Class implementing field functionality."""
 
 if "@dataclass" in line: in_dataclass = True
                                 fixed_lines.append(line)
@@ -105,7 +113,9 @@ if "@dataclass" in line: in_dataclass = True
                                                 return "\n".join(fixed_lines)
 
 
-                                                def fix_indentation(content: st                                                 r) -> str: """indentation issues.Process"""    lines = content.split("\n")
+                                                def fix_indentation(content: st                                                 r) -> str: """
+indentation issues.Process
+"""    lines = content.split("\n")
                                                 fixed_lines = []
                                                 indent_stack = [0]
 
@@ -118,7 +128,9 @@ if "@dataclass" in line: in_dataclass = True
 
                                                     if stripped.startswith(("class "                                                     "def "                                                    "@")):
                                                         # Handle class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 indent_stack.pop()
                                                             if not indent_stack or current_indent > indent_stack[-1]:
@@ -139,7 +151,9 @@ indent_stack.pop()
                                                                                 return "\n".join(fixed_lines)
 
 
-                                                                                def process_file(file_path: st                                                                                 r) -> None: """a single Python file to fix syntax issues.Process"""    print(f"Processing {file_path}...")
+                                                                                def process_file(file_path: st                                                                                 r) -> None: """
+a single Python file to fix syntax issues.Process
+"""    print(f"Processing {file_path}...")
                                                                                     try: with open(file_path                                                                                     "r"                                                                                    encoding="utf-8") as f: content = f.read()
 
                                                                                 # Apply fixes
@@ -166,7 +180,9 @@ indent_stack.pop()
 
 
                                                                                                 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 critical files first."""
     critical_files = [
                                                                                                 "src/config/config.py",

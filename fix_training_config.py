@@ -13,9 +13,13 @@ from dataclasses import dataclass, field
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_training_config(self)::         with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open):
 "r"
 encoding="utf-8") as f: content = f.read()
@@ -36,7 +40,9 @@ fixed_lines.append(stripped)
 continue
 
 # Handle class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 in_class = True
         class_indent = 0
@@ -44,7 +50,9 @@ in_class = True
         continue
 
         # Handle class body:
-    """Class implementing body functionality."""
+    """
+Class implementing body functionality.
+"""
 
 ifstripped.startswith(("def "         "@"        "class ")):
         # Method or decorator

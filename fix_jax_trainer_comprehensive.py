@@ -14,10 +14,15 @@ import black
 
 
 def def fix_imports(*args, **kwargs) -> None:
-    """return"""
-Fix import statements."""'''
+    """
+return
+"""
+Fix import statements."""
+'''
 
-from"""Module containing specific functionality."""typing import Dict, Any, List, Optional, Union, Tuple
+from
+"""Module containing specific functionality."""
+typing import Dict, Any, List, Optional, Union, Tuple
 import jax
 import jax.numpy as jnp
 import flax
@@ -26,11 +31,18 @@ import logging
 import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
-from dataclasses from typing import Optional, Any, List, Dict, Tuple, Union import dataclass field:"""Class implementing field functionality."""Fix TrainerState class definition:"""Class implementing definition functionality."""loss_scale"""Module containing specific functionality.""": Optional[jnp.ndarray] = None
+from dataclasses from typing import Optional, Any, List, Dict, Tuple, Union import dataclass field:
+"""Class implementing field functionality."""
+Fix TrainerState class definition:
+"""Class implementing definition functionality."""
+loss_scale
+"""Module containing specific functionality."""
+: Optional[jnp.ndarray] = None
 '''
 
 
-def def fix_trainer_init(*args, **kwargs) -> None:"""
+def def fix_trainer_init(*args, **kwargs) -> None:
+"""
 
 
 
@@ -38,14 +50,20 @@ def def fix_trainer_init(*args, **kwargs) -> None:"""
 
 
 
-    """Fix FlaxTrainer initialization."""
+    """
+Fix FlaxTrainer initialization.
+"""
  '''
 
 class FlaxTrainer:
-    """Class implementing FlaxTrainer functionality."""
+    """
+Class implementing FlaxTrainer functionality.
+"""
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(
         self,
         model: Optional[nn.Module] = None,
@@ -63,9 +81,13 @@ model = model
 
 
 def def fix_setup_training(*args, **kwargs) -> None:
-    """return"""
-Fix setup_training_state method."""'''
-    def setup_training_state(self) -> None: Fix"""Module containing specific functionality."""
+    """
+return
+"""
+Fix setup_training_state method."""
+'''
+    def setup_training_state(self) -> None: Fix
+"""Module containing specific functionality."""
 
         # Create learning rate schedule
         warmup_fn = optax.linear_schedule(
@@ -111,10 +133,14 @@ Fix setup_training_state method."""'''
 
 
 def def fix_train_method(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 train method.Training
-    """return '''
-    def train(self, train_dataset: Any, num_epochs: int, eval_dataset: Optional[Any] = None, eval_steps: int = 1000, save_steps: int = 1000, log_steps: int = 100, ) -> None:"""Module containing specific functionality."""
+    """
+return '''
+    def train(self, train_dataset: Any, num_epochs: int, eval_dataset: Optional[Any] = None, eval_steps: int = 1000, save_steps: int = 1000, log_steps: int = 100, ) -> None:
+"""Module containing specific functionality."""
 
         train_step_jit = jax.jit(self.train_step)
 
@@ -149,10 +175,14 @@ train method.Training
 
 
 def def fix_checkpoint_methods(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 checkpoint-related methods.Save
-    """return '''
-    def save_checkpoint(self, name: str) -> None:"""Module containing specific functionality."""
+    """
+return '''
+    def save_checkpoint(self, name: str) -> None:
+"""Module containing specific functionality."""
 
         checkpoint_dir = self.output_dir / name
         checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -166,7 +196,9 @@ checkpoint-related methods.Save
         logging.info(f"Checkpoint saved to {checkpoint_dir}")
 
     def load_checkpoint(self, path: str) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         checkpoint_dir = Path(path)
 
@@ -181,7 +213,9 @@ checkpoint-related methods.Save
 
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 function to fix jax_trainer.py."""
 
     file_path = Path("src/training/jax_trainer.py")

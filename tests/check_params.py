@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 import torch
 from src.utils.param_validator import ParamValidator
@@ -16,9 +18,17 @@ import unittest
 
 
 class TestParamValidation:
-    """Class implementing TestParamValidation functionality."""
+    """
+Class implementing TestParamValidation functionality.
+"""
 
-Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test parameter validation..."""Module containing specific functionality."""Test invalid parameter detection..."""
+Module containing specific functionality."""
+Set up test environment...
+
+Test parameter validation...
+
+Test invalid parameter detection...
+"""
         params = {
             "learning_rate": -1,
             "batch_size": 0

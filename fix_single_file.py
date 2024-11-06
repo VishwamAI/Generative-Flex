@@ -16,9 +16,13 @@ import sys
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_file(filepath) -> None: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(filepath
 "r"
 encoding="utf-8") as f: content = f.read()
@@ -39,7 +43,9 @@ for line in section.split("\n")
         continue
 
         # Fix class definitions:
-    """Class implementing definitions functionality."""
+    """
+Class implementing definitions functionality.
+"""
 
 lines = section.split("\n")
         class_name = lines[0]
@@ -73,7 +79,9 @@ lines = section.split("\n")
 
                         with open(filepath                         "w"                        encoding="utf-8") as f: f.write(fixed_content)
 
-                        def def main(self)::    """function."""        if len):
+                        def def main(self)::    """
+function.
+"""        if len):
 
                         filepath = sys.argv[1]
                         print(f"Fixing file: {}")

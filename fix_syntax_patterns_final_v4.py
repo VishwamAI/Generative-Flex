@@ -11,7 +11,9 @@ from dataclasses import dataclass, field
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 import ast
 from pathlib import Path
@@ -21,22 +23,30 @@ from typing import List, Dict, Tuple
 
 
 class CodeFormatter:
-    """Class implementing CodeFormatter functionality."""
+    """
+Class implementing CodeFormatter functionality.
+"""
 
 Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         patterns = [
             # Pattern 1:
     Class with vocab_size and hidden_size
             (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
              r'''class \1(nn.Module):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     def __init__(self, *args, **kwargs) -> None:
@@ -47,7 +57,9 @@ Fix
             # Pattern 2: Class with only hidden_size
             (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*hidden_size:\s*int\s*=\s*64',
              r'''class \1(nn.Module):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     def __init__(self, *args, **kwargs) -> None:
@@ -57,91 +69,118 @@ Fix
             # Pattern 3: unittest.TestCase class
             (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:(\s*$|\s+[^\n])',
              r'''class \1(unittest.TestCase):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     def def setUp(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 up test fixtures.Training
-    """super().setUp()'''),
+    """
+super().setUp()'''),
 
             # Pattern 4: train_state.TrainState class
             (r'class\s+(\w+)\s*\(\s*train_state\.TrainState\s*\)\s*:(\s*$|\s+[^\n])',
-             r'''class \1(train_state.TrainState):"""Module containing specific functionality."""def __init__(*args, **kwargs) -> None:"""
+             r'''class \1(train_state.TrainState):
+"""Module containing specific functionality."""
+def __init__(*args, **kwargs) -> None:
 
-
-
-
-
-
-
-        """training state.Neural"""
+training state.Neural
+"""
 
         super().__init__(*args, **kwargs)'''),
 
             # Pattern 5: Basic nn.Module class
             (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:(\s*$|\s+[^\n])',
              r'''class \1(nn.Module):
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
 
     def def __init__(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 the module.Fix
-    """super().__init__()''')
+    """
+super().__init__()''')
         ]
 
         for pattern, replacement in patterns: content = re.sub(pattern, replacement, content, flags=re.MULTILINE)
         return content
 
     @staticmethod
-    def fix_method_signatures(content: str) -> str:"""Module containing specific functionality."""# Fix method signatures with multiple parameters
+    def fix_method_signatures(content: str) -> str:
+
+# Fix method signatures with multiple parameters
         content = re.sub(
             r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*dataloader:\s*DataLoader,\s*optimizer:\s*torch\.optim\.Optimizer,\s*config:\s*TrainingConfig\)\s*:',
             r'''def \1(
     dataloader: DataLoader,
     optimizer: torch.optim.Optimizer,
     config: TrainingConfig,
-) -> None:"""Module containing specific functionality."""''',
+) -> None:
+
+''',
             content
         )
 
         # Fix method signatures with **kwargs
         content = re.sub(
             r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*\*\*kwargs\)\s*:',
-            r'''def \1(**kwargs) -> None:"""Module containing specific functionality."""''',
+            r'''def \1(**kwargs) -> None:
+"""Module containing specific functionality."""
+''',
             content
         )
         return content
 
     @staticmethod
-    def fix_docstrings(content: str) -> str:"""Module containing specific functionality."""# Fix module docstrings
+    def fix_docstrings(content: str) -> str:
+"""Module containing specific functionality."""
+# Fix module docstrings
         content = re.sub(
-            r'^"""([^"]*?)"""',
-            lambda m: f'"""{m.group(1).strip()}"""',
+            r'^
+"""([^"]*?)"""
+',
+            lambda m: f'
+"""{m.group(1).strip()}"""
+',
             content,
             flags=re.MULTILINE
         )
 
         # Fix method docstrings
         content = re.sub(
-            r'(\s+)"""([^"]*?)"""',
-            lambda m: f'{m.group(1)}"""{m.group(2).strip()}"""',
+            r'(\s+)
+"""([^"]*?)"""
+',
+            lambda m: f'{m.group(1)}
+"""{m.group(2).strip()}"""',
             content,
             flags=re.MULTILINE
         )
 
         # Fix docstrings at start of line
         content = re.sub(
-            r'^(\s*)([^"\n]+)"""([^"]+)"""',
-            lambda m: f'{m.group(1)}"""{m.group(3).strip()}"""',
+            r'^(\s*)([^"\n]+)"""([^"]+)"""
+',
+            lambda m: f'{m.group(1)}
+"""{m.group(3).strip()}"""
+',
             content,
             flags=re.MULTILINE
         )
         return content
 
     @staticmethod
-    def fix_indentation(content: str) -> str:"""Module containing specific functionality."""lines = content.splitlines()
+    def fix_indentation(content: str) -> str:
+"""Module containing specific functionality."""
+lines = content.splitlines()
         fixed_lines = []
         current_indent = 0
 
@@ -153,7 +192,8 @@ the module.Fix
             # Calculate proper indentation
             if stripped.startswith(('class ', 'def ')):
                 current_indent = 0
-            elif stripped.startswith(('"""', "'''")):  # Docstring
+            elif stripped.startswith(('
+"""', "'''")):  # Docstring
                 if not fixed_lines or not fixed_lines[-1].strip():
                     current_indent += 4
             elif any(stripped.startswith(kw) for kw in ['if ', 'else:', 'elif ', 'try:', 'except ', 'finally:', 'with ']):
@@ -172,7 +212,9 @@ the module.Fix
 
     @staticmethod
     def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
         # Fix Tuple type hints
         content = re.sub(
@@ -197,7 +239,9 @@ the module.Fix
         return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -218,7 +262,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

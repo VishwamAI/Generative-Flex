@@ -12,7 +12,9 @@ from typing import List
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import Dict,
@@ -21,7 +23,9 @@ from typing import Dict,
 PROBLEM_FILES = {
     "src/models/simple_model.py": {
         "docstring": Core
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ,
         "fixes": ["docstring", "class"]
     },
@@ -30,11 +34,15 @@ PROBLEM_FILES = {
         "fixes": ["class"]
     },
     "src/models/transformer.py": {
-        "docstring": """transformer architecture implementation using JAX and Flax.Configuration""",
+        "docstring": """
+transformer architecture implementation using JAX and Flax.Configuration
+""",
         "fixes": ["docstring"]
     },
     "src/models/text_to_anything.py": {
-        "docstring": """for text-to-anything generation.Method""",
+        "docstring": """
+for text-to-anything generation.Method
+""",
         "fixes": ["docstring"]
     },
     "src/test_inference.py": {
@@ -43,7 +51,9 @@ PROBLEM_FILES = {
         "fixes": ["class"]
     },
     "src/test_minimal.py": {
-        "docstring": """with parameters.Fix""",
+        "docstring": """
+with parameters.Fix
+""",
         "fixes": ["docstring"]
     },
     "src/training/jax_trainer.py": {
@@ -62,7 +72,9 @@ PROBLEM_FILES = {
 }
 
 def fix_file(file_path: str, fixes: Dict[str, str]) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -72,14 +84,18 @@ def fix_file(file_path: str, fixes: Dict[str, str]) -> None:
             docstring = fixes.get("docstring", "")
             content = re.sub(
                 r'^\s*["\']"\'"?.*?["\']"\'"?\s*$',
-                f'"""{docstring}"""',
+                f'"""
+{docstring}
+"""',
                 content,
                 flags=re.MULTILINE | re.DOTALL
             )
 
         if "class" in fixes.get("fixes", []):
             # Fix class inheritance:
-    """Class implementing inheritance functionality."""
+    """
+Class implementing inheritance functionality.
+"""
 
 if params: content = re.sub(
                         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*([^:\n]+)?',
@@ -123,7 +139,9 @@ if params: content = re.sub(
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """specific problematic files."""
+    """
+specific problematic files.
+"""
 
     for file_path, fixes in PROBLEM_FILES.items():
         if Path(file_path).exists():

@@ -29,7 +29,9 @@ import unittest
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_file(file_path content) -> None: os
 makedirs(os.path.dirname(file_path)
 exist_ok=True)
@@ -38,7 +40,9 @@ with open(file_path "w"encoding="utf-8") as f: f.write(content)            print
 
 .Tensor) -> Tuple[torch.Tensor
 torch.Tensor]: intermediate_output
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = self.dense(hidden_states)
 intermediate_output = self.intermediate_act_fn(intermediate_output)
 
@@ -48,17 +52,31 @@ layer_output = self.dropout(layer_output)
 return layer_output, torch.mean(intermediate_output, dim=-1)
 Mathematical
     """,
-"src/models/reasoning/mathematical_notation.py": """""" notation processing module.Processes
-"""Module containing specific functionality."""
+"src/models/reasoning/mathematical_notation.py": """
+
+""" notation processing module.Processes
+"""
+Module containing specific functionality.
+"""
  mathematical notation and converts between different formats.Process
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  mathematical notation.Symbolic
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ,
-"src/models/reasoning/symbolic_math.py": """""" mathematics processing module.Processes
-"""Module containing specific functionality."""
+"src/models/reasoning/symbolic_math.py": """
+
+""" mathematics processing module.Processes
+"""
+Module containing specific functionality.
+"""
  symbolic mathematics expressions.Train
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  for one epoch.Evaluate
     """
         model.train()
@@ -82,7 +100,9 @@ Mathematical
 
         val_loader: DataLoader) -> Dict[str
             float]:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
                 model.eval()
                 total_loss = 0.0
@@ -100,7 +120,9 @@ Mathematical
                     def def log_metrics(self):: metrics: Dict[str):
                 float]
                 step: Optional[int] = None
-                epoch: Optional[int] = None) -> None:                    """training metrics.Main"""
+                epoch: Optional[int] = None) -> None:                    """
+training metrics.Main
+"""
                 metric_str = " ".join(f"{}: {
      v: .4f
  }" for k                     v in metrics.items())    if epoch is not None: logger.info(f"Epoch {}: {}")
@@ -108,7 +130,9 @@ Mathematical
                 else: logger.info(metric_str)
 
 
-                    def def main(self)::    """training function.Comprehensive"""        config = TrainingConfig):
+                    def def main(self)::    """
+training function.Comprehensive
+"""        config = TrainingConfig):
                         model = EnhancedTransformer(config)
                         train_loader, val_loader = create_mmmu_dataloaders(config)
                         optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
@@ -130,24 +154,46 @@ Mathematical
 
                         if __name__ == "__main__":        main()
                         """,
-                        "tests/test_features.py": """""" tests for all model features.Test
-"""Module containing specific functionality."""
+                        "tests/test_features.py": """
+
+""" tests for all model features.Test
+"""
+Module containing specific functionality.
+"""
  suite for model features.Test
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  TextToAnything model initialization and forward pass.Test
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ,
-                "tests/test_models.py": """""" module for enhanced transformer models.Test
-"""Module containing specific functionality."""
+                "tests/test_models.py": """
+
+""" module for enhanced transformer models.Test
+"""
+Module containing specific functionality.
+"""
  cases for the enhanced transformer model.Test
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  forward pass through the model.Test
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ,
-                "tests/test_training_setup.py": """""" cases for training setup and configuration.Test
-"""Module containing specific functionality."""
+                "tests/test_training_setup.py": """
+
+""" cases for training setup and configuration.Test
+"""
+Module containing specific functionality.
+"""
  suite for training setup.Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  black formatting issues in problematic files."""
                 for file_path
                     content in fixes.items():

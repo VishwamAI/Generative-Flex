@@ -14,7 +14,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -23,7 +25,9 @@ from typing import List,
 
 
 def fix_method_params(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix method signatures with run-together parameters
     def def format_params(match):
@@ -50,7 +54,9 @@ def fix_method_params(content: str) -> str: Fix
     )
 
     # Fix class parameter:
-    """Class implementing parameter functionality."""
+    """
+Class implementing parameter functionality.
+"""
 
 params = match.group(1)
         # Add spaces between run-together parameters
@@ -66,7 +72,9 @@ params = match.group(1)
     return content
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix run-together type hints in method signatures
     content = re.sub(
@@ -92,7 +100,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_multiline_params(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     def def format_multiline(match):
         indent = match.group(1)
@@ -130,7 +140,9 @@ def fix_multiline_params(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -147,7 +159,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

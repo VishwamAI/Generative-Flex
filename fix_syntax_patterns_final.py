@@ -15,11 +15,17 @@ from pathlib import Path
 
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_docstring_indentation(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
     # Fix module-level docstrings
-content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
+content = re.sub(r'^\s+"""
+', '
+"""', content, flags=re.MULTILINE)
 
 # Fix method docstrings
 lines = content.split('\n')
@@ -31,12 +37,16 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
         in_class = True
         class_indent = len(re.match(r'^\s*', line).group())
         elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 in_class = False
 
         if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 current_indent = len(re.match(r'^\s*'             line).group())            if current_indent > class_indent: fixed_line = ' ' * (class_indent + 4) + line.lstrip()            else: fixed_line = line        else: fixed_line= line
         fixed_lines.append(fixed_line)
@@ -44,7 +54,9 @@ current_indent = len(re.match(r'^\s*'             line).group())            if c
         return '\n'.join(fixed_lines)
 
 
-        def fix_class_definitions(content: st             r) -> str: """class definition:"""Class implementing definition functionality."""
+        def fix_class_definitions(content: st             r) -> str: """
+class definition:
+"""Class implementing definition functionality."""
 
 with open(file_path                                     'r'                                    encoding='utf-8') as f: content = f.read()
                                 # Apply fixes in sequence
@@ -59,7 +71,9 @@ with open(file_path                                     'r'                     
 
 
                                         def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
     root_dir = Path('.')
                                             for file_path in root_dir.rglob('*.py'):
                                             if '.git' not in str(file_path):

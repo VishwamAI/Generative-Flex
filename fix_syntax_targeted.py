@@ -21,7 +21,9 @@ from typing import List,
 
 
 def fix_string_literals_in_default_factory(content: str) -> str: def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  fix_string_list(match):
         # Extract the string list content
         content = match.group(1)
@@ -40,29 +42,41 @@ def fix_string_literals_in_default_factory(content: str) -> str: def
     return content
 
 def fix_docstring_placement(content: str) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]*:)(\s*)"""',
-        r'\1\n"""',
+]*:)(\s*)"""
+',
+        r'\1\n
+"""',
         content
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(def\s+\w+[^:]*:)(\s*)"""',
-        r'\1\n"""',
+        r'(def\s+\w+[^:]*:)(\s*)"""
+',
+        r'\1\n
+"""',
         content
     )
     return content
 
 def fix_class_definitions(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix class method:
-    """Class implementing method functionality."""
+    """
+Class implementing method functionality.
+"""
 
 \s*def',
         r'class \1:\n    def',
@@ -78,7 +92,9 @@ def fix_class_definitions(content: str) -> str:
     return content
 
 def fix_type_annotations(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix field type annotations
     content = re.sub(
@@ -96,7 +112,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -125,7 +143,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax issues in critical files."""
 
     critical_files = [

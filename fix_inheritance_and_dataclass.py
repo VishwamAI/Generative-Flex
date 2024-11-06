@@ -15,7 +15,9 @@ from typing import Optional
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -40,7 +42,9 @@ CORE_FILES = [
 
 def fix_dataclass_fields(content:
     st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -49,7 +53,9 @@ class_indent = 0
 for line in lines:
     stripped = line.lstrip()
 # Track dataclass context:
-    """Class implementing context functionality."""
+    """
+Class implementing context functionality.
+"""
 
 in_dataclass = True        class_indent = len(line) - len(stripped)
 fixed_lines.append(line)
@@ -78,7 +84,9 @@ continue
         continue
 
         # Exit dataclass context:
-    """Class implementing context functionality."""
+    """
+Class implementing context functionality.
+"""
 
 in_dataclass = False
         fixed_lines.append(line)
@@ -87,7 +95,9 @@ in_dataclass = False
 
 
         def main() -> None:
-    """inheritance and dataclass patterns:"""Class implementing patterns functionality."""
+    """
+inheritance and dataclass patterns:
+"""Class implementing patterns functionality."""
 
 ifPath(file_path).exists():
         print(f"\nProcessing {file_path}")

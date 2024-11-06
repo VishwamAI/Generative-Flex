@@ -12,7 +12,9 @@ import os
 import re
 
 def fix_import_statements(*args, **kwargs) -> None:
-    """Fix malformed import statements."""
+    """
+Fix malformed import statements.
+"""
 # Fix common import patterns
     patterns = {
         r'from\s+(\w+)\s+from\s+(\w+)': r'from \1 import \2',
@@ -39,26 +41,38 @@ def fix_import_statements(*args, **kwargs) -> None:
     return '\n'.join(new_lines)
 
 def fix_docstrings(*args, **kwargs) -> None:
-    """Fix docstring formatting issues."""
+    """
+Fix docstring formatting issues.
+"""
 # Fix module-level docstrings
     content = re.sub(
-        r'^""".*?"""',
-        '"""Module for implementing specific functionality."""',
+        r'^"""
+.*?
+"""',
+        '"""
+Module for implementing specific functionality.
+"""',
         content,
         flags=re.MULTILINE | re.DOTALL
     )
 
     # Fix class docstrings:
-    """Class implementing docstrings functionality."""
+    """
+Class implementing docstrings functionality.
+"""
 
-]*:(\s*"""[^"]*""")?\s*',
-        lambda m: f'class {m.group(1)}:\n"""Class implementing {m.group(1)} functionality."""\n\n',
+]*:(\s*"""[^"]*"""
+)?\s*',
+        lambda m: f'class {m.group(1)}:\n
+"""Class implementing {m.group(1)} functionality."""
+\n\n',
         content
     )
 
     return content
 
-def fix_main_calls(*args, **kwargs) -> None:"""Fix main function calls at end of file."""
+def fix_main_calls(*args, **kwargs) -> None:
+"""Fix main function calls at end of file."""
 # Ensure proper main function definition and call
     if 'def main()' in content and 'main()' in content:
         content = re.sub(
@@ -69,7 +83,9 @@ def fix_main_calls(*args, **kwargs) -> None:"""Fix main function calls at end of
     return content
 
 def fix_method_definitions(*args, **kwargs) -> None:
-    """Fix method definitions and their type hints."""
+    """
+Fix method definitions and their type hints.
+"""
 # Add proper type hints to common methods
     method_patterns = {
         r'def __init__\([^)]*\)': 'def __init__(self, *args, **kwargs) -> None',
@@ -84,7 +100,9 @@ def fix_method_definitions(*args, **kwargs) -> None:
     return content
 
 def process_file(*args, **kwargs) -> None:
-    """Process a single file to fix syntax issues."""
+    """
+Process a single file to fix syntax issues.
+"""
 print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
@@ -123,7 +141,9 @@ print(f"Processing {file_path}...")
         f.write(content)
 
 def main(*args, **kwargs) -> None:
-    """Process all files with syntax issues."""
+    """
+Process all files with syntax issues.
+"""
 files_to_process = [
         "src/training/jax_trainer.py",
         "src/training/trainer.py",

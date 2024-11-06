@@ -14,8 +14,11 @@ from typing import Union
 
 
 def def fix_train_mmmu(*args, **kwargs) -> None:
-    """Fix"""
-Fix train_mmmu.py specific syntax issues."""# Fix function definitions with type hints
+    """
+Fix
+"""
+Fix train_mmmu.py specific syntax issues."""
+# Fix function definitions with type hints
     lines = content.split('\n')
     fixed_lines = []
     in_func = False
@@ -23,7 +26,8 @@ Fix train_mmmu.py specific syntax issues."""# Fix function definitions with type
 
     for line in lines: if line.strip().startswith('def ') and ':' in line: in_func = True
             func_lines = [line]
-        elif in_func and (line.strip().startswith(('"""', "'''") or not line.strip()):
+        elif in_func and (line.strip().startswith(('
+"""', "'''") or not line.strip()):
             in_func = False
             # Process collected function definition
             func_def = ' '.join(func_lines)
@@ -40,9 +44,12 @@ Fix train_mmmu.py specific syntax issues."""# Fix function definitions with type
     return '\n'.join(fixed_lines)
 
 def def fix_jax_trainer(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 jax_trainer.py specific syntax issues.Fix
-    """# Fix self parameter declarations
+    """
+# Fix self parameter declarations
     content = re.sub(r':\s*self\)\s*->\s*None:\s*self', r'(self) -> None:', content)
     # Fix type hints in function parameters
     content = re.sub(r'def\s+(\w+)\s*\(\s*self\s*:\s*self\)', r'def \1(self)', content)
@@ -50,23 +57,24 @@ jax_trainer.py specific syntax issues.Fix
     content = re.sub(r'Union\[Union\[([^]]+)\]\]', r'Union[\1]', content)
     return content
 
-def def fix_config(*args, **kwargs) -> None:"""
+def def fix_config(*args, **kwargs) -> None:
 
-
-
-
-
-    """config.py specific syntax issues.Fix"""
+config.py specific syntax issues.Fix
+"""
 
     # Fix dataclass field:
-    """Class implementing field functionality."""
+    """
+Class implementing field functionality.
+"""
 
 if line.strip().startswith('class '):
             in_class = True
             class_indent = len(line) - len(line.lstrip())
             fixed_lines.append(line)
         elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 ' in line and '=' in line and 'field(' in line:
             # Split multiple field definitions on one line
@@ -80,7 +88,9 @@ if line.strip().startswith('class '):
     return '\n'.join(fixed_lines)
 
 def def fix_file(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax issues in a specific file.Fix
     """
 
@@ -94,7 +104,9 @@ syntax issues in a specific file.Fix
     with open(file_path, 'w') as f: f.write(content)
 
 def def main(*args, **kwargs) -> None:
-    """"""
+    """
+
+"""
 syntax in core files with precise patterns."""
 
     core_files = [

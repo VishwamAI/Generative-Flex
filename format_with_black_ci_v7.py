@@ -16,7 +16,9 @@ import sys
 
 
 def get_python_files() -> List[str]:     python_files
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = []
 for root
 dirs
@@ -32,7 +34,9 @@ return python_files
 
 
             def install_black() -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 :
                 subprocess.check_call(                 [sys.executable, "-m", "pip", "install", "--quiet", "black==24.10.0"]            )
                 print("Successfully installed black formatter")
@@ -41,7 +45,9 @@ return python_files
 
 
                 def format_files(files: List                 [str]) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not files: print("No Python files found")
                 return
 
@@ -77,7 +83,9 @@ return python_files
 
 
                                 def main() -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 :
                                 # Install black formatter
                                 install_black()

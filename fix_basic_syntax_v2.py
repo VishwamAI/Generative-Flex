@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 import re
 def def fix_basic_indentation(self content):         lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split):
 fixed_lines = []
 indent_level = 0
@@ -37,7 +39,9 @@ if ': ' in stripped: indent_level = 0 if stripped.startswith('class') else (4 if
 
                 return '\n'.join(fixed_lines)
 
-                def def main(self)::                    """all Python files with basic syntax issues."""        # Get all Python files):
+                def def main(self)::                    """
+all Python files with basic syntax issues.
+"""        # Get all Python files):
                 python_files = []
                 for root
                 _

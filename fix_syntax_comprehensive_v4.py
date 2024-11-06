@@ -13,7 +13,9 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 from typing import List,
@@ -23,16 +25,22 @@ from typing import Any, Dict
 
 
 class CodeBlock:
-    """Class implementing CodeBlock functionality."""
+    """
+Class implementing CodeBlock functionality.
+"""
 
 def
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  __init__(self, indent_level: int = 0):
         self.indent_level = indent_level
         self.lines: List[str] = []
 
     def add_line(self, line: str) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  line.strip():
             self.lines.append("    " * self.indent_level + line.lstrip())
         else: self.lines.append("")
@@ -40,13 +48,17 @@ def
     def __str__(self) -> str: return "\n".join(self.lines)
 
 def create_class_block(class_name: str, parent_class: str, docstring: Optional[str] = None) -> CodeBlock: block
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = CodeBlock()
     block.add_line(f"class {class_name}({parent_class}):")
 
     inner_block = CodeBlock(1)
     if docstring: inner_block.add_line(f'Create
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ')
         inner_block.add_line("")
 
@@ -54,7 +66,9 @@ def create_class_block(class_name: str, parent_class: str, docstring: Optional[s
     return block
 
 def create_method_block(method_name: str, params: List[Tuple[str, str, Optional[str]]], return_type: Optional[str] = None, docstring: Optional[str] = None, is_init: bool = False, parent_class: Optional[str] = None) -> CodeBlock:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     block = CodeBlock(1)
 
@@ -80,7 +94,9 @@ def create_method_block(method_name: str, params: List[Tuple[str, str, Optional[
 
     # Add docstring
     if docstring: doc_block = CodeBlock(2)
-        doc_block.add_line(f'"""{docstring}"""')
+        doc_block.add_line(f'"""
+{docstring}
+"""')
         doc_block.add_line("")
         block.lines.extend(doc_block.lines)
 
@@ -92,10 +108,14 @@ def create_method_block(method_name: str, params: List[Tuple[str, str, Optional[
     return block
 
 def fix_class_definitions(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix nn.Module class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 \s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
         lambda m: str(create_class_block(m.group(1), "nn.Module", "Neural network module.")) + "\n" +
@@ -107,7 +127,9 @@ def fix_class_definitions(content: str) -> str:
     )
 
     # Fix nn.Module class with:
-    """Class implementing with functionality."""
+    """
+Class implementing with functionality.
+"""
 
 \s*hidden_size:\s*int\s*=\s*64',
         lambda m: str(create_class_block(m.group(1), "nn.Module", "Neural network module.")) + "\n" +
@@ -118,7 +140,9 @@ def fix_class_definitions(content: str) -> str:
     )
 
     # Fix unittest.TestCase class content:
-    """Class implementing content functionality."""
+    """
+Class implementing content functionality.
+"""
 
 ',
         lambda m: str(create_class_block(m.group(1), "unittest.TestCase", "Test case.")) + "\n" +
@@ -127,7 +151,9 @@ def fix_class_definitions(content: str) -> str:
     )
 
     # Fix train_state.TrainState class content:
-    """Class implementing content functionality."""
+    """
+Class implementing content functionality.
+"""
 
 ',
         lambda m: str(create_class_block(m.group(1), "train_state.TrainState", "Training state.")) + "\n" +
@@ -141,7 +167,9 @@ def fix_class_definitions(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix training method signature
     content = re.sub(
@@ -167,7 +195,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix Tuple type hints
     content = re.sub(
@@ -186,26 +216,36 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     # Fix module docstrings
     content = re.sub(
-        r'^"""([^"]*?)"""',
-        lambda m: f'"""{m.group(1).strip()}"""',
+        r'^"""([^"]*?)"""
+',
+        lambda m: f'
+"""{m.group(1).strip()}"""
+',
         content,
         flags=re.MULTILINE
     )
 
     # Fix method docstrings
     content = re.sub(
-        r'(\s+)"""([^"]*?)"""',
-        lambda m: f'{m.group(1)}"""{m.group(2).strip()}"""',
+        r'(\s+)
+"""([^"]*?)"""
+',
+        lambda m: f'{m.group(1)}
+"""{m.group(2).strip()}"""
+',
         content
     )
 
     return content
 
-def fix_multiline_statements(content: str) -> str:"""Module containing specific functionality."""
+def fix_multiline_statements(content: str) -> str:
+"""Module containing specific functionality."""
 
     # Fix print statements
     content = re.sub(
@@ -224,7 +264,9 @@ def fix_multiline_statements(content: str) -> str:"""Module containing specific 
     return content
 
 def process_file(file_path: Path) -> None:
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -243,7 +285,9 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """all Python files in the project."""
+    """
+all Python files in the project.
+"""
 
     # Get all Python files
     python_files = []

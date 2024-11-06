@@ -25,7 +25,9 @@ logger = logging.getLogger(__name__)
 
 
 def def analyze_performance(self)::                            metrics
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = extract_validation_metrics):
 category_stats = load_category_distribution()
 
@@ -61,7 +63,9 @@ return analysis
 
 
 def generate_report(analysis) -> None: if
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  not analysis: logger.error("No analysis data available")
 return
 
@@ -132,7 +136,9 @@ for diff
         logger.info(f"Performance analysis saved to {}")
 
         def def main(self)::            analysis
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = analyze_performance):
         if analysis: generate_visualization(analysis)
         generate_report(analysis)

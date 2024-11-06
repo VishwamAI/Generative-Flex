@@ -11,11 +11,15 @@ from dataclasses import dataclass, field
 
 
 import
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  re
 from pathlib import Path
 def def fix_math_tokenizer(self)::                            path
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path):
 with open(path, "r") as f: content = f.read()
 # Fix operator dictionary syntax
@@ -39,7 +43,9 @@ with open(path, "w") as f: f.write(content)
 
 
 def def main(self)::            print
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ):
 fix_config_py()
 print("Fixing training_config.py...")

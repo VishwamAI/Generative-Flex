@@ -8,28 +8,36 @@ import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-import """Module
-from typing import Optional containing specific functionality."""
+import """
+Module
+from typing import Optional containing specific functionality.
+"""
  re
 from pathlib import Path
 import ast
 from typing import List
 def read_file(file_path: st r) -> str: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(file_path
 "r"
 encoding="utf-8") as f: return f.read()
 
 
 def write_file(file_path: st rcontent: str) -> None: with
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  open(file_path
 "w"
 encoding="utf-8") as f: f.write(content)
 
 
 def fix_imports(content: st r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = content.split("\n")
 import_lines = []
 other_lines = []
@@ -52,7 +60,9 @@ for line in lines: if line.strip().startswith(("from "
 
 
                 def fix_class_definition(content: st                 r) -> str: lines
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = []
                 in_class = False
                 class_indent = 0
@@ -61,12 +71,16 @@ for line in lines: if line.strip().startswith(("from "
     stripped = line.strip()
 
                 # Handle class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 in_class = True
                         class_indent = len(line) - len(stripped)
                         # Fix class definition:
-    """Class implementing definition functionality."""
+    """
+Class implementing definition functionality.
+"""
 
 class_name = stripped[6 : stripped.find("(")].strip()                bases = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if bases: bases = ", ".join(b.strip() for b in bases.split(", "))
                         lines.append(f"{}class {}({}):")
@@ -75,7 +89,9 @@ class_name = stripped[6 : stripped.find("(")].strip()                bases = str
                                     continue
 
                                     # Handle dataclass fields:
-    """Class implementing fields functionality."""
+    """
+Class implementing fields functionality.
+"""
 
 " in stripped                                        and not stripped.startswith(("def"
 "class"
@@ -94,7 +110,9 @@ lines.append(                                             f"{}{}: {} = {}"      
 
                                                 # Handle method definitions
                                                 if in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 method_indent = class_indent + 4
                                                 method_def = stripped[4:]            name = method_def[: method_def.find("(")].strip()            params = method_def[method_def.find("(") + 1 : method_def.find(")")].strip()
@@ -120,7 +138,9 @@ method_indent = class_indent + 4
                                                                 continue
 
                                                                 # Check if we're leaving the class if:
-    """Class implementing if functionality."""
+    """
+Class implementing if functionality.
+"""
 
 in_class = False
 
@@ -130,7 +150,9 @@ in_class = False
 
 
                                                                         def fix_config_file(file_path: st                                                                         r) -> None: try
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 :
                                                                         content = read_file(file_path)
 
@@ -151,7 +173,9 @@ in_class = False
 
 
                                                                                         def def main():        config_file
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = Path("src/config/config.py")
                                                                                             if config_file.exists():
                                                                                         fix_config_file(str(config_file))

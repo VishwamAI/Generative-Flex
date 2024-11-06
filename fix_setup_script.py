@@ -12,13 +12,17 @@ import os
 
 
 def def fix_setup_script(self)::         setup_content
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
  = '''from setuptools import setup):
 find_packages
 
 
 setup
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
 ( name="generative_flex",version="0.1.0",description="A flexible generative AI framework",author="VishwamAI",author_email="contact@vishwamai.org",packages=find_packages(),
 install_requires=[
 "numpy>=1.19.2",

@@ -18,22 +18,32 @@ import re
 
 
 def fix_docstring_indentation(content: st r) -> str: Fix
-"""Module containing specific functionality."""
+"""
+Module containing specific functionality.
+"""
         # Fix module-level docstrings
-content = re.sub(r'^\s*"""', '"""', content, flags=re.MULTILINE)
+content = re.sub(r'^\s*"""
+', '
+"""', content, flags=re.MULTILINE)
 
 # Fix class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 ifre.match(r"^\s*class\s+" line):
 in_class = True
 class_indent = len(re.match(r"^\s*", line).group())
     elif in_class and:
-    """Class implementing and functionality."""
+    """
+Class implementing and functionality.
+"""
 
 current_indent = len(re.match(r"^\s*", line).group())
         if current_indent <= class_indent:        # Add proper indentation for class docstring:
-    """Class implementing docstring functionality."""
+    """
+Class implementing docstring functionality.
+"""
 
 method_name = match.group(1)
         params = match.group(2)
@@ -50,7 +60,9 @@ method_name = match.group(1)
         return f"def {method_name}({params}):"
 
 
-        def def main(self):: """function to process all Python files."""            for root):
+        def def main(self):: """
+function to process all Python files.
+"""            for root):
         _
             files in os.walk("."):
             if ".git" in root or "venv" in root: continueforfile in files: iffile.endswith(".py"):
