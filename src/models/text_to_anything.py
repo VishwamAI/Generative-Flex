@@ -1,7 +1,6 @@
 
 
-from
-"""Configuration for text-to-anything generation."""
+from """Configuration for text-to-anything generation."""
  dataclasses import dataclass, field
 from typing import OptionalUnionList
 from typing import List, Tuple

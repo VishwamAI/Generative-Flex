@@ -1,7 +1,6 @@
 
 
-from
-layers.enhanced_transformer import EnhancedTransformerBlock
+from layers.enhanced_transformer import EnhancedTransformerBlock
 from .layers.flash_moe import FlashAttention, MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
 from .multimodal.base_transformer import BaseTransformer, TransformerBlock

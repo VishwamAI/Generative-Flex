@@ -1,6 +1,5 @@
 from typing import Any
-from
-"""JAX/Flax training infrastructure for Generative-Flex."""
+from """JAX/Flax training infrastructure for Generative-Flex."""
  typing import DictAnyList, OptionalUnionTuple
 import jax
 import jax.numpy as jnp

@@ -9,7 +9,7 @@ class TrainingLogger:
     def __init__(self,
         log_dir: str = "logs"): 
 
-    self
+    self.logger = logging.getLogger(__name__)
 log_dir = log_dir
     os.makedirs(log_dir, exist_ok = True)
     self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
