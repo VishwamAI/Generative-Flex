@@ -25,7 +25,14 @@ Args: subject
     self.split = split
     self.tokenizer = tokenizer
     self.max_length = max_length
-    self.transform = transforms.Compose(     [transforms.Resize((224, 224)), transforms.ToTensor(), transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    self.transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(), transforms.Normalize(
+        mean = [0.485,
+        0.456,
+        0.406],
+        std=[0.229,
+        0.224,
+        0.225]
+    ),
     ]
     )
 
@@ -38,16 +45,16 @@ Args: subject
     y: dataset = load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
     processed_examples = []
     for example in dataset: tr
-    y: processed_example = {}if self.tokenizer: options = example["options"]options_text = " ".join( f"({chr(65+i)}) {opt}" for i
+    y: processed_example = {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({chr(65+i)}) {opt}" for i
     opt in enumerate(options)
     )
     question = example["question"]
     text = f"Question: {question}\nOptions: {options_text}"encoding = self.tokenizer(
-    text,
-    max_length = self.max_length,
-    padding = "max_length",
-    truncation = True,
-    return_tensors = "pt"
+        text,
+        max_length = self.max_length,
+        padding = "max_length",
+        truncation = True,
+        return_tensors = "pt"
     )
     processed_example["input_ids"] = encoding["input_ids"].squeeze(0)
     processed_example["attention_mask"] = encoding["attention_mask"].squeeze(0)
@@ -72,12 +79,11 @@ Args: subject
 
     except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")"""
 Get a single example with proper tensor handling.
-while (     dataset_idx < len(self.cumulative_lengths)
-    """and idx >= self.cumulative_lengths[dataset_idx]"""
+while(dataset_idx < len(self.cumulative_lengths)
+"""and idx >= self.cumulative_lengths[dataset_idx]"""
 
     ):
-    """dataset_idx += 1"""
-
+"""dataset_idx += 1"""
 """if dataset_idx = = 0: local_idx = idx"""
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 """try: example = self.datasets[dataset_idx][local_idx]    return {"""
@@ -87,10 +93,10 @@ else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 "images": (         example["images"].cpu()"""
 if "images" in example"""
 else torch.zeros(73224, 224)
-    """),"""
+"""),"""
 
     })
-    """"""
+""""""
 
 }
     """except Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {"""
@@ -100,19 +106,19 @@ else torch.zeros(73224, 224)
 "labels": torch, .tensor(0     dtype = torch.long)"""
 "images": torch, .zeros(7     3    224    224)"""
 }
-    """"""
+""""""
 
     }
-    """"""
+""""""
 
 @staticmethod
-    """Collate batch with proper tensor handling."""
+"""Collate batch with proper tensor handling."""
 
     "labels": []"""
 "images": []"""
 "metadata": []"""
 }
-    """"""
+""""""
 
     for example in examples: tr
     y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"])"""
@@ -132,11 +138,10 @@ return {
 "metadata": batch, ["metadata"]"""
 }
     """else: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise"""
-
-    """@staticmethod"""
+"""@staticmethod"""
 
 def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
-    """DataLoader"""
+"""DataLoader"""
 
     Create dataloaders with proper tensor handling.
     """
@@ -148,16 +153,13 @@ def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = None
     dataloaders = {}
     for split in ["dev"
     "validation"
-    "test"]: dataloaders, [split] = DataLoader(
-    datasets[split],
-    batch_size = batch_size,
-    shuffle = (split == "train"),
+    "test"]: dataloaders, [split] = DataLoader(datasets[split], batch_size = batch_size, shuffle = (split == "train"),
     num_workers = num_workers,
     pin_memory = pin_memory,
     collate_fn = MMUDataset.collate_mmmu_batch
     )
     logger.info(f"Created {split} dataloader with {len(datasets[split])} examples")
 
-    return (dataloaders["dev"], dataloaders["validation"], dataloaders["test"])
+    return(dataloaders["dev"], dataloaders["validation"], dataloaders["test"])
 
 except Exception as e: logger.error(f"Error creating dataloaders: {str(e)}")raise

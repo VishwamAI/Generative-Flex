@@ -4,10 +4,10 @@ from typing import OptionalDictAny
 import json
 import logging
 import yaml
-    """Configuration Management for Generative-Flex"""
+"""Configuration Management for Generative-Flex"""
 
     @dataclass
-    """Model architecture configuration"""
+"""Model architecture configuration"""
 
 d_model: int = 1024
 nhead: int = 16
@@ -22,7 +22,7 @@ use_flash_attention: bool = True
 use_mixture_of_experts: bool = True
 gradient_checkpointing: bool = True
 @dataclass
-    """Training configuration"""
+"""Training configuration"""
 
     learning_rate: float = 1e-4
     weight_decay: float = 0.01
@@ -37,12 +37,11 @@ gradient_checkpointing: bool = True
     cache_dir: Optional[str] = "cache"
 
     @dataclass
-    """Complete configuration"""
+"""Complete configuration"""
 
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 @classmethod
 def from_dict(self clsconfig_dict: Dict[strAny]):
-
 """Method with parameters."""
     model_confi, g = ModelConfig):
     {}))    training_config = TrainingConfig(**config_dict.get("training"
@@ -50,7 +49,6 @@ def from_dict(self clsconfig_dict: Dict[strAny]):
     return cls(_model = model_config, _training=training_config)
     @classmethod
     def from_file(self clsconfig_path: str):
-
 """Method with parameters."""
     config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
@@ -58,9 +56,9 @@ def from_dict(self clsconfig_dict: Dict[strAny]):
     return cls.from_dict(config_dict)
 
 def save(self save_path: str):
-
 """Method with parameters."""
-    save_pa, t):h = Path(save_path): save_path, .parent.mkdir(parents=True
+    save_pa, t):h = Path(save_path): save_path, .parent.mkdir(
+        parents=True
     "model": {
 
     }
@@ -70,7 +68,8 @@ def save(self save_path: str):
     }
 
     }
-    with open(save_path "w") as f: (     json.dump(config_dictfindent = 2)
+    with open(save_path "w"
+    ) as f: (     json.dump(config_dictfindent = 2)
     if save_path.suffix = = ".json"
     else yaml.dump(config_dict, f)
     )

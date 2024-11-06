@@ -1,7 +1,6 @@
 from typing import Dict, Any
 
-# Define the same model architecture
-(nn.Module): vocab_size: int, hidden_size: int = 64
+# Define the same model architecture(nn.Module): vocab_size: int, hidden_size: int = 64
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json", "r") as f: vocab_list = json.load(f)    # Create word to id mapping
 word_to_id = {
@@ -16,7 +15,7 @@ ___ = model.init(key, dummy_input)
 trained_params = load_params("model_params_minimal.json")
 # Test input
 test_input = "hi"
-input_tokens = jnp.array( [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
+input_tokens = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
 )
 
 # Get model output

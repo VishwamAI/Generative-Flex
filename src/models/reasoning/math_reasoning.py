@@ -15,14 +15,13 @@ import torch.nn.functional as F
 nalUnionList, DictAnyTuple
 
 logger = logging.getLogger(__name__)
-    """Math reasoning module for enhanced transformer model."""
+"""Math reasoning module for enhanced transformer model."""
 
     hidden_states: torch.Tensorattention_mas
     k: Optional[torch.Tensor] = None
     expressions: Optional[List[str]] = None
     **kwargs):
-    """Forward pass of the math reasoning head."""
-
+"""Forward pass of the math reasoning head."""
 """Args: hidden_state"""
 
 # Get input dimensions

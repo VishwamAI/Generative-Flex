@@ -1,14 +1,13 @@
 from typing import Any
 import jax
 """Core transformer architecture implementation using JAX and Flax."""
-
-    """Multi-head attention mechanism."""
+"""Multi-head attention mechanism."""
 
 head_dim: intdropout_rat
 e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-    """Applies multi-head attention on the input data."""
+"""Applies multi-head attention on the input data."""
 
     # Linear projections
     query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)
@@ -21,7 +20,12 @@ dtype: Any = jnp.float32
     # Scaled dot-product attention
     depth = query.shape[-1]
     query = query / jnp.sqrt(depth).astype(self.dtype)
-    attention = jnp.einsum("...qhd, ...khd->...hqk", query, key)
+    attention = jnp.einsum(
+        "...qhd,
+        ...khd->...hqk",
+        query,
+        key
+    )
     if mask is not None: # Add broadcasting dimensions to mask for headswhile mask.ndim < attention.ndim: mask = mask[...
     None
     :
@@ -34,11 +38,16 @@ dtype: Any = jnp.float32
     )
 
     # Combine heads
-    output = jnp.einsum("...hqk, ...khd->...qhd", attention, value)
+    output = jnp.einsum(
+        "...hqk,
+        ...khd->...qhd",
+        attention,
+        value
+    )
     output = output.reshape(output.shape[: -2] + (-1))        return nn.Dense(inputs_q.shape[-1]
     _dtype = self.dtype
     name = "output")(output)
-    """Transformer block with self-attention and feed-forward layers."""
+"""Transformer block with self-attention and feed-forward layers."""
 
 head_dim: intmlp_di
 m: intdropout_rate: floa = 0.1
