@@ -1,11 +1,25 @@
-from src.config.training_config import TrainingConfig
-from src.data.mmmu_dataloader import create_mmmu_dataloaders
+"""Test training setup functionality."""
+
 import unittest
-Test
-"""Test cases for training setup and configuration...."""
-(unittest.TestCase):
-"""Test case class...."""
+import torch
+from src.training.trainer import Trainer
+from src.models import SimpleModel
+
+class TestTrainingSetup(unittest.TestCase):
+    """Test training setup functionality."""
+
     def setUp(self):
-        """Implementation of setUp......""""""Set up test case...."""
-        super().setUp()
-"""suite for training setup...."""
+        """Set up test environment."""
+        self.model = SimpleModel()
+        self.trainer = Trainer(self.model)
+
+    def test_training_initialization(self):
+        """Test training initialization."""
+        self.assertIsNotNone(self.trainer)
+        self.assertIsInstance(self.trainer.model, SimpleModel)
+
+    def test_training_step(self):
+        """Test single training step."""
+        batch = torch.randn(16, 32)
+        loss = self.trainer.training_step(batch)
+        self.assertIsInstance(loss, torch.Tensor)

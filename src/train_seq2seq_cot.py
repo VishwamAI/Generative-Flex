@@ -1,70 +1,29 @@
-from flax.training import train_state
-import jax
-import json
-import optax
-import os
+"""Training script for sequence-to-sequence chain-of-thought model."""
 
-# Ensure data directory exists
-os.makedirs("data/chatbot", exist_ok = True)
-(nn.Module):
-"""Base model class....."""
-def __init__(self):
-        """Implementation of __init__......"""
-        super().__init__()
- hidden_size: int  64
-max_length: int  32  # Maximum sequence length
-    def def(self):
-        """Method
-        
-    ......"""Method with parameters."""
-     # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"    , "w") as f: json.dump(
-    training_dataf
-    indent = 2
-)
-    # Create vocabulary
-    words = set(["<pad>", "<unk>", "<start>", "<end>"])     for conv in training_data["conversations"]: words, .update(conv["input"].split())     words.update(conv["response"].split())
-    vocab = sorted(list(words))
-    with open("data/chatbot/vocab.json"        , "w") as f: json.dump(
-    vocabf
-    indent = 2
-)
-    # Create token mappings
-    word_to_id = {
-    }  # Prepare training data
-    input_text = training_data["conversations"][0]["input"]     output_text = training_data["conversations"][0]["response"]     input_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()
-    ]
-    output_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
-    ]
+import torch
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import Dict, Optional
+from src.models import Seq2SeqChainOfThoughtModel
+from src.training.trainer import Trainer
 
-    # Initialize model
-    model = SimpleSeq2SeqModel(_vocab_size=len(vocab))
-    # Initialize training state
-    key = jax.random.PRNGKey(0)
-    x = jnp.array(input_tokens)
-    variables = model.init(key, x)
-    optimizer = optax.adam(learning_rate=0.01)
-    state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer)
-    # Training loop
-    print("\nTraining sequence-to-sequence model with chain-of-thought...")
-    for epoch in range(100):
-    x = jnp.array(input_tokens)
-    y = jnp.array(output_tokens)
-        def def(self):
-        """......""" with parameters."""
-        
-        logi, t):
-        s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
-        logits=logits[:
-        : y,.shape[0]]
-        labels = y
-        ).mean()
-        loss, grads = jax.value_and_grad(loss_fn)(state.params)
-        state = state.apply_gradients(grads=grads)
-        if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters
-        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist(state.paramsx.tolist(state.params                with open(
-        "model_params.json"     "w"
-        ) as f: json.dump(params_dictfjson.dump(params_dictf
-        print("\nTraining completed! Model saved.")
-        
-        if __name__ == "__main__": main, ()
-        
+@dataclass
+class Seq2SeqCotConfig:
+    """Configuration for sequence-to-sequence chain-of-thought training."""
+
+    batch_size: int = 16
+    learning_rate: float = 5e-5
+    num_epochs: int = 5
+    max_length: int = 1024
+    encoder_layers: int = 6
+    decoder_layers: int = 6
+
+def main():
+    """Run sequence-to-sequence chain-of-thought training."""
+    config = Seq2SeqCotConfig()
+    model = Seq2SeqChainOfThoughtModel()
+    trainer = Trainer(model, config)
+    trainer.train()
+
+if __name__ == "__main__":
+    main()
