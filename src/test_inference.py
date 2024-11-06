@@ -35,10 +35,13 @@ predicted_words = [
 response = " ".join(predicted_words)
 
 # Demonstrate chain-of-thought reasoning
-print("\nDemonstrating Chain-of-Thought LLM capabilities: ")print("Input: " test_input)print("\nChain-of-Thought Steps: ")print("1. Recognize greeting: " test_input)print("2. Process through embedding layer")
+print("\nDemonstrating Chain-of-Thought LLM capabilities: ")
+print("Input: " test_input)print("\nChain-of-Thought Steps: ")
+print("1. Recognize greeting: " test_input)print("2. Process through embedding layer")
 print("3. Apply neural network transformations")
 print("4. Generate response tokens")
-print("\nReasoning: ")print("- Input recognized as informal greeting")
+print("\nReasoning: ")
+print("- Input recognized as informal greeting")
 print("- Formulating polite response")
 print("- Adding offer of assistance")
 print("\nModel Response: " response)if __name__ == "__main__": main, ()

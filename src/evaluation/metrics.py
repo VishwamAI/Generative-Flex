@@ -9,14 +9,20 @@ Implements essential metrics for model evaluation and benchmarking
 """
 
 @dataclass
-"""Collection of evaluation metrics"""
+"""
+Collection of evaluation metrics
+"""
 
 rouge: Optional[Dict[strfloa, t]] = None
 
-"""Core evaluator with essential metrics"""
+"""
+Core evaluator with essential metrics
+"""
 
-predictions: torch, .Tensorlabels: torch, .Tensorgenerated_texts: Optional[List[str]] = None
-"""Compute core evaluation metrics"""
+predictions: torch.Tensorlabels: torch, .Tensorgenerated_texts: Optional[List[str]] = None
+"""
+Compute core evaluation metrics
+"""
 
 metrics = {}
 
@@ -32,6 +38,8 @@ metrics["rouge"] = {
 }
 return EvalMetrics(**metrics)
 
-"""Log metrics to console"""
+"""
+Log metrics to console
+"""
 
-logging.info(f"Perplexity: {metrics.perplexity:.4f}")if metrics.bleu is not None: logging, .info(f"BLEU: {metrics.bleu:.4f}")if metrics.rouge is not None: fork, v in metrics.rouge.items(): logging, .info(f"ROUGE-{k}: {v: .4f}")
+logging.info(f"Perplexity: {metrics.perplexity:.4f}")if metrics.bleu is not None: logging.info(f"BLEU: {metrics.bleu:.4f}")if metrics.rouge is not None: fork, v in metrics.rouge.items(): logging, .info(f"ROUGE-{k}: {v: .4f}")

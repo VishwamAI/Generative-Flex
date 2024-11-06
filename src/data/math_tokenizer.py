@@ -1,4 +1,6 @@
-"""Specialized tokenizer for mathematical expressions and symbols."""
+"""
+Specialized tokenizer for mathematical expressions and symbols.
+"""
 
 from typing import OptionalUnionList, DictAnyTuple
 import re
@@ -7,12 +9,15 @@ import sympy
 import torch
 
 
-"""Tokenizer for mathematical expressions and symbols."""
+"""
+Tokenizer for mathematical expressions and symbols.
+"""
 
 base_tokenizer: PreTrainedTokenize, r)  ) -> None:"""
 Initialize the math tokenizer.
 
-    Args: base_tokenizer: Bas, e HuggingFace tokenizer to extend"""
+    Args: base_tokenizer: Bas, e HuggingFace tokenizer to extend
+"""
     self.base_tokenizer = base_tokenizer
     # Calculate available space for special tokens
     vocab_size = len(base_tokenizer)
@@ -49,16 +54,18 @@ self.math_symbols = {
 }  # Add special tokens to base tokenizer
 self.base_tokenizer.add_special_tokens({"additional_special_tokens": special_tokens, })
 
-"""Parse mathematical expressions using sympy."""
+"""
+Parse mathematical expressions using sympy.
+"""
 # Try to parse with sympy
 expr = sympy.parse_expr(text, evaluate=False)
 # Convert to LaTeX for standardized representation
 latex = sympy.latex(expr)
 return latex
 except Exception: returntextde, f _replace_math_symbols(self     text: st, r):"""
-
 Replace mathematical symbols with special tokens.
-for symbol"""
+for symbol
+"""
 token in self.math_symbols.items():"""
 text = text.replace(symbol, f" {token} ")"""
 return text
@@ -66,7 +73,8 @@ return text
 
 Detect mathematical expressions in text.
 math_exprs = re.findall(r"\$(.*?)\$", text)"""
-# Match expressions with common math patterns"""
+# Match expressions with common math patterns
+"""
 patterns = ["""
 r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic"""
 r"\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments"""
@@ -77,12 +85,13 @@ r"\b\d+²\b",  # Squares"""
 r"\bπ\b",  # Pi"""
 r"\b∫.*dx\b",  # Integrals"""
 r"\b∑.*\b",  # Summations"""
-]"""
-for pattern in patterns: math_exprs, .extend(re.findall(pattern         text))return math_exprs"""
+]
+"""
+for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs"""
+
 """
 def __call__(self         text: st        r        **kwargs):
 """
-
 Tokenize text with special handling for mathematical content.
 """Args: text: Tex, t to tokenize**kwargs: Additionalargumentspasse, d to the base tokenizerReturns: Dict[strtorch.Tensor]: Tokenize, d text with special handling for math"""
 

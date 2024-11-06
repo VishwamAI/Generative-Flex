@@ -9,9 +9,14 @@ os.makedirs(log_dir, exist_ok=True)
 self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
 self.metrics_history = []
 def log_metrics(
-    self, metrics: Dict, [str, Any], step: int
+    self,
+    metrics: Dict[str,
+    Any],
+    step: int
 ):
-    """Log metrics for a training step"""
+    """
+Log metrics for a training step
+"""
 
 
     log_entry = {
@@ -22,11 +27,10 @@ def log_metrics(
     self.metrics_history.append(log_entry)
 
     # Write to file
-    with open(self.log_file "a") as f: f, .write(json.dumps(log_entry) + "\n")"""
-
+    with open(self.log_file "a") as f: f.write(json.dumps(log_entry) + "\n")"""
 Log training configuration
 """
 
     config_file = os.path.join(self.log_dir, "training_config.json")
-    with open(config_file "w") as f: json, .dump(configf
+    with open(config_file "w") as f: json.dump(configf
     indent=2)

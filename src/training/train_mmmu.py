@@ -6,25 +6,23 @@ from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer import EnhancedTransformer
 
-"""Training script for MMMU dataset using enhanced transformer model."""
+"""
+Training script for MMMU dataset using enhanced transformer model.
+"""
 
 logger = logging.getLogger(__name__)
 
 
-def train_epoch(
-
-
-    model: EnhancedTransformertrain_loader: DataLoaderoptimizer: torch, .optim.Optimizer, config: TrainingConfig
-
-
-):
-    """Train for one epoch."""
+def train_epoch(model: EnhancedTransformertrain_loader: DataLoaderoptimizer: torch.optim.Optimizer, config: TrainingConfig):
+    """
+Train for one epoch.
+"""
     model.train()
     total_loss = 0.0
     correct = 0
     total = 0
 
-    for batch in train_loader: optimizer, .zero_grad()loss = model(batch)
+    for batch in train_loader: optimizer.zero_grad()loss = model(batch)
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
@@ -33,18 +31,23 @@ def train_epoch(
 
 
     def evaluate(model: EnhancedTransformerval_loader: DataLoader):"""
-
 Evaluate the model.
-model.eval()"""
+model.eval()
+"""
 total_loss  = 0.0"""
-correct = 0"""
+correct = 0
+"""
 total = 0"""
+
 """
 with torch.no_grad():"""
-for batch in val_loader: loss = model(batch)"""
+for batch in val_loader: loss = model(batch)
+"""
 total_loss += loss.item()"""
+
 """
 return {"val_loss": total_los, s / len(val_loader)}"""
+
 """
 """
 def main(config: TrainingConfig):

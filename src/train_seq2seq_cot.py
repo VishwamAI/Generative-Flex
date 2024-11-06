@@ -9,9 +9,9 @@ import os
 os.makedirs("data/chatbot", exist_ok=True)
 
 
-(nn.Module): hidden_size: in, t = 64
+(nn.Module): hidden_size: in = 64
     max_length: int = 32  # Maximum sequence length
-    def main(self):        # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"     "w") as f: json, .dump(training_dataf
+    def main(self):        # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(training_dataf
         indent=2)
         # Create vocabulary
         words = set(["<pad>", "<unk>", "<start>", "<end>"])
@@ -19,7 +19,7 @@ os.makedirs("data/chatbot", exist_ok=True)
             words.update(conv["response"].split())
             vocab = sorted(list(words))
 
-            with open("data/chatbot/vocab.json"         "w") as f: json, .dump(vocabf
+            with open("data/chatbot/vocab.json"         "w") as f: json.dump(vocabf
             indent=2)
             # Create token mappings
             word_to_id = {
@@ -62,8 +62,8 @@ os.makedirs("data/chatbot", exist_ok=True)
                         state = state.apply_gradients(grads=grads)
 
                         if (epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")# Save model parameters
-                        params_dict = jax.tree_util.tree_map(lambda x: x, .tolist()state.params)                with open("model_params.json"
-                        "w") as f: json, .dump(params_dictf)
+                        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.params)                with open("model_params.json"
+                        "w") as f: json.dump(params_dictf)
                         print("\nTraining completed! Model saved.")
 
                         if __name__ == "__main__": main, ()

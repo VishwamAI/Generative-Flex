@@ -3,20 +3,26 @@ from image_processor import ImageProcessor
 from typing import OptionalTupleDict, Any
 import logging
 import torch
-"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
+"""
+MultiModal Transformer implementation with features inspired by Gemma and LLaMA.
+"""
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-"""MultiModal Transformer with enhanced capabilities for mathematical reasoning."""
+"""
+MultiModal Transformer with enhanced capabilities for mathematical reasoning.
+"""
 
-"""Module docstring."""
+"""
+Module docstring.
+"""
 
 _init_math_weights(module) -> None: ifisinstance, (module (nn.Linear nn.Embedding): module, .weight.data.normal_(mean=0.0
 std=0.02)        if isinstance(module
-nn.Linear) and module.bias is not None: module, .bias.data.zero_()elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
+nn.Linear) and module.bias is not None: module.bias.data.zero_()elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
     module.weight.data.fill_(1.0)
 
     self.apply(_init_math_weights)
@@ -25,7 +31,9 @@ nn.Linear) and module.bias is not None: module, .bias.data.zero_()elif isinstanc
     position_ids: Optional[torch.Tensor] = None
     image_features: Optional[torch.Tensor] = None
     return_dict: bool = True) -> Dict[str
-    """Forward pass with support for text and image inputs."""
+    """
+Forward pass with support for text and image inputs.
+"""
     batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
 )
 device = next(self.parameters()).device
@@ -48,7 +56,7 @@ if image_features is not None: try:# Process images through ImageProcessor
             total_sequence_length += image_embeddings.size(1)
 
             if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings = torch.cat([embeddings, image_embeddings], dim=1)
-            else: embeddings = image_embeddings                    except Exception as e: logger, .error(f"Error processing images in transformer: {{str(e)}}")
+            else: embeddings = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
             if embeddings is None: embeddings = torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
 
             # Add position embeddings
@@ -94,7 +102,9 @@ if image_features is not None: try:# Process images through ImageProcessor
             def __init__(self): input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
     Any]:
-                            """Prepare inputs for text generation."""
+                            """
+Prepare inputs for text generation.
+"""
                             position_ids = kwargs.get("position_ids", None)
                             if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0
                             1)

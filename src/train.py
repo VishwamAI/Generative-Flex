@@ -9,16 +9,15 @@ import logging
 import torch
 Main training script for Generative-Flex
 """
-
-
 Demonstrates how to achieve maximum benchmark performance
-
 """
 
 # Import our implemented components
 def main(self):
     
-    """Main training function"""
+    """
+Main training function
+"""
 
 
 

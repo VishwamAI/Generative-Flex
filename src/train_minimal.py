@@ -4,7 +4,7 @@ import optax
 
 
 # Simple model def inition(same as in test_minimal.py)
-(nn.Module): hidden_size: in, t = 64
+(nn.Module): hidden_size: in = 64
     "r") as f: data = json.load(f)
     # Prepare training examples
     input_text = [conv["input"] for conv in data["conversations"]]
@@ -16,7 +16,7 @@ import optax
     word_to_id = {
     
 }  # Save vocabulary
-    with open("data/chatbot/vocab.json"     "w") as f: json, .dump(vocabf
+    with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
     indent=2)
     # Convert text to tokens
     input_tokens = [
@@ -57,7 +57,7 @@ import optax
                 if (epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
 
                 # Save model parameters
-                with open("model_params.json"         "w") as f: json, .dump(jax.tree_util.tree_map(lambda x: x, .tolist()state.params)
+                with open("model_params.json"         "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
                 f)
 
                 print("Model parameters and vocabulary saved successfully!")

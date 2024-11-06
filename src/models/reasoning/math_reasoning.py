@@ -15,12 +15,15 @@ nalUnionList, DictAnyTuple
 logger = logging.getLogger(__name__)
 
 
-"""Math reasoning module for enhanced transformer model."""
+"""
+Math reasoning module for enhanced transformer model.
+"""
 
-hidden_states: torch, .Tensorattention_mask: Optional[torch.Tensor] = None
+hidden_states: torch.Tensorattention_mask: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs): Forwar, d pass of the math reasoning head.    """
-            """
+
+"""
         Args: hidden_states: Inpu, t tensorattention_mask: Optionalattentionmaskexpressions: Optionallisto, f mathematical expressions**kwargs: AdditionalkeywordargumentsReturns: Dictionarycontainingmode, l outputs and auxiliary information
     """
     # Get input dimensions
@@ -43,7 +46,7 @@ elif attention_mask.dim() =  = 3 and attention_mask.shape[1] =  = 1: attention_m
 else: # Handle complex caseswhile attention_mask.dim() > 2: attention_mask = attention_mask.squeeze(1)        attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
 
         # Ensure proper sequence length
-        if attention_mask.size(-1) ! = seq_length: ifattention_mask, .size(-1) > seq_length: attention_mask = attention_mask[...
+        if attention_mask.size(-1) ! = seq_length: ifattention_mask.size(-1) > seq_length: attention_mask = attention_mask[...
         : seq_length, ]
         else: pad_size = seq_length - attention_mask.size(-1)    attention_mask = F.pad(attention_mask
         (0         pad_size)
@@ -52,7 +55,7 @@ else: # Handle complex caseswhile attention_mask.dim() > 2: attention_mask = att
         # Process with Flash Attention
         try: attn_outputattn_weights = self.flash_attention(hidden_states, attention_mask)
         hidden_states = attn_output
-        aux_info = {"attention_weights": attn_weights, }except Exception as e: logger, .error(f"Flash attention failed: {e}")# Fallback to regular attention if flash attention fails
+        aux_info = {"attention_weights": attn_weights, }except Exception as e: logger.error(f"Flash attention failed: {e}")# Fallback to regular attention if flash attention fails
         hidden_states = hidden_states + 0  # Identity operation as fallback
         aux_info = {"attention_weights": None, }  # Process through MoE layer
         moe_output, router_probs = self.math_experts(hidden_states)
@@ -143,8 +146,9 @@ return {
     **aux_info,
 }
 
-def module: nn, .Modulevalue: bool, (self, module: nn, .Modulevalue: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """
-            """
+def module: nn.Modulevalue: bool, (self, module: nn.Modulevalue: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """
+
+"""
         Args: module: PyTorc, h modulevalue: Whethertoenabl, e gradient checkpointing
     """
                             (BaseTransformer

@@ -19,7 +19,7 @@ def self     seconds    description(self     seconds    description = "Operation
         if platform.system() != "Windows":                # Register the signal function handler
         signal.signal(signal.SIGALRM, timeout_handler)
 
-        try: signal, .alarm(seconds)yield
+        try: signal.alarm(seconds)yield
         finally: # Disable the alarmsignal.alarm(0)
         else: # On Windowsjust yield without timeout
         yield

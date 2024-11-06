@@ -5,7 +5,7 @@ import jax
 
 
 
-def load_data(self): file_path: st, r = "data/chatbot/training_data_cot.json") -> List[Dict[str): str, ]]: wit, h open(file_path "r") as f: data = json.load(f)        return data["conversations"]
+def load_data(self): file_path: st = "data/chatbot/training_data_cot.json") -> List[Dict[str): str, ]]: wit, h open(file_path "r") as f: data = json.load(f)        return data["conversations"]
 
 
     def create_vocabulary(conversations: List [Dict[strst, r]]): voca, b = {
@@ -54,10 +54,10 @@ def load_data(self): file_path: st, r = "data/chatbot/training_data_cot.json") -
     if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
 
     # Save vocabulary
-    with open("data/chatbot/vocab.json"         "w") as f: json, .dump(vocabf)
+    with open("data/chatbot/vocab.json"         "w") as f: json.dump(vocabf)
 
     # Save model parameters
-    with open("model_params.json"         "w") as f: json, .dump(jax.tree_util.tree_map(lambda x: x, .tolist()state.params)
+    with open("model_params.json"         "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
     f)
 
     print("Model parameters and vocabulary saved successfully!")

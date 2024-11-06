@@ -4,7 +4,8 @@ import json
 
 # Simple model def inition
 (nn.Module): vocab_size: inthidden_siz, e: int = 64
-print("\nTesting model responses: ")print("-" * 40)
+print("\nTesting model responses: ")
+print("-" * 40)
 
 # Load vocabulary
 with open("data/chatbot/vocab.json" "r") as f: vocab = json.load(f)
@@ -19,7 +20,7 @@ model = SimpleLanguageModel(_vocab_size=len(vocab))
 # Load parameters
 with open("model_params.json" "r") as f: params_dict = json.load(f)
 # Convert parameters back to arrays
-params = jax.tree_util.tree_map(lambda x: jnp, .array(x)params_dict)
+params = jax.tree_util.tree_map(lambda x: jnp.array(x)params_dict)
 # Test input
 test_input = "hi"
 print(f"Input: {test_input}")# Tokenize input
@@ -34,6 +35,7 @@ axis=-1)
 
 # Convert tokens back to words
 response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
-print(f"Response: {response}")print("-" * 40)
+print(f"Response: {response}")
+print("-" * 40)
 
 if __name__ == "__main__": main, ()

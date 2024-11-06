@@ -10,7 +10,7 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 
 # Simple model for chain-of-thought demonstration
-(nn.Module): hidden_size: in, t = 64
+(nn.Module): hidden_size: in = 64
     {
     "response": (     "Step 1: Acknowledgegreeting, . "    "Step 2: Offerhelp, . "    "Hello! How can I assist you today?"    ),
 }
@@ -18,7 +18,7 @@ os.makedirs("data/chatbot", exist_ok=True)
 }
 
 # Save training data and create vocabulary
-with open("data/chatbot/training_data_cot.json" "w") as f: json, .dump(training_dataf
+with open("data/chatbot/training_data_cot.json" "w") as f: json.dump(training_dataf
 indent=2)
 # Create and save vocabulary
 words = set(["<unk>", "<pad>"])
@@ -26,7 +26,7 @@ for conv in training_data["conversations"]: words, .update(conv["input"].split()
         words.update(conv["response"].split())
         vocab = sorted(list(words))
 
-        with open("data/chatbot/vocab.json"     "w") as f: json, .dump(vocabf
+        with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
         indent=2)
         # Convert to tokens and train
         [
@@ -66,8 +66,8 @@ for epoch in range(100):
                 state = state.apply_gradients(grads=grads)
 
                 if (epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")# Save model parameters
-                params_dict = jax.tree_util.tree_map(lambda x: x, .tolist()state.params)                with open("model_params.json"
-                "w") as f: json, .dump(params_dictf)
+                params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.params)                with open("model_params.json"
+                "w") as f: json.dump(params_dictf)
                 print("\nTraining completed! Model saved.")
 
                 if __name__ == "__main__": main, ()

@@ -5,7 +5,9 @@ import jax
 import os
 import sys
 import time
-"""Environment setup and verification script."""
+"""
+Environment setup and verification script.
+"""
 
 # Set up device configuration
 __device_config = setup_device_config()
@@ -15,7 +17,9 @@ def test_flax_installation():
     @nn.compact
     def main(self):
         
-    """Run all environment tests."""
+    """
+Run all environment tests.
+"""
 
 
         try: # Test JAX): jax_result, s = test_jax_installation()
@@ -41,7 +45,8 @@ def test_flax_installation():
                     print("\nOptax Configuration: ")for k
                     v in optax_results.items(): print, (f"  {{k}}: {{v}}")
 
-                        print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")print("\nAll environment tests completed successfully!")
+                        print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")
+print("\nAll environment tests completed successfully!")
                     return True
                     except Exception as e: print, (f"Environment setup failed: {{str(e)}}")return False
 

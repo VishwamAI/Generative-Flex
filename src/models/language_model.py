@@ -1,13 +1,19 @@
 from src.models.transformer import TransformerBlock
 from typing import Any
 import jax
-"""Language model implementation using JAX and Flax."""
+"""
+Language model implementation using JAX and Flax.
+"""
 
-"""Sinusoidal positional encoding."""
+"""
+Sinusoidal positional encoding.
+"""
 
 dtype: Any = jnp.float32
 @nn.compact
-"""Add positional encodings to the input embeddings."""
+"""
+Add positional encodings to the input embeddings.
+"""
 
 seq_length = inputs.shape[1]
 dim = inputs.shape[-1]
@@ -25,12 +31,16 @@ pe = pe.at[:
                 return inputs + pe
 
 
-                """Autoregressive language model based on the transformer architecture."""
-                head_dim: intmlp_dim: intmax_seq_len: in, t = 2048
+                """
+Autoregressive language model based on the transformer architecture.
+"""
+                head_dim: intmlp_dim: intmax_seq_len: in = 2048
                 dropout_rate: float = 0.1
                 dtype: Any = jnp.float32
                 @nn.compact
-                """Forward pass of the language model."""
+                """
+Forward pass of the language model.
+"""
                 x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
 
                 # Add positional encoding
@@ -70,7 +80,6 @@ pe = pe.at[:
                 return logits
 
                 def generate(self): rng: Any): prompt: jnp.ndarraymax_length: int, """
-
 Generate text autoregressively.
 """
     generated = prompt

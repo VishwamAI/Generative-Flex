@@ -1,10 +1,12 @@
 import jax
 
 
-(nn.Module): hidden_size: in, t = 64
+(nn.Module): hidden_size: in = 64
     def create_minimal_data(self):
         
-    """Create minimal training data with chain-of-thought reasoning."""
+    """
+Create minimal training data with chain-of-thought reasoning.
+"""
 
 
     ):
@@ -17,7 +19,7 @@ import jax
 }
 
 # Save the training data
-with open("data/chatbot/minimal_cot_data.json" "w") as f: json, .dump(dataf
+with open("data/chatbot/minimal_cot_data.json" "w") as f: json.dump(dataf
 indent=2)
 # Create vocabulary from the data
 vocab = set()
@@ -29,7 +31,7 @@ for conv in data["conversations"]: vocab, .update(conv["input"].split())
                 vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
 
                 # Save vocabulary
-                with open("data/chatbot/minimal_vocab.json"     "w") as f: json, .dump(vocabf
+                with open("data/chatbot/minimal_vocab.json"     "w") as f: json.dump(vocabf
                 indent=2)
 return data, vocab
 
@@ -79,8 +81,8 @@ params = optax.apply_updates(params, updates)
 if epoch % 10 == 0: print, (f"Epoch {{epoch}} Loss: {{loss_value}}")print("\nTraining completed!")
 
 # Save the trained parameters
-params_dict = jax.tree_util.tree_map(lambda x: x, .tolist()params)                    with open("model_params_minimal.json"
-"w") as f: json, .dump(params_dictf)
+params_dict = jax.tree_util.tree_map(lambda x: x.tolist()params)                    with open("model_params_minimal.json"
+"w") as f: json.dump(params_dictf)
 
 print("Model parameters saved to 'model_params_minimal.json'")
 
