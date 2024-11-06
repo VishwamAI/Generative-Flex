@@ -1,4 +1,4 @@
-from dataclass es import dataclass, field
+from dataclasses import dataclass, field
 from typing import Optional, Union, List, Dict, Any, Tuple
 
 VOCAB_SIZE = 256  # Character-level tokenization
@@ -6,7 +6,7 @@ VOCAB_SIZE = 256  # Character-level tokenization
 
 @dataclass
 class GenerationConfig:
-"""Configuration for text-to-anything generation."""
+    """Configuration for text-to-anything generation."""
 # Model configuration
 # Generation parameters
 # Modality-specific settings

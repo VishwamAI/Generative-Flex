@@ -9,13 +9,13 @@ import logging
 import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
-from dataclass es import dataclass, field
+from dataclasses import dataclass, field
 
 
 class TrainerState(train_state.TrainState):
     """Custom train state with loss scaling for mixed precision training."""
 
-    loss_scale: Optional[jnp.ndarray] = None
+    loss_scale: Optional[jnp.ndarray] =  None
 
 
 class FlaxTrainer:
@@ -23,9 +23,9 @@ class FlaxTrainer:
 
     def __init__(
         self,
-        model: Optional[nn.Module] = None,
+        model: Optional[nn.Module] =  None,
         config: Dict[str, Any] = None,
-        output_dir: Optional[str] = None,
+        output_dir: Optional[str] =  None,
     ) -> None:
         """Initialize trainer."""
         self.model = model
@@ -85,10 +85,10 @@ class FlaxTrainer:
         self,
         train_dataset: Any,
         num_epochs: int,
-        eval_dataset: Optional[Any] = None,
-        eval_steps: int = 1000,
-        save_steps: int = 1000,
-        log_steps: int = 100,
+        eval_dataset: Optional[Any] =  None,
+        eval_steps: int =  1000,
+        save_steps: int =  1000,
+        log_steps: int =  100,
     ) -> None:
         """Training loop with evaluation."""
         train_step_jit = jax.jit(self.train_step)
@@ -104,15 +104,13 @@ class FlaxTrainer:
                 num_steps += 1
 
                 # Logging
-                if batch_idx % log_steps == 0:
-                    avg_loss = epoch_loss / num_steps
+                if batch_idx % log_steps == 0: avg_loss =  epoch_loss / num_steps
                     logging.info(
                         f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}"
                     )
 
                 # Evaluation
-                if eval_dataset is not None and batch_idx % eval_steps == 0:
-                    eval_loss = self.evaluate(eval_dataset)
+                if eval_dataset is not None and batch_idx % eval_steps == 0: eval_loss =  self.evaluate(eval_dataset)
                     logging.info(f"Eval Loss: {eval_loss:.4f}")
 
                 # Save checkpoint

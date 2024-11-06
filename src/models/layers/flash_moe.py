@@ -7,13 +7,13 @@ Flash Mixture of Experts implementation.
 
 
 
-    """"""
+    """Module docstring."""
 Flash Mixture of Experts layer implementation.
 """
 intermediate_size: int
 
-num_experts: int = 8
-    """"""
+num_experts: int =  8
+    """Module docstring."""
 Initialize the FlashMoE layer.
 """
 super().__init__()
@@ -35,8 +35,8 @@ for _ in range(num_experts)
 self.router = nn.Linear(hidden_size, num_experts)
 
 def __init__(self): hidden_states: torch.Tensor):
-attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
-    """"""
+attention_mask: Optional[torch.Tensor] =  None) -> Tuple[torch.Tensor
+    """Module docstring."""
 Forward pass through the FlashMoE layer.
 """
 batch_size, seq_length, hidden_size = hidden_states.shape
