@@ -2,10 +2,11 @@ import torch
 import torch.nn as nn
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
-
 @dataclass
 class VideoModelConfig:
-    """Configuration for VideoModel.."""
+    """
+Configuration for VideoModel..
+"""
 
     input_channels: int = 3
     hidden_dim: int = 64
@@ -13,7 +14,9 @@ class VideoModelConfig:
     frame_size: Tuple[int, int] = (224, 224)
 
 class VideoModel(nn.Module):
-    """Video processing model.."""
+    """
+Video processing model..
+"""
 
     def __init__(self, config: Optional[VideoModelConfig] = None):
         super().__init__()
@@ -37,13 +40,15 @@ class VideoModel(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Process video input.
+        """
+Process video input.
 
         Args:
             x: Input video tensor [batch, time, channels, height, width]
 
         Returns:
-            Processed video features"""
+            Processed video features
+"""
         # Spatial encoding
         x = self.spatial_encoder(x.transpose(1, 2))
 
@@ -52,5 +57,4 @@ class VideoModel(nn.Module):
         x = x.permute(0, 2, 1, 3, 4).contiguous()
         x = x.view(batch_size, self.config.num_frames, -1)
         x, _ = self.temporal_encoder(x)
-
         return x

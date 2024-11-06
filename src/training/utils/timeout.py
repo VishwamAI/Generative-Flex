@@ -1,32 +1,42 @@
-"""Timeout utilities for training.."""
-
+"""
+Timeout utilities for training..
+"""
 import signal
 from dataclasses import dataclass
 from typing import Optional, Callable
-
 @dataclass
 class TimeoutConfig:
-    """Configuration for timeout handler.."""
+    """
+Configuration for timeout handler..
+"""
 
     timeout_seconds: int = 3600
     callback: Optional[Callable] = None
 
 class TimeoutError(Exception):
-    """Exception raised when timeout occurs.."""
+    """
+Exception raised when timeout occurs..
+"""
     pass
 
 class TimeoutHandler:
-    """Handler for training timeouts.."""
+    """
+Handler for training timeouts..
+"""
 
     def __init__(self, config: Optional[TimeoutConfig] = None):
-        """Initialize timeout handler.
+        """
+Initialize timeout handler.
 
         Args:
-            config: Optional timeout configuration"""
+            config: Optional timeout configuration
+"""
         self.config = config or TimeoutConfig()
 
     def __enter__(self):
-        """Set up timeout handler.."""
+        """
+Set up timeout handler..
+"""
         def handler(signum, frame):
             if self.config.callback:
                 self.config.callback()
@@ -36,5 +46,7 @@ class TimeoutHandler:
         signal.alarm(self.config.timeout_seconds)
 
     def __exit__(self, type, value, traceback):
-        """Clean up timeout handler.."""
+        """
+Clean up timeout handler..
+"""
         signal.alarm(0)

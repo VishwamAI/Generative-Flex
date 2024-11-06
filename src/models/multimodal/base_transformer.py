@@ -1,13 +1,15 @@
-"""Base transformer implementation.."""
-
+"""
+Base transformer implementation..
+"""
 import torch
 import torch.nn as nn
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
-
 @dataclass
 class BaseTransformerConfig:
-    """Configuration for base transformer.."""
+    """
+Configuration for base transformer..
+"""
 
     hidden_size: int = 768
     num_attention_heads: int = 12
@@ -19,19 +21,25 @@ class BaseTransformerConfig:
     max_position_embeddings: int = 512
 
 class BaseTransformer(nn.Module):
-    """Base transformer model.."""
+    """
+Base transformer model..
+"""
 
     def __init__(self, config: Optional[BaseTransformerConfig] = None):
-        """Initialize base transformer.
+        """
+Initialize base transformer.
 
         Args:
-            config: Optional model configuration"""
+            config: Optional model configuration
+"""
         super().__init__()
         self.config = config or BaseTransformerConfig()
         self.setup_layers()
 
     def setup_layers(self):
-        """Set up transformer layers.."""
+        """
+Set up transformer layers..
+"""
         self.embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
                 30522,  # Default vocab size
@@ -61,9 +69,9 @@ class BaseTransformer(nn.Module):
         self,
         input_ids: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
-        position_ids: Optional[torch.Tensor] = None
-    ) -> Dict[str, torch.Tensor]:
-        """Process input through transformer.
+        position_ids: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
+        """
+Process input through transformer.
 
 
         Args:
@@ -72,7 +80,8 @@ class BaseTransformer(nn.Module):
             position_ids: Optional position IDs
 
         Returns:
-            Dictionary containing hidden states"""
+            Dictionary containing hidden states
+"""
         # Embedding
         if position_ids is None: position_ids = torch.arange(
                 input_ids.size(1),
@@ -91,5 +100,4 @@ class BaseTransformer(nn.Module):
                 hidden_states,
                 src_key_padding_mask=attention_mask
             )
-
         return {"hidden_states": hidden_states}

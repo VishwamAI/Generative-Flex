@@ -1,14 +1,17 @@
-"""Enhanced transformer layer implementation with advanced features."""
+"""
+Enhanced transformer layer implementation with advanced features.
+"""
 from typing import Optional, Dict, Union, Tuple
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 class EnhancedTransformer(nn.Module):
-    """Enhanced transformer layer with advanced attention mechanisms."""
+    """
+Enhanced transformer layer with advanced attention mechanisms.
+"""
 
-    def __init__(
-        self,
+    def __init__(self,
         hidden_size: int,
         num_attention_heads: int,
         dropout_prob: float = 0.1,
@@ -29,17 +32,19 @@ class EnhancedTransformer(nn.Module):
         self.layer_norm = nn.LayerNorm(hidden_size, eps=layer_norm_eps)
 
     def transpose_for_scores(self, x: torch.Tensor) -> torch.Tensor:
-        """Transpose and reshape tensor for attention computation."""
+        """
+Transpose and reshape tensor for attention computation.
+"""
         new_x_shape = x.size()[:-1] + (self.num_attention_heads, self.attention_head_size)
         x = x.view(new_x_shape)
         return x.permute(0, 2, 1, 3)
 
-    def forward(
-        self,
+    def forward(self,
         hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
-        """Forward pass of the enhanced transformer layer."""
+        attention_mask: Optional[torch.Tensor] = None,) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+Forward pass of the enhanced transformer layer.
+"""
         query_layer = self.transpose_for_scores(self.query(hidden_states))
         key_layer = self.transpose_for_scores(self.key(hidden_states))
         value_layer = self.transpose_for_scores(self.value(hidden_states))
@@ -62,5 +67,4 @@ class EnhancedTransformer(nn.Module):
 
         output = self.dropout(context_layer)
         output = self.layer_norm(output + hidden_states)
-
         return output, attention_probs

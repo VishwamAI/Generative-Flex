@@ -1,13 +1,15 @@
-"""Multimodal transformer implementation.."""
-
+"""
+Multimodal transformer implementation..
+"""
 import torch
 import torch.nn as nn
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
-
 @dataclass
 class MultiModalTransformerConfig:
-    """Configuration for multimodal transformer.."""
+    """
+Configuration for multimodal transformer..
+"""
 
     hidden_size: int = 768
     num_attention_heads: int = 12
@@ -22,19 +24,25 @@ class MultiModalTransformerConfig:
     num_channels: int = 3
 
 class MultiModalTransformer(nn.Module):
-    """Multimodal transformer model.."""
+    """
+Multimodal transformer model..
+"""
 
     def __init__(self, config: Optional[MultiModalTransformerConfig] = None):
-        """Initialize multimodal transformer.
+        """
+Initialize multimodal transformer.
 
         Args:
-            config: Optional model configuration"""
+            config: Optional model configuration
+"""
         super().__init__()
         self.config = config or MultiModalTransformerConfig()
         self.setup_layers()
 
     def setup_layers(self):
-        """Set up transformer layers.."""
+        """
+Set up transformer layers..
+"""
         # Text embeddings
         self.text_embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
@@ -75,23 +83,24 @@ class MultiModalTransformer(nn.Module):
         self.dropout = nn.Dropout(self.config.dropout)
 
     def _init_weights(self, module: nn.Module) -> None:
-        """Initialize module weights.
+        """
+Initialize module weights.
 
         Args:
-            module: Module to initialize"""
+            module: Module to initialize
+"""
         if isinstance(module, (nn.Linear, nn.Embedding)):
             module.weight.data.normal_(mean=0.0, std=0.02)
         if isinstance(module, nn.Linear) and module.bias is not None:
             module.bias.data.zero_()
 
-    def forward(
-        self,
+    def forward(self,
         input_ids: Optional[torch.Tensor] = None,
         attention_mask: Optional[torch.Tensor] = None,
         pixel_values: Optional[torch.Tensor] = None,
-        pixel_mask: Optional[torch.Tensor] = None
-    ) -> Dict[str, torch.Tensor]:
-        """Process input through transformer.
+        pixel_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
+        """
+Process input through transformer.
 
         Args:
             input_ids: Optional input token IDs
@@ -100,7 +109,8 @@ class MultiModalTransformer(nn.Module):
             pixel_mask: Optional pixel mask
 
         Returns:
-            Dictionary containing hidden states"""
+            Dictionary containing hidden states
+"""
         hidden_states_list = []
 
         # Process text if provided
@@ -166,5 +176,4 @@ class MultiModalTransformer(nn.Module):
                 )
 
             return {"hidden_states": hidden_states}
-
         return {"hidden_states": None}

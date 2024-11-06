@@ -1,13 +1,18 @@
-"""Test configuration module.."""
-
+"""
+Test configuration module..
+"""
 import unittest
 from src.models.reasoning.math_config import MathConfig
 
 class TestMathConfig(unittest.TestCase):
-    """Test cases for MathConfig.."""
+    """
+Test cases for MathConfig..
+"""
 
     def test_invalid_model_type(self):
-        """Test invalid model type raises ValueError.."""
+        """
+Test invalid model type raises ValueError..
+"""
         config = MathConfig()
         config.model_type = "invalid_type"
 
@@ -15,7 +20,9 @@ class TestMathConfig(unittest.TestCase):
             config.__post_init__()
 
     def test_valid_model_type(self):
-        """Test valid model type passes validation.."""
+        """
+Test valid model type passes validation..
+"""
         config = MathConfig()
         config.model_type = "math_reasoning"
 

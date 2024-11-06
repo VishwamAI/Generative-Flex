@@ -1,11 +1,13 @@
-"""Configuration for mathematical reasoning head.."""
-
+"""
+Configuration for mathematical reasoning head..
+"""
 from dataclasses import dataclass
 from typing import List, Optional
-
 @dataclass
 class MathHeadConfig:
-    """Configuration for mathematical reasoning head.."""
+    """
+Configuration for mathematical reasoning head..
+"""
 
     hidden_size: int = 768
     num_attention_heads: int = 12

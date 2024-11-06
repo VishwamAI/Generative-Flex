@@ -1,5 +1,6 @@
-"""Accelerated trainer module.."""
-
+"""
+Accelerated trainer module..
+"""
 import logging
 import torch
 from accelerate import Accelerator
@@ -7,10 +8,11 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
-
 @dataclass
 class AcceleratedTrainerConfig:
-    """Configuration for accelerated trainer.."""
+    """
+Configuration for accelerated trainer..
+"""
 
     learning_rate: float = 5e-5
     weight_decay: float = 0.01
@@ -22,13 +24,17 @@ class AcceleratedTrainerConfig:
     device: str = "cuda"
 
 class AcceleratedTrainer:
-    """Accelerated trainer class.."""
+    """
+Accelerated trainer class..
+"""
 
     def __init__(self, config: Optional[AcceleratedTrainerConfig] = None):
-        """Initialize accelerated trainer.
+        """
+Initialize accelerated trainer.
 
         Args:
-            config: Optional trainer configuration"""
+            config: Optional trainer configuration
+"""
         self.config = config or AcceleratedTrainerConfig()
         self.accelerator = Accelerator(
             mixed_precision=self.config.mixed_precision,
@@ -37,7 +43,9 @@ class AcceleratedTrainer:
         self.setup_training()
 
     def setup_training(self):
-        """Set up training components.."""
+        """
+Set up training components..
+"""
         logger.info("Setting up accelerated training...")
         self.optimizer = None
         self.scheduler = None
@@ -45,7 +53,9 @@ class AcceleratedTrainer:
         self.train_dataloader = None
 
     def train(self):
-        """Run training loop.."""
+        """
+Run training loop..
+"""
         if not all([
             self.model,
             self.optimizer,
@@ -83,5 +93,4 @@ class AcceleratedTrainer:
 
             if self.config.max_steps > 0 and completed_steps >= self.config.max_steps:
                 break
-
         logger.info("Training completed")
