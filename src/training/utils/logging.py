@@ -4,7 +4,9 @@ import json
 import os
 
 
-class TrainingLogger: de, f log_dir: str, (self, log_dir: str = "logs"): self, .log_dir = log_dir
+class TrainingLogger:
+    def __init__(self, log_dir: str = "logs"):
+        self.log_dir = log_dir
 os.makedirs(log_dir, exist_ok=True)
 self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
 self.metrics_history = []

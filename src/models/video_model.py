@@ -9,7 +9,7 @@ import jax
 
 
 patch_size: Tuple[intint
-int]# (time heightwidth)
+int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
 def __call__(self video): b):
@@ -32,7 +32,7 @@ return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 int
 int]# (frames heightwidth)
 patch_size: Tuple[intint
-int]# (time heightwidth)
+int]  # (time, height, width)
 hidden_dim: intnum_layer
 s: intnum_heads: inthead_di, m: intmlp_di
 m: intchannel, s: int = 3

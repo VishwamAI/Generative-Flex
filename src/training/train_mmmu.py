@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 def train_epoch(model: EnhancedTransformertrain_loade
-r: DataLoaderoptimizer: torch.optim.Optimizer, config: TrainingConfig):
+dataloader: DataLoader, optimizer: torch.optim.Optimizer, config: TrainingConfig):
     """Train for one epoch."""
 
     model.train()
