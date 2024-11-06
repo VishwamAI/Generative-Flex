@@ -9,9 +9,7 @@ nalUnionList, DictAnyTuple
 
 
 nal, Tuple
-Apple-style optimizatio"""
-
-"""ns for on-device ML performance."""
+    """"""ns for on-device ML performance."""
 
 
 """Implements: - Block-wise int4 quantization- Flexible shaped inputs"""

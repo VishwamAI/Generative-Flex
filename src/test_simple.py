@@ -15,7 +15,7 @@ word_to_id = {
 }  # Initialize model
 model = SimpleLanguageModel(_vocab_size=len(vocab))
 # Load parameters
-with open("model_params.json" "r") as f: params_dict = json.load(f)
+with open("model_params.json", "r") as f: params_dict = json.load(f)
 # Convert parameters back to arrays
 params = jax.tree_util.tree_map(lambda x: jnp.array(x)params_dict)
 # Test input

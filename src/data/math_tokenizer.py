@@ -13,19 +13,12 @@ base_tokenizer: PreTrainedTokenize, r)  ) -> None:
 """Initialize the math tokenizer.
 
     Args: base_tokenize
-r: Bas, e HuggingFace tokenizer to extend"""
-
-self.base_tokenizer = base_tokenizer
-"""Parse mathematical expressions using sympy."""
+    """self.base_tokenizer = base_tokenizer"""Parse mathematical expressions using sympy."""
 
 # Try to parse with sympy
 
 """Replace mathematical symbols with special tokens.
-for symbol"""
-
-token in self.math_symbols.items():
-
-"""
+    """token in self.math_symbols.items():"""
 
 text = text.replace(symbol, f" {token} ")"""
 return text

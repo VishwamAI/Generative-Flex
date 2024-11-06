@@ -14,7 +14,7 @@ Main training script for Generative-Flex
 # Import our implemented components
 def main(self):
     
-    """Main training function"""
+       """Main training function"""
 
 
 

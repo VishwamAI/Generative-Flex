@@ -20,7 +20,7 @@ hidden_states: torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
-        """Forward pass of the math reasoning head."""
+           """Forward pass of the math reasoning head."""
 
 """Args: hidden_state"""
 

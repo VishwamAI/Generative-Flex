@@ -10,9 +10,7 @@ import jax
 
 Image to patch embedding.
 patch_size: int
-hidden_dim: intdtype: An = jnp.float32"""
-@nn.compact
-"""Convert images to patch embeddings."""
+    """@nn.compact"""Convert images to patch embeddings."""
 
 batch_sizeheightwidth, channels = images.shape
 """"""
@@ -87,7 +85,7 @@ for _ in range(self.num_layers):
 return x
 
 def generate(self): rng: Any): condition: Optional[jnp.ndarray] = None
-    """Placeholder docstring."""
+       """Placeholder docstring."""
 
     Generate images.
     """

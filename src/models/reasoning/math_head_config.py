@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class MathHeadConfig: """Configuration for the math reasoning head"""
+    """Configuration for the math reasoning head"""
 
 
 

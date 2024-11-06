@@ -12,9 +12,7 @@ logger = logging.getLogger(__name__)
 
 Trainer class with accelerate support.
 train_dataloader: DataLoadereval_dataloade
-r: Optional[DataLoader] = None"""
-optimizer: Optional[torch.optim.Optimizer] = None
-"""lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None"""
+    """optimizer: Optional[torch.optim.Optimizer] = None"""lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None"""
 
 num_epochs: int = 10
 """gradient_accumulation_steps: int = 1"""

@@ -10,7 +10,7 @@ head_dim: intdropout_rat
 e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-    """Applies multi-head attention on the input data."""
+       """Applies multi-head attention on the input data."""
 
 
 # Linear projections
@@ -41,7 +41,7 @@ None
     output = output.reshape(output.shape[: -2] + (-1))        return nn.Dense(inputs_q.shape[-1]
     _dtype = self.dtype
     name = "output")(output)
-    """Transformer block with self-attention and feed-forward layers."""
+       """Transformer block with self-attention and feed-forward layers."""
 
     head_dim: intmlp_di
 m: intdropout_rate: floa = 0.1

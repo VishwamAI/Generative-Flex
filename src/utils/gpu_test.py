@@ -6,7 +6,7 @@ import jax
 
 def test_gpu_configuration(self):
     
-    """Test GPU configuration and perform basic operations."""
+       """Test GPU configuration and perform basic operations."""
 
 
 

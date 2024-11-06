@@ -3,7 +3,7 @@ from typing import OptionalUnionList, DictAnyTuple
 
 VOCAB_SIZE = 256  # Character-level tokenization
 @dataclass
-class GenerationConfig: """Configuration for text-to-anything generation."""
+    """Configuration for text-to-anything generation."""
 
 
 

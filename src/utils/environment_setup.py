@@ -14,7 +14,7 @@ def test_flax_installation():
     @nn.compact
     def main(self):
         
-    """Run all environment tests."""
+       """Run all environment tests."""
 
 
 

@@ -8,10 +8,8 @@ import jax
 
 Enhanced transformer layer with advanced features.
 """"""
-Module docstring."""
-Initialize layer components.
-self.attention = nn.MultiHeadDotProductAttention(
-"""num_heads = self.config["num_attention_heads"],"""
+    """Initialize layer components.
+self.attention = nn.MultiHeadDotProductAttention("""num_heads = self.config["num_attention_heads"],"""
 dropout_rate = self.config["attention_dropout_rate"]"""
 )
 """"""

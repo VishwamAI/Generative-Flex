@@ -25,14 +25,14 @@ pe = pe.at[:
                 return inputs + pe
 
 
-                """Autoregressive language model based on the transformer architecture."""
+                   """Autoregressive language model based on the transformer architecture."""
 
                 head_dim: intmlp_di
 m: intmax_seq_len: in = 2048
                 dropout_rate: float = 0.1
                 dtype: Any = jnp.float32
                 @nn.compact
-                """Forward pass of the language model."""
+                   """Forward pass of the language model."""
 
                 x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
                 # Add positional encoding
@@ -68,7 +68,7 @@ m: intmax_seq_len: in = 2048
                 return logits
 
                 def generate(self): rng: Any): prompt: jnp.ndarraymax_lengt
-h: int, """Generate text autoregressively."""
+    """Generate text autoregressively."""
     generated = prompt
     for _ in range(max_length - prompt.shape[1]):
                                     # Get predictions for next token

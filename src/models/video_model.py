@@ -68,7 +68,7 @@ for _ in range(self.num_layers):
 return x
 
 def generate(self): rng: Any): prompt: Optional[jnp.ndarray] = None
-    """Generate video frames."""
+       """Generate video frames."""
 
     if prompt is None: rnginit_rng = jax.random.split(rng)                    prompt = jax.random.normal(init_rng
     (1     1    self.video_size[1]    self.video_size[2]    self.channels))

@@ -1,9 +1,7 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-Advanced Generative-Flex Model Implementation"""
-Core model architecture with state-of-the-art optimizations
-""""""
+    """Core model architecture with state-of-the-art optimizations""""""
 
 Placeholder docstring.
 """Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths"""

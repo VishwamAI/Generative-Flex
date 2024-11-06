@@ -6,7 +6,7 @@ import pytest
 (nn.Module): vocab_size: int, hidden_size: int = 64
 chat_model
 model_params
-word_mappings)  ) -> None: """Test model forward pass with test input.
+    """Test model forward pass with test input.
 word_to_id, __ = word_mappings"""
 """# Test input"""test_input = "hi"""
 "

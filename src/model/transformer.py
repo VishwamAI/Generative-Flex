@@ -2,9 +2,7 @@ from attention import FlashAttention
 from experts import MixtureOfExperts
 from typing import Optional
 import torch
-Advanced Transformer Layer Implementation for Generative-Flex"""
-Combines Flash Attention and Mixture of Experts for optimal performance
-""""""
+    """Combines Flash Attention and Mixture of Experts for optimal performance""""""
 
 Placeholder docstring.
 """Advanced transformer layer combining Flash Attention and Mixture of Experts"""

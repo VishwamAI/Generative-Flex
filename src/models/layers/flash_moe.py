@@ -9,10 +9,8 @@ import torch.nn as nn
 
 Flash Mixture of Experts layer implementation.
 """intermediate_size: intnum_expert"""
-Module docstring."""
-Initialize the FlashMoE layer.
-super().__init__()
-"""self.hidden_size = hidden_size"""
+    """Initialize the FlashMoE layer.
+super().__init__()"""self.hidden_size = hidden_size"""
 self.intermediate_size = intermediate_size
 """self.num_experts = num_experts"""
 self.dropout = nn.Dropout(dropout_rate)

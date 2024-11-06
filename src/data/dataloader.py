@@ -8,9 +8,7 @@ import h5py
 import json
 import logging
 import torch
-Advanced Data Processing Pipeline for Generative-Flex"""
-Implements efficient data loading and preprocessing with dynamic batching
-"""@dataclass"""
+    """Implements efficient data loading and preprocessing with dynamic batching"""@dataclass"""
 
 Configuration for data processing
 """batch_size: int = 32"""
@@ -51,7 +49,7 @@ if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from
 
 "attention_mask": []
         "labels": []}  # Read and process data
-        with open(self.data_path         "r") as f: raw_data = json.load(f)
+        with open(self.data_path        , "r") as f: raw_data = json.load(f)
         for item in raw_data: # Tokenize texttokenized = self.tokenizer(
     item["text"],
     max_length = self.config.max_seq_length,

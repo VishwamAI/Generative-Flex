@@ -10,10 +10,8 @@ import torch.nn as nn
 
 Image processor for handling multimodal inputs in the MMMU model.
 """hidden_size: int = 768"""
-Placeholder docstring."""
-Initialize the image processor.
-super().__init__()
-"""self.image_size = image_size"""
+    """Initialize the image processor.
+super().__init__()"""self.image_size = image_size"""
 self.hidden_size = hidden_size
 """"""
 

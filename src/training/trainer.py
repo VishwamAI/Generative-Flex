@@ -53,10 +53,8 @@ for epoch in range(self.num_epochs):
         self._step += 1
 
         if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                        total_loss = 0
-        if self._step % self.evaluation_steps = = 0: self.evaluate()if self._step % self.save_steps == 0: self.save_checkpoint()def training_step(self): batc, h                            ) -> None: torch.Tensor) -> None:"""
-Perform a single training step.
-outputs = self.model(**batch)
-"""loss = outputs.loss"""
+            """Perform a single training step.
+outputs = self.model(**batch)"""loss = outputs.loss"""
 loss.backward()
 """if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
 

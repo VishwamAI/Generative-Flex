@@ -18,13 +18,11 @@ max_length: int = 512
 
 Args: data_di
 r: Director, y containing the dataset filessplit: Datasetsplit, (train/val/test)max_length: Maximumsequencelengthimage_siz
-e: Sizeofimage, s after preprocessing"""
-self.data_dir = data_dir
+    """self.data_dir = data_dir
 self.split = split
 self.max_length = max_length
 self.image_size = image_size
-self.examples = self._load_examples()
-"""Load examples from dataset files.):"""
+self.examples = self._load_examples()"""Load examples from dataset files.):"""
 
 Returns: Listofexample, s with text and image data
 """examples = []"""

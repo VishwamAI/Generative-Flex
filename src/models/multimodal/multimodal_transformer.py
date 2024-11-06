@@ -26,7 +26,7 @@ nn.Linear) and module.bias is not None: module.bias.data.zero_()elif isinstance(
     position_ids: Optional[torch.Tensor] = None
     image_features: Optional[torch.Tensor] = None
     return_dict: bool = True) -> Dict[str
-    """Forward pass with support for text and image inputs."""
+       """Forward pass with support for text and image inputs."""
 
     batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
 )
@@ -85,7 +85,7 @@ if image_features is not None: try:# Process images through ImageProcessor
             def __init__(self): input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
     Any]:
-                            """Prepare inputs for text generation."""
+                               """Prepare inputs for text generation."""
 
                             position_ids = kwargs.get("position_ids", None)
                             if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0

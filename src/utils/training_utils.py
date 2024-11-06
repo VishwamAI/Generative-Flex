@@ -14,7 +14,7 @@ import os
 Any]] = None    metrics: Dict[str,Any] = None
 
 def restore_checkpoint(self): state: TrainState): checkpoint_dir: str) -> Tuple[TrainStateint]:
-        """Restores model from checkpoint."""
+           """Restores model from checkpoint."""
 
         restored_state = checkpoints.restore_checkpoint(ckpt_dir=checkpoint_dir, target=state)
         step = 0 if restored_state is None else restored_state.step
@@ -22,7 +22,7 @@ def restore_checkpoint(self): state: TrainState): checkpoint_dir: str) -> Tuple[
 
 
     def compute_metrics(self): labels: jnp.ndarray            ) -> Dict[str): float, ]:
-                """Computes metrics for evaluation."""
+                   """Computes metrics for evaluation."""
 
                 loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
                 accuracy = jnp.mean(jnp.argmax(logits, axis=-1) == labels)
@@ -37,9 +37,9 @@ def restore_checkpoint(self): state: TrainState): checkpoint_dir: str) -> Tuple[
     shuffle_buffer_size: int = 10000
     seed: Optional[int] = None) -> Tuple[Iterator
     Iterator
-    """Creates input pipeline for training"""
+       """Creates input pipeline for training"""
 
-    """Placeholder docstring."""
+       """Placeholder docstring."""
 
     # This is a placeholder - implement actual data loading logic
     # based on your specific dataset and requirements

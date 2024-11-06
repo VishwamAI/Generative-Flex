@@ -9,7 +9,7 @@ import time
 
 def test_device_configuration(self):
     
-    """Test and print device configuration information."""
+       """Test and print device configuration information."""
 
 
 

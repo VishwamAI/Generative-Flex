@@ -6,7 +6,7 @@ import torch.nn as nn
 
 (nn.Module):
     
-    """Processes mathematical notation and converts between different formats."""
+       """Processes mathematical notation and converts between different formats."""
 
 
 

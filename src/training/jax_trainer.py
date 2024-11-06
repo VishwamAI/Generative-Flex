@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
     loss_scale: Optional[jnp.ndarray] = None
 
 
-    class FlaxTrainer: """Advanced trainer implementation using JAX/Flax.
+        """Advanced trainer implementation using JAX/Flax.
 def __init__(""""""
 
 

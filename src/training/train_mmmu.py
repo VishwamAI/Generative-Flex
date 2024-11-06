@@ -12,7 +12,7 @@ from src.models.enhanced_transformer import EnhancedTransformer
 logger = logging.getLogger(__name__)
 def train_epoch(model: EnhancedTransformertrain_loade
 dataloader: DataLoader, optimizer: torch.optim.Optimizer, config: TrainingConfig):
-    """Train for one epoch."""
+       """Train for one epoch."""
 
     model.train()
     total_loss = 0.0
@@ -27,10 +27,8 @@ dataloader: DataLoader, optimizer: torch.optim.Optimizer, config: TrainingConfig
 
 
     def evaluate(model: EnhancedTransformerval_loade
-r: DataLoader):"""
-Evaluate the model.
-model.eval()
-"""total_loss = 0.0"""
+    """Evaluate the model.
+model.eval()"""total_loss = 0.0"""
 correct = 0
 """total = 0"""
 """with torch.no_grad():"""
