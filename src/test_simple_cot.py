@@ -19,10 +19,10 @@ input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_i
 # Initialize with same structure as training
 ___ = model.init(key, input_tokens)
 # Load trained parameters
-    with open("model_params.json", "r") as f: params_dict = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
-    params_dict)
-    # Generate response
-    logits = model.apply({"params": params, } input_tokens)        predicted_tokens = jnp.argsort(logits)[-10: ][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {{word}}")
-    print("-" * 50)
+with open("model_params.json", "r") as f: params_dict = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
+params_dict)
+# Generate response
+logits = model.apply({"params": params, } input_tokens)        predicted_tokens = jnp.argsort(logits)[-10: ][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {{word}}")
+print("-" * 50)
 
-        if __name__ == "__main__": main, ()
+if __name__ == "__main__": main, ()

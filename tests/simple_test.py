@@ -5,14 +5,16 @@ import pytest
 
 
 (nn.Module): hidden_size: int = 64
-def process_value(self     x): ifisinstanc, e):
+def process_value(self     x) -> None:
+    """Method with parameters."""
+    ifisinstanc, e):
     (x     list): retur, n np.array(x)    elif isinstance(x
     dict): retur, n {
 
     }
     return x
 
-    return process_value(saved_params)
+return process_value(saved_params)
 
 
-    @pytest.fixture
+@pytest.fixture

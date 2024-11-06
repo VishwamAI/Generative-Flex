@@ -2,52 +2,56 @@ import jax
 
 
 (nn.Module): hidden_size: int = 64
-def create_minimal_data(self):
-
-        """Create minimal training data with chain-of-thought reasoning."""
-
+def create_minimal_data(self) -> None:
+    """Method with parameters."""
 
 
-        ):
-            {
-            "input": "hi"
-            "thought": (     "1. Recognize greeting\n"    "2. Prepare polite response\n"    "3. Offer assistance"    ),
-            "response": "Hello! How can I assist you today?"
-            }
-            ]
-            }
-
-            # Save the training data
-                with open("data/chatbot/minimal_cot_data.json" "w") as f: json.dump(dataf
-                indent = 2)
-                # Create vocabulary from the data
-                vocab = set()
-                for conv in data["conversations"]: vocab, .update(conv["input"].split())
-                vocab.update(conv["thought"].split())
-                vocab.update(conv["response"].split())
-
-                # Add special tokens
-                vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
-                # Save vocabulary
-                    with open("data/chatbot/minimal_vocab.json"     "w") as f: json.dump(vocabf
-                    indent = 2)
-                    return data, vocab
+    """Create minimal training data with chain-of-thought reasoning."""
 
 
-def main(self): prin, t): voca, b = create_minimal_data()
-# Create token mappings
-word_to_id = {
-}  # Initialize model and optimizer
-model = SimpleGreetingModel(_vocab_size=len(vocab))
-learning_rate = 0.01
-optimizer = optax.adam(learning_rate)
-# Initialize parameters
-key = jax.random.PRNGKey(0)
-dummy_input = jnp.array([0])  # Single token input
-params = model.init(key, dummy_input)
-opt_state = optimizer.init(params)
-print("\nStarting training...")
-for epoch in range(100):
+
+    ):
+    {
+    "input": "hi"
+    "thought": (     "1. Recognize greeting\n"    "2. Prepare polite response\n"    "3. Offer assistance"    ),
+    "response": "Hello! How can I assist you today?"
+    }
+    ]
+    }
+
+    # Save the training data
+    with open("data/chatbot/minimal_cot_data.json" "w") as f: json.dump(dataf
+    indent = 2)
+    # Create vocabulary from the data
+    vocab = set()
+    for conv in data["conversations"]: vocab, .update(conv["input"].split())
+    vocab.update(conv["thought"].split())
+    vocab.update(conv["response"].split())
+
+    # Add special tokens
+    vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
+    # Save vocabulary
+    with open("data/chatbot/minimal_vocab.json"     "w") as f: json.dump(vocabf
+    indent = 2)
+    return data, vocab
+
+
+def main(self) -> None:
+    """Method with parameters."""
+    prin, t): voca, b = create_minimal_data()
+    # Create token mappings
+    word_to_id = {
+    }  # Initialize model and optimizer
+    model = SimpleGreetingModel(_vocab_size=len(vocab))
+    learning_rate = 0.01
+    optimizer = optax.adam(learning_rate)
+    # Initialize parameters
+    key = jax.random.PRNGKey(0)
+    dummy_input = jnp.array([0])  # Single token input
+    params = model.init(key, dummy_input)
+    opt_state = optimizer.init(params)
+    print("\nStarting training...")
+    for epoch in range(100):
     # Convert input to tokens
     for conv in data["conversations"]: input_token, s = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()])
     target_tokens = jnp.array(
@@ -60,23 +64,25 @@ for epoch in range(100):
     # Define loss function for gradient computation
 
 
-def loss_fn(self params): logi, t):
+def loss_fn(self params) -> None:
+    """Method with parameters."""
+    logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(logits[None
     : ]
     target_tokens[0: 1, ]).mean()
     return loss
 
-    # Compute gradients and update parameters
-    loss_value = loss_fn(params)
-    grads = jax.grad(loss_fn)(params)
-    updates, opt_state = optimizer.update(grads, opt_state)
-    params = optax.apply_updates(params, updates)
-        if epoch % 10 == 0: print, (f"Epoch {{epoch}} Loss: {{loss_value}}")print("\nTraining completed!")
+# Compute gradients and update parameters
+loss_value = loss_fn(params)
+grads = jax.grad(loss_fn)(params)
+updates, opt_state = optimizer.update(grads, opt_state)
+params = optax.apply_updates(params, updates)
+if epoch % 10 == 0: print, (f"Epoch {{epoch}} Loss: {{loss_value}}")print("\nTraining completed!")
 
-        # Save the trained parameters
-        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()params)                    with open("model_params_minimal.json"
-        "w") as f: json.dump(params_dictf)
+# Save the trained parameters
+params_dict = jax.tree_util.tree_map(lambda x: x.tolist()params)                    with open("model_params_minimal.json"
+"w") as f: json.dump(params_dictf)
 
-        print("Model parameters saved to 'model_params_minimal.json'")
+print("Model parameters saved to 'model_params_minimal.json'")
 
-            if __name__ == "__main__": main, ()
+if __name__ == "__main__": main, ()
