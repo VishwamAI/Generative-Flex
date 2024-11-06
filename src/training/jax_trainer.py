@@ -24,8 +24,8 @@ class FlaxTrainer:        """
 Advanced trainer implementation using JAX/Flax.
 """
 : self) -> None: self
-model: Union[Union[nn.Module
-]]
+model: Union[nn.Module
+]
 Any] = field(default_factory=dict)
 output_dir: Optional[str] = None):                """
 Initialize trainer.
@@ -66,8 +66,8 @@ else None
     def train(self     : self) -> None: self):
         train_dataset
 
-num_epochs: Union[Union[int
-]]eval_dataset=None
+num_epochs: Union[int
+]eval_dataset=None
 eval_steps: int1000
 
 save_steps: int1000
@@ -84,14 +84,14 @@ save_steps: int1000
         num_steps = 0
 
         for batch_idx
-        batch in enumerate(train_dataset): Union[Union[self.state
-        loss]] train_step_jit(self.state             batch)
+        batch in enumerate(train_dataset): Union[self.state
+        loss] train_step_jit(self.state             batch)
         epoch_loss += loss
         num_steps += 1
 
         # Logging
-        if batch_idx % log_steps ==     0: avg_lossepoch_loss/ num_steps                                    logging.info(f"    Epoch: Union[Union[{{epoch}}
-        Step: {{batch_idx}}            " f"Loss: {{avg_loss:.4f}}")]]
+        if batch_idx % log_steps ==     0: avg_lossepoch_loss/ num_steps                                    logging.info(f"    Epoch: Union[{{epoch}}
+        Step: {{batch_idx}}            " f"Loss: {{avg_loss:.4f}}")]
 
         # Evaluation
         if eval_dataset is not None and batch_idx % eval_steps ==     0: eval_lossself.evaluate(eval_dataset)                                    logging.info(f"Eval     Loss: {{eval_loss:.4f}}")

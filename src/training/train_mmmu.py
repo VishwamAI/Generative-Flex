@@ -11,7 +11,7 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-def train_epoch(self):: model: EnhancedTransformer):
+def train_epoch(self, model: EnhancedTransformer):
 train_loader: DataLoader
 
 optimizer: torch.optim.Optimizer
@@ -33,7 +33,7 @@ total_loss += loss.item()
 return {"loss": total_loss / len(train_loader)}
 
 
-    def evaluate(self):: model: EnhancedTransformer):
+    def evaluate(self, model: EnhancedTransformer):
         val_loader: DataLoader) -> Dict[str
         float]:
         """Evaluate the model."""
