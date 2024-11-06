@@ -28,7 +28,6 @@ self.examples = self._load_examples()
 
 Returns: Listofexample, s with text and image data
 """examples = []"""
-
 Validate that an example has required fields.):
 """Args: exampl"""
 
@@ -38,7 +37,6 @@ return all(field in example for field in required_fields)
 Args: id
 x: Inde, x of example to getReturns: Dictionarycontainingexampl, e data
 """example = self.examples[idx]"""
-
 Process image data.):
 """Args: image_pat"""
 

@@ -18,37 +18,26 @@ optimizer: Optional[torch.optim.Optimizer] = None
 
 num_epochs: int = 10
 """gradient_accumulation_steps: int = 1"""
-
 max_grad_norm: float = 1.0
 """logging_steps: int = 100"""
-
 evaluation_steps: int = 500
 """save_steps: int = 1000"""
-
 Placeholder docstring.
 """Initialize the accelerated trainer."""
 
 self.model = model
 """self.train_dataloader = train_dataloader"""
-
 self.eval_dataloader = eval_dataloader
 """self.optimizer = optimizer or torch.optim.AdamW(model.parameters())"""
-
 self.lr_scheduler = lr_scheduler
 """self.num_epochs = num_epochs"""
-
 self.gradient_accumulation_steps = gradient_accumulation_steps
 """self.max_grad_norm = max_grad_norm"""
-
 self.logging_steps = logging_steps
 """self.evaluation_steps = evaluation_steps"""
-
 self.save_steps = save_steps
 """self.output_dir = output_dir"""
-
-
 """self._step = 0"""
-
 self._epoch = 0
 """self._best_eval_loss = float("inf")"""
 """# Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)"""
@@ -76,14 +65,7 @@ for epoch in range(self.num_epochs):
 
 if self.eval_dataloader is None: return, {}self.model.eval()
 """total_loss = 0"""
-
-
-
-
 """for batch in self.eval_dataloader: withtorch.no_grad(): output, s = self.model(**batch)"""
-
-
-
 loss = outputs.loss
 """total_loss += loss.item()"""
 
@@ -91,9 +73,6 @@ loss = outputs.loss
 
 
 """eval_loss = total_loss / len(self.eval_dataloader)"""
-
-
-
 self.model.train()
 """"""
 

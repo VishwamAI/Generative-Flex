@@ -14,7 +14,6 @@ Implements efficient data loading and preprocessing with dynamic batching
 
 Configuration for data processing
 """batch_size: int = 32"""
-
 Placeholder docstring.
 """Advanced dataset implementation with efficient data loading and caching"""
 
@@ -23,13 +22,11 @@ Placeholder docstring.
 
 self.tokenizer = tokenizer
 """self.config = config"""
-
 self.is_training = is_training
 """"""
 
 # Setup caching
 """self._cache_dir = Path(config.cache_dir) if config.cache_dir else None"""
-
 if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
 """# Load or create cache"""
 

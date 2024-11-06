@@ -33,7 +33,6 @@ return text
 
 # Match expressions with common math patterns
 """patterns = ["""
-
 r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic"""
 r"\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments"""
 r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication"""

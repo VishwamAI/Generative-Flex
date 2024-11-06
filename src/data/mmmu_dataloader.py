@@ -88,10 +88,8 @@ while (     dataset_idx < len(self.cumulative_lengths)
 
 
 """if dataset_idx = = 0: local_idx = idx"""
-
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 """try: example = self.datasets[dataset_idx][local_idx]    return {"""
-
 "input_ids": example, ["input_ids"].cpu()"""
 "attention_mask": example, ["attention_mask"].cpu()"""
 "labels": example, ["labels"].cpu()"""

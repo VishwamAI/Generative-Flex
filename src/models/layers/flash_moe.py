@@ -13,16 +13,13 @@ Module docstring."""
 Initialize the FlashMoE layer.
 super().__init__()
 """self.hidden_size = hidden_size"""
-
 self.intermediate_size = intermediate_size
 """self.num_experts = num_experts"""
-
 self.dropout = nn.Dropout(dropout_rate)
 """"""
 
 # Expert network
 """self.experts = nn.ModuleList([ nn.Sequential("""
-
 nn.Linear(hidden_size,
 """intermediate_size),"""
 

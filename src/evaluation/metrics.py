@@ -16,7 +16,6 @@ Core evaluator with essential metrics
 
 Compute core evaluation metrics
 """metrics = {}"""
-
 Log metrics to console
 """
 

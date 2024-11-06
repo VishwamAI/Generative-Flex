@@ -31,11 +31,8 @@ r: DataLoader):"""
 Evaluate the model.
 model.eval()
 """total_loss = 0.0"""
-
 correct = 0
 """total = 0"""
-
-
 """with torch.no_grad():"""
 
 for batch in val_loader: loss = model(batch)

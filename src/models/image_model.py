@@ -19,7 +19,6 @@ batch_sizeheightwidth, channels = images.shape
 
 # Reshape image into patches
 """patches = jnp.reshape("""
-
 images,
 """( batch_size,"""
 
@@ -34,8 +33,6 @@ channels)
 
 # Reshape patches into sequence
 """patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))"""
-
-
 """# Project patches to hidden dimension"""
 
 return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)

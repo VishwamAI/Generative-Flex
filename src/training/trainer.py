@@ -57,7 +57,6 @@ for epoch in range(self.num_epochs):
 Perform a single training step.
 outputs = self.model(**batch)
 """loss = outputs.loss"""
-
 loss.backward()
 """if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
 
@@ -74,7 +73,6 @@ total_loss = 0
 
 forbatchinself.eval_dataloader:withtorch.no_grad():output,s = self.model(**batch)
 """loss = outputs.loss"""
-
 total_loss+=loss.item()
 """"""
 
@@ -84,14 +82,10 @@ eval_loss = total_loss/len(self.eval_dataloader)
 
 """metrics = {"eval_loss":eval_loss,}self.log_metrics(metrics)"""
 """ifeval_loss<self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)"""
-
-
 """returnmetrics"""
 
 
 """defsave_checkpoint(self):is_best:boo = False)->None:Non,e)->None:"""
-
-
 Saveamodelcheckpoint.
 checkpoint_name = f"checkpoint-{{self._step}}""""
 ifis_best:checkpoint_name = "best_model""""
