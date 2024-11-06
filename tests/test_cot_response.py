@@ -22,9 +22,9 @@ from src.models import ChainOfThoughtModel
 class TestCotResponse:
     """
 Class implementing TestCotResponse functionality.
-"""
 
-Module containing specific functionality."""
+Module containing specific functionality.
+
 Set up test environment...
 
 Test response generation...

@@ -22,9 +22,9 @@ from src.models import SimpleModel
 class TestSimpleModel:
     """
 Class implementing TestSimpleModel functionality.
-"""
 
-Module containing specific functionality."""
+Module containing specific functionality.
+
 Set up test environment...
 
 Test forward pass...

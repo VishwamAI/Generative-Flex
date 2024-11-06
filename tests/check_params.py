@@ -20,9 +20,9 @@ import unittest
 class TestParamValidation:
     """
 Class implementing TestParamValidation functionality.
-"""
 
-Module containing specific functionality."""
+Module containing specific functionality.
+
 Set up test environment...
 
 Test parameter validation...

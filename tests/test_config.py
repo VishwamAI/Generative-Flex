@@ -18,11 +18,13 @@ from src.models.reasoning.math_config import MathConfig
 class TestMathConfig:
     """
 Class implementing TestMathConfig functionality.
-"""
 
-Module containing specific functionality."""
+Module containing specific functionality.
+
 Test invalid model type raises ValueError..
-"""Module containing specific functionality."""
+
+Module containing specific functionality.
+
 Test valid model type passes validation..
 """
         config = MathConfig()
