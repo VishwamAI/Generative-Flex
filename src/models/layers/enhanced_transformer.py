@@ -1,3 +1,9 @@
+from typing import Optional, Tuple, Union
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from dataclasses import dataclass
+
 from typing import OptionalDictAny
 import jax
 from typing import Dict

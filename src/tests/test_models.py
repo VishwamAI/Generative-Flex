@@ -1,16 +1,29 @@
-from src.models.audio_model import AudioGenerationModel
-from src.models.image_model import ImageGenerationModel
-from src.models.language_model import LanguageModel
-from src.models.video_model import VideoGenerationModel
-import jax
-import pytest
-# Test configurations
-BATCH_SIZE = 2
-SEQ_LENGTH = 32
-VOCAB_SIZE = 1000
-IMAGE_SIZE = (256, 256)
-AUDIO_SAMPLES = 16000
-VIDEO_FRAMES = 16
-CHANNELS = 3
-PATCH_SIZE = 16
-@pytest.fixture
+import unittest
+import torch
+import torch.nn as nn
+from src.models.transformer import TransformerModel
+from src.config.config import ModelConfig
+
+class TestModels(unittest.TestCase):
+    def setUp(self):
+        self.config = ModelConfig(
+            hidden_size=64,
+            num_attention_heads=4,
+            num_hidden_layers=2,
+            intermediate_size=128
+        )
+
+    def test_transformer_model(self):
+        model = TransformerModel(self.config)
+        self.assertIsInstance(model, nn.Module)
+
+    def test_model_forward(self):
+        model = TransformerModel(self.config)
+        batch_size = 2
+        seq_length = 10
+        input_ids = torch.randint(0, 1000, (batch_size, seq_length))
+        outputs = model(input_ids)
+        self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size))
+
+if __name__ == '__main__':
+    unittest.main()
