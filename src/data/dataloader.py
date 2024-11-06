@@ -11,7 +11,9 @@ import torch
 Advanced Data Processing Pipeline for Generative-Flex"""
 Implements efficient data loading and preprocessing with dynamic batching
 """
+
 @dataclass
+
 """
 
 Configuration for data processing
@@ -32,34 +34,46 @@ Advanced dataset implementation with efficient data loading and caching
 """
 
 
+
 tokenizer: PreTrainedTokenizerconfi
+
 
 
 """
 
 self.tokenizer = tokenizer
 """
+
 self.config = config
+
 """
 
 self.is_training = is_training
 """
 
+
+
 """
 
 # Setup caching
 """
+
 self._cache_dir = Path(config.cache_dir) if config.cache_dir else None
+
 """
 
 if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
 """
+
 # Load or create cache
+
 """
 
 self.load_and_cache_data()
 """
+
 Load and preprocess data with caching
+
 """
 
 
@@ -77,7 +91,9 @@ if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from
         else: self.data = processed_data
         self.length = len(processed_data["input_ids"])
 """
+
 Process raw data into model inputs
+
 """
 
 
@@ -101,7 +117,9 @@ Process raw data into model inputs
     
 }
 """
+
 Get a single example
+
 """
 
 
@@ -115,7 +133,9 @@ return item
 
 def create_dataloader(self): dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:
 """
+
 Create dataloader with optional distributed training support
+
 """
 
 

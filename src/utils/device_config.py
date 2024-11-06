@@ -3,21 +3,23 @@ import jax
 import os
 """
 
-
-
-
 Device configuration utility for handling both CPU and GPU environments.
-
-
-
 
 """
 
 
 
 
-def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bool = True) -> Dict[str, Any]:
-        """Set up device configuration.
+def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bool = True):
+    """
+
+    Set up device configuration.
+
+    """
+    return {'memory_fraction': memory_fraction, 'gpu_allow_growth': gpu_allow_growth}:
+        """
+
+        Set up device configuration.
 
         Args:
             memory_fraction: Fraction of GPU memory to allocate
@@ -25,9 +27,14 @@ def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bo
 
         Returns:
             Dict containing device configuration
+
         """
     Any]:
-        """Configure device settings for optimal performance."""
+        """
+
+        Configure device settings for optimal performance.
+
+        """
 
         config = get_device_info()
 
@@ -39,7 +46,13 @@ def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bo
 
         def get_compute_dtype(self):
     
-    """Get optimal compute dtype based on available hardware."""
+    """
+
+    
+    Get optimal compute dtype based on available hardware.
+
+    
+    """
 
 
 

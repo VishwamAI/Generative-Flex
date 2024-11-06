@@ -6,7 +6,9 @@ import os
 import sys
 import time
 """
+
 Environment setup and verification script.
+
 """
 
 
@@ -18,7 +20,13 @@ def test_flax_installation():
     @nn.compact
     def main(self):
         
-    """Run all environment tests."""
+    """
+
+        
+    Run all environment tests.
+
+        
+    """
 
 
 

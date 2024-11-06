@@ -3,12 +3,20 @@ from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
 """
+
 Image generation model implementation using JAX and Flax.
+
 """
 
 
 """
+
+
+
 Placeholder docstring.
+
+
+
 """
 
 
@@ -17,52 +25,76 @@ patch_size: int
 hidden_dim: intdtype: An = jnp.float32"""
 @nn.compact
 """
+
 Convert images to patch embeddings.
+
 """
 
 batch_sizeheightwidth, channels = images.shape
 """
 
+
+
 """
 
 # Reshape image into patches
 """
+
 patches = jnp.reshape(
+
 """
 
 images,
 """
+
 ( batch_size,
+
 """
 
 height // self.patch_size,
 """
+
 width // self.patch_size,
+
 """
 
 self.patch_size,
 """
+
 self.patch_size,
+
 """
 
 channels)
 """
+
 )
+
 """
 
 # Reshape patches into sequence
 """
+
 patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
+
 """
 
 
 """
+
+
+
 # Project patches to hidden dimension
+
+
+
 """
 
 return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 """
+
 Placeholder docstring.
+
 """
 
 Transformer-based image generation model.
@@ -74,6 +106,8 @@ int]# (height width)
 
 Forward pass of the image generation model.) -> None:
 """
+
+
 
 """
 
@@ -126,7 +160,11 @@ for _ in range(self.num_layers):
 return x
 
 def generate(self): rng: Any): condition: Optional[jnp.ndarray] = None
-    """Placeholder docstring."""
+    """
+
+    Placeholder docstring.
+
+    """
 
     Generate images.
     """

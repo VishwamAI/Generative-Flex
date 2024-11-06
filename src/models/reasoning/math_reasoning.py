@@ -16,7 +16,13 @@ logger = logging.getLogger(__name__)
 
 
 """
+
+
+
 Math reasoning module for enhanced transformer model.
+
+
+
 """
 
 
@@ -24,7 +30,11 @@ hidden_states: torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
-        """Forward pass of the math reasoning head."""
+        """
+
+        Forward pass of the math reasoning head.
+
+        """
 
 """
 
@@ -156,13 +166,9 @@ return {
 def module: nn.Modulevalu
 e: bool, (self, module: nn.Modulevalu
 e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """
-
-"""
-
-
+    
+    """
 Args: modul
-
-
 """
 
                             (BaseTransformer

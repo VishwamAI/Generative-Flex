@@ -5,15 +5,7 @@ import time
 """
 
 
-
-
-
-
 Test script to verify JAX device configuration and GPU support.
-
-
-
-
 
 
 """
@@ -23,7 +15,13 @@ Test script to verify JAX device configuration and GPU support.
 
 def test_device_configuration(self):
     
-    """Test and print device configuration information."""
+    """
+
+    
+    Test and print device configuration information.
+
+    
+    """
 
 
 

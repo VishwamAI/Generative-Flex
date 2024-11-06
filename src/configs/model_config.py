@@ -5,13 +5,17 @@ import json
 import logging
 import yaml
 """
+
 Configuration Management for Generative-Flex
+
 """
 
 
 @dataclass
 """
+
 Model architecture configuration
+
 """
 
 
@@ -30,7 +34,9 @@ gradient_checkpointing: bool = True
 
 @dataclass
 """
+
 Training configuration
+
 """
 
 
@@ -48,7 +54,9 @@ cache_dir: Optional[str] = "cache"
 
 @dataclass
 """
+
 Complete configuration
+
 """
 
 

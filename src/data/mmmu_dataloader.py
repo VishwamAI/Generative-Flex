@@ -21,8 +21,10 @@ MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 
 
-
 MMMU Dataset loader with multimodal support.
+
+
+
 """
 
 
@@ -30,13 +32,9 @@ subjects: Optional[List[str]] = None
 split: str = "validation"
 tokenizer: Any = None
 max_length: int = 512)  ) -> None: Initializ, e the dataset.    """
-
-"""
-
-
+    
+    """
 Args: subject
-
-
 """
 
     super().__init__()
@@ -101,22 +99,34 @@ except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")if n
 Get a single example with proper tensor handling.
 while (     dataset_idx < len(self.cumulative_lengths)
 """
+
 and idx >= self.cumulative_lengths[dataset_idx]
+
 """
 
 ):
 """
+
 dataset_idx += 1
+
 """
 
 
 """
+
+
+
 if dataset_idx == 0: local_idx = idx
+
+
+
 """
 
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 """
+
 try: example = self.datasets[dataset_idx][local_idx]    return {
+
 """
 
 "input_ids": example, ["input_ids"].cpu()"""
@@ -126,11 +136,15 @@ try: example = self.datasets[dataset_idx][local_idx]    return {
 if "images" in example"""
 else torch.zeros(73224, 224)
 """
+
 ),
+
 """
 
 })
 """
+
+
 
 """
 
@@ -144,10 +158,14 @@ else torch.zeros(73224, 224)
 }
 """
 
+
+
 """
 
 }
 """
+
+
 
 """
 
@@ -163,6 +181,8 @@ Collate batch with proper tensor handling.
 "metadata": []"""
 }
 """
+
+
 
 """
 
@@ -190,13 +210,7 @@ return {
 
 
 
-
 @staticmethod
-
-
-
-
-
 
 
 
@@ -206,7 +220,9 @@ return {
 
 def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
 """
+
 DataLoader
+
 """
 
 Create dataloaders with proper tensor handling.

@@ -4,8 +4,8 @@ import logging
 import torch
 """
 
-
 Base trainer implementation.
+
 """
 
 
@@ -13,7 +13,13 @@ logger = logging.getLogger(__name__)
 
 
 """
+
+
+
 Base trainer class.
+
+
+
 """
 
 
@@ -27,7 +33,9 @@ logging_steps: int = 100
 evaluation_steps: int = 500
 save_steps: int = 1000
 """
+
 Initialize the trainer.
+
 """
 
 
@@ -49,7 +57,11 @@ self._epoch = 0
 self._best_eval_loss = float("inf")
 
 """
+
+
 Train the model.
+
+
 """
 
 
@@ -73,20 +85,20 @@ for epoch in range(self.num_epochs):
 Perform a single training step.
 outputs = self.model(**batch)
 """
+
 loss = outputs.loss
+
 """
 
 loss.backward()
 """
+
 if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)
+
 """
 
 return loss
 """
-
-
-
-
 
 
 
@@ -97,69 +109,99 @@ return loss
 def evaluate(self): ) -> None: Dict[str):
 """
 
-Evaluate the model.
+Evaluatethemodel.
 
 """
 
-total_loss = 0
+total_loss=0
 """
+
+
 
 """
 
-for batch in self.eval_dataloader: withtorch.no_grad(): output, s = self.model(**batch)
-"""
-loss = outputs.loss
+forbatchinself.eval_dataloader:withtorch.no_grad():output,s=self.model(**batch)
 """
 
-total_loss += loss.item()
-"""
+loss=outputs.loss
 
 """
 
-eval_loss = total_loss / len(self.eval_dataloader)
+total_loss+=loss.item()
 """
+
+
+
+"""
+
+eval_loss=total_loss/len(self.eval_dataloader)
+"""
+
 self.model.train()
+
+"""
+
+
+"""metrics={"eval_loss":eval_loss,}self.log_metrics(metrics)"""
+
+
 """
 
 
-"""metrics = {"eval_loss": eval_loss, }                                        self.log_metrics(metrics)"""
+
+ifeval_loss<self._best_eval_loss:self._best_eval_loss=eval_lossself.save_checkpoint(is_best=True)
 
 
-"""
-if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss                                        self.save_checkpoint(is_best=True)
-"""
 
-
-"""
-return metrics
 """
 
 
 """
-def save_checkpoint(self): is_best: boo = False                                        ) -> None: Non, e) -> None:
+
+
+
+returnmetrics
+
+
+
 """
 
 
-Save a model checkpoint.
-checkpoint_name = f"checkpoint-{{self._step}}""""
-if is_best: checkpoint_name = "best_model""""
+"""
+
+
+
+defsave_checkpoint(self):is_best:boo=False)->None:Non,e)->None:
+
+
+
+"""
+
+
+Saveamodelcheckpoint.
+checkpoint_name=f"checkpoint-{{self._step}}""""
+ifis_best:checkpoint_name="best_model""""
 torch.save(
 """
+
 {
+
 """
 
-"optimizer_state_dict": self, .optimizer.state_dict()"""
-"step": self, ._step"""
-"epoch": self, ._epoch"""
+"optimizer_state_dict":self,.optimizer.state_dict()"""
+"step":self,._step"""
+"epoch":self,._epoch"""
 },
 """f"{{self.output_dir}}/{{checkpoint_name}}.pt"""
 "
 )
-"""logger.info(f"Saved checkpoint: {{checkpoint_name}}")def log_metrics(self): metrics: Dict[str): float, ]"""
+"""logger.info(f"Savedcheckpoint:{{checkpoint_name}}")deflog_metrics(self):metrics:Dict[str):float,]"""
 
 ) -> None: None:
 """
+
 Log training metrics.
+
 """
 
                                 metric_str = " ".join(f"{{k}}: {{v: .4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")

@@ -13,10 +13,14 @@ self.metrics_history = []
 def log_metrics(
     self,
     metrics: Dict[str,
-    Any],
+Any],
     step: int
 ):
-    """Log metrics for a training step"""
+    """
+
+    Log metrics for a training step
+
+    """
 
 
 

@@ -2,17 +2,31 @@ from typing import OptionalDictAny
 import torch
 import torch.nn as nn
 """
+
 Base transformer implementation for multimodal processing.
+
 """
 
 
 """
+
+
+
 Base transformer model for multimodal processing.
+
+
+
 """
 
 
 """
+
+
+
 Forward pass through the base transformer.
+
+
+
 """
 
 
@@ -25,12 +39,24 @@ return hidden_states
 
 
 """
+
+
+
 Single transformer layer implementation.
+
+
+
 """
 
 
 """
+
+
+
 Forward pass through the transformer layer.
+
+
+
 """
 
 
@@ -45,6 +71,12 @@ return self.norm2(hidden_states + layer_output)
 
 
 """
+
+
+
 Multi-head attention implementation.
+
+
+
 """
 
