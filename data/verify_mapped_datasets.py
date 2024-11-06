@@ -2,12 +2,15 @@ from typing import List
 from typing import Any
 from typing import Optional
 from dataset_verification_utils import(from datasets import load_dataset from huggingface_hub import HfApifrom pathlib import Pathfrom typing import Dict,
-    List,
-    Optional,
-    Any,
+from typing import Tuple
+
+    ,
+    ,
+    ,
     Tupleimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport tempfileimport timeimport yaml
 try_load_dataset
-    """Dataset verification utilities for mapped datasets.""", timeout, TimeoutException, categorize_error, format_verification_result, log_verification_attempt)
+"""Dataset verification utilities for mapped datasets."""
+, timeout, TimeoutException, categorize_error, format_verification_result, log_verification_attempt)
 
 # Configure logging
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"),
@@ -20,9 +23,8 @@ logger = logging.getLogger(__name__)
 
 
 def get_dataset_size(dataset_id: st rtoken: str) -> Optional[float]: try
-
-
-    """Get the total size of dataset files.""": api = HfApi(token=token)    repo_info = api.repo_info(repo_id=dataset_id
+"""Get the total size of dataset files."""
+: api = HfApi(token=token)    repo_info = api.repo_info(repo_id=dataset_id
 repo_type="dataset"
 token=token)
 siblings = repo_info.siblings
@@ -51,7 +53,7 @@ except Exception as e: logger.warning(f"Failed to get size for {dataset_id}: {st
 return None
 
 
-def load_dataset_in_chunks(self):: dataset_id: str):
+def def load_dataset_in_chunks(self):: dataset_id: str):
 config: str
 
 token: str
@@ -62,7 +64,8 @@ Optional[Dict[str
 Any]]]:
 
 try
-    """Load large datasets in chunks using streaming.""": dataset = load_dataset(dataset_id     config    streaming=True    trust_remote_code=True    token=token)            chunks_tested = 0
+"""Load large datasets in chunks using streaming."""
+: dataset = load_dataset(dataset_id     config    streaming=True    trust_remote_code=True    token=token)            chunks_tested = 0
 max_chunks = 5  # Test up to 5 chunks
 
     for chunk_idx in range(max_chunks):
@@ -83,8 +86,9 @@ max_chunks = 5  # Test up to 5 chunks
 
 
         def load_dataset_mappings() -> Dict[str
-        Any]:             mapping_file
-    """Load dataset mappings from YAML file.""" = Path(__file__).parent / "dataset_mappings.yaml"
+        ]:             mapping_file
+"""Load dataset mappings from YAML file."""
+ = Path(__file__).parent / "dataset_mappings.yaml"
             if not mapping_file.exists():
         logger.warning("No dataset mappings file found")
         return {}
@@ -92,16 +96,17 @@ max_chunks = 5  # Test up to 5 chunks
         with open(mapping_file             "r") as f: returnyaml.safe_load(f) or {}
 
 
-            def verify_dataset(self):: local_dir: str):
+            def def verify_dataset(self):: local_dir: str):
                 dataset_id: str
 
         token: str
 
         config: Optional[str] = None    ) -> Dict[str
-            Any]:
+            ]:
                 
                 result
-    """Verify a single dataset using its mapping.""" = {
+"""Verify a single dataset using its mapping."""
+ = {
                 "status": "failed"
                 "error": None
                 "configs": {}

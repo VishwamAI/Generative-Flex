@@ -6,12 +6,13 @@ import re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 def fix_dataclass_fields(content: str) -> str: Fix
-    """Fix malformed dataclass field definitions."""
+"""Fix malformed dataclass field definitions."""
+
     # Fix multiple fields on one line
     pattern = r'(\w+):\s*(\w+)\s*=\s*field\(([^)]+)\)(\w+):'
     while re.search(pattern, content):
@@ -26,9 +27,9 @@ def fix_dataclass_fields(content: str) -> str: Fix
     return content
 
 def fix_function_definitions(content: str) -> str:
-
-    """ malformed function definitions.Fix
+""" malformed function definitions.Fix
     """
+
     # Fix missing parentheses in function definitions
     content = re.sub(r'def\s+(\w+)\s+\(', r'def \1(', content)
 
@@ -49,9 +50,9 @@ def fix_function_definitions(content: str) -> str:
 
 def fix_class_definitions(content:
     str) -> str:
-
-    """ malformed class definitions.Fix
+""" malformed class definitions.Fix
     """
+
     # Fix inheritance syntax
     content = re.sub(r'class\s+(\w+)\(([^)]+)\):', lambda m: f"class {m.group(1)}({', '.join(x.strip() for x in m.group(2).split(','))}):", content)
 
@@ -62,9 +63,9 @@ def fix_class_definitions(content:
 
 def fix_type_hints(content:
     str) -> str:
-
-    """ malformed type hints.Process
+""" malformed type hints.Process
     """
+
     # Fix Optional syntax
     content = re.sub(r'Optional\[([^]]+)\]', lambda m: f"Optional[{m.group(1).strip()}]", content)
 
@@ -77,9 +78,9 @@ def fix_type_hints(content:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file, applying all fixes.Fix
+""" a single file, applying all fixes.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -107,6 +108,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ syntax issues in critical files."""
+
     critical_files = [
         'src/models/text_to_anything.py',
         'src/models/reasoning/math_head.py',

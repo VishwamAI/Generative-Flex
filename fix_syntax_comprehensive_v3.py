@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues comprehensively across all Python files.""" re
+"""Fix syntax issues comprehensively across all Python files."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 def fix_docstrings(content: str) -> str: Placeholder
-    """Fix docstring formatting and placement."""
+"""Fix docstring formatting and placement."""
+
     # Fix class docstrings with proper indentation
     content = re.sub(
         r'(class\s+[^:]+:)\s*"""([^"]+)"""',
@@ -39,16 +41,16 @@ def fix_docstrings(content: str) -> str: Placeholder
     content = re.sub(
         r'""""""',
         '""" docstring.Fix
-    """',
+"""',
         content
     )
 
     return content
 
 def fix_type_annotations(content: str) -> str:
-
-    """ type annotation syntax.Fix
     """
+ type annotation syntax.Fix
+"""
     # Fix field type annotations
     content = re.sub(
         r'(\w+):\s*([^=\n]+)\s*=\s*field\(([^)]+)\)',
@@ -77,11 +79,12 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature formatting.Format
     """
+ method signature formatting.Format
+"""
     def format_params(params: str) -> str:
-        """ parameters with proper spacing.Fix
+    """
+ parameters with proper spacing.Fix
     """
         if not params.strip():
             return ""
@@ -106,9 +109,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_dataclass_fields(content: str) -> str:
-
-    """ dataclass field definitions.Fix
+""" dataclass field definitions.Fix
     """
+
     # Fix list fields with default_factory
     content = re.sub(
         r'(\w+):\s*List\[[^\]]+\]\s*=\s*field\(default_factory=[^)]+\)',
@@ -126,9 +129,9 @@ def fix_dataclass_fields(content: str) -> str:
     return content
 
 def fix_line_continuations(content: str) -> str:
-
-    """ line continuation issues.Fix
+""" line continuation issues.Fix
     """
+
     # Fix dictionary comprehensions
     content = re.sub(
         r'{([^}]+)}\s*#\s*([^\n]+)',
@@ -146,9 +149,9 @@ def fix_line_continuations(content: str) -> str:
     return content
 
 def fix_imports(content: str) -> str:
-
-    """ import statement formatting.Process
+""" import statement formatting.Process
     """
+
     # Fix import line breaks
     content = re.sub(
         r'from\s+([^import]+)import\s+([^,\n]+)\s*,\s*([^\n]+)',
@@ -159,9 +162,9 @@ def fix_imports(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file.Process
+""" a single file.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -181,6 +184,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

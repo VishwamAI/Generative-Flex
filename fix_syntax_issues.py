@@ -1,13 +1,13 @@
 from pathlib import Path
 import re
+from typing import List
+
 
 
 
 def fix_indentation(content) -> None: lines
-
-
-
-    """Fix indentation issues.""" = content.split("\n")
+"""Fix indentation issues."""
+ = content.split("\n")
 fixed_lines = []
 current_indent = 0
 
@@ -43,7 +43,7 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                        def main(self)::                    """Fix syntax issues in all Python files."""        # List of files with known syntax issues):
+                        def def main(self)::                    """Fix syntax issues in all Python files."""        # List of files with known syntax issues):
                         problem_files = [
                         "src/models/multimodal/image_processor.py",
                         "src/models/multimodal/base_transformer.py",

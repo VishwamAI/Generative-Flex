@@ -9,9 +9,8 @@ os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 
 def format_size(size_bytes) -> None: for
-
-
-    """Format size in bytes to human readable string""" unit in ["B"
+"""Format size in bytes to human readable string"""
+ unit in ["B"
 "KB"
 "MB"
 "GB"
@@ -20,7 +19,7 @@ if size_bytes < 1024.0: returnf"{size_bytes:.2f} {unit}"
 size_bytes /= 1024.0
 
 
-    def analyze_model(self)::    print):
+    def def analyze_model(self)::    print):
         try: print("Loading base model configuration...")
         base_config = AutoConfig.from_pretrained("facebook/opt-1.3b")
 

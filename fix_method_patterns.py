@@ -3,17 +3,19 @@ from typing import Any
 from typing import Optional
 
 import
-    """Fix specific method definition patterns in Python files.""" re
+"""Fix specific method definition patterns in Python files."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_method_definition(line: str) -> str: Fix
-    """Fix method definition formatting."""
+"""Fix method definition formatting."""
+
 # Fix self parameter on its own line
 if re.match(r'\s*self\s*
 \s*$'
@@ -41,10 +43,9 @@ return line
 
 
 def fix_parameter_types(line: str) -> str:
-
-
-    """ parameter type hint formatting.Fix
+""" parameter type hint formatting.Fix
     """
+
 # Fix missing spaces after colons in type hints
 line = re.sub(r'(\w+): (\w+)'
 r'\1: \2'
@@ -67,10 +68,9 @@ return line
 
 
 def fix_return_type(line: str) -> str:
-
-
-    """ return type hint formatting.Fix
+""" return type hint formatting.Fix
     """
+
 # Fix return type annotations
     if '->' in line:
         # Handle multiple closing parentheses
@@ -88,10 +88,9 @@ return line
 
 
 def fix_class_method(content: str) -> str:
-
-
-    """ class method formatting.Process
+""" class method formatting.Process
     """
+
 lines = content.splitlines()
 fixed_lines = []
 in_class = False
@@ -148,10 +147,9 @@ return '\n'.join(fixed_lines)
 
 
 def process_file(file_path: str) -> bool:
-
-
-    """ a single file with robust error handling.Fix
+""" a single file with robust error handling.Fix
     """
+
     try: with open(file_path
 'r'
 encoding='utf-8') as f: content = f.read()
@@ -180,8 +178,9 @@ return False
         return False
 
 
-def main():
+def def main():
     """ method patterns in all Python files."""
+
 # Get all Python files
 python_files = []
 for root

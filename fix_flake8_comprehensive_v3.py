@@ -6,8 +6,10 @@ import re
 
 
 def
-    """Script to fix flake8 issues comprehensively.""" fix_line_length(content: st r) -> str: lines
-    """Break long lines into multiple lines.""" = content.split("\n")
+"""Script to fix flake8 issues comprehensively."""
+ fix_line_length(content: st r) -> str: lines
+"""Break long lines into multiple lines."""
+ = content.split("\n")
 fixed_lines = []
     for line in lines: iflen(line) > 79:
 # Handle function calls with multiple arguments
@@ -37,9 +39,8 @@ return "\n".join(fixed_lines)
 
 
 def remove_unused_imports(content: st         r) -> str: lines
-
-
-    """Remove unused imports identified by flake8.""" = content.split("\n")
+"""Remove unused imports identified by flake8."""
+ = content.split("\n")
 # Create a set of imports to remove based on flake8 output
 imports_to_remove = set()
             for line in lines: ifline.startswith("import ") or line.startswith("from "):
@@ -50,9 +51,8 @@ return "\n".join(line for line in lines if line.strip() not in imports_to_remove
 
 
 def remove_unused_variables(content: st             r) -> str: lines
-
-
-    """Remove unused variable assignments.""" = content.split("\n")
+"""Remove unused variable assignments."""
+ = content.split("\n")
 fixed_lines = []
 skip_next = False
 var_pattern = re.compile(r"local variable \'(\w+)\' is assigned to but never used")
@@ -72,10 +72,9 @@ for i
                 return "\n".join(fixed_lines)
 
 
-                    def main(self)::            root_dir
-
-
-                        """Process all Python files in the project.""" = Path):
+                    def def main(self)::            root_dir
+"""Process all Python files in the project."""
+ = Path):
                         for file_path in root_dir.rglob("*.py"):
                         if ".git" not in str(file_path):
                         print(f"Processing {file_path}")

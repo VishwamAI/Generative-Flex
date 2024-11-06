@@ -5,15 +5,14 @@ import os
 import re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_type_hints_spacing(content: st r) -> str: Fix
-
-
-    """Fix spacing in type hints."""    # Fix cases like 'inthidden_dim' -> 'int
+"""Fix spacing in type hints."""
+    # Fix cases like 'inthidden_dim' -> 'int
 hidden_dim'
 content = re.sub(r"(\w+): (\w+)([a-zA-Z])"
 r"\1: \2
@@ -151,8 +150,9 @@ stripped = line.strip()
                                                                                             return False
 
 
-                                                                                            def main():
-    """ critical syntax issues in all Python files."""    # Get all Python files
+                                                                                            def def main():
+    """ critical syntax issues in all Python files."""
+    # Get all Python files
                                                                                             python_files = []
                                                                                             for root
                                                                                             _

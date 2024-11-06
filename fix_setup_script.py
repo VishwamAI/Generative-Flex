@@ -1,15 +1,15 @@
 import os
 
 
-def fix_setup_script(self)::         setup_content
-
-
-    """Fix setup.py indentation and structure.""" = '''from setuptools import setup):
+def def fix_setup_script(self)::         setup_content
+"""Fix setup.py indentation and structure."""
+ = '''from setuptools import setup):
 find_packages
 
 
 setup
-    """Setup script for Generative-Flex."""( name="generative_flex",version="0.1.0",description="A flexible generative AI framework",author="VishwamAI",author_email="contact@vishwamai.org",packages=find_packages(),
+"""Setup script for Generative-Flex."""
+( name="generative_flex",version="0.1.0",description="A flexible generative AI framework",author="VishwamAI",author_email="contact@vishwamai.org",packages=find_packages(),
 install_requires=[
 "numpy>=1.19.2",
 "torch>=2.0.0",

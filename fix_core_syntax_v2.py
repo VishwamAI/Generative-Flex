@@ -1,15 +1,15 @@
 
 
 import
-    """Fix core syntax issues in configuration files.""" re
+"""Fix core syntax issues in configuration files."""
+ re
 from pathlib import Path
 import ast
 
 
 def fix_indentation_and_spacing(content: st r) -> str: lines
-
-
-    """Fix basic indentation and spacing issues.""" = []
+"""Fix basic indentation and spacing issues."""
+ = []
 current_indent = 0
 
 for line in content.split("\n"):
@@ -40,7 +40,8 @@ stripped = line.lstrip()
 
 
                         def fix_function_definition(content: st                             r) -> str: def
-    """Fix function definition syntax.""" fix_single_def(match):        name = match.group(1)        params = match.group(2) or ""
+"""Fix function definition syntax."""
+ fix_single_def(match):        name = match.group(1)        params = match.group(2) or ""
                         return_type = match.group(3)
 
                         # Fix parameter formatting
@@ -66,7 +67,8 @@ stripped = line.lstrip()
 
 
                                         def fix_class_definition(content: st                                             r) -> str: def
-    """Fix class definition syntax.""" fix_single_class(match):
+"""Fix class definition syntax."""
+ fix_single_class(match):
     name = match.group(1)        bases = match.group(2)
 
                                             if bases: bases = ", ".join(b.strip() for b in bases.split(", ") if b.strip())
@@ -80,9 +82,8 @@ stripped = line.lstrip()
 
                                                 def fix_dataclass_fields(content:
     st                                                 r) -> str: if
-
-
-                                                    """Fix dataclass field definitions.""" "@dataclass" not in content:
+"""Fix dataclass field definitions."""
+ "@dataclass" not in content:
     return content
 
                                                 lines = []
@@ -116,9 +117,8 @@ if (                                                             in_class       
 
 
                                                                         def process_file(file_path: st                                                                         r) -> None: try
-
-
-                                                                            """Process a single file applying fixes.""":
+"""Process a single file applying fixes."""
+:
                                                                         with open(file_path                                                                             "r"                                                                            encoding="utf-8") as f: content = f.read()
 
                                                                         # Skip empty files
@@ -143,10 +143,9 @@ if (                                                             in_class       
                                                                                         except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                                                                        def main():        core_files
-
-
-                                                                                            """Process core configuration files.""" = [
+                                                                                        def def main():        core_files
+"""Process core configuration files."""
+ = [
                                                                                         "src/config/config.py",
                                                                                         "src/config/training_config.py",
                                                                                         "src/models/reasoning/math_config.py",

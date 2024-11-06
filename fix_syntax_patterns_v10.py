@@ -4,19 +4,19 @@ from typing import Optional
 
 
 import
-    """Fix specific syntax patterns one at a time.""" re
+"""Fix specific syntax patterns one at a time."""
+ re
 from pathlib import Path
 import ast
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_basic_syntax(content: st r) -> str: Fix
-
-
-    """Fix basic syntax issues."""    # Remove extra spaces around colons in type hints
+"""Fix basic syntax issues."""
+    # Remove extra spaces around colons in type hints
 content = re.sub(r"\s*: \s*(\w+)"
 r": \1"
 content)
@@ -192,7 +192,8 @@ for line in lines: if line.lstrip().startswith("def "):
 
 
                                                                                                                                     def main() -> None:
-    """ all Python files in the project."""    # Process core files first
+    """ all Python files in the project."""
+    # Process core files first
                                                                                                                                     core_files = [
                                                                                                                                     "src/config/config.py",
                                                                                                                                     "src/config/training_config.py",

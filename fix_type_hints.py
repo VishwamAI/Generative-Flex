@@ -3,18 +3,20 @@ from typing import Any
 from typing import Optional
 
 import
-    """Fix type hints and dataclass field definitions.""" re
+"""Fix type hints and dataclass field definitions."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_type_hints(content:
     str) -> str: lines
-    """Fix type hint formatting.""" = content.splitlines()
+"""Fix type hint formatting."""
+ = content.splitlines()
 fixed_lines = []
 
     for line in lines:
@@ -48,7 +50,8 @@ fixed_lines = []
 
 
                             def fix_dataclass_fields(content: str) -> str: lines
-    """Fix dataclass field definitions.""" = content.splitlines()
+"""Fix dataclass field definitions."""
+ = content.splitlines()
                                 fixed_lines = []
                                 in_class = False
                                 class_indent = 0
@@ -93,7 +96,8 @@ if '
 
 
                                                                                         def fix_class_attributes(content: str) -> str: lines
-    """Fix class attribute definitions.""" = content.splitlines()
+"""Fix class attribute definitions."""
+ = content.splitlines()
                                                                                             fixed_lines = []
                                                                                             in_class = False
                                                                                             class_indent = 0
@@ -133,7 +137,8 @@ if '
 
 
                                                                                                                                                 def process_file(file_path: str) -> bool: try
-    """Process a single file with robust error handling.""":
+"""Process a single file with robust error handling."""
+:
                                                                                                                                                     with open(file_path                                                                                                                                                         'r'                                                                                                                                                        encoding='utf-8') as f: content = f.read()
 
                                                                                                                                                     # Apply fixes in sequence
@@ -149,8 +154,9 @@ if '
                                                                                                                                                                 return False
 
 
-                                                                                                                                                                    def main():
+                                                                                                                                                                    def def main():
     """Fix type hints and dataclass fields in all Python files."""
+
                                                                                                                                                                         # Get all Python files
                                                                                                                                                                         python_files = []
                                                                                                                                                                         for root

@@ -2,17 +2,16 @@ from typing import Tuple
 from typing import Dict
 from typing import Optional
 from typing import List,
-    Dict,
-    Tuple,
-    Optional
+    ,
+    ,
+    
 import os
 import re
 
 
 def fix_docstrings(content: st r) -> str: lines
-
-
-    """Fix docstring formatting and placement.""" = content.split("\n")
+"""Fix docstring formatting and placement."""
+ = content.split("\n")
 fixed_lines = []
 in_class = False
 class_indent = 0
@@ -48,8 +47,9 @@ line in enumerate(lines):
                         return "\n".join(fixed_lines)
 
 
-                        def main():
-    """ all Python files in the project."""            for root
+                        def def main():
+    """ all Python files in the project."""
+            for root
                         _
                                 files in os.walk("."):
                                 if ".git" in root or "venv" in root or "__pycache__" in root: continueforfile in files: iffile.endswith(".py"):

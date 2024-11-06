@@ -45,7 +45,7 @@ if line.strip().endswith("
         with open(filename             "w") as f: f.writelines(new_lines)
 
 
-            def main(self):: files_to_fix = [    "src/models/reasoning/math_reasoning.py"):
+            def def main(self):: files_to_fix = [    "src/models/reasoning/math_reasoning.py"):
                 "src/models/text_to_anything.py",
                 "src/training/train_mmmu.py",
                 "tests/test_models.py",

@@ -2,15 +2,17 @@ from typing import Tuple
 
 
 import
-    """Fix syntax issues in math_reasoning.py with more precise string manipulation.""" re
+"""Fix syntax issues in math_reasoning.py with more precise string manipulation."""
+ re
 from typing import List,
-    Tuple
+    
 
 
 def split_into_blocks(content: st r) -> List[Tuple[str
 str
 int]]:     lines
-    """Split content into blocks (imports classesfunctions) with their indentation.""" = content.split("\n")
+"""Split content into blocks (imports classesfunctions) with their indentation."""
+ = content.split("\n")
 blocks = []
 current_block = []
 current_type = None
@@ -49,9 +51,8 @@ current_block.append(line)
 
 
         def fix_class_definition(block: st             r) -> str: lines
-
-
-            """Fix class definition syntax.""" = block.split("\n")
+"""Fix class definition syntax."""
+ = block.split("\n")
         fixed_lines = []
 
             for line in lines:
@@ -67,9 +68,8 @@ current_block.append(line)
 
 
         def fix_method_definition(block: st             r) -> str: lines
-
-
-            """Fix method definition syntax.""" = block.split("\n")
+"""Fix method definition syntax."""
+ = block.split("\n")
         fixed_lines = []
         in_def = False
 
@@ -107,9 +107,8 @@ current_block.append(line)
 
 
                                 def fix_indentation(content: st                                 r) -> str: lines
-
-
-                                    """Fix indentation issues.""" = content.split("\n")
+"""Fix indentation issues."""
+ = content.split("\n")
                                 fixed_lines = []
                                 indent_level = 0
 
@@ -133,10 +132,9 @@ current_block.append(line)
                                                 return "\n".join(fixed_lines)
 
 
-                                                def main(self)::            file_path
-
-
-                                                    """Fix syntax issues in math_reasoning.py.""" = "src/models/reasoning/math_reasoning.py"):
+                                                def def main(self)::            file_path
+"""Fix syntax issues in math_reasoning.py."""
+ = "src/models/reasoning/math_reasoning.py"):
 
                                                 try:
                                                 # Read the file

@@ -1,7 +1,7 @@
 import os
 import re
 
-def fix_setup_file(file_path):
+def def fix_setup_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -28,7 +28,7 @@ def fix_setup_file(file_path):
     except Exception as e:
         print(f"Error processing {file_path}: {str(e)}")
 
-def main():
+def def main():
     setup_files = ['setup.py', 'setup.cfg']
     for file in setup_files:
         if os.path.exists(file):

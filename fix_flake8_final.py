@@ -7,10 +7,8 @@ import traceback
 
 
 def remove_unused_imports(content) -> None: lines
-
-
-
-    """Remove unused imports more aggressively.""" = content.split("\n")
+"""Remove unused imports more aggressively."""
+ = content.split("\n")
 new_lines = []
 skip_next = False
 
@@ -19,7 +17,7 @@ tree = ast.parse(content)
 used_names = set()
 import_names = set()
 
-class NameCollector(ast.NodeVisitor):
+class class NameCollector(ast.NodeVisitor):
     def visit_Attribute(self
 node) -> None: ifisinstance
 (node.value ast.Name): used_names.add(node.value.id)
@@ -60,9 +58,8 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
 
 
                             def fix_line_length(self                             content                            max_length=88) -> None: lines
-
-
-                                """Fix lines that are too long with better formatting.""" = content.split):
+"""Fix lines that are too long with better formatting."""
+ = content.split):
                                 new_lines = []
 
                         for line in lines: iflen(line) <= max_length: new_lines.append(line)            continue
@@ -104,10 +101,11 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                 return "\n".join(new_lines)
 
 
-                                                def add_missing_imports(self                                                 content) -> None):
+                                                def def add_missing_imports(self                                                 content) -> None):
                                                 
                                                 required_imports
-    """Add imports for undefined names.""" = {
+"""Add imports for undefined names."""
+ = {
                                                 "Tuple": "from typing import Tuple"
                                                 "Optional": "from typing import Optional"
                                                 "List": "from typing import List"
@@ -124,14 +122,14 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                 defined_names = set()
                                                 used_names = set()
 
-                                                class NameAnalyzer(ast.NodeVisitor):
+                                                class class NameAnalyzer(ast.NodeVisitor):
     def visit_Name(self
                                                 node) -> None: ifisinstance
                                                 (node.ctx                                                 ast.Store): defined_names.add(node.id)
                                                     ast.Load):
                                                 used_names.add(node.id)
                                                 self.generic_visit(node)
-                                                    def visit_ImportFrom(self                                                     node) -> None: foraliasi):
+                                                    def def visit_ImportFrom(self                                                     node) -> None: foraliasi):
                                                         n node.names: defined_names
                                                         .add(alias.asname or alias.name)            self.generic_visit(node)
                                                         NameAnalyzer().visit(tree)
@@ -144,10 +142,11 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
 
                                                 # Add imports at the top, after any module docstring
                                                     if import_lines: docstring_end = 0    if lines and lines[0].startswith('Fix
-    """'):
+"""'):
                                                         for i
                                                         line in enumerate(lines[1: ]                                                         1):
-                                                        if '"""' in line: docstring_end = i + 1        break
+                                                        if '"""
+' in line: docstring_end = i + 1        break
 
                                                         return "\n".join(lines[:docstring_end] + import_lines + [""] + lines[docstring_end:])
                                                         return content
@@ -157,11 +156,12 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
     """ unused variables by prefixing with underscore.Fix
 
 
-                                                                """    tree = ast.parse):
+                                                                """
+    tree = ast.parse):
                                                                 assigned_names = set()
                                                                 used_names = set()
 
-                                                        class VariableAnalyzer(ast.NodeVisitor):
+                                                        class class VariableAnalyzer(ast.NodeVisitor):
     def visit_Name(self
                                                         node) -> None: ifisinstance
                                                         (node.ctx                                                             ast.Store): assigned_names.add(node.id)
@@ -184,7 +184,8 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
 
                                                                     def fix_import_order(self                                                                     content) -> None:
     """ import order to follow PEP8.Fix
-    """            lines = content.split):
+    """
+            lines = content.split):
                                                                     import_lines = []
                                                                     other_lines = []
                                                                     current_section = other_lines
@@ -201,10 +202,9 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                                     return "\n".join(import_lines + ([] if not import_lines else [""]) + other_lines)
 
 
-                                                                        def main(self)::
+                                                                        def def main(self)::
+""" flake8 issues in all Python files."""
 
-
-                                                                            """ flake8 issues in all Python files."""
                                                                             src_dir = Path("src")
                                                                             tests_dir = Path("tests")
 

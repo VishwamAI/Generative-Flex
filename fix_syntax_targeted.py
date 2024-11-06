@@ -6,12 +6,13 @@ import re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 def fix_string_literals_in_default_factory(content: str) -> str: def
-    """Fix string literals in default_factory lambda functions.""" fix_string_list(match):
+"""Fix string literals in default_factory lambda functions."""
+ fix_string_list(match):
         # Extract the string list content
         content = match.group(1)
         # Split by commas and clean each item
@@ -29,7 +30,8 @@ def fix_string_literals_in_default_factory(content: str) -> str: def
     return content
 
 def fix_docstring_placement(content: str) -> str: Fix
-    """Fix docstring placement and indentation."""
+"""Fix docstring placement and indentation."""
+
     # Fix class docstrings
     content = re.sub(
         r'(class\s+\w+[^:]*:)(\s*)"""',
@@ -46,9 +48,9 @@ def fix_docstring_placement(content: str) -> str: Fix
     return content
 
 def fix_class_definitions(content: str) -> str:
-
-    """ class and method definitions.Fix
+""" class and method definitions.Fix
     """
+
     # Fix class method definitions
     content = re.sub(
         r'class\s+(\w+):\s*def',
@@ -65,9 +67,9 @@ def fix_class_definitions(content: str) -> str:
     return content
 
 def fix_type_annotations(content: str) -> str:
-
-    """ type annotation syntax.Process
+""" type annotation syntax.Process
     """
+
     # Fix field type annotations
     content = re.sub(
         r'(\w+):\s*([^=\n]+)\s*=\s*field\(([^)]+)\)',
@@ -84,9 +86,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file, applying all fixes.Fix
+""" a single file, applying all fixes.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -113,8 +115,9 @@ def process_file(file_path: Path) -> None:
         print(f"Successfully processed {file_path}")
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
-def main():
+def def main():
     """ syntax issues in critical files."""
+
     critical_files = [
         'src/models/text_to_anything.py',
         'src/config/training_config.py',

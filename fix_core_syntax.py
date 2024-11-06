@@ -5,13 +5,16 @@ from typing import Optional
 
 
 import
-    """Fix syntax issues in core files only, with more aggressive pattern matching.""" re
+"""Fix syntax issues in core files only, with more aggressive pattern matching."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+from typing import Union
+
+    ,
+    ,
+    ,
+    
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -28,9 +31,8 @@ CORE_FILES = [
 
 
 def fix_dataclass_fields(content: st r) -> str: lines
-
-
-    """Fix dataclass fields with proper formatting.""" = content.split("\n")
+"""Fix dataclass fields with proper formatting."""
+ = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 class_indent = 0
@@ -121,7 +123,8 @@ for pattern
 
 
         def main() -> None:
-    """ syntax issues in core files."""        print("Starting to process core files...")
+    """ syntax issues in core files."""
+        print("Starting to process core files...")
         successful = 0
         failed = 0
 

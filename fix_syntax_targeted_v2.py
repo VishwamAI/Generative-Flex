@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues in specific files that are failing Black formatting.""" re
+"""Fix syntax issues in specific files that are failing Black formatting."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 def fix_docstring_indentation(content: str) -> str: Fix
-    """Fix docstring indentation issues."""
+"""Fix docstring indentation issues."""
+
     # Fix class-level docstrings
     content = re.sub(
         r'(class\s+[^:]+:)\s*"""([^"]+)"""',
@@ -38,9 +40,9 @@ def fix_docstring_indentation(content: str) -> str: Fix
     return content
 
 def fix_type_hints(content: str) -> str:
-
-    """ type hint syntax issues.Fix
+""" type hint syntax issues.Fix
     """
+
     # Fix method parameter type hints
     content = re.sub(
         r'def\s+([^(]+)\(\s*self\s*,\s*([^)]+)\)\s*->\s*([^:]+):',
@@ -62,9 +64,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_method_definitions(content: str) -> str:
-
-    """ method definition syntax.Fix
+""" method definition syntax.Fix
     """
+
     # Fix method signatures
     content = re.sub(
         r'def\s+([^(]+)\(\s*([^)]+)\s*\)\s*->\s*([^:]+):',
@@ -79,9 +81,9 @@ def fix_method_definitions(content: str) -> str:
     return content
 
 def fix_dataclass_fields(content: str) -> str:
-
-    """ dataclass field definitions.Process
+""" dataclass field definitions.Process
     """
+
     # Fix list fields
     content = re.sub(
         r'supported_modalities:\s*List\[str\]\s*=\s*field\(default_factory=[^)]+\)',
@@ -99,9 +101,9 @@ def fix_dataclass_fields(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file.Fix
+""" a single file.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -118,6 +120,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ syntax in specific failing files."""
+
     failing_files = [
         "src/models/reasoning/math_experts.py",
         "src/models/reasoning/math_head.py",

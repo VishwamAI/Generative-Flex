@@ -1,52 +1,66 @@
 from typing import Tuple
 from typing import Optional,
-    Tuple
+    
 import torch
 import torch.nn as nn
 Module
-    """Flash Mixture of Experts implementation.""" """ docstring.intermediate_size
-    """
+"""Flash Mixture of Experts implementation."""
+    """ docstring.intermediate_size
+"""
 
 Flash Mixture of Experts layer implementation.
-""": intnum_expertInitialize
-    """
- """ the FlashMoE layer.     super().__init__()
+"""
+: intnum_expertInitialize
+"""
+ """
+ the FlashMoE layer.     super().__init__()
 self
-    """self.hidden_size = hidden_size""".intermediate_size = intermediate_size
+"""self.hidden_size = hidden_size"""
+.intermediate_size = intermediate_size
 
     self
-    """self.num_experts = num_experts""".dropout = nn.Dropout(dropout_rate)
+"""self.num_experts = num_experts"""
+.dropout = nn.Dropout(dropout_rate)
 self
-    """"""
+""""""
+
 
 # Expert network""".experts = nn.ModuleList(     [nn.Sequential(intermediate_size
-    """     nn.Linear(hidden_size,""" ), nn
-    """
+"""     nn.Linear(hidden_size,"""
+ ), nn
+"""
 
-nn.GELU(), """.Linear(     intermediate_size,nn
-    """
+nn.GELU(), """
+.Linear(     intermediate_size,nn
+"""
 
     hidden_size
-), """.Dropout(dropout_rate)for
-    """
+), """
+.Dropout(dropout_rate)for
+"""
 
 )
-""" _ in range(num_experts)
+"""
+ _ in range(num_experts)
 
 self
-    """
-] """)""" """# Router network""".router = nn.Linear(hidden_size, num_experts)
+"""
+] """
+)""" """# Router network""".router = nn.Linear(hidden_size, num_experts)
 Method
-    """"""
+""""""
 
-def __init__(self):
+
+def def __init__(self):
     """ with parameters.Module
     """
+
     hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 """ docstring.
 
     batch_sizeseq_lengthhidden_size
     """
+
 
 
     Forward pass through the FlashMoE layer.

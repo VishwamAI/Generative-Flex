@@ -3,17 +3,19 @@ from typing import Any
 from typing import Optional
 
 import
-    """Fix basic parsing issues in Python files.""" re
+"""Fix basic parsing issues in Python files."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_indentation(content: str) -> str: lines
-    """Fix basic indentation issues.""" = content.splitlines()
+"""Fix basic indentation issues."""
+ = content.splitlines()
 fixed_lines = []
 current_indent = 0
 indent_stack = []
@@ -55,7 +57,8 @@ if stripped in [']'
 
 
                             def fix_line_continuations(content: str) -> str: lines
-    """Fix line continuation issues.""" = content.splitlines()
+"""Fix line continuation issues."""
+ = content.splitlines()
                             fixed_lines = []
                             in_parentheses = False
                             current_line = ''
@@ -97,7 +100,8 @@ if stripped in [']'
 
 
                                                                         def fix_class_definitions(content: str) -> str: lines
-    """Fix class definition formatting.""" = content.splitlines()
+"""Fix class definition formatting."""
+ = content.splitlines()
                                                                             fixed_lines = []
                                                                             in_class = False
                                                                             class_indent = 0
@@ -144,7 +148,8 @@ return '\n'.join(fixed_lines)
 
 
                                                                                                             def fix_method_definitions(content: str) -> str: lines
-    """Fix method definition formatting.""" = content.splitlines()
+"""Fix method definition formatting."""
+ = content.splitlines()
                                                                                                                 fixed_lines = []
                                                                                                                 in_method = False
                                                                                                                 method_indent = 0
@@ -187,7 +192,8 @@ continue
 
 
                                                                                                                                                     def process_file(file_path: str) -> bool: try
-    """Process a single file with robust error handling.""":
+"""Process a single file with robust error handling."""
+:
 with open(file_path
 'r'
 encoding='utf-8') as f: content = f.read()
@@ -208,8 +214,9 @@ return True
                                                                                                                                                                         return False
 
 
-                                                                                                                                                                        def main():
+                                                                                                                                                                        def def main():
     """Fix basic parsing issues in all Python files."""
+
                                                                                                                                                                         # Get all Python files
                                                                                                                                                                         python_files = []
 for root

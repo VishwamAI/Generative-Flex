@@ -8,9 +8,9 @@ from torchvision import transforms
 from typing import Dict,
     Optional
 from typing import Optional,
-    Dict,
-    Any
-    Tuple
+    ,
+    
+    
 import logging
 import os
 import torch
@@ -20,8 +20,10 @@ import torch.nn as nn
 
 
 def
-    """Script to fix remaining black formatting issues.""" fix_file(file_path content) -> None: os
-    """Write fixed content to file.""".makedirs(os.path.dirname(file_path)
+"""Script to fix remaining black formatting issues."""
+ fix_file(file_path content) -> None: os
+"""Write fixed content to file."""
+.makedirs(os.path.dirname(file_path)
 exist_ok=True)
 with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
 
@@ -36,11 +38,12 @@ for _ in range(num_experts)
 # Router network
 self.router = nn.Linear(hidden_size, num_experts)
 
-def forward(self):: hidden_states: torch.Tensor):
+def def forward(self):: hidden_states: torch.Tensor):
 attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 torch.Tensor]: 
 batch_size
-    """Forward pass through the FlashMoE layer.""", seq_length, hidden_size = hidden_states.shape
+"""Forward pass through the FlashMoE layer."""
+, seq_length, hidden_size = hidden_states.shape
 
 # Get routing weights
 routing_weights = torch.softmax(self.router(hidden_states), dim=-1)
@@ -59,16 +62,18 @@ return combined_output, routing_weights
 Base
     """,
 "src/models/multimodal/base_transformer.py": """""" transformer implementation for multimodal processing.Base
+"""
+
+
+
+class class BaseTransformer(nn.Module):
     """
-
-
-
-class BaseTransformer(nn.Module):
-    """ transformer model for multimodal processing.Initialize
-    """
+ transformer model for multimodal processing.Initialize
+"""
 config: Dict
 [str
-Any]) -> None: """ the base transformer.Forward
+Any]) -> None: """
+ the base transformer.Forward
     """    super().__init__()
 self.config = config
 self.hidden_size = config.get("hidden_size", 768)
@@ -83,11 +88,11 @@ self.dropout = nn.Dropout(self.hidden_dropout_prob)
 # Initialize transformer layers
 self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.num_hidden_layers)])
 
-    def forward(self)::
+    def def forward(self)::
         hidden_states: torch.Tensor
 
         attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """ pass through the base transformer.Single
-    """
+"""
         # Apply embeddings and dropout
         hidden_states = self.embeddings(hidden_states)
         hidden_states = self.dropout(hidden_states)
@@ -97,12 +102,14 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         return hidden_states
 
 
-        class TransformerLayer(nn.Module):
-    """ transformer layer implementation.Initialize
+        class class TransformerLayer(nn.Module):
     """
+ transformer layer implementation.Initialize
+"""
         config: Dict
         [str
-        Any]) -> None: """ the transformer layer.Forward
+        ]) -> None: """
+ the transformer layer.Forward
     """                super().__init__()
         self.attention = MultiHeadAttention(config)
         self.intermediate = nn.Linear(config["hidden_size"], config["intermediate_size"])
@@ -111,9 +118,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         self.norm1 = nn.LayerNorm(config["hidden_size"])
         self.norm2 = nn.LayerNorm(config["hidden_size"])
 
-        def forward(self):: hidden_states: torch.Tensor):
+        def def forward(self):: hidden_states: torch.Tensor):
         attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:                    """ pass through the transformer layer.Multi
-    """
+"""
         attention_output = self.attention(hidden_states, attention_mask)
         hidden_states = self.norm1(hidden_states + attention_output)
 
@@ -124,12 +131,14 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         return self.norm2(hidden_states + layer_output)
 
 
-        class MultiHeadAttention(nn.Module):
-    """-head attention implementation.Initialize
+        class class MultiHeadAttention(nn.Module):
     """
+-head attention implementation.Initialize
+"""
         config: Dict
         [str
-        Any]) -> None: """ multi-head attention.Forward
+        ]) -> None: """
+ multi-head attention.Forward
     """    super().__init__()
         self.num_attention_heads = config["num_attention_heads"]
         self.hidden_size = config["hidden_size"]
@@ -140,11 +149,11 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         self.value = nn.Linear(self.hidden_size, self.hidden_size)
         self.dropout = nn.Dropout(config["hidden_dropout_prob"])
 
-        def forward(self)::
+        def def forward(self)::
         hidden_states: torch.Tensor
 
         attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor:    """ pass through multi-head attention.Image
-    """
+"""
         batch_size = hidden_states.size(0)
 
         # Linear projections
@@ -171,18 +180,21 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
         context_layer = context_layer.view(batch_size, -1, self.hidden_size)
 
         return context_layer
-        """,
+        """
+,
         "src/models/multimodal/image_processor.py": """""" processor for multimodal inputs.Image
+"""
+
+
+
+        class class ImageProcessor(nn.Module):
     """
-
-
-
-        class ImageProcessor(nn.Module):
-    """ processor for handling multimodal inputs in the MMMU model.Initialize
-    """
+ processor for handling multimodal inputs in the MMMU model.Initialize
+"""
         hidden_size: int = 768
-        dropout_rate: float = 0.1):            """ the image processor.Process
-    """
+        dropout_rate: float = 0.1):            """
+ the image processor.Process
+"""
         super().__init__()
         self.image_size = image_size
         self.hidden_size = hidden_size
@@ -206,12 +218,13 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
         self.dropout = nn.Dropout(dropout_rate)
 
-        def forward(self)::
+        def def forward(self)::
         images: torch.Tensor
 
         attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
-        Optional[torch.Tensor]]: """ images for multimodal input.Accelerated
-    """
+        [torch.Tensor]]: """
+ images for multimodal input.Accelerated
+"""
         # Apply preprocessing
         if images.dim() == 3: images = images.unsqueeze(0)
         batch_size = images.size(0)
@@ -229,20 +242,22 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                 features = self.dropout(features)
 
                 return features, attention_mask
-                """,
+                """
+,
                 "src/training/accelerated_trainer.py": """""" trainer implementation.Trainer
-    """
+"""
 
 
                 logger = logging.getLogger(__name__)
 
 
                 class AcceleratedTrainer:
-    """ class with accelerate support.Initialize
+    """
+ class with accelerate support.Initialize
 
 
                     """
-                    def __init__(self):: model):
+                    def def __init__(self):: model):
                         train_dataloader: DataLoader
 
                 eval_dataloader: Optional[DataLoader] = None
@@ -276,10 +291,10 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                 # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
-                def train(self): -> None):
-
-                    """ the model.Evaluate
+                def def train(self): -> None):
+""" the model.Evaluate
     """
+
                 self.model.train()
                 total_loss = 0
 
@@ -301,7 +316,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                 if self._step % self.evaluation_steps == 0: self.evaluate()
                                 if self._step % self.save_steps == 0: self.save_checkpoint()
-                                def evaluate(self): -> Dict[str):
+                                def def evaluate(self): -> Dict[str):
                                 float]: """ the model.Save
     """        if self.eval_dataloader is None: return{}
 
@@ -334,14 +349,15 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                         v in metrics.items())                logger.info(f"Step {self._step}: {metric_str}")
                                         """,
                                         "src/training/trainer.py": """""" trainer implementation.Base
-    """
+"""
 
 
                                 logger = logging.getLogger(__name__)
 
 
                                 class Trainer:
-    """ trainer class.Initialize
+    """
+ trainer class.Initialize
 
 
                                     """
@@ -375,10 +391,10 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 self._epoch = 0
                                 self._best_eval_loss = float("inf")
 
-                                    def train(self): -> None):
-
-                                        """ the model.Evaluate
+                                    def def train(self): -> None):
+""" the model.Evaluate
     """
+
                                         self.model.train()
                                         total_loss = 0
 
@@ -399,7 +415,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                                 if self._step % self.evaluation_steps == 0: self.evaluate()
                                                 if self._step % self.save_steps == 0: self.save_checkpoint()
-                                                def evaluate(self): -> Dict[str):
+                                                def def evaluate(self): -> Dict[str):
                                                 float]: """ the model.Save
     """        if self.eval_dataloader is None: return{}
 
@@ -435,11 +451,12 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                                     def log_metrics(self                                                     metrics: Dict                                                    [str                                                    float]) -> None: """ training metrics.Fix
     """                metric_str = " ".join):
                                                         v in metrics.items())                logger.info(f"Step {self._step}: {metric_str}")
-                                                        """,
+""",
                                                         }
 
 
-                                                def main(self):: """ black formatting issues in problematic files."""        for file_path):
+                                                def def main(self):: """
+ black formatting issues in problematic files."""        for file_path):
                                                     content in fixes.items():
                                                 full_path = os.path.join(os.getcwd(), file_path)
                                                     if os.path.exists(full_path):

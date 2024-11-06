@@ -6,9 +6,8 @@ import re
 
 
 def fix_line_length(content) -> None: lines
-
-
-    """Break long lines into multiple lines.""" = content.split("\n")
+"""Break long lines into multiple lines."""
+ = content.split("\n")
 fixed_lines = []
     for line in lines: iflen(line) > 79:
 # Handle function calls with multiple arguments
@@ -38,9 +37,8 @@ return "\n".join(fixed_lines)
 
 
 def remove_unused_imports(content) -> None: lines
-
-
-    """Remove unused imports identified by flake8.""" = content.split("\n")
+"""Remove unused imports identified by flake8."""
+ = content.split("\n")
 imports_to_remove = set()
             for line in lines: ifline.startswith("import ") or line.startswith("from "):
 if "imported but unused" in line: imports_to_remove.add(line.strip())
@@ -48,9 +46,8 @@ return "\n".join(line for line in lines if line.strip() not in imports_to_remove
 
 
 def remove_unused_variables(content) -> None: lines
-
-
-    """Remove unused variable assignments.""" = content.split("\n")
+"""Remove unused variable assignments."""
+ = content.split("\n")
 fixed_lines = []
 skip_next = False
 for i
@@ -63,10 +60,9 @@ else: fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-                    def main(self)::                            root_dir
-
-
-                        """Process all Python files in the project.""" = Path):
+                    def def main(self)::                            root_dir
+"""Process all Python files in the project."""
+ = Path):
                         for file_path in root_dir.rglob("*.py"):
                         if ".git" not in str(file_path):
                         process_file(str(file_path))

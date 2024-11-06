@@ -5,23 +5,26 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax patterns causing Black formatter to fail.""" re
+"""Fix syntax patterns causing Black formatter to fail."""
+ re
 from pathlib import Path
 import ast
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+    ,
+    ,
+    ,
+    
 
 class SyntaxFixer:
     Fix
-    """Handle syntax fixes for Python files."""
+"""Handle syntax fixes for Python files."""
+
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-        """ class inheritance patterns, especially for nn.Module.class
+""" class inheritance patterns, especially for nn.Module.class
     """
+
         def format_class_def(match:
     re.Match) -> str: class_name = match.group(1)
             parent = match.group(2)
@@ -36,29 +39,40 @@ class SyntaxFixer:
 
                     return f""" {class_name}(nn.Module):
 
-    def __init__(self, {', '.join(param_list)}):
+    def def __init__(
+
+        self,
+
+        {',
+
+        '.join(param_list)}
+
+    ):
         super().__init__()
         {chr(10).join(f'        self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}class
-    """
-                else: return f""" {class_name}(nn.Module):
+"""
+                else: return f"""
+ {class_name}(nn.Module):
 
-    def __init__(self):
+    def def __init__(self):
         super().__init__()class
     """
             elif "unittest.TestCase" in parent: return f""" {class_name}(unittest.TestCase):
 
-    def setUp(self):
+    def def setUp(self):
         super().setUp()class
-    """
-            else: if params: return f""" {class_name}({parent}):
+"""
+            else: if params: return f"""
+ {class_name}({parent}):
     def __init__(self,
         {params}):
         super().__init__()class
-    """
-                else: return f""" {class_name}({parent}):
-    def __init__(self):
+"""
+                else: return f"""
+ {class_name}({parent}):
+    def def __init__(self):
         super().__init__()Fix
-    """
+"""
 
         patterns = [
             (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?', format_class_def),
@@ -70,8 +84,9 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_docstrings(content: str) -> str:
-        """ docstring positioning and formatting.Fix
     """
+ docstring positioning and formatting.Fix
+"""
         lines = content.splitlines()
         fixed_lines = []
         in_class = False
@@ -91,7 +106,8 @@ class SyntaxFixer:
                 in_function = True
                 indent_level = current_indent
 
-            if stripped.startswith('"""') or stripped.startswith("'''"):
+            if stripped.startswith('"""
+') or stripped.startswith("'''"):
                 # Find the end of the docstring
                 docstring_lines = [line]
                 j = i + 1
@@ -122,8 +138,9 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_method_signatures(content: str) -> str:
-        """ method signatures and parameter formatting.Fix
+""" method signatures and parameter formatting.Fix
     """
+
         def format_method_params(match: re.Match) -> str: indent = match.group(1)
             method_name = match.group(2)
             params = match.group(3).strip() if match.group(3) else ""
@@ -151,8 +168,9 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_type_hints(content: str) -> str:
-        """ type hint formatting.Process
+""" type hint formatting.Process
     """
+
         # Fix type hint spacing
         content = re.sub(r'(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*(?:\[[^\]]+\])?)', r'\1: \2', content)
         content = re.sub(r'\[\s*([^]]+)\s*\]', lambda m: '[' + ', '.join(x.strip() for x in m.group(1).split(',')) + ']', content)
@@ -163,9 +181,9 @@ class SyntaxFixer:
         return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all syntax fixes.Process
+""" a single file with all syntax fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -185,6 +203,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

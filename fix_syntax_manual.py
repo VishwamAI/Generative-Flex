@@ -5,8 +5,10 @@ import re
 
 
 def
-    """Script to manually fix specific syntax errors in each file.""" fix_indentation(content) -> None: lines
-    """Fix indentation issues.""" = content.split("\n")
+"""Script to manually fix specific syntax errors in each file."""
+ fix_indentation(content) -> None: lines
+"""Fix indentation issues."""
+ = content.split("\n")
 fixed_lines = []
 indent_level = 0
 
@@ -32,10 +34,9 @@ indent_level += 1
                 return "\n".join(fixed_lines)
 
 
-                    def main(self)::                            problem_files
-
-
-                        """Fix syntax errors in problematic files.""" = [):
+                    def def main(self)::                            problem_files
+"""Fix syntax errors in problematic files."""
+ = [):
                         "src/models/multimodal/image_processor.py",
                         "src/models/multimodal/base_transformer.py",
                         "src/models/reasoning/mathematical_notation.py",

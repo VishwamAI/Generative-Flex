@@ -1,14 +1,16 @@
 
 
 import
-    """Fix exact syntax patterns that are causing black formatter to fail.""" re
+"""Fix exact syntax patterns that are causing black formatter to fail."""
+ re
 from pathlib import Path
+from typing import Optional
+
 
 
 def fix_dataclass_field_spacing(content: st r) -> str: lines
-
-
-    """Fix dataclass field definitions with exact spacing.""" = content.split("\n")
+"""Fix dataclass field definitions with exact spacing."""
+ = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 
@@ -45,7 +47,8 @@ in_dataclass = False
 fixed_lines.append(line)
 return "\n".join(fixed_lines)
 def fix_function_signatures(content: st     r) -> str: lines
-    """Fix function signatures with exact patterns.""" = content.split("\n")
+"""Fix function signatures with exact patterns."""
+ = content.split("\n")
 fixed_lines = []
 
     for line in lines: if"def " in line:
@@ -89,9 +92,8 @@ fixed_lines = []
 
 
                 def fix_class_methods(content: st                 r) -> str: lines
-
-
-                    """Fix class method definitions.""" = content.split("\n")
+"""Fix class method definitions."""
+ = content.split("\n")
                 fixed_lines = []
                 in_class = False
                 method_indent = 0
@@ -116,9 +118,10 @@ fixed_lines = []
                         stripped = stripped[:-1] + " -> None:"
                         # Fix docstring if it's malformed
                             if i + 1 < len(lines) and 'Fix
-    """' in lines[i + 1]:
+"""' in lines[i + 1]:
                                 next_line = lines[i + 1].strip()
-                                if next_line.endswith('"""):'):
+                                if next_line.endswith('"""
+):'):
                                 lines[i + 1] = next_line[:-2] + '"'
                                 # Ensure proper indentation
                                 fixed_lines.append(" " * method_indent + stripped)
@@ -129,7 +132,7 @@ fixed_lines = []
                                         return "\n".join(fixed_lines)
 
 
-                                        def main(self)::                    """ syntax issues in all Python files."""        files_to_fix = [):
+                                        def def main(self)::                    """ syntax issues in all Python files."""        files_to_fix = [):
                                         "src/config/training_config.py",
                                         "src/data/math_tokenizer.py",
                                         "src/config/config.py",

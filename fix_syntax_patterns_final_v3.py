@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
 import
-    """Fix specific syntax patterns causing Black formatter to fail.""" re
+"""Fix specific syntax patterns causing Black formatter to fail."""
+ re
 from pathlib import Path
+from typing import Any, List, Dict, Tuple
+
 
 def fix_nn_module_inheritance(content: str) -> str: patterns
-    """Fix nn.Module inheritance patterns.""" = [
+"""Fix nn.Module inheritance patterns."""
+ = [
         # Fix class with parameters in definition
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
         lambda m: f'''class {m.group(1)}(nn.Module):
@@ -30,7 +34,7 @@ def fix_nn_module_inheritance(content: str) -> str: patterns
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:(\s*$|\s+[^\n])',
         lambda m: f'''class {m.group(1)}(nn.Module):
 
-    def __init__(self):
+    def def __init__(self):
         super().__init__(){m.group(2)}''')
     ]
 
@@ -38,15 +42,17 @@ def fix_nn_module_inheritance(content: str) -> str: patterns
     return content
 
 def fix_unittest_inheritance(content: str) -> str: pattern
-    """Fix unittest.TestCase inheritance patterns.""" = r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:'
+"""Fix unittest.TestCase inheritance patterns."""
+ = r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:'
     replacement = lambda m: f'''class {m.group(1)}(unittest.TestCase):
 
-    def setUp(self):
+    def def setUp(self):
         super().setUp()'''
     return re.sub(pattern, replacement, content)
 
 def fix_method_signatures(content: str) -> str: patterns
-    """Fix method signatures with proper formatting.""" = [
+"""Fix method signatures with proper formatting."""
+ = [
         # Fix dataloader method signature
         (r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*dataloader:\s*DataLoader,\s*optimizer:\s*torch\.optim\.Optimizer,\s*config:\s*TrainingConfig\)\s*:',
         lambda m: f'''def {m.group(1)}(
@@ -64,7 +70,8 @@ def fix_method_signatures(content: str) -> str: patterns
     return content
 
 def fix_type_hints(content: str) -> str: patterns
-    """Fix type hint formatting.""" = [
+"""Fix type hint formatting."""
+ = [
         # Fix Tuple type hints
         (r'(\s+)([a-zA-Z_][a-zA-Z0-9_]*):\s*Tuple\[([^\]]+)\](\s*#[^\n]*)?',
         lambda m: f'{m.group(1)}{m.group(2)}: Tuple[{",".join(x.strip() for x in m.group(3).split(","))}]{m.group(4) if m.group(4) else ""}'),
@@ -82,7 +89,8 @@ def fix_type_hints(content: str) -> str: patterns
     return content
 
 def fix_multiline_statements(content: str) -> str: patterns
-    """Fix multiline statement formatting.""" = [
+"""Fix multiline statement formatting."""
+ = [
         # Fix print statements
         (r'(\s*)print\s*\(\s*f"([^"]+)"\s*\)',
         lambda m: f'{m.group(1)}print(f"{m.group(2).strip()}")'),
@@ -96,7 +104,8 @@ def fix_multiline_statements(content: str) -> str: patterns
     return content
 
 def fix_docstrings(content: str) -> str: Process
-    """Fix docstring formatting."""
+"""Fix docstring formatting."""
+
     # Fix module docstrings
     content = re.sub(
         r'^"""([^"]*?)"""',
@@ -115,9 +124,9 @@ def fix_docstrings(content: str) -> str: Process
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -137,6 +146,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

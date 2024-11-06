@@ -4,15 +4,19 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues with precise pattern matching for specific error cases.""" re
+"""Fix syntax issues with precise pattern matching for specific error cases."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+from typing import Tuple
+
+    ,
+    ,
+    
 
 def fix_class_inheritance(content: str) -> str: Fix
-    """Fix class inheritance syntax issues."""
+"""Fix class inheritance syntax issues."""
+
     # Fix class definitions with proper spacing
     patterns = [
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:', r'class \1(nn.Module):
@@ -27,10 +31,10 @@ def fix_class_inheritance(content: str) -> str: Fix
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature syntax issues.Fix
+""" method signature syntax issues.Fix
     """
-    def format_signature(match):
+
+    def def format_signature(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
@@ -67,9 +71,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-
-    """ type hint syntax issues.Fix
+""" type hint syntax issues.Fix
     """
+
     # Fix basic type hints
     patterns = [
         # Fix merged type hints
@@ -88,11 +92,11 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring formatting issues.Fix
+""" docstring formatting issues.Fix
     """
+
     # Fix docstring indentation and formatting
-    def format_docstring(match):
+    def def format_docstring(match):
         indent = match.group(1)
         docstring = match.group(2).strip()
         if '\n' in docstring:
@@ -113,9 +117,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-
-    """ multi-line statement formatting issues.Process
+""" multi-line statement formatting issues.Process
     """
+
     # Fix print statements
     content = re.sub(
         r'print\((.*?)\)print\(',
@@ -133,9 +137,9 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -154,6 +158,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

@@ -1,14 +1,14 @@
 from pathlib import Path
 import re
 import sys
+from typing import Optional, Any, List, Dict, Tuple, Union
+
 
 
 
 def remove_unused_imports(file_path) -> None: with
-
-
-
-    """Remove unused imports from a file.""" open(file_path
+"""Remove unused imports from a file."""
+ open(file_path
 "r") as f: content = f.read()
 # Dictionary of files and their unused imports to remove
 "src/models/text_to_anything.py": [
@@ -43,9 +43,8 @@ with open(file_path "w") as f: f.write(content)
 
 
 def fix_line_length_manually(file_path) -> None: with
-
-
-    """Fix remaining line length issues manually.""" open(file_path
+"""Fix remaining line length issues manually."""
+ open(file_path
 "r") as f: lines = f.readlines()
 fixed_lines = []
     for line in lines: iflen(line.rstrip()) > 79:
@@ -71,7 +70,7 @@ fixed_lines.append(line)
 with open(file_path                 "w") as f: f.writelines(fixed_lines)
 
 
-                def main(self):: files_to_process = [    "src/models/reasoning/symbolic_math.py"):
+                def def main(self):: files_to_process = [    "src/models/reasoning/symbolic_math.py"):
                     "src/models/text_to_anything.py",
                     "src/training/train_mmmu.py",
                     "tests/test_features.py",

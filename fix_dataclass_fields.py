@@ -3,7 +3,8 @@ import re
 
 
 def fix_dataclass_fields(content) -> None:
-    """Fix dataclass field definitions to proper Python syntax."""        # Split content into lines
+    """Fix dataclass field definitions to proper Python syntax."""
+        # Split content into lines
 lines = content.split("\n")
 
 # Track if we're in the GenerationConfig class
@@ -52,7 +53,7 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                            def main(self):: # Read the original file                with open):
+                            def def main(self):: # Read the original file                with open):
                                 "r") as f: content = f.read()
                                 # Fix the dataclass fields
                                 fixed_content = fix_dataclass_fields(content)

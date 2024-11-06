@@ -6,14 +6,14 @@ import os
 import re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+    ,
+    ,
+    ,
+    
 
 
 class SyntaxFixer:
-    def __init__(self)::        self.failed_files = [
+    def def __init__(self)::        self.failed_files = [
 "src/models/multimodal/image_processor.py",
 "src/models/multimodal/base_transformer.py",
 "src/models/reasoning/math_config.py",
@@ -50,7 +50,8 @@ class SyntaxFixer:
 ]
 content: st
 r) -> str: Fix
-    """Fix type hint syntax issues."""        # Fix missing spaces after colons in type hints
+"""Fix type hint syntax issues."""
+        # Fix missing spaces after colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
 content)
@@ -186,7 +187,7 @@ for line in content.splitlines():
                                                                                                                                 except Exception as e: print(f"Error processing {file_path}: {str(e)}")
                                                                                                                                     return False
 
-                                                                                                                                    def run(self)::        """ all failed files."""        success_count = 0):
+                                                                                                                                    def def run(self)::        """ all failed files."""        success_count = 0):
                                                                                                                                         for file_path in self.failed_files: if os.path.exists(file_path):
                                                                                                                                     print(f"Processing {file_path}...")
                                                                                                                                         if self.process_file(file_path):

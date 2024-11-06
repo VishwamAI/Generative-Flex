@@ -4,16 +4,18 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax patterns in Python files to ensure Black formatting succeeds.""" re
+"""Fix syntax patterns in Python files to ensure Black formatting succeeds."""
+ re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 def fix_default_factory_list(content: str) -> str: Fix
-    """Fix default_factory list syntax."""
+"""Fix default_factory list syntax."""
+
     # Fix the specific pattern in text_to_anything.py
     pattern = r'supported_modalities:\s*List\[str\]\s*=\s*field\(default_factory=[^)]+\)'
     replacement = 'supported_modalities: List[str] = field(\n        default_factory=lambda: ["text", "image", "audio", "video", "code"]\n    )'
@@ -21,9 +23,9 @@ def fix_default_factory_list(content: str) -> str: Fix
     return content
 
 def fix_type_annotations(content: str) -> str:
-
-    """ type annotation syntax.Fix
+""" type annotation syntax.Fix
     """
+
     # Fix incomplete type annotations in training_config.py
     content = re.sub(
         r'(\w+):\s*(\[?[^=\n]+\]?)\s*=\s*field\(default=([^)]+)\)',
@@ -40,9 +42,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring placement and formatting.Process
+""" docstring placement and formatting.Process
     """
+
     # Fix class docstrings
     content = re.sub(
         r'(class\s+[^:]+:)(\s*)"""',
@@ -78,9 +80,9 @@ def fix_docstrings(content: str) -> str:
     return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file, applying all fixes.Process
+""" a single file, applying all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -107,6 +109,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ files with syntax issues."""
+
     critical_files = [
         'src/models/text_to_anything.py',
         'src/config/training_config.py',

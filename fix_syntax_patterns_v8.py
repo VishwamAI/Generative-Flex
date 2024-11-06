@@ -1,14 +1,14 @@
 
 
 import
-    """Fix specific syntax patterns that are causing black formatter to fail.""" re
+"""Fix specific syntax patterns that are causing black formatter to fail."""
+ re
 from pathlib import Path
 
 
 def fix_function_definitions(content: st r) -> str: lines
-
-
-    """Fix function and method definitions.""" = content.split('\n')
+"""Fix function and method definitions."""
+ = content.split('\n')
 fixed_lines = []
 in_function = False
 current_function = []
@@ -58,7 +58,7 @@ for line in lines: stripped = line.lstrip()
         return '\n'.join(fixed_lines)
 
 
-        def fix_params(match): params = match.group(2).split('
+        def def fix_params(match): params = match.group(2).split('
         ')            fixed_params = []
 
         for param in params: param = param.strip()
@@ -88,9 +88,8 @@ for line in lines: stripped = line.lstrip()
 
 
         def fix_class_methods(content: st             r) -> str: lines
-
-
-            """Fix class method definitions.""" = content.split('\n')
+"""Fix class method definitions."""
+ = content.split('\n')
         fixed_lines = []
         in_class = False
         class_indent = 0
@@ -119,9 +118,8 @@ for line in lines: stripped = line.lstrip()
 
 
                                     def fix_dataclass_fields(content: st                                     r) -> str: if
-
-
-                                        """Fix dataclass field definitions.""" '@dataclass' not in content:
+"""Fix dataclass field definitions."""
+ '@dataclass' not in content:
     return content
 
                                         lines = content.split('\n')
@@ -150,9 +148,8 @@ for line in lines: stripped = line.lstrip()
 
 
                                                         def process_file(file_path: st                                                         r) -> None: try
-
-
-                                                            """Process a single file applying all fixes.""":
+"""Process a single file applying all fixes."""
+:
                                                         with open(file_path                                                             'r'                                                            encoding='utf-8') as f: content = f.read()
 
                                                         # Skip empty files
@@ -173,9 +170,8 @@ for line in lines: stripped = line.lstrip()
 
 
                                                                 def main() -> None: root_dir
-
-
-                                                                    """Process all Python files in the project.""" = Path('.')
+"""Process all Python files in the project."""
+ = Path('.')
                                                                         for file_path in root_dir.rglob('*.py'):
                                                                         if '.git' not in str(file_path):
                                                                 process_file(str(file_path))

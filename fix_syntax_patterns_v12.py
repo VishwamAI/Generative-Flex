@@ -4,19 +4,21 @@ from typing import Optional
 
 
 import
-    """Fix specific syntax patterns identified in CI output.""" re
+"""Fix specific syntax patterns identified in CI output."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
-def fix_self_parameter(content: str) -> str):
+def def fix_self_parameter(content: str) -> str):
 
 lines
-    """Fix self parameter formatting in method definitions.""" = content.splitlines()
+"""Fix self parameter formatting in method definitions."""
+ = content.splitlines()
 fixed_lines = []
 
     for line in lines:
@@ -59,7 +61,8 @@ fixed_lines = []
 
 
                         def fix_multiline_function(content: str) -> str: lines
-    """Fix indentation in multiline function definitions.""" = content.splitlines()
+"""Fix indentation in multiline function definitions."""
+ = content.splitlines()
                         fixed_lines = []
                         in_function_def = False
                         base_indent = 0
@@ -96,7 +99,8 @@ fixed_lines = []
 
 
                                                         def fix_method_calls(content: str) -> str: lines
-    """Fix method calls and dictionary access patterns.""" = content.splitlines()
+"""Fix method calls and dictionary access patterns."""
+ = content.splitlines()
                                                         fixed_lines = []
 
                                                             for line in lines:
@@ -119,7 +123,8 @@ fixed_lines = []
 
 
                                                                 def fix_exception_blocks(content: str) -> str: lines
-    """Fix exception handling blocks.""" = content.splitlines()
+"""Fix exception handling blocks."""
+ = content.splitlines()
                                                                 fixed_lines = []
                                                                 in_try_block = False
                                                                 try_indent = 0
@@ -156,7 +161,8 @@ fixed_lines = []
 
 
                                                                                             def process_file(file_path: str) -> bool: try
-    """Process a single file with robust error handling.""":
+"""Process a single file with robust error handling."""
+:
                                                                                                 with open(file_path                                                                                                     "r"                                                                                                    encoding="utf-8") as f: content = f.read()
 
                                                                                                 # Apply fixes in sequence
@@ -173,8 +179,9 @@ fixed_lines = []
                                                                                                             return False
 
 
-                                                                                                                def main():
+                                                                                                                def def main():
     """Fix syntax in all Python files."""
+
                                                                                                                     # Get all Python files
                                                                                                                     python_files = []
                                                                                                                     for root

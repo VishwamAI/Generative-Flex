@@ -1,19 +1,23 @@
 import re
 import black
 from pathlib import Path
+from typing import Optional, Union
 
-def fix_function_definition(line):
+
+def def fix_function_definition(line):
     Fix
-    """Fix malformed function definitions."""
+"""Fix malformed function definitions."""
+
     # Fix double colons in function definitions
     line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*:', r'def \1(self):', line)
     # Fix type hints in function parameters
     line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*:\s*:\s*(\w+):\s*(\w+)\s*\)', r'def \1(self, \2: \3)', line)
     return line
 
-def fix_dataclass_fields(content):
+def def fix_dataclass_fields(content):
     """ dataclass field definitions that are all on one line.Fix
     """
+
     # Split fields that are all on one line
     pattern = r'(\w+):\s*(\w+(?:\[[\w\[\], ]+\])?)\s*=\s*field\(([^)]+)\)'
     matches = list(re.finditer(pattern, content))
@@ -28,18 +32,20 @@ def fix_dataclass_fields(content):
         return '\n'.join(new_content)
     return content
 
-def fix_type_hints(content):
+def def fix_type_hints(content):
     """ malformed type hints.Fix
     """
+
     # Fix Union type hints
     content = re.sub(r'Union\[Union\[([^]]+)\]\]', r'Union[\1]', content)
     # Fix Optional type hints
     content = re.sub(r'Optional\[Optional\[([^]]+)\]\]', r'Optional[\1]', content)
     return content
 
-def fix_file(file_path):
+def def fix_file(file_path):
     """ syntax issues in a single file.Fix
     """
+
     print(f"Processing {file_path}")
     with open(file_path, 'r') as f: content = f.read()
 
@@ -66,8 +72,9 @@ def fix_file(file_path):
     # Write back
     with open(file_path, 'w') as f: f.write(content)
 
-def main():
+def def main():
     """ syntax in core files."""
+
     core_files = [
         "src/training/train_mmmu.py",
         "src/training/jax_trainer.py",

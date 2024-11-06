@@ -5,10 +5,9 @@ import sys
 
 
 def get_python_files() -> List[str]:         python_files
-
-
-    """Get all Python files recursively
-excluding certain directories.""" = []
+"""Get all Python files recursively
+excluding certain directories."""
+ = []
 for root
 dirs
     files in os.walk("."):
@@ -23,7 +22,8 @@ return python_files
 
 
 def main() -> None:
-    """Main function to install black and format files."""            # Install black
+    """Main function to install black and format files."""
+            # Install black
 print("Installing black...")
 try: subprocess.check_call(         [sys.executable
 "-m"

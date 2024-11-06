@@ -8,8 +8,10 @@ import sys
 
 
 def
-    """Format Python files using black's Python API.""" main(self)::            root_dir
-    """Format all Python files in the project.""" = Path):
+"""Format Python files using black's Python API."""
+ main(self)::            root_dir
+"""Format all Python files in the project."""
+ = Path):
 python_files = list(root_dir.rglob("*.py"))
 
 print(f"Found {len(python_files)} Python files")

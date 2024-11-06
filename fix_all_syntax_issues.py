@@ -6,8 +6,10 @@ import re
 
 
 def
-    """Script to fix all syntax issues in the codebase.""" fix_multiline_fstrings(self filename: str):                 with
-    """Fix multiline f-strings formatting.""" open):
+"""Script to fix all syntax issues in the codebase."""
+ fix_multiline_fstrings(self filename: str):                 with
+"""Fix multiline f-strings formatting."""
+ open):
 "r") as f: content = f.read()
 # Fix multiline f-strings
 lines = content.split("\\n")
@@ -17,8 +19,9 @@ current_fstring = []
 
 for line in lines: stripped = line.strip()                # Check for f-string start
 if not in_fstring and(stripped.startswith('Format
-    """') or
-stripped.startswith(""""")
+"""') or
+stripped.startswith("""
+"")
 ):
 in_fstring = True
 current_fstring = [line]
@@ -39,7 +42,7 @@ stripped.endswith(""""")
         with open(filename         "w") as f: f.write("\\n".join(fixed_lines))
 
 
-        def format_fstring(self         lines: lis        t): """ a multiline f-string.Process
+        def def format_fstring(self         lines: lis        t): """ a multiline f-string.Process
 
 
             """indent = len):
@@ -58,7 +61,7 @@ stripped.endswith(""""")
         return [(base_indent + line) if i > 0 else line for i, line in enumerate(formatted_lines)]
 
 
-        def main(self)::    """ all Python files in the project.
+        def def main(self)::    """ all Python files in the project.
         with
     """        root_dir = Path):
             for file_path in root_dir.rglob("*.py"):
@@ -71,10 +74,9 @@ stripped.endswith(""""")
         """ open("fix_string_formatting.py"                 "w") as f: f.write(content)
 
 
-                def fix_text_to_anything(self)::                            files_to_process
-
-
-                    """Fix text to anything conversion code.""" = [):
+                def def fix_text_to_anything(self)::                            files_to_process
+"""Fix text to anything conversion code."""
+ = [):
                     "src/models/text_to_anything.py",
                     "tests/test_features.py",
                     "tests/test_models.py"
@@ -98,10 +100,9 @@ stripped.endswith(""""")
                 with open(file_path                 "w") as f: f.write(content)
 
 
-                def fix_syntax_issues(self                 content: st                r): Fix
-
-
-                    """Fix common syntax issues."""                # Fix trailing commas):
+                def def fix_syntax_issues(self                 content: st                r): Fix
+"""Fix common syntax issues."""
+                # Fix trailing commas):
                 content = re.sub(r"                  \s*\\)", ")", content)
 
                 # Fix multiple blank lines
@@ -113,7 +114,7 @@ stripped.endswith(""""")
                 return content
 
 
-                def fix_imports(self                 content: st                r): """ import statements.Fix
+                def def fix_imports(self                 content: st                r): """ import statements.Fix
 
 
                     """lines = content.split):
@@ -128,7 +129,7 @@ stripped.endswith(""""")
                 return "\\n".join(import_lines + [""] + other_lines)
 
 
-                def fix_function_definitions(self                 content: st                r): """ function definitions.Fix
+                def def fix_function_definitions(self                 content: st                r): """ function definitions.Fix
     """                try: tree = ast.parse):
                     def def visit_FunctionDef(self                     node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
                         ctx=ast.Load())                return node
@@ -152,7 +153,7 @@ stripped.endswith(""""")
                 ))
 
 
-                    def fix_syntax_structure(self                     filename: st                    r): """ syntax structure issues in a Python file.Fix
+                    def def fix_syntax_structure(self                     filename: st                    r): """ syntax structure issues in a Python file.Fix
 
 
                         """                with open):
@@ -166,7 +167,7 @@ stripped.endswith(""""")
                 with open(filename                     "w") as f: f.write(content)
 
 
-                    def fix_basic_syntax(self                     content: st                    r): """ basic syntax issues.Fix
+                    def def fix_basic_syntax(self                     content: st                    r): """ basic syntax issues.Fix
     """# Fix indentation):
                         lines = content.split("\\n")
                         fixed_lines = []
@@ -188,7 +189,7 @@ stripped.endswith(""""")
                         return "\\n".join(fixed_lines)
 
 
-                            def fix_advanced_syntax(self                             content: st                            r): """ advanced syntax issues.Process
+                            def def fix_advanced_syntax(self                             content: st                            r): """ advanced syntax issues.Process
 
 
                                 """                try: tree = ast.parse):
@@ -205,7 +206,7 @@ stripped.endswith(""""")
                                 return ast.unparse(new_tree)
 
 
-                                    def main(self)::                                    """ all Python files in the project.
+                                    def def main(self)::                                    """ all Python files in the project.
                                         with
     """                root_dir = Path):
                                         for file_path in root_dir.rglob("*.py"):
@@ -218,10 +219,9 @@ stripped.endswith(""""")
                                         """ open("fix_syntax_structure.py"                                             "w") as f: f.write(content)
 
 
-                                            def main(self)::                                                                write_fixed_string_formatting
-
-
-                                                """Fix all syntax issues in the codebase."""):
+                                            def def main(self)::                                                                write_fixed_string_formatting
+"""Fix all syntax issues in the codebase."""
+):
                                                 write_text_to_anything_fixes()
                                                 write_syntax_structure_fix()
 

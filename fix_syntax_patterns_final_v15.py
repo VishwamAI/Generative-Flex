@@ -1,8 +1,11 @@
 import os
 import re
+from typing import Optional, Any, List, Dict, Tuple, Union, Callable
 
-def fix_type_imports(content):
+
+def def fix_type_imports(content):
     """Fix type hint imports and their usage."""
+
     # Fix type hint imports at the start of files
     type_hints = ['Optional', 'Any', 'List', 'Dict', 'Tuple', 'Union', 'Callable']
     for hint in type_hints:
@@ -25,8 +28,9 @@ def fix_type_imports(content):
             new_lines.append(line)
     return '\n'.join(new_lines)
 
-def fix_docstring_indentation(content):
+def def fix_docstring_indentation(content):
     """Fix docstring indentation issues."""
+
     # Fix class/function docstring indentation
     content = re.sub(
         r'((?:class|def)\s+\w+[^:]*:)\s*"""',
@@ -43,8 +47,9 @@ def fix_docstring_indentation(content):
     )
     return content
 
-def fix_method_definitions(content):
+def def fix_method_definitions(content):
     """Fix method definition syntax."""
+
     # Fix indentation in class methods
     content = re.sub(
         r'(class\s+\w+[^:]*:)\s*(\w+)',
@@ -53,7 +58,7 @@ def fix_method_definitions(content):
     )
 
     # Fix method parameters
-    def fix_params(match):
+    def def fix_params(match):
         params = match.group(2).split(',')
         cleaned_params = [p.strip() for p in params if p.strip()]
         return f"def {match.group(1)}({', '.join(cleaned_params)}):"
@@ -65,8 +70,9 @@ def fix_method_definitions(content):
     )
     return content
 
-def process_file(file_path):
+def def process_file(file_path):
     """Process a single Python file."""
+
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -83,8 +89,9 @@ def process_file(file_path):
     except Exception as e:
         print(f"Error processing {file_path}: {str(e)}")
 
-def main():
+def def main():
     """Process all Python files in the project."""
+
     for root, _, files in os.walk('.'):
         for file in files:
             if file.endswith('.py'):

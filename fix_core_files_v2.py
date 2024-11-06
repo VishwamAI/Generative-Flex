@@ -5,15 +5,14 @@ import os
 import re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_type_hints_line(line: st r) -> str: Fix
-
-
-    """Fix type hints in a single line."""    # Fix multiple type hints on same line
+"""Fix type hints in a single line."""
+    # Fix multiple type hints on same line
     if ":" in line: parts = []
 current = ""
 in_brackets = 0
@@ -138,8 +137,9 @@ in_brackets = 0
                                                                         return False
 
 
-                                                                        def main():
-    """ core configuration files first."""    core_files = [
+                                                                        def def main():
+    """ core configuration files first."""
+    core_files = [
                                                                         "src/config/config.py",
                                                                         "src/config/training_config.py",
                                                                         "src/models/text_to_anything.py",

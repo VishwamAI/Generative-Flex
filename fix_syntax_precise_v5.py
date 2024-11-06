@@ -3,19 +3,19 @@ from typing import Any
 from typing import Optional
 
 import
-    """Fix specific syntax patterns that are preventing black formatting.""" re
+"""Fix specific syntax patterns that are preventing black formatting."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_function_header(line: str) -> str: Fix
+"""Fix function header syntax."""
 
-
-    """Fix function header syntax."""
 # Fix self parameter with type hints
 line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*
 ?\s*([^)]*)\)\s*->\s*
@@ -41,9 +41,7 @@ return line
 
 
 def fix_type_hints(line: str) -> str:    """ type hint formatting.Fix
-
-
-    """
+"""
 # Fix missing spaces after colons in type hints
 line = re.sub(r'(\w+): ([A-Z]\w+(?:\[.*?\])?)'
 r'\1: \2'
@@ -65,8 +63,9 @@ line)
 return line
 
 
-def fix_class_method(line: str indent_level: int) -> str:    """ class method definition with proper indentation.Fix
-    """
+def fix_class_method(line: str indent_level: int) -> str:    """
+ class method definition with proper indentation.Fix
+"""
 # Strip existing indentation
 line = line.strip()
 
@@ -81,10 +80,9 @@ return ' ' * (indent_level * 4) + line
 
 
 def fix_dataclass_field(line:
-    str) -> str:    """ dataclass field definitions.Process
-
-
-    """
+    str) -> str:    """
+ dataclass field definitions.Process
+"""
 # Fix field type annotations
 line = re.sub(r'(\w+): \s*([A-Z]\w+(?:\[.*?\])?)\s*=\s*(.+)'
 r'\1: \2 = \3'
@@ -93,7 +91,8 @@ line)
 return line
 
 
-def process_file(file_path: str) -> bool:    """ a single file.Fix
+def process_file(file_path: str) -> bool:    """
+ a single file.Fix
     """
     try: with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
 
@@ -136,8 +135,9 @@ for i
                         return False
 
 
-                        def main():
+                        def def main():
     """ syntax in all Python files."""
+
                         python_files = []
 
                         # Get all Python files

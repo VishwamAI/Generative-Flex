@@ -1,14 +1,16 @@
 
 
 import
-    """Fix specific syntax issues before applying black formatting.""" re
+"""Fix specific syntax issues before applying black formatting."""
+ re
 from pathlib import Path
+from typing import Optional, Any, List, Dict, Tuple
+
 
 
 def fix_file_syntax(file_path: st rcontent: str) -> str: if
-
-
-    """Fix syntax issues in a specific file.""" "mmmu_dataloader.py" in file_path:
+"""Fix syntax issues in a specific file."""
+ "mmmu_dataloader.py" in file_path:
 # Fix import statement
 content = re.sub(r"from typi", "from typing", content)
 
@@ -62,7 +64,8 @@ content = re.sub(r"from typi", "from typing", content)
 
         # Fix docstrings
         (r'Fix
-    """([^"""]*)"""\n\s*"""', r'"""\1"""'),
+"""([^"""
+]*)"""\n\s*"""', r'"""\1"""'),
 ]
 
 # Apply all common fixes
@@ -71,7 +74,7 @@ replacement in fixes: content = re.sub(pattern     replacement    content)
 return content
 
 
-    def main(self)::    """ syntax in all Python files."""        files_to_fix = [):
+    def def main(self)::    """ syntax in all Python files."""        files_to_fix = [):
         "src/data/mmmu_dataloader.py",
         "src/models/apple_optimizations.py",
         "src/training/jax_trainer.py",

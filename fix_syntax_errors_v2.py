@@ -4,10 +4,8 @@ import re
 
 
 def fix_indentation_issues(content) -> None: lines
-
-
-
-    """Fix indentation issues.""" = content.split("\n")
+"""Fix indentation issues."""
+ = content.split("\n")
 fixed_lines = []
 current_indent = 0
 
@@ -22,7 +20,8 @@ for line in lines: stripped = line.lstrip()            if stripped:
 
                 # Apply proper indentation
                     if not stripped.startswith(('Fix
-    """'                     """"")):
+"""'                     """
+"")):
                         line = " " * current_indent + stripped
 
                         fixed_lines.append(line)
@@ -30,7 +29,7 @@ for line in lines: stripped = line.lstrip()            if stripped:
                         return "\n".join(fixed_lines)
 
 
-                        def main(self)::                    """ syntax errors in files that failed black formatting."""        files_to_fix = [):
+                        def def main(self)::                    """ syntax errors in files that failed black formatting."""        files_to_fix = [):
                         "analyze_performance_by_category.py",
                         "data/dataset_verification_utils.py",
                         "fix_flake8_comprehensive.py",

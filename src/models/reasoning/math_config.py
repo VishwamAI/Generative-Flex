@@ -2,10 +2,12 @@ from transformers import PretrainedConfig
 
 
 _model_type
-    """Configuration class for MathReasoningModel.""" = "math_reasoning"
-def __init__(self):
+"""Configuration class for MathReasoningModel."""
+ = "math_reasoning"
+def def __init__(self):
     hidden_size
-    """Method with parameters.""": in = 768): num_attention_heads: in, t = 12
+"""Method with parameters."""
+: in = 768): num_attention_heads: in, t = 12
     num_hidden_layers: int = 6
     max_position_embeddings: int = 512
     vocab_size: int = 50257

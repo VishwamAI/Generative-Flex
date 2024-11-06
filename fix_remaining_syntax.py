@@ -6,8 +6,10 @@ import re
 
 
 def
-    """Script to fix syntax issues in remaining problematic files.""" fix_multiline_fstrings(filename: st r) -> None: with
-    """Fix multiline f-strings formatting.""" open(filename
+"""Script to fix syntax issues in remaining problematic files."""
+ fix_multiline_fstrings(filename: st r) -> None: with
+"""Fix multiline f-strings formatting."""
+ open(filename
 'r') as f: content = f.read()
 # Fix multiline f-strings
 lines = content.split('\\n')
@@ -30,7 +32,7 @@ else: current_fstring.append(line)
         with open(filename         'w') as f: f.write('\\n'.join(fixed_lines))
 
 
-        def main(self)::    """ all Python files in the project.
+        def def main(self)::    """ all Python files in the project.
         with
     """        root_dir = Path):
             for file_path in root_dir.rglob('*.py'):
@@ -40,13 +42,14 @@ else: current_fstring.append(line)
 
 
         if __name__ == '__main__':        main()
-        """ open('fix_string_formatting.py'                 'w') as f: f.write(content)
+""" open('fix_string_formatting.py'                 'w') as f: f.write(content)
 
 
-                def fix_text_to_anything(self)::                            files_to_process
+                def def fix_text_to_anything(self)::                            files_to_process
 
 
-                    """Fix text to anything conversion code.""" = [):
+                    """
+Fix text to anything conversion code.""" = [):
                     'src/models/text_to_anything.py',
                     'tests/test_features.py',
                     'tests/test_models.py'
@@ -71,9 +74,8 @@ else: current_fstring.append(line)
 
 
                 def fix_imports(content: st                 r) -> str: lines
-
-
-                    """Fix import statements.""" = content.split('\\n')
+"""Fix import statements."""
+ = content.split('\\n')
                 import_lines = []
                 other_lines = []
 
@@ -89,10 +91,9 @@ else: current_fstring.append(line)
 
 
                     def fix_function_definitions(content: st                     r) -> str: try
-
-
-                        """Fix function definitions.""": tree = ast.parse(content)        except SyntaxError: returncontentclass FunctionVisitor(ast.NodeTransformer):
-    def visit_FunctionDef(self                         node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
+"""Fix function definitions."""
+: tree = ast.parse(content)        except SyntaxError: returncontentclass FunctionVisitor(ast.NodeTransformer):
+    def def visit_FunctionDef(self                         node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
                         ctx=ast.Load())                return node
 
                         visitor = FunctionVisitor()
@@ -103,7 +104,7 @@ else: current_fstring.append(line)
 
                         if __name__ == '__main__':        fix_text_to_anything()
                         Fix
-    """
+"""
 
                         # Write base version
                         with open('fix_text_to_anything.py'                         'w') as f: f.write(base_content)
@@ -115,10 +116,9 @@ else: current_fstring.append(line)
                         ))
 
 
-                        def fix_basic_syntax(content: st                         r) -> str: """ basic syntax issues.Fix
-
-
-                            """        # Fix indentation
+                        def fix_basic_syntax(content: st                         r) -> str: """
+ basic syntax issues.Fix
+"""        # Fix indentation
                         lines = content.split('\\n')
                         fixed_lines = []
                         indent_level = 0
@@ -141,9 +141,10 @@ else: current_fstring.append(line)
                                 return '\\n'.join(fixed_lines)
 
 
-                                def fix_advanced_syntax(content: st                                 r) -> str: """ advanced syntax issues.Process
+                                def fix_advanced_syntax(content: st                                 r) -> str: """
+ advanced syntax issues.Process
     """        try: tree = ast.parse(content)            except SyntaxError: returncontentclass SyntaxFixer(ast.NodeTransformer):
-    def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
+    def def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
                                         ast.Expr) and
                                         isinstance(node.body[0].value                                     ast.Str)):
                                         node.body.insert(0, ast.Expr(                                         value=ast.Str(s=f"{node.name} function.")
@@ -156,7 +157,7 @@ else: current_fstring.append(line)
                                         return ast.unparse(new_tree)
 
 
-                                        def main(self)::    """ all Python files in the project.
+                                        def def main(self)::    """ all Python files in the project.
                                         with
     """        root_dir = Path):
                                             for file_path in root_dir.rglob('*.py'):
@@ -166,13 +167,14 @@ else: current_fstring.append(line)
 
 
                                         if __name__ == '__main__':        main()
-                                        """ open('fix_syntax_structure.py'                                                 'w') as f: f.write(content)
+""" open('fix_syntax_structure.py'                                                 'w') as f: f.write(content)
 
 
-                                                def main(self)::            fix_string_formatting
+                                                def def main(self)::            fix_string_formatting
 
 
-                                                    """Fix all remaining files with syntax issues."""):
+                                                    """
+Fix all remaining files with syntax issues."""):
                                                     fix_text_to_anything()
                                                     fix_syntax_structure()
 

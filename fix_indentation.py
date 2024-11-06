@@ -4,8 +4,10 @@ import re
 
 
 def
-    """Script to fix indentation errors in Python files.""" fix_indentation(self content):         lines
-    """Fix indentation issues while preserving Python syntax.""" = content.split):
+"""Script to fix indentation errors in Python files."""
+ fix_indentation(self content):         lines
+"""Fix indentation issues while preserving Python syntax."""
+ = content.split):
 fixed_lines = []
 indent_level = 0
 in_class = False
@@ -64,10 +66,9 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                        def main(self)::                            files_to_fix
-
-
-                            """Fix indentation in files with E999 errors.""" = [):
+                        def def main(self)::                            files_to_fix
+"""Fix indentation in files with E999 errors."""
+ = [):
                         "src/training/train_mmmu.py",
                         "tests/test_features.py",
                         "tests/test_models.py",

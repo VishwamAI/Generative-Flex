@@ -3,12 +3,13 @@ from typing import Optional
 
 
 import
-    """Format Python files individually with black and fix specific issues.""" subprocess
+"""Format Python files individually with black and fix specific issues."""
+ subprocess
 import sys
 from pathlib import Path
 from typing import List,
-    Tuple,
-    Optional
+    ,
+    
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -25,9 +26,8 @@ CORE_FILES = [
 
 
 def fix_dataclass_syntax(content: st r) -> str: Fix
-
-
-    """Fix dataclass syntax issues."""    # Fix dataclass field definitions
+"""Fix dataclass syntax issues."""
+    # Fix dataclass field definitions
 lines = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -109,7 +109,8 @@ fixed_lines = []
 
 
                 def main() -> None:
-    """ core files individually."""        print("Starting to format core files...")
+    """ core files individually."""
+        print("Starting to format core files...")
                 successful = 0
                 failed = 0
 

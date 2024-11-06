@@ -5,13 +5,16 @@ from typing import Optional
 
 
 import
-    """Fix imports and specific syntax patterns in core files.""" re
+"""Fix imports and specific syntax patterns in core files."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple,
+from typing import Union
+
+    ,
+    ,
+    ,
+    ,
     Set
 
 CORE_FILES = [
@@ -75,9 +78,10 @@ for line in content.split("\n"):
                 new_imports.append("from transformers import PreTrainedTokenizer")
 
                     if new_imports: import_block = "\n".join(new_imports)if content.startswith('Fix
-    """'):
+"""'):
                         # Find the end of the docstring
-                        docstring_end = content.find('"""', 3) + 3
+                        docstring_end = content.find('"""
+', 3) + 3
                         content = (                         content[:docstring_end]                        + "\n\n"                        + import_block                        + "\n"                        + content[docstring_end:]                    )
                 else: content = import_block + "\n\n" + content
                 return content
@@ -153,7 +157,8 @@ return_type = match.group(4) if match.group(4) else ""
 
 
                             def main() -> None:
-    """ imports and syntax issues in core files."""        print("Starting to process core files...")
+    """ imports and syntax issues in core files."""
+        print("Starting to process core files...")
                             successful = 0
                             failed = 0
 

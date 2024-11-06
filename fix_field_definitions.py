@@ -6,12 +6,13 @@ import re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 def fix_field_definitions(content: str) -> str: Fix
-    """Fix malformed field definitions."""
+"""Fix malformed field definitions."""
+
     # Fix split "default" keyword
     content = re.sub(r'field\(def\s+ault', r'field(default', content)
     content = re.sub(r'def\s+ault_factory', r'default_factory', content)
@@ -34,9 +35,9 @@ def fix_field_definitions(content: str) -> str: Fix
     return content
 
 def fix_docstring_placement(content: str) -> str:
-
-    """ docstring placement and indentation.Process
+""" docstring placement and indentation.Process
     """
+
     # Fix class docstrings
     content = re.sub(
         r'(class\s+\w+[^:]*:)\s*"""([^"]+)"""',
@@ -61,9 +62,9 @@ def fix_docstring_placement(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file, applying all fixes.Fix
+""" a single file, applying all fixes.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -89,6 +90,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ field definitions and docstring placement in critical files."""
+
     critical_files = [
         'src/models/text_to_anything.py',
         'src/models/apple_optimizations.py',

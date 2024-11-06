@@ -5,7 +5,8 @@ import re
 
 
 def
-    """Script to fix specific formatting issues in problematic files.""" main(self)::    """Fix formatting issues in specific files."""        # Files with file operation issues):
+"""Script to fix specific formatting issues in problematic files."""
+ main(self)::    """Fix formatting issues in specific files."""        # Files with file operation issues):
 file_op_files = [
 "fix_text_to_anything.py",
 "fix_text_to_anything_v6.py",

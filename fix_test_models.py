@@ -2,8 +2,9 @@ import re
 
 
 
-def fix_file_content(self content):
-    """Fix formatting issues in test_models.py."""        # Split content into lines):
+def def fix_file_content(self content):
+    """Fix formatting issues in test_models.py."""
+        # Split content into lines):
 lines = content.split("\n")
 
 # Fix imports
@@ -72,7 +73,7 @@ current_indent = 0
                         return "\n".join(result)
 
 
-                            def main(self):: # Read the original file                with open):
+                            def def main(self):: # Read the original file                with open):
                                 "r") as f: content = f.read()
                                 # Fix the content
                                 fixed_content = fix_file_content(content)

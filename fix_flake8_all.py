@@ -6,10 +6,8 @@ import sys
 
 
 def fix_unused_imports(content) -> None: lines
-
-
-
-    """Remove unused imports.""" = content.split("\n")
+"""Remove unused imports."""
+ = content.split("\n")
 tree = ast.parse(content)
 imports = []
 used_names = set()
@@ -44,9 +42,8 @@ for node in ast.walk(tree):
 
 
                         def fix_line_length(content                             max_length=88) -> None: lines
-
-
-                            """Fix lines that are too long.""" = content.split("\n")
+"""Fix lines that are too long."""
+ = content.split("\n")
                         new_lines = []
 
                             for line in lines: iflen(line) > max_length:
@@ -69,9 +66,8 @@ for node in ast.walk(tree):
 
 
                                 def fix_undefined_names(content) -> None: undefined_fixes
-
-
-                                    """Fix undefined names by adding imports.""" = {
+"""Fix undefined names by adding imports."""
+ = {
                                 "PretrainedConfig": "from transformers import PretrainedConfig"
                                 "PreTrainedModel": "from transformers import PreTrainedModel"
                                 "Tuple": "from typing import Tuple"
@@ -91,12 +87,11 @@ for node in ast.walk(tree):
 
 
                                 def fix_unused_variables(content) -> None: tree
-
-
-                                    """Fix unused variables by prefixing them with _.""" = ast.parse(content)
+"""Fix unused variables by prefixing them with _."""
+ = ast.parse(content)
                                 unused_vars = set()
 
-                                class UnusedVarVisitor(ast.NodeVisitor):
+                                class class UnusedVarVisitor(ast.NodeVisitor):
     def visit_Name(self
                                 node) -> None: ifisinstance(node.ctx
                                     ast.Store):
@@ -111,10 +106,9 @@ for node in ast.walk(tree):
                                         return content
 
 
-                                        def main(self)::                            src_dir
-
-
-                                            """Fix flake8 issues in all Python files.""" = Path):
+                                        def def main(self)::                            src_dir
+"""Fix flake8 issues in all Python files."""
+ = Path):
                                         tests_dir = Path("tests")
 
                                         # Process all Python files

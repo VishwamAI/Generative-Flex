@@ -8,7 +8,7 @@ from src.models.text_to_anything import TextToAnything
 from torch.utils.data import DataLoader
 from transformers import PretrainedConfig
 from typing import Dict,
-    Optional
+    
 from typing import Tuple
 import logging
 import os
@@ -20,15 +20,18 @@ import unittest
 
 
 def
-    """Script to fix black formatting issues in Python files.""" fix_file(file_path content) -> None: os
-    """Write fixed content to file.""".makedirs(os.path.dirname(file_path)
+"""Script to fix black formatting issues in Python files."""
+ fix_file(file_path content) -> None: os
+"""Write fixed content to file."""
+.makedirs(os.path.dirname(file_path)
 exist_ok=True)
 with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
 
 
 .Tensor) -> Tuple[torch.Tensor
 torch.Tensor]: intermediate_output
-    """Forward pass through the mathematical expert.""" = self.dense(hidden_states)
+"""Forward pass through the mathematical expert."""
+ = self.dense(hidden_states)
 intermediate_output = self.intermediate_act_fn(intermediate_output)
 
 layer_output = self.dense_output(intermediate_output)
@@ -38,35 +41,40 @@ return layer_output, torch.mean(intermediate_output, dim=-1)
 Mathematical
     """,
 "src/models/reasoning/mathematical_notation.py": """""" notation processing module.Processes
+"""
+
+
+
+class class MathNotationProcessor(nn.Module):
     """
-
-
-
-class MathNotationProcessor(nn.Module):
-    """ mathematical notation and converts between different formats.Process
-    """
+ mathematical notation and converts between different formats.Process
+"""
     input_text) -> None:
-""" mathematical notation.Symbolic
-    """
+"""
+ mathematical notation.Symbolic
+"""
 
 # Implementation for processing mathematical notation
 pass
-""",
+"""
+,
 "src/models/reasoning/symbolic_math.py": """""" mathematics processing module.Processes
+"""
+
+
+
+class class SymbolicMathProcessor(nn.Module):
     """
-
-
-
-class SymbolicMathProcessor(nn.Module):
-    """ symbolic mathematics expressions.Train
-    """
+ symbolic mathematics expressions.Train
+"""
 train_loader: DataLoader
 
 optimizer: torch.optim.Optimizer
 
 config: TrainingConfig) -> Dict[str
     float]:
-        """ for one epoch.Evaluate
+    """
+ for one epoch.Evaluate
     """
         model.train()
         total_loss = 0.0
@@ -82,13 +90,14 @@ config: TrainingConfig) -> Dict[str
         return {"loss": total_loss / len(train_loader)}
 
 
-        def evaluate(self)::
+        def def evaluate(self)::
         model: EnhancedTransformer
 
         val_loader: DataLoader) -> Dict[str
             float]:
-                """ the model.Log
+""" the model.Log
     """
+
                 model.eval()
                 total_loss = 0.0
                 correct = 0
@@ -100,7 +109,7 @@ config: TrainingConfig) -> Dict[str
                 return {"val_loss": total_loss / len(val_loader)}
 
 
-                    def log_metrics(self):: metrics: Dict[str):
+                    def def log_metrics(self):: metrics: Dict[str):
                 float]
                 step: Optional[int] = None
                 epoch: Optional[int] = None) -> None:                    """ training metrics.Main
@@ -110,7 +119,7 @@ config: TrainingConfig) -> Dict[str
                 else: logger.info(metric_str)
 
 
-                    def main(self)::    """ training function.Comprehensive
+                    def def main(self)::    """ training function.Comprehensive
 
 
                         """        config = TrainingConfig):
@@ -134,15 +143,17 @@ config: TrainingConfig) -> Dict[str
                         if __name__ == "__main__":        main()
                         """,
                         "tests/test_features.py": """""" tests for all model features.Test
-    """
+"""
 
 
 
-                        class TestModelFeatures(unittest.TestCase):
-    """ suite for model features.Test
+                        class class TestModelFeatures(unittest.TestCase):
     """
-                        """ TextToAnything model initialization and forward pass.Test
+ suite for model features.Test
+"""
     """
+ TextToAnything model initialization and forward pass.Test
+"""
                         model = TextToAnything(self.config)
                         batch_size = 4
                         seq_length = 128
@@ -152,17 +163,20 @@ config: TrainingConfig) -> Dict[str
                         outputs = model(input_ids, attention_mask)
                         self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size)
                 )
-                """,
+                """
+,
                 "tests/test_models.py": """""" module for enhanced transformer models.Test
-    """
+"""
 
 
 
-                class TestEnhancedTransformer(unittest.TestCase):
-    """ cases for the enhanced transformer model.Test
+                class class TestEnhancedTransformer(unittest.TestCase):
     """
-                """ forward pass through the model.Test
+ cases for the enhanced transformer model.Test
+"""
     """
+ forward pass through the model.Test
+"""
                 batch_size = 4
                 seq_length = 128
                 input_ids = torch.randint(0, 1000, (batch_size, seq_length))
@@ -171,17 +185,20 @@ config: TrainingConfig) -> Dict[str
                 outputs = self.model(input_ids, attention_mask=attention_mask)
                 self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size)
                 )
-                """,
+                """
+,
                 "tests/test_training_setup.py": """""" cases for training setup and configuration.Test
+"""
+
+
+
+                class class TestTrainingSetup(unittest.TestCase):
     """
-
-
-
-                class TestTrainingSetup(unittest.TestCase):
-    """ suite for training setup.Fix
-    """
+ suite for training setup.Fix
+"""
                 @classmethod
-                """ black formatting issues in problematic files."""
+    """
+ black formatting issues in problematic files."""
                 for file_path
                     content in fixes.items():
                     if os.path.exists(file_path):

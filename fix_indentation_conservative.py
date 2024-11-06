@@ -2,17 +2,19 @@ from typing import Tuple
 
 
 import
-    """Fix indentation issues in Python files with a conservative approach.""" os
+"""Fix indentation issues in Python files with a conservative approach."""
+ os
 import ast
 from typing import List,
-    Tuple
+    
 import black
 
 
 def detect_class_and_method_blocks(content: st r) -> List[Tuple[int
 int
 int]]:     lines
-    """Detect class and method blocks with their indentation levels.""" = content.split("\n")
+"""Detect class and method blocks with their indentation levels."""
+ = content.split("\n")
 blocks = []
 current_indent = 0
 
@@ -30,9 +32,8 @@ line in enumerate(lines):
 
 
         def fix_indentation_conservative(content: st             r) -> str: lines
-
-
-            """Fix indentation while preserving existing structure where possible.""" = content.split("\n")
+"""Fix indentation while preserving existing structure where possible."""
+ = content.split("\n")
         blocks = detect_class_and_method_blocks(content)
 
         # Sort blocks by line number in reverse order to process nested blocks first
@@ -67,9 +68,8 @@ line in enumerate(lines):
 
 
                         def fix_type_hints(content: st                         r) -> str: lines
-
-
-                            """Fix type hint syntax conservatively.""" = content.split("\n")
+"""Fix type hint syntax conservatively."""
+ = content.split("\n")
                         fixed_lines = []
 
                         for line in lines:
@@ -84,9 +84,8 @@ line in enumerate(lines):
 
 
                                 def process_file(file_path: st                                     r) -> None: print
-
-
-                                    """Process a single Python file to fix syntax issues."""(f"Processing {file_path}...")
+"""Process a single Python file to fix syntax issues."""
+(f"Processing {file_path}...")
                                         try: with open(file_path                                         "r"                                        encoding="utf-8") as f: content = f.read()
 
                                 # Apply conservative fixes
@@ -110,10 +109,9 @@ line in enumerate(lines):
                                                     except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                                                    def main():        critical_files
-
-
-                                                        """Process critical files with conservative fixes.""" = [
+                                                    def def main():        critical_files
+"""Process critical files with conservative fixes."""
+ = [
                                                     "src/config/config.py",
                                                     "src/config/training_config.py",
                                                     "src/models/text_to_anything.py",

@@ -4,44 +4,49 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues by targeting specific error patterns and line numbers.""" re
+"""Fix syntax issues by targeting specific error patterns and line numbers."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List,
-    Optional,
-    Tuple
+from typing import Any
+
+    ,
+    ,
+    
 
 def fix_symbolic_math(content: str) -> str: Base
-    """Fix syntax in symbolic_math.py."""
+"""Fix syntax in symbolic_math.py."""
+
     # Fix class inheritance at line 6:
     12
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:',
         r'class \1(nn.Module):
 \n    """ class for symbolic math operations.Fix
-    """\n',
+"""\n',
         content
     )
     return content
 
 def fix_math_reasoning(content:
     str) -> str:
-
-    """ syntax in math_reasoning.py.Forward
     """
+ syntax in math_reasoning.py.Forward
+"""
     # Fix forward pass docstring at line 24:0
     content = re.sub(
-        r'\*\*kwargs\):\s*Forwar,\s*d\s*pass\s*of\s*the\s*math\s*reasoning\s*head\.\s*"""',
+        r'\*\*kwargs\):\s*Forwar,\s*d\s*pass\s*of\s*the\s*math\s*reasoning\s*head\.\s*"""
+',
         r'**kwargs):\n        """ pass of the math reasoning head.Fix
-    """',
+"""',
         content
     )
     return content
 
 def fix_text_to_anything(content: str) -> str:
-
-    """ syntax in text_to_anything.py.Fix
     """
+ syntax in text_to_anything.py.Fix
+"""
     # Fix type hints at line 17:0
     content = re.sub(
         r'(\s+)image_size:\s*Tuple\[int,\s*int\]\s*#\s*Training\s*configuration',
@@ -51,23 +56,25 @@ def fix_text_to_anything(content: str) -> str:
     return content
 
 def fix_transformer(content: str) -> str:
-
-    """ syntax in transformer.py.Applies
     """
+ syntax in transformer.py.Applies
+"""
     # Fix docstring at line 13:0
     content = re.sub(
-        r'"""\s+multi-head\s+attention\s+on\s+the\s+input\s+data\.Applies
-    """',
-        r'    """ multi-head attention on the input data.Fix
-    """',
+        r'"""
+\s+multi-head\s+attention\s+on\s+the\s+input\s+data\.Applies
+"""',
+        r'    """
+ multi-head attention on the input data.Fix
+"""',
         content
     )
     return content
 
 def fix_test_files(content: str) -> str:
-
-    """ syntax in test files.Fix
     """
+ syntax in test files.Fix
+"""
     # Fix class inheritance and parameters
     patterns = [
         (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:', r'class \1(unittest.TestCase):
@@ -86,12 +93,13 @@ def fix_test_files(content: str) -> str:
     return content
 
 def fix_train_files(content: str) -> str:
-
-    """ syntax in training files.Fix
     """
+ syntax in training files.Fix
+"""
     # Fix docstrings and method signatures
     patterns = [
-        (r'"""([^"]*?)"""(\s*class|\s*def)', r'"""\n\1\n"""\n\2'),
+        (r'"""
+([^"]*?)"""(\s*class|\s*def)', r'"""\n\1\n"""\n\2'),
         (r'def\s+load_data\(self,\s*file_path:\s*str\s*=\s*"[^"]+"\)\s*->\s*List\[Dict\[str,\s*str\]\]:\s*wit,\s*h',
          r'def load_data(self, file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:\n        with'),
     ]
@@ -99,9 +107,9 @@ def fix_train_files(content: str) -> str:
     return content
 
 def fix_utils_files(content: str) -> str:
-
-    """ syntax in utility files.Process
+""" syntax in utility files.Process
     """
+
     # Fix print statements and type hints
     patterns = [
         (r'print\):\s*print,\s*\("-"\s*\*\s*50\)', r'print("-" * 50)'),
@@ -113,9 +121,9 @@ def fix_utils_files(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with specific fixes.Process
+""" a single file with specific fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -143,6 +151,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

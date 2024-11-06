@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues with precise pattern matching for specific error cases.""" re
+"""Fix syntax issues with precise pattern matching for specific error cases."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List,
-    Optional,
-    Tuple
+    ,
+    ,
+    
 
 def fix_module_inheritance(content: str) -> str: Fix
-    """Fix nn.Module inheritance patterns."""
+"""Fix nn.Module inheritance patterns."""
+
     # Fix class definitions inheriting from nn.Module
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*([^:\n]*?)(?=\s*(?:class|\Z|\n\S))',
@@ -38,9 +40,9 @@ def fix_module_inheritance(content: str) -> str: Fix
     return content
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring formatting and placement.Fix
+""" docstring formatting and placement.Fix
     """
+
     # Move module-level docstrings to column 0
     content = re.sub(
         r'^(\s+)"""([^"]*?)"""',
@@ -59,9 +61,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature formatting.Format
+""" method signature formatting.Format
     """
+
     # Fix method signatures with type hints
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*(?:->[\s\w\[\],]*)?:\s*',
@@ -72,9 +74,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def format_method_signature(name: str, params: str) -> str:
-
-    """ method signature with proper spacing and line breaks.Fix
+""" method signature with proper spacing and line breaks.Fix
     """
+
     if not params.strip():
         return f"def {name}():\n"
 
@@ -94,9 +96,9 @@ def format_method_signature(name: str, params: str) -> str:
         return f"def {name}({', '.join(param_list)}):\n"
 
 def fix_multiline_statements(content: str) -> str:
-
-    """ multiline statement formatting.Format
+""" multiline statement formatting.Format
     """
+
     # Fix multiline imports
     content = re.sub(
         r'from\s+(\w+)\s+import\s+\(\s*([^)]+)\s*\)',
@@ -115,18 +117,18 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def format_function_call(name: str, args: str) -> str:
-
-    """ function call with proper line breaks.Process
+""" function call with proper line breaks.Process
     """
+
     args_list = [a.strip() for a in args.split(',')]
     if len(args_list) > 3 or sum(len(a) for a in args_list) > 80: args_formatted = ',\n        '.join(args_list)
         return f"{name}(\n        {args_formatted}\n    )"
     return f"{name}({', '.join(args_list)})"
 
 def process_file(file_path: str) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -148,6 +150,7 @@ def process_file(file_path: str) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

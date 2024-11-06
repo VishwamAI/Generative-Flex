@@ -4,15 +4,19 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix type hint and method signature spacing issues.""" re
+"""Fix type hint and method signature spacing issues."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+from typing import Tuple
+
+    ,
+    ,
+    
 
 def fix_type_hints(content: str) -> str: Fix
-    """Fix type hint spacing issues."""
+"""Fix type hint spacing issues."""
+
     # Fix basic type hints with incorrect comma spacing
     content = re.sub(
         r'(\w+)\s*,\s*:\s*(\w+)',
@@ -51,10 +55,10 @@ def fix_type_hints(content: str) -> str: Fix
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature spacing issues.Fix
+""" method signature spacing issues.Fix
     """
-    def format_params(match):
+
+    def def format_params(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
@@ -84,9 +88,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_class_inheritance(content: str) -> str:
-
-    """ class inheritance syntax.Process
+""" class inheritance syntax.Process
     """
+
     # Fix class definitions
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:',
@@ -97,9 +101,9 @@ def fix_class_inheritance(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -116,6 +120,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

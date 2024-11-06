@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues with precise pattern matching.""" re
+"""Fix syntax issues with precise pattern matching."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List,
-    Optional,
-    Tuple
+    ,
+    ,
+    
 
 def fix_docstring_indentation(content: str) -> str: Fix
-    """Move module-level docstrings to column 0."""
+"""Move module-level docstrings to column 0."""
+
     # Find all docstrings with their indentation
     docstring_pattern = re.compile(r'^(\s+)"""[^"]*"""\s*$', re.MULTILINE)
     matches = list(docstring_pattern.finditer(content))
@@ -32,9 +34,9 @@ def fix_docstring_indentation(content: str) -> str: Fix
     return content
 
 def fix_class_inheritance(content: str) -> str:
-
-    """ class inheritance and parameter patterns.class
+""" class inheritance and parameter patterns.class
     """
+
     # Pattern to match class definitions with parameters after parentheses
     class_pattern = re.compile(
         r'class\s+(\w+)\s*\(\s*([^)]+)\s*\)\s*:\s*([^:\n]*?)(?=\s*(?:class|\Z|\n\S))',
@@ -67,13 +69,13 @@ def fix_class_inheritance(content: str) -> str:
         {assignments}
 
 Fix
-    """
+"""
 
     return class_pattern.sub(process_class_match, content)
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature formatting.Process
+    """
+ method signature formatting.Process
     """
     # Pattern to match method definitions
     method_pattern = re.compile(
@@ -98,9 +100,9 @@ def fix_method_signatures(content: str) -> str:
     return method_pattern.sub(process_method_match, content)
 
 def process_file(file_path: str) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -121,6 +123,7 @@ def process_file(file_path: str) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

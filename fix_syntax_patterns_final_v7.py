@@ -5,23 +5,26 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax patterns causing Black formatter to fail.""" re
+"""Fix syntax patterns causing Black formatter to fail."""
+ re
 from pathlib import Path
 import ast
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+    ,
+    ,
+    ,
+    
 
 class SyntaxFixer:
     Fix
-    """Handle syntax fixes for Python files."""
+"""Handle syntax fixes for Python files."""
+
 
     @staticmethod
     def fix_module_docstring(content: str) -> str:
-        """ module-level docstring positioning.Fix
+""" module-level docstring positioning.Fix
     """
+
         lines = content.splitlines()
         if not lines: return content
 
@@ -49,9 +52,10 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-        """ class inheritance patterns.
+""" class inheritance patterns.
                 else
     """
+
         def format_class_def(match:
     re.Match) -> str: indent = match.group(1)
             class_name = match.group(2)
@@ -72,25 +76,29 @@ class SyntaxFixer:
 {indent}        {chr(10) + indent + '        '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}""":
                     return f
             elif
-    """{indent}class {class_name}(nn.Module):
+"""{indent}class {class_name}(nn.Module):
 
-{indent}    def __init__(self):
-{indent}        super().__init__()""" "unittest.TestCase" in parent: return f
-            else
-    """{indent}class {class_name}(unittest.TestCase):
-
-{indent}    def setUp(self):
-{indent}        super().setUp()""":
-                if params: return f
-                else
-    """{indent}class {class_name}({parent}):
-{indent}    def __init__(self,
-        {params}):
-{indent}        super().__init__()""":
-                    return fFix
-    """{indent}class {class_name}({parent}):
 {indent}    def __init__(self):
 {indent}        super().__init__()"""
+ "unittest.TestCase" in parent: return f
+            else
+"""{indent}class {class_name}(unittest.TestCase):
+
+{indent}    def setUp(self):
+{indent}        super().setUp()"""
+:
+                if params: return f
+                else
+"""{indent}class {class_name}({parent}):
+{indent}    def __init__(self,
+        {params}):
+{indent}        super().__init__()"""
+:
+                    return fFix
+"""{indent}class {class_name}({parent}):
+{indent}    def __init__(self):
+{indent}        super().__init__()"""
+
 
         # Fix class inheritance patterns
         pattern = r'^(\s*)class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?'
@@ -99,8 +107,9 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_method_signatures(content: str) -> str:
-        """ method signatures and parameter formatting.Fix
+""" method signatures and parameter formatting.Fix
     """
+
         def format_method_def(match: re.Match) -> str: indent = match.group(1)
             method_name = match.group(2)
             params = match.group(3).strip() if match.group(3) else ""
@@ -128,8 +137,9 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_type_hints(content: str) -> str:
-        """ type hint formatting.Process
+""" type hint formatting.Process
     """
+
         # Fix type hint spacing
         content = re.sub(r'(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*(?:\[[^\]]+\])?)', r'\1: \2', content)
 
@@ -145,9 +155,9 @@ class SyntaxFixer:
         return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all syntax fixes.Process
+""" a single file with all syntax fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -167,6 +177,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

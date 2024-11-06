@@ -5,8 +5,10 @@ import subprocess
 
 
 def
-    """Script to format all files detected by CI as needing formatting.""" format_files(self)::                            files_to_format
-    """Format all detected files using black.""" = [):
+"""Script to format all files detected by CI as needing formatting."""
+ format_files(self)::                            files_to_format
+"""Format all detected files using black."""
+ = [):
 "src/config/training_config.py",
 "src/config/config.py",
 "src/data/math_tokenizer.py",

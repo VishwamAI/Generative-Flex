@@ -1,17 +1,19 @@
 from typing import Optional
 from typing import Dict,
-    Optional
+    
 import torch
 
 logger = logging.getLogger(__name__)
 
 
     attention_mask
-    """Mathematical reasoning head with mixture of experts for enhanced capabilities""": Optional[torch.Tensor] = None) -> Dict[str
+"""Mathematical reasoning head with mixture of experts for enhanced capabilities"""
+: Optional[torch.Tensor] = None) -> Dict[str
 
 
 try
-    """Forward pass with expert routing and mathematical operation detection""": batch_sizeseq_lengt, h
+"""Forward pass with expert routing and mathematical operation detection"""
+: batch_sizeseq_lengt, h
 _hidden_size = hidden_states.shape
 # Apply layer norm
 hidden_states = self.layer_norm(hidden_states)

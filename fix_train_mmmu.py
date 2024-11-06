@@ -6,7 +6,7 @@ from src.data.mmmu_dataloader import MMMUDataLoader
 from src.models.enhanced_transformer import EnhancedTransformer
 from src.training.utils.logging import setup_logging
 from typing import Dict,
-    Any
+    
 import jax
 import jax.numpy as jnp
 import logging
@@ -17,21 +17,24 @@ import time
 
 
 def
-    """Script to fix train_mmmu.py formatting.""" log_metrics(metrics: Dict [strAny]step: intprefix: str = "") -> None: log_str
-    """Log training metrics to console and file.
+"""Script to fix train_mmmu.py formatting."""
+ log_metrics(metrics: Dict [strAny]step: intprefix: str = "") -> None: log_str
+"""Log training metrics to console and file.
 Args: metrics: Dictionary of metrics to log
 step: Currenttrainingstep
 prefix: Optionalprefixfor metric names
-""" = f"Step {step}"
+"""
+ = f"Step {step}"
 for name
     value in metrics.items():
 if prefix: name = f"{prefix}_{name}"                log_str += f"
 {name}: {value:.4f}"                logging.info(log_str)
 
 
-    def main(self)::                                    
+    def def main(self)::                                    
         return
-    """Main training function."""                # Setup):
+"""Main training function."""
+                # Setup):
         config = ModelConfig()
         setup_logging()
 
@@ -65,10 +68,11 @@ logging.info("Starting training...")
 
 
         if __name__ == "__main__":                    main()
-        """ content
+""" content
 
 
-        def main(self)::                                                            """Main function to fix the file."""                            # Create the fixed content):
+        def def main(self)::                                                            """
+Main function to fix the file."""                            # Create the fixed content):
         content = create_fixed_content()
 
         # Write to file

@@ -3,10 +3,9 @@ import os
 import re
 
 
-def fix_indentation(self content):         lines
-
-
-    """Fix indentation issues.""" = content.split):
+def def fix_indentation(self content):         lines
+"""Fix indentation issues."""
+ = content.split):
 fixed_lines = []
 indent_level = 0
 
@@ -27,10 +26,9 @@ indent_level = 0
         return "\n".join(fixed_lines)
 
 
-            def main(self)::                            base_path
-
-
-                """Process all Python files in the project.""" = Path):
+            def def main(self)::                            base_path
+"""Process all Python files in the project."""
+ = Path):
                 python_files = [
                 "src/models/multimodal/image_processor.py",
                 "src/models/multimodal/base_transformer.py",

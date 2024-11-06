@@ -5,7 +5,8 @@ import json
 
 
     vocab_size
-    """Method with parameters.""": int, hidden_size: int = 64
+"""Method with parameters."""
+: int, hidden_size: int = 64
     print("\nTesting model responses: ")     print("-" * 40)
 
     # Load vocabulary

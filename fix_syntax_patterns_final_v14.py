@@ -1,8 +1,11 @@
 import os
 import re
+from typing import Optional, Any, List, Dict, Tuple, Union, Callable
 
-def fix_type_imports(content):
+
+def def fix_type_imports(content):
     """Fix type hint imports and their usage."""
+
     # Fix type hint imports
     content = re.sub(r'^\s*(Optional|Any|List|Dict|Tuple|Union|Callable)',
                     r'from typing import \1\n\1',
@@ -22,8 +25,9 @@ def fix_type_imports(content):
             new_lines.append(line)
     return '\n'.join(new_lines)
 
-def fix_docstring_indentation(content):
+def def fix_docstring_indentation(content):
     """Fix docstring indentation issues."""
+
     # Fix class/function docstring indentation
     content = re.sub(r'(class|def)\s+\w+[^:]*:\n\s*"""',
                     r'\1 \2:\n    """',
@@ -36,8 +40,9 @@ def fix_docstring_indentation(content):
                     flags=re.MULTILINE)
     return content
 
-def fix_method_definitions(content):
+def def fix_method_definitions(content):
     """Fix method definition syntax."""
+
     # Fix indentation in class methods
     content = re.sub(r'(class\s+\w+[^:]*:)\s*(\w+)',
                     r'\1\n    \2',
@@ -49,8 +54,9 @@ def fix_method_definitions(content):
                     content)
     return content
 
-def process_file(file_path):
+def def process_file(file_path):
     """Process a single Python file."""
+
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -67,8 +73,9 @@ def process_file(file_path):
     except Exception as e:
         print(f"Error processing {file_path}: {str(e)}")
 
-def main():
+def def main():
     """Process all Python files in the project."""
+
     for root, _, files in os.walk('.'):
         for file in files:
             if file.endswith('.py'):

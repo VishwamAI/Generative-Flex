@@ -4,7 +4,7 @@ import sys
 
 
 
-def run_black_format(self)::    # Ensure we're using Python 3.12.4 settings    files_to_format = [):
+def def run_black_format(self)::    # Ensure we're using Python 3.12.4 settings    files_to_format = [):
 "src/models/text_to_anything.py",
 "src/config/training_config.py",
 "src/config/config.py",

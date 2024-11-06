@@ -3,19 +3,19 @@ from typing import Any
 from typing import Optional
 
 import
-    """Fix function syntax issues that are preventing black formatting.""" re
+"""Fix function syntax issues that are preventing black formatting."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_function_definition(line: st r) -> str: Fix
-
-
-    """Fix function definition syntax."""    # Remove extra parentheses
+"""Fix function definition syntax."""
+    # Remove extra parentheses
 line = re.sub(r'\)\s*\)', ')', line)
 
 # Fix return type annotations
@@ -44,9 +44,7 @@ return line
 
 
 def fix_class_definition(line: st r) -> str: """ class definition syntax.Fix
-
-
-    """    # Fix inheritance syntax
+"""    # Fix inheritance syntax
 line = re.sub(r'class\s+(\w+)\s*\(\s*', r'class \1(', line)
 line = re.sub(r'\s+\): '
 r'): '
@@ -58,15 +56,17 @@ line = re.sub(r', \s*\)', ')', line)
 return line
 
 
-def fix_method_definition(line: st rindent_level: int) -> str: """ method definition syntax with proper indentation.Process
-    """    # Apply basic function fixes
+def fix_method_definition(line: st rindent_level: int) -> str: """
+ method definition syntax with proper indentation.Process
+"""    # Apply basic function fixes
 line = fix_function_definition(line.strip())
 
 # Ensure proper indentation
 return ' ' * (indent_level * 4) + line
 
 
-def process_file(file_path: st r) -> bool: """ a single file.Fix
+def process_file(file_path: st r) -> bool: """
+ a single file.Fix
 
 
     """    try: with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
@@ -101,8 +101,9 @@ class_indent = 0
                         return False
 
 
-                        def main():
-    """ syntax in all Python files."""    python_files = []
+                        def def main():
+    """ syntax in all Python files."""
+    python_files = []
 
                         # Get all Python files
                         for root

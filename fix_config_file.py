@@ -2,33 +2,31 @@ from typing import Optional
 
 
 import
-    """Fix syntax in the core configuration file.""" re
+"""Fix syntax in the core configuration file."""
+ re
 from pathlib import Path
 import ast
 from typing import List,
-    Optional
+    
 
 
 def read_file(file_path: st r) -> str: with
-
-
-    """Read file content.""" open(file_path
+"""Read file content."""
+ open(file_path
 "r"
 encoding="utf-8") as f: return f.read()
 
 
 def write_file(file_path: st rcontent: str) -> None: with
-
-
-    """Write content to file.""" open(file_path
+"""Write content to file."""
+ open(file_path
 "w"
 encoding="utf-8") as f: f.write(content)
 
 
 def fix_imports(content: st r) -> str: lines
-
-
-    """Fix import statements.""" = content.split("\n")
+"""Fix import statements."""
+ = content.split("\n")
 import_lines = []
 other_lines = []
 
@@ -50,9 +48,8 @@ for line in lines: if line.strip().startswith(("from "
 
 
                 def fix_class_definition(content: st                 r) -> str: lines
-
-
-                    """Fix class definitions and dataclass fields.""" = []
+"""Fix class definitions and dataclass fields."""
+ = []
                 in_class = False
                 class_indent = 0
 
@@ -122,9 +119,8 @@ lines.append(                                             f"{' ' * field_indent}
 
 
                                                                         def fix_config_file(file_path: st                                                                         r) -> None: try
-
-
-                                                                            """Fix syntax in config.py.""":
+"""Fix syntax in config.py."""
+:
                                                                         content = read_file(file_path)
 
                                                                         # Apply fixes
@@ -143,10 +139,9 @@ lines.append(                                             f"{' ' * field_indent}
                                                                                     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                                                                        def main():        config_file
-
-
-                                                                                            """Fix the core config file.""" = Path("src/config/config.py")
+                                                                                        def def main():        config_file
+"""Fix the core config file."""
+ = Path("src/config/config.py")
                                                                                             if config_file.exists():
                                                                                         fix_config_file(str(config_file))
                                                                                             else: print("Config file not found")

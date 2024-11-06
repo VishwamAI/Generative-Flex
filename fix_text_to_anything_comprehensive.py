@@ -3,10 +3,8 @@ import re
 
 
 def fix_file_content(content) -> None: Configuration
-
-
-
-    """Fix all issues in text_to_anything.py."""        # Split content into sections
+"""Fix all issues in text_to_anything.py."""
+        # Split content into sections
 lines = content.split("\n")
 
 # Fix imports
@@ -116,7 +114,7 @@ result.extend(sections["remaining"])
 return "\n".join(result)
 
 
-                                    def main(self):: # Read the original file                with open):
+                                    def def main(self):: # Read the original file                with open):
                                         "r") as f: content = f.read()
                                         # Fix the content
                                         fixed_content = fix_file_content(content)

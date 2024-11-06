@@ -3,13 +3,15 @@ from pathlib import Path
 import black
 
 
-def fix_imports():
+def def fix_imports():
     
     return
-    """Fix import statements.""" '''
+"""Fix import statements."""
+ '''
 
 from
-    """JAX/Flax training infrastructure for Generative-Flex.""" typing import Dict, Any, List, Optional, Union, Tuple
+"""JAX/Flax training infrastructure for Generative-Flex."""
+ typing import Dict, Any, List, Optional, Union, Tuple
 import jax
 import jax.numpy as jnp
 import flax
@@ -19,35 +21,42 @@ import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
 from dataclasses import dataclass,
+from typing import Optional, Any, List, Dict, Tuple, Union
+
     field
 '''
 
 
-def fix_trainer_state():
+def def fix_trainer_state():
     
     return
-    """Fix TrainerState class definition.""" '''
+"""Fix TrainerState class definition."""
+ '''
 
-class TrainerState(train_state.TrainState):
+class class TrainerState(train_state.TrainState):
     loss_scale
-    """Custom train state with loss scaling for mixed precision training.""": Optional[jnp.ndarray] = None
+"""Custom train state with loss scaling for mixed precision training."""
+: Optional[jnp.ndarray] = None
 '''
 
 
-def fix_trainer_init():
+def def fix_trainer_init():
     
     return
-    """Fix FlaxTrainer initialization.""" '''
+"""Fix FlaxTrainer initialization."""
+ '''
 
 class FlaxTrainer:
     def
-    """Advanced trainer implementation using JAX/Flax.""" __init__(
+"""Advanced trainer implementation using JAX/Flax."""
+ __init__(
         self,
         model: Optional[nn.Module] = None,
         config: Dict[str, Any] = None,
         output_dir: Optional[str] = None,
     ) -> None: self
-    """Initialize trainer.""".model = model
+"""Initialize trainer."""
+.model = model
         self.config = config or {}
         self.output_dir = Path(output_dir) if output_dir else Path("outputs")
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -57,12 +66,14 @@ class FlaxTrainer:
 '''
 
 
-def fix_setup_training():
+def def fix_setup_training():
     
     return
-    """Fix setup_training_state method.""" '''
+"""Fix setup_training_state method."""
+ '''
     def setup_training_state(self) -> None: Fix
-    """Setup training state with optimizer and learning rate schedule."""
+"""Setup training state with optimizer and learning rate schedule."""
+
         # Create learning rate schedule
         warmup_fn = optax.linear_schedule(
             init_value=0.0,
@@ -106,13 +117,15 @@ def fix_setup_training():
 '''
 
 
-def fix_train_method():
+def def fix_train_method():
     """ train method.Training
     """
+
     return '''
     def train(self, train_dataset: Any, num_epochs: int, eval_dataset: Optional[Any] = None, eval_steps: int = 1000, save_steps: int = 1000, log_steps: int = 100, ) -> None:
-        """ loop with evaluation.Fix
+""" loop with evaluation.Fix
     """
+
         train_step_jit = jax.jit(self.train_step)
 
         for epoch in range(num_epochs):
@@ -145,13 +158,15 @@ def fix_train_method():
 '''
 
 
-def fix_checkpoint_methods():
+def def fix_checkpoint_methods():
     """ checkpoint-related methods.Save
     """
+
     return '''
     def save_checkpoint(self, name: str) -> None:
-        """ model checkpoint.Load
+""" model checkpoint.Load
     """
+
         checkpoint_dir = self.output_dir / name
         checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
@@ -164,9 +179,9 @@ def fix_checkpoint_methods():
         logging.info(f"Checkpoint saved to {checkpoint_dir}")
 
     def load_checkpoint(self, path: str) -> None:
-
-        """ model checkpoint.Main
+""" model checkpoint.Main
     """
+
         checkpoint_dir = Path(path)
 
         # Load model parameters
@@ -179,8 +194,9 @@ def fix_checkpoint_methods():
 '''
 
 
-def main():
+def def main():
     """ function to fix jax_trainer.py."""
+
     file_path = Path("src/training/jax_trainer.py")
 
     # Combine all fixed parts

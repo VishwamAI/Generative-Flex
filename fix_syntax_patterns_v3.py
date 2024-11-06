@@ -7,13 +7,14 @@ from typing import Optional
 
 
 import
-    """Fix specific syntax patterns that are causing black formatter to fail.""" re
+"""Fix specific syntax patterns that are causing black formatter to fail."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
+    ,
+    ,
     Optional,
-    Tuple,
+    ,
     Set
 
 CORE_FILES = [
@@ -31,18 +32,17 @@ CORE_FILES = [
 
 
 def ensure_imports(content: st r) -> str: required_imports
-
-
-    """Ensure necessary imports are present at the top.""" = {
+"""Ensure necessary imports are present at the top."""
+ = {
 "from dataclasses import dataclass,
     field",
     
 "from typing import Optional,
-    Union,
-    List,
-    Dict,
-    Any,
-    Tuple",
+    ,
+    ,
+    ,
+    ,
+    ",
     
 "import unittest",
 "import torch.nn as nn",
@@ -68,11 +68,11 @@ if any( type_hint in contentfor type_hint in ["Optional"
 "Any"
 "Tuple"]):
 needed_imports.add("from typing import Optional,
-    Union,
-    List,
-    Dict,
-    Any,
-    Tuple")
+    ,
+    ,
+    ,
+    ,
+    ")
 
 # Get existing imports
 existing_imports = set()
@@ -84,15 +84,17 @@ existing_imports = set()
         # Add missing imports at the top
         new_imports = needed_imports - existing_imports
             if new_imports: import_block = "\n".join(sorted(new_imports))if content.startswith('Fix
-    """'):
-                docstring_end = content.find('"""', 3) + 3
+"""'):
+                docstring_end = content.find('"""
+', 3) + 3
                 content = (                 content[:docstring_end]                + "\n\n"                + import_block                + "\n"                + content[docstring_end:]            )
         else: content = import_block + "\n\n" + content
         return content
 
 
         def main() -> None:
-    """ syntax patterns in core files."""        print("Starting to process core files...")
+    """ syntax patterns in core files."""
+        print("Starting to process core files...")
         successful = 0
         failed = 0
 

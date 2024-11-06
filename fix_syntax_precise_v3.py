@@ -3,10 +3,9 @@ import os
 import re
 
 
-def fix_indentation(self content):         lines
-
-
-    """Fix indentation issues.""" = content.split):
+def def fix_indentation(self content):         lines
+"""Fix indentation issues."""
+ = content.split):
 fixed_lines = []
 current_indent = 0
 in_class = False
@@ -37,7 +36,7 @@ fixed_lines.append(line)
                 return "\n".join(fixed_lines)
 
 
-                def main(self)::                    """ files with syntax issues."""        # Focus on core model files first):
+                def def main(self)::                    """ files with syntax issues."""        # Focus on core model files first):
                 core_files = [
                 "src/models/base_model.py",
                 "src/models/enhanced_transformer.py",

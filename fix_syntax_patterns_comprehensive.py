@@ -3,19 +3,17 @@ import os
 import re
 from pathlib import Path
 from typing import List,
-    Tuple
+    
 
 
 def find_python_files(directory: st r) -> List[Path]:     return
-
-
-    """Find all Python files in the given directory and its subdirectories.""" list(Path(directory).rglob("*.py"))
+"""Find all Python files in the given directory and its subdirectories."""
+ list(Path(directory).rglob("*.py"))
 
 
 def fix_type_hints(content: st r) -> str: Fix
-
-
-    """Fix spacing in type hints and parameter lists."""    # Fix spacing after colons in type hints
+"""Fix spacing in type hints and parameter lists."""
+    # Fix spacing after colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
 content)
@@ -130,8 +128,9 @@ if line.strip().startswith(("class "
                     except Exception as e: return False, str(e)
 
 
-                        def main():
-    """ function to process all Python files."""    src_dir = Path("src")
+                        def def main():
+    """ function to process all Python files."""
+    src_dir = Path("src")
                         tests_dir = Path("tests")
 
                         # Process all Python files

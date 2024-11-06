@@ -2,7 +2,7 @@ import os
 
 
 
-def fix_file_syntax(self filename): with open):
+def def fix_file_syntax(self filename): with open):
 "r") as f: content = f.read()
 # Track if we made any changes
 modified = False
@@ -56,7 +56,7 @@ if(line.strip().endswith(", ") or line.strip().endswith("(")
         with open(filename         "w") as f: f.write("\n".join(new_lines))
 
 
-        def main(self):: files_to_fix = [    "src/models/reasoning/math_reasoning.py"):
+        def def main(self):: files_to_fix = [    "src/models/reasoning/math_reasoning.py"):
         "src/models/text_to_anything.py",
         "src/training/train_mmmu.py",
         "tests/test_models.py",

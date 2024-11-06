@@ -4,20 +4,22 @@ from typing import Optional
 
 
 import
-    """Fix syntax issues in critical files first.""" os
+"""Fix syntax issues in critical files first."""
+ os
 import ast
 import re
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 import black
+from typing import Union
+
 
 
 def fix_type_hints(content: st r) -> str: Fix
-
-
-    """Fix common type hint syntax issues."""    # Fix missing spaces around colons in type hints
+"""Fix common type hint syntax issues."""
+    # Fix missing spaces around colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
 content)    # Fix missing spaces after commas in type hints
@@ -166,8 +168,9 @@ indent = len(line) - len(stripped)
                                                                                                 except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                                                                                                def main():
-    """ critical files first."""    critical_files = [
+                                                                                                def def main():
+    """ critical files first."""
+    critical_files = [
                                                                                                 "src/config/config.py",
                                                                                                 "src/config/training_config.py",
                                                                                                 "src/models/text_to_anything.py",

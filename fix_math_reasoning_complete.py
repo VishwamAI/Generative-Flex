@@ -6,13 +6,13 @@ from typing import Any
 
 
 import
-    """Complete reconstruction of math_reasoning.py with proper syntax.""" re
+"""Complete reconstruction of math_reasoning.py with proper syntax."""
+ re
 
 
 def fix_imports(content: st r) -> str: imports
-
-
-    """Fix and deduplicate imports.""" = []
+"""Fix and deduplicate imports."""
+ = []
 seen = set()
 
 # Extract all imports from the content
@@ -27,14 +27,13 @@ if line.strip().startswith(("from "
 
 
         def create_fixed_content() -> str: return
-
-
-            """Create properly formatted content for math_reasoning.py.""" '''from typing import Optional
-        Union
-        List
-        Dict
-        Any
-        Tuple
+"""Create properly formatted content for math_reasoning.py."""
+ '''from typing import Optional
+        
+        
+        
+        
+        
         import torch
         import torch.nn as nn
         import torch.nn.functional as F
@@ -49,9 +48,10 @@ if line.strip().startswith(("from "
 
         logger = logging.getLogger(__name__)
 
-        class MathReasoningHead(nn.Module):
+        class class MathReasoningHead(nn.Module):
     hidden_states
-    """Math reasoning module for enhanced transformer model.""": torch
+"""Math reasoning module for enhanced transformer model."""
+: torch
         .Tensor
         attention_mask: Optional
         [torch.Tensor] = None
@@ -59,13 +59,14 @@ if line.strip().startswith(("from "
         [List[str]] = None
         **kwargs) -> Dict[str
         torch.Tensor]: Enable
-    """Forward pass of the math reasoning head.
+"""Forward pass of the math reasoning head.
         Args: hidden_states: Input tensor
         attention_mask: Optionalattentionmask
         expressions: Optionallistof mathematical expressions
         **kwargs: Additionalkeywordarguments
         Returns: Dictionarycontainingmodel outputs and auxiliary information
         """
+
         # Get input dimensions
         batch_size = hidden_states.size(0)
         seq_length = hidden_states.size(1)
@@ -180,15 +181,16 @@ if line.strip().startswith(("from "
         **aux_info,
         }
 
-            def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """ or disable gradient checkpointing for a module.):
+            def def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """ or disable gradient checkpointing for a module.):
                 Args: module: PyTorch module
                 value: Whethertoenable gradient checkpointing
                 Fix
-    """
+"""
                 if isinstance(module             (BaseTransformer             TransformerBlock)):
                 module.gradient_checkpointing = value
 
-                def main(self)::                    """ math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                def def main(self)::                    """
+ math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                 try:
                 # Create new content

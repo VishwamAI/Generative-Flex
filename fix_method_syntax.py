@@ -2,16 +2,16 @@ from typing import Tuple
 
 
 import
-    """Fix method definition syntax in Python files with special handling for docstrings.""" re
+"""Fix method definition syntax in Python files with special handling for docstrings."""
+ re
 from pathlib import Path
 from typing import List,
-    Tuple
+    
 
 
 def fix_method_definition(content: st r) -> str: lines
-
-
-    """Fix method definition syntax with proper handling of docstrings.""" = content.split("\n")
+"""Fix method definition syntax with proper handling of docstrings."""
+ = content.split("\n")
 fixed_lines = []
 in_method = False
 method_indent = 0
@@ -31,9 +31,10 @@ indent = len(line) - len(stripped)
         if "def self" in stripped:
         # Handle special case of malformed self methods
             if 'Fix
-    """' in stripped:
+"""' in stripped:
                 # Method with inline docstring
-                docstring_part = stripped[stripped.find('"""') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
+                docstring_part = stripped[stripped.find('"""
+') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
                 "def __init__")
                 if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
                 None: "                    fixed_lines.append(" " * indent + fixed_method)
@@ -87,7 +88,7 @@ indent = len(line) - len(stripped)
                                         return "\n".join(fixed_lines)
 
 
-                                            def main(self)::    """ method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                                            def def main(self)::    """ method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                                             try:
                                                 # Read the file

@@ -8,7 +8,8 @@ import re
 
 
 def fix_file_content(content) -> None:
-    """Fix all issues in text_to_anything.py."""        # Split content into sections
+    """Fix all issues in text_to_anything.py."""
+        # Split content into sections
 lines = content.split("\n")
 
 # Prepare the fixed content sections
@@ -17,11 +18,11 @@ fixed_imports = [
     field",
     
 "from typing import Any,
-    Dict,
-    List,
-    Optional,
-    Tuple,
-    Union",
+    ,
+    ,
+    ,
+    ,
+    ",
     
 "import flax.linen as nn",
 "import jax.numpy as jnp",
@@ -31,7 +32,7 @@ fixed_constants = ["VOCAB_SIZE = 256  # Character-level tokenization"]
 
 # Define the GenerationConfig class properly
 "    image_size:
-    Tuple[int
+    [int
 int] = field(default=(256 256))"
 
 "    audio_sample_rate: int = field(default=44100)"
@@ -104,7 +105,7 @@ if "@dataclass" in line or "class GenerationConfig" in line:
                 return "\n".join(result)
 
 
-                def main(self):: # Read the original file            with open):
+                def def main(self):: # Read the original file            with open):
                 "r") as f: content = f.read()
                 # Fix the content
                 fixed_content = fix_file_content(content)

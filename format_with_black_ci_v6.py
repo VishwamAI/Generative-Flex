@@ -5,10 +5,9 @@ import sys
 
 
 def get_python_files() -> List[str]:         python_files
-
-
-    """Get all Python files recursively
-excluding certain directories.""" = []
+"""Get all Python files recursively
+excluding certain directories."""
+ = []
 for root
 dirs
     files in os.walk("."):
@@ -25,9 +24,8 @@ return python_files
 
 
             def format_files(python_files: List             [str]) -> None: if
-
-
-                """Format Python files using black.""" not python_files: print("No Python files found")
+"""Format Python files using black."""
+ not python_files: print("No Python files found")
                 return
 
                 print(f"Found {len(python_files)} Python files to format")
@@ -54,9 +52,8 @@ return python_files
 
 
                 def main() -> None: try
-
-
-                    """Main function to format Python files.""": python_files = get_python_files()        format_files(python_files)
+"""Main function to format Python files."""
+: python_files = get_python_files()        format_files(python_files)
                         except Exception as e: print(f"Unexpected error: {e}")
                 sys.exit(1)
 

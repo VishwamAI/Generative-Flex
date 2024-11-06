@@ -3,8 +3,10 @@
 
 
 def
-    """Script to fix training config formatting.""" fix_training_config(self)::         with
-    """Fix the training config file formatting.""" open):
+"""Script to fix training config formatting."""
+ fix_training_config(self)::         with
+"""Fix the training config file formatting."""
+ open):
 "r"
 encoding="utf-8") as f: content = f.read()
 # Split into sections

@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix indentation and multi-line statement issues.""" re
+"""Fix indentation and multi-line statement issues."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 def fix_indentation_levels(content: str) -> str: lines
-    """Fix indentation levels to be consistent.""" = content.split('\n')
+"""Fix indentation levels to be consistent."""
+ = content.split('\n')
     fixed_lines = []
     indent_stack = [0]  # Stack to track indentation levels
 
@@ -42,7 +44,8 @@ def fix_indentation_levels(content: str) -> str: lines
     return '\n'.join(fixed_lines)
 
 def fix_multiline_statements(content: str) -> str: Format
-    """Fix multi-line statement formatting."""
+"""Fix multi-line statement formatting."""
+
     # Fix method definitions with multiple parameters
     content = re.sub(
         r'def\s+(\w+)\s*\(([\s\S]*?)\)\s*(?:->[\s\S]*?)?:',
@@ -67,9 +70,9 @@ def fix_multiline_statements(content: str) -> str: Format
     return content
 
 def format_method_def(name: str, params: str) -> str:
-
-    """ method definition with proper parameter alignment.Format
+""" method definition with proper parameter alignment.Format
     """
+
     params = params.strip()
     if ',' not in params: return f'def {name}({params}):'
 
@@ -81,9 +84,9 @@ def format_method_def(name: str, params: str) -> str:
     return f'def {name}(\n' + '\n'.join(formatted_params) + '\n):'
 
 def format_comprehension(comp: str) -> str:
-
-    """ dictionary/list comprehension with proper line breaks.Apply
+""" dictionary/list comprehension with proper line breaks.Apply
     """
+
     parts = comp.strip().split('\n')
     if len(parts) == 1: return comp
 
@@ -94,17 +97,17 @@ def format_comprehension(comp: str) -> str:
     return '[\n    ' + '\n    '.join(cleaned_parts[1:-1]) + '\n]'
 
 def fix_file_content(content: str) -> str:
-
-    """ all fixes to file content.Process
+""" all fixes to file content.Process
     """
+
     content = fix_indentation_levels(content)
     content = fix_multiline_statements(content)
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -119,6 +122,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

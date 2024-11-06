@@ -6,12 +6,13 @@ import re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 def fix_imports(content: str) -> str: Fix
-    """Fix malformed imports, especially dataclasses."""
+"""Fix malformed imports, especially dataclasses."""
+
     # Fix split dataclasses import
     content = re.sub(r'from\s+dataclass\s+es\s+import', 'from dataclasses import', content)
 
@@ -22,9 +23,9 @@ def fix_imports(content: str) -> str: Fix
     return content
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring formatting and placement.Module
+""" docstring formatting and placement.Module
     """
+
     # Fix class docstrings
     content = re.sub(
         r'(class\s+\w+[^:]*:)\s*"""([^"]+)"""',
@@ -41,11 +42,12 @@ def fix_docstrings(content: str) -> str:
 
     # Fix empty docstrings
     content = re.sub(r'""""""', '""" docstring.Fix
-    """', content)
+"""', content)
 
     # Fix docstrings after type hints
     content = re.sub(
-        r'(\)\s*->\s*\w+[^:]*:)\s*"""',
+        r'(\)\s*->\s*\w+[^:]*:)\s*"""
+',
         r'\1\n        """',
         content
     )
@@ -53,9 +55,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-
-    """ type hint formatting.Process
+""" type hint formatting.Process
     """
+
     # Fix return type hints
     content = re.sub(r'\)\s*->\s*(\w+):', r') -> \1:', content)
     content = re.sub(r'\)\s*->\s*Optional\[([^]]+)\]:', r') -> Optional[\1]:', content)
@@ -67,9 +69,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file, applying all fixes.Fix
+""" a single file, applying all fixes.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -96,6 +98,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ import and docstring issues in critical files."""
+
     critical_files = [
         'src/models/text_to_anything.py',
         'src/models/apple_optimizations.py',

@@ -7,10 +7,8 @@ import traceback
 
 
 def fix_unused_imports(content) -> None: try
-
-
-
-    """Remove unused imports.""": lines = content.split("\n")            tree = ast.parse(content)
+"""Remove unused imports."""
+: lines = content.split("\n")            tree = ast.parse(content)
 imports = []
 used_names = set()
 
@@ -42,7 +40,8 @@ for node in ast.walk(tree):
 
                         return "\n".join(new_lines)
                         except SyntaxError: returncontentdef fix_line_length(content                             max_length=88) -> None: lines
-    """Fix lines that are too long.""" = content.split("\n")
+"""Fix lines that are too long."""
+ = content.split("\n")
                         new_lines = []
 
                             for line in lines: iflen(line) > max_length:
@@ -65,9 +64,8 @@ for node in ast.walk(tree):
 
 
                                 def fix_undefined_names(content) -> None: try
-
-
-                                    """Fix undefined names by adding imports.""": undefined_fixes = {                                                            "PretrainedConfig": "from transformers import PretrainedConfig"
+"""Fix undefined names by adding imports."""
+: undefined_fixes = {                                                            "PretrainedConfig": "from transformers import PretrainedConfig"
                                 "PreTrainedModel": "from transformers import PreTrainedModel"
                                 "Tuple": "from typing import Tuple"
                                 "os": "import os"
@@ -84,9 +82,10 @@ for node in ast.walk(tree):
 
                                 return "\n".join(lines)
                                 except Exception: returncontentdef fix_unused_variables(content) -> None: try
-    """Fix unused variables by prefixing them with _.""": tree = ast.parse(content)                    unused_vars = set()
+"""Fix unused variables by prefixing them with _."""
+: tree = ast.parse(content)                    unused_vars = set()
 
-                                class UnusedVarVisitor(ast.NodeVisitor):
+                                class class UnusedVarVisitor(ast.NodeVisitor):
     def visit_Name(self
                                 node) -> None: ifisinstance
                                 (node.ctx                                     ast.Store): unused_vars.add(node.id)
@@ -99,7 +98,8 @@ for node in ast.walk(tree):
                                 content)
                                 return content
                                         except SyntaxError: returncontentdef process_file(file_path) -> None: try
-    """Process a single file fixing all flake8 issues.""": withopen(file_path                                             "r"                                            encoding="utf-8") as f: content = f.read()
+"""Process a single file fixing all flake8 issues."""
+: withopen(file_path                                             "r"                                            encoding="utf-8") as f: content = f.read()
 
                                             # First fix syntax errors
                                             content = fix_syntax_errors(content)
@@ -116,10 +116,9 @@ for node in ast.walk(tree):
                                             traceback.print_exc()
 
 
-                                            def main(self)::            src_dir
-
-
-                                                """Fix flake8 issues in all Python files.""" = Path):
+                                            def def main(self)::            src_dir
+"""Fix flake8 issues in all Python files."""
+ = Path):
                                             tests_dir = Path("tests")
 
                                             # Process all Python files

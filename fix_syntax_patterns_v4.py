@@ -3,10 +3,9 @@ import os
 import re
 
 
-def main(self)::                            files_to_fix
-
-
-    """Process files with syntax pattern issues.""" = [):
+def def main(self)::                            files_to_fix
+"""Process files with syntax pattern issues."""
+ = [):
 "src/models/audio_model.py",
 "src/models/base_model.py",
 "src/models/enhanced_transformer.py",

@@ -3,10 +3,9 @@ import os
 import re
 
 
-def format_params(self func_nameparams):         if
-
-
-    """Format parameters with proper type hints.""" not params.strip):
+def def format_params(self func_nameparams):         if
+"""Format parameters with proper type hints."""
+ not params.strip):
 return f"def {func_name}():"
 
 param_list = []
@@ -20,10 +19,9 @@ param_list = []
         return f"def {func_name}(\n    {formatted_params}\n):"
 
 
-        def fix_function_bodies(self         content):         lines
-
-
-            """Fix function body indentation and structure.""" = content.split):
+        def def fix_function_bodies(self         content):         lines
+"""Fix function body indentation and structure."""
+ = content.split):
         fixed_lines = []
         in_function = False
         indent_level = 0
@@ -57,10 +55,9 @@ param_list = []
                 return "\n".join(fixed_lines)
 
 
-                    def main(self)::                            files_to_fix
-
-
-                        """Process files with function definition issues.""" = [):
+                    def def main(self)::                            files_to_fix
+"""Process files with function definition issues."""
+ = [):
                         "src/training/jax_trainer.py",
                         "src/models/layers/flash_moe.py",
                         "src/training/train_mmmu.py",

@@ -3,7 +3,7 @@ import subprocess
 import sys
 
 
-def fix_line_length(self)::    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length):
+def def fix_line_length(self)::    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length):
 black_args = ["--line-length", "79"]
 
 # Files to process

@@ -7,17 +7,17 @@ from typing import Optional
 import re
 
 
-def fix_text_to_anything(self):: with open):
+def def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports if not present
 imports = [
 "import jax.numpy as jnp\n",
 "from typing import Dict,
-    List,
-    Optional,
-    Tuple,
-    Union,
-    Any\n",
+    ,
+    ,
+    ,
+    ,
+    \n",
     
 "from flax import linen as nn\n",
     

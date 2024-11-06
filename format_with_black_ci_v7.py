@@ -7,10 +7,9 @@ import sys
 
 
 def get_python_files() -> List[str]:     python_files
-
-
-    """Get all Python files recursively
-excluding certain directories.""" = []
+"""Get all Python files recursively
+excluding certain directories."""
+ = []
 for root
 dirs
     files in os.walk("."):
@@ -27,9 +26,8 @@ return python_files
 
 
             def install_black() -> None: try
-
-
-                """Install black formatter with specific version.""":
+"""Install black formatter with specific version."""
+:
                 subprocess.check_call(                 [sys.executable, "-m", "pip", "install", "--quiet", "black==24.10.0"]            )
                 print("Successfully installed black formatter")
                 except subprocess.CalledProcessError as e: print(f"Error installing black: {e}")
@@ -37,9 +35,8 @@ return python_files
 
 
                 def format_files(files: List                 [str]) -> None: if
-
-
-                    """Format Python files using black.""" not files: print("No Python files found")
+"""Format Python files using black."""
+ not files: print("No Python files found")
                 return
 
                 print(f"Found {len(files)} Python files to format")
@@ -74,9 +71,8 @@ return python_files
 
 
                                 def main() -> None: try
-
-
-                                    """Main function to format Python files.""":
+"""Main function to format Python files."""
+:
                                 # Install black formatter
                                 install_black()
 

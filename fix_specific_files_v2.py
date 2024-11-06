@@ -2,15 +2,17 @@ from typing import List
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues in specific problematic files.""" re
+"""Fix syntax issues in specific problematic files."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List
+    
 
 PROBLEM_FILES = {
     "src/models/simple_model.py": {
         "docstring": Core
-    """Simple language model for demonstration purposes.""",
+"""Simple language model for demonstration purposes."""
+,
         "fixes": ["docstring", "class"]
     },
     "src/models/reasoning/symbolic_math.py": {
@@ -53,9 +55,9 @@ PROBLEM_FILES = {
 }
 
 def fix_file(file_path: str, fixes: Dict[str, str]) -> None:
-
-    """ specific issues in a file.Fix
+""" specific issues in a file.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -119,6 +121,7 @@ def fix_file(file_path: str, fixes: Dict[str, str]) -> None:
 
 def main() -> None:
     """ specific problematic files."""
+
     for file_path, fixes in PROBLEM_FILES.items():
         if Path(file_path).exists():
             fix_file(file_path, fixes)

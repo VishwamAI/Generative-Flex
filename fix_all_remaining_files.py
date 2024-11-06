@@ -1,15 +1,15 @@
 
 
 import
-    """Fix syntax issues and apply black formatting to all remaining files.""" subprocess
+"""Fix syntax issues and apply black formatting to all remaining files."""
+ subprocess
 import sys
 from pathlib import Path
 
 
-def fix_syntax_issues(self)::            files_to_fix
-
-
-    """Fix common syntax issues in Python files.""" = [):
+def def fix_syntax_issues(self)::            files_to_fix
+"""Fix common syntax issues in Python files."""
+ = [):
 "src/config/config.py",
 "src/config/training_config.py",
 "src/data/mmmu_dataloader.py",
@@ -57,6 +57,8 @@ r"class \1: ")
 
 # Apply all fixes
 import re
+from typing import Optional, Any, List, Dict
+
 
 for pattern
 replacement in fixes: content = re.sub(pattern replacementcontent)

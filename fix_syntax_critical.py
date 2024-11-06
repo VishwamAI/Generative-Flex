@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
 import
-    """Fix critical syntax issues in Python files.""" re
+"""Fix critical syntax issues in Python files."""
+ re
 from pathlib import Path
+from typing import Any, List, Dict
+
 
 def fix_field_definitions(content: str) -> str: Fix
-    """Fix field definitions in dataclasses."""
+"""Fix field definitions in dataclasses."""
+
     # Fix supported_modalities field
     pattern = r'supported_modalities:\s*List\[str\]\s*=\s*field\(.*?\)'
     replacement = '''supported_modalities: List[str] = field(
@@ -29,9 +33,9 @@ def fix_field_definitions(content: str) -> str: Fix
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signatures.Process
+""" method signatures.Process
     """
+
     # Fix log_metrics signature
     pattern = r'def\s+log_metrics\s*\(\s*self\s*,\s*metrics:\s*Dict\[strAny\]step:\s*int\)\s*\)\s*->\s*None\)\s*->\s*None:'
     replacement = 'def log_metrics(self, metrics: Dict[str, Any], step: int) -> None:'
@@ -39,9 +43,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file.Fix
+""" a single file.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -56,6 +60,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ syntax in critical files."""
+
     critical_files = [
         "src/models/text_to_anything.py",
         "src/config/training_config.py",

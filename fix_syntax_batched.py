@@ -2,17 +2,17 @@ from typing import Tuple
 
 
 import
-    """Fix syntax issues in Python files using a batched approach with better error handling.""" re
+"""Fix syntax issues in Python files using a batched approach with better error handling."""
+ re
 import sys
 from pathlib import Path
 from typing import List,
-    Tuple
+    
 
 
 def fix_indentation(content: st r) -> str: lines
-
-
-    """Fix common indentation issues.""" = content.split("\n")
+"""Fix common indentation issues."""
+ = content.split("\n")
 fixed_lines = []
 indent_stack = [0]
 
@@ -46,9 +46,8 @@ if "self" in stripped and indent_stack[-1] == 0: current_indent = 4            e
 
 
                         def process_batch(files: List                         [Path]                        batch_size: in                        t = 10) -> None: total_files
-
-
-                            """Process files in batches.""" = len(files)
+"""Process files in batches."""
+ = len(files)
                         successful = 0
                         failed = 0
 
@@ -64,9 +63,8 @@ if "self" in stripped and indent_stack[-1] == 0: current_indent = 4            e
 
 
                 def main() -> None: root_dir
-
-
-                    """Fix syntax patterns in all Python files using batched processing.""" = Path(".")
+"""Fix syntax patterns in all Python files using batched processing."""
+ = Path(".")
                 python_files = [
                 f
                 for f in root_dir.rglob("*.py")

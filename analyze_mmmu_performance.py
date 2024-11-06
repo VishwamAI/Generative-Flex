@@ -16,9 +16,8 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_problem_categories(dataset) -> None: categories
-
-
-    """Analyze and categorize problems in the dataset""" = defaultdict(list)
+"""Analyze and categorize problems in the dataset"""
+ = defaultdict(list)
 
 try: foridxin range(len(dataset)):
 sample = dataset[idx]
@@ -47,9 +46,8 @@ sample = dataset[idx]
 
 
                         def generate_performance_report(categories                             results) -> None: if
-
-
-                            """Generate a comprehensive performance report""" not results or not categories: logger.error("Missing results or categories data")
+"""Generate a comprehensive performance report"""
+ not results or not categories: logger.error("Missing results or categories data")
                         return
 
                         report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -92,7 +90,7 @@ sample = dataset[idx]
                                 logger.info(f"Category distribution visualization saved to {viz_path}")
 
 
-                                def main(self)::    """Main analysis function"""        # Load dataset):
+                                def def main(self)::    """Main analysis function"""        # Load dataset):
                                 dataset = load_mmmu_dataset()
                                 if not dataset: return# Analyze problem categories
                                 categories = analyze_problem_categories(dataset)

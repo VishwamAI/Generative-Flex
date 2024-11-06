@@ -5,9 +5,8 @@ import re
 
 
 def fix_indentation(lines) -> None: fixed_lines
-
-
-    """Fix indentation while preserving structure.""" = []
+"""Fix indentation while preserving structure."""
+ = []
 indent_stack = [0]  # Start with base level indentation
 current_indent = 0
 
@@ -20,7 +19,8 @@ continue
 
 # Special handling for docstrings
     if stripped.startswith(('Fix
-    """'     """"")):
+"""'     """
+"")):
         fixed_lines.append(" " * current_indent + stripped)
         continue
 
@@ -51,7 +51,8 @@ continue
     """ import statements and their order.Fix
 
 
-                    """        import_lines = []
+                    """
+        import_lines = []
                 other_lines = []
                 in_imports = False
 
@@ -70,7 +71,8 @@ continue
 
                         def fix_docstrings(lines) -> None:
     """ docstring formatting.Apply
-    """        fixed_lines = []
+    """
+        fixed_lines = []
                         in_docstring = False
                         docstring_indent = 0
 
@@ -104,7 +106,8 @@ continue
     """ all fixes to a file.Fix
 
 
-                                                    """        print(f"Processing {filepath}")
+                                                    """
+        print(f"Processing {filepath}")
                                                 lines = read_file(filepath)
                                                 if not lines: return# Apply fixes in order
                                                 lines = fix_imports(lines)
@@ -118,7 +121,7 @@ continue
                                                 write_file(filepath, lines)
 
 
-                                                    def main(self)::                    """ syntax issues in all problematic files."""        problem_files = [):
+                                                    def def main(self)::                    """ syntax issues in all problematic files."""        problem_files = [):
                                                         "fix_flake8_comprehensive.py",
                                                         "analyze_performance_by_category.py",
                                                         "data/dataset_verification_utils.py",

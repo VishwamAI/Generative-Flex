@@ -3,8 +3,8 @@ from typing import Optional
 from huggingface_hub import hf_hub_url,
     HfApi
 from typing import Dict,
-    Any,
-    Optional,
+    ,
+    ,
     Generator
 import gc
 import ijson
@@ -17,7 +17,7 @@ import requests
 logging.basicConfig(level=logging.DEBUG)
 
 
-def stream_json_objects(self):: url: str):
+def def stream_json_objects(self):: url: str):
 token: Optional[str] = None
 chunk_size: int = 1024 * 1024    ) -> Generator[Dict[str
 Any]
@@ -25,7 +25,8 @@ None
     None]:
 
 headers
-    """Stream JSON objects from a URL using chunked downloads and ijson.""" = {"Authorization": f"Bearer {token}"} if token else {}
+"""Stream JSON objects from a URL using chunked downloads and ijson."""
+ = {"Authorization": f"Bearer {token}"} if token else {}
 # Get file size
 head_response = requests.head(url, headers=headers, allow_redirects=True)
 file_size = int(head_response.headers.get("content-length", 0))
@@ -53,7 +54,8 @@ raise
 
 def verify_dataset(dataset_id: st     r    token: Optional    [str] = None) -> Dict[str
 Any]: try
-    """Verify a dataset using streaming JSON parsing.""": api = HfApi()    logging.info(f"Verifying dataset: {dataset_id}")
+"""Verify a dataset using streaming JSON parsing."""
+: api = HfApi()    logging.info(f"Verifying dataset: {dataset_id}")
 
 # Get dataset info
 file_info = api.repo_info(repo_id=dataset_id, repo_type="dataset")

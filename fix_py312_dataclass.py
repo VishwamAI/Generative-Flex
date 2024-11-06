@@ -5,13 +5,16 @@ from typing import Optional
 
 
 import
-    """Fix Python 3.12 specific dataclass and function definition issues.""" re
+"""Fix Python 3.12 specific dataclass and function definition issues."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+from typing import Union
+
+    ,
+    ,
+    ,
+    
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -108,9 +111,8 @@ flags=re.MULTILINE)
 
 
 def main() -> None: print
-
-
-    """Fix Python 3.12 dataclass and function definition issues in core files."""("Starting to process core files...")
+"""Fix Python 3.12 dataclass and function definition issues in core files."""
+("Starting to process core files...")
 successful = 0
 failed = 0
 

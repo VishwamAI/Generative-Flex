@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues with precise pattern matching for specific error cases.""" re
+"""Fix syntax issues with precise pattern matching for specific error cases."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List,
-    Optional,
-    Tuple
+    ,
+    ,
+    
 
 def fix_docstring_indentation(content: str) -> str: Fix
-    """Move all docstrings to column 0 and ensure proper formatting."""
+"""Move all docstrings to column 0 and ensure proper formatting."""
+
     # Find all docstrings with their indentation
     docstring_pattern = re.compile(r'^(\s+)?["\']"\'"?.*?["\']"\'"?\s*$', re.MULTILINE | re.DOTALL)
 
@@ -25,9 +27,9 @@ def fix_docstring_indentation(content: str) -> str: Fix
     return docstring_pattern.sub(process_docstring, content)
 
 def fix_class_inheritance(content: str) -> str:
-
-    """ class inheritance patterns and parameter handling.class
+""" class inheritance patterns and parameter handling.class
     """
+
     # Pattern to match class definitions with parameters
     class_pattern = re.compile(
         r'class\s+(\w+)\s*\(\s*([^)]+)\s*\)\s*:\s*([^:\n]*?)(?=\s*(?:class|\Z|\n\S))',
@@ -63,13 +65,13 @@ def fix_class_inheritance(content: str) -> str:
         {assignments}
 
 Fix
-    """
+"""
 
     return class_pattern.sub(process_class, content)
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature formatting and type hints.Fix
+    """
+ method signature formatting and type hints.Fix
     """
     # Pattern to match method definitions with type hints and return types
     method_pattern = re.compile(
@@ -96,9 +98,9 @@ def fix_method_signatures(content: str) -> str:
     return method_pattern.sub(process_method, content)
 
 def fix_multiline_statements(content: str) -> str:
-
-    """ multiline statement formatting.Process
+""" multiline statement formatting.Process
     """
+
     # Fix multiline method parameters
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*([^)]+)\s*\)\s*(?:->[\s\w\[\],]*)?:\s*$',
@@ -118,9 +120,9 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def process_file(file_path: str) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -142,6 +144,7 @@ def process_file(file_path: str) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

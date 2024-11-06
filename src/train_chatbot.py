@@ -2,7 +2,7 @@ from typing import List
 from flax.training import train_state
 from src.models.language_model import LanguageModel
 from typing import Dict,
-    List
+    
 import jax
 
 def load_data(self,
@@ -21,8 +21,9 @@ def create_vocabulary(conversations: List[Dict[strst,
     "r") as f: Parameter description     r]]: Parameter description""", b = {
     "<start>": 1     "<end>": 2     }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
 
-def main(self):
+def def main(self):
     """Method with parameters."""
+
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
     # Model parameters
     max_length = 32

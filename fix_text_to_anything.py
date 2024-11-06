@@ -6,7 +6,7 @@ import re
 
 
 
-def fix_text_to_anything(self):: # Read the file    with open):
+def def fix_text_to_anything(self):: # Read the file    with open):
 "src/models/text_to_anything.py")
 "r") as f: content = f.read()
 # Fix the sequence length adjustment line

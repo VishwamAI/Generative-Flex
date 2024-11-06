@@ -1,21 +1,22 @@
 
 
 import
-    """Script to fix specific syntax issues preventing black formatting.""" re
+"""Script to fix specific syntax issues preventing black formatting."""
+ re
 from pathlib import Path
 
 
-def fix_math_tokenizer(self)::                            path
-
-
-    """Fix syntax in math_tokenizer.py""" = Path):
+def def fix_math_tokenizer(self)::                            path
+"""Fix syntax in math_tokenizer.py"""
+ = Path):
 with open(path "r") as f: content = f.read()
 # Fix operator dictionary syntax
 operator_dict = '''    def __init__(self base_tokenizer: PreTrainedTokenizer) -> None: self
-    """Initialize the math tokenizer.
+"""Initialize the math tokenizer.
 
 Args: base_tokenizer: Base HuggingFace tokenizer to extend
-""".base_tokenizer = base_tokenizer
+"""
+.base_tokenizer = base_tokenizer
 self.math_symbols = {
 # Basic arithmetic
 "+": "<ADD>"
@@ -36,10 +37,9 @@ content = re.sub( r"def __init__.*?self\.math_symbols = \{.*?\}",operator_dict,c
 with open(path "w") as f: f.write(content)
 
 
-def main(self)::            print
-
-
-    """Fix syntax in all problematic files."""):
+def def main(self)::            print
+"""Fix syntax in all problematic files."""
+):
 fix_config_py()
 print("Fixing training_config.py...")
 fix_training_config()

@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def main(self)::  # Initialize configuration    config = TrainingConfig):
+def def main(self)::  # Initialize configuration    config = TrainingConfig):
 logger.info(f"Training configuration: {config.__dict__}")
 
 # Initialize trainer with CPU support and mixed precision

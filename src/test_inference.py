@@ -1,6 +1,6 @@
 from typing import Any
 from typing import Dict,
-    Any
+    
 
 # Define the same model architecture(nn.Module):
  vocab_size: int, hidden_size: int = 64

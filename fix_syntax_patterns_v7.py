@@ -5,8 +5,10 @@ import re
 
 
 def
-    """Fix specific syntax patterns that are causing black formatter to fail.""" fix_docstring_placement(content: st r) -> str: Fix
-    """Fix docstring placement and indentation."""    # Remove extra indentation from module-level docstrings
+"""Fix specific syntax patterns that are causing black formatter to fail."""
+ fix_docstring_placement(content: st r) -> str: Fix
+"""Fix docstring placement and indentation."""
+    # Remove extra indentation from module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
 # Fix class and function docstrings
@@ -78,7 +80,7 @@ line in enumerate(lines):
 
 
                                             def fix_imports(content: st                                                 r) -> str: """ import statement formatting.Process
-    """    lines = content.split('\n')
+"""    lines = content.split('\n')
                                             import_lines = []
                                             other_lines = []
 
@@ -98,7 +100,8 @@ line in enumerate(lines):
                                                             return '\n'.join(import_lines + other_lines)
 
 
-                                                                def process_file(file_path: st                                                                 r) -> None: """ a single file applying all fixes.Process
+                                                                def process_file(file_path: st                                                                 r) -> None: """
+ a single file applying all fixes.Process
 
 
                                                                     """    try: with open(file_path                                                                     'r'                                                                    encoding='utf-8') as f: content = f.read()
@@ -120,7 +123,8 @@ line in enumerate(lines):
 
 
                                                                             def main() -> None:
-    """ all Python files in the project."""    root_dir = Path('.')
+    """ all Python files in the project."""
+    root_dir = Path('.')
                                                                                 for file_path in root_dir.rglob('*.py'):
                                                                                 if '.git' not in str(file_path):
                                                                             process_file(str(file_path))

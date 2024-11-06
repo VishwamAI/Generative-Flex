@@ -4,16 +4,20 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax patterns with precise matching for class inheritance, type hints, and method signatures.""" re
+"""Fix syntax patterns with precise matching for class inheritance, type hints, and method signatures."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+from typing import Tuple
+
+    ,
+    ,
+    
 
 def fix_class_inheritance(content:
     str) -> str: Fix
-    """Fix class inheritance syntax issues."""
+"""Fix class inheritance syntax issues."""
+
     # Fix basic class inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:',
@@ -40,9 +44,9 @@ def fix_class_inheritance(content:
     return content
 
 def fix_type_hints(content: str) -> str:
-
-    """ type hint syntax issues.Fix
+""" type hint syntax issues.Fix
     """
+
     # Fix basic type hints
     content = re.sub(
         r'(\w+)\s*:\s*(\w+)\s*,\s*\.(\w+)',
@@ -81,10 +85,10 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signature syntax issues.Fix
+""" method signature syntax issues.Fix
     """
-    def format_params(match):
+
+    def def format_params(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
@@ -122,9 +126,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-
-    """ multi-line statement syntax issues.Process
+""" multi-line statement syntax issues.Process
     """
+
     # Fix print statements
     content = re.sub(
         r'print\((.*?)\)print\(',
@@ -142,9 +146,9 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -162,6 +166,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

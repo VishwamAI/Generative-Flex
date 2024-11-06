@@ -7,9 +7,11 @@ import sys
 
 
 def
-    """Script to format Python files with black, targeting Python 3.12.""" format_file(file_path) -> None: print
-    """Format a single file with black
-handling errors."""(f"Formatting {file_path}...")
+"""Script to format Python files with black, targeting Python 3.12."""
+ format_file(file_path) -> None: print
+"""Format a single file with black
+handling errors."""
+(f"Formatting {file_path}...")
     try:
 # Try formatting with Python 3.12 target
 result = subprocess.run(["black", "--target-version", "py312", file_path], capture_output=True, text=True, check=False)
@@ -27,10 +29,9 @@ except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 return False
 
 
-    def main(self)::            success_count
-
-
-        """Main function to format all Python files.""" = 0):
+    def def main(self)::            success_count
+"""Main function to format all Python files."""
+ = 0):
         failure_count = 0
         failed_files = []
 

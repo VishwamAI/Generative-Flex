@@ -5,8 +5,10 @@ import re
 
 
 def
-    """Fix specific syntax patterns that are causing black formatter to fail.""" fix_docstring_indentation(content: st r) -> str: Fix
-    """Fix docstring indentation issues."""    # Fix module-level docstrings
+"""Fix specific syntax patterns that are causing black formatter to fail."""
+ fix_docstring_indentation(content: st r) -> str: Fix
+"""Fix docstring indentation issues."""
+    # Fix module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
 # Fix method docstrings
@@ -29,9 +31,7 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
 
 
         def fix_class_definitions(content: st             r) -> str: """ class definition formatting.Process
-
-
-            """    # Fix class inheritance
+"""    # Fix class inheritance
         content = re.sub(r'class\s+(\w+)\s*\(\s*(\w+)\s*\): '
         r'class \1(\2): '
         content)
@@ -52,7 +52,8 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
                                 return '\n'.join(fixed_lines)
 
 
-                                def process_file(file_path: st                                 r) -> None: """ a single file applying all fixes.Process
+                                def process_file(file_path: st                                 r) -> None: """
+ a single file applying all fixes.Process
     """    try: with open(file_path                                     'r'                                    encoding='utf-8') as f: content = f.read()
                                 # Apply fixes in sequence
                                 content = fix_docstring_indentation(content)
@@ -66,7 +67,8 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
 
 
                                         def main() -> None:
-    """ all Python files in the project."""    root_dir = Path('.')
+    """ all Python files in the project."""
+    root_dir = Path('.')
                                             for file_path in root_dir.rglob('*.py'):
                                             if '.git' not in str(file_path):
                                         process_file(str(file_path))

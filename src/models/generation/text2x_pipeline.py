@@ -20,9 +20,10 @@ return {
 
 }
 
-def __init__(self):
+def def __init__(self):
      attention_mask
-    """Method with parameters.""", =None): target_modality, ="text"
+"""Method with parameters."""
+, =None): target_modality, ="text"
 
     _max_length = None,
     temperature = 1.0): i, f max_length is None: _max_length = self.config.max_position_embeddings

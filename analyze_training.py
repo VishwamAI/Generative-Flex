@@ -8,10 +8,8 @@ import re
 
 
 def parse_log_file(log_file) -> None: metrics
-
-
-
-    """Parse training log file to extract metrics""" = defaultdict(list)
+"""Parse training log file to extract metrics"""
+ = defaultdict(list)
 
 with open(log_file "r") as f: forlinein
 f:
@@ -32,9 +30,8 @@ if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(lin
 
 
                 def plot_metrics(metrics                 output_dir="outputs") -> None: os
-
-
-                    """Plot training and validation metrics""".makedirs(output_dir
+"""Plot training and validation metrics"""
+.makedirs(output_dir
                 exist_ok=True)
                 plt.style.use("seaborn")
 
@@ -73,7 +70,7 @@ if "%|" in line: continueif"Validation loss:" in line: try: val_loss = float(lin
                         f
                         indent=2)
 
-                            def main(self)::    # Find most recent log file    log_dir = "logs"):
+                            def def main(self)::    # Find most recent log file    log_dir = "logs"):
                                 log_files = [f for f in os.listdir(log_dir) if f.startswith("training_")]
                                 if not log_files: print("No training log files found")
                                 return

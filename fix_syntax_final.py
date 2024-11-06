@@ -6,12 +6,13 @@ import re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 def fix_string_literals(content: str) -> str: def
-    """Fix string literal formatting in field definitions.""" format_string(match):
+"""Fix string literal formatting in field definitions."""
+ format_string(match):
         items = re.findall(r'"[^"]*"|\S+', match.group(1))
         formatted_items = []
         for item in items: cleaned = item.strip().replace('"', '')
@@ -27,7 +28,8 @@ def fix_string_literals(content: str) -> str: def
     return content
 
 def fix_class_method_syntax(content: str) -> str: Fix
-    """Fix class method decorator and spacing."""
+"""Fix class method decorator and spacing."""
+
     # Fix @classmethod spacing
     content = re.sub(r'@class\s+method', r'@classmethod', content)
 
@@ -41,9 +43,9 @@ def fix_class_method_syntax(content: str) -> str: Fix
 
 def fix_function_definitions(content:
     str) -> str:
-
-    """ function definition formatting.Fix
+""" function definition formatting.Fix
     """
+
     # Fix method definitions with multiple spaces
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*self\s*,?\s*([^)]*)\)\s*->\s*([^:]+):',
@@ -60,9 +62,9 @@ def fix_function_definitions(content:
     return content
 
 def fix_type_annotations(content: str) -> str:
-
-    """ type annotation syntax.Process
+""" type annotation syntax.Process
     """
+
     # Fix nested type annotations
     content = re.sub(
         r'(\w+):\s*Optional\[([^]]+)\]\s*=\s*field\(([^)]+)\)',
@@ -79,9 +81,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file, applying all fixes.Fix
+""" a single file, applying all fixes.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -109,6 +111,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ final syntax issues in critical files."""
+
     critical_files = [
         'src/models/text_to_anything.py',
         'src/config/config.py',

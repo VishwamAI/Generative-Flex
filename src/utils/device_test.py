@@ -4,9 +4,11 @@ import time
 
 
 def
-    """Test script to verify JAX device configuration and GPU support.""" test_device_configuration(self):
+"""Test script to verify JAX device configuration and GPU support."""
+ test_device_configuration(self):
 Test
-    """Method with parameters.""" """ and print device configuration information."""
+"""Method with parameters."""
+    """ and print device configuration information."""
 
 print("\nDevice Configuration Test") print("-" * 50)
 

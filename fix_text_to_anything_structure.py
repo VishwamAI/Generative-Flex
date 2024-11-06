@@ -5,6 +5,7 @@ def fix_file_structure(content) -> None:
     """Fix the structure of text_to_anything.py
 particularly the GenerationConfig class."""
 
+
 # Split content into lines
 lines = content.split("\n")
 
@@ -100,7 +101,7 @@ line = lines[i]
                 return "\n".join(                     result                )
 
 
-                def main(self):: # Read the original file            with open):
+                def def main(self):: # Read the original file            with open):
                 "r") as f: content = f.read()
                 # Fix the structure
                 fixed_content = fix_file_structure(content)

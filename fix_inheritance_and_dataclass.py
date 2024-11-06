@@ -5,13 +5,14 @@ from typing import Optional
 
 
 import
-    """Fix class inheritance and dataclass field patterns that are causing black to fail.""" re
+"""Fix class inheritance and dataclass field patterns that are causing black to fail."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+    ,
+    ,
+    ,
+    
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -29,9 +30,8 @@ CORE_FILES = [
 
 def fix_dataclass_fields(content:
     st r) -> str: lines
-
-
-    """Fix dataclass field patterns.""" = content.split("\n")
+"""Fix dataclass field patterns."""
+ = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 class_indent = 0
@@ -76,7 +76,8 @@ continue
 
 
         def main() -> None:
-    """ inheritance and dataclass patterns in core files."""        print("Starting to process core files...")
+    """ inheritance and dataclass patterns in core files."""
+        print("Starting to process core files...")
         successful = 0
         failed = 0
 

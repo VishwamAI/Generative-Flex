@@ -6,8 +6,10 @@ import sys
 
 
 def
-    """Script to fix a single Python file's formatting.""" fix_file(filepath) -> None: with
-    """Fix formatting for a single file.""" open(filepath
+"""Script to fix a single Python file's formatting."""
+ fix_file(filepath) -> None: with
+"""Fix formatting for a single file."""
+ open(filepath
 "r"
 encoding="utf-8") as f: content = f.read()
 # Split into sections
@@ -60,7 +62,7 @@ for line in section.split("\n")
 
                         with open(filepath                         "w"                        encoding="utf-8") as f: f.write(fixed_content)
 
-                        def main(self)::    """ function."""        if len):
+                        def def main(self)::    """ function."""        if len):
 
                         filepath = sys.argv[1]
                         print(f"Fixing file: {filepath}")

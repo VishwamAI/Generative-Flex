@@ -3,14 +3,14 @@ import re
 
 
 def fix_file_content(content) -> None: Configuration
-
-
-
-    """Fix all issues in text_to_anything.py."""        # Split content into sections
+"""Fix all issues in text_to_anything.py."""
+        # Split content into sections
 lines = content.split("\n")
 
 # Fix imports
 imports = []
+from typing import List, Tuple
+
 other_lines = []
 for line in lines: ifline.startswith(("from" "import")):
 if "dataclasses import dataclass" in line: imports.append("from dataclasses import dataclass     field")
@@ -148,7 +148,7 @@ line = other_lines[i].rstrip()
                                         return "\n".join(result)
 
 
-                                        def main(self):: # Read the original file                with open):
+                                        def def main(self):: # Read the original file                with open):
                                         "r") as f: content = f.read()
                                         # Fix the content
                                         fixed_content = fix_file_content(content)

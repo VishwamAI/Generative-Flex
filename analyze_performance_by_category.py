@@ -10,14 +10,14 @@ import seaborn as sns
 
 
 logging
-    """Script to analyze performance across mathematical categories.""".basicConfig(level=logging.INFO)
+"""Script to analyze performance across mathematical categories."""
+.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def analyze_performance(self)::                            metrics
-
-
-    """Analyze performance across mathematical categories.""" = extract_validation_metrics):
+def def analyze_performance(self)::                            metrics
+"""Analyze performance across mathematical categories."""
+ = extract_validation_metrics):
 category_stats = load_category_distribution()
 
 if not category_stats: logger.error("Required data not available")
@@ -55,9 +55,8 @@ return analysis
 
 
 def generate_report(analysis) -> None: if
-
-
-    """Generate comprehensive performance report.""" not analysis: logger.error("No analysis data available")
+"""Generate comprehensive performance report."""
+ not analysis: logger.error("No analysis data available")
 return
 
 report = ["MMMU Mathematical Performance Analysis\n"]
@@ -110,9 +109,9 @@ for diff
         with open(report_path         "w") as f: f.write("\n".join(report))
         logger.info(f"Performance analysis saved to {report_path}")
 
-        def main(self)::            analysis
-
-            """Main analysis function.""" = analyze_performance):
+        def def main(self)::            analysis
+"""Main analysis function."""
+ = analyze_performance):
         if analysis: generate_visualization(analysis)
         generate_report(analysis)
 

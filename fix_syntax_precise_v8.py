@@ -7,13 +7,14 @@ import re
 from pathlib import Path
 import black
 from typing import List,
-    Dict,
-    Optional,
-    Any
+    ,
+    ,
+    
 
 
 def fix_function_definitions(content: str) -> str: patterns
-    """Fix malformed function definitions.""" = [
+"""Fix malformed function definitions."""
+ = [
         # Fix double colons in method definitions
         (r'def\s+(\w+)\s*\(\s*self\s*\)\s*::', r'def \1(self):'),
 
@@ -34,7 +35,8 @@ def fix_function_definitions(content: str) -> str: patterns
 
         # Fix missing return types with docstrings
         (r'def\s+(\w+)\s*\((.*?)\):\s*Fix
-    """', r'def \1(\2) -> None:\n    """'),
+"""', r'def \1(\2) -> None:\n    """
+'),
     ]
 
     for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
@@ -43,10 +45,9 @@ def fix_function_definitions(content: str) -> str: patterns
 
 
 def fix_type_hints(content: str) -> str:
-
-
-    """ malformed type hints.Fix
+""" malformed type hints.Fix
     """
+
     patterns = [
         # Fix basic type hints
         (r'(\w+):(\w+)([,)])', r'\1: \2\3'),
@@ -73,10 +74,9 @@ def fix_type_hints(content: str) -> str:
 
 
 def fix_docstrings(content: str) -> str:
-
-
-    """ docstring formatting.Fix
+""" docstring formatting.Fix
     """
+
     lines = content.split('\n')
     fixed_lines = []
     in_class = False
@@ -101,10 +101,9 @@ def fix_docstrings(content: str) -> str:
 
 
 def fix_dataclass_fields(content: str) -> str:
-
-
-    """ dataclass field definitions.Process
+""" dataclass field definitions.Process
     """
+
     lines = content.split('\n')
     fixed_lines = []
     in_dataclass = False
@@ -130,10 +129,9 @@ def fix_dataclass_fields(content: str) -> str:
 
 
 def process_file(file_path: Path) -> None:
-
-
-    """ a single file, applying all fixes and black formatting.Fix
+""" a single file, applying all fixes and black formatting.Fix
     """
+
     try: print(f"Processing {file_path}")
         with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -162,6 +160,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ syntax issues in all Python files."""
+
     # Get all Python files
     python_files = list(Path('src').rglob('*.py')) + list(Path('tests').rglob('*.py'))
     print(f"Found {len(python_files)} Python files to process")

@@ -2,8 +2,9 @@ import re
 
 
 
-def fix_imports_and_dataclass(self content):
-    """Fix imports and dataclass field definitions."""        # Split content into lines):
+def def fix_imports_and_dataclass(self content):
+    """Fix imports and dataclass field definitions."""
+        # Split content into lines):
     lines = content.split("\n")
 
 # Add necessary imports
@@ -77,7 +78,7 @@ else: other_lines.append(line)
                                         return "\n".join(imports + [""] + fixed_lines)
 
 
-                                            def main(self):: # Read the original file                with open):
+                                            def def main(self):: # Read the original file                with open):
                                                 "r") as f: content = f.read()
                                                 # Fix the imports and dataclass fields
                                                 fixed_content = fix_imports_and_dataclass(content)

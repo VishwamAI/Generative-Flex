@@ -4,18 +4,20 @@ from typing import Optional
 
 
 import
-    """Fix class and method definitions with proper line breaks and indentation.""" re
+"""Fix class and method definitions with proper line breaks and indentation."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_class_definition(content:
     str) -> str: Process
-    """Fix class definitions and their methods."""
+"""Fix class definitions and their methods."""
+
 # Split content into lines while preserving empty lines
 lines = content.splitlines()
 fixed_lines = []
@@ -80,10 +82,9 @@ i = 0
 
 
                                     def process_file(file_path: str) -> bool:
-
-
-                                        """ a single file.Fix
+""" a single file.Fix
     """
+
                                         try: with open(file_path                                             "r"                                            encoding="utf-8") as f: content = f.read()
 
                                         # Fix the content
@@ -98,8 +99,9 @@ i = 0
                                                             return False
 
 
-                                                            def main():
+                                                            def def main():
     """ class definitions in all Python files."""
+
                                                             python_files = []
 
                                                             # Get all Python files

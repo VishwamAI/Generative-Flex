@@ -4,18 +4,20 @@ from typing import Optional
 
 
 import
-    """Fix dataclass and configuration file patterns.""" re
+"""Fix dataclass and configuration file patterns."""
+ re
 import os
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 def fix_dataclass_fields(content:
     str) -> str: lines
-    """Fix dataclass field definitions.""" = content.splitlines()
+"""Fix dataclass field definitions."""
+ = content.splitlines()
 fixed_lines = []
 in_class = False
 class_indent = 0
@@ -81,7 +83,8 @@ return "\n".join(fixed_lines)
 
 
 def fix_config_patterns(content: str) -> str: lines
-    """Fix configuration file patterns.""" = content.splitlines()
+"""Fix configuration file patterns."""
+ = content.splitlines()
 fixed_lines = []
 in_config = False
 config_indent = 0
@@ -139,7 +142,8 @@ return "\n".join(fixed_lines)
 
 
 def process_file(file_path: str) -> bool: try
-    """Process a single file with robust error handling.""":
+"""Process a single file with robust error handling."""
+:
         with open(file_path, "r", encoding="utf-8") as f: content = f.read()
 
         # Apply fixes
@@ -154,8 +158,9 @@ def process_file(file_path: str) -> bool: try
         return False
 
 
-def main():
+def def main():
     """Fix dataclass and configuration patterns in all Python files."""
+
 # Get all Python files
 python_files = []
     for root, _, files in os.walk("."):

@@ -4,9 +4,10 @@ from typing import Optional
 import re
 from pathlib import Path
 
-def fix_function_signature(content):
+def def fix_function_signature(content):
     Add
-    """Fix function signatures with type hints."""
+"""Fix function signatures with type hints."""
+
     # Fix specific malformed function signatures
     patterns = [
         # Fix train_epoch signature
@@ -39,14 +40,15 @@ def fix_function_signature(content):
 
     return content
 
-def fix_imports(content):
+def def fix_imports(content):
     """ necessary imports.Fix
     """
+
     imports_to_add = [
         'from typing import Dict,
-    Any,
-    List,
-    Optional',
+    ,
+    ,
+    ',
     
         'from torch.utils.data import DataLoader',
         'from src.models.enhanced_transformer import EnhancedTransformer'
@@ -59,9 +61,10 @@ def fix_imports(content):
 
     return content
 
-def fix_file(file_path):
+def def fix_file(file_path):
     """ a Python file.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r') as f: content = f.read()
 
@@ -77,8 +80,9 @@ def fix_file(file_path):
         print(f"Successfully processed {file_path}")
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
-def main():
+def def main():
     """ Python files."""
+
     files_to_fix = [
         "src/training/train_mmmu.py",
         "src/training/jax_trainer.py",

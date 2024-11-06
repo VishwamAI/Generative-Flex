@@ -3,18 +3,18 @@ from typing import Any
 
 
 import
-    """Fix specific syntax patterns that are causing black formatter to fail.""" re
+"""Fix specific syntax patterns that are causing black formatter to fail."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any
+    ,
+    
 import ast
 
 
 def fix_indentation(content: st r) -> str: lines
-
-
-    """Fix indentation issues in the file.""" = content.split("\n")
+"""Fix indentation issues in the file."""
+ = content.split("\n")
 fixed_lines = []
 indent_level = 0
 
@@ -41,8 +41,10 @@ for line in lines: stripped = line.lstrip()
 
 
                 def fix_function_definition(content: st                     r) -> str: def
-    """Fix function definition formatting.""" fix_params(match: re                     .Match) -> str: func_name
-    """Fix parameter formatting within a function definition.""" = match.group(1)
+"""Fix function definition formatting."""
+ fix_params(match: re                     .Match) -> str: func_name
+"""Fix parameter formatting within a function definition."""
+ = match.group(1)
                 params = match.group(2)
                 return_type = match.group(3) if match.group(3) else ""
 
@@ -74,9 +76,11 @@ for line in lines: stripped = line.lstrip()
 
 
                                         def fix_class_definition(content: st                                             r) -> str: def
-    """Fix class definition formatting.""" fix_class_def(match:
+"""Fix class definition formatting."""
+ fix_class_def(match:
     re                                             .Match) -> str: class_name
-    """Fix class definition formatting.""" = match.group(1)
+"""Fix class definition formatting."""
+ = match.group(1)
                                         inheritance = match.group(2)
 
                                             if inheritance:
@@ -93,9 +97,8 @@ for line in lines: stripped = line.lstrip()
 
 
                                                 def fix_dataclass_fields(content: st                                                 r) -> str: if
-
-
-                                                    """Fix dataclass field definitions.""" "@dataclass" not in content:
+"""Fix dataclass field definitions."""
+ "@dataclass" not in content:
     return content
 
                                                 lines = content.split("\n")
@@ -125,9 +128,8 @@ field_part = type_and_default.split("=", 1)[1].strip()
 
 
                                                                             def fix_imports(content: st                                                                             r) -> str: lines
-
-
-                                                                                """Fix import statement formatting.""" = content.split("\n")
+"""Fix import statement formatting."""
+ = content.split("\n")
                                                                             import_lines = []
                                                                             other_lines = []
 
@@ -155,9 +157,8 @@ field_part = type_and_default.split("=", 1)[1].strip()
 
 
                                                                                                 def process_file(file_path: st                                                                                                 r) -> None: try
-
-
-                                                                                                    """Process a single file applying all fixes.""":
+"""Process a single file applying all fixes."""
+:
                                                                                                     with open(file_path                                                                                                     "r"                                                                                                    encoding="utf-8") as f: content = f.read()
 
                                                                                                     # Skip empty files
@@ -184,9 +185,8 @@ field_part = type_and_default.split("=", 1)[1].strip()
 
 
                                                                                                                     def process_files_in_order() -> None: root_dir
-
-
-                                                                                                                        """Process files in a specific order to handle dependencies.""" = Path(".")
+"""Process files in a specific order to handle dependencies."""
+ = Path(".")
 
                                                                                                                     # Define processing order
                                                                                                                     order = [

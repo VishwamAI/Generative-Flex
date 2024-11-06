@@ -4,15 +4,17 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues with precise pattern matching for specific error cases.""" re
+"""Fix syntax issues with precise pattern matching for specific error cases."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List,
-    Optional,
-    Tuple
+    ,
+    ,
+    
 
 def fix_class_inheritance(content: str) -> str: Format
-    """Fix class inheritance patterns for nn.Module and unittest.TestCase."""
+"""Fix class inheritance patterns for nn.Module and unittest.TestCase."""
+
     # Fix nn.Module inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*(?:\n\s+"""[^"]*"""\s*)?(?!\s*def __init__)',
@@ -49,9 +51,9 @@ def fix_class_inheritance(content: str) -> str: Format
     return content
 
 def format_class_with_params(name: str, params: str) -> str:
-
-    """ class definition with parameters.Fix
+""" class definition with parameters.Fix
     """
+
     params = params.strip()
     param_list = [p.strip() for p in params.split(',')]
     assignments = '\n        '.join(
@@ -67,9 +69,9 @@ def format_class_with_params(name: str, params: str) -> str:
     )
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring formatting and placement.Fix
+""" docstring formatting and placement.Fix
     """
+
     # Move module-level docstrings to column 0
     content = re.sub(
         r'^(\s+)?"""(.+?)"""',
@@ -88,12 +90,13 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
+""" method signature formatting.Format
+    """
 
-    """ method signature formatting.Format
-    """
     def format_params(params: str) -> str:
-        """ parameters with proper spacing.Fix
+""" parameters with proper spacing.Fix
     """
+
         if not params.strip():
             return ""
         params = params.strip()
@@ -122,9 +125,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-
-    """ multiline statement formatting.Format
+""" multiline statement formatting.Format
     """
+
     # Fix multiline function calls
     content = re.sub(
         r'(\w+)\s*\(\s*([^)]+)\s*\)',
@@ -143,18 +146,18 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def format_multiline_call(name: str, args: str) -> str:
-
-    """ function call with proper line breaks.Process
+""" function call with proper line breaks.Process
     """
+
     args = args.strip()
     if len(args) < 80 and '\n' not in args: return f"{name}({args})"
     args_list = [a.strip() for a in args.split(',')]
     return f"{name}(\n    {','.join(args_list)}\n)"
 
 def process_file(file_path: str) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -176,6 +179,7 @@ def process_file(file_path: str) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 
 import
-    """Fix specific syntax patterns that are still causing Black formatter to fail.""" re
+"""Fix specific syntax patterns that are still causing Black formatter to fail."""
+ re
 from pathlib import Path
+from typing import List, Dict, Tuple
+
 
 def fix_class_inheritance(content: str) -> str: Neural
-    """Fix class inheritance patterns."""
+"""Fix class inheritance patterns."""
+
     # Fix nn.Module class with parameters in class definition
     patterns = [
         # Pattern 1:
     class with vocab_size and hidden_size
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
          lambda m: f'''class {m.group(1)}(nn.Module):
-
-    """ network module.Neural
+""" network module.Neural
     """
+
 
     def __init__(self,
         vocab_size: int,
@@ -26,9 +30,9 @@ def fix_class_inheritance(content: str) -> str: Neural
         # Pattern 2: class with only hidden_size
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*hidden_size:\s*int\s*=\s*64',
          lambda m: f'''class {m.group(1)}(nn.Module):
-
-    """ network module.Test
+""" network module.Test
     """
+
 
     def __init__(self,
         hidden_size: int = 64):
@@ -38,36 +42,39 @@ def fix_class_inheritance(content: str) -> str: Neural
         # Pattern 3: unittest.TestCase class
         (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:',
          lambda m: f'''class {m.group(1)}(unittest.TestCase):
-
-    """ case.Set
+""" case.Set
     """
 
-    def setUp(self):
+
+    def def setUp(self):
     """ up test fixtures.Training
     """
+
         super().setUp()'''),
 
         # Pattern 4: train_state.TrainState class
         (r'class\s+(\w+)\s*\(\s*train_state\.TrainState\s*\)\s*:',
          lambda m: f'''class {m.group(1)}(train_state.TrainState):
-    """ state.Initialize
+""" state.Initialize
     """
+
 
     def __init__(self,
         *args,
         **kwargs):
     """ training state.Neural
     """
+
         super().__init__(*args, **kwargs)'''),
 
         # Pattern 5: basic nn.Module class
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:(\s*$|\s+[^\n])',
          lambda m: f'''class {m.group(1)}(nn.Module):
-
-    """ network module.Fix
+""" network module.Fix
     """
 
-    def __init__(self):
+
+    def def __init__(self):
         super().__init__()''')
     ]
 
@@ -75,9 +82,9 @@ def fix_class_inheritance(content: str) -> str: Neural
     return content
 
 def fix_method_signatures(content: str) -> str:
-
-    """ method signatures and file operations.Train
+""" method signatures and file operations.Train
     """
+
     # Fix file operations
     content = re.sub(
         r'with\s+open\s*\(\s*([^,]+)\s+"r"\s*\)\s*as\s+f:',
@@ -93,21 +100,22 @@ def fix_method_signatures(content: str) -> str:
     optimizer: torch.optim.Optimizer,
     config: TrainingConfig,
 ) -> None:
-    """ the model.
+""" the model.
 
     Args: dataloader: Data loader for training
         optimizer: Optimizer for updating parameters
         config: Training configuration
     Fix
-    """''',
+    """
+''',
         content
     )
     return content
 
 def fix_return_statements(content: str) -> str:
-
-    """ return statements with trailing colons.Fix
+""" return statements with trailing colons.Fix
     """
+
     # Remove trailing colons from return statements
     content = re.sub(
         r'return\s+({[^}]+}):',
@@ -117,9 +125,9 @@ def fix_return_statements(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring formatting and indentation.Fix
+""" docstring formatting and indentation.Fix
     """
+
     # Fix module docstrings
     content = re.sub(
         r'^"""([^"]*?)"""',
@@ -145,9 +153,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-
-    """ type hint formatting.Process
+""" type hint formatting.Process
     """
+
     # Fix Tuple type hints
     content = re.sub(
         r'(\s+)([a-zA-Z_][a-zA-Z0-9_]*):\s*Tuple\[([^\]]+)\](\s*#[^\n]*)?',
@@ -171,9 +179,9 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -192,6 +200,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

@@ -2,16 +2,16 @@ from typing import Union
 from typing import Tuple
 from typing import List
 from typing import Optional
-def fix_text_to_anything(self):: with open):
+def def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports
 imports = [
 "import jax.numpy as jnp\n",
 "from typing import Dict,
-    List,
-    Optional,
-    Tuple,
-    Union\n",
+    ,
+    ,
+    ,
+    \n",
     
 "from flax import linen as nn\n",
     

@@ -1,10 +1,13 @@
 import re
 from pathlib import Path
+from typing import Union
 
-def fix_train_mmmu(content):
+
+def def fix_train_mmmu(content):
     
     lines
-    """Fix train_mmmu.py specific syntax issues.""" = content.split('\n')
+"""Fix train_mmmu.py specific syntax issues."""
+ = content.split('\n')
     fixed_lines = []
     current_func = []
     in_func = False
@@ -27,9 +30,10 @@ def fix_train_mmmu(content):
 
     return '\n'.join(fixed_lines)
 
-def process_function(func_text):
+def def process_function(func_text):
     """ a function definition block.Fix
     """
+
     # Fix double colons
     func_text = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*:', r'def \1(self):', func_text)
 
@@ -38,9 +42,10 @@ def process_function(func_text):
 
     return [func_text]
 
-def fix_jax_trainer(content):
+def def fix_jax_trainer(content):
     """ jax_trainer.py specific syntax issues.Fix
     """
+
     lines = content.split('\n')
     fixed_lines = []
 
@@ -58,9 +63,10 @@ def fix_jax_trainer(content):
 
     return '\n'.join(fixed_lines)
 
-def fix_config(content):
+def def fix_config(content):
     """ config.py specific syntax issues.Fix
     """
+
     lines = content.split('\n')
     fixed_lines = []
     class_indent = 0
@@ -86,9 +92,10 @@ def fix_config(content):
 
     return '\n'.join(fixed_lines)
 
-def fix_file(file_path):
+def def fix_file(file_path):
     """ syntax issues in a specific file.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r') as f: content = f.read()
 
@@ -104,8 +111,9 @@ def fix_file(file_path):
         print(f"Successfully processed {file_path}")
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
-def main():
+def def main():
     """ syntax in core files with precise patterns."""
+
     core_files = [
         "src/training/train_mmmu.py",
         "src/training/jax_trainer.py",

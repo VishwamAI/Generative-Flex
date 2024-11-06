@@ -5,9 +5,13 @@ import sys
 
 
 def
-    """Script to fix flake8 issues in Python files.""" fix_unused_imports(content) -> None: lines
-    """Remove unused imports.""" = content.split("\n")
+"""Script to fix flake8 issues in Python files."""
+ fix_unused_imports(content) -> None: lines
+"""Remove unused imports."""
+ = content.split("\n")
 imports_to_remove = [
+from typing import Optional, Any, List, Dict, Tuple, Union
+
 "typing.Dict",
 "typing.List",
 "typing.Optional",
@@ -39,9 +43,8 @@ for line in lines: should_keep = True            for unused_import in imports_to
 
 
         def fix_line_length(content) -> None: lines
-
-
-            """Break long lines to comply with 79 character limit.""" = content.split("\n")
+"""Break long lines to comply with 79 character limit."""
+ = content.split("\n")
         fixed_lines = []
 
         for line in lines: iflen(line.rstrip()) > 79:
@@ -91,18 +94,16 @@ for line in lines: should_keep = True            for unused_import in imports_to
 
 
                         def fix_bare_except(content) -> None: lines
-
-
-                            """Fix bare except clauses.""" = content.split("\n")
+"""Fix bare except clauses."""
+ = content.split("\n")
                         for i
                             line in enumerate(lines):
                         if "except: " in line: lines[i] = line.replace("except:"                             "except Exception: ")        return "\n".join(lines)
 
 
-                            def main(self)::                            files_to_process
-
-
-                                """Main function to process all files.""" = [):
+                            def def main(self)::                            files_to_process
+"""Main function to process all files."""
+ = [):
                                 "tests/test_features.py",
                                 "tests/test_models.py",
                                 "src/config/training_config.py",

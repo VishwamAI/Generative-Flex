@@ -3,21 +3,24 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax patterns causing Black formatter to fail.""" re
+"""Fix syntax patterns causing Black formatter to fail."""
+ re
 from pathlib import Path
 import ast
 from typing import List,
-    Tuple,
-    Optional
+    ,
+    
 
 class SyntaxFixer:
     Fix
-    """Handle syntax fixes for Python files."""
+"""Handle syntax fixes for Python files."""
+
 
     @staticmethod
     def fix_docstring_position(content: str) -> str:
-        """ docstring positioning and indentation.Fix
+""" docstring positioning and indentation.Fix
     """
+
         lines = content.splitlines()
         fixed_lines = []
         in_class = False
@@ -71,8 +74,9 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
-        """ class inheritance and initialization patterns.class
+""" class inheritance and initialization patterns.class
     """
+
         def format_class_def(match) -> str:
     class_name = match.group(1)
             parent = match.group(2)
@@ -90,22 +94,32 @@ class SyntaxFixer:
                 return f""" {class_name}({parent}):
     \"\"\"Class with parameters for initialization.\"\"\"
 
-    def __init__(self, {', '.join(param_list)}):
+    def def __init__(
+
+        self,
+
+        {',
+
+        '.join(param_list)}
+
+    ):
         super().__init__()
         {chr(10).join(f'        self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}class
-    """
-            else: return f""" {class_name}({parent}):
+"""
+            else: return f"""
+ {class_name}({parent}):
     \"\"\"Class inheriting from {parent}.\"\"\"
 
-    def __init__(self):
+    def def __init__(self):
         super().__init__()Class
-    """
+"""
 
         # Fix various class inheritance patterns
         patterns = [
             (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?', format_class_def),
-            (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:', r'class \1(\2):\n    """ inheriting from \2.Fix
-    """\n\n    def __init__(self):\n        super().__init__()'),
+            (r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:', r'class \1(\2):\n    """
+ inheriting from \2.Fix
+"""\n\n    def __init__(self):\n        super().__init__()'),
         ]
 
         for pattern, replacement in patterns: if callable(replacement):
@@ -116,7 +130,8 @@ class SyntaxFixer:
 
     @staticmethod
     def fix_method_signatures(content: str) -> str:
-        """ method signatures and parameter formatting.def
+    """
+ method signatures and parameter formatting.def
     """
         def format_method_def(match) -> str: method_name = match.group(1)
             params = match.group(2)
@@ -157,8 +172,9 @@ Fix
 
     @staticmethod
     def fix_indentation(content: str) -> str:
-        """ indentation issues while preserving logical structure.Process
+""" indentation issues while preserving logical structure.Process
     """
+
         lines = content.splitlines()
         fixed_lines = []
         indent_stack = [0]
@@ -201,9 +217,9 @@ Fix
         return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all syntax fixes.Process
+""" a single file with all syntax fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -223,6 +239,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

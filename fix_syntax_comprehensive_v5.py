@@ -3,31 +3,36 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues comprehensively with file-specific patterns.""" re
+"""Fix syntax issues comprehensively with file-specific patterns."""
+ re
 from pathlib import Path
 from typing import Dict,
-    List,
-    Optional
+from typing import Any, Tuple
+
+    ,
+    
 
 def fix_docstring(content: str, docstring: str) -> str: Fix
-    """Fix module-level docstring formatting."""
+"""Fix module-level docstring formatting."""
+
     # Remove any existing docstring
     content = re.sub(r'^\s*["\']"\'"?.*?["\']"\'"?\s*$', '', content, flags=re.MULTILINE | re.DOTALL)
     # Add new docstring at column 0
     return f'"""{docstring}"""\n\n{content.lstrip()}'
 
 def fix_class_definition(content: str, class_name: str, parent_class: str, params: Optional[str] = None) -> str:
-
-    """ class definition and inheritance.    def
+""" class definition and inheritance.    def
     """
+
     if params:
     init_method = f""" __init__(self, {params}):
         super().__init__()
         {'; '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in params.split(','))}    def
-    """
-    else: init_method = """ __init__(self):
+"""
+    else: init_method = """
+ __init__(self):
         super().__init__()Fix
-    """
+"""
 
     # Replace class definition and its __init__
     pattern = fr'class\s+{class_name}\s*\([^)]+\)\s*:(?:[^:]+?(?=class|\Z)|\Z)'
@@ -35,9 +40,9 @@ def fix_class_definition(content: str, class_name: str, parent_class: str, param
     return re.sub(pattern, replacement, content, flags=re.MULTILINE | re.DOTALL)
 
 def fix_method_signature(content: str, method_name: str, params: str, return_type: Optional[str] = None) -> str:
-
-    """ method signature formatting.Process
     """
+ method signature formatting.Process
+"""
     # Clean up parameter formatting
     formatted_params = ', '.join(p.strip() for p in params.split(','))
     return_annotation = f' -> {return_type}' if return_type else ''
@@ -48,8 +53,8 @@ def fix_method_signature(content: str, method_name: str, params: str, return_typ
     return re.sub(pattern, replacement, content, flags=re.MULTILINE | re.DOTALL)
 
 def process_file(file_path: str) -> None:
-
-    """ a single file with specific fixes.Process
+    """
+ a single file with specific fixes.Process
     """
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
@@ -89,6 +94,7 @@ def process_file(file_path: str) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

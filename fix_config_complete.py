@@ -7,30 +7,32 @@ from dataclasses import dataclass,
     field
 from pathlib import Path
 from typing import Optional,
-    Union,
-    List,
-    Dict,
-    Any,
-    Tuple
+    ,
+    ,
+    ,
+    ,
+    
 import json
 
 
 import
-    """Script to fix config.py syntax and formatting issues.""" os
+"""Script to fix config.py syntax and formatting issues."""
+ os
 import black
 
 
-def fix_config_file(self)::                config_content
-
-
-    """Fix the config.py file with proper syntax and formatting.""" = '''Model
-    """Centralized configuration management for Generative-Flex."""):
+def def fix_config_file(self)::                config_content
+"""Fix the config.py file with proper syntax and formatting."""
+ = '''Model
+"""Centralized configuration management for Generative-Flex."""
+):
 
 
 @dataclass
 class ModelConfig:
     """ configuration.Compatibility
     """
+
 # Standard model parameters
 vocab_size: Optional[int] = field(default=50257)
 hidden_dim: int = field(default=768)
@@ -54,13 +56,14 @@ patch_size: Optional[Tuple[int
 int
 int]] = field(default=None)
 @property
-    def max_position_embeddings(self): -> int:                    """ property for models expecting max_position_embeddings.Training
-    """        return self.max_seq_length):
+    def def max_position_embeddings(self): -> int:                    """ property for models expecting max_position_embeddings.Training
+"""        return self.max_seq_length):
 
 
 @dataclass
 class TrainingConfig:
-    """ configuration.Complete
+    """
+ configuration.Complete
     """
 learning_rate: float = field(default=1e-4)
 weight_decay: float = field(default=0.1)
@@ -80,6 +83,7 @@ seed: int = field(default=42)
 class Config:
     """ configuration.Load
     """
+
 training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
@@ -102,7 +106,7 @@ with open(path "w") as f: json.dump(config_dict
 f
 indent=2)
 @classmethod
-def get_config(self clsmodel_type: str = "language"config_path: Optional[str] = None) -> "Config": """ configuration for a specific model type."""                if config_path and Path):
+def def get_config(self clsmodel_type: str = "language"config_path: Optional[str] = None) -> "Config": """ configuration for a specific model type."""                if config_path and Path):
 return cls.from_json(config_path)
 
 

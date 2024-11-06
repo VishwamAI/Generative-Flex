@@ -5,7 +5,7 @@ import os
 
 
 
-def main(self)::    args = parse_args):
+def def main(self)::    args = parse_args):
 # Set up logging
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",

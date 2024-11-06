@@ -1,7 +1,8 @@
 
 
 from
-    """Math reasoning module for enhanced transformer model.""" .layers.enhanced_transformer import EnhancedTransformerBlock
+"""Math reasoning module for enhanced transformer model."""
+ .layers.enhanced_transformer import EnhancedTransformerBlock
 from .layers.flash_moe import FlashAttention, MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
 from .multimodal.base_transformer import BaseTransformer, TransformerBlock
@@ -13,6 +14,8 @@ import logging
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from typing import Optional, List
+
 
 nalUnionList, DictAnyTuple
 
@@ -20,12 +23,14 @@ logger = logging.getLogger(__name__)
 
 
     hidden_states
-    """Math reasoning module for enhanced transformer model.""": torch.Tensorattention_mas
+"""Math reasoning module for enhanced transformer model."""
+: torch.Tensorattention_mas
     k: Optional[torch.Tensor] = None
     expressions: Optional[List[str]] = None
     **kwargs):
 Args
-    """Forward pass of the math reasoning head.""" """: hidden_state
+"""Forward pass of the math reasoning head."""
+    """: hidden_state
     Args
     """
 

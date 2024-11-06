@@ -1,14 +1,14 @@
 
 
 import
-    """Fix specific syntax patterns that are causing issues with black formatting.""" re
+"""Fix specific syntax patterns that are causing issues with black formatting."""
+ re
 from pathlib import Path
 
 
 def fix_indentation(content: st r) -> str: Fix
-
-
-    """Fix common indentation issues."""    # Fix inconsistent indentation in class methods
+"""Fix common indentation issues."""
+    # Fix inconsistent indentation in class methods
 lines = content.split("\n")
 fixed_lines = []
 current_indent = 0
@@ -48,7 +48,8 @@ current_indent = 0
 
 
                 def main() -> None:
-    """ syntax patterns in all Python files."""        root_dir = Path(".")
+    """ syntax patterns in all Python files."""
+        root_dir = Path(".")
                 python_files = list(root_dir.rglob("*.py"))
 
                 print(f"Found {len(python_files)} Python files")

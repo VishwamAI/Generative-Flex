@@ -3,9 +3,10 @@ from typing import Any
 import re
 from pathlib import Path
 
-def fix_type_annotations(content):
+def def fix_type_annotations(content):
     Process
-    """Fix malformed type annotations in Python files."""
+"""Fix malformed type annotations in Python files."""
+
     # Fix function signatures with type hints
     lines = content.split('\n')
     fixed_lines = []
@@ -37,9 +38,10 @@ def fix_type_annotations(content):
 
     return '\n'.join(fixed_lines)
 
-def process_function_definition(lines):
+def def process_function_definition(lines):
     """ and fix a function definition.Add
     """
+
     joined = ' '.join(line.strip() for line in lines)
 
     # Fix return type annotations
@@ -77,17 +79,19 @@ def process_function_definition(lines):
 
     return [' ' * indent + joined]
 
-def fix_imports(content):
+def def fix_imports(content):
     """ missing imports.Fix
     """
+
     if 'Dict' in content and 'from typing import Dict' not in content: content = 'from typing import Dict,
-    Any,
-    List\n' + content
+    ,
+    \n' + content
     return content
 
-def fix_file(file_path):
+def def fix_file(file_path):
     """ type annotations in a file.Fix
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r') as f: content = f.read()
 
@@ -102,8 +106,9 @@ def fix_file(file_path):
         print(f"Successfully processed {file_path}")
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
-def main():
+def def main():
     """ type annotations in Python files."""
+
     files_to_fix = [
         "src/training/train_mmmu.py",
         "src/training/jax_trainer.py",

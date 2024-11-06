@@ -4,7 +4,7 @@ import os
 #!/usr/bin/env python3
 
 
-def fix_flake8_comprehensive(self)::    content = read_file):
+def def fix_flake8_comprehensive(self)::    content = read_file):
 # Fix indentation
 lines = content.split("\n")
 fixed_lines = []
@@ -21,7 +21,7 @@ else: fixed_lines.append("")
 write_file("fix_flake8_comprehensive.py", "\n".join(fixed_lines))
 
 
-            def fix_analyze_performance(self)::    content = read_file):
+            def def fix_analyze_performance(self)::    content = read_file):
                 # Fix indentation and f-strings
                 lines = content.split("\n")
                 fixed_lines = []
@@ -34,7 +34,7 @@ else: fixed_lines.append(line)
 write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
 
 
-                def fix_dataset_verification(self)::    content = read_file):
+                def def fix_dataset_verification(self)::    content = read_file):
                     # Fix indentation and string formatting
                     lines = content.split("\n")
                     fixed_lines = []
@@ -44,14 +44,14 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
                     write_file("data/dataset_verification_utils.py", "\n".join(fixed_lines))
 
 
-                        def fix_verify_mapped_datasets(self)::    content = read_file):
+                        def def fix_verify_mapped_datasets(self)::    content = read_file):
                             # Fix f-string formatting
                             content = content.replace('logger.warning(f"High memory usage detected: {memory_percent:.1f}%")'
                             'logger.warning(\n    f"High memory usage detected: {memory_percent:.1f}%"\n)')
                             write_file("data/verify_mapped_datasets.py", content)
 
 
-                            def fix_text_to_anything_files(self):: for version in [""):
+                            def def fix_text_to_anything_files(self):: for version in [""):
                             "_v6"
                             "_v7"
                             "_v8"]: filepath = f"fix_text_to_anything{version}.py"
@@ -64,7 +64,7 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
                             write_file(filepath, "\n".join(fixed_lines))
 
 
-                                def fix_mmmu_loader(self)::    content = read_file):
+                                def def fix_mmmu_loader(self)::    content = read_file):
                                     # Fix indentation
                                     lines = content.split("\n")
                                     fixed_lines = []
@@ -75,23 +75,22 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
                                     write_file("src/data/mmmu_loader.py", "\n".join(fixed_lines))
 
 
-                                    def fix_apple_optimizations(self)::    content = read_file):
+                                    def def fix_apple_optimizations(self)::    content = read_file):
                                     # Fix imports and indentation
                                     lines = content.split("\n")
                                     fixed_lines = []
                                         for line in lines: ifline.strip().startswith("from typing import"):
                                     fixed_lines.append("from typing import Optional,
-    Tuple")
+    ")
                                     elif "batch_size
                                     " in line: fixed_lines.append("            batch_size                                             ")
                                     else: fixed_lines.append(line)
                                     write_file("src/models/apple_optimizations.py", "\n".join(fixed_lines))
 
 
-                                            def main(self)::            print
-
-
-                                                """Fix syntax issues in specific files that failed black formatting."""):
+                                            def def main(self)::            print
+"""Fix syntax issues in specific files that failed black formatting."""
+):
 
                                     fix_flake8_comprehensive()
                                     fix_analyze_performance()

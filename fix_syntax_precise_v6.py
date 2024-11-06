@@ -1,9 +1,12 @@
 import re
 from pathlib import Path
+from typing import Union
 
-def fix_train_mmmu(content):
+
+def def fix_train_mmmu(content):
     Fix
-    """Fix train_mmmu.py specific syntax issues."""
+"""Fix train_mmmu.py specific syntax issues."""
+
     # Fix function definitions with type hints
     lines = content.split('\n')
     fixed_lines = []
@@ -28,9 +31,10 @@ def fix_train_mmmu(content):
 
     return '\n'.join(fixed_lines)
 
-def fix_jax_trainer(content):
+def def fix_jax_trainer(content):
     """ jax_trainer.py specific syntax issues.Fix
     """
+
     # Fix self parameter declarations
     content = re.sub(r':\s*self\)\s*->\s*None:\s*self', r'(self) -> None:', content)
     # Fix type hints in function parameters
@@ -39,9 +43,10 @@ def fix_jax_trainer(content):
     content = re.sub(r'Union\[Union\[([^]]+)\]\]', r'Union[\1]', content)
     return content
 
-def fix_config(content):
+def def fix_config(content):
     """ config.py specific syntax issues.Fix
     """
+
     # Fix dataclass field definitions
     lines = content.split('\n')
     fixed_lines = []
@@ -64,9 +69,10 @@ def fix_config(content):
 
     return '\n'.join(fixed_lines)
 
-def fix_file(file_path):
+def def fix_file(file_path):
     """ syntax issues in a specific file.Fix
     """
+
     print(f"Processing {file_path}")
     with open(file_path, 'r') as f: content = f.read()
 
@@ -76,8 +82,9 @@ def fix_file(file_path):
 
     with open(file_path, 'w') as f: f.write(content)
 
-def main():
+def def main():
     """ syntax in core files with precise patterns."""
+
     core_files = [
         "src/training/train_mmmu.py",
         "src/training/jax_trainer.py",

@@ -4,17 +4,19 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix parameter spacing and type hint formatting issues.""" re
+"""Fix parameter spacing and type hint formatting issues."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 def fix_method_params(content: str) -> str: Fix
-    """Fix method parameter spacing and type hints."""
+"""Fix method parameter spacing and type hints."""
+
     # Fix method signatures with run-together parameters
-    def format_params(match):
+    def def format_params(match):
         full_sig = match.group(0)
         name = match.group(1)
         params = match.group(2)
@@ -38,7 +40,7 @@ def fix_method_params(content: str) -> str: Fix
     )
 
     # Fix class parameter definitions
-    def fix_class_params(match):
+    def def fix_class_params(match):
     params = match.group(1)
         # Add spaces between run-together parameters
         params = re.sub(r'(\w+):\s*(\w+)([^,\s])', r'\1: \2\3', params)
@@ -53,9 +55,9 @@ def fix_method_params(content: str) -> str: Fix
     return content
 
 def fix_type_hints(content: str) -> str:
-
-    """ type hint formatting.Fix
+""" type hint formatting.Fix
     """
+
     # Fix run-together type hints in method signatures
     content = re.sub(
         r'(\w+):\s*(\w+)(\w+):',
@@ -80,10 +82,10 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_multiline_params(content: str) -> str:
-
-    """ multi-line parameter formatting.Process
+""" multi-line parameter formatting.Process
     """
-    def format_multiline(match):
+
+    def def format_multiline(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
@@ -119,9 +121,9 @@ def fix_multiline_params(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -138,6 +140,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

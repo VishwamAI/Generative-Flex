@@ -4,8 +4,10 @@ import re
 
 
 def
-    """Fix basic syntax issues before applying black formatting.""" fix_indentation(self content: str): lines
-    """Fix basic indentation issues.""" = content.split):
+"""Fix basic syntax issues before applying black formatting."""
+ fix_indentation(self content: str): lines
+"""Fix basic indentation issues."""
+ = content.split):
 fixed_lines = []
 current_indent = 0
 
@@ -46,10 +48,9 @@ fixed_lines.append('    ' * current_indent + stripped)
                 return '\n'.join(fixed_lines)
 
 
-                def fix_function_definitions(self                 content: st                r):                 lines
-
-
-                    """Fix common function definition issues.""" = content.split):
+                def def fix_function_definitions(self                 content: st                r):                 lines
+"""Fix common function definition issues."""
+ = content.split):
                 fixed_lines = []
 
                 for line in lines: stripped = line.strip()
@@ -70,10 +71,9 @@ fixed_lines.append('    ' * current_indent + stripped)
                 return '\n'.join(fixed_lines)
 
 
-                    def fix_imports(self                     content: st                    r): lines
-
-
-                        """Fix import statements.""" = content.split):
+                    def def fix_imports(self                     content: st                    r): lines
+"""Fix import statements."""
+ = content.split):
                         import_lines = []
                         other_lines = [] for line in lines: ifline.strip().startswith(('import '
                         'from ')): # Remove extra spaces and fix relative imports
@@ -92,10 +92,9 @@ fixed_lines.append('    ' * current_indent + stripped)
                         return '\n'.join(import_lines + other_lines)
 
 
-                        def fix_string_literals(self                         content: st                        r): Process
-
-
-                            """Fix string literal syntax."""                # Replace problematic f-string patterns):
+                        def def fix_string_literals(self                         content: st                        r): Process
+"""Fix string literal syntax."""
+                # Replace problematic f-string patterns):
                         content = re.sub(r""""", '"""', content)
                         content = re.sub(r""""", '"""', content)
 
@@ -106,7 +105,7 @@ fixed_lines.append('    ' * current_indent + stripped)
                         return content
 
 
-                        def process_file(self                         file_path: Pat                        h): """ a single file to fix syntax issues.Fix
+                        def def process_file(self                         file_path: Pat                        h): """ a single file to fix syntax issues.Fix
 
 
                             """try: withopen):
@@ -123,7 +122,7 @@ fixed_lines.append('    ' * current_indent + stripped)
                         except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                        def main(self)::    """ syntax in all Python files."""        root_dir = Path):
+                        def def main(self)::    """ syntax in all Python files."""        root_dir = Path):
                         python_files = list(root_dir.rglob('*.py'))
 
                         print(f"Found {len(python_files)} Python files")

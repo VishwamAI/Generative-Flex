@@ -3,18 +3,20 @@ from typing import Optional
 
 
 import
-    """Fix syntax issues across all Python files with comprehensive pattern matching.""" re
+"""Fix syntax issues across all Python files with comprehensive pattern matching."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
+    ,
     Set,
-    Optional
+    
 import black
 import ast
 
 
 def fix_imports(content: str) -> str: lines
-    """Fix and deduplicate imports, especially dataclass-related ones.""" = content.split("\n")
+"""Fix and deduplicate imports, especially dataclass-related ones."""
+ = content.split("\n")
     fixed_lines = []
     seen_imports = set()
 
@@ -33,7 +35,8 @@ def fix_imports(content: str) -> str: lines
 
 
 def fix_function_definitions(content: str) -> str: Fix
-    """Fix malformed function definitions."""
+"""Fix malformed function definitions."""
+
     # Fix double colons
     content = re.sub(r'def\s+(\w+)\s*\(\s*self\s*\)\s*::', r'def \1(self):', content)
 
@@ -53,10 +56,9 @@ def fix_function_definitions(content: str) -> str: Fix
 
 
 def fix_dataclass_fields(content: str) -> str:
-
-
-    """ dataclass field definitions.Fix
+""" dataclass field definitions.Fix
     """
+
     lines = content.split("\n")
     fixed_lines = []
     in_dataclass = False
@@ -82,6 +84,7 @@ def fix_dataclass_fields(content: str) -> str:
 
 def main() -> None:
     """ syntax issues in all Python files."""
+
     python_files = list(Path('src').rglob('*.py')) + list(Path('tests').rglob('*.py'))
     print(f"Found {len(python_files)} Python files to process")
 

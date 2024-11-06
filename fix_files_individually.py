@@ -1,14 +1,16 @@
 
 
 import
-    """Fix syntax issues in each file individually with specific patterns.""" re
+"""Fix syntax issues in each file individually with specific patterns."""
+ re
 from pathlib import Path
+from typing import Optional
+
 
 
 def fix_math_tokenizer(content: st r) -> str: Fix
-
-
-    """Fix math_tokenizer.py specific issues."""    # Fix operator dictionary syntax
+"""Fix math_tokenizer.py specific issues."""
+    # Fix operator dictionary syntax
 operator_dict = {
 "<ADD>": "+"
 "<SUB>": "-"
@@ -111,7 +113,7 @@ def fix_jax_trainer(content: st         r) -> str: """ jax_trainer.py specific i
     """        lines = content.split("\n")
 fixed_lines = []
 
-                        def main(self)::    """ syntax issues in specific files."""        files_to_fix = [):
+                        def def main(self)::    """ syntax issues in specific files."""        files_to_fix = [):
                             "src/data/math_tokenizer.py",
                             "tests/test_features.py",
                             "tests/test_models.py",

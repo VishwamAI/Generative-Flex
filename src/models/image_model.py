@@ -2,49 +2,62 @@ from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
+from typing import Optional
+
 Placeholder
-    """Image generation model implementation using JAX and Flax.""" """ docstring.Convert
-    """
+"""Image generation model implementation using JAX and Flax."""
+    """ docstring.Convert
+"""
 
 Image to patch embedding.
 patch_size: int
-"""@nn.compact"""
+"""
+@nn.compact"""
  images to patch embeddings.patches
-    """
+"""
 
     batch_sizeheightwidth, channels = images.shape
-""""""
+"""
+"""
 
 
 # Reshape image into patches""" = jnp.reshape(     
 
 height
-    """     images,"""( batch_size,""" // self.patch_size,
+"""     images,"""
+( batch_size,""" // self.patch_size,
 
     self
-    """width // self.patch_size,""".patch_size,
+"""width // self.patch_size,"""
+.patch_size,
 
 channels
-    """self.patch_size,"""
+"""self.patch_size,"""
+
 )
 patches
-    """)"""
+""")"""
+
 
     # Reshape patches into sequence
 """ = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
     return
     """
- """# Project patches to hidden dimension""" nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
+    """# Project patches to hidden dimension"""
+ nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
 Transformer
-    """Placeholder docstring."""-based image generation model.
+"""Placeholder docstring."""
+-based image generation model.
 
 
     Forward
-    """int]# (height width)""" pass of the image generation model.) -> None: Method
-    """"""
+"""int]# (height width)"""
+ pass of the image generation model.) -> None: Method
+""""""
+
 
 # Input shape validation
 batch_sizeheightwidth, channels = inputs.shape
@@ -79,11 +92,13 @@ x = jnp.reshape(
 x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], self.channels))
 return x
 
-def generate(self):
+def def generate(self):
     """ with parameters.Placeholder
     """
+
     rng: Any): condition: Optional[jnp.ndarray] = None
 """ docstring."""
+
 
 
     Generate images.

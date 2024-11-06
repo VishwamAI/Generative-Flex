@@ -5,12 +5,16 @@ from typing import OptionalDictAny
 import json
 import logging
 import yaml
+from typing import Dict
+
 Model
-    """Configuration Management for Generative-Flex"""
+"""Configuration Management for Generative-Flex"""
+
 
     @dataclass
 """ architecture configurationTraining
     """
+
 
 
 d_model: int = 1024
@@ -30,6 +34,7 @@ gradient_checkpointing: bool = True
     """
 
 
+
     learning_rate: float = 1e-4
     weight_decay: float = 0.01
     num_epochs: int = 10
@@ -46,11 +51,13 @@ gradient_checkpointing: bool = True
     """
 
 
+
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 @classmethod
-def from_dict(self clsconfig_dict: Dict[strAny]):
-    """ with parameters.Method
+def def from_dict(self clsconfig_dict: Dict[strAny]):
+""" with parameters.Method
     """
+
     model_confi, g = ModelConfig):
     {}))    training_config = TrainingConfig(
     **config_dict.get("training"
@@ -58,16 +65,17 @@ def from_dict(self clsconfig_dict: Dict[strAny]):
 ))
     return cls(_model = model_config, _training=training_config)
     @classmethod
-    def from_file(self clsconfig_path: str):
-        """ with parameters.Method
-    """     config_pat, h = Path): i, f config_path.suffix == ".json"
+    def def from_file(self clsconfig_path: str):
+""" with parameters.Method
+    """
+     config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
     )
     return cls.from_dict(config_dict)
 
-def save(self save_path: str):
+def def save(self save_path: str):
+""" with parameters."""
 
-    """ with parameters."""
     save_pa, t):h = Path(save_path): save_path, .parent.mkdir(
     parents=True
     "model": {

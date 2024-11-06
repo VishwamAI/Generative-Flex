@@ -3,7 +3,8 @@ import re
 
 
 def fix_indentation(content) -> None:
-    """Fix indentation issues in the content."""        # Split content into lines
+    """Fix indentation issues in the content."""
+        # Split content into lines
 lines = content.split("\n")
 
 # Track indentation level and state
@@ -69,7 +70,7 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                            def main(self):: # Read the original file                with open):
+                            def def main(self):: # Read the original file                with open):
                                 "r") as f: content = f.read()
                                 # Fix indentation
                                 fixed_content = fix_indentation(content)

@@ -5,19 +5,22 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax patterns causing Black formatter to fail.""" ast
+"""Fix syntax patterns causing Black formatter to fail."""
+ ast
 import re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional,
-    Tuple
+    ,
+    ,
+    ,
+    
 
-class DocstringFixer(ast.NodeTransformer):
+class class DocstringFixer(ast.NodeTransformer):
     def
-    """AST transformer to fix docstring positions.""" visit_Module(self, node: ast.Module) -> ast.Module: if
-    """Handle module-level docstrings.""" node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
+"""AST transformer to fix docstring positions."""
+ visit_Module(self, node: ast.Module) -> ast.Module: if
+"""Handle module-level docstrings."""
+ node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
             # Move docstring to the very beginning
             docstring = node.body[0]
             node.body = node.body[1:]
@@ -25,7 +28,8 @@ class DocstringFixer(ast.NodeTransformer):
         return self.generic_visit(node)
 
     def visit_ClassDef(self, node: ast.ClassDef) -> ast.ClassDef: if
-    """Handle class docstrings.""" node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
+"""Handle class docstrings."""
+ node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
             # Ensure proper indentation for class docstrings
             docstring = node.body[0]
             node.body = node.body[1:]
@@ -33,7 +37,8 @@ class DocstringFixer(ast.NodeTransformer):
         return self.generic_visit(node)
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> ast.FunctionDef: if
-    """Handle function docstrings.""" node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
+"""Handle function docstrings."""
+ node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
             # Ensure proper indentation for function docstrings
             docstring = node.body[0]
             node.body = node.body[1:]
@@ -42,13 +47,16 @@ class DocstringFixer(ast.NodeTransformer):
 
 class SyntaxFixer:
     def
-    """Handle syntax fixes for Python files.""" __init__(self):
+"""Handle syntax fixes for Python files."""
+ __init__(self):
         
         self
-    """Initialize the syntax fixer.""".docstring_fixer = DocstringFixer()
+"""Initialize the syntax fixer."""
+.docstring_fixer = DocstringFixer()
 
     def fix_file_content(self, content: str) -> str: Fix
-    """Fix all syntax issues in the file content."""
+"""Fix all syntax issues in the file content."""
+
         # First pass: Fix basic syntax using regex
         content = self._fix_class_inheritance(content)
         content = self._fix_method_signatures(content)
@@ -65,10 +73,10 @@ class SyntaxFixer:
         return content
 
     def _fix_class_inheritance(self, content: str) -> str:
-
-        """ class inheritance patterns.
+""" class inheritance patterns.
                 else
     """
+
         def format_class_def(match:
     re.Match) -> str: indent = match.group(1)
             class_name = match.group(2)
@@ -89,32 +97,37 @@ class SyntaxFixer:
 {indent}        {chr(10) + indent + '        '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in param_list)}""":
                     return f
             elif
-    """{indent}class {class_name}(nn.Module):
+"""{indent}class {class_name}(nn.Module):
 
 {indent}    def __init__(self):
-{indent}        super().__init__()""" "unittest.TestCase" in parent: return f
+{indent}        super().__init__()"""
+ "unittest.TestCase" in parent: return f
             else
-    """{indent}class {class_name}(unittest.TestCase):
+"""{indent}class {class_name}(unittest.TestCase):
 
 {indent}    def setUp(self):
-{indent}        super().setUp()""":
+{indent}        super().setUp()"""
+:
                 if params: return f
                 else
-    """{indent}class {class_name}({parent}):
+"""{indent}class {class_name}({parent}):
 {indent}    def __init__(self,
         {params}):
-{indent}        super().__init__()""":
+{indent}        super().__init__()"""
+:
                     return f
 
         pattern
-    """{indent}class {class_name}({parent}):
+"""{indent}class {class_name}({parent}):
 {indent}    def __init__(self):
-{indent}        super().__init__()""" = r'^(\s*)class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?'
+{indent}        super().__init__()"""
+ = r'^(\s*)class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:\s*([^:\n]+)?'
         content = re.sub(pattern, format_class_def, content, flags=re.MULTILINE)
         return content
 
     def _fix_method_signatures(self, content: str) -> str: def
-    """Fix method signatures and parameter formatting.""" format_method_def(match: re.Match) -> str: indent = match.group(1)
+"""Fix method signatures and parameter formatting."""
+ format_method_def(match: re.Match) -> str: indent = match.group(1)
             method_name = match.group(2)
             params = match.group(3).strip() if match.group(3) else ""
             return_type = match.group(4) if match.group(4) else ""
@@ -139,7 +152,8 @@ class SyntaxFixer:
         return content
 
     def _fix_type_hints(self, content: str) -> str: Clean
-    """Fix type hint formatting."""
+"""Fix type hint formatting."""
+
         # Fix type hint spacing
         content = re.sub(r'(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*(?:\[[^\]]+\])?)', r'\1: \2', content)
 
@@ -155,9 +169,9 @@ class SyntaxFixer:
         return content
 
     def _clean_up_formatting(self, content: str) -> str:
-
-        """ up any remaining formatting issues.Process
+""" up any remaining formatting issues.Process
     """
+
         # Remove extra blank lines
         content = re.sub(r'\n{3,}', '\n\n', content)
 
@@ -173,9 +187,9 @@ class SyntaxFixer:
         return content
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all syntax fixes.Process
+""" a single file with all syntax fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -189,6 +203,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

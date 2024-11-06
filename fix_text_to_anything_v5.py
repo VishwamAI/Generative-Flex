@@ -4,17 +4,17 @@ from typing import Dict
 from typing import List
 from typing import Any
 from typing import Optional
-def fix_text_to_anything(self):: with open):
+def def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports at the top
 imports = [
 "import jax.numpy as jnp\n",
 "from typing import Dict,
-    List,
-    Optional,
-    Tuple,
-    Union,
-    Any\n",
+    ,
+    ,
+    ,
+    ,
+    \n",
     
 "from flax import linen as nn\n",
     
@@ -58,8 +58,8 @@ while i < len(content):
                 fixed_content.append(f"{method_indent}inputs: Union[str                 Dict[str                Any]]                 n")
                 fixed_content.append(f"{method_indent}target_modality: str                 n")
                 fixed_content.append(f"{method_indent}context: Optional[Dict[str                 Any]] = None \n")
-                Dict[str
-                Any]]: \n"
+                [str
+                ]]: \n"
         )
         # Skip the original method signature
             while i < len(content) and not content[i].strip().endswith(":"):

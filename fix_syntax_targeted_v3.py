@@ -4,19 +4,21 @@ from typing import Optional
 #!/usr/bin/env python3
 
 import
-    """Fix syntax issues with precise pattern matching for specific error cases.""" re
+"""Fix syntax issues with precise pattern matching for specific error cases."""
+ re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 def fix_method_signatures(content: str) -> str: Fix
-    """Fix method signature formatting."""
+"""Fix method signature formatting."""
+
     # Fix method with parameters and type hints
     pattern = r'def\s+(\w+)\s*\((.*?)\)\s*(?:->.*?)?:'
 
-    def format_params(match):
+    def def format_params(match):
         name = match.group(1)
         params = match.group(2).strip()
 
@@ -62,9 +64,9 @@ def fix_method_signatures(content: str) -> str: Fix
     return content
 
 def fix_docstrings(content: str) -> str:
-
-    """ docstring formatting and placement.Fix
+""" docstring formatting and placement.Fix
     """
+
     # Fix module-level docstrings
     content = re.sub(
         r'^(""".+?""")(?:\s*)?$',
@@ -90,9 +92,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_type_annotations(content: str) -> str:
-
-    """ type annotation syntax.Fix
+""" type annotation syntax.Fix
     """
+
     # Fix dataclass field definitions
     content = re.sub(
         r'(\w+):\s*List\[[^\]]+\]\s*=\s*field\(default_factory=[^)]+\)',
@@ -110,9 +112,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-
-    """ multi-line statement formatting.Format
+""" multi-line statement formatting.Format
     """
+
     # Fix list/dict comprehensions
     content = re.sub(
         r'\{([^}]+)for\s+(\w+)\s+in\s+([^}]+)\}',
@@ -130,9 +132,9 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def format_function_call(name: str, args: str) -> str:
-
-    """ function call with proper line breaks and indentation.Process
+""" function call with proper line breaks and indentation.Process
     """
+
     args = args.strip()
     if ',' not in args or len(args) < 80: return f"{name}({args})"
 
@@ -141,9 +143,9 @@ def format_function_call(name: str, args: str) -> str:
     return f"{name}(\n    " + ",\n    ".join(formatted_args) + "\n)"
 
 def process_file(file_path: Path) -> None:
-
-    """ a single file with all fixes.Process
+""" a single file with all fixes.Process
     """
+
     print(f"Processing {file_path}")
     try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
@@ -161,6 +163,7 @@ def process_file(file_path: Path) -> None:
 
 def main() -> None:
     """ all Python files in the project."""
+
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:

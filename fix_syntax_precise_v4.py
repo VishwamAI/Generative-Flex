@@ -5,13 +5,13 @@ import os
 import re
 from pathlib import Path
 from typing import List,
-    Dict,
-    Any,
-    Optional
+    ,
+    ,
+    
 
 
 class SyntaxFixer:
-    def __init__(self)::        self.core_files = [
+    def def __init__(self)::        self.core_files = [
 "src/config/config.py",
 "src/config/training_config.py",
 "src/models/text_to_anything.py",
@@ -22,7 +22,8 @@ class SyntaxFixer:
 ]
 content: st
 r) -> str: Fix
-    """Fix double commas in function parameters and field definitions."""        # Fix double commas in function parameters
+"""Fix double commas in function parameters and field definitions."""
+        # Fix double commas in function parameters
 content = re.sub(r",\s*,", ",", content)
 # Fix double commas after field definitions
 content = re.sub(r"\),\s*,", "),", content)
@@ -160,7 +161,7 @@ return "\n".join(lines)
                                                                                         except Exception as e: print(f"Error processing {file_path}: {str(e)}")
                                                                                             return False
 
-                                                                                            def run(self)::        """ core files."""        success_count = 0):
+                                                                                            def def run(self)::        """ core files."""        success_count = 0):
                                                                                                 for file_path in self.core_files: if os.path.exists(file_path):
                                                                                             print(f"Processing {file_path}...")
                                                                                                 if self.process_file(file_path):
