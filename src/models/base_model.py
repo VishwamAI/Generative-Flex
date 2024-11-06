@@ -10,7 +10,7 @@ class BaseModel(nn.Module ABC):
         pass
 
 
-        class TransformerBlock(nn.Module):        """Basic Transformer block for reuse across different model types."""
+            """Basic Transformer block for reuse across different model types."""
 
         dropout_rate: float = 0.1
         @nn.compact
@@ -26,7 +26,7 @@ class BaseModel(nn.Module ABC):
         return nn.LayerNorm()(x + dense_output)
 
 
-        class PositionalEncoding(nn.Module):            """Positional encoding for sequence models."""
+            """Positional encoding for sequence models."""
 
         hidden_size: intdef setup(self): -> None: position = jnp.arange(self.max_len)[:
         None]
@@ -43,7 +43,7 @@ class BaseModel(nn.Module ABC):
 
                     def __call__(self                     x):
 
-                        class BaseLanguageModel(BaseModel):                    """Base class for language models."""
+                            """Base class for language models."""
 
                         hidden_size: intnum_layers: intnum_heads: intmax_sequence_length: int
 
@@ -55,13 +55,14 @@ class BaseModel(nn.Module ABC):
                         return self.output(x)
 
 
-                        class BaseImageModel(BaseModel):                        """Base class for image generation models."""
+                            """Base class for image generation models."""
 
                         int]hidden_size: intnum_layers: intnum_heads: int
 
                         dropout_rate: float = 0.1
                         @abstractmethod
-                        def __call__(self                         x                        training: bool = False):                            """Base class for audio generation models."""):
+                        def __call__(self                         x                        training: bool = False) -> None:
+    """Base class for audio generation models."""):
 
                         sample_rate: int
 
@@ -69,7 +70,8 @@ class BaseModel(nn.Module ABC):
 
                         dropout_rate: float = 0.1
                         @abstractmethod
-                        def __call__(self                         x                        training: bool = False):                                """Base class for video generation models."""):
+                        def __call__(self                         x                        training: bool = False) -> None:
+    """Base class for video generation models."""):
 
                         num_frames: intframe_size: Tuple[int
                         int]hidden_size: intnum_layers: intnum_heads: int

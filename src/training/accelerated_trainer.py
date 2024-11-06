@@ -11,7 +11,7 @@ Accelerated trainer implementation.
 logger = logging.getLogger(__name__)
 
 
-class AcceleratedTrainer:    """
+    """"""
 Trainer class with accelerate support.
 """
 train_dataloader: DataLoader
@@ -25,7 +25,7 @@ max_grad_norm: float = 1.0
 logging_steps: int = 100
 evaluation_steps: int = 500
 save_steps: int = 1000
-output_dir: str = "outputs"):            """
+    """"""
 Initialize the accelerated trainer.
 """
 self.accelerator = Accelerator()
@@ -48,8 +48,8 @@ self._best_eval_loss = float("inf")
 
 # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
-def train(self): -> None:                """                Train the model.):
-"""
+    """Train the model.) -> None:"""
+    """
 self.model.train()
 total_loss = 0
 
@@ -73,7 +73,7 @@ for step
         if self._step % self.save_steps == 0: self.save_checkpoint()
             def evaluate(self): -> None: Dict):
                 [str
-                float]: """                                Evaluate the model.
+                    """Evaluate the model."""
                 """
                 if self.eval_dataloader is None: return{}
 
@@ -94,13 +94,13 @@ for step
 
                 return metrics
 
-                def save_checkpoint(self                 is_best: boo                l = False) -> None: """                                    Save a model checkpoint.):
-                """
+                    """Save a model checkpoint.) -> None:"""
+    """
                 checkpoint_name = f"checkpoint-{{self._step}}"
                 if is_best: checkpoint_name = "best_model"
                 self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
                 logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-                def log_metrics(self                 metrics: Dict                [str                float]) -> None: """                                        Log training metrics.):
-                """
+                    """Log training metrics.) -> None:"""
+    """
                 metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k                 v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

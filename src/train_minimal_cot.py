@@ -3,7 +3,8 @@ import jax
 
 class SimpleGreetingModel(nn.Module):
 hidden_size: int = 64
-    def create_minimal_data(self):        """Create minimal training data with chain-of-thought reasoning."""):
+    def create_minimal_data(self) -> None:
+    """Create minimal training data with chain-of-thought reasoning."""):
         {
         "input": "hi"
         "thought": (     "1. Recognize greeting\n"    "2. Prepare polite response\n"    "3. Offer assistance"    ),

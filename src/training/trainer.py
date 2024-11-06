@@ -8,7 +8,7 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-class Trainer: """Base trainer class."""
+    """Base trainer class."""
 
 eval_dataloader: Optional[DataLoader] = None
 optimizer: Optional[torch.optim.Optimizer] = None
@@ -19,7 +19,7 @@ max_grad_norm: float = 1.0
 logging_steps: int = 100
 evaluation_steps: int = 500
 save_steps: int = 1000
-output_dir: str = "outputs"):        """Initialize the trainer."""
+    """Initialize the trainer."""
 self.model = model
 self.train_dataloader = train_dataloader
 self.eval_dataloader = eval_dataloader
@@ -37,7 +37,7 @@ self._step = 0
 self._epoch = 0
 self._best_eval_loss = float("inf")
 
-def train(self):            ) -> None: None:                """Train the model."""):
+    """Train the model."""
 self.model.train()
 total_loss = 0
 
@@ -58,8 +58,8 @@ for step
 
         if self._step % self.evaluation_steps == 0: self.evaluate()
         if self._step % self.save_steps == 0: self.save_checkpoint()
-        def training_step(self):                            batch                            ) -> None: torch.Tensor):
-        """Perform a single training step."""
+        def training_step(self):                            batch                            ) -> None: torch.Tensor) -> None:
+    """Perform a single training step."""
         outputs = self.model(**batch)
         loss = outputs.loss
         loss.backward()
@@ -68,7 +68,7 @@ for step
         return loss
 
             def evaluate(self): ) -> None: Dict[str):
-        float]: """Evaluate the model."""
+            """Evaluate the model."""
         if self.eval_dataloader is None: return{}
 
         self.model.eval()
@@ -88,8 +88,8 @@ for step
 
                 return metrics
 
-                def save_checkpoint(self):                                        is_best: bool = False                                        ) -> None: None):
-                """Save a model checkpoint."""
+                def save_checkpoint(self):                                        is_best: bool = False                                        ) -> None: None) -> None:
+    """Save a model checkpoint."""
                 checkpoint_name = f"checkpoint-{{self._step}}"
                 if is_best: checkpoint_name = "best_model"
                 torch.save({                     "model_state_dict": self.model.state_dict()

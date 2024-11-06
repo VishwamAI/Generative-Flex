@@ -7,7 +7,7 @@ import sympy
 import torch
 
 
-class MathTokenizer:    """Tokenizer for mathematical expressions and symbols."""
+    """Tokenizer for mathematical expressions and symbols."""
     base_tokenizer: PreTrainedTokenizer)  ) -> None:
 """Initialize the math tokenizer.
 
@@ -56,7 +56,7 @@ v in self.math_symbols.items() if v in special_tokens
 # Add special tokens to base tokenizer
 self.base_tokenizer.add_special_tokens( {"additional_special_tokens": special_tokens})
 
-def _parse_math_expression(self text: str) -> str: """Parse mathematical expressions using sympy."""    try):
+    """Parse mathematical expressions using sympy."""
 # Try to parse with sympy
 expr = sympy.parse_expr(text, evaluate=False)
 # Convert to LaTeX for standardized representation
@@ -69,7 +69,7 @@ for symbol
 text = text.replace(symbol, f" {token} ")
 return text
 
-            def _detect_math_expressions(self             text: st            r) -> List[str]: """Detect mathematical expressions in text."""                # Match expressions between $ signs):
+                """Detect mathematical expressions in text."""
                 math_exprs = re.findall(r"\$(.*?)\$", text)
                 # Match expressions with common math patterns
                 patterns = [
@@ -87,7 +87,7 @@ return text
                 return math_exprs
 
         def __call__(self         text: st        r        **kwargs) -> Dict[str):
-torch.Tensor]: """Tokenize text with special handling for mathematical content.
+    """Tokenize text with special handling for mathematical content."""
 Args: text: Text to tokenize
 **kwargs: Additionalargumentspassed to the base tokenizer
 

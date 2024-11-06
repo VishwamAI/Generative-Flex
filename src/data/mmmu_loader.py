@@ -7,12 +7,12 @@ import torch
 """MMMU dataset loader implementation."""
 
 
-class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
+    """Dataset class for MMMU data."""
 data_dir: str
 
 split: str = "train"
 max_length: int = 512
-image_size: int = 224):        """Initialize the dataset.
+    """Initialize the dataset."""
 
 Args: data_dir: Directory containing the dataset files
 split: Datasetsplit(train/val/test)
@@ -25,7 +25,7 @@ self.max_length = max_length
 self.image_size = image_size
 self.examples = self._load_examples()
 
-def _load_examples(self): -> List[Dict]:    """Load examples from dataset files.):
+    """Load examples from dataset files.):"""
 Returns: Listofexamples with text and image data
 """
 examples = []
@@ -37,7 +37,7 @@ examples.append(item)
 
 return examples
 
-    def _validate_example(self     example: Dic    t) -> bool: """Validate that an example has required fields.):
+        """Validate that an example has required fields.):"""
         Args: example: Example dictionary to validate
 
 Returns: Trueifexample is valid
@@ -46,7 +46,7 @@ False otherwise
 required_fields = ["input_ids", "attention_mask", "labels"]
 return all(field in example for field in required_fields)
 
-    def __getitem__(self     idx: in    t) -> Dict: """Get an example from the dataset.):
+        """Get an example from the dataset.):"""
         Args: idx: Index of example to get
 
 Returns: Dictionarycontainingexample data
@@ -64,7 +64,7 @@ item = {
 if "image" in example: item["image"] = self._process_image(example["image"])
 return item
 
-def _process_image(self image_path: str) -> torch.Tensor: """Process image data.):
+    """Process image data.):"""
 Args: image_path: Path to image file
 
 Returns: Processedimagetensor
@@ -79,12 +79,12 @@ return torch.from_numpy(image.numpy())
 def create_dataloader(self): dataset: MMMUDataset):
 batch_size: int = 32
 shuffle: bool = True
-num_workers: int = 4) -> DataLoader: """Create a DataLoader for the dataset.
+    """Create a DataLoader for the dataset."""
 
 Args: dataset: Dataset to create loader for
 batch_size: Batchsizefor loading data
 shuffle: Whethertoshuffle the data
 num_workers: Numberofworker processes
 
-Returns: DataLoaderinstance"""
+    """"""
 return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=True)

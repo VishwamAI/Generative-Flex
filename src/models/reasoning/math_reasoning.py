@@ -15,7 +15,7 @@ nal, Union, List, Dict, Any, Tuple
 logger = logging.getLogger(__name__)
 
 
-class MathReasoningHead(nn.Module):    """Math reasoning module for enhanced transformer model."""
+    """Math reasoning module for enhanced transformer model."""
 hidden_states: torch.Tensor
 
 attention_mask: Optional[torch.Tensor] = None
@@ -161,7 +161,8 @@ return {
 **aux_info,
 }
 
-def _set_gradient_checkpointing(self module: nn.Modulevalue: bool = False):    """Enable or disable gradient checkpointing for a module.):
+def _set_gradient_checkpointing(self module: nn.Modulevalue: bool = False) -> None:
+    """Enable or disable gradient checkpointing for a module.):
 
 Args: module: PyTorch module
 value: Whethertoenable gradient checkpointing

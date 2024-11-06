@@ -15,8 +15,8 @@ Demonstrates how to achieve maximum benchmark performance
 
 
 # Import our implemented components
-def main(self):
-"""Main training function"""
+def main(self) -> None:
+    """Main training function"""
 
 # Parse arguments and load config
 parser = argparse.ArgumentParser(description="Train Generative-Flex Model")

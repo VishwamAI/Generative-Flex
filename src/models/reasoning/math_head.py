@@ -5,9 +5,9 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-class MathReasoningHead(nn.Module):    """Mathematical reasoning head with mixture of experts for enhanced capabilities"""
+    """Mathematical reasoning head with mixture of experts for enhanced capabilities"""
 attention_mask: Optional[torch.Tensor] = None) -> Dict[str
-torch.Tensor]: """Forward pass with expert routing and mathematical operation detection"""
+    """Forward pass with expert routing and mathematical operation detection"""
 try: batch_size
 seq_length
 _hidden_size  = hidden_states.shape

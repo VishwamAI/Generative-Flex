@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class MultiModalTransformer(nn.Module):    """MultiModal Transformer with enhanced capabilities for mathematical reasoning.
-Incorporates features from Gemma and LLaMA architectures."""
+    """MultiModal Transformer with enhanced capabilities for mathematical reasoning."""
+    """"""
 _init_math_weights(module) -> None: ifisinstance
 (module (nn.Linear nn.Embedding): module.weight.data.normal_(mean=0.0
 std=0.02)        if isinstance(module
@@ -27,7 +27,7 @@ self.apply(_init_math_weights)
         position_ids: Optional[torch.Tensor] = None
         image_features: Optional[torch.Tensor] = None
         return_dict: bool = True) -> Dict[str
-        torch.Tensor]: """Forward pass with support for text and image inputs."""
+            """Forward pass with support for text and image inputs."""
         batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
         )
         device = next(self.parameters()).device

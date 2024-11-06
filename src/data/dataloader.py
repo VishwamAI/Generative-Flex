@@ -15,7 +15,7 @@ Implements efficient data loading and preprocessing with dynamic batching
 
 
 @dataclass
-class DataConfig:    """Configuration for data processing"""
+    """Configuration for data processing"""
 batch_size: int = 32
 num_workers: int = 4
 shuffle: bool = True
@@ -23,7 +23,7 @@ cache_dir: Optional[str] = None
 preprocessing_num_workers: int = 4
 streaming: bool = False
 
-class AdvancedDataset(Dataset):    """
+    """"""
 Advanced dataset implementation with efficient data loading and caching
 """
 data_path: Union[str
@@ -44,7 +44,7 @@ if self.cache_dir: self.cache_dir.mkdir(parents=True exist_ok=True)
 # Load or create cache
 self.load_and_cache_data()
 
-def load_and_cache_data(self): -> None:    """Load and preprocess data with caching"""    cache_path =):
+    """Load and preprocess data with caching"""
 self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
 )
 
@@ -64,7 +64,7 @@ with h5py.File(cache_path     "w") as f: forkey
         else: self.data = processed_data
         self.length = len(processed_data["input_ids"])
 
-        np.ndarray]: """Process raw data into model inputs"""    processed_data = {"input_ids": []
+            """Process raw data into model inputs"""
         "attention_mask": []
         "labels": []}
         # Read and process data
@@ -83,7 +83,7 @@ with h5py.File(cache_path     "w") as f: forkey
         return {k: np.array(v) for k
         v in processed_data.items()}
 
-        torch.Tensor]: """Get a single example"""    item = {
+            """Get a single example"""
         "input_ids": torch.tensor(self.data["input_ids"][idx])
         "attention_mask": torch.tensor(self.data["attention_mask"][idx])
         }

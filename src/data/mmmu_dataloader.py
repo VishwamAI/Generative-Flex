@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 
-class MMUDataset(Dataset):    """MMMU Dataset loader with multimodal support."""
+    """MMMU Dataset loader with multimodal support."""
 subjects: Optional[List[str]] = None
 split: str = "validation"
 tokenizer: Any = None
@@ -87,8 +87,7 @@ except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")
 
 if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")
 
-    def __getitem__(self     idx: in    t) -> Dict[str):
-Any]: """Get a single example with proper tensor handling."""    dataset_idx = 0
+        """Get a single example with proper tensor handling."""
 while (     dataset_idx < len(self.cumulative_lengths)
 and idx >= self.cumulative_lengths[dataset_idx]
         ):
@@ -118,8 +117,7 @@ return {
 }
 
 @staticmethod
-def collate_mmmu_batch(self examples: List[Dict[strAny]]) -> Dict[str):
-Any]: """Collate batch with proper tensor handling."""    try: batch = {    "input_ids": []
+    """Collate batch with proper tensor handling."""
 "attention_mask": []
 "labels": []
 "images": []
@@ -150,7 +148,7 @@ raise
 @staticmethod
 def create_mmmu_dataloaders(self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False) -> Tuple[DataLoader):
 DataLoader
-DataLoader]: """Create dataloaders with proper tensor handling."""    if subjects is None: subjects = MMMU_SUBJECTS
+    """Create dataloaders with proper tensor handling."""
 split: MMUDataset(    subjects=subjects
 split=split,tokenizer=tokenizer,max_length=max_length)
 for split in ["dev", "validation", "test"]

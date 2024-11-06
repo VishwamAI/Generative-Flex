@@ -8,7 +8,7 @@ import os
 """Utility functions for model training."""
 
 
-class TrainState(train_state.TrainState):    """Extended TrainState for training."""
+    """Extended TrainState for training."""
 Any]] = None    metrics: Dict[str
 Any] = None
 
@@ -41,8 +41,8 @@ return restored_state or state, step
         shuffle_buffer_size: int = 10000
         seed: Optional[int] = None) -> Tuple[Iterator
         Iterator
-        Iterator]: """Creates input pipeline for training
-        validation and testing."""
+            """Creates input pipeline for training"""
+            """"""
         # This is a placeholder - implement actual data loading logic
         # based on your specific dataset and requirements
         raise NotImplementedError("Implement data loading logic specific to your dataset")

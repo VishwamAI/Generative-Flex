@@ -5,8 +5,8 @@ import transformers
 """Test script to verify JAX/Flax/Optax installation."""
 
 
-def test_environment(self):
-"""Verify JAX installation and GPU availability."""
+def test_environment(self) -> None:
+    """Verify JAX installation and GPU availability."""
 
 print("\nEnvironment Test Results:")
 print("-" * 50)

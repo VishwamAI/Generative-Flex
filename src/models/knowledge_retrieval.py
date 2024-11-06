@@ -9,9 +9,9 @@ Supports: - Real-time data integration(Grok-1 style)
 
 
 @dataclass
-class KnowledgeConfig: """Configuration for knowledge retrieval system.
+    """Configuration for knowledge retrieval system."""
 
-class KnowledgeRetriever(nn.Module):    """
+    """"""
 Knowledge retriever with real-time updates.
 """
     setup(:     self): -> None: None:
@@ -73,7 +73,7 @@ self.knowledge_store.value = self.knowledge_store.value.at[current_index].set(ne
 self.store_index.value = next_index
 
 
-class KnowledgeIntegrator(nn.Module):                            """
+    """"""
 Integrates retrieved knowledge with input embeddings.
 """
         setup(:         self): -> None: None:
@@ -92,7 +92,7 @@ Integrates retrieved knowledge with input embeddings.
             jnp.ndarray]
 jnp.ndarray]
 modality: str = "text"
-context: Optional[jnp.ndarray] = None) -> jnp.ndarray: """                                        Process inputs with knowledge integration.
+    """Process inputs with knowledge integration."""
 """
 # Handle dictionary inputs
             if isinstance(inputs         dict):
@@ -151,7 +151,7 @@ return fused
                                     axis=0)                                                        self.retriever.update(combined)
 
 
-                                    class RealTimeUpdater: """                                                        Handles real-time updates to the knowledge base.
+                                        """Handles real-time updates to the knowledge base."""
                                         def __init__(self                                     __init__):
                                             self.update_counter = 0
                                             self.knowledge_retriever = None
@@ -172,7 +172,7 @@ return fused
                                     self.update_counter = 0
 
 
-                                    class KnowledgeAugmentedTransformer(nn.Module):                                                                                        """
+                                        """"""
                                     Transformer architecture with integrated knowledge retrieval.
                                     """
                                         setup(:                                         self): -> None: None:

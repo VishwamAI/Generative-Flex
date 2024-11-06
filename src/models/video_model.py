@@ -5,7 +5,7 @@ import jax
 """Video generation model implementation using JAX and Flax."""
 
 
-class VideoEmbedding(nn.Module):    """Video to embedding conversion."""
+    """Video to embedding conversion."""
 patch_size: Tuple[int
 int
 int]# (time heightwidth)
@@ -20,7 +20,7 @@ dtype: Any = jnp.float32
         return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 
 
-class VideoGenerationModel(nn.Module):        """Transformer-based video generation model."""
+    """Transformer-based video generation model."""
 int
 int]# (frames heightwidth)
 patch_size: Tuple[int
@@ -59,7 +59,7 @@ return x
 
     def generate(self): rng: Any):
         prompt: Optional[jnp.ndarray] = None
-        num_frames: int = 16):                    """Generate video frames."""
+            """Generate video frames."""
         if prompt is None: rng
         init_rng = jax.random.split(rng)                    prompt = jax.random.normal(init_rng
         (1     1    self.video_size[1]    self.video_size[2]    self.channels))

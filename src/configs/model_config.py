@@ -8,7 +8,7 @@ import yaml
 
 
 @dataclass
-class ModelConfig:    """Model architecture configuration"""
+    """Model architecture configuration"""
 d_model: int = 1024
 nhead: int = 16
 num_layers: int = 24
@@ -23,7 +23,7 @@ use_mixture_of_experts: bool = True
 gradient_checkpointing: bool = True
 
 @dataclass
-class TrainingConfig:    """Training configuration"""
+    """Training configuration"""
 learning_rate: float = 1e-4
 weight_decay: float = 0.01
 num_epochs: int = 10
@@ -37,7 +37,7 @@ output_dir: str = "outputs"
 cache_dir: Optional[str] = "cache"
 
 @dataclass
-class GenerativeFlexConfig:    """Complete configuration"""
+    """Complete configuration"""
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 
 @classmethod

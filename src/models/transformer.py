@@ -3,12 +3,12 @@ import jax
 """Core transformer architecture implementation using JAX and Flax."""
 
 
-class MultiHeadAttention(nn.Module):    """Multi-head attention mechanism."""
+    """Multi-head attention mechanism."""
 head_dim: int
 dropout_rate: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-    def __call__(self x) -> None: """Applies multi-head attention on the input data."""        qkv_features = self.num_heads * self.head_dim):
+        """Applies multi-head attention on the input data."""
 
 # Linear projections
 query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)
@@ -44,7 +44,7 @@ _dtype=self.dtype
 name="output")(output)
 
 
-class TransformerBlock(nn.Module):        """Transformer block with self-attention and feed-forward layers."""
+    """Transformer block with self-attention and feed-forward layers."""
 head_dim: intmlp_dim: int
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32

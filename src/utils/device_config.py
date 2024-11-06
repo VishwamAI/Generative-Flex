@@ -17,7 +17,8 @@ if config["device_count"] > 1: os.environ["XLA_FLAGS"] = "--xla_force_host_platf
 return config
 
 
-    def get_compute_dtype(self):            """Get optimal compute dtype based on available hardware."""            config = get_device_info):
+    def get_compute_dtype(self) -> None:
+    """Get optimal compute dtype based on available hardware."""            config = get_device_info):
         return jnp.bfloat16 if config["has_gpu"] else jnp.float32
 
 

@@ -7,12 +7,12 @@ Image generation model implementation using JAX and Flax.
 """
 
 
-class PatchEmbedding(nn.Module):    """
+    """"""
 Image to patch embedding.
 """
 patch_size: inthidden_dim: intdtype: Any = jnp.float32
 @nn.compact
-images) -> None: """        Convert images to patch embeddings.
+    """Convert images to patch embeddings."""
 """
 batch_size, height, width, channels = images.shape
 
@@ -25,7 +25,7 @@ patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_siz
 return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 
 
-class ImageGenerationModel(nn.Module):        """
+    """"""
 Transformer-based image generation model.
 """
 int]# (height width)
@@ -34,8 +34,8 @@ head_dim: intmlp_dim: intchannels: int = 3
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
-    def __call__(self inputstraining: bool = True) -> None: """            Forward pass of the image generation model.):
-        """
+        """Forward pass of the image generation model.) -> None:"""
+    """
         # Input shape validation
         batch_size, height, width, channels = inputs.shape
         assert height == self.image_size[0] and width == self.image_size[1]
@@ -69,7 +69,7 @@ return x
 
     def generate(self): rng: Any):
         condition: Optional[jnp.ndarray] = None
-        batch_size: int = 1):                    """
+            """"""
         Generate images.
         """
         # Initialize with random noise if no condition is provided

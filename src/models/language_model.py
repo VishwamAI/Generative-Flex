@@ -4,10 +4,10 @@ import jax
 """Language model implementation using JAX and Flax."""
 
 
-class PositionalEncoding(nn.Module):    """Sinusoidal positional encoding."""
+    """Sinusoidal positional encoding."""
 dtype: Any = jnp.float32
 @nn.compact
-    def __call__(self x) -> None: """Add positional encodings to the input embeddings."""        batch_size = inputs.shape[0]):
+        """Add positional encodings to the input embeddings."""
         seq_length = inputs.shape[1]
         dim = inputs.shape[-1]
 
@@ -28,12 +28,12 @@ pe = pe.at[:
                 return inputs + pe
 
 
-                class LanguageModel(nn.Module):        """Autoregressive language model based on the transformer architecture."""
+                    """Autoregressive language model based on the transformer architecture."""
                 head_dim: intmlp_dim: intmax_seq_len: int = 2048
                 dropout_rate: float = 0.1
                 dtype: Any = jnp.float32
                 @nn.compact
-                    def __call__(self                 x) -> None: """Forward pass of the language model."""            # Token embeddings):
+                        """Forward pass of the language model."""
                         x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
 
                 # Add positional encoding
@@ -68,7 +68,7 @@ pe = pe.at[:
 
                 max_length: int
 
-                temperature: float = 1.0):                    """Generate text autoregressively."""
+                    """Generate text autoregressively."""
                 generated = prompt
 
                     for _ in range(max_length - prompt.shape[1]):

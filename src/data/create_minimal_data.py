@@ -2,8 +2,8 @@ import json
 import os
 
 
-def create_minimal_training_data(self):
-"""Create minimal training data with chain-of-thought reasoning."""
+def create_minimal_training_data(self) -> None:
+    """Create minimal training data with chain-of-thought reasoning."""
 
 
 # Ensure directory exists
