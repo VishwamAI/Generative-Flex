@@ -1,12 +1,12 @@
-from pathlib import Path
-import json
+from pathlib import Path, json
 import pytest
 Test
 """Tests for model parameter loading and validation functionality."""
 
 
     @pytest.fixture
-def setup():
+def setup:
+
     """Test setup fixture."""
     return None
 """ all parameter arrays have consistent shapes."""

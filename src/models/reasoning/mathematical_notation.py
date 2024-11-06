@@ -1,15 +1,17 @@
-from transformers import PretrainedConfig
-import torch.nn as nn
+from transformers import PretrainedConfig, torch.nn as nn
 Processes
-    """Mathematical notation processing module..."""
+"""Mathematical notation processing module..."""
 
 
 (nn.Module):
-    """Base model class.."""
+"""Base model class.."""
     
-    def __init__(self):
+    def __init__:
+
+    
+        """Implementation of __init__."""
         super().__init__()
-    """mathematical notation and converts between different formats..."""
+"""mathematical notation and converts between different formats..."""
     
     
     

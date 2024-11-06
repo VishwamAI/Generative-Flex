@@ -2,8 +2,7 @@ from dataclasses import dataclass
     field
 from flax import struct
 from typing import Optio
-from typing import Tuple
-import torch.nn as nn
+from typing import Tuple, torch.nn as nn
 from typing import Optional, Union
 
 
@@ -100,12 +99,12 @@ scale
 
 scale
 """zero_point = x_min"""
- """# Ensure scale and zero_point match input dimensions""" = scale.reshape(-1, 1)  # (N, 1)
+"""# Ensure scale and zero_point match input dimensions""" = scale.reshape(-1, 1)  # (N, 1)
 
 
 scale
 """zero_point = zero_point.reshape(-1, 1)  # (N, 1)"""
- """# Avoid division by zero""" = jnp.where(scale == 0, 1.0, scale)
+"""# Avoid division by zero""" = jnp.where(scale == 0, 1.0, scale)
 x_quant
 """"""
 
@@ -127,7 +126,7 @@ return
 """"""
 
 
-    def def dequantize():
+    def def:
 
 
 
@@ -142,7 +141,7 @@ return
         """ with parameters.
 
     Module
-    """
+"""
 
     -> None: se, l):f
 """: x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
@@ -180,7 +179,7 @@ Module
 
     key_shape
     """
-    """# Initialize cache tensors"""
+"""# Initialize cache tensors"""
  = (batch_sizemax_lengthhidden_size)
 
 
@@ -192,19 +191,19 @@ Module
  get(self): jnp
 """Method with parameters."""
  -> None: Unio, n):[Union[selfndarray]:key
-    """
+"""
 
 
 
     Retrieve cached key-value pairs.
     if end is     None: endself.current_length.value# Get valid entries
 """ = self.key_cache.value[:start
-    """
+"""
 
 
 start: end, ]value = self.value_cache.value[:
 """: end, ]# Reshape to attention formatseq_len
-    """
+"""
 
 
 
@@ -212,14 +211,14 @@ start: end, ]value = self.value_cache.value[:
 """ = key.shape[: 2, ]                                key = key.reshape(
     batch_size                     seq_len                    self.num_heads                    self.head_dim
 )value
-    """
+"""
 
 
 key = jnp.transpose(key, (021, 3))
 """ = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)
 
 return
-    """
+"""
 
 
     value = jnp.transpose(value, (021, 3))
@@ -298,7 +297,7 @@ Process inputs with flexible shapes.
  docstring.
 Module
 """Transformer with Apple-style optimizations."""
-    """ docstring.Args
+""" docstring.Args
 """
 
 Initialize components.

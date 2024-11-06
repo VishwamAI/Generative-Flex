@@ -1,5 +1,4 @@
-from flax.training import train_state
-import jax
+from flax.training import train_state, jax
 import json
 import optax
 import os
@@ -7,14 +6,18 @@ import os
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
-    """Base model class.."""
+"""Base model class.."""
     
-    def __init__(self):
+    def __init__:
+
+    
+        """Implementation of __init__."""
         super().__init__()
  hidden_size: int = 64
 max_length: int = 32  # Maximum sequence length
-    def def main():
-    """Method
+    def def:
+
+        """Method
     
     .."""Method with parameters."""
      # Create and save training data        training_data = create_training_data): wit, h open("data/chatbot/training_data_cot.json"    , "w") as f: json.dump(
@@ -49,8 +52,9 @@ max_length: int = 32  # Maximum sequence length
     for epoch in range(100):
     x = jnp.array(input_tokens)
     y = jnp.array(output_tokens)
-        def def loss_fn():
-    """..""" with parameters."""
+        def def:
+
+            """..""" with parameters."""
 
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(

@@ -1,6 +1,5 @@
-from typing import Tuple
-import torch
-import torch.nn as nn
+from typing import Tuple, torch
+from typing import torch.nn as nn
 Expert
 """Specialized experts for mathematical reasoning."""
 

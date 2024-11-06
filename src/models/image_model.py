@@ -1,12 +1,11 @@
 from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
-from typing import Tuple
-import jax
+from typing import Tuple, jax
 from typing import Optional
 
 Placeholder
 """Image generation model implementation using JAX and Flax."""
-    """ docstring.Convert
+""" docstring.Convert
 """
 
 Image to patch embedding.
@@ -43,7 +42,7 @@ patches
 
     return
     """
-    """# Project patches to hidden dimension"""
+"""# Project patches to hidden dimension"""
  nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
@@ -91,7 +90,7 @@ x = jnp.reshape(
 x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], self.channels))
 return x
 
-def def generate():
+def def:
 
 
     """
@@ -101,7 +100,7 @@ def def generate():
 
 
     """ with parameters.Placeholder
-    """
+"""
 
     rng: Any): condition: Optional[jnp.ndarray] = None
 """ docstring."""

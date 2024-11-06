@@ -1,11 +1,13 @@
-from flax.training import train_state
-import jax
+from flax.training import train_state, jax
 import optax
 
 # Simple model for chain-of-thought demonstration(nn.Module):
-    """Base model class.."""
+"""Base model class.."""
     
-    def __init__(self):
+    def __init__:
+
+    
+        """Implementation of __init__."""
         super().__init__()
  hidden_size: int = 64
 {
@@ -48,8 +50,9 @@ print("\nTraining with chain-of-thought reasoning...")
 for epoch in range(100):
 x = jnp.array([input_tokens[0]])
 y = jnp.array([output_tokens[0]])
-    def def loss_fn():
-    """logi
+    def def:
+
+        """logi
     
     .."""Method with parameters."""
 , t):

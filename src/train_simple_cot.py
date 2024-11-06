@@ -1,5 +1,4 @@
-from flax.training import train_state
-import jax
+from flax.training import train_state, jax
 import json
 import optax
 import os
@@ -7,13 +6,17 @@ import os
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module):
-    """Base model class.."""
+"""Base model class.."""
     
-    def __init__(self):
+    def __init__:
+
+    
+        """Implementation of __init__."""
         super().__init__()
  hidden_size: int = 64
-    def def main():
-    """Method
+    def def:
+
+        """Method
     
     .."""Method with parameters."""
 
@@ -43,8 +46,9 @@ os.makedirs("data/chatbot", exist_ok = True)
     print("\nTraining simple chain-of-thought model...")
 
     @jax.jit
-        def def train_step():
-    """..""" with parameters."""
+        def def:
+
+            """..""" with parameters."""
 
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(

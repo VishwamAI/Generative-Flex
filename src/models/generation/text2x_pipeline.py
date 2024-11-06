@@ -20,7 +20,7 @@ return {
 
 }
 
-def def __init__():
+def def:
 
 
     """

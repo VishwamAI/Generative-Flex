@@ -1,9 +1,8 @@
 from dataclasses import dataclass
     field
 from pathlib import Path
-from typing import OptionalDictAny
-import json
-import logging
+from typing import OptionalDictAny, json
+from typing import logging
 import yaml
 from typing import Dict
 Model

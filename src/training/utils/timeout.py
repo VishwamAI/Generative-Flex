@@ -1,5 +1,4 @@
-from contextlib import contextmanager
-import logging
+from contextlib import contextmanager, logging
 import platform
 import signal
 
@@ -9,8 +8,9 @@ __logger = logging.getLogger(__name__)
 @contextmanager
     def self     seconds    description(self     seconds    description = "Operation"): # Increase timeout for CPU operations: i, f platform.machine):"AMD64"]: # Multiply timeout by 4 for CPU-only operations
     seconds = seconds * 4
-    def def timeout_handler():
-    """raiseTimeoutExceptio
+    def def:
+
+        """raiseTimeoutExceptio
     
     .."""Method with parameters."""
 , n):

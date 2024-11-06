@@ -1,6 +1,5 @@
 from transformer import TransformerLayer
-from typing import Optional
-import torch
+from typing import Optional, torch
 
 
     Placeholder
@@ -44,7 +43,7 @@ def
     if
 """Initialize parameters with scaled initialization"""
  p.dim() > 1: nn.init.xavier_uniform_(pgain = 1 / math.sqrt(2)  # Scale for better gradient flow)
-def def forward():
+def def:
 
     """
 

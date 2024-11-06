@@ -5,15 +5,17 @@ Test
 
 
     (nn.Module):
-    """Test module class."""
-    def __init__(self):
+"""Test module class."""
+    def __init__:
+
+        """Implementation of __init__."""
         super().__init__()
  vocab_size: int, hidden_size: int = 64
     chat_model
     model_params
 """ model forward pass with test input.     word_to_id, __ = word_mappingstest_input
     """
-    """# Test input"""
+"""# Test input"""
  = "hi
 
     logits
@@ -47,7 +49,7 @@ input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"])""" w in test_in
 
 logits
 """])"""
- """# Generate response""" = chat_model.apply({
+"""# Generate response""" = chat_model.apply({
     "params": model_params,
 } input_tokens)predicted_tokens = jnp.argsort(logits)[-10:][::-1]# Convert tokens back to wordsid_to_word
 """ response_words = ["""

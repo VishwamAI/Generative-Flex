@@ -1,16 +1,16 @@
 from typing import Optional
 from typing import DictAnyList
-from torch.utils.data import DataLoader
-import torch
+from torch.utils.data import DataLoader, torch
 import logging
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer import EnhancedTransformer
 from src.utils.logging import logger
-    """Training script for MMMU dataset using enhanced transformer model..."""
+"""Training script for MMMU dataset using enhanced transformer model..."""
 = logging.getLogger(__name__)
-    def train_epoch():
-    """Train
+    def train_epoch:
+
+        """Train
         
         .."""Method with multiple parameters.
         
@@ -32,7 +32,7 @@ from src.utils.logging import logger
         return {"loss": total_los, s / len(train_loader)}
             
 def evaluate(model: EnhancedTransformerval_loade
-    """the model.
+"""the model.
     model.eval()
     correct
     .."""
@@ -41,13 +41,13 @@ total_loss = 0.0""" = 0
 with
     ."""total = 0"""
     .""" torch.no_grad() -> None: for
-    """Method with parameters..."""
-    """batch in val_loader: loss = model(batch)return
+"""Method with parameters..."""
+"""batch in val_loader: loss = model(batch)return
             .."""total_loss += loss.item()"""
             .""" {"val_loss": total_los, s / len(val_loader)}
                 
             def """.."""
-    """main(config: TrainingConfig):
+"""main(config: TrainingConfig):
                     Main
                         .."""Method with parameters."""
                         .""" training function."""

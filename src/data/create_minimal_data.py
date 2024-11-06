@@ -1,7 +1,7 @@
 import json
 import os
 
-def def create_minimal_training_data():
+def def:
 
 
     """
@@ -11,7 +11,7 @@ def def create_minimal_training_data():
 
 
     """Method with parameters."""
-    """ minimal training data with chain-of-thought reasoning."""
+""" minimal training data with chain-of-thought reasoning."""
 
     # Ensure directory exists
     os.makedirs("data/chatbot", exist_ok = True)

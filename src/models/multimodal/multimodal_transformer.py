@@ -16,7 +16,7 @@ MultiModal
     logger = logging.getLogger(__name__)
 """ Transformer with enhanced capabilities for mathematical reasoning.Module
     """
-    """ docstring.Method
+""" docstring.Method
     """
 
 
@@ -31,7 +31,7 @@ module.weight.data.fill_(1.0)
 
 self.apply(_init_math_weights)
 
-def def __init__():
+def def:
 
 
     """
@@ -41,7 +41,7 @@ def def __init__():
 
 
     """ with parameters.Forward
-    """
+"""
 
     input_ids: Optional[torch.Tensor] = None): attention_mask: Optional[torch.Tensor] = None
     position_ids: Optional[torch.Tensor] = None
@@ -106,7 +106,7 @@ def def __init__():
     }
     return hidden_states
 
-    def def __init__():
+    def def:
 
 
         """
@@ -116,7 +116,7 @@ def def __init__():
 
 
         """ with parameters.Prepare
-    """
+"""
 
     input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str

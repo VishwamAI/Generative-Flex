@@ -1,18 +1,17 @@
 from typing import Tuple
 from torchvision import transforms
-from typing import Optional
-import torch
-import torch.nn as nn
+from typing import Optional, torch
+from typing import torch.nn as nn
 Placeholder
 """Image processor for multimodal inputs."""
-    """ docstring.hidden_size
+""" docstring.hidden_size
 """
 
 Image processor for handling multimodal inputs in the MMMU model.
 """
 : int = 768Initialize
 """
- """
+"""
  the image processor.     super().__init__()
 self.hidden_size = hidden_size
 self

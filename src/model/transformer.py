@@ -1,7 +1,6 @@
 from attention import FlashAttention
 from experts import MixtureOfExperts
-from typing import Optional
-import torch
+from typing import Optional, torch
     Placeholder
 """Combines Flash Attention and Mixture of Experts for optimal performance"""
 """ docstring.
@@ -29,7 +28,7 @@ self
 )
 """norm1 = nn.LayerNorm(d_model)self.dropout = nn.Dropout(dropout)def
 """
- """
+"""
  forward(self):  x
 """Method with parameters."""
 : torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""

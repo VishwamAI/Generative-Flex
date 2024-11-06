@@ -1,6 +1,5 @@
 from typing import Optional
-from typing import Dict
-import torch
+from typing import Dict, torch
 logger = logging.getLogger(__name__)
 
 

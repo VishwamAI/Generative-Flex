@@ -5,14 +5,14 @@ import torch
 import torch.nn as nn
 Module
 """Flash Mixture of Experts implementation."""
-    """ docstring.intermediate_size
+""" docstring.intermediate_size
 """
 
 Flash Mixture of Experts layer implementation.
 """
 : intnum_expertInitialize
 """
- """
+"""
  the FlashMoE layer.     super().__init__()
 self
 intermediate_size = intermediate_size
@@ -39,7 +39,7 @@ Method
 """"""
 
 
-def def __init__():
+def def:
 
 
 
@@ -52,13 +52,13 @@ def def __init__():
 
 
     """ with parameters.Module
-    """
+"""
 
     hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 """ docstring.
 
     batch_sizeseq_lengthhidden_size
-    """
+"""
 
 
 

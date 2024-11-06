@@ -1,8 +1,7 @@
 from src.models.audio_model import AudioGenerationModel
 from src.models.image_model import ImageGenerationModel
 from src.models.language_model import LanguageModel
-from src.models.video_model import VideoGenerationModel
-import jax
+from src.models.video_model import VideoGenerationModel, jax
 import pytest
 # Test configurations
 BATCH_SIZE = 2

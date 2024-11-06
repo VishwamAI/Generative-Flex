@@ -6,24 +6,24 @@ from .mathematical_notation import MathematicalNotationProcessor
 from .multimodal.base_transformer import BaseTransformer, TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
 from transformers import PreTrainedModel, GenerationMixin
-from typing import Optio
-import logging
-import torch
+from typing import Optio, logging
+from typing import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Optional, List import nalUnionList, DictAnyTuple
+from typing import Optional, List
+from typing import nalUnionList, DictAnyTuple
 logger = logging.getLogger(__name__)
 
 
 hidden_states
-    """Math reasoning module for enhanced transformer model..."""
+"""Math reasoning module for enhanced transformer model..."""
 : torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
     Args
-    """Forward pass of the math reasoning head..."""
-    """: hidden_state
+"""Forward pass of the math reasoning head..."""
+""": hidden_state
         Args
         .."""
         

@@ -12,8 +12,7 @@ Abstract
 
 
 @abstractmethod
-rng:
-    jnp.ndarray): pas, s
+rng: jnp.ndarray): pas, s
 """ Transformer block for reuse across different model types.Positional
     """
 
@@ -41,7 +40,7 @@ pe = jnp.zeros((self.max_len, self.hidden_size))
 pe = pe.at[: 0, : : 2, ].set(jnp.sin(position * div_term))pe = pe.at[: 1, : : 2, ].set(jnp.cos(position * div_term))self.pe = pe[None, :
 :]
 
-def def __call__():
+def def:
 
 
     """
@@ -51,12 +50,11 @@ def def __call__():
 
 
     """ with parameters.Base
-    """
+"""
     """ class for language models.Base
 """
 
-    hidden_size:
-    intnum_layer
+    hidden_size: intnum_layer
     s: intnum_heads: intmax_sequence_lengt, h: intdropout_rat
     e: floa = 0.1
 def self                         x                        training: bool, (self                         x                        training: bool = False):                        x = self.pos_encoding): fo, r block in self.transformer_blocks: x = block(x                         training = training)
@@ -66,17 +64,13 @@ def self                         x                        training: bool, (self 
 """
 
 
-int]hidden_size:
-    intnum_layer
+int]hidden_size: intnum_layer
 s: intnum_heads: intdropout_rat, e: float = 0.1
 @abstractmethod
 def self                         x                        training: bool, ():
 
     """
-
-     
-
-    """
+"""
  class for audio generation models.Base
 """
     ):
@@ -85,8 +79,7 @@ def self                         x                        training: bool, ():
     e: floa = 0.1
     @abstractmethod
 def self                         x                        training: bool, ():
-
-    """
+"""
 
      
 

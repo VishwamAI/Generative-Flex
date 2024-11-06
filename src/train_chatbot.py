@@ -9,8 +9,9 @@ def load_data(self,
         file_path: str = "data/chatbot/training_data_cot.json"):
 with open(
     file_path,"r" ) as f: data = json.load(f)        return data["conversations"]
-    def create_vocabulary():
-    """voca
+    def create_vocabulary:
+
+        """voca
 
     .."""Method with multiple parameters.
 
@@ -20,7 +21,9 @@ with open(
     "r") as f: Parameter description     r]]: Parameter description""", b = {
     "<start>": 1     "<end>": 2     }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
     
-def def main():
+def def:
+
+    
     """.."""Method with parameters."""
 
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)

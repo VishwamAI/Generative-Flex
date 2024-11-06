@@ -3,19 +3,19 @@ from data.dataloader import AdvancedDatasetDataConfigcreate_dataloader
 from model import AdvancedGenerativeFlexModel
 from pathlib import Path
 from training.trainer import AdvancedTrainer
-from transformers import AutoTokenizer
-import argparse
+from transformers import AutoTokenizer, argparse
 import logging
 import torch
 Main training script for Generative-Flex
 Method
-    """Demonstrates how to achieve maximum benchmark performance.."""
+"""Demonstrates how to achieve maximum benchmark performance.."""
 
 
     # Import our implemented components
-        def def main():
-    """..""" with parameters.Main
-    """..""" training function"""
+        def def:
+
+            """..""" with parameters.Main
+"""..""" training function"""
 
 # Parse arguments and load config
 parser = argparse.ArgumentParser(description="Train Generative-Flex Model") parser.add_argument("--config", type = str, def ault="configs/def ault_config.json") parser.add_argument("--local_rank", type = int, def ault=-1)

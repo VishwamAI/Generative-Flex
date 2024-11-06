@@ -4,8 +4,7 @@ from
 """Specialized tokenizer for mathematical expressions and symbols."""
  typing import OptionalUnionList, DictAnyTuple
 import re
-from transformers import PreTrainedTokenizer
-import sympy
+from transformers import PreTrainedTokenizer, sympy
 import torch
 base_tokenizer
 """Tokenizer for mathematical expressions and symbols."""
@@ -39,7 +38,7 @@ return text
 ]
 """ pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprsdef
     """
-    """ __call__(self         text: st        r        **kwargs): Tokenize
+""" __call__(self         text: st        r        **kwargs): Tokenize
     """
 Method with parameters.""" """ text with special handling for mathematical content."""Args: tex"""
 

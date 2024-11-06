@@ -3,7 +3,7 @@ from src.models.transformer import TransformerBlock
 from typing import Any
 Audio
 """Audio generation model implementation using JAX and Flax."""
-    """ signal to embedding.Convert
+""" signal to embedding.Convert
 """
 
 hop_length: int = 256

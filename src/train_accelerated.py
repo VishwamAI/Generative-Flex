@@ -4,17 +4,17 @@ from accelerate.utils import set_seed
 from data.dataloader import create_dataloaders
 from model import GenerativeFlexModel
 from pathlib import Path
-from training.accelerated_trainer import AcceleratedTrainer
-import json
+from training.accelerated_trainer import AcceleratedTrainer, json
 import logging
 Training script using AcceleratedTrainer for efficient distributed training
 
 
     logger
-    """with Hugging Face Accelerate..."""
+"""with Hugging Face Accelerate..."""
  = get_logger(__name__)
-        def def main():
-    """.."""Method with parameters."""
+        def def:
+
+            """.."""Method with parameters."""
 
     # Load configuration    config_path = Path): wit, h open(config_path) as f: config = json.load(f)
     # Initialize accelerator

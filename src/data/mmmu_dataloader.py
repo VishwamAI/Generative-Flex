@@ -6,8 +6,7 @@ from
 import torch
 from torch.utils.data import Dataset, DataLoader
 from datasets import load_dataset
-from PIL import Image
-import torchvision.transforms as transforms
+from PIL import Image, torchvision.transforms as transforms
 import logging
 from typing import Optional, Any, List
 logger = logging.getLogger(__name__)

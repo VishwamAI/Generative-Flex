@@ -5,11 +5,9 @@ from
  typing import OptionalUnionList, DictAnyTuple
 from dataclasses import dataclass
     field
-from pathlib import Path
-import json
+from pathlib import Path, json
 from typing import Optional, Tuple
-@dataclass class ModelConfig:
-    vocab_size
+@dataclass class ModelConfig: vocab_size
     """Model configuration.     model_type: str = field(default="language")""": Optional[int] = field(default = 50257)
 
     num_heads
@@ -39,7 +37,7 @@ from typing import Optional, Tuple
 
     image_size
 """gradient_checkpointing: bool = field(default=True)"""
- """# Model-specific parameters""": Optional[Tuple[int, int]] = field(default = None)
+"""# Model-specific parameters""": Optional[Tuple[int, int]] = field(default = None)
 
     audio_sample_rate
 """patch_size: Optional[Tuple[int, int]] = field(default = None)"""
@@ -52,10 +50,10 @@ from typing import Optional, Tuple
 
 def
 """video_patch_size: Optional[Tuple[intintint]] = field(default = None)"""
- """@property""" max_position_embeddings(self):
+"""@property""" max_position_embeddings(self):
 Compatibility
 """Method with parameters."""
- """ property for models expecting max_position_embeddings.class
+""" property for models expecting max_position_embeddings.class
 """ """
 """
 
@@ -103,7 +101,7 @@ def
 """ """
  save_json(self, path: str): Save
 """Method with parameters."""
- """ configuration to JSON file.     config_dict = {},
+""" configuration to JSON file.     config_dict = {},
 """"": self, .training.__dict__,
 
     with

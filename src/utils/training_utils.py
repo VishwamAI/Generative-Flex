@@ -6,12 +6,16 @@ from typing import AnyDictIterator,
     
     from typing import Tuple, List, Optional
 
-def get_training_params() -> Tuple[float, int]:
+def get_training_params:
+
+
     """Get training parameters."""
     return 0.001, 100
 from typing import from typing import Tuple, List, Optional
 
-def get_training_params() -> Tuple[float, int]:
+def get_training_params:
+
+
     """Get training parameters."""
     return 0.001, 100
 import jax
@@ -21,12 +25,12 @@ from typing import Dict
 
 Extended
 """Utility functions for model training."""
-    """ TrainState for training.Method
+""" TrainState for training.Method
 """
 
 ]] = None    metrics: Dict[str, Any] = None
 
-def def restore_checkpoint():
+def def:
 
 
     """
@@ -48,16 +52,11 @@ def def restore_checkpoint():
     step = 0 if restored_state is None else restored_state.step
     return restored_state or state, step
 
-def def compute_metrics():
+def def:
 
 
     """
-
-
-     
-
-
-    """
+"""
  with parameters.Computes
 """
     labels: jnp.ndarray            ) -> Dict[str): float, ]:
@@ -72,7 +71,7 @@ def def compute_metrics():
 
 }
 
-def def create_input_pipeline():
+def def:
 
 
     """
