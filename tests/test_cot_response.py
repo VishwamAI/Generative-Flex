@@ -4,6 +4,7 @@ import unittest
 
 
 
+
 class TestTestCotResponse(unittest.TestCase):
     """Test suite for module functionality."""
 
