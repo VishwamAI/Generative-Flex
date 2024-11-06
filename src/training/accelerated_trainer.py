@@ -30,22 +30,21 @@ Accelerated trainer class..
 
     def __init__(self, config: Optional[AcceleratedTrainerConfig] = None):
     """
-    Initialize accelerated trainer.
+Initialize accelerated trainer.
 
     Args:
     config: Optional trainer configuration
-    """
+"""
     self.config = config or AcceleratedTrainerConfig()
     self.accelerator = Accelerator(
-    mixed_precision=self.config.mixed_precision,
-    gradient_accumulation_steps=self.config.gradient_accumulation_steps
+    mixed_precision=self.config.mixed_precision, gradient_accumulation_steps=self.config.gradient_accumulation_steps
     )
     self.setup_training()
 
     def setup_training(self):
     """
-    Set up training components..
-    """
+Set up training components..
+"""
     logger.info("Setting up accelerated training...")
     self.optimizer = None
     self.scheduler = None
@@ -54,13 +53,14 @@ Accelerated trainer class..
 
     def train(self):
     """
-    Run training loop..
-    """
+Run training loop..
+"""
     if not all([
-    self.model,
-    self.optimizer,
-    self.train_dataloader
+    self.model, self.optimizer, self.train_dataloader
     ]):
+
+
+        """Method for __init__."""
     raise ValueError(
     "Model, optimizer, and dataloader must be set before training"
     )

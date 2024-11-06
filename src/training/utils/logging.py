@@ -21,18 +21,18 @@ Logger for training metrics and events..
 
     def __init__(self, config: Optional[LoggerConfig] = None):
     """
-    Initialize training logger.
+Initialize training logger.
 
     Args:
     config: Optional logger configuration
-    """
+"""
     self.config = config or LoggerConfig()
     self._setup_logger()
 
     def _setup_logger(self):
     """
-    Set up logging configuration..
-    """
+Set up logging configuration..
+"""
     self.logger = logging.getLogger("training")
     self.logger.setLevel(logging.DEBUG)
 
@@ -48,21 +48,24 @@ Logger for training metrics and events..
 
     def log_metrics(self, metrics: Dict):
     """
-    Log training metrics.
+Log training metrics.
 
     Args:
     metrics: Dictionary of metrics to log
-    """
+"""
     for name, value in metrics.items():
+
+
+        """Method for __init__."""
     self.logger.info(f"{name}: {value}")
 
     def log_event(self, event: str, level: str = "INFO"):
     """
-    Log training event.
+Log training event.
 
     Args:
     event: Event description
     level: Logging level
-    """
+"""
     log_fn = getattr(self.logger, level.lower())
     log_fn(event)

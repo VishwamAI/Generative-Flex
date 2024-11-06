@@ -28,19 +28,19 @@ JAX-based model trainer..
 
     def __init__(self, model: BaseModel, config: Optional[JaxTrainerConfig] = None):
     """
-    Initialize JAX trainer.
+Initialize JAX trainer.
 
     Args:
     model: Model to train
     config: Optional trainer configuration
-    """
+"""
     self.model = model
     self.config = config or JaxTrainerConfig()
     self.utils = TrainingUtils()
 
     def train_step(self, state: Dict, batch: Dict):
     """
-    Perform single training step.
+Perform single training step.
 
     Args:
     state: Current training state
@@ -48,8 +48,11 @@ JAX-based model trainer..
 
     Returns:
     Updated state and loss value
-    """
+"""
         def loss_fn(params):
+
+
+        """Method for __init__."""
         logits = self.model.apply(params, batch["input_ids"])
         loss = jnp.mean(
         self.utils.compute_loss(logits, batch["labels"])
@@ -76,20 +79,22 @@ JAX-based model trainer..
 
     def train(self, train_data: Dict):
     """
-    Train model on provided data.
+Train model on provided data.
 
     Args:
     train_data: Training dataset
 
     Returns:
     Training metrics
-    """
+"""
     state = self.utils.init_training_state(
-    self.model,
-    self.config
+    self.model, self.config
     )
 
     for epoch in range(self.config.num_epochs):
+
+
+        """Method for train."""
     for batch in self.utils.get_batches(
     train_data,
     self.config.batch_size

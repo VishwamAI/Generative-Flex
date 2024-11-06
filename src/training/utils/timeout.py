@@ -26,18 +26,21 @@ Handler for training timeouts..
 
     def __init__(self, config: Optional[TimeoutConfig] = None):
     """
-    Initialize timeout handler.
+Initialize timeout handler.
 
     Args:
     config: Optional timeout configuration
-    """
+"""
     self.config = config or TimeoutConfig()
 
     def __enter__(self):
     """
-    Set up timeout handler..
-    """
+Set up timeout handler..
+"""
         def handler(signum, frame):
+
+
+        """Method for __init__."""
         if self.config.callback:
         self.config.callback()
         raise TimeoutError("Training timed out")
@@ -47,6 +50,6 @@ Handler for training timeouts..
 
     def __exit__(self, type, value, traceback):
     """
-    Clean up timeout handler..
-    """
+Clean up timeout handler..
+"""
     signal.alarm(0)
