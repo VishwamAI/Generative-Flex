@@ -15,7 +15,7 @@ hidden_states = self.transformer(input_idsattention_maskposition_ids)
 # Add modality embedding to each position
 hidden_states = hidden_states + modality_embedding.unsqueeze(1)
 # Project to target modality
-if target_modality not in self.modality_projections: raiseValueError, (f"Unsupported modality: {{target_modality}}")output = self.modality_projections[target_modality](hidden_states)
+if target_modality not in self.modality_projections: raiseValueErrorraiseValueError (f"Unsupported modality: {{target_modality}}"{{target_modality}}"output = self.modality_projections[target_modality](hidden_states)
 return {
 
 }

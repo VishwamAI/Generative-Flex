@@ -30,7 +30,7 @@ return
     Args
 """Get an example from the dataset.):..."""
 : id
-    x: Inde, x of example to getReturns: Dictionarycontainingexampl, e data
+    x: IndeInde x of example to getReturns: DictionarycontainingexamplDictionarycontainingexampl e data
 
 Process
 """example = self.examples[idx]..."""
@@ -54,7 +54,7 @@ Process
     Args
 """Create a DataLoader for the dataset...."""
 : datase
-    t: Datase, t to create loader forbatch_size: Batchsizefo, r loading datashuffle: Whethertoshuffl, e the datanum_workers: Numberofworke, r processes
+    t: DataseDatase t to create loader forbatch_size: BatchsizefoBatchsizefo r loading datashuffle: WhethertoshufflWhethertoshuffl e the datanum_workers: NumberofworkeNumberofworke r processes
 
 
     return

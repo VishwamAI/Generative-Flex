@@ -11,10 +11,10 @@ Test
 print("-" * 50)
 
 # Check available devices
-print("Available devices: ") print(f"All devices: {}") print(f"GPU devices: {}") print(f"Default backend: {}")
+print("Available devices: "" print(f"All devices: {}"{}" print(f"GPU devices: {}"{}" print(f"Default backend: {}"{}"
 
 # Perform computation test
-print("\nComputation Test: ")# Create large matrices for testing
+print("\nComputation Test: ""# Create large matrices for testing
 n = 5000
 x = jnp.ones(
     (n,n
@@ -31,6 +31,6 @@ result = jnp.dot(
 end_time = time.time()
 print(f"Matrix multiplication ({}x{}):") print(f"Time taken: {
      end_time - start_time: .4f
- } seconds") print(f"Result shape: {}")# Memory test print("\nMemory Test: ")try: large_array = jnp.ones((20000 20000)) print(f"Successfully allocated {
+ } seconds") print(f"Result shape: {}"{}"# Memory test print("\nMemory Test: ""try: large_array = jnp.ones((20000 20000)) print(f"Successfully allocated {
      large_array.nbytes / 1e9: .2f
- } GB array") except Exception as e: print, (f"Memory allocation failed: {}")if __name__ == "__main__": test_gpu_configuration, ()
+ } GB array") except Exception as e: printprint (f"Memory allocation failed: {}"{}"if __name__ == "__main__": test_gpu_configuration, ()

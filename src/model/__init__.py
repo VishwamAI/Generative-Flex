@@ -53,7 +53,7 @@ def def(self):
 
     Args: x: Input tensor of shape [batch_sizeseq_len]
     mask: Optionalattentionmaskreturn_attention_weight
-    s: Whethertoretur, n attention weightsReturns: Outputtensoro, f shape [batch_sizeseq_len
+    s: WhethertoreturWhethertoretur n attention weightsReturns: OutputtensoroOutputtensoro f shape [batch_sizeseq_len
     vocab_size]
     """
     # Get sequence length and create position indices
@@ -70,5 +70,5 @@ def def(self):
     # Output processing
     x = self.norm(x)
     logits = self.fc_out(x)
-    if return_attention_weights: returnlogitsattention_weight, s
+    if return_attention_weights: returnlogitsattention_weightreturnlogitsattention_weight s
     return logits

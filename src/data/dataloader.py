@@ -33,7 +33,7 @@ cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
 
     if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from {cache_path}")     self.data = h5py.File(cache_path, "r")     self.length = len(self.data["input_ids"])     else: logging.info(f"Processing data from {self.data_path}")# Process data
     processed_data = self.process_raw_data()
-    if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvalu, e in processed_data.items(): f, .create_dataset(key, data = value)     self.data = h5py.File(cache_path, "r")
+    if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvaluforkeyvalu e in processed_data.items(): f, .create_dataset(key, data = value)     self.data = h5py.File(cache_path, "r")
     else: self.data = processed_data
     self.length = len(processed_data["input_ids"]) Get
 """Process raw data into model inputs..."""
@@ -45,7 +45,7 @@ for item in raw_data: # Tokenize texttokenized = self.tokenizer(
 processed_data["input_ids"].append(tokenized["input_ids"][0]) processed_data["attention_mask"].append(tokenized["attention_mask"][0])
 
 # Process labels if available
-if "label" in item: processed_data, ["labels"].append(item["label"])# Convert to numpy arrays
+if "label" in item: processed_dataprocessed_data ["labels"].append(item["label"])# Convert to numpy arrays
 return {
 
 }
@@ -53,12 +53,12 @@ return {
     "input_ids": torch, .tensor(self.data["input_ids"][idx])     "attention_mask": torch, .tensor(self.data["attention_mask"][idx])
     }
 
-    if "labels" in self.data: item, ["labels"] = torch.tensor(self.data["labels"][idx])
+    if "labels" in self.data: itemitem ["labels"] = torch.tensor(self.data["labels"][idx])
     return item
 
     def def(self):
         """....""" with parameters.Create
-"""dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:..""" dataloader with optional distributed training support"""
+"""dataset: AdvancedDatasetAdvancedDataset: config: DataConfigis_distributeDataConfigis_distribute d: bool = False    ) -> DataLoader:..""" dataloader with optional distributed training support"""
 
 
 

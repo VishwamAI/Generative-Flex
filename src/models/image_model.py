@@ -77,7 +77,7 @@ return x
 
 def def(self):
         """....""" with parameters.Placeholder
-"""rng: Any): condition: Optional[jnp.ndarray] = None..""" docstring."""
+"""rng: AnyAny: condition: Optional[jnp.ndarray] = None..""" docstring."""
 
 
 

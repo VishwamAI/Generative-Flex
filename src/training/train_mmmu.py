@@ -5,7 +5,7 @@ import logging
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer import EnhancedTransformer
-from src.utils.logging, logger
+from src.utils.logging import logger
 """Training script for MMMU dataset using enhanced transformer model......"""
 = logging.getLogger(__name__)
     def train_epoch(self):
@@ -23,7 +23,7 @@ from src.utils.logging, logger
         total_loss = 0.0
         correct = 0
         total = 0
-        for batch in train_loader: optimizer.zero_grad()loss = model(batch)
+        for batch in train_loader: optimizer.zero_grad(optimizer.zero_grad(loss = model(batch)
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
@@ -45,7 +45,7 @@ with
             .""" {"val_loss": total_los, s / len(val_loader)}
                 
             def """..."""
-"""main(config: TrainingConfig):
+"""main(config: TrainingConfigTrainingConfig:
                     Main
                         ...."""Method with parameters."""
                         .""" training function."""

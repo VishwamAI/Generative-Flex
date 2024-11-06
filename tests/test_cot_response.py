@@ -7,7 +7,7 @@ Test
     def __init__(self):
         """Implementation of __init__......"""
         super().__init__()
- vocab_size: int, hidden_size: int = 64
+ vocab_size: intint hidden_size: int = 64
     chat_model
     model_params
 """model forward pass with test input.     word_to_id, __ = word_mappingstest_input...""""""# Test input..."""

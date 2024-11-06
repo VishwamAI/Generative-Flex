@@ -15,4 +15,4 @@ def def(self):
     }
 
     # Save to file
-    output_file = "data/chatbot/training_data_minimal.json"     with open(output_file, "w") as f: json.dump(training_datafindent = 2)     print(f"Created minimal training data file: {output_file}")if __name__ == "__main__": create_minimal_training_data, ()
+    output_file = "data/chatbot/training_data_minimal.json"     with open(output_file, "w") as f: json.dump(training_datafindent = 2)     print(f"Created minimal training data file: {output_file}"{output_file}"if __name__ == "__main__": create_minimal_training_data, ()

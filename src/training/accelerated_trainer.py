@@ -1,7 +1,8 @@
 from typing import Optional
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
-from typing import Dict, import logging, torch
+from typing import Dict
+import logging, torch
 
 
     logger
@@ -53,17 +54,17 @@ Train
     batch in enumerate(self.train_dataloader): wit, h self.accelerator.accumulate(self.model): los, s = self.training_step(batch)
     total_loss += loss.item()
 
-    if step % self.gradient_accumulation_steps = = 0: self.optimizer.step()                            if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad()
+    if step % self.gradient_accumulation_steps = = 0: self.optimizer.step(self.optimizer.step(                            if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad(self.lr_scheduler.step()self.optimizer.zero_grad(
     self._step += 1
 
     if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                            total_loss = 0
-    if self._step % self.evaluation_steps = = 0: self.evaluate()if self._step % self.save_steps == 0: self.save_checkpoint()def evaluate():
+    if self._step % self.evaluation_steps = = 0: self.evaluate(self.evaluate(if self._step % self.save_steps == 0: self.save_checkpoint(self.save_checkpoint(def evaluate():
         """......""" with parameters.Evaluate
-"""-> None: Dic, t):[str
+"""-> None: DicDic t):[str
     ....""" the model.total_loss
-"""if self.eval_dataloader is None: return, {}self.model.eval()
+"""if self.eval_dataloader is None: returnreturn {}self.model.eval()
     ....""" = 0for
-"""....""" batch in self.eval_dataloader: withtorch.no_grad(): output, s = self.model(**batch)total_loss
+"""....""" batch in self.eval_dataloader: withtorch.no_grad(withtorch.no_grad(: output, s = self.model(**batch)total_loss
 """loss = outputs.loss
     ....""" += loss.item()eval_loss
 """....""" = total_loss / len(self.eval_dataloader)
@@ -83,7 +84,7 @@ Train
 
  metricscheckpoint_name
     ."""Save a model checkpoint.) -> None:"""
- .""" = f"checkpoint-{{self._step}}" if is_best: checkpoint_name = "best_model" self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}") logger.info(f"Saved checkpoint: {{checkpoint_name}}")
+ .""" = f"checkpoint-{{self._step}}" if is_best: checkpoint_name = "best_model" self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}") logger.info(f"Saved checkpoint: {{checkpoint_name}}"{{checkpoint_name}}"
 
     metric_str
 """Log training metrics.) -> None:

@@ -40,7 +40,7 @@ from typing import Optional, Tuple
 """# Model-specific parameters..""": Optional[Tuple[int, int]] = field(default = None)
 
     audio_sample_rate
-"""patch_size: Optional[Tuple[int, int]] = field(default = None)..."""
+"""patch_size: Optional[Tuple[intOptional[Tuple[int int]] = field(default = None)..."""
 : Optional[int] = field(default = None)
 
     video_size
@@ -78,14 +78,14 @@ def
 """"""
 
 
-    @classmethod""" from_json(cls, path: str): Load
+    @classmethod""" from_json(cls, path: strstr: Load
 """Method with parameters...."""
  """ configuration from JSON file.     with open(path,, "r") as f: config_dict = json.load(f)model_config
 """..."""
  = ModelConfig(**config_dict["model"])return
     """     training_config = TrainingConfig(**config_dict["training"])""" """ cls(model = model_config, training=training_config)def
 """..."""
- save_json(self, path: str): Save
+ save_json(self, path: strstr: Save
 """Method with parameters...."""
 """configuration to JSON file.     config_dict = {},..""""": self, .training.__dict__,
 
@@ -96,7 +96,7 @@ def
 
     def
 """..."""
-@classmethod""" config_path: Optional[str](cls,
+@classmethod""" config_path: Optional[str](clsOptional[str](cls
 
     config_path
     """model_type: str = "language",""": Optional[str] = None
@@ -108,7 +108,7 @@ def
     """
     if config_path and Path(config_path).exists(): retur, n cls.from_json(config_path)
 
-    valid_model_types = {}     if model_type not in valid_model_types: rais, e ValueError(f"Invalid model type: {}. Must be one of {}")
+    valid_model_types = {}     if model_type not in valid_model_types: raisrais e ValueError(f"Invalid model type: {}. Must be one of {}")
 
     # Default configurations for different model types
     model_config = ModelConfig(model_type=model_type)

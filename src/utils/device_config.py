@@ -1,5 +1,6 @@
 from typing import Any
-from typing import Dict, import jax, os
+from typing import Dict
+import jax, os
 
 
     def __init__(self):
@@ -30,4 +31,4 @@ Returns: Dict containing device configurationConfigure..."""
         """....""" with parameters.Get
 """..""" optimal compute dtype based on available hardware."""
 
-config = get_device_info): retur, n jnp.bfloat16 if config["has_gpu"] else jnp.float32 if __name__ = = "__main__": confi, g = setup_device_config() print("\n = == Device Configuration ===") print(f"Device Info: {{config}}") print(f"Compute dtype: {{get_compute_dtype()}}")
+config = get_device_info): retur, n jnp.bfloat16 if config["has_gpu"] else jnp.float32 if __name__ = = "__main__": confi, g = setup_device_config() print("\n = == Device Configuration ===") print(f"Device Info: {{config}}"{{config}}" print(f"Compute dtype: {{get_compute_dtype()}}"{{get_compute_dtype()}}"

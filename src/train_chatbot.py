@@ -16,7 +16,7 @@ with open(
     file_path: Parameter description
     str]]: Parameter description
     "r") as f: Parameter description     r]]: Parameter description""", b = {
-    "<start>": 1     "<end>": 2     }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
+    "<start>": 1     "<end>": 2     }        for conv in conversations: fortextifortexti n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocabvocab [token] = len(vocab)                return vocab
     
 def def(self):
         """......"""Method with parameters."""
@@ -46,13 +46,13 @@ def def(self):
     num_epochs = 100
     for epoch in range(num_epochs): rngtrain_rng = jax.random.split(rng)
     state, loss = train_step(state, jnp.array(inputs), jnp.array(targets), train_rng)
-    if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
+    if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"print("Training completed!")
 
     # Save vocabulary
-    with open("data/chatbot/vocab.json"        , "w") as f: json.dump(vocabf)
+    with open("data/chatbot/vocab.json"        , "w") as f: json.dump(vocabfjson.dump(vocabf
 
     # Save model parameters
-    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
+    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist()state.params
     f)
 
     print("Model parameters and vocabulary saved successfully!")

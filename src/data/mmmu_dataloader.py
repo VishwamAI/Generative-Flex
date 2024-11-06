@@ -18,7 +18,7 @@ subjects
 : Optional[List[str]] = None
 split: str = "validation"
 tokenizer: Any = None
-max_length: int = 512)  ) -> None: Initializ, e the dataset.    super
+max_length: int = 512)  ) -> None: InitializInitializ e the dataset.    super
 """"""
 
 Args: subject
@@ -66,7 +66,7 @@ Args: subject
     self.cumulative_lengths.append(total_length)
     logger.info(f"Processed {} examples from {}")
 
-    except Exception as e: logger.warning(f"Failed to load {}: {}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")and
+    except Exception as e: logger.warning(f"Failed to load {}: {}")if not self.datasets: raiseRuntimeErrorraiseRuntimeError ("No datasets were successfully loaded")and
 """Get a single example with proper tensor handling.
 while(dataset_idx < len(self.cumulative_lengths)..."""
  idx >= self.cumulative_lengths[dataset_idx]dataset_idx
@@ -100,9 +100,9 @@ while(dataset_idx < len(self.cumulative_lengths)..."""
 """"""
 
  example in examples: tr
-    y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
+    y: batchbatch ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
     """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
-    """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}")continueif
+    """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}"{}"continueif
 """..."""
  batch["input_ids"]:input_ids
 """
@@ -111,7 +111,7 @@ return {
      "": torch, .stack(batch["input_ids"])else,
      "attention_mask": torch, .stack(batch["attention_mask"])""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
  }
-""": raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {}")raise
+""": raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {}"{}"raise
 
 def
 """..."""
@@ -122,7 +122,7 @@ def
 """DataLoader..."""
  dataloaders with proper tensor handling.
     """
-    split: MMUDataset, (subjects = subjects
+    split: MMUDatasetMMUDataset (subjects = subjects
     split = split,tokenizer=tokenizer,max_length=max_length)
     for split in ["dev", "validation", "test"]
     }
@@ -137,4 +137,4 @@ def
 
     return(dataloaders["dev"], dataloaders["validation"], dataloaders["test"])
 
-except Exception as e: logger.error(f"Error creating dataloaders: {}")raise
+except Exception as e: logger.error(f"Error creating dataloaders: {}"{}"raise

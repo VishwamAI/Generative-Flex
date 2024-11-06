@@ -39,5 +39,5 @@ mlp_output = self.mlp(normed_hidden_states)
 hidden_states = hidden_states + self.dropout(mlp_output, deterministic=deterministic)
 outputs = {
      "hidden_states": hidden_states,
- }if output_attentions: outputs, ["attentions"] = attention_output["attentions"]
+ }if output_attentions: outputsoutputs ["attentions"] = attention_output["attentions"]
 return outputs

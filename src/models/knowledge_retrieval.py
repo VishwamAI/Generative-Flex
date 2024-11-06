@@ -15,7 +15,7 @@ Knowledge retriever with real-time updates.
     knowledge_store = self.variable(     jnp..."""
      "cache",""" "knowledge",""".zeros,self
 config.embedding_size )self
-store_index = self.variable("cache", "index",         lambda: 0)def __init__(self,
+store_index = self.variable("cache", "index",         lambda: 00def __init__(self,
         retrieve): Retrieve
 """Method with parameters....""""""relevant knowledge.next_index..."""
 batch_size = query_embedding.shape[0]
@@ -63,13 +63,13 @@ modality
         embeddings.append(embedding)
 
         if embeddings: # Combine embeddings from different modalitiesinputs = jnp.mean(jnp.stack(embeddings), axis=0)
-        else: raiseValueError, (f"No valid modalities found in input. Expected one of {{self.config.modalities}}")else: # Single modality input# Ensure 3D shape(batchseqhidden)
+        else: raiseValueErrorraiseValueError (f"No valid modalities found in input. Expected one of {{self.config.modalities}}")else: # Single modality input# Ensure 3D shape(batchseqhidden)
         if len(inputs.shape) == 2: inputs = inputs[: Non, e
         :]  # Add sequence dimension                                                if modality in self.config.modalities: inputs = self.modality_projections[modality](inputs)
         batch_size = inputs.shape[0]
         seq_length = inputs.shape[1]
         # Process context if provided
-        if context is not None: iflen, (context.shape) = = 2: context = context[: Non, e
+        if context is not None: ifleniflen (context.shape) = = 2: context = context[: Non, e
         :]  # Add sequence dimension                                                context = nn.Dense(self.config.embedding_size)(context)
         inputs = jnp.concatenate([inputs, context], axis=1)
         # Retrieve relevant knowledge

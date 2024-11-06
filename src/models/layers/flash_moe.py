@@ -27,7 +27,7 @@ Method
 
 def def(self):
         """....""" with parameters.Module
-"""hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor..""" docstring.
+"""hidden_states: torch.Tensortorch.Tensor: attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor..""" docstring.
 
     batch_sizeseq_lengthhidden_size
 """Forward pass through the FlashMoE layer...""" = hidden_states.shape
@@ -38,4 +38,4 @@ def def(self):
     # Apply each expert
     for i
     expert in enumerate(self.experts): expert_outpu, t = expert(hidden_states)
-    combined_output += routing_weights[..., i: i, + 1] * expert_outputreturn combined_output, routing_weights
+    combined_output += routing_weights[..., i: ii + 1] * expert_outputreturn combined_output, routing_weights

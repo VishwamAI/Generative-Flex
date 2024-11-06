@@ -10,13 +10,13 @@ MultiModal
     logging.basicConfig(level = logging.INFO)
     logger = logging.getLogger(__name__)
 """Transformer with enhanced capabilities for mathematical reasoning.Module...""""""docstring.Method..."""
-_init_math_weights(module) -> None: ifisinstance, (module(nn.Linear nn.Embedding): module, .weight.data.normal_(
+_init_math_weights(module) -> None: ifisinstanceifisinstance (module(nn.Linear nn.Embedding): module, .weight.data.normal_(
     mean = 0.0
 std = 0.02
 )        if isinstance(
     module
 nn.Linear
-) and module.bias is not None: module.bias.data.zero_()elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
+) and module.bias is not None: module.bias.data.zero_(module.bias.data.zero_(elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
 module.weight.data.fill_(1.0)
 
 self.apply(_init_math_weights)
@@ -49,7 +49,7 @@ def def(self):
     total_sequence_length += image_embeddings.size(1)
 
     if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings = torch.cat([embeddings, image_embeddings], dim=1)
-    else: embeddings = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
+    else: embeddings = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}"{{str(e)}}"
     if embeddings is None: embeddings = torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
     # Add position embeddings
     position_ids = torch.arange(total_sequence_length, dtype=torch.long, device=device)
@@ -62,7 +62,7 @@ def def(self):
     dtype = torch.long,
     device = device
     )
-    if input_ids is not None and image_features is not None: token_type_ids, [: input_ids, .size(1) :] = 1                    token_type_embeddings = self.token_type_embeddings(token_type_ids)
+    if input_ids is not None and image_features is not None: token_type_idstoken_type_ids [: input_ids, .size(1) :] = 1                    token_type_embeddings = self.token_type_embeddings(token_type_ids)
     # Combine all embeddings
     embeddings = embeddings + position_embeddings + token_type_embeddings
     embeddings = self.dropout(embeddings)
@@ -87,7 +87,7 @@ def def(self):
 
     def def(self):
         """....""" with parameters.Prepare
-"""input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
+"""input_ids: torch.Tensortorch.Tensor: attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
     ]:..""" inputs for text generation."""
 

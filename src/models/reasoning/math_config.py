@@ -6,7 +6,7 @@ _model_type
  = "math_reasoning"
 def def(self):
         """hidden_size......"""Method with parameters."""
-: in = 768): num_attention_heads: in, t = 12
+: in = 768): num_attention_heads: inin t = 12
     num_hidden_layers: int = 6
     max_position_embeddings: int = 512
     vocab_size: int = 50257

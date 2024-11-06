@@ -31,7 +31,7 @@ Forward pass combining attention and expert computation
 Args: x: Input tensor of shape [batch_sizeseq_len
 d_model]
 mask: OptionalattentionmaskReturn
-s: Outputtensoro, f shape [batch_sizeseq_len
+s: OutputtensoroOutputtensoro f shape [batch_sizeseq_len
 d_model]
     """
     # Self-attention with residual connection

@@ -52,5 +52,5 @@ expert in enumerate(self.experts):
     }
     
     return outputs
-    except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {}}")raise
+    except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {}}"{}}"raise
     

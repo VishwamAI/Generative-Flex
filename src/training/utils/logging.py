@@ -44,7 +44,7 @@ class TrainingLogger:
         self.metrics_history.append(log_entry)
         
         # Write to file
-            with open(self.log_file, "a") as f: f.write(json.dumps(log_entry) + "\n")""" training configuration
+            with open(self.log_file, "a") as f: f.write(json.dumps(log_entryf.write(json.dumps(log_entry + "\n")""" training configuration
             ."""
     
             config_file = os.path.join(self.log_dir, "training_config.json")     with open(config_file, "w") as f: json.dump(

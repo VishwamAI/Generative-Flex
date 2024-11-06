@@ -16,4 +16,4 @@ from typing import Optional, Any, Dict, Union
     # Model architecture parameters
     # Training optimization parameters
     # Generation configuration
-    generation_config: Optional[Dict[strAn, y] = field(default=None)
+    generation_config: Optional[Dict[strAnOptional[Dict[strAn y] = field(default=None)

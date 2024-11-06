@@ -121,25 +121,25 @@ self
                                                             .""""""
                                                             
                                                             
-                                                        num_epochs: int,."""""": Optional[Any] = None,
+                                                        num_epochs: intint."""""": Optional[Any] = None,
                                                         
                                                         t
                                                         .""""""
                                                         
                                                         
-                                                    eval_steps: in,."""""" = 1000,
+                                                    eval_steps: inin."""""" = 1000,
                                                     
                                                     t
                                                     .""""""
                                                     
                                                     
-                                                save_steps: in,."""""" = 1000,
+                                                save_steps: inin."""""" = 1000,
                                                 
                                                 t
                                                 .""""""
                                                 
                                                 
-                                            log_steps: in,."""""" = 100
+                                            log_steps: inin."""""" = 100
                                             Method
                                             .""""""
                                             
@@ -202,7 +202,7 @@ self
                                         
                                         
                                         if
-                                            """logging.info(f"Epoch: {}, Step: {}, Loss: {
+                                            """logging.info(f"Epoch: {}{} Step: {}{} Loss: {
                                             avg_loss: .4f
                                         }")""" ."""# Evaluation""" eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.evaluate(eval_dataset)
                                         
@@ -210,19 +210,19 @@ self
                                         if
                                             ."""logging.info(f"Eval Loss: {
                                             eval_loss: .4f
-                                        }")# Save checkpoint""" batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{}-{}")# End of epochlogging
+                                        }")# Save checkpoint""" batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{}-{}"self.save_checkpoint(f"checkpoint-{}-{}"# End of epochlogging
                                         info(f"Epoch {} finished. Average Loss: {
                                         avg_epoch_loss: .4f
                                         }")self.save_checkpoint(f"epoch-{}")def
 """....."""
-                                        save_checkpoint(self, name: str): Save
+                                        save_checkpoint(self, name: strstr: Save
 """Method with parameters......"""
 """model checkpoint.     checkpoint_dir = self.output_dir / name
                                             
                                             with
                                                 ...."""checkpoint_dir.mkdir(parents = True, exist_ok=True)"""
-                                                ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save configdef
-                                                    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: str): Load
+                                                ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.state)# Save configdef
+                                                    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.config)logging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: strstr: Load
 """Method with parameters......""""""model checkpoint......"""
                                                     checkpoint_dir = Path(path)
                                                     # Load model parameters

@@ -60,7 +60,7 @@ dtype: Any = jnp.float32
     )
 
     # Apply windowing and overlap-add
-    output = output.at[: indices, ].add(x * window[None             None            :])
+    output = output.at[: indices, ].add(x * window[None             None: ]]
     # Normalize by window overlap
     divisor = jnp.zeros_like(output)
     divisor = divisor.at[: indices, ].add(window[None                 None                :] ** 2)                output = jnp.where(

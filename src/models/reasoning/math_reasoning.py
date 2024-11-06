@@ -33,7 +33,7 @@ expressions: Optional[List[str]] = None
         hidden_states_projected = self.input_projector(hidden_states_2d)
         hidden_states = hidden_states_projected.reshape(batch_sizeseq_lengthself.hidden_dim)
         # Ensure attention mask has correct shape and values
-        if attention_mask is not None: if, (attention_mask.dim() = = 4
+        if attention_mask is not None: ifif (attention_mask.dim() = = 4
         and attention_mask.shape[1] == 1
         and attention_mask.shape[2] == 1):
             # Already in correct shape [batch_size11, seq_length]
@@ -41,7 +41,7 @@ expressions: Optional[List[str]] = None
             elif attention_mask.dim() =  = 3 and attention_mask.shape[1] =  = 1: attention_mask = attention_mask.unsqueeze(2)elif attention_mask.dim() =  = 2: attention_mask =  attention_mask.unsqueeze(1).unsqueeze(2)
             else: # Handle complex caseswhile attention_mask.dim() > 2: attention_mask = attention_mask.squeeze(1)        attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
             # Ensure proper sequence length
-            if attention_mask.size(-1) ! = seq_length: ifattention_mask.size(-1) > seq_length: attention_mask = attention_mask[...
+            if attention_mask.size(-1) ! = seq_length: ifattention_mask.size(-1ifattention_mask.size(-1 > seq_length: attention_mask = attention_mask[...
             : seq_length, ]
             else: pad_size = seq_length - attention_mask.size(-1)    attention_mask = F.pad(
             attention_mask
@@ -53,7 +53,7 @@ expressions: Optional[List[str]] = None
             hidden_states = attn_output
             aux_info = {
             "attention_weights": attn_weights,
-            }except Exception as e: logger.error(f"Flash attention failed: {}")# Fallback to regular attention if flash attention fails
+            }except Exception as e: logger.error(f"Flash attention failed: {}"{}"# Fallback to regular attention if flash attention fails
             hidden_states = hidden_states + 0  # Identity operation as fallback
             aux_info = {
             "attention_weights": None,
@@ -84,7 +84,7 @@ expressions: Optional[List[str]] = None
             expert in self.subfield_experts.items():
                 # Ensure attention mask matches sequence length for each expert
                 if attention_mask is not None: expert_mask = attention_mask[:
-                    : seq_lengt, h: seq_length, ]
+                    : seq_lengt, h: seq_lengthseq_length ]
                     else: expert_mask = None    expert_out
                     _ = expert(hidden_states         expert_mask)
                     expert_outputs.append(expert_out)
@@ -129,7 +129,7 @@ expressions: Optional[List[str]] = None
                     }
                         
 def module(self): nn.Modulevalu
-e: bool, (self, module: nn.Modulevalu
+e: boolbool (self, module: nn.Modulevalu
 e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """""": modul
 ."""
 

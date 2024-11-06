@@ -1,6 +1,7 @@
 from typing import Optional
 from torch.utils.data import DataLoader
-from typing import Dict, import logging, torch
+from typing import Dict
+import logging, torch
     logger
 """Base trainer implementation......"""
  = logging.getLogger(__name__)
@@ -46,7 +47,7 @@ for step
 batch in enumerate(self.train_dataloader): los, s = self.training_step(batch)
 total_loss += loss.item()
 
-if step % self.gradient_accumulation_steps = = 0: self.optimizer.step()                        if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad()
+if step % self.gradient_accumulation_steps = = 0: self.optimizer.step(self.optimizer.step(                        if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad(self.lr_scheduler.step()self.optimizer.zero_grad(
 self._step += 1
 
 if self._step % self.logging_steps = = 0: self.log_metrics({
@@ -56,7 +57,7 @@ if self._step % self.logging_steps = = 0: self.log_metrics({
  = outputs.lossif
 """loss.backward()
 ....."""
- self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)
+ self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_normtorch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm
     
 def """return loss
 ..."""
@@ -64,7 +65,7 @@ def """return loss
 Evaluatethemodel
     ...."""Method with parameters.forbatchinself
 """total_loss = 0
-eval_dataloader: withtorch.no_grad():output, s = self.model(**batch)
+eval_dataloader: withtorch.no_grad():outputwithtorch.no_grad():output s = self.model(**batch)
     total_loss
     ...."""loss = outputs.loss"""
 +=loss.item()
@@ -79,7 +80,7 @@ self
 """....."""
 defsave_checkpoint
 """....."""
-(self):is_best: boo = False) -> None: Non, e) -> None: ifis_best
+(self):is_best: boo = False) -> None: NonNon e) -> None: ifis_best
     """
     Saveamodelcheckpoint.
     checkpoint_name = f"checkpoint-{}}"""":checkpoint_name = "best_modelf
@@ -90,7 +91,7 @@ defsave_checkpoint
 }, .""""{}}/{}}.ptlogger
     """     "
     )
-""".info(f"Savedcheckpoint:{}}")deflog_metrics(self):metrics: Dict[str):float, ]Log
+""".info(f"Savedcheckpoint: {}}")deflog_metrics(self{}}")deflog_metrics(self:metrics: Dict[str):floatDict[str):float ]Log
 """) -> None: None:
 ....."""
  training metrics."""

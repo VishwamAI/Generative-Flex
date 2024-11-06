@@ -10,8 +10,7 @@ from typing import Optional
 
 
 Core
-"""rouge:
-    [Dict[strfloa, t]] = None..."""
+"""rouge: [Dict[strfloa[Dict[strfloa t]] = None..."""
  evaluator with essential metrics
 
 
@@ -28,6 +27,6 @@ Log
      metrics.perplexity: .4f
  }")if metrics.bleu is not None: logging.info(f"BLEU: {
      metrics.bleu: .4f
- }")if metrics.rouge is not None: fork, v in metrics.rouge.items(): logging, .info(f"ROUGE-{}: {
+ }")if metrics.rouge is not None: forkfork v in metrics.rouge.items(): logging, .info(f"ROUGE-{}: {
      v: .4f
  }")

@@ -108,7 +108,7 @@ return
         """....""" with parameters.
 
     Module
-"""-> None: se, l):f..""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
+"""-> None: sese l):f..""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
 
  docstring.
 Module
@@ -135,14 +135,14 @@ Module
     self
 """value_shape = (batch_sizemax_lengthhidden_size)..."""
  key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype)) self
-    """ self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""".current_length = self.variable("cache", "length", lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)def
+    """ self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""".current_length = self.variable("cache", "length", lambda: 00self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)def
 """..."""
  get(self): jnp
 """Method with parameters...."""
- -> None: Unio, n):[Union[selfndarray]:key
+ -> None: UnioUnio n):[Union[selfndarray]:key
 """Retrieve cached key-value pairs.
     if end is     None: endself.current_length.value# Get valid entries..""" = self.key_cache.value[:start
-"""start: end, ]value = self.value_cache.value[:..""": end, ]# Reshape to attention formatseq_len
+"""start: endend ]value = self.value_cache.value[:..""": end, ]# Reshape to attention formatseq_len
 """batch_size..""" = key.shape[: 2, ]                                key = key.reshape(
     batch_size                     seq_len                    self.num_heads                    self.head_dim
 )value

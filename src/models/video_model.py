@@ -35,16 +35,16 @@ int]# (frames heightwidth)
 patch_size: Tuple[intint
 int]  # (time, height, width)
 hidden_dim: intnum_layer
-s: intnum_heads: inthead_di, m: intmlp_di
-m: intchannel, s: int = 3
+s: intnum_heads: inthead_diinthead_di m: intmlp_di
+m: intchannelintchannel s: int = 3
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
-    def self inputstraining: bool, (self inputstraining: bool = True): b):
+    def self inputstraining: boolbool (self inputstraining: bool = True): b):
     t
     h
     w
-    c = inputs.shape: assert, (t = = self.video_size[0]            and h == self.video_size[1] and w == self.video_size[2]and c == self.channels)
+    c = inputs.shape: assertassert (t = = self.video_size[0]            and h == self.video_size[1] and w == self.video_size[2]and c == self.channels)
     x = VideoEmbedding(_hidden_dim=self.hidden_dim, _patch_size=self.patch_size, _dtype=self.dtype)(inputs)
     num_patches = ( (self.video_size[0] // self.patch_size[0])
     * (self.video_size[1] // self.patch_size[1])
@@ -68,7 +68,7 @@ dtype: Any = jnp.float32
     
 def def(self):
         """......""" with parameters.Generate
-"""rng: Any): prompt: Optional[jnp.ndarray] = None
+"""rng: AnyAny: prompt: Optional[jnp.ndarray] = None
     ....""" video frames."""
 
 

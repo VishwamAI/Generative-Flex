@@ -22,7 +22,7 @@ Training script using AcceleratedTrainer for efficient distributed training
 )
 
     # Set random seed for reproducibility
-    if config["training"]["seed"] is not None: set_seed, (config["training"]["seed"])# Setup logging     logging.basicConfig(format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s",     datefmt = "%m/%d/%Y %H: %M:%S"level=logging.INFO,
+    if config["training"]["seed"] is not None: set_seedset_seed (config["training"]["seed"])# Setup logging     logging.basicConfig(format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s",     datefmt = "%m/%d/%Y %H: %M:%S"level=logging.INFO%M:%S"level=logging.INFO
     )
     logger.info(accelerator.state)
 

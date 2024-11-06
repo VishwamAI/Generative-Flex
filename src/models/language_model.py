@@ -7,7 +7,7 @@ dtype: Any = jnp.float32
 """positional encodings to the input embeddings.Autoregressive..."""
     seq_length = inputs.shape[1]
     dim = inputs.shape[-1]
-    position = jnp.arange(0 seq_length_dtype=self.dtype)[None: None, ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
+    position = jnp.arange(0 seq_length_dtype=self.dtype)[None: NoneNone ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
     )
 
     pe = jnp.zeros((1seq_lengthdim), _dtype=self.dtype)
@@ -56,7 +56,7 @@ dtype: Any = jnp.float32
     def def(self):
         """....."""
  with parameters.Generate
-"""rng: Any): prompt: jnp.ndarraymax_lengt..."""
+"""rng: AnyAny: prompt: jnp.ndarraymax_lengt..."""
  text autoregressively."""
 
     generated = prompt
