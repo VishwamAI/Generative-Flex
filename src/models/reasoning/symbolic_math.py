@@ -1,45 +1,50 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
-import torch
-import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
-from pathlib import Path
 from dataclasses import dataclass, field
-
-from typing import Dict, Any, Optional, List, Union, Tuple
-import torch
-import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
 from pathlib import Path
-from dataclasses import dataclass, field
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+import logging
+import numpy as np
+import os
+import torch
 
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+import logging
+import numpy as np
+import os
+import torch
+
+
+from pathlib import Path
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import os
-from pathlib import Path
 import logging
+import os
+
 
 from typing import Dict, List, Optional
+
 
 import torch.nn as nn
 
 
+
 class SymbolicMath:
-        """
-Class implementing SymbolicMath functionality.
+    """
+    Class implementing SymbolicMath functionality.
     """
 
-Module for implementing specific functionality."""
-Handles symbolic mathematics operations..
-
-Method for __init__..
-
-Method for forward..
+    Module for implementing specific functionality."""
+    Handles symbolic mathematics operations..
+    
+    Method for __init__..
+    
+    Method for forward..
     """
         symbol_embeds = self.symbol_embeddings(symbols)
         operation_embeds = self.operation_embeddings(operations)

@@ -1,28 +1,31 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
-import torch
-import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
-from pathlib import Path
 from dataclasses import dataclass, field
-
-from typing import Dict, Any, Optional, List, Union, Tuple
-import torch
-import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
 from pathlib import Path
-from dataclasses import dataclass, field
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+import logging
+import numpy as np
+import os
+import torch
 
+
+from dataclasses import dataclass, field
+from pathlib import Path
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+import logging
+import numpy as np
+import os
+import torch
+
+
+from pathlib import Path
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import os
-from pathlib import Path
 import logging
+import os
+
 
 
 """
@@ -33,19 +36,20 @@ from torch.utils.data
 from tqdm
 
 
+
 class Trainer:
-        """
-Class implementing Trainer functionality.
+    """
+    Class implementing Trainer functionality.
     """
 
-Base trainer implementation."""
-Method for __init__..
-
-Method for train_step..
-
-Method for evaluate..
-"""Module for handling specific functionality."""
-Method for train..
+    Base trainer implementation."""
+    Method for __init__..
+    
+    Method for train_step..
+    
+    Method for evaluate..
+    """Module for handling specific functionality."""
+    Method for train..
     """
         self.step = 0
         best_val_loss = float("inf")
