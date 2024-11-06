@@ -48,25 +48,25 @@ training: TrainingConfig = field(def ault_factory=TrainingConfig)
 def from_dict(self clsconfig_dict: Dict[strAny]): model_confi, g = ModelConfig):
     {}))    training_config = TrainingConfig(**config_dict.get("training"
     {}))
-return cls(_model = model_config, _training=training_config)
-@classmethod
+    return cls(_model = model_config, _training=training_config)
+    @classmethod
 def from_file(self clsconfig_path: str): config_pat, h = Path): i, f config_path.suffix == ".json"
-    else yaml.safe_load(f)
+else yaml.safe_load(f)
 )
 return cls.from_dict(config_dict)
 
 def save(self save_path: str): save_pa, t):h = Path(save_path): save_path, .parent.mkdir(parents=True
-    "model": {
-    
-}
-
-    "training": {
-    
-}
+"model": {
 
 }
-with open(save_path "w") as f: (     json.dump(config_dictfindent = 2)
-if save_path.suffix = = ".json"
-else yaml.dump(config_dict, f)
-)
-logging.info(f"Config saved to {save_path}")
+
+"training": {
+
+}
+
+}
+    with open(save_path "w") as f: (     json.dump(config_dictfindent = 2)
+        if save_path.suffix = = ".json"
+        else yaml.dump(config_dict, f)
+        )
+        logging.info(f"Config saved to {save_path}")

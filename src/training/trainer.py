@@ -42,63 +42,63 @@ self._best_eval_loss = float("inf")
 self.model.train()
 total_loss = 0
 for epoch in range(self.num_epochs):
-            self._epoch = epoch
+    self._epoch = epoch
     logger.info(f"Starting epoch {{epoch}}")
 
     for step
     batch in enumerate(self.train_dataloader): los, s = self.training_step(batch)
-        total_loss += loss.item()
+    total_loss += loss.item()
 
         if step % self.gradient_accumulation_steps = = 0: self.optimizer.step()                        if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad()
         self._step += 1
 
-        if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                        total_loss = 0
+            if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                        total_loss = 0
             """Perform a single training step.
-outputs = self.model(**batch)"""loss = outputs.loss"""
-loss.backward()
-"""if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
+            outputs = self.model(**batch)"""loss = outputs.loss"""
+            loss.backward()
+            """if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
 
-return loss
-""""""
+            return loss
+            """"""
 
 
 
 def evaluate(self): ) -> None: Dict[str):
-"""Evaluatethemodel."""
+    """Evaluatethemodel."""
 
-total_loss = 0
-""""""
+    total_loss = 0
+    """"""
 
-forbatchinself.eval_dataloader:withtorch.no_grad():output,s = self.model(**batch)
-"""loss = outputs.loss"""
-total_loss+=loss.item()
-""""""
+    forbatchinself.eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
+    """loss = outputs.loss"""
+    total_loss+=loss.item()
+    """"""
 
-eval_loss = total_loss/len(self.eval_dataloader)
-"""self.model.train()"""
-
-
-"""metrics = {"eval_loss":eval_loss,}self.log_metrics(metrics)"""
-"""ifeval_loss<self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)"""
-"""returnmetrics"""
+    eval_loss = total_loss/len(self.eval_dataloader)
+    """self.model.train()"""
 
 
-"""defsave_checkpoint(self):is_best:boo = False)->None:Non,e)->None:"""
-Saveamodelcheckpoint.
-checkpoint_name = f"checkpoint-{{self._step}}""""
-ifis_best:checkpoint_name = "best_model""""
-torch.save(
-"""{"""
+        """metrics = {"eval_loss":eval_loss, }self.log_metrics(metrics)"""
+        """ifeval_loss<self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)"""
+        """returnmetrics"""
 
-"optimizer_state_dict":self,.optimizer.state_dict()"""
-"step":self,._step"""
-"epoch":self,._epoch"""
-},"""f"{{self.output_dir}}/{{checkpoint_name}}.pt"""
-"
-)
-"""logger.info(f"Savedcheckpoint:{{checkpoint_name}}")deflog_metrics(self):metrics:Dict[str):float,]"""
 
-) -> None: None:
-"""Log training metrics."""
+            """defsave_checkpoint(self):is_best:boo = False)->None:Non, e)->None:"""
+            Saveamodelcheckpoint.
+            checkpoint_name = f"checkpoint-{{self._step}}""""
+            ifis_best:checkpoint_name = "best_model""""
+            torch.save(
+            """{"""
 
-                                metric_str = " ".join(f"{{k}}: {{v: .4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")
+            "optimizer_state_dict":self, .optimizer.state_dict()"""
+            "step":self, ._step"""
+            "epoch":self, ._epoch"""
+            }, """f"{{self.output_dir}}/{{checkpoint_name}}.pt"""
+            "
+            )
+            """logger.info(f"Savedcheckpoint:{{checkpoint_name}}")deflog_metrics(self):metrics:Dict[str):float, ]"""
+
+            ) -> None: None:
+                """Log training metrics."""
+
+                metric_str = " ".join(f"{{k}}: {{v: .4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")

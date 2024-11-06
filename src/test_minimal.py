@@ -18,7 +18,7 @@ params = load_params()
 test_input = "hi"
 print(f"Input: {test_input}")# Tokenize input
 input_tokens = [
-    word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
+word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
 ]
 input_array = jnp.array([input_tokens])
 # Generate response
@@ -29,4 +29,4 @@ response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
 print(f"Response: {response}")
 print("-" * 40)
 
-if __name__ == "__main__": main, ()
+    if __name__ == "__main__": main, ()

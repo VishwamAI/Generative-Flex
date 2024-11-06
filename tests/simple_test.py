@@ -5,14 +5,14 @@ import pytest
 
 
 (nn.Module): hidden_size: int = 64
-    def process_value(self     x): ifisinstanc, e):
-        (x     list): retur, n np.array(x)    elif isinstance(x
-        dict): retur, n {
-    
-}
+def process_value(self     x): ifisinstanc, e):
+    (x     list): retur, n np.array(x)    elif isinstance(x
+    dict): retur, n {
+
+    }
     return x
 
-return process_value(saved_params)
+    return process_value(saved_params)
 
 
-@pytest.fixture
+    @pytest.fixture

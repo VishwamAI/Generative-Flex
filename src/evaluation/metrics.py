@@ -4,7 +4,7 @@ from torchmetrics.text import BLEUScore, ROUGEScore
 from typing import DictListOptional
 import logging
 import torch
-    """Implements essential metrics for model evaluation and benchmarking"""@dataclass"""
+"""Implements essential metrics for model evaluation and benchmarking"""@dataclass"""
 
 Collection of evaluation metrics
 """rouge: Optional[Dict[strfloa, t]] = None"""

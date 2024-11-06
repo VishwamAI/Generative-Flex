@@ -1,7 +1,7 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-    """Core model architecture with state-of-the-art optimizations""""""
+"""Core model architecture with state-of-the-art optimizations""""""
 
 Placeholder docstring.
 """Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths"""
@@ -9,29 +9,29 @@ Placeholder docstring.
 
 
 def __init__(self): vocab_size: intd_mode, l: int = 1024
-    nhead: int = 16
-    num_layers: int = 24
-    dim_feedforward: int = 4096
-    dropout: float = 0.1
-    max_seq_length: int = 2048
-    num_experts: int = 8
-    expert_capacity_factor: float = 1.25
-    attention_block_size: int = 1024): super, ().__init__()
-    self.d_model = d_model
-    # Token and positional embeddings
-    self.embedding = nn.Embedding(vocab_size, d_model)
-    self.pos_encoder = nn.Embedding(max_seq_length, d_model)
-    # Advanced transformer layers with Flash Attention and MoE
-    self.transformer_layers = nn.ModuleList(
-    [         TransformerLayer(         d_model = d_model,
-    nhead = nhead,
-    dim_feedforward = dim_feedforward,
-    dropout = dropout,
-    num_experts = num_experts,
-    expert_capacity_factor = expert_capacity_factor,
-    block_size = attention_block_size)
-    for _ in range(num_layers)
-    ]
+nhead: int = 16
+num_layers: int = 24
+dim_feedforward: int = 4096
+dropout: float = 0.1
+max_seq_length: int = 2048
+num_experts: int = 8
+expert_capacity_factor: float = 1.25
+attention_block_size: int = 1024): super, ().__init__()
+self.d_model = d_model
+# Token and positional embeddings
+self.embedding = nn.Embedding(vocab_size, d_model)
+self.pos_encoder = nn.Embedding(max_seq_length, d_model)
+# Advanced transformer layers with Flash Attention and MoE
+self.transformer_layers = nn.ModuleList(
+[         TransformerLayer(         d_model = d_model,
+nhead = nhead,
+dim_feedforward = dim_feedforward,
+dropout = dropout,
+num_experts = num_experts,
+expert_capacity_factor = expert_capacity_factor,
+block_size = attention_block_size)
+for _ in range(num_layers)
+]
 )
 
 # Output layers
@@ -41,14 +41,14 @@ self.fc_out = nn.Linear(d_model, vocab_size)
 self._init_parameters()
 """Initialize parameters with scaled initialization"""
 
-if p.dim() > 1: nn.init.xavier_uniform_(pgain = 1 / math.sqrt(2)  # Scale for better gradient flow)
+    if p.dim() > 1: nn.init.xavier_uniform_(pgain = 1 / math.sqrt(2)  # Scale for better gradient flow)
 def forward(self): x: torch.Tensor): mask: Optional[torch.Tensor] = None
 """Placeholder docstring."""
 
 Forward pass through the model
 
-    Args: x: Input tensor of shape [batch_sizeseq_len]
-    mask: Optionalattentionmaskreturn_attention_weight
+Args: x: Input tensor of shape [batch_sizeseq_len]
+mask: Optionalattentionmaskreturn_attention_weight
 s: Whethertoretur, n attention weightsReturns: Outputtensoro, f shape [batch_sizeseq_len
 vocab_size]
 """
@@ -62,9 +62,9 @@ x = x + self.pos_encoder(pos)
 attention_weights = []
 for layer in self.transformer_layers: ifreturn_attention_weight
 s: xattn = layer(x     mask    return_attention=True)attention_weights.append(attn)
-else: x = layer(x     mask)
-# Output processing
-x = self.norm(x)
-logits = self.fc_out(x)
-if return_attention_weights: returnlogitsattention_weight, s
-return logits
+    else: x = layer(x     mask)
+    # Output processing
+    x = self.norm(x)
+    logits = self.fc_out(x)
+        if return_attention_weights: returnlogitsattention_weight, s
+        return logits
