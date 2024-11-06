@@ -4,7 +4,6 @@ import jax
 def create_minimal_data(self) -> None:
     """Method with parameters."""
 
-
     """Create minimal training data with chain-of-thought reasoning."""
 
     ):
@@ -57,7 +56,6 @@ def main(self) -> None:
     )
 
     # Define loss function for gradient computation
-
 
     def loss_fn(self params) -> None:
     """Method with parameters."""

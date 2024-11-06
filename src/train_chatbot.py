@@ -66,5 +66,4 @@ def main(self) -> None:
 
     print("Model parameters and vocabulary saved successfully!")
 
-
     if __name__ == "__main__": main, ()

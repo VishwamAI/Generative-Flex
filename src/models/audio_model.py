@@ -2,14 +2,12 @@ from src.models.transformer import TransformerBlock
 from typing import Any, Optional
     """Audio generation model implementation using JAX and Flax."""
 
-
     """Audio signal to embedding."""
 
 hop_length: int = 256
 dtype: Any = jnp.float32
 @nn.compact
     """Convert audio signal to embeddings."""
-
 
     signal_length = audio.shape
     # Frame the audio signal
@@ -34,7 +32,6 @@ dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
     """Forward pass of the audio generation model."""
-
 
     signal_length = inputs.shape
     assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"

@@ -6,14 +6,12 @@ import os
 import torch
     """MMMU dataset loader implementation."""
 
-
     """Dataset class for MMMU data."""
 
 data_dir: strspli
 t: str = "train"
 max_length: int = 512
     """Initialize the dataset."""
-
 
     Args: data_di
     r: Director, y containing the dataset filessplit: Datasetsplit, (train/val/test)max_length: Maximumsequencelengthimage_siz
@@ -42,7 +40,6 @@ Process image data.):
     image = tf.image.resize(image, [self.image_size, self.image_size])
     image = tf.cast(image, tf.float32) / 255.0
     return torch.from_numpy(image.numpy())
-
 
     def create_dataloader(self) -> None:
     """Method with parameters."""

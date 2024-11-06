@@ -5,7 +5,6 @@ import logging
 import torch
     """Accelerated trainer implementation."""
 
-
     logger = logging.getLogger(__name__)
     """Placeholder docstring."""
 
@@ -42,7 +41,6 @@ self._epoch = 0
 Train the model.) -> None:
     """"""
 
-
     self.model.train()
     total_loss = 0
     for epoch in range(self.num_epochs):
@@ -74,8 +72,6 @@ self.model.train()
 
     metrics = {"eval_loss": eval_loss, }                                    self.log_metrics(metrics)
     """"""
-
-
 
     if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss                                    self.save_checkpoint(is_best=True)
     """"""

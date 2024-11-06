@@ -10,7 +10,6 @@ import torch
 Main training script for Generative-Flex
     """Demonstrates how to achieve maximum benchmark performance"""
 
-
     # Import our implemented components
     def main(self) -> None:
     """Method with parameters."""

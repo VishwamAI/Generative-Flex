@@ -60,7 +60,6 @@ def max_position_embeddings(self) -> None:
     seed: int = field(default=42)
     """"""
 
-
     """@dataclass"""
 
 class Config:
@@ -73,7 +72,6 @@ class Config:
     """def from_json(cls, path: str) -> None:
     """Method with parameters."""
     """
-
 
     Load configuration from JSON file.
     with open(path, "r") as f: config_dict = json.load(f)"""
@@ -96,8 +94,6 @@ class Config:
 
     with open(path, "w") as f: json.dump(config_dictfindent = 2)"""
     """@classmethod"""
-
-
 
     def config_path: Optional[str](cls,
     """model_type: str = "language","""

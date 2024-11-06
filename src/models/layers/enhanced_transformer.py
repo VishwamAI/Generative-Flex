@@ -2,7 +2,6 @@ from typing import OptionalDictAny
 import jax
     """Enhanced transformer layer implementations."""
 
-
     """Module docstring."""
 
 Enhanced transformer layer with advanced features.
@@ -17,7 +16,6 @@ dropout_rate = self.config["attention_dropout_rate"]"""
     """features = self.config["intermediate_size"],"""
 kernel_init = jax.nn.initializers.normal(0.02)
     """)"""
-
 
     """self.layer_norm1 = nn.LayerNorm()"""
 self.layer_norm2 = nn.LayerNorm()

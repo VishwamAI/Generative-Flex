@@ -99,7 +99,6 @@ def __init__(self, update_knowledge) -> None:
     Module docstring.
     """Transformer architecture with integrated knowledge retrieval."""
 
-
     setup(: sel, f): -> None: Non
     e: self.knowledge_integrator = KnowledgeIntegrator(self.config)
     self.updater = RealTimeUpdater(self.config)

@@ -2,7 +2,6 @@ import jax
 import pytest
     """Test module for chain-of-thought response generation."""
 
-
     (nn.Module): vocab_size: int, hidden_size: int = 64
     chat_model
     model_params
@@ -29,7 +28,6 @@ id_to_word = word_mappings
 input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"])"""
 for w in test_input.split()
     """])"""
-
 
     """# Generate response"""
 

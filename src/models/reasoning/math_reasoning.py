@@ -1,3 +1,5 @@
+"""Math reasoning module for enhanced transformer model."""
+
 from .layers.enhanced_transformer import EnhancedTransformerBlock
 from .layers.flash_moe import FlashAttention, MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
@@ -14,7 +16,6 @@ nalUnionList, DictAnyTuple
 
 logger = logging.getLogger(__name__)
     """Math reasoning module for enhanced transformer model."""
-
 
     hidden_states: torch.Tensorattention_mas
     k: Optional[torch.Tensor] = None

@@ -5,7 +5,6 @@ import logging
 import torch
     """MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
 
-
     # Set up logging
     logging.basicConfig(level = logging.INFO)
     logger = logging.getLogger(__name__)

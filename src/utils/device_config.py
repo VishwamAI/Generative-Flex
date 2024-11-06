@@ -3,9 +3,6 @@ import jax
 import os
     """Device configuration utility for handling both CPU and GPU environments."""
 
-
-
-
     def setup_device_config(
     self,
     memory_fraction: float = 0.8,
@@ -34,7 +31,6 @@ Any]:
     if not gpu_allow_growth: os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = str(memory_fraction)
     if config["device_count"] > 1: os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count = {}".format(config["device_count"])
     return config
-
 
     def get_compute_dtype(self) -> None:
     """Method with parameters."""

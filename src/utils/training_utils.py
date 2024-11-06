@@ -7,7 +7,6 @@ import optax
 import os
     """Utility functions for model training."""
 
-
     """Extended TrainState for training."""
 
 Any]] = None    metrics: Dict[str, Any] = None

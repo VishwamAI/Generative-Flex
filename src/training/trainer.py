@@ -4,7 +4,6 @@ import logging
 import torch
     """Base trainer implementation."""
 
-
     logger = logging.getLogger(__name__)
     """Base trainer class."""
 
@@ -18,7 +17,6 @@ logging_steps: int = 100
 evaluation_steps: int = 500
 save_steps: int = 1000
     """Initialize the trainer."""
-
 
     self.model = model
     self.train_dataloader = train_dataloader
@@ -78,7 +76,6 @@ def evaluate(self) -> None:
 """metrics = {"eval_loss":eval_loss, }self.log_metrics(metrics)"""
 """ifeval_loss<self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)"""
     """returnmetrics"""
-
 
     """defsave_checkpoint(self):is_best:boo = False) -> None:Non, e) -> None:"""
     Saveamodelcheckpoint.

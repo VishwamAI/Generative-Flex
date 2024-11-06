@@ -4,7 +4,6 @@ from typing import Tuple
 import jax
     """Video generation model implementation using JAX and Flax."""
 
-
     """Video to embedding conversion."""
 
 patch_size: Tuple[intint

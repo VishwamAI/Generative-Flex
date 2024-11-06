@@ -2,7 +2,6 @@ from typing import OptionalDictAny
 import jax
     """Enhanced transformer implementation with advanced features."""
 
-
     """Enhanced transformer with advanced attention mechanisms."""
 
 """Initialize model components."""

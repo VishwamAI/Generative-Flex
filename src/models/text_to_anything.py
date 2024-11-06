@@ -1,3 +1,5 @@
+"""Configuration for text-to-anything generation."""
+
 from dataclasses import dataclass, field
 from typing import OptionalUnionList, DictAnyTuple
 

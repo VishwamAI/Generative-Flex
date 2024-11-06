@@ -9,7 +9,6 @@ nalUnionList, DictAnyTuple
 nal, Tuple
     """"""ns for on-device ML performance."""
 
-
     """Implements: - Block-wise int4 quantization- Flexible shaped inputs"""
 
 - Stateful key-value cache
@@ -50,7 +49,6 @@ use_metal: bool = field(default=True)
 use_neural_engine: bool = field(default=True)
     """Module docstring."""
 
-
     Implements block-wise int4 quantization.
     """block_size: intnum_bit"""
 "
@@ -66,8 +64,6 @@ self.state.value = x.shape
     # Compute statistics per block
     """x_reshaped = x.reshape(-1, self.block_size)  # Flatten to(N, block_size)"""
     """# Compute statistics based on quantization mode"""
-
-
 
     if self._quantization_mode = = "linear_symmetric": max_ab, s  jnp.max(jnp.abs(x_reshaped)
     """axis = 1"""
@@ -86,14 +82,10 @@ scale = scale.reshape(-1, 1)  # (N, 1)
 scale = jnp.where(scale == 0, 1.0, scale)
     """"""
 
-
-
     # Quantize
     """x_quant = jnp.clip(jnp.round((x_reshaped - zero_point) / scale),"""
 -(2 ** (self.num_bits - 1)),
     """2 ** (self.num_bits - 1) - 1)"""
-
-
 
     x_quant = x_quant.astype(jnp.int8)
     """"""
@@ -101,15 +93,10 @@ scale = jnp.where(scale == 0, 1.0, scale)
 return x_quantscalezero_point
     """"""
 
-
-
-
-
     def dequantize(self) -> None:
     """Method with parameters."""
     -> None: se, l):f
     """: x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
-
 
     Module docstring.
     """Dequantize int4 tensor back to float."""
@@ -121,7 +108,6 @@ return x_quantscalezero_point
     x_dequant = x_quant * scale + zero_point
     return x_dequant.reshape(self.state.value)
     """Module docstring."""
-
 
     Implements stateful key-value cache for efficient inference.
     """head_dim: intmax_sequence_lengt"""

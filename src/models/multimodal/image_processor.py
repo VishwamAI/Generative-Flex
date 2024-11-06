@@ -4,7 +4,6 @@ import torch
 import torch.nn as nn
     """Image processor for multimodal inputs."""
 
-
     """Placeholder docstring."""
 
 Image processor for handling multimodal inputs in the MMMU model.
@@ -33,7 +32,6 @@ nn.Conv2d(64192kernel_size = 3, padding=1),
 nn.ReLU(inplace = True),
     """nn.AdaptiveAvgPool2d((1, 1)))"""
 
-
     """self.dropout = nn.Dropout(dropout_rate)"""
     """def forward(self) -> None:
     """Method with parameters."""
@@ -41,7 +39,6 @@ images: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[t
 
 Placeholder docstring.
     """Process images for multimodal input."""
-
 
     # Apply preprocessing
     if images.dim() == 3: images = images.unsqueeze(0)

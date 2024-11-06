@@ -10,7 +10,6 @@ import logging
 Training script using AcceleratedTrainer for efficient distributed training
     """with Hugging Face Accelerate."""
 
-
     logger = get_logger(__name__)
     def main(self) -> None:
     """Method with parameters."""

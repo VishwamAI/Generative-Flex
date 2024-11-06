@@ -4,7 +4,6 @@ from typing import Tuple
 import jax
     """Image generation model implementation using JAX and Flax."""
 
-
     """Placeholder docstring."""
 
 Image to patch embedding.

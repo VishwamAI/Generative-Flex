@@ -7,7 +7,6 @@ import sys
 import time
     """Environment setup and verification script."""
 
-
     # Set up device configuration
     __device_config = setup_device_config()
     def test_flax_installation() -> None:
@@ -16,7 +15,6 @@ import time
     @nn.compact
 def main(self) -> None:
     """Method with parameters."""
-
 
     """Run all environment tests."""
 

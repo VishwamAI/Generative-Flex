@@ -3,13 +3,11 @@ from typing import Any
 import jax
     """Language model implementation using JAX and Flax."""
 
-
     """Sinusoidal positional encoding."""
 
 dtype: Any = jnp.float32
 @nn.compact
     """Add positional encodings to the input embeddings."""
-
 
     seq_length = inputs.shape[1]
     dim = inputs.shape[-1]
@@ -22,7 +20,6 @@ dtype: Any = jnp.float32
     : 1, : : 2, ].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
     pe = jnp.broadcast_to(pe, (batch_sizeseq_lengthdim))
     return inputs + pe
-
 
     """Autoregressive language model based on the transformer architecture."""
 
