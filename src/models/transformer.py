@@ -4,46 +4,46 @@ from dataclasses import dataclass
 from typing import Optional
 @dataclass
 class TransformerConfig:
-    """
+"""
 Configuration for Transformer model..
 """
 
-    hidden_size: int = 768
-    num_attention_heads: int = 12
-    num_hidden_layers: int = 12
-    intermediate_size: int = 3072
-    hidden_dropout_prob: float = 0.1
-    attention_probs_dropout_prob: float = 0.1
+hidden_size: int = 768
+num_attention_heads: int = 12
+num_hidden_layers: int = 12
+intermediate_size: int = 3072
+hidden_dropout_prob: float = 0.1
+attention_probs_dropout_prob: float = 0.1
 
-class Transformer(nn.Module):
-    """
+class Transformer:
+"""
 Transformer model implementation..
 """
 
     def __init__(self, config: Optional[TransformerConfig] = None):
-        super().__init__()
-        self.config = config or TransformerConfig()
+    super().__init__()
+    self.config = config or TransformerConfig()
 
-        self.encoder = nn.TransformerEncoder(
-            nn.TransformerEncoderLayer(
-                d_model=self.config.hidden_size,
-                nhead=self.config.num_attention_heads,
-                dim_feedforward=self.config.intermediate_size,
-                dropout=self.config.hidden_dropout_prob,
-                activation='gelu'
-            ),
-            num_layers=self.config.num_hidden_layers
-        )
+    self.encoder = nn.TransformerEncoder(
+    nn.TransformerEncoderLayer(
+    d_model=self.config.hidden_size,
+    nhead=self.config.num_attention_heads,
+    dim_feedforward=self.config.intermediate_size,
+    dropout=self.config.hidden_dropout_prob,
+    activation='gelu'
+    ),
+    num_layers=self.config.num_hidden_layers
+    )
 
-    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None) -> torch.Tensor:
-        """
-Forward pass through the transformer.
+    def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None):
+    """
+    Forward pass through the transformer.
 
-        Args:
-            x: Input tensor
-            mask: Optional attention mask
+    Args:
+    x: Input tensor
+    mask: Optional attention mask
 
-        Returns:
-            Output tensor
-"""
-        return self.encoder(x, mask=mask)
+    Returns:
+    Output tensor
+    """
+    return self.encoder(x, mask=mask)

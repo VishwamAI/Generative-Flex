@@ -1,4 +1,18 @@
-"""Trainer class for model training and evaluation."""
+import re
+import os
+
+def fix_trainer():
+    """Fix trainer.py syntax issues."""
+    file_path = "src/training/trainer.py"
+    if not os.path.exists(file_path):
+        print(f"File {file_path} not found!")
+        return
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    # Fix the specific parsing error at line 72:73
+    fixed_content = '''"""Trainer class for model training and evaluation."""
 from typing import Dict, Optional, Any, Union
 import torch
 from torch.utils.data import DataLoader
@@ -137,3 +151,89 @@ class Trainer:
             "train_loss": epoch_loss / num_batches,
             "val_loss": val_metrics.get("val_loss", None)
         }
+'''
+
+    with open(file_path, 'w') as f:
+        f.write(fixed_content)
+
+def fix_failing_files():
+    """Process files that are failing to reformat."""
+    failing_files = [
+        "src/training/trainer.py",
+        "src/models/text_to_anything.py",
+        "src/models/transformer.py",
+        "src/models/video_model.py",
+        "src/test_inference.py",
+        "src/test_minimal.py",
+        "src/test_simple.py",
+        "src/test_simple_cot.py",
+        "src/tests/test_models.py",
+        "src/train.py",
+        "src/train_chatbot.py",
+        "src/train_accelerated.py",
+        "src/train_cot_simple.py",
+        "src/train_cot_fixed.py",
+        "src/train_minimal.py",
+        "src/train_minimal_cot.py",
+        "src/train_seq2seq_cot.py",
+        "src/train_simple_cot.py",
+        "src/training/jax_trainer.py",
+        "src/training/accelerated_trainer.py",
+        "src/training/train_mmmu.py",
+        "src/training/utils/timeout.py",
+        "src/training/utils/logging.py"
+    ]
+
+    # First fix trainer.py specifically
+    fix_trainer()
+
+    # Then process other failing files
+    for file_path in failing_files:
+        if file_path == "src/training/trainer.py":
+            continue  # Already handled
+
+        if os.path.exists(file_path):
+            print(f"Processing {file_path}...")
+            with open(file_path, 'r') as f:
+                content = f.read()
+
+            # Fix imports
+            content = re.sub(
+                r'from\s+(\w+)\s+import\s*\*',
+                r'from \1 import (',
+                content
+            )
+
+            # Fix method definitions
+            content = re.sub(
+                r'def\s+(\w+)\s*\((.*?)\)\s*(?:->.*?)?\s*:',
+                lambda m: f'def {m.group(1)}({", ".join(arg.strip() for arg in m.group(2).split(",") if arg.strip())}):'
+                if m.group(2).strip() else f'def {m.group(1)}():',
+                content
+            )
+
+            # Fix class definitions
+            content = re.sub(
+                r'class\s+(\w+)\s*(?:\([^)]*\))?\s*:',
+                lambda m: f'class {m.group(1)}:',
+                content
+            )
+
+            # Fix indentation
+            lines = content.split('\n')
+            fixed_lines = []
+            indent_level = 0
+            for line in lines:
+                stripped = line.lstrip()
+                if stripped.startswith(('class ', 'def ')):
+                    indent_level = len(line) - len(stripped)
+                elif stripped and not line.isspace():
+                    line = ' ' * indent_level + stripped
+                fixed_lines.append(line)
+            content = '\n'.join(fixed_lines)
+
+            with open(file_path, 'w') as f:
+                f.write(content)
+
+if __name__ == "__main__":
+    fix_failing_files()
