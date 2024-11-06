@@ -1,6 +1,8 @@
+import unittest
+
 import numpy as np
 import torch
-import unittest
+
 
 
 
@@ -9,17 +11,17 @@ import unittest
 
 class TestTestConfig:
     """
-    
-
-        Test suite for module functionality.
-
-    
+    Test suite for module functionality.
     """
 
     def setUp(self):
+
+
         """
 
-            Set up test fixtures.
+
+        Set up test fixtures.
+
 
         """
         pass
@@ -27,9 +29,19 @@ class TestTestConfig:
 
 
     def test_test_math_config(self):
+
+
+
+
         """
 
-            Test test math config.
+
+
+
+        Test test math config.
+
+
+
 
         """
         config = MathConfig()

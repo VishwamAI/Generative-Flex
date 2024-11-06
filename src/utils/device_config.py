@@ -6,17 +6,14 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 from typing import Optional
 import logging
 import os
+
 from torch.utils.data import DataLoader, Dataset
 import numpy as np
 import torch
 
+
 """
-
-
-    \1
-
-
-
+\1
 """
 
 Class implementing import functionality.
@@ -33,40 +30,10 @@ Class implementing import functionality.
 
 
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-    \1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\1
 """
 """
-
-    \1
-
-
+\1
 """
 Module containing specific functionality.
 Manage device configuration and placement...
@@ -83,8 +50,5 @@ tensor: Input tensor
 Returns:
 Tensor on configured device
 """
-
-    \1
-
-
+\1
 """

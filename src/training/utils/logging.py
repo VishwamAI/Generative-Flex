@@ -1,20 +1,7 @@
 from dataclasses import dataclass from:
+
     """
-    
-
-
-        
-    
-
-        
-Class implementing class functionality.
-    
-
-    
-    
-
-
-    
+    Class implementing class functionality.
     """
 Module containing training-related implementations.
 Logger for training metrics and events..

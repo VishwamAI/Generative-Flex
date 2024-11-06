@@ -1,6 +1,8 @@
+import unittest
+
 import numpy as np
 import torch
-import unittest
+
 
 
 
@@ -9,17 +11,17 @@ import unittest
 
 class TestEnvironment:
     """
-    
-
-        Test suite for module functionality.
-
-    
+    Test suite for module functionality.
     """
 
     def setUp(self):
+
+
         """
 
-            Set up test fixtures.
+
+        Set up test fixtures.
+
 
         """
         pass
@@ -27,9 +29,19 @@ class TestEnvironment:
 
 
     def test_test_cuda_availability(self):
+
+
+
+
         """
 
-            Test test cuda availability.
+
+
+
+        Test test cuda availability.
+
+
+
 
         """
         if torch.cuda.is_available():

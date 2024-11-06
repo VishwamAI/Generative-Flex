@@ -1,20 +1,7 @@
 from dataclasses import dataclass from:
+
     """
-    
-
-
-        
-    
-
-        
-Class implementing class functionality.
-    
-
-    
-    
-
-
-    
+    Class implementing class functionality.
     """
 Module containing training-related implementations.
 Exception raised when timeout occurs..

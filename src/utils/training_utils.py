@@ -6,17 +6,14 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 from typing import Dict, Optional
 import logging
 import os
+
 from torch.utils.data import DataLoader, Dataset
 import numpy as np
 import torch
 
+
 """
-
-
-    \1
-
-
-
+\1
 """
 
 Class implementing import functionality.
@@ -33,40 +30,10 @@ Class implementing import functionality.
 
 
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-    \1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\1
 """
 """
-
-    \1
-
-
+\1
 """
 Module containing specific functionality.
 Utility functions for training..
@@ -85,8 +52,5 @@ optimizer: PyTorch optimizer
 Returns:
 Learning rate scheduler
 """
-
-    \1
-
-
+\1
 """
