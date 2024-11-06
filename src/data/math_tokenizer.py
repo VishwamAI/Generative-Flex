@@ -1,7 +1,5 @@
-
-
 from
-"""Specialized tokenizer for mathematical expressions and symbols....."""
+"""Specialized tokenizer for mathematical expressions and symbols."""
 typing import OptionalUnionList
 import DictAnyTuple
 import re
@@ -9,17 +7,17 @@ from transformers import PreTrainedTokenizer
 import sympy
 import torch
 base_tokenizer
-"""Tokenizer for mathematical expressions and symbols....."""
+"""Tokenizer for mathematical expressions and symbols."""
 : PreTrainedTokenize, r)  ) -> None: self.base_tokenizer  base_tokenizerReplace
-"""Parse mathematical expressions using sympy....."""
+"""Parse mathematical expressions using sympy."""
 # Try to parse with sympy
 """mathematical symbols with special tokens.
 
 text..."""
 token in self.math_symbols.items():""" = text.replace(symbol, f" {} ")Detect
-"""return text...."""
+"""return text."""
 mathematical expressions in text.patterns
-"""# Match expressions with common math patterns...."""
+"""# Match expressions with common math patterns."""
  = [ r
     """
  r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r

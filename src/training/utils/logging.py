@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from typing import Dict, Optional
 @dataclass
 class LoggerConfig:
-"""
-Configuration for training logger..
+
+    """Configuration for training logger..
 """
 
 log_file: str = "training.log"
@@ -20,19 +20,16 @@ Logger for training metrics and events..
 """
 
     def __init__(self, config: Optional[LoggerConfig] = None):
-    """
-Initialize training logger.
 
-    Args:
-    config: Optional logger configuration
-"""
+
+        """Method for __init__."""
     self.config = config or LoggerConfig()
     self._setup_logger()
 
     def _setup_logger(self):
-    """
-Set up logging configuration..
-"""
+
+
+        """Method for _setup_logger."""
     self.logger = logging.getLogger("training")
     self.logger.setLevel(logging.DEBUG)
 
@@ -47,25 +44,17 @@ Set up logging configuration..
     self.logger.addHandler(file_handler)
 
     def log_metrics(self, metrics: Dict):
-    """
-Log training metrics.
 
-    Args:
-    metrics: Dictionary of metrics to log
-"""
+
+        """Method for log_metrics."""
     for name, value in metrics.items():
 
 
-        """Method for __init__."""
-    self.logger.info(f"{name}: {value}")
+        """Method for __init__."""self.logger.info(f"{name}: {value}")
 
     def log_event(self, event: str, level: str = "INFO"):
-    """
-Log training event.
 
-    Args:
-    event: Event description
-    level: Logging level
-"""
+
+        """Method for log_event."""
     log_fn = getattr(self.logger, level.lower())
     log_fn(event)

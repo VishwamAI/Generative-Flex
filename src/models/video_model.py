@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from typing import List, Optional, Tuple
 @dataclass
 class VideoModelConfig:
-"""
-Configuration for VideoModel.
+
+    """Configuration for VideoModel.
 """
 
 input_channels: int = 3
@@ -21,8 +21,7 @@ Video processing model.
     def __init__(self, config: Optional[VideoModelConfig] = None):
 
 
-        """Method for __init__."""
-    super().__init__()
+        """Method for __init__."""super().__init__()
     self.config = config or VideoModelConfig()
 
     self.spatial_encoder = nn.Sequential(
@@ -43,15 +42,9 @@ Video processing model.
     )
 
     def forward(self, x: torch.Tensor):
-    """
-Process video input.
 
-    Args:
-    x: Input video tensor [batch, time, channels, height, width]
 
-    Returns:
-    Processed video features
-"""
+        """Method for forward."""
     # Spatial encoding
     x = self.spatial_encoder(x.transpose(1, 2))
 

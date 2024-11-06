@@ -10,8 +10,8 @@ from typing import Dict, List, Optional, Tuple
 logger = logging.getLogger(__name__)
 @dataclass
 class AcceleratedTrainerConfig:
-"""
-Configuration for accelerated trainer..
+
+    """Configuration for accelerated trainer..
 """
 
 learning_rate: float = 5e-5
@@ -29,12 +29,9 @@ Accelerated trainer class..
 """
 
     def __init__(self, config: Optional[AcceleratedTrainerConfig] = None):
-    """
-Initialize accelerated trainer.
 
-    Args:
-    config: Optional trainer configuration
-"""
+
+        """Method for __init__."""
     self.config = config or AcceleratedTrainerConfig()
     self.accelerator = Accelerator(
     mixed_precision=self.config.mixed_precision, gradient_accumulation_steps=self.config.gradient_accumulation_steps
@@ -42,9 +39,9 @@ Initialize accelerated trainer.
     self.setup_training()
 
     def setup_training(self):
-    """
-Set up training components..
-"""
+
+
+        """Method for setup_training."""
     logger.info("Setting up accelerated training...")
     self.optimizer = None
     self.scheduler = None
@@ -52,16 +49,15 @@ Set up training components..
     self.train_dataloader = None
 
     def train(self):
-    """
-Run training loop..
-"""
+
+
+        """Method for train."""
     if not all([
     self.model, self.optimizer, self.train_dataloader
     ]):
 
 
-        """Method for __init__."""
-    raise ValueError(
+        """Method for __init__."""raise ValueError(
     "Model, optimizer, and dataloader must be set before training"
     )
 

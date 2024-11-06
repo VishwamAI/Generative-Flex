@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from typing import Optional
 @dataclass
 class TransformerConfig:
-"""
-Configuration for Transformer model.
+
+    """Configuration for Transformer model.
 """
 
 hidden_size: int = 768
@@ -23,8 +23,7 @@ Transformer model implementation.
     def __init__(self, config: Optional[TransformerConfig] = None):
 
 
-        """Method for __init__."""
-    super().__init__()
+        """Method for __init__."""super().__init__()
     self.config = config or TransformerConfig()
 
     self.encoder = nn.TransformerEncoder(
@@ -39,14 +38,7 @@ Transformer model implementation.
     )
 
     def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None):
-    """
-Forward pass through the transformer.
 
-    Args:
-    x: Input tensor
-    mask: Optional attention mask
 
-    Returns:
-    Output tensor
-"""
+        """Method for forward."""
     return self.encoder(x, mask=mask)

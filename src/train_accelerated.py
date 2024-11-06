@@ -12,7 +12,8 @@ from src.utils.training_utils import TrainingUtils
 
 @dataclass
 class AcceleratedConfig:
-"""
+
+    """Class for AcceleratedConfig.""""""
 Configuration for accelerated training.
 """
 
@@ -23,9 +24,9 @@ num_gpus: int = torch.cuda.device_count()
 mixed_precision: bool = True
 
 def main():
-"""
-Run accelerated training.
-"""
+
+
+    """Method for main."""
 config = AcceleratedConfig()
 model = SimpleModel()
 trainer = AcceleratedTrainer(model, config)

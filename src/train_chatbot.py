@@ -11,7 +11,8 @@ from src.training.trainer import Trainer
 
 @dataclass
 class ChatbotConfig:
-"""
+
+    """Class for ChatbotConfig.""""""
 Configuration for chatbot training.
 """
 
@@ -22,9 +23,9 @@ max_length: int = 512
 file_path: str = "data/chatbot/training_data_cot.json"
 
 def main():
-"""
-Run chatbot training.
-"""
+
+
+    """Method for main."""
 config = ChatbotConfig()
 model = ChatbotModel()
 trainer = Trainer(model, config)

@@ -7,7 +7,8 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 @dataclass
 class MathHeadConfig:
-    """
+
+    """Class for MathHeadConfig.""""""
 Configuration for mathematical reasoning head..
 """
 
@@ -17,26 +18,25 @@ Configuration for mathematical reasoning head..
     dropout: float = 0.1
     num_experts: int = 4
 
-class MathHead(nn.Module):
-    """
+class MathHead:
+
+
+    """Class for MathHead.""""""
 Mathematical reasoning head module..
 """
 
     def __init__(self, config: Optional[MathHeadConfig] = None):
-        """
-Initialize math head.
 
-        Args:
-            config: Optional head configuration
-"""
+
+        """Method for __init__."""
         super().__init__()
         self.config = config or MathHeadConfig()
         self.setup_layers()
 
     def setup_layers(self):
-        """
-Set up neural network layers..
-"""
+
+
+        """Method for setup_layers."""
         self.attention = nn.MultiheadAttention(
             embed_dim=self.config.hidden_size,
             num_heads=self.config.num_attention_heads,
@@ -53,20 +53,10 @@ Set up neural network layers..
         self.layer_norm2 = nn.LayerNorm(self.config.hidden_size)
         self.dropout = nn.Dropout(self.config.dropout)
 
-    def forward(
-        self,
-        hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
-        """
-Process input through math head.
+    def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
-        Args:
-            hidden_states: Input hidden states
-            attention_mask: Optional attention mask
 
-        Returns:
-            Dictionary containing processed hidden states
-"""
+        """Method for forward."""
         # Self-attention
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)

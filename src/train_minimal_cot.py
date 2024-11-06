@@ -11,7 +11,8 @@ from src.training.trainer import Trainer
 
 @dataclass
 class MinimalCotConfig:
-"""
+
+    """Class for MinimalCotConfig.""""""
 Configuration for minimal chain-of-thought training.
 """
 
@@ -22,9 +23,9 @@ num_epochs: int = 5
 max_length: int = 512
 
 def main():
-"""
-Run minimal chain-of-thought training.
-"""
+
+
+    """Method for main."""
 config = MinimalCotConfig()
 model = MinimalChainOfThoughtModel(config.hidden_size)
 trainer = Trainer(model, config)

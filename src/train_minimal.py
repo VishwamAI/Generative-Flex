@@ -11,7 +11,8 @@ from src.training.trainer import Trainer
 
 @dataclass
 class MinimalConfig:
-"""
+
+    """Class for MinimalConfig.""""""
 Configuration for minimal model training.
 """
 
@@ -21,9 +22,9 @@ learning_rate: float = 1e-4
 num_epochs: int = 5
 
 def main():
-"""
-Run minimal model training.
-"""
+
+
+    """Method for main."""
 config = MinimalConfig()
 model = MinimalModel(config.hidden_size)
 trainer = Trainer(model, config)

@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from typing import Optional, Callable
 @dataclass
 class TimeoutConfig:
-"""
-Configuration for timeout handler..
+
+    """Configuration for timeout handler..
 """
 
 timeout_seconds: int = 3600
@@ -25,23 +25,18 @@ Handler for training timeouts..
 """
 
     def __init__(self, config: Optional[TimeoutConfig] = None):
-    """
-Initialize timeout handler.
-
-    Args:
-    config: Optional timeout configuration
-"""
-    self.config = config or TimeoutConfig()
-
-    def __enter__(self):
-    """
-Set up timeout handler..
-"""
-        def handler(signum, frame):
 
 
         """Method for __init__."""
-        if self.config.callback:
+    self.config = config or TimeoutConfig()
+
+    def __enter__(self):
+
+
+        """Method for __enter__."""
+        def handler(signum, frame):
+
+            """Method for handler."""if self.config.callback:
         self.config.callback()
         raise TimeoutError("Training timed out")
 
@@ -49,7 +44,7 @@ Set up timeout handler..
         signal.alarm(self.config.timeout_seconds)
 
     def __exit__(self, type, value, traceback):
-    """
-Clean up timeout handler..
-"""
+
+
+        """Method for __exit__."""
     signal.alarm(0)

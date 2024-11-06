@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from typing import List, Optional, Dict
 @dataclass
 class GenerationConfig:
-"""
-Configuration for text-to-anything generation.
+
+    """Configuration for text-to-anything generation.
 """
 
 max_length: int = 1024
@@ -27,23 +27,11 @@ Text-to-anything generation model.
     def __init__(self, config: Optional[GenerationConfig] = None):
 
 
-        """Method for __init__."""
-    self.config = config or GenerationConfig()
+        """Method for __init__."""self.config = config or GenerationConfig()
 
-    def generate(self,
-    text: str,
-    target_modality: str,
-    **kwargs: Dict):
-    """
-Generate content in target modality from input text.
+    def generate(self, text: str, target_modality: str, **kwargs: Dict):
 
-    Args:
-    text: Input text to convert
-    target_modality: Target modality (image/video/audio)
-    **kwargs: Additional generation parameters
 
-    Returns:
-    List of generated outputs
-"""
+        """Method for generate."""
     # Implementation details
     return []

@@ -12,7 +12,8 @@ from src.utils.training_utils import TrainingUtils
 
 @dataclass
 class TrainingConfig:
-"""
+
+    """Class for TrainingConfig.""""""
 Training configuration.
 """
 
@@ -22,9 +23,9 @@ num_epochs: int = 10
 device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
 def main():
-"""
-Run main training loop.
-"""
+
+
+    """Method for main."""
 config = TrainingConfig()
 model = SimpleModel().to(config.device)
 trainer = Trainer(model, config)

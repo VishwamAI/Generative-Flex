@@ -11,7 +11,8 @@ from src.training.trainer import Trainer
 
 @dataclass
 class CotConfig:
-"""
+
+    """Class for CotConfig.""""""
 Configuration for chain-of-thought training.
 """
 
@@ -22,9 +23,9 @@ max_length: int = 1024
 prompt_template: str = "Let's solve this step by step:"
 
 def main():
-"""
-Run chain-of-thought training.
-"""
+
+
+    """Method for main."""
 config = CotConfig()
 model = ChainOfThoughtModel()
 trainer = Trainer(model, config)

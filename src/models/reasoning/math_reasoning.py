@@ -7,7 +7,8 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 @dataclass
 class MathReasoningConfig:
-    """
+
+    """Class for MathReasoningConfig.""""""
 Configuration for mathematical reasoning..
 """
 
@@ -18,18 +19,17 @@ Configuration for mathematical reasoning..
     expert_hidden_size: int = 1024
     dropout_prob: float = 0.1
 
-class MathReasoning(nn.Module):
-    """
+class MathReasoning:
+
+
+    """Class for MathReasoning.""""""
 Mathematical reasoning module..
 """
 
     def __init__(self, config: Optional[MathReasoningConfig] = None):
-        """
-Initialize mathematical reasoning module.
 
-        Args:
-            config: Optional configuration
-"""
+
+        """Method for __init__."""
         super().__init__()
         self.config = config or MathReasoningConfig()
 
@@ -46,20 +46,10 @@ Initialize mathematical reasoning module.
         self.router = nn.Linear(self.config.hidden_size, self.config.num_experts)
         self.dropout = nn.Dropout(self.config.dropout_prob)
 
-    def forward(
-        self,
-        hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
-        """
-Forward pass through mathematical reasoning module.
+    def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
-        Args:
-            hidden_states: Input hidden states
-            attention_mask: Optional attention mask
 
-        Returns:
-            Dictionary containing output tensors
-"""
+        """Method for forward."""
         # Route input to experts
         router_logits = self.router(hidden_states)
         routing_weights = torch.softmax(router_logits, dim=-1)

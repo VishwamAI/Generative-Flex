@@ -11,7 +11,8 @@ from src.training.trainer import Trainer
 
 @dataclass
 class Seq2SeqCotConfig:
-"""
+
+    """Class for Seq2SeqCotConfig.""""""
 Configuration for sequence-to-sequence chain-of-thought training.
 """
 
@@ -23,9 +24,9 @@ encoder_layers: int = 6
 decoder_layers: int = 6
 
 def main():
-"""
-Run sequence-to-sequence chain-of-thought training.
-"""
+
+
+    """Method for main."""
 config = Seq2SeqCotConfig()
 model = Seq2SeqChainOfThoughtModel()
 trainer = Trainer(model, config)

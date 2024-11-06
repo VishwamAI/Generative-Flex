@@ -5,10 +5,10 @@ from src.models.transformer import TransformerModel
 from src.config.config import ModelConfig
 
 class TestModels:
-    """Class for TestModels."""
-    def setUp(self):
 
-        """Method for setUp."""
+
+    """Class for TestModels."""def setUp(self):
+    """Method for setUp."""
     self.config = ModelConfig(
     hidden_size=64,
     num_attention_heads=4,

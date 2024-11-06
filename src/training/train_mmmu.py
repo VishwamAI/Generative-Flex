@@ -12,7 +12,8 @@ from src.training.trainer import Trainer, TrainerConfig
 logger = logging.getLogger(__name__)
 @dataclass
 class MMUTrainingConfig:
-"""
+
+    """Class for MMUTrainingConfig.""""""
 Configuration for MMMU training..
 """
 
@@ -23,9 +24,9 @@ math_head_dropout: float = 0.1
 math_head_hidden_size: int = 768
 
 def main():
-"""
-Run MMMU training..
-"""
+
+
+    """Method for main."""
 # Setup logging
 logging.basicConfig(
 format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",

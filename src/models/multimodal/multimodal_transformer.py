@@ -7,7 +7,8 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 @dataclass
 class MultiModalTransformerConfig:
-    """
+
+    """Class for MultiModalTransformerConfig.""""""
 Configuration for multimodal transformer..
 """
 
@@ -23,26 +24,25 @@ Configuration for multimodal transformer..
     patch_size: int = 16
     num_channels: int = 3
 
-class MultiModalTransformer(nn.Module):
-    """
+class MultiModalTransformer:
+
+
+    """Class for MultiModalTransformer.""""""
 Multimodal transformer model..
 """
 
     def __init__(self, config: Optional[MultiModalTransformerConfig] = None):
-        """
-Initialize multimodal transformer.
 
-        Args:
-            config: Optional model configuration
-"""
+
+        """Method for __init__."""
         super().__init__()
         self.config = config or MultiModalTransformerConfig()
         self.setup_layers()
 
     def setup_layers(self):
-        """
-Set up transformer layers..
-"""
+
+
+        """Method for setup_layers."""
         # Text embeddings
         self.text_embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
@@ -83,34 +83,18 @@ Set up transformer layers..
         self.dropout = nn.Dropout(self.config.dropout)
 
     def _init_weights(self, module: nn.Module) -> None:
-        """
-Initialize module weights.
 
-        Args:
-            module: Module to initialize
-"""
+
+        """Method for _init_weights."""
         if isinstance(module, (nn.Linear, nn.Embedding)):
             module.weight.data.normal_(mean=0.0, std=0.02)
         if isinstance(module, nn.Linear) and module.bias is not None:
             module.bias.data.zero_()
 
-    def forward(self,
-        input_ids: Optional[torch.Tensor] = None,
-        attention_mask: Optional[torch.Tensor] = None,
-        pixel_values: Optional[torch.Tensor] = None,
-        pixel_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
-        """
-Process input through transformer.
+    def forward(self, input_ids: Optional[torch.Tensor] = None, attention_mask: Optional[torch.Tensor] = None, pixel_values: Optional[torch.Tensor] = None, pixel_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
-        Args:
-            input_ids: Optional input token IDs
-            attention_mask: Optional attention mask
-            pixel_values: Optional pixel values
-            pixel_mask: Optional pixel mask
 
-        Returns:
-            Dictionary containing hidden states
-"""
+        """Method for forward."""
         hidden_states_list = []
 
         # Process text if provided

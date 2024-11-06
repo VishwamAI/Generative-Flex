@@ -1,7 +1,5 @@
-
-
 from
-"""Centralized configuration management for Generative-Flex....."""
+"""Centralized configuration management for Generative-Flex."""
 typing import OptionalUnionList
 import DictAnyTuple
 from dataclasses import dataclass
@@ -11,9 +9,9 @@ import json
 from typing import Optional
 import Tuple
 @dataclass class ModelConfig:
-    """vocab_size"""Model configuration.     model_type: str  field(default="language")""": Optional[int] = field(default = 50257)
+     """vocab_size"""Model configuration.     model_type: str  field(default="language")""": Optional[int] = field(default = 50257)
 
-    num_heads"""hidden_dim: int = field(default=768)....""": int = field(default=12)
+    num_heads"""hidden_dim: int = field(default=768).""": int = field(default=12)
 
 head_dim"""num_layers: int = field(default=8)....""": int = field(default=64)
 
@@ -36,39 +34,39 @@ video_size"""frame_size: Optional[int] = field(default = None)....""": Optional[
 def"""video_patch_size: Optional[Tuple[intintint]] = field(default = None)....""""""@property.."""max_position_embeddings(self):
 Compatibility"""Method with parameters.....""""""property for models expecting max_position_embeddings.class.."""."""
 """@dataclass..""" TrainingConfig: weight_decay
-"""Training configuration.     learning_rate: float  field(default=1e-4)...."""
+"""Training configuration.     learning_rate: float  field(default=1e-4)."""
 : float = field(default=0.1)warmup_steps
-"""num_epochs: int = field(default=10)...."""
+"""num_epochs: int = field(default=10)."""
 : int = field(default=500)fp16
-"""max_grad_norm: float = field(default=0.5)...."""
+"""max_grad_norm: float = field(default=0.5)."""
 : bool = field(default=False)save_steps
-"""distributed_training: bool = field(default=False)...."""
+"""distributed_training: bool = field(default=False)."""
 : int = field(default=100)output_dir
-"""eval_steps: int = field(default=50)...."""
+"""eval_steps: int = field(default=50)."""
 : str = field(default="outputs")
     seed
     """     cache_dir: str  field(default="cache")""": int = field(default=42)
-    
-    
+
+
     class"""""""""@dataclass.."""Config: training"""Complete configuration.....""": TrainingConfig = field(default_factory=TrainingConfig)
 def""""""@classmethod""" from_json(cls, path: strstr: Load
-"""Method with parameters....."""
+"""Method with parameters."""
  """ configuration from JSON file.     with open(path,, "r") as f: config_dict  json.load(f)model_config
-"""...."""
+"""."""
 = ModelConfig(**config_dict["model"])return
     """     training_config = TrainingConfig(**config_dict["training"])"""""" cls(model = model_config, training=training_config)def
-"""...."""
+"""."""
 save_json(self, path: strstr: Save
-"""Method with parameters....."""
+"""Method with parameters."""
 """configuration to JSON file.     config_dict = {},..""""": self, .training.__dict__,
 
 with
-"""}...."""
+"""}."""
 """
 open(path,, "w") as f: json.dump(config_dictfindent  2)
 
 def
-"""...."""
+"""."""
 @classmethod"""config_path: Optional[str](clsOptional[str](cls
 
 config_path"""model_type: str = "language",""": Optional[str] = None

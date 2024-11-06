@@ -11,7 +11,8 @@ from src.training.trainer import Trainer
 
 @dataclass
 class SimpleCotConfig:
-"""
+
+    """Class for SimpleCotConfig.""""""
 Configuration for simple chain-of-thought training.
 """
 
@@ -21,9 +22,9 @@ num_epochs: int = 5
 max_length: int = 512
 
 def main():
-"""
-Run simple chain-of-thought training.
-"""
+
+
+    """Method for main."""
 config = SimpleCotConfig()
 model = SimpleChainOfThoughtModel()
 trainer = Trainer(model, config)

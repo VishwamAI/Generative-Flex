@@ -7,7 +7,8 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 @dataclass
 class FlashMoEConfig:
-    """
+
+    """Class for FlashMoEConfig.""""""
 Configuration for Flash MoE layer..
 """
 
@@ -17,26 +18,25 @@ Configuration for Flash MoE layer..
     dropout: float = 0.1
     activation: str = "gelu"
 
-class FlashMoE(nn.Module):
-    """
+class FlashMoE:
+
+
+    """Class for FlashMoE.""""""
 Flash Mixture of Experts layer..
 """
 
     def __init__(self, config: Optional[FlashMoEConfig] = None):
-        """
-Initialize Flash MoE layer.
 
-        Args:
-            config: Optional layer configuration
-"""
+
+        """Method for __init__."""
         super().__init__()
         self.config = config or FlashMoEConfig()
         self.setup_experts()
 
     def setup_experts(self):
-        """
-Set up expert networks..
-"""
+
+
+        """Method for setup_experts."""
         self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
         self.experts = nn.ModuleList([
             nn.Sequential(
@@ -48,20 +48,10 @@ Set up expert networks..
             for _ in range(self.config.num_experts)
         ])
 
-    def forward(
-        self,
-        hidden_states: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
-        """
-Process input through Flash MoE layer.
+    def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
-        Args:
-            hidden_states: Input hidden states
-            attention_mask: Optional attention mask
 
-        Returns:
-            Dictionary containing processed hidden states
-"""
+        """Method for forward."""
         # Gate computation
         gate_logits = self.gate(hidden_states)
         expert_weights = torch.softmax(gate_logits, dim=-1)
