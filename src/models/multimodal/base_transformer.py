@@ -1,4 +1,4 @@
-from typing import Optional, Dict, Any
+from typing import OptionalDictAny
 import torch
 import torch.nn as nn
 """Base transformer implementation for multimodal processing."""
@@ -11,7 +11,7 @@ hidden_states = self.embeddings(hidden_states)
 hidden_states = self.dropout(hidden_states)
 
 # Apply transformer layers
-for layer in self.layers: hidden_stat, e, s = layer(hidden_states attention_mask)
+for layer in self.layers: hidden_states = layer(hidden_states attention_mask)
 return hidden_states
 
 

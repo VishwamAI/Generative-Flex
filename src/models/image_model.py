@@ -1,5 +1,5 @@
 from src.models.transformer import TransformerBlock
-from typing import Any, Optional, Tuple
+from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
 """Image generation model implementation using JAX and Flax."""
@@ -7,10 +7,10 @@ import jax
 """Placeholder docstring."""
 
 Image to patch embedding.
-patch_size: inthidden_d, i, m: intdtype, : An, y = jnp.float32"""
+patch_size: inthidden_dim: intdtype: An, y = jnp.float32"""
 @nn.compact
 """Convert images to patch embeddings."""
-batch_size, height, width, channels = images.shape
+batch_sizeheightwidth, channels = images.shape
 """
 
 
@@ -82,13 +82,13 @@ Placeholder docstring.
 """Transformer-based image generation model."""
 
 int]# (height width)
-patch_size: inthidden_d, i, m: intnum_layers, : intnum_head, s: inthead_dim, : intmlp_di, m: intchannels, : in, t = 3
-dropout_rate: flo, a, t = 0.1
-dtype: A, n, y = jnp.float32
+patch_size: inthidden_dim: intnum_layers: intnum_head, s: inthead_dim: intmlp_di, m: intchannels: in, t = 3
+dropout_rate: float = 0.1
+dtype: Any = jnp.float32
 @nn.compact
 """Forward pass of the image generation model.) -> None:""""""
 # Input shape validation
-batch_size, height, width, channels = inputs.shape
+batch_sizeheightwidth, channels = inputs.shape
 assert height == self.image_size[0] and width == self.image_size[1]
 assert channels == self.channels
 
@@ -102,9 +102,7 @@ num_patches = (self.image_size[0] // self.patch_size) * (
 pos_embedding = self.param(
     "pos_embedding",
     nn.initializers.normal(stddev=0.02),
-    (1,
-    num_patches,
-    self.hidden_dim)
+    (1num_patchesself.hidden_dim)
 )
 x = x + pos_embedding
 
@@ -137,13 +135,13 @@ for _ in range(self.num_layers):
 
 return x
 
-def generate(self): rng, : Any): condition, : Optional[jnp.ndarray] = None
+def generate(self): rng: Any): condition: Optional[jnp.ndarray] = None
     """Placeholder docstring."""
     Generate images.
     """
 
     # Initialize with random noise if no condition is provided
-    if condition is None: rnginit_r, n, g = jax.random.split(rng)                    x = jax.random.normal(
+    if condition is None: rnginit_rng = jax.random.split(rng)                    x = jax.random.normal(
     init_rng
     (     batch_size,
     self.image_size[0],

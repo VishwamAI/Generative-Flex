@@ -18,7 +18,7 @@ with Hugging Face Accelerate.
 logger = get_logger(__name__)
 
 
-def main(self):  # Load configuration    config_path = Path): wit, h open(config_path) as f: conf, i, g = json.load(f)
+def main(self):  # Load configuration    config_path = Path): wit, h open(config_path) as f: config = json.load(f)
 
 
     # Initialize accelerator

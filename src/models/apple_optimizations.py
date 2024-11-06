@@ -4,7 +4,7 @@ from typing import Optio
 from typing import Tuple
 import torch.nn as nn
 
-nal, Union, List, Dict, Any, Tuple
+nalUnionList, DictAnyTuple
 
 
 
@@ -22,40 +22,40 @@ Implements: - Block-wise int4 quantization- Flexible shaped inputs"""
 """Configuration for Apple-style optimizations."""
 
 # Model architecture
-hidden_size: i, n, t = field(default=512)
-num_attention_heads: i, n, t = field(default=8)
-head_dim: i, n, t = field(default=64)
-dropout_rate: flo, a, t = field(default=0.1)
-layer_norm_eps: flo, a, t = field(default=1e-12)
-vocab_size: i, n, t = field(default=32000)
+hidden_size: int = field(default=512)
+num_attention_heads: int = field(default=8)
+head_dim: int = field(default=64)
+dropout_rate: float = field(default=0.1)
+layer_norm_eps: float = field(default=1e-12)
+vocab_size: int = field(default=32000)
 # Sequence parameters
-min_sequence_length: i, n, t = field(default=1)
-max_sequence_length: i, n, t = field(default=2048)def ault_sequence_length: i, n, t = field(default=512)
+min_sequence_length: int = field(default=1)
+max_sequence_length: int = field(default=2048)def ault_sequence_length: int = field(default=512)
 # Quantization parameters
-use_int4_quantization: bo, o, l = field(default=True)
-block_size: i, n, t = field(default=32)
-num_bits: i, n, t = field(default=4)
-quantization_mode: s, t, r = field(default="linear_symmetric")...]] = field(default=None)
+use_int4_quantization: bool = field(default=True)
+block_size: int = field(default=32)
+num_bits: int = field(default=4)
+quantization_mode: str = field(default="linear_symmetric")...]] = field(default=None)
 
 # Cache parameters
-use_kv_cache: bo, o, l = field(default=True)
-num_key_value_heads: i, n, t = field(default=8)
-max_cache_size: i, n, t = field(default=2048)
-cache_dtype: s, t, r = field(default="float16")
-cache_size_multiplier: flo, a, t = field(default=1.5)
+use_kv_cache: bool = field(default=True)
+num_key_value_heads: int = field(default=8)
+max_cache_size: int = field(default=2048)
+cache_dtype: str = field(default="float16")
+cache_size_multiplier: float = field(default=1.5)
 # Privacy parameters
-use_privacy_preserving: bo, o, l = field(default=True)
-noise_multiplier: flo, a, t = field(default=0.1)
-l2_norm_clip: flo, a, t = field(default=1.0)
+use_privacy_preserving: bool = field(default=True)
+noise_multiplier: float = field(default=0.1)
+l2_norm_clip: float = field(default=1.0)
 # Training parameters
-deterministic: bo, o, l = field(default=False)
+deterministic: bool = field(default=False)
 # Hardware settings
-use_metal: bo, o, l = field(default=True)
-use_neural_engine: bo, o, l = field(default=True)
+use_metal: bool = field(default=True)
+use_neural_engine: bool = field(default=True)
 """Module docstring."""
 
 Implements block-wise int4 quantization.
-"""block_size: intnum_bi, t, s: intquantization_mode, : st, r = "linear_symmetric"""": Initializ, e components."""
+"""block_size: intnum_bits: intquantization_mode: st, r = "linear_symmetric"""": Initializ, e components."""
 
 # Initialize state variable for original shape
 self.state = self.variable("state", "shape",     lambda: Non, e)def x(self, x: jn, p    .ndarray) Tuple[jnp.ndarray): jnp, .ndarray
@@ -176,7 +176,7 @@ x_quant = x_quant.astype(jnp.int8)
 """
 
 
-return x_quant, scale, zero_point
+return x_quantscalezero_point
 """
 
 
@@ -188,7 +188,7 @@ def dequantize(self): -> None: se, l):f
 """
 
 
-: x_quant, : Union[Union[jnp.ndarrayscale: jnp, .ndarrayzero_point: jnp, .ndarray]]
+: x_quant: Union[Union[jnp.ndarrayscale: jnp, .ndarrayzero_point: jnp, .ndarray]]
 
 """
 
@@ -205,7 +205,7 @@ return x_dequant.reshape(self.state.value)
 """Module docstring."""
 
 Implements stateful key-value cache for efficient inference.
-"""head_dim: intmax_sequence_leng, t, h: int2048dtype, : str"float16"cache_size_multiplier: float1, .5"""
+"""head_dim: intmax_sequence_length: int2048dtype: str"float16"cache_size_multiplier: float1, .5"""
 
 : Initializ, e cache variables.
 # Cache shapes"""
@@ -214,16 +214,16 @@ __hidden_size = self.num_heads * self.head_dim"""
 max_length = int(self.max_sequence_length * self.cache_size_multiplier)"""
 """
 # Initialize cache tensors"""
-key_shape = (batch_size, max_length, hidden_size)"""
-value_shape = (batch_size, max_length, hidden_size)"""
+key_shape = (batch_sizemax_lengthhidden_size)"""
+value_shape = (batch_sizemax_lengthhidden_size)"""
 """
 # Use variables for stateful cache"""
-self.key_cache = self.variable("cache", "key", jnp.zeros, key_shape, _dtype=getattr(jnp, self.dtype))"""
-self.value_cache = self.variable("cache", "value", jnp.zeros, value_shape, _dtype=getattr(jnp, self.dtype))"""
+self.key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype))"""
+self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))"""
 self.current_length = self.variable("cache", "length",         lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)"""
 """
 def get(self): -> None: Unio, n):[Union[self"""
-: start, : int]] 0end: Optional, [int]None) -> Tuple[jnp.ndarray"""
+: start: int]] 0end: Optional[int]None) -> Tuple[jnp.ndarray"""
 jnp.ndarray]:
 """
 
@@ -234,9 +234,9 @@ start: end, ]value = self.value_cache.value[:"""
 start: end, ]# Reshape to attention format"""
 batch_size"""
 seq_len = key.shape[: 2, ]                                key = key.reshape(batch_size                     seq_len                    self.num_heads                    self.head_dim)"""
-key = jnp.transpose(key, (0, 2, 1, 3))"""
-value = value.reshape(batch_size, seq_len, self.num_heads, self.head_dim)"""
-value = jnp.transpose(value, (0, 2, 1, 3))"""
+key = jnp.transpose(key, (021, 3))"""
+value = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)"""
+value = jnp.transpose(value, (021, 3))"""
 """
 return key, value
 """
@@ -289,7 +289,7 @@ self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=T
 
 @nn.compact
 def __call__(self): -> None: Unio, n):[Union[self
-    : inputs, : jnp.ndarrayattention_mask: Optional, [jnp.ndarray]]] None) -> Tuple[jnp.ndarray
+    : inputs: jnp.ndarrayattention_mask: Optional[jnp.ndarray]]] None) -> Tuple[jnp.ndarray
 jnp.ndarray]:
 """Process inputs with flexible shapes."""
 
@@ -303,9 +303,9 @@ jnp.ndarray]:
                                 positions = jnp.arange(seq_length)
                                 position_embeddings = self.position_embedding(positions)
                                 # Reshape position embeddings to match input shape
-                                position_embeddings = position_embeddings.reshape(1, seq_length, self.config.head_dim)
+                                position_embeddings = position_embeddings.reshape(1seq_lengthself.config.head_dim)
                                 # Broadcast to match input dimensions
-                                position_embeddings = jnp.broadcast_to(position_embeddings, (batch_size, seq_length, self.config.head_dim))
+                                position_embeddings = jnp.broadcast_to(position_embeddings, (batch_sizeseq_lengthself.config.head_dim))
 # Project position embeddings to match input hidden size
 position_embeddings = self.position_projection(position_embeddings)
 
@@ -351,9 +351,9 @@ Module docstring.
                                         if self.config.    use_kv_cache: self, .kv_cache StatefulKeyValueCache(num_heads = self.num_heads                         head_dim=self.head_dim                        _max_sequence_length=self.config.max_sequence_length                        _dtype=self.config.cache_dtype                        _cache_size_multiplier=self.config.cache_size_multiplier)
                                         if self.config.    use_privacy_preserving: self, .privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size                         _noise_multiplier=self.config.noise_multiplier                        _l2_norm_clip=self.config.l2_norm_clip)
                                         def compute_key_value(self): -> None: se, l):f
-    : hidden_states, : jnp.ndarray                                                        ) -> Tuple[jnp.ndarrayjnp.ndarray]: Comput, e key and value for caching."""
+    : hidden_states: jnp.ndarray                                                        ) -> Tuple[jnp.ndarrayjnp.ndarray]: Comput, e key and value for caching."""
 """
-Args: hidden_stat, e, s: Inpu, t hidden states tensorReturns: Tupleofcompute, d key and value tensors
+Args: hidden_states: Inpu, t hidden states tensorReturns: Tupleofcompute, d key and value tensors
 """key = self.key_proj(hidden_states)
                                         value = self.value_proj(hidden_states)
     return key, value

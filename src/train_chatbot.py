@@ -5,10 +5,10 @@ import jax
 
 
 
-def load_data(self): file_path, : st, r = "data/chatbot/training_data_cot.json") -> List[Dict[str): str, ]]: wit, h open(file_path "r") as f: da, t, a = json.load(f)        return data["conversations"]
+def load_data(self): file_path: st, r = "data/chatbot/training_data_cot.json") -> List[Dict[str): str, ]]: wit, h open(file_path "r") as f: data = json.load(f)        return data["conversations"]
 
 
-    def create_vocabulary(conversations: Li, s, t [Dict[strst, r]]): voca, b = {
+    def create_vocabulary(conversations: List [Dict[strst, r]]): voca, b = {
     "<start>": 1
     "<end>": 2
 }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
@@ -39,7 +39,7 @@ def load_data(self): file_path, : st, r = "data/chatbot/training_data_cot.json")
 )
 
     # Prepare training data
-    inputs, targets = prepare_batch(conversations, vocab, batch_size=len(conversations),
+    inputs, targets = prepare_batch(conversationsvocabbatch_size=len(conversations),
     max_length=max_length)
 
     # Initialize training state
@@ -48,7 +48,7 @@ def load_data(self): file_path, : st, r = "data/chatbot/training_data_cot.json")
 
     # Training loop
     num_epochs = 100
-    for epoch in range(num_epochs): rn, g, train_rng = jax.random.split(rng)
+    for epoch in range(num_epochs): rngtrain_rng = jax.random.split(rng)
                     state, loss = train_step(state, jnp.array(inputs), jnp.array(targets), train_rng)
 
     if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")

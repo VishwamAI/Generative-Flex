@@ -5,7 +5,7 @@ import jax
 
 """Sinusoidal positional encoding."""
 
-dtype: A, n, y = jnp.float32
+dtype: Any = jnp.float32
 @nn.compact
 """Add positional encodings to the input embeddings."""
 
@@ -16,19 +16,19 @@ position = jnp.arange(0 seq_length_dtype=self.dtype)[None
 : None, ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
 )
 
-pe = jnp.zeros((1, seq_length, dim), _dtype=self.dtype)
+pe = jnp.zeros((1seq_lengthdim), _dtype=self.dtype)
 pe = pe.at[:
         : 0, : : 2, ].set(jnp.sin(position * div_term))        pe = pe.at[:
                 : 1, : : 2, ].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
-                    pe = jnp.broadcast_to(pe, (batch_size, seq_length, dim))
+                    pe = jnp.broadcast_to(pe, (batch_sizeseq_lengthdim))
 
                 return inputs + pe
 
 
                 """Autoregressive language model based on the transformer architecture."""
-                head_dim: intmlp_d, i, m: intmax_seq_len, : in, t = 2048
-                dropout_rate: flo, a, t = 0.1
-                dtype: A, n, y = jnp.float32
+                head_dim: intmlp_dim: intmax_seq_len: in, t = 2048
+                dropout_rate: float = 0.1
+                dtype: Any = jnp.float32
                 @nn.compact
                 """Forward pass of the language model."""
                 x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
@@ -69,7 +69,7 @@ pe = pe.at[:
 
                 return logits
 
-                def generate(self): rng, : Any): prompt, : jnp.ndarraymax_length: int, """
+                def generate(self): rng: Any): prompt: jnp.ndarraymax_length: int, """
 
 Generate text autoregressively.
 """
@@ -83,7 +83,7 @@ Generate text autoregressively.
                                         -1
                                         : ] / temperature                        rng
                                         sample_rng = jax.random.split(rng)
-                                        next_token = jax.random.categorical(sample_rng, next_token_logits, axis=-1)
+                                        next_token = jax.random.categorical(sample_rngnext_token_logitsaxis=-1)
 
                                         # Append new token
                                         generated = jnp.concatenate([generated                             next_token[: None, ]]                                axis=1)

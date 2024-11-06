@@ -2,7 +2,7 @@ import json
 
 
 # Simple model def inition
-(nn.Module): vocab_size, : inthidden_siz, e: i, n, t = 64
+(nn.Module): vocab_size: inthidden_siz, e: int = 64
 print("\nTesting model responses: ")print("-" * 40)
 
 # Load vocabulary and create token mappings

@@ -6,7 +6,7 @@ import torch.nn as nn
 """Module docstring."""
 
 Flash Mixture of Experts layer implementation.
-"""intermediate_size: intnum_exper, t, s: i, n, t = 8"""Module docstring."""
+"""intermediate_size: intnum_experts: int = 8"""Module docstring."""
 
 Initialize the FlashMoE layer.
 super().__init__()"""
@@ -31,13 +31,13 @@ for _ in range(num_experts)"""
 # Router network"""
 self.router = nn.Linear(hidden_size, num_experts)"""
 """
-def __init__(self): hidden_states, : torch.Tensor): attention_mask, : Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
+def __init__(self): hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 """
 
 Module docstring.
 """Forward pass through the FlashMoE layer."""
 
-    batch_size, seq_length, hidden_size = hidden_states.shape
+    batch_sizeseq_lengthhidden_size = hidden_states.shape
 
     # Get routing weights
     routing_weights = torch.softmax(self.router(hidden_states), dim=-1)

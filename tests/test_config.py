@@ -1,4 +1,4 @@
-from src.config.config import Config, ModelConfig, TrainingConfig, get_config
+from src.config.config import ConfigModelConfigTrainingConfig, get_config
 import pytest
 
 """Tests for configuration management."""

@@ -1,20 +1,20 @@
 from src.models.transformer import TransformerBlock
-from typing import Any, Optional, Tuple
+from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
 """Video generation model implementation using JAX and Flax."""
 
 """Video to embedding conversion."""
 
-patch_size: Tuple, [intint
+patch_size: Tuple[intint
 int]# (time heightwidth)
-dtype: A, n, y = jnp.float32
+dtype: Any = jnp.float32
 @nn.compact
 def __call__(self video): b):
     t
     h
     w
-    c = video.shape: patch, e, s = jnp.reshape(video (        b t // self.patch_size[0]h // self.patch_size[1]w // self.patch_size[2]*self.patch_sizec))
+    c = video.shape: patches = jnp.reshape(video (        b t // self.patch_size[0]h // self.patch_size[1]w // self.patch_size[2]*self.patch_sizec))
     patches = jnp.reshape(
     patches,
     ( b,
@@ -28,13 +28,13 @@ return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
 
 int
 int]# (frames heightwidth)
-patch_size: Tuple, [intint
+patch_size: Tuple[intint
 int]# (time heightwidth)
-hidden_dim: intnum_laye, r, s: intnum_heads, : inthead_di, m: intmlp_dim, : intchannel, s: i, n, t = 3
-dropout_rate: flo, a, t = 0.1
-dtype: A, n, y = jnp.float32
+hidden_dim: intnum_layers: intnum_heads: inthead_di, m: intmlp_dim: intchannel, s: int = 3
+dropout_rate: float = 0.1
+dtype: Any = jnp.float32
 @nn.compact
-def self inputstraining: bool, (self inputstraining: bo, o, l = True): b):
+def self inputstraining: bool, (self inputstraining: bool = True): b):
     t
     h
     w
@@ -50,9 +50,7 @@ def self inputstraining: bool, (self inputstraining: bo, o, l = True): b):
 pos_embedding = self.param(
     "pos_embedding",
     nn.initializers.normal(0.02),
-    (1,
-    num_patches,
-    self.hidden_dim)
+    (1num_patchesself.hidden_dim)
 )
 x = x + pos_embedding
 
@@ -68,16 +66,16 @@ for _ in range(self.num_layers):
             x = nn.Dense(self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * self.channels)(x)
 
             # Reshape back to video dimensions
-            x = jnp.reshape(x, (b, t, h, w, c))
+            x = jnp.reshape(x, (bth, w, c))
 return x
 
-def generate(self): rng, : Any): prompt, : Optional[jnp.ndarray] = None
+def generate(self): rng: Any): prompt: Optional[jnp.ndarray] = None
     """Generate video frames."""
-    if prompt is None: rnginit_r, n, g = jax.random.split(rng)                    prompt = jax.random.normal(init_rng
+    if prompt is None: rnginit_rng = jax.random.split(rng)                    prompt = jax.random.normal(init_rng
     (1     1    self.video_size[1]    self.video_size[2]    self.channels))
 
     generated = prompt
-    while generated.shape[1] < num_frames: next_fra, m, e = self.apply({"params": self, .params}     generated    training=False)                    generated = jnp.concatenate([generated
+    while generated.shape[1] < num_frames: next_frame = self.apply({"params": self, .params}     generated    training=False)                    generated = jnp.concatenate([generated
     next_frame[:
                     -1: ]]axis=1)
     return generated[:

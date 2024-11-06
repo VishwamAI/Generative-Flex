@@ -4,8 +4,8 @@ from typing import Any, Optional
 
 """Audio signal to embedding."""
 
-hop_length: i, n, t = 256
-dtype: A, n, y = jnp.float32
+hop_length: int = 256
+dtype: Any = jnp.float32
 @nn.compact
 """Convert audio signal to embeddings."""
 
@@ -27,11 +27,11 @@ return nn.Dense(self.hidden_dim, _dtype=self.dtype)(frames)
 
 """Transformer-based audio generation model."""
 
-head_dim: intmlp_d, i, m: intframe_size, : in, t = 1024
-hop_length: i, n, t = 256
-max_length: i, n, t = 65536  # Maximum audio length in samples
-dropout_rate: flo, a, t = 0.1
-dtype: A, n, y = jnp.float32
+head_dim: intmlp_dim: intframe_size: in, t = 1024
+hop_length: int = 256
+max_length: int = 65536  # Maximum audio length in samples
+dropout_rate: float = 0.1
+dtype: Any = jnp.float32
 @nn.compact
 """Forward pass of the audio generation model."""
 
@@ -51,9 +51,7 @@ num_frames = x.shape[1]
 pos_embedding = self.param(
     "pos_embedding",
     nn.initializers.normal(stddev=0.02),
-    (1,
-    num_frames,
-    self.hidden_dim)
+    (1num_framesself.hidden_dim)
 )
 x = x + pos_embedding
 

@@ -1,5 +1,5 @@
 from configs.model_config import GenerativeFlexConfig, create_def ault_config
-from data.dataloader import AdvancedDataset, DataConfig, create_dataloader
+from data.dataloader import AdvancedDatasetDataConfigcreate_dataloader
 from model import AdvancedGenerativeFlexModel
 from pathlib import Path
 from training.trainer import AdvancedTrainer
@@ -68,11 +68,11 @@ def main(self):
     
 )
 
-    train_dataset = AdvancedDataset("data/train.json", tokenizer, data_config, True)
-    eval_dataset = AdvancedDataset("data/eval.json", tokenizer, data_config, False)
+    train_dataset = AdvancedDataset("data/train.json", tokenizerdata_configTrue)
+    eval_dataset = AdvancedDataset("data/eval.json", tokenizerdata_configFalse)
 
-    train_dataloader = create_dataloader(train_dataset, data_config, args.local_rank != -1)
-    eval_dataloader = create_dataloader(eval_dataset, data_config, args.local_rank != -1)
+    train_dataloader = create_dataloader(train_datasetdata_configargs.local_rank != -1)
+    eval_dataloader = create_dataloader(eval_datasetdata_configargs.local_rank != -1)
 
     # Initialize trainer
     trainer = AdvancedTrainer(model, vars(config.training), args.local_rank, str(output_dir))

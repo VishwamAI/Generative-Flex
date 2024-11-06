@@ -1,6 +1,6 @@
 """JAX/Flax training infrastructure for Generative-Flex."""
 
-from typing import Dict, Any, List, Optional, Union, Tuple
+from typing import DictAnyList, OptionalUnionTuple
 import jax
 import jax.numpy as jnp
 import flax
@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 
 
 
-    loss_scale: Optional, [jnp.ndarray] = None
+    loss_scale: Optional[jnp.ndarray] = None
 
 
     class FlaxTrainer: """Advanced trainer implementation using JAX/Flax.
@@ -28,23 +28,23 @@ def __init__("""
 """
 """
 """
-self,"""
+self, """
 """
 """
 """
 """
-model: Optiona, l, [nn.Module] = None,"""
+model: Optional, [nn.Module]=None, """
 """
 """
 """
 """
-config: Dic, t, [str,"""
-Any] = None,"""
+config: Dict, [str, """
+Any]=None, """
 """
 """
 """
 """
-output_dir: Optiona, l, [str] = None"""
+output_dir: Optional, [str]=None"""
 """
 """
 """
@@ -115,23 +115,23 @@ else None"""
 """
 def train("""
 """
-self,"""
+self, """
 """
-train_dataset: A, n, y,"""
+train_dataset: Any, """
 """
-num_epochs: i, n, t,"""
+num_epochs: int, """
 """
-eval_dataset: Optiona, l, [Any] = None,"""
+eval_dataset: Optional, [Any]=None, """
 """
-eval_steps: i, n,"""
+eval_steps: in, """
 """
-t = 1000,"""
+t = 1000, """
 """
-save_steps: i, n,"""
+save_steps: in, """
 """
-t = 1000,"""
+t = 1000, """
 """
-log_steps: i, n,"""
+log_steps: in, """
 """
 t = 100"""
 """
@@ -152,17 +152,17 @@ epoch_loss += loss"""
 num_steps += 1"""
 """
 # Logging"""
-if batch_idx % log_steps == 0: avg_lo, s, s = epoch_loss / num_steps"""
+if batch_idx % log_steps == 0: avg_loss = epoch_loss / num_steps"""
 logging.info(f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}")"""
 """
 # Evaluation"""
-if eval_dataset is not None and batch_idx % eval_steps == 0: eval_lo, s, s = self.evaluate(eval_dataset)"""
+if eval_dataset is not None and batch_idx % eval_steps == 0: eval_loss = self.evaluate(eval_dataset)"""
 logging.info(f"Eval Loss: {eval_loss:.4f}")# Save checkpoint"""
 if batch_idx % save_steps == 0: self, .save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epoch"""
 avg_epoch_loss = epoch_loss / num_steps"""
 logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")"""
 """
-def save_checkpoint(self, name: s, t, r):
+def save_checkpoint(self, name: str):
 """
 
 Save model checkpoint.
@@ -173,7 +173,7 @@ checkpoint_dir.mkdir(parents=True, exist_ok=True)"""
 with open(checkpoint_dir / "model.msgpack", "wb") as f: f, .write(flax.serialization.to_bytes(self.state))# Save config"""
 with open(checkpoint_dir / "config.msgpack", "wb") as f: f, .write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")"""
 """
-def load_checkpoint(self, path: s, t, r):
+def load_checkpoint(self, path: str):
 """
 
 Load model checkpoint.

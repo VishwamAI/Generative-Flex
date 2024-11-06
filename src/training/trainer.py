@@ -9,15 +9,15 @@ logger = logging.getLogger(__name__)
 
 """Base trainer class."""
 
-eval_dataloader: Optional, [DataLoader] = None
-optimizer: Optional, [torch.optim.Optimizer] = None
-lr_scheduler: Optional, [torch.optim.lr_scheduler._LRScheduler] = None
-num_epochs: i, n, t = 10
-gradient_accumulation_steps: i, n, t = 1
-max_grad_norm: flo, a, t = 1.0
-logging_steps: i, n, t = 100
-evaluation_steps: i, n, t = 500
-save_steps: i, n, t = 1000
+eval_dataloader: Optional[DataLoader] = None
+optimizer: Optional[torch.optim.Optimizer] = None
+lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
+num_epochs: int = 10
+gradient_accumulation_steps: int = 1
+max_grad_norm: float = 1.0
+logging_steps: int = 100
+evaluation_steps: int = 500
+save_steps: int = 1000
 """Initialize the trainer."""
 
 self.model = model
@@ -62,7 +62,7 @@ loss.backward()"""
 if self.max_grad_norm > 0: torch, .nn.utils.clip_grad_norm_(self.model.parameters()self.max_grad_norm)"""
 return loss"""
 """
-def evaluate(self): ) -> None: Dict, [str):
+def evaluate(self): ) -> None: Dict[str):
 """
 
 Evaluate the model.
@@ -82,12 +82,12 @@ if eval_loss < self._best_eval_loss: self, ._best_eval_loss = eval_loss         
 """
 return metrics"""
 """
-def save_checkpoint(self): is_best, : boo, l = False                                        ) -> None: Non, e) -> None:
+def save_checkpoint(self): is_best: boo, l = False                                        ) -> None: Non, e) -> None:
 """
 
 Save a model checkpoint.
 checkpoint_name = f"checkpoint-{{self._step}}""""
-if is_best: checkpoint_na, m, e = "best_model""""
+if is_best: checkpoint_name = "best_model""""
 torch.save("""
 {"""
 "optimizer_state_dict": self, .optimizer.state_dict()"""
@@ -96,8 +96,8 @@ torch.save("""
 },"""
 f"{{self.output_dir}}/{{checkpoint_name}}.pt""""
 )"""
-logger.info(f"Saved checkpoint: {{checkpoint_name}}")def log_metrics(self): metrics, : Dict[str): float, ]"""
-) -> None: No, n, e:
+logger.info(f"Saved checkpoint: {{checkpoint_name}}")def log_metrics(self): metrics: Dict[str): float, ]"""
+) -> None: None:
 """
 
 Log training metrics.

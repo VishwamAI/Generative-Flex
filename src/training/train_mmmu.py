@@ -1,4 +1,4 @@
-from typing import Dict, Any, List, Optional
+from typing import DictAnyList, Optional
 from torch.utils.data import DataLoader
 import torch
 import logging
@@ -14,16 +14,7 @@ logger = logging.getLogger(__name__)
 def train_epoch(
 
 
-    model: EnhancedTransform, e, r,
-
-
-    train_loader: DataLoad, e, r,
-
-
-    optimizer: torc, h, .optim.Optimizer,
-
-
-    config: TrainingConf, i, g
+    model: EnhancedTransformertrain_loader: DataLoaderoptimizer: torch, .optim.Optimizer, config: TrainingConfig
 
 
 ):
@@ -41,7 +32,7 @@ def train_epoch(
     return {"loss": total_los, s / len(train_loader)}
 
 
-    def evaluate(model: EnhancedTransform, e, r, val_loader: DataLoad, e, r):"""
+    def evaluate(model: EnhancedTransformerval_loader: DataLoader):"""
 
 Evaluate the model.
 model.eval()"""
@@ -50,13 +41,13 @@ correct = 0"""
 total = 0"""
 """
 with torch.no_grad():"""
-for batch in val_loader: lo, s, s = model(batch)"""
+for batch in val_loader: loss = model(batch)"""
 total_loss += loss.item()"""
 """
 return {"val_loss": total_los, s / len(val_loader)}"""
 """
 """
-def main(config: TrainingConf, i, g):
+def main(config: TrainingConfig):
 """
 
 Main training function.
@@ -69,13 +60,13 @@ Main training function.
 
     best_val_loss = float("inf")
 
-    for epoch in range(config.num_epochs): train_metric, s = train_epoch(model, train_loader, optimizer, config)
+    for epoch in range(config.num_epochs): train_metric, s = train_epoch(modeltrain_loaderoptimizer, config)
                         val_metrics = evaluate(model, val_loader)
 
                         metrics = {**train_metrics, **val_metrics}
                         logger.info(f"Epoch {epoch}: {metrics}")
 
-                        if val_metrics["val_loss"] < best_val_loss: best_val_lo, s, s = val_metrics["val_loss"]
+                        if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]
                         torch.save(model.state_dict(), "best_model.pt")
 
 

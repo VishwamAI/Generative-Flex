@@ -1,4 +1,4 @@
-from typing import Optional, Dict, Any
+from typing import OptionalDictAny
 import jax
 """Enhanced transformer layer implementations."""
 
@@ -22,21 +22,19 @@ self.layer_norm1 = nn.LayerNorm()"""
 self.layer_norm2 = nn.LayerNorm()"""
 self.dropout = nn.Dropout(rate=self.config["dropout_rate"])"""
 """
-def __init__(self): hidden_states, : jnp.ndarray): attention_mask, : Optional[jnp.ndarray] = None"""
-deterministic: bo, o, l = True"""
-output_attentions: bo, o, l = False) -> Dict[str"""
+def __init__(self): hidden_states: jnp.ndarray): attention_mask: Optional[jnp.ndarray] = None"""
+deterministic: bool = True"""
+output_attentions: bool = False) -> Dict[str"""
 jnp.ndarray]:
 """
 
 Forward pass of the layer.
 
-        Args: hidden_stat, e, s: Inpu, t hidden statesattention_mask: Attentionmaskdeterminist, i, c: Whethertous, e deterministic behavioroutput_attentions: Whethertooutpu, t attention weightsReturns: Dictionarycontaininglaye, r outputs"""
+        Args: hidden_states: Inpu, t hidden statesattention_mask: Attentionmaskdeterministic: Whethertous, e deterministic behavioroutput_attentions: Whethertooutpu, t attention weightsReturns: Dictionarycontaininglaye, r outputs"""
         # Self attention
         normed_hidden_states = self.layer_norm1(hidden_states)
         attention_output = self.attention(
-    normed_hidden_states,
-    normed_hidden_states,
-    mask=attention_mask,
+    normed_hidden_statesnormed_hidden_statesmask=attention_mask,
     deterministic=deterministic,
     output_attentions=output_attentions
 )

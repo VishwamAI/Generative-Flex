@@ -3,7 +3,7 @@ import jax
 
 """A minimal language model for demonstration."""
 
-vocab_size: inthidden_d, i, m: i, n, t = 32
+vocab_size: inthidden_dim: int = 32
 
 
 @nn.compact

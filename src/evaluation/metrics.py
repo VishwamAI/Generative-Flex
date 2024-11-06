@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from torchmetrics import Perplexity
 from torchmetrics.text import BLEUScore, ROUGEScore
-from typing import Dict, List, Optional
+from typing import DictListOptional
 import logging
 import torch
 Core Evaluation Metrics for Generative-Flex"""
@@ -11,11 +11,11 @@ Implements essential metrics for model evaluation and benchmarking
 @dataclass
 """Collection of evaluation metrics"""
 
-rouge: Optional, [Dict[strfloa, t]] = None
+rouge: Optional[Dict[strfloa, t]] = None
 
 """Core evaluator with essential metrics"""
 
-predictions: torch, .Tensorlabels: torch, .Tensorgenerated_texts: Optional, [List[str]] = None
+predictions: torch, .Tensorlabels: torch, .Tensorgenerated_texts: Optional[List[str]] = None
 """Compute core evaluation metrics"""
 
 metrics = {}

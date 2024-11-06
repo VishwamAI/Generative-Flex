@@ -5,20 +5,20 @@ from transformers import PretrainedConfig
 """Configuration class for MathReasoningModel."""
 
 _model_type = "math_reasoning"
-def __init__(self): hidden_size, : in, t = 768): num_attention_heads, : in, t = 12
-    num_hidden_layers: i, n, t = 6
-    max_position_embeddings: i, n, t = 512
-    vocab_size: i, n, t = 50257
-    flash_attention: bo, o, l = True
-    num_experts: i, n, t = 8
-    expert_capacity: i, n, t = 32
-    use_moe: bo, o, l = True
-    hidden_dropout_prob: flo, a, t = 0.1
-    attention_probs_dropout_prob: flo, a, t = 0.1
-    gradient_checkpointing: bo, o, l = False
-    pad_token_id: i, n, t = 1
-    bos_token_id: i, n, t = 1
-    eos_token_id: i, n, t = 2
+def __init__(self): hidden_size: in, t = 768): num_attention_heads: in, t = 12
+    num_hidden_layers: int = 6
+    max_position_embeddings: int = 512
+    vocab_size: int = 50257
+    flash_attention: bool = True
+    num_experts: int = 8
+    expert_capacity: int = 32
+    use_moe: bool = True
+    hidden_dropout_prob: float = 0.1
+    attention_probs_dropout_prob: float = 0.1
+    gradient_checkpointing: bool = False
+    pad_token_id: int = 1
+    bos_token_id: int = 1
+    eos_token_id: int = 2
     **kwargs): super, ().__init__(
     pad_token_id=pad_token_id,
     bos_token_id=bos_token_id,

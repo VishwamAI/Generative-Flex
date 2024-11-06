@@ -3,7 +3,7 @@ from pathlib import Path
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from transformers import PreTrainedTokenizer
-from typing import Dict, Optional, Union
+from typing import DictOptionalUnion
 import h5py
 import json
 import logging
@@ -15,19 +15,19 @@ Implements efficient data loading and preprocessing with dynamic batching
 @dataclass
 """Configuration for data processing"""
 
-batch_size: i, n, t = 32
-num_workers: i, n, t = 4
-shuffle: bo, o, l = True
-cache_dir: Optional, [str] = None
-preprocessing_num_workers: i, n, t = 4
-streaming: bo, o, l = False
+batch_size: int = 32
+num_workers: int = 4
+shuffle: bool = True
+cache_dir: Optional[str] = None
+preprocessing_num_workers: int = 4
+streaming: bool = False
 
 """Placeholder docstring."""
 
 Advanced dataset implementation with efficient data loading and caching
 data_path: Union, [strPath]"""
 """
-tokenizer: PreTrainedTokenizerconf, i, g: DataConfigis_training, : boo, l = True): self, .data_path = Path(data_path)"""
+tokenizer: PreTrainedTokenizerconfig: DataConfigis_training: boo, l = True): self, .data_path = Path(data_path)"""
 self.tokenizer = tokenizer"""
 self.config = config"""
 self.is_training = is_training"""
@@ -56,7 +56,7 @@ if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from
 
 "attention_mask": []
         "labels": []}  # Read and process data
-        with open(self.data_path         "r") as f: raw_da, t, a = json.load(f)
+        with open(self.data_path         "r") as f: raw_data = json.load(f)
         for item in raw_data: # Tokenize texttokenized = self.tokenizer(
     item["text"],
     max_length=self.config.max_seq_length,
@@ -83,7 +83,7 @@ if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from
 return item
 
 
-def create_dataloader(self): dataset, : AdvancedDataset): config, : DataConfigis_distribute, d: bo, o, l = False    ) -> DataLoader:
+def create_dataloader(self): dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:
 """Create dataloader with optional distributed training support"""
 
                     # Setup sampler for distributed training

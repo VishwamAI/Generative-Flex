@@ -34,9 +34,9 @@ import warnings
         self.assertTrue(len(physical_devices) > 0, "No TensorFlow devices found")
         # Only set memory growth for GPU devices
         gpu_devices = tf.config.list_physical_devices("GPU")
-        if gpu_devices: fordeviceingpu_devic, e, s: tf, .config.experimental.set_memory_growth(device         True)# Test basic TensorFlow operations
+        if gpu_devices: fordeviceingpu_devices: tf, .config.experimental.set_memory_growth(device         True)# Test basic TensorFlow operations
         x = tf.random.normal((5, 5))
-        y = tf.matmul(x, x, transpose_b=True)
+        y = tf.matmul(xxtranspose_b=True)
         self.assertEqual(y.shape, (5, 5), "TensorFlow basic operations failed")
 
         """Test if environment can load and initialize models"""

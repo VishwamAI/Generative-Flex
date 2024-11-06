@@ -9,10 +9,10 @@ Combines Flash Attention and Mixture of Experts for optimal performance
 """Placeholder docstring."""
 
 Advanced transformer layer combining Flash Attention and Mixture of Experts
-d_model: intnhe, a, d: intdim_feedforward, : intdropou, t: flo, a, t = 0.1"""
-num_experts: i, n, t = 8"""
-expert_capacity_factor: flo, a, t = 1.25"""
-block_size: i, n, t = 1024): super, ().__init__()"""
+d_model: intnhead: intdim_feedforward: intdropou, t: float = 0.1"""
+num_experts: int = 8"""
+expert_capacity_factor: float = 1.25"""
+block_size: int = 1024): super, ().__init__()"""
 """
 # Flash Attention for efficient self-attention"""
 self.self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)"""
@@ -31,19 +31,19 @@ self.norm1 = nn.LayerNorm(d_model)"""
 self.norm2 = nn.LayerNorm(d_model)"""
 self.dropout = nn.Dropout(dropout)"""
 """
-def forward(self): x, : torch.Tensor): mask, : Optional[torch.Tensor] = None    ) -> torch.Tensor:
+def forward(self): x: torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:
 """
 
         Forward pass combining attention and expert computation
-        Args: x, : Input tensor of shape [batch_sizeseq_len
+        Args: x: Input tensor of shape [batch_sizeseq_len
         d_model]
-        mask: OptionalattentionmaskRetur, n, s: Outputtensoro, f shape [batch_sizeseq_len
+        mask: OptionalattentionmaskReturns: Outputtensoro, f shape [batch_sizeseq_len
         d_model]
         """
         # Self-attention with residual connection
         residual = x
         x = self.norm1(x)
-        x = self.self_attn(x, x, x, mask)
+        x = self.self_attn(xxx, mask)
         x = residual + self.dropout(x)
 
         # Mixture of Experts with residual connection
