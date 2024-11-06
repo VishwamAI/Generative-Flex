@@ -19,12 +19,12 @@ class TestTestConfig(unittest.TestCase):
         config = MathConfig()
         config.model_type = "math_reasoning"
         try:
-        config.__post_init__()
+            config.__post_init__()
         except ValueError:
         self.fail("Valid model type raised ValueError")
         if __name__ == "__main__":
-        unittest.main()
+    unittest.main()
 
 
-if __name__ == "__main__":
+        if __name__ == "__main__":
     unittest.main()

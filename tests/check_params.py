@@ -21,13 +21,13 @@ class TestParameters(unittest.TestCase):
         "learning_rate": 0.001
         }
         self.assertIsInstance(params, dict)
-        "learning_rate": -1,
+            "learning_rate": 0.001,
         "batch_size": 0
         }
         self.assertFalse(self.validator.validate(params))
         if __name__ == "__main__":
-        unittest.main()
+    unittest.main()
 
 
-if __name__ == "__main__":
+        if __name__ == "__main__":
     unittest.main()
