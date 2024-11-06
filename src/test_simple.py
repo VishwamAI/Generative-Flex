@@ -1,13 +1,12 @@
 import jax
 import json
 
-
 # Simple model def inition(nn.Module) -> None:
     """Method with parameters."""
     vocab_size: int, hidden_size: int = 64
     print("\nTesting model responses: ")
     print("-" * 40)
-    
+
     # Load vocabulary
     with open("data/chatbot/vocab.json" "r") as f: vocab = json.load(f)
     # Create token mappings
@@ -32,5 +31,5 @@ import json
     response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
     print(f"Response: {response}")
     print("-" * 40)
-    
+
     if __name__ == "__main__": main, ()

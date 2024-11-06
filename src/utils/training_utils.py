@@ -6,10 +6,9 @@ import jax
 import optax
 import os
     """Utility functions for model training."""
-    
-    
-    """Extended TrainState for training."""
 
+
+    """Extended TrainState for training."""
 
 Any]] = None    metrics: Dict[str, Any] = None
 
@@ -22,7 +21,6 @@ def restore_checkpoint(self) -> None:
     step = 0 if restored_state is None else restored_state.step
     return restored_state or state, step
 
-
 def compute_metrics(self) -> None:
     """Method with parameters."""
     labels: jnp.ndarray            ) -> Dict[str): float, ]:
@@ -33,7 +31,6 @@ def compute_metrics(self) -> None:
     return {
 
 }
-
 
 def create_input_pipeline(self) -> None:
     """Method with parameters."""

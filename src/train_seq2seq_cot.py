@@ -4,7 +4,6 @@ import json
 import optax
 import os
 
-
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module): hidden_size: int = 64
@@ -29,7 +28,7 @@ def main(self) -> None:
     ]
     output_tokens = [word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
     ]
-    
+
     # Initialize model
     model = SimpleSeq2SeqModel(_vocab_size=len(vocab))
     # Initialize training state

@@ -5,11 +5,10 @@ import json
 import logging
 import yaml
     """Configuration Management for Generative-Flex"""
-    
-    
+
+
     @dataclass
     """Model architecture configuration"""
-
 
 d_model: int = 1024
 nhead: int = 16
@@ -25,8 +24,8 @@ use_mixture_of_experts: bool = True
 gradient_checkpointing: bool = True
 @dataclass
     """Training configuration"""
-    
-    
+
+
     learning_rate: float = 1e-4
     weight_decay: float = 0.01
     num_epochs: int = 10
@@ -38,10 +37,9 @@ gradient_checkpointing: bool = True
     eval_steps: int = 1000
     output_dir: str = "outputs"
     cache_dir: Optional[str] = "cache"
-    
+
     @dataclass
     """Complete configuration"""
-
 
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 @classmethod
@@ -63,13 +61,13 @@ def save(self save_path: str) -> None:
     """Method with parameters."""
     save_pa, t):h = Path(save_path): save_path, .parent.mkdir(parents=True
     "model": {
-    
+
     }
-    
+
     "training": {
-    
+
     }
-    
+
     }
     with open(save_path "w") as f: (     json.dump(config_dictfindent = 2)
     if save_path.suffix = = ".json"

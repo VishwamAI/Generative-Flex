@@ -11,56 +11,42 @@ from flax.training import train_state
 from pathlib import Path
 from dataclasses import dataclass, field
 
-
 (train_state.TrainState):
 
 """Custom train state with loss scaling for mixed precision training."""
 
-
-
-
-
 loss_scale: Optional[jnp.ndarray] = None
-
 
 """Advanced trainer implementation using JAX/Flax.
 def __init__(
 """"""
 
-
 """"""
-
 
 """self,
 """
 
-
 """"""
-
 
 """"""
 
     model: Optional[nn.Module] = None,
     """"""
-    
-    
-    """"""
 
+
+    """"""
 
 """config: Dict[str, """
 
     Any] = None,
     """"""
-    
-    
-    """"""
 
+
+    """"""
 
 """output_dir: Optional[str] = None"""
 
-
 """"""
-
 
 """"""
 ) -> None:
@@ -69,35 +55,29 @@ def __init__(
 Args:
 """"""
 
-
 """"""
-
 
 """self: Parameter description
 """
 
-
 """"""
-
 
 """"""
 
     model: Parameter description
     """"""
-    
-    
-    """"""
 
+
+    """"""
 
 """config: Parameter description
 """
 
     Any] = None: Parameter description
     """"""
-    
-    
-    """"""
 
+
+    """"""
 
 """output_dir: Parameter description
 """
@@ -108,15 +88,14 @@ self.config = config or {}
 """self.output_dir = Path(output_dir) if output_dir else Path("outputs")"""
     self.output_dir.mkdir(parents = True, exist_ok=True)
     """"""
-    
+
     # Initialize training state
     """self.setup_training_state()"""
-
 
 """def setup_training_state(self) -> None:
 """Method with parameters."""
     """
-    
+
     Setup training state with optimizer and learning rate schedule.
     # Create learning rate schedule
     """warmup_fn = optax.linear_schedule("""
@@ -124,8 +103,8 @@ self.config = config or {}
     """end_value = self.config["training"]["learning_rate"],"""
     transition_steps = self.config["training"]["warmup_steps"],"""
     """)"""
-    
-    
+
+
     """decay_fn = optax.cosine_decay_schedule("""
     init_value = self.config["training"]["learning_rate"],"""
     decay_steps = self.config["training"]["num_epochs"]"""
@@ -133,25 +112,24 @@ self.config = config or {}
 
 """)"""
 
-
 """schedule_fn = optax.join_schedules("""
     schedules = [warmup_fn, """decay_fn],"""
-    
+
     boundaries = [self.config["training"]["warmup_steps"]],"""
     """)"""
-    
-    
+
+
     """# Create optimizer"""
 
     optimizer = optax.chain(
     """optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),"""
-    
+
     optax.adamw(
     """learning_rate = schedule_fn,"""
     weight_decay = self.config["training"]["weight_decay"],"""
     ),
     """"""
-    
+
     )
     """"""
 
@@ -160,7 +138,7 @@ self.config = config or {}
     dummy_input = jnp.ones((1, self.config["model"]["max_seq_length"]))"""
     variables = self.model.init(rng, dummy_input)
     """"""
-    
+
     self.state = TrainerState.create(
     """apply_fn = self.model.apply,"""
     params = variables["params"],"""
@@ -171,39 +149,37 @@ self.config = config or {}
 
     else None
     """),"""
-    
+
     )
     """"""
 
-
-
 def train(
     """"""
-    
+
     self,
     """"""
 
     train_dataset: Any,
     """"""
-    
+
     num_epochs: int,
     """"""
 
     eval_dataset: Optional[Any] = None,
     """"""
-    
+
     eval_steps: in,
     """"""
 
     t = 1000,
     """"""
-    
+
     save_steps: in,
     """"""
 
     t = 1000,
     """"""
-    
+
     log_steps: in,
     """"""
 
@@ -211,43 +187,42 @@ def train(
     """"""
     ) -> None:
     """Method with multiple parameters.
-    
+
     Args:
     """"""
 
     self: Parameter description
     """"""
-    
+
     train_dataset: Parameter description
     """"""
 
     num_epochs: Parameter description
     """"""
-    
+
     eval_dataset: Parameter description
     """"""
 
     eval_steps: Parameter description
     """"""
-    
+
     t = 1000: Parameter description
     """"""
 
     save_steps: Parameter description
     """"""
-    
+
     t = 1000: Parameter description
     """"""
 
     log_steps: Parameter description
     """"""
-    
+
     t = 100
     """""": Parameter description
     """
 
 """Training loop with evaluation."""
-
 
 """for epoch in range(num_epochs):"""
 
@@ -261,12 +236,10 @@ def train(
     epoch_loss += loss
     """num_steps += 1"""
 
-
 """# Logging"""
 
 if batch_idx % log_steps = = 0: avg_loss = epoch_loss / num_steps
 """logging.info(f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}")"""
-
 
 """# Evaluation"""
 
@@ -276,24 +249,24 @@ if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.e
     if batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epoch"""
     avg_epoch_loss = epoch_loss / num_steps
     """logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")"""
-    
-    
+
+
     """def save_checkpoint(self, name: str) -> None:
     """Method with parameters."""
     """
-    
+
     Save model checkpoint.
     checkpoint_dir = self.output_dir / name
     """checkpoint_dir.mkdir(parents = True, exist_ok=True)"""
     """# Save model parameters"""
-    
+
     with open(checkpoint_dir / "model.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save config"""
     with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")"""
 
 """def load_checkpoint(self, path: str) -> None:
 """Method with parameters."""
     """
-    
+
     Load model checkpoint.
     """
 

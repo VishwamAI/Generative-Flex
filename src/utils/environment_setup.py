@@ -6,8 +6,8 @@ import os
 import sys
 import time
     """Environment setup and verification script."""
-    
-    
+
+
     # Set up device configuration
     __device_config = setup_device_config()
     def test_flax_installation() -> None:
@@ -16,11 +16,9 @@ import time
     @nn.compact
 def main(self) -> None:
     """Method with parameters."""
-    
-    
+
+
     """Run all environment tests."""
-
-
 
     try: # Test JAX): jax_result, s = test_jax_installation()
     print("JAX test completed successfully")
@@ -49,7 +47,6 @@ def main(self) -> None:
     print("\nAll environment tests completed successfully!")
     return True
 except Exception as e: print, (f"Environment setup failed: {{str(e)}}")return False
-
 
 if __name__ = = "__main__": succes, s = main()
 sys.exit(0 if success else 1)

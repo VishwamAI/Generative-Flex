@@ -9,18 +9,13 @@ import logging
 import torch
 Main training script for Generative-Flex
     """Demonstrates how to achieve maximum benchmark performance"""
-    
-    
+
+
     # Import our implemented components
     def main(self) -> None:
     """Method with parameters."""
 
-
 """Main training function"""
-
-
-
-
 
 # Parse arguments and load config
 parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
@@ -33,7 +28,6 @@ GenerativeFlexConfig.from_file(args.config)
 if Path(args.config).exists()
 else create_def ault_config()
 )
-
 
 output_dir = Path(config.training.output_dir)
 output_dir.mkdir(parents = True, exist_ok=True)

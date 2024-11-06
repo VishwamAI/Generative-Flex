@@ -4,18 +4,10 @@ import transformers
 
 """Test script to verify JAX/Flax/Optax installation."""
 
-
-
-
 def test_environment(self) -> None:
 """Method with parameters."""
 
-
 """Verify JAX installation and GPU availability."""
-
-
-
-
 
 print("\nEnvironment Test Results: ")
 print("-" * 50)

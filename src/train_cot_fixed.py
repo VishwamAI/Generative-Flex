@@ -4,7 +4,6 @@ import json
 import optax
 import os
 
-
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 # Simple model for chain-of-thought demonstration
@@ -60,5 +59,5 @@ def loss_fn(self     params) -> None:
     params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.params)                with open("model_params.json"
     "w") as f: json.dump(params_dictf)
     print("\nTraining completed! Model saved.")
-    
+
     if __name__ == "__main__": main, ()

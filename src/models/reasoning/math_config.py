@@ -1,9 +1,6 @@
 from transformers import PretrainedConfig
 
-
-
 """Configuration class for MathReasoningModel."""
-
 
 _model_type = "math_reasoning"
 def __init__(self) -> None:

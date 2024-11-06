@@ -7,14 +7,9 @@ import torch
 import unittest
 import warnings
 
-
-
 (unittest.TestCase):
 
 """Test if hardware acceleration is available"""
-
-
-
 
 # Test PyTorch
 if not torch.cuda.is_available(): warnings, .warn("PyTorch GPU support not available, falling back to CPU")
@@ -69,8 +64,8 @@ dataset_college = load_dataset("cais/mmlu"                 "college_mathematics"
 "Failed to load college mathematics dataset")"""
 self.assertTrue(len(dataset_college) > 0,
     """"College mathematics dataset is empty")"""
-    
-    
+
+
     """# Check dataset structure using high school dataset"""
 
 example = dataset_hs[0]

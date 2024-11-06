@@ -9,13 +9,13 @@ import json
 import logging
 import torch
     """Implements efficient data loading and preprocessing with dynamic batching"""@dataclass"""
-    
+
     Configuration for data processing
     """batch_size: int = 32"""
 Placeholder docstring.
     """Advanced dataset implementation with efficient data loading and caching"""
-    
-    
+
+
     """tokenizer: PreTrainedTokenizerconfi"""
 
 self.tokenizer = tokenizer
@@ -30,11 +30,11 @@ self.tokenizer = tokenizer
 
 self.load_and_cache_data()
     """Load and preprocess data with caching"""
-    
-    
+
+
     self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
     )
-    
+
     if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from {cache_path}")
     self.data = h5py.File(cache_path, "r")
     self.length = len(self.data["input_ids"])
@@ -45,7 +45,6 @@ self.load_and_cache_data()
     else: self.data = processed_data
     self.length = len(processed_data["input_ids"])
     """Process raw data into model inputs"""
-
 
 "attention_mask": []
 "labels": []}  # Read and process data
@@ -67,22 +66,22 @@ return {
 
 }
     """Get a single example"""
-    
-    
+
+
     "input_ids": torch, .tensor(self.data["input_ids"][idx])
     "attention_mask": torch, .tensor(self.data["attention_mask"][idx])
     }
-    
+
     if "labels" in self.data: item, ["labels"] = torch.tensor(self.data["labels"][idx])
     return item
-    
-    
+
+
     def create_dataloader(self) -> None:
     """Method with parameters."""
     dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:
     """Create dataloader with optional distributed training support"""
-    
-    
+
+
     # Setup sampler for distributed training
     sampler = DistributedSampler(dataset) if is_distributed else None
     # Create dataloader
@@ -95,5 +94,5 @@ return {
     pin_memory = True,
     drop_last = True
     )
-    
+
     return dataloader

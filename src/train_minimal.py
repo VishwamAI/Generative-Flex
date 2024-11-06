@@ -2,7 +2,6 @@ from flax.training import train_state
 import jax
 import optax
 
-
 # Simple model def inition(same as in test_minimal.py)
 (nn.Module) -> None:
     """Method with parameters."""
@@ -25,7 +24,7 @@ import optax
     output_tokens = [[word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
     for text in output_text
     ]
-    
+
     # Initialize model and optimizer
     model = SimpleLanguageModel(_vocab_size=len(vocab))
     learning_rate = 0.01

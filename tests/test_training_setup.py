@@ -4,7 +4,6 @@ import unittest
 
 """Test cases for training setup and configuration."""
 
-
 (unittest.TestCase):
 
 """Test suite for training setup."""

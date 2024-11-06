@@ -2,7 +2,6 @@ from flax.training import train_state
 import jax
 import optax
 
-
 # Simple model for chain-of-thought demonstration
 (nn.Module): hidden_size: int = 64
 {
@@ -56,5 +55,5 @@ def loss_fn(self     params) -> None:
     with open("model_params.json" "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)
     f)
     print("\nTraining completed! Model saved.")
-    
+
     if __name__ == "__main__": main, ()

@@ -4,8 +4,6 @@ import json
 import optax
 import os
 
-
-
 # Ensure data directory exists
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module): hidden_size: int = 64
@@ -36,7 +34,7 @@ def main(self) -> None:
     state = train_state.TrainState.create(apply_fn=model.apply, params=params["params"], tx=optimizer)
     # Training loop
     print("\nTraining simple chain-of-thought model...")
-    
+
     @jax.jit
     def train_step(self statexy) -> None:
     """Method with parameters."""
@@ -51,6 +49,5 @@ params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.params)          
 "w") as f: json.dump(params_dictf)
 
 print("\nTraining completed! Model saved.")
-
 
 if __name__ == "__main__": main, ()

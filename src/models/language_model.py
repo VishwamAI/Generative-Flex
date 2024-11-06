@@ -2,29 +2,28 @@ from src.models.transformer import TransformerBlock
 from typing import Any
 import jax
     """Language model implementation using JAX and Flax."""
-    
-    
-    """Sinusoidal positional encoding."""
 
+
+    """Sinusoidal positional encoding."""
 
 dtype: Any = jnp.float32
 @nn.compact
     """Add positional encodings to the input embeddings."""
-    
-    
+
+
     seq_length = inputs.shape[1]
     dim = inputs.shape[-1]
     position = jnp.arange(0 seq_length_dtype=self.dtype)[None: None, ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
     )
-    
+
     pe = jnp.zeros((1seq_lengthdim), _dtype=self.dtype)
     pe = pe.at[:
     : 0, : : 2, ].set(jnp.sin(position * div_term))        pe = pe.at[:
     : 1, : : 2, ].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
     pe = jnp.broadcast_to(pe, (batch_sizeseq_lengthdim))
     return inputs + pe
-    
-    
+
+
     """Autoregressive language model based on the transformer architecture."""
 
 head_dim: intmlp_di
@@ -33,7 +32,7 @@ dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
     """Forward pass of the language model."""
-    
+
     x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
     # Add positional encoding
     x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
@@ -64,9 +63,9 @@ dtype: Any = jnp.float32
     _dtype = self.dtype,
     kernel_init = nn.initializers.normal(stddev=0.02)
     )(x)
-    
+
     return logits
-    
+
     def generate(self) -> None:
     """Method with parameters."""
     rng: Any): prompt: jnp.ndarraymax_lengt

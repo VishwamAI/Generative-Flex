@@ -5,7 +5,6 @@ from src.models.video_model import VideoGenerationModel
 import jax
 import pytest
 
-
 # Test configurations
 BATCH_SIZE = 2
 SEQ_LENGTH = 32

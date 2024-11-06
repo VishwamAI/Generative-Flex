@@ -5,10 +5,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 import json
 
-
 @dataclass
 class ModelConfig:
-
 """
     Model configuration.
     model_type: str = field(default="language")"""
@@ -36,22 +34,16 @@ class ModelConfig:
     """video_patch_size: Optional[Tuple[intintint]] = field(default = None)"""
     """@property"""
 
-
-
 def max_position_embeddings(self) -> None:
     """Method with parameters."""
-    
-    """Compatibility property for models expecting max_position_embeddings."""
 
+    """Compatibility property for models expecting max_position_embeddings."""
 
 """"""
 
-
 @dataclass
 
-
 """class TrainingConfig:"""
-
 
     Training configuration.
     learning_rate: float = field(default=1e-4)
@@ -67,15 +59,13 @@ def max_position_embeddings(self) -> None:
     cache_dir: str = field(default="cache")"""
     seed: int = field(default=42)
     """"""
-    
-    
+
+
     """@dataclass"""
-
-
 
 class Config:
     """Complete configuration."""
-    
+
     training: TrainingConfig = field(default_factory=TrainingConfig)
     """"""
 
@@ -83,8 +73,8 @@ class Config:
     """def from_json(cls, path: str) -> None:
     """Method with parameters."""
     """
-    
-    
+
+
     Load configuration from JSON file.
     with open(path, "r") as f: config_dict = json.load(f)"""
     """model_config = ModelConfig(**config_dict["model"])"""
@@ -93,27 +83,27 @@ class Config:
     """def save_json(self, path: str) -> None:
     """Method with parameters."""
     """
-    
+
     Save configuration to JSON file.
     config_dict = {
     """"""
 
     },
     """"training": self, .training.__dict__,"""
-    
+
     }
     """"""
 
     with open(path, "w") as f: json.dump(config_dictfindent = 2)"""
     """@classmethod"""
-    
-    
-    
+
+
+
     def config_path: Optional[str](cls,
     """model_type: str = "language","""
     config_path: Optional[str] = None
     """):"""
-    
+
     Get configuration for a specific model type.
     """
     if config_path and Path(config_path).exists(): retur, n cls.from_json(config_path)

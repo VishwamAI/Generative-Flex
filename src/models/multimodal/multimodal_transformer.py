@@ -4,16 +4,14 @@ from typing import OptionalTupleDict, Any
 import logging
 import torch
     """MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
-    
-    
+
+
     # Set up logging
     logging.basicConfig(level = logging.INFO)
     logger = logging.getLogger(__name__)
     """MultiModal Transformer with enhanced capabilities for mathematical reasoning."""
 
-
 """Module docstring."""
-
 
 _init_math_weights(module) -> None: ifisinstance, (module (nn.Linear nn.Embedding): module, .weight.data.normal_(mean = 0.0
 std = 0.02)        if isinstance(module
@@ -29,7 +27,7 @@ def __init__(self) -> None:
     image_features: Optional[torch.Tensor] = None
     return_dict: bool = True) -> Dict[str
     """Forward pass with support for text and image inputs."""
-    
+
     batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
     )
     device = next(self.parameters()).device
@@ -46,7 +44,7 @@ def __init__(self) -> None:
     # Project image features
     image_embeddings = self.image_projection(processed_images)  # [batch_sizenum_imageshidden_size]
     total_sequence_length += image_embeddings.size(1)
-    
+
     if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings = torch.cat([embeddings, image_embeddings], dim=1)
     else: embeddings = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
     if embeddings is None: embeddings = torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
@@ -78,23 +76,23 @@ def __init__(self) -> None:
     "pooler_output": hidden_states, [: 0, ]
     # Use first token for pooling
     "math_gate": math_gat, e
-    
+
     "router_probs": router_probs_lis, t
-    
+
     }
     return hidden_states
-    
+
     def __init__(self) -> None:
     """Method with parameters."""
     input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
     Any]:
     """Prepare inputs for text generation."""
-    
+
     position_ids = kwargs.get("position_ids", None)
     if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0
     1)
-    
+
     return {
     "input_ids": input_id, s
     "attention_mask": attention_mas, k

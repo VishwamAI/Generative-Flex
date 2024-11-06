@@ -1,3 +1,1 @@
-# Reasoning package initialization
-
-___all__ = ["MathReasoningHead"]
+___all__ = ['MathReasoningHead']

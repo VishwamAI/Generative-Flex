@@ -3,7 +3,7 @@ from experts import MixtureOfExperts
 from typing import Optional
 import torch
     """Combines Flash Attention and Mixture of Experts for optimal performance""""""
-    
+
     Placeholder docstring.
     """Advanced transformer layer combining Flash Attention and Mixture of Experts"""
 

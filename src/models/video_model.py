@@ -3,10 +3,9 @@ from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
     """Video generation model implementation using JAX and Flax."""
-    
-    
-    """Video to embedding conversion."""
 
+
+    """Video to embedding conversion."""
 
 patch_size: Tuple[intint
 int]  # (time, height, width)
@@ -27,7 +26,6 @@ def __call__(self video) -> None:
     )
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
     """Transformer-based video generation model."""
-
 
 int
 int]# (frames heightwidth)

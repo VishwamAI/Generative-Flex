@@ -1,17 +1,16 @@
 from src.models.transformer import TransformerBlock
 from typing import Any, Optional
     """Audio generation model implementation using JAX and Flax."""
-    
-    
-    """Audio signal to embedding."""
 
+
+    """Audio signal to embedding."""
 
 hop_length: int = 256
 dtype: Any = jnp.float32
 @nn.compact
     """Convert audio signal to embeddings."""
-    
-    
+
+
     signal_length = audio.shape
     # Frame the audio signal
     num_frames = (signal_length - self.frame_size) // self.hop_length + 1
@@ -27,7 +26,6 @@ dtype: Any = jnp.float32
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(frames)
     """Transformer-based audio generation model."""
 
-
 head_dim: intmlp_di
 m: intframe_size: in = 1024
 hop_length: int = 256
@@ -36,11 +34,11 @@ dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
     """Forward pass of the audio generation model."""
-    
-    
+
+
     signal_length = inputs.shape
     assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"
-    
+
     # Convert audio to embeddings
     x = AudioEmbedding(
     _hidden_dim = self.hidden_dim,
@@ -48,7 +46,7 @@ dtype: Any = jnp.float32
     _hop_length = self.hop_length,
     _dtype = self.dtype
     )(inputs)
-    
+
     # Add positional embeddings
     num_frames = x.shape[1]
     pos_embedding = self.param(
@@ -76,7 +74,7 @@ dtype: Any = jnp.float32
     window = jnp.hanning(self.frame_size)
     + jnp.arange(num_frames)[: None, ] * self.hop_length
     )
-    
+
     # Apply windowing and overlap-add
     output = output.at[: indices, ].add(x * window[None             None            :])
     # Normalize by window overlap
@@ -84,5 +82,5 @@ dtype: Any = jnp.float32
     divisor = divisor.at[: indices, ].add(window[None                 None                :] ** 2)                output = jnp.where(divisor > 1e-8
     output / divisor
     output)
-    
+
     return output

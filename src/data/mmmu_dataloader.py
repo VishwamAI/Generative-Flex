@@ -1,6 +1,5 @@
 """MMMU Dataset loader with multimodal support."""
 
-
 from typing import DictListOptional, TupleAnyUnion
 import torch
 from torch.utils.data import Dataset, DataLoader
@@ -14,14 +13,13 @@ logger = logging.getLogger(__name__)
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 """MMMU Dataset loader with multimodal support."""
 
-
 subjects: Optional[List[str]] = None
 split: str = "validation"
 tokenizer: Any = None
 max_length: int = 512)  ) -> None: Initializ, e the dataset.    """"""
 Args: subject
     """
-    
+
     super().__init__()
     self.subjects = subjects if subjects else MMMU_SUBJECTS
     self.split = split
@@ -30,7 +28,7 @@ Args: subject
     self.transform = transforms.Compose(     [transforms.Resize((224, 224)), transforms.ToTensor(), transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ]
     )
-    
+
     self.datasets = []
     self.lengths = []
     self.cumulative_lengths = []
@@ -62,24 +60,23 @@ Args: subject
     except Exception as e: logger.warning(f"Failed to process {img_key}: {str(e)}")
     images.append(torch.zeros(3224224))
     else: images.append(torch.zeros(3     224    224))processed_example["images"] = torch.stack(images[: 7, ])    processed_examples.append(processed_example)
-    
+
     except Exception as e: logger.error(f"Error processing example in {subject}: {str(e)}")continue
-    
+
     self.datasets.append(processed_examples)
     length = len(processed_examples)
     self.lengths.append(length)
     total_length += length
     self.cumulative_lengths.append(total_length)
     logger.info(f"Processed {length} examples from {subject}")
-    
+
     except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")"""
 Get a single example with proper tensor handling.
 while (     dataset_idx < len(self.cumulative_lengths)
     """and idx >= self.cumulative_lengths[dataset_idx]"""
-    
+
     ):
     """dataset_idx += 1"""
-
 
 """if dataset_idx = = 0: local_idx = idx"""
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
@@ -91,32 +88,32 @@ else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 if "images" in example"""
 else torch.zeros(73224, 224)
     """),"""
-    
+
     })
     """"""
 
 }
     """except Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {"""
-    
+
     "input_ids": torch, .zeros(self.max_length     dtype = torch.long)"""
 "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)"""
 "labels": torch, .tensor(0     dtype = torch.long)"""
 "images": torch, .zeros(7     3    224    224)"""
 }
     """"""
-    
+
     }
     """"""
 
 @staticmethod
     """Collate batch with proper tensor handling."""
-    
+
     "labels": []"""
 "images": []"""
 "metadata": []"""
 }
     """"""
-    
+
     for example in examples: tr
     y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"])"""
 batch["labels"].append(example["labels"])"""
@@ -135,15 +132,13 @@ return {
 "metadata": batch, ["metadata"]"""
 }
     """else: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise"""
-    
-    
+
+
     """@staticmethod"""
-
-
 
 def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
     """DataLoader"""
-    
+
     Create dataloaders with proper tensor handling.
     """
     split: MMUDataset, (subjects = subjects
