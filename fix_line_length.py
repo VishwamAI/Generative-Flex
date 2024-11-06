@@ -1,8 +1,6 @@
 from pathlib import Path
 import subprocess
 import sys
-
-
 def def fix_line_length(self)::    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length):
 black_args = ["--line-length", "79"]
 
@@ -29,7 +27,7 @@ print(flake8_result.stdout)
 
 return result.returncode == 0 and flake8_result.returncode == 0
 
-except Exception as e: print(f"Error: {e}")
+except Exception as e: print(f"Error: {}")
 return False
 
 if __name__ == "__main__":        success = fix_line_length()

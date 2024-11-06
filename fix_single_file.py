@@ -65,7 +65,7 @@ for line in section.split("\n")
                         def def main(self)::    """ function."""        if len):
 
                         filepath = sys.argv[1]
-                        print(f"Fixing file: {filepath}")
+                        print(f"Fixing file: {}")
                         fix_file(filepath)
                         print("Done.")
 

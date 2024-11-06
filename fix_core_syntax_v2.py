@@ -5,8 +5,6 @@ import
  re
 from pathlib import Path
 import ast
-
-
 def fix_indentation_and_spacing(content: st r) -> str: lines
 """Fix basic indentation and spacing issues."""
  = []
@@ -51,13 +49,13 @@ stripped = line.lstrip()
                                 if ": " in param and "=" in param: name
                                 rest = param.split(": "                                     1)                    type_hint
                                 default = rest.split("="                                     1)
-                                    param = f"{name.strip()}: {type_hint.strip()} = {default.strip()}"                elif ":" in param: name
-                                        type_hint = param.split(": "                                         1)                    param = f"{name.strip()}: {type_hint.strip()}"                param_parts.append(param)
+                                    param = f"{}: {} = {}"                elif ":" in param: name
+                                        type_hint = param.split(": "                                         1)                    param = f"{}: {}"                param_parts.append(param)
                                         params = ", ".join(param_parts)
 
                                         # Format the function definition
-                                        if return_type: return f"def {name}({params}) -> {return_type.strip()}:"
-                                        return f"def {name}({params}):"
+                                        if return_type: return f"def {}({}) -> {}:"
+                                        return f"def {}({}):"
 
                                         # Fix function definitions
                                         pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->\s*(.*?))?\s*:"    return re.sub(pattern
@@ -72,8 +70,8 @@ stripped = line.lstrip()
     name = match.group(1)        bases = match.group(2)
 
                                             if bases: bases = ", ".join(b.strip() for b in bases.split(", ") if b.strip())
-                                                return f"class {name}({bases}):"
-                                                return f"class {name}:"
+                                                return f"class {}({}):"
+                                                return f"class {}:"
 
                                                 pattern = r"class\s+(\w+)\s*(?: \((.*?)\))?\s*:"    return re.sub(pattern
                                                 fix_single_class
@@ -105,8 +103,8 @@ if (                                                             in_class       
                                                                 if "=" in stripped: name
                                                                 rest = stripped.split(": "                                                                 1)                type_hint
                                                                 default = rest.split("="                                                                 1)
-                                                                line = f"{' ' * indent}{name.strip()}: {type_hint.strip()} = {default.strip()}"            else: name
-                                                                type_hint = stripped.split(": "                                                                     1)                line = f"{' ' * indent}{name.strip()}: {type_hint.strip()}"
+                                                                line = f"{}{}: {} = {}"            else: name
+                                                                type_hint = stripped.split(": "                                                                     1)                line = f"{}{}: {}"
                                                                 lines.append(line)
 
                                                                 # Check if we're leaving the class
@@ -133,14 +131,14 @@ if (                                                             in_class       
 
                                                                                 # Validate syntax
                                                                                 try: ast.parse(content)
-                                                                                    except SyntaxError as e: print(f"Syntax error in {file_path}: {e}")
+                                                                                    except SyntaxError as e: print(f"Syntax error in {}: {}")
                                                                                         return
 
                                                                                         # Write back the fixed content
                                                                                         with open(file_path                                                                                         "w"                                                                                        encoding="utf-8") as f: f.write(content)
-                                                                                        print(f"Fixed {file_path}")
+                                                                                        print(f"Fixed {}")
 
-                                                                                        except Exception as e: print(f"Error processing {file_path}: {e}")
+                                                                                        except Exception as e: print(f"Error processing {}: {}")
 
 
                                                                                         def def main():        core_files

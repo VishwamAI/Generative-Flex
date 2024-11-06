@@ -1,6 +1,5 @@
 from typing import Tuple
 import os
-
 #!/usr/bin/env python3
 
 
@@ -46,15 +45,19 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
 
                         def def fix_verify_mapped_datasets(self)::    content = read_file):
                             # Fix f-string formatting
-                            content = content.replace('logger.warning(f"High memory usage detected: {memory_percent:.1f}%")'
-                            'logger.warning(\n    f"High memory usage detected: {memory_percent:.1f}%"\n)')
+                            content = content.replace('logger.warning(f"High memory usage detected: {
+     memory_percent: .1f
+ }%")'
+                            'logger.warning(\n    f"High memory usage detected: {
+     memory_percent: .1f
+ }%"\n)')
                             write_file("data/verify_mapped_datasets.py", content)
 
 
                             def def fix_text_to_anything_files(self):: for version in [""):
                             "_v6"
                             "_v7"
-                            "_v8"]: filepath = f"fix_text_to_anything{version}.py"
+                            "_v8"]: filepath = f"fix_text_to_anything{}.py"
                             content = read_file(filepath)
                                 if content:
                             # Fix indentation

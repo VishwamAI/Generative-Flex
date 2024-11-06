@@ -5,8 +5,6 @@ from typing import List
 from typing import Any
 from typing import Optional
 import os
-
-
 def def fix_text_to_anything(self):: with open):
 "src/models/text_to_anything.py")
 "r") as f: content = f.readlines()
@@ -14,7 +12,6 @@ def def fix_text_to_anything(self):: with open):
 imports = [
 "import jax.numpy as jnp\n",
 "from typing import Dict,
-    ,
     ,
     ,
     
@@ -60,42 +57,42 @@ i = 0
                 if in_class and line.strip().startswith("def "):
     in_method = True
                 # Special handling for TextTokenizer methods
-                if current_class == "TextTokenizer": if "def __init__" in line: fixed_content.append(f"{class_indent}def __init__(self                     max_length: int                    vocab_size: int):\n"
+                if current_class == "TextTokenizer": if "def __init__" in line: fixed_content.append(f"{}def __init__(self                     max_length: int                    vocab_size: int):\n"
                 )
         )
-        fixed_content.append(f"{method_indent}self.max_length = max_length\n")
-        fixed_content.append(f"{method_indent}self.vocab_size = vocab_size\n")
-        fixed_content.append(f"{method_indent}self.pad_token = 0\n")
+        fixed_content.append(f"{}self.max_length = max_length\n")
+        fixed_content.append(f"{}self.vocab_size = vocab_size\n")
+        fixed_content.append(f"{}self.pad_token = 0\n")
         # Skip the original method content
         while i < len(content) and not content[
         i
             ].strip().startswith("def"):
                 i += 1
-                continue                 elif "def encode" in line: fixed_content.append(f"{class_indent}def encode(self                 text: str) -> jnp.ndarray:\n"
+                continue                 elif "def encode" in line: fixed_content.append(f"{}def encode(self                 text: str) -> jnp.ndarray:\n"
         )
         )
-        fixed_content.append(f"{method_indent}# Convert text to token IDs\n")
-        fixed_content.append(f"{method_indent}tokens = [ord(c) % self.vocab_size for c in text]\n"
+        fixed_content.append(f"{}# Convert text to token IDs\n")
+        fixed_content.append(f"{}tokens = [ord(c) % self.vocab_size for c in text]\n"
 )
-fixed_content.append(f"{method_indent}# Truncate or pad to max_length\n")
-fixed_content.append(f"{method_indent}if len(tokens) > self.max_length:\n"
+fixed_content.append(f"{}# Truncate or pad to max_length\n")
+fixed_content.append(f"{}if len(tokens) > self.max_length:\n"
 )
-fixed_content.append(f"{method_indent}    tokens = tokens[:self.max_length]\n")                                                fixed_content.append(f"{method_indent}elif len(tokens) < self.max_length:\n"
+fixed_content.append(f"{}    tokens = tokens[:self.max_length]\n")                                                fixed_content.append(f"{}elif len(tokens) < self.max_length:\n"
 )
-fixed_content.append(f"{method_indent}    tokens.extend([self.pad_token] * (self.max_length - len(tokens)))\n"
+fixed_content.append(f"{}    tokens.extend([self.pad_token] * (self.max_length - len(tokens)))\n"
 )
-fixed_content.append(f"{method_indent}return jnp.array(tokens)\n"
+fixed_content.append(f"{}return jnp.array(tokens)\n"
 )
 # Skip the original method content
 while i < len(content) and not content[
 i
 ].strip().startswith("def"):
 i += 1
-continue                 elif "def decode" in line: fixed_content.append(f"{class_indent}def decode(self     tokens: jnp.ndarray) -> str:\n"
+continue                 elif "def decode" in line: fixed_content.append(f"{}def decode(self     tokens: jnp.ndarray) -> str:\n"
 )
 )
-fixed_content.append(f"{method_indent}# Convert token IDs back to text\n")
-fixed_content.append(f"{method_indent}return ''.join(chr(t) for t in tokens if t != self.pad_token)\n"
+fixed_content.append(f"{}# Convert token IDs back to text\n")
+fixed_content.append(f"{}return ''.join(chr(t) for t in tokens if t != self.pad_token)\n"
 )
 # Skip the original method content
 while i < len(content) and not content[
@@ -103,11 +100,11 @@ i
 ].strip().startswith("def"):
 i += 1
 continue
-# Handle __call__ method             elif "def __call__" in line: fixed_content.append(f"{class_indent}def __call__(\n")
-fixed_content.append(f"{method_indent}self      n")
-fixed_content.append(f"{method_indent}inputs: Union[str     Dict[str    Any]]     n")
-fixed_content.append(f"{method_indent}target_modality: str     n")
-fixed_content.append(f"{method_indent}context: Optional[Dict[str     Any]] = None \n")
+# Handle __call__ method             elif "def __call__" in line: fixed_content.append(f"{}def __call__(\n")
+fixed_content.append(f"{}self      n")
+fixed_content.append(f"{}inputs: Union[str     Dict[str    Any]]     n")
+fixed_content.append(f"{}target_modality: str     n")
+fixed_content.append(f"{}context: Optional[Dict[str     Any]] = None \n")
 Dict[str
 Any]]: \n"
 )
@@ -116,19 +113,20 @@ while i < len(content) and not content[i].strip().endswith(":"):
 i += 1
 i += 1
 continue
-else: fixed_content.append(f"{class_indent}{line.lstrip()}\n")
+else: fixed_content.append(f"{}{}\n")
 i += 1
 continue
 
 # Handle method content
     if in_method: stripped = line.strip()                                                                            if stripped:
         # Handle special cases
-        if "batch_size = 1" in stripped: if"# Initialize with default value" not in stripped: fixed_content.append(f"{method_inden                                                                                        # Initialize with default value\n")
-        else: fixed_content.append(f"{method_indent}{stripped}\n")
-        elif "curr_batch_size = " in stripped: fixed_content.append(f"{method_indent}{stripped}\n")                                                                                                elif "_adjust_sequence_length" in stripped: if"embedded = self._adjust_sequence_length(" in stripped: fixed_content.append(                                                                                                        f"{method_indent}embedded = self._adjust_sequence_length(\n")
-        fixed_content.append(f"{method_indent}    embedded          n")
-        fixed_content.append(f"{method_indent}    sequence_length\n")
-        fixed_content.append(f"{method_indent})\n")
+        if "batch_size = 1" in stripped: if"# Initialize with default value" not in stripped: fixed_content.append(f"{
+    else: fixed_content.append(f"{method_indent
+}{}\n")
+        elif "curr_batch_size = " in stripped: fixed_content.append(f"{}{}\n")                                                                                                elif "_adjust_sequence_length" in stripped: if"embedded = self._adjust_sequence_length(" in stripped: fixed_content.append(                                                                                                        f"{}embedded = self._adjust_sequence_length(\n")
+        fixed_content.append(f"{}    embedded          n")
+        fixed_content.append(f"{}    sequence_length\n")
+        fixed_content.append(f"{})\n")
 
         # Skip the original call
         while i < len(content) and ")" not in content[i]:
@@ -137,13 +135,13 @@ continue
         i +
         = 1
         continue
-        else: fixed_content.append(f"{method_indent}{stripped}\n")
-        else: fixed_content.append(f"{method_indent}{stripped}\n")
+        else: fixed_content.append(f"{}{}\n")
+        else: fixed_content.append(f"{}{}\n")
         else: fixed_content.append("\n")
 
         # Handle class content
         elif in_class:
-    stripped = line.strip()                                                                                                                            if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
+    stripped = line.strip()                                                                                                                            if stripped: fixed_content.append(f"{}{}\n")
         else: fixed_content.append("\n")
 
         # Handle top-level content

@@ -10,8 +10,6 @@ from PIL import Image
 import torchvision.transforms as transforms
 import logging
 from typing import Optional, Any, List
-
-
 logger = logging.getLogger(__name__)
 # Default subjects for MMMU dataset
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"] 
@@ -42,34 +40,34 @@ Args: subject
     # Load datasets for each subject
     total_length = 0
     for subject in self.subjects: tr
-    y: dataset = load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
+    y: dataset = load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {} dataset with {} examples")
     processed_examples = []
     for example in dataset: tr
-    y: processed_example = {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({chr(65+i)}) {opt}" for i
+    y: processed_example = {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({}) {}" for i
     opt in enumerate(options)
     )
-    question = example["question"]     text = f"Question: {question}\nOptions: {options_text}"encoding = self.tokenizer(     text,max_length = self.max_length,padding = "max_length",truncation = True,return_tensors = "pt"
+    question = example["question"]     text = f"Question: {}\nOptions: {}"encoding = self.tokenizer(     text,max_length = self.max_length,padding = "max_length",truncation = True,return_tensors = "pt"
 )
     processed_example["input_ids"] = encoding["input_ids"].squeeze(0)     processed_example["attention_mask"] = encoding["attention_mask"].squeeze(0)     processed_example["labels"] = torch.tensor(ord(example["answer"]) - ord("A"), dtype = torch.long)
     images = []
-    for i in range(1 8): img_ke, y = f"image_{i}"
+    for i in range(1 8): img_ke, y = f"image_{}"
     if img_key in example and example[img_key] is not None: tr
     y: image = example[img_key]    if isinstance(image     Image.Image): imag, e = self.transform(image)
     images.append(image)
-    except Exception as e: logger.warning(f"Failed to process {img_key}: {str(e)}")
+    except Exception as e: logger.warning(f"Failed to process {}: {}")
     images.append(torch.zeros(3224224))
     else: images.append(torch.zeros(3     224    224))processed_example["images"] = torch.stack(images[: 7, ])    processed_examples.append(processed_example)
 
-    except Exception as e: logger.error(f"Error processing example in {subject}: {str(e)}")continue
+    except Exception as e: logger.error(f"Error processing example in {}: {}")continue
 
     self.datasets.append(processed_examples)
     length = len(processed_examples)
     self.lengths.append(length)
     total_length += length
     self.cumulative_lengths.append(total_length)
-    logger.info(f"Processed {length} examples from {subject}")
+    logger.info(f"Processed {} examples from {}")
 
-    except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")and
+    except Exception as e: logger.warning(f"Failed to load {}: {}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")and
 """
 Get a single example with proper tensor handling.
 while(dataset_idx < len(self.cumulative_lengths)
@@ -87,25 +85,16 @@ while(dataset_idx < len(self.cumulative_lengths)
 """
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 """
-: example = self.datasets[dataset_idx][local_idx]    return { if
-    """
- "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
-"""
-else torch.zeros(73224, 224)
-"""
-),"""
-
-
-    })
+: example = self.datasets[dataset_idx][local_idx]    return {
+     "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
+ })
 """"""
 
 
 
-}""" Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {Collate
-    """
-
-    "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
-}
+}""" Exception as e: logger.error(f"Error retrieving example {}: {}")return {
+     "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
+ }
 """"""
 
 
@@ -127,19 +116,16 @@ else torch.zeros(73224, 224)
  example in examples: tr
     y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
     """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
-    """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {str(e)}")continueif
+    """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}")continueif
 """ """
  batch["input_ids"]:input_ids
 """
 
 return {
-"""
-"": torch, .stack(batch["input_ids"])else
-    """
-
-"attention_mask": torch, .stack(batch["attention_mask"])""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
-}
-""": raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise
+     "": torch, .stack(batch["input_ids"])else,
+     "attention_mask": torch, .stack(batch["attention_mask"])""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
+ }
+""": raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {}")raise
 
 def
 """ """
@@ -161,8 +147,8 @@ def
     pin_memory = pin_memory,
     collate_fn = MMUDataset.collate_mmmu_batch
     )
-    logger.info(f"Created {split} dataloader with {len(datasets[split])} examples")
+    logger.info(f"Created {} dataloader with {} examples")
 
     return(dataloaders["dev"], dataloaders["validation"], dataloaders["test"])
 
-except Exception as e: logger.error(f"Error creating dataloaders: {str(e)}")raise
+except Exception as e: logger.error(f"Error creating dataloaders: {}")raise

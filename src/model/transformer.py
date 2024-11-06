@@ -2,8 +2,6 @@ from attention import FlashAttention
 from experts import MixtureOfExperts
 from typing import Optional
 import torch
-
-
     Placeholder
 """Combines Flash Attention and Mixture of Experts for optimal performance"""
 """ docstring.
@@ -29,8 +27,7 @@ self
 """dropout = dropout"""
 
 )
-"""norm1 = nn.LayerNorm(d_model)self
-dropout = nn.Dropout(dropout)def
+"""norm1 = nn.LayerNorm(d_model)self.dropout = nn.Dropout(dropout)def
 """
  """
  forward(self):  x

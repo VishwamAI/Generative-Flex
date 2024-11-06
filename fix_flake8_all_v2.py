@@ -3,9 +3,6 @@ import ast
 import re
 import sys
 import traceback
-
-
-
 def fix_unused_imports(content) -> None: try
 """Remove unused imports."""
 : lines = content.split("\n")            tree = ast.parse(content)
@@ -65,11 +62,12 @@ for node in ast.walk(tree):
 
                                 def fix_undefined_names(content) -> None: try
 """Fix undefined names by adding imports."""
-: undefined_fixes = {                                                            "PretrainedConfig": "from transformers import PretrainedConfig"
-                                "PreTrainedModel": "from transformers import PreTrainedModel"
-                                "Tuple": "from typing import Tuple"
-                                "os": "import os"
-                                }
+: undefined_fixes = {
+     "PretrainedConfig": "from transformers import PretrainedConfig",
+     "PreTrainedModel": "from transformers import PreTrainedModel",
+     "Tuple": "from typing import Tuple",
+     "os": "import os"
+ }
 
                         lines = content.split("\n")
                         imports_added = set()
@@ -93,8 +91,8 @@ for node in ast.walk(tree):
                                 unused_vars.discard(node.id)
                                 UnusedVarVisitor().visit(tree)
 
-                                for var in unused_vars: content = re.sub(rf"\b{var}\b(?=\s*=)"
-                                f"_{var}"
+                                for var in unused_vars: content = re.sub(rf"\b{}\b(?=\s*=)"
+                                f"_{}"
                                 content)
                                 return content
                                         except SyntaxError: returncontentdef process_file(file_path) -> None: try
@@ -111,8 +109,8 @@ for node in ast.walk(tree):
                                             content = fix_unused_variables(content)
 
                                             # Write back
-                                            with open(file_path                                             "w"                                            encoding="utf-8") as f: f.write(content)            print(f"Successfully processed {file_path}")
-                                            except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                                            with open(file_path                                             "w"                                            encoding="utf-8") as f: f.write(content)            print(f"Successfully processed {}")
+                                            except Exception as e: print(f"Error processing {}: {}")
                                             traceback.print_exc()
 
 
@@ -126,7 +124,7 @@ for node in ast.walk(tree):
                                             tests_dir]:
                                                 if directory.exists():
                                                     for file_path in directory.rglob("*.py"):
-                                                    print(f"Processing {file_path}...")
+                                                    print(f"Processing {}...")
                                                     process_file(file_path)
 
 

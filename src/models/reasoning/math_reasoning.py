@@ -17,7 +17,6 @@ from typing import Optional, List
 
 
 nalUnionList, DictAnyTuple
-
 logger = logging.getLogger(__name__)
 
 
@@ -60,9 +59,13 @@ value = 0)
 # Process with Flash Attention
 try: attn_outputattn_weights = self.flash_attention(hidden_states, attention_mask)
 hidden_states = attn_output
-aux_info = {"attention_weights": attn_weights, }except Exception as e: logger.error(f"Flash attention failed: {e}")# Fallback to regular attention if flash attention fails
+aux_info = {
+     "attention_weights": attn_weights,
+ }except Exception as e: logger.error(f"Flash attention failed: {}")# Fallback to regular attention if flash attention fails
 hidden_states = hidden_states + 0  # Identity operation as fallback
-aux_info = {"attention_weights": None, }  # Process through MoE layer
+aux_info = {
+     "attention_weights": None,
+ }  # Process through MoE layer
 moe_output, router_probs = self.math_experts(hidden_states)
 hidden_states = hidden_states + self.dropout(moe_output)
 # Calculate auxiliary losses
@@ -129,9 +132,9 @@ device = logits.device
 total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
 # Return outputs and auxiliary information
 return {
-"loss": total_los, s "logits": logit, s "hidden_states": hidden_state, s "math_accuracy": math_accurac, y "expert_entropy": expert_entrop, y "router_entropy": router_entrop, y "load_balance_loss": load_balance_los, s
-**aux_info,
-}
+     "loss": total_los, s "logits": logit, s "hidden_states": hidden_state, s "math_accuracy": math_accurac, y "expert_entropy": expert_entrop, y "router_entropy": router_entrop, y "load_balance_loss": load_balance_los, s,
+     **aux_info,
+ }
 
 def module: nn.Modulevalu
 e: bool, (self, module: nn.Modulevalu

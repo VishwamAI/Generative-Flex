@@ -1,15 +1,10 @@
 from typing import Tuple
-
-
 import
 """Fix syntax issues in Python files using a batched approach with better error handling."""
  re
 import sys
 from pathlib import Path
-from typing import List,
-    
-
-
+from typing import List
 def fix_indentation(content: st r) -> str: lines
 """Fix common indentation issues."""
  = content.split("\n")
@@ -52,13 +47,13 @@ if "self" in stripped and indent_stack[-1] == 0: current_indent = 4            e
                         failed = 0
 
                         for i in range(0                         total_files                        batch_size):
-                        batch = files[i: i+ batch_size]                print(                             f"\nProcessing batch {i//batch_size + 1}/{(total_files + batch_size - 1)//batch_size}"
+                        batch = files[i: i+ batch_size]                print(                             f"\nProcessing batch {}/{}"
                         )
 
                         for file_path in batch: success
                         message = process_file(file_path)                print(message)
                         if success: successful+= 1                else: failed+= 1
-                        print(                         f"\nBatch progress: {successful}/{total_files} successful                        {failed}/{total_files} failed"                    )
+                        print(                         f"\nBatch progress: {}/{} successful                        {}/{} failed"                    )
                 sys.stdout.flush()
 
 
@@ -71,7 +66,7 @@ if "self" in stripped and indent_stack[-1] == 0: current_indent = 4            e
                 if ".git" not in str(f) and "venv" not in str(f)
                 ]
 
-                print(f"Found {len(python_files)} Python files")
+                print(f"Found {} Python files")
                 process_batch(python_files, batch_size=10)
 
 

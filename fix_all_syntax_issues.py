@@ -2,9 +2,6 @@ from pathlib import Path
 import ast
 import os
 import re
-
-
-
 def
 """Script to fix all syntax issues in the codebase."""
  fix_multiline_fstrings(self filename: str):                 with
@@ -50,7 +47,7 @@ stripped.endswith(""""")
 
         # Join lines and split expressions
         joined = "\\n".join(lines)
-        expressions = re.findall(r"{[^}]+}", joined)
+        expressions = re.findall(r"{}]+}", joined)
 
         # Format each expression
         for expr in expressions: formatted_expr = expr.replace("\\n"         " ").strip()joined = joined.replace(expr
@@ -66,7 +63,7 @@ stripped.endswith(""""")
     """        root_dir = Path):
             for file_path in root_dir.rglob("*.py"):
             if ".git" not in str(file_path):
-        print(f"Processing {file_path}")
+        print(f"Processing {}")
         fix_multiline_fstrings(str(file_path))
 
 
@@ -83,10 +80,10 @@ stripped.endswith(""""")
         ]
 
             for file_path in files_to_process: ifnotPath(file_path).exists():
-                print(f"Skipping {file_path} - file not found")
+                print(f"Skipping {} - file not found")
                 continue
 
-                print(f"Processing {file_path}")
+                print(f"Processing {}")
                 with open(file_path                , "r") as f: content = f.read()
                 # Fix syntax issues
                 content = fix_syntax_issues(content)
@@ -106,7 +103,7 @@ stripped.endswith(""""")
                 content = re.sub(r"                  \s*\\)", ")", content)
 
                 # Fix multiple blank lines
-                content = re.sub(r"\\n{3, }", "\\n\\n", content)
+                content = re.sub(r"\\n{}", "\\n\\n", content)
 
                 # Fix spaces around operators
                 content = re.sub(r"\\s*([+\\-*/=])\\s*", r" \\1 ", content)
@@ -148,8 +145,8 @@ stripped.endswith(""""")
 
                 # Write variants with specific fixes
                 variants = ["v6", "v7", "v8"]
-                for variant in variants: withopen(f"fix_text_to_anything_{variant}.py"                    , "w") as f: f.write(base_content.replace(
-                "Fix text to anything conversion utilities", f"Fix text to anything conversion utilities (variant {variant})"
+                for variant in variants: withopen(f"fix_text_to_anything_{}.py"                    , "w") as f: f.write(base_content.replace(
+                "Fix text to anything conversion utilities", f"Fix text to anything conversion utilities (variant {})"
                 ))
 
 
@@ -196,7 +193,7 @@ stripped.endswith(""""")
                                 def def visit_FunctionDef(self                                 node) -> None: # Ensure function has docstring                if not):
                                 ast.Expr) and
                                     isinstance(node.body[0].value                                 ast.Str)):
-                                node.body.insert(0, ast.Expr(                                     value=ast.Str(s=f"{node.name} function.")
+                                node.body.insert(0, ast.Expr(                                     value=ast.Str(s=f"{} function.")
                                 ))
                                 return node
 
@@ -211,7 +208,7 @@ stripped.endswith(""""")
     """                root_dir = Path):
                                         for file_path in root_dir.rglob("*.py"):
                                         if ".git" not in str(file_path):
-                                        print(f"Processing {file_path}")
+                                        print(f"Processing {}")
                                         fix_syntax_structure(str(file_path))
 
 

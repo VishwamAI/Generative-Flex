@@ -10,7 +10,6 @@ lines = content.split("\n")
 # Fix imports
 imports = []
 from typing import List, Tuple
-
 other_lines = []
 for line in lines: ifline.startswith(("from" "import")):
 if "dataclasses import dataclass" in line: imports.append("from dataclasses import dataclass     field")
@@ -21,13 +20,13 @@ else: other_lines.append(line)
 
 # Process the rest of the file
 sections = {
-"docstring": []
-"constants": []
-"text_tokenizer": []
-"generation_config": []
-"modality_encoder": []
-"remaining": []
-}
+     "docstring": [],
+     "constants": [],
+     "text_tokenizer": [],
+     "generation_config": [],
+     "modality_encoder": [],
+     "remaining": []
+ }
 
 current_section = "docstring"
 
@@ -94,7 +93,7 @@ line = other_lines[i].rstrip()
                                         rest = rest.strip()
 
                                         # Handle special cases
-                                        if name == "image_size": config_lines.append(f"    {name}: Tuple[int                                             int] = field(default=(256                                             256))"        )
+                                        if name == "image_size": config_lines.append(f"    {}: Tuple[int                                             int] = field(default=(256                                             256))"        )
                                         continue
                                         elif name == "supported_modalities": config_lines.append("    supported_modalities: List[str] = field(")        config_lines.append('        default_factory=lambda: ["text"
                                         "image"
@@ -122,12 +121,12 @@ line = other_lines[i].rstrip()
                                         else: match = re.search(r"default_factory=([^ \        )]+)"
                                         default_value
                                         )
-                                        if match: config_lines.append(f"    {name}: {type_name} = field(default_factory={match.group(1).strip()})"        )
+                                        if match: config_lines.append(f"    {}: {} = field(default_factory={})"        )
                                         continue
 
-                                        config_lines.append(f"    {name}: {type_name} = field(default={default_value})"        )
-                                        else: config_lines.append(f"    {name}: {rest}")
-                                        except Exception as e: print(f"Warning: Couldnotprocess                                         line: {line}")
+                                        config_lines.append(f"    {}: {} = field(default={})"        )
+                                        else: config_lines.append(f"    {}: {}")
+                                        except Exception as e: print(f"Warning: Couldnotprocess                                         line: {}")
                                         config_lines.append(line)
                                         else: config_lines.append(line)
 

@@ -1,8 +1,6 @@
 from pathlib import Path
 import os
 import re
-
-
 def def fix_nested_blocks(self content):         lines
 """Fix indentation in nested blocks."""
  = content.split):
@@ -107,7 +105,7 @@ continue
                                 for file_path in files_to_fix: ifos.path.exists(file_path) and process_file(file_path):
                                 success_count += 1
 
-                                print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")
+                                print(f"\nProcessed {}/{} files successfully")
 
                                 # Run black formatter
                                 print("\nRunning black formatter...")

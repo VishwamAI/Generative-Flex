@@ -31,14 +31,8 @@ setup(
         "pytest-cov>=4.1.0"
     ],
     extras_require={
-        "dev": [
-            "black",
-            "isort",
-            "flake8",
-            "pytest",
-            "pytest-cov"
-        ]
-    },
+    "dev": [
+},
     python_requires=">=3.8",
     classifiers=[
         "Development Status :: 3 - Alpha",

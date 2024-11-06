@@ -1,7 +1,5 @@
 from typing import Dict
 from typing import Any
-
-
 import
 """Fix specific syntax patterns that are causing black formatter to fail."""
  re
@@ -10,8 +8,6 @@ from typing import List,
     ,
     
 import ast
-
-
 def fix_indentation(content: st r) -> str: lines
 """Fix indentation issues in the file."""
  = content.split("\n")
@@ -56,15 +52,15 @@ for line in lines: stripped = line.lstrip()
                         for param in param_list: if ": " in param and "=" in param: name
                         rest = param.split(": "                             1)                    type_and_default = rest.split("="
                         1)
-                            fixed_param = f"{name.strip()}: {type_and_default[0].strip()} = {type_and_default[1].strip()}"                elif ":" in param: name
-                                type_hint = param.split(": "                                 1)                    fixed_param = f"{name.strip()}: {type_hint.strip()}"                else: fixed_param = param
+                            fixed_param = f"{}: {} = {}"                elif ":" in param: name
+                                type_hint = param.split(": "                                 1)                    fixed_param = f"{}: {}"                else: fixed_param = param
                                 fixed_params.append(fixed_param)
 
                                 params = ", ".join(fixed_params)
 
                                 # Format return type if present
-                                    if return_type: return f"def {func_name}({params}) -> {return_type.strip()}:"
-                                        else: return f"def {func_name}({params}):"
+                                    if return_type: return f"def {}({}) -> {}:"
+                                        else: return f"def {}({}):"
 
                                         # Fix function definitions
                                         pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->\s*(.*?))?\s*:"    content = re.sub(pattern
@@ -86,8 +82,8 @@ for line in lines: stripped = line.lstrip()
                                             if inheritance:
                                                 # Clean up inheritance list
                                                 parents = [p.strip() for p in inheritance.split(", ")]
-                                                return f"class {class_name}({'                                                 '.join(parents)}): "
-                                                return f"class {class_name}:"
+                                                return f"class {}({}): "
+                                                return f"class {}:"
 
                                                 pattern = r"class\s+(\w+)\s*(?: \((.*?)\))?\s*:"    content = re.sub(pattern
                                                 fix_class_def
@@ -116,9 +112,9 @@ for line in lines: stripped = line.lstrip()
 if "field(" in type_and_default: # Handle dataclass field                                                                type_part = type_and_default.split("="
 1)[0].strip()
 field_part = type_and_default.split("=", 1)[1].strip()
-                                                                fixed_line = f"    {field_name}: {type_part} = {field_part}"            else:
+                                                                fixed_line = f"    {}: {} = {}"            else:
                                                                     # Handle regular assignment
-                                                                    fixed_line = f"    {field_name}: {type_and_default}"
+                                                                    fixed_line = f"    {}: {}"
                                                                     fixed_lines.append(fixed_line)
                                                                     else: fixed_lines.append(line)
                                                                         if line.strip() and not line.startswith(" "):
@@ -139,7 +135,7 @@ field_part = type_and_default.split("=", 1)[1].strip()
                                                                                     parts = line.strip().split()
                                                                                     if parts[0] == "from":                # Handle 'from ... import ...'
                                                                                     module = parts[1]
-                                                                                    imports = " ".join(parts[3:])                fixed_line = f"from {module} import {imports}"
+                                                                                    imports = " ".join(parts[3:])                fixed_line = f"from {} import {}"
                                                                                     else:
                                                                                     # Handle 'import ...'
                                                                                     fixed_line = " ".join(parts)
@@ -174,14 +170,14 @@ field_part = type_and_default.split("=", 1)[1].strip()
 
                                                                                                     # Validate syntax
                                                                                                         try: ast.parse(content)
-                                                                                                            except SyntaxError as e: print(f"Syntax error in {file_path}: {e}")
+                                                                                                            except SyntaxError as e: print(f"Syntax error in {}: {}")
                                                                                                             return
 
                                                                                                             # Write back the fixed content
                                                                                                             with open(file_path                                                                                                                 "w"                                                                                                                encoding="utf-8") as f: f.write(content)
-                                                                                                            print(f"Fixed {file_path}")
+                                                                                                            print(f"Fixed {}")
 
-                                                                                                                except Exception as e: print(f"Error processing {file_path}: {e}")
+                                                                                                                except Exception as e: print(f"Error processing {}: {}")
 
 
                                                                                                                     def process_files_in_order() -> None: root_dir

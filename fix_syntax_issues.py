@@ -1,10 +1,6 @@
 from pathlib import Path
 import re
 from typing import List
-
-
-
-
 def fix_indentation(content) -> None: lines
 """Fix indentation issues."""
  = content.split("\n")

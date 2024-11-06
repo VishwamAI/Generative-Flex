@@ -42,17 +42,10 @@ if(line.strip().endswith(", ") or line.strip().endswith("(")
         next_indent = len(next_line) - len(next_line.lstrip())
 
         if next_indent <= current_indent: modified = True                                        # Wrap in parentheses for proper line continuation
-        "{"]):
-        new_lines.append(" " * current_indent + "(")
-        new_lines.append(" " * (current_indent + 4) + line.lstrip())
-        new_lines.append(" " * (current_indent + 4) + next_line.lstrip()
-        )
-        new_lines.append(" " * current_indent + ")")
-        i += 2
-        continue
-        new_lines.append(line)
-        i += 1
-        if modified: print(f"Fixing syntax in {filename}")
+        "{
+    "]): ,
+    if modified: print(f"Fixing syntax in {filename
+}")
         with open(filename        , "w") as f: f.write("\n".join(new_lines))
 
 

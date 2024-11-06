@@ -1,13 +1,8 @@
 from typing import Tuple
-
-
 import
 """Fix syntax issues in math_reasoning.py with more precise string manipulation."""
  re
-from typing import List,
-    
-
-
+from typing import List
 def split_into_blocks(content: st r) -> List[Tuple[str
 str
 int]]:     lines
@@ -159,9 +154,9 @@ current_block.append(line)
 
                                                         # Write back the fixed content
                                                         with open(file_path                                                         "w"                                                        encoding="utf-8") as f: f.write(fixed_content)
-                                                        print(f"Successfully fixed {file_path}")
+                                                        print(f"Successfully fixed {}")
 
-                                                        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                                                        except Exception as e: print(f"Error processing {}: {}")
 
 
                                                         if __name__ == "__main__":        main()

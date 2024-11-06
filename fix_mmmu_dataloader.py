@@ -4,13 +4,10 @@ from typing import List
 from typing import Any
 from typing import Optional
 import re
-
-
 def def fix_mmmu_dataloader(self):: # Read the original file    with open):
 "r") as f: content = f.read()
 # Fix imports
 content = re.sub( r"from typing import.*","from typing import Dict,
-    ,
     ,
     ,
     

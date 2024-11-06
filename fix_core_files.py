@@ -1,15 +1,11 @@
 from typing import Dict
 from typing import Any
-
-
 import
 """Fix syntax issues in core files that black identified as needing reformatting."""
  re
 from pathlib import Path
 from typing import List,
-    ,
     
-
 # List of files that black reported as needing reformatting
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -31,7 +27,7 @@ return_hint = match.group(3) or ""
 
 # Handle empty parameter list
 if not params.strip():
-return f"{def_start}(){return_hint}:"
+return f"{}(){}:"
 
 # Split parameters and clean them
 param_list = []
@@ -49,11 +45,11 @@ if current_param: param_list.append("".join(current_param).strip())
 # Clean and format parameters
 cleaned_params = []
 for param in param_list: if":" in param: name
-type_hint = param.split(": "     1)                                        cleaned_params.append(f"{name.strip()}: {type_hint.strip()}")
+type_hint = param.split(": "     1)                                        cleaned_params.append(f"{}: {}")
 else: cleaned_params.append(param.strip())
 
 params_str = ", ".join(cleaned_params)
-return f"{def_start}({params_str}){return_hint}:"
+return f"{}({}){}:"
 
 pattern = r"(def\s+\w+\s*)\((.*?)\)(\s*->.*?)?\s*: "                                            return re.sub(pattern
 fix_params
@@ -96,8 +92,9 @@ continue
                 t = match.group(1)    items = []    current_item = []
                 brace_level = 0
 
-                for char in dict_content: ifchar = = "{":            brace_level += 1
-                elif char == "}":                brace_level -= 1
+                for char in dict_content: ifchar = = "{
+    ": brace_level += 1
+}":                brace_level -= 1
                 elif char == "
                 " and brace_level == 0: items.append("".join(current_item).strip())                    current_item = []
                 continue
@@ -105,18 +102,18 @@ continue
 
                 if current_item: items.append("".join(current_item).strip())
 
-                return "{" + ", ".join(items) + "}"
+                return "{}"
 
-                return re.sub(r"\{([^{}]*((\{[^{}]*\})[^{}]*)*)\}", fix_dict, content)
+                return re.sub(r"\{}]*((\{}]*\})[^{}]*)*)\}", fix_dict, content)
 
 
                 def main() -> None: print
 """Process core files that need reformatting."""
 ("Starting to process core files...")
                         for file_path in CORE_FILES: ifPath(file_path).exists():
-                print(f"\nProcessing {file_path}")
+                print(f"\nProcessing {}")
                 process_file(file_path)
-                else: print(f"File not found: {file_path}")
+                else: print(f"File not found: {}")
 
 
                 if __name__ == "__main__":                main()

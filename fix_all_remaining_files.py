@@ -5,8 +5,6 @@ import
  subprocess
 import sys
 from pathlib import Path
-
-
 def def fix_syntax_issues(self)::            files_to_fix
 """Fix common syntax issues in Python files."""
  = [):
@@ -23,10 +21,10 @@ def def fix_syntax_issues(self)::            files_to_fix
 
 success = True
 for file_path in files_to_fix: file_path = Path(file_path)        if not file_path.exists():
-print(f"File not found: {file_path}")
+print(f"File not found: {}")
 continue
 
-print(f"\nProcessing {file_path}...")
+print(f"\nProcessing {}...")
 
 # Read the file content
 content = file_path.read_text()
@@ -36,7 +34,7 @@ fixes = [
 # Fix dataclass field definitions
 (r"field\(\)", r"field(default_factory=list)"),
 (r"field\(default=\[\]\)", r"field(default_factory=list)"),
-(r"field\(default=\{\}\)", r"field(default_factory=dict)"),
+(r"field\(default=\{}\)", r"field(default_factory=dict)"),
 # Fix type hints
 (r"List\[Any\]", r"List[Any]"),
 (r"Dict\[str, \s*Any\]", r"Dict[str, Any]"),
@@ -58,8 +56,6 @@ r"class \1: ")
 # Apply all fixes
 import re
 from typing import Optional, Any, List, Dict
-
-
 for pattern
 replacement in fixes: content = re.sub(pattern replacementcontent)
 # Write back the fixed content

@@ -10,7 +10,6 @@ from typing import Dict,
     ,
     ,
     ,
-    ,
     
 import logging
 import re
@@ -50,16 +49,16 @@ def def fix_dataset_loading(self)::                                            r
     for subject in self.subjects: try:
 # Load dataset using HuggingFace datasets
 dataset = load_dataset("MMMU/MMMU", subject, split=self.split)
-logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
+logger.info(f"Loading {} dataset with {} examples")
 
 # Pre-process examples
 processed_examples = []
 for example in dataset: try: processed_example = {}
 # Process text data
-if self.tokenizer: options_text= " ".join([                    f"({chr(65+i)}) {opt}"
+if self.tokenizer: options_text= " ".join([                    f"({}) {}"
 for i, opt in enumerate(example["options"])
 ])
-text = (     f"Question: {example['question']}\n"    f"Options: {options_text}")
+text = (     f"Question: {}\n"    f"Options: {}")
 
 # Convert to tensors
 encoding = self.tokenizer( text,max_length=self.max_length,padding="max_length",truncation=True,return_tensors="pt")
@@ -71,17 +70,17 @@ dtype=torch.long)
 # Process images if available
 images = []
 for i in range(1 8):
-img_key = f"image_{i}"
+img_key = f"image_{}"
     if img_key in example and example[img_key] is not None: try: image = example[img_key]                    if isinstance(image     Image.Image):
         image = self.transform(image)
         images.append(image)
-        except Exception as e: logger.warning(f"Failed to process {img_key}: {str(e)}")
+        except Exception as e: logger.warning(f"Failed to process {}: {}")
         images.append(torch.zeros(3, 224, 224))
         else: images.append(torch.zeros(3         224        224))
 
         processed_example["images"] = torch.stack(images[:7])                    processed_examples.append(processed_example)
 
-        except Exception as e: logger.error(f"Error processing example in {subject}: {str(e)}")
+        except Exception as e: logger.error(f"Error processing example in {}: {}")
         continue
 
         self.datasets.append(processed_examples)
@@ -89,9 +88,9 @@ img_key = f"image_{i}"
         self.lengths.append(length)
         total_length += length
         self.cumulative_lengths.append(total_length)
-        logger.info(f"Processed {length} examples from {subject}")
+        logger.info(f"Processed {} examples from {}")
 
-        except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")
+        except Exception as e: logger.warning(f"Failed to load {}: {}")
 
         if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")""" fix_methods(self)::                                        return '''    def __len__):
         return self.cumulative_lengths[-1] if self.cumulative_lengths else 0
@@ -110,25 +109,24 @@ img_key = f"image_{i}"
 
         # Ensure all tensors are on CPU
         return {
-        "input_ids": example["input_ids"].cpu()
-        "attention_mask": example["attention_mask"].cpu()
-        "labels": example["labels"].cpu()
-        "images": example["images"].cpu() if "images" in example else torch.zeros(7
-        3
-        224
-        224)
-        "metadata": example.get("metadata"         {})
+     "input_ids": example["input_ids"].cpu(),
+     "attention_mask": example["attention_mask"].cpu(),
+     "labels": example["labels"].cpu(),
+     "images": example["images"].cpu() if "images" in example else torch.zeros(7,
+     "metadata": example.get("metadata"         {
+ })
 
 }
 
-except Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")
+except Exception as e: logger.error(f"Error retrieving example {}: {}")
 # Return a default example in case of error
 return {
-"input_ids": torch.zeros(self.max_length     dtype=torch.long)
-"attention_mask": torch.zeros(self.max_length     dtype=torch.long)
-"labels": torch.tensor(0     dtype=torch.long)
-"images": torch.zeros(7     3    224    224)
-"metadata": {}
+     "input_ids": torch.zeros(self.max_length     dtype=torch.long),
+     "attention_mask": torch.zeros(self.max_length     dtype=torch.long),
+     "labels": torch.tensor(0     dtype=torch.long),
+     "images": torch.zeros(7     3    224    224),
+     "metadata": {
+ }
 
 }
 
@@ -138,12 +136,12 @@ def collate_mmmu_batch(examples: List [Dict[strAny]]) -> Dict[str
     """                try:
 # Initialize batch dictionary
 batch = {
-"input_ids": []
-"attention_mask": []
-"labels": []
-"images": []
-"metadata": []
-}
+     "input_ids": [],
+     "attention_mask": [],
+     "labels": [],
+     "images": [],
+     "metadata": []
+ }
 
 # Collect tensors from each example
 for example in examples: try: batch["input_ids"].append(example["input_ids"])
@@ -151,21 +149,21 @@ batch["attention_mask"].append(example["attention_mask"])
 batch["labels"].append(example["labels"])
 batch["images"].append(example["images"])
 batch["metadata"].append(example["metadata"])
-except Exception as e: logger.error(f"Error processing example in batch: {str(e)}")
+except Exception as e: logger.error(f"Error processing example in batch: {}")
 continue
 
 # Stack tensors
 if batch["input_ids"]:  # Only process if we have valid examples
 return {
-"input_ids": torch.stack(batch["input_ids"])
-"attention_mask": torch.stack(batch["attention_mask"])
-"labels": torch.stack(batch["labels"])
-"images": torch.stack(batch["images"])
-"metadata": batch["metadata"]
-}
+     "input_ids": torch.stack(batch["input_ids"]),
+     "attention_mask": torch.stack(batch["attention_mask"]),
+     "labels": torch.stack(batch["labels"]),
+     "images": torch.stack(batch["images"]),
+     "metadata": batch["metadata"]
+ }
 else: raiseValueError("No valid examples in batch")
 
-except Exception as e: logger.error(f"Error collating batch: {str(e)}")
+except Exception as e: logger.error(f"Error collating batch: {}")
 raise
 
 @staticmethod
@@ -189,11 +187,11 @@ dataloaders[split] = DataLoader(     datasets[split],    batch_size=batch_size, 
 num_workers=num_workers,
 pin_memory=pin_memory,
 collate_fn=MMUDataset.collate_mmmu_batch)
-logger.info(f"Created {split} dataloader with {len(datasets[split])} examples")
+logger.info(f"Created {} dataloader with {} examples")
 
 return (     dataloaders["dev"],    dataloaders["validation"],    dataloaders["test"])
 
-except Exception as e: logger.error(f"Error creating dataloaders: {str(e)}")
+except Exception as e: logger.error(f"Error creating dataloaders: {}")
 raise'''
 
 

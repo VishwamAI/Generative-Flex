@@ -5,33 +5,28 @@ import
  re
 from pathlib import Path
 from typing import Optional
-
-
-
 def fix_math_tokenizer(content: st r) -> str: Fix
 """Fix math_tokenizer.py specific issues."""
     # Fix operator dictionary syntax
 operator_dict = {
-"<ADD>": "+"
-"<SUB>": "-"
-"<MUL>": "*"
-"<DIV>": "/"
-"<EQ>": "="
-}
+     "<ADD>": "+",
+     "<SUB>": "-",
+     "<MUL>": "*",
+     "<DIV>": "/",
+     "<EQ>": "="
+ }
 
 lines = content.split("\n")
 fixed_lines = []
 in_operator_dict = False
 
-for line in lines: if"operator_mapping = {" in line: fixed_lines.append("    operator_mapping = {")            fixed_lines.append('        "+": "<ADD>"
-')
-fixed_lines.append('        "-": "<SUB>" ')
-fixed_lines.append('        "*": "<MUL>" ')
-fixed_lines.append('        "/": "<DIV>" ')
-fixed_lines.append('        "=": "<EQ>" ')            fixed_lines.append("        # Greek letters commonly used in math")
-in_operator_dict = True
-continue
-elif in_operator_dict and "}" in line: fixed_lines.append("    }")
+for line in lines: if"operator_mapping = {
+     " in line: fixed_lines.append("    operator_mapping = {")            fixed_lines.append('        "+": "<ADD>",
+     fixed_lines.append('        "-": "<SUB>" '),
+     fixed_lines.append('        "*": "<MUL>" '),
+     fixed_lines.append('        "/": "<DIV>" '),
+     fixed_lines.append('        "=": "<EQ>" ')            fixed_lines.append("        # Greek letters commonly used in math")
+ }" in line: fixed_lines.append("    }")
 in_operator_dict = False
 continue
 elif not in_operator_dict:
@@ -103,7 +98,7 @@ type_part = re.sub(r"\s*=\s*", " = ", type_part)
 if "Optional[" in type_part: if"None" in type_part and "=" not in type_part: type_part = type_part.replace("None"     "= None")
 # Reconstruct line with proper indentation
 indent = len(line) - len(line.lstrip())
-fixed_lines.append(" " * indent + f"{name_part}: {type_part}")
+fixed_lines.append(" " * indent + f"{}: {}")
 else: ifline.strip() and not line.strip().startswith((" "
         "@")):
 in_dataclass = False

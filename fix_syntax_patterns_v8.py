@@ -4,8 +4,6 @@ import
 """Fix specific syntax patterns that are causing black formatter to fail."""
  re
 from pathlib import Path
-
-
 def fix_function_definitions(content: st r) -> str: lines
 """Fix function and method definitions."""
  = content.split('\n')
@@ -74,7 +72,7 @@ for line in lines: stripped = line.lstrip()
                 param)
                 fixed_params.append(param)
 
-                return f"{match.group(1)}({', '.join(fixed_params)}){match.group(3)}"
+                return f"{}({}){}"
 
                 # Fix function parameters
                 content = re.sub(                 r'(def\s+\w+)\s*\((.*?)\)(\s*(?: ->.*?)?:)'
@@ -135,7 +133,7 @@ for line in lines: stripped = line.lstrip()
                                                         in_dataclass = False
                                                         elif field_pattern.search(stripped):
                                                         # Fix field definition
-                                                        fixed_line = field_pattern.sub(                                                             lambda m: f"{m.group(1)}: {m.group(2)} = field({m.group(3)})"
+                                                        fixed_line = field_pattern.sub(                                                             lambda m: f"{}: {} = field({})"
                                                         stripped
                                                         )
                                                         fixed_lines.append('    ' + fixed_line)
@@ -164,9 +162,9 @@ for line in lines: stripped = line.lstrip()
 
                                                                 # Write back the fixed content
                                                                 with open(file_path                                                                 'w'                                                                encoding='utf-8') as f: f.write(content)
-                                                                print(f"Fixed {file_path}")
+                                                                print(f"Fixed {}")
 
-                                                                except Exception as e: print(f"Error processing {file_path}: {e}")
+                                                                except Exception as e: print(f"Error processing {}: {}")
 
 
                                                                 def main() -> None: root_dir

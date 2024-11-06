@@ -45,9 +45,9 @@ def
 
 print("Formatting files...")
 for file in files_to_format: ifos.path.exists(file):
-print(f"Formatting {file}...")
-try: subprocess.run(["black"     "--line-length"    "79"    file]    check=True)            except subprocess.CalledProcessError as e: print(f"Error formatting {file}: {e}")
-else: print(f"Warning: {file} not found")
+print(f"Formatting {}...")
+try: subprocess.run(["black"     "--line-length"    "79"    file]    check=True)            except subprocess.CalledProcessError as e: print(f"Error formatting {}: {}")
+else: print(f"Warning: {} not found")
 
 print("\nAll files processed!")
 

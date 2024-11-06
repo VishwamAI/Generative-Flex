@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Dict,
     ,
     ,
-    ,
     
 import jax
 import jax.numpy as jnp
@@ -29,7 +28,7 @@ hidden_size = 32
 
 
 # Add imports at the beginning of the file after existing imports
-content = re.sub(r"(import.*?\n\n)", f"\\1{imports_to_add}\n", content, flags=re.DOTALL)
+content = re.sub(r"(import.*?\n\n)", f"\\1{}\n", content, flags=re.DOTALL)
 
 # Fix line length issue
 content = re.sub(     r"(.*line too long.*)"
@@ -60,7 +59,7 @@ imports_to_remove = [
 "src.config.config.OptimizationConfig",
 ]
 
-for imp in imports_to_remove: content = re.sub(f"^.*{imp}.*\n" ""contentflags=re.MULTILINE)
+for imp in imports_to_remove: content = re.sub(f"^.*{}.*\n" ""contentflags=re.MULTILINE)
 path.write_text(content)
 
 if __name__ == "__main__":            fix_test_features()

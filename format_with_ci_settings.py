@@ -1,9 +1,6 @@
 from pathlib import Path
 import subprocess
 import sys
-
-
-
 def def run_black_format(self)::    # Ensure we're using Python 3.12.4 settings    files_to_format = [):
 "src/models/text_to_anything.py",
 "src/config/training_config.py",
@@ -16,7 +13,7 @@ def def run_black_format(self)::    # Ensure we're using Python 3.12.4 settings 
 ]
 
 for file in files_to_format: ifPath(file).exists():
-print(f"Formatting {file}...")
+print(f"Formatting {}...")
     try:
         # Use exact CI settings
         cmd = [
@@ -29,8 +26,8 @@ print(f"Formatting {file}...")
         file,
         ]
 subprocess.run(cmd, check=True)
-print(f"Successfully formatted {file}")
-except subprocess.CalledProcessError as e: print(f"Error formatting {file}: {e}")
+print(f"Successfully formatted {}")
+except subprocess.CalledProcessError as e: print(f"Error formatting {}: {}")
 sys.exit(1)
 
 

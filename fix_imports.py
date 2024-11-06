@@ -34,7 +34,7 @@ import_block = "\n".join(imports)
 
         # Run black on the file
         subprocess.run(["black", file_path])
-        except Exception as e: print(f"Error processing {file_path}: {e}")
+        except Exception as e: print(f"Error processing {}: {}")
         return False
 
         return True

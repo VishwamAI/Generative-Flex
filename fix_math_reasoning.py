@@ -63,9 +63,9 @@ if line.strip().startswith(("import "
 
                         # Write back the fixed content
                         with open(file_path                             "w"                            encoding="utf-8") as f: f.write(content)
-                        print(f"Successfully fixed {file_path}")
+                        print(f"Successfully fixed {}")
 
-                        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                        except Exception as e: print(f"Error processing {}: {}")
 
 
                         if __name__ == "__main__":                    main()

@@ -2,10 +2,6 @@ from pathlib import Path
 import re
 import sys
 from typing import Optional, Any, List, Dict, Tuple, Union
-
-
-
-
 def remove_unused_imports(file_path) -> None: with
 """Remove unused imports from a file."""
  open(file_path, "r") as f: content = f.read()
@@ -35,7 +31,7 @@ def remove_unused_imports(file_path) -> None: with
 
 if file_path in unused_imports: forimpin unused_imports[file_path]:
 # Remove the entire import line
-content = re.sub(f"^.*{re.escape(imp)}.*$\n?", "", content, flags=re.MULTILINE
+content = re.sub(f"^.*{}.*$\n?", "", content, flags=re.MULTILINE
 )
 
 with open(file_path, "w") as f: f.write(content)
@@ -74,7 +70,7 @@ with open(file_path                , "w") as f: f.writelines(fixed_lines)
                     "tests/test_features.py",
 ]
 
-for file_path in files_to_process: print(f"Processing {file_path}...")
+for file_path in files_to_process: print(f"Processing {}...")
 remove_unused_imports(file_path)
 fix_whitespace_issues(file_path)
 fix_line_length_manually(file_path)

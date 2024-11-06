@@ -1,14 +1,9 @@
 from typing import Tuple
-
-
 import
 """Fix method definition syntax in Python files with special handling for docstrings."""
  re
 from pathlib import Path
-from typing import List,
-    
-
-
+from typing import List
 def fix_method_definition(content: st r) -> str: lines
 """Fix method definition syntax with proper handling of docstrings."""
  = content.split("\n")
@@ -58,8 +53,8 @@ indent = len(line) - len(stripped)
                         params = "self"
 
                         # Add return type if missing
-                        if " -> " not in stripped: fixed_line = f"def {method_name}({params}) -> None:"
-                        else: fixed_line = f"def {method_name}({params})"
+                        if " -> " not in stripped: fixed_line = f"def {}({}) -> None:"
+                        else: fixed_line = f"def {}({})"
                         fixed_lines.append(" " * indent + fixed_line)
                         else: fixed_lines.append(line)
 
@@ -98,9 +93,9 @@ indent = len(line) - len(stripped)
 
                                                 # Write back the fixed content
                                                 with open(file_path                                                 "w"                                                encoding="utf-8") as f: f.write(fixed_content)
-                                                print(f"Successfully fixed method definitions in {file_path}")
+                                                print(f"Successfully fixed method definitions in {}")
 
-                                                except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                                                except Exception as e: print(f"Error processing {}: {}")
 
 
                                                 if __name__ == "__main__":        main()

@@ -1,6 +1,4 @@
 from typing import Tuple
-
-
 import
 """Fix indentation issues in Python files with a conservative approach."""
  os
@@ -8,8 +6,6 @@ import ast
 from typing import List,
     
 import black
-
-
 def detect_class_and_method_blocks(content: st r) -> List[Tuple[int
 int
 int]]:     lines
@@ -78,14 +74,14 @@ line in enumerate(lines):
                                 parts = line.split(":")            if len(parts) == 2: name = parts[0].rstrip()
                                 type_part = parts[1].lstrip()
                                 if type_part and not type_part.startswith(" "):
-                                line = f"{name}: {type_part}"        fixed_lines.append(line)
+                                line = f"{}: {}"        fixed_lines.append(line)
 
                                 return "\n".join(fixed_lines)
 
 
                                 def process_file(file_path: st                                     r) -> None: print
 """Process a single Python file to fix syntax issues."""
-(f"Processing {file_path}...")
+(f"Processing {}...")
                                         try: with open(file_path                                         "r"                                        encoding="utf-8") as f: content = f.read()
 
                                 # Apply conservative fixes
@@ -94,19 +90,19 @@ line in enumerate(lines):
 
                                 # Validate syntax
                                         try: ast.parse(content)
-                                            except SyntaxError as e: print(f"Syntax error in {file_path}: {str(e)}")
+                                            except SyntaxError as e: print(f"Syntax error in {}: {}")
                                             return
 
                                             # Format with black
-                                                try: mode = black.Mode(                                                     target_versions={black.TargetVersion.PY312},                                                    line_length=88,                                                    string_normalization=True,                                                    is_pyi=False,                                                )
+                                                try: mode = black.Mode(                                                     target_versions={},                                                    line_length=88,                                                    string_normalization=True,                                                    is_pyi=False,                                                )
                                             content = black.format_str(content, mode=mode)
-                                                except Exception as e: print(f"Black formatting failed for {file_path}: {str(e)}")
+                                                except Exception as e: print(f"Black formatting failed for {}: {}")
                                                     return
 
                                                     # Write back
                                                     with open(file_path                                                     "w"                                                    encoding="utf-8") as f: f.write(content)
-                                                    print(f"Successfully processed {file_path}")
-                                                    except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                                                    print(f"Successfully processed {}")
+                                                    except Exception as e: print(f"Error processing {}: {}")
 
 
                                                     def def main():        critical_files

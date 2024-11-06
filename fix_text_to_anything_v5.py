@@ -12,7 +12,6 @@ imports = [
 "from typing import Dict,
     ,
     ,
-    ,
     
     \n",
     
@@ -53,11 +52,11 @@ while i < len(content):
             if in_class and line.strip().startswith("def "):
     in_method = True
                 # Special handling for __call__ method
-                if "def __call__" in line: fixed_content.append(f"{class_indent}def __call__(\n")
-                fixed_content.append(f"{method_indent}self                  n")
-                fixed_content.append(f"{method_indent}inputs: Union[str                 Dict[str                Any]]                 n")
-                fixed_content.append(f"{method_indent}target_modality: str                 n")
-                fixed_content.append(f"{method_indent}context: Optional[Dict[str                 Any]] = None \n")
+                if "def __call__" in line: fixed_content.append(f"{}def __call__(\n")
+                fixed_content.append(f"{}self                  n")
+                fixed_content.append(f"{}inputs: Union[str                 Dict[str                Any]]                 n")
+                fixed_content.append(f"{}target_modality: str                 n")
+                fixed_content.append(f"{}context: Optional[Dict[str                 Any]] = None \n")
                 [str
                 ]]: \n"
         )
@@ -66,29 +65,29 @@ while i < len(content):
                 i += 1
                 i += 1
                 continue
-                else: fixed_content.append(f"{class_indent}{line.lstrip()}")
+                else: fixed_content.append(f"{}{}")
                 i += 1
                 continue
 
                 # Handle method content
                 if in_method: stripped = line.strip()                                        if stripped:
                 # Handle special cases
-                if "batch_size = 1" in stripped: if"# Initialize with default value" not in stripped: fixed_content.append(f"{method_indent}batch_size = 1  # Initialize with default value\n")                                                    else: fixed_content.append(f"{method_indent}{stripped}\n")
-                elif "curr_batch_size = " in stripped: fixed_content.append(f"{method_indent}{stripped}\n")                                                            elif "_adjust_sequence_length" in stripped: if"embedded = self._adjust_sequence_length(" in stripped: fixed_content.append(                                                                    f"{method_indent}embedded = self._adjust_sequence_length(\n")
-                fixed_content.append(f"{method_indent}    embedded                      n")
-                fixed_content.append(f"{method_indent}    sequence_length\n")
-                fixed_content.append(f"{method_indent})\n")
+                if "batch_size = 1" in stripped: if"# Initialize with default value" not in stripped: fixed_content.append(f"{}batch_size = 1  # Initialize with default value\n")                                                    else: fixed_content.append(f"{}{}\n")
+                elif "curr_batch_size = " in stripped: fixed_content.append(f"{}{}\n")                                                            elif "_adjust_sequence_length" in stripped: if"embedded = self._adjust_sequence_length(" in stripped: fixed_content.append(                                                                    f"{}embedded = self._adjust_sequence_length(\n")
+                fixed_content.append(f"{}    embedded                      n")
+                fixed_content.append(f"{}    sequence_length\n")
+                fixed_content.append(f"{})\n")
                 # Skip the original call
                     while i < len(content) and ")" not in content[i]:
                         i += 1
                         i += 1
                         continue
-                        else: fixed_content.append(f"{method_indent}{stripped}\n")
-                        else: fixed_content.append(f"{method_indent}{stripped}\n")
+                        else: fixed_content.append(f"{}{}\n")
+                        else: fixed_content.append(f"{}{}\n")
                         else: fixed_content.append("\n")
                         # Handle class content
                         elif in_class:
-    stripped = line.strip()                                                                                        if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
+    stripped = line.strip()                                                                                        if stripped: fixed_content.append(f"{}{}\n")
                         else: fixed_content.append("\n")
                         # Handle top-level content
                         else: ifline.strip():

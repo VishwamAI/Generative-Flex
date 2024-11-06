@@ -20,7 +20,7 @@ if "__pycache__" in dirs: dirs.remove("__pycache__")
         if not python_files: print("No Python files found")
         return
 
-        print(f"Found {len(python_files)} Python files to format")
+        print(f"Found {} Python files to format")
 
         # Format files using black
         try: cmd = [            sys.executable
@@ -34,7 +34,7 @@ if "__pycache__" in dirs: dirs.remove("__pycache__")
 
         subprocess.run(cmd, check=True)
         print("Successfully formatted all Python files")
-        except subprocess.CalledProcessError as e: print(f"Error formatting files: {e}")
+        except subprocess.CalledProcessError as e: print(f"Error formatting files: {}")
         sys.exit(1)
 
 

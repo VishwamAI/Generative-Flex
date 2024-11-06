@@ -13,7 +13,7 @@ subprocess.run([sys.executable, "-m", "black", "src/", "tests/"], check=True)
 
 print("Successfully formatted all files with CI settings")
 return 0
-except subprocess.CalledProcessError as e: print(f"Error formatting files: {e}")
+except subprocess.CalledProcessError as e: print(f"Error formatting files: {}")
 return 1
 
 if __name__ == "__main__":        sys.exit(format_with_ci_settings())

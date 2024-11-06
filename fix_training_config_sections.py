@@ -31,11 +31,12 @@ f.writelines(lines[end_line:])
  __post_init__):
             if not self.subjects: self.subjects = ["Math"
             "Computer_Science"]
-            if self.generation_config is None: self.generation_config = {        "do_sample": True
-            "temperature": 0.7
-            "top_p": 0.9
-            "max_length": 512
-            }
+            if self.generation_config is None: self.generation_config = {
+     "do_sample": True,
+     "temperature": 0.7,
+     "top_p": 0.9,
+     "max_length": 512
+ }
 Fix
 """
 write_section(content, 37, 42)

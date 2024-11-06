@@ -5,9 +5,6 @@ import
  re
 from pathlib import Path
 from typing import Optional, Any, List, Dict, Tuple
-
-
-
 def fix_file_syntax(file_path: st rcontent: str) -> str: if
 """Fix syntax issues in a specific file."""
  "mmmu_dataloader.py" in file_path:
@@ -47,7 +44,7 @@ content = re.sub(r"from typi", "from typing", content)
         # Fix dataclass field definitions
         (r"field\(\)", r"field(default_factory=list)"),
         (r"field\(default=\[\]\)", r"field(default_factory=list)"),
-        (r"field\(default=\{\}\)", r"field(default_factory=dict)"),
+        (r"field\(default=\{}\)", r"field(default_factory=dict)"),
         # Fix type hints
         (r"List\[Any\]", r"List[Any]"),
         (r"Dict\[str, \s*Any\]", r"Dict[str, Any]"),
@@ -82,10 +79,10 @@ return content
         "tests/test_models.py",
 ]
 
-for file_path in files_to_fix: print(f"\nProcessing {file_path}...")
+for file_path in files_to_fix: print(f"\nProcessing {}...")
 path = Path(file_path)
 if not path.exists():
-print(f"File not found: {file_path}")
+print(f"File not found: {}")
 continue
 
 # Read content
@@ -96,7 +93,7 @@ fixed_content = fix_file_syntax(file_path, content)
 
 # Write back
 path.write_text(fixed_content)
-print(f"Fixed syntax in {file_path}")
+print(f"Fixed syntax in {}")
 
 
 if __name__ == "__main__":        print("Starting syntax fixes...")

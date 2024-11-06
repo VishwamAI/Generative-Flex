@@ -1,8 +1,5 @@
 from pathlib import Path
 import re
-
-
-
 def fix_docstrings_and_strings(content) -> None: Fix
 """Fix docstring and string literal issues."""
         # Fix docstrings with extra quotes

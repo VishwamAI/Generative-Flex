@@ -26,7 +26,7 @@ def fix_method_definitions(content):
         # Clean up parameters
         params = re.sub(r'\s*,\s*\n\s*\]', '', params)
         params = re.sub(r'\s*:\s*\n\s*,', ':', params)
-        return f"{indent}def {name}({params}):"
+        return f"{}def {}({}):"
 
     content = re.sub(r'(\s*)def\s+([^\n(]+)\(\s*([^)]+)\)\s*:', fix_method, content)
     return content
@@ -39,9 +39,9 @@ def fix_dict_creation(content):
         # Clean up dictionary content
         content = re.sub(r':\s*ste,\s*p\s*"', ': step, "', content)
         content = re.sub(r'\*\*metrics,\s*\n', '**metrics\n', content)
-        return f"{indent}{{\n{indent}    {content}\n{indent}}}"
+        return f"{}{}    {}\n{}}}"
 
-    content = re.sub(r'(\s*)log_entry\s*=\s*{\s*([^}]+)\s*}', fix_dict, content)
+    content = re.sub(r'(\s*)log_entry\s*=\s*{}]+)\s*}', fix_dict, content)
     return content
 
 def fix_file_operations(content):
@@ -67,12 +67,12 @@ def process_file(file_path):
         if content != original_content:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(content)
-            print(f"Successfully processed {file_path}")
+            print(f"Successfully processed {}")
         else:
-            print(f"No changes needed for {file_path}")
+            print(f"No changes needed for {}")
 
     except Exception as e:
-        print(f"Error processing {file_path}: {str(e)}")
+        print(f"Error processing {}: {}")
 
 def main():
     # Process all Python files

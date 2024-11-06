@@ -1,15 +1,10 @@
 from typing import Optional
-
-
 import
 """Fix syntax in the core configuration file."""
  re
 from pathlib import Path
 import ast
-from typing import List,
-    
-
-
+from typing import List
 def read_file(file_path: st r) -> str: with
 """Read file content."""
  open(file_path
@@ -31,13 +26,13 @@ import_lines = []
 other_lines = []
 
 for line in lines: if line.strip().startswith(("from "
-    "import ")):
+   , "import ")):
         # Fix spacing after commas in imports
         if "
         " in line: parts = line.split(" import ")
         if len(parts) == 2: imports = [i.strip() for i in parts[1].split("
         ")]
-        line = f"{parts[0]} import {', '.join(imports)}"
+        line = f"{} import {}"
         import_lines.append(line)
             else: other_lines.append(line)
 
@@ -63,9 +58,9 @@ for line in lines: if line.strip().startswith(("from "
                         # Fix class definition
                         if "(" in stripped:
     class_name = stripped[6 : stripped.find("(")].strip()                bases = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if bases: bases = ", ".join(b.strip() for b in bases.split(", "))
-                        lines.append(f"{' ' * class_indent}class {class_name}({bases}):")
-                                else: lines.append(f"{' ' * class_indent}class {class_name}:")
-                                    else: class_name = stripped[6 : stripped.find(":")].strip()                lines.append(f"{' ' * class_indent}class {class_name}:")
+                        lines.append(f"{}class {}({}):")
+                                else: lines.append(f"{}class {}:")
+                                    else: class_name = stripped[6 : stripped.find(":")].strip()                lines.append(f"{}class {}:")
                                     continue
 
                                     # Handle dataclass fields
@@ -79,9 +74,9 @@ rest = stripped.split(": "                                             1)       
 
 if "=" in rest: type_hint
 default = rest.split("="                                             1)
-lines.append(                                             f"{' ' * field_indent}{name}: {type_hint.strip()} = {default.strip()}"                )
+lines.append(                                             f"{}{}: {} = {}"                )
                                             else: type_hint = rest.strip()
-                                                lines.append(f"{' ' * field_indent}{name}: {type_hint}")
+                                                lines.append(f"{}{}: {}")
                                                 continue
 
                                                 # Handle method definitions
@@ -95,18 +90,18 @@ lines.append(                                             f"{' ' * field_indent}
                                                         if ": " in param and "=" in param: p_name
                                                         rest = param.split(": "                                                             1)                        type_hint
                                                         default = rest.split("="                                                             1)
-                                                        param = (                                                             f"{p_name.strip()}: {type_hint.strip()} = {default.strip()}"                        )
+                                                        param = (                                                             f"{}: {} = {}"                        )
                                                             elif ":" in param: p_name
-                                                                type_hint = param.split(": "                                                                 1)                        param = f"{p_name.strip()}: {type_hint.strip()}"                    param_parts.append(param)
+                                                                type_hint = param.split(": "                                                                 1)                        param = f"{}: {}"                    param_parts.append(param)
                                                                 params = ", ".join(param_parts)
 
                                                                 # Add return type if present
                                                                 if "->" in method_def: return_type = method_def[
                                                                 method_def.find("->") + 2 : method_def.find(":")
                                                                 ].strip()
-                                                                lines.append(                                                                     f"{' ' * method_indent}def {name}({params}) -> {return_type}:"
+                                                                lines.append(                                                                     f"{}def {}({}) -> {}:"
                                                                 )
-                                                                else: lines.append(f"{' ' * method_indent}def {name}({params}):")
+                                                                else: lines.append(f"{}def {}({}):")
                                                                 continue
 
                                                                 # Check if we're leaving the class
@@ -129,14 +124,14 @@ lines.append(                                             f"{' ' * field_indent}
 
                                                                         # Validate syntax
                                                                             try: ast.parse(content)
-                                                                                except SyntaxError as e: print(f"Syntax error after fixes: {e}")
+                                                                                except SyntaxError as e: print(f"Syntax error after fixes: {}")
                                                                                 return
 
                                                                                 # Write back
                                                                                 write_file(file_path, content)
-                                                                                print(f"Successfully fixed {file_path}")
+                                                                                print(f"Successfully fixed {}")
 
-                                                                                    except Exception as e: print(f"Error processing {file_path}: {e}")
+                                                                                    except Exception as e: print(f"Error processing {}: {}")
 
 
                                                                                         def def main():        config_file

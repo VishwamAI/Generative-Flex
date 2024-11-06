@@ -6,10 +6,7 @@ import re
 from pathlib import Path
 from typing import List,
     ,
-    ,
     
-
-
 class SyntaxFixer:
     def def __init__(self)::        self.core_files = [
 "src/config/config.py",
@@ -54,7 +51,7 @@ if ": " in line and "
 fixed_parts = []
     for part in parts: part = part.strip()
     if ":" in part: name
-type_hint = part.split(": "                 1)                        fixed_parts.append(f"{name.strip()}: {type_hint.strip()}")
+type_hint = part.split(": "                 1)                        fixed_parts.append(f"{}: {}")
     else: fixed_parts.append(part)
 line = ",\n".join(fixed_parts)
 lines.append(line)
@@ -129,16 +126,16 @@ return "\n".join(lines)
                                                             fixed_params = []
                                                                 for param in params: param = param.strip()
                                                                     if ":" in param: name
-                                                                    type_hint = param.split(": "                                                                         1)                param = f"{name.strip()}: {type_hint.strip()}"            if "=" in param: name_type
+                                                                    type_hint = param.split(": "                                                                         1)                param = f"{}: {}"            if "=" in param: name_type
                                                                     default = param.split("="                                                                         1)
-                                                                    param = f"{name_type.strip()}={default.strip()}"
+                                                                    param = f"{}={}"
                                                                     fixed_params.append(param)
 
                                                                     # Fix return type
                                                                         if "->" in after_params: return_part = after_params[after_params.find("->") + 2 :].strip()            if return_part.endswith(":"):
-                                                                                return_part = return_part[:-1]            after_params = f") -> {return_part.strip()}:"        else: after_params = "):"
+                                                                                return_part = return_part[:-1]            after_params = f") -> {}:"        else: after_params = "):"
                                                                                     # Reconstruct function definition
-                                                                                    fixed_def = f"{before_params}({', '.join(fixed_params)}{after_params}"
+                                                                                    fixed_def = f"{}({}{}"
                                                                                     return [fixed_def] + lines[1:]
 
                                                                                     def process_file(self                                                                                     file_path: st                                                                                    r) -> bool: """ a single file with all fixes.Process
@@ -158,18 +155,18 @@ return "\n".join(lines)
                                                                                     with open(file_path                                                                                         "w"                                                                                        encoding="utf-8") as f: f.write(content)
 
                                                                                     return True
-                                                                                        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                                                                                        except Exception as e: print(f"Error processing {}: {}")
                                                                                             return False
 
                                                                                             def def run(self)::        """ core files."""        success_count = 0):
                                                                                                 for file_path in self.core_files: if os.path.exists(file_path):
-                                                                                            print(f"Processing {file_path}...")
+                                                                                            print(f"Processing {}...")
                                                                                                 if self.process_file(file_path):
-                                                                                            print(f"Successfully fixed {file_path}")
+                                                                                            print(f"Successfully fixed {}")
                                                                                             success_count += 1
-                                                                                                else: print(f"Failed to fix {file_path}")
+                                                                                                else: print(f"Failed to fix {}")
 
-                                                                                            print(f"\nFixed {success_count}/{len(self.core_files)} core files")
+                                                                                            print(f"\nFixed {}/{} core files")
 
                                                                                             # Run black formatter
                                                                                             print("\nRunning black formatter...")

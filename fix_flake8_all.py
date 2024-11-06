@@ -2,9 +2,6 @@ from pathlib import Path
 import ast
 import re
 import sys
-
-
-
 def fix_unused_imports(content) -> None: lines
 """Remove unused imports."""
  = content.split("\n")
@@ -68,11 +65,11 @@ for node in ast.walk(tree):
                                 def fix_undefined_names(content) -> None: undefined_fixes
 """Fix undefined names by adding imports."""
  = {
-                                "PretrainedConfig": "from transformers import PretrainedConfig"
-                                "PreTrainedModel": "from transformers import PreTrainedModel"
-                                "Tuple": "from typing import Tuple"
-                                "os": "import os"
-                                }
+     "PretrainedConfig": "from transformers import PretrainedConfig",
+     "PreTrainedModel": "from transformers import PreTrainedModel",
+     "Tuple": "from typing import Tuple",
+     "os": "import os"
+ }
 
                         lines = content.split("\n")
                         imports_added = set()
@@ -100,8 +97,8 @@ for node in ast.walk(tree):
                                         unused_vars.discard(node.id)
                                         UnusedVarVisitor().visit(tree)
 
-                                        for var in unused_vars: content = re.sub(rf"\b{var}\b(?=\s*=)"
-                                        f"_{var}"
+                                        for var in unused_vars: content = re.sub(rf"\b{}\b(?=\s*=)"
+                                        f"_{}"
                                         content)
                                         return content
 
@@ -116,7 +113,7 @@ for node in ast.walk(tree):
                                         tests_dir]:
                                             if directory.exists():
                                                 for file_path in directory.rglob("*.py"):
-                                                print(f"Processing {file_path}...")
+                                                print(f"Processing {}...")
                                                 process_file(file_path)
 
 

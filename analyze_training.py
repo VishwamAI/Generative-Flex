@@ -77,23 +77,33 @@ makedirs(output_dir
                         latest_log = max(log_files                             key=lambda x: os.path.getctime(os.path.join(log_dir                             x))        )
                         log_path = os.path.join(log_dir, latest_log)
 
-                        print(f"Analyzing log file: {log_path}")
+                        print(f"Analyzing log file: {}")
                         metrics = parse_log_file(log_path)
                         plot_metrics(metrics)
 
                         # Print summary statistics
                         print("\nTraining Summary:")
                             if metrics["val_loss"]:
-                                print(f"Final validation loss: {metrics['val_loss'][-1]:.4f}")
+                                print(f"Final validation loss: {
+     metrics['val_loss'][-1]: .4f
+ }")
                                 if metrics["math_accuracy"]:
-                                print(f"Final math accuracy: {metrics['math_accuracy'][-1]:.4f}")
+                                print(f"Final math accuracy: {
+     metrics['math_accuracy'][-1]: .4f
+ }")
 
                                 print("\nModel Performance Analysis:")
                                     if metrics["math_accuracy"]:
                                         acc = np.array(metrics["math_accuracy"])
-                                        print(f"Average math accuracy: {np.mean(acc):.4f}")
-                                        print(f"Best math accuracy: {np.max(acc):.4f}")
-                                        print(f"Math accuracy std dev: {np.std(acc):.4f}")
+                                        print(f"Average math accuracy: {
+     np.mean(acc): .4f
+ }")
+                                        print(f"Best math accuracy: {
+     np.max(acc): .4f
+ }")
+                                        print(f"Math accuracy std dev: {
+     np.std(acc): .4f
+ }")
 
 
                                         if __name__ == "__main__":                        main()

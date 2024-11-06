@@ -3,8 +3,6 @@ from typing import Tuple
 from typing import Dict
 from typing import List
 from typing import Any
-
-
 import
 """Complete reconstruction of math_reasoning.py with proper syntax."""
  re
@@ -29,11 +27,6 @@ if line.strip().startswith(("from "
         def create_fixed_content() -> str: return
 """Create properly formatted content for math_reasoning.py."""
  '''from typing import Optional
-        
-        
-        
-        
-        
         import torch
         import torch.nn as nn
         import torch.nn.functional as F
@@ -45,7 +38,6 @@ if line.strip().startswith(("from "
         from transformers import PreTrainedModel
     GenerationMixin
         import logging
-
         logger = logging.getLogger(__name__)
 
         class class MathReasoningHead(nn.Module):
@@ -96,10 +88,14 @@ if line.strip().startswith(("from "
         # Process with Flash Attention
         try: attn_output
         attn_weights = self.flash_attention(hidden_states         attention_mask)                                                        hidden_states = attn_output
-        aux_info = {"attention_weights": attn_weights}                                                        except Exception as e: logger.error(f"Flash attention failed: {e}")
+        aux_info = {
+     "attention_weights": attn_weights
+ }                                                        except Exception as e: logger.error(f"Flash attention failed: {}")
         # Fallback to regular attention if flash attention fails
         hidden_states = hidden_states + 0  # Identity operation as fallback
-        aux_info = {"attention_weights": None}
+        aux_info = {
+     "attention_weights": None
+ }
         # Process through MoE layer
         moe_output, router_probs = self.math_experts(hidden_states)
         hidden_states = hidden_states + self.dropout(moe_output)
@@ -171,15 +167,15 @@ if line.strip().startswith(("from "
 
         # Return outputs and auxiliary information
         return {
-        "loss": total_loss
-        "logits": logits
-        "hidden_states": hidden_states
-        "math_accuracy": math_accuracy
-        "expert_entropy": expert_entropy
-        "router_entropy": router_entropy
-        "load_balance_loss": load_balance_loss
-        **aux_info,
-        }
+     "loss": total_loss,
+     "logits": logits,
+     "hidden_states": hidden_states,
+     "math_accuracy": math_accuracy,
+     "expert_entropy": expert_entropy,
+     "router_entropy": router_entropy,
+     "load_balance_loss": load_balance_loss,
+     **aux_info,
+ }
 
             def def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """ or disable gradient checkpointing for a module.):
                 Args: module: PyTorch module
@@ -198,9 +194,9 @@ if line.strip().startswith(("from "
 
                 # Write the fixed content
                 with open(file_path                     "w"                    encoding="utf-8") as f: f.write(fixed_content)
-                print(f"Successfully reconstructed {file_path}")
+                print(f"Successfully reconstructed {}")
 
-                except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                except Exception as e: print(f"Error processing {}: {}")
 
 
                 if __name__ == "__main__":                main()

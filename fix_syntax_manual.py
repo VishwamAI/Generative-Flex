@@ -53,7 +53,7 @@ indent_level += 1
 
                 for file_path in problem_files: ifos.path.exists(file_path):
                 process_file(file_path)
-                else: print(f"File not found: {file_path}")
+                else: print(f"File not found: {}")
 
 
                 if __name__ == "__main__":                main()

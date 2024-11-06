@@ -11,7 +11,6 @@ def
  = content.split("\n")
 imports_to_remove = [
 from typing import Optional, Any, List, Dict, Tuple, Union
-
 "typing.Dict",
 "typing.List",
 "typing.Optional",
@@ -60,23 +59,21 @@ for line in lines: should_keep = True            for unused_import in imports_to
         fixed_lines.append(func_name)
         for i
             arg in enumerate(arg_list):
-                if i < len(arg_list) - 1: fixed_lines.append(f"{extra_indent}{arg}
+                if i < len(arg_list) - 1: fixed_lines.append(f"{}{}
                 ")
-                else: fixed_lines.append(f"{extra_indent}{arg})")
+                else: fixed_lines.append(f"{}{})")
                 continue
 
                 # Split dictionary/list entries
-                if "{" in line or "[" in line: opener = "{" if "{" in line else "["        closer = "}" if "{" in line else "]"
-                parts = line.split(opener, 1)
-                if len(parts) == 2: prefix = parts[0] + opener        content = parts[1].rstrip(closer)
-                entries = [entry.strip() for entry in content.split(", ")]
-
-                fixed_lines.append(prefix)
-                for i
-                entry in enumerate(entries):
-                if i < len(entries) - 1: fixed_lines.append(f"{extra_indent}{entry}
+                if "{
+    " in line or "[" in line: opener = "{" if "{" in line else "["        closer = "
+}" if "{
+    if len(parts) == 2: prefix = parts[0] + opener        content = parts[1].rstrip(closer),
+    entry in enumerate(entries): ,
+    if i < len(entries) - 1: fixed_lines.append(f"{extra_indent
+}{}
                 ")
-                else: fixed_lines.append(f"{extra_indent}{entry}{closer}")
+                else: fixed_lines.append(f"{}{}{}")
                 continue
 
                 # Default handling for other long lines

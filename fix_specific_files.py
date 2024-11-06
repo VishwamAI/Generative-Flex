@@ -6,7 +6,7 @@ import os
 def def fix_text_to_anything_files(self):: for version in [""):
 "_v6"
 "_v7"
-"_v8"]: filename = f"fix_text_to_anything{version}.py"
+"_v8"]: filename = f"fix_text_to_anything{}.py"
     if os.path.exists(filename):
 with open(filename    , "r") as f: content = f.read()                # Fix indentation
 content = content.replace(     "\ncontent = f.read", "\n    content = f.read")

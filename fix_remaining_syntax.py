@@ -2,9 +2,6 @@ from pathlib import Path
 import ast
 import os
 import re
-
-
-
 def
 """Script to fix syntax issues in remaining problematic files."""
  fix_multiline_fstrings(filename: st r) -> None: with
@@ -37,7 +34,7 @@ else: current_fstring.append(line)
     """        root_dir = Path):
             for file_path in root_dir.rglob('*.py'):
             if '.git' not in str(file_path):
-        print(f"Processing {file_path}")
+        print(f"Processing {}")
         fix_multiline_fstrings(str(file_path))
 
 
@@ -56,10 +53,10 @@ Fix text to anything conversion code.""" = [):
         ]
 
             for file_path in files_to_process: ifnotPath(file_path).exists():
-                print(f"Skipping {file_path} - file not found")
+                print(f"Skipping {} - file not found")
                 continue
 
-                print(f"Processing {file_path}")
+                print(f"Processing {}")
                 with open(file_path                 'r') as f: content = f.read()
                 # Fix syntax issues
                 content = fix_syntax_issues(content)
@@ -111,8 +108,8 @@ Fix text to anything conversion code.""" = [):
 
                         # Write variants with specific fixes
                         variants = ['v6', 'v7', 'v8']
-                        for variant in variants: withopen(f'fix_text_to_anything_{variant}.py'                         'w') as f: f.write(base_content.replace(
-                        'Fix text to anything conversion utilities', f'Fix text to anything conversion utilities (variant {variant})'
+                        for variant in variants: withopen(f'fix_text_to_anything_{}.py'                         'w') as f: f.write(base_content.replace(
+                        'Fix text to anything conversion utilities', f'Fix text to anything conversion utilities (variant {})'
                         ))
 
 
@@ -147,7 +144,7 @@ Fix text to anything conversion code.""" = [):
     def def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
                                         ast.Expr) and
                                         isinstance(node.body[0].value                                     ast.Str)):
-                                        node.body.insert(0, ast.Expr(                                         value=ast.Str(s=f"{node.name} function.")
+                                        node.body.insert(0, ast.Expr(                                         value=ast.Str(s=f"{} function.")
                                         ))
                                         return node
 
@@ -162,7 +159,7 @@ Fix text to anything conversion code.""" = [):
     """        root_dir = Path):
                                             for file_path in root_dir.rglob('*.py'):
                                             if '.git' not in str(file_path):
-                                        print(f"Processing {file_path}")
+                                        print(f"Processing {}")
                                         fix_syntax_structure(str(file_path))
 
 

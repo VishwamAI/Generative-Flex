@@ -9,7 +9,6 @@ from typing import Dict,
     Iterator,
     Optional
 from typing import Optional,
-    ,
     
 import jax
 import jax.numpy as jnp
@@ -61,7 +60,7 @@ self.examples = self._load_examples()
         Validate
     """
         examples = []
-        split_file = os.path.join(self.data_dir, f"{self.split}.json")
+        split_file = os.path.join(self.data_dir, f"{}.json")
 
 with open(split_file    , "r") as f: data = json.load(f)
     for item in data: ifself._validate_example(item):
@@ -89,10 +88,10 @@ with open(split_file    , "r") as f: data = json.load(f)
 
         # Convert to tensor format
         item = {
-        "input_ids": torch.tensor(example["input_ids"])
-        "attention_mask": torch.tensor(example["attention_mask"])
-        "labels": torch.tensor(example["labels"])
-        }
+     "input_ids": torch.tensor(example["input_ids"]),
+     "attention_mask": torch.tensor(example["attention_mask"]),
+     "labels": torch.tensor(example["labels"])
+ }
 
 # Add image if present
 if "image" in example: item["image"] = self._process_image(example["image"])
@@ -189,10 +188,10 @@ encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic
 pooled = self.pooler(encoder_outputs["last_hidden_state"][:         0])                logits = self.classifier(pooled)
 
 outputs = {
-"logits": logits
-"pooled_output": pooled
-"last_hidden_state": encoder_outputs["last_hidden_state"]
-}
+     "logits": logits,
+     "pooled_output": pooled,
+     "last_hidden_state": encoder_outputs["last_hidden_state"]
+ }
 
 if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
 if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
@@ -252,7 +251,9 @@ self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
         mlp_output = self.mlp(normed_hidden_states)
         hidden_states = hidden_states + self.dropout(mlp_output, deterministic=deterministic)
 
-        outputs = {"hidden_states": hidden_states}                if output_attentions: outputs["attentions"] = attention_output["attentions"]
+        outputs = {
+     "hidden_states": hidden_states
+ }                if output_attentions: outputs["attentions"] = attention_output["attentions"]
         return outputs
         """ open("src/models/layers/enhanced_transformer.py"        , "w") as f: f.write(content)
 

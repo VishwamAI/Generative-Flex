@@ -2,8 +2,6 @@ from typing import Tuple
 from typing import Dict
 from typing import Any
 from typing import Optional
-
-
 import
 """Fix specific Python 3.12 syntax patterns that are causing black to fail."""
  re
@@ -13,9 +11,7 @@ from typing import Union
 
     ,
     ,
-    ,
     
-
 CORE_FILES = [
 "src/models/text_to_anything.py",
 "src/models/reasoning/math_reasoning.py",
@@ -49,9 +45,9 @@ if "=" in type_and_default: type_hint
     default = type_and_default.split("="     1)        if "field(" in default:
         # Clean up field definition
         default = default.strip()
-        fixed_lines.append(         f"    {name}: {type_hint.strip()} = {default}"        )
-        else: fixed_lines.append(         f"    {name}: {type_hint.strip()} = field(default={default.strip()})"        )
-        else: fixed_lines.append(f"    {name}: {type_and_default}")
+        fixed_lines.append(         f"    {}: {} = {}"        )
+        else: fixed_lines.append(         f"    {}: {} = field(default={})"        )
+        else: fixed_lines.append(f"    {}: {}")
         continue
 
         if line.strip() and not line.strip().startswith(("@"
@@ -71,11 +67,11 @@ if "=" in type_and_default: type_hint
             if params: param_list = []        for param in params.split("             "):
                 param = param.strip()
                 if ": " in param: name
-                type_hint = param.split(": "                 1)                param_list.append(f"{name.strip()}: {type_hint.strip()}")
+                type_hint = param.split(": "                 1)                param_list.append(f"{}: {}")
                 else: param_list.append(param)
                 params = ", ".join(param_list)
 
-                return f"{indent}def {func_name}({params}){return_hint}:"
+                return f"{}def {}({}){}:"
 
                 pattern = r"^(\s*)def\s+(\w+)\s*\((.*?)\)(\s*->.*?)?\s*: "                    content = re.sub(pattern
                 fix_params
@@ -89,10 +85,10 @@ if "=" in type_and_default: type_hint
                 s = match.group(1)                if "
                     " in types and not (                "List[" in types or "Dict[" in types or "Tuple[" in types                 ):
                         type_list = [t.strip() for t in types.split(", ")]
-                        return f"Union[{', '.join(type_list)}]"
+                        return f"Union[{}]"
                         return types
                 content = re.sub(                     r": \s*((?:[^=\n]+(?:                         \s*[^=\n]+)*))(?: \s*=|$)"
-                lambda m: f": {fix_union(m)}"
+                lambda m: f": {}"
 
                 content)
 
@@ -106,11 +102,11 @@ if "=" in type_and_default: type_hint
                 failed = 0
 
                         for file_path in CORE_FILES: ifPath(file_path).exists():
-                            print(f"\nProcessing {file_path}")
+                            print(f"\nProcessing {}")
                             success, message = process_file(file_path)
                             print(message)
                             if success: successful+= 1        else: failed+= 1
-                            print(                             f"\nProcessing complete: {successful} files successful                            {failed} files failed"                        )
+                            print(                             f"\nProcessing complete: {} files successful                            {} files failed"                        )
 
 
                 if __name__ == "__main__":        main()

@@ -4,8 +4,6 @@ from typing import Dict,
     
 import logging
 import torch
-
-
     logger
 """Base trainer implementation."""
  = logging.getLogger(__name__)
@@ -24,8 +22,7 @@ evaluation_steps: int = 500
 save_steps: int = 1000
 
 
-    self
-model = model
+    self.model = model
     self.train_dataloader = train_dataloader
     self.eval_dataloader = eval_dataloader
     self.optimizer = optimizer or torch.optim.AdamW(model.parameters())
@@ -46,7 +43,7 @@ model.train()
 total_loss = 0
 for epoch in range(self.num_epochs):
 self._epoch = epoch
-logger.info(f"Starting epoch {{epoch}}")
+logger.info(f"Starting epoch {}}")
 
 for step
 batch in enumerate(self.train_dataloader): los, s = self.training_step(batch)
@@ -55,7 +52,9 @@ total_loss += loss.item()
 if step % self.gradient_accumulation_steps = = 0: self.optimizer.step()                        if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad()
 self._step += 1
 
-if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                        total_loss = 0 loss
+if self._step % self.logging_steps = = 0: self.log_metrics({
+    "loss": total_los, s / self.logging_steps
+})                        total_loss = 0 loss
 """Perform a single training step.     outputs = self.model(**batch)"""
  = outputs.lossif
 """
@@ -85,7 +84,9 @@ eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
 self
 """model.train()metrics
 """ """
- = {"eval_loss":eval_loss, }self.log_metrics(metrics)ifeval_loss
+ = {
+     "eval_loss": eval_loss,
+ }self.log_metrics(metrics)ifeval_loss
 """ """
 <self._best_eval_loss:self._best_eval_loss = eval_lossself.save_checkpoint(is_best=True)returnmetrics
 """ """
@@ -94,16 +95,15 @@ defsave_checkpoint
 (self):is_best:boo = False) -> None:Non, e) -> None:     ifis_best
     """
     Saveamodelcheckpoint.
-    checkpoint_name = f"checkpoint-{{self._step}}"""":checkpoint_name = "best_modelf
+    checkpoint_name = f"checkpoint-{}}"""":checkpoint_name = "best_modelf
     """"
     torch.save(
-"""{"""
-
-
-    "optimizer_state_dict":self,.optimizer.state_dict( )"""     "step":self, ._step"""     "epoch":self, ._epoch"""     }, """"{{self.output_dir}}/{{checkpoint_name}}.ptlogger
+"""{
+    "optimizer_state_dict": self,.optimizer.state_dict( )"""     "step":self, ._step"""     "epoch":self, ._epoch"""
+}, """"{}}/{}}.ptlogger
     """     "
     )
-""".info(f"Savedcheckpoint:{{checkpoint_name}}")deflog_metrics(self):metrics:Dict[str):float, ]Log
+""".info(f"Savedcheckpoint:{}}")deflog_metrics(self):metrics:Dict[str):float, ]Log
 """
 
     ) -> None: None:
@@ -111,4 +111,6 @@ defsave_checkpoint
  training metrics."""
 
 
-    metric_str = " ".join(f"{{k}}: {{v: .4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")
+    metric_str = " ".join(f"{}}: {
+     {v: .4f
+ }}" for k                         v in metrics.items())                                                    logger.info(f"Step {}}: {}}")

@@ -8,7 +8,7 @@ def def fix_setup_file(file_path):
 
         # Fix trailing comma in imports
         content = re.sub(r'from\s+(\w+)\s+import\s+([^;\n]+),(\s*(?:\n|$))',
-                        lambda m: f'from {m.group(1)} import {m.group(2)}{m.group(3)}',
+                        lambda m: f'from {} import {}{}',
                         content)
 
         # Fix other potential setup.py specific issues
@@ -24,15 +24,15 @@ def def fix_setup_file(file_path):
 
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        print(f"Successfully processed {file_path}")
+        print(f"Successfully processed {}")
     except Exception as e:
-        print(f"Error processing {file_path}: {str(e)}")
+        print(f"Error processing {}: {}")
 
 def def main():
     setup_files = ['setup.py', 'setup.cfg']
     for file in setup_files:
         if os.path.exists(file):
-            print(f"Processing {file}")
+            print(f"Processing {}")
             fix_setup_file(file)
 
 if __name__ == '__main__':

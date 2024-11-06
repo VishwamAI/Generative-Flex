@@ -5,9 +5,6 @@ import
  re
 from pathlib import Path
 from typing import Optional
-
-
-
 def fix_dataclass_field_spacing(content: st r) -> str: lines
 """Fix dataclass field definitions with exact spacing."""
  = content.split("\n")
@@ -40,7 +37,7 @@ type_part = re.sub(r"\s+field\(", " field(", type_part)
 type_part = re.sub(r"\s*=\s*", " = ", type_part)
 # Reconstruct line with proper indentation
 indent = len(line) - len(line.lstrip())
-fixed_lines.append(" " * indent + f"{name_part}: {type_part}")
+fixed_lines.append(" " * indent + f"{}: {}")
 else: ifline.strip() and not line.strip().startswith((" "
     "@")):
 in_dataclass = False
@@ -80,7 +77,11 @@ fixed_lines = []
                 fixed_params.append(param)
 
                 # Reconstruct the line
-                line = (                 f"{line[: params_start]}{'                '.join(fixed_params)}{line[params_end: ]}"
+                line = (                 f"{
+    line[: params_start]
+}{}{
+    line[params_end: ]
+}"
         )
 
         # Fix return type annotations

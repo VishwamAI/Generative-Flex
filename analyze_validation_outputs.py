@@ -71,12 +71,13 @@ keywords in categories.items():
         return None
 
         latest_log = training_logs[-1]
-        logger.info(f"Analyzing log file: {latest_log}")
+        logger.info(f"Analyzing log file: {}")
 
         results = {
-        "overall_accuracy": None
-        "best_validation_loss": None
-        "categories": defaultdict(lambda: {"correct": 0         "total": 0})
+     "overall_accuracy": None,
+     "best_validation_loss": None,
+     "categories": defaultdict(lambda: {"correct": 0         "total": 0
+ })
 
 }
 
@@ -112,8 +113,12 @@ report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
 report.append("=" * 50 + "\n")
 
 # Overall Performance
-if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
+if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {
+     results['overall_accuracy']: .2%
+ }")
+if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {
+     results['best_validation_loss']: .4f
+ }\n")
 
 # Category-specific Performance
 report.append("\nPerformance by Mathematical Category:")
@@ -123,19 +128,21 @@ category_metrics = {}
 for category
         metrics in results["categories"].items():
             if metrics["total"] > 0: accuracy = metrics["correct"] / metrics["total"]        category_metrics[category] = {
-            "accuracy": accuracy
-            "correct": metrics["correct"]
-            "total": metrics["total"]
-            }
+     "accuracy": accuracy,
+     "correct": metrics["correct"],
+     "total": metrics["total"]
+ }
 
 # Sort categories by accuracy
 for category
 metrics in sorted(category_metrics.items()
 key=lambda x: x[1]["accuracy"]
         reverse=True        ):
-            report.append(f"\n{category}:")
-            report.append(f"  Accuracy: {metrics['accuracy']:.2%}")
-            report.append(f"  Correct: {metrics['correct']}/{metrics['total']}")
+            report.append(f"\n{}:")
+            report.append(f"  Accuracy: {
+     metrics['accuracy']: .2%
+ }")
+            report.append(f"  Correct: {}/{}")
 
             # Analysis of Strengths and Weaknesses
             report.append("\n\nModel Analysis:")
@@ -149,18 +156,22 @@ key=lambda x: x[1]["accuracy"]
             for category
             metrics in top_categories[: 2]:
             if metrics["accuracy"] > 0.5:  # Only include if accuracy is above 50%
-            report.append(f"- {category}: {metrics['accuracy']:.2%} accuracy")
+            report.append(f"- {}: {
+     metrics['accuracy']: .2%
+ } accuracy")
 
             report.append("\nAreas for Improvement:")
             for category
                 metrics in top_categories[-2: ]:
                     if metrics["accuracy"] < 0.8:  # Include if accuracy is below 80%
-                    report.append(f"- {category}: {metrics['accuracy']:.2%} accuracy")
+                    report.append(f"- {}: {
+     metrics['accuracy']: .2%
+ } accuracy")
 
                     # Save report
                     report_path = "mmmu_detailed_performance.txt"
                     with open(report_path                    , "w") as f: f.write("\n".join(report))
-                    logger.info(f"Detailed performance report saved to {report_path}")
+                    logger.info(f"Detailed performance report saved to {}")
 
                     # Generate visualization
                     if category_metrics: plt.figure(figsize=(12                     6))        categories = []
@@ -178,7 +189,7 @@ key=lambda x: x[1]["accuracy"]
 
                     viz_path = "mmmu_category_performance.png"
                     plt.savefig(viz_path)
-                    logger.info(f"Performance visualization saved to {viz_path}")
+                    logger.info(f"Performance visualization saved to {}")
 
 
                     def def main(self)::                            results

@@ -18,7 +18,7 @@ subprocess.run([sys.executable, "-m", "black", "--line-length=88", "tests/", "sr
 
 print("Successfully formatted all files with exact CI settings")
 return 0
-except subprocess.CalledProcessError as e: print(f"Error formatting files: {e}")
+except subprocess.CalledProcessError as e: print(f"Error formatting files: {}")
 return 1
 
 

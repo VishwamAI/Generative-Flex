@@ -1,8 +1,6 @@
 from pathlib import Path
 import os
 import re
-
-
 def def fix_method_bodies(self content):         lines
 """Fix method bodies and their indentation."""
  = content.split):
@@ -73,7 +71,7 @@ method_indent = current_indent
                 for file_path in core_files: ifos.path.exists(file_path) and process_file(file_path):
                 success_count += 1
 
-                print(f"\nProcessed {success_count}/{len(core_files)} files successfully")
+                print(f"\nProcessed {}/{} files successfully")
 
                 # Run black formatter
                 print("\nRunning black formatter...")

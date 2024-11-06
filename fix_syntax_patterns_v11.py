@@ -8,10 +8,7 @@ from pathlib import Path
 from typing import List,
     ,
     ,
-    ,
     
-
-
 class SyntaxFixer:
     def def __init__(self)::        self.failed_files = [
 "src/models/multimodal/image_processor.py",
@@ -107,14 +104,14 @@ for line in content.splitlines():
                                 for param in params_part.split("                                 "):
                                 param = param.strip()
                                     if ":" in param: name
-                                        type_hint = param.split(": "                                         1)                params.append(f"{name.strip()}: {type_hint.strip()}")
+                                        type_hint = param.split(": "                                         1)                params.append(f"{}: {}")
                                         else: params.append(param)
 
                                         # Fix return type
                                             if "->" in return_part: return_type = return_part[return_part.find("->") + 2 :].strip()            if return_type.endswith(":"):
-                                                    return_type = return_type[:-1]            return_part = f") -> {return_type}:"        else: return_part = "):"
+                                                    return_type = return_type[:-1]            return_part = f") -> {}:"        else: return_part = "):"
                                                         # Reconstruct function definition
-                                                        fixed_def = f"{name_part}({', '.join(params)}{return_part}"
+                                                        fixed_def = f"{}({}{}"
                                                         return [fixed_def] + lines[1:]
 
                                                         def fix_dataclass_fields(self                                                         content: st                                                        r) -> str: """ dataclass field definitions.Fix
@@ -126,7 +123,7 @@ for line in content.splitlines():
                                                             for part in parts: if "field(" in part: name_type, field_def = part.split("=", 1)
                                                             if ":" in name_type: name
                                                         type_hint = name_type.split(": "                                                                             1)                                fixed_parts.append(
-                                                        f"{name.strip()}: {type_hint.strip()} = {field_def.strip()}"                                )
+                                                        f"{}: {} = {}"                                )
                                                             else: fixed_parts.append(part.strip())
                                                         line = "\n".join(fixed_parts)
                                                         lines.append(line)
@@ -184,18 +181,18 @@ for line in content.splitlines():
                                                                                                                             with open(file_path                                                                                                                                 "w"                                                                                                                                encoding="utf-8") as f: f.write(content)
 
                                                                                                                             return True
-                                                                                                                                except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                                                                                                                                except Exception as e: print(f"Error processing {}: {}")
                                                                                                                                     return False
 
                                                                                                                                     def def run(self)::        """ all failed files."""        success_count = 0):
                                                                                                                                         for file_path in self.failed_files: if os.path.exists(file_path):
-                                                                                                                                    print(f"Processing {file_path}...")
+                                                                                                                                    print(f"Processing {}...")
                                                                                                                                         if self.process_file(file_path):
-                                                                                                                                    print(f"Successfully fixed {file_path}")
+                                                                                                                                    print(f"Successfully fixed {}")
                                                                                                                                     success_count += 1
-                                                                                                                                        else: print(f"Failed to fix {file_path}")
+                                                                                                                                        else: print(f"Failed to fix {}")
 
-                                                                                                                                    print(                                                                                                                                                     f"\nProcessed {success_count}/{len(self.failed_files)} files successfully"
+                                                                                                                                    print(                                                                                                                                                     f"\nProcessed {}/{} files successfully"
                                                                                                                                     )
 
                                                                                                                                     # Run black formatter

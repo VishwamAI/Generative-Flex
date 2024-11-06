@@ -1,8 +1,5 @@
 from pathlib import Path
 import re
-
-
-
 def
 """Fix basic syntax issues before applying black formatting."""
  fix_indentation(self content: str): lines
@@ -58,9 +55,7 @@ fixed_lines.append('    ' * current_indent + stripped)
                 if stripped.startswith('def '):
                 # Ensure proper spacing around parameters
                 line = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\)',
-                lambda m: f'def {m.group(1)}({"
-                ".join(p.strip() for p in m.group(2).split("
-                ") if p.strip())})'
+                lambda m: f'def {}({})'
 
                 line)
 
@@ -118,14 +113,14 @@ fixed_lines.append('    ' * current_indent + stripped)
                         content = fix_string_literals(content)
 
                         with open(file_path                         'w'                        encoding='utf-8') as f: f.write(content)
-                        print(f"Successfully fixed syntax in {file_path}")
-                        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                        print(f"Successfully fixed syntax in {}")
+                        except Exception as e: print(f"Error processing {}: {}")
 
 
                         def def main(self)::    """ syntax in all Python files."""        root_dir = Path):
                         python_files = list(root_dir.rglob('*.py'))
 
-                        print(f"Found {len(python_files)} Python files")
+                        print(f"Found {} Python files")
                         for file_path in python_files: if'.git' not in str(file_path):
                         process_file(file_path)
 

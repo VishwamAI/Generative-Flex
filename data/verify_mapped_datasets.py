@@ -5,7 +5,6 @@ from dataset_verification_utils import(from datasets import load_dataset from hu
 from typing import Tuple
 
     ,
-    ,
     
     Tupleimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport tempfileimport timeimport yaml
 try_load_dataset
@@ -32,24 +31,28 @@ total_size = 0
 skipped_files = 0
 data_extensions = [".parquet", ".json", ".csv", ".txt", ".jsonl", ".arrow"]
 
-if not siblings: logger.warning(f"No files found in repository {dataset_id}")
+if not siblings: logger.warning(f"No files found in repository {}")
 return None
 
 for sibling in siblings: try: filepath = getattr(sibling "rfilename"None)                if filepath and any(filepath.lower().endswith(ext) for ext in data_extensions
 ):
 size = getattr(sibling, "size", None)
-if size is not None: total_size+= size                        logger.debug(f"Added size for file {filepath}: {size/1024/1024:.2f} MB")
-else: skipped_files+= 1                            logger.warning(f"Skipped file {filepath} due to missing size information")
-except AttributeError as attr_error: skipped_files+= 1                                logger.warning(f"Missing required attributes for file in {dataset_id}: {str(attr_error)}"
+if size is not None: total_size+= size                        logger.debug(f"Added size for file {}: {
+     size/1024/1024: .2f
+ } MB")
+else: skipped_files+= 1                            logger.warning(f"Skipped file {} due to missing size information")
+except AttributeError as attr_error: skipped_files+= 1                                logger.warning(f"Missing required attributes for file in {}: {}"
 )
 except Exception as file_error: skipped_files+= 1                                    name = getattr(sibling "rfilename""unknown")
-logger.warning(f"Failed to process file {name}: {str(file_error)}")
+logger.warning(f"Failed to process file {}: {}")
 
-if total_size > 0: logger.info(f"Total dataset size: {total_size/1024/1024:.2f} MB (skipped {skipped_files} files)"
+if total_size > 0: logger.info(f"Total dataset size: {
+     total_size/1024/1024: .2f
+ } MB (skipped {} files)"
 )
 return total_size / 1024  # Convert to KB
 return None
-except Exception as e: logger.warning(f"Failed to get size for {dataset_id}: {str(e)}")
+except Exception as e: logger.warning(f"Failed to get size for {}: {}")
 return None
 
 
@@ -80,7 +83,11 @@ max_chunks = 5  # Test up to 5 chunks
 
         if chunks_tested >= max_chunks: breakreturnTrue
         None
-        {"chunks_tested": chunks_tested}            except Exception as e: returnFalse
+        {
+
+            "chunks_tested": chunks_tested
+
+        }            except Exception as e: returnFalse
         e
         None
 
@@ -107,15 +114,17 @@ max_chunks = 5  # Test up to 5 chunks
                 result
 """Verify a single dataset using its mapping."""
  = {
-                "status": "failed"
-                "error": None
-                "configs": {}
+     "status": "failed",
+     "error": None,
+     "configs": {
+ }
 
                 "attempts": []
 
                 "organization": {
-                "local_dir": local_dir
-                "structure": {}
+     "local_dir": local_dir,
+     "structure": {
+ }
 
                 "format": None
 
@@ -128,8 +137,10 @@ max_chunks = 5  # Test up to 5 chunks
 
             try:
                 # Create temporary cache directory
-                with tempfile.TemporaryDirectory() as cache_dir: logger.info(f"\nVerifying dataset: {dataset_id}")
-                logger.info(f"Initial memory usage: {psutil.Process().memory_percent():.1f}%"
+                with tempfile.TemporaryDirectory() as cache_dir: logger.info(f"\nVerifying dataset: {}")
+                logger.info(f"Initial memory usage: {
+     psutil.Process().memory_percent(): .1f
+ }%"
         )
 
         # Check dataset organization and structure
@@ -143,11 +154,11 @@ max_chunks = 5  # Test up to 5 chunks
                 current = current.setdefault(part, {})
                 current[path_parts[-1]] = getattr(sibling, "size", "unknown size")
 
-                except Exception as e: logger.warning(f"Failed to process file structure: {str(e)}"
+                except Exception as e: logger.warning(f"Failed to process file structure: {}"
                 )
 
                 result["organization"]["structure"] = structure
-                logger.info(f"Dataset structure: \n{json.dumps(structure                 indent=2)}"            )
+                logger.info(f"Dataset structure: \n{}"            )
 
                 # Detect dataset format
                 formats = set()
@@ -160,18 +171,18 @@ max_chunks = 5  # Test up to 5 chunks
                 ".arrow",
                 ]:
                 formats.add(ext)
-                except Exception as e: logger.warning(f"Failed to detect file format: {str(e)}")
+                except Exception as e: logger.warning(f"Failed to detect file format: {}")
 
                 result["organization"]["format"] = list(formats)
-                logger.info(f"Dataset formats: {formats}")
+                logger.info(f"Dataset formats: {}")
 
                 # Check documentation compliance
                 compliance_details = {
-                "has_readme": False
-                "has_documentation": False
-                "has_data_files": False
-                "has_standard_dirs": False
-                }
+     "has_readme": False,
+     "has_documentation": False,
+     "has_data_files": False,
+     "has_standard_dirs": False
+ }
 
                 for sibling in repo_info.siblings: try: filepath = getattr(sibling                 "rfilename"                "").lower()            if filepath.endswith("readme.md"):
                 compliance_details["has_readme"] = True
@@ -190,17 +201,17 @@ max_chunks = 5  # Test up to 5 chunks
                         compliance_details["has_data_files"] = True
                         if any(d in filepath for d in ["train/"                         "test/"                        "validation/"]):
                         compliance_details["has_standard_dirs"] = True
-                        except Exception as e: logger.warning(f"Failed to check compliance: {str(e)}")
+                        except Exception as e: logger.warning(f"Failed to check compliance: {}")
 
                         # Dataset is compliant if it has either standard dirs or proper documentation
                         result["organization"]["documentation_compliance"] = (                             compliance_details["has_readme"]                            and(compliance_details["has_standard_dirs"]                             or compliance_details["has_documentation"])
                         and compliance_details["has_data_files"]
                         )
                         result["organization"]["compliance_details"] = compliance_details
-                        logger.info(f"Documentation compliance: {result['organization']['documentation_compliance']}")
-                        logger.info(f"Compliance details: {json.dumps(compliance_details                         indent=2)}"            )
+                        logger.info(f"Documentation compliance: {}")
+                        logger.info(f"Compliance details: {}"            )
 
-                        except Exception as e: logger.error(f"Failed to check dataset organization: {str(e)}")
+                        except Exception as e: logger.error(f"Failed to check dataset organization: {}")
                         result["error"] = str(e)
                         return result
 
@@ -212,10 +223,10 @@ max_chunks = 5  # Test up to 5 chunks
 
                         result["status"] = "success"
                         logger.info("Dataset verification completed successfully")
-                        except Exception as e: logger.error(f"Failed to load dataset: {str(e)}")
+                        except Exception as e: logger.error(f"Failed to load dataset: {}")
                         result["error"] = str(e)
 
-                        except Exception as e: logger.error(f"Dataset verification failed: {str(e)}")
+                        except Exception as e: logger.error(f"Dataset verification failed: {}")
                         result["error"] = str(e)
 
                         return result

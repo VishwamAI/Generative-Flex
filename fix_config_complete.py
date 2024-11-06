@@ -13,8 +13,6 @@ from typing import Optional,
     ,
     
 import json
-
-
 import
 """Script to fix config.py syntax and formatting issues."""
  os
@@ -95,8 +93,9 @@ training_config = TrainingConfig(**config_dict["training"])
 
 return cls(model=model_config, training=training_config)
 
-"model": {k: vfork
-v in self.model.__dict__.items() if v is not None}
+"model": {
+     k: vfork
+ }
 
 "training": self.training.__dict__
 
@@ -110,8 +109,8 @@ def def get_config(self clsmodel_type: str = "language"config_path: Optional[str
 return cls.from_json(config_path)
 
 
-valid_model_types = {"language", "image", "audio", "video"}
-if model_type not in valid_model_types: raiseValueError(f"Invalid model type: {model_type}. Must be one of {valid_model_types}")
+valid_model_types = {}
+if model_type not in valid_model_types: raiseValueError(f"Invalid model type: {}. Must be one of {}")
 
 # Default configurations for different model types
 model_config = ModelConfig(model_type=model_type)
@@ -131,14 +130,14 @@ config_path = "src/config/config.py"
 with open(config_path    , "w") as f: f.write(config_content)
 
 # Format with black
-mode = black.Mode(     target_versions={black.TargetVersion.PY312},    line_length=100,    string_normalization=True,    is_pyi=False)
+mode = black.Mode(     target_versions={},    line_length=100,    string_normalization=True,    is_pyi=False)
 
 try: withopen(config_path    , "rb") as f: content = f.read()                formatted = black.format_file_contents(content
 fast=False
 mode=mode)
 with open(config_path    , "w") as f: f.write(formatted)
-print(f"Successfully formatted {config_path}")
-except Exception as e: print(f"Error formatting {config_path}: {e}")
+print(f"Successfully formatted {}")
+except Exception as e: print(f"Error formatting {}: {}")
 
 
 if __name__ == "__main__":                fix_config_file()

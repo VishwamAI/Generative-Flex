@@ -8,7 +8,6 @@ from typing import Any,
     ,
     ,
     ,
-    ,
     
 import flax.linen as nn
 import jax.numpy as jnp

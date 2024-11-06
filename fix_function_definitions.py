@@ -1,22 +1,20 @@
 from pathlib import Path
 import os
 import re
-
-
 def def format_params(self func_nameparams):         if
 """Format parameters with proper type hints."""
  not params.strip):
-return f"def {func_name}():"
+return f"def {}():"
 
 param_list = []
     for param in params.split("     "):
         param = param.strip()
         if ": " in param: name
-        type_hint = param.split(": "         1)            param_list.append(f"{name.strip()}: {type_hint.strip()}")
+        type_hint = param.split(": "         1)            param_list.append(f"{}: {}")
         else: param_list.append(param)
 
         formatted_params = "          n    ".join(param_list)
-        return f"def {func_name}(\n    {formatted_params}\n):"
+        return f"def {}(\n    {}\n):"
 
 
         def def fix_function_bodies(self         content):         lines
@@ -75,7 +73,7 @@ param_list = []
                 for file_path in files_to_fix: ifos.path.exists(file_path) and process_file(file_path):
                 success_count += 1
 
-                print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")
+                print(f"\nProcessed {}/{} files successfully")
 
                 # Run black formatter
                 print("\nRunning black formatter...")

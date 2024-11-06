@@ -1,7 +1,6 @@
 from typing import Tuple
 from torchvision import transforms
-from typing import Optional,
-    
+from typing import Optional
 import torch
 import torch.nn as nn
 Placeholder
@@ -15,8 +14,7 @@ Image processor for handling multimodal inputs in the MMMU model.
 """
  """
  the image processor.     super().__init__()
-self
-hidden_size = hidden_size
+self.hidden_size = hidden_size
 self
 """transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
 """
@@ -30,8 +28,7 @@ transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
 ReLU(inplace = True),nn
 Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
-AdaptiveAvgPool2d((1, 1)))self
-dropout = nn.Dropout(dropout_rate)def
+AdaptiveAvgPool2d((1, 1)))self.dropout = nn.Dropout(dropout_rate)def
 """ """
  forward(self):  images
 """Method with parameters."""

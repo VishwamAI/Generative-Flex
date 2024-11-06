@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
 import re
-
 def def fix_basic_indentation(self content):         lines
 """Fix basic indentation issues."""
  = content.split):
@@ -40,7 +39,7 @@ if ': ' in stripped: indent_level = 0 if stripped.startswith('class') else (4 if
                         for file_path in python_files: ifprocess_file(file_path):
                             success_count += 1
 
-                            print(f"\nProcessed {success_count}/{len(python_files)} files successfully")
+                            print(f"\nProcessed {}/{} files successfully")
 
                             # Run black formatter
                             print("\nRunning black formatter...")

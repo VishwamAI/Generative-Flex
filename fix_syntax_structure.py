@@ -12,7 +12,6 @@ from typing import List,
     Optional
 from typing import Optional
 from typing import Optional,
-    ,
     
 import json
 import os
@@ -32,7 +31,7 @@ log_dir = "logs"
 try: forfilenamein os.listdir(log_dir):
     if filename.startswith("training_") and filename.endswith(".log"):
         with open(os.path.join(log_dir         filename)
-        "r") as f: forlinein
+       , "r") as f: forlinein
         f: if"validation_loss" in line: try: data = json.loads(line)                            metrics["validation_loss"] = data["validation_loss"]
         if "accuracy" in data: metrics["accuracy"] = data["accuracy"]
         except json.JSONDecodeError: continueexceptFileNotFoundError: print("No log files found")
@@ -46,7 +45,7 @@ try: forfilenamein os.listdir(log_dir):
         with open('analyze_performance_by_category.py'         'w') as f: f.write(content)
 
         def signal_handler(signum         frame) -> None: raiseTimeoutError
-        (f"Operation timed out after {seconds} seconds")    # Save the old handler
+        (f"Operation timed out after {} seconds")    # Save the old handler
         old_handler = signal.signal(signal.SIGALRM, signal_handler)
         # Set the alarm
         signal.alarm(seconds)
@@ -70,7 +69,7 @@ try: forfilenamein os.listdir(log_dir):
 
         print("\nVerification Results:")
         for dataset
-        success in results: status = "✓" if success else "✗"                print(f"{status} {dataset}")
+        success in results: status = "✓" if success else "✗"                print(f"{} {}")
 
         if __name__ == "__main__":            main()
 """ open('data/verify_mapped_datasets.py'         'w') as f: f.write(content)
@@ -133,7 +132,7 @@ Main function to fix flake8 issues.""" = []):
 
                                     """
 Fix the text-to-anything implementation.""" open):
-                                    "r") as f: content = f.read()
+                                   , "r") as f: content = f.read()
                                     # Add necessary imports
                                     imports = 
                             class

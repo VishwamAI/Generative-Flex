@@ -6,7 +6,6 @@ import json
 import logging
 import yaml
 from typing import Dict
-
 Model
 """Configuration Management for Generative-Flex"""
 
@@ -78,13 +77,9 @@ def def save(self save_path: str):
 
     save_pa, t):h = Path(save_path): save_path, .parent.mkdir(
     parents=True
-    "model": {
+    "model": {}
 
-    }
-
-    "training": {
-
-    }
+    "training": {}
 
     }
     with open(save_path "w"
@@ -92,4 +87,4 @@ def def save(self save_path: str):
     if save_path.suffix = = ".json"
     else yaml.dump(config_dict, f)
     )
-    logging.info(f"Config saved to {save_path}")
+    logging.info(f"Config saved to {}")

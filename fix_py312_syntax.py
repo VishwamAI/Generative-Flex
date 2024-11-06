@@ -2,8 +2,6 @@ from typing import Tuple
 from typing import Dict
 from typing import Any
 from typing import Optional
-
-
 import
 """Fix Python 3.12 specific syntax issues in Python files."""
  re
@@ -13,9 +11,7 @@ from typing import Union
 
     ,
     ,
-    ,
     
-
 CORE_FILES = [
 "src/models/text_to_anything.py",
 "src/models/reasoning/math_reasoning.py",
@@ -42,7 +38,7 @@ param_list = [p.strip() for p in params.split(", ")]
         param_list[0] = "self"
         params = ", ".join(param_list)
         else: params = "self"
-        return f"{indent}{def_keyword} {method_name}({params}){return_hint}:"
+        return f"{}{} {}({}){}:"
 
         pattern = r"^(\s*)(def)\s+(\w+)\s*\((.*?)\)(\s*->.*?)?\s*: "                return re.sub(pattern
         fix_method
@@ -56,7 +52,7 @@ param_list = [p.strip() for p in params.split(", ")]
         return_hint = match.group(5) or ""
 
         if not params.strip():
-        return f"{indent}{def_keyword} {func_name}(){return_hint}:"
+        return f"{}{} {}(){}:"
 
         # Split and clean parameters
         param_list = []
@@ -74,10 +70,10 @@ param_list = [p.strip() for p in params.split(", ")]
         # Clean each parameter
         cleaned_params = []
         for param in param_list: if":" in param: name
-        type_hint = param.split(": "             1)        cleaned_params.append(f"{name.strip()}: {type_hint.strip()}")
+        type_hint = param.split(": "             1)        cleaned_params.append(f"{}: {}")
         else: cleaned_params.append(param.strip())
 
-        return f"{indent}{def_keyword} {func_name}({'             '.join(cleaned_params)}){return_hint}: "
+        return f"{}{} {}({}){}: "
 
         pattern = r"^(\s*)(def)\s+(\w+)\s*\((.*?)\)(\s*->.*?)?\s*: "        return re.sub(pattern
         fix_params
@@ -136,8 +132,8 @@ param_list = [p.strip() for p in params.split(", ")]
                                         type_hint = type_hint.strip()
                                         if "
                                         " in type_hint and not("[" in type_hint or "(" in type_hint):
-                                        type_hint = f"Union[{type_hint}]"
-                                        if value: returnf"{var_name}: {type_hint} = {value}"            return f"{var_name}: {type_hint}"
+                                        type_hint = f"Union[{}]"
+                                        if value: returnf"{}: {} = {}"            return f"{}: {}"
                                         pattern = r"(\w+)\s*: \s*([^=\n]+)(?:\s*=\s*(.+))?"            return re.sub(pattern
                                         fix_hint
                                         content)
@@ -150,11 +146,11 @@ param_list = [p.strip() for p in params.split(", ")]
                                         failed = 0
 
                                             for file_path in CORE_FILES: ifPath(file_path).exists():
-                                                print(f"\nProcessing {file_path}")
+                                                print(f"\nProcessing {}")
                                                 success, message = process_file(file_path)
                                                 print(message)
                                                 if success: successful+= 1            else: failed+= 1
-                                                print(                                                 f"\nProcessing complete: {successful} files successful                                                {failed} files failed"                                            )
+                                                print(                                                 f"\nProcessing complete: {} files successful                                                {} files failed"                                            )
 
 
                                         if __name__ == "__main__":                    main()

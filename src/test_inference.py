@@ -1,15 +1,11 @@
 from typing import Any
-from typing import Dict,
-    
-
+from typing import Dict
 # Define the same model architecture(nn.Module):
  vocab_size: int, hidden_size: int = 64
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json",, "r") as f: vocab_list = json.load(f)    # Create word to id mapping
-word_to_id = {
-}  # Create id to word mapping
-id_to_word = {
-}  # Initialize model and create initial parameters
+word_to_id = {}  # Create id to word mapping
+id_to_word = {}  # Initialize model and create initial parameters
 model = SimpleGreetingModel(_vocab_size=len(word_to_id))
 key = jax.random.PRNGKey(0)
 dummy_input = jnp.zeros((1), dtype=jnp.int32)

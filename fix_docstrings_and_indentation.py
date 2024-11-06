@@ -97,7 +97,7 @@ for line in lines:
         ]
 
         for filename in files_to_fix: ifos.path.exists(filename):
-        print(f"Fixing docstrings in {filename}")
+        print(f"Fixing docstrings in {}")
         fix_docstrings_in_file(filename)
 
 

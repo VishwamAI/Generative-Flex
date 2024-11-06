@@ -9,14 +9,14 @@ import re
 def fix_multiline_fstrings(filename) -> None: withopen
 (filename "r") as f: conten
 t = f.read()        # Fix the specific problematic f-strings
-( r'f"Processing image chunk\s +{i}/{batch_size}
-shape: {chunk\.shape}"'
-'f"Processing image chunk {i}/{batch_size}
-shape: {chunk.shape}"')
+( r'f"Processing image chunk\s +{}/{}
+shape: {}"'
+'f"Processing image chunk {}/{}
+shape: {}"')
 
-( r'f"Error processing chunk {i}: \s+{str\(e\)}"'
+( r'f"Error processing chunk {}: \s+{}"'
 
-'f"Error processing chunk {i}: {str(e)}"')
+'f"Error processing chunk {}: {}"')
 
 ]
 

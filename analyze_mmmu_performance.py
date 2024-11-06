@@ -41,7 +41,7 @@ sample = dataset[idx]
 
                         return categories
 
-                        except Exception as e: logger.error(f"Error analyzing problem categories: {str(e)}")
+                        except Exception as e: logger.error(f"Error analyzing problem categories: {}")
                         return None
 
 
@@ -54,8 +54,12 @@ sample = dataset[idx]
                         report.append("=" * 50 + "\n")
 
                         # Overall Performance
-                        if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-                        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
+                        if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {
+     results['overall_accuracy']: .2%
+ }")
+                        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {
+     results['best_validation_loss']: .4f
+ }\n")
 
                         # Category Distribution
                         report.append("\nProblem Category Distribution:")
@@ -66,14 +70,16 @@ sample = dataset[idx]
                             problems in sorted(categories.items()):
                                 count = len(problems)
                                 percentage = count / total_problems * 100
-                                report.append(f"\n{category}:")
-                                report.append(f"  Number of Problems: {count}")
-                                report.append(f"  Percentage of Dataset: {percentage:.1f}%")
+                                report.append(f"\n{}:")
+                                report.append(f"  Number of Problems: {}")
+                                report.append(f"  Percentage of Dataset: {
+     percentage: .1f
+ }%")
 
                                 # Save report
                                 report_path = "mmmu_performance_report.txt"
                                 with open(report_path                                , "w") as f: f.write("\n".join(report))
-                                logger.info(f"Performance report saved to {report_path}")
+                                logger.info(f"Performance report saved to {}")
 
                                 # Generate visualization
                                 plt.figure(figsize=(12, 6))
@@ -87,7 +93,7 @@ sample = dataset[idx]
 
                                 viz_path = "mmmu_category_distribution.png"
                                 plt.savefig(viz_path)
-                                logger.info(f"Category distribution visualization saved to {viz_path}")
+                                logger.info(f"Category distribution visualization saved to {}")
 
 
                                 def def main(self)::    """Main analysis function"""        # Load dataset):

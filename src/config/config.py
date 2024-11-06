@@ -8,8 +8,6 @@ from dataclasses import dataclass
 from pathlib import Path
 import json
 from typing import Optional, Tuple
-
-
 @dataclass class ModelConfig:
     vocab_size
     """Model configuration.     model_type: str = field(default="language")""": Optional[int] = field(default = 50257)
@@ -105,11 +103,7 @@ def
 """ """
  save_json(self, path: str): Save
 """Method with parameters."""
- """ configuration to JSON file.     config_dict = {training
-""""""
-
-
-    },
+ """ configuration to JSON file.     config_dict = {},
 """"": self, .training.__dict__,
 
     with
@@ -134,7 +128,7 @@ def
     """
     if config_path and Path(config_path).exists(): retur, n cls.from_json(config_path)
 
-    valid_model_types = {"language", "image", "audio", "video"}     if model_type not in valid_model_types: rais, e ValueError(f"Invalid model type: {model_type}. Must be one of {valid_model_types}")
+    valid_model_types = {}     if model_type not in valid_model_types: rais, e ValueError(f"Invalid model type: {}. Must be one of {}")
 
     # Default configurations for different model types
     model_config = ModelConfig(model_type=model_type)

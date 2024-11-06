@@ -1,9 +1,6 @@
 from pathlib import Path
 import subprocess
 import sys
-
-
-
 def def format_files(self)::            files_to_format
 """Format all Python files in the project using black."""
  = [):
@@ -43,13 +40,13 @@ def def format_files(self)::            files_to_format
 
 # Ensure all files exist
 for file_path in files_to_format: ifnotPath(file_path).exists():
-print(f"Warning: File{file_path} not found")
+print(f"Warning: File{} not found")
 continue
 
-try: print(f"Formatting {file_path}...")
+try: print(f"Formatting {}...")
 subprocess.run(["black", file_path], check=True)
 
-except subprocess.CalledProcessError as e: print(f"Error formatting {file_path}: {e}")
+except subprocess.CalledProcessError as e: print(f"Error formatting {}: {}")
 sys.exit(1)
 
 print("All files formatted successfully!")

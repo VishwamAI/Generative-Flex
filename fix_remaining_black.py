@@ -8,8 +8,6 @@ from torchvision import transforms
 from typing import Dict,
     Optional
 from typing import Optional,
-    ,
-    
     
 import logging
 import os
@@ -24,7 +22,7 @@ def
  fix_file(file_path content) -> None: os
 makedirs(os.path.dirname(file_path)
 exist_ok=True)
-with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
+with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {}")
 
 
 self.experts = nn.ModuleList([ nn.Sequential( nn.Linear(hidden_size, intermediate_size),
@@ -299,7 +297,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                     for epoch in range(self.num_epochs):
                         self._epoch = epoch
-                        logger.info(f"Starting epoch {epoch}")
+                        logger.info(f"Starting epoch {}")
 
                         for step
                         batch in enumerate(self.train_dataloader):
@@ -311,7 +309,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 self.optimizer.zero_grad()
                                 self._step += 1
 
-                                if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})        total_loss = 0
+                                if self._step % self.logging_steps == 0: self.log_metrics({
+    "loss": total_loss / self.logging_steps
+})        total_loss = 0
 
                                 if self._step % self.evaluation_steps == 0: self.evaluate()
                                 if self._step % self.save_steps == 0: self.save_checkpoint()
@@ -330,7 +330,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 eval_loss = total_loss / len(self.eval_dataloader)
                                 self.model.train()
 
-                                metrics = {"eval_loss": eval_loss}        self.log_metrics(metrics)
+                                metrics = {
+     "eval_loss": eval_loss
+ }        self.log_metrics(metrics)
 
                                 if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss        self.save_checkpoint(is_best=True)
 
@@ -338,14 +340,14 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                     def save_checkpoint(self                                     is_best: boo                                    l = False) -> None: """ a model checkpoint.Log
 
-                                        """checkpoint_name = f"checkpoint-{self._step}"):
+                                        """checkpoint_name = f"checkpoint-{}"):
                                         if is_best: checkpoint_name = "best_model"
-                                        self.accelerator.save_state(f"{self.output_dir}/{checkpoint_name}")
-                                        logger.info(f"Saved checkpoint: {checkpoint_name}")
+                                        self.accelerator.save_state(f"{}/{}")
+                                        logger.info(f"Saved checkpoint: {}")
 
                                     def log_metrics(self                                     metrics: Dict                                    [str                                    float]) -> None: """ training metrics.Base
     """                metric_str = " ".join):
-                                        v in metrics.items())                logger.info(f"Step {self._step}: {metric_str}")
+                                        v in metrics.items())                logger.info(f"Step {}: {}")
                                         """,
                                         "src/training/trainer.py": """""" trainer implementation.Base
 """
@@ -399,7 +401,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                         for epoch in range(self.num_epochs):
                                         self._epoch = epoch
-                                        logger.info(f"Starting epoch {epoch}")
+                                        logger.info(f"Starting epoch {}")
 
                                         for step
                                             batch in enumerate(self.train_dataloader):
@@ -410,7 +412,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                                 self.optimizer.zero_grad()
                                                 self._step += 1
 
-                                                if self._step % self.logging_steps == 0: self.log_metrics({"loss": total_loss / self.logging_steps})        total_loss = 0
+                                                if self._step % self.logging_steps == 0: self.log_metrics({
+    "loss": total_loss / self.logging_steps
+})        total_loss = 0
 
                                                 if self._step % self.evaluation_steps == 0: self.evaluate()
                                                 if self._step % self.save_steps == 0: self.save_checkpoint()
@@ -429,7 +433,9 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                                 eval_loss = total_loss / len(self.eval_dataloader)
                                                 self.model.train()
 
-                                                metrics = {"eval_loss": eval_loss}        self.log_metrics(metrics)
+                                                metrics = {
+     "eval_loss": eval_loss
+ }        self.log_metrics(metrics)
 
                                                 if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss        self.save_checkpoint(is_best=True)
 
@@ -437,19 +443,20 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
                                                     def save_checkpoint(self                                                     is_best: boo                                                    l = False) -> None: """ a model checkpoint.Log
 
-                                                        """checkpoint_name = f"checkpoint-{self._step}"):
+                                                        """checkpoint_name = f"checkpoint-{}"):
                                                         if is_best: checkpoint_name = "best_model"
-                                                        torch.save({                                                     "model_state_dict": self.model.state_dict()
-                                                        "optimizer_state_dict": self.optimizer.state_dict()
-                                                        "step": self._step
-                                                        "epoch": self._epoch
-                                                        },
-                                                f"{self.output_dir}/{checkpoint_name}.pt")
-                                                logger.info(f"Saved checkpoint: {checkpoint_name}")
+                                                        torch.save({
+    "model_state_dict": self.model.state_dict(),
+    "optimizer_state_dict": self.optimizer.state_dict(),
+    "step": self._step,
+    "epoch": self._epoch
+},
+                                                f"{}/{}.pt")
+                                                logger.info(f"Saved checkpoint: {}")
 
                                                     def log_metrics(self                                                     metrics: Dict                                                    [str                                                    float]) -> None: """ training metrics.Fix
     """                metric_str = " ".join):
-                                                        v in metrics.items())                logger.info(f"Step {self._step}: {metric_str}")
+                                                        v in metrics.items())                logger.info(f"Step {}: {}")
 """,
                                                         }
 
@@ -460,7 +467,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                                 full_path = os.path.join(os.getcwd(), file_path)
                                                     if os.path.exists(full_path):
                                                 fix_file(full_path, content)
-                                                else: print(f"File not found: {file_path}")
+                                                else: print(f"File not found: {}")
 
 
                                                 if __name__ == "__main__":        main()

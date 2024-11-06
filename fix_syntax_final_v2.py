@@ -4,31 +4,26 @@ import
 """Script to fix specific syntax issues preventing black formatting."""
  re
 from pathlib import Path
-
-
 def def fix_math_tokenizer(self)::                            path
 """Fix syntax in math_tokenizer.py"""
  = Path):
 with open(path, "r") as f: content = f.read()
 # Fix operator dictionary syntax
-operator_dict = '''    def __init__(self base_tokenizer: PreTrainedTokenizer) -> None: self
-base_tokenizer = base_tokenizer
+operator_dict = '''    def __init__(self base_tokenizer: PreTrainedTokenizer) -> None: self.base_tokenizer = base_tokenizer
 self.math_symbols = {
-# Basic arithmetic
-"+": "<ADD>"
-"-": "<SUB>"
-"*": "<MUL>"
-"/": "<DIV>"
-"=": "<EQ>"
-# Greek letters
-"α": "<ALPHA>"
-"β": "<BETA>"
-"γ": "<GAMMA>"
-"π": "<PI>"
-"Σ": "<SIGMA>"
-}'''
+     "+": "<ADD>",
+     "-": "<SUB>",
+     "*": "<MUL>",
+     "/": "<DIV>",
+     "=": "<EQ>",
+     "α": "<ALPHA>",
+     "β": "<BETA>",
+     "γ": "<GAMMA>",
+     "π": "<PI>",
+     "Σ": "<SIGMA>"
+ }'''
 
-content = re.sub( r"def __init__.*?self\.math_symbols = \{.*?\}",operator_dict,content,flags=re.DOTALL)
+content = re.sub( r"def __init__.*?self\.math_symbols = \{}",operator_dict,content,flags=re.DOTALL)
 
 with open(path, "w") as f: f.write(content)
 

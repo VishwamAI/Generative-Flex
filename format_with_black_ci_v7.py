@@ -2,7 +2,6 @@ from typing import List
 import os
 import subprocess
 import sys
-
 #!/usr/bin/env python3
 
 
@@ -14,9 +13,7 @@ for root
 dirs
     files in os.walk("."):
 # Skip specific directories
-dirs[: ] = [d for d in dirs if d not in {".git"
-"venv"
-"__pycache__"}]
+dirs[: ] = [d for d in dirs if d not in {}]
 # Process Python files
     for file in files: if file.endswith(".py"):
 file_path = os.path.join(root, file)
@@ -30,7 +27,7 @@ return python_files
 :
                 subprocess.check_call(                 [sys.executable, "-m", "pip", "install", "--quiet", "black==24.10.0"]            )
                 print("Successfully installed black formatter")
-                except subprocess.CalledProcessError as e: print(f"Error installing black: {e}")
+                except subprocess.CalledProcessError as e: print(f"Error installing black: {}")
                 sys.exit(1)
 
 
@@ -39,7 +36,7 @@ return python_files
  not files: print("No Python files found")
                 return
 
-                print(f"Found {len(files)} Python files to format")
+                print(f"Found {} Python files to format")
 
                     try:
                         # Format files in batches to avoid command line length limits
@@ -58,15 +55,15 @@ return python_files
 
                         result = subprocess.run(cmd, capture_output=True, text=True)
 
-                        if result.returncode != 0: print(f"Error during formatting batch {i//batch_size + 1}:")
+                        if result.returncode != 0: print(f"Error during formatting batch {}:")
                         print(result.stderr)
                         # Continue with next batch instead of exiting
                         continue
 
-                        print(f"Successfully formatted batch {i//batch_size + 1}")
+                        print(f"Successfully formatted batch {}")
 
                         print("Completed formatting all files")
-                            except Exception as e: print(f"Unexpected error during formatting: {e}")
+                            except Exception as e: print(f"Unexpected error during formatting: {}")
                                 sys.exit(1)
 
 
@@ -84,7 +81,7 @@ return python_files
 
                                     except KeyboardInterrupt: print("\nOperation cancelled by user")
                                         sys.exit(1)
-                                        except Exception as e: print(f"Unexpected error: {e}")
+                                        except Exception as e: print(f"Unexpected error: {}")
                                         sys.exit(1)
 
 

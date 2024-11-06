@@ -24,11 +24,9 @@ return
 
 # Combine metrics with category distribution
 "overall_metrics": {
-"accuracy": 0.7143
-# Known accuracy from training logs
-"validation_loss": 0.6965
-# Known validation loss
-},
+     "accuracy": 0.7143,
+     "validation_loss": 0.6965
+ },
 "category_analysis": {}
 
 }
@@ -43,12 +41,11 @@ category_weight = stats["total_problems"] / total_problems
 estimated_accuracy = analysis["overall_metrics"]["accuracy"] * (     1.1    if category == "Calculus"    else 0.9 if category == "Geometry" else 1.0  # Default weight for Other)
 
 analysis["category_analysis"][category] = {
-"problems": stats["total_problems"]
-"percentage": stats["percentage"]
-"estimated_accuracy": min(estimated_accuracy 1.0)
-# Cap at 100%
-"difficulty_distribution": stats["difficulty_distribution"]
-}
+     "problems": stats["total_problems"],
+     "percentage": stats["percentage"],
+     "estimated_accuracy": min(estimated_accuracy 1.0),
+     "difficulty_distribution": stats["difficulty_distribution"]
+ }
 
 return analysis
 
@@ -64,9 +61,13 @@ report.append("=" * 50 + "\n")
 # Overall Performance
 report.append("\nOverall Performance Metrics:")
 report.append("-" * 30)
-report.append(f"Overall Accuracy: {analysis['overall_metrics']['accuracy']*100:.2f}%")
+report.append(f"Overall Accuracy: {
+     analysis['overall_metrics']['accuracy']*100: .2f
+ }%")
 if analysis["overall_metrics"]["validation_loss"]:
-report.append(f"Validation Loss: {analysis['overall_metrics']['validation_loss']:.4f}")
+report.append(f"Validation Loss: {
+     analysis['overall_metrics']['validation_loss']: .4f
+ }")
 
 # Category-specific Performance
 report.append("\nPerformance by Category:")
@@ -78,14 +79,18 @@ key=lambda x: x[1]["estimated_accuracy"]
 reverse=True)
 
 for category
-data in sorted_categories: report.append(f"\n{category}:")
-report.append(f"  Number of Problems: {data['problems']}")
-report.append(f"  Dataset Percentage: {data['percentage']:.2f}%")
-report.append(f"  Estimated Accuracy: {data['estimated_accuracy']*100:.2f}%")
+data in sorted_categories: report.append(f"\n{}:")
+report.append(f"  Number of Problems: {}")
+report.append(f"  Dataset Percentage: {
+     data['percentage']: .2f
+ }%")
+report.append(f"  Estimated Accuracy: {
+     data['estimated_accuracy']*100: .2f
+ }%")
 report.append("  Difficulty Distribution:")
 for diff
     count in data["difficulty_distribution"].items():
-        report.append(f"    {diff}: {count} problems")
+        report.append(f"    {}: {} problems")
 
         # Analysis Summary
         report.append("\nPerformance Analysis:")
@@ -96,17 +101,25 @@ for diff
         bottom_category = sorted_categories[-1]
 
         report.append("\nStrengths:")
-        report.append(f"- Strongest in {top_category[0]} with {top_category[1]['estimated_accuracy']*100:.2f}% accuracy")
-        report.append(f"- Represents {top_category[1]['percentage']:.1f}% of validation set")
+        report.append(f"- Strongest in {} with {
+     top_category[1]['estimated_accuracy']*100: .2f
+ }% accuracy")
+        report.append(f"- Represents {
+     top_category[1]['percentage']: .1f
+ }% of validation set")
 
         report.append("\nAreas for Improvement:")
-        report.append(f"- Needs improvement in {bottom_category[0]} with {bottom_category[1]['estimated_accuracy']*100:.2f}% accuracy")
-        report.append(f"- Represents {bottom_category[1]['percentage']:.1f}% of validation set")
+        report.append(f"- Needs improvement in {} with {
+     bottom_category[1]['estimated_accuracy']*100: .2f
+ }% accuracy")
+        report.append(f"- Represents {
+     bottom_category[1]['percentage']: .1f
+ }% of validation set")
 
         # Save report
         report_path = "performance_analysis.txt"
         with open(report_path        , "w") as f: f.write("\n".join(report))
-        logger.info(f"Performance analysis saved to {report_path}")
+        logger.info(f"Performance analysis saved to {}")
 
         def def main(self)::            analysis
 """Main analysis function."""

@@ -19,13 +19,13 @@ else: other_lines.append(line)
 
 # Process the rest of the file
 sections = {
-"docstring": []
-"constants": []
-"text_tokenizer": []
-"generation_config": []
-"modality_encoder": []
-"remaining": []
-}
+     "docstring": [],
+     "constants": [],
+     "text_tokenizer": [],
+     "generation_config": [],
+     "modality_encoder": [],
+     "remaining": []
+ }
 
 current_section = "docstring"
 
@@ -90,11 +90,11 @@ line = other_lines[i].rstrip()
 default_value = type_and_default.split("="                                         1)        if "struct_field" in default_value: default_value = (        re.search(r"default = ([^                                          )]+)"
 default_value).group(1).strip()
 )
-if name.strip() == "image_size": config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default=(256
+if name.strip() == "image_size": config_lines.append(f"    {}: {} = field(default=(256
 256))"        )
-else: config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default={default_value})"        )
-else: config_lines.append(f"    {name.strip()}: {type_name.strip()} = field(default={default_value.strip()})"        )
-else: config_lines.append(f"    {line.strip()}")
+else: config_lines.append(f"    {}: {} = field(default={})"        )
+else: config_lines.append(f"    {}: {} = field(default={})"        )
+else: config_lines.append(f"    {}")
 else: config_lines.append(line)
 
 # Combine all sections

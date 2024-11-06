@@ -20,14 +20,14 @@ if not training_logs: logger.error("No training logs found")
 return None
 
 latest_log = training_logs[-1]
-logger.info(f"Analyzing log file: {latest_log}")
+logger.info(f"Analyzing log file: {}")
 
 # Initialize results dictionary
 results = {
-"overall_accuracy": None
-"best_validation_loss": None
-"problem_types": defaultdict(list)
-}
+     "overall_accuracy": None,
+     "best_validation_loss": None,
+     "problem_types": defaultdict(list)
+ }
 
 current_problem = None
 
@@ -57,8 +57,12 @@ except ValueError: continue# Look for problem type indicators in the input text
         report.append("=" * 50 + "\n")
 
         # Overall Performance
-        if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
+        if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {
+     results['overall_accuracy']: .2%
+ }")
+        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {
+     results['best_validation_loss']: .4f
+ }\n")
 
         # Performance by Category
         report.append("\nPerformance by Problem Category:")
@@ -70,24 +74,26 @@ except ValueError: continue# Look for problem type indicators in the input text
                 if outcomes: correct = sum(1 for x in outcomes if x)                    total = len(outcomes)
                 accuracy = correct / total if total > 0 else 0
                 category_metrics[category] = {
-                "accuracy": accuracy
-                "correct": correct
-                "total": total
-                }
+     "accuracy": accuracy,
+     "correct": correct,
+     "total": total
+ }
 
         # Sort categories by accuracy
         for category
         metrics in sorted(category_metrics.items()
         key=lambda x: x[1]["accuracy"]
             reverse=True                    ):
-                report.append(f"\n{category}:")
-                report.append(f"  Accuracy: {metrics['accuracy']:.2%}")
-                report.append(f"  Correct: {metrics['correct']}/{metrics['total']}")
+                report.append(f"\n{}:")
+                report.append(f"  Accuracy: {
+     metrics['accuracy']: .2%
+ }")
+                report.append(f"  Correct: {}/{}")
 
                 # Save report
                 report_path = "mmmu_performance_report.txt"
                 with open(report_path                , "w") as f: f.write("\n".join(report))
-                logger.info(f"Performance report saved to {report_path}")
+                logger.info(f"Performance report saved to {}")
 
                 # Generate visualization
                 if category_metrics: plt.figure(figsize=(12                 6))                                categories = []
@@ -105,7 +111,7 @@ except ValueError: continue# Look for problem type indicators in the input text
 
                 viz_path = "mmmu_performance_by_category.png"
                 plt.savefig(viz_path)
-                logger.info(f"Performance visualization saved to {viz_path}")
+                logger.info(f"Performance visualization saved to {}")
 
 
                 def def main(self)::            results

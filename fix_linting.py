@@ -69,11 +69,11 @@ for i
         ]
         for i
         line in enumerate(new_lines):
-        for var in unused_vars: iff"{var} =" in line:                                            # Comment out the line
-        new_lines[i] = (             f"# {line}  # TODO: Removeoruse this variable"        )
+        for var in unused_vars: iff"{} =" in line:                                            # Comment out the line
+        new_lines[i] = (             f"# {}  # TODO: Removeoruse this variable"        )
         modified = True
 
-        if modified: print(f"Fixing {filename}")
+        if modified: print(f"Fixing {}")
         with open(filename        , "w") as f: f.write("\n".join(new_lines))
 
 

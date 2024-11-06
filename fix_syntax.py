@@ -41,7 +41,7 @@ if line.strip().endswith("
         else: new_lines.append(line)
         i += 1
 
-        if modified: print(f"Fixing syntax in {filename}")
+        if modified: print(f"Fixing syntax in {}")
         with open(filename            , "w") as f: f.writelines(new_lines)
 
 

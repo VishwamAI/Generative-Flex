@@ -5,15 +5,12 @@ from typing import List
 from typing import Any
 from typing import Optional
 import re
-
-
 def def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports if not present
 imports = [
 "import jax.numpy as jnp\n",
 "from typing import Dict,
-    ,
     ,
     ,
     
@@ -74,7 +71,7 @@ stripped = line.lstrip()
     if stripped.startswith("#"):
         continue
         spaces = (         "        "        if in_call_method        else "    "    )
-fixed_content.append(     f"{spaces}{stripped}")
+fixed_content.append(     f"{}{}")
 continue
 
 # Fix duplicate _adjust_sequence_length calls
@@ -97,5 +94,5 @@ with open(     "src/models/text_to_anything.py"
 fixed_content
 )
 
-if ( __name__== "__main__"):
+if ( __name__==, "__main__"):
 fix_text_to_anything()

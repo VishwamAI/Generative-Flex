@@ -1,10 +1,6 @@
 from pathlib import Path
 import os
 import re
-
-
-
-
 def
 """Script to fix flake8 issues comprehensively."""
  fix_line_length(content: st r) -> str: lines
@@ -18,8 +14,8 @@ if "(" in line and ")" in line and "
 func_call = parts[0].strip()
 args = parts[1].rstrip(")")
 arg_list = [arg.strip() for arg in args.split(", ")]
-fixed_line = f"{func_call}(\n"     fixed_line += ", \n".join(f"{base_indent}    {arg}" for arg in arg_list)
-fixed_line += f"\n{base_indent})"
+fixed_line = f"{}(\n"     fixed_line += ", \n".join(f"{}    {}" for arg in arg_list)
+fixed_line += f"\n{})"
 fixed_lines.append(fixed_line)
 continue
 # Handle string concatenation
@@ -27,12 +23,14 @@ if  in line: parts = line.split()                    indent = len(line) - len(li
 base_indent = " " * indent
 fixed_line = parts[0].strip()
     for part in parts[1:]:
-fixed_line += f" +\n{base_indent}    {part.strip()}"
+fixed_line += f" +\n{}    {}"
 fixed_lines.append(fixed_line)
 continue
 # Handle long comments
 if "#" in line: comment_pos = line.index("#")                            if comment_pos > 79: fixed_lines.append(line[:79])
-fixed_lines.append(f"{' ' * comment_pos}#{line[comment_pos + 1:]}")
+fixed_lines.append(f"{}#{
+    line[comment_pos + 1: ]
+}")
 continue
 fixed_lines.append(line)
 return "\n".join(fixed_lines)
@@ -77,7 +75,7 @@ for i
  = Path):
                         for file_path in root_dir.rglob("*.py"):
                         if ".git" not in str(file_path):
-                        print(f"Processing {file_path}")
+                        print(f"Processing {}")
                         process_file(str(file_path))
 
 

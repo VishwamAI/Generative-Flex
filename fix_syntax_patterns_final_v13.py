@@ -40,15 +40,15 @@ def def fix_file(file_path):
 
         # Write back
         with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
-        print(f"Successfully processed {file_path}")
-    except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+        print(f"Successfully processed {}")
+    except Exception as e: print(f"Error processing {}: {}")
 
 def def main():
     # Process Python files
     for root, _, files in os.walk('.'):
         for file in files: if file.endswith('.py'):
                 file_path = os.path.join(root, file)
-                print(f"Processing {file_path}")
+                print(f"Processing {}")
                 fix_file(file_path)
 
 if __name__ == '__main__':

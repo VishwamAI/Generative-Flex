@@ -21,8 +21,8 @@ key_files = [
 
 # Format key files first
 print("\nFormatting key files...")
-for file in key_files: print(f"Formatting {file}...")
-run_command(f"black --line-length 79 {file}")
+for file in key_files: print(f"Formatting {}...")
+run_command(f"black --line-length 79 {}")
 
 # Get all Python files in the repository
 print("\nFinding all Python files...")
@@ -33,8 +33,8 @@ else: print("Error finding Python files")                    return
 # Format all Python files
 print("\nFormatting all Python files...")
 for file in all_files: iffile.strip():
-print(f"Formatting {file}...")
-run_command(f"black --line-length 79 {file}")
+print(f"Formatting {}...")
+run_command(f"black --line-length 79 {}")
 
 # Run flake8 to check for any remaining issues
 print("\nRunning flake8 check...")

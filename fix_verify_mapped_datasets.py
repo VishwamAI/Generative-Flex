@@ -1,7 +1,6 @@
 from typing import List
 from typing import Optional
 from dataset_verification_utils import(from datasets import load_dataset from huggingface_hub import HfApifrom pathlib import Pathfrom typing import Dict,
-    ,
     
     Anyimport blackimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport reimport tempfileimport timeimport yaml
 def
@@ -58,7 +57,7 @@ content
 flags=re.DOTALL
 )
 content = re.sub(r"basic_strategies = \[.*?\]", fixed_basic_strategies, content, flags=re.DOTALL)
-content = re.sub(r"dataset_configs = {.*?}", fixed_dataset_configs, content, flags=re.DOTALL)
+content = re.sub(r"dataset_configs = {}", fixed_dataset_configs, content, flags=re.DOTALL)
 
 # Fix indentation and other syntax issues
 content = re.sub(r"\)\s*\)", ")", content)  # Remove duplicate closing parentheses
@@ -67,9 +66,9 @@ content = re.sub(r"  s*\)", ")", content
 content = re.sub(r"\+\s*=\s*1", " += 1", content)  # Fix increment syntax
 
 # Format with black
-try: mode = black.Mode(target_versions={black.TargetVersion.PY312} line_length=88string_normalization=Trueis_pyi=False)                formatted_content = black.format_str(content
+try: mode = black.Mode(target_versions={} line_length=88string_normalization=Trueis_pyi=False)                formatted_content = black.format_str(content
 mode=mode)
-except Exception as e: print(f"Black formatting failed: {str(e)}")
+except Exception as e: print(f"Black formatting failed: {}")
 formatted_content = content
 
 # Write the fixed content back

@@ -15,7 +15,9 @@ Test
 
     logits
     """     "
-    input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()])""" """# Generate response""" = chat_model.apply({"params": model_params, } input_tokens)assert
+    input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()])""" """# Generate response""" = chat_model.apply({
+    "params": model_params,
+} input_tokens)assert
 """
 # Verify output shape and type
 """
@@ -42,7 +44,9 @@ input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"])""" w in test_in
 
 logits
 """])"""
- """# Generate response""" = chat_model.apply({"params": model_params, } input_tokens)predicted_tokens = jnp.argsort(logits)[-10:][::-1]# Convert tokens back to wordsid_to_word
+ """# Generate response""" = chat_model.apply({
+    "params": model_params,
+} input_tokens)predicted_tokens = jnp.argsort(logits)[-10:][::-1]# Convert tokens back to wordsid_to_word
 """ response_words = ["""
 [int(token)] for token in predicted_tokensresponse
 """
@@ -73,5 +77,7 @@ assert
     assert input_tokens[0] == word_to_id["<unk>"]
 
     # Generate response
-    logits = chat_model.apply({"params": model_params, }input_tokens)
+    logits = chat_model.apply({
+    "params": model_params,
+}input_tokens)
     assert not jnp.any(jnp.isnan(logits))

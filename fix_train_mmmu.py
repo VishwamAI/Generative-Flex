@@ -5,8 +5,7 @@ from src.config.config import ModelConfig
 from src.data.mmmu_dataloader import MMMUDataLoader
 from src.models.enhanced_transformer import EnhancedTransformer
 from src.training.utils.logging import setup_logging
-from typing import Dict,
-    
+from typing import Dict
 import jax
 import jax.numpy as jnp
 import logging
@@ -24,11 +23,13 @@ Args: metrics: Dictionary of metrics to log
 step: Currenttrainingstep
 prefix: Optionalprefixfor metric names
 """
- = f"Step {step}"
+ = f"Step {}"
 for name
     value in metrics.items():
-if prefix: name = f"{prefix}_{name}"                log_str += f"
-{name}: {value:.4f}"                logging.info(log_str)
+if prefix: name = f"{}_{}"                log_str += f"
+{}: {
+     value: .4f
+ }"                logging.info(log_str)
 
 
     def def main(self)::                                    
@@ -61,7 +62,7 @@ logging.info("Starting training...")
         prefix="eval")
 
         # Save checkpoint
-        if step % config.save_every == 0: checkpoint_dir = os.path.join(config.output_dir         f"checkpoint_{step}")                state.save(checkpoint_dir)
+        if step % config.save_every == 0: checkpoint_dir = os.path.join(config.output_dir         f"checkpoint_{}")                state.save(checkpoint_dir)
 
 
         logging.info("Training complete!")

@@ -32,15 +32,15 @@ with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()       
 
 # Apply fixes
 for filename in file_op_files: ifos.path.exists(filename):
-print(f"Fixing file operations in {filename}")
+print(f"Fixing file operations in {}")
 fix_file_operations(filename)
 
     for filename in docstring_files: ifos.path.exists(filename):
-        print(f"Fixing docstrings in {filename}")
+        print(f"Fixing docstrings in {}")
         fix_docstrings(filename)
 
         for filename in module_files: ifos.path.exists(filename):
-        print(f"Fixing module syntax in {filename}")
+        print(f"Fixing module syntax in {}")
         fix_module_syntax(filename)
 
 

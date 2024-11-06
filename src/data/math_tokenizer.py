@@ -7,12 +7,9 @@ import re
 from transformers import PreTrainedTokenizer
 import sympy
 import torch
-
-
 base_tokenizer
 """Tokenizer for mathematical expressions and symbols."""
-: PreTrainedTokenize, r)  ) -> None: self
-base_tokenizer = base_tokenizerReplace
+: PreTrainedTokenize, r)  ) -> None: self.base_tokenizer = base_tokenizerReplace
 """Parse mathematical expressions using sympy."""
 
 
@@ -22,7 +19,7 @@ base_tokenizer = base_tokenizerReplace
 text
     """
 
-token in self.math_symbols.items():""" = text.replace(symbol, f" {token} ")Detect
+token in self.math_symbols.items():""" = text.replace(symbol, f" {} ")Detect
 """
 return text
 """
