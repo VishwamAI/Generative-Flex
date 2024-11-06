@@ -13,7 +13,7 @@ def test_gpu_configuration(self):
 
 
 
-    print): print, ("-" * 50)
+    print("-" * 50)
 
         # Check available devices
         print("Available devices: ")

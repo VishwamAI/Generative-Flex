@@ -21,7 +21,8 @@ logger = logging.getLogger(__name__)
 hidden_states: torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
-**kwargs): Forwar, d pass of the math reasoning head.    """
+**kwargs):
+        """Forward pass of the math reasoning head."""
 
 """
 

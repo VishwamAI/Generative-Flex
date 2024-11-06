@@ -10,7 +10,7 @@ head_dim: intdropout_rat
 e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-"""Applies multi-head attention on the input data."""
+    """Applies multi-head attention on the input data."""
 
 
 # Linear projections
