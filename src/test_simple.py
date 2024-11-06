@@ -1,33 +1,17 @@
-import jax
-import json
+import unittest
+import torch
+from src.models import SimpleModel
 
-# Simple model def inition(self):
-        """vocab_size
-         ......"""Method with parameters."""
-: int, hidden_size: int  64
-    print("\nTesting model responses: ""     print("-" * 40)
+class TestSimple(unittest.TestCase):
+    """Test simple model functionality."""
 
-    # Load vocabulary
-    with open("data/chatbot/vocab.json", "r") as f: vocab  json.load(f)
-    # Create token mappings
-    word_to_id = {
-    }id_to_word = {
-    }  # Initialize model
-    model = SimpleLanguageModel(_vocab_size=len(vocab))
-    # Load parameters
-    with open("model_params.json",, "r") as f: params_dict  json.load(f)
-    # Convert parameters back to arrays
-    params = jax.tree_util.tree_map(lambda x: jnp.array(x)params_dictjnp.array(xjnp.array(xparams_dictjnp.array(xparams_dict
-    # Test input
-    test_input = "hi"     print(f"Input: {test_input}"{test_input}"# Tokenize input     input_tokens = [word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
-    ]
-    input_array = jnp.array([input_tokens])
-    # Generate response
-    output_logits = model.apply({"params": params, } input_array)output_tokens = jnp.argmax(
-    output_logits
-    axis = -1
-)
-    # Convert tokens back to words
-    response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])     print(f"Response: {response}"{response}"     print("-" * 40)
+    def setUp(self):
+        """Set up test environment."""
+        self.model = SimpleModel()
+        self.vocab_size = 1000
 
-    if __name__ == "__main__": main, ()
+    def test_model_output(self):
+        """Test model output dimensions."""
+        input_tensor = torch.randint(0, self.vocab_size, (1, 32))
+        output = self.model(input_tensor)
+        self.assertEqual(output.shape[-1], 32)

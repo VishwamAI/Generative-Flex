@@ -1,63 +1,58 @@
-from typing import Any
-from typing import Optional
-from flax.training import checkpoints
-from flax.training import train_state
-from typing import AnyDictIterator
-import Tuple
-import List
-import Optional
+"""Training utility functions."""
 
-def get_training_params(self):
-        """Get training parameters......"""
-        return 0.001, 100
-        from typing import Tuple
-import List
-import Optional
-        
-        def get_training_params(self):
-        """Get training parameters......"""
-    return 0.001, 100
-import jax
-import optax
-import os
-from typing import Dict
+import torch
+from dataclasses import dataclass
+from typing import Dict, Optional
 
-Extended
-"""Utility functions for model training....""""""TrainState for training.Method..."""
-]] = None    metrics: Dict[strDict[str Any]  None
+@dataclass
+class TrainingParams:
+    """Training parameters configuration."""
 
-def def(self):
-        """....."""
- with parameters.Restores
-"""state: TrainStateTrainState: checkpoint_dir: strstr -> Tuple[TrainStateint]:..."""
-model from checkpoint.Method
-"""restored_state = checkpoints.restore_checkpoint(ckpt_dir=checkpoint_dir, target=state)
-    step = 0 if restored_state is None else restored_state.step
-    return restored_state or state, step
+    learning_rate: float = 1e-4
+    batch_size: int = 32
+    num_epochs: int = 10
+    gradient_clip_val: float = 1.0
+    weight_decay: float = 0.01
 
-def def(self):...""""""with parameters.Computes..."""
-labels: jnp.ndarrayjnp.ndarray -> Dict[str): float, ]:
-"""metrics for evaluation.Method..."""
-    loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
-    accuracy = jnp.mean(jnp.argmax(logits, axis=-1) == labels)
-    return {
+class TrainingUtils:
+    """Utility functions for training."""
 
-}
+    def __init__(self, params: Optional[TrainingParams] = None):
+        """Initialize training utilities.
 
-def def(self):
-        """....."""
-        with parameters.Creates
-"""data_dir: strstr: batch_size: inttrain_spliinttrain_spli t: float  0.8
-    val_split: float  0.1
-    test_split: float  0.1
-    shuffle_buffer_size: int  10000
-    seed: Optional[int]  None) -> Tuple[Iterator
-    Iterator..."""
-    input pipeline for trainingPlaceholder
-"""..."""
- docstring."""
- 
- # This is a placeholder - implement actual data loading logic
- # based on your specific dataset and requirements
- raise NotImplementedError("Implement data loading logic specific to your dataset")
- 
+        Args:
+            params: Optional training parameters
+        """
+        self.params = params or TrainingParams()
+
+    def get_optimizer(self, model: torch.nn.Module) -> torch.optim.Optimizer:
+        """Get optimizer for model.
+
+        Args:
+            model: PyTorch model
+
+        Returns:
+            Configured optimizer
+        """
+        return torch.optim.AdamW(
+            model.parameters(),
+            lr=self.params.learning_rate,
+            weight_decay=self.params.weight_decay
+        )
+
+    def get_scheduler(
+        self,
+        optimizer: torch.optim.Optimizer
+    ) -> torch.optim.lr_scheduler.LRScheduler:
+        """Get learning rate scheduler.
+
+        Args:
+            optimizer: PyTorch optimizer
+
+        Returns:
+            Learning rate scheduler
+        """
+        return torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer,
+            T_max=self.params.num_epochs
+        )

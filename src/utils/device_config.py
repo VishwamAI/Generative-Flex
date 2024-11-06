@@ -1,35 +1,46 @@
-from typing import Any
-from typing import Dict
-import jax
-import os
+"""Device configuration utilities."""
 
+import torch
+from dataclasses import dataclass
+from typing import Optional
 
-    def __init__(self):
-        """Implementation of __init__......""""""Initialize device configuration...."""
-        pass
-"""Device configuration utility for handling both CPU and GPU environments...."""
- setup_device_config(self, memory_fraction: float  0.8, gpu_allow_growth: bool  True):
-Set
-"""Method with multiple parameters.
+@dataclass
+class DeviceConfig:
+    """Device configuration parameters."""
 
-Args: self: Parameter description
-memory_fraction: Parameter description
-    gpu_allow_growth: Parameter description...""""""up device configuration.Set..."""
-return {'memory_fraction': memory_fraction, 'gpu_allow_growth': gpu_allow_growth}
-"""up device configuration.
+    use_cuda: bool = True
+    device_id: int = 0
+    use_amp: bool = True
 
-Args: memory_fraction: Fraction of GPU memory to allocate
-gpu_allow_growth: Whether to allow GPU memory growth
+class DeviceManager:
+    """Manage device configuration and placement."""
 
-Returns: Dict containing device configurationConfigure..."""
-]:
-"""device settings for optimal performance.Method..."""
-config = get_device_info()
-if config["has_gpu"]: os, .environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = (         "false" if gpu_allow_growth else "true"    )     if not gpu_allow_growth: os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"]  str(memory_fraction)     if config["device_count"] > 1: os.environ["XLA_FLAGS"]  "--xla_force_host_platform_device_count = {}".format(config["device_count"])
-return config
+    def __init__(self, config: Optional[DeviceConfig] = None):
+        """Initialize device manager.
 
-def def(self):
-        """....""" with parameters.Get
-"""..""" optimal compute dtype based on available hardware."""
+        Args:
+            config: Optional device configuration
+        """
+        self.config = config or DeviceConfig()
+        self.device = self._setup_device()
 
-config = get_device_info): retur, n jnp.bfloat16 if config["has_gpu"] else jnp.float32 if __name__ = = "__main__": confi, g = setup_device_config() print("\n = == Device Configuration ===") print(f"Device Info: {{config}}"{{config}}" print(f"Compute dtype: {{get_compute_dtype()}}"{{get_compute_dtype({{get_compute_dtype(}}"{{get_compute_dtype(}}"
+    def _setup_device(self) -> torch.device:
+        """Set up compute device.
+
+        Returns:
+            Configured device
+        """
+        if self.config.use_cuda and torch.cuda.is_available():
+            return torch.device(f"cuda:{self.config.device_id}")
+        return torch.device("cpu")
+
+    def place_on_device(self, tensor: torch.Tensor) -> torch.Tensor:
+        """Place tensor on configured device.
+
+        Args:
+            tensor: Input tensor
+
+        Returns:
+            Tensor on configured device
+        """
+        return tensor.to(self.device)

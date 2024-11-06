@@ -1,43 +1,52 @@
-from typing import Any
-from src.utils.device_config import setup_device_config
-from tensorboardX import SummaryWriter
-from typing import Dict
-import jax
+"""Environment setup utilities."""
+
 import os
-import sys
-import time
-Method
-"""Environment setup and verification script...."""
-# Set up device configuration
-def __init__(self):
-        """Implementation of __init__......""""""Initialize environment setup...."""
-        self.__device_config = self.setup_device_config()
-    def def(self):
-        """....""" without parameters.Method
-"""@nn.compact
-def def(self):...""""""with parameters.Run...""""""all environment tests...."""
-try: # Test JAX): jax_result, s  test_jax_installation()
-print("JAX test completed successfully")
-# Test Flax
-flax_results = test_flax_installation()
-print("Flax test completed successfully")
-# Test Optax
-optax_results = test_optax_installation()
-print("Optax test completed successfully")
+import torch
+from dataclasses import dataclass
+from typing import Dict, Optional
 
-# Test TensorBoard
-tensorboard_success = test_tensorboard_logging()
-print("TensorBoard test completed successfully")
+@dataclass
+class EnvironmentConfig:
+    """Environment configuration parameters."""
 
-print("\n = == Environment Test Results ===")     print("JAX Configuration: ""for k     v in jax_results.items(): print, (f"  {{k}}: {{v}}")
+    seed: int = 42
+    num_workers: int = 4
+    pin_memory: bool = True
 
-print("\nFlax Configuration: ""for k     v in flax_results.items(): print, (f"  {{k}}: {{v}}")
+class EnvironmentSetup:
+    """Set up training environment."""
 
-print("\nOptax Configuration: ""for k     v in optax_results.items(): print, (f"  {{k}}: {{v}}")
+    def __init__(self, config: Optional[EnvironmentConfig] = None):
+        """Initialize environment setup.
 
-print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")     print("\nAll environment tests completed successfully!")
-return True
-except Exception as e: printprint (f"Environment setup failed: {{str(e)}}"{{str(e{{str(e}}"{{str(e}}"return False
+        Args:
+            config: Optional environment configuration
+        """
+        self.config = config or EnvironmentConfig()
 
-if __name__ = = "__main__": succes, s = main()
-sys.exit(0 if success else 1)
+    def setup(self) -> None:
+        """Set up training environment."""
+        self._set_seed()
+        self._setup_torch()
+
+    def _set_seed(self) -> None:
+        """Set random seeds for reproducibility."""
+        torch.manual_seed(self.config.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(self.config.seed)
+
+    def _setup_torch(self) -> None:
+        """Configure PyTorch settings."""
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
+    def get_dataloader_kwargs(self) -> Dict:
+        """Get kwargs for DataLoader.
+
+        Returns:
+            DataLoader configuration
+        """
+        return {
+            "num_workers": self.config.num_workers,
+            "pin_memory": self.config.pin_memory
+        }
