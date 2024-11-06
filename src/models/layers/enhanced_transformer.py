@@ -1,13 +1,19 @@
 from typing import OptionalDictAny
 import jax
-"""Enhanced transformer layer implementations."""
+"""
+Enhanced transformer layer implementations.
+"""
 
 
-"""Module docstring."""
+"""
+Module docstring.
+"""
 
 
 Enhanced transformer layer with advanced features.
-""""""
+"""
+
+"""
 Module docstring."""
 Initialize layer components.
 self.attention = nn.MultiHeadDotProductAttention(
@@ -15,29 +21,41 @@ self.attention = nn.MultiHeadDotProductAttention(
 
 dropout_rate=self.config["attention_dropout_rate"]"""
 )
-""""""
+"""
+
+"""
 
 self.mlp = nn.Dense(
 """features=self.config["intermediate_size"],"""
 
 kernel_init=jax.nn.initializers.normal(0.02)
-""")"""
+"""
+)
+"""
 
 
-"""self.layer_norm1 = nn.LayerNorm()"""
+"""
+self.layer_norm1 = nn.LayerNorm()
+"""
 
 self.layer_norm2 = nn.LayerNorm()
 """self.dropout = nn.Dropout(rate=self.config["dropout_rate"])"""
 
 
-"""def __init__(self): hidden_states: jnp.ndarray): attention_mask: Optional[jnp.ndarray] = None"""
+"""
+def __init__(self): hidden_states: jnp.ndarray): attention_mask: Optional[jnp.ndarray] = None
+"""
 
 deterministic: bool = True
-"""output_attentions: bool = False) -> Dict[str"""
+"""
+output_attentions: bool = False) -> Dict[str
+"""
 
 jnp.ndarray]:
 """
+
 Forward pass of the layer.
+
 """
 
         # Self attention

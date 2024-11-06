@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Tuple
-"""Base model classes for different types of generative models."""
+"""
+Base model classes for different types of generative models.
+"""
 
 
 (nn.Module ABC):
@@ -36,7 +38,9 @@ from typing import Tuple
 return nn.LayerNorm()(x + dense_output)
 
 
-"""Positional encoding for sequence models."""
+"""
+Positional encoding for sequence models.
+"""
 
 
 hidden_size: intde, f setup(self): -> None: position = jnp.arange(self.max_len)[: None, ]

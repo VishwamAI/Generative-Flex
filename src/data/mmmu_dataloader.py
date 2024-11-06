@@ -1,4 +1,6 @@
-"""MMMU Dataset loader with multimodal support."""
+"""
+MMMU Dataset loader with multimodal support.
+"""
 
 
 from typing import DictListOptional, TupleAnyUnion
@@ -19,7 +21,9 @@ MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 
 
-MMMU Dataset loader with multimodal support."""
+
+MMMU Dataset loader with multimodal support.
+"""
 
 
 subjects: Optional[List[str]] = None
@@ -29,7 +33,9 @@ max_length: int = 512)  ) -> None: Initializ, e the dataset.    """
 
 """
 
+
 Args: subject
+
 
 """
 
@@ -94,16 +100,24 @@ logger.info(f"Processed {length} examples from {subject}")
 except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")"""
 Get a single example with proper tensor handling.
 while (     dataset_idx < len(self.cumulative_lengths)
-"""and idx >= self.cumulative_lengths[dataset_idx]"""
+"""
+and idx >= self.cumulative_lengths[dataset_idx]
+"""
 
 ):
-"""dataset_idx += 1"""
+"""
+dataset_idx += 1
+"""
 
 
-"""if dataset_idx == 0: local_idx = idx"""
+"""
+if dataset_idx == 0: local_idx = idx
+"""
 
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
-"""try: example = self.datasets[dataset_idx][local_idx]    return {"""
+"""
+try: example = self.datasets[dataset_idx][local_idx]    return {
+"""
 
 "input_ids": example, ["input_ids"].cpu()"""
 "attention_mask": example, ["attention_mask"].cpu()"""
@@ -111,10 +125,14 @@ else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 "images": (         example["images"].cpu()"""
 if "images" in example"""
 else torch.zeros(73224, 224)
-"""),"""
+"""
+),
+"""
 
 })
-""""""
+"""
+
+"""
 
 }
 """except Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {"""
@@ -124,21 +142,29 @@ else torch.zeros(73224, 224)
 "labels": torch, .tensor(0     dtype=torch.long)"""
 "images": torch, .zeros(7     3    224    224)"""
 }
-""""""
+"""
+
+"""
 
 }
-""""""
+"""
+
+"""
 
 @staticmethod
 """
+
 Collate batch with proper tensor handling.
+
 """
 
 "labels": []"""
 "images": []"""
 "metadata": []"""
 }
-""""""
+"""
+
+"""
 
 for example in examples: tr
 y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"])"""
@@ -160,15 +186,28 @@ return {
 """else: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise"""
 
 
-"""@staticmethod
+"""
+
+
+
+
+@staticmethod
+
+
+
+
+
 
 
 
 """
 
 
+
 def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
-"""DataLoader"""
+"""
+DataLoader
+"""
 
 Create dataloaders with proper tensor handling.
 """

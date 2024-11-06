@@ -3,7 +3,9 @@ from image_processor import ImageProcessor
 from typing import OptionalTupleDict, Any
 import logging
 import torch
-"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
+"""
+MultiModal Transformer implementation with features inspired by Gemma and LLaMA.
+"""
 
 
 # Set up logging
@@ -11,10 +13,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-"""MultiModal Transformer with enhanced capabilities for mathematical reasoning."""
+"""
+MultiModal Transformer with enhanced capabilities for mathematical reasoning.
+"""
 
 
-"""Module docstring."""
+"""
+Module docstring.
+"""
 
 
 _init_math_weights(module) -> None: ifisinstance, (module (nn.Linear nn.Embedding): module, .weight.data.normal_(mean=0.0

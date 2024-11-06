@@ -2,7 +2,9 @@ from typing import Tuple
 import torch
 import torch.nn as nn
 
-"""Specialized experts for mathematical reasoning."""
+"""
+Specialized experts for mathematical reasoning.
+"""
 
 
 (nn.Module):

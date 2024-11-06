@@ -2,7 +2,9 @@ from transformers import PretrainedConfig
 
 
 
-"""Configuration class for MathReasoningModel."""
+"""
+Configuration class for MathReasoningModel.
+"""
 
 
 _model_type = "math_reasoning"

@@ -5,10 +5,19 @@ import time
 """
 
 
+
+
+
+
 Test script to verify JAX device configuration and GPU support.
 
 
+
+
+
+
 """
+
 
 
 

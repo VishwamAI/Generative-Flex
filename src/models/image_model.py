@@ -2,52 +2,80 @@ from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
-"""Image generation model implementation using JAX and Flax."""
+"""
+Image generation model implementation using JAX and Flax.
+"""
 
 
-"""Placeholder docstring."""
+"""
+Placeholder docstring.
+"""
 
 
 Image to patch embedding.
 patch_size: int
 hidden_dim: intdtype: An = jnp.float32"""
 @nn.compact
-"""Convert images to patch embeddings."""
+"""
+Convert images to patch embeddings.
+"""
 
 batch_sizeheightwidth, channels = images.shape
-""""""
+"""
+
+"""
 
 # Reshape image into patches
-"""patches = jnp.reshape("""
+"""
+patches = jnp.reshape(
+"""
 
 images,
-"""( batch_size,"""
+"""
+( batch_size,
+"""
 
 height // self.patch_size,
-"""width // self.patch_size,"""
+"""
+width // self.patch_size,
+"""
 
 self.patch_size,
-"""self.patch_size,"""
+"""
+self.patch_size,
+"""
 
 channels)
-""")"""
+"""
+)
+"""
 
 # Reshape patches into sequence
-"""patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))"""
+"""
+patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
+"""
 
 
-"""# Project patches to hidden dimension"""
+"""
+# Project patches to hidden dimension
+"""
 
 return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
-"""Placeholder docstring."""
+"""
+Placeholder docstring.
+"""
 
 Transformer-based image generation model.
 """
+
 int]# (height width)
+
 """
 
 Forward pass of the image generation model.) -> None:
-""""""
+"""
+
+"""
 
 # Input shape validation
 batch_sizeheightwidth, channels = inputs.shape

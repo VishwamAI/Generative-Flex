@@ -1,13 +1,19 @@
 from typing import OptionalDictAny
 import torch
 import torch.nn as nn
-"""Base transformer implementation for multimodal processing."""
+"""
+Base transformer implementation for multimodal processing.
+"""
 
 
-"""Base transformer model for multimodal processing."""
+"""
+Base transformer model for multimodal processing.
+"""
 
 
-"""Forward pass through the base transformer."""
+"""
+Forward pass through the base transformer.
+"""
 
 
 hidden_states = self.embeddings(hidden_states)
@@ -18,10 +24,14 @@ for layer in self.layers: hidden_states = layer(hidden_states attention_mask)
 return hidden_states
 
 
-"""Single transformer layer implementation."""
+"""
+Single transformer layer implementation.
+"""
 
 
-"""Forward pass through the transformer layer."""
+"""
+Forward pass through the transformer layer.
+"""
 
 
 attention_mask)
@@ -34,5 +44,7 @@ layer_output = self.dropout(layer_output)
 return self.norm2(hidden_states + layer_output)
 
 
-"""Multi-head attention implementation."""
+"""
+Multi-head attention implementation.
+"""
 

@@ -1,8 +1,12 @@
 import jax
-"""Simple language model for demonstration purposes."""
+"""
+Simple language model for demonstration purposes.
+"""
 
 
-"""A minimal language model for demonstration."""
+"""
+A minimal language model for demonstration.
+"""
 
 
 vocab_size: int

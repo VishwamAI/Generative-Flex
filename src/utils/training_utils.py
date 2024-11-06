@@ -5,10 +5,14 @@ from typing import Tuple
 import jax
 import optax
 import os
-"""Utility functions for model training."""
+"""
+Utility functions for model training.
+"""
 
 
-"""Extended TrainState for training."""
+"""
+Extended TrainState for training.
+"""
 
 
 Any]] = None    metrics: Dict[str, Any] = None

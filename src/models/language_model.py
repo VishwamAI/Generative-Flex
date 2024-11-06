@@ -1,15 +1,21 @@
 from src.models.transformer import TransformerBlock
 from typing import Any
 import jax
-"""Language model implementation using JAX and Flax."""
+"""
+Language model implementation using JAX and Flax.
+"""
 
 
-"""Sinusoidal positional encoding."""
+"""
+Sinusoidal positional encoding.
+"""
 
 
 dtype: Any = jnp.float32
 @nn.compact
-"""Add positional encodings to the input embeddings."""
+"""
+Add positional encodings to the input embeddings.
+"""
 
 
 seq_length = inputs.shape[1]

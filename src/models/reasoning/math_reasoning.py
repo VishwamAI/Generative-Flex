@@ -15,7 +15,9 @@ nalUnionList, DictAnyTuple
 logger = logging.getLogger(__name__)
 
 
-"""Math reasoning module for enhanced transformer model."""
+"""
+Math reasoning module for enhanced transformer model.
+"""
 
 
 hidden_states: torch.Tensorattention_mas
@@ -26,7 +28,9 @@ expressions: Optional[List[str]] = None
 
 """
 
+
 Args: hidden_state
+
 
 """
 
@@ -155,7 +159,9 @@ e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    
 
 """
 
+
 Args: modul
+
 
 """
 

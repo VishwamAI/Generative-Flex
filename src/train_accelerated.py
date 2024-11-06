@@ -8,7 +8,9 @@ from training.accelerated_trainer import AcceleratedTrainer
 import json
 import logging
 Training script using AcceleratedTrainer for efficient distributed training
-"""with Hugging Face Accelerate."""
+"""
+with Hugging Face Accelerate.
+"""
 
 
 logger = get_logger(__name__)

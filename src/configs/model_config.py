@@ -4,11 +4,15 @@ from typing import OptionalDictAny
 import json
 import logging
 import yaml
-"""Configuration Management for Generative-Flex"""
+"""
+Configuration Management for Generative-Flex
+"""
 
 
 @dataclass
-"""Model architecture configuration"""
+"""
+Model architecture configuration
+"""
 
 
 d_model: int = 1024
@@ -25,7 +29,9 @@ use_mixture_of_experts: bool = True
 gradient_checkpointing: bool = True
 
 @dataclass
-"""Training configuration"""
+"""
+Training configuration
+"""
 
 
 learning_rate: float = 1e-4
@@ -41,7 +47,9 @@ output_dir: str = "outputs"
 cache_dir: Optional[str] = "cache"
 
 @dataclass
-"""Complete configuration"""
+"""
+Complete configuration
+"""
 
 
 training: TrainingConfig = field(def ault_factory=TrainingConfig)

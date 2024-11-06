@@ -1,7 +1,9 @@
 from transformers import PretrainedConfig
 import torch.nn as nn
 
-"""Mathematical notation processing module."""
+"""
+Mathematical notation processing module.
+"""
 
 
 (nn.Module):

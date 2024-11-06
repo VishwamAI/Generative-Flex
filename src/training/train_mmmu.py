@@ -9,7 +9,9 @@ from src.models.enhanced_transformer import EnhancedTransformer
 """
 
 
-Training script for MMMU dataset using enhanced transformer model."""
+
+Training script for MMMU dataset using enhanced transformer model.
+"""
 
 
 logger = logging.getLogger(__name__)
@@ -36,16 +38,24 @@ dataloader: DataLoader, optimizer: torch.optim.Optimizer, config: TrainingConfig
 r: DataLoader):"""
 Evaluate the model.
 model.eval()
-"""total_loss  = 0.0"""
+"""
+total_loss  = 0.0
+"""
 
 correct = 0
-"""total = 0"""
+"""
+total = 0
+"""
 
 
-"""with torch.no_grad():"""
+"""
+with torch.no_grad():
+"""
 
 for batch in val_loader: loss = model(batch)
-"""total_loss += loss.item()"""
+"""
+total_loss += loss.item()
+"""
 
 
 """return {"val_loss": total_los, s / len(val_loader)}"""
@@ -56,12 +66,25 @@ for batch in val_loader: loss = model(batch)
 
 
 
+
+
+
+
+
+
+
+
+
+
 """
 
 
 
+
 def main(config: TrainingConfig):
-"""Main training function."""
+"""
+Main training function.
+"""
 
 
     model = EnhancedTransformer(config)

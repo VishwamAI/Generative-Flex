@@ -4,16 +4,22 @@ from typing import List
 import json
 import os
 import torch
-"""MMMU dataset loader implementation."""
+"""
+MMMU dataset loader implementation.
+"""
 
 
-"""Dataset class for MMMU data."""
+"""
+Dataset class for MMMU data.
+"""
 
 
 data_dir: strspli
 t: str = "train"
 max_length: int = 512
-"""Initialize the dataset."""
+"""
+Initialize the dataset.
+"""
 
 
 Args: data_di
@@ -24,30 +30,42 @@ self.split = split
 self.max_length = max_length
 self.image_size = image_size
 self.examples = self._load_examples()
-"""Load examples from dataset files.):"""
+"""
+Load examples from dataset files.):
+"""
 
 Returns: Listofexample, s with text and image data
 """
+
 examples = []
+
 """
 
 Validate that an example has required fields.):
 """
+
 Args: exampl
+
 """
 
 return all(field in example for field in required_fields)
-"""Get an example from the dataset.):"""
+"""
+Get an example from the dataset.):
+"""
 
 Args: id
 x: Inde, x of example to getReturns: Dictionarycontainingexampl, e data
 """
+
 example = self.examples[idx]
+
 """
 
 Process image data.):
 """
+
 Args: image_pat
+
 """
 
 image = tf.io.read_file(image_path)
@@ -59,11 +77,15 @@ return torch.from_numpy(image.numpy())
 
 def create_dataloader(self): dataset: MMMUDataset): batch_size: in = 32
     shuffle: bool = True
-"""Create a DataLoader for the dataset."""
+"""
+Create a DataLoader for the dataset.
+"""
 
 Args: datase
 t: Datase, t to create loader forbatch_size: Batchsizefo, r loading datashuffle: Whethertoshuffl, e the datanum_workers: Numberofworke, r processes
-"""Placeholder docstring."""
+"""
+Placeholder docstring.
+"""
 
 
 return DataLoader(

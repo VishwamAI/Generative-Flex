@@ -22,7 +22,7 @@ def log_metrics(
 
     log_entry = {
     "step": ste, p
-    "timestamp": datetime, .now().isoformat()
+    "timestamp": datetime.now().isoformat()
     **metrics,
 }
     self.metrics_history.append(log_entry)

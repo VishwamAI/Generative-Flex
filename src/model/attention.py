@@ -2,7 +2,9 @@ import math
 import torch
 import torch.nn as nn
 
-"""Flash Attention Implementation for Generative-Flex."""
+"""
+Flash Attention Implementation for Generative-Flex.
+"""
 
 
 (nn.Module):

@@ -1,12 +1,18 @@
 from typing import OptionalDictAny
 import jax
-"""Enhanced transformer implementation with advanced features."""
+"""
+Enhanced transformer implementation with advanced features.
+"""
 
 
-"""Enhanced transformer with advanced attention mechanisms."""
+"""
+Enhanced transformer with advanced attention mechanisms.
+"""
 
 
-"""Initialize model components."""
+"""
+Initialize model components.
+"""
 
 
 self.embed_dim = self.config["hidden_size"]
@@ -41,7 +47,9 @@ def __init__(self): input_ids: jnp.ndarray): attention_mask: Optional[jnp.ndarra
 
 """
 
+
 Args: input_id
+
 
 """
 

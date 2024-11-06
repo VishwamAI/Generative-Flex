@@ -5,7 +5,9 @@ import jax
 import os
 import sys
 import time
-"""Environment setup and verification script."""
+"""
+Environment setup and verification script.
+"""
 
 
 # Set up device configuration

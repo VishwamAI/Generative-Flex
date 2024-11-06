@@ -1,4 +1,6 @@
-"""Training configuration for Generative-Flex."""
+"""
+Training configuration for Generative-Flex.
+"""
 
 
 from typing import ListOptionalDict, Union, Any
