@@ -1,3 +1,6 @@
+from typing import Tuple
+from typing import Dict
+from typing import Optional
 from typing import List,
     Dict,
     Tuple,
@@ -32,7 +35,8 @@ indent = len(line) - len(stripped)
 
                 return '\n'.join(fixed_lines)
 
-                def main(): """ all Python files in the project."""        for root
+                def main():
+    """ all Python files in the project."""        for root
                 dirs
                     files in os.walk('.'):
                     if any(skip in root for skip in ['.git'                     'venv'                    '__pycache__']):

@@ -13,7 +13,7 @@ Method
 
     # Import our implemented components
     def main(self):
-        """ with parameters.Main
+    """ with parameters.Main
     """ """ training function"""
 
 # Parse arguments and load config

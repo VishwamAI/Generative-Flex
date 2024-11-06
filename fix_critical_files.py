@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -71,7 +74,8 @@ indent = len(line) - len(stripped)
                         fixed_lines = []
                         in_dataclass = False
 
-                        for line in lines: if "@dataclass" in line: in_dataclass = True
+                        for line in lines:
+    if "@dataclass" in line: in_dataclass = True
                                 fixed_lines.append(line)
                                 continue
 
@@ -116,7 +120,7 @@ indent = len(line) - len(stripped)
                                                     if stripped.startswith(("class "                                                     "def "                                                    "@")):
                                                         # Handle class and function definitions
                                                         while indent_stack and current_indent < indent_stack[-1]:
-                                                        indent_stack.pop()
+    indent_stack.pop()
                                                             if not indent_stack or current_indent > indent_stack[-1]:
                                                                 indent_stack.append(current_indent)
                                                                 line = " " * indent_stack[-1] + stripped
@@ -162,7 +166,8 @@ indent = len(line) - len(stripped)
                                                                                                 except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                                                                                                def main():    """ critical files first."""    critical_files = [
+                                                                                                def main():
+    """ critical files first."""    critical_files = [
                                                                                                 "src/config/config.py",
                                                                                                 "src/config/training_config.py",
                                                                                                 "src/models/text_to_anything.py",

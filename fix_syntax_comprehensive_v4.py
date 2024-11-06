@@ -1,3 +1,5 @@
+from typing import Tuple
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -7,7 +9,8 @@ from typing import List,
     Optional,
     Tuple
 
-class CodeBlock: def
+class CodeBlock:
+    def
     """Represents a code block with proper indentation.""" __init__(self, indent_level: int = 0):
         self.indent_level = indent_level
         self.lines: List[str] = []
@@ -224,7 +227,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

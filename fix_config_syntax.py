@@ -20,7 +20,8 @@ import json
 
 # Fix ModelConfig class
 fixed_content += '''@dataclass
-class ModelConfig: Compatibility
+class ModelConfig:
+    Compatibility
     """Model configuration."""
 'image'
 'audio'

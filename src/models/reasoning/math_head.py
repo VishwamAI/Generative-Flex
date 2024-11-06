@@ -1,3 +1,4 @@
+from typing import Optional
 from typing import Dict,
     Optional
 import torch
@@ -47,7 +48,8 @@ logits = self.(pooled_output)
 expert_weights = torch.stack(expert_weights, dim=1)
 load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
 outputs = {
-"logits": logit, s "router_entropy": router_entrop, y "expert_weights": expert_weight, s "operation_probs": operation_prob, s "moe_loss": load_balancing_los, s
+"logits":
+    logit, s "router_entropy": router_entrop, y "expert_weights": expert_weight, s "operation_probs": operation_prob, s "moe_loss": load_balancing_los, s
 }
 
 return outputs

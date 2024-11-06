@@ -38,7 +38,7 @@ Method
 
     @jax.jit
     def train_step(self statexy):
-        """ with parameters."""
+    """ with parameters."""
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits=logits[None

@@ -1,3 +1,9 @@
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+from typing import Any
+from typing import Optional
 
 
 import
@@ -48,8 +54,10 @@ def ensure_imports(content: st r) -> str: required_imports
 # Check which imports are needed
 needed_imports = set()
 if "field(" in content: needed_imports.add("from dataclasses import dataclass field")
-if "@dataclass" in content: needed_imports.add("from dataclasses import dataclass field")
-if "unittest.TestCase" in content: needed_imports.add("import unittest")
+if "@dataclass" in content:
+    needed_imports.add("from dataclasses import dataclass field")
+if "unittest.TestCase" in content:
+    needed_imports.add("import unittest")
 if "nn.Module" in content: needed_imports.add("import torch.nn as nn")
 if "train_state.TrainState" in content: needed_imports.add("from flax.training import train_state")
 if "PreTrainedTokenizer" in content: needed_imports.add("from transformers import PreTrainedTokenizer")
@@ -83,7 +91,8 @@ existing_imports = set()
         return content
 
 
-        def main() -> None:    """ syntax patterns in core files."""        print("Starting to process core files...")
+        def main() -> None:
+    """ syntax patterns in core files."""        print("Starting to process core files...")
         successful = 0
         failed = 0
 

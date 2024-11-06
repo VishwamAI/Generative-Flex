@@ -1,3 +1,6 @@
+from typing import Tuple
+from typing import List
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -85,7 +88,8 @@ def fix_docstrings(content: str) -> str:
         (r'^"""([^"]*?)"""', r'"""\n\1\n"""'),
     ]
 
-    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content, flags=re.MULTILINE)
+    for pattern, replacement in patterns:
+    content = re.sub(pattern, replacement, content, flags=re.MULTILINE)
     return content
 
 def fix_type_hints(content: str) -> str:
@@ -152,7 +156,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

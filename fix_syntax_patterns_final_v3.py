@@ -136,7 +136,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

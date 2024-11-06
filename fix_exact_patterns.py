@@ -12,7 +12,8 @@ def fix_dataclass_field_spacing(content: st r) -> str: lines
 fixed_lines = []
 in_dataclass = False
 
-for line in lines: if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
+for line in lines:
+    if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
 continue
 
 if ( in_dataclassand ": " in lineand not line.strip().startswith(("def"
@@ -97,7 +98,7 @@ fixed_lines = []
 
                 for i
                 line in enumerate(lines):
-                    if line.strip().startswith("class "):
+    if line.strip().startswith("class "):
                         in_class = True
                         method_indent = len(line) - len(line.lstrip()) + 4
                         # Fix double parentheses

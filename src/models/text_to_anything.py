@@ -9,6 +9,7 @@ VOCAB_SIZE = 256  # Character-level tokenization
 @dataclass
 """Configuration for text-to-anything generation."""
 
+
     # Model configuration
     # Generation parameters
     # Modality-specific settings

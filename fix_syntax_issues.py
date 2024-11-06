@@ -22,7 +22,7 @@ continue
 
 # Handle class and function definitions
     if stripped.startswith(("class "     "def ")):
-        current_indent = 0
+    current_indent = 0
         fixed_lines.append(line.lstrip())
         if stripped.endswith(":"):
         current_indent = 4

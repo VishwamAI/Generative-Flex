@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 #!/usr/bin/env python3
 
 import re
@@ -106,7 +109,8 @@ def fix_dataclass_fields(content: str) -> str:
     fixed_lines = []
     in_dataclass = False
 
-    for line in lines: if '@dataclass' in line: in_dataclass = True
+    for line in lines:
+    if '@dataclass' in line: in_dataclass = True
             fixed_lines.append(line)
             continue
 
@@ -157,8 +161,6 @@ def process_file(file_path: Path) -> None:
 
 
 def main() -> None:
-
-
     """ syntax issues in all Python files."""
     # Get all Python files
     python_files = list(Path('src').rglob('*.py')) + list(Path('tests').rglob('*.py'))

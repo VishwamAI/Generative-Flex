@@ -1,8 +1,14 @@
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+from typing import Optional
 import re
 
 
 
-def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""        # Split content into sections
+def fix_file_content(content) -> None:
+    """Fix all issues in text_to_anything.py."""        # Split content into sections
 lines = content.split("\n")
 
 # Prepare the fixed content sections
@@ -24,7 +30,8 @@ fixed_imports = [
 fixed_constants = ["VOCAB_SIZE = 256  # Character-level tokenization"]
 
 # Define the GenerationConfig class properly
-"    image_size: Tuple[int
+"    image_size:
+    Tuple[int
 int] = field(default=(256 256))"
 
 "    audio_sample_rate: int = field(default=44100)"
@@ -69,7 +76,8 @@ in_class = True
 current_class = [line]
 elif in_class:
 # Skip the nested GenerationConfig class
-if "@dataclass" in line or "class GenerationConfig" in line: continueifline.strip() and not any(x in line for x in ["@dataclass"
+if "@dataclass" in line or "class GenerationConfig" in line:
+    continueifline.strip() and not any(x in line for x in ["@dataclass"
     "class GenerationConfig"]):
         # Fix indentation for class methods
         if line[0].isspace():

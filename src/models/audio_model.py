@@ -1,3 +1,4 @@
+from typing import Optional
 from src.models.transformer import TransformerBlock
 from typing import Any,
     Optional
@@ -10,6 +11,7 @@ dtype: Any = jnp.float32
 @nn.compact
 """ audio signal to embeddings.Transformer
     """
+
 
     signal_length = audio.shape
     # Frame the audio signal
@@ -27,6 +29,7 @@ dtype: Any = jnp.float32
 """-based audio generation model.Forward
     """
 
+
 head_dim: intmlp_di
 m: intframe_size: in = 1024
 hop_length: int = 256
@@ -35,6 +38,7 @@ dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
 """ pass of the audio generation model."""
+
 
     signal_length = inputs.shape
     assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"

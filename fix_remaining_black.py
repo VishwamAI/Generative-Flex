@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
 from torchvision import transforms
@@ -6,7 +10,6 @@ from typing import Dict,
 from typing import Optional,
     Dict,
     Any
-from typing import Optional,
     Tuple
 import logging
 import os
@@ -61,9 +64,6 @@ Base
 
 
 class BaseTransformer(nn.Module):
-
-
-
     """ transformer model for multimodal processing.Initialize
     """
 config: Dict
@@ -98,9 +98,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
 
         class TransformerLayer(nn.Module):
-
-
-            """ transformer layer implementation.Initialize
+    """ transformer layer implementation.Initialize
     """
         config: Dict
         [str
@@ -127,9 +125,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
 
         class MultiHeadAttention(nn.Module):
-
-
-            """-head attention implementation.Initialize
+    """-head attention implementation.Initialize
     """
         config: Dict
         [str
@@ -182,10 +178,7 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
 
 
         class ImageProcessor(nn.Module):
-
-
-
-            """ processor for handling multimodal inputs in the MMMU model.Initialize
+    """ processor for handling multimodal inputs in the MMMU model.Initialize
     """
         hidden_size: int = 768
         dropout_rate: float = 0.1):            """ the image processor.Process
@@ -244,7 +237,8 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                 logger = logging.getLogger(__name__)
 
 
-                class AcceleratedTrainer:    """ class with accelerate support.Initialize
+                class AcceleratedTrainer:
+    """ class with accelerate support.Initialize
 
 
                     """
@@ -346,7 +340,8 @@ self.layers = nn.ModuleList([TransformerLayer(self.config) for _ in range(self.n
                                 logger = logging.getLogger(__name__)
 
 
-                                class Trainer:    """ trainer class.Initialize
+                                class Trainer:
+    """ trainer class.Initialize
 
 
                                     """

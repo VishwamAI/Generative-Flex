@@ -1,3 +1,5 @@
+from typing import Dict
+from typing import Optional
 
 
 import
@@ -22,7 +24,8 @@ def fix_imports(content: str) -> str: lines
             line = line.replace("from.", "from .")
             line = line.replace("import.", "import .")
 
-            if line.strip() not in seen_imports: seen_imports.add(line.strip())
+            if line.strip() not in seen_imports:
+    seen_imports.add(line.strip())
                 fixed_lines.append(line)
         else: fixed_lines.append(line)
 
@@ -58,7 +61,8 @@ def fix_dataclass_fields(content: str) -> str:
     fixed_lines = []
     in_dataclass = False
 
-    for line in lines: if "@dataclass" in line: in_dataclass = True
+    for line in lines:
+    if "@dataclass" in line: in_dataclass = True
             fixed_lines.append(line)
         elif in_dataclass and ":" in line:
             # Fix field definitions
@@ -77,8 +81,6 @@ def fix_dataclass_fields(content: str) -> str:
 
 
 def main() -> None:
-
-
     """ syntax issues in all Python files."""
     python_files = list(Path('src').rglob('*.py')) + list(Path('tests').rglob('*.py'))
     print(f"Found {len(python_files)} Python files to process")

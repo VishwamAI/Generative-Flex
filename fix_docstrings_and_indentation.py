@@ -21,7 +21,8 @@ flags=re.MULTILINE)
 
 # Fix class and method docstrings
 content = re.sub(r'(\s+)"""([^"]*?)"""',
-lambda m: m.group(1) + '"""' + m.group(2).strip() + '"""\n' + m.group(1)
+lambda m:
+    m.group(1) + '"""' + m.group(2).strip() + '"""\n' + m.group(1)
 
 content)
 
@@ -29,7 +30,8 @@ content)
 lines = content.split("\n")
 fixed_lines = []
 current_indent = 0
-for line in lines: stripped = line.lstrip()                if stripped.startswith("class ") or stripped.startswith("def "):
+for line in lines:
+    stripped = line.lstrip()                if stripped.startswith("class ") or stripped.startswith("def "):
     if stripped.startswith("class "):
         current_indent = 0
         else: current_indent = 4                    if stripped: indent= " " * current_indent                        fixed_lines.append(indent + stripped)
@@ -48,10 +50,7 @@ for line in lines: stripped = line.lstrip()                if stripped.startswit
 
 
         class MixtureOfExperts(nn.Module):
-
-
-
-            """ of Experts layer implementation.Forward
+    """ of Experts layer implementation.Forward
     """
             x) -> None:
         """ pass through the MoE layer.Flash
@@ -74,10 +73,7 @@ for line in lines: stripped = line.lstrip()                if stripped.startswit
 
 
         class FlashAttention(nn.Module):
-
-
-
-            """ attention implementation using flash attention algorithm.Fix
+    """ attention implementation using flash attention algorithm.Fix
     """
         """ formatting issues in all problematic files."""
         # Fix model files first

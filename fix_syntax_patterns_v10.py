@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -100,26 +103,29 @@ for line in lines: if line.lstrip().startswith("def "):
                                     in_class = False
                                     class_indent = ""
 
-                                        for line in lines: if line.lstrip().startswith("class "):
+                                        for line in lines:
+    if line.lstrip().startswith("class "):
                                             in_class = True
                                             class_indent = " " * (len(line) - len(line.lstrip()))
                                             # Fix class definition line
                                             stripped = line.lstrip()
-                                                if "(" in stripped and ")" in stripped: class_name = stripped[6 : stripped.find("(")].strip()                parents = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if parents: parents = ", ".join(p.strip() for p in parents.split(", "))
+                                                if "(" in stripped and ")" in stripped:
+    class_name = stripped[6 : stripped.find("(")].strip()                parents = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if parents: parents = ", ".join(p.strip() for p in parents.split(", "))
                                                     fixed_lines.append(f"{class_indent}class {class_name}({parents}):")
                                                         else: fixed_lines.append(f"{class_indent}class {class_name}:")
                                                             else: class_name = stripped[6 : stripped.find(":")].strip()                fixed_lines.append(f"{class_indent}class {class_name}:")
                                                             continue
 
                                                                 if in_class and line.strip() and not line.startswith(class_indent):
-                                                                    in_class = False
+    in_class = False
                                                                     fixed_lines.append(line)
 
                                                                     return "\n".join(fixed_lines)
 
 
                                                                     def fix_dataclass_fields(content: st                                                                     r) -> str: """ dataclass field definitions.Process
-    """    if "@dataclass" not in content: return content
+    """    if "@dataclass" not in content:
+    return content
 
                                                                     lines = content.split("\n")
                                                                     fixed_lines = []
@@ -185,7 +191,8 @@ for line in lines: if line.lstrip().startswith("def "):
                                                                                                                                 except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                                                                                                                    def main() -> None:    """ all Python files in the project."""    # Process core files first
+                                                                                                                                    def main() -> None:
+    """ all Python files in the project."""    # Process core files first
                                                                                                                                     core_files = [
                                                                                                                                     "src/config/config.py",
                                                                                                                                     "src/config/training_config.py",

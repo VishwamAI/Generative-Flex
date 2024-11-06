@@ -27,11 +27,13 @@ self
 )
 """"""
 
+
 # Layer normalization and dropout""".norm1 = nn.LayerNorm(d_model)self
     """
     self.norm2 = nn.LayerNorm(d_model)
 """.dropout = nn.Dropout(dropout)def
-    """ """ forward(self):  x
+    """
+ """ forward(self):  x
     """Method with parameters.""": torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""
 
 Forward pass combining attention and expert computation

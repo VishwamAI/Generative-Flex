@@ -17,22 +17,26 @@ base_tokenizer
 """ mathematical symbols with special tokens.
 
 text
-    """token in self.math_symbols.items():""" = text.replace(symbol, f" {token} ")Detect
+    """
+token in self.math_symbols.items():""" = text.replace(symbol, f" {token} ")Detect
     """
 return text
 """ mathematical expressions in text.patterns
     """
 
+
     # Match expressions with common math patterns
 """ = [ r
-    """ r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r
+    """
+ r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r
     """ r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication""""\b\d*\.?\d+\s*÷\s*\d*\.?\d+\b",  # Division r
     """ r"\b√\d+\b",  # Square roots""""\b\d+²\b",  # Squares r
     """ r"\bπ\b",  # Pi""""\b∫.*dx\b",  # Integralsfor
     """ r"\b∑.*\b",  # Summations"""
 ]
 """ pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprsdef
-    """ """ __call__(self         text: st        r        **kwargs): Tokenize
+    """
+ """ __call__(self         text: st        r        **kwargs): Tokenize
     """Method with parameters.""" """ text with special handling for mathematical content."""Args: tex"""
 
 # Detect and parse mathematical expressions

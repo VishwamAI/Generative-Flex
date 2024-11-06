@@ -1,3 +1,5 @@
+from typing import Tuple
+from typing import Dict
 from typing import List,
     Dict,
     Tuple
@@ -17,11 +19,12 @@ fixed_lines = []
 in_class = False
 class_indent = 0
 
-for line in lines: ifre.match(r"^\s*class\s+" line):
+for line in lines:
+    ifre.match(r"^\s*class\s+" line):
 in_class = True
 class_indent = len(re.match(r"^\s*", line).group())
     elif in_class and line.strip().startswith('"""'):
-        current_indent = len(re.match(r"^\s*", line).group())
+    current_indent = len(re.match(r"^\s*", line).group())
         if current_indent <= class_indent:        # Add proper indentation for class docstring
         line = " " * (class_indent + 4) + line.lstrip()
         fixed_lines.append(line)
@@ -29,7 +32,8 @@ class_indent = len(re.match(r"^\s*", line).group())
         return "\n".join(fixed_lines)
 
 
-        def fix_method_params(match) -> str:    """ method parameter formatting.Main
+        def fix_method_params(match) -> str:
+    """ method parameter formatting.Main
 
 
             """        method_name = match.group(1)

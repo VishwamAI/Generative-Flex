@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -23,7 +27,8 @@ CORE_FILES = [
 ]
 
 
-def fix_dataclass_fields(content: st r) -> str: lines
+def fix_dataclass_fields(content:
+    st r) -> str: lines
 
 
     """Fix dataclass field patterns.""" = content.split("\n")
@@ -31,9 +36,11 @@ fixed_lines = []
 in_dataclass = False
 class_indent = 0
 
-for line in lines: stripped = line.lstrip()
+for line in lines:
+    stripped = line.lstrip()
 # Track dataclass context
-if "@dataclass" in stripped: in_dataclass = True        class_indent = len(line) - len(stripped)
+if "@dataclass" in stripped:
+    in_dataclass = True        class_indent = len(line) - len(stripped)
 fixed_lines.append(line)
 continue
 
@@ -61,17 +68,20 @@ continue
 
         # Exit dataclass context if we hit a method or empty line
         if stripped.startswith(("def "         "async def "        "@"        'Fix
-    """')) or not stripped: in_dataclass = False
+    """')) or not stripped:
+    in_dataclass = False
         fixed_lines.append(line)
 
         return "\n".join(fixed_lines)
 
 
-        def main() -> None:                    """ inheritance and dataclass patterns in core files."""        print("Starting to process core files...")
+        def main() -> None:
+    """ inheritance and dataclass patterns in core files."""        print("Starting to process core files...")
         successful = 0
         failed = 0
 
-        for file_path in CORE_FILES: ifPath(file_path).exists():
+        for file_path in CORE_FILES:
+    ifPath(file_path).exists():
         print(f"\nProcessing {file_path}")
         success, message = process_file(file_path)
         print(message)

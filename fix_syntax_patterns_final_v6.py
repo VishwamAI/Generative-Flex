@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -10,14 +14,16 @@ from typing import List,
     Optional,
     Tuple
 
-class SyntaxFixer: Fix
+class SyntaxFixer:
+    Fix
     """Handle syntax fixes for Python files."""
 
     @staticmethod
     def fix_class_inheritance(content: str) -> str:
         """ class inheritance patterns, especially for nn.Module.class
     """
-        def format_class_def(match: re.Match) -> str: class_name = match.group(1)
+        def format_class_def(match:
+    re.Match) -> str: class_name = match.group(1)
             parent = match.group(2)
             params = match.group(3) if match.group(3) else ""
 
@@ -178,7 +184,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

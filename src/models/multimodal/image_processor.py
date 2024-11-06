@@ -1,3 +1,4 @@
+from typing import Tuple
 from torchvision import transforms
 from typing import Optional,
     Tuple
@@ -9,7 +10,8 @@ Placeholder
 
 Image processor for handling multimodal inputs in the MMMU model.
 """: int = 768Initialize
-    """ """ the image processor.     super().__init__()
+    """
+ """ the image processor.     super().__init__()
 self
     """self.image_size = image_size""".hidden_size = hidden_size
 self
@@ -20,29 +22,36 @@ self
 transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 """]"""
 
+
     )
 """"""
+
 
 # CNN backbone""".backbone = nn.Sequential(nn.Conv2d(364kernel_size=7, stride=2, padding=3),nn
     """
     nn.ReLU(inplace = True),
 """.MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
     """
+
 nn.Conv2d(64192kernel_size = 3, padding=1),
 """.ReLU(inplace = True),nn
     """
+
     nn.MaxPool2d(kernel_size = 3, stride=2, padding=1),
 """.Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
     """
+
 nn.ReLU(inplace = True),
 """.AdaptiveAvgPool2d((1, 1)))self
-    """ """.dropout = nn.Dropout(dropout_rate)def
+    """
+ """.dropout = nn.Dropout(dropout_rate)def
     """ """ forward(self):  images
     """Method with parameters.""": torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.TensorProcess
     """
 
 Placeholder docstring.
 """ images for multimodal input."""
+
 
     # Apply preprocessing
     if images.dim() == 3: images = images.unsqueeze(0)

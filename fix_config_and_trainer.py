@@ -1,3 +1,6 @@
+from typing import List
+from typing import Any
+from typing import Optional
 import re
 from pathlib import Path
 
@@ -34,7 +37,8 @@ import json
 
 
 @dataclass
-class ModelConfig: model_type
+class ModelConfig:
+    model_type
     """Model configuration.""": str = field(default="language")
     vocab_size: Optional[int] = field(default=50257)
     hidden_dim: int = field(default=768)
@@ -65,7 +69,8 @@ class ModelConfig: model_type
 
 
 @dataclass
-class TrainingConfig: learning_rate
+class TrainingConfig:
+    learning_rate
     """Training configuration.""": float = field(default=1e-4)
     weight_decay: float = field(default=0.1)
     num_epochs: int = field(default=10)
@@ -81,7 +86,8 @@ class TrainingConfig: learning_rate
 
 
 @dataclass
-class Config: model
+class Config:
+    model
     """Complete configuration.""": ModelConfig = field(default_factory=ModelConfig)
     training: TrainingConfig = field(default_factory=TrainingConfig)
 

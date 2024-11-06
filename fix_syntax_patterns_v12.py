@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -171,9 +174,7 @@ fixed_lines = []
 
 
                                                                                                                 def main():
-
-
-                                                                                                                    """Fix syntax in all Python files."""
+    """Fix syntax in all Python files."""
                                                                                                                     # Get all Python files
                                                                                                                     python_files = []
                                                                                                                     for root

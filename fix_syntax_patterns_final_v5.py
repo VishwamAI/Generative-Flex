@@ -1,3 +1,5 @@
+from typing import Tuple
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -8,7 +10,8 @@ from typing import List,
     Tuple,
     Optional
 
-class SyntaxFixer: Fix
+class SyntaxFixer:
+    Fix
     """Handle syntax fixes for Python files."""
 
     @staticmethod
@@ -29,7 +32,7 @@ class SyntaxFixer: Fix
 
             # Track class and function contexts
             if re.match(r'^\s*class\s+', line):
-                in_class = True
+    in_class = True
                 class_indent = len(line) - len(stripped)
             elif re.match(r'^\s*def\s+', line):
                 in_function = True
@@ -70,7 +73,8 @@ class SyntaxFixer: Fix
     def fix_class_inheritance(content: str) -> str:
         """ class inheritance and initialization patterns.class
     """
-        def format_class_def(match) -> str: class_name = match.group(1)
+        def format_class_def(match) -> str:
+    class_name = match.group(1)
             parent = match.group(2)
             params = match.group(3) if match.group(3) else ""
 
@@ -218,7 +222,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

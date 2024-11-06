@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -10,7 +13,8 @@ from typing import List,
     Optional
 
 
-def fix_dataclass_fields(content: str) -> str: lines
+def fix_dataclass_fields(content:
+    str) -> str: lines
     """Fix dataclass field definitions.""" = content.splitlines()
 fixed_lines = []
 in_class = False
@@ -18,12 +22,12 @@ class_indent = 0
 
 i = 0
     while i < len(lines):
-        line = lines[i]
+    line = lines[i]
         stripped = line.strip()
 
         # Start of class definition
         if stripped.startswith("@dataclass") or stripped.startswith("class "):
-        in_class = True
+    in_class = True
         class_indent = len(re.match(r"(\s*)", line).group(1))
         fixed_lines.append(line)
         i += 1
@@ -33,7 +37,7 @@ i = 0
         if in_class:
         # End of class
             if not stripped or not line.startswith(" " * class_indent):
-                in_class = False
+    in_class = False
                 fixed_lines.append(line)
                 i += 1
                 continue
@@ -151,13 +155,11 @@ def process_file(file_path: str) -> bool: try
 
 
 def main():
-
-
     """Fix dataclass and configuration patterns in all Python files."""
 # Get all Python files
 python_files = []
     for root, _, files in os.walk("."):
-        if ".git" in root: continue
+    if ".git" in root: continue
         for file in files: if file.endswith(".py"):
                 python_files.append(os.path.join(root, file))
 

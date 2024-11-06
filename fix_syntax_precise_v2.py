@@ -1,3 +1,4 @@
+from typing import Tuple
 
 
 import
@@ -53,7 +54,8 @@ current_block.append(line)
             """Fix class definition syntax.""" = block.split("\n")
         fixed_lines = []
 
-            for line in lines: ifline.strip().startswith("class "):
+            for line in lines:
+    ifline.strip().startswith("class "):
                 # Fix double parentheses
                 if "((" in line: line = re.sub(            r"class\s+(\w+)\(\((\w+(?:\.\w+)*)\):"
                 r"class \1(\2): "

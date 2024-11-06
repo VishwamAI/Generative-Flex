@@ -1,3 +1,4 @@
+from typing import Optional
 
 
 import
@@ -56,14 +57,15 @@ for line in lines: if line.strip().startswith(("from "
                 class_indent = 0
 
                 for line in content.split("\n"):
-                stripped = line.strip()
+    stripped = line.strip()
 
                 # Handle class definition
                     if stripped.startswith("class "):
-                        in_class = True
+    in_class = True
                         class_indent = len(line) - len(stripped)
                         # Fix class definition
-                        if "(" in stripped: class_name = stripped[6 : stripped.find("(")].strip()                bases = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if bases: bases = ", ".join(b.strip() for b in bases.split(", "))
+                        if "(" in stripped:
+    class_name = stripped[6 : stripped.find("(")].strip()                bases = stripped[stripped.find("(") + 1 : stripped.find(")")].strip()                if bases: bases = ", ".join(b.strip() for b in bases.split(", "))
                         lines.append(f"{' ' * class_indent}class {class_name}({bases}):")
                                 else: lines.append(f"{' ' * class_indent}class {class_name}:")
                                     else: class_name = stripped[6 : stripped.find(":")].strip()                lines.append(f"{' ' * class_indent}class {class_name}:")
@@ -87,7 +89,7 @@ lines.append(                                             f"{' ' * field_indent}
 
                                                 # Handle method definitions
                                                 if in_class and stripped.startswith("def "):
-                                                method_indent = class_indent + 4
+    method_indent = class_indent + 4
                                                 method_def = stripped[4:]            name = method_def[: method_def.find("(")].strip()            params = method_def[method_def.find("(") + 1 : method_def.find(")")].strip()
                                                 # Fix parameter formatting
                                                     if params: param_parts = []
@@ -112,7 +114,7 @@ lines.append(                                             f"{' ' * field_indent}
 
                                                                 # Check if we're leaving the class
                                                                     if in_class and stripped and not line.startswith(" " * (class_indent + 4)):
-                                                                        in_class = False
+    in_class = False
 
                                                                         lines.append(line)
 

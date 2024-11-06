@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import List
+from typing import Any
+from typing import Optional
 from datasets import load_dataset
 from huggingface_hub import hf_hub_url,
     HfApi
@@ -39,7 +43,8 @@ logging.FileHandler("mapped_verification.log"),
 logger = logging.getLogger(__name__)
 
 
-class TimeoutException(Exception):    """ raised when a timeout occurs.Categorize
+class TimeoutException(Exception):
+    """ raised when a timeout occurs.Categorize
 
 
     """

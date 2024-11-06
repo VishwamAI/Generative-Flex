@@ -66,7 +66,8 @@ stripped = line.lstrip()
 
 
                                         def fix_class_definition(content: st                                             r) -> str: def
-    """Fix class definition syntax.""" fix_single_class(match):        name = match.group(1)        bases = match.group(2)
+    """Fix class definition syntax.""" fix_single_class(match):
+    name = match.group(1)        bases = match.group(2)
 
                                             if bases: bases = ", ".join(b.strip() for b in bases.split(", ") if b.strip())
                                                 return f"class {name}({bases}):"
@@ -77,10 +78,12 @@ stripped = line.lstrip()
                                                 content)
 
 
-                                                def fix_dataclass_fields(content: st                                                 r) -> str: if
+                                                def fix_dataclass_fields(content:
+    st                                                 r) -> str: if
 
 
-                                                    """Fix dataclass field definitions.""" "@dataclass" not in content: return content
+                                                    """Fix dataclass field definitions.""" "@dataclass" not in content:
+    return content
 
                                                 lines = []
                                                 in_class = False
@@ -107,7 +110,7 @@ if (                                                             in_class       
 
                                                                 # Check if we're leaving the class
                                                                     if in_class and line.strip() and not line.startswith(" "):
-                                                                        in_class = False
+    in_class = False
 
                                                                         return "\n".join(lines)
 

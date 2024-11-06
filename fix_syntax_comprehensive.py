@@ -1,3 +1,8 @@
+from typing import Union
+from typing import Tuple
+from typing import List
+from typing import Any
+from typing import Optional
 from PIL import Image
 from datasets import load_dataset
 from torch.utils.data import Dataset, DataLoader
@@ -14,8 +19,7 @@ import torchvision.transforms as transforms
 
 
 def fix_class_definition(self)::    return '''class MMUDataset):
-
-def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: super
+    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: super
     """Initialize the dataset.):
 Args: subjects: List of subjects to load
 split: Datasetsplitto use
@@ -40,7 +44,8 @@ def fix_dataset_loading(self)::                                            retur
 
 
         def
-    """        # Load datasets for each subject                                        total_length = 0):
+    """
+        # Load datasets for each subject                                        total_length = 0):
     for subject in self.subjects: try:
 # Load dataset using HuggingFace datasets
 dataset = load_dataset("MMMU/MMMU", subject, split=self.split)

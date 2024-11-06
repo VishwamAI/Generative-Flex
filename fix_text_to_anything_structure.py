@@ -1,7 +1,8 @@
 import re
 
 
-def fix_file_structure(content) -> None: """Fix the structure of text_to_anything.py
+def fix_file_structure(content) -> None:
+    """Fix the structure of text_to_anything.py
 particularly the GenerationConfig class."""
 
 # Split content into lines
@@ -42,7 +43,7 @@ line = lines[i]
 
                 # Handle TextTokenizer class
                 if line.strip().startswith("class TextTokenizer"):
-                current_section = text_tokenizer
+    current_section = text_tokenizer
                 while i < len(lines) and (
                 lines[i].strip().startswith("class TextTokenizer")
                 or len(lines[i].strip()) == 0
@@ -52,11 +53,11 @@ line = lines[i]
                         if lines[i].strip().startswith("@dataclass") or lines[
                         i
                         ].strip().startswith("class GenerationConfig"):
-                        while i < len(lines) and (
+    while i < len(lines) and (
                         len(lines[i].strip()) == 0
                         or not lines[i].startswith(                             "class ModalityEncoder"                        )
                         ):
-                            if lines[i].strip():
+    if lines[i].strip():
                                 generation_config.append(lines[i].lstrip())
                                 i += 1
                                 continue
@@ -90,7 +91,7 @@ line = lines[i]
                                 if (                                 not generation_config[0]                                .strip()
                                 .startswith(                                 "@dataclass"                            )
                             ):
-                                result.append(                                 "@dataclass"                            )
+    result.append(                                 "@dataclass"                            )
                         result.extend(                             generation_config                        )
                         result.append("")
 

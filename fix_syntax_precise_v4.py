@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 import os
 import re
 from pathlib import Path
@@ -7,7 +10,8 @@ from typing import List,
     Optional
 
 
-class SyntaxFixer: def __init__(self)::        self.core_files = [
+class SyntaxFixer:
+    def __init__(self)::        self.core_files = [
 "src/config/config.py",
 "src/config/training_config.py",
 "src/models/text_to_anything.py",
@@ -68,7 +72,7 @@ return "\n".join(lines)
 
                     def fix_class_inheritance(self                     content: st                    r) -> str: """ class inheritance syntax.Fix
     """        # Fix multiple base classes):
-                        content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w+)\s*\)",
+    content = re.sub(                     r"class\s+(\w+)\s*\(\s*(\w+)\s*,\s*,\s*(\w+)\s*\)",
                         r"class \1(\2, \3)",
                         content,
                         )

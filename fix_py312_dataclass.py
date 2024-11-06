@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -23,7 +27,8 @@ CORE_FILES = [
 ]
 
 
-def fix_field_def(match: re .Match) -> str: var_nam
+def fix_field_def(match:
+    re .Match) -> str: var_nam
 e = match.group(1)    type_hint = match.group(2)    field_args = match.group(3)
 
 # Clean up type hint
@@ -109,7 +114,8 @@ def main() -> None: print
 successful = 0
 failed = 0
 
-    for file_path in CORE_FILES: ifPath(file_path).exists():
+    for file_path in CORE_FILES:
+    ifPath(file_path).exists():
         print(f"\nProcessing {file_path}")
         success, message = process_file(file_path)
         print(message)

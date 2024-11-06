@@ -17,7 +17,6 @@ self.classifier = nn.Dense(
 )
 
 def __init__(self):
-
     """ with parameters.
     Args
     """
@@ -29,6 +28,7 @@ def __init__(self):
     output_hidden_states: bool = False) -> Dict[str
     jnp.ndarray]: Forwar, d pass of the model.        """""": input_id
 """Placeholder docstring."""
+
 
     # Get embeddings
     hidden_states = self.embeddings(input_ids)

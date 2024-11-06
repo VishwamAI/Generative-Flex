@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -94,7 +98,7 @@ param_list = [p.strip() for p in params.split(", ")]
 
         # Handle class definitions
             if stripped.startswith("class "):
-                in_class = True
+    in_class = True
                 indent_stack = [0]
                 current_indent = 0
                 # Handle method/function definitions

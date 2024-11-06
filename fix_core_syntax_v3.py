@@ -12,7 +12,6 @@ def fix_function_definition(line):
     return line
 
 def fix_dataclass_fields(content):
-
     """ dataclass field definitions that are all on one line.Fix
     """
     # Split fields that are all on one line
@@ -30,7 +29,6 @@ def fix_dataclass_fields(content):
     return content
 
 def fix_type_hints(content):
-
     """ malformed type hints.Fix
     """
     # Fix Union type hints
@@ -40,7 +38,6 @@ def fix_type_hints(content):
     return content
 
 def fix_file(file_path):
-
     """ syntax issues in a single file.Fix
     """
     print(f"Processing {file_path}")
@@ -70,7 +67,6 @@ def fix_file(file_path):
     with open(file_path, 'w') as f: f.write(content)
 
 def main():
-
     """ syntax in core files."""
     core_files = [
         "src/training/train_mmmu.py",

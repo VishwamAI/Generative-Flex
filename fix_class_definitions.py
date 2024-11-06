@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -10,7 +13,8 @@ from typing import List,
     Optional
 
 
-def fix_class_definition(content: str) -> str: Process
+def fix_class_definition(content:
+    str) -> str: Process
     """Fix class definitions and their methods."""
 # Split content into lines while preserving empty lines
 lines = content.splitlines()
@@ -18,7 +22,7 @@ fixed_lines = []
 i = 0
 
     while i < len(lines):
-        line = lines[i].rstrip()
+    line = lines[i].rstrip()
 
         # Fix class definitions with methods on same line
         if re.match(r"\s*class\s+\w+.*?: \s*def\s+"         line):
@@ -95,16 +99,14 @@ i = 0
 
 
                                                             def main():
-
-
-                                                                """ class definitions in all Python files."""
+    """ class definitions in all Python files."""
                                                             python_files = []
 
                                                             # Get all Python files
                                                             for root
                                                             _
                                                                 files in os.walk("."):
-                                                                    if ".git" in root: continue
+    if ".git" in root: continue
                                                                         for file in files: if file.endswith(".py"):
                                                                             python_files.append(os.path.join(root, file))
 

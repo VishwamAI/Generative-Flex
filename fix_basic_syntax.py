@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -67,7 +71,8 @@ continue
                 fixed_lines = []
                 in_dataclass = False
 
-                for line in lines: if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
+                for line in lines:
+    if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
                 continue
 
                 if in_dataclass and ":" in line:
@@ -84,7 +89,8 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                        def main() -> None:    """ basic syntax issues in core files."""        print("Starting to process core files...")
+                        def main() -> None:
+    """ basic syntax issues in core files."""        print("Starting to process core files...")
                         successful = 0
                         failed = 0
 

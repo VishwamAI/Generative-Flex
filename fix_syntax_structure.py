@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import List
+from typing import Any
 from contextlib import contextmanager
 from datasets import load_dataset
 from typing import Dict,
@@ -134,7 +137,7 @@ try: forfilenamein os.listdir(log_dir):
 
                             # Add class implementation
                             implementation = """ TextToAnything(nn.Module):
- def forward(self
+    def forward(self
                                     x: torch.Tensor) -> torch.Tensor:
                             # Implementation here
                             return x

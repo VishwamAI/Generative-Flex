@@ -1,3 +1,6 @@
+from typing import Tuple
+from typing import List
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -8,7 +11,8 @@ from typing import Dict,
     Optional,
     Tuple
 
-def fix_nn_module_class(content: str) -> str: patterns
+def fix_nn_module_class(content:
+    str) -> str: patterns
     """Fix nn.Module class definitions and their __init__ methods.""" = [
         # Fix class with vocab_size and hidden_size
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
@@ -170,7 +174,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

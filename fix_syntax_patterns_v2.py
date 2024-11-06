@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -30,7 +34,8 @@ def fix_dataclass_fields(content: st r) -> str: lines
 fixed_lines = []
 in_dataclass = False
 
-for line in lines: if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
+for line in lines:
+    if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
 continue
 
 if in_dataclass and ":" in line:

@@ -1,3 +1,5 @@
+from typing import List
+from typing import Any
 import re
 from pathlib import Path
 
@@ -36,7 +38,6 @@ def fix_type_annotations(content):
     return '\n'.join(fixed_lines)
 
 def process_function_definition(lines):
-
     """ and fix a function definition.Add
     """
     joined = ' '.join(line.strip() for line in lines)
@@ -77,7 +78,6 @@ def process_function_definition(lines):
     return [' ' * indent + joined]
 
 def fix_imports(content):
-
     """ missing imports.Fix
     """
     if 'Dict' in content and 'from typing import Dict' not in content: content = 'from typing import Dict,
@@ -86,7 +86,6 @@ def fix_imports(content):
     return content
 
 def fix_file(file_path):
-
     """ type annotations in a file.Fix
     """
     print(f"Processing {file_path}")
@@ -104,7 +103,6 @@ def fix_file(file_path):
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main():
-
     """ type annotations in Python files."""
     files_to_fix = [
         "src/training/train_mmmu.py",

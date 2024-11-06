@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 import
     """Fix type hints and dataclass field definitions.""" re
@@ -9,7 +12,8 @@ from typing import List,
     Optional
 
 
-def fix_type_hints(content: str) -> str: lines
+def fix_type_hints(content:
+    str) -> str: lines
     """Fix type hint formatting.""" = content.splitlines()
 fixed_lines = []
 
@@ -52,7 +56,7 @@ fixed_lines = []
                                 for line in lines:
                                 # Detect class start
                                     if re.match(r'\s*class\s+\w+'                                     line):
-                                        in_class = True
+    in_class = True
                                         class_indent = len(re.match(r'(\s*)', line).group(1))
                                         fixed_lines.append(line)
                                         continue
@@ -60,7 +64,7 @@ fixed_lines = []
                                         if in_class: stripped = line.strip()
                                         # End of class definition
                                             if not stripped or not line.startswith(' ' * (class_indent + 4)):
-                                                in_class = False
+    in_class = False
                                                 # Fix field definitions
 elif '=' in line and 'field(' in line: indent = len(re.match(r'(\s*)'
 line).group(1))
@@ -97,7 +101,7 @@ if '
                                                                                             for line in lines:
                                                                                             # Detect class start
                                                                                                 if re.match(r'\s*class\s+\w+'                                                                                                 line):
-                                                                                                    in_class = True
+    in_class = True
                                                                                                     class_indent = len(re.match(r'(\s*)', line).group(1))
                                                                                                     fixed_lines.append(line)
                                                                                                     continue
@@ -105,7 +109,7 @@ if '
                                                                                                     if in_class: stripped = line.strip()
                                                                                                     # End of class definition
                                                                                                         if not stripped or not line.startswith(' ' * (class_indent + 4)):
-                                                                                                            in_class = False
+    in_class = False
                                                                                                             # Fix attribute definitions
                                                                                                             elif ': ' in line and not line.strip().startswith(('def'
                                                                                                             'class'
@@ -146,15 +150,13 @@ if '
 
 
                                                                                                                                                                     def main():
-
-
-                                                                                                                                                                        """Fix type hints and dataclass fields in all Python files."""
+    """Fix type hints and dataclass fields in all Python files."""
                                                                                                                                                                         # Get all Python files
                                                                                                                                                                         python_files = []
                                                                                                                                                                         for root
                                                                                                                                                                         _
                                                                                                                                                                         files in os.walk('.'):
-                                                                                                                                                                        if '.git' in root: continue
+    if '.git' in root: continue
                                                                                                                                                                         for file in files: if file.endswith('.py'):
                                                                                                                                                                         python_files.append(os.path.join(root, file))
 

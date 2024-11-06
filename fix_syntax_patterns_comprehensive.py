@@ -1,3 +1,4 @@
+from typing import Tuple
 import os
 import re
 from pathlib import Path
@@ -129,7 +130,8 @@ if line.strip().startswith(("class "
                     except Exception as e: return False, str(e)
 
 
-                        def main():    """ function to process all Python files."""    src_dir = Path("src")
+                        def main():
+    """ function to process all Python files."""    src_dir = Path("src")
                         tests_dir = Path("tests")
 
                         # Process all Python files

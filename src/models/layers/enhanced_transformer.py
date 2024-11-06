@@ -5,7 +5,8 @@ Module
     """
 
 Enhanced transformer layer with advanced features.
-""""""""" layer components.
+""""""
+""" layer components.
     self.attention = nn.MultiHeadDotProductAttention(
      dropout_rate
     """num_heads = self.config["num_attention_heads"],""" = self.config["attention_dropout_rate"]
@@ -13,7 +14,8 @@ Enhanced transformer layer with advanced features.
     self
     """
 )
-"""""".mlp = nn.Dense(
+""""""
+.mlp = nn.Dense(
     
 kernel_init
     """features = self.config["intermediate_size"],""" = jax.nn.initializers.normal(0.02
@@ -30,8 +32,10 @@ self.layer_norm2 = nn.LayerNorm()
 deterministic: bool = True
 """: bool = False) -> Dict[strForward
     """
+
     jnp.ndarray]:
 """ pass of the layer."""
+
 
 # Self attention
 normed_hidden_states = self.layer_norm1(hidden_states)

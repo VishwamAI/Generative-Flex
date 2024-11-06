@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -11,8 +15,6 @@ from typing import List,
     Tuple
 
 class DocstringFixer(ast.NodeTransformer):
-    
-
     def
     """AST transformer to fix docstring positions.""" visit_Module(self, node: ast.Module) -> ast.Module: if
     """Handle module-level docstrings.""" node.body and isinstance(node.body[0], ast.Expr) and isinstance(node.body[0].value, ast.Str):
@@ -38,7 +40,8 @@ class DocstringFixer(ast.NodeTransformer):
             node.body.insert(0, docstring)
         return self.generic_visit(node)
 
-class SyntaxFixer: def
+class SyntaxFixer:
+    def
     """Handle syntax fixes for Python files.""" __init__(self):
         
         self
@@ -66,7 +69,8 @@ class SyntaxFixer: def
         """ class inheritance patterns.
                 else
     """
-        def format_class_def(match: re.Match) -> str: indent = match.group(1)
+        def format_class_def(match:
+    re.Match) -> str: indent = match.group(1)
             class_name = match.group(2)
             parent = match.group(3)
             params = match.group(4) if match.group(4) else ""
@@ -184,7 +188,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

@@ -1,3 +1,4 @@
+from typing import Any
 from src.utils.device_config import setup_device_config
 from tensorboardX import SummaryWriter
 from typing import Dict,
@@ -12,7 +13,7 @@ Method
     # Set up device configuration
     __device_config = setup_device_config()
     def test_flax_installation():
-        """ without parameters.Method
+    """ without parameters.Method
     """
 
     @nn.compact

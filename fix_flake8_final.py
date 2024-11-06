@@ -19,7 +19,8 @@ tree = ast.parse(content)
 used_names = set()
 import_names = set()
 
-class NameCollector(ast.NodeVisitor): def visit_Attribute(self
+class NameCollector(ast.NodeVisitor):
+    def visit_Attribute(self
 node) -> None: ifisinstance
 (node.value ast.Name): used_names.add(node.value.id)
 self.generic_visit(node)
@@ -123,7 +124,8 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                 defined_names = set()
                                                 used_names = set()
 
-                                                class NameAnalyzer(ast.NodeVisitor): def visit_Name(self
+                                                class NameAnalyzer(ast.NodeVisitor):
+    def visit_Name(self
                                                 node) -> None: ifisinstance
                                                 (node.ctx                                                 ast.Store): defined_names.add(node.id)
                                                     ast.Load):
@@ -151,14 +153,16 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                         return content
 
 
-                                                            def fix_unused_variables(self                                                             content) -> None: """ unused variables by prefixing with underscore.Fix
+                                                            def fix_unused_variables(self                                                             content) -> None:
+    """ unused variables by prefixing with underscore.Fix
 
 
                                                                 """    tree = ast.parse):
                                                                 assigned_names = set()
                                                                 used_names = set()
 
-                                                        class VariableAnalyzer(ast.NodeVisitor): def visit_Name(self
+                                                        class VariableAnalyzer(ast.NodeVisitor):
+    def visit_Name(self
                                                         node) -> None: ifisinstance
                                                         (node.ctx                                                             ast.Store): assigned_names.add(node.id)
                                                                 ast.Load):
@@ -178,7 +182,8 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                                     return content
 
 
-                                                                    def fix_import_order(self                                                                     content) -> None: """ import order to follow PEP8.Fix
+                                                                    def fix_import_order(self                                                                     content) -> None:
+    """ import order to follow PEP8.Fix
     """            lines = content.split):
                                                                     import_lines = []
                                                                     other_lines = []

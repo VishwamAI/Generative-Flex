@@ -32,7 +32,7 @@ continue
 
         # Handle class and function definitions
             elif stripped.startswith(("class "             "def ")):
-                while len(indent_stack) > 1: indent_stack.pop()
+    while len(indent_stack) > 1: indent_stack.pop()
                 current_indent = indent_stack[-1]
 
                 # Handle control flow statements
@@ -47,7 +47,8 @@ continue
                 return fixed_lines
 
 
-                def fix_imports(lines) -> None:    """ import statements and their order.Fix
+                def fix_imports(lines) -> None:
+    """ import statements and their order.Fix
 
 
                     """        import_lines = []
@@ -67,7 +68,8 @@ continue
                         return import_lines + other_lines
 
 
-                        def fix_docstrings(lines) -> None:                    """ docstring formatting.Apply
+                        def fix_docstrings(lines) -> None:
+    """ docstring formatting.Apply
     """        fixed_lines = []
                         in_docstring = False
                         docstring_indent = 0
@@ -98,7 +100,8 @@ continue
                                                 return fixed_lines
 
 
-                                                def fix_file(filepath) -> None:    """ all fixes to a file.Fix
+                                                def fix_file(filepath) -> None:
+    """ all fixes to a file.Fix
 
 
                                                     """        print(f"Processing {filepath}")

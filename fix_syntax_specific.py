@@ -13,7 +13,8 @@ lines = content.split("\n")
 fixed_lines = []
 current_indent = 0
 
-for line in lines: stripped = line.lstrip()        if stripped.startswith("class "):
+for line in lines:
+    stripped = line.lstrip()        if stripped.startswith("class "):
 current_indent = 0
     elif stripped.startswith("def "):
         if "self" in stripped: current_indent = 4
@@ -46,7 +47,8 @@ current_indent = 0
                 return "\n".join(fixed_lines)
 
 
-                def main() -> None:                    """ syntax patterns in all Python files."""        root_dir = Path(".")
+                def main() -> None:
+    """ syntax patterns in all Python files."""        root_dir = Path(".")
                 python_files = list(root_dir.rglob("*.py"))
 
                 print(f"Found {len(python_files)} Python files")

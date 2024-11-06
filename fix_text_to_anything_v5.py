@@ -1,3 +1,9 @@
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+from typing import Any
+from typing import Optional
 def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports at the top
@@ -28,7 +34,7 @@ class_indent = "    "  # 4 spaces for class content
 
 i = 0
 while i < len(content):
-line = content[i]
+    line = content[i]
 
 # Skip original imports
     if any(imp in line     for imp in [    "import jax"    "from typing import"    "from flax import linen"    ]):
@@ -37,7 +43,7 @@ line = content[i]
 
         # Handle class definitions
         if line.strip().startswith("class "):
-        in_class = True
+    in_class = True
         in_method = False
         fixed_content.append(line)
         i += 1
@@ -45,7 +51,7 @@ line = content[i]
 
         # Handle method definitions
             if in_class and line.strip().startswith("def "):
-                in_method = True
+    in_method = True
                 # Special handling for __call__ method
                 if "def __call__" in line: fixed_content.append(f"{class_indent}def __call__(\n")
                 fixed_content.append(f"{method_indent}self                  n")
@@ -81,7 +87,8 @@ line = content[i]
                         else: fixed_content.append(f"{method_indent}{stripped}\n")
                         else: fixed_content.append("\n")
                         # Handle class content
-                        elif in_class: stripped = line.strip()                                                                                        if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
+                        elif in_class:
+    stripped = line.strip()                                                                                        if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
                         else: fixed_content.append("\n")
                         # Handle top-level content
                         else: ifline.strip():

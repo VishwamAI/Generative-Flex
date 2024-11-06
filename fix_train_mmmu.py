@@ -1,3 +1,4 @@
+from typing import Any
 from flax import linen as nn
 from flax.training import train_state
 from src.config.config import ModelConfig

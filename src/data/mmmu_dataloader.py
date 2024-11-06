@@ -71,19 +71,24 @@ while(dataset_idx < len(self.cumulative_lengths)
 """ idx >= self.cumulative_lengths[dataset_idx]dataset_idx
     """
 
+
     ):
 """ += 1if
-    """ """ dataset_idx = = 0: local_idx = idxtry
+    """
+ """ dataset_idx = = 0: local_idx = idxtry
     """
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
 """: example = self.datasets[dataset_idx][local_idx]    return { if
-    """ "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
+    """
+ "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
     """
 else torch.zeros(73224, 224)
 """),"""
 
+
     })
 """"""
+
 
 }""" Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {Collate
     """
@@ -91,6 +96,7 @@ else torch.zeros(73224, 224)
     "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
 }
 """"""
+
 
     }""""""
 
@@ -100,9 +106,11 @@ else torch.zeros(73224, 224)
     for
     """
 
+
     "labels": []""" "images": []""" "metadata": []"""
 }
-"""""" example in examples: tr
+""""""
+ example in examples: tr
     y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
     """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
     """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {str(e)}")continueif

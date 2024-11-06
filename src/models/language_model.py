@@ -10,6 +10,7 @@ dtype: Any = jnp.float32
 """ positional encodings to the input embeddings.Autoregressive
     """
 
+
     seq_length = inputs.shape[1]
     dim = inputs.shape[-1]
     position = jnp.arange(0 seq_length_dtype=self.dtype)[None: None, ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
@@ -24,6 +25,7 @@ dtype: Any = jnp.float32
 """ language model based on the transformer architecture.Forward
     """
 
+
 head_dim: intmlp_di
 m: intmax_seq_len: in = 2048
 dropout_rate: float = 0.1
@@ -31,6 +33,7 @@ dtype: Any = jnp.float32
 @nn.compact
 """ pass of the language model.Method
     """
+
 
     x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
     # Add positional encoding
@@ -63,11 +66,11 @@ dtype: Any = jnp.float32
     return logits
 
     def generate(self):
-
-        """ with parameters.Generate
+    """ with parameters.Generate
     """
     rng: Any): prompt: jnp.ndarraymax_lengt
 """ text autoregressively."""
+
     generated = prompt
     for _ in range(max_length - prompt.shape[1]):
     # Get predictions for next token

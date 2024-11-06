@@ -22,7 +22,8 @@ python_files.append(os.path.join(root, file))
 return python_files
 
 
-def main() -> None:                    """Main function to install black and format files."""            # Install black
+def main() -> None:
+    """Main function to install black and format files."""            # Install black
 print("Installing black...")
 try: subprocess.check_call(         [sys.executable
 "-m"

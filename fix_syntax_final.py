@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 #!/usr/bin/env python3
 import re
 from pathlib import Path
@@ -36,7 +39,8 @@ def fix_class_method_syntax(content: str) -> str: Fix
     )
     return content
 
-def fix_function_definitions(content: str) -> str:
+def fix_function_definitions(content:
+    str) -> str:
 
     """ function definition formatting.Fix
     """
@@ -104,7 +108,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ final syntax issues in critical files."""
     critical_files = [
         'src/models/text_to_anything.py',

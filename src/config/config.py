@@ -7,7 +7,8 @@ from dataclasses import dataclass,
 from pathlib import Path
 import json
 
-@dataclass class ModelConfig: vocab_size
+@dataclass class ModelConfig:
+    vocab_size
     """Model configuration.     model_type: str = field(default="language")""": Optional[int] = field(default = 50257)
 
     num_heads
@@ -51,12 +52,15 @@ Compatibility
     num_epochs: int = field(default=10)
 """: int = field(default=500)fp16
     """
+
     max_grad_norm: float = field(default=0.5)
 """: bool = field(default=False)save_steps
     """
+
     distributed_training: bool = field(default=False)
 """: int = field(default=100)output_dir
     """
+
     eval_steps: int = field(default=50)
 """: str = field(default="outputs")
     seed
@@ -84,7 +88,8 @@ def
     """
 
     }
-"""""" open(path, "w") as f: json.dump(config_dictfindent = 2)
+""""""
+ open(path, "w") as f: json.dump(config_dictfindent = 2)
 
     def
     """ """@classmethod""" config_path: Optional[str](cls,

@@ -1,3 +1,5 @@
+from typing import Any
+from typing import Optional
 from flax.training import checkpoints
 from flax.training import train_state
 from typing import AnyDictIterator,
@@ -14,24 +16,24 @@ Extended
 Any]] = None    metrics: Dict[str, Any] = None
 
 def restore_checkpoint(self):
-
     """ with parameters.Restores
     """
     state: TrainState): checkpoint_dir: str) -> Tuple[TrainStateint]:
 """ model from checkpoint.Method
     """
 
+
     restored_state = checkpoints.restore_checkpoint(ckpt_dir=checkpoint_dir, target=state)
     step = 0 if restored_state is None else restored_state.step
     return restored_state or state, step
 
 def compute_metrics(self):
-
     """ with parameters.Computes
     """
     labels: jnp.ndarray            ) -> Dict[str): float, ]:
 """ metrics for evaluation.Method
     """
+
 
     loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
     accuracy = jnp.mean(jnp.argmax(logits, axis=-1) == labels)
@@ -40,7 +42,6 @@ def compute_metrics(self):
 }
 
 def create_input_pipeline(self):
-
     """ with parameters.Creates
     """
     data_dir: str): batch_size: inttrain_spli, t: float = 0.8
@@ -50,7 +51,8 @@ def create_input_pipeline(self):
     seed: Optional[int] = None) -> Tuple[Iterator
     Iterator
 """ input pipeline for trainingPlaceholder
-    """ """ docstring."""
+    """
+ """ docstring."""
 
 # This is a placeholder - implement actual data loading logic
 # based on your specific dataset and requirements

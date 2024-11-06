@@ -1,3 +1,4 @@
+from typing import Optional
 from src.config.config import ModelConfig
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
@@ -42,14 +43,12 @@ Mathematical
 
 
 class MathNotationProcessor(nn.Module):
-
-
-
     """ mathematical notation and converts between different formats.Process
     """
     input_text) -> None:
 """ mathematical notation.Symbolic
     """
+
 # Implementation for processing mathematical notation
 pass
 """,
@@ -59,9 +58,6 @@ pass
 
 
 class SymbolicMathProcessor(nn.Module):
-
-
-
     """ symbolic mathematics expressions.Train
     """
 train_loader: DataLoader
@@ -143,10 +139,7 @@ config: TrainingConfig) -> Dict[str
 
 
                         class TestModelFeatures(unittest.TestCase):
-
-
-
-                            """ suite for model features.Test
+    """ suite for model features.Test
     """
                         """ TextToAnything model initialization and forward pass.Test
     """
@@ -166,10 +159,7 @@ config: TrainingConfig) -> Dict[str
 
 
                 class TestEnhancedTransformer(unittest.TestCase):
-
-
-
-                    """ cases for the enhanced transformer model.Test
+    """ cases for the enhanced transformer model.Test
     """
                 """ forward pass through the model.Test
     """
@@ -188,10 +178,7 @@ config: TrainingConfig) -> Dict[str
 
 
                 class TestTrainingSetup(unittest.TestCase):
-
-
-
-                    """ suite for training setup.Fix
+    """ suite for training setup.Fix
     """
                 @classmethod
                 """ black formatting issues in problematic files."""

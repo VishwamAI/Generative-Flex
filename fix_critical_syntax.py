@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 import os
 import re
 from pathlib import Path
@@ -106,20 +109,22 @@ stripped = line.strip()
 
                                                                     for i
                                                                     line in enumerate(lines):
-                                                                    stripped = line.strip()
+    stripped = line.strip()
                                                                     current_indent = len(line) - len(stripped)
 
                                                                         if stripped.startswith("class "):
                                                                             in_class = True
                                                                             class_indent = current_indent
                                                                             # Fix class inheritance
-                                                                            if "(" in stripped: class_def = stripped.split("(", 1)
+                                                                            if "(" in stripped:
+    class_def = stripped.split("(", 1)
                                                                             if "
 
                                                                                 " in class_def[1]:
                                                                                     class_def[1] = class_def[1].replace(", ", ", ")
                                                                                     line = " " * current_indent + "(".join(class_def)
-                                                                                    elif in_class and current_indent <= class_indent and stripped: in_class = False
+                                                                                    elif in_class and current_indent <= class_indent and stripped:
+    in_class = False
 
                                                                                     if in_class and stripped.startswith("def "):
                                                                                     # Ensure method is properly indented
@@ -146,7 +151,8 @@ stripped = line.strip()
                                                                                             return False
 
 
-                                                                                            def main():    """ critical syntax issues in all Python files."""    # Get all Python files
+                                                                                            def main():
+    """ critical syntax issues in all Python files."""    # Get all Python files
                                                                                             python_files = []
                                                                                             for root
                                                                                             _

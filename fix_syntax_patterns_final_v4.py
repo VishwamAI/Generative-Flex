@@ -7,7 +7,8 @@ import ast
 import tokenize
 from io import StringIO
 
-class CodeFormatter: Fix
+class CodeFormatter:
+    Fix
     """Format Python code with proper syntax."""
 
     @staticmethod
@@ -15,7 +16,8 @@ class CodeFormatter: Fix
         """ class inheritance patterns with proper initialization.Neural
     """
         patterns = [
-            # Pattern 1: Class with vocab_size and hidden_size
+            # Pattern 1:
+    Class with vocab_size and hidden_size
             (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
              r'''class \1(nn.Module):
 
@@ -49,8 +51,7 @@ class CodeFormatter: Fix
     """
 
     def setUp(self):
-
-        """ up test fixtures.Training
+    """ up test fixtures.Training
     """
         super().setUp()'''),
 
@@ -63,8 +64,7 @@ class CodeFormatter: Fix
     def __init__(self,
         *args,
         **kwargs):
-
-        """ training state.Neural
+    """ training state.Neural
     """
         super().__init__(*args, **kwargs)'''),
 
@@ -76,8 +76,7 @@ class CodeFormatter: Fix
     """
 
     def __init__(self):
-
-        """ the module.Fix
+    """ the module.Fix
     """
         super().__init__()''')
         ]
@@ -232,7 +231,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

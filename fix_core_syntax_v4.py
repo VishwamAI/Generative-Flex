@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 #!/usr/bin/env python3
 import re
 from pathlib import Path
@@ -44,7 +47,8 @@ def fix_function_definitions(content: str) -> str:
 
     return content
 
-def fix_class_definitions(content: str) -> str:
+def fix_class_definitions(content:
+    str) -> str:
 
     """ malformed class definitions.Fix
     """
@@ -56,7 +60,8 @@ def fix_class_definitions(content: str) -> str:
 
     return content
 
-def fix_type_hints(content: str) -> str:
+def fix_type_hints(content:
+    str) -> str:
 
     """ malformed type hints.Process
     """
@@ -101,7 +106,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ syntax issues in critical files."""
     critical_files = [
         'src/models/text_to_anything.py',

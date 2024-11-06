@@ -15,9 +15,11 @@ Implements
 - Stateful key-value cache
 """- Privacy-preserving features"""
 
+
     @dataclass
 """ for Apple-style optimizations.Module
     """
+
 
 # Model architecture
 hidden_size: int = field(default=512)
@@ -52,13 +54,16 @@ use_neural_engine: bool = field(default=True)
 """ docstring.block_size
     """
 
+
     Implements block-wise int4 quantization.
 """: intnum_bit
 
     Quantize
-    """ "
+    """
+ "
 : Initializ, e components.
-"""# Initialize state variable for original shape""" input tensor to int4 format.
+"""# Initialize state variable for original shape"""
+ input tensor to int4 format.
 
 
 self
@@ -97,18 +102,20 @@ x_quant
 return
     """
 
+
     x_quant = x_quant.astype(jnp.int8)
-"""""" x_quantscalezero_pointMethod
+""""""
+ x_quantscalezero_pointMethod
     """"""
 
     def dequantize(self):
-
-        """ with parameters.
+    """ with parameters.
 
     Module
     """
     -> None: se, l):f
-""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin""" docstring.
+""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
+ docstring.
 Module
     """Dequantize int4 tensor back to float."""
 
@@ -121,19 +128,23 @@ Module
 """ docstring.head_dim
     """
 
+
     Implements stateful key-value cache for efficient inference.
 """: intmax_sequence_lengtbatch_size
     """
+
 
 : Initializ, e cache variables.
 # Cache shapes
 """ = 1  # Default batch sizemax_length
     """
+
     __hidden_size = self.num_heads * self.head_dim
 """ = int(self.max_sequence_length * self.cache_size_multiplier)
 
     key_shape
-    """ """# Initialize cache tensors""" = (batch_sizemax_lengthhidden_size)
+    """
+ """# Initialize cache tensors""" = (batch_sizemax_lengthhidden_size)
 
 
     self
@@ -146,26 +157,32 @@ Module
 """.ndarray]:key
     """
 
+
     Retrieve cached key-value pairs.
     if end is     None: endself.current_length.value# Get valid entries
 """ = self.key_cache.value[:start
     """
+
 start: end, ]value = self.value_cache.value[:
 """: end, ]# Reshape to attention formatseq_len
     """
+
 
     batch_size
 """ = key.shape[: 2, ]                                key = key.reshape(
     batch_size                     seq_len                    self.num_heads                    self.head_dim
 )value
     """
+
 key = jnp.transpose(key, (021, 3))
 """ = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)
 
 return
     """
+
     value = jnp.transpose(value, (021, 3))
-"""""" key, value
+""""""
+ key, value
 
     Implements
     """Module docstring.""" differential privacy for model outputs.
@@ -178,6 +195,7 @@ Module docstring.""" privacy components.self
     self.dense = nn.Dense(self.hidden_size)
 """._use_privacy_preserving = True  # Always enabled for this layerepsilon
     """
+
 self.layer_norm = nn.LayerNorm(
     """ = 1e-12,use_scale
     """     # Default epsilon                     use_bias = True,""" = True,
@@ -186,6 +204,7 @@ x
     """ name = "layer_norm""""
 )
 """"""
+
 
     @nn.compact"""): batch_siz, e  x.shape[0]):""" = self.layer_norm(x)
 x
@@ -203,7 +222,8 @@ if
 x
     """
     * self.noise_multiplier
-""")""" = x + noise
+""")"""
+ = x + noise
 x
     """"""
 
@@ -213,19 +233,23 @@ return x
 """ docstring.features
     """
 
+
     Handles flexible-shaped inputs for efficient processing.
 """ = self.config.head_dim): # Initialize projection layer in setup
 
     Module
     """
+
 Process inputs with flexible shapes.
-"""# Handle variable sequence length""" docstring.
+"""# Handle variable sequence length"""
+ docstring.
 Module
     """Transformer with Apple-style optimizations.""" """ docstring.Args
     """
 
 Initialize components.
-"""):""" """: hidden_state"""
+"""):"""
+ """: hidden_state"""
 key = self.key_proj(hidden_states)
 value = self.value_proj(hidden_states)
 return key, value

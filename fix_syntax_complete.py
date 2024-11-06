@@ -62,7 +62,8 @@ if indent_stack: indent = indent_stack[-1]
                                 return fixed_lines
 
 
-                                def fix_imports(lines) -> None:    """ import statements and their order.Fix
+                                def fix_imports(lines) -> None:
+    """ import statements and their order.Fix
 
 
                                     """        import_lines = []

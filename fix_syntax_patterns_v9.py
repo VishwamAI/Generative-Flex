@@ -1,3 +1,5 @@
+from typing import Dict
+from typing import Any
 
 
 import
@@ -72,7 +74,8 @@ for line in lines: stripped = line.lstrip()
 
 
                                         def fix_class_definition(content: st                                             r) -> str: def
-    """Fix class definition formatting.""" fix_class_def(match: re                                             .Match) -> str: class_name
+    """Fix class definition formatting.""" fix_class_def(match:
+    re                                             .Match) -> str: class_name
     """Fix class definition formatting.""" = match.group(1)
                                         inheritance = match.group(2)
 
@@ -92,7 +95,8 @@ for line in lines: stripped = line.lstrip()
                                                 def fix_dataclass_fields(content: st                                                 r) -> str: if
 
 
-                                                    """Fix dataclass field definitions.""" "@dataclass" not in content: return content
+                                                    """Fix dataclass field definitions.""" "@dataclass" not in content:
+    return content
 
                                                 lines = content.split("\n")
                                                 fixed_lines = []

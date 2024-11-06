@@ -1,3 +1,7 @@
+from typing import Union
+from typing import Tuple
+from typing import List
+from typing import Optional
 def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports at the top

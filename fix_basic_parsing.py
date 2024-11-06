@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 import
     """Fix basic parsing issues in Python files.""" re
@@ -101,21 +104,23 @@ if stripped in [']'
 
 for i
                                                                                 line in enumerate(lines):
-stripped = line.strip()
+    stripped = line.strip()
 
 # Handle class definitions
                                                                                 if stripped.startswith('class '):
-                                                                                    in_class = True
+    in_class = True
                                                                                     class_indent = len(line) - len(line.lstrip())
                                                                                     # Fix class inheritance
-                                                                                    if '(' in stripped and ')' not in stripped: next_line = lines[i + 1].strip() if i + 1 < len(lines) else ''
+                                                                                    if '(' in stripped and ')' not in stripped:
+    next_line = lines[i + 1].strip() if i + 1 < len(lines) else ''
                                                                                         if ')' in next_line: fixed_lines.append(line + ' ' + next_line)
                                                                                             continue
                                                                                             fixed_lines.append(line)
                                                                                             continue
 
                                                                                             # Handle class body
-                                                                                            if in_class: if not stripped: in_class = False
+                                                                                            if in_class:
+    if not stripped: in_class = False
                                                                                                     fixed_lines.append('')
                                                                                                     continue
 
@@ -204,9 +209,7 @@ return True
 
 
                                                                                                                                                                         def main():
-
-
-                                                                                                                                                                            """Fix basic parsing issues in all Python files."""
+    """Fix basic parsing issues in all Python files."""
                                                                                                                                                                         # Get all Python files
                                                                                                                                                                         python_files = []
 for root

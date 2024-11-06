@@ -1,3 +1,8 @@
+from typing import Union
+from typing import Tuple
+from typing import List
+from typing import Any
+from typing import Optional
 import os
 
 
@@ -34,7 +39,7 @@ class_indent = "    "  # 4 spaces for class content
 
 i = 0
     while i < len(content):
-        line = content[i].rstrip()
+    line = content[i].rstrip()
 
         # Skip original imports
         if any(imp.strip() in line for imp in imports):
@@ -43,7 +48,7 @@ i = 0
 
         # Handle class definitions
             if line.strip().startswith("class "):
-                in_class = True
+    in_class = True
                 in_method = False
                 current_class = line.split()[1].split("(")[0]
                 fixed_content.append(line + "\n")
@@ -52,7 +57,7 @@ i = 0
 
                 # Handle method definitions
                 if in_class and line.strip().startswith("def "):
-                in_method = True
+    in_method = True
                 # Special handling for TextTokenizer methods
                 if current_class == "TextTokenizer":                                    if "def __init__" in line: fixed_content.extend([                     f"{class_indent}def def __init__(self                     max_length: int                    vocab_size: int) -> None:\n")
                 f'{method_indent}Convert
@@ -142,7 +147,8 @@ else: fixed_content.append(f"{method_indent}{stripped}\n")
 else: fixed_content.append("\n")
 
 # Handle class content
-elif in_class: stripped = line.strip()                                                                                                                            if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
+elif in_class:
+    stripped = line.strip()                                                                                                                            if stripped: fixed_content.append(f"{class_indent}{stripped}\n")
 else: fixed_content.append("\n")
 
 # Handle top-level content

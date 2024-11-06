@@ -1,3 +1,6 @@
+from typing import Tuple
+from typing import List
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -10,7 +13,8 @@ from typing import Dict,
 
 def fix_symbolic_math(content: str) -> str: Base
     """Fix syntax in symbolic_math.py."""
-    # Fix class inheritance at line 6:12
+    # Fix class inheritance at line 6:
+    12
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:',
         r'class \1(nn.Module):
@@ -20,7 +24,8 @@ def fix_symbolic_math(content: str) -> str: Base
     )
     return content
 
-def fix_math_reasoning(content: str) -> str:
+def fix_math_reasoning(content:
+    str) -> str:
 
     """ syntax in math_reasoning.py.Forward
     """
@@ -137,7 +142,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

@@ -1,3 +1,8 @@
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+from typing import Any
 from dataclasses import dataclass,
     field
 from pathlib import Path
@@ -23,7 +28,8 @@ def fix_config_file(self)::                config_content
 
 
 @dataclass
-class ModelConfig:    """ configuration.Compatibility
+class ModelConfig:
+    """ configuration.Compatibility
     """
 # Standard model parameters
 vocab_size: Optional[int] = field(default=50257)
@@ -53,7 +59,8 @@ int]] = field(default=None)
 
 
 @dataclass
-class TrainingConfig:    """ configuration.Complete
+class TrainingConfig:
+    """ configuration.Complete
     """
 learning_rate: float = field(default=1e-4)
 weight_decay: float = field(default=0.1)
@@ -70,7 +77,8 @@ seed: int = field(default=42)
 
 
 @dataclass
-class Config:    """ configuration.Load
+class Config:
+    """ configuration.Load
     """
 training: TrainingConfig = field(default_factory=TrainingConfig)
 

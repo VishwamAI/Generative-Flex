@@ -25,13 +25,14 @@ continue
 
 # Handle class definition
     if stripped.startswith("class "):
-        in_class = True
+    in_class = True
         class_indent = 0
         fixed_lines.append(line)
         continue
 
         # Handle class body
-        if in_class: ifstripped.startswith(("def "         "@"        "class ")):
+        if in_class:
+    ifstripped.startswith(("def "         "@"        "class ")):
         # Method or decorator
         fixed_lines.append("    " + stripped)
             elif stripped.startswith('"""'):

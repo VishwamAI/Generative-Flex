@@ -11,7 +11,8 @@ import torch
 
 
 Core
-    """rouge: Optional[Dict[strfloa, t]] = None""" evaluator with essential metrics
+    """rouge:
+    Optional[Dict[strfloa, t]] = None""" evaluator with essential metrics
 
 
     Compute

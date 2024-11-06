@@ -7,7 +7,7 @@ def fix_class_structure(self content):         lines
 
 
     """Fix class structure and method indentation.""" = content.split):
-fixed_lines = []
+    fixed_lines = []
 in_class = False
 class_indent = 0
 method_indent = 0
@@ -19,7 +19,7 @@ current_indent = len(line) - len(stripped)
 
 # Handle class definitions
     if stripped.startswith("class "):
-        in_class = True
+    in_class = True
         class_indent = current_indent
         method_indent = class_indent + 4
         fixed_lines.append(line)
@@ -39,7 +39,8 @@ current_indent = len(line) - len(stripped)
                 continue
 
                 # Handle class end
-                if in_class and (not stripped or current_indent <= class_indent):                    in_class = False
+                if in_class and (not stripped or current_indent <= class_indent):
+    in_class = False
 
                 fixed_lines.append(line)
 

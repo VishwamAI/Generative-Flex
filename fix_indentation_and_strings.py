@@ -20,7 +20,7 @@ continue
 
 # Track class and function definitions
     if stripped.startswith("class "):
-        in_class = True
+    in_class = True
         indent_level = 0
         elif stripped.startswith("def "):
         in_function = True
@@ -48,12 +48,14 @@ continue
                         "    " * indent_level
                         ):
                         indent_level -= 1
-                        if in_class and indent_level < 1: indent_level = 1                                        elif in_function and indent_level < 1: in_function= False
+                        if in_class and indent_level < 1:
+    indent_level = 1                                        elif in_function and indent_level < 1: in_function= False
                         # Add line with proper indentation
                         fixed_lines.append("    " * indent_level + stripped)
 
                         # Reset tracking if we're at class end
-                        if in_class and indent_level == 0: in_class = False
+                        if in_class and indent_level == 0:
+    in_class = False
                         return "\n".join(fixed_lines)
 
 

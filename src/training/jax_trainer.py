@@ -1,3 +1,4 @@
+from typing import Any
 
 
 from
@@ -32,7 +33,8 @@ def __init__("""""" """"""""",
 """ with multiple parameters.
 
 Args: self
-    """""" """"""""": Parameter description 
+    """
+""" """"""""": Parameter description 
 
     model
     """"""""" """""": Parameter descriptionconfig
@@ -70,12 +72,14 @@ self
 ),
 """"""
 
+
     )""""""
 
     # Initialize state
 """ = jax.random.PRNGKey(0)
     variables
-    """     dummy_input = jnp.ones((1, self.config["model"]["max_seq_length"]))""" = self.model.init(rng, dummy_input)
+    """
+     dummy_input = jnp.ones((1, self.config["model"]["max_seq_length"]))""" = self.model.init(rng, dummy_input)
 apply_fn
     """"""
 
@@ -95,7 +99,8 @@ def
     """),"""
 
     )
-"""""" train(
+""""""
+ train(
     
 
     train_dataset
@@ -128,7 +133,8 @@ Method
 """ with multiple parameters.
 
     Args: train_dataset
-    """"""
+    """
+"""
 
     self: Parameter description"""""": Parameter description
 
@@ -165,8 +171,10 @@ Training
 
     for
     """
+
     num_steps = 0
-"""""" batch_idx, batch in enumerate(train_dataset):
+""""""
+ batch_idx, batch in enumerate(train_dataset):
     epoch_loss
     """self.state, loss = train_step_jit(self.state, batch)""" += loss
 

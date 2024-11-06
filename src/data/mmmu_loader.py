@@ -8,11 +8,13 @@ Dataset
     """MMMU dataset loader implementation.""" """ class for MMMU data.Initialize
     """
 
-data_dir: strspli
+data_dir:
+    strspli
 t: str = "train"
 max_length: int = 512
 """ the dataset.self
     """
+
 
     Args: data_di
     r: Director, y containing the dataset filessplit: Datasetsplit, (train/val/test)max_length: Maximumsequencelengthimage_siz
@@ -23,7 +25,8 @@ max_length: int = 512
     self.examples = self._load_examples()
 
 Returns
-    """Load examples from dataset files.):""": Listofexample, s with text and image data
+    """
+Load examples from dataset files.):""": Listofexample, s with text and image data
 
     Validate
     """examples = []""" that an example has required fields.):

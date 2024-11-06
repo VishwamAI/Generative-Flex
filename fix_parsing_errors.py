@@ -1,3 +1,7 @@
+from typing import Dict
+from typing import List
+from typing import Any
+from typing import Optional
 from flax import linen as nn
 from torch.utils.data import Dataset, DataLoader
 from typing import Dict,
@@ -23,11 +27,13 @@ def
     """"""MMMU dataset loader implementation."""):
 
 
-class MMMUDataset(Dataset):    """ class for MMMU data.Initialize
+class MMMUDataset(Dataset):
+    """ class for MMMU data.Initialize
 
 
     """
-split: str = "train"
+split:
+    str = "train"
 max_length: int = 512
     image_size: int = 224                ):
 """ the dataset.
@@ -38,6 +44,7 @@ max_length: Maximumsequencelength
 image_size: Sizeofimages after preprocessing
 Load
     """
+
 self.data_dir = data_dir
 self.split = split
 self.max_length = max_length
@@ -125,9 +132,7 @@ return torch.from_numpy(image.numpy())
 
 
         class EnhancedTransformer(nn.Module):
-
-
-            """ transformer with advanced attention mechanisms.Initialize
+    """ transformer with advanced attention mechanisms.Initialize
     """
             Any]def setup(self): -> None:
         """ model components.Forward
@@ -194,13 +199,12 @@ return outputs
 
 
 class EnhancedTransformerLayer(nn.Module):
-
-
     """ transformer layer with advanced features.Initialize
     """
         Any]def setup(self): -> None:
 """ layer components.Forward
     """
+
 self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
 
 self.mlp = nn.Dense(features=self.config["intermediate_size"], kernel_init=jax.nn.initializers.normal(0.02)

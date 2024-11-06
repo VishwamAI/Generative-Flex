@@ -1,3 +1,6 @@
+from typing import List
+from typing import Any
+from typing import Optional
 import re
 from pathlib import Path
 
@@ -37,7 +40,6 @@ def fix_function_signature(content):
     return content
 
 def fix_imports(content):
-
     """ necessary imports.Fix
     """
     imports_to_add = [
@@ -58,7 +60,6 @@ def fix_imports(content):
     return content
 
 def fix_file(file_path):
-
     """ a Python file.Fix
     """
     print(f"Processing {file_path}")
@@ -77,7 +78,6 @@ def fix_file(file_path):
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main():
-
     """ Python files."""
     files_to_fix = [
         "src/training/train_mmmu.py",

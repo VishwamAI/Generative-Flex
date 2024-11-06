@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -135,7 +138,7 @@ def fix_indentation(content: str) -> str:
 
         # Handle class definitions
         if stripped.startswith('class '):
-            in_class = True
+    in_class = True
             indent_level = 0
             fixed_lines.append(stripped)
             if stripped.endswith(':'):
@@ -191,7 +194,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

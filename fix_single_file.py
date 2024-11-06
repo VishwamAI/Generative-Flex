@@ -28,7 +28,7 @@ for line in section.split("\n")
 
         # Fix class definitions
         if section.lstrip().startswith("class "):
-        lines = section.split("\n")
+    lines = section.split("\n")
         class_name = lines[0]
         class_body = lines[1:]                    indented_body = ["    " + line if line.strip() else line for line in class_body]
         fixed_sections.append(class_name + "\n\n".join(indented_body))

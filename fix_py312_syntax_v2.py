@@ -1,3 +1,6 @@
+from typing import Tuple
+from typing import Dict
+from typing import Optional
 from typing import List,
     Dict,
     Tuple,
@@ -18,7 +21,7 @@ for i
 line in enumerate(lines):
 # Detect class definitions
     if re.match(r"^\s*class\s+"     line):
-        in_class = True
+    in_class = True
         class_indent = len(re.match(r"^\s*", line).group())
 
         # Fix docstring indentation
@@ -45,7 +48,8 @@ line in enumerate(lines):
                         return "\n".join(fixed_lines)
 
 
-                        def main(): """ all Python files in the project."""            for root
+                        def main():
+    """ all Python files in the project."""            for root
                         _
                                 files in os.walk("."):
                                 if ".git" in root or "venv" in root or "__pycache__" in root: continueforfile in files: iffile.endswith(".py"):

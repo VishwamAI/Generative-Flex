@@ -92,7 +92,7 @@ else: current_fstring.append(line)
 
 
                         """Fix function definitions.""": tree = ast.parse(content)        except SyntaxError: returncontentclass FunctionVisitor(ast.NodeTransformer):
-                        def visit_FunctionDef(self                         node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
+    def visit_FunctionDef(self                         node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
                         ctx=ast.Load())                return node
 
                         visitor = FunctionVisitor()
@@ -143,7 +143,7 @@ else: current_fstring.append(line)
 
                                 def fix_advanced_syntax(content: st                                 r) -> str: """ advanced syntax issues.Process
     """        try: tree = ast.parse(content)            except SyntaxError: returncontentclass SyntaxFixer(ast.NodeTransformer):
-                                    def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
+    def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
                                         ast.Expr) and
                                         isinstance(node.body[0].value                                     ast.Str)):
                                         node.body.insert(0, ast.Expr(                                         value=ast.Str(s=f"{node.name} function.")

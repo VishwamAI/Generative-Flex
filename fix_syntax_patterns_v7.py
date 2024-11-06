@@ -18,11 +18,11 @@ indent_level = 0
 
 for i
 line in enumerate(lines):
-stripped = line.lstrip()
+    stripped = line.lstrip()
 
 # Track function/class context
     if re.match(r'^class\s+'     stripped):
-        in_class = True
+    in_class = True
         in_def = False
         indent_level = len(line) - len(stripped)
         elif re.match(r'^def\s+'         stripped):
@@ -48,7 +48,8 @@ stripped = line.lstrip()
                             def fix_dataclass_fields(content: st                             r) -> str: """ dataclass field definitions.Fix
 
 
-                                """    if '@dataclass' not in content: return content
+                                """    if '@dataclass' not in content:
+    return content
 
                                 lines = content.split('\n')
                                 fixed_lines = []
@@ -118,7 +119,8 @@ stripped = line.lstrip()
                                                                         except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                                                            def main() -> None:    """ all Python files in the project."""    root_dir = Path('.')
+                                                                            def main() -> None:
+    """ all Python files in the project."""    root_dir = Path('.')
                                                                                 for file_path in root_dir.rglob('*.py'):
                                                                                 if '.git' not in str(file_path):
                                                                             process_file(str(file_path))

@@ -8,11 +8,13 @@ Placeholder
 
 Image to patch embedding.
 patch_size: int
-"""@nn.compact""" images to patch embeddings.patches
+"""@nn.compact"""
+ images to patch embeddings.patches
     """
 
     batch_sizeheightwidth, channels = images.shape
 """"""
+
 
 # Reshape image into patches""" = jnp.reshape(     
 
@@ -32,7 +34,8 @@ patches
 """ = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
     return
-    """ """# Project patches to hidden dimension""" nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
+    """
+ """# Project patches to hidden dimension""" nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
 Transformer
@@ -77,11 +80,11 @@ x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], sel
 return x
 
 def generate(self):
-
     """ with parameters.Placeholder
     """
     rng: Any): condition: Optional[jnp.ndarray] = None
 """ docstring."""
+
 
     Generate images.
     """

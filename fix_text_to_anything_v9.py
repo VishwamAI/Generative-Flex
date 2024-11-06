@@ -1,3 +1,8 @@
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+from typing import Optional
 from pathlib import Path
 from typing import Any,
     Dict,
@@ -19,7 +24,8 @@ content = """ dataclasses import dataclass, field
 VOCAB_SIZE = 256  # Character-level tokenization
 
 @dataclass
-class GenerationConfig: num_attention_heads
+class GenerationConfig:
+    num_attention_heads
     """Configuration for text-to-anything generation.""": int = field(default=32)
 num_hidden_layers: int = field(default=24)
 intermediate_size: int = field(default=8192)

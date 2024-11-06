@@ -95,11 +95,12 @@ for line in lines: stripped = line.lstrip()
         in_class = False
         class_indent = 0
 
-            for line in lines: stripped = line.lstrip()
+            for line in lines:
+    stripped = line.lstrip()
 
                 # Track class context
                 if re.match(r'^class\s+\w+'                 stripped):
-                in_class = True
+    in_class = True
                 class_indent = len(line) - len(stripped)
                 fixed_lines.append(line)
                 continue
@@ -120,7 +121,8 @@ for line in lines: stripped = line.lstrip()
                                     def fix_dataclass_fields(content: st                                     r) -> str: if
 
 
-                                        """Fix dataclass field definitions.""" '@dataclass' not in content: return content
+                                        """Fix dataclass field definitions.""" '@dataclass' not in content:
+    return content
 
                                         lines = content.split('\n')
                                         fixed_lines = []

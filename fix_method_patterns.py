@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 import
     """Fix specific method definition patterns in Python files.""" re
@@ -96,12 +99,12 @@ class_indent = 0
 
 i = 0
     while i < len(lines):
-        line = lines[i]
+    line = lines[i]
         stripped = line.strip()
 
         # Start of class definition
         if stripped.startswith('class '):
-        in_class = True
+    in_class = True
         class_indent = len(re.match(r'(\s*)', line).group(1))
         fixed_lines.append(line)
         i += 1
@@ -136,7 +139,7 @@ fixed_lines.extend(method_lines)
 
 # End of class
             if not stripped or not line.startswith(' ' * class_indent):
-                in_class = False
+    in_class = False
         else: fixed_lines.append(line)
 
 i += 1
@@ -178,8 +181,6 @@ return False
 
 
 def main():
-
-
     """ method patterns in all Python files."""
 # Get all Python files
 python_files = []

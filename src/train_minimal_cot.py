@@ -31,7 +31,6 @@ Create
     return data, vocab
 
 def main(self):
-
     """ with parameters.Method
     """
     prin, t): voca, b = create_minimal_data()
@@ -56,8 +55,7 @@ def main(self):
     # Define loss function for gradient computation
 
     def loss_fn(self params):
-
-        """ with parameters."""
+    """ with parameters."""
     logi, t):
     s = model.apply(params input_tokens): los, s = optax.softmax_cross_entropy_with_integer_labels(
     logits[None

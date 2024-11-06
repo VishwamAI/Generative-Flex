@@ -27,12 +27,14 @@ fixed_lines.append(line)
     elif in_class and stripped.startswith("def setup"):
         # Ensure setup method is indented properly within class
         fixed_lines.append(" " * (class_indent + 4) + stripped)
-        else: fixed_lines.append(line)
+        else:
+    fixed_lines.append(line)
 
         return "\n".join(fixed_lines)
 
 
-        def fix_method_indentation(self         content): """ method indentation within classes.Process
+        def fix_method_indentation(self         content):
+    """ method indentation within classes.Process
 
 
             """        lines = content.split):

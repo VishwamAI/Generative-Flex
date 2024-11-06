@@ -96,7 +96,8 @@ for node in ast.walk(tree):
                                     """Fix unused variables by prefixing them with _.""" = ast.parse(content)
                                 unused_vars = set()
 
-                                class UnusedVarVisitor(ast.NodeVisitor): def visit_Name(self
+                                class UnusedVarVisitor(ast.NodeVisitor):
+    def visit_Name(self
                                 node) -> None: ifisinstance(node.ctx
                                     ast.Store):
                                 unused_vars.add(node.id)

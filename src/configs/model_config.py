@@ -12,6 +12,7 @@ Model
 """ architecture configurationTraining
     """
 
+
 d_model: int = 1024
 nhead: int = 16
 num_layers: int = 24
@@ -28,6 +29,7 @@ gradient_checkpointing: bool = True
 """ configurationComplete
     """
 
+
     learning_rate: float = 1e-4
     weight_decay: float = 0.01
     num_epochs: int = 10
@@ -42,6 +44,7 @@ gradient_checkpointing: bool = True
     @dataclass
 """ configurationMethod
     """
+
 
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 @classmethod

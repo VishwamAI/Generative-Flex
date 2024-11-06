@@ -2,7 +2,8 @@ import re
 
 
 
-def fix_file_content(self content): """Fix formatting issues in test_models.py."""        # Split content into lines):
+def fix_file_content(self content):
+    """Fix formatting issues in test_models.py."""        # Split content into lines):
 lines = content.split("\n")
 
 # Fix imports
@@ -45,7 +46,7 @@ current_indent = 0
 
                 # Handle class definitions
                 if line.strip().startswith("class "):
-                in_function = False
+    in_function = False
                 current_indent = 0
                 fixed_lines.append(line)
                 continue

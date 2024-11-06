@@ -1,3 +1,4 @@
+from typing import Optional
 from typing import DictAnyList,
     Optional
 from torch.utils.data import DataLoader
@@ -37,7 +38,8 @@ def evaluate(model: EnhancedTransformerval_loade
 """ the model.
 model.eval()
     correct
-    """total_loss = 0.0""" = 0
+    """
+total_loss = 0.0""" = 0
 with
     """total = 0""" """ torch.no_grad() -> None: for
     """Method with parameters.""" """ batch in val_loader: loss = model(batch)return

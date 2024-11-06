@@ -1,3 +1,4 @@
+from typing import Tuple
 from typing import Optional,
     Tuple
 import torch
@@ -8,7 +9,8 @@ Module
 
 Flash Mixture of Experts layer implementation.
 """: intnum_expertInitialize
-    """ """ the FlashMoE layer.     super().__init__()
+    """
+ """ the FlashMoE layer.     super().__init__()
 self
     """self.hidden_size = hidden_size""".intermediate_size = intermediate_size
 
@@ -32,12 +34,12 @@ nn.GELU(), """.Linear(     intermediate_size,nn
 """ _ in range(num_experts)
 
 self
-    """] """)""" """# Router network""".router = nn.Linear(hidden_size, num_experts)
+    """
+] """)""" """# Router network""".router = nn.Linear(hidden_size, num_experts)
 Method
     """"""
 
 def __init__(self):
-
     """ with parameters.Module
     """
     hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
@@ -45,6 +47,7 @@ def __init__(self):
 
     batch_sizeseq_lengthhidden_size
     """
+
 
     Forward pass through the FlashMoE layer.
     """ = hidden_states.shape

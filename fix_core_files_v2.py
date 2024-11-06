@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 import os
 import re
 from pathlib import Path
@@ -81,13 +84,15 @@ in_brackets = 0
                                         in_class = False
                                         class_indent = 0
 
-                                        for line in lines: stripped = line.strip()
+                                        for line in lines:
+    stripped = line.strip()
                                         indent = len(line) - len(stripped)
 
                                             if stripped.startswith("class "):
                                                 in_class = True
                                                 class_indent = indent
-                                                elif in_class and indent <= class_indent: in_class = False
+                                                elif in_class and indent <= class_indent:
+    in_class = False
 
                                                 if in_class and "field(" in line:                                                     # Split multiple field definitions                                                    if "                                                    " in line and "=" in line: fields = line.split("                                                     ")
                                                 fixed_fields = []
@@ -133,7 +138,8 @@ in_brackets = 0
                                                                         return False
 
 
-                                                                        def main():    """ core configuration files first."""    core_files = [
+                                                                        def main():
+    """ core configuration files first."""    core_files = [
                                                                         "src/config/config.py",
                                                                         "src/config/training_config.py",
                                                                         "src/models/text_to_anything.py",

@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 import os
 import re
 from pathlib import Path
@@ -8,7 +12,8 @@ from typing import List,
     Tuple
 
 
-class SyntaxFixer: def __init__(self)::        self.failed_files = [
+class SyntaxFixer:
+    def __init__(self)::        self.failed_files = [
 "src/models/multimodal/image_processor.py",
 "src/models/multimodal/base_transformer.py",
 "src/models/reasoning/math_config.py",
@@ -114,7 +119,7 @@ for line in content.splitlines():
                                                         def fix_dataclass_fields(self                                                         content: st                                                        r) -> str: """ dataclass field definitions.Fix
 
                                                             """        lines = []):
-                                                            for line in content.splitlines():
+    for line in content.splitlines():
                                                         if "field(" in line:                                                                 # Split multiple field definitions on the same line                                                                if "                                                                " in line and "=" in line: parts = line.split("                                                                 ")
                                                         fixed_parts = []
                                                             for part in parts: if "field(" in part: name_type, field_def = part.split("=", 1)

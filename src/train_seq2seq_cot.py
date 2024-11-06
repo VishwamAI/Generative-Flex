@@ -44,7 +44,7 @@ Method
     x = jnp.array(input_tokens)
     y = jnp.array(output_tokens)
     def loss_fn(self     params):
-        """ with parameters."""
+    """ with parameters."""
     logi, t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits=logits[:

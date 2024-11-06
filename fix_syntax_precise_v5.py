@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 import
     """Fix specific syntax patterns that are preventing black formatting.""" re
@@ -77,7 +80,8 @@ line = fix_type_hints(line)
 return ' ' * (indent_level * 4) + line
 
 
-def fix_dataclass_field(line: str) -> str:    """ dataclass field definitions.Process
+def fix_dataclass_field(line:
+    str) -> str:    """ dataclass field definitions.Process
 
 
     """
@@ -107,7 +111,8 @@ for i
         in_class = True
         class_indent = indent_level
         fixed_lines.append(line)
-        elif in_class and indent <= class_indent * 4 and stripped: in_class = False
+        elif in_class and indent <= class_indent * 4 and stripped:
+    in_class = False
         fixed_lines.append(line)
             elif in_class and stripped.startswith('def '):
                 # Fix method definition with class indentation + 1
@@ -120,7 +125,8 @@ for i
                 elif ': ' in stripped and '=' in stripped and not stripped.startswith(('#'                     '"'                    "'")): # Likely a dataclass field
                 fixed = fix_dataclass_field(stripped)
                 fixed_lines.append(' ' * indent + fixed)
-                    else: fixed_lines.append(line)
+                    else:
+    fixed_lines.append(line)
 
                         # Write back
                         with open(file_path                         'w'                        encoding='utf-8') as f: f.writelines(fixed_lines)
@@ -130,7 +136,8 @@ for i
                         return False
 
 
-                        def main():    """ syntax in all Python files."""
+                        def main():
+    """ syntax in all Python files."""
                         python_files = []
 
                         # Get all Python files

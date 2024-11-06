@@ -2,7 +2,8 @@ import re
 
 
 
-def fix_indentation(content) -> None:    """Fix indentation issues in the content."""        # Split content into lines
+def fix_indentation(content) -> None:
+    """Fix indentation issues in the content."""        # Split content into lines
 lines = content.split("\n")
 
 # Track indentation level and state
@@ -27,7 +28,7 @@ continue
 
 # Detect class definitions
     if re.match(r"^class\s+\w+"     stripped):
-        if not previous_was_decorator: current_indent = 0        in_class = True
+    if not previous_was_decorator: current_indent = 0        in_class = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
         continue
@@ -51,7 +52,8 @@ continue
                 continue
 
                 # Handle class body
-                if in_class and not in_function: ifnotre.match(r"^(class|def|@)\s*\w+"
+                if in_class and not in_function:
+    ifnotre.match(r"^(class|def|@)\s*\w+"
                     stripped):
                         fixed_lines.append(" " * 4 + stripped)
                         else: ifstripped.startswith("@"):

@@ -1,3 +1,8 @@
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+from typing import Any
 
 
 import
@@ -45,8 +50,7 @@ if line.strip().startswith(("from "
         logger = logging.getLogger(__name__)
 
         class MathReasoningHead(nn.Module):
-    
-        hidden_states
+    hidden_states
     """Math reasoning module for enhanced transformer model.""": torch
         .Tensor
         attention_mask: Optional

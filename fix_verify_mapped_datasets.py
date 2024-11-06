@@ -1,3 +1,5 @@
+from typing import List
+from typing import Optional
 from dataset_verification_utils import(from datasets import load_dataset from huggingface_hub import HfApifrom pathlib import Pathfrom typing import Dict,
     List,
     Optional,
@@ -20,7 +22,8 @@ log_verification_attempt)
 """
 
 # Fix basic strategies definition
-fixed_basic_strategies = """    # Basic strategies with memory monitoring
+fixed_basic_strategies = """
+    # Basic strategies with memory monitoring
 basic_strategies = [
 ("streaming_basic", True, False, 180),
 ("basic", False, False, 300),
@@ -29,7 +32,8 @@ basic_strategies = [
 """
 
 # Fix dataset configs
-fixed_dataset_configs = """    # Dataset configurations that require specific handling
+fixed_dataset_configs = """
+    # Dataset configurations that require specific handling
 "MMMU/MMMU": [
 "Accounting",
 "Math",

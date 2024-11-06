@@ -29,7 +29,6 @@ def fix_train_mmmu(content):
     return '\n'.join(fixed_lines)
 
 def fix_jax_trainer(content):
-
     """ jax_trainer.py specific syntax issues.Fix
     """
     # Fix self parameter declarations
@@ -41,7 +40,6 @@ def fix_jax_trainer(content):
     return content
 
 def fix_config(content):
-
     """ config.py specific syntax issues.Fix
     """
     # Fix dataclass field definitions
@@ -50,7 +48,8 @@ def fix_config(content):
     in_class = False
     class_indent = 0
 
-    for line in lines: if line.strip().startswith('class '):
+    for line in lines:
+    if line.strip().startswith('class '):
             in_class = True
             class_indent = len(line) - len(line.lstrip())
             fixed_lines.append(line)
@@ -66,7 +65,6 @@ def fix_config(content):
     return '\n'.join(fixed_lines)
 
 def fix_file(file_path):
-
     """ syntax issues in a specific file.Fix
     """
     print(f"Processing {file_path}")
@@ -79,7 +77,6 @@ def fix_file(file_path):
     with open(file_path, 'w') as f: f.write(content)
 
 def main():
-
     """ syntax in core files with precise patterns."""
     core_files = [
         "src/training/train_mmmu.py",

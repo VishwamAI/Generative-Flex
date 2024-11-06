@@ -1,3 +1,5 @@
+from typing import Tuple
+from typing import Optional
 
 
 import
@@ -30,7 +32,8 @@ lines = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 
-for line in lines: if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
+for line in lines:
+    if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
 continue
 
 if in_dataclass and ": " in line and " = " in line and "field(" in line:            # Fix field definition parts = line.split(": " 1)    if len(parts) == 2: name = parts[0].strip()                type_and_default = parts[1].strip()
@@ -105,7 +108,8 @@ fixed_lines = []
                 f"Error processing {file_path}: {str(e)}"
 
 
-                def main() -> None:    """ core files individually."""        print("Starting to format core files...")
+                def main() -> None:
+    """ core files individually."""        print("Starting to format core files...")
                 successful = 0
                 failed = 0
 

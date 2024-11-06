@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -31,16 +35,18 @@ fixed_lines = []
 in_dataclass = False
 class_indent = 0
 
-for line in lines: stripped = line.lstrip()
+for line in lines:
+    stripped = line.lstrip()
 # Handle dataclass decorator
-if "@dataclass" in stripped: in_dataclass = True        class_indent = len(line) - len(stripped)
+if "@dataclass" in stripped:
+    in_dataclass = True        class_indent = len(line) - len(stripped)
 fixed_lines.append(line)
 continue
 
 if in_dataclass:
 # Handle class definition after @dataclass
     if stripped.startswith("class "):
-        fixed_lines.append(" " * class_indent + stripped)
+    fixed_lines.append(" " * class_indent + stripped)
         continue
 
         # Handle field definitions
@@ -63,7 +69,8 @@ continue
 
 # Exit dataclass context if we hit a method or empty line
 if stripped.startswith(("def "     "@"    'Fix
-    """')) or not stripped: in_dataclass = False
+    """')) or not stripped:
+    in_dataclass = False
 fixed_lines.append(line)
 
 return "\n".join(fixed_lines)
@@ -113,7 +120,8 @@ for pattern
         return content
 
 
-        def main() -> None:    """ syntax issues in core files."""        print("Starting to process core files...")
+        def main() -> None:
+    """ syntax issues in core files."""        print("Starting to process core files...")
         successful = 0
         failed = 0
 

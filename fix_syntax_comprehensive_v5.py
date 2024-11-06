@@ -1,3 +1,5 @@
+from typing import List
+from typing import Optional
 #!/usr/bin/env python3
 
 import
@@ -18,7 +20,8 @@ def fix_class_definition(content: str, class_name: str, parent_class: str, param
 
     """ class definition and inheritance.    def
     """
-    if params: init_method = f""" __init__(self, {params}):
+    if params:
+    init_method = f""" __init__(self, {params}):
         super().__init__()
         {'; '.join(f'self.{p.split(":")[0].strip()} = {p.split(":")[0].strip()}' for p in params.split(','))}    def
     """
@@ -85,7 +88,6 @@ def process_file(file_path: str) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

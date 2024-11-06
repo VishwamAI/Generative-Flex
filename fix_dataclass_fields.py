@@ -2,7 +2,8 @@ import re
 
 
 
-def fix_dataclass_fields(content) -> None:    """Fix dataclass field definitions to proper Python syntax."""        # Split content into lines
+def fix_dataclass_fields(content) -> None:
+    """Fix dataclass field definitions to proper Python syntax."""        # Split content into lines
 lines = content.split("\n")
 
 # Track if we're in the GenerationConfig class
@@ -15,7 +16,7 @@ if "@dataclass" in line: in_config = True        fixed_lines.append(line)
 continue
 
     if in_config and line.strip().startswith("class GenerationConfig"):
-        fixed_lines.append(line)
+    fixed_lines.append(line)
         continue
 
         if in_config and line.strip() and not line.strip().startswith(('"""'
@@ -57,9 +58,11 @@ continue
                                 fixed_content = fix_dataclass_fields(content)
 
                         # Write the fixed content back
-                        with open("src/models/text_to_anything.py"                             "w") as f: f.write(fixed_content)
+                        with open("src/models/text_to_anything.py"                             "w") as f:
+    f.write(fixed_content)
 
                         print("Dataclass fields fixed in text_to_anything.py")
 
 
-                        if __name__ == "__main__":        main()
+                        if __name__ == "__main__":
+    main()

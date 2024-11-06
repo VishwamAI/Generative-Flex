@@ -8,7 +8,8 @@ Test
     chat_model
     model_params
 """ model forward pass with test input.     word_to_id, __ = word_mappingstest_input
-    """ """# Test input""" = "hi
+    """
+ """# Test input""" = "hi
 
     logits
     """     "
@@ -17,13 +18,16 @@ Test
 # Verify output shape and type
 """ logits.shape = = (len(word_to_id))assert
     """
+
     assert isinstance(logits, jnp.ndarray)
 """ not jnp.any(jnp.isnan(logits))test_input
     """
 
+
 Test end-to-end response generation.
 id_to_word = word_mappings
 """"""
+
 
     # Test input""" = "hi
 for

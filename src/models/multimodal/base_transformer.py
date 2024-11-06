@@ -12,7 +12,8 @@ hidden_states = self.dropout(hidden_states)
 for layer in self.layers: hidden_states = layer(hidden_states attention_mask)
 return hidden_states
 """ transformer layer implementation.Forward
-    """ """ pass through the transformer layer.Multi
+    """
+ """ pass through the transformer layer.Multi
     """
 
 attention_mask)
@@ -22,3 +23,4 @@ layer_output = self.output(intermediate_output)
 layer_output = self.dropout(layer_output)
 return self.norm2(hidden_states + layer_output)
 """-head attention implementation."""
+

@@ -1,3 +1,4 @@
+from typing import Tuple
 
 
 import
@@ -17,7 +18,7 @@ current_indent = 0
 
 for i
 line in enumerate(lines):
-stripped = line.lstrip()
+    stripped = line.lstrip()
     if not stripped: continue
 
         indent = len(line) - len(stripped)

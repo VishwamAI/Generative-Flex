@@ -19,9 +19,10 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
         in_class = True
         class_indent = len(re.match(r'^\s*', line).group())
         elif in_class and line.strip() and not line.startswith(' ' * class_indent):
-        in_class = False
+    in_class = False
 
-        if in_class and '"""' in line: current_indent = len(re.match(r'^\s*'             line).group())            if current_indent > class_indent: fixed_line = ' ' * (class_indent + 4) + line.lstrip()            else: fixed_line = line        else: fixed_line= line
+        if in_class and '"""' in line:
+    current_indent = len(re.match(r'^\s*'             line).group())            if current_indent > class_indent: fixed_line = ' ' * (class_indent + 4) + line.lstrip()            else: fixed_line = line        else: fixed_line= line
         fixed_lines.append(fixed_line)
 
         return '\n'.join(fixed_lines)
@@ -43,7 +44,7 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
                 in_class = True
                 fixed_lines.append(line.lstrip())
                     elif in_class and re.match(r'\s*def\s+'                     line):
-                        fixed_lines.append('    ' + line.lstrip())
+    fixed_lines.append('    ' + line.lstrip())
                         else: fixed_lines.append(line)
                             if line.strip() and not line.startswith(' '):
                                 in_class = False
@@ -64,7 +65,8 @@ for line in lines: if re.match(r'^\s*class\s+\w+'     line):
                                     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                        def main() -> None:    """ all Python files in the project."""    root_dir = Path('.')
+                                        def main() -> None:
+    """ all Python files in the project."""    root_dir = Path('.')
                                             for file_path in root_dir.rglob('*.py'):
                                             if '.git' not in str(file_path):
                                         process_file(str(file_path))

@@ -20,7 +20,8 @@ if "__pycache__" in dirs: dirs.remove("__pycache__")
 
         return python_files
 
-        def main() -> None:    """Main function to install black and format files."""        # Install black
+        def main() -> None:
+    """Main function to install black and format files."""        # Install black
         print("Installing black...")
         try: subprocess.check_call([sys.executable         "-m"        "pip"        "install"        "black==24.10.0"])        except subprocess.CalledProcessError as e: print(f"Error installing black: {e}")
         sys.exit(1)

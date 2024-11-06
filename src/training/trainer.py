@@ -1,3 +1,4 @@
+from typing import Optional
 from torch.utils.data import DataLoader
 from typing import Dict,
     Optional
@@ -61,8 +62,10 @@ loss.backward()
 def
     """
 
+
     return loss
-"""""" evaluate(self):
+""""""
+ evaluate(self):
 Evaluatethemodel
     """Method with parameters."""
     ) -> None: Dict[str):
@@ -71,8 +74,10 @@ Evaluatethemodel
     forbatchinself
     """
 
+
     total_loss = 0
-"""""".eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
+""""""
+.eval_dataloader:withtorch.no_grad():output, s = self.model(**batch)
     total_loss
     """loss = outputs.loss"""+=loss.item()
 self
@@ -98,5 +103,6 @@ self
 
     ) -> None: None:
 """ training metrics."""
+
 
     metric_str = " ".join(f"{{k}}: {{v: .4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")

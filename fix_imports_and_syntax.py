@@ -1,3 +1,7 @@
+from typing import Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 
 import
@@ -55,10 +59,12 @@ for line in content.split("\n"):
         if "field(" in content and "from dataclasses import field" not in existing_imports: new_imports.append("from dataclasses import dataclass         field")
 
         if (         "@dataclass" in content        and "from dataclasses import dataclass" not in existing_imports        ):
-        if "from dataclasses import dataclass
-        field" not in new_imports: new_imports.append("from dataclasses import dataclass             field")
+    if "from dataclasses import dataclass
+        field" not in new_imports:
+    new_imports.append("from dataclasses import dataclass             field")
 
-        if "unittest.TestCase" in content and "import unittest" not in existing_imports: new_imports.append("import unittest")
+        if "unittest.TestCase" in content and "import unittest" not in existing_imports:
+    new_imports.append("import unittest")
 
         if "nn.Module" in content and "import torch.nn as nn" not in existing_imports: new_imports.append("import torch.nn as nn")
 
@@ -85,7 +91,8 @@ for line in content.split("\n"):
                 in_dataclass = False
                 class_indent = 0
 
-                for line in lines: stripped = line.lstrip()
+                for line in lines:
+    stripped = line.lstrip()
                 if "@dataclass" in stripped: in_dataclass = True                class_indent = len(line) - len(stripped)
                 fixed_lines.append(line)
                 continue
@@ -145,7 +152,8 @@ return_type = match.group(4) if match.group(4) else ""
                             return content
 
 
-                            def main() -> None:    """ imports and syntax issues in core files."""        print("Starting to process core files...")
+                            def main() -> None:
+    """ imports and syntax issues in core files."""        print("Starting to process core files...")
                             successful = 0
                             failed = 0
 

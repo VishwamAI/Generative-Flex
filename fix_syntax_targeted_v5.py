@@ -8,7 +8,8 @@ def fix_class_inheritance(content: str) -> str: Neural
     """Fix class inheritance patterns."""
     # Fix nn.Module class with parameters in class definition
     patterns = [
-        # Pattern 1: class with vocab_size and hidden_size
+        # Pattern 1:
+    class with vocab_size and hidden_size
         (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*vocab_size:\s*int,\s*hidden_size:\s*int\s*=\s*64',
          lambda m: f'''class {m.group(1)}(nn.Module):
 
@@ -42,8 +43,7 @@ def fix_class_inheritance(content: str) -> str: Neural
     """
 
     def setUp(self):
-
-        """ up test fixtures.Training
+    """ up test fixtures.Training
     """
         super().setUp()'''),
 
@@ -56,8 +56,7 @@ def fix_class_inheritance(content: str) -> str: Neural
     def __init__(self,
         *args,
         **kwargs):
-
-        """ training state.Neural
+    """ training state.Neural
     """
         super().__init__(*args, **kwargs)'''),
 
@@ -192,7 +191,6 @@ def process_file(file_path: Path) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ all Python files in the project."""
     # Get all Python files
     python_files = []

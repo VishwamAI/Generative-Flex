@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 import
     """Fix function syntax issues that are preventing black formatting.""" re
@@ -80,7 +83,8 @@ class_indent = 0
         in_class = True
         class_indent = indent_level
         fixed_lines.append(' ' * indent + fix_class_definition(stripped))
-        elif in_class and indent <= class_indent * 4 and stripped: in_class = False
+        elif in_class and indent <= class_indent * 4 and stripped:
+    in_class = False
         fixed_lines.append(line)
             elif in_class and stripped.startswith('def '):
                 # Fix method definition with class indentation + 1
@@ -97,7 +101,8 @@ class_indent = 0
                         return False
 
 
-                        def main():    """ syntax in all Python files."""    python_files = []
+                        def main():
+    """ syntax in all Python files."""    python_files = []
 
                         # Get all Python files
                         for root

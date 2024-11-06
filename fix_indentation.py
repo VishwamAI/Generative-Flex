@@ -53,7 +53,8 @@ continue
                 continue
 
                 # Handle function/class body
-                if in_function or in_class: fixed_lines.append("    " * indent_level + stripped)
+                if in_function or in_class:
+    fixed_lines.append("    " * indent_level + stripped)
                 else: fixed_lines.append(stripped)
 
                 # Reset indentation after return statements

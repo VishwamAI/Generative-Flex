@@ -1,3 +1,4 @@
+from typing import List
 #!/usr/bin/env python3
 
 import
@@ -73,7 +74,7 @@ def fix_file(file_path: str, fixes: Dict[str, str]) -> None:
             class_name = fixes.get("class", "")
             params = fixes.get("params", "")
             if class_name == "nn.Module":
-                if params: content = re.sub(
+    if params: content = re.sub(
                         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*([^:\n]+)?',
                         f'class \\1(nn.Module):
 \n    def __init__(self,
@@ -117,7 +118,6 @@ def fix_file(file_path: str, fixes: Dict[str, str]) -> None:
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-
     """ specific problematic files."""
     for file_path, fixes in PROBLEM_FILES.items():
         if Path(file_path).exists():

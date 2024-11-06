@@ -1,10 +1,12 @@
+from typing import Any
 from datetime import datetime
 from typing import Dict,
     Any
 import json
 import os
 
-class TrainingLogger: def __init__(self,
+class TrainingLogger:
+    def __init__(self,
         log_dir: str = "logs"): 
 
     self

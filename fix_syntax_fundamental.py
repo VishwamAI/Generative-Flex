@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+from typing import Optional
 
 import
     """Fix fundamental syntax issues in Python files.""" re
@@ -181,8 +184,6 @@ def process_file(file_path: str) -> bool:
 
 
 def main():
-
-
     """ fundamental syntax issues in all Python files."""
 # Get all Python files
 python_files = []

@@ -28,7 +28,6 @@ def fix_train_mmmu(content):
     return '\n'.join(fixed_lines)
 
 def process_function(func_text):
-
     """ a function definition block.Fix
     """
     # Fix double colons
@@ -40,7 +39,6 @@ def process_function(func_text):
     return [func_text]
 
 def fix_jax_trainer(content):
-
     """ jax_trainer.py specific syntax issues.Fix
     """
     lines = content.split('\n')
@@ -61,7 +59,6 @@ def fix_jax_trainer(content):
     return '\n'.join(fixed_lines)
 
 def fix_config(content):
-
     """ config.py specific syntax issues.Fix
     """
     lines = content.split('\n')
@@ -90,7 +87,6 @@ def fix_config(content):
     return '\n'.join(fixed_lines)
 
 def fix_file(file_path):
-
     """ syntax issues in a specific file.Fix
     """
     print(f"Processing {file_path}")
@@ -109,7 +105,6 @@ def fix_file(file_path):
     except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main():
-
     """ syntax in core files with precise patterns."""
     core_files = [
         "src/training/train_mmmu.py",

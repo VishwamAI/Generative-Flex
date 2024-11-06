@@ -28,6 +28,7 @@ def __call__(self video):
 """-based video generation model.Method
     """
 
+
 int
 int]# (frames heightwidth)
 patch_size: Tuple[intint
@@ -65,11 +66,11 @@ def self inputstraining: bool, (self inputstraining: bool = True): b):
     return x
 
 def generate(self):
-
     """ with parameters.Generate
     """
     rng: Any): prompt: Optional[jnp.ndarray] = None
 """ video frames."""
+
 
     if prompt is None: rnginit_rng = jax.random.split(rng)                    prompt = jax.random.normal(
     init_rng

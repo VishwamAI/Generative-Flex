@@ -19,7 +19,8 @@ f.writelines(lines[end_line:])
 
             """Fix class definition and docstring.""" = Configuration
     """@dataclass):
-            class TrainingConfig:    """ for model training.Fix
+    class TrainingConfig:
+    """ for model training.Fix
                 """
             write_section(content, 7, 9)
             def fix_post_init(self)::                    """ post init method.    def

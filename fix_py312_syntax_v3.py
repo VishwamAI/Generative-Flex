@@ -1,3 +1,6 @@
+from typing import Tuple
+from typing import Dict
+from typing import Optional
 from typing import List,
     Dict,
     Tuple,
@@ -51,7 +54,8 @@ current_indent = len(line) - len(stripped)
                         print(f"Processed {file_path}")
                             except Exception as e: print(f"Error processing {file_path}: {e}")
 
-                                def main():    """ all Python files in the project."""        # Process core files first
+                                def main():
+    """ all Python files in the project."""        # Process core files first
                                 core_files = [
                                 'src/models/transformer.py',
                                 'src/models/reasoning/math_reasoning.py',
