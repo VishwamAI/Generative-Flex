@@ -1,107 +1,177 @@
-from typing import Any
-from .layers.flash_moe import EnhancedTransformerBlock
-from image_processor import ImageProcessor
-from typing import OptionalTupleDict
-import logging
+"""Multimodal transformer implementation."""
+
 import torch
-from typing import Dict
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
-MultiModal
-"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA...."""
-# Set up logging
-logging.basicConfig(level = logging.INFO)
-logger = logging.getLogger(__name__)
-"""Transformer with enhanced capabilities for mathematical reasoning.Module...""""""docstring.Method..."""
-_init_math_weights(module) -> None: ifisinstanceifisinstance (module(nn.Linear nn.Embedding): module, .weight.data.normal_(
-    mean = 0.0
-std = 0.02
-)        if isinstance(
-    module
-nn.Linear
-) and module.bias is not None: module.bias.data.zero_(module.bias.data.zero_(elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
-module.weight.data.fill_(1.0)
+@dataclass
+class MultiModalTransformerConfig:
+    """Configuration for multimodal transformer."""
 
-self.apply(_init_math_weights)
+    hidden_size: int = 768
+    num_attention_heads: int = 12
+    num_hidden_layers: int = 12
+    intermediate_size: int = 3072
+    activation: str = "gelu"
+    dropout: float = 0.1
+    attention_dropout: float = 0.1
+    max_position_embeddings: int = 512
+    max_image_size: int = 224
+    patch_size: int = 16
+    num_channels: int = 3
 
-def def(self):
-        """....""" with parameters.Forward
-"""input_ids: Optional[torch.Tensor] = None): attention_mask: Optional[torch.Tensor]  None
-    position_ids: Optional[torch.Tensor]  None
-    image_features: Optional[torch.Tensor]  None
-    return_dict: bool  True) -> Dict[str..""" pass with support for text and image inputs.Method
-    """
+class MultiModalTransformer(nn.Module):
+    """Multimodal transformer model."""
 
+    def __init__(self, config: Optional[MultiModalTransformerConfig] = None):
+        """Initialize multimodal transformer.
 
+        Args:
+            config: Optional model configuration
+        """
+        super().__init__()
+        self.config = config or MultiModalTransformerConfig()
+        self.setup_layers()
 
-    batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
-    )
-    device = next(self.parameters()).device
-    embeddings = None
-    total_sequence_length = 0
-    # Process text inputs
-    if input_ids is not None: text_embeddings  self.word_embeddings(input_ids)  # [batch_size
-    seq_len
-    hidden_size]                total_sequence_length += text_embeddings.size(1)
-    embeddings = text_embeddings
-    # Process image inputs
-    if image_features is not None: try:# Process images through ImageProcessor
-    processed_images = self.image_processor(image_features)  # [batch_sizenum_imageshidden_size]
-    # Project image features
-    image_embeddings = self.image_projection(processed_images)  # [batch_sizenum_imageshidden_size]
-    total_sequence_length += image_embeddings.size(1)
+    def setup_layers(self):
+        """Set up transformer layers."""
+        # Text embeddings
+        self.text_embeddings = nn.ModuleDict({
+            "word_embeddings": nn.Embedding(
+                30522,  # Default vocab size
+                self.config.hidden_size
+            ),
+            "position_embeddings": nn.Embedding(
+                self.config.max_position_embeddings,
+                self.config.hidden_size
+            )
+        })
 
-    if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings  torch.cat([embeddings, image_embeddings], dim=1)
-    else: embeddings  image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}"{{str(e{{str(e}}"{{str(e}}"
-    if embeddings is None: embeddings  torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
-    # Add position embeddings
-    position_ids = torch.arange(total_sequence_length, dtype=torch.long, device=device)
-    position_ids = position_ids.unsqueeze(0).expand(batch_size, -1)
-    position_embeddings = self.position_embeddings(position_ids)
-    # Add token type embeddings(0 for text, 1 for image)
-    token_type_ids = torch.zeros(
-    (batch_size,total_sequence_length
-),
-    dtype = torch.long,
-    device = device
-    )
-    if input_ids is not None and image_features is not None: token_type_idstoken_type_ids [: input_ids, .size(1) :]  1                    token_type_embeddings = self.token_type_embeddings(token_type_ids)
-    # Combine all embeddings
-    embeddings = embeddings + position_embeddings + token_type_embeddings
-    embeddings = self.dropout(embeddings)
-    hidden_states = embeddings
-    # Apply transformer blocks
-    router_probs_list = []
-    for block in self.transformer_blocks: hidden_statesrouter_probs = block(hidden_states         attention_mask)                    router_probs_list.append(router_probs)
-    # Apply mathematical reasoning enhancement
-    math_gate = torch.sigmoid(self.math_gate(hidden_states))
-    math_hidden = self.math_transform(hidden_states)
-    hidden_states = math_gate * math_hidden + (1 - math_gate) * hidden_states
-    # Final layer norm
-    hidden_states = self.layer_norm(hidden_states)
-    "pooler_output": hidden_states, [: 0, ]
-    # Use first token for pooling
-    "math_gate": math_gat, e
+        # Image embeddings
+        num_patches = (self.config.max_image_size // self.config.patch_size) ** 2
+        patch_dim = self.config.num_channels * self.config.patch_size ** 2
 
-    "router_probs": router_probs_lis, t
+        self.image_embeddings = nn.ModuleDict({
+            "patch_embeddings": nn.Linear(patch_dim, self.config.hidden_size),
+            "position_embeddings": nn.Embedding(
+                num_patches + 1,  # Add 1 for [CLS] token
+                self.config.hidden_size
+            )
+        })
 
-    }
-    return hidden_states
+        # Transformer layers
+        self.encoder = nn.ModuleList([
+            nn.TransformerEncoderLayer(
+                d_model=self.config.hidden_size,
+                nhead=self.config.num_attention_heads,
+                dim_feedforward=self.config.intermediate_size,
+                dropout=self.config.dropout,
+                activation=self.config.activation
+            )
+            for _ in range(self.config.num_hidden_layers)
+        ])
 
-    def def(self):
-        """....""" with parameters.Prepare
-"""input_ids: torch.Tensortorch.Tensor: attention_mask: Optional[torch.Tensor]  None
-    **kwargs) -> Dict[str
-    ]:..""" inputs for text generation."""
-    
-    
-    
-    position_ids = kwargs.get("position_ids", None)
-    if position_ids is None: position_ids  attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(
-    attention_mask == 0
-    1
-    )
-    
-    return {
-    "input_ids": input_id, s     "attention_mask": attention_mas, k     "position_ids": position_id, s     "image_features": kwargs, .get("image_features"             None)
-    }
-    
+        self.layernorm = nn.LayerNorm(self.config.hidden_size)
+        self.dropout = nn.Dropout(self.config.dropout)
+
+    def _init_weights(self, module: nn.Module) -> None:
+        """Initialize module weights.
+
+        Args:
+            module: Module to initialize
+        """
+        if isinstance(module, (nn.Linear, nn.Embedding)):
+            module.weight.data.normal_(mean=0.0, std=0.02)
+        if isinstance(module, nn.Linear) and module.bias is not None:
+            module.bias.data.zero_()
+
+    def forward(
+        self,
+        input_ids: Optional[torch.Tensor] = None,
+        attention_mask: Optional[torch.Tensor] = None,
+        pixel_values: Optional[torch.Tensor] = None,
+        pixel_mask: Optional[torch.Tensor] = None
+    ) -> Dict[str, torch.Tensor]:
+        """Process input through transformer.
+
+        Args:
+            input_ids: Optional input token IDs
+            attention_mask: Optional attention mask
+            pixel_values: Optional pixel values
+            pixel_mask: Optional pixel mask
+
+        Returns:
+            Dictionary containing hidden states
+        """
+        hidden_states_list = []
+
+        # Process text if provided
+        if input_ids is not None:
+            position_ids = torch.arange(
+                input_ids.size(1),
+                device=input_ids.device
+            ).unsqueeze(0)
+
+            word_embeds = self.text_embeddings["word_embeddings"](input_ids)
+            position_embeds = self.text_embeddings["position_embeddings"](
+                position_ids
+            )
+
+            text_hidden_states = word_embeds + position_embeds
+            text_hidden_states = self.layernorm(text_hidden_states)
+            text_hidden_states = self.dropout(text_hidden_states)
+
+            hidden_states_list.append(text_hidden_states)
+
+        # Process images if provided
+        if pixel_values is not None:
+            B, C, H, W = pixel_values.shape
+            P = self.config.patch_size
+
+            # Convert image to patches
+            patches = pixel_values.unfold(2, P, P).unfold(3, P, P)
+            patches = patches.contiguous().view(
+                B, C, -1, P * P
+            ).transpose(1, 2)
+            patches = patches.reshape(B, -1, C * P * P)
+
+            # Embed patches
+            patch_embeds = self.image_embeddings["patch_embeddings"](patches)
+
+            # Add position embeddings
+            position_ids = torch.arange(
+                patches.size(1),
+                device=patches.device
+            ).unsqueeze(0)
+            position_embeds = self.image_embeddings["position_embeddings"](
+                position_ids
+            )
+
+            image_hidden_states = patch_embeds + position_embeds
+            image_hidden_states = self.layernorm(image_hidden_states)
+            image_hidden_states = self.dropout(image_hidden_states)
+
+            hidden_states_list.append(image_hidden_states)
+
+        # Combine modalities
+        if hidden_states_list:
+            hidden_states = torch.cat(hidden_states_list, dim=1)
+
+            # Update attention mask
+            if attention_mask is not None and pixel_mask is not None:
+                attention_mask = torch.cat(
+                    [attention_mask, pixel_mask],
+                    dim=1
+                )
+
+            # Process through transformer
+            for layer in self.encoder:
+                hidden_states = layer(
+                    hidden_states,
+                    src_key_padding_mask=attention_mask
+                )
+
+            return {"hidden_states": hidden_states}
+
+        return {"hidden_states": None}

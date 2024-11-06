@@ -1,43 +1,72 @@
-from typing import Tuple
-from typing import Optional
+"""Flash Mixture of Experts layer implementation."""
+
 import torch
 import torch.nn as nn
-Module
-"""Flash Mixture of Experts implementation....""""""docstring.intermediate_size..."""
-Flash Mixture of Experts layer implementation.
-""": intnum_expertInitialize..."""
-"""the FlashMoE layer.     super().__init__()
-self
-intermediate_size = intermediate_size
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple
 
-self
-dropout = nn.Dropout(dropout_rate)
-self.."""experts = nn.ModuleList(     [nn.Sequential(intermediate_size
-"""nn.Linear(hidden_size,..."""
-), nn
-Linear(     intermediate_size,nn
-Dropout(dropout_rate)for
-""")..."""
- _ in range(num_experts)
+@dataclass
+class FlashMoEConfig:
+    """Configuration for Flash MoE layer."""
 
-self
-"""]..."""
-)""" router = nn.Linear(hidden_size, num_experts)
-Method
-""""""
+    hidden_size: int = 768
+    num_experts: int = 4
+    expert_capacity: int = 128
+    dropout: float = 0.1
+    activation: str = "gelu"
 
+class FlashMoE(nn.Module):
+    """Flash Mixture of Experts layer."""
 
-def def(self):
-        """....""" with parameters.Module
-"""hidden_states: torch.Tensortorch.Tensor: attention_mask: Optional[torch.Tensor]  None) -> Tuple[torch.Tensor..""" docstring.
+    def __init__(self, config: Optional[FlashMoEConfig] = None):
+        """Initialize Flash MoE layer.
 
-batch_sizeseq_lengthhidden_size
-"""Forward pass through the FlashMoE layer...""" = hidden_states.shape
-    # Get routing weights
-    routing_weights = torch.softmax(self.router(hidden_states), dim=-1)
-    # Initialize output tensor
-    combined_output = torch.zeros_like(hidden_states)
-    # Apply each expert
-    for i
-    expert in enumerate(self.experts): expert_outpu, t = expert(hidden_states)
-    combined_output += routing_weights[..., i: ii + 1] * expert_outputreturn combined_output, routing_weights
+        Args:
+            config: Optional layer configuration
+        """
+        super().__init__()
+        self.config = config or FlashMoEConfig()
+        self.setup_experts()
+
+    def setup_experts(self):
+        """Set up expert networks."""
+        self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
+        self.experts = nn.ModuleList([
+            nn.Sequential(
+                nn.Linear(self.config.hidden_size, 4 * self.config.hidden_size),
+                nn.GELU() if self.config.activation == "gelu" else nn.ReLU(),
+                nn.Linear(4 * self.config.hidden_size, self.config.hidden_size),
+                nn.Dropout(self.config.dropout)
+            )
+            for _ in range(self.config.num_experts)
+        ])
+
+    def forward(
+        self,
+        hidden_states: torch.Tensor,
+        attention_mask: Optional[torch.Tensor] = None
+    ) -> Dict[str, torch.Tensor]:
+        """Process input through Flash MoE layer.
+
+        Args:
+            hidden_states: Input hidden states
+            attention_mask: Optional attention mask
+
+        Returns:
+            Dictionary containing processed hidden states
+        """
+        # Gate computation
+        gate_logits = self.gate(hidden_states)
+        expert_weights = torch.softmax(gate_logits, dim=-1)
+
+        # Expert computation
+        expert_outputs = []
+        for i, expert in enumerate(self.experts):
+            expert_output = expert(hidden_states)
+            weighted_output = expert_output * expert_weights[..., i].unsqueeze(-1)
+            expert_outputs.append(weighted_output)
+
+        # Combine expert outputs
+        combined_output = sum(expert_outputs)
+
+        return {"hidden_states": combined_output}
