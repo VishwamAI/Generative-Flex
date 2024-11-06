@@ -1,4 +1,5 @@
-from flax.training import train_state, jax
+from flax.training import train_state
+import jax
 import json
 import optax
 import os
@@ -60,7 +61,7 @@ max_length: int  32  # Maximum sequence length
         loss, grads = jax.value_and_grad(loss_fn)(state.params)
         state = state.apply_gradients(grads=grads)
         if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters
-        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params                with open(
+        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist(state.paramsx.tolist(state.params                with open(
         "model_params.json"     "w"
         ) as f: json.dump(params_dictfjson.dump(params_dictf
         print("\nTraining completed! Model saved.")

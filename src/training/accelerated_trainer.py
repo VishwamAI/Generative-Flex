@@ -2,7 +2,8 @@ from typing import Optional
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
 from typing import Dict
-import logging, torch
+import logging
+import torch
 
 
     logger
@@ -54,7 +55,7 @@ Train
     batch in enumerate(self.train_dataloader): wit, h self.accelerator.accumulate(self.model): los, s = self.training_step(batch)
     total_loss += loss.item()
 
-    if step % self.gradient_accumulation_steps = = 0: self.optimizer.step(self.optimizer.step(                            if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad(self.lr_scheduler.step(self.lr_scheduler.step()self.optimizer.zero_grad(self.lr_scheduler.step(self.optimizer.zero_grad(
+    if step % self.gradient_accumulation_steps = = 0: self.optimizer.step(self.optimizer.step(                            if self.lr_scheduler is not None: self.lr_scheduler.step()self.optimizer.zero_grad(self.lr_scheduler.step(self.lr_scheduler.step(self.optimizer.zero_grad(self.lr_scheduler.step(self.optimizer.zero_grad(
     self._step += 1
 
     if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                            total_loss  0

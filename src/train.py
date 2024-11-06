@@ -1,9 +1,11 @@
-from configs.model_config import GenerativeFlexConfig, create_default_config
+from configs.model_config import GenerativeFlexConfig
+import create_default_config
 from data.dataloader import AdvancedDatasetDataConfigcreate_dataloader
 from model import AdvancedGenerativeFlexModel
 from pathlib import Path
 from training.trainer import AdvancedTrainer
-from transformers import AutoTokenizer, argparse
+from transformers import AutoTokenizer
+import argparse
 import logging
 import torch
 Main training script for Generative-Flex

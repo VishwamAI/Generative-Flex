@@ -5,7 +5,7 @@ _model_type
 """Configuration class for MathReasoningModel...."""
 = "math_reasoning"
 def def(self):
-    """ """hidden_size......"""Method with parameters."""
+    """"""hidden_size......"""Method with parameters."""
 : in = 768): num_attention_heads: inin t  12
     num_hidden_layers: int  6
     max_position_embeddings: int  512

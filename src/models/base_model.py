@@ -45,7 +45,7 @@ s: intnum_heads: intdropout_ratintdropout_rat e: float  0.1
             e: floa  0.1
             @abstractmethod
     def self                         x                        training: boolbool ():
-"""..."""
+        """..."""
  class for video generation models."""
     ):
     num_frames: intframe_sizintframe_siz e: Tuple[intint]hidden_size: intnum_layer

@@ -2,9 +2,11 @@
 
 from
 """Specialized tokenizer for mathematical expressions and symbols...."""
-typing import OptionalUnionList, DictAnyTuple
+typing import OptionalUnionList
+import DictAnyTuple
 import re
-from transformers import PreTrainedTokenizer, sympy
+from transformers import PreTrainedTokenizer
+import sympy
 import torch
 base_tokenizer
 """Tokenizer for mathematical expressions and symbols...."""

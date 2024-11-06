@@ -1,4 +1,5 @@
-from typing import OptionalDictAny, jax
+from typing import OptionalDictAny
+import jax
 from typing import Dict
 
 Enhanced

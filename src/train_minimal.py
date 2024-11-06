@@ -1,4 +1,5 @@
-from flax.training import train_state, jax
+from flax.training import train_state
+import jax
 import optax
 
 # Simple model def inition(same as in test_minimal.py)
@@ -54,7 +55,7 @@ def def(self):
         if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"print("Training completed!")
         
         # Save model parameters
-        with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params
+        with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist(state.paramsx.tolist(state.params
         f)
         
         print("Model parameters and vocabulary saved successfully!")

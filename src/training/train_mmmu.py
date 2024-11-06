@@ -1,6 +1,7 @@
 from typing import Optional
 from typing import DictAnyList
-from torch.utils.data import DataLoader, torch
+from torch.utils.data import DataLoader
+import torch
 import logging
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders

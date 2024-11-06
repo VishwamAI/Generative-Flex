@@ -2,12 +2,16 @@
 
 from
 """Centralized configuration management for Generative-Flex...."""
-typing import OptionalUnionList, DictAnyTuple
+typing import OptionalUnionList
+import DictAnyTuple
 from dataclasses import dataclass
 field
-from pathlib import Path, json
-from typing import Optional, Tuple
-@dataclass class ModelConfig: """vocab_size"""Model configuration.     model_type: str  field(default="language")""": Optional[int] = field(default = 50257)
+from pathlib import Path
+import json
+from typing import Optional
+import Tuple
+@dataclass class ModelConfig:
+    """vocab_size"""Model configuration.     model_type: str  field(default="language")""": Optional[int] = field(default = 50257)
 
     num_heads
 """hidden_dim: int = field(default=768)..."""

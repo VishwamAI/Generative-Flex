@@ -1,7 +1,9 @@
 from typing import Any
 from .layers.flash_moe import EnhancedTransformerBlock
 from image_processor import ImageProcessor
-from typing import OptionalTupleDict, import logging, torch
+from typing import OptionalTupleDict
+import logging
+import torch
 from typing import Dict
 
 MultiModal
@@ -49,7 +51,7 @@ def def(self):
     total_sequence_length += image_embeddings.size(1)
 
     if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings  torch.cat([embeddings, image_embeddings], dim=1)
-    else: embeddings  image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}"{{str(e{{str(e)}}"{{str(e}}"
+    else: embeddings  image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}"{{str(e{{str(e}}"{{str(e}}"
     if embeddings is None: embeddings  torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
     # Add position embeddings
     position_ids = torch.arange(total_sequence_length, dtype=torch.long, device=device)

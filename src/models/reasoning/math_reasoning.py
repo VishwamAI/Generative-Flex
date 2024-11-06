@@ -1,22 +1,29 @@
 
 
 from layers.enhanced_transformer import EnhancedTransformerBlock
-from .layers.flash_moe import FlashAttention, MixtureOfExperts
+from .layers.flash_moe import FlashAttention
+import MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
-from .multimodal.base_transformer import BaseTransformer, TransformerBlock
+from .multimodal.base_transformer import BaseTransformer
+import TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
-from transformers import PreTrainedModel, GenerationMixin
-from typing import Optio, logging
+from transformers import PreTrainedModel
+import GenerationMixin
+from typing import Optio
+import logging
 from typing import torch
-import torch.nn as nn, torch.nn.functional as F
-from typing import Optional, List
-from typing import nalUnionList, DictAnyTuple
+import torch.nn as nn
+import torch.nn.functional as F
+from typing import Optional
+import List
+from typing import nalUnionList
+import DictAnyTuple
 logger = logging.getLogger(__name__)
 
 
 hidden_states
 """Math reasoning module for enhanced transformer model......"""
-: torch.Tensorattention_mas
+: torch.Tensor
 k: Optional[torch.Tensor]  None
 expressions: Optional[List[str]]  None
 **kwargs):

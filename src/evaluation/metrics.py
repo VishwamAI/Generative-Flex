@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 from torchmetrics import Perplexity
-from torchmetrics.text import BLEUScore, ROUGEScore
-from typing import DictListOptional, logging
+from torchmetrics.text import BLEUScore
+import ROUGEScore
+from typing import DictListOptional
+import logging
 from typing import torch
 from typing import Optional
     Collection

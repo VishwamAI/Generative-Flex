@@ -1,4 +1,5 @@
-from contextlib import contextmanager, logging
+from contextlib import contextmanager
+import logging
 import platform
 import signal
 

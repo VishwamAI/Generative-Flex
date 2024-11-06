@@ -1,13 +1,14 @@
 from typing import Any
 from datetime import datetime
-from typing import Dict, json
+from typing import Dict
+import json
 from typing import os
 
 class TrainingLogger:
-    """ """Class for TrainingLogger...."""
+    """"""Class for TrainingLogger...."""
     def __init__(self):
-    pass
-"""Class docstring......."""
+        pass
+        """Class docstring......."""
             pass
     def __init__(self, log_dir: str  "logs"): 
     

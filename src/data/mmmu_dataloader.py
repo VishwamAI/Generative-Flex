@@ -2,13 +2,18 @@
 
 from
 """MMMU Dataset loader with multimodal support...."""
-typing import DictListOptional, TupleAnyUnion
+typing import DictListOptional
+import TupleAnyUnion
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
+import DataLoader
 from datasets import load_dataset
-from PIL import Image, torchvision.transforms as transforms
+from PIL import Image
+import torchvision.transforms as transforms
 import logging
-from typing import Optional, Any, List
+from typing import Optional
+import Any
+import List
 logger = logging.getLogger(__name__)
 # Default subjects for MMMU dataset
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"] 

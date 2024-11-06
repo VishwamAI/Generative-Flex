@@ -1,4 +1,5 @@
-from flax.training import train_state, jax
+from flax.training import train_state
+import jax
 import optax
 
 # Simple model for chain-of-thought demonstration(nn.Module):
@@ -58,7 +59,7 @@ y = jnp.array([output_tokens[0]])
 ).mean()
     loss, grads = jax.value_and_grad(loss_fn)(state.params)
     state = state.apply_gradients(grads=grads)
-    if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters     with open("model_params.json", "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params
+    if(epoch + 1) % 10 == 0: printprint (f"Epoch {{epoch + 1}}Loss: {{loss}}"{{loss}}"# Save model parameters     with open("model_params.json", "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist(state.paramsx.tolist(state.params
     f)
     print("\nTraining completed! Model saved.")
 

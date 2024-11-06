@@ -1,6 +1,7 @@
 from typing import Tuple
 from torchvision import transforms
-from typing import Optional, torch
+from typing import Optional
+import torch
 from typing import torch.nn as nn
 Placeholder
 """Image processor for multimodal inputs....""""""docstring.hidden_size..."""

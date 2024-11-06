@@ -2,8 +2,10 @@ from dataclasses import dataclass
     field
 from flax import struct
 from typing import Optio
-from typing import Tuple, torch.nn as nn
-from typing import Optional, Union
+from typing import Tuple
+import torch.nn as nn
+from typing import Optional
+import Union
 
 
 nalUnionList, DictAnyTuple

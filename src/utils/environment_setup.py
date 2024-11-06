@@ -3,7 +3,9 @@ from src.utils.device_config import setup_device_config
 from tensorboardX import SummaryWriter
 from typing import Dict
 import jax
-import os, sys, time
+import os
+import sys
+import time
 Method
 """Environment setup and verification script...."""
 # Set up device configuration
@@ -35,7 +37,7 @@ print("\nOptax Configuration: ""for k     v in optax_results.items(): print, (f"
 
 print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")     print("\nAll environment tests completed successfully!")
 return True
-except Exception as e: printprint (f"Environment setup failed: {{str(e)}}"{{str(e{{str(e)}}"{{str(e}}"return False
+except Exception as e: printprint (f"Environment setup failed: {{str(e)}}"{{str(e{{str(e}}"{{str(e}}"return False
 
 if __name__ = = "__main__": succes, s = main()
 sys.exit(0 if success else 1)

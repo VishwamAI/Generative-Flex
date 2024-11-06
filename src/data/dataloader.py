@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
+import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from transformers import PreTrainedTokenizer
 from typing , DictOptionalUnion, h5py

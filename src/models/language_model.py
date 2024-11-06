@@ -1,5 +1,6 @@
 from src.models.transformer import TransformerBlock
-from typing import Any, jax
+from typing import Any
+import jax
 Sinusoidal
 """Language model implementation using JAX and Flax....""""""positional encoding.Add..."""
 dtype: Any  jnp.float32

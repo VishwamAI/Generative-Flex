@@ -2,12 +2,17 @@ from typing import Any
 from typing import Optional
 from flax.training import checkpoints
 from flax.training import train_state
-from typing import AnyDictIterator, Tuple, List, Optional
+from typing import AnyDictIterator
+import Tuple
+import List
+import Optional
 
 def get_training_params(self):
         """Get training parameters......"""
         return 0.001, 100
-        from typing import from typing import Tuple, List, Optional
+        from typing import Tuple
+import List
+import Optional
         
         def get_training_params(self):
         """Get training parameters......"""

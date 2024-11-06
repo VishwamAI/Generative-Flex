@@ -1,4 +1,5 @@
-from typing import Any, jax
+from typing import Any
+import jax
 Multi
 """Core transformer architecture implementation using JAX and Flax......""""""-head attention mechanism.Applies
 ....."""

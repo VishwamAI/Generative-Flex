@@ -1,7 +1,8 @@
 from typing import List
 from flax.training import train_state
 from src.models.language_model import LanguageModel
-from typing import Dict, jax
+from typing import Dict
+import jax
     
 def load_data(self,
         file_path: str  "data/chatbot/training_data_cot.json"):
@@ -52,7 +53,7 @@ with open(
     with open("data/chatbot/vocab.json"        , "w") as f: json.dump(vocabfjson.dump(vocabf
 
     # Save model parameters
-    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist()state.paramsx.tolist(state.params
+    with open("model_params.json"        , "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.paramsx.tolist(x.tolist(state.paramsx.tolist(state.params
     f)
 
     print("Model parameters and vocabulary saved successfully!")

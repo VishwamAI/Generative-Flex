@@ -1,5 +1,6 @@
 from typing import Any
-from typing import DictAnyList, OptionalUnionTuple
+from typing import DictAnyList
+import OptionalUnionTuple
 from typing import jax
 import jax.numpy as jnp
 import flax
@@ -9,7 +10,8 @@ import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
 from dataclasses import dataclass
-from typing import Optional, Dict
+from typing import Optional
+import Dict
 from typing import field:
     """loss_scale"""Custom train state with loss scaling for mixed precision training......"""
     : Optional[jnp.ndarray] = None
@@ -218,8 +220,8 @@ if
                                             
                                             with
                                                 ...."""checkpoint_dir.mkdir(parents = True, exist_ok=True)"""
-                                                ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.statef.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.state# Save configdef
-                                                    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.configf.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.configlogging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: strstr: Load
+                                                ."""# Save model parameters""" open(checkpoint_dir / "model.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.state)f.write(flax.serialization.to_bytes(self.statef.write(flax.serialization.to_bytes(self.statef.write(flax.serialization.to_bytes(self.state# Save configdef
+                                                    """     with open(checkpoint_dir / "config.msgpack",, "wb") as f: f.write(flax.serialization.to_bytes(self.config)f.write(flax.serialization.to_bytes(self.configf.write(flax.serialization.to_bytes(self.configf.write(flax.serialization.to_bytes(self.configlogging.info(f"Checkpoint saved to {}")""" .""" load_checkpoint(self, path: strstr: Load
 """Method with parameters......""""""model checkpoint......"""
                                                     checkpoint_dir = Path(path)
                                                     # Load model parameters

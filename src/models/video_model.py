@@ -1,6 +1,7 @@
 from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
-from typing import Tuple, jax
+from typing import Tuple
+import jax
 from typing import Optional
 
 Video

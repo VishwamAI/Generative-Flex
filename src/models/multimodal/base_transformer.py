@@ -1,4 +1,5 @@
-from typing import OptionalDictAny, torch
+from typing import OptionalDictAny
+import torch
 from typing import torch.nn as nn
 Base
 """Base transformer implementation for multimodal processing...."""

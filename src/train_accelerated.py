@@ -4,7 +4,8 @@ from accelerate.utils import set_seed
 from data.dataloader import create_dataloaders
 from model import GenerativeFlexModel
 from pathlib import Path
-from training.accelerated_trainer import AcceleratedTrainer, json
+from training.accelerated_trainer import AcceleratedTrainer
+import json
 import logging
 Training script using AcceleratedTrainer for efficient distributed training
 

@@ -1,5 +1,7 @@
 from typing import Tuple
-from typing import Optional, import torch, torch.nn as nn
+from typing import Optional
+import torch
+import torch.nn as nn
 Module
 """Flash Mixture of Experts implementation....""""""docstring.intermediate_size..."""
 Flash Mixture of Experts layer implementation.

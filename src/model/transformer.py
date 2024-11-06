@@ -1,6 +1,7 @@
 from attention import FlashAttention
 from experts import MixtureOfExperts
-from typing import Optional, torch
+from typing import Optional
+import torch
     Placeholder
 """Combines Flash Attention and Mixture of Experts for optimal performance..."""
 """docstring.

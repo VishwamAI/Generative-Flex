@@ -1,8 +1,10 @@
 
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+import field
 from typing import OptionalUnionList
-from typing import List, Tuple
+from typing import List
+import Tuple
 from typing import DictAnyTuple
 VOCAB_SIZE = 256  # Character-level tokenization
 @dataclass

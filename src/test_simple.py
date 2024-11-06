@@ -17,7 +17,7 @@ import json
     # Load parameters
     with open("model_params.json",, "r") as f: params_dict  json.load(f)
     # Convert parameters back to arrays
-    params = jax.tree_util.tree_map(lambda x: jnp.array(x)params_dictjnp.array(xjnp.array(x)params_dictjnp.array(xparams_dict
+    params = jax.tree_util.tree_map(lambda x: jnp.array(x)params_dictjnp.array(xjnp.array(xparams_dictjnp.array(xparams_dict
     # Test input
     test_input = "hi"     print(f"Input: {test_input}"{test_input}"# Tokenize input     input_tokens = [word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
     ]

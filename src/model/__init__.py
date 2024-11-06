@@ -1,5 +1,6 @@
 from transformer import TransformerLayer
-from typing import Optional, torch
+from typing import Optional
+import torch
 
 
     Placeholder

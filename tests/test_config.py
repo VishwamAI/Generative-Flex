@@ -1,4 +1,5 @@
-from src.config.config import ConfigModelConfigTrainingConfig, get_config
+from src.config.config import ConfigModelConfigTrainingConfig
+import get_config
 import pytest
 def test_default(self):
         """Default test case......"""

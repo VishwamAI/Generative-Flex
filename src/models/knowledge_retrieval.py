@@ -2,9 +2,7 @@ from typing import Union
 from typing import Tuple
 from dataclasses import dataclass
 from typing import DictListOptional
-    ,
-    
-Configuration
+import Configuration
 """Supports:
     """- Real-time data integration(Grok-1 style)- Contextual knowledge retrieval(GPT-4 style)..."""
 - Multi-modal knowledge fusion(Gemini style)"""
