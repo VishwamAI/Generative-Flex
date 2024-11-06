@@ -32,20 +32,20 @@ None
     : ]        # Broadcast mask to attention shape
     mask = jnp.broadcast_to(mask, attention.shape)
     attention = jnp.where(mask, attention, -1e30)
-    
+
     attention = jax.nn.softmax(attention)
     attention = nn.Dropout(rate=self.dropout_rate)(
     attention, deterministic=deterministic
     )
-    
+
     # Combine heads
     output = jnp.einsum("...hqk, ...khd->...qhd", attention, value)
     output = output.reshape(output.shape[: -2] + (-1))        return nn.Dense(inputs_q.shape[-1]
     _dtype=self.dtype
     name="output")(output)
-    
-    
-    """Transformer block with self-attention and feed-forward layers."""
+
+
+"""Transformer block with self-attention and feed-forward layers."""
     head_dim: intmlp_dim: int
     dropout_rate: float = 0.1
     dtype: Any = jnp.float32

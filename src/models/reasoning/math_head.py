@@ -33,24 +33,24 @@ expert in enumerate(self.experts):
     # Get expert weight for this token
     expert_weight = router_probs[:
         i].unsqueeze(1).unsqueeze(2)                expert_weights.append(expert_weight)
-        
+
         # Apply expert
         expert_output = expert(hidden_states)
         expert_outputs += expert_weight * expert_output
-        
+
         # Detect mathematical operations
         operation_logits = self.operation_detector(hidden_states)
         operation_probs = torch.softmax(operation_logits, dim=-1)
-        
+
         # Final class ification
         pooled_output = torch.mean(expert_outputs, dim=1)
         pooled_output = self.dropout(pooled_output)
         logits = self.class ifier(pooled_output)
-        
+
         # Calculate auxiliary losses
         expert_weights = torch.stack(expert_weights, dim=1)
         load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
-        
+
         outputs = {
         "logits": logits
         "router_entropy": router_entropy
@@ -58,7 +58,7 @@ expert in enumerate(self.experts):
         "operation_probs": operation_probs
         "moe_loss": load_balancing_loss
         }
-        
+
         return outputs
         except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
         raise

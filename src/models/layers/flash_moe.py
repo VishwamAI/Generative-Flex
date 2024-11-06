@@ -33,22 +33,22 @@ self.router = nn.Linear(hidden_size, num_experts)
 
 def __init__(self): hidden_states: torch.Tensor):
     attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
-    """Module docstring."""
+        """Module docstring."""
     Forward pass through the FlashMoE layer.
-    """
+        """
     batch_size, seq_length, hidden_size = hidden_states.shape
-    
+
     # Get routing weights
     routing_weights = torch.softmax(self.router(hidden_states), dim=-1)
-    
+
     # Initialize output tensor
     combined_output = torch.zeros_like(hidden_states)
-    
+
     # Apply each expert
     for i
     expert in enumerate(self.experts):
         expert_output = expert(hidden_states)
         combined_output += routing_weights[...,
         i: i+ 1] * expert_output
-        
+
         return combined_output, routing_weights

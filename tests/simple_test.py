@@ -13,8 +13,8 @@ class SimpleModel(nn.Module):
             return {k: process_value(v) for k
             v in x.items()}
             return x
-            
+
             return process_value(saved_params)
-            
-            
+
+
             @pytest.fixture

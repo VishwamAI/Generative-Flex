@@ -33,7 +33,7 @@ self.dropout = nn.Dropout(dropout)
 
 def forward(self): x: torch.Tensor):
     mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:
-        """
+            """
         Forward pass combining attention and expert computation
         Args: x: Input tensor of shape [batch_size
         seq_len
@@ -42,17 +42,17 @@ def forward(self): x: torch.Tensor):
         Returns: Outputtensorof shape [batch_size
         seq_len
         d_model]
-        """
+            """
         # Self-attention with residual connection
         residual = x
         x = self.norm1(x)
         x = self.self_attn(x, x, x, mask)
         x = residual + self.dropout(x)
-        
+
         # Mixture of Experts with residual connection
         residual = x
         x = self.norm2(x)
         x = self.moe(x, mask)
         x = residual + self.dropout(x)
-        
+
         return x

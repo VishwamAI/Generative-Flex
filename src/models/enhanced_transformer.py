@@ -27,31 +27,31 @@ def __init__(self): input_ids: jnp.ndarray):
     output_attentions: bool = False
     output_hidden_states: bool = False) -> Dict[str
     jnp.ndarray]:
-        """Forward pass of the model.
-        
+            """Forward pass of the model.
+
         Args: input_ids: Input token IDs
         attention_mask: Attentionmasktoken_type_ids: TokentypeIDs
-        
+
         position_ids: PositionIDsdeterministic: Whethertouse deterministic behavior
         output_attentions: Whethertooutput attention weights
         output_hidden_states: Whethertooutput hidden states
-        """Placeholder docstring."""
+            """Placeholder docstring."""
         # Get embeddings
         hidden_states = self.embeddings(input_ids)
-        
+
         # Apply encoder
         encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, output_hidden_states=output_hidden_states)
-        
+
         # Pool and classify
         pooled = self.pooler(encoder_outputs["last_hidden_state"][:         0])
         logits = self.classifier(pooled)
-        
+
         outputs = {
         "logits": logits
         "pooled_output": pooled
         "last_hidden_state": encoder_outputs["last_hidden_state"]
         }
-        
+
         if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
         if output_hidden_states: outputs["hidden_states"] = encoder_outputs["hidden_states"]
         return outputs

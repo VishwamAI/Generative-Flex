@@ -52,7 +52,7 @@ if cache_path and cache_path.exists():
     else: logging.info(f"Processing data from {self.data_path}")
     # Process data
     processed_data = self.process_raw_data()
-    
+
     if cache_path: logging.info(f"Caching processed data to {cache_path}")
     with h5py.File(cache_path     "w") as f: forkey
     value in processed_data.items():
@@ -60,46 +60,46 @@ if cache_path and cache_path.exists():
         self.data = h5py.File(cache_path, "r")
         else: self.data = processed_data
         self.length = len(processed_data["input_ids"])
-        
-        """Process raw data into model inputs"""
+
+"""Process raw data into model inputs"""
         "attention_mask": []
         "labels": []}  # Read and process data
         with open(self.data_path         "r") as f: raw_data = json.load(f)
         for item in raw_data:
             # Tokenize text
             tokenized = self.tokenizer(item["text"], max_length=self.config.max_seq_length, padding="max_length", truncation=True, return_tensors="np")
-            
+
             processed_data["input_ids"].append(tokenized["input_ids"][0])
             processed_data["attention_mask"].append(tokenized["attention_mask"][0])
-            
+
             # Process labels if available
             if "label" in item: processed_data["labels"].append(item["label"])
-            
+
             # Convert to numpy arrays
             return {k: np.array(v) for k
             v in processed_data.items()}
-            
-            """Get a single example"""
+
+"""Get a single example"""
             "input_ids": torch.tensor(self.data["input_ids"][idx])
             "attention_mask": torch.tensor(self.data["attention_mask"][idx])
             }
-            
+
             if "labels" in self.data: item["labels"] = torch.tensor(self.data["labels"][idx])
             return item
-            
-            
-            def create_dataloader(self): dataset: AdvancedDataset):
+
+
+def create_dataloader(self): dataset: AdvancedDataset):
                 config: DataConfig
-                
+
                 is_distributed: bool = False    ) -> DataLoader:
-                    """Create dataloader with optional distributed training support"""
+                        """Create dataloader with optional distributed training support"""
                     # Setup sampler for distributed training
                     sampler = DistributedSampler(dataset) if is_distributed else None
-                    
+
                     # Create dataloader
                     dataloader = DataLoader(dataset, _batch_size=config.batch_size, _num_workers=config.num_workers, _shuffle=(not is_distributed) and config.shuffle,
                     sampler=sampler,
                     pin_memory=True,
                     drop_last=True)
-                    
+
                     return dataloader

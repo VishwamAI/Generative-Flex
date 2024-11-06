@@ -49,23 +49,23 @@ x = x + pos_embedding
 # Apply transformer blocks
 for _ in range(self.num_layers):
     x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, deterministic=not training)
-    
+
     # Project back to patch space
     x = nn.Dense(self.patch_size * self.patch_size * self.channels, _dtype=self.dtype)(x)
-    
+
     # Reshape back to image
     x = jnp.reshape(x, (     batch_size, self.image_size[0] // self.patch_size, self.image_size[1] // self.patch_size, self.patch_size, self.patch_size, self.channels))
-    
+
     # Final reshape to image dimensions
     x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], self.channels))
-    
+
     return x
-    
-    def generate(self): rng: Any):
+
+def generate(self): rng: Any):
         condition: Optional[jnp.ndarray] = None
-        """Placeholder docstring."""
+            """Placeholder docstring."""
         Generate images.
-        """
+            """
         # Initialize with random noise if no condition is provided
         if condition is None: rng
         init_rng = jax.random.split(rng)                    x = jax.random.normal(init_rng

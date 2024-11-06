@@ -15,31 +15,32 @@ Demonstrates how to achieve maximum benchmark performance
 
 # Import our implemented components
 def main(self) -> None:
-    """Main training function"""
-    
-    
+        """Main training function"""
+
+
+
     # Parse arguments and load config
     parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
     parser.add_argument("--config", type=str, def ault="configs/def ault_config.json")
     parser.add_argument("--local_rank", type=int, def ault=-1)
     args = parser.parse_args()
-    
+
     # Load configuration and setup
     config = (
     GenerativeFlexConfig.from_file(args.config)
     if Path(args.config).exists()
     else create_def ault_config()
     )
-    
-    
+
+
     output_dir = Path(config.training.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     setup_logging(output_dir)
-    
+
     # Setup device and initialize components
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    
+
     # Initialize model with advanced features
     model = AdvancedGenerativeFlexModel(
     vocab_size=config.model.vocab_size,
@@ -53,25 +54,25 @@ def main(self) -> None:
     expert_capacity_factor=config.model.expert_capacity_factor,
     attention_block_size=config.model.attention_block_size,
     ).to(device)
-    
+
     # Create datasets and dataloaders
     data_config = DataConfig(
     max_seq_length=config.model.max_seq_length,
     batch_size=config.training.batch_size,
     cache_dir=config.training.cache_dir,
     )
-    
+
     train_dataset = AdvancedDataset("data/train.json", tokenizer, data_config, True)
     eval_dataset = AdvancedDataset("data/eval.json", tokenizer, data_config, False)
-    
+
     train_dataloader = create_dataloader(train_dataset, data_config, args.local_rank != -1)
     eval_dataloader = create_dataloader(eval_dataset, data_config, args.local_rank != -1)
-    
+
     # Initialize trainer
     trainer = AdvancedTrainer(
     model, vars(config.training), args.local_rank, str(output_dir)
     )
-    
+
     # Train model
     trainer.train(
     train_dataloader=train_dataloader,
@@ -80,6 +81,6 @@ def main(self) -> None:
     eval_steps=config.training.eval_steps,
     save_steps=config.training.save_steps,
     )
-    
+
     if __name__ == "__main__":
         main()

@@ -26,15 +26,15 @@ return {"output": output
 
 def __init__(self): attention_mask=None):
     target_modality="text"
-    
+
     _max_length=None,
     temperature=1.0):                    if max_length is None: _max_length = self.config.max_position_embeddings
     _device = input_ids.device
     _batch_size = input_ids.shape[0]
-    
+
     with torch.no_grad():
         outputs = self.forward(input_ids, attention_mask, target_modality)
-        
+
         if target_modality == "text":                            # Text generation with sampling
         logits = outputs["output"][:
             -1
@@ -43,5 +43,5 @@ def __init__(self): attention_mask=None):
             return next_token
             else: # Direct generation for other modalities
             return outputs["output"]
-            
+
             @staticmethod

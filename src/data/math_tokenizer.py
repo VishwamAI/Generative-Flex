@@ -1,5 +1,5 @@
-"""Specialized tokenizer for mathematical expressions and symbols.
-"""
+"""Specialized tokenizer for mathematical expressions and symbols."""
+
 
 from typing import Optional, Union, List, Dict, Any, Tuple
 import re
@@ -10,16 +10,16 @@ import torch
 
 """Tokenizer for mathematical expressions and symbols."""
 base_tokenizer: PreTrainedTokenizer)  ) -> None:
-    """Initialize the math tokenizer.
-    
+"""Initialize the math tokenizer.
+
     Args: base_tokenizer: Base HuggingFace tokenizer to extend
-    """
+"""
     self.base_tokenizer = base_tokenizer
     # Calculate available space for special tokens
     vocab_size = len(base_tokenizer)
     max_vocab = 50265  # OPT-125m vocabulary size
     available_tokens = max_vocab - vocab_size
-    
+
     # Define mathematical symbols and their special tokens
     self.math_symbols = {"+": "<ADD>"
     "-": "<SUB>"
@@ -48,22 +48,22 @@ base_tokenizer: PreTrainedTokenizer)  ) -> None:
     self.math_symbols = {k: vfork
     v in self.math_symbols.items() if v in special_tokens}  # Add special tokens to base tokenizer
     self.base_tokenizer.add_special_tokens( {"additional_special_tokens": special_tokens})
-    
-    """Parse mathematical expressions using sympy."""
+
+"""Parse mathematical expressions using sympy."""
     # Try to parse with sympy
     expr = sympy.parse_expr(text, evaluate=False)
     # Convert to LaTeX for standardized representation
     latex = sympy.latex(expr)
     return latex
     except Exception: returntextdef _replace_math_symbols(self     text: str) -> str:
-        """Replace mathematical symbols with special tokens.
-        """
+"""Replace mathematical symbols with special tokens.
+"""
         for symbol
         token in self.math_symbols.items():
             text = text.replace(symbol, f" {token} ")
             return text
-            
-            """Detect mathematical expressions in text."""
+
+"""Detect mathematical expressions in text."""
             math_exprs = re.findall(r"\$(.*?)\$", text)
             # Match expressions with common math patterns
             patterns = [
@@ -79,27 +79,27 @@ base_tokenizer: PreTrainedTokenizer)  ) -> None:
             ]
             for pattern in patterns: math_exprs.extend(re.findall(pattern         text))
             return math_exprs
-            
-            def __call__(self         text: st        r        **kwargs) -> Dict[str):
-                """Tokenize text with special handling for mathematical content."""
+
+def __call__(self         text: st        r        **kwargs) -> Dict[str):
+                    """Tokenize text with special handling for mathematical content."""
                 Args: text: Text to tokenize
                 **kwargs: Additionalargumentspassed to the base tokenizer
-                
+
                 Returns: Dict[str
                 torch.Tensor]: Tokenized text with special handling for math
-                """
+                    """
                 # Detect and parse mathematical expressions
                 math_exprs = self._detect_math_expressions(text)
                 for expr in math_exprs: parsed_expr = self._parse_math_expression(expr)        text = text.replace(expr
                 parsed_expr)
-                
+
                 # Replace mathematical symbols with special tokens
                 text = self._replace_math_symbols(text)
-                
+
                 # Tokenize with base tokenizer
                 encoding = self.base_tokenizer(         text,        padding=kwargs.get("padding", True),
                 truncation=kwargs.get("truncation", True),
                 max_length=kwargs.get("max_length", 512),
                 return_tensors=kwargs.get("return_tensors", "pt"))
-                
+
                 return encoding
