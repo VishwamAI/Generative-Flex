@@ -1,79 +1,132 @@
-from pathlib import Path
-import os
+#!/usr/bin/env python3
 import re
+from pathlib import Path
+import black
+from typing import List, Dict, Optional, Any
 
+def fix_string_literals_in_default_factory(content: str) -> str:
+    """Fix string literals in default_factory lambda functions."""
+    def fix_string_list(match):
+        # Extract the string list content
+        content = match.group(1)
+        # Split by commas and clean each item
+        items = [item.strip().strip('"').strip("'") for item in content.split(',')]
+        # Filter out empty strings and format properly
+        items = [f'"{item}"' for item in items if item]
+        return f'default_factory=lambda: [{", ".join(items)}]'
 
-def fix_indentation_issues(self content): """Fix common indentation issues."""        lines = content.split):
-fixed_lines = []
-indent_level = 0
+    # Fix the default_factory pattern
+    content = re.sub(
+        r'default_factory=lambda:\s*\[(.*?)\]',
+        fix_string_list,
+        content
+    )
+    return content
 
-for line in lines: stripped = line.lstrip()
-# Adjust indent level based on content
-if stripped.startswith(("class " "def ")):
-indent_level = 0 if stripped.startswith("class ") else 1
-    elif stripped.startswith(("if "     "for "    "while "    "try: "    "else: "    "elif ")):
-        indent_level += 1
-        elif stripped == "":                fixed_lines.append("")
-        continue
+def fix_docstring_placement(content: str) -> str:
+    """Fix docstring placement and indentation."""
+    # Fix class docstrings
+    content = re.sub(
+        r'(class\s+\w+[^:]*:)(\s*)"""',
+        r'\1\n    """',
+        content
+    )
 
-        # Apply indentation
-        fixed_lines.append("    " * indent_level + stripped)
+    # Fix method docstrings
+    content = re.sub(
+        r'(def\s+\w+[^:]*:)(\s*)"""',
+        r'\1\n        """',
+        content
+    )
+    return content
 
-        # Adjust indent level for next line
-        if stripped.endswith(":") and not stripped.startswith(
-        ("else: "         "elif "        "except: "        "finally: ")
-        ):
-        indent_level += 1
+def fix_class_definitions(content: str) -> str:
+    """Fix class and method definitions."""
+    # Fix class method definitions
+    content = re.sub(
+        r'class\s+(\w+):\s*def',
+        r'class \1:\n    def',
+        content
+    )
 
-        return "\n".join(fixed_lines)
+    # Fix method parameters
+    content = re.sub(
+        r'def\s+(\w+)\s*\(\s*self\s*,?\s*([^)]*)\)',
+        lambda m: f'def {m.group(1)}(self{", " + m.group(2).strip() if m.group(2).strip() else ""})',
+        content
+    )
+    return content
 
+def fix_type_annotations(content: str) -> str:
+    """Fix type annotation syntax."""
+    # Fix field type annotations
+    content = re.sub(
+        r'(\w+):\s*([^=\n]+)\s*=\s*field\(([^)]+)\)',
+        lambda m: f'{m.group(1)}: {m.group(2).strip()} = field({m.group(3).strip()})',
+        content
+    )
 
-            def main(self)::                    """Process all Python files that failed formatting."""        # List of files that failed formatting):
-                failed_files = [
-                "src/models/multimodal/image_processor.py",
-                "src/models/multimodal/base_transformer.py",
-                "src/models/reasoning/math_config.py",
-                "src/models/reasoning/math_head.py",
-                "src/models/multimodal/multimodal_transformer.py",
-                "src/models/transformer.py",
-                "src/models/video_model.py",
-                "src/test_simple_cot.py",
-                "src/train_chatbot.py",
-                "src/train_cot_fixed.py",
-                "src/train_cot_simple.py",
-                "src/train_minimal.py",
-                "src/train_minimal_cot.py",
-                "src/train_seq2seq_cot.py",
-                "src/training/accelerated_trainer.py",
-                "src/train_simple_cot.py",
-                "src/training/train_mmmu.py",
-                "src/training/jax_trainer.py",
-                "src/training/trainer.py",
-                "src/training/utils/timeout.py",
-                "src/utils/device_config.py",
-                "src/utils/environment_setup.py",
-                "src/utils/training_utils.py",
-                "src/models/apple_optimizations.py",
-                "src/models/audio_model.py",
-                "src/models/enhanced_transformer.py",
-                "src/models/base_model.py",
-                "src/models/generation/text2x_pipeline.py",
-                "src/models/image_model.py",
-                "src/models/knowledge_retrieval.py",
-                "src/models/language_model.py",
-                "src/models/layers/enhanced_transformer.py",
-                "src/models/layers/flash_moe.py",
-                ]
+    # Fix method return type annotations
+    content = re.sub(
+        r'def\s+(\w+\s*\([^)]*\))\s*->\s*([^:]+):',
+        lambda m: f'def {m.group(1)} -> {m.group(2).strip()}:',
+        content
+    )
+    return content
 
-        success_count = 0
-        for file_path in failed_files: ifos.path.exists(file_path) and process_file(file_path):
-        success_count += 1
+def process_file(file_path: Path) -> None:
+    """Process a single file, applying all fixes."""
+    print(f"Processing {file_path}")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-        print(f"\nProcessed {success_count}/{len(failed_files)} files successfully")
+        # Apply fixes in specific order
+        content = fix_string_literals_in_default_factory(content)
+        content = fix_docstring_placement(content)
+        content = fix_class_definitions(content)
+        content = fix_type_annotations(content)
 
-        # Run black formatter
-        print("\nRunning black formatter...")
-        os.system("python3 -m black .")
+        # Format with black
+        mode = black.Mode(
+            target_versions={black.TargetVersion.PY312},
+            line_length=88,
+            string_normalization=True,
+            is_pyi=False,
+        )
 
+        try:
+            content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e:
+            print(f"Warning: Black formatting failed for {file_path}: {e}")
 
-        if __name__ == "__main__":            main()
+        # Write the fixed content back
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        print(f"Successfully processed {file_path}")
+    except Exception as e:
+        print(f"Error processing {file_path}: {e}")
+
+def main():
+    """Fix syntax issues in critical files."""
+    critical_files = [
+        'src/models/text_to_anything.py',
+        'src/config/training_config.py',
+        'src/models/apple_optimizations.py',
+        'src/models/knowledge_retrieval.py',
+        'src/models/reasoning/math_head.py',
+        'src/models/reasoning/math_reasoning.py',
+        'src/models/multimodal/base_transformer.py',
+        'src/models/multimodal/multimodal_transformer.py',
+        'src/training/utils/logging.py'
+    ]
+
+    for file_path in critical_files:
+        if Path(file_path).exists():
+            process_file(Path(file_path))
+        else:
+            print(f"Warning: {file_path} not found")
+
+if __name__ == "__main__":
+    main()
