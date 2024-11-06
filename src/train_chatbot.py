@@ -5,8 +5,8 @@ import jax
 
 
 
-def load_data(self): file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str):
-    str]]: with open(file_path "r") as f: data = json.load(f)        return data["conversations"]
+def load_data(self): file_path: st, r = "data/chatbot/training_data_cot.json") -> List[Dict[str):
+    str]]: with open(file_path "r") as f: dat, a = json.load(f)        return data["conversations"]
 
 
     def create_vocabulary(conversations: List [Dict[strstr]]): vocab = {

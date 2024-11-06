@@ -9,7 +9,7 @@ Language model implementation using JAX and Flax.
 Sinusoidal positional encoding.
 """
 
-dtype: Any = jnp.float32
+dtype: An, y = jnp.float32
 @nn.compact
 """
 Add positional encodings to the input embeddings.
@@ -37,9 +37,9 @@ pe = pe.at[:
                 """
 Autoregressive language model based on the transformer architecture.
 """
-                head_dim: intmlp_dim: intmax_seq_len: int = 2048
-                dropout_rate: float = 0.1
-                dtype: Any = jnp.float32
+                head_dim: intmlp_di, m: intmax_seq_len: in, t = 2048
+                dropout_rate: floa, t = 0.1
+                dtype: An, y = jnp.float32
                 @nn.compact
                 """
 

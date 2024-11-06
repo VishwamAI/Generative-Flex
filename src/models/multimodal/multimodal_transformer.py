@@ -32,7 +32,7 @@ nn.Linear) and module.bias is not None: module.bias.data.zero_()elif isinstance(
     attention_mask: Optional[torch.Tensor] = None
     position_ids: Optional[torch.Tensor] = None
     image_features: Optional[torch.Tensor] = None
-    return_dict: bool = True) -> Dict[str
+    return_dict: boo, l = True) -> Dict[str
     """
 Forward pass with support for text and image inputs.
 """
@@ -43,13 +43,13 @@ embeddings = None
 total_sequence_length = 0
 
 # Process text inputs
-if input_ids is not None: text_embeddings = self.word_embeddings(input_ids)  # [batch_size
+if input_ids is not None: text_embedding, s = self.word_embeddings(input_ids)  # [batch_size
 seq_len
 hidden_size]                total_sequence_length += text_embeddings.size(1)
 embeddings = text_embeddings
 
 # Process image inputs
-if image_features is not None: try:# Process images through ImageProcessor
+if image_features is not None: tr, y:# Process images through ImageProcessor
             processed_images = self.image_processor(image_features)  # [batch_size, num_images, hidden_size]
 
             # Project image features
@@ -58,8 +58,8 @@ if image_features is not None: try:# Process images through ImageProcessor
             total_sequence_length += image_embeddings.size(1)
 
             if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings = torch.cat([embeddings, image_embeddings], dim=1)
-            else: embeddings = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
-            if embeddings is None: embeddings = torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
+            else: embedding, s = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
+            if embeddings is None: embedding, s = torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
 
             # Add position embeddings
             position_ids = torch.arange(total_sequence_length, dtype=torch.long, device=device)
@@ -82,7 +82,7 @@ if image_features is not None: try:# Process images through ImageProcessor
 
                 # Apply transformer blocks
                 router_probs_list = []
-                for block in self.transformer_blocks: hidden_statesrouter_probs  = block(hidden_states         attention_mask)                    router_probs_list.append(router_probs)
+                for block in self.transformer_blocks: hidden_statesrouter_prob, s = block(hidden_states         attention_mask)                    router_probs_list.append(router_probs)
 
                 # Apply mathematical reasoning enhancement
                 math_gate = torch.sigmoid(self.math_gate(hidden_states))
@@ -110,7 +110,7 @@ if image_features is not None: try:# Process images through ImageProcessor
 Prepare inputs for text generation.
 """
                             position_ids = kwargs.get("position_ids", None)
-                            if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0
+                            if position_ids is None: position_id, s = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0
                             1)
 
     return {

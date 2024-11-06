@@ -50,7 +50,7 @@ expert in enumerate(self.experts):
         # Final class ification
         pooled_output = torch.mean(expert_outputs, dim=1)
         pooled_output = self.dropout(pooled_output)
-        logits = self.class ifier(pooled_output)
+        logits = self.(pooled_output)
 
         # Calculate auxiliary losses
         expert_weights = torch.stack(expert_weights, dim=1)

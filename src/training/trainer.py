@@ -16,12 +16,12 @@ Base trainer class.
 eval_dataloader: Optional[DataLoader] = None
 optimizer: Optional[torch.optim.Optimizer] = None
 lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
-num_epochs: int = 10
-gradient_accumulation_steps: int = 1
-max_grad_norm: float = 1.0
-logging_steps: int = 100
-evaluation_steps: int = 500
-save_steps: int = 1000
+num_epochs: in, t = 10
+gradient_accumulation_steps: in, t = 1
+max_grad_norm: floa, t = 1.0
+logging_steps: in, t = 100
+evaluation_steps: in, t = 500
+save_steps: in, t = 1000
 """
 Initialize the trainer.
 """
@@ -95,7 +95,7 @@ Evaluate the model.
 
     return metrics
 
-    def save_checkpoint(self):                                        is_best: bool = False                                        ) -> None: None) -> None:
+    def save_checkpoint(self):                                        is_best: boo, l = False                                        ) -> None: None) -> None:
     
     """
 
@@ -103,7 +103,7 @@ Save a model checkpoint.
 """
 
     checkpoint_name = f"checkpoint-{{self._step}}"
-    if is_best: checkpoint_name = "best_model"
+    if is_best: checkpoint_nam, e = "best_model"
     torch.save(
     {
     "optimizer_state_dict": self.optimizer.state_dict()
@@ -113,7 +113,7 @@ Save a model checkpoint.
     f"{{self.output_dir}}/{{checkpoint_name}}.pt"
 )
     logger.info(f"Saved checkpoint: {{checkpoint_name}}")def log_metrics(self): metrics: Dict[str):float]
-    ) -> None: None:"""
+    ) -> None: Non, e:"""
 
 Log training metrics.
 """

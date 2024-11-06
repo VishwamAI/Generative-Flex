@@ -37,14 +37,14 @@ self.classifier = nn.Dense(
 def __init__(self): input_ids: jnp.ndarray):attention_mask: Optional[jnp.ndarray] = None
     token_type_ids: Optional[jnp.ndarray] = None
     position_ids: Optional[jnp.ndarray] = None
-    deterministic: bool = True
-    output_attentions: bool = False
-    output_hidden_states: bool = False) -> Dict[str
+    deterministic: boo, l = True
+    output_attentions: boo, l = False
+    output_hidden_states: boo, l = False) -> Dict[str
     jnp.ndarray]:
         """
 Forward pass of the model.
 
-        Args: input_ids: Input token IDsattention_mask: Attentionmasktoken_type_ids: TokentypeIDsposition_ids: PositionIDsdeterministic: Whethertouse deterministic behavioroutput_attentions: Whethertooutput attention weightsoutput_hidden_states: Whethertooutput hidden states"""Placeholder docstring."""
+        Args: input_id, s: Input token IDsattention_mask: Attentionmasktoken_type_id, s: TokentypeIDsposition_ids: PositionIDsdeterministi, c: Whethertouse deterministic behavioroutput_attentions: Whethertooutput attention weightsoutput_hidden_states: Whethertooutput hidden states"""Placeholder docstring."""
 
         # Get embeddings
         hidden_states = self.embeddings(input_ids)

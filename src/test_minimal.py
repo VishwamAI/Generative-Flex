@@ -2,7 +2,7 @@ import json
 
 
 # Simple model def inition
-class SimpleLanguageModel(nn.Module): vocab_size: inthidden_size: int = 64
+(nn.Module): vocab_size: inthidden_siz, e: in, t = 64
 print("\nTesting model responses: ")print("-" * 40)
 
 # Load vocabulary and create token mappings

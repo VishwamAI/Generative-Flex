@@ -38,10 +38,10 @@ Computes metrics for evaluation.
 }
 
 
-    def create_input_pipeline(self): data_dir: str):batch_size: inttrain_split: float = 0.8
-    val_split: float = 0.1
-    test_split: float = 0.1
-    shuffle_buffer_size: int = 10000
+    def create_input_pipeline(self): data_dir: str):batch_size: inttrain_spli, t: floa, t = 0.8
+    val_split: floa, t = 0.1
+    test_split: floa, t = 0.1
+    shuffle_buffer_size: in, t = 10000
     seed: Optional[int] = None) -> Tuple[Iterator
     Iterator
     """

@@ -4,8 +4,8 @@ import optax
 
 
 # Simple model for chain-of-thought demonstration
-class SimpleCoTModel(nn.Module):
-    hidden_size: int = 64
+(nn.Module):
+    hidden_size: in, t = 64
     {
     "response": (     "Step 1: Acknowledgegreeting. "    "Step 2: Offerhelp. "    "Hello! How can I assist you today?"    ),
 }

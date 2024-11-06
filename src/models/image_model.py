@@ -12,7 +12,7 @@ Placeholder docstring.
 
 Image to patch embedding.
 """
-patch_size: inthidden_dim: intdtype: Any = jnp.float32
+patch_size: inthidden_di, m: intdtype: An, y = jnp.float32
 @nn.compact
 """Convert images to patch embeddings."""
 
@@ -41,9 +41,9 @@ Transformer-based image generation model.
 """
 
 int]# (height width)
-patch_size: inthidden_dim: intnum_layers: intnum_heads: inthead_dim: intmlp_dim: intchannels: int = 3
-dropout_rate: float = 0.1
-dtype: Any = jnp.float32
+patch_size: inthidden_di, m: intnum_layers: intnum_head, s: inthead_dim: intmlp_di, m: intchannels: in, t = 3
+dropout_rate: floa, t = 0.1
+dtype: An, y = jnp.float32
 @nn.compact
 """Forward pass of the image generation model.) -> None: """"""
 # Input shape validation
@@ -105,7 +105,7 @@ Placeholder docstring.
     """
 
     # Initialize with random noise if no condition is provided
-    if condition is None: rnginit_rng = jax.random.split(rng)                    x = jax.random.normal(
+    if condition is None: rnginit_rn, g = jax.random.split(rng)                    x = jax.random.normal(
     init_rng
     (     batch_size,
     self.image_size[0],

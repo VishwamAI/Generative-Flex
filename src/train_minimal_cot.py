@@ -1,8 +1,8 @@
 import jax
 
 
-class SimpleGreetingModel(nn.Module):
-    hidden_size: int = 64
+(nn.Module):
+    hidden_size: in, t = 64
     def create_minimal_data(self):
         
     """

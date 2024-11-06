@@ -9,9 +9,9 @@ import os
 os.makedirs("data/chatbot", exist_ok=True)
 
 
-class SimpleSeq2SeqModel(nn.Module):
-    hidden_size: int = 64
-    max_length: int = 32  # Maximum sequence length
+(nn.Module):
+    hidden_size: in, t = 64
+    max_length: in, t = 32  # Maximum sequence length
     def main(self):        # Create and save training data        training_data = create_training_data):
         with open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(training_dataf
         indent=2)

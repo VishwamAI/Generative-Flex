@@ -14,7 +14,7 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 
-class TrainerState(train_state.TrainState):
+(train_state.TrainState):
     
     """
 Custom train state with loss scaling for mixed precision training.
@@ -33,12 +33,32 @@ Custom train state with loss scaling for mixed precision training.
 
 
     def __init__(
-    self,
-    model: Optional[nn.Module] = None,
-    config: Dict[str,
+
+
+
+
+        self,
+
+
+
+
+        model: Optional[nn.Module] = None,
+
+
+
+
+        config: Dict[str,
     Any] = None,
-    output_dir: Optional[str] = None
-):
+
+
+
+
+        output_dir: Optional[str] = None
+
+
+
+
+    ):
         """
 
 Initialize trainer.
@@ -109,14 +129,28 @@ Setup training state with optimizer and learning rate schedule.
             )
 
             def train(
-    self,
-    train_dataset: Any,
-    num_epochs: int,
-    eval_dataset: Optional[Any] = None,
-    eval_steps: int = 1000,
-    save_steps: int = 1000,
-    log_steps: int = 100
-):
+
+                self,
+
+                train_dataset: Any,
+
+                num_epochs: int,
+
+                eval_dataset: Optional[Any] = None,
+
+                eval_steps: in,
+
+                t = 1000,
+
+                save_steps: in,
+
+                t = 1000,
+
+                log_steps: in,
+
+                t = 100
+
+            ):
                 """
 
 Training loop with evaluation.
@@ -134,11 +168,11 @@ Training loop with evaluation.
                         num_steps += 1
 
                         # Logging
-                        if batch_idx % log_steps == 0: avg_loss = epoch_loss / num_steps
+                        if batch_idx % log_steps == 0: avg_los, s = epoch_loss / num_steps
                         logging.info(f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}")
 
                         # Evaluation
-                        if eval_dataset is not None and batch_idx % eval_steps == 0: eval_loss = self.evaluate(eval_dataset)
+                        if eval_dataset is not None and batch_idx % eval_steps == 0: eval_los, s = self.evaluate(eval_dataset)
                         logging.info(f"Eval Loss: {eval_loss:.4f}")# Save checkpoint
                         if batch_idx % save_steps == 0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epoch
                             avg_epoch_loss = epoch_loss / num_steps

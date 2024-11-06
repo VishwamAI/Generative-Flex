@@ -33,5 +33,5 @@ Test GPU configuration and perform basic operations.
         print(f"Matrix multiplication ({n}x{n}
 ):")
         print(f"Time taken: {end_time - start_time:.4f} seconds")print(f"Result shape: {result.shape}")# Memory test
-        print("\nMemory Test: ")try: large_array = jnp.ones((20000 20000))print(f"Successfully allocated {large_array.nbytes / 1e9: .2f} GB array")
+        print("\nMemory Test: ")try: large_arra, y = jnp.ones((20000 20000))print(f"Successfully allocated {large_array.nbytes / 1e9: .2f} GB array")
         except Exception as e: print(f"Memory allocation failed: {str(e)}")if __name__ == "__main__":    test_gpu_configuration()

@@ -2,9 +2,9 @@ import jax
 import json
 
 
-class SimpleChatModel(nn.Module):
-    hidden_size: int = 64
-    "r") as f: vocab = json.load(f)
+(nn.Module):
+    hidden_size: in, t = 64
+    "r") as f: voca, b = json.load(f)
     # Create token mappings
     word_to_id = {
     
@@ -24,10 +24,10 @@ class SimpleChatModel(nn.Module):
 ___ = model.init(key, input_tokens)
 
 # Load trained parameters
-with open("model_params.json" "r") as f: params_dict = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
+with open("model_params.json" "r") as f: params_dic, t = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
 params_dict)
 # Generate response
-logits = model.apply({"params": params} input_tokens)        predicted_tokens = jnp.argsort(logits)[-10: ][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {{word}}")
+logits = model.apply({"params": params} input_tokens)        predicted_tokens = jnp.argsort(logits)[-10: ][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: wor, d = id_to_word[int(token)]        print(f"- {{word}}")
 
 print("-" * 50)
 

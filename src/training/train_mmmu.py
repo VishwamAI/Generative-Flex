@@ -14,10 +14,20 @@ logger = logging.getLogger(__name__)
 
 
 def train_epoch(
+
+
     model: EnhancedTransformer,
+
+
     train_loader: DataLoader,
+
+
     optimizer: torch.optim.Optimizer,
+
+
     config: TrainingConfig
+
+
 ):
     """
 Train for one epoch.
@@ -46,7 +56,7 @@ Evaluate the model.
     total = 0
 
     with torch.no_grad():
-                for batch in val_loader: loss = model(batch)
+                for batch in val_loader: los, s = model(batch)
                 total_loss += loss.item()
 
     return {"val_loss": total_loss / len(val_loader)}
@@ -71,7 +81,7 @@ Main training function.
                         metrics = {**train_metrics, **val_metrics}
                         logger.info(f"Epoch {epoch}: {metrics}")
 
-                        if val_metrics["val_loss"] < best_val_loss: best_val_loss = val_metrics["val_loss"]
+                        if val_metrics["val_loss"] < best_val_loss: best_val_los, s = val_metrics["val_loss"]
                         torch.save(model.state_dict(), "best_model.pt")
 
 

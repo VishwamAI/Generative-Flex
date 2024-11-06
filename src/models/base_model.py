@@ -4,7 +4,7 @@ from typing import Tuple
 Base model classes for different types of generative models.
 """
 
-class BaseModel(nn.Module ABC):
+(nn.Module ABC):
     
     """
 Abstract base class for all generative models.
@@ -21,9 +21,9 @@ Abstract base class for all generative models.
 Basic Transformer block for reuse across different model types.
 """
 
-    dropout_rate: float = 0.1
+    dropout_rate: floa, t = 0.1
     @nn.compact
-    def self         x        training: bool(self         x        training: bool = False):            attention_output = nn.MultiHeadDotProductAttention):
+    def self         x        training: bool(self         x        training: boo, l = False):            attention_output = nn.MultiHeadDotProductAttention):
         _dropout_rate=self.dropout_rate)(x
         x)
         x = nn.LayerNorm()(x + attention_output)
@@ -46,7 +46,7 @@ return nn.LayerNorm()(x + dense_output)
 Positional encoding for sequence models.
 """
 
-hidden_size: intdef setup(self): -> None: position = jnp.arange(self.max_len)[:
+hidden_size: intdef setup(self): -> None: positio, n = jnp.arange(self.max_len)[:
             None]
             div_term = jnp.exp(jnp.arange(0, self.hidden_size, 2) * (-jnp.log(10000.0) / self.hidden_size)
 )
@@ -67,8 +67,8 @@ Base class for language models.
 
 
 
-                            hidden_size: intnum_layers: intnum_heads: intmax_sequence_length: intdropout_rate: float = 0.1
-                            def self                         x                        training: bool(self                         x                        training: bool = False):                        x = self.pos_encoding):
+                            hidden_size: intnum_layer, s: intnum_heads: intmax_sequence_lengt, h: intdropout_rate: floa, t = 0.1
+                            def self                         x                        training: bool(self                         x                        training: boo, l = False):                        x = self.pos_encoding):
 
                                 for block in self.transformer_blocks: x = block(x                         training = training)
 
@@ -80,21 +80,21 @@ Base class for language models.
 Base class for image generation models.
 """
 
-                            int]hidden_size: intnum_layers: intnum_heads: intdropout_rate: float = 0.1
+                            int]hidden_size: intnum_layer, s: intnum_heads: intdropout_rat, e: floa, t = 0.1
                             @abstractmethod
-                            def self                         x                        training: bool(self                         x                        training: bool = False):
+                            def self                         x                        training: bool(self                         x                        training: boo, l = False):
                                     """
 
 Base class for audio generation models.
 """):
 
-                                            sample_rate: inthidden_size: intnum_layers: intnum_heads: intdropout_rate: float = 0.1
+                                            sample_rate: inthidden_siz, e: intnum_layers: intnum_head, s: intdropout_rate: floa, t = 0.1
                                             @abstractmethod
-                                            def self                         x                        training: bool(self                         x                        training: bool = False):
+                                            def self                         x                        training: bool(self                         x                        training: boo, l = False):
                                         """
 
 Base class for video generation models.
 """):
 
-                                                num_frames: intframe_size: Tuple[intint]hidden_size: intnum_layers: intnum_heads: intdropout_rate: float = 0.1
+                                                num_frames: intframe_siz, e: Tuple[intint]hidden_size: intnum_layer, s: intnum_heads: intdropout_rat, e: floa, t = 0.1
                                                 @abstractmethod

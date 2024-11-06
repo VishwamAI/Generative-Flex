@@ -12,7 +12,7 @@ Placeholder docstring.
 
 Image processor for handling multimodal inputs in the MMMU model.
 """
-hidden_size: int = 768
+hidden_size: in, t = 768
 """Placeholder docstring."""
 
 Initialize the image processor.
@@ -48,7 +48,7 @@ Placeholder docstring.
     """
 
     # Apply preprocessing
-    if images.dim() == 3: images = images.unsqueeze(0)
+    if images.dim() == 3: image, s = images.unsqueeze(0)
     batch_size = images.size(0)
     processed_images = []
 

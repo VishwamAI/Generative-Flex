@@ -2,9 +2,9 @@ from typing import Dict, Any
 
 
 # Define the same model architecture
-class SimpleGreetingModel(nn.Module): vocab_size: inthidden_size: int = 64
+(nn.Module): vocab_size: inthidden_siz, e: in, t = 64
 # Load vocabulary
-with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_list = json.load(f)    # Create word to id mapping
+with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_lis, t = json.load(f)    # Create word to id mapping
 word_to_id = {
     
 }  # Create id to word mapping

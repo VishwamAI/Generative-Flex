@@ -30,14 +30,14 @@ self.layer_norm2 = nn.LayerNorm()
 self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
 def __init__(self): hidden_states: jnp.ndarray):attention_mask: Optional[jnp.ndarray] = None
-    deterministic: bool = True
-    output_attentions: bool = False) -> Dict[str
+    deterministic: boo, l = True
+    output_attentions: boo, l = False) -> Dict[str
     jnp.ndarray]:
         """
 
 Forward pass of the layer.
 
-        Args: hidden_states: Input hidden statesattention_mask: Attentionmaskdeterministic: Whethertouse deterministic behavioroutput_attentions: Whethertooutput attention weightsReturns: Dictionarycontaininglayer outputs"""
+        Args: hidden_state, s: Input hidden statesattention_mask: Attentionmaskdeterministi, c: Whethertouse deterministic behavioroutput_attentions: Whethertooutput attention weightsReturns: Dictionarycontaininglayer outputs"""
         # Self attention
         normed_hidden_states = self.layer_norm1(hidden_states)
         attention_output = self.attention(

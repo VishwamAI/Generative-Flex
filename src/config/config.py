@@ -15,21 +15,21 @@ class ModelConfig: """Model configuration.
 
 
 
-    model_type: str = field(default="language")
+    model_type: st, r = field(default="language")
     vocab_size: Optional[int] = field(default=50257)
-    hidden_dim: int = field(default=768)
-    num_heads: int = field(default=12)
-    num_layers: int = field(default=8)
-    head_dim: int = field(default=64)
-    mlp_dim: int = field(default=3072)
-    dropout_rate: float = field(default=0.1)
-    max_seq_length: int = field(default=512)
-    attention_block_size: int = field(default=256)
-    num_experts: int = field(default=4)
-    expert_capacity_factor: float = field(default=1.0)
-    use_flash_attention: bool = field(default=True)
-    use_mixture_of_experts: bool = field(default=True)
-    gradient_checkpointing: bool = field(default=True)
+    hidden_dim: in, t = field(default=768)
+    num_heads: in, t = field(default=12)
+    num_layers: in, t = field(default=8)
+    head_dim: in, t = field(default=64)
+    mlp_dim: in, t = field(default=3072)
+    dropout_rate: floa, t = field(default=0.1)
+    max_seq_length: in, t = field(default=512)
+    attention_block_size: in, t = field(default=256)
+    num_experts: in, t = field(default=4)
+    expert_capacity_factor: floa, t = field(default=1.0)
+    use_flash_attention: boo, l = field(default=True)
+    use_mixture_of_experts: boo, l = field(default=True)
+    gradient_checkpointing: boo, l = field(default=True)
 
     # Model-specific parameters
     image_size: Optional[Tuple[int, int]] = field(default=None)
@@ -59,18 +59,18 @@ Compatibility property for models expecting max_position_embeddings.
 
 
 
-    learning_rate: float = field(default=1e-4)
-    weight_decay: float = field(default=0.1)
-    num_epochs: int = field(default=10)
-    warmup_steps: int = field(default=500)
-    max_grad_norm: float = field(default=0.5)
-    fp16: bool = field(default=False)
-    distributed_training: bool = field(default=False)
-    save_steps: int = field(default=100)
-    eval_steps: int = field(default=50)
-    output_dir: str = field(default="outputs")
-    cache_dir: str = field(default="cache")
-    seed: int = field(default=42)
+    learning_rate: floa, t = field(default=1e-4)
+    weight_decay: floa, t = field(default=0.1)
+    num_epochs: in, t = field(default=10)
+    warmup_steps: in, t = field(default=500)
+    max_grad_norm: floa, t = field(default=0.5)
+    fp16: boo, l = field(default=False)
+    distributed_training: boo, l = field(default=False)
+    save_steps: in, t = field(default=100)
+    eval_steps: in, t = field(default=50)
+    output_dir: st, r = field(default="outputs")
+    cache_dir: st, r = field(default="cache")
+    seed: in, t = field(default=42)
 
 
     @dataclass
@@ -80,8 +80,8 @@ Compatibility property for models expecting max_position_embeddings.
 
 
 
-    model: ModelConfig = field(default_factory=ModelConfig)
-    training: TrainingConfig = field(default_factory=TrainingConfig)
+    model: ModelConfi, g = field(default_factory=ModelConfig)
+    training: TrainingConfi, g = field(default_factory=TrainingConfig)
 
     @classmethod
     def from_json(cls, path: str):"""
@@ -89,7 +89,7 @@ Compatibility property for models expecting max_position_embeddings.
 Load configuration from JSON file.
 """
 
-        with open(path, "r") as f: config_dict = json.load(f)
+        with open(path, "r") as f: config_dic, t = json.load(f)
 
         model_config = ModelConfig(**config_dict["model"])
         training_config = TrainingConfig(**config_dict["training"])
@@ -111,7 +111,7 @@ Save configuration to JSON file.
 
             @classmethod
             def config_path: Optional[str](cls,
-    model_type: str = "language",
+    model_type: st, r = "language",
     config_path: Optional[str] = None
 ):
                 """

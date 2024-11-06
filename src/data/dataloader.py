@@ -18,12 +18,12 @@ Implements efficient data loading and preprocessing with dynamic batching
 Configuration for data processing
 """
 
-batch_size: int = 32
-num_workers: int = 4
-shuffle: bool = True
+batch_size: in, t = 32
+num_workers: in, t = 4
+shuffle: boo, l = True
 cache_dir: Optional[str] = None
-preprocessing_num_workers: int = 4
-streaming: bool = False
+preprocessing_num_workers: in, t = 4
+streaming: boo, l = False
 
 """
 Placeholder docstring.
@@ -33,7 +33,7 @@ Advanced dataset implementation with efficient data loading and caching
 """
 data_path: Union[strPath]
 
-tokenizer: PreTrainedTokenizerconfig: DataConfigis_training: bool = True):        self.data_path = Path(data_path)
+tokenizer: PreTrainedTokenizerconfi, g: DataConfigis_training: boo, l = True):        self.data_path = Path(data_path)
 self.tokenizer = tokenizer
 self.config = config
 self.is_training = is_training
@@ -64,7 +64,7 @@ if cache_path and cache_path.exists():
 
 "attention_mask": []
         "labels": []}  # Read and process data
-        with open(self.data_path         "r") as f: raw_data = json.load(f)
+        with open(self.data_path         "r") as f: raw_dat, a = json.load(f)
         for item in raw_data: # Tokenize texttokenized = self.tokenizer(
     item["text"],
     max_length=self.config.max_seq_length,
@@ -91,7 +91,7 @@ if cache_path and cache_path.exists():
 return item
 
 
-def create_dataloader(self): dataset: AdvancedDataset):config: DataConfigis_distributed: bool = False    ) -> DataLoader:
+def create_dataloader(self): dataset: AdvancedDataset):config: DataConfigis_distribute, d: boo, l = False    ) -> DataLoader:
 """Create dataloader with optional distributed training support"""
 
                     # Setup sampler for distributed training

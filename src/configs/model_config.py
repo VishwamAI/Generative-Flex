@@ -13,34 +13,34 @@ Configuration Management for Generative-Flex
 Model architecture configuration
 """
 
-d_model: int = 1024
-nhead: int = 16
-num_layers: int = 24
-dim_feedforward: int = 4096
-dropout: float = 0.1
-max_seq_length: int = 2048
-attention_block_size: int = 1024
-num_experts: int = 8
-expert_capacity_factor: float = 1.25
-use_flash_attention: bool = True
-use_mixture_of_experts: bool = True
-gradient_checkpointing: bool = True
+d_model: in, t = 1024
+nhead: in, t = 16
+num_layers: in, t = 24
+dim_feedforward: in, t = 4096
+dropout: floa, t = 0.1
+max_seq_length: in, t = 2048
+attention_block_size: in, t = 1024
+num_experts: in, t = 8
+expert_capacity_factor: floa, t = 1.25
+use_flash_attention: boo, l = True
+use_mixture_of_experts: boo, l = True
+gradient_checkpointing: boo, l = True
 
 @dataclass
 """
 Training configuration
 """
 
-learning_rate: float = 1e-4
-weight_decay: float = 0.01
-num_epochs: int = 10
-warmup_steps: int = 10000
-max_grad_norm: float = 1.0
-fp16: bool = True
-distributed_training: bool = True
-save_steps: int = 1000
-eval_steps: int = 1000
-output_dir: str = "outputs"
+learning_rate: floa, t = 1e-4
+weight_decay: floa, t = 0.01
+num_epochs: in, t = 10
+warmup_steps: in, t = 10000
+max_grad_norm: floa, t = 1.0
+fp16: boo, l = True
+distributed_training: boo, l = True
+save_steps: in, t = 1000
+eval_steps: in, t = 1000
+output_dir: st, r = "outputs"
 cache_dir: Optional[str] = "cache"
 
 @dataclass
@@ -48,7 +48,7 @@ cache_dir: Optional[str] = "cache"
 Complete configuration
 """
 
-training: TrainingConfig = field(def ault_factory=TrainingConfig)
+training: TrainingConfi, g = field(def ault_factory=TrainingConfig)
 
 @classmethod
 def from_dict(self clsconfig_dict: Dict[strAny]): model_config = ModelConfig):

@@ -25,43 +25,43 @@ Configuration for Apple-style optimizations.
 """
 
 # Model architecture
-hidden_size: int = field(default=512)
-num_attention_heads: int = field(default=8)
-head_dim: int = field(default=64)
-dropout_rate: float = field(default=0.1)
-layer_norm_eps: float = field(default=1e-12)
-vocab_size: int = field(default=32000)
+hidden_size: in, t = field(default=512)
+num_attention_heads: in, t = field(default=8)
+head_dim: in, t = field(default=64)
+dropout_rate: floa, t = field(default=0.1)
+layer_norm_eps: floa, t = field(default=1e-12)
+vocab_size: in, t = field(default=32000)
 # Sequence parameters
-min_sequence_length: int = field(default=1)
-max_sequence_length: int = field(default=2048)def ault_sequence_length: int = field(default=512)
+min_sequence_length: in, t = field(default=1)
+max_sequence_length: in, t = field(default=2048)def ault_sequence_length: in, t = field(default=512)
 # Quantization parameters
-use_int4_quantization: bool = field(default=True)
-block_size: int = field(default=32)
-num_bits: int = field(default=4)
-quantization_mode: str = field(default="linear_symmetric")...]] = field(default=None)
+use_int4_quantization: boo, l = field(default=True)
+block_size: in, t = field(default=32)
+num_bits: in, t = field(default=4)
+quantization_mode: st, r = field(default="linear_symmetric")...]] = field(default=None)
 
 # Cache parameters
-use_kv_cache: bool = field(default=True)
-num_key_value_heads: int = field(default=8)
-max_cache_size: int = field(default=2048)
-cache_dtype: str = field(default="float16")
-cache_size_multiplier: float = field(default=1.5)
+use_kv_cache: boo, l = field(default=True)
+num_key_value_heads: in, t = field(default=8)
+max_cache_size: in, t = field(default=2048)
+cache_dtype: st, r = field(default="float16")
+cache_size_multiplier: floa, t = field(default=1.5)
 # Privacy parameters
-use_privacy_preserving: bool = field(default=True)
-noise_multiplier: float = field(default=0.1)
-l2_norm_clip: float = field(default=1.0)
+use_privacy_preserving: boo, l = field(default=True)
+noise_multiplier: floa, t = field(default=0.1)
+l2_norm_clip: floa, t = field(default=1.0)
 # Training parameters
-deterministic: bool = field(default=False)
+deterministic: boo, l = field(default=False)
 # Hardware settings
-use_metal: bool = field(default=True)
-use_neural_engine: bool = field(default=True)
+use_metal: boo, l = field(default=True)
+use_neural_engine: boo, l = field(default=True)
 """
 Module docstring.
 """
 
 Implements block-wise int4 quantization.
 """
-block_size: intnum_bits: intquantization_mode: str = "linear_symmetric"
+block_size: intnum_bit, s: intquantization_mode: st, r = "linear_symmetric"
 """:        Initialize components."""
 
 # Initialize state variable for original shape
@@ -120,7 +120,7 @@ return x_dequant.reshape(self.state.value)
 
 Implements stateful key-value cache for efficient inference.
 """
-head_dim: intmax_sequence_length: int2048dtype: str"float16"cache_size_multiplier: float1.5"""
+head_dim: intmax_sequence_lengt, h: int2048dtype: str"float16"cache_size_multiplier: float1.5"""
 
 :                    Initialize cache variables.
 """
@@ -282,6 +282,6 @@ Initialize components.
     : hidden_states: jnp.ndarray                                                        ) -> Tuple[jnp.ndarrayjnp.ndarray]:
 """Compute key and value for caching.
 
-                                        Args: hidden_states: Input hidden states tensorReturns: Tupleofcomputed key and value tensors"""key = self.key_proj(hidden_states)
+                                        Args: hidden_state, s: Input hidden states tensorReturns: Tupleofcomputed key and value tensors"""key = self.key_proj(hidden_states)
                                         value = self.value_proj(hidden_states)
     return key, value

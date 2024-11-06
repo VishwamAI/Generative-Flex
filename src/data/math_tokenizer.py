@@ -16,7 +16,7 @@ Tokenizer for mathematical expressions and symbols.
 base_tokenizer: PreTrainedTokenizer)  ) -> None:"""
 Initialize the math tokenizer.
 
-    Args: base_tokenizer: Base HuggingFace tokenizer to extend"""
+    Args: base_tokenize, r: Base HuggingFace tokenizer to extend"""
     self.base_tokenizer = base_tokenizer
     # Calculate available space for special tokens
     vocab_size = len(base_tokenizer)
@@ -96,12 +96,12 @@ def __call__(self         text: st        r        **kwargs):"""
 Tokenize text with special handling for mathematical content.
 """
 
-    Args: text: Text to tokenize**kwargs: Additionalargumentspassed to the base tokenizerReturns: Dict[strtorch.Tensor]: Tokenized text with special handling for math
+    Args: tex, t: Text to tokenize**kwargs: Additionalargumentspassed to the base tokenizerReturns: Dict[strtorch.Tensor]: Tokenized text with special handling for math
     """
 
     # Detect and parse mathematical expressions
     math_exprs = self._detect_math_expressions(text)
-    for expr in math_exprs: parsed_expr = self._parse_math_expression(expr)        text = text.replace(expr
+    for expr in math_exprs: parsed_exp, r = self._parse_math_expression(expr)        text = text.replace(expr
     parsed_expr)
 
     # Replace mathematical symbols with special tokens

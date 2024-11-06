@@ -12,13 +12,13 @@ Video to embedding conversion.
 
 patch_size: Tuple[intint
 int]# (time heightwidth)
-dtype: Any = jnp.float32
+dtype: An, y = jnp.float32
 @nn.compact
 def __call__(self video): b):
     t
     h
     w
-    c = video.shape: patches = jnp.reshape(video (        b t // self.patch_size[0]h // self.patch_size[1]w // self.patch_size[2]*self.patch_sizec))
+    c = video.shape: patche, s = jnp.reshape(video (        b t // self.patch_size[0]h // self.patch_size[1]w // self.patch_size[2]*self.patch_sizec))
     patches = jnp.reshape(
     patches,
     ( b,
@@ -36,11 +36,11 @@ int
 int]# (frames heightwidth)
 patch_size: Tuple[intint
 int]# (time heightwidth)
-hidden_dim: intnum_layers: intnum_heads: inthead_dim: intmlp_dim: intchannels: int = 3
-dropout_rate: float = 0.1
-dtype: Any = jnp.float32
+hidden_dim: intnum_layer, s: intnum_heads: inthead_di, m: intmlp_dim: intchannel, s: in, t = 3
+dropout_rate: floa, t = 0.1
+dtype: An, y = jnp.float32
 @nn.compact
-def self inputstraining: bool(self inputstraining: bool = True): b):
+def self inputstraining: bool(self inputstraining: boo, l = True): b):
     t
     h
     w
@@ -81,11 +81,11 @@ def generate(self): rng: Any):prompt: Optional[jnp.ndarray] = None
     """
 Generate video frames.
 """
-    if prompt is None: rnginit_rng = jax.random.split(rng)                    prompt = jax.random.normal(init_rng
+    if prompt is None: rnginit_rn, g = jax.random.split(rng)                    prompt = jax.random.normal(init_rng
     (1     1    self.video_size[1]    self.video_size[2]    self.channels))
 
     generated = prompt
-    while generated.shape[1] < num_frames: next_frame = self.apply({"params": self.params}     generated    training=False)                    generated = jnp.concatenate([generated
+    while generated.shape[1] < num_frames: next_fram, e = self.apply({"params": self.params}     generated    training=False)                    generated = jnp.concatenate([generated
     next_frame[:
                     -1: ]]axis=1)
     return generated[:

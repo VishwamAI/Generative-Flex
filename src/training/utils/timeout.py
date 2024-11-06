@@ -8,7 +8,7 @@ import signal
 __logger = logging.getLogger(__name__)
 
 
-class TimeoutException(Exception):
+(Exception):
 pass
 
 @contextmanager

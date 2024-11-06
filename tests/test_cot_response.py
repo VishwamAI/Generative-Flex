@@ -4,7 +4,7 @@ import pytest
 Test module for chain-of-thought response generation.
 """
 
-class SimpleChatModel(nn.Module): vocab_size: inthidden_size: int = 64
+(nn.Module): vocab_size: inthidden_siz, e: in, t = 64
 chat_model
 model_params
 word_mappings)  ) -> None: """Test model forward pass with test input.

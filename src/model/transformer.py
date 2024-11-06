@@ -13,10 +13,10 @@ Placeholder docstring.
 
 Advanced transformer layer combining Flash Attention and Mixture of Experts
 """
-d_model: intnhead: intdim_feedforward: intdropout: float = 0.1
-num_experts: int = 8
-expert_capacity_factor: float = 1.25
-block_size: int = 1024):        super().__init__()
+d_model: intnhea, d: intdim_feedforward: intdropou, t: floa, t = 0.1
+num_experts: in, t = 8
+expert_capacity_factor: floa, t = 1.25
+block_size: in, t = 1024):        super().__init__()
 
 # Flash Attention for efficient self-attention
 self.self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)
@@ -41,7 +41,7 @@ def forward(self): x: torch.Tensor):mask: Optional[torch.Tensor] = None    ) -> 
         Forward pass combining attention and expert computation
         Args: x: Input tensor of shape [batch_sizeseq_len
         d_model]
-        mask: OptionalattentionmaskReturns: Outputtensorof shape [batch_sizeseq_len
+        mask: OptionalattentionmaskReturn, s: Outputtensorof shape [batch_sizeseq_len
         d_model]
         """
         # Self-attention with residual connection

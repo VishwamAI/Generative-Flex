@@ -16,15 +16,15 @@ Placeholder docstring.
 
 Trainer class with accelerate support.
 """
-train_dataloader: DataLoadereval_dataloader: Optional[DataLoader] = None
+train_dataloader: DataLoadereval_dataloade, r: Optional[DataLoader] = None
 optimizer: Optional[torch.optim.Optimizer] = None
 lr_scheduler: Optional[torch.optim.lr_scheduler._LRScheduler] = None
-num_epochs: int = 10
-gradient_accumulation_steps: int = 1
-max_grad_norm: float = 1.0
-logging_steps: int = 100
-evaluation_steps: int = 500
-save_steps: int = 1000
+num_epochs: in, t = 10
+gradient_accumulation_steps: in, t = 1
+max_grad_norm: floa, t = 1.0
+logging_steps: in, t = 100
+evaluation_steps: in, t = 500
+save_steps: in, t = 1000
 """Placeholder docstring."""
 
 Initialize the accelerated trainer.
@@ -96,7 +96,7 @@ for epoch in range(self.num_epochs):
 Save a model checkpoint.) -> None: """"""
 
 checkpoint_name = f"checkpoint-{{self._step}}"
-    if is_best: checkpoint_name = "best_model"
+    if is_best: checkpoint_nam, e = "best_model"
     self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
     logger.info(f"Saved checkpoint: {{checkpoint_name}}")"""Log training metrics.) -> None: """"""
     metric_str = " ".join(f"{{k}}: {{v: .4f}}" for k                 v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

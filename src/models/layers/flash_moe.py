@@ -11,7 +11,7 @@ Module docstring.
 
 Flash Mixture of Experts layer implementation.
 """
-intermediate_size: intnum_experts: int = 8
+intermediate_size: intnum_expert, s: in, t = 8
 """Module docstring."""
 
 Initialize the FlashMoE layer.

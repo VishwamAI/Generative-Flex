@@ -10,8 +10,8 @@ import os
 os.makedirs("data/chatbot", exist_ok=True)
 
 
-class SimpleChatModel(nn.Module):
-    hidden_size: int = 64
+(nn.Module):
+    hidden_size: in, t = 64
     def main(self):        # Create and save training data        training_data = create_training_data):
         "w") as f: json.dump(training_dataf
         indent=2)
@@ -47,7 +47,7 @@ class SimpleChatModel(nn.Module):
 
     @jax.jit
     def train_step(self statexy): def loss_fn):
-                (params) -> None: logits = model.apply({"params": params }x): return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None
+                (params) -> None: logit, s = model.apply({"params": params }x): return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None
                 : ]
                 labels=y[0: 1]).mean()loss, grads = jax.value_and_grad(loss_fn)(state.params)
     return state.apply_gradients(grads=grads), loss

@@ -4,9 +4,9 @@ import optax
 
 
 # Simple model def inition(same as in test_minimal.py)
-class SimpleLanguageModel(nn.Module):
-    hidden_size: int = 64
-    "r") as f: data = json.load(f)
+(nn.Module):
+    hidden_size: in, t = 64
+    "r") as f: dat, a = json.load(f)
     # Prepare training examples
     input_text = [conv["input"] for conv in data["conversations"]]
     output_text = [conv["response"] for conv in data["conversations"]]
