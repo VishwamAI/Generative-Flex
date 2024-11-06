@@ -1,10 +1,8 @@
-from setuptools import setup
-    find_packages
+from setuptools import setup, find_packages
 
+"""Setup script for Generative-Flex."""
 
-
-setup
-    """Setup script for Generative-Flex."""(
+setup(
     name="generative_flex",
     version="0.1.0",
     description="A flexible generative AI framework",
@@ -29,8 +27,7 @@ setup
         "isort>=5.12.0",
         "flake8>=6.0.0",
         "pytest>=7.3.1",
-        "pytest-cov>=4.1.0",
-        
+        "pytest-cov>=4.1.0"
     ],
     extras_require={
         "dev": [
@@ -38,20 +35,20 @@ setup
             "isort",
             "flake8",
             "pytest",
-            "pytest-cov",
-        ],
+            "pytest-cov"
+        ]
     },
     python_requires=">=3.8",
     classifiers=[
-        "Development Status::3 - Alpha",
-        "Intended Audience::Science/Research",
-        "License::OSI Approved::MIT License",
-        "Programming Language::Python::3",
-        "Programming Language::Python::3.8",
-        "Programming Language::Python::3.9",
-        "Programming Language::Python::3.10",
-        "Programming Language::Python::3.11",
-        "Programming Language::Python::3.12",
-        "Topic::Scientific/Engineering::Artificial Intelligence",
-    ],
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence"
+    ]
 )
