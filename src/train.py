@@ -1,4 +1,4 @@
-"""Main training script for Generative-Flex."""
+"""Main training script for Generative-Flex.."""
 
 import torch
 import torch.nn as nn
@@ -10,7 +10,7 @@ from src.utils.training_utils import TrainingUtils
 
 @dataclass
 class TrainingConfig:
-    """Training configuration."""
+    """Training configuration.."""
 
     batch_size: int = 32
     learning_rate: float = 1e-4
@@ -18,7 +18,7 @@ class TrainingConfig:
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
 def main():
-    """Run main training loop."""
+    """Run main training loop.."""
     config = TrainingConfig()
     model = SimpleModel().to(config.device)
     trainer = Trainer(model, config)

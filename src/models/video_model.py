@@ -5,7 +5,7 @@ from typing import List, Optional, Tuple
 
 @dataclass
 class VideoModelConfig:
-    """Configuration for VideoModel."""
+    """Configuration for VideoModel.."""
 
     input_channels: int = 3
     hidden_dim: int = 64
@@ -13,7 +13,7 @@ class VideoModelConfig:
     frame_size: Tuple[int, int] = (224, 224)
 
 class VideoModel(nn.Module):
-    """Video processing model."""
+    """Video processing model.."""
 
     def __init__(self, config: Optional[VideoModelConfig] = None):
         super().__init__()
@@ -43,8 +43,7 @@ class VideoModel(nn.Module):
             x: Input video tensor [batch, time, channels, height, width]
 
         Returns:
-            Processed video features
-        """
+            Processed video features"""
         # Spatial encoding
         x = self.spatial_encoder(x.transpose(1, 2))
 

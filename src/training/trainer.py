@@ -1,4 +1,4 @@
-"""Base trainer module."""
+"""Base trainer module.."""
 
 import logging
 import torch
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class TrainerConfig:
-    """Configuration for base trainer."""
+    """Configuration for base trainer.."""
 
     learning_rate: float = 5e-5
     weight_decay: float = 0.01
@@ -21,19 +21,18 @@ class TrainerConfig:
     mixed_precision: bool = False
 
 class Trainer:
-    """Base trainer class."""
+    """Base trainer class.."""
 
     def __init__(self, config: Optional[TrainerConfig] = None):
         """Initialize trainer.
 
         Args:
-            config: Optional trainer configuration
-        """
+            config: Optional trainer configuration"""
         self.config = config or TrainerConfig()
         self.setup_training()
 
     def setup_training(self):
-        """Set up training components."""
+        """Set up training components.."""
         logger.info("Setting up training...")
         self.optimizer = None
         self.scheduler = None
@@ -42,7 +41,7 @@ class Trainer:
         self.scaler = torch.cuda.amp.GradScaler() if self.config.mixed_precision else None
 
     def train(self):
-        """Run training loop."""
+        """Run training loop.."""
         if not all([
             self.model,
             self.optimizer,
@@ -63,8 +62,7 @@ class Trainer:
                         outputs = self.model(**batch)
                         loss = outputs.loss / self.config.gradient_accumulation_steps
                     self.scaler.scale(loss).backward()
-                else:
-                    outputs = self.model(**batch)
+                else: outputs = self.model(**batch)
                     loss = outputs.loss / self.config.gradient_accumulation_steps
                     loss.backward()
 

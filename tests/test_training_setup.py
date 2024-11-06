@@ -1,4 +1,4 @@
-"""Test training setup functionality."""
+"""Test training setup functionality.."""
 
 import unittest
 import torch
@@ -6,20 +6,20 @@ from src.training.trainer import Trainer
 from src.models import SimpleModel
 
 class TestTrainingSetup(unittest.TestCase):
-    """Test training setup functionality."""
+    """Test training setup functionality.."""
 
     def setUp(self):
-        """Set up test environment."""
+        """Set up test environment.."""
         self.model = SimpleModel()
         self.trainer = Trainer(self.model)
 
     def test_training_initialization(self):
-        """Test training initialization."""
+        """Test training initialization.."""
         self.assertIsNotNone(self.trainer)
         self.assertIsInstance(self.trainer.model, SimpleModel)
 
     def test_training_step(self):
-        """Test single training step."""
+        """Test single training step.."""
         batch = torch.randn(16, 32)
         loss = self.trainer.training_step(batch)
         self.assertIsInstance(loss, torch.Tensor)

@@ -1,4 +1,4 @@
-"""Image processor for multimodal transformer."""
+"""Image processor for multimodal transformer.."""
 
 import torch
 import torch.nn as nn
@@ -8,7 +8,7 @@ from transformers import AutoImageProcessor
 
 @dataclass
 class ImageProcessorConfig:
-    """Configuration for image processor."""
+    """Configuration for image processor.."""
 
     image_size: int = 224
     patch_size: int = 16
@@ -19,21 +19,20 @@ class ImageProcessorConfig:
     dropout: float = 0.1
 
 class ImageProcessor(nn.Module):
-    """Image processor module."""
+    """Image processor module.."""
 
     def __init__(self, config: Optional[ImageProcessorConfig] = None):
         """Initialize image processor.
 
         Args:
-            config: Optional processor configuration
-        """
+            config: Optional processor configuration"""
         super().__init__()
         self.config = config or ImageProcessorConfig()
         self.processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
         self.setup_layers()
 
     def setup_layers(self):
-        """Set up neural network layers."""
+        """Set up neural network layers.."""
         self.patch_embed = nn.Conv2d(
             self.config.num_channels,
             self.config.hidden_size,
@@ -49,8 +48,7 @@ class ImageProcessor(nn.Module):
         """Calculate number of patches.
 
         Returns:
-            Number of patches
-        """
+            Number of patches"""
         patches_per_side = self.config.image_size // self.config.patch_size
         return patches_per_side * patches_per_side
 
@@ -61,8 +59,7 @@ class ImageProcessor(nn.Module):
             images: Input images
 
         Returns:
-            Processed image features
-        """
+            Processed image features"""
         batch_size = images.shape[0]
         x = self.patch_embed(images)
         x = x.flatten(2).transpose(1, 2)

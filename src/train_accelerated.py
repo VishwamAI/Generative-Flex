@@ -1,4 +1,4 @@
-"""Training script using AcceleratedTrainer for efficient distributed training."""
+"""Training script using AcceleratedTrainer for efficient distributed training.."""
 
 import torch
 import torch.nn as nn
@@ -10,7 +10,7 @@ from src.utils.training_utils import TrainingUtils
 
 @dataclass
 class AcceleratedConfig:
-    """Configuration for accelerated training."""
+    """Configuration for accelerated training.."""
 
     batch_size: int = 32
     learning_rate: float = 1e-4
@@ -19,7 +19,7 @@ class AcceleratedConfig:
     mixed_precision: bool = True
 
 def main():
-    """Run accelerated training."""
+    """Run accelerated training.."""
     config = AcceleratedConfig()
     model = SimpleModel()
     trainer = AcceleratedTrainer(model, config)

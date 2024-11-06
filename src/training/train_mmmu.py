@@ -1,4 +1,4 @@
-"""MMMU training script."""
+"""MMMU training script.."""
 
 import logging
 import torch
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class MMUTrainingConfig(TrainerConfig):
-    """Configuration for MMMU training."""
+    """Configuration for MMMU training.."""
 
     batch_size: int = 32
     max_length: int = 512
@@ -21,7 +21,7 @@ class MMUTrainingConfig(TrainerConfig):
     math_head_hidden_size: int = 768
 
 def main():
-    """Run MMMU training."""
+    """Run MMMU training.."""
     # Setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",

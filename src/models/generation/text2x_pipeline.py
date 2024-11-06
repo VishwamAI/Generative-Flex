@@ -21,7 +21,7 @@ return {
 }
 
 def def(self):
-        """attention_mask...."""Method with parameters."""
+        """attention_mask...."""Method with parameters.."""
         , =None): target_modality, ="text"
         
         _max_length = None,

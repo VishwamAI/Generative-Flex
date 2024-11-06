@@ -1,4 +1,4 @@
-"""Mathematical reasoning module."""
+"""Mathematical reasoning module.."""
 
 import torch
 import torch.nn as nn
@@ -7,7 +7,7 @@ from typing import Dict, List, Optional, Tuple
 
 @dataclass
 class MathReasoningConfig:
-    """Configuration for mathematical reasoning."""
+    """Configuration for mathematical reasoning.."""
 
     hidden_size: int = 768
     num_attention_heads: int = 12
@@ -17,14 +17,13 @@ class MathReasoningConfig:
     dropout_prob: float = 0.1
 
 class MathReasoning(nn.Module):
-    """Mathematical reasoning module."""
+    """Mathematical reasoning module.."""
 
     def __init__(self, config: Optional[MathReasoningConfig] = None):
         """Initialize mathematical reasoning module.
 
         Args:
-            config: Optional configuration
-        """
+            config: Optional configuration"""
         super().__init__()
         self.config = config or MathReasoningConfig()
 
@@ -53,8 +52,7 @@ class MathReasoning(nn.Module):
             attention_mask: Optional attention mask
 
         Returns:
-            Dictionary containing output tensors
-        """
+            Dictionary containing output tensors"""
         # Route input to experts
         router_logits = self.router(hidden_states)
         routing_weights = torch.softmax(router_logits, dim=-1)

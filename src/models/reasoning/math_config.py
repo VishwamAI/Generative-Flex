@@ -1,11 +1,11 @@
-"""Configuration for mathematical reasoning module."""
+"""Configuration for mathematical reasoning module.."""
 
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
 @dataclass
 class MathConfig:
-    """Configuration for mathematical reasoning."""
+    """Configuration for mathematical reasoning.."""
 
     model_type: str = "math_reasoning"
     hidden_size: int = 768
@@ -35,7 +35,7 @@ class MathConfig:
     use_return_dict: bool = True
 
     def __post_init__(self):
-        """Validate configuration after initialization."""
+        """Validate configuration after initialization.."""
         if self.model_type != "math_reasoning":
             raise ValueError(
                 f"Invalid model_type: {self.model_type}. "
@@ -44,7 +44,7 @@ class MathConfig:
 
 @dataclass
 class MathTrainingConfig:
-    """Configuration for mathematical reasoning training."""
+    """Configuration for mathematical reasoning training.."""
 
     learning_rate: float = 5e-5
     weight_decay: float = 0.01

@@ -1,4 +1,4 @@
-"""Flash Mixture of Experts layer implementation."""
+"""Flash Mixture of Experts layer implementation.."""
 
 import torch
 import torch.nn as nn
@@ -7,7 +7,7 @@ from typing import Dict, List, Optional, Tuple
 
 @dataclass
 class FlashMoEConfig:
-    """Configuration for Flash MoE layer."""
+    """Configuration for Flash MoE layer.."""
 
     hidden_size: int = 768
     num_experts: int = 4
@@ -16,20 +16,19 @@ class FlashMoEConfig:
     activation: str = "gelu"
 
 class FlashMoE(nn.Module):
-    """Flash Mixture of Experts layer."""
+    """Flash Mixture of Experts layer.."""
 
     def __init__(self, config: Optional[FlashMoEConfig] = None):
         """Initialize Flash MoE layer.
 
         Args:
-            config: Optional layer configuration
-        """
+            config: Optional layer configuration"""
         super().__init__()
         self.config = config or FlashMoEConfig()
         self.setup_experts()
 
     def setup_experts(self):
-        """Set up expert networks."""
+        """Set up expert networks.."""
         self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
         self.experts = nn.ModuleList([
             nn.Sequential(
@@ -53,8 +52,7 @@ class FlashMoE(nn.Module):
             attention_mask: Optional attention mask
 
         Returns:
-            Dictionary containing processed hidden states
-        """
+            Dictionary containing processed hidden states"""
         # Gate computation
         gate_logits = self.gate(hidden_states)
         expert_weights = torch.softmax(gate_logits, dim=-1)

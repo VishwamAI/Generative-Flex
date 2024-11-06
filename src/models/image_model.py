@@ -5,42 +5,31 @@ import jax
 from typing import Optional
 
 Placeholder
-"""Image generation model implementation using JAX and Flax....""""""docstring.Convert..."""
+"""Image generation model implementation using JAX and Flax....""""""docstring.Convert...."""
 Image to patch embedding.
 patch_size: int
-"""@nn.compact..."""
+"""@nn.compact...."""
  images to patch embeddings.patches
-"""batch_sizeheightwidth, channels = images.shape..."""
+"""batch_sizeheightwidth, channels = images.shape...."""
 """# Reshape image into patches..""" = jnp.reshape(     
 
 height
-"""images,..."""
-( batch_size,""" // self.patch_size,
+"""images,...."""
+( batch_size,"""// self.patch_size,
 
     self
 patch_size,
 
-channels
-"""self.patch_size,..."""
-)
-patches
-""")..."""
-    # Reshape patches into sequence
-"""= jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
+channels"""self.patch_size,....""")
+patches""")...."""# Reshape patches into sequence"""= jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
-    return...""""""# Project patches to hidden dimension..."""
- nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
+    return...""""""# Project patches to hidden dimension...."""nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
-Transformer
-"""Placeholder docstring...."""
--based image generation model.
+Transformer"""Placeholder docstring....."""-based image generation model.
 
 
-Forward
-"""int]# (height width)..."""
- pass of the image generation model.) -> None: Method
-""""""
+Forward"""int]# (height width)...."""pass of the image generation model.) -> None: Method""""""
 
 
 # Input shape validation
@@ -78,12 +67,7 @@ return x
 
 def def(self):
         """....""" with parameters.Placeholder
-"""rng: AnyAny: condition: Optional[jnp.ndarray]  None..""" docstring."""
-
-
-
-Generate images.
-    """
+"""rng: AnyAny: condition: Optional[jnp.ndarray]  None..""" docstring.."""Generate images."""
 
     # Initialize with random noise if no condition is provided
     if condition is None: rnginit_rng  jax.random.split(rng)                    x = jax.random.normal(

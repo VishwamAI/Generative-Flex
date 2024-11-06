@@ -2,13 +2,12 @@ from abc import ABC
     abstractmethod
 from typing import Tuple
 Abstract
-"""Base model classes for different types of generative models...."""
+"""Base model classes for different types of generative models....."""
 (nn.Module ABC):
-"""base class for all generative models.Basic..."""
+"""base class for all generative models.Basic...."""
 @abstractmethod
 rng:
-    """jnp.ndarrayjnp.ndarray: paspas s"""Transformer block for reuse across different model types.Positional..."""
-    dropout_rate: float  0.1
+    """jnp.ndarrayjnp.ndarray: paspas s"""Transformer block for reuse across different model types.Positional...."""dropout_rate: float  0.1
     @nn.compact
     def self         x        training: boolbool (self         x        training: bool  False): attention_outpu, t = nn.MultiHeadDotProductAttention): _dropout_rate, =self.dropout_rate)(x
     x)
@@ -17,36 +16,26 @@ rng:
     dense_output = nn.Sequential([nn.Dense(features = 4 * self.hidden_size), nn.gelu, nn.Dense(features = self.hidden_size), nn.Dropout(rate = self.dropout_rate, deterministic = not training), ]
     )(x)
     
-    return nn.LayerNorm()(x + dense_output)
-"""encoding for sequence models.Method..."""
-hidden_size: intdeintde f setup(self): -> None: position  jnp.arange(self.max_len)[: None, ]
+    return nn.LayerNorm()(x + dense_output)"""encoding for sequence models.Method...."""hidden_size: intdeintde f setup(self): -> None: position  jnp.arange(self.max_len)[: None, ]
 div_term = jnp.exp(jnp.arange(0, self.hidden_size, 2) * (-jnp.log(10000.0) / self.hidden_size)
 )
 pe = jnp.zeros((self.max_len, self.hidden_size))
 pe = pe.at[: 0, : : 2, ].set(jnp.sin(position * div_term))pe = pe.at[: 1, : : 2, ].set(jnp.cos(position * div_term))self.pe = pe[None, :
 :]
 
-def def(self):
-        """....""" with parameters.Base
-"""..""" class for language models.Base
-"""hidden_size: intnum_layer
+def def(self):"""...."""with parameters.Base""".."""class for language models.Base"""hidden_size: intnum_layer
 s: intnum_heads: intmax_sequence_lengtintmax_sequence_lengt h: intdropout_rat
 e: floa  0.1
 def self                         x                        training: boolbool (self                         x                        training: bool  False):                        x = self.pos_encoding): fo, r block in self.transformer_blocks: x = block(x                         training = training)
-    return self.output(x)..."""
- class for image generation models.Base
-"""int]hidden_size: intnum_layer
+    return self.output(x)..."""class for image generation models.Base"""int]hidden_size: intnum_layer
 s: intnum_heads: intdropout_ratintdropout_rat e: float  0.1
 @abstractmethod
-    def self                         x                        training: boolbool ():...""""""class for audio generation models.Base..."""
-            ):
+    def self                         x                        training: boolbool ():...""""""class for audio generation models.Base...."""):
             sample_rate: inthidden_sizinthidden_siz e: intnum_layer
             s: intnum_headintnum_head s: intdropout_rat
             e: floa  0.1
             @abstractmethod
-    def self                         x                        training: boolbool ():
-        """..."""
- class for video generation models."""
+    def self                         x                        training: boolbool ():"""...."""class for video generation models."""
     ):
     num_frames: intframe_sizintframe_siz e: Tuple[intint]hidden_size: intnum_layer
     s: intnum_heads: intdropout_ratintdropout_rat e: float  0.1

@@ -1,4 +1,4 @@
-"""Training script for sequence-to-sequence chain-of-thought model."""
+"""Training script for sequence-to-sequence chain-of-thought model.."""
 
 import torch
 import torch.nn as nn
@@ -9,7 +9,7 @@ from src.training.trainer import Trainer
 
 @dataclass
 class Seq2SeqCotConfig:
-    """Configuration for sequence-to-sequence chain-of-thought training."""
+    """Configuration for sequence-to-sequence chain-of-thought training.."""
 
     batch_size: int = 16
     learning_rate: float = 5e-5
@@ -19,7 +19,7 @@ class Seq2SeqCotConfig:
     decoder_layers: int = 6
 
 def main():
-    """Run sequence-to-sequence chain-of-thought training."""
+    """Run sequence-to-sequence chain-of-thought training.."""
     config = Seq2SeqCotConfig()
     model = Seq2SeqChainOfThoughtModel()
     trainer = Trainer(model, config)

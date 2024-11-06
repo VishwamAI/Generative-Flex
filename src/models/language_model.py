@@ -2,10 +2,10 @@ from src.models.transformer import TransformerBlock
 from typing import Any
 import jax
 Sinusoidal
-"""Language model implementation using JAX and Flax....""""""positional encoding.Add..."""
+"""Language model implementation using JAX and Flax....""""""positional encoding.Add...."""
 dtype: Any  jnp.float32
 @nn.compact
-"""positional encodings to the input embeddings.Autoregressive..."""
+"""positional encodings to the input embeddings.Autoregressive...."""
     seq_length = inputs.shape[1]
     dim = inputs.shape[-1]
     position = jnp.arange(0 seq_length_dtype=self.dtype)[None: NoneNone ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
@@ -17,13 +17,13 @@ dtype: Any  jnp.float32
     : 1, : : 2, ].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
     pe = jnp.broadcast_to(pe, (batch_sizeseq_lengthdim))
     return inputs + pe
-"""language model based on the transformer architecture.Forward..."""
+"""language model based on the transformer architecture.Forward...."""
 head_dim: intmlp_di
 m: intmax_seq_len: in  2048
 dropout_rate: float  0.1
 dtype: Any  jnp.float32
 @nn.compact
-"""pass of the language model.Method..."""
+"""pass of the language model.Method...."""
     x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
     # Add positional encoding
     x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
@@ -55,9 +55,9 @@ dtype: Any  jnp.float32
     return logits
 
     def def(self):
-        """....."""
+        """......"""
         with parameters.Generate
-"""rng: AnyAny: prompt: jnp.ndarraymax_lengt..."""
+"""rng: AnyAny: prompt: jnp.ndarraymax_lengt...."""
  text autoregressively."""
  
  generated = prompt

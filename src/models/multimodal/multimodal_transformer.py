@@ -1,4 +1,4 @@
-"""Multimodal transformer implementation."""
+"""Multimodal transformer implementation.."""
 
 import torch
 import torch.nn as nn
@@ -7,7 +7,7 @@ from typing import Dict, List, Optional, Tuple
 
 @dataclass
 class MultiModalTransformerConfig:
-    """Configuration for multimodal transformer."""
+    """Configuration for multimodal transformer.."""
 
     hidden_size: int = 768
     num_attention_heads: int = 12
@@ -22,20 +22,19 @@ class MultiModalTransformerConfig:
     num_channels: int = 3
 
 class MultiModalTransformer(nn.Module):
-    """Multimodal transformer model."""
+    """Multimodal transformer model.."""
 
     def __init__(self, config: Optional[MultiModalTransformerConfig] = None):
         """Initialize multimodal transformer.
 
         Args:
-            config: Optional model configuration
-        """
+            config: Optional model configuration"""
         super().__init__()
         self.config = config or MultiModalTransformerConfig()
         self.setup_layers()
 
     def setup_layers(self):
-        """Set up transformer layers."""
+        """Set up transformer layers.."""
         # Text embeddings
         self.text_embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
@@ -79,8 +78,7 @@ class MultiModalTransformer(nn.Module):
         """Initialize module weights.
 
         Args:
-            module: Module to initialize
-        """
+            module: Module to initialize"""
         if isinstance(module, (nn.Linear, nn.Embedding)):
             module.weight.data.normal_(mean=0.0, std=0.02)
         if isinstance(module, nn.Linear) and module.bias is not None:
@@ -102,13 +100,11 @@ class MultiModalTransformer(nn.Module):
             pixel_mask: Optional pixel mask
 
         Returns:
-            Dictionary containing hidden states
-        """
+            Dictionary containing hidden states"""
         hidden_states_list = []
 
         # Process text if provided
-        if input_ids is not None:
-            position_ids = torch.arange(
+        if input_ids is not None: position_ids = torch.arange(
                 input_ids.size(1),
                 device=input_ids.device
             ).unsqueeze(0)
@@ -155,19 +151,16 @@ class MultiModalTransformer(nn.Module):
             hidden_states_list.append(image_hidden_states)
 
         # Combine modalities
-        if hidden_states_list:
-            hidden_states = torch.cat(hidden_states_list, dim=1)
+        if hidden_states_list: hidden_states = torch.cat(hidden_states_list, dim=1)
 
             # Update attention mask
-            if attention_mask is not None and pixel_mask is not None:
-                attention_mask = torch.cat(
+            if attention_mask is not None and pixel_mask is not None: attention_mask = torch.cat(
                     [attention_mask, pixel_mask],
                     dim=1
                 )
 
             # Process through transformer
-            for layer in self.encoder:
-                hidden_states = layer(
+            for layer in self.encoder: hidden_states = layer(
                     hidden_states,
                     src_key_padding_mask=attention_mask
                 )

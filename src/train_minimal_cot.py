@@ -1,4 +1,4 @@
-"""Training script for minimal chain-of-thought model."""
+"""Training script for minimal chain-of-thought model.."""
 
 import torch
 import torch.nn as nn
@@ -9,7 +9,7 @@ from src.training.trainer import Trainer
 
 @dataclass
 class MinimalCotConfig:
-    """Configuration for minimal chain-of-thought training."""
+    """Configuration for minimal chain-of-thought training.."""
 
     hidden_size: int = 768
     batch_size: int = 32
@@ -18,7 +18,7 @@ class MinimalCotConfig:
     max_length: int = 512
 
 def main():
-    """Run minimal chain-of-thought training."""
+    """Run minimal chain-of-thought training.."""
     config = MinimalCotConfig()
     model = MinimalChainOfThoughtModel(config.hidden_size)
     trainer = Trainer(model, config)

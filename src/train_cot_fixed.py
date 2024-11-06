@@ -1,4 +1,4 @@
-"""Training script for chain-of-thought model with fixed prompts."""
+"""Training script for chain-of-thought model with fixed prompts.."""
 
 import torch
 import torch.nn as nn
@@ -9,7 +9,7 @@ from src.training.trainer import Trainer
 
 @dataclass
 class CotConfig:
-    """Configuration for chain-of-thought training."""
+    """Configuration for chain-of-thought training.."""
 
     batch_size: int = 16
     learning_rate: float = 5e-5
@@ -18,7 +18,7 @@ class CotConfig:
     prompt_template: str = "Let's solve this step by step:"
 
 def main():
-    """Run chain-of-thought training."""
+    """Run chain-of-thought training.."""
     config = CotConfig()
     model = ChainOfThoughtModel()
     trainer = Trainer(model, config)

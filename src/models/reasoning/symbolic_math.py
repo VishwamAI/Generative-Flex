@@ -3,7 +3,7 @@ import torch.nn as nn
 from typing import Dict, List, Optional
 
 class SymbolicMath(nn.Module):
-    """Handles symbolic mathematics operations."""
+    """Handles symbolic mathematics operations.."""
 
     def __init__(self):
         super().__init__()
@@ -23,8 +23,7 @@ class SymbolicMath(nn.Module):
             operations: Tensor of operation IDs
 
         Returns:
-            Processed symbolic mathematics
-        """
+            Processed symbolic mathematics"""
         symbol_embeds = self.symbol_embeddings(symbols)
         operation_embeds = self.operation_embeddings(operations)
         combined = torch.cat([symbol_embeds, operation_embeds], dim=-1)

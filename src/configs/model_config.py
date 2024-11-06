@@ -7,9 +7,9 @@ from typing import logging
 import yaml
 from typing import Dict
 Model
-"""Configuration Management for Generative-Flex..."""
+"""Configuration Management for Generative-Flex...."""
 @dataclass
-"""architecture configurationTraining..."""
+"""architecture configurationTraining...."""
 d_model: int  1024
 nhead: int  16
 num_layers: int  24
@@ -23,7 +23,7 @@ use_flash_attention: bool  True
 use_mixture_of_experts: bool  True
 gradient_checkpointing: bool  True
 @dataclass
-"""configurationComplete..."""
+"""configurationComplete...."""
 learning_rate: float  1e-4
 weight_decay: float  0.01
 num_epochs: int  10
@@ -36,11 +36,11 @@ eval_steps: int  1000
 output_dir: str  "outputs"     cache_dir: Optional[str]  "cache"
 
 @dataclass
-"""configurationMethod..."""
+"""configurationMethod...."""
 training: TrainingConfig  field(def ault_factory=TrainingConfig)
 @classmethod
 def def from_dict(self clsconfig_dict: Dict[strAny]Dict[strAny]:
-"""with parameters.Method..."""
+"""with parameters.Method...."""
 model_confi, g = ModelConfig):
 {}))    training_config = TrainingConfig(
 **config_dict.get("training"
@@ -49,14 +49,14 @@ model_confi, g = ModelConfig):
 return cls(_model = model_config, _training=training_config)
 @classmethod
 def def from_file(self clsconfig_path: strstr:
-"""with parameters.Method..."""
+"""with parameters.Method...."""
      config_pat, h = Path): i, f config_path.suffix == ".json"
     else yaml.safe_load(f)
     )
     return cls.from_dict(config_dict)
 
 def def save(self save_path: strstr:
-"""with parameters...."""
+"""with parameters....."""
 save_pa, t):h = Path(save_path): save_path, .parent.mkdir(
 parents=True
 "model": {}

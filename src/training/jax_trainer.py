@@ -1,4 +1,4 @@
-"""JAX-based trainer implementation."""
+"""JAX-based trainer implementation.."""
 
 import jax
 import jax.numpy as jnp
@@ -9,7 +9,7 @@ from src.utils.training_utils import TrainingUtils
 
 @dataclass
 class JaxTrainerConfig:
-    """Configuration for JAX trainer."""
+    """Configuration for JAX trainer.."""
 
     learning_rate: float = 1e-4
     batch_size: int = 32
@@ -20,15 +20,14 @@ class JaxTrainerConfig:
     optimizer_params: Dict = field(default_factory=dict)
 
 class JaxTrainer:
-    """JAX-based model trainer."""
+    """JAX-based model trainer.."""
 
     def __init__(self, model: BaseModel, config: Optional[JaxTrainerConfig] = None):
         """Initialize JAX trainer.
 
         Args:
             model: Model to train
-            config: Optional trainer configuration
-        """
+            config: Optional trainer configuration"""
         self.model = model
         self.config = config or JaxTrainerConfig()
         self.utils = TrainingUtils()
@@ -41,8 +40,7 @@ class JaxTrainer:
             batch: Batch of training data
 
         Returns:
-            Updated state and loss value
-        """
+            Updated state and loss value"""
         def loss_fn(params):
             logits = self.model.apply(params, batch["input_ids"])
             loss = jnp.mean(
@@ -75,8 +73,7 @@ class JaxTrainer:
             train_data: Training dataset
 
         Returns:
-            Training metrics
-        """
+            Training metrics"""
         state = self.utils.init_training_state(
             self.model,
             self.config
