@@ -68,11 +68,9 @@ class ModelConfig:
     """
     Class implementing class functionality.
     """
-
     Module for implementing specific functionality.
     Transformer model implementation.
-
     Method for __init__..
-
     Method for forward..
+    """
     """

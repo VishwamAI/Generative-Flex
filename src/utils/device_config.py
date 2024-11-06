@@ -20,44 +20,24 @@ import torch
 """
 Module containing specific functionality.
 """
-
 from typing import Optional
-
-
-
-
-
 from dataclasses import dataclass
-
-
-
-
 """
 Class implementing import functionality.
-
-
-
-
 """
-
 Module containing specific functionality.
 Manage device configuration and placement...
-
 Initialize device manager.
-
 Args:
 config: Optional device configuration
-
 Set up compute device.
-
 Returns:
 Configured device
 Module for handling specific functionality.
 Place tensor on configured device.
-
 Args:
 tensor: Input tensor
-
 Returns:
 Tensor on configured device
+"""
 """

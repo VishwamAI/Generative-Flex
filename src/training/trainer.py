@@ -53,27 +53,17 @@ import os
 """
 Module containing specific functionality.
 """
-
 from torch.utils.data import DataLoader, Dataset
-
 from tqdm
-
-
-
-
-
-
 class Trainer:
-    """
-    Class implementing Trainer functionality.
-    """
-
-    Base trainer implementation.
-    Method for __init__..
-
-    Method for train_step..
-
-    Method for evaluate..
-    Module for handling specific functionality.
-    Method for train..
-    """
+"""
+Class implementing Trainer functionality.
+"""
+Base trainer implementation.
+Method for __init__..
+Method for train_step..
+Method for evaluate..
+Module for handling specific functionality.
+Method for train..
+"""
+"""

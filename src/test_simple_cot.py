@@ -20,28 +20,18 @@ import torch
 """
 Module containing specific functionality.
 """
-
 from src.models import SimpleModel
-
 import torch
 import unittest
-
-
-
-
-
-
 class TestSimpleCot:
-    """
-    Class implementing TestSimpleCot functionality.
-    """
-
-    Module containing specific functionality.
-    Test simple chain-of-thought model.
-
-    Method for setUp..
-
-    Method for test_cot_generation..
-    Module for handling specific functionality.
-    Method for test_cot_batch..
-    """
+"""
+Class implementing TestSimpleCot functionality.
+"""
+Module containing specific functionality.
+Test simple chain-of-thought model.
+Method for setUp..
+Method for test_cot_generation..
+Module for handling specific functionality.
+Method for test_cot_batch..
+"""
+"""

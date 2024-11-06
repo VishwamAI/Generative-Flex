@@ -20,28 +20,18 @@ import torch
 """
 Module containing specific functionality.
 """
-
 from src.models import SimpleModel
-
 import torch
 import unittest
-
-
-
-
-
-
 class TestInference:
-    """
-    Class implementing TestInference functionality.
-    """
-
-    Module containing specific functionality.
-    Test inference functionality.
-
-    Method for setUp..
-
-    Method for test_inference..
-    Module for handling specific functionality.
-    Method for test_batch_inference..
-    """
+"""
+Class implementing TestInference functionality.
+"""
+Module containing specific functionality.
+Test inference functionality.
+Method for setUp..
+Method for test_inference..
+Module for handling specific functionality.
+Method for test_batch_inference..
+"""
+"""

@@ -53,17 +53,11 @@ import os
 """
 Module containing specific functionality.
 """
-
-
 from accelerate import dataclasses
-
-
-
-
-
 logger = logging.getLogger(__name__)
 @dataclass
 class ModelConfig:
-    """
-    Class implementing class functionality.
-    """
+"""
+Class implementing class functionality.
+"""
+"""

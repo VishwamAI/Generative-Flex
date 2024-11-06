@@ -72,11 +72,9 @@ class ModelConfig:
     """
     Class implementing class functionality.
     """
-
     Module for implementing specific functionality.
     Video processing model.
-
     Method for __init__..
-
     Method for forward..
+    """
     """

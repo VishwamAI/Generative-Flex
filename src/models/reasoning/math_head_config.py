@@ -21,23 +21,18 @@ import torch
 Module containing specific functionality.
 """
 from dataclasses import dataclass
-
 from typing import List, Optional
-
-
-
-
 @dataclass
 class ModelConfig:
-    """
-    Class implementing class functionality.
-    """
-
+"""
+Class implementing class functionality.
+"""
 hidden_size: int = 768
-    num_attention_heads: int = 12
-    intermediate_size: int = 3072
-    hidden_dropout_prob: float = 0.1
-    attention_probs_dropout_prob: float = 0.1
-    max_position_embeddings: int = 512
-    num_experts: int = 8
-    num_math_tokens: int = 1000
+num_attention_heads: int = 12
+intermediate_size: int = 3072
+hidden_dropout_prob: float = 0.1
+attention_probs_dropout_prob: float = 0.1
+max_position_embeddings: int = 512
+num_experts: int = 8
+num_math_tokens: int = 1000
+"""

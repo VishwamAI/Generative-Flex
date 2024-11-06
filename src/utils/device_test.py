@@ -20,26 +20,16 @@ import torch
 """
 Module containing specific functionality.
 """
-
 from src.utils.device_config import DeviceConfig
-
 import torch
 import unittest
-
-
-
-
-
-
 class TestDeviceConfig:
-    """
-    Class implementing TestDeviceConfig functionality.
-    """
-
-    Module containing specific functionality.
-    Set up test environment...
-
-    Test device configuration...
-
-    Test CUDA availability check...
-    """
+"""
+Class implementing TestDeviceConfig functionality.
+"""
+Module containing specific functionality.
+Set up test environment...
+Test device configuration...
+Test CUDA availability check...
+"""
+"""

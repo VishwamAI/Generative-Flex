@@ -20,26 +20,16 @@ import torch
 """
 Module containing specific functionality.
 """
-
 from src.utils.gpu_utils import GPUUtils
-
 import torch
 import unittest
-
-
-
-
-
-
 class TestGPU:
-    """
-    Class implementing TestGPU functionality.
-    """
-
-    Module containing specific functionality.
-    Set up test environment...
-
-    Test GPU memory utilities...
-
-    Test GPU availability check...
-    """
+"""
+Class implementing TestGPU functionality.
+"""
+Module containing specific functionality.
+Set up test environment...
+Test GPU memory utilities...
+Test GPU availability check...
+"""
+"""

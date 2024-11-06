@@ -70,11 +70,9 @@ class TestModels:
     """
     Class implementing TestModels functionality.
     """
-
     Module for implementing specific functionality.
     Method for setUp..
-
     Method for test_transformer_model..
-
     Method for test_model_forward..
+    """
     """

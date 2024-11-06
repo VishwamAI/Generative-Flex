@@ -53,33 +53,21 @@ import os
 """
 Module containing specific functionality.
 """
-
-
 from dataclasses import dataclass
-
 from src.models import *
-
 from src.utils.training_utils import *
-
-
-
-
 @dataclass
 class ModelConfig:
-    """
-    Class implementing class functionality.
-    """
-
-    JAX-based trainer implementation.
-    JAX-based model trainer..
-
-    Method for __init__..
-
-    Method for train_step..
-    Module for handling specific functionality.
-    Method for loss_fn..
-
-    Method for train..
-
-    Method for train..
-    """
+"""
+Class implementing class functionality.
+"""
+JAX-based trainer implementation.
+JAX-based model trainer..
+Method for __init__..
+Method for train_step..
+Module for handling specific functionality.
+Method for loss_fn..
+Method for train..
+Method for train..
+"""
+"""

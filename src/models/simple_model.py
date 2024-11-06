@@ -32,15 +32,13 @@ class ModelConfig:
     """
     Class implementing class functionality.
     """
-
     Module containing specific functionality.
     A simple neural network model..
     Module for handling specific functionality.
     Forward pass through the model.
-
     Args:
     x: Input tensor
-
     Returns:
     Output tensor
+    """
     """

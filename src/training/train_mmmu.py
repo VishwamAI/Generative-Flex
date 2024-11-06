@@ -54,26 +54,16 @@ import os
 Module containing specific functionality.
 """
 from src.models.reasoning.math_head import MathHead
-
-
-
-
-
 from dataclasses import src.data.mmmu_dataloader from src.training.trainer
-
-
-
-
-
 logger = logging.getLogger(__name__)
 @dataclass
 class ModelConfig:
-    """
-    Class implementing class functionality.
-    """
-
-    Module containing training-related implementations.
-    Configuration for MMMU training..
-    Module for handling specific functionality.
-    Method for main..
-    """
+"""
+Class implementing class functionality.
+"""
+Module containing training-related implementations.
+Configuration for MMMU training..
+Module for handling specific functionality.
+Method for main..
+"""
+"""
