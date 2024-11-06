@@ -1,22 +1,22 @@
-import jax
-import optax
-import transformers
+"""Test environment setup functionality."""
 
+import unittest
+import torch
+from src.utils.environment_setup import EnvironmentSetup
 
-def __init__(self):
-        """Implementation of __init__......""""""Initialize device configuration...."""
-        pass
-"""Test script to verify JAX/Flax/Optax installation...."""
- test_environment(self):
-Verify
-"""Method with parameters....""""""JAX installation and GPU availability...."""
-print("\nEnvironment Test Results: "" print("-" * 50)
+class TestEnvironment(unittest.TestCase):
+    """Test environment setup functionality."""
 
-# Test JAX
-print(f"JAX version: {}"{}" print(f"Available devices: {}"{}"# Test basic JAX operation
-x = jnp.ones((2, 2))
-y = jnp.ones((2, 2))
-z = jnp.matmul(x, y)
-print(f"Basic JAX operation successful: {}"{}"# Test Flax print(f"Flax version: {}"{}"# Test Optax print(f"Optax version: {}"{}"# Test other dependencies print(f"TensorFlow Datasets version: {}"{}" print(f"NumPy version: {}"{}" print(f"Transformers version: {}"{}" print("\nAll environment tests passed successfully!")
+    def setUp(self):
+        """Set up test environment."""
+        self.env = EnvironmentSetup()
 
-if __name__ == "__main__": test_environment, ()
+    def test_environment(self):
+        """Test environment setup."""
+        self.assertIsNotNone(self.env)
+        self.env.setup()
+
+    def test_cuda_setup(self):
+        """Test CUDA setup."""
+        if torch.cuda.is_available():
+            self.assertTrue(self.env.setup_cuda())

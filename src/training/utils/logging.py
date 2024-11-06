@@ -1,55 +1,59 @@
-from typing import Any
-from datetime import datetime
-from typing import Dict
-import json
-from typing import os
+"""Training logger implementation."""
+
+import logging
+from dataclasses import dataclass
+from typing import Dict, Optional
+
+@dataclass
+class LoggerConfig:
+    """Configuration for training logger."""
+
+    log_file: str = "training.log"
+    console_level: str = "INFO"
+    file_level: str = "DEBUG"
 
 class TrainingLogger:
-    """"""Class for TrainingLogger...."""
-    def __init__(self):
-        pass
-        """Class docstring......."""
-            pass
-    def __init__(self, log_dir: str  "logs"): 
-    
-    def __init__(self):
-        """Implementation of __init__......""""""Initialize logger....."""
-        super().__init__()
-        self.logger = logging.getLogger(__name__)
-        log_dir = log_dir
-        os.makedirs(log_dir, exist_ok = True)
-        self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
-        self.metrics_history = []
-        def log_metrics(self):
-        """Log
-        
-        ......"""Method with multiple parameters.
-        
-        Args: self: Parameter description
-        metrics: Parameter description
-        ]: Parameter description
-            step: Parameter description"""
-            .""" metrics for a training step
-            Log
+    """Logger for training metrics and events."""
+
+    def __init__(self, config: Optional[LoggerConfig] = None):
+        """Initialize training logger.
+
+        Args:
+            config: Optional logger configuration
         """
-        
-        {
-        
-        
-        "step": step, "timestamp": datetime.now().isoformat()
-        **metrics
-        
-        
-        
-        }
-        self.metrics_history.append(log_entry)
-        
-        # Write to file
-            with open(self.log_file, "a") as f: f.write(json.dumps(log_entryf.write(json.dumps(log_entry + "\n")""" training configuration
-            ."""
-    
-            config_file = os.path.join(self.log_dir, "training_config.json")     with open(config_file, "w") as f: json.dump(
-            configf
-            indent=2
-            )
-    
+        self.config = config or LoggerConfig()
+        self._setup_logger()
+
+    def _setup_logger(self):
+        """Set up logging configuration."""
+        self.logger = logging.getLogger("training")
+        self.logger.setLevel(logging.DEBUG)
+
+        # Console handler
+        console = logging.StreamHandler()
+        console.setLevel(getattr(logging, self.config.console_level))
+        self.logger.addHandler(console)
+
+        # File handler
+        file_handler = logging.FileHandler(self.config.log_file)
+        file_handler.setLevel(getattr(logging, self.config.file_level))
+        self.logger.addHandler(file_handler)
+
+    def log_metrics(self, metrics: Dict):
+        """Log training metrics.
+
+        Args:
+            metrics: Dictionary of metrics to log
+        """
+        for name, value in metrics.items():
+            self.logger.info(f"{name}: {value}")
+
+    def log_event(self, event: str, level: str = "INFO"):
+        """Log training event.
+
+        Args:
+            event: Event description
+            level: Logging level
+        """
+        log_fn = getattr(self.logger, level.lower())
+        log_fn(event)

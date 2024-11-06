@@ -1,36 +1,23 @@
-import jax
+"""Test GPU utilities functionality."""
 
+import unittest
+import torch
+from src.utils.gpu_utils import GPUUtils
 
-    def __init__(self):
-        """Implementation of __init__......""""""Initialize device configuration...."""
-        pass
-"""Test script to verify GPU configuration and CUDA support in JAX...."""
- test_gpu_configuration(self):
-Test
-"""Method with parameters....""""""GPU configuration and perform basic operations...."""
-print("-" * 50)
+class TestGPU(unittest.TestCase):
+    """Test GPU utilities functionality."""
 
-# Check available devices
-print("Available devices: "" print(f"All devices: {}"{}" print(f"GPU devices: {}"{}" print(f"Default backend: {}"{}"
+    def setUp(self):
+        """Set up test environment."""
+        self.utils = GPUUtils()
 
-# Perform computation test
-print("\nComputation Test: ""# Create large matrices for testing
-n = 5000
-x = jnp.ones(
-(n,n
-))
-y = jnp.ones(
-(n,n
-))
+    def test_gpu_memory(self):
+        """Test GPU memory utilities."""
+        if torch.cuda.is_available():
+            memory_info = self.utils.get_memory_info()
+            self.assertIsNotNone(memory_info)
 
-# Time the computation
-start_time = time.time()
-result = jnp.dot(
-x,y
-)
-end_time = time.time()
-print(f"Matrix multiplication ({}x{}):") print(f"Time taken: {
-end_time - start_time: .4f
-} seconds") print(f"Result shape: {}"{}"# Memory test print("\nMemory Test: ""try: large_array  jnp.ones((20000 20000)) print(f"Successfully allocated {
-large_array.nbytes / 1e9: .2f
-} GB array") except Exception as e: printprint (f"Memory allocation failed: {}"{}"if __name__ = "__main__": test_gpu_configuration, ()
+    def test_gpu_availability(self):
+        """Test GPU availability check."""
+        is_available = self.utils.is_gpu_available()
+        self.assertIsInstance(is_available, bool)

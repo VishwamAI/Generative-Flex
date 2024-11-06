@@ -1,23 +1,41 @@
-from contextlib import contextmanager
-import logging
-import platform
+"""Timeout utilities for training."""
+
 import signal
+from dataclasses import dataclass
+from typing import Optional, Callable
 
-__logger = logging.getLogger(__name__)
-(Exception): pas, s
+@dataclass
+class TimeoutConfig:
+    """Configuration for timeout handler."""
 
-@contextmanager
-    def self     seconds    description(self     seconds    description = "Operation"): # Increase timeout for CPU operations: ii f platform.machine):"AMD64"]: # Multiply timeout by 4 for CPU-only operations
-    seconds = seconds * 4
-    def def(self):
-        """raiseTimeoutExceptio
-        
-    ......"""Method with parameters."""
-, n):
-    (f"{{description}} timed out after {{seconds}} seconds"): # Only use SIGALRM on Unix-like systems     if platform.system() != "Windows":                # Register the signal function handler
-    signal.signal(signal.SIGALRM, timeout_handler)
+    timeout_seconds: int = 3600
+    callback: Optional[Callable] = None
 
-    try: signal.alarm(secondssignal.alarm(secondsyield
-    finally: # Disable the alarmsignal.alarm(0)
-    else: # On Windowsjust yield without timeout
-    yield
+class TimeoutError(Exception):
+    """Exception raised when timeout occurs."""
+    pass
+
+class TimeoutHandler:
+    """Handler for training timeouts."""
+
+    def __init__(self, config: Optional[TimeoutConfig] = None):
+        """Initialize timeout handler.
+
+        Args:
+            config: Optional timeout configuration
+        """
+        self.config = config or TimeoutConfig()
+
+    def __enter__(self):
+        """Set up timeout handler."""
+        def handler(signum, frame):
+            if self.config.callback:
+                self.config.callback()
+            raise TimeoutError("Training timed out")
+
+        signal.signal(signal.SIGALRM, handler)
+        signal.alarm(self.config.timeout_seconds)
+
+    def __exit__(self, type, value, traceback):
+        """Clean up timeout handler."""
+        signal.alarm(0)

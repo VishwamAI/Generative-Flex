@@ -1,29 +1,26 @@
-import jax
-import json
-import pytest
-Method
-"""Tests for the simple language model implementation using Flax...."""
-(nn.Module):
-"""Test module class...."""
-    def __init__(self):
-        """Implementation of __init__......"""
-        super().__init__()
-        hidden_size: int  64
-        def def(self):
-        """....""" with parameters."""
+"""Test simple model functionality."""
 
-    ifisinstanc, e):
-    (x     list): retur, n np.array(x)    elif isinstance(
-    x
-    dict
-): retur, n {
+import unittest
+import torch
+import torch.nn as nn
+from src.models import SimpleModel
 
-    }
-    return x
+class TestSimpleModel(nn.Module):
+    """Test simple model functionality."""
 
-return process_value(saved_params)
+    def setUp(self):
+        """Set up test environment."""
+        self.model = SimpleModel()
 
-@pytest.fixture
-def setup(self):
-        """Test setup fixture......"""
-        return None
+    def test_forward_pass(self):
+        """Test forward pass."""
+        input_tensor = torch.randn(1, 32)
+        output = self.model(input_tensor)
+        self.assertEqual(output.shape[-1], 32)
+
+    def test_batch_processing(self):
+        """Test batch processing."""
+        batch_size = 16
+        input_tensor = torch.randn(batch_size, 32)
+        output = self.model(input_tensor)
+        self.assertEqual(output.shape[0], batch_size)
