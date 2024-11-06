@@ -5,9 +5,8 @@ import jax
 import os
 import sys
 import time
-"""
-Environment setup and verification script.
-"""
+"""Environment setup and verification script."""
+
 
 # Set up device configuration
 __device_config = setup_device_config()
@@ -17,9 +16,8 @@ def test_flax_installation():
     @nn.compact
     def main(self):
         
-    """
-Run all environment tests.
-"""
+    """Run all environment tests."""
+
 
 
         try: # Test JAX): jax_result, s = test_jax_installation()

@@ -2,84 +2,53 @@ from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
-"""
-Image generation model implementation using JAX and Flax.
-"""
+"""Image generation model implementation using JAX and Flax."""
 
-"""
-Placeholder docstring.
-"""
+
+"""Placeholder docstring."""
+
 
 Image to patch embedding.
 patch_size: int
 hidden_dim: intdtype: An = jnp.float32"""
 @nn.compact
 """Convert images to patch embeddings."""
+
 batch_sizeheightwidth, channels = images.shape
-"""
+""""""
 
-
-
-"""
 # Reshape image into patches
-"""
+"""patches = jnp.reshape("""
 
-
-patches = jnp.reshape(
-"""
 images,
-"""
+"""( batch_size,"""
 
-
-( batch_size,
-"""
 height // self.patch_size,
-"""
-
-
-width // self.patch_size,
-"""
-self.patch_size,
-"""
-
+"""width // self.patch_size,"""
 
 self.patch_size,
-"""
+"""self.patch_size,"""
+
 channels)
-"""
+""")"""
 
-
-)
-"""
 # Reshape patches into sequence
-"""
+"""patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))"""
 
 
-patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
-"""
+"""# Project patches to hidden dimension"""
 
-"""
-
-
-# Project patches to hidden dimension
-"""
 return nn.Dense(self.hidden_dim, _dtype=self.dtype)(patches)
-"""
+"""Placeholder docstring."""
 
-Placeholder docstring.
-"""
 Transformer-based image generation model.
 """
-
 int]# (height width)
-patch_size: int
-hidden_dim: intnum_layers: intnum_head, s: inthead_dim: intmlp_di, m: intchannels: in = 3
-dropout_rate: float = 0.1
-dtype: Any = jnp.float32
-@nn.compact
 """
+
 Forward pass of the image generation model.) -> None:
 """"""
+
 # Input shape validation
 batch_sizeheightwidth, channels = inputs.shape
 assert height == self.image_size[0] and width == self.image_size[1]
@@ -129,9 +98,8 @@ for _ in range(self.num_layers):
 return x
 
 def generate(self): rng: Any): condition: Optional[jnp.ndarray] = None
-    """
-Placeholder docstring.
-"""
+    """Placeholder docstring."""
+
     Generate images.
     """
 

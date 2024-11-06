@@ -14,9 +14,8 @@ def log_metrics(
     Any],
     step: int
 ):
-    """
-Log metrics for a training step
-"""
+    """Log metrics for a training step"""
+
 
 
     log_entry = {

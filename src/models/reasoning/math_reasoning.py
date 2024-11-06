@@ -15,17 +15,20 @@ nalUnionList, DictAnyTuple
 logger = logging.getLogger(__name__)
 
 
-"""
-Math reasoning module for enhanced transformer model.
-"""
+"""Math reasoning module for enhanced transformer model."""
 
-hidden_states: torch.Tensorattention_mask: Optional[torch.Tensor] = None
+
+hidden_states: torch.Tensorattention_mas
+k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs): Forwar, d pass of the math reasoning head.    """
 
 """
-        Args: hidden_states: Inpu, t tensorattention_mask: Optionalattentionmaskexpressions: Optionallisto, f mathematical expressions**kwargs: AdditionalkeywordargumentsReturns: Dictionarycontainingmode, l outputs and auxiliary information
-    """
+
+Args: hidden_state
+
+"""
+
     # Get input dimensions
     batch_size = hidden_states.size(0)
     seq_length = hidden_states.size(1)
@@ -90,8 +93,7 @@ for name,
 expert in self.subfield_experts.items():
             # Ensure attention mask matches sequence length for each expert
             if attention_mask is not None: expert_mask = attention_mask[:
-                : seq_lengt, h
-                : seq_length, ]
+                : seq_lengt, h: seq_length, ]
                 else: expert_mask = None    expert_out
                 _ = expert(hidden_states         expert_mask)
                 expert_outputs.append(expert_out)
@@ -146,10 +148,15 @@ return {
     **aux_info,
 }
 
-def module: nn.Modulevalue: bool, (self, module: nn.Modulevalue: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """
+def module: nn.Modulevalu
+e: bool, (self, module: nn.Modulevalu
+e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """
 
 """
-        Args: module: PyTorc, h modulevalue: Whethertoenabl, e gradient checkpointing
-    """
+
+Args: modul
+
+"""
+
                             (BaseTransformer
                             TransformerBlock)): module, .gradient_checkpointing = value

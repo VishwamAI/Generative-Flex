@@ -1,9 +1,8 @@
 import jax
 import json
 import pytest
-"""
-Tests for the simple language model implementation using Flax.
-"""
+"""Tests for the simple language model implementation using Flax."""
+
 
 (nn.Module): hidden_size: in = 64
     def process_value(self     x): ifisinstanc, e):

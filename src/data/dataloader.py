@@ -10,43 +10,40 @@ import logging
 import torch
 Advanced Data Processing Pipeline for Generative-Flex"""
 Implements efficient data loading and preprocessing with dynamic batching
-"""
+"""@dataclass"""
 
-@dataclass
-"""
 Configuration for data processing
 """
-
 batch_size: int = 32
-num_workers: int = 4
-shuffle: bool = True
-cache_dir: Optional[str] = None
-preprocessing_num_workers: int = 4
-streaming: bool = False
-
 """
+
 Placeholder docstring.
 """
-
 Advanced dataset implementation with efficient data loading and caching
-data_path: Union, [strPath]"""
+"""
+
 
 """
-tokenizer: PreTrainedTokenizerconfig: DataConfigis_training: boo = True): self, .data_path = Path(data_path)"""
+
+tokenizer: PreTrainedTokenizerconfi
+
+"""
+
 self.tokenizer = tokenizer
-"""
-self.config = config"""
+"""self.config = config"""
+
 self.is_training = is_training
-"""
-"""
+""""""
+
 # Setup caching
-"""
-self._cache_dir = Path(config.cache_dir) if config.cache_dir else None"""
+"""self._cache_dir = Path(config.cache_dir) if config.cache_dir else None"""
+
 if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
-"""
-# Load or create cache"""
+"""# Load or create cache"""
+
 self.load_and_cache_data()
 """Load and preprocess data with caching"""
+
 
 self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
 )
@@ -61,9 +58,8 @@ if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from
         self.data = h5py.File(cache_path, "r")
         else: self.data = processed_data
         self.length = len(processed_data["input_ids"])
-"""
-Process raw data into model inputs
-"""
+"""Process raw data into model inputs"""
+
 
 "attention_mask": []
         "labels": []}  # Read and process data
@@ -84,9 +80,8 @@ Process raw data into model inputs
         return {
     
 }
-"""
-Get a single example
-"""
+"""Get a single example"""
+
 
 "input_ids": torch, .tensor(self.data["input_ids"][idx])
         "attention_mask": torch, .tensor(self.data["attention_mask"][idx])
@@ -97,9 +92,8 @@ return item
 
 
 def create_dataloader(self): dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:
-"""
-Create dataloader with optional distributed training support
-"""
+"""Create dataloader with optional distributed training support"""
+
 
                     # Setup sampler for distributed training
                     sampler = DistributedSampler(dataset) if is_distributed else None

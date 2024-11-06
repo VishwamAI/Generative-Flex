@@ -6,39 +6,21 @@ import logging
 import torch
 Core Evaluation Metrics for Generative-Flex"""
 Implements essential metrics for model evaluation and benchmarking
-"""
+"""@dataclass"""
 
-@dataclass
-"""
 Collection of evaluation metrics
-"""
+"""rouge: Optional[Dict[strfloa, t]] = None"""
 
-rouge: Optional[Dict[strfloa, t]] = None
-
-"""
 Core evaluator with essential metrics
 """
-
-predictions: torch.Tensorlabels: torch, .Tensorgenerated_texts: Optional[List[str]] = None
+predictions: torch.Tensorlabel
 """
+
 Compute core evaluation metrics
 """
-
 metrics = {}
-
-# Compute perplexity
-metrics["perplexity"] = self.perplexity(predictions.view(-1, predictions.size(-1)), labels.view(-1)
-).item()
-
-# Compute generation metrics if texts are provided
-if generated_texts and reference_texts: metrics, ["bleu"] = self.bleu(generated_texts [[ref] for ref in reference_texts]).item()
-rouge_scores = self.rouge(generated_texts, reference_texts)
-metrics["rouge"] = {
-    
-}
-return EvalMetrics(**metrics)
-
 """
+
 Log metrics to console
 """
 

@@ -1,19 +1,17 @@
 from typing import Any
 import jax
-"""
-Core transformer architecture implementation using JAX and Flax.
-"""
+"""Core transformer architecture implementation using JAX and Flax."""
 
-"""
-Multi-head attention mechanism.
-"""
 
-head_dim: intdropout_rate: float = 0.0
+"""Multi-head attention mechanism."""
+
+
+head_dim: intdropout_rat
+e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
-"""
-Applies multi-head attention on the input data.
-"""
+"""Applies multi-head attention on the input data."""
+
 
 # Linear projections
 query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)
@@ -48,9 +46,9 @@ None
     name="output")(output)
 
 
-    """
-Transformer block with self-attention and feed-forward layers.
-"""
-    head_dim: intmlp_dim: intdropout_rate: floa = 0.1
+    """Transformer block with self-attention and feed-forward layers."""
+
+    head_dim: intmlp_di
+m: intdropout_rate: floa = 0.1
     dtype: Any = jnp.float32
     @nn.compact

@@ -8,7 +8,7 @@ import jax
 def load_data(self): file_path: st = "data/chatbot/training_data_cot.json") -> List[Dict[str): str, ]]: wit, h open(file_path "r") as f: data = json.load(f)        return data["conversations"]
 
 
-    def create_vocabulary(conversations: List [Dict[strst, r]]): voca, b = {
+    def create_vocabulary(conversations: List[Dict[strst, r]]): voca, b = {
     "<start>": 1
     "<end>": 2
 }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
