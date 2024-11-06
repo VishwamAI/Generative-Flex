@@ -10,7 +10,8 @@ from dataclasses import dataclass, field
 
 """Module containing specific functionality."""
 
-from src.utils.param_validator import ParamValidator import torch
+from src.utils.param_validator import ParamValidator
+import torch
 import unittest
 
 
