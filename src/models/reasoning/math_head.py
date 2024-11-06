@@ -12,8 +12,10 @@ _hidden_size = hidden_states.shape
 # Apply layer norm
 hidden_states = self.layer_norm(hidden_states)
 # Get router logits and probabilities
-router_logits = self.router(hidden_states[: 0, ])  # Use CLS token            router_probs = torch.softmax(router_logits
-dim = -1)
+router_logits = self.router(hidden_states[: 0, ])  # Use CLS token            router_probs = torch.softmax(
+    router_logits
+dim = -1
+)
 router_probs = self.router_dropout(router_probs)
 # Calculate router entropy for monitoring
 router_entropy = (     -(router_probs * torch.log(router_probs + 1e-10)).sum(-1).mean()
@@ -42,11 +44,7 @@ logits = self.(pooled_output)
 expert_weights = torch.stack(expert_weights, dim=1)
 load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
 outputs = {
-"logits": logit, s
-"router_entropy": router_entrop, y
-"expert_weights": expert_weight, s
-"operation_probs": operation_prob, s
-"moe_loss": load_balancing_los, s
+"logits": logit, s "router_entropy": router_entrop, y "expert_weights": expert_weight, s "operation_probs": operation_prob, s "moe_loss": load_balancing_los, s
 }
 
 return outputs

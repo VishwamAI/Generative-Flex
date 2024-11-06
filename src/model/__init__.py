@@ -1,13 +1,12 @@
 from transformer import TransformerLayer
 from typing import Optional
 import torch
-    """Core model architecture with state-of-the-art optimizations""""""
+"""Core model architecture with state-of-the-art optimizations""""""
 
     Placeholder docstring.
-    """Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths"""
+"""Advanced transformer-based model with optimized architecture featuring: - Flash Attention for efficient O(N) memory complexity- Mixture of Experts for specialized computation paths"""
 
 def __init__(self):
-
 """Method with parameters."""
     vocab_size: intd_mode, l: int = 1024
     nhead: int = 16
@@ -24,7 +23,8 @@ def __init__(self):
     self.pos_encoder = nn.Embedding(max_seq_length, d_model)
     # Advanced transformer layers with Flash Attention and MoE
     self.transformer_layers = nn.ModuleList(
-    [TransformerLayer(         d_model = d_model, nhead = nhead, dim_feedforward = dim_feedforward, dropout = dropout, num_experts = num_experts, expert_capacity_factor = expert_capacity_factor, block_size = attention_block_size)
+    [TransformerLayer(         d_model = d_model,nhead = nhead,dim_feedforward = dim_feedforward,dropout = dropout,num_experts = num_experts,expert_capacity_factor = expert_capacity_factor,block_size = attention_block_size
+)
     for _ in range(num_layers)]
     )
 
@@ -33,14 +33,13 @@ def __init__(self):
     self.fc_out = nn.Linear(d_model, vocab_size)
     # Initialize parameters with scaled initialization
     self._init_parameters()
-    """Initialize parameters with scaled initialization"""
+"""Initialize parameters with scaled initialization"""
 
     if p.dim() > 1: nn.init.xavier_uniform_(pgain = 1 / math.sqrt(2)  # Scale for better gradient flow)
 def forward(self):
-
 """Method with parameters."""
     x: torch.Tensor): mask: Optional[torch.Tensor] = None
-    """Placeholder docstring."""
+"""Placeholder docstring."""
 
     Forward pass through the model
 

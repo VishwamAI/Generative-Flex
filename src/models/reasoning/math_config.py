@@ -3,7 +3,6 @@ from transformers import PretrainedConfig
 
 _model_type = "math_reasoning"
 def __init__(self):
-
 """Method with parameters."""
     hidden_size: in = 768): num_attention_heads: in, t = 12
     num_hidden_layers: int = 6
@@ -20,11 +19,8 @@ def __init__(self):
     bos_token_id: int = 1
     eos_token_id: int = 2
     **kwargs): super, ().__init__(
-    pad_token_id = pad_token_id,
-    bos_token_id = bos_token_id,
-    eos_token_id = eos_token_id,
-    **kwargs
-    )
+    pad_token_id = pad_token_id,bos_token_id = bos_token_id,eos_token_id = eos_token_id,**kwargs
+)
     self.hidden_size = hidden_size
     self.num_attention_heads = num_attention_heads
     self.num_hidden_layers = num_hidden_layers

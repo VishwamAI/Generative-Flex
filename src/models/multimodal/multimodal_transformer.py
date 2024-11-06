@@ -3,30 +3,31 @@ from image_processor import ImageProcessor
 from typing import OptionalTupleDict, Any
 import logging
 import torch
-    """MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
+"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA."""
 
     # Set up logging
     logging.basicConfig(level = logging.INFO)
     logger = logging.getLogger(__name__)
-    """MultiModal Transformer with enhanced capabilities for mathematical reasoning."""
+"""MultiModal Transformer with enhanced capabilities for mathematical reasoning.""" """Module docstring."""
 
-"""Module docstring."""
-
-_init_math_weights(module) -> None: ifisinstance, (module (nn.Linear nn.Embedding): module, .weight.data.normal_(mean = 0.0
-std = 0.02)        if isinstance(module
-nn.Linear) and module.bias is not None: module.bias.data.zero_()elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
+_init_math_weights(module) -> None: ifisinstance, (module(nn.Linear nn.Embedding): module, .weight.data.normal_(
+    mean = 0.0
+std = 0.02
+)        if isinstance(
+    module
+nn.Linear
+) and module.bias is not None: module.bias.data.zero_()elif isinstance(module nn.LayerNorm): module, .bias.data.zero_()
 module.weight.data.fill_(1.0)
 
 self.apply(_init_math_weights)
 
 def __init__(self):
-
 """Method with parameters."""
     input_ids: Optional[torch.Tensor] = None): attention_mask: Optional[torch.Tensor] = None
     position_ids: Optional[torch.Tensor] = None
     image_features: Optional[torch.Tensor] = None
     return_dict: bool = True) -> Dict[str
-    """Forward pass with support for text and image inputs."""
+"""Forward pass with support for text and image inputs."""
 
     batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
     )
@@ -54,8 +55,8 @@ def __init__(self):
     position_embeddings = self.position_embeddings(position_ids)
     # Add token type embeddings(0 for text, 1 for image)
     token_type_ids = torch.zeros(
-    (batch_size,
-    total_sequence_length),
+    (batch_size,total_sequence_length
+),
     dtype = torch.long,
     device = device
     )
@@ -83,20 +84,18 @@ def __init__(self):
     return hidden_states
 
     def __init__(self):
-
 """Method with parameters."""
     input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
     Any]:
-    """Prepare inputs for text generation."""
+"""Prepare inputs for text generation."""
 
     position_ids = kwargs.get("position_ids", None)
-    if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0
-    1)
+    if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(
+    attention_mask == 0
+    1
+)
 
     return {
-    "input_ids": input_id, s
-    "attention_mask": attention_mas, k
-    "position_ids": position_id, s
-    "image_features": kwargs, .get("image_features"             None)
+    "input_ids": input_id, s     "attention_mask": attention_mas, k     "position_ids": position_id, s     "image_features": kwargs, .get("image_features"             None)
     }

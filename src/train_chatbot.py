@@ -4,26 +4,19 @@ from typing import Dict, List
 import jax
 
 def load_data(self, file_path: str = "data/chatbot/training_data_cot.json"):
-
-with open(file_path,
-    "r") as f: data = json.load(f)        return data["conversations"]
+with open(
+    file_path,"r" ) as f: data = json.load(f)        return data["conversations"]
 def create_vocabulary(conversations: List[Dict[strst, r]]):
-
 """Method with multiple parameters.
 
     Args: self: Parameter description
     file_path: Parameter description
     str]]: Parameter description
-    "r") as f: Parameter description
-    r]]: Parameter description
-    """
+    "r") as f: Parameter description     r]]: Parameter description"""
     voca, b = {
-    "<start>": 1
-    "<end>": 2
-    }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
+    "<start>": 1     "<end>": 2     }        for conv in conversations: fortexti, n [conv["input"]conv["response"]]: fo, r token in text.lower().split(): i, f token not in vocab: vocab, [token] = len(vocab)                return vocab
 
 def main(self):
-
 """Method with parameters."""
     # Load and prepare data                conversations = load_data): voca, b = create_vocabulary(conversations)
     # Model parameters
@@ -37,15 +30,8 @@ def main(self):
     dropout_rate = 0.1
     # Create and initialize model
     model = LanguageModel(
-    vocab_size = vocab_size,
-    hidden_dim = hidden_dim,
-    num_heads = num_heads,
-    head_dim = head_dim,
-    mlp_dim = mlp_dim,
-    num_layers = num_layers,
-    dropout_rate = dropout_rate,
-    max_seq_len = max_length
-    )
+    vocab_size = vocab_size,hidden_dim = hidden_dim,num_heads = num_heads,head_dim = head_dim,mlp_dim = mlp_dim,num_layers = num_layers,dropout_rate = dropout_rate,max_seq_len = max_length
+)
 
     # Prepare training data
     inputs, targets = prepare_batch(conversationsvocabbatch_size=len(conversations),

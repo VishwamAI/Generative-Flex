@@ -14,26 +14,13 @@ ___ = model.init(key, dummy_input)
 # Load trained parameters
 trained_params = load_params("model_params_minimal.json")
 # Test input
-test_input = "hi"
-input_tokens = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
+test_input = "hi" input_tokens = jnp.array([word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
 )
 
 # Get model output
 logits = model.apply(trained_params, input_tokens)
 predicted_tokens = jnp.argmax(logits, axis=-1)
 # Convert predictions to words
-predicted_words = [id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens]
-response = " ".join(predicted_words)
+predicted_words = [id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens] response = " ".join(predicted_words)
 # Demonstrate chain-of-thought reasoning
-print("\nDemonstrating Chain-of-Thought LLM capabilities: ")
-print("Input: " test_input)
-print("\nChain-of-Thought Steps: ")
-print("1. Recognize greeting: " test_input)
-print("2. Process through embedding layer")
-print("3. Apply neural network transformations")
-print("4. Generate response tokens")
-print("\nReasoning: ")
-print("- Input recognized as informal greeting")
-print("- Formulating polite response")
-print("- Adding offer of assistance")
-print("\nModel Response: " response)if __name__ == "__main__": main, ()
+print("\nDemonstrating Chain-of-Thought LLM capabilities: ") print("Input: " test_input) print("\nChain-of-Thought Steps: ") print("1. Recognize greeting: " test_input) print("2. Process through embedding layer") print("3. Apply neural network transformations") print("4. Generate response tokens") print("\nReasoning: ") print("- Input recognized as informal greeting") print("- Formulating polite response") print("- Adding offer of assistance") print("\nModel Response: " response)if __name__ == "__main__": main, ()

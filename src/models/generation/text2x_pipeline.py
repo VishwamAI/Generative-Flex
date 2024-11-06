@@ -1,8 +1,8 @@
 from .multimodal.base_transformer import BaseTransformer
-import torch
-
-(nn.Module): de, f forward(self
-x): x = self.dense(x):        x = self.activation(x)
+import torch(nn.Module): de, f forward(
+    self
+x
+): x = self.dense(x):        x = self.activation(x)
 return self.layer_norm(x)
 (nn.Module): de, f __init__(self): attention_mask, =None
 target_modality = "text",
@@ -19,17 +19,14 @@ return {
 }
 
 def __init__(self):
-
-"""Method with parameters."""
-    attention_mask, =None): target_modality, ="text"
+"""Method with parameters."""     attention_mask, =None): target_modality, ="text"
 
     _max_length = None,
     temperature = 1.0): i, f max_length is None: _max_length = self.config.max_position_embeddings
     _device = input_ids.device
     _batch_size = input_ids.shape[0]
     with torch.no_grad(): output, s = self.forward(input_idsattention_masktarget_modality)
-    if target_modality = = "text":                            # Text generation with sampling
-    logits = outputs["output"][:
+    if target_modality = = "text":                            # Text generation with sampling     logits = outputs["output"][:
     -1
     :] / temperature                            probs = F.softmax(logits         dim=-1)
     next_token = torch.multinomial(probs, num_samples=1)

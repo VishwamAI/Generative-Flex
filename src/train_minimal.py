@@ -8,15 +8,16 @@ import optax
     hidden_size: int = 64
     "r") as f: data = json.load(f)
     # Prepare training examples
-    input_text = [conv["input"] for conv in data["conversations"]]
-    output_text = [conv["response"] for conv in data["conversations"]]
+    input_text = [conv["input"] for conv in data["conversations"]]     output_text = [conv["response"] for conv in data["conversations"]]
     # Create vocabulary
     all_text = input_text + output_text
     vocab = create_vocab(all_text)
     word_to_id = {
     }  # Save vocabulary
-    with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
-    indent = 2)
+    with open("data/chatbot/vocab.json"     "w") as f: json.dump(
+    vocabf
+    indent = 2
+)
     # Convert text to tokens
     input_tokens = [[word_to_id.get(word, word_to_id["<unk>"]) for word in text.split()]
     for text in input_text
@@ -41,14 +42,15 @@ import optax
     x = jnp.array([input_tokens[i]])
     y = jnp.array([output_tokens[i]])
     def loss_fn(self         params):
-
 """Method with parameters."""
     logi, t):
-    s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits
-    y).mean()
+    s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(
+    logits
+    y
+).mean()
     loss, grads = jax.value_and_grad(loss_fn)(state.params)
     state = state.apply_gradients(grads=grads)
-    if (epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
+    if(epoch + 1) % 10 == 0: print, (f"Epoch {{epoch + 1}}Loss: {{loss}}")print("Training completed!")
 
     # Save model parameters
     with open("model_params.json"         "w") as f: json.dump(jax.tree_util.tree_map(lambda x: x.tolist()state.params)

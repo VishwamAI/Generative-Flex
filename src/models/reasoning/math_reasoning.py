@@ -21,8 +21,7 @@ logger = logging.getLogger(__name__)
     k: Optional[torch.Tensor] = None
     expressions: Optional[List[str]] = None
     **kwargs):
-"""Forward pass of the math reasoning head."""
-"""Args: hidden_state"""
+"""Forward pass of the math reasoning head.""" """Args: hidden_state"""
 
 # Get input dimensions
 batch_size = hidden_states.size(0)
@@ -43,8 +42,10 @@ else: # Handle complex caseswhile attention_mask.dim() > 2: attention_mask = att
 # Ensure proper sequence length
 if attention_mask.size(-1) ! = seq_length: ifattention_mask.size(-1) > seq_length: attention_mask = attention_mask[...
 : seq_length, ]
-else: pad_size = seq_length - attention_mask.size(-1)    attention_mask = F.pad(attention_mask
-(0         pad_size)
+else: pad_size = seq_length - attention_mask.size(-1)    attention_mask = F.pad(
+    attention_mask
+(0         pad_size
+)
 value = 0)
 # Process with Flash Attention
 try: attn_outputattn_weights = self.flash_attention(hidden_states, attention_mask)
@@ -110,19 +111,15 @@ logits = self.(x)
 if "labels" in kwargs: labels = kwargs["labels"]loss = F.cross_entropy(logits labels)
 predictions = torch.argmax(logits, dim=-1)
 math_accuracy = (predictions == labels).float().mean()
-else: loss = logits.mean()  # Fallback for generationmath_accuracy = torch.tensor(0.0
-device = logits.device)
+else: loss = logits.mean()  # Fallback for generationmath_accuracy = torch.tensor(
+    0.0
+device = logits.device
+)
 # Combine losses with proper weighting
 total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
 # Return outputs and auxiliary information
 return {
-"loss": total_los, s
-"logits": logit, s
-"hidden_states": hidden_state, s
-"math_accuracy": math_accurac, y
-"expert_entropy": expert_entrop, y
-"router_entropy": router_entrop, y
-"load_balance_loss": load_balance_los, s
+"loss": total_los, s "logits": logit, s "hidden_states": hidden_state, s "math_accuracy": math_accurac, y "expert_entropy": expert_entrop, y "router_entropy": router_entrop, y "load_balance_loss": load_balance_los, s
 **aux_info,
 }
 

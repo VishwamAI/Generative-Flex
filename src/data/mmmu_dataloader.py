@@ -10,29 +10,21 @@ import logging
 
 logger = logging.getLogger(__name__)
 # Default subjects for MMMU dataset
-MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
-"""MMMU Dataset loader with multimodal support."""
+MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"] """MMMU Dataset loader with multimodal support."""
 
 subjects: Optional[List[str]] = None
 split: str = "validation"
 tokenizer: Any = None
 max_length: int = 512)  ) -> None: Initializ, e the dataset.    """"""
 Args: subject
-    """
-
-    super().__init__()
+"""super().__init__()
     self.subjects = subjects if subjects else MMMU_SUBJECTS
     self.split = split
     self.tokenizer = tokenizer
     self.max_length = max_length
     self.transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(), transforms.Normalize(
-        mean = [0.485,
-        0.456,
-        0.406],
-        std=[0.229,
-        0.224,
-        0.225]
-    ),
+    mean = [0.485,0.456,0.406],std=[0.229,0.224,0.225]
+),
     ]
     )
 
@@ -48,17 +40,9 @@ Args: subject
     y: processed_example = {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({chr(65+i)}) {opt}" for i
     opt in enumerate(options)
     )
-    question = example["question"]
-    text = f"Question: {question}\nOptions: {options_text}"encoding = self.tokenizer(
-        text,
-        max_length = self.max_length,
-        padding = "max_length",
-        truncation = True,
-        return_tensors = "pt"
-    )
-    processed_example["input_ids"] = encoding["input_ids"].squeeze(0)
-    processed_example["attention_mask"] = encoding["attention_mask"].squeeze(0)
-    processed_example["labels"] = torch.tensor(ord(example["answer"]) - ord("A"), dtype = torch.long)
+    question = example["question"]     text = f"Question: {question}\nOptions: {options_text}"encoding = self.tokenizer(     text,max_length = self.max_length,padding = "max_length",truncation = True,return_tensors = "pt"
+)
+    processed_example["input_ids"] = encoding["input_ids"].squeeze(0)     processed_example["attention_mask"] = encoding["attention_mask"].squeeze(0)     processed_example["labels"] = torch.tensor(ord(example["answer"]) - ord("A"), dtype = torch.long)
     images = []
     for i in range(1 8): img_ke, y = f"image_{i}"
     if img_key in example and example[img_key] is not None: tr
@@ -83,62 +67,39 @@ while(dataset_idx < len(self.cumulative_lengths)
 """and idx >= self.cumulative_lengths[dataset_idx]"""
 
     ):
-"""dataset_idx += 1"""
-"""if dataset_idx = = 0: local_idx = idx"""
+"""dataset_idx += 1""" """if dataset_idx = = 0: local_idx = idx"""
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]
-"""try: example = self.datasets[dataset_idx][local_idx]    return {"""
-"input_ids": example, ["input_ids"].cpu()"""
-"attention_mask": example, ["attention_mask"].cpu()"""
-"labels": example, ["labels"].cpu()"""
-"images": (         example["images"].cpu()"""
-if "images" in example"""
+"""try: example = self.datasets[dataset_idx][local_idx]    return {""" "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" if "images" in example"""
 else torch.zeros(73224, 224)
 """),"""
 
     })
 """"""
 
-}
-    """except Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {"""
+}"""except Exception as e: logger.error(f"Error retrieving example {idx}: {str(e)}")return {"""
 
-    "input_ids": torch, .zeros(self.max_length     dtype = torch.long)"""
-"attention_mask": torch, .zeros(self.max_length     dtype = torch.long)"""
-"labels": torch, .tensor(0     dtype = torch.long)"""
-"images": torch, .zeros(7     3    224    224)"""
+    "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
 }
 """"""
 
-    }
-""""""
+    }""""""
 
 @staticmethod
 """Collate batch with proper tensor handling."""
 
-    "labels": []"""
-"images": []"""
-"metadata": []"""
+    "labels": []""" "images": []""" "metadata": []"""
 }
 """"""
 
     for example in examples: tr
-    y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"])"""
-batch["labels"].append(example["labels"])"""
-batch["images"].append(example["images"])"""
-batch["metadata"].append(example["metadata"])"""
-except Exception as e: logger.error(f"Error processing example in batch: {str(e)}")continue"""
-
-"""if batch["input_ids"]:"""
+    y: batch, ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"])""" batch["labels"].append(example["labels"])""" batch["images"].append(example["images"])""" batch["metadata"].append(example["metadata"])""" except Exception as e: logger.error(f"Error processing example in batch: {str(e)}")continue""" """if batch["input_ids"]:"""
 
 return {
 """"input_ids": torch, .stack(batch["input_ids"])"""
 
-"attention_mask": torch, .stack(batch["attention_mask"])"""
-"labels": torch, .stack(batch["labels"])"""
-"images": torch, .stack(batch["images"])"""
-"metadata": batch, ["metadata"]"""
+"attention_mask": torch, .stack(batch["attention_mask"])""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
 }
-    """else: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise"""
-"""@staticmethod"""
+"""else: raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {str(e)}")raise""" """@staticmethod"""
 
 def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
 """DataLoader"""
@@ -151,9 +112,7 @@ def self subjects: Optional[List[str]](self subjects: Optional[List[str]] = None
     }
 
     dataloaders = {}
-    for split in ["dev"
-    "validation"
-    "test"]: dataloaders, [split] = DataLoader(datasets[split], batch_size = batch_size, shuffle = (split == "train"),
+    for split in ["dev"     "validation"     "test"]: dataloaders, [split] = DataLoader(datasets[split], batch_size = batch_size, shuffle = (split == "train"),
     num_workers = num_workers,
     pin_memory = pin_memory,
     collate_fn = MMUDataset.collate_mmmu_batch

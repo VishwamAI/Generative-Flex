@@ -3,9 +3,8 @@
 from typing import ListOptionalDict, Union, Any
 from dataclasses import dataclass, field
 
-@dataclass
-class TrainingConfig:
-"""Configuration for model training."""
+@dataclass class TrainingConfig:
+    """Configuration for model training."""
 
     # Model configuration
     # Model architecture parameters

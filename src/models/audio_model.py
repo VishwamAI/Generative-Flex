@@ -1,7 +1,6 @@
 from src.models.transformer import TransformerBlock
 from typing import Any, Optional
-"""Audio generation model implementation using JAX and Flax."""
-"""Audio signal to embedding."""
+"""Audio generation model implementation using JAX and Flax.""" """Audio signal to embedding."""
 
 hop_length: int = 256
 dtype: Any = jnp.float32
@@ -37,11 +36,8 @@ dtype: Any = jnp.float32
 
     # Convert audio to embeddings
     x = AudioEmbedding(
-        _hidden_dim = self.hidden_dim,
-        _frame_size = self.frame_size,
-        _hop_length = self.hop_length,
-        _dtype = self.dtype
-    )(inputs)
+    _hidden_dim = self.hidden_dim,_frame_size = self.frame_size,_hop_length = self.hop_length,_dtype = self.dtype
+)(inputs)
 
     # Add positional embeddings
     num_frames = x.shape[1]
@@ -52,12 +48,8 @@ dtype: Any = jnp.float32
     # Apply transformer blocks
     for _ in range(self.num_layers):
     x = TransformerBlock(
-        _num_heads = self.num_heads,
-        _head_dim = self.head_dim,
-        _mlp_dim = self.mlp_dim,
-        _dropout_rate = self.dropout_rate,
-        _dtype = self.dtype
-    )(x, deterministic = not training)
+    _num_heads = self.num_heads,_head_dim = self.head_dim,_mlp_dim = self.mlp_dim,_dropout_rate = self.dropout_rate,_dtype = self.dtype
+)(x, deterministic = not training)
     # Project back to audio frame space
     x = nn.Dense(self.frame_size, _dtype=self.dtype)(x)
     # Overlap-add synthesis
@@ -73,8 +65,10 @@ dtype: Any = jnp.float32
     output = output.at[: indices, ].add(x * window[None             None            :])
     # Normalize by window overlap
     divisor = jnp.zeros_like(output)
-    divisor = divisor.at[: indices, ].add(window[None                 None                :] ** 2)                output = jnp.where(divisor > 1e-8
+    divisor = divisor.at[: indices, ].add(window[None                 None                :] ** 2)                output = jnp.where(
+    divisor > 1e-8
     output / divisor
-    output)
+    output
+)
 
     return output

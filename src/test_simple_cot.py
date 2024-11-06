@@ -5,10 +5,7 @@ import json(nn.Module): hidden_size: int = 64
 word_to_id = {
 }        id_to_word = {
 }  # Test input
-test_input = "hi"
-print("\nTesting Chain-of-Thought Response Generation: ")
-print("-" * 50)
-print(f"Input: {{test_input}}")# Initialize model with same key as training
+test_input = "hi" print("\nTesting Chain-of-Thought Response Generation: ") print("-" * 50) print(f"Input: {{test_input}}")# Initialize model with same key as training
 key = jax.random.PRNGKey(0)
 model = SimpleChatModel(_vocab_size=len(vocab))
 # Convert input to tokens
@@ -19,7 +16,6 @@ ___ = model.init(key, input_tokens)
 with open("model_params.json", "r") as f: params_dict = json.load(f)        params = jax.tree_util.tree_map(lambda x: jnp.array(x)
 params_dict)
 # Generate response
-logits = model.apply({"params": params, } input_tokens)        predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {{word}}")
-print("-" * 50)
+logits = model.apply({"params": params, } input_tokens)        predicted_tokens = jnp.argsort(logits)[-10:][::-1]  # Get top 10 predictionsprint("\nTop predicted responses: ")for token in predicted_tokens: word = id_to_word[int(token)]        print(f"- {{word}}") print("-" * 50)
 
 if __name__ == "__main__": main, ()
