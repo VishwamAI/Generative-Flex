@@ -1,98 +1,127 @@
-import os
-import re
-
 #!/usr/bin/env python3
+import re
+from pathlib import Path
+import black
+from typing import List, Dict, Optional, Any
 
+def fix_string_literals(content: str) -> str:
+    """Fix string literal formatting in field definitions."""
+    def format_string(match):
+        items = re.findall(r'"[^"]*"|\S+', match.group(1))
+        formatted_items = []
+        for item in items:
+            cleaned = item.strip().replace('"', '')
+            formatted_items.append(f'"{cleaned}"')
+        return 'default_factory=lambda: [' + ', '.join(formatted_items) + ']'
 
-def fix_class_indentation(content) -> None:    """Fix class and method indentation."""        lines = content.split("\n")
-fixed_lines = []
-indent_level = 0
+    # Fix string literals in default_factory
+    content = re.sub(
+        r'default_factory=lambda:\s*\[(.*?)\]',
+        format_string,
+        content
+    )
+    return content
 
-for line in lines: stripped = line.lstrip()        if not stripped: fixed_lines.append("")
-continue
+def fix_class_method_syntax(content: str) -> str:
+    """Fix class method decorator and spacing."""
+    # Fix @classmethod spacing
+    content = re.sub(r'@class\s+method', r'@classmethod', content)
 
-# Handle class definitions
-if stripped.startswith("class "):
-indent_level = 0
-fixed_lines.append(stripped)
-indent_level += 1
-continue
+    # Fix method definitions after decorators
+    content = re.sub(
+        r'(@\w+)\s*\n\s*def',
+        r'\1\n    def',
+        content
+    )
+    return content
 
-# Handle method definitions
-    if stripped.startswith("def "):
-        if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
-        else: fixed_lines.append(stripped)
-        continue
+def fix_function_definitions(content: str) -> str:
+    """Fix function definition formatting."""
+    # Fix method definitions with multiple spaces
+    content = re.sub(
+        r'def\s+(\w+)\s*\(\s*self\s*,?\s*([^)]*)\)\s*->\s*([^:]+):',
+        lambda m: f'def {m.group(1)}(self{", " + m.group(2) if m.group(2).strip() else ""}) -> {m.group(3).strip()}:',
+        content
+    )
 
-        # Handle decorators
-        if stripped.startswith("@"):
-        if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
-        else: fixed_lines.append(stripped)
-        continue
+    # Fix standalone function definitions
+    content = re.sub(
+        r'def\s+(\w+)\s*\(\s*([^)]*)\)\s*->\s*([^:]+):',
+        lambda m: f'def {m.group(1)}({m.group(2).strip()}) -> {m.group(3).strip()}:',
+        content
+    )
+    return content
 
-        # Handle other lines
-        if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
-        else: fixed_lines.append(stripped)
+def fix_type_annotations(content: str) -> str:
+    """Fix type annotation syntax."""
+    # Fix nested type annotations
+    content = re.sub(
+        r'(\w+):\s*Optional\[([^]]+)\]\s*=\s*field\(([^)]+)\)',
+        r'\1: Optional[\2] = field(\3)',
+        content
+    )
 
-        return "\n".join(fixed_lines)
+    # Fix dictionary type annotations
+    content = re.sub(
+        r'Dict\[([^]]+)\]\]',
+        lambda m: f'Dict[{m.group(1).strip()}]',
+        content
+    )
+    return content
 
+def process_file(file_path: Path) -> None:
+    """Process a single file, applying all fixes."""
+    print(f"Processing {file_path}")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-        def fix_imports(content) -> None:                    """Fix import statement formatting."""        lines = content.split("\n")
-        import_lines = []
-        other_lines = []
+        # Apply fixes
+        content = fix_string_literals(content)
+        content = fix_class_method_syntax(content)
+        content = fix_function_definitions(content)
+        content = fix_type_annotations(content)
 
-        for line in lines: ifline.strip().startswith(("import "
-            "from ")):
-                import_lines.append(line)
-                else: other_lines.append(line)
+        # Format with black
+        mode = black.Mode(
+            target_versions={black.TargetVersion.PY312},
+            line_length=88,
+            string_normalization=True,
+            is_pyi=False,
+        )
 
-                if import_lines: return"\n".join(sorted(import_lines)) + "\n\n\n".join(other_lines)
-                return content
+        try:
+            content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e:
+            print(f"Warning: Black formatting failed for {file_path}: {e}")
 
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
 
-                def fix_file(filepath) -> None:    """Apply all fixes to a file."""        print(f"Processing {filepath}")
-                content = read_file(filepath)
-                if not content: return# Apply fixes in order
-                content = fix_imports(content)
-                content = fix_docstrings(content)
-                content = fix_multiline_strings(content)
-                content = fix_class_indentation(content)
+        print(f"Successfully processed {file_path}")
+    except Exception as e:
+        print(f"Error processing {file_path}: {e}")
 
-                # Ensure final newline
-                if not content.endswith("\n"):
-                content += "\n"
+def main() -> None:
+    """Fix final syntax issues in critical files."""
+    critical_files = [
+        'src/models/text_to_anything.py',
+        'src/config/config.py',
+        'src/config/training_config.py',
+        'src/models/apple_optimizations.py',
+        'src/models/knowledge_retrieval.py',
+        'src/models/reasoning/math_head.py',
+        'src/models/reasoning/math_reasoning.py',
+        'src/models/multimodal/base_transformer.py',
+        'src/models/multimodal/multimodal_transformer.py',
+        'src/training/utils/logging.py'
+    ]
 
-                write_file(filepath, content)
+    for file_path in critical_files:
+        if Path(file_path).exists():
+            process_file(Path(file_path))
+        else:
+            print(f"Warning: {file_path} not found")
 
-
-                    def main(self)::                    """Fix syntax issues in all problematic files."""        problem_files = [):
-                        "analyze_performance_by_category.py",
-                        "data/dataset_verification_utils.py",
-                        "data/verify_mapped_datasets.py",
-                        "fix_flake8_comprehensive.py",
-                        "fix_string_formatting.py",
-                        "fix_text_to_anything.py",
-                        "fix_text_to_anything_v6.py",
-                        "fix_text_to_anything_v7.py",
-                        "fix_text_to_anything_v8.py",
-                        "src/data/mmmu_loader.py",
-                        "src/models/apple_optimizations.py",
-                        "src/models/enhanced_transformer.py",
-                        "src/models/layers/enhanced_transformer.py",
-                        # Additional key files from completion criteria
-                        "src/config/training_config.py",
-                        "src/config/config.py",
-                        "src/data/math_tokenizer.py",
-                        "src/data/mmmu_dataloader.py",
-                        "src/models/text_to_anything.py",
-                        "src/training/train_mmmu.py",
-                        "tests/test_models.py",
-                ]
-
-                print("Applying final syntax fixes...")
-                for filepath in problem_files: ifos.path.exists(filepath):
-                fix_file(filepath)
-                print("Completed applying syntax fixes.")
-
-
-                if __name__ == "__main__":            main()
+if __name__ == "__main__":
+    main()
