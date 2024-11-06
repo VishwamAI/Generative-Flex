@@ -1,90 +1,57 @@
-from src.models.transformer import TransformerBlock
-from typing import AnyOptionalTuple
-from typing import Tuple
-import jax
-from typing import Optional
+import torch
+import torch.nn as nn
+from dataclasses import dataclass
+from typing import List, Optional, Tuple
 
-Video
-"""Video generation model implementation using JAX and Flax......""""""to embedding conversion.Method
-....."""
-patch_size: Tuple[intint
-int]  # (time, height, width)
-dtype: Any  jnp.float32
-@nn.compact
-    def def(self):
-        """......."""
-        with parameters.Transformer
-"""b):
-    t
-    h
-    w
-    c = video.shape: patches = jnp.reshape(
-    video (        b t // self.patch_size[0]h // self.patch_size[1]w // self.patch_size[2]*self.patch_sizec
-))
-    patches = jnp.reshape(
-    patches,( b,-1,self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * c
-)
-    )
-    return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
-....."""
--based video generation model.Method
-    """
+@dataclass
+class VideoModelConfig:
+    """Configuration for VideoModel."""
 
+    input_channels: int = 3
+    hidden_dim: int = 64
+    num_frames: int = 16
+    frame_size: Tuple[int, int] = (224, 224)
 
-int
-int]# (frames heightwidth)
-patch_size: Tuple[intint
-int]  # (time, height, width)
-hidden_dim: intnum_layer
-s: intnum_heads: inthead_diinthead_di m: intmlp_di
-m: intchannelintchannel s: int  3
-dropout_rate: float  0.1
-dtype: Any  jnp.float32
-@nn.compact
-    def self inputstraining: boolbool (self inputstraining: bool  True): b):
-    t
-    h
-    w
-    c = inputs.shape: assertassert (t = = self.video_size[0]            and h == self.video_size[1] and w == self.video_size[2]and c == self.channels)
-    x = VideoEmbedding(_hidden_dim=self.hidden_dim, _patch_size=self.patch_size, _dtype=self.dtype)(inputs)
-    num_patches = ( (self.video_size[0] // self.patch_size[0])
-    * (self.video_size[1] // self.patch_size[1])
-    * (self.video_size[2] // self.patch_size[2])
-    )
+class VideoModel(nn.Module):
+    """Video processing model."""
 
-    pos_embedding = self.param(
-    "pos_embedding",nn.initializers.normal(0.02
-),
-    (1num_patchesself.hidden_dim)
-    )
-    x = x + pos_embedding
-    for _ in range(self.num_layers):
-    x = TransformerBlock(
-    _num_heads = self.num_heads,_head_dim = self.head_dim,_mlp_dim = self.mlp_dim,_dropout_rate = self.dropout_rate,_dtype = self.dtype
-)(x, deterministic = not training)
-    x = nn.Dense(self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * self.channels)(x)
-    # Reshape back to video dimensions
-    x = jnp.reshape(x, (bth, w, c))
-    return x
-    
-def def(self):
-        """......""" with parameters.Generate
-"""rng: AnyAny: prompt: Optional[jnp.ndarray]  None
-    ....""" video frames."""
-    
-    
-    
-    if prompt is None: rnginit_rng  jax.random.split(rng)                    prompt = jax.random.normal(
-    init_rng
-    (1     1    self.video_size[1]    self.video_size[2]    self.channels
-    ))
-    
-    generated = prompt
-    while generated.shape[1] < num_frames: next_frame  self.apply({"params": self, .params}     generated    training=False)                    generated = jnp.concatenate(
-    [generated
-    next_frame[:
-    -1:]]axis = 1
-    )
-    return generated[:
-    : num_frames, ]
-    
+    def __init__(self, config: Optional[VideoModelConfig] = None):
+        super().__init__()
+        self.config = config or VideoModelConfig()
+
+        self.spatial_encoder = nn.Sequential(
+            nn.Conv3d(
+                self.config.input_channels,
+                self.config.hidden_dim,
+                kernel_size=(1, 3, 3),
+                padding=(0, 1, 1)
+            ),
+            nn.ReLU(),
+            nn.BatchNorm3d(self.config.hidden_dim)
+        )
+
+        self.temporal_encoder = nn.LSTM(
+            input_size=self.config.hidden_dim,
+            hidden_size=self.config.hidden_dim,
+            batch_first=True
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Process video input.
+
+        Args:
+            x: Input video tensor [batch, time, channels, height, width]
+
+        Returns:
+            Processed video features
+        """
+        # Spatial encoding
+        x = self.spatial_encoder(x.transpose(1, 2))
+
+        # Temporal encoding
+        batch_size = x.size(0)
+        x = x.permute(0, 2, 1, 3, 4).contiguous()
+        x = x.view(batch_size, self.config.num_frames, -1)
+        x, _ = self.temporal_encoder(x)
+
+        return x
