@@ -1,49 +1,43 @@
+"""
+Module containing specific functionality.
+"""
+
+from dataclasses import dataclass
 from dataclasses import dataclass, field
-
 from pathlib import Path
-
-from torch.utils.data import DataLoader, Dataset
-
 from tqdm import tqdm
-
 from typing import Dict, Any, Optional, List, Union, Tuple
-
 import logging
-import numpy as np
 import os
-import torch
-
-
-
-
-
-from dataclasses import dataclass, field
-
-from pathlib import Path
-
-from torch.utils.data import DataLoader, Dataset
-
-from tqdm import tqdm
-
-from typing import Dict, Any, Optional, List, Union, Tuple
-
-import logging
-import numpy as np
-import os
-import torch
-
-
-
-
-
-from pathlib import Path
 
 from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
+import numpy as np
+import torch
 
-from tqdm import tqdm
 
-import logging
-import os
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -53,12 +47,11 @@ import os
 """
 Module containing specific functionality.
 """
-from dataclasses import dataclass
 @dataclass
 class ModelConfig:
-"""
+    """
 Class implementing class functionality.
-"""
+    """
 Module containing training-related implementations.
 Logger for training metrics and events..
 Method for __init__..
@@ -67,5 +60,5 @@ Module for handling specific functionality.
 Method for log_metrics..
 Method for __init__..
 Method for log_event..
-"""
-"""
+    """
+    """
