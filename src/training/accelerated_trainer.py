@@ -1,11 +1,12 @@
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 import logging
 import os
 from pathlib import Path
+from dataclasses import dataclass, field
 
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
@@ -14,7 +15,9 @@ from torch.utils.data from tqdm import tqdm import DataLoader
 import logging
 from pathlib import Path import os
 
-"""Module for implementing specific functionality."""
+from pathlib import Path import os import logging
+
+"""Module containing specific functionality."""
 
 
 from accelerate import dataclasses
@@ -25,13 +28,13 @@ logger = logging.getLogger(__name__)
 
 Module containing training-related implementations."""
 Accelerated trainer class..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for __init__..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for setup_training..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for train..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for __init__..
 """raise ValueError(
     "Model, optimizer, and dataloader must be set before training"

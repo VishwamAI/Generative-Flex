@@ -1,11 +1,12 @@
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 import logging
 import os
 from pathlib import Path
+from dataclasses import dataclass, field
 
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
@@ -14,7 +15,9 @@ from torch.utils.data from tqdm import tqdm import DataLoader
 import logging
 from pathlib import Path import os
 
-"""Module for implementing specific functionality."""
+from pathlib import Path import os import logging
+
+"""Module containing specific functionality."""
 
 
 from dataclasses import src.models from src.utils.training_utils
@@ -23,15 +26,15 @@ from dataclasses import src.models from src.utils.training_utils
 
 JAX-based trainer implementation."""
 JAX-based model trainer..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for __init__..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for train_step..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for loss_fn..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for train..
-"""Module for implementing specific functionality."""
+"""Module containing specific functionality."""
 Method for train..
 """
     for batch in self.utils.get_batches(
