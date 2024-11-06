@@ -1,6 +1,4 @@
-"""
-Trainer class for model training and evaluation..
-"""
+"""Base trainer implementation."""
 from typing import Dict, Optional, Any, Union
 
 from torch.utils.data import DataLoader
@@ -11,76 +9,15 @@ from tqdm import tqdm
 
 
 class Trainer:
+    """Base trainer class for model training."""
 
-
-
-    """
-Trainer class for handling model training and evaluation..
-"""def __init__(self, model: torch.nn.Module, config: Any, optimizer: torch.optim.Optimizer, train_dataloader: DataLoader, val_dataloader: Optional[DataLoader] = None):
-    """
+Base trainer implementation."""
 Method for __init__..
-"""
-        self.model = model
-        self.config = config
-        self.optimizer = optimizer
-        self.train_dataloader = train_dataloader
-        self.val_dataloader = val_dataloader
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)
-
-    def train_step(self, batch: Dict[str, torch.Tensor]):
-
-
-        """
+"""Base trainer implementation."""
 Method for train_step..
-"""
-        self.model.train()
-        batch = {k: v.to(self.device) for k, v in batch.items()}
-
-        # Forward pass
-        outputs = self.model(**batch)
-        loss = outputs.loss / self.config.gradient_accumulation_steps
-
-        # Backward pass
-        loss.backward()
-
-        # Gradient accumulation
-        if (self.step + 1) % self.config.gradient_accumulation_steps == 0:
-            torch.nn.utils.clip_grad_norm_(
-                self.model.parameters(),
-                self.config.max_grad_norm
-            )
-            self.optimizer.step()
-            self.optimizer.zero_grad()
-
-        return {"loss": loss.item() * self.config.gradient_accumulation_steps}
-
-    def evaluate(self):
-
-
-        """
+"""Base trainer implementation."""
 Method for evaluate..
-"""
-        if not self.val_dataloader:
-            return {}
-
-        self.model.eval()
-        total_loss = 0.0
-        num_batches = 0
-
-        with torch.no_grad():
-            for batch in tqdm(self.val_dataloader, desc="Evaluating"):
-                batch = {k: v.to(self.device) for k, v in batch.items()}
-                outputs = self.model(**batch)
-                total_loss += outputs.loss.item()
-                num_batches += 1
-
-        return {"val_loss": total_loss / num_batches}
-
-    def train(self, num_epochs: int):
-
-
-        """
+"""Base trainer implementation."""
 Method for train..
 """
         self.step = 0
