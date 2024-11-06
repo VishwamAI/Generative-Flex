@@ -1,13 +1,9 @@
-"""
-Configuration for text-to-anything generation..
-"""
+"""Configuration for text-to-anything generation.."""
 from dataclasses import dataclass
 from typing import List, Optional, Dict
 @dataclass
 class GenerationConfig:
-"""
-Configuration for text-to-anything generation..
-"""
+"""Configuration for text-to-anything generation.."""
 
 max_length: int = 1024
 min_length: int = 0
@@ -20,20 +16,16 @@ num_return_sequences: int = 1
 do_sample: bool = True
 
 class TextToAnything:
-"""
-Text-to-anything generation model..
-"""
+"""Text-to-anything generation model.."""
 
     def __init__(self, config: Optional[GenerationConfig] = None):
     self.config = config or GenerationConfig()
 
-    def generate(
-    self,
+    def generate(self,
     text: str,
     target_modality: str,
-    **kwargs: Dict) -> List[str]:
-    """
-    Generate content in target modality from input text.
+    **kwargs: Dict):
+    """Generate content in target modality from input text.
 
     Args:
     text: Input text to convert
@@ -41,7 +33,6 @@ Text-to-anything generation model..
     **kwargs: Additional generation parameters
 
     Returns:
-    List of generated outputs
-    """
+    List of generated outputs"""
     # Implementation details
     return []

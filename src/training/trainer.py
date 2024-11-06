@@ -8,14 +8,12 @@ from tqdm import tqdm
 class Trainer:
     """Trainer class for handling model training and evaluation."""
 
-    def __init__(
-        self,
+    def __init__(self,
         model: torch.nn.Module,
         config: Any,
         optimizer: torch.optim.Optimizer,
         train_dataloader: DataLoader,
-        val_dataloader: Optional[DataLoader] = None,
-    ):
+        val_dataloader: Optional[DataLoader] = None,):
         """Initialize the trainer.
 
         Args:
@@ -23,8 +21,7 @@ class Trainer:
             config: Training configuration
             optimizer: The optimizer to use
             train_dataloader: DataLoader for training data
-            val_dataloader: Optional DataLoader for validation data
-        """
+            val_dataloader: Optional DataLoader for validation data"""
         self.model = model
         self.config = config
         self.optimizer = optimizer
@@ -33,15 +30,14 @@ class Trainer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
 
-    def train_step(self, batch: Dict[str, torch.Tensor]) -> Dict[str, float]:
+    def train_step(self, batch: Dict[str, torch.Tensor]):
         """Perform a single training step.
 
         Args:
             batch: The input batch of data
 
         Returns:
-            Dict containing the loss values
-        """
+            Dict containing the loss values"""
         self.model.train()
         batch = {k: v.to(self.device) for k, v in batch.items()}
 
@@ -63,12 +59,11 @@ class Trainer:
 
         return {"loss": loss.item() * self.config.gradient_accumulation_steps}
 
-    def evaluate(self) -> Dict[str, float]:
+    def evaluate(self):
         """Evaluate the model on the validation set.
 
         Returns:
-            Dict containing evaluation metrics
-        """
+            Dict containing evaluation metrics"""
         if not self.val_dataloader:
             return {}
 
@@ -85,15 +80,14 @@ class Trainer:
 
         return {"val_loss": total_loss / num_batches}
 
-    def train(self, num_epochs: int) -> Dict[str, float]:
+    def train(self, num_epochs: int):
         """Train the model for the specified number of epochs.
 
         Args:
             num_epochs: Number of epochs to train for
 
         Returns:
-            Dict containing training metrics
-        """
+            Dict containing training metrics"""
         self.step = 0
         best_val_loss = float("inf")
 

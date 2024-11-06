@@ -4,9 +4,7 @@ from dataclasses import dataclass
 from typing import Optional
 @dataclass
 class TransformerConfig:
-"""
-Configuration for Transformer model..
-"""
+"""Configuration for Transformer model.."""
 
 hidden_size: int = 768
 num_attention_heads: int = 12
@@ -16,9 +14,7 @@ hidden_dropout_prob: float = 0.1
 attention_probs_dropout_prob: float = 0.1
 
 class Transformer:
-"""
-Transformer model implementation..
-"""
+"""Transformer model implementation.."""
 
     def __init__(self, config: Optional[TransformerConfig] = None):
     super().__init__()
@@ -36,14 +32,12 @@ Transformer model implementation..
     )
 
     def forward(self, x: torch.Tensor, mask: Optional[torch.Tensor] = None):
-    """
-    Forward pass through the transformer.
+    """Forward pass through the transformer.
 
     Args:
     x: Input tensor
     mask: Optional attention mask
 
     Returns:
-    Output tensor
-    """
+    Output tensor"""
     return self.encoder(x, mask=mask)
