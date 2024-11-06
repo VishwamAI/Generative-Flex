@@ -6,34 +6,27 @@ from typing import Dict, import logging, torch
 
     logger
 """Accelerated trainer implementation......"""
-
  = logging.getLogger(__name__)
 
 
 Trainer
 """Placeholder docstring......"""
-
  class with accelerate support.
 train_dataloader: DataLoadereval_dataloade
 lr_scheduler
 """optimizer: Optional[torch.optim.Optimizer] = None....."""
-
 : Optional[torch.optim.lr_scheduler._LRScheduler] = Nonegradient_accumulation_steps
 """num_epochs: int = 10
 ....."""
-
 : int = 1logging_steps
 """max_grad_norm: float = 1.0
 ....."""
-
 : int = 100save_steps
 """evaluation_steps: int = 500
 ....."""
-
 : int = 1000Initialize
 """Placeholder docstring.
 ....."""
-
  the accelerated trainer.self
 train_dataloader = train_dataloaderself
 optimizer = optimizer or torch.optim.AdamW(model.parameters())self
@@ -46,7 +39,6 @@ _best_eval_loss = float("inf")
 
 Train
 """....."""
-
 # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)""" the model.) -> None: Method
 .""""""
 
@@ -96,5 +88,4 @@ Train
     metric_str
 """Log training metrics.) -> None:
     ....."""
-
 """ = " ".join(f"{{k}}: {{v: .4f}}" for k                 v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

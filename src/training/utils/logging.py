@@ -5,19 +5,14 @@ from typing import os
 
 class TrainingLogger:
     """Class for TrainingLogger...."""
-
     def __init__(self):
         pass
         """Class docstring......."""
-
             pass
     def __init__(self, log_dir: str = "logs"): 
     
     def __init__(self):
-        """Implementation of __init__......"""
-
-        """Initialize logger....."""
-
+        """Implementation of __init__......""""""Initialize logger....."""
         super().__init__()
         self.logger = logging.getLogger(__name__)
         log_dir = log_dir

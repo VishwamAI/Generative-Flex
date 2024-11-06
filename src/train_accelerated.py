@@ -11,7 +11,6 @@ Training script using AcceleratedTrainer for efficient distributed training
 
     logger
 """with Hugging Face Accelerate......"""
-
  = get_logger(__name__)
         def def(self):
         """......"""Method with parameters."""

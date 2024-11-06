@@ -16,18 +16,14 @@ logger = logging.getLogger(__name__)
 
 hidden_states
 """Math reasoning module for enhanced transformer model......"""
-
 : torch.Tensorattention_mas
 k: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
     Args
-"""Forward pass of the math reasoning head......"""
-
-""": hidden_state
+"""Forward pass of the math reasoning head......"""""": hidden_state
         Args
         ....."""
-
         # Get input dimensions
         batch_size = hidden_states.size(0)
         seq_length = hidden_states.size(1)

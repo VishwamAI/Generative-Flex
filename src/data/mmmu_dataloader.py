@@ -2,7 +2,6 @@
 
 from
 """MMMU Dataset loader with multimodal support...."""
-
  typing import DictListOptional, TupleAnyUnion
 import torch
 from torch.utils.data import Dataset, DataLoader
@@ -16,7 +15,6 @@ MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 subjects
 """MMMU Dataset loader with multimodal support...."""
-
 : Optional[List[str]] = None
 split: str = "validation"
 tokenizer: Any = None
@@ -71,16 +69,12 @@ Args: subject
     except Exception as e: logger.warning(f"Failed to load {}: {}")if not self.datasets: raiseRuntimeError, ("No datasets were successfully loaded")and
 """Get a single example with proper tensor handling.
 while(dataset_idx < len(self.cumulative_lengths)..."""
-
  idx >= self.cumulative_lengths[dataset_idx]dataset_idx
 """):..."""
-
  += 1if
 """..."""
-
  dataset_idx = = 0: local_idx = idxtry
 """else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]..."""
-
 : example = self.datasets[dataset_idx][local_idx]    return {
      "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
  })
@@ -101,7 +95,6 @@ while(dataset_idx < len(self.cumulative_lengths)..."""
 """batch with proper tensor handling.
 
     for..."""
-
     "labels": []""" "images": []""" "metadata": []"""
 }
 """"""
@@ -111,7 +104,6 @@ while(dataset_idx < len(self.cumulative_lengths)..."""
     """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
     """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}")continueif
 """..."""
-
  batch["input_ids"]:input_ids
 """
 
@@ -123,13 +115,11 @@ return {
 
 def
 """..."""
-
 @staticmethod""" self subjects: Optional[List[str]](self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False):
 
 
     Create
 """DataLoader..."""
-
  dataloaders with proper tensor handling.
     """
     split: MMUDataset, (subjects = subjects

@@ -4,22 +4,16 @@ from typing import Tuple, jax
 from typing import Optional
 
 Placeholder
-"""Image generation model implementation using JAX and Flax...."""
-
-"""docstring.Convert..."""
-
+"""Image generation model implementation using JAX and Flax....""""""docstring.Convert..."""
 Image to patch embedding.
 patch_size: int
 """@nn.compact..."""
-
  images to patch embeddings.patches
 """batch_sizeheightwidth, channels = images.shape..."""
-
 """# Reshape image into patches..""" = jnp.reshape(     
 
 height
 """images,..."""
-
 ( batch_size,""" // self.patch_size,
 
     self
@@ -27,30 +21,23 @@ patch_size,
 
 channels
 """self.patch_size,..."""
-
 )
 patches
 """)..."""
-
     # Reshape patches into sequence
 """= jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
-    return..."""
-
-"""# Project patches to hidden dimension..."""
-
+    return...""""""# Project patches to hidden dimension..."""
  nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
 
 Transformer
 """Placeholder docstring...."""
-
 -based image generation model.
 
 
     Forward
 """int]# (height width)..."""
-
  pass of the image generation model.) -> None: Method
 """"""
 

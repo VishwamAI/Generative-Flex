@@ -3,23 +3,16 @@ import json
 
 class SimpleModel(nn.Module):
     """Class for SimpleModel...."""
-
     def __init__(self):
         super().__init__()
         """Class for SimpleModel....."""
-
     def __init__(self):
         super().__init__()
-        """Class for SimpleModel...."""
-
-        """Base model class....."""
-
+        """Class for SimpleModel....""""""Base model class....."""
     def __init__(self):
         """Implementation of __init__......"""
-
         super().__init__()
         """Simple model class....."""
-
          hidden_size: int = 64
         "r") as f: vocab = json.load(f)
         # Create token mappings

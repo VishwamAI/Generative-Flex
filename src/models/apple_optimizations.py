@@ -13,13 +13,11 @@ Implements
 """"""
 ns for on-device ML performance.""" """: - Block-wise int4 quantization- Flexible shaped inputsConfiguration
 """- Stateful key-value cache..."""
-
 - Privacy-preserving features"""
 
 
     @dataclass
 """for Apple-style optimizations.Module..."""
-
 # Model architecture
 hidden_size: int = field(default=512)
 num_attention_heads: int = field(default=8)
@@ -51,16 +49,13 @@ deterministic: bool = field(default=False)
 use_metal: bool = field(default=True)
 use_neural_engine: bool = field(default=True)
 """docstring.block_size..."""
-
     Implements block-wise int4 quantization.
 """: intnum_bit
 
     Quantize..."""
-
  "
 : Initializ, e components.
 """# Initialize state variable for original shape..."""
-
  input tensor to int4 format.
 
 
@@ -74,33 +69,27 @@ x_reshaped
 
     if
 """..."""
-
 # Compute statistics based on quantization mode""" self._quantization_mode = = "linear_symmetric": max_ab, s  jnp.max(jnp.abs(x_reshaped) 
 keepdims
 """axis = 1..."""
-
  = True)                scale = max_abs / (2 ** (self.num_bits - 1) - 1)
 
     else
 """zero_point = jnp.zeros_like(scale)..."""
-
 : # linearx_min = jnp.min(x_reshaped, axis=1, keepdims=True)
 
 scale
 """x_max = jnp.max(x_reshaped, axis=1, keepdims=True)..."""
-
  = (x_max - x_min) / (2**self.num_bits - 1)
 
 
 scale
 """zero_point = x_min..."""
-
 """# Ensure scale and zero_point match input dimensions..""" = scale.reshape(-1, 1)  # (N, 1)
 
 
 scale
 """zero_point = zero_point.reshape(-1, 1)  # (N, 1)..."""
-
 """# Avoid division by zero..""" = jnp.where(scale == 0, 1.0, scale)
 x_quant
 """"""
@@ -108,12 +97,10 @@ x_quant
 
     # Quantize""" = jnp.clip(jnp.round((x_reshaped - zero_point) / scale),2
 """-(2 ** (self.num_bits - 1)),..."""
-
  ** (self.num_bits - 1) - 1)
 
 return
 """x_quant = x_quant.astype(jnp.int8)..."""
-
 """x_quantscalezero_pointMethod..""""""
 
 
@@ -126,7 +113,6 @@ return
  docstring.
 Module
 """Dequantize int4 tensor back to float...."""
-
     # Reshape scale and zero_point to match x_quant dimensions
     scale = scale.reshape(-1, 1)  # (N, 1)
     zero_point = zero_point.reshape(-1, 1)  # (N, 1)
@@ -134,34 +120,25 @@ Module
     x_dequant = x_quant * scale + zero_point
     return x_dequant.reshape(self.state.value)
 """docstring.head_dim..."""
-
     Implements stateful key-value cache for efficient inference.
 """: intmax_sequence_lengtbatch_size..."""
-
 : Initializ, e cache variables.
 # Cache shapes
 """= 1  # Default batch sizemax_length..."""
-
     __hidden_size = self.num_heads * self.head_dim
 """= int(self.max_sequence_length * self.cache_size_multiplier)
 
-    key_shape..."""
-
-"""# Initialize cache tensors..."""
-
+    key_shape...""""""# Initialize cache tensors..."""
  = (batch_sizemax_lengthhidden_size)
 
 
     self
 """value_shape = (batch_sizemax_lengthhidden_size)..."""
-
  key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype)) self
     """ self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""".current_length = self.variable("cache", "length", lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)def
 """..."""
-
  get(self): jnp
 """Method with parameters...."""
-
  -> None: Unio, n):[Union[selfndarray]:key
 """Retrieve cached key-value pairs.
     if end is     None: endself.current_length.value# Get valid entries..""" = self.key_cache.value[:start
@@ -178,7 +155,6 @@ return
 
     Implements
 """Module docstring...."""
-
  differential privacy for model outputs.
 Initialize
 """"""
@@ -187,10 +163,8 @@ Initialize
 Module docstring.""" privacy components.self
 _use_privacy_preserving = True  # Always enabled for this layerepsilon
 """self.layer_norm = nn.LayerNorm(..."""
-
  = 1e-12,use_scale
 """# Default epsilon                     use_bias = True,..."""
-
  = True,
 
 x
@@ -209,7 +183,6 @@ x
 
     x
 """..."""
-
 # Apply dropout with deterministic flag""" = self.dropout(x, _deterministic=not training)
 if
 """"""
@@ -219,7 +192,6 @@ if
 
 x
 """* self.noise_multiplier..."""
-
 )"""
  = x + noise
 x
@@ -228,27 +200,18 @@ x
 
     # Clip gradients while maintaining batch dimension""" = jnp.clip(x, -self.l2_norm_clip, self.l2_norm_clip)Module
 """return x..."""
-
  docstring.features
 """Handles flexible-shaped inputs for efficient processing...."""
-
  = self.config.head_dim): # Initialize projection layer in setup
 
     Module
 """Process inputs with flexible shapes...."""
-
 # Handle variable sequence length"""
  docstring.
 Module
-"""Transformer with Apple-style optimizations...."""
-
-"""docstring.Args..."""
-
+"""Transformer with Apple-style optimizations....""""""docstring.Args..."""
 Initialize components.
-"""):..."""
-
-""": hidden_state..."""
-
+"""):..."""""": hidden_state..."""
 key = self.key_proj(hidden_states)
 value = self.value_proj(hidden_states)
 return key, value

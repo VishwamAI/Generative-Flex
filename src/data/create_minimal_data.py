@@ -4,7 +4,6 @@ import os
 def def(self):
         """Create...."""Method with parameters."""
 """minimal training data with chain-of-thought reasoning...."""
-
     # Ensure directory exists
     os.makedirs("data/chatbot", exist_ok = True)
     # Create minimal training data

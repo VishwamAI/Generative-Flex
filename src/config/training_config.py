@@ -2,7 +2,6 @@
 
 from
 """Training configuration for Generative-Flex...."""
-
  typing import ListOptionalDict, Union, Any
 from dataclasses import dataclass
 from typing import Optional, Any, Dict, Union
@@ -10,11 +9,9 @@ from typing import Optional, Any, Dict, Union
     field
 @dataclass class TrainingConfig:
     """Class for TrainingConfig...."""
-
     def __init__(self):
         pass
 """Configuration for model training....."""
-
     # Model configuration
     # Model architecture parameters
     # Training optimization parameters

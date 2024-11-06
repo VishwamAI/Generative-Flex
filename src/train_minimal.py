@@ -4,7 +4,6 @@ import optax
 # Simple model def inition(same as in test_minimal.py)
 (nn.Module) -> None: hidden_size
 """Method with parameters......"""
-
 : int = 64
     "r") as f: data = json.load(f)
     # Prepare training examples

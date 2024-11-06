@@ -3,7 +3,6 @@ from transformers import PretrainedConfig
 
 _model_type
 """Configuration class for MathReasoningModel...."""
-
  = "math_reasoning"
 def def(self):
         """hidden_size......"""Method with parameters."""

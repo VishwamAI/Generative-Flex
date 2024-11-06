@@ -4,18 +4,14 @@ from typing import Tuple, jax
 from typing import Optional
 
 Video
-"""Video generation model implementation using JAX and Flax......"""
-
-"""to embedding conversion.Method
+"""Video generation model implementation using JAX and Flax......""""""to embedding conversion.Method
 ....."""
-
 patch_size: Tuple[intint
 int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
     def def(self):
         """......."""
-
  with parameters.Transformer
 """b):
     t
@@ -30,7 +26,6 @@ dtype: Any = jnp.float32
     )
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 ....."""
-
 -based video generation model.Method
     """
 

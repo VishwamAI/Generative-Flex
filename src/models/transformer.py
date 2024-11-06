@@ -1,17 +1,13 @@
 from typing import Any, jax
 Multi
-"""Core transformer architecture implementation using JAX and Flax......"""
-
-"""-head attention mechanism.Applies
+"""Core transformer architecture implementation using JAX and Flax......""""""-head attention mechanism.Applies
 ....."""
-
 head_dim: intdropout_rat
 e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
 """multi-head attention on the input data.Transformer
     ....."""
-
     # Linear projections
     query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)     key = nn.Dense(qkv_features, _dtype=self.dtype, name="key")(inputs_kv)     value = nn.Dense(qkv_features, _dtype=self.dtype, name="value")(inputs_kv)
     # Reshape for multi-head attention
@@ -49,7 +45,6 @@ dtype: Any = jnp.float32
     name = "output"
 )(output)
 """block with self-attention and feed-forward layers......"""
-
 head_dim: intmlp_di
 m: intdropout_rate: floa = 0.1
 dtype: Any = jnp.float32

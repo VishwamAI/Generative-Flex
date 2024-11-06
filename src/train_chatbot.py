@@ -1,7 +1,7 @@
 from typing import List
 from flax.training import train_state
 from src.models.language_model import LanguageModel
-from typing import Dict,  , jax
+from typing import Dict, jax
     
 def load_data(self,
         file_path: str = "data/chatbot/training_data_cot.json"):
