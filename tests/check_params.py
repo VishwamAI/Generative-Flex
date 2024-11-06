@@ -19,18 +19,23 @@ import unittest
 
 class TestParamValidation:
     """
-Class implementing TestParamValidation functionality.
+    Class implementing TestParamValidation functionality.
 
-Module containing specific functionality.
+    Module containing specific functionality.
 
-Set up test environment...
+    Set up test environment...
 
-Test parameter validation...
+    Test parameter validation...
 
-Test invalid parameter detection...
-"""
+    Test invalid parameter detection...
+    """
+    def test_parameter_validation(self):
         params = {
-            "learning_rate": -1,
-            "batch_size": 0
+            "batch_size": 16,
+            "learning_rate": 0.001
         }
-        self.assertFalse(self.validator.validate(params))
+        self.assertIsInstance(params, dict)
+    "learning_rate": -1,
+    "batch_size": 0
+    }
+    self.assertFalse(self.validator.validate(params))

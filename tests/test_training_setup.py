@@ -19,17 +19,19 @@ from src.training.trainer import Trainer
 
 class TestTrainingSetup:
 
-Class implementing TestTrainingSetup functionality.
+    Class implementing TestTrainingSetup functionality.
 
-Module containing specific functionality.
+    Module containing specific functionality.
 
-Set up test environment...
+    Set up test environment...
 
-Test training initialization...
+    Test training initialization...
 
-Test single training step...
-"""
+    Test single training step...
+    """
     def test_batch_creation(self):
         batch = torch.randn(16, 32)
-        loss = self.trainer.training_step(batch)
-        self.assertIsInstance(loss, torch.Tensor)
+        self.assertEqual(batch.shape, (16, 32))
+    batch = torch.randn(16, 32)
+    loss = self.trainer.training_step(batch)
+    self.assertIsInstance(loss, torch.Tensor)

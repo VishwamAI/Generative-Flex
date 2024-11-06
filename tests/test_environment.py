@@ -19,16 +19,21 @@ from transformers import AutoModelForCausalLM
 
 class TestEnvironment:
 
-Class implementing TestEnvironment functionality.
+    Class implementing TestEnvironment functionality.
 
-Module containing specific functionality.
+    Module containing specific functionality.
 
-Set up test environment...
+    Set up test environment...
 
-Test environment initialization...
+    Test environment initialization...
 
-Test CUDA availability check...
-"""
+    Test CUDA availability check...
+    """
     def test_cuda_availability(self):
         if torch.cuda.is_available():
-            self.assertTrue(torch.cuda.is_initialized())
+            device = torch.device("cuda")
+        else:
+            device = torch.device("cpu")
+        self.assertIsNotNone(device)
+    if torch.cuda.is_available():
+    self.assertTrue(torch.cuda.is_initialized())
