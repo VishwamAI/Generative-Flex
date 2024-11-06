@@ -2,7 +2,8 @@ from src.models.transformer import TransformerBlock
 from typing import Any, Optional, Tuple
 from typing import Tuple
 import jax
-"""Video generation model implementation using JAX and Flax."""
+"""Video generation model implementation using JAX and Flax.
+"""
 
 
     """Video to embedding conversion."""

@@ -1,6 +1,7 @@
 from typing import Any
 import jax
-"""Core transformer architecture implementation using JAX and Flax."""
+"""Core transformer architecture implementation using JAX and Flax.
+"""
 
 
     """Multi-head attention mechanism."""

@@ -1,4 +1,5 @@
-"""JAX/Flax training infrastructure for Generative-Flex."""
+"""JAX/Flax training infrastructure for Generative-Flex.
+"""
 
 from typing import Dict, Any, List, Optional, Union, Tuple
 import jax
@@ -13,20 +14,17 @@ from dataclasses import dataclass, field
 
 
 class TrainerState(train_state.TrainState):
-    """Custom train state with loss scaling for mixed precision training."""
+    """Custom train state with loss scaling for mixed precision training.
+    """
 
     loss_scale: Optional[jnp.ndarray] =  None
 
 
 class FlaxTrainer:
-    """Advanced trainer implementation using JAX/Flax."""
+    """Advanced trainer implementation using JAX/Flax.
+    """
 
-    def __init__(
-        self,
-        model: Optional[nn.Module] =  None,
-        config: Dict[str, Any] = None,
-        output_dir: Optional[str] =  None,
-    ) -> None:
+    def __init__(self, model: Optional[nn.Module] =  None, config: Dict[str, Any] = None, output_dir: Optional[str] =  None) -> None:
         """Initialize trainer."""
         self.model = model
         self.config = config or {}
@@ -37,7 +35,8 @@ class FlaxTrainer:
         self.setup_training_state()
 
     def setup_training_state(self) -> None:
-        """Setup training state with optimizer and learning rate schedule."""
+        """Setup training state with optimizer and learning rate schedule.
+        """
         # Create learning rate schedule
         warmup_fn = optax.linear_schedule(
             init_value=0.0,
@@ -81,15 +80,7 @@ class FlaxTrainer:
             ),
         )
 
-    def train(
-        self,
-        train_dataset: Any,
-        num_epochs: int,
-        eval_dataset: Optional[Any] =  None,
-        eval_steps: int =  1000,
-        save_steps: int =  1000,
-        log_steps: int =  100,
-    ) -> None:
+    def train(self, train_dataset: Any, num_epochs: int, eval_dataset: Optional[Any] =  None, eval_steps: int =  1000, save_steps: int =  1000, log_steps: int =  100) -> None:
         """Training loop with evaluation."""
         train_step_jit = jax.jit(self.train_step)
 
