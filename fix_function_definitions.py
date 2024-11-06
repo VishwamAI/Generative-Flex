@@ -4,9 +4,9 @@ import re
 
 
 def format_params(self func_nameparams): """Format parameters with proper type hints."""        if not params.strip):
-    return f"def {func_name}():"
+return f"def {func_name}():"
 
-    param_list = []
+param_list = []
     for param in params.split("     "):
         param = param.strip()
         if ": " in param: name
@@ -18,40 +18,40 @@ def format_params(self func_nameparams): """Format parameters with proper type h
 
 
         def fix_function_bodies(self         content): """Fix function body indentation and structure."""        lines = content.split):
-            fixed_lines = []
-            in_function = False
-            indent_level = 0
+        fixed_lines = []
+        in_function = False
+        indent_level = 0
 
         for line in lines: stripped = line.lstrip()
         # Handle function definitions
         if stripped.startswith("def "):
-            in_function = True
-            indent_level = 0
-            fixed_lines.append(line)
+        in_function = True
+        indent_level = 0
+        fixed_lines.append(line)
             if not stripped.endswith(":"):
                 fixed_lines[-1] += ":"        indent_level += 1
                 continue
 
                 # Handle nested blocks
                 if stripped.endswith(":"):
-                    fixed_lines.append("    " * indent_level + stripped)
-                    indent_level += 1
-                    continue
+                fixed_lines.append("    " * indent_level + stripped)
+                indent_level += 1
+                continue
 
-                    # Handle block ends
-                    if not stripped and in_function: fixed_lines.append("")
-                    continue
+                # Handle block ends
+                if not stripped and in_function: fixed_lines.append("")
+                continue
 
-                    # Regular lines in function
-                    if in_function: fixed_lines.append("    " * indent_level + stripped)
-                    else: fixed_lines.append(line)
+                # Regular lines in function
+                if in_function: fixed_lines.append("    " * indent_level + stripped)
+                else: fixed_lines.append(line)
 
-                    # Check for block end
-                    if in_function and indent_level > 1 and not stripped: indent_level-= 1
-                    return "\n".join(fixed_lines)
+                # Check for block end
+                if in_function and indent_level > 1 and not stripped: indent_level-= 1
+                return "\n".join(fixed_lines)
 
 
-                    def main(self):                    """Process files with function definition issues."""        files_to_fix = [):
+                    def main(self)::                    """Process files with function definition issues."""        files_to_fix = [):
                         "src/training/jax_trainer.py",
                         "src/models/layers/flash_moe.py",
                         "src/training/train_mmmu.py",
@@ -63,17 +63,17 @@ def format_params(self func_nameparams): """Format parameters with proper type h
                         "tests/test_environment.py",
                         "src/models/knowledge_retrieval.py",
                         "src/models/reasoning/math_config.py",
-                        ]
+                ]
 
                 success_count = 0
                 for file_path in files_to_fix: ifos.path.exists(file_path) and process_file(file_path):
-                    success_count += 1
+                success_count += 1
 
-                    print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")
+                print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")
 
-                    # Run black formatter
-                    print("\nRunning black formatter...")
-                    os.system("python3 -m black .")
+                # Run black formatter
+                print("\nRunning black formatter...")
+                os.system("python3 -m black .")
 
 
-                    if __name__ == "__main__":            main()
+                if __name__ == "__main__":            main()

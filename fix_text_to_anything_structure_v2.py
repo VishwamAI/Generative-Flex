@@ -3,7 +3,7 @@ import re
 
 
 def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""        # Split content into sections
-    lines = content.split("\n")
+lines = content.split("\n")
 
 # Prepare the fixed content sections
 fixed_imports = [
@@ -16,36 +16,6 @@ fixed_imports = [
 fixed_constants = ["VOCAB_SIZE = 256  # Character-level tokenization"]
 
 # Define the GenerationConfig class properly
-fixed_generation_config = [
-"@dataclass",
-"class GenerationConfig: "
-
-'    """Configuration for text-to-anything generation."""',
-"    # Model configuration",
-"    hidden_size: int = field(default=2048)"
-
-"    num_attention_heads: int = field(default=32)"
-
-"    num_hidden_layers: int = field(default=24)"
-
-"    intermediate_size: int = field(default=8192)"
-
-"    vocab_size: int = field(default=VOCAB_SIZE)"
-
-"    max_sequence_length: int = field(default=2048)"
-
-"",
-"    # Generation parameters",
-"    temperature: float = field(default=0.9)"
-
-"    top_k: int = field(default=50)"
-
-"    top_p: float = field(default=0.9)"
-
-"    num_beams: int = field(default=4)"
-
-"",
-"    # Modality-specific settings",
 "    image_size: Tuple[int
 int] = field(default=(256 256))"
 
@@ -90,16 +60,16 @@ current_class = []
 in_class = True
 current_class = [line]
 elif in_class:
-    # Skip the nested GenerationConfig class
-    if "@dataclass" in line or "class GenerationConfig" in line: continueifline.strip() and not any(x in line for x in ["@dataclass"
+# Skip the nested GenerationConfig class
+if "@dataclass" in line or "class GenerationConfig" in line: continueifline.strip() and not any(x in line for x in ["@dataclass"
     "class GenerationConfig"]):
         # Fix indentation for class methods
         if line[0].isspace():
-            # Ensure 4 spaces for indentation
-            stripped = line.lstrip()
-            indent_level = 1 if line.startswith("    ") else 2
-            current_class.append("    " * indent_level + stripped)
-            else: current_class.append(line)
+        # Ensure 4 spaces for indentation
+        stripped = line.lstrip()
+        indent_level = 1 if line.startswith("    ") else 2
+        current_class.append("    " * indent_level + stripped)
+        else: current_class.append(line)
             elif not line.strip():
                 current_class.append("")
 
@@ -118,10 +88,10 @@ elif in_class:
                 return "\n".join(result)
 
 
-                def main(self): # Read the original file            with open):
-                    "r") as f: content = f.read()
-                    # Fix the content
-                    fixed_content = fix_file_content(content)
+                def main(self):: # Read the original file            with open):
+                "r") as f: content = f.read()
+                # Fix the content
+                fixed_content = fix_file_content(content)
 
                 # Write the fixed content back
                 with open("src/models/text_to_anything.py"                 "w") as f: f.write(fixed_content)

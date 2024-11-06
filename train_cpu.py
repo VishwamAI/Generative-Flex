@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def main(self):    # Initialize accelerator for CPU training    accelerator = Accelerator):
+def main(self)::    # Initialize accelerator for CPU training    accelerator = Accelerator):
 
 # Initialize configuration with CPU-specific settings
 config = TrainingConfig(model_name="facebook/opt-125m", # Using smaller model for CPU training subjects=["Math", "Computer_Science"], batch_size=2, # Reduced batch size for CPUlearning_rate=2e-5, num_epochs=5, gradient_accumulation_steps=16, # Increased for CPUmax_grad_norm=1.0, warmup_steps=100)

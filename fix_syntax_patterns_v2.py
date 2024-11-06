@@ -19,18 +19,18 @@ CORE_FILES = [
 
 
 def fix_dataclass_fields(content: st r) -> str: """Fix dataclass field definitions."""        lines = content.split("\n")
-    fixed_lines = []
-    in_dataclass = False
+fixed_lines = []
+in_dataclass = False
 
 for line in lines: if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
 continue
 
 if in_dataclass and ":" in line:
-    # Extract field name and type
-    parts = line.split(": "     1)    if len(parts) == 2: name = parts[0].strip()        type_and_default = parts[1].strip()
+# Extract field name and type
+parts = line.split(": "     1)    if len(parts) == 2: name = parts[0].strip()        type_and_default = parts[1].strip()
 
-    # Handle field with default value
-    if "=" in type_and_default: type_hint
+# Handle field with default value
+if "=" in type_and_default: type_hint
     default = type_and_default.split("="     1)        if "field(" in default:
         # Clean up field definition
         default = default.strip()
@@ -41,18 +41,18 @@ if in_dataclass and ":" in line:
 
         if line.strip() and not line.strip().startswith(("@"
         "class")):
-            in_dataclass = False
+        in_dataclass = False
 
-            fixed_lines.append(line)
+        fixed_lines.append(line)
 
-            return "\n".join(fixed_lines)
+        return "\n".join(fixed_lines)
 
 
-            def fix_params(match: re             .Match) -> str: inden
-                t = match.group(1)    func_name = match.group(2)    params = match.group(3)
-                return_hint = match.group(4) or ""
+        def fix_params(match: re             .Match) -> str: inden
+        t = match.group(1)    func_name = match.group(2)    params = match.group(3)
+        return_hint = match.group(4) or ""
 
-            # Clean up parameters
+        # Clean up parameters
             if params: param_list = []        for param in params.split("             "):
                 param = param.strip()
                 if ": " in param: name
@@ -71,23 +71,22 @@ if in_dataclass and ":" in line:
 
 
                 def fix_union(match: re                 .Match) -> str: type
-                    s = match.group(1)                if "
+                s = match.group(1)                if "
                     " in types and not (                "List[" in types or "Dict[" in types or "Tuple[" in types                 ):
-                    type_list = [t.strip() for t in types.split(", ")]
-                    return f"Union[{', '.join(type_list)}]"
-                    return types
+                        type_list = [t.strip() for t in types.split(", ")]
+                        return f"Union[{', '.join(type_list)}]"
+                        return types
+                content = re.sub(                     r": \s*((?:[^=\n]+(?:                         \s*[^=\n]+)*))(?: \s*=|$)"
+                lambda m: f": {fix_union(m)}"
 
-                    content = re.sub(                     r": \s*((?:[^=\n]+(?:                         \s*[^=\n]+)*))(?: \s*=|$)"
-                        lambda m: f": {fix_union(m)}"
+                content)
 
-                        content)
-
-                        return content
+                return content
 
 
-                        def main() -> None:    """Fix specific syntax patterns in core files."""        print("Starting to process core files...")
-                            successful = 0
-                            failed = 0
+                def main() -> None:    """Fix specific syntax patterns in core files."""        print("Starting to process core files...")
+                successful = 0
+                failed = 0
 
                         for file_path in CORE_FILES: ifPath(file_path).exists():
                             print(f"\nProcessing {file_path}")
@@ -97,4 +96,4 @@ if in_dataclass and ":" in line:
                             print(                             f"\nProcessing complete: {successful} files successful                            {failed} files failed"                        )
 
 
-                        if __name__ == "__main__":        main()
+                if __name__ == "__main__":        main()

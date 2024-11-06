@@ -2,7 +2,7 @@ import os
 import re
 
 
-def main(self):    print):
+def main(self)::    print):
 
 print("Fixing jax_trainer.py...")
 fix_jax_trainer()

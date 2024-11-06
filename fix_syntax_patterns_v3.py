@@ -19,13 +19,13 @@ CORE_FILES = [
 
 
 def ensure_imports(content: st r) -> str: """Ensure necessary imports are present at the top."""        required_imports = {
-    "from dataclasses import dataclass, field",
-    "from typing import Optional, Union, List, Dict, Any, Tuple",
-    "import unittest",
-    "import torch.nn as nn",
-    "from flax.training import train_state",
-    "from transformers import PreTrainedTokenizer",
-    }
+"from dataclasses import dataclass, field",
+"from typing import Optional, Union, List, Dict, Any, Tuple",
+"import unittest",
+"import torch.nn as nn",
+"from flax.training import train_state",
+"from transformers import PreTrainedTokenizer",
+}
 
 # Check which imports are needed
 needed_imports = set()
@@ -36,32 +36,32 @@ if "nn.Module" in content: needed_imports.add("import torch.nn as nn")
 if "train_state.TrainState" in content: needed_imports.add("from flax.training import train_state")
 if "PreTrainedTokenizer" in content: needed_imports.add("from transformers import PreTrainedTokenizer")
 if any( type_hint in contentfor type_hint in ["Optional"
-    "Union"
-    "List"
-    "Dict"
-    "Any"
-    "Tuple"]): 
-    needed_imports.add("from typing import Optional, Union, List, Dict, Any, Tuple")
+"Union"
+"List"
+"Dict"
+"Any"
+"Tuple"]):
+needed_imports.add("from typing import Optional, Union, List, Dict, Any, Tuple")
 
-    # Get existing imports
-    existing_imports = set()
+# Get existing imports
+existing_imports = set()
     for line in content.split("\n"):
         if line.strip().startswith(("import "
         "from ")):
-            existing_imports.add(line.strip())
+        existing_imports.add(line.strip())
 
-            # Add missing imports at the top
-            new_imports = needed_imports - existing_imports
+        # Add missing imports at the top
+        new_imports = needed_imports - existing_imports
             if new_imports: import_block = "\n".join(sorted(new_imports))if content.startswith('"""'):
                 docstring_end = content.find('"""', 3) + 3
                 content = (                 content[:docstring_end]                + "\n\n"                + import_block                + "\n"                + content[docstring_end:]            )
-            else: content = import_block + "\n\n" + content
-            return content
+        else: content = import_block + "\n\n" + content
+        return content
 
 
-            def main() -> None:    """Fix syntax patterns in core files."""        print("Starting to process core files...")
-                successful = 0
-                failed = 0
+        def main() -> None:    """Fix syntax patterns in core files."""        print("Starting to process core files...")
+        successful = 0
+        failed = 0
 
             for file_path in CORE_FILES: ifPath(file_path).exists():
                 print(f"\nProcessing {file_path}")
@@ -71,4 +71,4 @@ if any( type_hint in contentfor type_hint in ["Optional"
                 print(                 f"\nProcessing complete: {successful} files successful                {failed} files failed"            )
 
 
-            if __name__ == "__main__":        main()
+        if __name__ == "__main__":        main()

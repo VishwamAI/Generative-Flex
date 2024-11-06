@@ -6,16 +6,16 @@ from typing import List, Tuple
 
 
 def fix_method_definition(content: st r) -> str: """Fix method definition syntax with proper handling of docstrings."""    lines = content.split("\n")
-    fixed_lines = []
-    in_method = False
-    method_indent = 0
-    docstring_started = False
+fixed_lines = []
+in_method = False
+method_indent = 0
+docstring_started = False
 
 i = 0
 while i < len(lines):
-    line = lines[i]
-    stripped = line.strip()
-    indent = len(line) - len(stripped)
+line = lines[i]
+stripped = line.strip()
+indent = len(line) - len(stripped)
 
     if stripped.startswith("def "):
         in_method = True
@@ -23,7 +23,7 @@ while i < len(lines):
 
         # Fix method definition
         if "def self" in stripped:
-            # Handle special case of malformed self methods
+        # Handle special case of malformed self methods
             if '"""' in stripped:
                 # Method with inline docstring
                 docstring_part = stripped[stripped.find('"""') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
@@ -32,55 +32,55 @@ while i < len(lines):
                 None: "                    fixed_lines.append(" " * indent + fixed_method)
                 fixed_lines.append(" " * (indent + 4) + docstring_part)
                 else:
-                    # Regular method
-                    fixed_method = stripped.replace("def self", "def __init__")
-                    if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
-                    None: "                            fixed_lines.append(" " * indent + fixed_method)
+                # Regular method
+                fixed_method = stripped.replace("def self", "def __init__")
+                if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
+                None: "                            fixed_lines.append(" " * indent + fixed_method)
                     else:
                         # Handle regular method definitions
                         method_match = re.match(                         r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->.*?)?:"
                         stripped
-                    )
-                    if method_match: method_name = method_match.group(1)                                    params = method_match.group(2)
+                )
+                if method_match: method_name = method_match.group(1)                                    params = method_match.group(2)
 
-                    # Fix parameters
+                # Fix parameters
                     if params.strip() and not params.startswith("self"):
                         params = "self, " + params
                         elif not params.strip():
-                            params = "self"
+                        params = "self"
 
-                            # Add return type if missing
-                            if " -> " not in stripped: fixed_line = f"def {method_name}({params}) -> None:"
-                            else: fixed_line = f"def {method_name}({params})"
-                            fixed_lines.append(" " * indent + fixed_line)
-                            else: fixed_lines.append(line)
+                        # Add return type if missing
+                        if " -> " not in stripped: fixed_line = f"def {method_name}({params}) -> None:"
+                        else: fixed_line = f"def {method_name}({params})"
+                        fixed_lines.append(" " * indent + fixed_line)
+                        else: fixed_lines.append(line)
 
-                            # Check for docstring in next line
+                        # Check for docstring in next line
                             if i + 1 < len(lines) and '"""' in lines[i + 1].strip():
                                 docstring_started = True
 
                                 elif docstring_started:
-                                    # Handle docstring
+                                # Handle docstring
                                     if '"""' in stripped and not stripped.startswith('"""'):
                                         # End of docstring
                                         docstring_started = False
                                         fixed_lines.append(line)
 
                                         elif in_method: ifstripped.startswith("super().__init__():"):
-                                            # Fix super().__init__() call
-                                            fixed_lines.append(" " * (indent) + "super().__init__()")
-                                            elif not stripped or indent <= method_indent:                                                                                # End of method
-                                            in_method = False
-                                            fixed_lines.append(line)
-                                            else: fixed_lines.append(line)
-                                            else: fixed_lines.append(line)
+                                        # Fix super().__init__() call
+                                        fixed_lines.append(" " * (indent) + "super().__init__()")
+                                        elif not stripped or indent <= method_indent:                                                                                # End of method
+                                        in_method = False
+                                        fixed_lines.append(line)
+                                        else: fixed_lines.append(line)
+                                        else: fixed_lines.append(line)
 
-                                            i += 1
+                                        i += 1
 
-                                            return "\n".join(fixed_lines)
+                                        return "\n".join(fixed_lines)
 
 
-                                            def main(self):    """Fix method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                                            def main(self)::    """Fix method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                                             try:
                                                 # Read the file

@@ -4,13 +4,13 @@ import re
 
 
 def fix_indentation_issues(self content): """Fix common indentation issues."""        lines = content.split):
-    fixed_lines = []
-    indent_level = 0
+fixed_lines = []
+indent_level = 0
 
 for line in lines: stripped = line.lstrip()
 # Adjust indent level based on content
 if stripped.startswith(("class " "def ")):
-    indent_level = 0 if stripped.startswith("class ") else 1
+indent_level = 0 if stripped.startswith("class ") else 1
     elif stripped.startswith(("if "     "for "    "while "    "try: "    "else: "    "elif ")):
         indent_level += 1
         elif stripped == "":                fixed_lines.append("")
@@ -23,12 +23,12 @@ if stripped.startswith(("class " "def ")):
         if stripped.endswith(":") and not stripped.startswith(
         ("else: "         "elif "        "except: "        "finally: ")
         ):
-            indent_level += 1
+        indent_level += 1
 
-            return "\n".join(fixed_lines)
+        return "\n".join(fixed_lines)
 
 
-            def main(self):                    """Process all Python files that failed formatting."""        # List of files that failed formatting):
+            def main(self)::                    """Process all Python files that failed formatting."""        # List of files that failed formatting):
                 failed_files = [
                 "src/models/multimodal/image_processor.py",
                 "src/models/multimodal/base_transformer.py",
@@ -67,13 +67,13 @@ if stripped.startswith(("class " "def ")):
 
         success_count = 0
         for file_path in failed_files: ifos.path.exists(file_path) and process_file(file_path):
-            success_count += 1
+        success_count += 1
 
-            print(f"\nProcessed {success_count}/{len(failed_files)} files successfully")
+        print(f"\nProcessed {success_count}/{len(failed_files)} files successfully")
 
-            # Run black formatter
-            print("\nRunning black formatter...")
-            os.system("python3 -m black .")
+        # Run black formatter
+        print("\nRunning black formatter...")
+        os.system("python3 -m black .")
 
 
-            if __name__ == "__main__":            main()
+        if __name__ == "__main__":            main()

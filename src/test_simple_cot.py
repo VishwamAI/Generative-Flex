@@ -3,24 +3,24 @@ import json
 
 
 class SimpleChatModel(nn.Module):
-    hidden_size: int = 64
-    "r") as f: vocab = json.load(f)
-    # Create token mappings
-    word_to_id = {word: ifori
-    word in enumerate(vocab)}        id_to_word = {i: wordfori
-    word in enumerate(vocab)}
-    # Test input
-    test_input = "hi"
-    print("\nTesting Chain-of-Thought Response Generation:")
-    print("-" * 50)
-    print(f"Input: {{test_input}}")
+hidden_size: int = 64
+"r") as f: vocab = json.load(f)
+# Create token mappings
+word_to_id = {word: ifori
+word in enumerate(vocab)}        id_to_word = {i: wordfori
+word in enumerate(vocab)}
+# Test input
+test_input = "hi"
+print("\nTesting Chain-of-Thought Response Generation:")
+print("-" * 50)
+print(f"Input: {{test_input}}")
 
-    # Initialize model with same key as training
-    key = jax.random.PRNGKey(0)
-    model = SimpleChatModel(_vocab_size=len(vocab))
+# Initialize model with same key as training
+key = jax.random.PRNGKey(0)
+model = SimpleChatModel(_vocab_size=len(vocab))
 
-    # Convert input to tokens
-    input_tokens = jnp.array(     [word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()]
+# Convert input to tokens
+input_tokens = jnp.array(     [word_to_id.get(w, word_to_id["<unk>"]) for w in test_input.split()]
 )
 
 # Initialize with same structure as training

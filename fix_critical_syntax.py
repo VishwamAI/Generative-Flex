@@ -5,29 +5,29 @@ from typing import List, Dict, Any, Optional
 
 
 def fix_type_hints_spacing(content: st r) -> str: """Fix spacing in type hints."""    # Fix cases like 'inthidden_dim' -> 'int
-    hidden_dim'
-    content = re.sub(r"(\w+): (\w+)([a-zA-Z])"
-    r"\1: \2
-    \3"
-    content)    # Fix missing spaces after colons in type hints
-    content = re.sub(r"(\w+): (\w+)"
-    r"\1: \2"
-    content)    return content
+hidden_dim'
+content = re.sub(r"(\w+): (\w+)([a-zA-Z])"
+r"\1: \2
+\3"
+content)    # Fix missing spaces after colons in type hints
+content = re.sub(r"(\w+): (\w+)"
+r"\1: \2"
+content)    return content
 
 
 def fix_function_definitions(content: st r) -> str: """Fix function definition syntax."""    lines = []
-    in_function = False
-    current_function = []
+in_function = False
+current_function = []
 
 for line in content.splitlines():
-    stripped = line.strip()
+stripped = line.strip()
 
     if stripped.startswith("def "):
         if current_function:
-            lines.extend(fix_single_function(current_function))
-            current_function = []
-            in_function = True
-            current_function.append(line)
+        lines.extend(fix_single_function(current_function))
+        current_function = []
+        in_function = True
+        current_function.append(line)
             elif in_function and line.strip():
                 current_function.append(line)
                 else:
@@ -38,21 +38,21 @@ for line in content.splitlines():
                         lines.append(line)
 
                         if current_function:
-                            lines.extend(fix_single_function(current_function))
+                        lines.extend(fix_single_function(current_function))
 
-                            return "\n".join(lines)
+                        return "\n".join(lines)
 
 
-                            def fix_single_function(lines: List                             [str]) -> List[str]: """Fix a single function definition."""    def_line = lines[0]
+                        def fix_single_function(lines: List                             [str]) -> List[str]: """Fix a single function definition."""    def_line = lines[0]
                                 if "(" not in def_line or ")" not in def_line:
-                                return lines
+                        return lines
 
-                                # Extract function components
-                                name_part = def_line[: def_line.find("(")]    params_part = def_line[def_line.find("(") + 1 : def_line.rfind(")")]    return_part = def_line[def_line.rfind(")") :]
-                                # Fix parameter list
-                                params = []
-                                current_param = ""
-                                bracket_depth = 0
+                        # Extract function components
+                        name_part = def_line[: def_line.find("(")]    params_part = def_line[def_line.find("(") + 1 : def_line.rfind(")")]    return_part = def_line[def_line.rfind(")") :]
+                        # Fix parameter list
+                        params = []
+                        current_param = ""
+                        bracket_depth = 0
 
                                 for char in params_part:
                                     if char == "[":            bracket_depth += 1
@@ -60,26 +60,26 @@ for line in content.splitlines():
 
                                     if char == "
                                     " and bracket_depth == 0: if current_param.strip():
-                                        params.append(current_param.strip())
-                                        current_param = ""
+                                    params.append(current_param.strip())
+                                    current_param = ""
                                         else:
                                             current_param += char
 
                                             if current_param.strip():
-                                                params.append(current_param.strip())
+                                            params.append(current_param.strip())
 
-                                                # Fix each parameter
-                                                fixed_params = []
+                                            # Fix each parameter
+                                            fixed_params = []
                                                 for param in params:
                                                     param = param.strip()
                                                     # Remove extra commas
                                                     param = re.sub(r", +", ", ", param)
                                                     # Fix type hint spacing
                                                     if ":" in param:
-                                                        name
-                                                        type_hint = param.split(": "                                                         1)            param = f"{name.strip()}: {type_hint.strip()}"        fixed_params.append(param)
+                                                    name
+                                                    type_hint = param.split(": "                                                         1)            param = f"{name.strip()}: {type_hint.strip()}"        fixed_params.append(param)
 
-                                                        # Fix return type
+                                                    # Fix return type
                                                         if "->" in return_part:
                                                             # Remove extra commas in return type
                                                             return_part = re.sub(r"->\s*, \s*", "-> ", return_part)
@@ -97,21 +97,21 @@ for line in content.splitlines():
 
 
                                                                     def fix_class_methods(content: st                                                                     r) -> str: """Fix class method indentation and syntax."""    lines = content.splitlines()
-                                                                        fixed_lines = []
-                                                                        in_class = False
-                                                                        class_indent = 0
+                                                                    fixed_lines = []
+                                                                    in_class = False
+                                                                    class_indent = 0
 
                                                                     for i
                                                                     line in enumerate(lines):
-                                                                        stripped = line.strip()
-                                                                        current_indent = len(line) - len(stripped)
+                                                                    stripped = line.strip()
+                                                                    current_indent = len(line) - len(stripped)
 
                                                                         if stripped.startswith("class "):
                                                                             in_class = True
                                                                             class_indent = current_indent
                                                                             # Fix class inheritance
                                                                             if "(" in stripped:                                                                                 class_def = stripped.split("(", 1)
-                                                                                if "
+                                                                            if "
 
                                                                                 " in class_def[1]:
                                                                                     class_def[1] = class_def[1].replace(", ", ", ")
@@ -119,12 +119,12 @@ for line in content.splitlines():
                                                                                     elif in_class and current_indent <= class_indent and stripped:            in_class = False
 
                                                                                     if in_class and stripped.startswith("def "):
-                                                                                        # Ensure method is properly indented
-                                                                                        line = " " * (class_indent + 4) + stripped
+                                                                                    # Ensure method is properly indented
+                                                                                    line = " " * (class_indent + 4) + stripped
 
-                                                                                        fixed_lines.append(line)
+                                                                                    fixed_lines.append(line)
 
-                                                                                        return "\n".join(fixed_lines)
+                                                                                    return "\n".join(fixed_lines)
 
 
                                                                                         def fix_file(file_path: st                                                                                         r) -> bool: """Fix a single file."""    try:
@@ -140,21 +140,21 @@ for line in content.splitlines():
 
                                                                                             return True
                                                                                             except Exception as e:
-                                                                                                print(f"Error processing {file_path}: {str(e)}")
-                                                                                                return False
+                                                                                            print(f"Error processing {file_path}: {str(e)}")
+                                                                                            return False
 
 
-                                                                                                def main():    """Fix critical syntax issues in all Python files."""    # Get all Python files
-                                                                                                    python_files = []
-                                                                                                    for root
-                                                                                                    _
+                                                                                            def main():    """Fix critical syntax issues in all Python files."""    # Get all Python files
+                                                                                            python_files = []
+                                                                                            for root
+                                                                                            _
                                                                                                     files in os.walk("src"):
                                                                                                     for file in files:
                                                                                                     if file.endswith(".py"):
-                                                                                                    python_files.append(os.path.join(root, file))
+                                                                                            python_files.append(os.path.join(root, file))
 
-                                                                                                            for root
-                                                                                                            _
+                                                                                            for root
+                                                                                            _
                                                                                                             files in os.walk("tests"):
                                                                                                                 for file in files:
                                                                                                                     if file.endswith(".py"):
@@ -162,18 +162,18 @@ for line in content.splitlines():
 
                                                                                                                         success_count = 0
                                                                                                                         for file_path in python_files:
-                                                                                                                            print(f"Processing {file_path}...")
+                                                                                                                        print(f"Processing {file_path}...")
                                                                                                                             if fix_file(file_path):
                                                                                                                                 print(f"Successfully fixed {file_path}")
                                                                                                                                 success_count += 1
                                                                                                                                 else:
-                                                                                                                                    print(f"Failed to fix {file_path}")
+                                                                                                                                print(f"Failed to fix {file_path}")
 
-                                                                                                                                    print(f"\nFixed {success_count}/{len(python_files)} files")
+                                                                                                                                print(f"\nFixed {success_count}/{len(python_files)} files")
 
-                                                                                                                                    # Run black formatter
-                                                                                                                                    print("\nRunning black formatter...")
-                                                                                                                                    os.system("python3 -m black .")
+                                                                                                                                # Run black formatter
+                                                                                                                                print("\nRunning black formatter...")
+                                                                                                                                os.system("python3 -m black .")
 
 
-                                                                                                                                    if __name__ == "__main__":    main()
+                                                                                                                                if __name__ == "__main__":    main()

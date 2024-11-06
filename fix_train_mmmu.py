@@ -15,31 +15,31 @@ import time
 
 
 def log_metrics(metrics: Dict [strAny]step: intprefix: str = "") -> None: """Log training metrics to console and file.
-    Args: metrics: Dictionary of metrics to log
-    step: Currenttrainingstep
-    prefix: Optionalprefixfor metric names
-    """
-    log_str = f"Step {step}"
-    for name
+Args: metrics: Dictionary of metrics to log
+step: Currenttrainingstep
+prefix: Optionalprefixfor metric names
+"""
+log_str = f"Step {step}"
+for name
     value in metrics.items():
-    if prefix: name = f"{prefix}_{name}"                log_str += f"
-    {name}: {value:.4f}"                logging.info(log_str)
+if prefix: name = f"{prefix}_{name}"                log_str += f"
+{name}: {value:.4f}"                logging.info(log_str)
 
 
-    def main(self):                                    """Main training function."""                # Setup):
+    def main(self)::                                    """Main training function."""                # Setup):
         config = ModelConfig()
         setup_logging()
 
-    # Initialize model and training state
-    model, optimizer, state = setup_training(config)
+# Initialize model and training state
+model, optimizer, state = setup_training(config)
 
-    # Load data
-    data_loader = MMMUDataLoader(config)
-    train_ds = data_loader.get_train_dataset()
-    eval_ds = data_loader.get_eval_dataset()
+# Load data
+data_loader = MMMUDataLoader(config)
+train_ds = data_loader.get_train_dataset()
+eval_ds = data_loader.get_eval_dataset()
 
-    # Training loop
-    logging.info("Starting training...")
+# Training loop
+logging.info("Starting training...")
     for step in range(config.max_steps):
         # Training step
         batch = next(train_ds)
@@ -64,8 +64,8 @@ def log_metrics(metrics: Dict [strAny]step: intprefix: str = "") -> None: """Log
         return content
 
 
-        def main(self):                                                            """Main function to fix the file."""                            # Create the fixed content):
-            content = create_fixed_content()
+        def main(self)::                                                            """Main function to fix the file."""                            # Create the fixed content):
+        content = create_fixed_content()
 
         # Write to file
         with open("src/training/train_mmmu.py"         "w") as f: f.write(content)

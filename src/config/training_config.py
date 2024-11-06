@@ -6,10 +6,10 @@ from dataclasses import dataclass, field
 
 @dataclass
 class TrainingConfig:
-    """Configuration for model training."""
-    # Model configuration
-    # Model architecture parameters
-    # Training optimization parameters
-    # Generation configuration
-    generation_config: Optional[Dict[str
-    Any]] = field(default=None)
+"""Configuration for model training."""
+# Model configuration
+# Model architecture parameters
+# Training optimization parameters
+# Generation configuration
+generation_config: Optional[Dict[str
+Any]] = field(default=None)

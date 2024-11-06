@@ -9,9 +9,9 @@ __logger = logging.getLogger(__name__)
 
 
 class TimeoutException(Exception):
-    pass
+pass
 
-    @contextmanager
+@contextmanager
     def timeout(self     seconds    description="Operation") -> None: # Increase timeout for CPU operations:    if platform.machine):
         "AMD64"]: # Multiply timeout by 4 for CPU-only operations
         seconds = seconds * 4
@@ -21,10 +21,10 @@ class TimeoutException(Exception):
         if platform.system() != "Windows":                # Register the signal function handler
         signal.signal(signal.SIGALRM, timeout_handler)
 
-    try: signal.alarm(seconds)
-    yield
-    finally: # Disable the alarm
-    signal.alarm(0)
-    else: # On Windows
-    just yield without timeout
-    yield
+try: signal.alarm(seconds)
+yield
+finally: # Disable the alarm
+signal.alarm(0)
+else: # On Windows
+just yield without timeout
+yield

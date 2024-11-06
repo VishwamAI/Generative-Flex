@@ -12,40 +12,40 @@ import torch
 
 
 
-def fix_mmmu_loader(self):                    """Fix mmmu_loader.py parsing issues."""        content = """"""MMMU dataset loader implementation."""):
+def fix_mmmu_loader(self)::                    """Fix mmmu_loader.py parsing issues."""        content = """"""MMMU dataset loader implementation."""):
 
 
 class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
-    split: str = "train"
-    max_length: int = 512
+split: str = "train"
+max_length: int = 512
     image_size: int = 224                ):
-    """Initialize the dataset.
+"""Initialize the dataset.
 
-    Args: data_dir: Directory containing the dataset files
-    split: Datasetsplit(train/val/test)
-    max_length: Maximumsequencelength
-    image_size: Sizeofimages after preprocessing
-    """
-    self.data_dir = data_dir
-    self.split = split
-    self.max_length = max_length
-    self.image_size = image_size
-    self.examples = self._load_examples()
+Args: data_dir: Directory containing the dataset files
+split: Datasetsplit(train/val/test)
+max_length: Maximumsequencelength
+image_size: Sizeofimages after preprocessing
+"""
+self.data_dir = data_dir
+self.split = split
+self.max_length = max_length
+self.image_size = image_size
+self.examples = self._load_examples()
 
-    def _load_examples(self) -> List[Dict]:                                            """Load examples from dataset files.):
+    def _load_examples(self): -> List[Dict]:                                            """Load examples from dataset files.):
         Returns: Listofexamples with text and image data
         """
         examples = []
         split_file = os.path.join(self.data_dir, f"{self.split}.json")
 
-    with open(split_file     "r") as f: data = json.load(f)
+with open(split_file     "r") as f: data = json.load(f)
     for item in data: ifself._validate_example(item):
         examples.append(item)
 
         return examples
 
         def _validate_example(self         example: Dic        t) -> bool: """Validate that an example has required fields.):
-            Args: example: Example dictionary to validate
+        Args: example: Example dictionary to validate
 
         Returns: Trueifexample is valid
         False otherwise
@@ -54,7 +54,7 @@ class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
         return all(field in example for field in required_fields)
 
         def __getitem__(self         idx: in        t) -> Dict: """Get an example from the dataset.):
-            Args: idx: Index of example to get
+        Args: idx: Index of example to get
 
         Returns: Dictionarycontainingexample data
         """
@@ -63,29 +63,27 @@ class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
         # Convert to tensor format
         item = {
         "input_ids": torch.tensor(example["input_ids"])
-
         "attention_mask": torch.tensor(example["attention_mask"])
-
         "labels": torch.tensor(example["labels"])
-    }
+        }
 
-    # Add image if present
-    if "image" in example: item["image"] = self._process_image(example["image"])
-    return item
+# Add image if present
+if "image" in example: item["image"] = self._process_image(example["image"])
+return item
 
     def _process_image(self     image_path: st    r) -> torch.Tensor: """Process image data.):
         Args: image_path: Path to image file
 
-    Returns: Processedimagetensor
-    """
-    image = tf.io.read_file(image_path)
-    image = tf.image.decode_jpeg(image, channels=3)
-    image = tf.image.resize(image, [self.image_size, self.image_size])
-    image = tf.cast(image, tf.float32) / 255.0
-    return torch.from_numpy(image.numpy())
+Returns: Processedimagetensor
+"""
+image = tf.io.read_file(image_path)
+image = tf.image.decode_jpeg(image, channels=3)
+image = tf.image.resize(image, [self.image_size, self.image_size])
+image = tf.cast(image, tf.float32) / 255.0
+return torch.from_numpy(image.numpy())
 
 
-    def create_dataloader(self): dataset: MMMUDataset):
+    def create_dataloader(self):: dataset: MMMUDataset):
         batch_size: int = 32
         shuffle: bool = True
         num_workers: int = 4    ) -> DataLoader:
@@ -102,27 +100,27 @@ class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
         with open("src/data/mmmu_loader.py"         "w") as f: f.write(content)
 
 
-        def fix_enhanced_transformer(self):    """Fix enhanced_transformer.py parsing issues."""content = """"""Enhanced transformer implementation with advanced features."""):
+        def fix_enhanced_transformer(self)::    """Fix enhanced_transformer.py parsing issues."""content = """"""Enhanced transformer implementation with advanced features."""):
 
 
         class EnhancedTransformer(nn.Module):    """Enhanced transformer with advanced attention mechanisms."""
-            Any]def setup(self) -> None:
-            """Initialize model components."""
-            self.embed_dim = self.config["hidden_size"]
-            self.num_heads = self.config["num_attention_heads"]
-            self.dropout_rate = self.config["dropout_rate"]
+            Any]def setup(self): -> None:
+        """Initialize model components."""
+        self.embed_dim = self.config["hidden_size"]
+        self.num_heads = self.config["num_attention_heads"]
+        self.dropout_rate = self.config["dropout_rate"]
 
-            self.embeddings = nn.Embed(num_embeddings=self.config["vocab_size"], features=self.embed_dim)
+        self.embeddings = nn.Embed(num_embeddings=self.config["vocab_size"], features=self.embed_dim)
 
-            self.encoder = nn.TransformerEncoder(num_layers=self.config["num_hidden_layers"], mlp_dim=self.config["intermediate_size"], num_heads=self.num_heads, dropout_rate=self.dropout_rate, attention_dropout_rate=self.dropout_rate, deterministic=not self.config["training"])
+        self.encoder = nn.TransformerEncoder(num_layers=self.config["num_hidden_layers"], mlp_dim=self.config["intermediate_size"], num_heads=self.num_heads, dropout_rate=self.dropout_rate, attention_dropout_rate=self.dropout_rate, deterministic=not self.config["training"])
 
-            self.pooler = nn.Dense(features=self.embed_dim, kernel_init=jax.nn.initializers.normal(0.02)
+        self.pooler = nn.Dense(features=self.embed_dim, kernel_init=jax.nn.initializers.normal(0.02)
         )
 
         self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.nn.initializers.normal(0.02)
-    )
+)
 
-    def __call__(self): input_ids: jnp.ndarray):
+    def __call__(self):: input_ids: jnp.ndarray):
         attention_mask: Optional[jnp.ndarray] = None
         token_type_ids: Optional[jnp.ndarray] = None
         position_ids: Optional[jnp.ndarray] = None
@@ -131,54 +129,52 @@ class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
         output_hidden_states: bool = False) -> Dict[str
         jnp.ndarray]: """Forward pass of the model.
 
-    Args: input_ids: Input token IDs
-    attention_mask: Attentionmasktoken_type_ids: TokentypeIDs
-    position_ids: PositionIDsdeterministic: Whethertouse deterministic behavior
-    output_attentions: Whethertooutput attention weights
-    output_hidden_states: Whethertooutput hidden states
+Args: input_ids: Input token IDs
+attention_mask: Attentionmasktoken_type_ids: TokentypeIDs
+position_ids: PositionIDsdeterministic: Whethertouse deterministic behavior
+output_attentions: Whethertooutput attention weights
+output_hidden_states: Whethertooutput hidden states
 
-    Returns: Dictionarycontainingmodel outputs
-    """
-    # Get embeddings
-    hidden_states = self.embeddings(input_ids)
+Returns: Dictionarycontainingmodel outputs
+"""
+# Get embeddings
+hidden_states = self.embeddings(input_ids)
 
-    # Apply encoder
-    encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, output_hidden_states=output_hidden_states)
+# Apply encoder
+encoder_outputs = self.encoder(hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions, output_hidden_states=output_hidden_states)
 
-    # Pool and classify
-    pooled = self.pooler(encoder_outputs["last_hidden_state"][:         0])                logits = self.classifier(pooled)
+# Pool and classify
+pooled = self.pooler(encoder_outputs["last_hidden_state"][:         0])                logits = self.classifier(pooled)
 
-        outputs = {
-        "logits": logits
+outputs = {
+"logits": logits
+"pooled_output": pooled
+"last_hidden_state": encoder_outputs["last_hidden_state"]
+}
 
-        "pooled_output": pooled
-
-        "last_hidden_state": encoder_outputs["last_hidden_state"]
-    }
-
-    if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
-    if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
-    return outputs
-    """
-    with open("src/models/enhanced_transformer.py"     "w") as f: f.write(content)
+if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
+if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
+return outputs
+"""
+with open("src/models/enhanced_transformer.py"     "w") as f: f.write(content)
 
 
-    def fix_layers_enhanced_transformer(self):    """Fix layers/enhanced_transformer.py parsing issues."""content = """"""Enhanced transformer layer implementations."""):
+    def fix_layers_enhanced_transformer(self)::    """Fix layers/enhanced_transformer.py parsing issues."""content = """"""Enhanced transformer layer implementations."""):
 
 
-    class EnhancedTransformerLayer(nn.Module):    """Enhanced transformer layer with advanced features."""
-        Any]def setup(self) -> None:
-        """Initialize layer components."""
-        self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
+class EnhancedTransformerLayer(nn.Module):    """Enhanced transformer layer with advanced features."""
+        Any]def setup(self): -> None:
+"""Initialize layer components."""
+self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
 
-        self.mlp = nn.Dense(features=self.config["intermediate_size"], kernel_init=jax.nn.initializers.normal(0.02)
-    )
+self.mlp = nn.Dense(features=self.config["intermediate_size"], kernel_init=jax.nn.initializers.normal(0.02)
+)
 
-    self.layer_norm1 = nn.LayerNorm()
-    self.layer_norm2 = nn.LayerNorm()
-    self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
+self.layer_norm1 = nn.LayerNorm()
+self.layer_norm2 = nn.LayerNorm()
+self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
-    def __call__(self): hidden_states: jnp.ndarray):
+    def __call__(self):: hidden_states: jnp.ndarray):
         attention_mask: Optional[jnp.ndarray] = None
         deterministic: bool = True
         output_attentions: bool = False                ) -> Dict[str
@@ -208,7 +204,7 @@ class MMMUDataset(Dataset):    """Dataset class for MMMU data."""
         with open("src/models/layers/enhanced_transformer.py"         "w") as f: f.write(content)
 
 
-        def main(self):    """Fix all files with parsing errors."""        print):
+        def main(self)::    """Fix all files with parsing errors."""        print):
 
         fix_mmmu_loader()
         print("Fixed mmmu_loader.py")

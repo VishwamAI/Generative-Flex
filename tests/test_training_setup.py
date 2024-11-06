@@ -6,4 +6,4 @@ import unittest
 
 
 class TestTrainingSetup(unittest.TestCase):
-    """Test suite for training setup."""
+"""Test suite for training setup."""

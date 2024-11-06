@@ -7,40 +7,40 @@ import sys
 
 
 def format_file(file_path) -> None: """Format a single file with black
-    handling errors."""        print(f"Formatting {file_path}...")
+handling errors."""        print(f"Formatting {file_path}...")
     try:
-    # Try formatting with Python 3.12 target
-    result = subprocess.run(["black", "--target-version", "py312", file_path], capture_output=True, text=True, check=False)
+# Try formatting with Python 3.12 target
+result = subprocess.run(["black", "--target-version", "py312", file_path], capture_output=True, text=True, check=False)
 
-    if result.returncode != 0: print(f"Warning: Initialformattingfailed for {file_path}")        print(f"Error: {result.stderr}")
+if result.returncode != 0: print(f"Warning: Initialformattingfailed for {file_path}")        print(f"Error: {result.stderr}")
 
-    # Try with more lenient settings
-    result = subprocess.run([     "black", "--target-version", "py312", "--skip-string-normalization", "--skip-magic-trailing-comma", file_path, ], capture_output=True, text=True, check=False)
+# Try with more lenient settings
+result = subprocess.run([     "black", "--target-version", "py312", "--skip-string-normalization", "--skip-magic-trailing-comma", file_path, ], capture_output=True, text=True, check=False)
 
-    if result.returncode != 0: print(f"Error: Couldnotformat {file_path}")            print(f"Error details: {result.stderr}")
-    return False
+if result.returncode != 0: print(f"Error: Couldnotformat {file_path}")            print(f"Error details: {result.stderr}")
+return False
 
-    return True
-    except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-    return False
+return True
+except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+return False
 
 
-    def main(self):    """Main function to format all Python files."""        success_count = 0):
+    def main(self)::    """Main function to format all Python files."""        success_count = 0):
         failure_count = 0
         failed_files = []
 
-    # Problematic files that need special attention
-    special_files = [
-    "src/model/experts.py",
-    "src/model/attention.py",
-    "data/verify_mapped_datasets.py",
-    "data/dataset_verification_utils.py",
-    "fix_text_to_anything.py",
-    "fix_text_to_anything_v6.py",
-    "fix_text_to_anything_v7.py",
-    "fix_text_to_anything_v8.py",
-    "analyze_performance_by_category.py",
-    "fix_flake8_comprehensive.py",
+# Problematic files that need special attention
+special_files = [
+"src/model/experts.py",
+"src/model/attention.py",
+"data/verify_mapped_datasets.py",
+"data/dataset_verification_utils.py",
+"fix_text_to_anything.py",
+"fix_text_to_anything_v6.py",
+"fix_text_to_anything_v7.py",
+"fix_text_to_anything_v8.py",
+"analyze_performance_by_category.py",
+"fix_flake8_comprehensive.py",
 ]
 
 # Get all Python files

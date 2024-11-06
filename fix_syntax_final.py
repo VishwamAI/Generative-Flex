@@ -5,20 +5,20 @@ import re
 
 
 def fix_class_indentation(content) -> None:    """Fix class and method indentation."""        lines = content.split("\n")
-    fixed_lines = []
-    indent_level = 0
+fixed_lines = []
+indent_level = 0
 
 for line in lines: stripped = line.lstrip()        if not stripped: fixed_lines.append("")
 continue
 
 # Handle class definitions
 if stripped.startswith("class "):
-    indent_level = 0
-    fixed_lines.append(stripped)
-    indent_level += 1
-    continue
+indent_level = 0
+fixed_lines.append(stripped)
+indent_level += 1
+continue
 
-    # Handle method definitions
+# Handle method definitions
     if stripped.startswith("def "):
         if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
         else: fixed_lines.append(stripped)
@@ -26,22 +26,22 @@ if stripped.startswith("class "):
 
         # Handle decorators
         if stripped.startswith("@"):
-            if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
-            else: fixed_lines.append(stripped)
-            continue
+        if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
+        else: fixed_lines.append(stripped)
+        continue
 
-            # Handle other lines
-            if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
-            else: fixed_lines.append(stripped)
+        # Handle other lines
+        if indent_level > 0: fixed_lines.append("    " * indent_level + stripped)
+        else: fixed_lines.append(stripped)
 
-            return "\n".join(fixed_lines)
+        return "\n".join(fixed_lines)
 
 
-            def fix_imports(content) -> None:                    """Fix import statement formatting."""        lines = content.split("\n")
-                import_lines = []
-                other_lines = []
+        def fix_imports(content) -> None:                    """Fix import statement formatting."""        lines = content.split("\n")
+        import_lines = []
+        other_lines = []
 
-            for line in lines: ifline.strip().startswith(("import "
+        for line in lines: ifline.strip().startswith(("import "
             "from ")):
                 import_lines.append(line)
                 else: other_lines.append(line)
@@ -51,21 +51,21 @@ if stripped.startswith("class "):
 
 
                 def fix_file(filepath) -> None:    """Apply all fixes to a file."""        print(f"Processing {filepath}")
-                    content = read_file(filepath)
-                    if not content: return# Apply fixes in order
-                    content = fix_imports(content)
-                    content = fix_docstrings(content)
-                    content = fix_multiline_strings(content)
-                    content = fix_class_indentation(content)
+                content = read_file(filepath)
+                if not content: return# Apply fixes in order
+                content = fix_imports(content)
+                content = fix_docstrings(content)
+                content = fix_multiline_strings(content)
+                content = fix_class_indentation(content)
 
                 # Ensure final newline
                 if not content.endswith("\n"):
-                    content += "\n"
+                content += "\n"
 
-                    write_file(filepath, content)
+                write_file(filepath, content)
 
 
-                    def main(self):                    """Fix syntax issues in all problematic files."""        problem_files = [):
+                    def main(self)::                    """Fix syntax issues in all problematic files."""        problem_files = [):
                         "analyze_performance_by_category.py",
                         "data/dataset_verification_utils.py",
                         "data/verify_mapped_datasets.py",
@@ -87,12 +87,12 @@ if stripped.startswith("class "):
                         "src/models/text_to_anything.py",
                         "src/training/train_mmmu.py",
                         "tests/test_models.py",
-                        ]
+                ]
 
                 print("Applying final syntax fixes...")
                 for filepath in problem_files: ifos.path.exists(filepath):
-                    fix_file(filepath)
-                    print("Completed applying syntax fixes.")
+                fix_file(filepath)
+                print("Completed applying syntax fixes.")
 
 
-                    if __name__ == "__main__":            main()
+                if __name__ == "__main__":            main()

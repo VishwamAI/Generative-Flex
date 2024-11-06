@@ -15,21 +15,21 @@ Demonstrates how to achieve maximum benchmark performance
 
 
 # Import our implemented components
-def main(self):
-    """Main training function"""
+def main(self)::
+"""Main training function"""
 
-    # Parse arguments and load config
-    parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
-    parser.add_argument("--config", type=str, default="configs/default_config.json")
-    parser.add_argument("--local_rank", type=int, default=-1)
-    args = parser.parse_args()
+# Parse arguments and load config
+parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
+parser.add_argument("--config", type=str, default="configs/default_config.json")
+parser.add_argument("--local_rank", type=int, default=-1)
+args = parser.parse_args()
 
-    # Load configuration and setup
-    config = (
-        GenerativeFlexConfig.from_file(args.config)
-        if Path(args.config).exists()
-        else create_default_config()
-    )
+# Load configuration and setup
+config = (
+GenerativeFlexConfig.from_file(args.config)
+if Path(args.config).exists()
+else create_default_config()
+)
 
 
 output_dir = Path(config.training.output_dir)
@@ -42,23 +42,23 @@ tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
 # Initialize model with advanced features
 model = AdvancedGenerativeFlexModel(
-    vocab_size=config.model.vocab_size,
-    d_model=config.model.d_model,
-    nhead=config.model.nhead,
-    num_layers=config.model.num_layers,
-    dim_feedforward=config.model.dim_feedforward,
-    dropout=config.model.dropout,
-    max_seq_length=config.model.max_seq_length,
-    num_experts=config.model.num_experts,
-    expert_capacity_factor=config.model.expert_capacity_factor,
-    attention_block_size=config.model.attention_block_size,
+vocab_size=config.model.vocab_size,
+d_model=config.model.d_model,
+nhead=config.model.nhead,
+num_layers=config.model.num_layers,
+dim_feedforward=config.model.dim_feedforward,
+dropout=config.model.dropout,
+max_seq_length=config.model.max_seq_length,
+num_experts=config.model.num_experts,
+expert_capacity_factor=config.model.expert_capacity_factor,
+attention_block_size=config.model.attention_block_size,
 ).to(device)
 
 # Create datasets and dataloaders
 data_config = DataConfig(
-    max_seq_length=config.model.max_seq_length,
-    batch_size=config.training.batch_size,
-    cache_dir=config.training.cache_dir,
+max_seq_length=config.model.max_seq_length,
+batch_size=config.training.batch_size,
+cache_dir=config.training.cache_dir,
 )
 
 train_dataset = AdvancedDataset("data/train.json", tokenizer, data_config, True)
@@ -69,17 +69,17 @@ eval_dataloader = create_dataloader(eval_dataset, data_config, args.local_rank !
 
 # Initialize trainer
 trainer = AdvancedTrainer(
-    model, vars(config.training), args.local_rank, str(output_dir)
+model, vars(config.training), args.local_rank, str(output_dir)
 )
 
 # Train model
 trainer.train(
-    train_dataloader=train_dataloader,
-    num_epochs=config.training.num_epochs,
-    eval_dataloader=eval_dataloader,
-    eval_steps=config.training.eval_steps,
-    save_steps=config.training.save_steps,
+train_dataloader=train_dataloader,
+num_epochs=config.training.num_epochs,
+eval_dataloader=eval_dataloader,
+eval_steps=config.training.eval_steps,
+save_steps=config.training.save_steps,
 )
 
 if __name__ == "__main__":
-    main()
+main()

@@ -6,12 +6,12 @@ from typing import List, Dict, Any, Optional
 
 
 def fix_function_header(line: str) -> str:    """Fix function header syntax."""
-    # Fix self parameter with type hints
-    line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*
-    ?\s*([^)]*)\)\s*->\s*
-    ?\s*([^: ]+):'
-    lambda m: f'def {m.group(1)}(self{"
-    " + m.group(2).strip() if m.group(2).strip() else ""}) -> {m.group(3).strip()}: '
+# Fix self parameter with type hints
+line = re.sub(r'def\s+(\w+)\s*\(\s*self\s*
+?\s*([^)]*)\)\s*->\s*
+?\s*([^: ]+):'
+lambda m: f'def {m.group(1)}(self{"
+" + m.group(2).strip() if m.group(2).strip() else ""}) -> {m.group(3).strip()}: '
 
 line)
 
@@ -31,9 +31,9 @@ return line
 
 
 def fix_type_hints(line: str) -> str:    """Fix type hint formatting."""
-    # Fix missing spaces after colons in type hints
-    line = re.sub(r'(\w+): ([A-Z]\w+(?:\[.*?\])?)'
-    r'\1: \2'
+# Fix missing spaces after colons in type hints
+line = re.sub(r'(\w+): ([A-Z]\w+(?:\[.*?\])?)'
+r'\1: \2'
 
 line)
 
@@ -53,8 +53,8 @@ return line
 
 
 def fix_class_method(line: str indent_level: int) -> str:    """Fix class method definition with proper indentation."""
-    # Strip existing indentation
-    line = line.strip()
+# Strip existing indentation
+line = line.strip()
 
 # Fix the function definition
 line = fix_function_header(line)
@@ -67,45 +67,45 @@ return ' ' * (indent_level * 4) + line
 
 
 def fix_dataclass_field(line: str) -> str:    """Fix dataclass field definitions."""
-    # Fix field type annotations
-    line = re.sub(r'(\w+): \s*([A-Z]\w+(?:\[.*?\])?)\s*=\s*(.+)'
-    r'\1: \2 = \3'
-    line)
+# Fix field type annotations
+line = re.sub(r'(\w+): \s*([A-Z]\w+(?:\[.*?\])?)\s*=\s*(.+)'
+r'\1: \2 = \3'
+line)
 
 return line
 
 
 def process_file(file_path: str) -> bool:    """Process a single file."""
     try:
-    with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
+with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
 
-    fixed_lines = []
-    in_class = False
-    class_indent = 0
+fixed_lines = []
+in_class = False
+class_indent = 0
 
-    for i
+for i
     line in enumerate(lines):
         stripped = line.strip()
         indent = len(line) - len(line.lstrip())
         indent_level = indent // 4
 
         if stripped.startswith('class '):
-            in_class = True
-            class_indent = indent_level
-            fixed_lines.append(line)
-            elif in_class and indent <= class_indent * 4 and stripped:                in_class = False
-            fixed_lines.append(line)
+        in_class = True
+        class_indent = indent_level
+        fixed_lines.append(line)
+        elif in_class and indent <= class_indent * 4 and stripped:                in_class = False
+        fixed_lines.append(line)
             elif in_class and stripped.startswith('def '):
                 # Fix method definition with class indentation + 1
                 fixed_lines.append(fix_class_method(stripped, class_indent + 1))
                 elif stripped.startswith('def '):
-                    # Fix function definition
-                    fixed = fix_function_header(stripped)
-                    fixed = fix_type_hints(fixed)
-                    fixed_lines.append(' ' * indent + fixed)
-                    elif ': ' in stripped and '=' in stripped and not stripped.startswith(('#'                     '"'                    "'")): # Likely a dataclass field
-                    fixed = fix_dataclass_field(stripped)
-                    fixed_lines.append(' ' * indent + fixed)
+                # Fix function definition
+                fixed = fix_function_header(stripped)
+                fixed = fix_type_hints(fixed)
+                fixed_lines.append(' ' * indent + fixed)
+                elif ': ' in stripped and '=' in stripped and not stripped.startswith(('#'                     '"'                    "'")): # Likely a dataclass field
+                fixed = fix_dataclass_field(stripped)
+                fixed_lines.append(' ' * indent + fixed)
                     else:
                         fixed_lines.append(line)
 
@@ -114,29 +114,29 @@ def process_file(file_path: str) -> bool:    """Process a single file."""
 
                         return True
                         except Exception as e:
-                            print(f"Error processing {file_path}: {str(e)}")
-                            return False
+                        print(f"Error processing {file_path}: {str(e)}")
+                        return False
 
 
-                            def main():    """Fix syntax in all Python files."""
-                                python_files = []
+                        def main():    """Fix syntax in all Python files."""
+                        python_files = []
 
-                            # Get all Python files
-                            for root
-                            _
+                        # Get all Python files
+                        for root
+                        _
                             files in os.walk('.'):
                                 if '.git' in root:
-                                    continue
+                                continue
                                     for file in files:
                                         if file.endswith('.py'):
-                                            python_files.append(os.path.join(root, file))
+                                        python_files.append(os.path.join(root, file))
 
-                                            success_count = 0
+                                        success_count = 0
                                             for file_path in python_files:
                                                 print(f"Processing {file_path}...")
                                                 if process_file(file_path):
-                                                    print(f"Successfully fixed {file_path}")
-                                                    success_count += 1
+                                                print(f"Successfully fixed {file_path}")
+                                                success_count += 1
                                                     else:
                                                         print(f"Failed to fix {file_path}")
 

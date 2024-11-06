@@ -5,17 +5,17 @@ import re
 
 
 def fix_indentation(lines) -> None:                    """Fix indentation while preserving structure."""        fixed_lines = []
-    indent_stack = [0]  # Start with base level indentation
-    current_indent = 0
+indent_stack = [0]  # Start with base level indentation
+current_indent = 0
 
 for i
 line in enumerate(lines):
-    stripped = line.lstrip()
-    if not stripped:  # Empty line
-    fixed_lines.append("\n")
-    continue
+stripped = line.lstrip()
+if not stripped:  # Empty line
+fixed_lines.append("\n")
+continue
 
-    # Special handling for docstrings
+# Special handling for docstrings
     if stripped.startswith(('"""'     """"")):
         fixed_lines.append(" " * current_indent + stripped)
         continue
@@ -23,48 +23,48 @@ line in enumerate(lines):
         # Handle dedents
         if stripped.startswith(("return", "break", "continue", "pass", "raise", ")", "]", "}")
         ):
-            if len(indent_stack) > 1: indent_stack.pop()
-            current_indent = indent_stack[-1]
+        if len(indent_stack) > 1: indent_stack.pop()
+        current_indent = indent_stack[-1]
 
-            # Handle class and function definitions
+        # Handle class and function definitions
             elif stripped.startswith(("class "             "def ")):
                 while len(indent_stack) > 1: indent_stack.pop()
                 current_indent = indent_stack[-1]
 
                 # Handle control flow statements
                 elif stripped.startswith(("elif "                 "else: "                "except"                "finally: ")):
-                    if len(indent_stack) > 1: current_indent = indent_stack[-2]
-                    # Handle indentation after colons
-                    elif lines[i - 1].rstrip().endswith(":") if i > 0 else False: current_indent = indent_stack[-1] + 4                                    indent_stack.append(current_indent)
+                if len(indent_stack) > 1: current_indent = indent_stack[-2]
+                # Handle indentation after colons
+                elif lines[i - 1].rstrip().endswith(":") if i > 0 else False: current_indent = indent_stack[-1] + 4                                    indent_stack.append(current_indent)
 
-                    # Add the line with proper indentation
-                    fixed_lines.append(" " * current_indent + stripped)
+                # Add the line with proper indentation
+                fixed_lines.append(" " * current_indent + stripped)
 
-                    return fixed_lines
+                return fixed_lines
 
 
-                    def fix_imports(lines) -> None:    """Fix import statements and their order."""        import_lines = []
-                        other_lines = []
-                        in_imports = False
+                def fix_imports(lines) -> None:    """Fix import statements and their order."""        import_lines = []
+                other_lines = []
+                in_imports = False
 
-                    for line in lines: stripped = line.strip()        if stripped.startswith(("import "
+                for line in lines: stripped = line.strip()        if stripped.startswith(("import "
                     "from ")):
                         if not in_imports and import_lines: import_lines.append("\n")
                         in_imports = True
                         import_lines.append(line)
                         else: ifin_importsand
                         stripped: in_imports = False        if not line.isspace():
-                            other_lines.append("\n")
-                            other_lines.append(line)
+                        other_lines.append("\n")
+                        other_lines.append(line)
 
-                            return import_lines + other_lines
+                        return import_lines + other_lines
 
 
-                            def fix_docstrings(lines) -> None:                    """Fix docstring formatting."""        fixed_lines = []
-                                in_docstring = False
-                                docstring_indent = 0
+                        def fix_docstrings(lines) -> None:                    """Fix docstring formatting."""        fixed_lines = []
+                        in_docstring = False
+                        docstring_indent = 0
 
-                            for i
+                        for i
                             line in enumerate(lines):
                                 stripped = line.lstrip()
 
@@ -75,12 +75,12 @@ line in enumerate(lines):
                                         in_docstring = True
                                         # Calculate proper indentation
                                         if i > 0 and lines[i - 1].rstrip().endswith(":"):
-                                            docstring_indent = get_indent_level(lines[i - 1]) + 4
-                                            else: docstring_indent = get_indent_level(line)
-                                            else: # End of docstring
-                                            in_docstring = False
-                                            fixed_lines.append(" " * docstring_indent + stripped)
-                                            continue
+                                        docstring_indent = get_indent_level(lines[i - 1]) + 4
+                                        else: docstring_indent = get_indent_level(line)
+                                        else: # End of docstring
+                                        in_docstring = False
+                                        fixed_lines.append(" " * docstring_indent + stripped)
+                                        continue
 
                                             if in_docstring:
                                                 # Maintain docstring indentation
@@ -91,20 +91,20 @@ line in enumerate(lines):
 
 
                                                 def fix_file(filepath) -> None:    """Apply all fixes to a file."""        print(f"Processing {filepath}")
-                                                    lines = read_file(filepath)
-                                                    if not lines: return# Apply fixes in order
-                                                    lines = fix_imports(lines)
-                                                    lines = fix_docstrings(lines)
-                                                    lines = fix_indentation(lines)
+                                                lines = read_file(filepath)
+                                                if not lines: return# Apply fixes in order
+                                                lines = fix_imports(lines)
+                                                lines = fix_docstrings(lines)
+                                                lines = fix_indentation(lines)
 
                                                 # Ensure final newline
                                                 if lines and not lines[-1].endswith("\n"):
-                                                    lines[-1] += "\n"
+                                                lines[-1] += "\n"
 
-                                                    write_file(filepath, lines)
+                                                write_file(filepath, lines)
 
 
-                                                    def main(self):                    """Fix syntax issues in all problematic files."""        problem_files = [):
+                                                    def main(self)::                    """Fix syntax issues in all problematic files."""        problem_files = [):
                                                         "fix_flake8_comprehensive.py",
                                                         "analyze_performance_by_category.py",
                                                         "data/dataset_verification_utils.py",
@@ -118,7 +118,7 @@ line in enumerate(lines):
                                                         "src/models/apple_optimizations.py",
                                                         "src/models/enhanced_transformer.py",
                                                         "src/models/layers/enhanced_transformer.py",
-                                                        ]
+                                                ]
 
                                                 print("Applying complete syntax fixes...")
                                                 for filepath in problem_files: fix_file(filepath)

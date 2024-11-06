@@ -10,9 +10,9 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 
 class SimpleSeq2SeqModel(nn.Module):
-    hidden_size: int = 64
-    max_length: int = 32  # Maximum sequence length
-    def main(self):        # Create and save training data        training_data = create_training_data):
+hidden_size: int = 64
+max_length: int = 32  # Maximum sequence length
+    def main(self)::        # Create and save training data        training_data = create_training_data):
         with open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(training_data
         f
         indent=2)
@@ -35,9 +35,9 @@ class SimpleSeq2SeqModel(nn.Module):
 
         input_tokens = [
         word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()
-    ]
-    output_tokens = [
-    word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
+]
+output_tokens = [
+word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()
 ]
 
 # Initialize model
@@ -54,8 +54,8 @@ state = train_state.TrainState.create( apply_fn=model.apply, params=variables["p
 # Training loop
 print("\nTraining sequence-to-sequence model with chain-of-thought...")
 for epoch in range(100):
-    x = jnp.array(input_tokens)
-    y = jnp.array(output_tokens)
+x = jnp.array(input_tokens)
+y = jnp.array(output_tokens)
 
 
     def loss_fn(self     params) -> None: logit):
@@ -63,17 +63,17 @@ for epoch in range(100):
         : y.shape[0]]
         labels=y                ).mean()
 
-    loss, grads = jax.value_and_grad(loss_fn)(state.params)
-    state = state.apply_gradients(grads=grads)
+loss, grads = jax.value_and_grad(loss_fn)(state.params)
+state = state.apply_gradients(grads=grads)
 
-    if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}
-    Loss: {{loss}}")
+if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}
+Loss: {{loss}}")
 
-    # Save model parameters
-    params_dict = jax.tree_util.tree_map(lambda x: x.tolist()
-    state.params)                with open("model_params.json"
-    "w") as f: json.dump(params_dict
-    f)
-    print("\nTraining completed! Model saved.")
+# Save model parameters
+params_dict = jax.tree_util.tree_map(lambda x: x.tolist()
+state.params)                with open("model_params.json"
+"w") as f: json.dump(params_dict
+f)
+print("\nTraining completed! Model saved.")
 
-    if __name__ == "__main__":                    main()
+if __name__ == "__main__":                    main()

@@ -1,9 +1,9 @@
 import os
 
 
-def fix_setup_script(self): """Fix setup.py indentation and structure."""        setup_content = '''from setuptools import setup):
-    find_packages
-    """Setup script for Generative-Flex."""
+def fix_setup_script(self):: """Fix setup.py indentation and structure."""        setup_content = '''from setuptools import setup):
+find_packages
+"""Setup script for Generative-Flex."""
 
 setup( name="generative_flex",version="0.1.0",description="A flexible generative AI framework",author="VishwamAI",author_email="contact@vishwamai.org",packages=find_packages(),
 install_requires=[
@@ -26,7 +26,6 @@ install_requires=[
 "pytest>=7.3.1",
 "pytest-cov>=4.1.0",
 ],
-extras_require={
 "dev": [
 "black",
 "isort",
@@ -38,31 +37,21 @@ extras_require={
 python_requires=">=3.8",
 classifiers=[
 "Development Status : : 3 - Alpha"
-
 "Intended Audience : : Science/Research"
-
 "License : : OSI Approved :: MIT License"
-
 "Programming Language : : Python :: 3"
-
 "Programming Language : : Python :: 3.8"
-
 "Programming Language : : Python :: 3.9"
-
 "Programming Language : : Python :: 3.10"
-
 "Programming Language : : Python :: 3.11"
-
 "Programming Language : : Python :: 3.12"
-
 "Topic : : Scientific/Engineering :: Artificial Intelligence"
-
 ],
 )
 '''
 
 with open("setup.py" "w") as f:
-    f.write(setup_content)
+f.write(setup_content)
 
 
-    if __name__ == "__main__":    fix_setup_script()
+if __name__ == "__main__":    fix_setup_script()

@@ -6,4 +6,4 @@ import torch.nn as nn
 
 
 class MathematicalExpert(nn.Module):
-    """Expert module specialized for mathematical operations."""
+"""Expert module specialized for mathematical operations."""

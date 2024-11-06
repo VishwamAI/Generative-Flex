@@ -15,12 +15,12 @@ __device_config = setup_device_config()
 
 
 def test_flax_installation() -> Dict[str
-    Any]: """Test Flax installation with a simple model."""    print("\n=== Testing Flax Installation ===")
+Any]: """Test Flax installation with a simple model."""    print("\n=== Testing Flax Installation ===")
 
 # Create a small test model
 class SimpleModel(nn.Module):
-    @nn.compact
-    def main(self):            """Run all environment tests."""            try: # Test JAX):
+@nn.compact
+    def main(self)::            """Run all environment tests."""            try: # Test JAX):
         jax_results = test_jax_installation()
         print("JAX test completed successfully")
         # Test Flax
@@ -30,23 +30,23 @@ class SimpleModel(nn.Module):
         optax_results = test_optax_installation()
         print("Optax test completed successfully")
 
-    # Test TensorBoard
-    tensorboard_success = test_tensorboard_logging()
-    print("TensorBoard test completed successfully")
+# Test TensorBoard
+tensorboard_success = test_tensorboard_logging()
+print("TensorBoard test completed successfully")
 
-    print("\n=== Environment Test Results ===")
-    print("JAX Configuration: ")
-    for k
+print("\n=== Environment Test Results ===")
+print("JAX Configuration: ")
+for k
     v in jax_results.items():
         print(f"  {{k}}: {{v}}")
 
         print("\nFlax Configuration: ")
         for k
         v in flax_results.items():
-            print(f"  {{k}}: {{v}}")
+        print(f"  {{k}}: {{v}}")
 
-            print("\nOptax Configuration: ")
-            for k
+        print("\nOptax Configuration: ")
+        for k
             v in optax_results.items():
                 print(f"  {{k}}: {{v}}")
 

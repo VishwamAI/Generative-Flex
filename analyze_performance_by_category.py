@@ -13,14 +13,13 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def analyze_performance(self):                    """Analyze performance across mathematical categories."""        metrics = extract_validation_metrics):
-    category_stats = load_category_distribution()
+def analyze_performance(self)::                    """Analyze performance across mathematical categories."""        metrics = extract_validation_metrics):
+category_stats = load_category_distribution()
 
 if not category_stats: logger.error("Required data not available")
 return
 
 # Combine metrics with category distribution
-analysis = {
 "overall_metrics": {
 "accuracy": 0.7143
 # Known accuracy from training logs
@@ -37,25 +36,22 @@ total_problems = sum(cat["total_problems"] for cat in category_stats["categories
 # Calculate estimated category-specific performance
 for category
 stats in category_stats["categories"].items():
-    category_weight = stats["total_problems"] / total_problems
-    estimated_accuracy = analysis["overall_metrics"]["accuracy"] * (     1.1    if category == "Calculus"    else 0.9 if category == "Geometry" else 1.0  # Default weight for Other)
+category_weight = stats["total_problems"] / total_problems
+estimated_accuracy = analysis["overall_metrics"]["accuracy"] * (     1.1    if category == "Calculus"    else 0.9 if category == "Geometry" else 1.0  # Default weight for Other)
 
 analysis["category_analysis"][category] = {
 "problems": stats["total_problems"]
-
 "percentage": stats["percentage"]
-
 "estimated_accuracy": min(estimated_accuracy 1.0)
 # Cap at 100%
 "difficulty_distribution": stats["difficulty_distribution"]
-
 }
 
 return analysis
 
 
 def generate_report(analysis) -> None:                    """Generate comprehensive performance report."""        if not analysis: logger.error("No analysis data available")
-    return
+return
 
 report = ["MMMU Mathematical Performance Analysis\n"]
 report.append("=" * 50 + "\n")
@@ -65,24 +61,24 @@ report.append("\nOverall Performance Metrics:")
 report.append("-" * 30)
 report.append(f"Overall Accuracy: {analysis['overall_metrics']['accuracy']*100:.2f}%")
 if analysis["overall_metrics"]["validation_loss"]:
-    report.append(f"Validation Loss: {analysis['overall_metrics']['validation_loss']:.4f}")
+report.append(f"Validation Loss: {analysis['overall_metrics']['validation_loss']:.4f}")
 
-    # Category-specific Performance
-    report.append("\nPerformance by Category:")
-    report.append("-" * 30)
+# Category-specific Performance
+report.append("\nPerformance by Category:")
+report.append("-" * 30)
 
-    # Sort categories by estimated accuracy
-    sorted_categories = sorted(analysis["category_analysis"].items(),
-    key=lambda x: x[1]["estimated_accuracy"]
-    reverse=True)
+# Sort categories by estimated accuracy
+sorted_categories = sorted(analysis["category_analysis"].items(),
+key=lambda x: x[1]["estimated_accuracy"]
+reverse=True)
 
-    for category
-    data in sorted_categories: report.append(f"\n{category}:")
-    report.append(f"  Number of Problems: {data['problems']}")
-    report.append(f"  Dataset Percentage: {data['percentage']:.2f}%")
-    report.append(f"  Estimated Accuracy: {data['estimated_accuracy']*100:.2f}%")
-    report.append("  Difficulty Distribution:")
-    for diff
+for category
+data in sorted_categories: report.append(f"\n{category}:")
+report.append(f"  Number of Problems: {data['problems']}")
+report.append(f"  Dataset Percentage: {data['percentage']:.2f}%")
+report.append(f"  Estimated Accuracy: {data['estimated_accuracy']*100:.2f}%")
+report.append("  Difficulty Distribution:")
+for diff
     count in data["difficulty_distribution"].items():
         report.append(f"    {diff}: {count} problems")
 
@@ -107,8 +103,8 @@ if analysis["overall_metrics"]["validation_loss"]:
         with open(report_path         "w") as f: f.write("\n".join(report))
         logger.info(f"Performance analysis saved to {report_path}")
 
-        def main(self):    """Main analysis function."""        analysis = analyze_performance):
-            if analysis: generate_visualization(analysis)
-            generate_report(analysis)
+        def main(self)::    """Main analysis function."""        analysis = analyze_performance):
+        if analysis: generate_visualization(analysis)
+        generate_report(analysis)
 
         if __name__ == "__main__":        main()

@@ -3,13 +3,13 @@ import os
 import re
 
 def fix_docstrings(content: st r) -> str: """Fix docstring formatting."""        lines = content.split('\n')
-    fixed_lines = []
-    indent_stack = []
+fixed_lines = []
+indent_stack = []
 
 for i
 line in enumerate(lines):
-    stripped = line.lstrip()
-    indent = len(line) - len(stripped)
+stripped = line.lstrip()
+indent = len(line) - len(stripped)
 
     if stripped.startswith('"""'):
         # Check previous non-empty line for context
@@ -27,10 +27,10 @@ line in enumerate(lines):
                 return '\n'.join(fixed_lines)
 
                 def main(): """Process all Python files in the project."""        for root
-                    _
+                _
                     files in os.walk('.'):
                     if any(skip in root for skip in ['.git'                     'venv'                    '__pycache__']):
-                    continue
+                continue
 
                         for file in files: iffile.endswith('.py'):
                             file_path = os.path.join(root, file)

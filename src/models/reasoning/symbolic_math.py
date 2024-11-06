@@ -4,4 +4,4 @@ import torch.nn as nn
 
 
 class SymbolicMathProcessor(nn.Module):
-    """Processes symbolic mathematics expressions."""
+"""Processes symbolic mathematics expressions."""

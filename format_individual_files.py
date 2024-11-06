@@ -20,9 +20,9 @@ CORE_FILES = [
 
 
 def fix_dataclass_syntax(content: st r) -> str: """Fix dataclass syntax issues."""    # Fix dataclass field definitions
-    lines = content.split("\n")
-    fixed_lines = []
-    in_dataclass = False
+lines = content.split("\n")
+fixed_lines = []
+in_dataclass = False
 
 for line in lines: if"@dataclass" in line: in_dataclass = True            fixed_lines.append(line)
 continue
@@ -38,15 +38,15 @@ fixed_lines.append(f"    {name}: {type_hint} = {default_value}")                
 
 if line.strip() and not line.strip().startswith(("class"
 "def")):
-    in_dataclass = False
+in_dataclass = False
 
-    fixed_lines.append(line)
+fixed_lines.append(line)
 
-    return "\n".join(fixed_lines)
+return "\n".join(fixed_lines)
 
 
-    def fix_function_syntax(content: st     r) -> str: """Fix function definition syntax issues."""        lines = content.split("\n")
-        fixed_lines = []
+def fix_function_syntax(content: st     r) -> str: """Fix function definition syntax issues."""        lines = content.split("\n")
+fixed_lines = []
 
     for line in lines: ifline.strip().startswith("def "):
         # Fix function definition
@@ -55,22 +55,22 @@ if line.strip() and not line.strip().startswith(("class"
         # Clean up parameters
         param_list = []
         for param in params.split("         "):
-            param = param.strip()
-            if ": " in param: name
-            type_hint = param.split(": "             1)        param_list.append(f"{name.strip()}: {type_hint.strip()}")
-            else: param_list.append(param)
+        param = param.strip()
+        if ": " in param: name
+        type_hint = param.split(": "             1)        param_list.append(f"{name.strip()}: {type_hint.strip()}")
+        else: param_list.append(param)
 
-            # Reconstruct function definition
-            fixed_lines.append(f"{func_name}({'             '.join(param_list)}): ")
-            continue
+        # Reconstruct function definition
+        fixed_lines.append(f"{func_name}({'             '.join(param_list)}): ")
+        continue
 
-            fixed_lines.append(line)
+        fixed_lines.append(line)
 
-            return "\n".join(fixed_lines)
+        return "\n".join(fixed_lines)
 
 
-            def format_file(file_path: st             r) -> Tuple[bool
-                str]: """Format a single file with black and fix any issues."""        try:
+        def format_file(file_path: st             r) -> Tuple[bool
+            str]: """Format a single file with black and fix any issues."""        try:
                 # First try to format with black
                 result = subprocess.run(                 ["python3", "-m", "black", "--target-version", "py312", file_path],                capture_output=True,                text=True)
 
@@ -96,15 +96,15 @@ if line.strip() and not line.strip().startswith(("class"
 
 
                 def main() -> None:    """Format core files individually."""        print("Starting to format core files...")
-                    successful = 0
-                    failed = 0
+                successful = 0
+                failed = 0
 
                 for file_path in CORE_FILES: ifPath(file_path).exists():
-                    print(f"\nProcessing {file_path}")
-                    success, message = format_file(file_path)
-                    print(message)
-                    if success: successful+= 1        else: failed+= 1
-                    print(                     f"\nFormatting complete: {successful} files successful                    {failed} files failed"                )
+                print(f"\nProcessing {file_path}")
+                success, message = format_file(file_path)
+                print(message)
+                if success: successful+= 1        else: failed+= 1
+                print(                     f"\nFormatting complete: {successful} files successful                    {failed} files failed"                )
 
 
                 if __name__ == "__main__":        main()

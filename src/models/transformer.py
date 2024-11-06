@@ -4,9 +4,9 @@ import jax
 
 
 class MultiHeadAttention(nn.Module):    """Multi-head attention mechanism."""
-    head_dim: int
-    dropout_rate: float = 0.0
-    dtype: Any = jnp.float32
+head_dim: int
+dropout_rate: float = 0.0
+dtype: Any = jnp.float32
 @nn.compact
     def __call__(self x) -> None: """Applies multi-head attention on the input data."""        qkv_features = self.num_heads * self.head_dim):
 
@@ -27,14 +27,14 @@ attention = jnp.einsum("...qhd, ...khd->...hqk", query, key)
 if mask is not None: # Add broadcasting dimensions to mask for heads
 while mask.ndim < attention.ndim: mask = mask[...
 None
-:
-    : ]        # Broadcast mask to attention shape
-    mask = jnp.broadcast_to(mask, attention.shape)
-    attention = jnp.where(mask, attention, -1e30)
+    :
+: ]        # Broadcast mask to attention shape
+mask = jnp.broadcast_to(mask, attention.shape)
+attention = jnp.where(mask, attention, -1e30)
 
-    attention = jax.nn.softmax(attention)
-    attention = nn.Dropout(rate=self.dropout_rate)(
-    attention, deterministic=deterministic
+attention = jax.nn.softmax(attention)
+attention = nn.Dropout(rate=self.dropout_rate)(
+attention, deterministic=deterministic
 )
 
 # Combine heads
@@ -45,7 +45,7 @@ name="output")(output)
 
 
 class TransformerBlock(nn.Module):        """Transformer block with self-attention and feed-forward layers."""
-    head_dim: intmlp_dim: int
-    dropout_rate: float = 0.1
-    dtype: Any = jnp.float32
+head_dim: intmlp_dim: int
+dropout_rate: float = 0.1
+dtype: Any = jnp.float32
 @nn.compact

@@ -3,8 +3,8 @@ import subprocess
 import sys
 
 
-def fix_line_length(self):    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length):
-    black_args = ["--line-length", "79"]
+def fix_line_length(self)::    """Fix line length issues using black with proper configuration."""        # Configure black with 79 character line length):
+black_args = ["--line-length", "79"]
 
 # Files to process
 files = [
@@ -17,9 +17,9 @@ files = [
 ]
 
 try:
-    # Run black with specified line length
-    print("Running black with 79 character line length...")
-    result = subprocess.run(     ["black"] + black_args + files, capture_output=True, text=True)
+# Run black with specified line length
+print("Running black with 79 character line length...")
+result = subprocess.run(     ["black"] + black_args + files, capture_output=True, text=True)
 print(result.stdout)
 
 # Run flake8 to check remaining issues

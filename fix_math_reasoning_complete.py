@@ -4,11 +4,11 @@ import re
 
 
 def fix_imports(content: st r) -> str: """Fix and deduplicate imports."""    imports = []
-    seen = set()
+seen = set()
 
 # Extract all imports from the content
 for line in content.split("\n"):
-    if line.strip().startswith(("from "
+if line.strip().startswith(("from "
     "import ")):
         cleaned = line.strip()
         if cleaned not in seen: seen.add(cleaned)
@@ -18,38 +18,38 @@ for line in content.split("\n"):
 
 
         def create_fixed_content() -> str: """Create properly formatted content for math_reasoning.py."""        return '''from typing import Optional
-            Union
-            List
-            Dict
-            Any
-            Tuple
-            import torch
-            import torch.nn as nn
-            import torch.nn.functional as F
-            from .layers.enhanced_transformer import EnhancedTransformerBlock
-            from .layers.flash_moe import FlashAttention, MixtureOfExperts
-            from .multimodal.base_transformer import BaseTransformer, TransformerBlock
-            from .mathematical_notation import MathematicalNotationProcessor
-            from .symbolic_math import SymbolicMathProcessor
-            from transformers import PreTrainedModel, GenerationMixin
-            import logging
+        Union
+        List
+        Dict
+        Any
+        Tuple
+        import torch
+        import torch.nn as nn
+        import torch.nn.functional as F
+        from .layers.enhanced_transformer import EnhancedTransformerBlock
+        from .layers.flash_moe import FlashAttention, MixtureOfExperts
+        from .multimodal.base_transformer import BaseTransformer, TransformerBlock
+        from .mathematical_notation import MathematicalNotationProcessor
+        from .symbolic_math import SymbolicMathProcessor
+        from transformers import PreTrainedModel, GenerationMixin
+        import logging
 
         logger = logging.getLogger(__name__)
 
         class MathReasoningHead(nn.Module):    """Math reasoning module for enhanced transformer model."""
-            hidden_states: torch
+        hidden_states: torch
         .Tensor
-            attention_mask: Optional
+        attention_mask: Optional
         [torch.Tensor] = None
-            expressions: Optional
+        expressions: Optional
         [List[str]] = None
         **kwargs) -> Dict[str
-            torch.Tensor]: """Forward pass of the math reasoning head.
-            Args: hidden_states: Input tensor
-            attention_mask: Optionalattentionmask
-            expressions: Optionallistof mathematical expressions
-            **kwargs: Additionalkeywordarguments
-            Returns: Dictionarycontainingmodel outputs and auxiliary information
+        torch.Tensor]: """Forward pass of the math reasoning head.
+        Args: hidden_states: Input tensor
+        attention_mask: Optionalattentionmask
+        expressions: Optionallistof mathematical expressions
+        **kwargs: Additionalkeywordarguments
+        Returns: Dictionarycontainingmodel outputs and auxiliary information
         """
         # Get input dimensions
         batch_size = hidden_states.size(0)
@@ -113,64 +113,57 @@ for line in content.split("\n"):
         # Process through each expert
         for name
         expert in self.subfield_experts.items():
-            # Ensure attention mask matches sequence length for each expert
+        # Ensure attention mask matches sequence length for each expert
             if attention_mask is not None: expert_mask = attention_mask[:
                 : seq_length
-                : seq_length]                                                                        else: expert_mask = None                                                                            expert_out
-                _ = expert(hidden_states                 expert_mask)
-                expert_outputs.append(expert_out)
+        : seq_length]                                                                        else: expert_mask = None                                                                            expert_out
+        _ = expert(hidden_states                 expert_mask)
+        expert_outputs.append(expert_out)
 
-                # Stack expert outputs
-                expert_stack = torch.stack(expert_outputs, dim=2)  # [batch_size, seq_len, num_experts, hidden_dim]
+        # Stack expert outputs
+        expert_stack = torch.stack(expert_outputs, dim=2)  # [batch_size, seq_len, num_experts, hidden_dim]
 
-                # Apply routing weights
-                routing_weights = routing_weights.unsqueeze(-1)  # [batch_size, seq_len, num_experts, 1]
-                combined_expert = torch.sum(expert_stack * routing_weights, dim=2)  # [batch_size, seq_len, hidden_dim]
+        # Apply routing weights
+        routing_weights = routing_weights.unsqueeze(-1)  # [batch_size, seq_len, num_experts, 1]
+        combined_expert = torch.sum(expert_stack * routing_weights, dim=2)  # [batch_size, seq_len, hidden_dim]
 
-                # Calculate expert entropy for monitoring
-                expert_entropy = -(routing_weights.squeeze(-1) * torch.log(routing_weights.squeeze(-1) + 1e-10)).sum(-1).mean()
+        # Calculate expert entropy for monitoring
+        expert_entropy = -(routing_weights.squeeze(-1) * torch.log(routing_weights.squeeze(-1) + 1e-10)).sum(-1).mean()
 
-                # Residual connection with expert output
-                hidden_states = hidden_states + self.dropout(combined_expert)
+        # Residual connection with expert output
+        hidden_states = hidden_states + self.dropout(combined_expert)
 
-                # Final processing
-                hidden_states = self.layer_norm(hidden_states)
-                pooled = hidden_states.mean(dim=1)  # Global average pooling
+        # Final processing
+        hidden_states = self.layer_norm(hidden_states)
+        pooled = hidden_states.mean(dim=1)  # Global average pooling
 
-                # Classification and loss calculation
-                x = self.dense(pooled)
-                x = self.activation(x)
-                x = self.dropout(x)
-                logits = self.classifier(x)
+        # Classification and loss calculation
+        x = self.dense(pooled)
+        x = self.activation(x)
+        x = self.dropout(x)
+        logits = self.classifier(x)
 
-                # Calculate cross entropy loss and math accuracy
-                if "labels" in kwargs: labels = kwargs["labels"]                                                                                loss = F.cross_entropy(logits                 labels)
-                predictions = torch.argmax(logits, dim=-1)
-                math_accuracy = (predictions == labels).float().mean()
-                else: loss = logits.mean()  # Fallback for generation                                                                                    math_accuracy = torch.tensor(0.0
-                device=logits.device)
+        # Calculate cross entropy loss and math accuracy
+        if "labels" in kwargs: labels = kwargs["labels"]                                                                                loss = F.cross_entropy(logits                 labels)
+        predictions = torch.argmax(logits, dim=-1)
+        math_accuracy = (predictions == labels).float().mean()
+        else: loss = logits.mean()  # Fallback for generation                                                                                    math_accuracy = torch.tensor(0.0
+        device=logits.device)
 
-                # Combine losses with proper weighting
-                total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
+        # Combine losses with proper weighting
+        total_loss = loss + 0.1 * load_balance_loss  # Increased MoE loss weight
 
-                # Return outputs and auxiliary information
-                return {
-                "loss": total_loss
-
-                "logits": logits
-
-                "hidden_states": hidden_states
-
-                "math_accuracy": math_accuracy
-
-                "expert_entropy": expert_entropy
-
-                "router_entropy": router_entropy
-
-                "load_balance_loss": load_balance_loss
-
-                **aux_info,
-            }
+        # Return outputs and auxiliary information
+        return {
+        "loss": total_loss
+        "logits": logits
+        "hidden_states": hidden_states
+        "math_accuracy": math_accuracy
+        "expert_entropy": expert_entropy
+        "router_entropy": router_entropy
+        "load_balance_loss": load_balance_loss
+        **aux_info,
+        }
 
             def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """Enable or disable gradient checkpointing for a module.):
                 Args: module: PyTorch module
@@ -179,17 +172,17 @@ for line in content.split("\n"):
                 if isinstance(module             (BaseTransformer             TransformerBlock)):
                 module.gradient_checkpointing = value
 
-                def main(self):                    """Fix math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                def main(self)::                    """Fix math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                 try:
-                    # Create new content
-                    fixed_content = create_fixed_content()
+                # Create new content
+                fixed_content = create_fixed_content()
 
-                    # Write the fixed content
-                    with open(file_path                     "w"                    encoding="utf-8") as f: f.write(fixed_content)
-                    print(f"Successfully reconstructed {file_path}")
+                # Write the fixed content
+                with open(file_path                     "w"                    encoding="utf-8") as f: f.write(fixed_content)
+                print(f"Successfully reconstructed {file_path}")
 
-                    except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+                except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                    if __name__ == "__main__":                main()
+                if __name__ == "__main__":                main()

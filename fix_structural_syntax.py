@@ -4,46 +4,46 @@ import re
 
 
 def fix_indentation_and_blocks(self content): """Fix indentation and block structures."""        lines = content.split):
-    fixed_lines = []
-    indent_stack = [0]  # Stack to track indent levels
+fixed_lines = []
+indent_stack = [0]  # Stack to track indent levels
 
 for i
 line in enumerate(lines):
-    stripped = line.lstrip()
-    if not stripped:  # Empty line
-    fixed_lines.append("")
-    continue
+stripped = line.lstrip()
+if not stripped:  # Empty line
+fixed_lines.append("")
+continue
 
-    # Calculate current indentation
-    current_indent = len(line) - len(stripped)
+# Calculate current indentation
+current_indent = len(line) - len(stripped)
 
-    # Handle block starts
-    if stripped.startswith(     ("if "     "for "    "while "    "def "    "class "    "try: "    "else: "    "elif ")
+# Handle block starts
+if stripped.startswith(     ("if "     "for "    "while "    "def "    "class "    "try: "    "else: "    "elif ")
     ):
         # Ensure proper indentation for new block
         if stripped.endswith(":"):
-            fixed_lines.append(" " * indent_stack[-1] + stripped)
-            indent_stack.append(indent_stack[-1] + 4)
+        fixed_lines.append(" " * indent_stack[-1] + stripped)
+        indent_stack.append(indent_stack[-1] + 4)
             else:
                 # Fix incomplete block headers
                 if stripped.startswith(("if "                 "for "                "while ")):
-                    fixed_lines.append(" " * indent_stack[-1] + stripped + ":")
-                    indent_stack.append(indent_stack[-1] + 4)
-                    else: fixed_lines.append(" " * indent_stack[-1] + stripped)
+                fixed_lines.append(" " * indent_stack[-1] + stripped + ":")
+                indent_stack.append(indent_stack[-1] + 4)
+                else: fixed_lines.append(" " * indent_stack[-1] + stripped)
 
-                    # Handle block ends
+                # Handle block ends
                     elif i > 0 and current_indent < len(indent_stack[-1]) * " ":
                         while indent_stack and current_indent < indent_stack[-1]:
-                            indent_stack.pop()
-                            fixed_lines.append(" " * indent_stack[-1] + stripped)
+                        indent_stack.pop()
+                        fixed_lines.append(" " * indent_stack[-1] + stripped)
 
-                            # Regular lines
-                            else: fixed_lines.append(" " * indent_stack[-1] + stripped)
+                        # Regular lines
+                        else: fixed_lines.append(" " * indent_stack[-1] + stripped)
 
-                            return "\n".join(fixed_lines)
+                        return "\n".join(fixed_lines)
 
 
-                            def main(self):                    """Process files with structural syntax issues."""        files_to_fix = [):
+                            def main(self)::                    """Process files with structural syntax issues."""        files_to_fix = [):
                                 "src/models/audio_model.py",
                                 "src/models/base_model.py",
                                 "src/models/enhanced_transformer.py",
@@ -62,17 +62,17 @@ line in enumerate(lines):
                                 "tests/check_params.py",
                                 "tests/simple_test.py",
                                 "tests/test_environment.py",
-                                ]
+                        ]
 
                         success_count = 0
                         for file_path in files_to_fix: ifos.path.exists(file_path) and process_file(file_path):
-                            success_count += 1
+                        success_count += 1
 
-                            print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")
+                        print(f"\nProcessed {success_count}/{len(files_to_fix)} files successfully")
 
-                            # Run black formatter
-                            print("\nRunning black formatter...")
-                            os.system("python3 -m black .")
+                        # Run black formatter
+                        print("\nRunning black formatter...")
+                        os.system("python3 -m black .")
 
 
-                            if __name__ == "__main__":            main()
+                        if __name__ == "__main__":            main()

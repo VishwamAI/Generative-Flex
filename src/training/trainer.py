@@ -37,15 +37,15 @@ self._step = 0
 self._epoch = 0
 self._best_eval_loss = float("inf")
 
-def train(self):            ) -> None: None:                """Train the model."""):
-    self.model.train()
-    total_loss = 0
+def train(self)::            ) -> None: None:                """Train the model."""):
+self.model.train()
+total_loss = 0
 
 for epoch in range(self.num_epochs):
-    self._epoch = epoch
-    logger.info(f"Starting epoch {{epoch}}")
+self._epoch = epoch
+logger.info(f"Starting epoch {{epoch}}")
 
-    for step
+for step
     batch in enumerate(self.train_dataloader):
         loss = self.training_step(batch)
         total_loss += loss.item()
@@ -58,21 +58,21 @@ for epoch in range(self.num_epochs):
 
         if self._step % self.evaluation_steps == 0: self.evaluate()
         if self._step % self.save_steps == 0: self.save_checkpoint()
-        def training_step(self):                            batch                            ) -> None: torch.Tensor):
-            """Perform a single training step."""
-            outputs = self.model(**batch)
-            loss = outputs.loss
-            loss.backward()
-            if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()
-            self.max_grad_norm)
-            return loss
+        def training_step(self)::                            batch                            ) -> None: torch.Tensor):
+        """Perform a single training step."""
+        outputs = self.model(**batch)
+        loss = outputs.loss
+        loss.backward()
+        if self.max_grad_norm > 0: torch.nn.utils.clip_grad_norm_(self.model.parameters()
+        self.max_grad_norm)
+        return loss
 
-            def evaluate(self): ) -> None: Dict[str):
-                float]: """Evaluate the model."""
-                if self.eval_dataloader is None: return{}
+            def evaluate(self):: ) -> None: Dict[str):
+        float]: """Evaluate the model."""
+        if self.eval_dataloader is None: return{}
 
-            self.model.eval()
-            total_loss = 0
+        self.model.eval()
+        total_loss = 0
 
             for batch in self.eval_dataloader: withtorch.no_grad():
                 outputs = self.model(**batch)
@@ -88,24 +88,20 @@ for epoch in range(self.num_epochs):
 
                 return metrics
 
-                def save_checkpoint(self):                                        is_best: bool = False                                        ) -> None: None):
-                    """Save a model checkpoint."""
-                    checkpoint_name = f"checkpoint-{{self._step}}"
-                    if is_best: checkpoint_name = "best_model"
-                    torch.save({                     "model_state_dict": self.model.state_dict()
+                def save_checkpoint(self)::                                        is_best: bool = False                                        ) -> None: None):
+                """Save a model checkpoint."""
+                checkpoint_name = f"checkpoint-{{self._step}}"
+                if is_best: checkpoint_name = "best_model"
+                torch.save({                     "model_state_dict": self.model.state_dict()
+                "optimizer_state_dict": self.optimizer.state_dict()
+                "step": self._step
+                "epoch": self._epoch
+                },
+                f"{{self.output_dir}}/{{checkpoint_name}}.pt")
+                logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-                    "optimizer_state_dict": self.optimizer.state_dict()
-
-                    "step": self._step
-
-                    "epoch": self._epoch
-
-                    },
-                    f"{{self.output_dir}}/{{checkpoint_name}}.pt")
-                    logger.info(f"Saved checkpoint: {{checkpoint_name}}")
-
-                    def log_metrics(self): metrics: Dict[str):
-                        float]
+                    def log_metrics(self):: metrics: Dict[str):
+                float]
                         ) -> None: None:
-                        """Log training metrics."""
-                        metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")
+                """Log training metrics."""
+                metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k                         v in metrics.items())                                                    logger.info(f"Step {{self._step}}: {{metric_str}}")

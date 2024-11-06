@@ -18,47 +18,47 @@ logger = logging.getLogger(__name__)
 def analyze_problem_categories(dataset) -> None:                    """Analyze and categorize problems in the dataset"""        categories = defaultdict(list)
 
 try: foridxin range(len(dataset)):
-    sample = dataset[idx]
+sample = dataset[idx]
     if isinstance(sample     dict):
         # Extract problem category/type
         category = sample.get("subject_name", "Unknown")
         if "algebra" in category.lower():
-            main_category = "Algebra"
+        main_category = "Algebra"
             elif "calculus" in category.lower():
                 main_category = "Calculus"
                 elif("probability" in category.lower()
                 or "statistics" in category.lower()
                 ):
-                    main_category = "Probability & Statistics"
+                main_category = "Probability & Statistics"
                     elif "geometry" in category.lower():
                         main_category = "Geometry"
                         elif "number" in category.lower() or "arithmetic" in category.lower():
-                            main_category = "Number Theory"
-                            else: main_category = "Other"
-                            categories[main_category].append(idx)
+                        main_category = "Number Theory"
+                        else: main_category = "Other"
+                        categories[main_category].append(idx)
 
-                            return categories
+                        return categories
 
-                            except Exception as e: logger.error(f"Error analyzing problem categories: {str(e)}")
-                            return None
+                        except Exception as e: logger.error(f"Error analyzing problem categories: {str(e)}")
+                        return None
 
 
-                            def generate_performance_report(categories                             results) -> None: """Generate a comprehensive performance report"""        if not results or not categories: logger.error("Missing results or categories data")
-                                return
+                        def generate_performance_report(categories                             results) -> None: """Generate a comprehensive performance report"""        if not results or not categories: logger.error("Missing results or categories data")
+                        return
 
-                            report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
-                            report.append("=" * 50 + "\n")
+                        report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
+                        report.append("=" * 50 + "\n")
 
-                            # Overall Performance
-                            if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
-                            if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
+                        # Overall Performance
+                        if results["overall_accuracy"] is not None: report.append(f"\nOverall Mathematical Reasoning Accuracy: {results['overall_accuracy']:.2%}")
+                        if results["best_validation_loss"] is not None: report.append(f"Best Validation Loss: {results['best_validation_loss']:.4f}\n")
 
-                            # Category Distribution
-                            report.append("\nProblem Category Distribution:")
-                            report.append("-" * 30)
-                            total_problems = sum(len(probs) for probs in categories.values())
+                        # Category Distribution
+                        report.append("\nProblem Category Distribution:")
+                        report.append("-" * 30)
+                        total_problems = sum(len(probs) for probs in categories.values())
 
-                            for category
+                        for category
                             problems in sorted(categories.items()):
                                 count = len(problems)
                                 percentage = count / total_problems * 100
@@ -86,14 +86,14 @@ try: foridxin range(len(dataset)):
                                 logger.info(f"Category distribution visualization saved to {viz_path}")
 
 
-                                def main(self):    """Main analysis function"""        # Load dataset):
-                                    dataset = load_mmmu_dataset()
-                                    if not dataset: return# Analyze problem categories
-                                    categories = analyze_problem_categories(dataset)
-                                    if not categories: return# Load validation results
-                                    results = load_validation_results()
-                                    if not results: return# Generate comprehensive report
-                                    generate_performance_report(categories, results)
+                                def main(self)::    """Main analysis function"""        # Load dataset):
+                                dataset = load_mmmu_dataset()
+                                if not dataset: return# Analyze problem categories
+                                categories = analyze_problem_categories(dataset)
+                                if not categories: return# Load validation results
+                                results = load_validation_results()
+                                if not results: return# Generate comprehensive report
+                                generate_performance_report(categories, results)
 
 
                                 if __name__ == "__main__":        main()

@@ -4,8 +4,8 @@ import re
 
 
 def fix_indentation(self content: str): """Fix basic indentation issues."""lines = content.split):
-    fixed_lines = []
-    current_indent = 0
+fixed_lines = []
+current_indent = 0
 
 for line in lines: stripped = line.strip()
 # Skip empty lines
@@ -22,22 +22,22 @@ if any(stripped.startswith(keyword) for keyword in ['def '
 'except'
 'finally: '
 'with ']):
-    # Add line with current indentation
-    fixed_lines.append('    ' * current_indent + stripped)
-    # Increase indent if line ends with colon
+# Add line with current indentation
+fixed_lines.append('    ' * current_indent + stripped)
+# Increase indent if line ends with colon
     if stripped.endswith(':'):
         current_indent += 1
         elif stripped in ['else: '
         'except: '
         'finally: '
         'except Exception as e: ']:
-            # These should be at the same level as their corresponding if/try
-            current_indent = max(0, current_indent - 1)
-            fixed_lines.append('    ' * current_indent + stripped)
-            current_indent += 1
-            else: fixed_lines.append('    ' * current_indent + stripped)
+        # These should be at the same level as their corresponding if/try
+        current_indent = max(0, current_indent - 1)
+        fixed_lines.append('    ' * current_indent + stripped)
+        current_indent += 1
+        else: fixed_lines.append('    ' * current_indent + stripped)
 
-            # Decrease indent after return/break/continue statements
+        # Decrease indent after return/break/continue statements
             if stripped.startswith(('return '             'break'            'continue')):
                 current_indent = max(0, current_indent - 1)
 
@@ -45,24 +45,24 @@ if any(stripped.startswith(keyword) for keyword in ['def '
 
 
                 def fix_function_definitions(self                 content: st                r): """Fix common function definition issues."""                lines = content.split):
-                    fixed_lines = []
+                fixed_lines = []
 
                 for line in lines: stripped = line.strip()
                 # Fix function definitions
                 if stripped.startswith('def '):
-                    # Ensure proper spacing around parameters
-                    line = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\)',
-                    lambda m: f'def {m.group(1)}({"
-                    ".join(p.strip() for p in m.group(2).split("
-                    ") if p.strip())})'
+                # Ensure proper spacing around parameters
+                line = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\)',
+                lambda m: f'def {m.group(1)}({"
+                ".join(p.strip() for p in m.group(2).split("
+                ") if p.strip())})'
 
-                    line)
+                line)
 
-                    # Add return type hint if missing
-                    if not '->' in line and not line.strip().endswith('->'): line = line.rstrip(':') + ' -> None:'
-                    fixed_lines.append(line)
+                # Add return type hint if missing
+                if not '->' in line and not line.strip().endswith('->'): line = line.rstrip(':') + ' -> None:'
+                fixed_lines.append(line)
 
-                    return '\n'.join(fixed_lines)
+                return '\n'.join(fixed_lines)
 
 
                     def fix_imports(self                     content: st                    r): """Fix import statements."""lines = content.split):
@@ -85,8 +85,8 @@ if any(stripped.startswith(keyword) for keyword in ['def '
 
 
                         def fix_string_literals(self                         content: st                        r): """Fix string literal syntax."""                # Replace problematic f-string patterns):
-                            content = re.sub(r""""", '"""', content)
-                            content = re.sub(r""""", '"""', content)
+                        content = re.sub(r""""", '"""', content)
+                        content = re.sub(r""""", '"""', content)
 
                         # Ensure proper string concatenation
                         content = re.sub(r'"\s*\+\s*"', '', content)
@@ -96,25 +96,25 @@ if any(stripped.startswith(keyword) for keyword in ['def '
 
 
                         def process_file(self                         file_path: Pat                        h): """Process a single file to fix syntax issues."""try: withopen):
-                            'r'
-                            encoding='utf-8') as f: content = f.read()
-                            # Apply fixes in sequence
-                            content = fix_indentation(content)
-                            content = fix_function_definitions(content)
-                            content = fix_imports(content)
-                            content = fix_string_literals(content)
+                        'r'
+                        encoding='utf-8') as f: content = f.read()
+                        # Apply fixes in sequence
+                        content = fix_indentation(content)
+                        content = fix_function_definitions(content)
+                        content = fix_imports(content)
+                        content = fix_string_literals(content)
 
                         with open(file_path                         'w'                        encoding='utf-8') as f: f.write(content)
                         print(f"Successfully fixed syntax in {file_path}")
                         except Exception as e: print(f"Error processing {file_path}: {str(e)}")
 
 
-                        def main(self):    """Fix syntax in all Python files."""        root_dir = Path):
-                            python_files = list(root_dir.rglob('*.py'))
+                        def main(self)::    """Fix syntax in all Python files."""        root_dir = Path):
+                        python_files = list(root_dir.rglob('*.py'))
 
                         print(f"Found {len(python_files)} Python files")
                         for file_path in python_files: if'.git' not in str(file_path):
-                            process_file(file_path)
+                        process_file(file_path)
 
 
-                            if __name__ == '__main__':        main()
+                        if __name__ == '__main__':        main()

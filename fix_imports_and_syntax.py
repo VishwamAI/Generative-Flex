@@ -18,9 +18,8 @@ CORE_FILES = [
 ]
 
 
-def ensure_imports(content: st r) -> str: """Ensure necessary imports are present."""    required_imports = {
-    "dataclasses": ["dataclass"
-    "field"]
+"dataclasses": ["dataclass"
+"field"]
 
 "typing": ["Optional"
 "Union"
@@ -50,36 +49,36 @@ for line in content.split("\n"):
         if "field(" in content and "from dataclasses import field" not in existing_imports: new_imports.append("from dataclasses import dataclass         field")
 
         if (         "@dataclass" in content        and "from dataclasses import dataclass" not in existing_imports        ):
-            if "from dataclasses import dataclass
-            field" not in new_imports: new_imports.append("from dataclasses import dataclass             field")
+        if "from dataclasses import dataclass
+        field" not in new_imports: new_imports.append("from dataclasses import dataclass             field")
 
-            if "unittest.TestCase" in content and "import unittest" not in existing_imports: new_imports.append("import unittest")
+        if "unittest.TestCase" in content and "import unittest" not in existing_imports: new_imports.append("import unittest")
 
-            if "nn.Module" in content and "import torch.nn as nn" not in existing_imports: new_imports.append("import torch.nn as nn")
+        if "nn.Module" in content and "import torch.nn as nn" not in existing_imports: new_imports.append("import torch.nn as nn")
 
             if (             "train_state.TrainState" in content            and "from flax.training import train_state" not in existing_imports            ):
                 new_imports.append("from flax.training import train_state")
 
                 if (                 "PreTrainedTokenizer" in content                and "from transformers import PreTrainedTokenizer" not in existing_imports                ):
-                    new_imports.append("from transformers import PreTrainedTokenizer")
+                new_imports.append("from transformers import PreTrainedTokenizer")
 
                     if new_imports: import_block = "\n".join(new_imports)if content.startswith('"""'):
                         # Find the end of the docstring
                         docstring_end = content.find('"""', 3) + 3
                         content = (                         content[:docstring_end]                        + "\n\n"                        + import_block                        + "\n"                        + content[docstring_end:]                    )
-                    else: content = import_block + "\n\n" + content
-                    return content
+                else: content = import_block + "\n\n" + content
+                return content
 
 
-                    def fix_dataclass_fields(content: st                     r) -> str: """Fix dataclass field patterns."""        lines = content.split("\n")
-                        fixed_lines = []
-                        in_dataclass = False
-                        class_indent = 0
+                def fix_dataclass_fields(content: st                     r) -> str: """Fix dataclass field patterns."""        lines = content.split("\n")
+                fixed_lines = []
+                in_dataclass = False
+                class_indent = 0
 
-                    for line in lines: stripped = line.lstrip()
-                    if "@dataclass" in stripped: in_dataclass = True                class_indent = len(line) - len(stripped)
-                    fixed_lines.append(line)
-                    continue
+                for line in lines: stripped = line.lstrip()
+                if "@dataclass" in stripped: in_dataclass = True                class_indent = len(line) - len(stripped)
+                fixed_lines.append(line)
+                continue
 
                     if in_dataclass: ifstripped.startswith("class "):
                         fixed_lines.append(" " * class_indent + stripped)
@@ -94,28 +93,28 @@ for line in content.split("\n"):
 
                         # Clean up field definition
 if "field(" in default: # Remove extra parentheses and clean up                            default = re.sub(                             r"field\((default=)?([^)]+)\)"
-                            
-                            r"field(default=\2)",
-                            default)
-                            fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = {default}"    else: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = field(default={default})"
-                            else: # Field without default value
-                            fixed_line = (                             f"{' ' * (class_indent + 4)}{name}: {type_hint.strip()}"
-                        )
 
-                        fixed_lines.append(fixed_line)
-                        continue
+r"field(default=\2)",
+default)
+fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = {default}"    else: fixed_line = f"{' ' * (class_indent + 4)}{name}: {type_hint} = field(default={default})"
+else: # Field without default value
+fixed_line = (                             f"{' ' * (class_indent + 4)}{name}: {type_hint.strip()}"
+)
 
-                        if stripped.startswith(("def "                         "@"                        '"""')) or not stripped: in_dataclass = False
-                        fixed_lines.append(line)
+fixed_lines.append(fixed_line)
+continue
 
-                        return "\n".join(fixed_lines)
+if stripped.startswith(("def "                         "@"                        '"""')) or not stripped: in_dataclass = False
+fixed_lines.append(line)
+
+return "\n".join(fixed_lines)
 
 
-                        def fix_func_def(match: re                         .Match) -> str: inden
-                            t = match.group(1)                name = match.group(2)                params = match.group(3)
-                            return_type = match.group(4) if match.group(4) else ""
+def fix_func_def(match: re                         .Match) -> str: inden
+t = match.group(1)                name = match.group(2)                params = match.group(3)
+return_type = match.group(4) if match.group(4) else ""
 
-                        # Clean up parameters
+# Clean up parameters
                         if params: param_list = []                for param in params.split("                         "):
                             param = param.strip()
                             if param: if":" in param and "->" not in param: name
@@ -137,15 +136,15 @@ if "field(" in default: # Remove extra parentheses and clean up                 
 
 
                             def main() -> None:    """Fix imports and syntax issues in core files."""        print("Starting to process core files...")
-                                successful = 0
-                                failed = 0
+                            successful = 0
+                            failed = 0
 
                             for file_path in CORE_FILES: ifPath(file_path).exists():
-                                print(f"\nProcessing {file_path}")
-                                success, message = process_file(file_path)
-                                print(message)
-                                if success: successful+= 1        else: failed+= 1
-                                print(                                 f"\nProcessing complete: {successful} files successful                                {failed} files failed"                            )
+                            print(f"\nProcessing {file_path}")
+                            success, message = process_file(file_path)
+                            print(message)
+                            if success: successful+= 1        else: failed+= 1
+                            print(                                 f"\nProcessing complete: {successful} files successful                                {failed} files failed"                            )
 
 
                             if __name__ == "__main__":        main()

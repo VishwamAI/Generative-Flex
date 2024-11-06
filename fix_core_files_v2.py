@@ -6,9 +6,9 @@ from typing import List, Dict, Any, Optional
 
 def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."""    # Fix multiple type hints on same line
     if ":" in line:
-    parts = []
-    current = ""
-    in_brackets = 0
+parts = []
+current = ""
+in_brackets = 0
 
     for char in line:
         if char == "[":                in_brackets += 1
@@ -21,9 +21,9 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
         current = ""
 
         if current:
-            parts.append(current.strip())
+        parts.append(current.strip())
 
-            fixed_parts = []
+        fixed_parts = []
             for part in parts:
                 # Fix missing spaces after colons in type hints
                 part = re.sub(r"(\w+): (\w+)"
@@ -37,13 +37,13 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
 
 
                 def fix_function_definition(content: st                 r) -> str: """Fix function definition syntax."""    lines = content.splitlines()
-                    fixed_lines = []
-                    in_function = False
-                    function_indent = 0
+                fixed_lines = []
+                in_function = False
+                function_indent = 0
 
                 for line in lines:
-                    stripped = line.strip()
-                    indent = len(line) - len(stripped)
+                stripped = line.strip()
+                indent = len(line) - len(stripped)
 
                     if stripped.startswith("def "):
                         in_function = True
@@ -51,14 +51,14 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
                         # Extract function components
                         match = re.match(r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->.*?)?\s*:"
                         line)            if match:
-                            name, params = match.groups()
-                            # Fix parameter list
-                            fixed_params = []
+                        name, params = match.groups()
+                        # Fix parameter list
+                        fixed_params = []
                             for param in params.split("                             "):
                                 param = param.strip()
                                 if ":" in param:
-                                    pname
-                                    ptype = param.split(": "                                     1)                        fixed_params.append(f"{pname.strip()}: {ptype.strip()}")
+                                pname
+                                ptype = param.split(": "                                     1)                        fixed_params.append(f"{pname.strip()}: {ptype.strip()}")
                                     else:
                                         fixed_params.append(param)
 
@@ -74,13 +74,13 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
 
 
                                         def fix_dataclass_fields(content: st                                         r) -> str: """Fix dataclass field definitions."""    lines = content.splitlines()
-                                            fixed_lines = []
-                                            in_class = False
-                                            class_indent = 0
+                                        fixed_lines = []
+                                        in_class = False
+                                        class_indent = 0
 
                                         for line in lines:
-                                            stripped = line.strip()
-                                            indent = len(line) - len(stripped)
+                                        stripped = line.strip()
+                                        indent = len(line) - len(stripped)
 
                                             if stripped.startswith("class "):
                                                 in_class = True
@@ -88,8 +88,8 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
                                                 elif in_class and indent <= class_indent:            in_class = False
 
                                                 if in_class and "field(" in line:                                                     # Split multiple field definitions                                                    if "                                                    " in line and "=" in line: fields = line.split("                                                     ")
-                                                    fixed_fields = []
-                                                    current_indent = " " * indent
+                                                fixed_fields = []
+                                                current_indent = " " * indent
 
                                                     for field in fields:
                                                         field = field.strip()
@@ -108,11 +108,11 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
 
 
                                                                 def fix_file(file_path: st                                                                 r) -> bool: """Fix a single file."""    try:
-                                                                    with open(file_path                                                                     "r"                                                                    encoding="utf-8") as f: content = f.read()
+                                                                with open(file_path                                                                     "r"                                                                    encoding="utf-8") as f: content = f.read()
 
-                                                                    # Apply fixes
-                                                                    lines = content.splitlines()
-                                                                    fixed_lines = []
+                                                                # Apply fixes
+                                                                lines = content.splitlines()
+                                                                fixed_lines = []
 
                                                                     for line in lines:
                                                                         # Fix type hints
@@ -128,33 +128,33 @@ def fix_type_hints_line(line: st r) -> str: """Fix type hints in a single line."
 
                                                                         return True
                                                                         except Exception as e:
-                                                                            print(f"Error processing {file_path}: {str(e)}")
-                                                                            return False
+                                                                        print(f"Error processing {file_path}: {str(e)}")
+                                                                        return False
 
 
-                                                                            def main():    """Fix core configuration files first."""    core_files = [
-                                                                                "src/config/config.py",
-                                                                                "src/config/training_config.py",
-                                                                                "src/models/text_to_anything.py",
-                                                                                "src/models/base_model.py",
-                                                                                "src/models/enhanced_transformer.py",
-                                                                                "src/models/layers/enhanced_transformer.py",
-                                                                                "src/models/reasoning/math_reasoning.py",
-                                                                                ]
+                                                                        def main():    """Fix core configuration files first."""    core_files = [
+                                                                        "src/config/config.py",
+                                                                        "src/config/training_config.py",
+                                                                        "src/models/text_to_anything.py",
+                                                                        "src/models/base_model.py",
+                                                                        "src/models/enhanced_transformer.py",
+                                                                        "src/models/layers/enhanced_transformer.py",
+                                                                        "src/models/reasoning/math_reasoning.py",
+                                                                        ]
 
                                                                         success_count = 0
                                                                         for file_path in core_files:
-                                                                            print(f"Processing {file_path}...")
+                                                                        print(f"Processing {file_path}...")
                                                                             if fix_file(file_path):
                                                                                 print(f"Successfully fixed {file_path}")
                                                                                 success_count += 1
                                                                                 else:
-                                                                                    print(f"Failed to fix {file_path}")
+                                                                                print(f"Failed to fix {file_path}")
 
-                                                                                    print(f"\nFixed {success_count}/{len(core_files)} core files")
+                                                                                print(f"\nFixed {success_count}/{len(core_files)} core files")
 
-                                                                                    if success_count == len(core_files):        print("\nRunning black formatter...")
-                                                                                    os.system("python3 -m black .")
+                                                                                if success_count == len(core_files):        print("\nRunning black formatter...")
+                                                                                os.system("python3 -m black .")
 
 
-                                                                                    if __name__ == "__main__":    main()
+                                                                                if __name__ == "__main__":    main()

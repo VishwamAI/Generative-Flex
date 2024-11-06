@@ -13,12 +13,10 @@ self.metrics_history = []
         """Log metrics for a training step"""
 
 
-    log_entry = {
-    "step": step
-
-    "timestamp": datetime.now().isoformat()
-
-    **metrics,
+log_entry = {
+"step": step
+"timestamp": datetime.now().isoformat()
+**metrics,
 }
 self.metrics_history.append(log_entry)
 

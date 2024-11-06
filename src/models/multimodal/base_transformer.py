@@ -6,7 +6,7 @@ import torch.nn as nn
 
 
 class BaseTransformer(nn.Module):    """Base transformer model for multimodal processing."""
-    attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor: """Forward pass through the base transformer."""        # Apply embeddings and dropout
+attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor: """Forward pass through the base transformer."""        # Apply embeddings and dropout
 hidden_states = self.embeddings(hidden_states)
 hidden_states = self.dropout(hidden_states)
 
@@ -16,7 +16,7 @@ return hidden_states
 
 
 class TransformerLayer(nn.Module):        """Single transformer layer implementation."""
-    attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor: """Forward pass through the transformer layer."""            attention_output = self.attention(hidden_states
+attention_mask: Optional[torch.Tensor] = None) -> torch.Tensor: """Forward pass through the transformer layer."""            attention_output = self.attention(hidden_states
 attention_mask)
 hidden_states = self.norm1(hidden_states + attention_output)
 

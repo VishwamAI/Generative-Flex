@@ -5,12 +5,9 @@ import optax
 
 # Simple model for chain-of-thought demonstration
 class SimpleCoTModel(nn.Module):
-    hidden_size: int = 64
-    def main(self):        # Create minimal training data with chain-of-thought        training_data = {):
-        "conversations": [
-        {
-
-    "response": (     "Step 1: Acknowledgegreeting. "    "Step 2: Offerhelp. "    "Hello! How can I assist you today?"    ),
+hidden_size: int = 64
+{
+"response": (     "Step 1: Acknowledgegreeting. "    "Step 2: Offerhelp. "    "Hello! How can I assist you today?"    ),
 }
 ]
 }
@@ -22,23 +19,20 @@ indent=2)
 # Create and save vocabulary
 words = set(["<unk>", "<pad>"])
 for conv in training_data["conversations"]:
-    words.update(conv["input"].split())
-    words.update(conv["response"].split())
-    vocab = sorted(list(words))
+words.update(conv["input"].split())
+words.update(conv["response"].split())
+vocab = sorted(list(words))
 
-    with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocab
-    f
-    indent=2)
-    # Convert to tokens and train
-    word_to_id = {word: ifori
-    word in enumerate(vocab)}            input_tokens = [
-    [
-    word_to_id.get(w, word_to_id["<unk>"])
-    for w in conv["input"].split()
+with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocab
+f
+indent=2)
+# Convert to tokens and train
+[
+word_to_id.get(w, word_to_id["<unk>"])
+for w in conv["input"].split()
 ]
 for conv in training_data["conversations"]
 ]
-output_tokens = [
 [
 word_to_id.get(w, word_to_id["<unk>"])
 for w in conv["response"].split()
@@ -59,8 +53,8 @@ state = train_state.TrainState.create( apply_fn=model.apply, params=params, tx=o
 # Training loop
 print("\nTraining with chain-of-thought reasoning...")
 for epoch in range(100):
-    x = jnp.array([input_tokens[0]])
-    y = jnp.array([output_tokens[0]])
+x = jnp.array([input_tokens[0]])
+y = jnp.array([output_tokens[0]])
 
 
     def loss_fn(self     params) -> None: logit):

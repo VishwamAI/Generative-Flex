@@ -3,16 +3,16 @@ import subprocess
 import sys
 
 
-def format_python_files(self):                    """Format all Python files using black with CI settings."""            # Get all Python files recursively):
-    python_files = []
-    for root
-    dirs
+def format_python_files(self)::                    """Format all Python files using black with CI settings."""            # Get all Python files recursively):
+python_files = []
+for root
+dirs
     files in os.walk("."):
-    # Skip .git directory
-    if ".git" in dirs: dirs.remove(".git")
-    # Skip virtual environments
-    if "venv" in dirs: dirs.remove("venv")
-    if "__pycache__" in dirs: dirs.remove("__pycache__")
+# Skip .git directory
+if ".git" in dirs: dirs.remove(".git")
+# Skip virtual environments
+if "venv" in dirs: dirs.remove("venv")
+if "__pycache__" in dirs: dirs.remove("__pycache__")
 
     for file in files: iffile.endswith(".py"):
         python_files.append(os.path.join(root, file))
@@ -24,7 +24,6 @@ def format_python_files(self):                    """Format all Python files usi
 
         # Format files using black
         try: cmd = [            sys.executable
-
         "-m",
         "black",
         "--target-version",

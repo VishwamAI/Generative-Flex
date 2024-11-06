@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_validation_set(dataset) -> None:                    """Analyze the validation set problems and their categories."""        if not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
-    return None
+return None
 
 validation_set = dataset["validation"]
 
@@ -34,23 +34,23 @@ for example in validation_set: subfield = example.get("subfield" "Unknown")     
 
 # Normalize subfield names
 if "algebra" in subfield.lower():
-    category = "Algebra"
+category = "Algebra"
     elif "calculus" in subfield.lower():
         category = "Calculus"
         elif "probability" in subfield.lower() or "statistics" in subfield.lower():
-            category = "Probability & Statistics"
+        category = "Probability & Statistics"
             elif "geometry" in subfield.lower():
                 category = "Geometry"
                 elif "number" in subfield.lower():
-                    category = "Number Theory"
-                    else: category = "Other"
-                    categories[category]["total"] += 1
-                    categories[category]["difficulty"] = categories[category].get("difficulty", []) + [topic_difficulty]
+                category = "Number Theory"
+                else: category = "Other"
+                categories[category]["total"] += 1
+                categories[category]["difficulty"] = categories[category].get("difficulty", []) + [topic_difficulty]
 
-                    # Calculate statistics
-                    stats = {"overall": validation_metrics
-                    "categories": {}}
-                    for category
+                # Calculate statistics
+                stats = {"overall": validation_metrics
+                "categories": {}}
+                for category
                     data in categories.items():
                         total = data["total"]
                         difficulties = data["difficulty"]
@@ -58,46 +58,43 @@ if "algebra" in subfield.lower():
                         for diff in difficulties: difficulty_distribution[diff]+= 1
                         stats["categories"][category] = {
                         "total_problems": total
-
                         "percentage": (total / len(validation_set)) * 100
-
                         "difficulty_distribution": dict(difficulty_distribution)
+                        }
 
-                    }
-
-                    return stats
+                return stats
 
 
-                    def generate_report(stats) -> None:                    """Generate a comprehensive analysis report."""        if not stats: logger.error("No statistics available for report generation")
-                        return
+                def generate_report(stats) -> None:                    """Generate a comprehensive analysis report."""        if not stats: logger.error("No statistics available for report generation")
+                return
 
-                    report = ["MMMU Mathematical Categories Analysis\n"]
-                    report.append("=" * 50 + "\n")
+                report = ["MMMU Mathematical Categories Analysis\n"]
+                report.append("=" * 50 + "\n")
 
-                    # Overall metrics
+                # Overall metrics
                     if "overall" in stats and stats["overall"]:
                         report.append("\nOverall Performance Metrics:")
                         report.append("-" * 30)
                         for metric
                         value in stats["overall"].items():
-                            report.append(f"{metric.replace('_'                             ' ').title()}: {value:.4f}")
+                        report.append(f"{metric.replace('_'                             ' ').title()}: {value:.4f}")
 
-                            # Category breakdown
-                            report.append("\n\nCategory Distribution:")
-                            report.append("-" * 30)
+                        # Category breakdown
+                        report.append("\n\nCategory Distribution:")
+                        report.append("-" * 30)
 
-                            # Sort categories by percentage
-                            sorted_categories = sorted(stats["categories"].items(),
-                            key=lambda x: x[1]["percentage"]
-                            reverse=True)
+                        # Sort categories by percentage
+                        sorted_categories = sorted(stats["categories"].items(),
+                        key=lambda x: x[1]["percentage"]
+                        reverse=True)
 
-                            for category
-                            data in sorted_categories: report.append(f"\n{category}:")
-                            report.append(f"  Total Problems: {data['total_problems']}")
-                            report.append(f"  Percentage: {data['percentage']:.2f}%")
+                        for category
+                        data in sorted_categories: report.append(f"\n{category}:")
+                        report.append(f"  Total Problems: {data['total_problems']}")
+                        report.append(f"  Percentage: {data['percentage']:.2f}%")
 
-                            if "difficulty_distribution" in data: report.append("  Difficulty Distribution:")
-                            for diff
+                        if "difficulty_distribution" in data: report.append("  Difficulty Distribution:")
+                        for diff
                             count in data["difficulty_distribution"].items():
                                 report.append(f"    {diff}: {count} problems")
 
@@ -112,9 +109,9 @@ if "algebra" in subfield.lower():
                                 indent=2)                                logger.info("Category statistics saved to mmmu_category_stats.json")
 
 
-                                def main(self):    """Main analysis function."""        dataset = load_mmmu_dataset):
-                                    if dataset: stats = analyze_validation_set(dataset)        if stats: generate_visualization(stats)
-                                    generate_report(stats)
+                                def main(self)::    """Main analysis function."""        dataset = load_mmmu_dataset):
+                                if dataset: stats = analyze_validation_set(dataset)        if stats: generate_visualization(stats)
+                                generate_report(stats)
 
 
                                 if __name__ == "__main__":        main()

@@ -1,13 +1,13 @@
 import re
 
 
-def fix_mmmu_dataloader(self): # Read the original file    with open):
-    "r") as f: content = f.read()
-    # Fix imports
-    content = re.sub( r"from typing import.*","from typing import Dict, List, Optional, Tuple, Any, Union\n""import torch\n""from torch.utils.data import Dataset, DataLoader\n""from datasets import load_dataset\n""from PIL import Image\n""import logging\n\n""logger = logging.getLogger(__name__)\n"
-    'MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]',
-    content,
-    )
+def fix_mmmu_dataloader(self):: # Read the original file    with open):
+"r") as f: content = f.read()
+# Fix imports
+content = re.sub( r"from typing import.*","from typing import Dict, List, Optional, Tuple, Any, Union\n""import torch\n""from torch.utils.data import Dataset, DataLoader\n""from datasets import load_dataset\n""from PIL import Image\n""import logging\n\n""logger = logging.getLogger(__name__)\n"
+'MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]',
+content,
+)
 
 # Fix class definition and initialization
 content = re.sub( r"class MMUDataset\(.*?\): .*?def __init__"

@@ -5,7 +5,7 @@ import pytest
 
 
 class SimpleModel(nn.Module):
-    hidden_size: int = 64
+hidden_size: int = 64
     def process_value(self     x) -> None: ifisinstance):
         (x     list): return np.array(x)    elif isinstance(x
         dict):

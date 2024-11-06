@@ -7,154 +7,152 @@ from typing import List, Dict, Any, Optional
 
 
 def fix_dataclass_fields(content: str) -> str:
-    """Fix dataclass field definitions."""
-    lines = content.splitlines()
-    fixed_lines = []
-    in_class = False
-    class_indent = 0
+"""Fix dataclass field definitions."""
+lines = content.splitlines()
+fixed_lines = []
+in_class = False
+class_indent = 0
 
-    i = 0
+i = 0
     while i < len(lines):
         line = lines[i]
         stripped = line.strip()
 
         # Start of class definition
         if stripped.startswith("@dataclass") or stripped.startswith("class "):
-            in_class = True
-            class_indent = len(re.match(r"(\s*)", line).group(1))
-            fixed_lines.append(line)
-            i += 1
-            continue
+        in_class = True
+        class_indent = len(re.match(r"(\s*)", line).group(1))
+        fixed_lines.append(line)
+        i += 1
+        continue
 
         # Inside class
         if in_class:
-            # End of class
+        # End of class
             if not stripped or not line.startswith(" " * class_indent):
                 in_class = False
                 fixed_lines.append(line)
                 i += 1
                 continue
 
-            # Fix field definitions
+        # Fix field definitions
             if ":" in line and "field(" in line:
-                indent = len(re.match(r"(\s*)", line).group(1))
-                # Handle multiple fields on same line
+        indent = len(re.match(r"(\s*)", line).group(1))
+        # Handle multiple fields on same line
                 if "," in line and not line.endswith(","):
                     fields = line.split(",")
                     for field in fields:
-                        field = field.strip()
+                    field = field.strip()
                         if field:
                             # Fix field with default value
-                            if "=" in field and "field(" in field:
-                                name_match = re.match(
-                                    r"(\w+):\s*([^=]+?)\s*=\s*field\((.*)\)", field
-                                )
+                            name_match = re.match(
+                            r"(\w+):\s*([^=]+?)\s*=\s*field\((.*)\)", field
+                            )
                                 if name_match:
                                     name, type_hint, field_args = name_match.groups()
                                     fixed_field = f"{' ' * indent}{name}: {type_hint.strip()} = field({field_args.strip()})"
                                     fixed_lines.append(fixed_field)
                             # Fix simple field
                             elif ":" in field:
-                                name, type_hint = field.split(":", 1)
-                                fixed_lines.append(
-                                    f"{' ' * indent}{name.strip()}: {type_hint.strip()}"
-                                )
+                            name, type_hint = field.split(":", 1)
+                            fixed_lines.append(
+                            f"{' ' * indent}{name.strip()}: {type_hint.strip()}"
+                            )
                 else:
                     # Fix single field definition
-                    if "=" in line and "field(" in line:
-                        name_match = re.match(
-                            r"(\s*)(\w+):\s*([^=]+?)\s*=\s*field\((.*)\)", line
-                        )
+                    name_match = re.match(
+                    r"(\s*)(\w+):\s*([^=]+?)\s*=\s*field\((.*)\)", line
+                    )
                         if name_match:
                             indent, name, type_hint, field_args = name_match.groups()
                             fixed_line = f"{indent}{name}: {type_hint.strip()} = field({field_args.strip()})"
                             fixed_lines.append(fixed_line)
                     else:
-                        fixed_lines.append(line)
+                    fixed_lines.append(line)
             else:
                 fixed_lines.append(line)
-            i += 1
-            continue
+        i += 1
+        continue
 
         fixed_lines.append(line)
         i += 1
 
-    return "\n".join(fixed_lines)
+return "\n".join(fixed_lines)
 
 
 def fix_config_patterns(content: str) -> str:
-    """Fix configuration file patterns."""
-    lines = content.splitlines()
-    fixed_lines = []
-    in_config = False
-    config_indent = 0
+"""Fix configuration file patterns."""
+lines = content.splitlines()
+fixed_lines = []
+in_config = False
+config_indent = 0
 
-    i = 0
+i = 0
     while i < len(lines):
         line = lines[i]
         stripped = line.strip()
 
         # Start of config class/function
         if "Config" in stripped and ("class" in stripped or "def" in stripped):
-            in_config = True
-            config_indent = len(re.match(r"(\s*)", line).group(1))
-            fixed_lines.append(line)
-            i += 1
-            continue
+        in_config = True
+        config_indent = len(re.match(r"(\s*)", line).group(1))
+        fixed_lines.append(line)
+        i += 1
+        continue
 
         # Inside config
         if in_config:
-            # End of config
+        # End of config
             if not stripped or not line.startswith(" " * config_indent):
                 in_config = False
                 fixed_lines.append(line)
                 i += 1
                 continue
 
-            # Fix config parameters
+        # Fix config parameters
             if ":" in line and "=" in line:
                 indent = len(re.match(r"(\s*)", line).group(1))
                 # Handle multiple parameters on same line
                 if "," in line and not line.endswith(","):
-                    params = line.split(",")
+                params = line.split(",")
                     for param in params:
                         param = param.strip()
                         if param:
                             if "=" in param:
                                 name, value = param.split("=", 1)
                                 if ":" in name:
-                                    name_part, type_part = name.split(":", 1)
-                                    fixed_param = f"{' ' * indent}{name_part.strip()}: {type_part.strip()} = {value.strip()}"
+                                name_part, type_part = name.split(":", 1)
+                                fixed_param = f"{' ' * indent}{name_part.strip()}: {type_part.strip()} = {value.strip()}"
                                 else:
-                                    fixed_param = f"{' ' * indent}{name.strip()} = {value.strip()}"
+                                fixed_param = f"{' ' * indent}{name.strip()} = {value.strip()}"
                                 fixed_lines.append(fixed_param)
                 else:
-                    # Fix single parameter
-                    name_match = re.match(r"(\s*)(\w+):\s*([^=]+?)\s*=\s*(.+)", line)
+                # Fix single parameter
+                name_match = re.match(r"(\s*)(\w+):\s*([^=]+?)\s*=\s*(.+)", line)
                     if name_match:
                         indent, name, type_hint, value = name_match.groups()
                         fixed_line = (
-                            f"{indent}{name}: {type_hint.strip()} = {value.strip()}"
+                        f"{indent}{name}: {type_hint.strip()} = {value.strip()}"
                         )
                         fixed_lines.append(fixed_line)
                     else:
                         fixed_lines.append(line)
             else:
                 fixed_lines.append(line)
-            i += 1
-            continue
+        i += 1
+        continue
 
         fixed_lines.append(line)
         i += 1
 
-    return "\n".join(fixed_lines)
+return "\n".join(fixed_lines)
 
 
 def process_file(file_path: str) -> bool:
-    """Process a single file with robust error handling."""
+"""Process a single file with robust error handling."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
+        content = f.read()
 
         # Apply fixes
         content = fix_dataclass_fields(content)
@@ -162,7 +160,7 @@ def process_file(file_path: str) -> bool:
 
         # Write back only if changes were made
         with open(file_path, "w", encoding="utf-8") as f:
-            f.write(content)
+        f.write(content)
 
         return True
     except Exception as e:
@@ -171,29 +169,29 @@ def process_file(file_path: str) -> bool:
 
 
 def main():
-    """Fix dataclass and configuration patterns in all Python files."""
-    # Get all Python files
-    python_files = []
+"""Fix dataclass and configuration patterns in all Python files."""
+# Get all Python files
+python_files = []
     for root, _, files in os.walk("."):
         if ".git" in root:
-            continue
+        continue
         for file in files:
             if file.endswith(".py"):
                 python_files.append(os.path.join(root, file))
 
-    # Process files
-    success_count = 0
+# Process files
+success_count = 0
     for file_path in python_files:
         print(f"Processing {file_path}...")
         if process_file(file_path):
-            success_count += 1
+        success_count += 1
 
-    print(f"\nFixed {success_count}/{len(python_files)} files")
+print(f"\nFixed {success_count}/{len(python_files)} files")
 
-    # Run black formatter
-    print("\nRunning black formatter...")
-    os.system("python3 -m black .")
+# Run black formatter
+print("\nRunning black formatter...")
+os.system("python3 -m black .")
 
 
 if __name__ == "__main__":
-    main()
+main()

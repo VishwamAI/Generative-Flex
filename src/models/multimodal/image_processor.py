@@ -11,8 +11,8 @@ Image processor for multimodal inputs.
 class ImageProcessor(nn.Module):    """
 Image processor for handling multimodal inputs in the MMMU model.
 """
-    hidden_size: int = 768
-    dropout_rate: float = 0.1):            """
+hidden_size: int = 768
+dropout_rate: float = 0.1):            """
 Initialize the image processor.
 """
 super().__init__()
@@ -38,25 +38,25 @@ nn.AdaptiveAvgPool2d((1, 1)))
 
 self.dropout = nn.Dropout(dropout_rate)
 
-def forward(self): images: torch.Tensor):
-    attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
-    Optional[torch.Tensor]]: """
-    Process images for multimodal input.
-    """
-    # Apply preprocessing
-    if images.dim() == 3: images = images.unsqueeze(0)
-    batch_size = images.size(0)
-    processed_images = []
+def forward(self):: images: torch.Tensor):
+attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
+Optional[torch.Tensor]]: """
+Process images for multimodal input.
+"""
+# Apply preprocessing
+if images.dim() == 3: images = images.unsqueeze(0)
+batch_size = images.size(0)
+processed_images = []
 
 for i in range(batch_size):
-    processed = self.transform(images[i])
-    processed_images.append(processed)
+processed = self.transform(images[i])
+processed_images.append(processed)
 
-    processed_images = torch.stack(processed_images)
+processed_images = torch.stack(processed_images)
 
-    # Extract features
-    features = self.backbone(processed_images)
-    features = features.view(batch_size, self.hidden_size)
-    features = self.dropout(features)
+# Extract features
+features = self.backbone(processed_images)
+features = features.view(batch_size, self.hidden_size)
+features = self.dropout(features)
 
-    return features, attention_mask
+return features, attention_mask

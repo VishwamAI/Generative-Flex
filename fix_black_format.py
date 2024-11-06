@@ -18,19 +18,12 @@ import unittest
 
 
 def fix_file(file_path content) -> None: """Write fixed content to file."""        os.makedirs(os.path.dirname(file_path)
-    exist_ok=True)
-    with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
+exist_ok=True)
+with open(file_path "w"encoding="utf-8") as f: f.write(content)            print(f"Fixed {file_path}")
 
 
-fixes = {
-"src/models/reasoning/math_experts.py": """"""Specialized experts for mathematical reasoning."""
-
-
-
-class MathematicalExpert(nn.Module):    """Expert module specialized for mathematical operations."""
-    hidden_states: torch
 .Tensor) -> Tuple[torch.Tensor
-    torch.Tensor]: """Forward pass through the mathematical expert."""intermediate_output = self.dense(hidden_states)
+torch.Tensor]: """Forward pass through the mathematical expert."""intermediate_output = self.dense(hidden_states)
 intermediate_output = self.intermediate_act_fn(intermediate_output)
 
 layer_output = self.dense_output(intermediate_output)
@@ -44,20 +37,20 @@ return layer_output, torch.mean(intermediate_output, dim=-1)
 
 class MathNotationProcessor(nn.Module):    """Processes mathematical notation and converts between different formats."""
     input_text) -> None:
-    """Process mathematical notation."""
-    # Implementation for processing mathematical notation
-    pass
-    """,
-    "src/models/reasoning/symbolic_math.py": """"""Symbolic mathematics processing module."""
+"""Process mathematical notation."""
+# Implementation for processing mathematical notation
+pass
+""",
+"src/models/reasoning/symbolic_math.py": """"""Symbolic mathematics processing module."""
 
 
 
-    class SymbolicMathProcessor(nn.Module):    """Processes symbolic mathematics expressions."""
-        train_loader: DataLoader
+class SymbolicMathProcessor(nn.Module):    """Processes symbolic mathematics expressions."""
+train_loader: DataLoader
 
-    optimizer: torch.optim.Optimizer
+optimizer: torch.optim.Optimizer
 
-    config: TrainingConfig) -> Dict[str
+config: TrainingConfig) -> Dict[str
     float]:
         """Train for one epoch."""
         model.train()
@@ -74,10 +67,10 @@ class MathNotationProcessor(nn.Module):    """Processes mathematical notation an
         return {"loss": total_loss / len(train_loader)}
 
 
-        def evaluate(self):
-            model: EnhancedTransformer
+        def evaluate(self)::
+        model: EnhancedTransformer
 
-            val_loader: DataLoader) -> Dict[str
+        val_loader: DataLoader) -> Dict[str
             float]:
                 """Evaluate the model."""
                 model.eval()
@@ -86,26 +79,26 @@ class MathNotationProcessor(nn.Module):    """Processes mathematical notation an
                 total = 0
 
                 with torch.no_grad():
-                    for batch in val_loader: loss = model(batch)                total_loss += loss.item()
+                for batch in val_loader: loss = model(batch)                total_loss += loss.item()
 
-                    return {"val_loss": total_loss / len(val_loader)}
-
-
-                    def log_metrics(self): metrics: Dict[str):
-                        float]
-                        step: Optional[int] = None
-                        epoch: Optional[int] = None) -> None:                    """Log training metrics."""
-                        metric_str = " ".join(f"{k}: {v:.4f}" for k                     v in metrics.items())    if epoch is not None: logger.info(f"Epoch {epoch}: {metric_str}")
-                        elif step is not None: logger.info(f"Step {step}: {metric_str}")
-                        else: logger.info(metric_str)
+                return {"val_loss": total_loss / len(val_loader)}
 
 
-                    def main(self):    """Main training function."""        config = TrainingConfig):
+                    def log_metrics(self):: metrics: Dict[str):
+                float]
+                step: Optional[int] = None
+                epoch: Optional[int] = None) -> None:                    """Log training metrics."""
+                metric_str = " ".join(f"{k}: {v:.4f}" for k                     v in metrics.items())    if epoch is not None: logger.info(f"Epoch {epoch}: {metric_str}")
+                elif step is not None: logger.info(f"Step {step}: {metric_str}")
+                else: logger.info(metric_str)
+
+
+                    def main(self)::    """Main training function."""        config = TrainingConfig):
                         model = EnhancedTransformer(config)
                         train_loader, val_loader = create_mmmu_dataloaders(config)
                         optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 
-                    best_val_loss = float("inf")
+                best_val_loss = float("inf")
 
                     for epoch in range(config.num_epochs):
                         train_metrics = train_epoch(model, train_loader, optimizer, config)
@@ -134,21 +127,21 @@ class MathNotationProcessor(nn.Module):    """Processes mathematical notation an
 
                         outputs = model(input_ids, attention_mask)
                         self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size)
-                    )
-                    """,
-                    "tests/test_models.py": """"""Test module for enhanced transformer models."""
+                )
+                """,
+                "tests/test_models.py": """"""Test module for enhanced transformer models."""
 
 
 
-                    class TestEnhancedTransformer(unittest.TestCase):    """Test cases for the enhanced transformer model."""
-                    """Test forward pass through the model."""
-                    batch_size = 4
-                    seq_length = 128
-                    input_ids = torch.randint(0, 1000, (batch_size, seq_length))
-                    attention_mask = torch.ones_like(input_ids)
+                class TestEnhancedTransformer(unittest.TestCase):    """Test cases for the enhanced transformer model."""
+                """Test forward pass through the model."""
+                batch_size = 4
+                seq_length = 128
+                input_ids = torch.randint(0, 1000, (batch_size, seq_length))
+                attention_mask = torch.ones_like(input_ids)
 
-                    outputs = self.model(input_ids, attention_mask=attention_mask)
-                    self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size)
+                outputs = self.model(input_ids, attention_mask=attention_mask)
+                self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size)
                 )
                 """,
                 "tests/test_training_setup.py": """"""Test cases for training setup and configuration."""
@@ -162,7 +155,7 @@ class MathNotationProcessor(nn.Module):    """Processes mathematical notation an
                     content in fixes.items():
                     if os.path.exists(file_path):
                         fix_file(file_path, content)
-                    else: print(f"File not found: {file_path}")
+                else: print(f"File not found: {file_path}")
 
 
-                        if __name__ == "__main__":        main()
+                if __name__ == "__main__":        main()

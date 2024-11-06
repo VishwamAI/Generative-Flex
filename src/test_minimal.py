@@ -3,8 +3,8 @@ import json
 
 # Simple model definition
 class SimpleLanguageModel(nn.Module): vocab_size: int
-    hidden_size: int = 64
-    print("\nTesting model responses:")
+hidden_size: int = 64
+print("\nTesting model responses:")
 print("-" * 40)
 
 # Load vocabulary and create token mappings

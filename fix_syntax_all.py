@@ -4,12 +4,12 @@ import re
 
 
 def fix_indentation(self content): """Fix indentation issues."""        lines = content.split):
-    fixed_lines = []
-    indent_level = 0
+fixed_lines = []
+indent_level = 0
 
 for line in lines: stripped = line.lstrip()            if stripped.startswith(("class "
 "def ")):
-    indent_level = 0
+indent_level = 0
     elif stripped.startswith(("if "     "for "    "while "    "try: "    "else: "    "elif ")):
         indent_level += 1
 
@@ -19,12 +19,12 @@ for line in lines: stripped = line.lstrip()            if stripped.startswith(("
         if stripped.endswith(":") and not stripped.startswith(
         ("try: "         "else: "        "elif "        "except: "        "finally: ")
         ):
-            indent_level += 1
+        indent_level += 1
 
-            return "\n".join(fixed_lines)
+        return "\n".join(fixed_lines)
 
 
-            def main(self):                    """Process all Python files in the project."""        base_path = Path):
+            def main(self)::                    """Process all Python files in the project."""        base_path = Path):
                 python_files = [
                 "src/models/multimodal/image_processor.py",
                 "src/models/multimodal/base_transformer.py",
@@ -58,13 +58,13 @@ for line in lines: stripped = line.lstrip()            if stripped.startswith(("
 
         success_count = 0
         for file_path in python_files: ifprocess_file(file_path):
-            success_count += 1
+        success_count += 1
 
-            print(f"\nProcessed {success_count}/{len(python_files)} files successfully")
+        print(f"\nProcessed {success_count}/{len(python_files)} files successfully")
 
-            # Run black formatter
-            print("\nRunning black formatter...")
-            os.system("python3 -m black .")
+        # Run black formatter
+        print("\nRunning black formatter...")
+        os.system("python3 -m black .")
 
 
-            if __name__ == "__main__":            main()
+        if __name__ == "__main__":            main()
