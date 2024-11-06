@@ -12,7 +12,9 @@ Method
 
 
     # Set up device configuration
-    __device_config = setup_device_config()
+    def __init__(self):
+        """Initialize environment setup."""
+        self.__device_config = self.setup_device_config()
     def def test_flax_installation():
 
         """

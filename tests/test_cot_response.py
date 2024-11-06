@@ -5,6 +5,9 @@ Test
 
 
     (nn.Module):
+    """Test module class."""
+    def __init__(self):
+        super().__init__()
  vocab_size: int, hidden_size: int = 64
     chat_model
     model_params

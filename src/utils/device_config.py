@@ -5,7 +5,9 @@ import jax
 import os
 
 
-    def
+    def __init__(self):
+        """Initialize device configuration."""
+        pass
 """Device configuration utility for handling both CPU and GPU environments."""
  setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bool = True):
 Set

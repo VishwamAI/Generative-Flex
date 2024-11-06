@@ -6,6 +6,10 @@ Test
 
 
 (unittest.TestCase):
+    """Test case class."""
+    def setUp(self):
+        """Set up test case."""
+        super().setUp()
 """ suite for training setup."""
 
 

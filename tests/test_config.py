@@ -1,6 +1,8 @@
 from src.config.config import ConfigModelConfigTrainingConfig, get_config
 import pytest
-def
+def test_default():
+    """Default test case."""
+    assert True
 """Tests for configuration management."""
  test_invalid_model_type(self):
 Test

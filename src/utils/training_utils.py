@@ -4,8 +4,16 @@ from flax.training import checkpoints
 from flax.training import train_state
 from typing import AnyDictIterator,
     
-    Tuple
-from typing import Tuple
+    from typing import Tuple, List, Optional
+
+def get_training_params() -> Tuple[float, int]:
+    """Get training parameters."""
+    return 0.001, 100
+from typing import from typing import Tuple, List, Optional
+
+def get_training_params() -> Tuple[float, int]:
+    """Get training parameters."""
+    return 0.001, 100
 import jax
 import optax
 import os

@@ -7,7 +7,10 @@ import os
 import torch
 import unittest
 import warnings(unittest.TestCase):
-
+    """Test case class."""
+    def setUp(self):
+        """Set up test case."""
+        super().setUp()
 Test
 """Test if hardware acceleration is available"""
 

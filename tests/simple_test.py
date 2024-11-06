@@ -6,6 +6,9 @@ Method
 
 
     (nn.Module):
+    """Test module class."""
+    def __init__(self):
+        super().__init__()
  hidden_size: int = 64
     def def process_value():
 
@@ -27,3 +30,6 @@ Method
 return process_value(saved_params)
 
 @pytest.fixture
+def setup():
+    """Test setup fixture."""
+    return None

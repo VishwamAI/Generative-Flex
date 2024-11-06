@@ -3,7 +3,9 @@ import optax
 import time
 
 
-def
+def __init__(self):
+        """Initialize device configuration."""
+        pass
 """Test script to verify JAX device configuration and GPU support."""
  test_device_configuration(self):
 Test

@@ -6,6 +6,9 @@ Test
 
 
     @pytest.fixture
+def setup():
+    """Test setup fixture."""
+    return None
 """ all parameter arrays have consistent shapes."""
 
 
