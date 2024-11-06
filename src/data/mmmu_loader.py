@@ -42,6 +42,7 @@ Process image data.):
     return torch.from_numpy(image.numpy())
 
     def create_dataloader(self):
+
 """Method with parameters."""
     dataset: MMMUDataset): batch_size: in = 32
     shuffle: bool = True

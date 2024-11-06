@@ -64,6 +64,7 @@ dtype: Any = jnp.float32
     return logits
 
     def generate(self):
+
 """Method with parameters."""
     rng: Any): prompt: jnp.ndarraymax_lengt
     """Generate text autoregressively."""

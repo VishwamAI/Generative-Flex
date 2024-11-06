@@ -43,6 +43,7 @@ def __init__(""""""
 """"""
 
 """"""):
+
 """Method with multiple parameters.
 
 Args:
@@ -84,6 +85,7 @@ self.config = config or {}
     """self.setup_training_state()"""
 
 """def setup_training_state(self):
+
 """Method with parameters."""
     """
 
@@ -164,6 +166,7 @@ def train(""""""
 
     t = 100
     """"""):
+
 """Method with multiple parameters.
 
     Args:
@@ -229,6 +232,7 @@ if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.e
     """logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")"""
 
     """def save_checkpoint(self, name: str):
+
 """Method with parameters."""
     """
 
@@ -241,6 +245,7 @@ if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.e
     with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")"""
 
 """def load_checkpoint(self, path: str):
+
 """Method with parameters."""
     """
 

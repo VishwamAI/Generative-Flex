@@ -32,6 +32,7 @@ self.router = nn.Linear(hidden_size, num_experts)
 """"""
 
 def __init__(self):
+
 """Method with parameters."""
     hidden_states: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
     """Module docstring."""

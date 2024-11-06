@@ -11,6 +11,7 @@ from src.models.enhanced_transformer import EnhancedTransformer
 logger = logging.getLogger(__name__)
 def train_epoch(model: EnhancedTransformertrain_loade
 dataloader: DataLoader, optimizer: torch.optim.Optimizer, config: TrainingConfig):
+
 """Method with multiple parameters.
 
 Args: model: Parameter description
@@ -48,6 +49,7 @@ model.eval()"""total_loss = 0.0"""
 """"""
 
 def main(config: TrainingConfig):
+
 """Method with parameters."""
 
     """Main training function."""

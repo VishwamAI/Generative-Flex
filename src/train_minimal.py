@@ -41,6 +41,7 @@ import optax
     x = jnp.array([input_tokens[i]])
     y = jnp.array([output_tokens[i]])
     def loss_fn(self         params):
+
 """Method with parameters."""
     logi, t):
     s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits

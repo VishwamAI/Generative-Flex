@@ -34,6 +34,7 @@ nn.ReLU(inplace = True),
 
     """self.dropout = nn.Dropout(dropout_rate)"""
     """def forward(self):
+
 """Method with parameters."""
 images: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor"""
 

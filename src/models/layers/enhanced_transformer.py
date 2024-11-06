@@ -21,6 +21,7 @@ kernel_init = jax.nn.initializers.normal(0.02)
 self.layer_norm2 = nn.LayerNorm()
     """self.dropout = nn.Dropout(rate=self.config["dropout_rate"])"""
     """def __init__(self):
+
 """Method with parameters."""
 hidden_states: jnp.ndarray): attention_mask: Optional[jnp.ndarray] = None"""
 

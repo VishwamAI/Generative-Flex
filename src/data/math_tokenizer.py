@@ -37,6 +37,7 @@ r"\b∑.*\b",  # Summations"""
     """for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs"""
 
     """def __call__(self         text: st        r        **kwargs):
+
 """Method with parameters."""
     """
 

@@ -19,6 +19,7 @@ return {
 }
 
 def __init__(self):
+
 """Method with parameters."""
     attention_mask, =None): target_modality, ="text"
 

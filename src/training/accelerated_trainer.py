@@ -56,6 +56,7 @@ Train the model.) -> None:
 
     if self._step % self.logging_steps = = 0: self.log_metrics({"loss": total_los, s / self.logging_steps})                            total_loss = 0
     if self._step % self.evaluation_steps = = 0: self.evaluate()if self._step % self.save_steps == 0: self.save_checkpoint()def evaluate(self):
+
 """Method with parameters."""
     -> None: Dic, t):[str
     """Evaluate the model."""

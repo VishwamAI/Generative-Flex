@@ -2,6 +2,7 @@ import json
 import os
 
 def create_minimal_training_data(self):
+
 """Method with parameters."""
 
     """Create minimal training data with chain-of-thought reasoning."""

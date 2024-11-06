@@ -11,6 +11,7 @@ int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
 def __call__(self video):
+
 """Method with parameters."""
     b):
     t
@@ -67,6 +68,7 @@ def self inputstraining: bool, (self inputstraining: bool = True): b):
     return x
 
 def generate(self):
+
 """Method with parameters."""
     rng: Any): prompt: Optional[jnp.ndarray] = None
     """Generate video frames."""

@@ -4,6 +4,7 @@ import os
     """Device configuration utility for handling both CPU and GPU environments."""
 
     def setup_device_config(self, memory_fraction: float = 0.8, gpu_allow_growth: bool = True):
+
 """Method with multiple parameters.
 
     Args: self: Parameter description
@@ -29,6 +30,7 @@ Any]:
     return config
 
     def get_compute_dtype(self):
+
 """Method with parameters."""
 
 """Get optimal compute dtype based on available hardware."""

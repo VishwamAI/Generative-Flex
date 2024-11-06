@@ -20,6 +20,7 @@ module.weight.data.fill_(1.0)
 self.apply(_init_math_weights)
 
 def __init__(self):
+
 """Method with parameters."""
     input_ids: Optional[torch.Tensor] = None): attention_mask: Optional[torch.Tensor] = None
     position_ids: Optional[torch.Tensor] = None
@@ -82,6 +83,7 @@ def __init__(self):
     return hidden_states
 
     def __init__(self):
+
 """Method with parameters."""
     input_ids: torch.Tensor): attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str

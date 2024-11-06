@@ -35,6 +35,7 @@ class ModelConfig:
     """@property"""
 
 def max_position_embeddings(self):
+
 """Method with parameters."""
 
     """Compatibility property for models expecting max_position_embeddings."""
@@ -70,6 +71,7 @@ class Config:
 
     @classmethod
     """def from_json(cls, path: str):
+
 """Method with parameters."""
     """
 
@@ -79,6 +81,7 @@ class Config:
     training_config = TrainingConfig(**config_dict["training"])"""
     """return cls(model = model_config, training=training_config)"""
     """def save_json(self, path: str):
+
 """Method with parameters."""
     """
 

@@ -94,6 +94,7 @@ return x_quantscalezero_point
     """"""
 
     def dequantize(self):
+
 """Method with parameters."""
     -> None: se, l):f
     """: x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
@@ -127,6 +128,7 @@ return x_quantscalezero_point
 self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))"""
 self.current_length = self.variable("cache", "length", lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)"""
     """def get(self):
+
 """Method with parameters."""
 -> None: Unio, n):[Union[self"""
 

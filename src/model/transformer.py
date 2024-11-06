@@ -30,6 +30,7 @@ capacity_factor = expert_capacity_factor,
     self.norm2 = nn.LayerNorm(d_model)
     """self.dropout = nn.Dropout(dropout)"""
     """def forward(self):
+
 """Method with parameters."""
 x: torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""
 

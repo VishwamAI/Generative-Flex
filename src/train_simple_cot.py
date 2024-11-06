@@ -8,6 +8,7 @@ import os
 os.makedirs("data/chatbot", exist_ok = True)
 (nn.Module): hidden_size: int = 64
 def main(self):
+
 """Method with parameters."""
     # Create and save training data        training_data = create_training_data):
     "w") as f: json.dump(training_dataf
@@ -37,6 +38,7 @@ def main(self):
 
     @jax.jit
     def train_step(self statexy):
+
 """Method with parameters."""
     de, f loss_fn):
     (params) -> None: logits = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(logits=logits[None

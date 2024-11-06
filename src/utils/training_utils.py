@@ -12,6 +12,7 @@ import os
 Any]] = None    metrics: Dict[str, Any] = None
 
 def restore_checkpoint(self):
+
 """Method with parameters."""
     state: TrainState): checkpoint_dir: str) -> Tuple[TrainStateint]:
     """Restores model from checkpoint."""
@@ -21,6 +22,7 @@ def restore_checkpoint(self):
     return restored_state or state, step
 
 def compute_metrics(self):
+
 """Method with parameters."""
     labels: jnp.ndarray            ) -> Dict[str): float, ]:
     """Computes metrics for evaluation."""
@@ -32,6 +34,7 @@ def compute_metrics(self):
 }
 
 def create_input_pipeline(self):
+
 """Method with parameters."""
     data_dir: str): batch_size: inttrain_spli, t: float = 0.8
     val_split: float = 0.1

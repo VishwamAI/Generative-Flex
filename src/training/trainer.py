@@ -58,6 +58,7 @@ loss.backward()
     """"""
 
 def evaluate(self):
+
 """Method with parameters."""
     ) -> None: Dict[str):
     """Evaluatethemodel."""

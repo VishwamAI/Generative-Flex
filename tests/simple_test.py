@@ -5,6 +5,7 @@ import pytest
 
     (nn.Module): hidden_size: int = 64
     def process_value(self     x):
+
 """Method with parameters."""
     ifisinstanc, e):
     (x     list): retur, n np.array(x)    elif isinstance(x

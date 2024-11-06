@@ -21,6 +21,7 @@ self.embedder = nn.Dense(self.config.embedding_size)
     """
 
 self.store_index = self.variable("cache", "index",         lambda: 0)def __init__(self, retrieve):
+
 """Method with parameters."""
     """Retrieve relevant knowledge."""
 batch_size = query_embedding.shape[0]
@@ -37,6 +38,7 @@ setup(: sel, f): -> None: None:
 
 """@nn.compact"""
 def __init__(self):
+
 """Method with parameters."""
     inputs: Union[Dict[str): jnp, .ndarray]
     """jnp.ndarray]"""modality: str = "text""""
@@ -74,6 +76,7 @@ def __init__(self):
         return fused
 
 def __init__(self, update_knowledge):
+
 """Method with parameters."""
     Updat, e knowledge store with new data.
     """embeddings = []"""for modality"""
@@ -87,6 +90,7 @@ def __init__(self, update_knowledge):
     self.update_counter = 0
     """self.knowledge_retriever = None"""
     """def __init__(self, initialize):
+
 """Method with parameters."""
     """
 

@@ -33,6 +33,7 @@ pe = pe.at[: 0, : : 2, ].set(jnp.sin(position * div_term))pe = pe.at[: 1, : : 2,
 :]
 
 def __call__(self                     x):
+
 """Method with parameters."""
 
     """Base class for language models."""
