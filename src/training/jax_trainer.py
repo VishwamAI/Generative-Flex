@@ -33,14 +33,12 @@ def __init__(
     model: Optional[nn.Module] = None,
     """"""
 
-
     """"""
 
 """config: Dict[str, """
 
     Any] = None,
     """"""
-
 
     """"""
 
@@ -67,7 +65,6 @@ Args:
     model: Parameter description
     """"""
 
-
     """"""
 
 """config: Parameter description
@@ -75,7 +72,6 @@ Args:
 
     Any] = None: Parameter description
     """"""
-
 
     """"""
 
@@ -104,7 +100,6 @@ self.config = config or {}
     transition_steps = self.config["training"]["warmup_steps"],"""
     """)"""
 
-
     """decay_fn = optax.cosine_decay_schedule("""
     init_value = self.config["training"]["learning_rate"],"""
     decay_steps = self.config["training"]["num_epochs"]"""
@@ -117,7 +112,6 @@ self.config = config or {}
 
     boundaries = [self.config["training"]["warmup_steps"]],"""
     """)"""
-
 
     """# Create optimizer"""
 
@@ -249,7 +243,6 @@ if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.e
     if batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epoch"""
     avg_epoch_loss = epoch_loss / num_steps
     """logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")"""
-
 
     """def save_checkpoint(self, name: str) -> None:
     """Method with parameters."""

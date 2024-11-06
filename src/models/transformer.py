@@ -2,7 +2,6 @@ from typing import Any
 import jax
     """Core transformer architecture implementation using JAX and Flax."""
 
-
     """Multi-head attention mechanism."""
 
 head_dim: intdropout_rat
@@ -10,7 +9,6 @@ e: float = 0.0
 dtype: Any = jnp.float32
 @nn.compact
     """Applies multi-head attention on the input data."""
-
 
     # Linear projections
     query = nn.Dense(qkv_features, _dtype=self.dtype, name="query")(inputs_q)

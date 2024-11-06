@@ -65,7 +65,6 @@ dataset_college = load_dataset("cais/mmlu"                 "college_mathematics"
 self.assertTrue(len(dataset_college) > 0,
     """"College mathematics dataset is empty")"""
 
-
     """# Check dataset structure using high school dataset"""
 
 example = dataset_hs[0]
