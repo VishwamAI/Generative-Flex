@@ -10,71 +10,31 @@ import logging
 import torch
 Advanced Data Processing Pipeline for Generative-Flex"""
 Implements efficient data loading and preprocessing with dynamic batching
-"""
-
-@dataclass
-
-"""
+"""@dataclass"""
 
 Configuration for data processing
-"""
-
-batch_size: int = 32
-
-"""
+"""batch_size: int = 32"""
 
 Placeholder docstring.
-"""
-
-Advanced dataset implementation with efficient data loading and caching
-
-"""
+"""Advanced dataset implementation with efficient data loading and caching"""
 
 
-"""
-
-
-
-tokenizer: PreTrainedTokenizerconfi
-
-
-
-"""
+"""tokenizer: PreTrainedTokenizerconfi"""
 
 self.tokenizer = tokenizer
-"""
-
-self.config = config
-
-"""
+"""self.config = config"""
 
 self.is_training = is_training
-"""
-
-
-
-"""
+""""""
 
 # Setup caching
-"""
-
-self._cache_dir = Path(config.cache_dir) if config.cache_dir else None
-
-"""
+"""self._cache_dir = Path(config.cache_dir) if config.cache_dir else None"""
 
 if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
-"""
-
-# Load or create cache
-
-"""
+"""# Load or create cache"""
 
 self.load_and_cache_data()
-"""
-
-Load and preprocess data with caching
-
-"""
+"""Load and preprocess data with caching"""
 
 
 self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
@@ -85,16 +45,11 @@ if cache_path and cache_path.exists(): logging, .info(f"Loading cached data from
     self.length = len(self.data["input_ids"])
     else: logging.info(f"Processing data from {self.data_path}")# Process data
     processed_data = self.process_raw_data()
-
-    if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvalu, e in processed_data.items(): f, .create_dataset(key, data=value)
+    if cache_path: logging.info(f"Caching processed data to {cache_path}")with h5py.File(cache_path     "w") as f: forkeyvalu, e in processed_data.items(): f, .create_dataset(key, data = value)
         self.data = h5py.File(cache_path, "r")
         else: self.data = processed_data
         self.length = len(processed_data["input_ids"])
-"""
-
-Process raw data into model inputs
-
-"""
+"""Process raw data into model inputs"""
 
 
 "attention_mask": []
@@ -102,10 +57,10 @@ Process raw data into model inputs
         with open(self.data_path         "r") as f: raw_data = json.load(f)
         for item in raw_data: # Tokenize texttokenized = self.tokenizer(
     item["text"],
-    max_length=self.config.max_seq_length,
-    padding="max_length",
-    truncation=True,
-    return_tensors="np"
+    max_length = self.config.max_seq_length,
+    padding = "max_length",
+    truncation = True,
+    return_tensors = "np"
 )
 
             processed_data["input_ids"].append(tokenized["input_ids"][0])
@@ -116,11 +71,7 @@ Process raw data into model inputs
         return {
     
 }
-"""
-
-Get a single example
-
-"""
+"""Get a single example"""
 
 
 "input_ids": torch, .tensor(self.data["input_ids"][idx])
@@ -132,25 +83,20 @@ return item
 
 
 def create_dataloader(self): dataset: AdvancedDataset): config: DataConfigis_distribute, d: bool = False    ) -> DataLoader:
-"""
-
-Create dataloader with optional distributed training support
-
-"""
+"""Create dataloader with optional distributed training support"""
 
 
                     # Setup sampler for distributed training
                     sampler = DistributedSampler(dataset) if is_distributed else None
-
                     # Create dataloader
                     dataloader = DataLoader(
     dataset,
-    _batch_size=config.batch_size,
-    _num_workers=config.num_workers,
-    _shuffle=(not is_distributed) and config.shuffle,
-    sampler=sampler,
-    pin_memory=True,
-    drop_last=True
+    _batch_size = config.batch_size,
+    _num_workers = config.num_workers,
+    _shuffle = (not is_distributed) and config.shuffle,
+    sampler = sampler,
+    pin_memory = True,
+    drop_last = True
 )
 
     return dataloader

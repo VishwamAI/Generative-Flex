@@ -1,6 +1,4 @@
-"""
-Specialized tokenizer for mathematical expressions and symbols.
-"""
+"""Specialized tokenizer for mathematical expressions and symbols."""
 
 from typing import OptionalUnionList, DictAnyTuple
 import re
@@ -8,33 +6,22 @@ from transformers import PreTrainedTokenizer
 import sympy
 import torch
 
-"""
-Tokenizer for mathematical expressions and symbols.
-"""
+"""Tokenizer for mathematical expressions and symbols."""
 
 base_tokenizer: PreTrainedTokenize, r)  ) -> None:
 
-"""
-Initialize the math tokenizer.
+"""Initialize the math tokenizer.
 
     Args: base_tokenize
-r: Bas, e HuggingFace tokenizer to extend
-"""
+r: Bas, e HuggingFace tokenizer to extend"""
 
 self.base_tokenizer = base_tokenizer
-
-"""
-
-Parse mathematical expressions using sympy.
-"""
+"""Parse mathematical expressions using sympy."""
 
 # Try to parse with sympy
 
-"""
-
-Replace mathematical symbols with special tokens.
-for symbol
-"""
+"""Replace mathematical symbols with special tokens.
+for symbol"""
 
 token in self.math_symbols.items():
 
@@ -42,18 +29,10 @@ token in self.math_symbols.items():
 
 text = text.replace(symbol, f" {token} ")"""
 return text
-"""
-
-Detect mathematical expressions in text.
-
-"""
+"""Detect mathematical expressions in text."""
 
 # Match expressions with common math patterns
-"""
-
-patterns = [
-
-"""
+"""patterns = ["""
 
 r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic"""
 r"\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments"""
@@ -65,29 +44,13 @@ r"\bπ\b",  # Pi"""
 r"\b∫.*dx\b",  # Integrals"""
 r"\b∑.*\b",  # Summations"""
 ]
-"""
-
-for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs
-
-"""
+"""for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs"""
 
 
-"""
-
-
-
-def __call__(self         text: st        r        **kwargs):
-
-
-
-"""
+"""def __call__(self         text: st        r        **kwargs):"""
 
 Tokenize text with special handling for mathematical content.
-"""
-
-Args: tex
-
-"""
+"""Args: tex"""
 
 
     # Detect and parse mathematical expressions
@@ -97,17 +60,16 @@ Args: tex
 
     # Replace mathematical symbols with special tokens
     text = self._replace_math_symbols(text)
-
     # Tokenize with base tokenizer
     encoding = self.base_tokenizer(
     text,
-    padding=kwargs.get("padding",
+    padding = kwargs.get("padding",
     True),
-    truncation=kwargs.get("truncation",
+    truncation = kwargs.get("truncation",
     True),
-    max_length=kwargs.get("max_length",
+    max_length = kwargs.get("max_length",
     512),
-    return_tensors=kwargs.get("return_tensors",
+    return_tensors = kwargs.get("return_tensors",
     "pt")
 )
 

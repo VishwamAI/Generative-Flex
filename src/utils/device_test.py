@@ -2,26 +2,14 @@ import jax
 import optax
 import time
 
-"""
-
-
-Test script to verify JAX device configuration and GPU support.
-
-
-"""
+"""Test script to verify JAX device configuration and GPU support."""
 
 
 
 
 def test_device_configuration(self):
     
-    """
-
-    
-    Test and print device configuration information.
-
-    
-    """
+    """Test and print device configuration information."""
 
 
 
@@ -35,13 +23,11 @@ def test_device_configuration(self):
 print(f"Available devices: {jax.devices()}")# Test basic JAX operation on def ault device
     x = jnp.ones((1000, 1000))
     y = jnp.ones((1000, 1000))
-
     # Time matrix multiplication to test performance
 
     start_time = time.time()
     z = jnp.matmul(x, y)
     end_time = time.time()
-
     print("\nMatrix multiplication test: ")
 print(f"Time taken: {end_time - start_time:.4f} seconds")
 print(f"Output shape: {z.shape}")# Print other relevant information

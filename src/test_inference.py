@@ -6,19 +6,15 @@ from typing import Dict, Any
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_list = json.load(f)    # Create word to id mapping
 word_to_id = {
-    
 }  # Create id to word mapping
 id_to_word = {
-    
 }  # Initialize model and create initial parameters
 model = SimpleGreetingModel(_vocab_size=len(word_to_id))
 key = jax.random.PRNGKey(0)
 dummy_input = jnp.zeros((1), dtype=jnp.int32)
 ___ = model.init(key, dummy_input)
-
 # Load trained parameters
 trained_params = load_params("model_params_minimal.json")
-
 # Test input
 test_input = "hi"
 input_tokens = jnp.array( [word_to_id.get(test_input.lower(), word_to_id["<unk>"])]
@@ -27,13 +23,11 @@ input_tokens = jnp.array( [word_to_id.get(test_input.lower(), word_to_id["<unk>"
 # Get model output
 logits = model.apply(trained_params, input_tokens)
 predicted_tokens = jnp.argmax(logits, axis=-1)
-
 # Convert predictions to words
 predicted_words = [
     id_to_word.get(int(idx), "<unk>") for idx in predicted_tokens
 ]
 response = " ".join(predicted_words)
-
 # Demonstrate chain-of-thought reasoning
 print("\nDemonstrating Chain-of-Thought LLM capabilities: ")
 print("Input: " test_input)

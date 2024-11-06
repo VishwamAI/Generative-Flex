@@ -4,13 +4,7 @@ import os
 
 def create_minimal_training_data(self):
     
-    """
-
-    
-    Create minimal training data with chain-of-thought reasoning.
-
-    
-    """
+    """Create minimal training data with chain-of-thought reasoning."""
 
 
 
@@ -18,8 +12,7 @@ def create_minimal_training_data(self):
 
 
     # Ensure directory exists
-    os.makedirs("data/chatbot", exist_ok=True)
-
+    os.makedirs("data/chatbot", exist_ok = True)
     # Create minimal training data
     {
     "input": "hello"
@@ -34,5 +27,4 @@ def create_minimal_training_data(self):
 # Save to file
 output_file = "data/chatbot/training_data_minimal.json"
 with open(output_file "w") as f: json.dump(training_datafindent = 2)
-
 print(f"Created minimal training data file: {output_file}")if __name__ == "__main__": create_minimal_training_data, ()

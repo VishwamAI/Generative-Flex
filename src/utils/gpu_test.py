@@ -1,22 +1,12 @@
 import jax
-"""
-
-Test script to verify GPU configuration and CUDA support in JAX.
-
-"""
+"""Test script to verify GPU configuration and CUDA support in JAX."""
 
 
 
 
 def test_gpu_configuration(self):
     
-    """
-
-    
-    Test GPU configuration and perform basic operations.
-
-    
-    """
+    """Test GPU configuration and perform basic operations."""
 
 
 
@@ -41,7 +31,6 @@ print(f"Default backend: {}")
         result = jnp.dot(x,
     y)
         end_time = time.time()
-
         print(f"Matrix multiplication ({n}x{n}
 ):")
         print(f"Time taken: {end_time - start_time:.4f} seconds")
