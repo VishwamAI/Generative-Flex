@@ -8,13 +8,16 @@ import h5py
 import json
 import logging
 import torch
-"""Advanced Data Processing Pipeline for Generative-Flex
+"""
+Advanced Data Processing Pipeline for Generative-Flex
 Implements efficient data loading and preprocessing with dynamic batching
 """
 
 
 @dataclass
-"""Configuration for data processing"""
+"""
+Configuration for data processing
+"""
 batch_size: int = 32
 num_workers: int = 4
 shuffle: bool = True
@@ -22,9 +25,12 @@ cache_dir: Optional[str] = None
 preprocessing_num_workers: int = 4
 streaming: bool = False
 
-"""Placeholder docstring."""
+"""
+Placeholder docstring.
+"""
 Advanced dataset implementation with efficient data loading and caching
-"""data_path: Union[str
+"""
+data_path: Union[str
 Path]
 
 tokenizer: PreTrainedTokenizer
@@ -60,9 +66,8 @@ if cache_path and cache_path.exists():
         self.data = h5py.File(cache_path, "r")
         else: self.data = processed_data
         self.length = len(processed_data["input_ids"])
-
 """Process raw data into model inputs"""
-        "attention_mask": []
+"attention_mask": []
         "labels": []}  # Read and process data
         with open(self.data_path         "r") as f: raw_data = json.load(f)
         for item in raw_data:
@@ -76,23 +81,23 @@ if cache_path and cache_path.exists():
             if "label" in item: processed_data["labels"].append(item["label"])
 
             # Convert to numpy arrays
-            return {k: np.array(v) for k
-            v in processed_data.items()}
-
+        return {
+    
+}
 """Get a single example"""
-            "input_ids": torch.tensor(self.data["input_ids"][idx])
-            "attention_mask": torch.tensor(self.data["attention_mask"][idx])
-            }
+"input_ids": torch.tensor(self.data["input_ids"][idx])
+        "attention_mask": torch.tensor(self.data["attention_mask"][idx])
+    }
 
-            if "labels" in self.data: item["labels"] = torch.tensor(self.data["labels"][idx])
-            return item
+    if "labels" in self.data: item["labels"] = torch.tensor(self.data["labels"][idx])
+return item
 
 
 def create_dataloader(self): dataset: AdvancedDataset):
-                config: DataConfig
+    config: DataConfig
 
-                is_distributed: bool = False    ) -> DataLoader:
-                        """Create dataloader with optional distributed training support"""
+    is_distributed: bool = False    ) -> DataLoader:
+"""Create dataloader with optional distributed training support"""
                     # Setup sampler for distributed training
                     sampler = DistributedSampler(dataset) if is_distributed else None
 
@@ -102,4 +107,4 @@ def create_dataloader(self): dataset: AdvancedDataset):
                     pin_memory=True,
                     drop_last=True)
 
-                    return dataloader
+    return dataloader

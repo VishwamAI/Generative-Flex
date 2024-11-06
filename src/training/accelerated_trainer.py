@@ -3,16 +3,20 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-"""Accelerated trainer implementation.
+"""
+Accelerated trainer implementation.
 """
 
 
 logger = logging.getLogger(__name__)
 
 
-"""Placeholder docstring."""
+"""
+Placeholder docstring.
+"""
 Trainer class with accelerate support.
-"""train_dataloader: DataLoader
+"""
+train_dataloader: DataLoader
 
 eval_dataloader: Optional[DataLoader] = None
 optimizer: Optional[torch.optim.Optimizer] = None
@@ -46,7 +50,9 @@ self._best_eval_loss = float("inf")
 
 # Prepare for distributed training(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader) = self.accelerator.prepare(self.model, self.optimizer, self.train_dataloader, self.eval_dataloader)
 
-"""Train the model.) -> None:"""
+"""
+Train the model.) -> None:
+"""
 """
 self.model.train()
 total_loss = 0
@@ -69,16 +75,17 @@ for epoch in range(self.num_epochs):
 
             if self._step % self.evaluation_steps == 0: self.evaluate()
             if self._step % self.save_steps == 0: self.save_checkpoint()
-def evaluate(self): -> None: Dict):
-                [str
-                    """Evaluate the model."""
-                    """
-                if self.eval_dataloader is None: return{}
+            def evaluate(self): -> None: Dict):
+    [str
+"""Evaluate the model."""
 
-                self.model.eval()
-                total_loss = 0
+"""
+    if self.eval_dataloader is None: return{}
 
-                for batch in self.eval_dataloader: withtorch.no_grad():
+    self.model.eval()
+    total_loss = 0
+
+    for batch in self.eval_dataloader: withtorch.no_grad():
                     outputs = self.model(**batch)
                     loss = outputs.loss
                     total_loss += loss.item()
@@ -90,15 +97,17 @@ def evaluate(self): -> None: Dict):
 
                     if eval_loss < self._best_eval_loss: self._best_eval_loss = eval_loss                                    self.save_checkpoint(is_best=True)
 
-                    return metrics
+    return metrics
 
-                        """Save a model checkpoint.) -> None:"""
-                        """
-                    checkpoint_name = f"checkpoint-{{self._step}}"
-                    if is_best: checkpoint_name = "best_model"
-                    self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
-                    logger.info(f"Saved checkpoint: {{checkpoint_name}}")
+    """
+Save a model checkpoint.) -> None:
+"""
+    """
+checkpoint_name = f"checkpoint-{{self._step}}"
+    if is_best: checkpoint_name = "best_model"
+    self.accelerator.save_state(f"{{self.output_dir}}/{{checkpoint_name}}")
+    logger.info(f"Saved checkpoint: {{checkpoint_name}}")
+"""Log training metrics.) -> None:"""
 
-                        """Log training metrics.) -> None:"""
-                        """
-                    metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k                 v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")
+"""
+    metric_str = " ".join(f"{{k}}: {{v:.4f}}" for k                 v in metrics.items())                                        logger.info(f"Step {{self._step}}: {{metric_str}}")

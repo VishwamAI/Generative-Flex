@@ -2,14 +2,18 @@ from attention import FlashAttention
 from experts import MixtureOfExperts
 from typing import Optional
 import torch
-"""Advanced Transformer Layer Implementation for Generative-Flex
+"""
+Advanced Transformer Layer Implementation for Generative-Flex
 Combines Flash Attention and Mixture of Experts for optimal performance
 """
 
 
-"""Placeholder docstring."""
+"""
+Placeholder docstring.
+"""
 Advanced transformer layer combining Flash Attention and Mixture of Experts
-"""d_model: int
+"""
+d_model: int
 
 nhead: int
 
@@ -33,7 +37,7 @@ self.dropout = nn.Dropout(dropout)
 
 def forward(self): x: torch.Tensor):
     mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:
-            """
+"""
         Forward pass combining attention and expert computation
         Args: x: Input tensor of shape [batch_size
         seq_len
@@ -42,7 +46,7 @@ def forward(self): x: torch.Tensor):
         Returns: Outputtensorof shape [batch_size
         seq_len
         d_model]
-            """
+        """
         # Self-attention with residual connection
         residual = x
         x = self.norm1(x)
@@ -55,4 +59,4 @@ def forward(self): x: torch.Tensor):
         x = self.moe(x, mask)
         x = residual + self.dropout(x)
 
-        return x
+    return x

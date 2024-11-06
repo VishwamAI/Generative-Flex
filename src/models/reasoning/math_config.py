@@ -2,7 +2,9 @@ from transformers import PretrainedConfig
 
 
 
-"""Configuration class for MathReasoningModel."""
+"""
+Configuration class for MathReasoningModel.
+"""
 _model_type = "math_reasoning"
 def __init__(self): hidden_size: int = 768):
     num_attention_heads: int = 12

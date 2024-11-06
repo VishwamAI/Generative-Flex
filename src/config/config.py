@@ -1,4 +1,6 @@
-"""Centralized configuration management for Generative-Flex."""
+"""
+Centralized configuration management for Generative-Flex.
+"""
 
 
 from typing import Optional, Union, List, Dict, Any, Tuple
@@ -9,7 +11,9 @@ import json
 
 @dataclass
 class ModelConfig:
-    """Model configuration."""
+    """
+Model configuration.
+"""
 
 
 
@@ -38,16 +42,20 @@ class ModelConfig:
     video_patch_size: Optional[Tuple[int, int, int]] = field(default=None)
 
     @property
-    def max_position_embeddings(self) -> int:
-            """Compatibility property for models expecting max_position_embeddings."""
+    def max_position_embeddings(self):
+        """
+Compatibility property for models expecting max_position_embeddings.
+"""
 
 
-        return self.max_seq_length
+    return self.max_seq_length
 
 
-        @dataclass
-class TrainingConfig:
-        """Training configuration."""
+    @dataclass
+    class TrainingConfig:
+    """
+Training configuration.
+"""
 
 
 
@@ -66,8 +74,10 @@ class TrainingConfig:
 
 
     @dataclass
-class Config:
-        """Complete configuration."""
+    class Config:
+    """
+Complete configuration.
+"""
 
 
 
@@ -75,40 +85,47 @@ class Config:
     training: TrainingConfig = field(default_factory=TrainingConfig)
 
     @classmethod
-    def from_json(cls, path: str) -> "Config":
-            """Load configuration from JSON file."""
+    def from_json(cls, path: str):
+        """
+Load configuration from JSON file.
+"""
         with open(path, "r") as f: config_dict = json.load(f)
 
         model_config = ModelConfig(**config_dict["model"])
         training_config = TrainingConfig(**config_dict["training"])
 
-        return cls(model=model_config, training=training_config)
+    return cls(model=model_config, training=training_config)
 
-        def save_json(self, path: str) -> None:
-                """Save configuration to JSON file."""
+    def save_json(self, path: str):
+            """
+Save configuration to JSON file.
+"""
             config_dict = {
-            "model": {k: v for k, v in self.model.__dict__.items() if v is not None},
-            "training": self.training.__dict__,
+    
+},
+                "training": self.training.__dict__,
             }
 
             with open(path, "w") as f: json.dump(config_dict, f, indent = 2)
 
             @classmethod
-            def get_config(cls, model_type: str="language", config_path: Optional[str] = None) -> "Config":
-                    """Get configuration for a specific model type."""
+            def get_config(cls, model_type: str="language", config_path: Optional[str] = None):
+                """
+Get configuration for a specific model type.
+"""
                 if config_path and Path(config_path).exists():
-                    return cls.from_json(config_path)
+                return cls.from_json(config_path)
 
-                    valid_model_types = {"language", "image", "audio", "video"}
-                    if model_type not in valid_model_types:
-                        raise ValueError(
-                        f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
-                        )
+                valid_model_types = {"language", "image", "audio", "video"}
+                if model_type not in valid_model_types:
+                raise ValueError(
+                            f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
+                )
 
-                        # Default configurations for different model types
-                        model_config = ModelConfig(model_type=model_type)
+                # Default configurations for different model types
+                model_config = ModelConfig(model_type=model_type)
 
-                        if model_type == "image":
+                if model_type == "image":
                             model_config.image_size = (256, 256)
                             model_config.patch_size = (16, 16)
                             elif model_type == "audio":
@@ -118,4 +135,4 @@ class Config:
                                     model_config.video_size = (16, 256, 256)
                                     model_config.video_patch_size = (2, 16, 16)
 
-                                    return cls(model=model_config, training=TrainingConfig())
+                                return cls(model=model_config, training=TrainingConfig())

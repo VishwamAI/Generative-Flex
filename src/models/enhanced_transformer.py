@@ -1,12 +1,17 @@
 from typing import Optional, Dict, Any
 import jax
-"""Enhanced transformer implementation with advanced features.
+"""
+Enhanced transformer implementation with advanced features.
 """
 
 
-"""Enhanced transformer with advanced attention mechanisms."""
+"""
+Enhanced transformer with advanced attention mechanisms.
+"""
 
-"""Initialize model components."""
+"""
+Initialize model components.
+"""
 self.embed_dim = self.config["hidden_size"]
 self.num_heads = self.config["num_attention_heads"]
 self.dropout_rate = self.config["dropout_rate"]
@@ -27,7 +32,8 @@ def __init__(self): input_ids: jnp.ndarray):
     output_attentions: bool = False
     output_hidden_states: bool = False) -> Dict[str
     jnp.ndarray]:
-            """Forward pass of the model.
+        """
+Forward pass of the model.
 
         Args: input_ids: Input token IDs
         attention_mask: Attentionmasktoken_type_ids: TokentypeIDs
@@ -35,7 +41,7 @@ def __init__(self): input_ids: jnp.ndarray):
         position_ids: PositionIDsdeterministic: Whethertouse deterministic behavior
         output_attentions: Whethertooutput attention weights
         output_hidden_states: Whethertooutput hidden states
-            """Placeholder docstring."""
+"""Placeholder docstring."""
         # Get embeddings
         hidden_states = self.embeddings(input_ids)
 
@@ -47,11 +53,11 @@ def __init__(self): input_ids: jnp.ndarray):
         logits = self.classifier(pooled)
 
         outputs = {
-        "logits": logits
-        "pooled_output": pooled
-        "last_hidden_state": encoder_outputs["last_hidden_state"]
-        }
+    "logits": logits
+    "pooled_output": pooled
+    "last_hidden_state": encoder_outputs["last_hidden_state"]
+}
 
         if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
         if output_hidden_states: outputs["hidden_states"] = encoder_outputs["hidden_states"]
-        return outputs
+    return outputs

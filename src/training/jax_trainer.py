@@ -1,4 +1,6 @@
-"""JAX/Flax training infrastructure for Generative-Flex."""
+"""
+JAX/Flax training infrastructure for Generative-Flex.
+"""
 
 
 from typing import Dict, Any, List, Optional, Union, Tuple
@@ -14,15 +16,19 @@ from dataclasses import dataclass, field
 
 
 class TrainerState(train_state.TrainState):
-    """Custom train state with loss scaling for mixed precision training."""
+    """
+Custom train state with loss scaling for mixed precision training.
+"""
 
 
 
     loss_scale: Optional[jnp.ndarray] = None
 
 
-class FlaxTrainer:
-    """Advanced trainer implementation using JAX/Flax."""
+    class FlaxTrainer:
+    """
+Advanced trainer implementation using JAX/Flax.
+"""
 
 
 
@@ -32,8 +38,10 @@ class FlaxTrainer:
     config: Dict[str,
     Any] = None,
     output_dir: Optional[str] = None
-    ) -> None:
-            """Initialize trainer."""
+):
+        """
+Initialize trainer.
+"""
         self.model = model
         self.config = config or {}
         self.output_dir = Path(output_dir) if output_dir else Path("outputs")
@@ -42,35 +50,37 @@ class FlaxTrainer:
         # Initialize training state
         self.setup_training_state()
 
-        def setup_training_state(self) -> None:
-                """Setup training state with optimizer and learning rate schedule."""
+        def setup_training_state(self):
+            """
+Setup training state with optimizer and learning rate schedule.
+"""
 
 
             # Create learning rate schedule
             warmup_fn = optax.linear_schedule(
-            init_value=0.0,
-            end_value=self.config["training"]["learning_rate"],
-            transition_steps=self.config["training"]["warmup_steps"],
+                init_value=0.0,
+                end_value=self.config["training"]["learning_rate"],
+                transition_steps=self.config["training"]["warmup_steps"],
             )
 
             decay_fn = optax.cosine_decay_schedule(
-            init_value=self.config["training"]["learning_rate"],
-            decay_steps=self.config["training"]["num_epochs"]
-            * self.config["training"]["steps_per_epoch"],
+                init_value=self.config["training"]["learning_rate"],
+                decay_steps=self.config["training"]["num_epochs"]
+                * self.config["training"]["steps_per_epoch"],
             )
 
             schedule_fn = optax.join_schedules(
-            schedules=[warmup_fn, decay_fn],
-            boundaries=[self.config["training"]["warmup_steps"]],
+                schedules=[warmup_fn, decay_fn],
+                boundaries=[self.config["training"]["warmup_steps"]],
             )
 
             # Create optimizer
             optimizer = optax.chain(
-            optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),
-            optax.adamw(
-            learning_rate=schedule_fn,
-            weight_decay=self.config["training"]["weight_decay"],
-            ),
+                optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),
+                optax.adamw(
+                learning_rate=schedule_fn,
+                weight_decay=self.config["training"]["weight_decay"],
+                ),
             )
 
             # Initialize state
@@ -79,26 +89,28 @@ class FlaxTrainer:
             variables = self.model.init(rng, dummy_input)
 
             self.state = TrainerState.create(
-            apply_fn=self.model.apply,
-            params=variables["params"],
-            tx=optimizer,
-            loss_scale=(
-            jnp.array(2.0**15)
-            if self.config["training"].get("fp16", False)
-            else None
-            ),
+                apply_fn=self.model.apply,
+                params=variables["params"],
+                tx=optimizer,
+                loss_scale=(
+                jnp.array(2.0**15)
+                if self.config["training"].get("fp16", False)
+                else None
+                ),
             )
 
             def train(
-            self,
-            train_dataset: Any,
-            num_epochs: int,
-            eval_dataset: Optional[Any] = None,
-            eval_steps: int = 1000,
-            save_steps: int = 1000,
-            log_steps: int = 100
-            ) -> None:
-                    """Training loop with evaluation."""
+    self,
+    train_dataset: Any,
+    num_epochs: int,
+    eval_dataset: Optional[Any] = None,
+    eval_steps: int = 1000,
+    save_steps: int = 1000,
+    log_steps: int = 100
+):
+                """
+Training loop with evaluation.
+"""
                 train_step_jit = jax.jit(self.train_step)
 
                 for epoch in range(num_epochs):
@@ -114,7 +126,7 @@ class FlaxTrainer:
                         # Logging
                         if batch_idx % log_steps == 0: avg_loss = epoch_loss / num_steps
                         logging.info(
-                        f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}"
+                            f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}"
                         )
 
                         # Evaluation
@@ -130,8 +142,10 @@ class FlaxTrainer:
                             logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")
                             self.save_checkpoint(f"epoch-{epoch}")
 
-                            def save_checkpoint(self, name: str) -> None:
-                                    """Save model checkpoint."""
+                            def save_checkpoint(self, name: str):
+                                """
+Save model checkpoint.
+"""
                                 checkpoint_dir = self.output_dir / name
                                 checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
@@ -145,8 +159,10 @@ class FlaxTrainer:
 
                                         logging.info(f"Checkpoint saved to {checkpoint_dir}")
 
-                                        def load_checkpoint(self, path: str) -> None:
-                                                """Load model checkpoint."""
+                                        def load_checkpoint(self, path: str):
+                                            """
+Load model checkpoint.
+"""
                                             checkpoint_dir = Path(path)
 
                                             # Load model parameters

@@ -9,9 +9,11 @@ print("-" * 40)
 
 # Load vocabulary and create token mappings
 vocab = load_vocab()
-word_to_id = {word: ifori
-word in enumerate(vocab)}id_to_word = {i: wordfori
-word in enumerate(vocab)}  # Initialize model
+word_to_id = {
+    
+}id_to_word = {
+    
+}  # Initialize model
 model = SimpleLanguageModel(_vocab_size=len(vocab))
 
 # Load parameters
@@ -23,7 +25,7 @@ print(f"Input: {test_input}")
 
 # Tokenize input
 input_tokens = [
-word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
+    word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
 ]
 input_array = jnp.array([input_tokens])
 

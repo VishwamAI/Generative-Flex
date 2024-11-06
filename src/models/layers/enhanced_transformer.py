@@ -1,12 +1,16 @@
 from typing import Optional, Dict, Any
 import jax
-"""Enhanced transformer layer implementations.
+"""
+Enhanced transformer layer implementations.
 """
 
 
-"""Module docstring."""
+"""
+Module docstring.
+"""
 Enhanced transformer layer with advanced features.
 """
+
 """Module docstring."""
 Initialize layer components.
 """
@@ -23,15 +27,15 @@ def __init__(self): hidden_states: jnp.ndarray):
     deterministic: bool = True
     output_attentions: bool = False) -> Dict[str
     jnp.ndarray]:
-            """
-        Forward pass of the layer.
+        """
+Forward pass of the layer.
 
         Args: hidden_states: Input hidden states
         attention_mask: Attentionmaskdeterministic: Whethertouse deterministic behavior
         output_attentions: Whethertooutput attention weights
 
         Returns: Dictionarycontaininglayer outputs
-            """
+"""
         # Self attention
         normed_hidden_states = self.layer_norm1(hidden_states)
         attention_output = self.attention(normed_hidden_states, normed_hidden_states, mask=attention_mask, deterministic=deterministic, output_attentions=output_attentions)
@@ -44,4 +48,4 @@ def __init__(self): hidden_states: jnp.ndarray):
         hidden_states = hidden_states + self.dropout(mlp_output, deterministic=deterministic)
 
         outputs = {"hidden_states": hidden_states}if output_attentions: outputs["attentions"] = attention_output["attentions"]
-        return outputs
+    return outputs

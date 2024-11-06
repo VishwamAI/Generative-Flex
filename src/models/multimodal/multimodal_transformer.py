@@ -3,7 +3,8 @@ from image_processor import ImageProcessor
 from typing import Optional, Tuple, Dict, Any
 import logging
 import torch
-"""MultiModal Transformer implementation with features inspired by Gemma and LLaMA.
+"""
+MultiModal Transformer implementation with features inspired by Gemma and LLaMA.
 """
 
 # Set up logging
@@ -11,8 +12,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-"""MultiModal Transformer with enhanced capabilities for mathematical reasoning."""
-"""Module docstring."""
+"""
+MultiModal Transformer with enhanced capabilities for mathematical reasoning.
+"""
+"""
+Module docstring.
+"""
 _init_math_weights(module) -> None: ifisinstance
 (module (nn.Linear nn.Embedding): module.weight.data.normal_(mean=0.0
 std=0.02)        if isinstance(module
@@ -23,26 +28,28 @@ elif isinstance(module nn.LayerNorm):
 
     self.apply(_init_math_weights)
 
-def __init__(self): input_ids: Optional[torch.Tensor] = None):
-        attention_mask: Optional[torch.Tensor] = None
-        position_ids: Optional[torch.Tensor] = None
-        image_features: Optional[torch.Tensor] = None
-        return_dict: bool = True) -> Dict[str
-            """Forward pass with support for text and image inputs."""
-        batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
-        )
-        device = next(self.parameters()).device
-        embeddings = None
-        total_sequence_length = 0
+    def __init__(self): input_ids: Optional[torch.Tensor] = None):
+    attention_mask: Optional[torch.Tensor] = None
+    position_ids: Optional[torch.Tensor] = None
+    image_features: Optional[torch.Tensor] = None
+    return_dict: bool = True) -> Dict[str
+    """
+Forward pass with support for text and image inputs.
+"""
+    batch_size = (     input_ids.size(0) if input_ids is not None else image_features.size(0)
+)
+device = next(self.parameters()).device
+embeddings = None
+total_sequence_length = 0
 
-        # Process text inputs
-        if input_ids is not None: text_embeddings = self.word_embeddings(input_ids)  # [batch_size
-        seq_len
-        hidden_size]                total_sequence_length += text_embeddings.size(1)
-        embeddings = text_embeddings
+# Process text inputs
+if input_ids is not None: text_embeddings = self.word_embeddings(input_ids)  # [batch_size
+seq_len
+hidden_size]                total_sequence_length += text_embeddings.size(1)
+embeddings = text_embeddings
 
-        # Process image inputs
-        if image_features is not None: try:
+# Process image inputs
+if image_features is not None: try:
             # Process images through ImageProcessor
             processed_images = self.image_processor(image_features)  # [batch_size, num_images, hidden_size]
 
@@ -93,21 +100,23 @@ def __init__(self): input_ids: Optional[torch.Tensor] = None):
 
                     "router_probs": router_probs_list
 
-                    }
-                    return hidden_states
+                }
+            return hidden_states
 
-def __init__(self): input_ids: torch.Tensor):
-                        attention_mask: Optional[torch.Tensor] = None
-                        **kwargs) -> Dict[str
-                        Any]:
-                                """Prepare inputs for text generation."""
+            def __init__(self): input_ids: torch.Tensor):
+    attention_mask: Optional[torch.Tensor] = None
+    **kwargs) -> Dict[str
+    Any]:
+                            """
+Prepare inputs for text generation.
+"""
                             position_ids = kwargs.get("position_ids", None)
                             if position_ids is None: position_ids = attention_mask.long().cumsum(-1) - 1                        position_ids.masked_fill_(attention_mask == 0
                             1)
 
-                            return {
-                            "input_ids": input_ids
-                            "attention_mask": attention_mask
-                            "position_ids": position_ids
-                            "image_features": kwargs.get("image_features"             None)
-                            }
+    return {
+    "input_ids": input_ids
+    "attention_mask": attention_mask
+    "position_ids": position_ids
+    "image_features": kwargs.get("image_features"             None)
+}

@@ -8,7 +8,8 @@ from training.accelerated_trainer import AcceleratedTrainer
 import json
 import logging
 
-"""Training script using AcceleratedTrainer for efficient distributed training
+"""
+Training script using AcceleratedTrainer for efficient distributed training
 with Hugging Face Accelerate.
 """
 
@@ -31,26 +32,26 @@ def main(self):  # Load configuration    config_path = Path):
         datefmt="%m/%d/%Y %H: %M:%S"
 
         level=logging.INFO,
-        )
-        logger.info(accelerator.state)
+    )
+    logger.info(accelerator.state)
 
-        # Initialize model
-        model = GenerativeFlexModel(**config["model"])
+    # Initialize model
+    model = GenerativeFlexModel(**config["model"])
 
-        # Initialize trainer
-        trainer = AcceleratedTrainer( model=model,accelerator=accelerator,config=config["training"],output_dir=config["training"]["output_dir"],)
+    # Initialize trainer
+    trainer = AcceleratedTrainer( model=model,accelerator=accelerator,config=config["training"],output_dir=config["training"]["output_dir"],)
 
-        # Create dataloaders
-        train_dataloader, eval_dataloader = create_dataloaders( batch_size=config["training"]["batch_size"],max_length=config["model"]["max_seq_length"],)
+    # Create dataloaders
+    train_dataloader, eval_dataloader = create_dataloaders( batch_size=config["training"]["batch_size"],max_length=config["model"]["max_seq_length"],)
 
-        # Prepare for distributed training
-        train_dataloader, eval_dataloader = accelerator.prepare( train_dataloader, eval_dataloader)
+    # Prepare for distributed training
+    train_dataloader, eval_dataloader = accelerator.prepare( train_dataloader, eval_dataloader)
 
-        # Start training
-        trainer.train( train_dataloader=train_dataloader,eval_dataloader=eval_dataloader,num_epochs=config["training"]["num_epochs"],eval_steps=config["training"]["eval_steps"],save_steps=config["training"]["save_steps"],resume_from_checkpoint=config["training"]["resume_from_checkpoint"],)
+    # Start training
+    trainer.train( train_dataloader=train_dataloader,eval_dataloader=eval_dataloader,num_epochs=config["training"]["num_epochs"],eval_steps=config["training"]["eval_steps"],save_steps=config["training"]["save_steps"],resume_from_checkpoint=config["training"]["resume_from_checkpoint"],)
 
-        # Push to Hub if configured
-        if config["training"]["push_to_hub"] and config["training"]["hub_model_id"]:
+    # Push to Hub if configured
+    if config["training"]["push_to_hub"] and config["training"]["hub_model_id"]:
             trainer.push_to_hub(     repo_id=config["training"]["hub_model_id"],    strategy=config["training"]["hub_strategy"],)
 
             if __name__ == "__main__":

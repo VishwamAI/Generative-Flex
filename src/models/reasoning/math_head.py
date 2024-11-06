@@ -5,9 +5,13 @@ import torch
 logger = logging.getLogger(__name__)
 
 
-"""Mathematical reasoning head with mixture of experts for enhanced capabilities"""
+"""
+Mathematical reasoning head with mixture of experts for enhanced capabilities
+"""
 attention_mask: Optional[torch.Tensor] = None) -> Dict[str
-"""Forward pass with expert routing and mathematical operation detection"""
+"""
+Forward pass with expert routing and mathematical operation detection
+"""
 try: batch_size
 seq_length
 _hidden_size  = hidden_states.shape
@@ -52,13 +56,13 @@ expert in enumerate(self.experts):
         load_balancing_loss = self._compute_load_balancing_loss(expert_weights)
 
         outputs = {
-        "logits": logits
-        "router_entropy": router_entropy
-        "expert_weights": expert_weights
-        "operation_probs": operation_probs
-        "moe_loss": load_balancing_loss
-        }
+    "logits": logits
+    "router_entropy": router_entropy
+    "expert_weights": expert_weights
+    "operation_probs": operation_probs
+    "moe_loss": load_balancing_loss
+}
 
-        return outputs
-        except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
-        raise
+    return outputs
+    except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
+raise

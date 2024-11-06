@@ -27,37 +27,38 @@ class SimpleChatModel(nn.Module):
             f
             indent=2)
             # Create token mappings
-            word_to_id = {word: ifori
-            word in enumerate(vocab)}  # Prepare training data
+            word_to_id = {
+    
+}  # Prepare training data
             input_text = training_data["conversations"][0]["input"]
             output_text = training_data["conversations"][0]["response"]
 
             input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in input_text.split()]
-            )
-            output_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()]
-            )
+        )
+        output_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in output_text.split()]
+    )
 
-            # Initialize model and optimizer
-            model = SimpleChatModel(_vocab_size=len(vocab))
-            key = jax.random.PRNGKey(0)
-            params = model.init(key, input_tokens)
+    # Initialize model and optimizer
+    model = SimpleChatModel(_vocab_size=len(vocab))
+    key = jax.random.PRNGKey(0)
+    params = model.init(key, input_tokens)
 
-            optimizer = optax.adam(learning_rate=0.01)
-            state = train_state.TrainState.create(apply_fn=model.apply, params=params["params"], tx=optimizer)
+    optimizer = optax.adam(learning_rate=0.01)
+    state = train_state.TrainState.create(apply_fn=model.apply, params=params["params"], tx=optimizer)
 
-            # Training loop
-            print("\nTraining simple chain-of-thought model...")
+    # Training loop
+    print("\nTraining simple chain-of-thought model...")
 
-            @jax.jit
-            def train_step(self statexy) -> None: def loss_fn):
+    @jax.jit
+    def train_step(self statexy): def loss_fn):
                 (params) -> None: logit
                 s = model.apply({"params": params }x): return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None
                 : ]
                 labels=y[0: 1]).mean()
                 loss, grads = jax.value_and_grad(loss_fn)(state.params)
-                return state.apply_gradients(grads=grads), loss
+    return state.apply_gradients(grads=grads), loss
 
-                for epoch in range(100):
+    for epoch in range(100):
                     state, loss = train_step(state, input_tokens, output_tokens)
 
                     if(epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}

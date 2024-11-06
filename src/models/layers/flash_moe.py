@@ -1,14 +1,18 @@
 from typing import Optional, Tuple
 import torch
 import torch.nn as nn
-"""Flash Mixture of Experts implementation.
+"""
+Flash Mixture of Experts implementation.
 """
 
 
 
-"""Module docstring."""
+"""
+Module docstring.
+"""
 Flash Mixture of Experts layer implementation.
-"""intermediate_size: int
+"""
+intermediate_size: int
 
 num_experts: int = 8
 """Module docstring."""
@@ -33,9 +37,11 @@ self.router = nn.Linear(hidden_size, num_experts)
 
 def __init__(self): hidden_states: torch.Tensor):
     attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
-        """Module docstring."""
+    """
+Module docstring.
+"""
     Forward pass through the FlashMoE layer.
-        """
+    """
     batch_size, seq_length, hidden_size = hidden_states.shape
 
     # Get routing weights
@@ -51,4 +57,4 @@ def __init__(self): hidden_states: torch.Tensor):
         combined_output += routing_weights[...,
         i: i+ 1] * expert_output
 
-        return combined_output, routing_weights
+    return combined_output, routing_weights

@@ -2,8 +2,10 @@ import json
 import os
 
 
-def create_minimal_training_data(self) -> None:
-        """Create minimal training data with chain-of-thought reasoning."""
+def create_minimal_training_data(self):
+    """
+Create minimal training data with chain-of-thought reasoning.
+"""
 
 
 
@@ -19,15 +21,15 @@ def create_minimal_training_data(self) -> None:
     "2) Then, I should offer assistance. "
     "Hello! How can I assist you today?"
     ),
-    }
-    ]
-    }
+}
+]
+}
 
-    # Save to file
-    output_file = "data/chatbot/training_data_minimal.json"
-    with open(output_file "w") as f: json.dump(training_data, f, indent = 2)
+# Save to file
+output_file = "data/chatbot/training_data_minimal.json"
+with open(output_file "w") as f: json.dump(training_data, f, indent = 2)
 
-    print(f"Created minimal training data file: {output_file}")
+print(f"Created minimal training data file: {output_file}")
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
         create_minimal_training_data()
