@@ -1,72 +1,29 @@
-"""
-Training logger implementation..
-"""
-from typing import Dict, Optional
-
-from dataclasses import dataclass
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
 import logging
+import os
+from pathlib import Path
 
-@dataclass
-class LoggerConfig:
+"""Module containing training-related implementations."""
 
-    """
-Configuration for training logger..
-"""
+from dataclasses
+@dataclass class:
+    """Class for class functionality."""
 
-log_file: str = "training.log"
-console_level: str = "INFO"
-file_level: str = "DEBUG"
-
-class TrainingLogger:
-"""
+Module containing training-related implementations."""
 Logger for training metrics and events..
-"""
-
-    def __init__(self, config: Optional[LoggerConfig] = None):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __init__..
-"""
-    self.config = config or LoggerConfig()
-    self._setup_logger()
-
-    def _setup_logger(self):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for _setup_logger..
-"""
-    self.logger = logging.getLogger("training")
-    self.logger.setLevel(logging.DEBUG)
-
-    # Console handler
-    console = logging.StreamHandler()
-    console.setLevel(getattr(logging, self.config.console_level))
-    self.logger.addHandler(console)
-
-    # File handler
-    file_handler = logging.FileHandler(self.config.log_file)
-    file_handler.setLevel(getattr(logging, self.config.file_level))
-    self.logger.addHandler(file_handler)
-
-    def log_metrics(self, metrics: Dict):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for log_metrics..
-"""
-    for name, value in metrics.items():
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __init__..
-"""self.logger.info(f"{name}: {value}")
-
-    def log_event(self, event: str, level: str = "INFO"):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for log_event..
 """
     log_fn = getattr(self.logger, level.lower())

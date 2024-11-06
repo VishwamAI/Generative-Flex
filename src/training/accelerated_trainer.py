@@ -1,73 +1,30 @@
-"""
-Accelerated trainer module..
-"""
-from typing import Dict, List, Optional, Tuple
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
-
-from accelerate import Accelerator
-from dataclasses import dataclass
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
 import logging
+import os
+from pathlib import Path
 
+"""Module containing training-related implementations."""
+
+
+from accelerate from dataclasses
 
 logger = logging.getLogger(__name__)
-@dataclass
-class AcceleratedTrainerConfig:
+@dataclass class:
+    """Class for class functionality."""
 
-    """
-Configuration for accelerated trainer..
-"""
-
-learning_rate: float = 5e-5
-weight_decay: float = 0.01
-num_train_epochs: int = 3
-max_steps: int = -1
-gradient_accumulation_steps: int = 1
-max_grad_norm: float = 1.0
-mixed_precision: Optional[str] = "fp16"
-device: str = "cuda"
-
-class AcceleratedTrainer:
-"""
+Module containing training-related implementations."""
 Accelerated trainer class..
-"""
-
-    def __init__(self, config: Optional[AcceleratedTrainerConfig] = None):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __init__..
-"""
-    self.config = config or AcceleratedTrainerConfig()
-    self.accelerator = Accelerator(
-    mixed_precision=self.config.mixed_precision, gradient_accumulation_steps=self.config.gradient_accumulation_steps
-    )
-    self.setup_training()
-
-    def setup_training(self):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for setup_training..
-"""
-    logger.info("Setting up accelerated training...")
-    self.optimizer = None
-    self.scheduler = None
-    self.model = None
-    self.train_dataloader = None
-
-    def train(self):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for train..
-"""
-    if not all([
-    self.model, self.optimizer, self.train_dataloader
-    ]):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __init__..
 """raise ValueError(
     "Model, optimizer, and dataloader must be set before training"

@@ -1,37 +1,24 @@
-"""
-MMMU training script..
-"""
-from src.models.reasoning.math_head import MathHead
-from typing import Dict, List, Optional, Tuple
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
-
-from dataclasses import dataclass
-from src.data.mmmu_dataloader import MMUDataLoader
-from src.training.trainer import Trainer, TrainerConfig
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
 import logging
+import os
+from pathlib import Path
 
+"""Module containing training-related implementations."""
+from src.models.reasoning.math_head
+
+from dataclasses from src.data.mmmu_dataloader from src.training.trainer
 
 logger = logging.getLogger(__name__)
-@dataclass
-class MMUTrainingConfig:
+@dataclass class:
+    """Class for class functionality."""
 
-    """
-Class for MMUTrainingConfig..
-""""""
+Module containing training-related implementations."""
 Configuration for MMMU training..
-"""
-
-batch_size: int = 32
-max_length: int = 512
-num_workers: int = 4
-math_head_dropout: float = 0.1
-math_head_hidden_size: int = 768
-
-def main():
-
-
-    """
+"""Module containing training-related implementations."""
 Method for main..
 """
 # Setup logging

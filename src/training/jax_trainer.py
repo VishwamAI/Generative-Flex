@@ -1,28 +1,30 @@
-"""JAX-based trainer implementation."""
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
 
-import jax
-import jax.numpy as jnp
+"""Module containing training-related implementations."""
 
-from dataclasses import dataclass, field
-from src.models import BaseModel
-from src.utils.training_utils import TrainingUtils
 
-@dataclass
-class JaxTrainer:
-    """JAX trainer for model optimization."""
+from dataclasses from src.models from src.utils.training_utils
+@dataclass class:
+    """Class for class functionality."""
 
 JAX-based trainer implementation."""
 JAX-based model trainer..
-"""JAX-based trainer implementation."""
+"""Module containing training-related implementations."""
 Method for __init__..
-"""JAX-based trainer implementation."""
+"""Module containing training-related implementations."""
 Method for train_step..
-"""JAX-based trainer implementation."""
+"""Module containing training-related implementations."""
 Method for loss_fn..
-"""JAX-based trainer implementation."""
+"""Module containing training-related implementations."""
 Method for train..
-"""JAX-based trainer implementation."""
+"""Module containing training-related implementations."""
 Method for train..
 """
     for batch in self.utils.get_batches(

@@ -1,61 +1,29 @@
-"""
-Timeout utilities for training..
-"""
-from typing import Optional, Callable
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
 
-from dataclasses import dataclass
-import signal
+"""Module containing training-related implementations."""
 
-@dataclass
-class TimeoutConfig:
+from dataclasses
+@dataclass class:
+    """Class for class functionality."""
 
-    """
-Configuration for timeout handler..
-"""
-
-timeout_seconds: int = 3600
-callback: Optional[Callable] = None
-
-class TimeoutError:
-"""
+Module containing training-related implementations."""
 Exception raised when timeout occurs..
-"""
-pass
-
-class TimeoutHandler:
-"""
+"""Module containing training-related implementations."""
 Handler for training timeouts..
-"""
-
-    def __init__(self, config: Optional[TimeoutConfig] = None):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __init__..
-"""
-    self.config = config or TimeoutConfig()
-
-    def __enter__(self):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __enter__..
-"""
-        def handler(signum, frame):
-
-            """
+"""Module containing training-related implementations."""
 Method for handler..
-"""if self.config.callback:
-        self.config.callback()
-        raise TimeoutError("Training timed out")
-
-        signal.signal(signal.SIGALRM, handler)
-        signal.alarm(self.config.timeout_seconds)
-
-    def __exit__(self, type, value, traceback):
-
-
-        """
+"""Module containing training-related implementations."""
 Method for __exit__..
 """
     signal.alarm(0)
