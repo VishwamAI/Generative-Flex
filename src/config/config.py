@@ -1,7 +1,7 @@
 """Centralized configuration management for Generative-Flex."""
 
 from typing import Optional, Union, List, Dict, Any, Tuple
-from dataclasses import dataclass, field
+from dataclass es import dataclass, field
 from pathlib import Path
 import json
 
@@ -65,7 +65,7 @@ class Config:
     model: ModelConfig = field(def ault_factory=ModelConfig)
     training: TrainingConfig = field(def ault_factory=TrainingConfig)
 
-    @classmethod
+    @class method
     def from_json(cls, path: str) -> "Config":
         """Load configuration from JSON file."""
         with open(path, "r") as f:
@@ -86,7 +86,7 @@ class Config:
         with open(path, "w") as f:
             json.dump(config_dict, f, indent=2)
 
-    @classmethod
+    @class method
     def get_config(
         cls, model_type: str = "language", config_path: Optional[str] = None
     ) -> "Config":

@@ -4,12 +4,12 @@ import json
 import os
 
 
-class TrainingLogger: def __init__(self log_dir: str = "logs") -> None: self.log_dir = log_dir
+class TrainingLogger: def __init__(self, log_dir: str = "logs") -> None: self.log_dir = log_dir
 os.makedirs(log_dir, exist_ok=True)
 self.log_file = os.path.join( log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
 )
 self.metrics_history = []
-    def log_metrics(self metrics: Dict[strAny]step: int)  ) -> None) -> None:
+    def log_metrics(self, metrics: Dict[strAny]step: int)  ) -> None) -> None:
     """Log metrics for a training step"""
 
 

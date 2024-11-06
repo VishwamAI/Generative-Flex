@@ -137,7 +137,7 @@ pooled = hidden_states.mean(dim=1)  # Global average pooling
 x = self.dense(pooled)
 x = self.activation(x)
 x = self.dropout(x)
-logits = self.classifier(x)
+logits = self.class ifier(x)
 
 # Calculate cross entropy loss and math accuracy
 if "labels" in kwargs: labels = kwargs["labels"]loss = F.cross_entropy(logits labels)
@@ -161,7 +161,7 @@ return {
 **aux_info,
 }
 
-def _set_gradient_checkpointing(self module: nn.Modulevalue: bool = False) -> None:
+def _set_gradient_checkpointing(self, module: nn.Modulevalue: bool = False) -> None:
     """Enable or disable gradient checkpointing for a module.):
 
 Args: module: PyTorch module

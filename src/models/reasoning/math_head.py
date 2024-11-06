@@ -42,10 +42,10 @@ expert_outputs += expert_weight * expert_output
 operation_logits = self.operation_detector(hidden_states)
 operation_probs = torch.softmax(operation_logits, dim=-1)
 
-# Final classification
+# Final class ification
 pooled_output = torch.mean(expert_outputs, dim=1)
 pooled_output = self.dropout(pooled_output)
-logits = self.classifier(pooled_output)
+logits = self.class ifier(pooled_output)
 
 # Calculate auxiliary losses
 expert_weights = torch.stack(expert_weights, dim=1)

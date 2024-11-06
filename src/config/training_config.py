@@ -1,7 +1,7 @@
 """Training configuration for Generative-Flex."""
 
 from typing import List, Optional, Dict, Union, Any
-from dataclasses import dataclass, field
+from dataclass es import dataclass, field
 
 
 @dataclass

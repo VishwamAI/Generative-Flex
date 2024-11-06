@@ -9,7 +9,7 @@ import logging
 import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
-from dataclasses import dataclass, field
+from dataclass es import dataclass, field
 
 
 class TrainerState(train_state.TrainState):
