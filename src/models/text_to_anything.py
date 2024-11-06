@@ -18,5 +18,4 @@ image_size: Tuple[int
 supported_modalities: List[str] = field(default_factory=list)
 
 # Constitutional principles
-constitutional_principles: List[str] = field(default_factory=lambda: [        "Do not generate harmful content"
-"Respect privacy and intellectual property",    "Be transparent about AI-generated content",])
+constitutional_principles: List[str] = field(default_factory=list)

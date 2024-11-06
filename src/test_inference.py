@@ -7,10 +7,9 @@ hidden_size: int = 64
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_list = json.load(f)    # Create word to id mapping
 word_to_id = {word: idxforidx
-word in enumerate(vocab_list)}    # Create id to word mapping
+word in enumerate(vocab_list)}  # Create id to word mapping
 id_to_word = {idx: wordforidx
-word in enumerate(vocab_list)}
-# Initialize model and create initial parameters
+word in enumerate(vocab_list)}  # Initialize model and create initial parameters
 model = SimpleGreetingModel(_vocab_size=len(word_to_id))
 key = jax.random.PRNGKey(0)
 dummy_input = jnp.zeros((1), dtype=jnp.int32)

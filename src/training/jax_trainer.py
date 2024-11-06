@@ -17,14 +17,14 @@ class TrainerState(train_state.TrainState):
     """Custom train state with loss scaling for mixed precision training.
     """
 
-    loss_scale: Optional[jnp.ndarray] =  None
+    loss_scale: Optional[jnp.ndarray] = None
 
 
 class FlaxTrainer:
     """Advanced trainer implementation using JAX/Flax.
     """
 
-    def __init__(self, model: Optional[nn.Module] =  None, config: Dict[str, Any] = None, output_dir: Optional[str] =  None) -> None:
+    def __init__(self, model: Optional[nn.Module]=None, config: Dict[str, Any]=None, output_dir: Optional[str]=None) -> None:
         """Initialize trainer."""
         self.model = model
         self.config = config or {}
@@ -40,8 +40,8 @@ class FlaxTrainer:
         # Create learning rate schedule
         warmup_fn = optax.linear_schedule(
             init_value=0.0,
-            end_value=self.config["training"]["learning_rate"],
-            transition_steps=self.config["training"]["warmup_steps"],
+    end_value=self.config["training"]["learning_rate"],
+    transition_steps=self.config["training"]["warmup_steps"],
         )
 
         decay_fn = optax.cosine_decay_schedule(
@@ -52,16 +52,16 @@ class FlaxTrainer:
 
         schedule_fn = optax.join_schedules(
             schedules=[warmup_fn, decay_fn],
-            boundaries=[self.config["training"]["warmup_steps"]],
-        )
+    boundaries=[self.config["training"]["warmup_steps"]],
+    )
 
         # Create optimizer
         optimizer = optax.chain(
             optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),
             optax.adamw(
                 learning_rate=schedule_fn,
-                weight_decay=self.config["training"]["weight_decay"],
-            ),
+    weight_decay=self.config["training"]["weight_decay"],
+    ),
         )
 
         # Initialize state
@@ -71,8 +71,8 @@ class FlaxTrainer:
 
         self.state = TrainerState.create(
             apply_fn=self.model.apply,
-            params=variables["params"],
-            tx=optimizer,
+    params=variables["params"],
+    tx=optimizer,
             loss_scale=(
                 jnp.array(2.0**15)
                 if self.config["training"].get("fp16", False)
@@ -80,7 +80,7 @@ class FlaxTrainer:
             ),
         )
 
-    def train(self, train_dataset: Any, num_epochs: int, eval_dataset: Optional[Any] =  None, eval_steps: int =  1000, save_steps: int =  1000, log_steps: int =  100) -> None:
+    def train(self, train_dataset: Any, num_epochs: int, eval_dataset: Optional[Any]=None, eval_steps: int=1000, save_steps: int=1000, log_steps: int=100) -> None:
         """Training loop with evaluation."""
         train_step_jit = jax.jit(self.train_step)
 
@@ -95,13 +95,13 @@ class FlaxTrainer:
                 num_steps += 1
 
                 # Logging
-                if batch_idx % log_steps == 0: avg_loss =  epoch_loss / num_steps
+                if batch_idx % log_steps == 0: avg_loss = epoch_loss / num_steps
                     logging.info(
                         f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}"
                     )
 
                 # Evaluation
-                if eval_dataset is not None and batch_idx % eval_steps == 0: eval_loss =  self.evaluate(eval_dataset)
+                if eval_dataset is not None and batch_idx % eval_steps == 0: eval_loss = self.evaluate(eval_dataset)
                     logging.info(f"Eval Loss: {eval_loss:.4f}")
 
                 # Save checkpoint
@@ -133,11 +133,9 @@ class FlaxTrainer:
         checkpoint_dir = Path(path)
 
         # Load model parameters
-        with open(checkpoint_dir / "model.msgpack", "rb") as f:
-            self.state = flax.serialization.from_bytes(self.state, f.read())
+        with open(checkpoint_dir / "model.msgpack", "rb") as f: self.state = flax.serialization.from_bytes(self.state, f.read())
 
         # Load config
-        with open(checkpoint_dir / "config.msgpack", "rb") as f:
-            self.config = flax.serialization.from_bytes(self.config, f.read())
+        with open(checkpoint_dir / "config.msgpack", "rb") as f: self.config = flax.serialization.from_bytes(self.config, f.read())
 
         logging.info(f"Checkpoint loaded from {checkpoint_dir}")

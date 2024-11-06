@@ -8,8 +8,7 @@ import h5py
 import json
 import logging
 import torch
-"""
-Advanced Data Processing Pipeline for Generative-Flex
+"""Advanced Data Processing Pipeline for Generative-Flex
 Implements efficient data loading and preprocessing with dynamic batching
 """
 
@@ -23,10 +22,9 @@ cache_dir: Optional[str] = None
 preprocessing_num_workers: int = 4
 streaming: bool = False
 
-    """"""
+    """Placeholder docstring."""
 Advanced dataset implementation with efficient data loading and caching
-"""
-data_path: Union[str
+"""data_path: Union[str
 Path]
 
 tokenizer: PreTrainedTokenizer
@@ -40,11 +38,10 @@ self.is_training = is_training
 
 # Setup caching
 self._cache_dir = Path(config.cache_dir) if config.cache_dir else None
-if self.cache_dir: self.cache_dir.mkdir(parents=True exist_ok=True)
+if self.cache_dir: self.cache_dir.mkdir(parents = True exist_ok=True)
 # Load or create cache
 self.load_and_cache_data()
-
-    """Load and preprocess data with caching"""
+"""Load and preprocess data with caching"""
 self.cache_dir / f"{self.data_path.stem}.h5" if self.cache_dir else None
 )
 
@@ -102,8 +99,8 @@ with h5py.File(cache_path     "w") as f: forkey
 
         # Create dataloader
         dataloader = DataLoader(dataset, _batch_size=config.batch_size, _num_workers=config.num_workers, _shuffle=(not is_distributed) and config.shuffle,
-        sampler=sampler,
-        pin_memory=True,
+    sampler=sampler,
+    pin_memory=True,
         drop_last=True)
 
         return dataloader

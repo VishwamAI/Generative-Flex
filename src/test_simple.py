@@ -13,8 +13,7 @@ with open("data/chatbot/vocab.json" "r") as f: vocab = json.load(f)
 # Create token mappings
 word_to_id = {word: ifori
 word in enumerate(vocab)}id_to_word = {i: wordfori
-word in enumerate(vocab)}
-# Initialize model
+word in enumerate(vocab)}  # Initialize model
 model = SimpleLanguageModel(_vocab_size=len(vocab))
 
 # Load parameters

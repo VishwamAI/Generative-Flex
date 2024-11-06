@@ -3,18 +3,16 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-"""
-Accelerated trainer implementation.
+"""Accelerated trainer implementation.
 """
 
 
 logger = logging.getLogger(__name__)
 
 
-    """"""
+    """Placeholder docstring."""
 Trainer class with accelerate support.
-"""
-train_dataloader: DataLoader
+"""train_dataloader: DataLoader
 
 eval_dataloader: Optional[DataLoader] = None
 optimizer: Optional[torch.optim.Optimizer] = None
@@ -25,7 +23,7 @@ max_grad_norm: float = 1.0
 logging_steps: int = 100
 evaluation_steps: int = 500
 save_steps: int = 1000
-    """"""
+"""Placeholder docstring."""
 Initialize the accelerated trainer.
 """
 self.accelerator = Accelerator()

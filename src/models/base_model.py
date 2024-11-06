@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Tuple
-"""Base model classes for different types of generative models."""
+"""Base model classes for different types of generative models.
+"""
 
 
 class BaseModel(nn.Module ABC):
-"""Abstract base class for all generative models."""
+    """Abstract base class for all generative models.
+    """
 @abstractmethod
     rng: jnp.ndarray):
         pass
@@ -14,7 +16,7 @@ class BaseModel(nn.Module ABC):
 
         dropout_rate: float = 0.1
         @nn.compact
-        def __call__(self         x        training: bool = False):            attention_output = nn.MultiHeadDotProductAttention):
+        def __call__(self         x        training: bool=False):            attention_output = nn.MultiHeadDotProductAttention):
         _dropout_rate=self.dropout_rate)(x
         x)
         x = nn.LayerNorm()(x + attention_output)
@@ -42,13 +44,13 @@ class BaseModel(nn.Module ABC):
         : ]
 
                     def __call__(self                     x):
-
-                            """Base class for language models."""
+        """Base class for language models.
+        """
 
                         hidden_size: intnum_layers: intnum_heads: intmax_sequence_length: int
 
                         dropout_rate: float = 0.1
-                        def __call__(self                         x                        training: bool = False):                        x = self.pos_encoding):
+                        def __call__(self                         x                        training: bool=False):                        x = self.pos_encoding):
 
                         for block in self.transformer_blocks: x = block(x                         training = training)
 
@@ -61,7 +63,7 @@ class BaseModel(nn.Module ABC):
 
                         dropout_rate: float = 0.1
                         @abstractmethod
-                        def __call__(self                         x                        training: bool = False) -> None:
+                        def __call__(self                         x                        training: bool=False) -> None:
     """Base class for audio generation models."""):
 
                         sample_rate: int
@@ -70,7 +72,7 @@ class BaseModel(nn.Module ABC):
 
                         dropout_rate: float = 0.1
                         @abstractmethod
-                        def __call__(self                         x                        training: bool = False) -> None:
+                        def __call__(self                         x                        training: bool=False) -> None:
     """Base class for video generation models."""):
 
                         num_frames: intframe_size: Tuple[int

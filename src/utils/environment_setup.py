@@ -5,7 +5,8 @@ import jax
 import os
 import sys
 import time
-"""Environment setup and verification script."""
+"""Environment setup and verification script.
+"""
 
 
 
@@ -21,7 +22,8 @@ def test_flax_installation() -> Dict[str
 class SimpleModel(nn.Module):
 @nn.compact
     def main(self) -> None:
-    """Run all environment tests."""            try: # Test JAX):
+        """Run all environment tests.
+        """            try: # Test JAX):
         jax_results = test_jax_installation()
         print("JAX test completed successfully")
         # Test Flax

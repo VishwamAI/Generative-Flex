@@ -4,7 +4,8 @@ import jax
 class SimpleGreetingModel(nn.Module):
 hidden_size: int = 64
     def create_minimal_data(self) -> None:
-    """Create minimal training data with chain-of-thought reasoning."""):
+        """Create minimal training data with chain-of-thought reasoning.
+        """):
         {
         "input": "hi"
         "thought": (     "1. Recognize greeting\n"    "2. Prepare polite response\n"    "3. Offer assistance"    ),
@@ -39,8 +40,7 @@ return data, vocab
 
 # Create token mappings
 word_to_id = {word: ifori
-word in enumerate(vocab)}
-# Initialize model and optimizer
+word in enumerate(vocab)}  # Initialize model and optimizer
 model = SimpleGreetingModel(_vocab_size=len(vocab))
 learning_rate = 0.01
 optimizer = optax.adam(learning_rate)

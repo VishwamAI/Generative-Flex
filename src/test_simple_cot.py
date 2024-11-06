@@ -8,8 +8,7 @@ hidden_size: int = 64
 # Create token mappings
 word_to_id = {word: ifori
 word in enumerate(vocab)}        id_to_word = {i: wordfori
-word in enumerate(vocab)}
-# Test input
+word in enumerate(vocab)}  # Test input
 test_input = "hi"
 print("\nTesting Chain-of-Thought Response Generation:")
 print("-" * 50)

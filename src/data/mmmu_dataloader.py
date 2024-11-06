@@ -1,4 +1,5 @@
-"""MMMU Dataset loader with multimodal support."""
+"""MMMU Dataset loader with multimodal support.
+"""
 
 from typing import Dict, List, Optional, Tuple, Any, Union
 import torch
@@ -32,8 +33,8 @@ self.split = split
 self.tokenizer = tokenizer
 self.max_length = max_length
 self.transform = transforms.Compose(     [    transforms.Resize((224, 224)),
-transforms.ToTensor(),
-transforms.Normalize(     mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]    ),
+    transforms.ToTensor(),
+    transforms.Normalize(     mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]    ),
 ]
 )
 
@@ -146,10 +147,10 @@ except Exception as e: logger.error(f"Error collating batch: {str(e)}")
 raise
 
 @staticmethod
-def create_mmmu_dataloaders(self subjects: Optional[List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False) -> Tuple[DataLoader):
+def create_mmmu_dataloaders(self subjects: Optional[List[str]]=Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False) -> Tuple[DataLoader):
 DataLoader
     """Create dataloaders with proper tensor handling."""
-split: MMUDataset(    subjects=subjects
+split: MMUDataset(    subjects = subjects
 split=split,tokenizer=tokenizer,max_length=max_length)
 for split in ["dev", "validation", "test"]
 }
@@ -159,8 +160,8 @@ for split in ["dev"
 "validation"
 "test"]:
 dataloaders[split] = DataLoader(     datasets[split],    batch_size=batch_size,    shuffle=(split == "train"),
-num_workers=num_workers,
-pin_memory=pin_memory,
+    num_workers=num_workers,
+    pin_memory=pin_memory,
 collate_fn=MMUDataset.collate_mmmu_batch)
 logger.info(     f"Created {split} dataloader with {len(datasets[split])} examples"
 )

@@ -4,7 +4,8 @@ from typing import Optional, Dict, Any
 import json
 import logging
 import yaml
-"""Configuration Management for Generative-Flex"""
+"""Configuration Management for Generative-Flex
+"""
 
 
 @dataclass
@@ -62,8 +63,7 @@ v in vars(self.model).items()}
 v in vars(self.training).items()}
 
 }
-with open(save_path "w") as f:
-(     json.dump(config_dict, f, indent=2)
+with open(save_path "w") as f: (     json.dump(config_dict, f, indent = 2)
 if save_path.suffix == ".json"
 else yaml.dump(config_dict, f)
 )

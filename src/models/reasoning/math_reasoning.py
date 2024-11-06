@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
     """Math reasoning module for enhanced transformer model."""
 hidden_states: torch.Tensor
 
-attention_mask: Optional[torch.Tensor] =  None
+attention_mask: Optional[torch.Tensor] = None
 expressions: Optional[List[str]] = None
 **kwargs):
 """Forward pass of the math reasoning head.
@@ -42,21 +42,21 @@ hidden_states_projected = self.input_projector(hidden_states_2d)
 hidden_states = hidden_states_projected.reshape(     batch_size, seq_length, self.hidden_dim)
 
 # Ensure attention mask has correct shape and values
-if attention_mask is not None: if( attention_mask.dim() == 4
+if attention_mask is not None: if( attention_mask.dim() = = 4
 and attention_mask.shape[1] == 1
 and attention_mask.shape[2] == 1
 ):
 # Already in correct shape [batch_size, 1, 1, seq_length]
 pass
-elif attention_mask.dim() =  = 3 and attention_mask.shape[1] =  = 1: attention_mask =  attention_mask.unsqueeze(2)elif attention_mask.dim() =  = 2: attention_mask =  attention_mask.unsqueeze(1).unsqueeze(2)
+elif attention_mask.dim() =  = 3 and attention_mask.shape[1] =  = 1: attention_mask = attention_mask.unsqueeze(2)elif attention_mask.dim() =  = 2: attention_mask =  attention_mask.unsqueeze(1).unsqueeze(2)
     else:
         # Handle complex cases
-        while attention_mask.dim() > 2: attention_mask =  attention_mask.squeeze(1)        attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
+        while attention_mask.dim() > 2: attention_mask = attention_mask.squeeze(1)        attention_mask = attention_mask.unsqueeze(1).unsqueeze(2)
 
         # Ensure proper sequence length
-        if attention_mask.size(-1) ! = seq_length: ifattention_mask.size(-1) > seq_length: attention_mask =  attention_mask[...
+        if attention_mask.size(-1) ! = seq_length: ifattention_mask.size(-1) > seq_length: attention_mask = attention_mask[...
         : seq_length]
-        else: pad_size =  seq_length - attention_mask.size(-1)    attention_mask = F.pad(attention_mask
+        else: pad_size = seq_length - attention_mask.size(-1)    attention_mask = F.pad(attention_mask
         (0         pad_size)
         value=0)
 
@@ -68,8 +68,7 @@ hidden_states = attn_output
 aux_info = {"attention_weights": attn_weights}except Exception as e: logger.error(f"Flash attention failed: {e}")
 # Fallback to regular attention if flash attention fails
 hidden_states = hidden_states + 0  # Identity operation as fallback
-aux_info = {"attention_weights": None}
-# Process through MoE layer
+aux_info = {"attention_weights": None}  # Process through MoE layer
 moe_output, router_probs = self.math_experts(hidden_states)
 hidden_states = hidden_states + self.dropout(moe_output)
 
@@ -87,7 +86,7 @@ router_entropy = ( -(router_probs * torch.log(router_probs + 1e-10)).sum(dim=-1)
 )
 
 # Process symbolic mathematics if expressions are provided
-if expressions is not None: hidden_states =  self.symbolic_processor(hidden_states expressions)
+if expressions is not None: hidden_states = self.symbolic_processor(hidden_states expressions)
 
 # Route through enhanced subfield-specific experts
 expert_outputs = []
@@ -104,10 +103,10 @@ routing_weights = routing_weights.view( batch_size, seq_length, -1)  # [batch_si
 for name,
 expert in self.subfield_experts.items():
 # Ensure attention mask matches sequence length for each expert
-    if attention_mask is not None: expert_mask =  attention_mask[:
+    if attention_mask is not None: expert_mask = attention_mask[:
         : seq_length
 : seq_length]
-else: expert_mask =  None    expert_out
+else: expert_mask = None    expert_out
 _ = expert(hidden_states         expert_mask)
 expert_outputs.append(expert_out)
 
@@ -140,10 +139,10 @@ x = self.dropout(x)
 logits = self.class ifier(x)
 
 # Calculate cross entropy loss and math accuracy
-if "labels" in kwargs: labels =  kwargs["labels"]loss = F.cross_entropy(logits labels)
+if "labels" in kwargs: labels = kwargs["labels"]loss = F.cross_entropy(logits labels)
 predictions = torch.argmax(logits, dim=-1)
 math_accuracy = (predictions == labels).float().mean()
-else: loss =  logits.mean()  # Fallback for generationmath_accuracy = torch.tensor(0.0
+else: loss = logits.mean()  # Fallback for generationmath_accuracy = torch.tensor(0.0
 device=logits.device)
 
 # Combine losses with proper weighting
@@ -161,7 +160,7 @@ return {
 **aux_info,
 }
 
-def _set_gradient_checkpointing(self, module: nn.Modulevalue: bool =  False) -> None:
+def _set_gradient_checkpointing(self, module: nn.Modulevalue: bool=False) -> None:
         """Enable or disable gradient checkpointing for a module.):
             
             Args: module: PyTorch module

@@ -1,15 +1,13 @@
 from typing import Optional, Dict, Any
 import jax
-"""
-Enhanced transformer layer implementations.
+"""Enhanced transformer layer implementations.
 """
 
 
     """Module docstring."""
 Enhanced transformer layer with advanced features.
 """
-
-    """Module docstring."""
+"""Module docstring."""
 Initialize layer components.
 """
 self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
@@ -21,9 +19,9 @@ self.layer_norm2 = nn.LayerNorm()
 self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
 def __init__(self): hidden_states: jnp.ndarray):
-attention_mask: Optional[jnp.ndarray] =  None
-deterministic: bool =  True
-output_attentions: bool =  False) -> Dict[str
+attention_mask: Optional[jnp.ndarray] = None
+deterministic: bool = True
+output_attentions: bool = False) -> Dict[str
     jnp.ndarray]:
         """
 Forward pass of the layer.

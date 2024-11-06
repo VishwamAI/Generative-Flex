@@ -1,9 +1,11 @@
 import jax
-"""Test script to verify GPU configuration and CUDA support in JAX."""
+"""Test script to verify GPU configuration and CUDA support in JAX.
+"""
 
 
 def test_gpu_configuration(self) -> None:
-    """Test GPU configuration and perform basic operations."""    print):
+        """Test GPU configuration and perform basic operations.
+        """    print):
 print("-" * 50)
 
 # Check available devices

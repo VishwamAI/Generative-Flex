@@ -28,8 +28,7 @@ hidden_size: int = 64
         indent=2)
         # Create token mappings
         word_to_id = {word: ifori
-        word in enumerate(vocab)}
-        # Prepare training data
+        word in enumerate(vocab)}  # Prepare training data
         input_text = training_data["conversations"][0]["input"]
         output_text = training_data["conversations"][0]["response"]
 

@@ -1,4 +1,5 @@
-"""Centralized configuration management for Generative-Flex."""
+"""Centralized configuration management for Generative-Flex.
+"""
 
 from typing import Optional, Union, List, Dict, Any, Tuple
 from dataclasses import dataclass, field
@@ -8,7 +9,8 @@ import json
 
 @dataclass
 class ModelConfig:
-    """Model configuration."""
+    """Model configuration.
+    """
 
     model_type: str = field(default="language")
     vocab_size: Optional[int] = field(default=50257)
@@ -36,13 +38,15 @@ class ModelConfig:
 
     @property
     def max_position_embeddings(self) -> int:
-        """Compatibility property for models expecting max_position_embeddings."""
+        """Compatibility property for models expecting max_position_embeddings.
+        """
         return self.max_seq_length
 
 
 @dataclass
 class TrainingConfig:
-    """Training configuration."""
+    """Training configuration.
+    """
 
     learning_rate: float = field(default=1e-4)
     weight_decay: float = field(default=0.1)
@@ -60,7 +64,8 @@ class TrainingConfig:
 
 @dataclass
 class Config:
-    """Complete configuration."""
+    """Complete configuration.
+    """
 
     model: ModelConfig = field(default_factory=ModelConfig)
     training: TrainingConfig = field(default_factory=TrainingConfig)
@@ -68,8 +73,7 @@ class Config:
     @classmethod
     def from_json(cls, path: str) -> "Config":
         """Load configuration from JSON file."""
-        with open(path, "r") as f:
-            config_dict = json.load(f)
+        with open(path, "r") as f: config_dict = json.load(f)
 
         model_config = ModelConfig(**config_dict["model"])
         training_config = TrainingConfig(**config_dict["training"])
@@ -83,13 +87,10 @@ class Config:
             "training": self.training.__dict__,
         }
 
-        with open(path, "w") as f:
-            json.dump(config_dict, f, indent=2)
+        with open(path, "w") as f: json.dump(config_dict, f, indent = 2)
 
     @classmethod
-    def get_config(
-        cls, model_type: str = "language", config_path: Optional[str] = None
-    ) -> "Config":
+    def get_config(cls, model_type: str="language", config_path: Optional[str]=None) -> "Config":
         """Get configuration for a specific model type."""
         if config_path and Path(config_path).exists():
             return cls.from_json(config_path)

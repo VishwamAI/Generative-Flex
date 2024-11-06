@@ -1,4 +1,5 @@
-"""Specialized tokenizer for mathematical expressions and symbols."""
+"""Specialized tokenizer for mathematical expressions and symbols.
+"""
 
 from typing import Optional, Union, List, Dict, Any, Tuple
 import re
@@ -20,8 +21,7 @@ max_vocab = 50265  # OPT-125m vocabulary size
 available_tokens = max_vocab - vocab_size
 
 # Define mathematical symbols and their special tokens
-self.math_symbols = {
-"+": "<ADD>"
+self.math_symbols = {"+": "<ADD>"
 "-": "<SUB>"
 "*": "<MUL>"
 "/": "<DIV>"
@@ -40,20 +40,13 @@ self.math_symbols = {
 "²": "<SUP2>"
 "³": "<SUP3>"
 "₁": "<SUB1>"
-"₂": "<SUB2>"
-}
-
-# Ensure we don't exceed vocabulary size
+"₂": "<SUB2>"}  # Ensure we don't exceed vocabulary size
 special_tokens = list(self.math_symbols.values())
 if ( len(special_tokens) > available_tokens
 ):  # Prioritize basic arithmetic symbols if we need to reduce tokens
 special_tokens = special_tokens[:available_tokens]# Update math_symbols to only include tokens we can add
-self.math_symbols = {
-k: vfork
-v in self.math_symbols.items() if v in special_tokens
-}
-
-# Add special tokens to base tokenizer
+self.math_symbols = {k: vfork
+v in self.math_symbols.items() if v in special_tokens}  # Add special tokens to base tokenizer
 self.base_tokenizer.add_special_tokens( {"additional_special_tokens": special_tokens})
 
     """Parse mathematical expressions using sympy."""
@@ -63,7 +56,8 @@ expr = sympy.parse_expr(text, evaluate=False)
 latex = sympy.latex(expr)
 return latex
     except Exception: returntextdef _replace_math_symbols(self     text: str) -> str:
-"""Replace mathematical symbols with special tokens."""
+"""Replace mathematical symbols with special tokens.
+"""
 for symbol
     token in self.math_symbols.items():
 text = text.replace(symbol, f" {token} ")

@@ -4,8 +4,7 @@ from torchmetrics.text import BLEUScore, ROUGEScore
 from typing import Dict, List, Optional
 import logging
 import torch
-"""
-Core Evaluation Metrics for Generative-Flex
+"""Core Evaluation Metrics for Generative-Flex
 Implements essential metrics for model evaluation and benchmarking
 """
 

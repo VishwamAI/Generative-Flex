@@ -15,8 +15,7 @@ output_text = [conv["response"] for conv in data["conversations"]]
 all_text = input_text + output_text
 vocab = create_vocab(all_text)
 word_to_id = {word: ifori
-word in enumerate(vocab)}
-# Save vocabulary
+word in enumerate(vocab)}  # Save vocabulary
 with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocab
 f
 indent=2)

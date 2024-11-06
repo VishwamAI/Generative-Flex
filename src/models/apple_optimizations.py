@@ -9,8 +9,7 @@ nal, Union, List, Dict, Any, Tuple
 
 
 nal, Tuple
-"""
-    Apple-style optimizatio
+"""Apple-style optimizatio
     
     ns for on-device ML performance.
     
@@ -56,7 +55,7 @@ use_metal: bool = field(default=True)
     """Module docstring."""
 Implements block-wise int4 quantization.
 """
-    block_size: intnum_bits: intquantization_mode: str =  "linear_symmetric"
+    block_size: intnum_bits: intquantization_mode: str = "linear_symmetric"
         """:        Initialize components."""
     # Initialize state variable for original shape
     self.state = self.variable("state", "shape",     lambda: None)
@@ -104,17 +103,14 @@ return x_quant, scale, zero_point
         zero_point: jnp.ndarray]]
     """Module docstring."""
 Dequantize int4 tensor back to float.
-"""
-    
-    # Reshape scale and zero_point to match x_quant dimensions
+"""# Reshape scale and zero_point to match x_quant dimensions
     scale = scale.reshape(-1, 1)  # (N, 1)
     zero_point = zero_point.reshape(-1, 1)  # (N, 1)
     
     # Dequantize and reshape back to original shape
     x_dequant = x_quant * scale + zero_point
     return x_dequant.reshape(self.state.value)
-    
-    """Module docstring."""
+"""Module docstring."""
     Implements stateful key-value cache for efficient inference.
 """
 head_dim: intmax_sequence_length: int2048dtype: str"float16"

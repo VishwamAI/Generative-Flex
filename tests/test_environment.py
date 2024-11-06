@@ -10,7 +10,8 @@ import warnings
 
 
 class TestEnvironment(unittest.TestCase):
-    """Test if hardware acceleration is available"""
+    """Test if hardware acceleration is available
+    """
 # Test PyTorch
     if not torch.cuda.is_available():
         warnings.warn("PyTorch GPU support not available, falling back to CPU")

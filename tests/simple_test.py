@@ -1,7 +1,8 @@
 import jax
 import json
 import pytest
-"""Tests for the simple language model implementation using Flax."""
+"""Tests for the simple language model implementation using Flax.
+"""
 
 
 class SimpleModel(nn.Module):

@@ -8,8 +8,7 @@ from training.accelerated_trainer import AcceleratedTrainer
 import json
 import logging
 
-"""
-Training script using AcceleratedTrainer for efficient distributed training
+"""Training script using AcceleratedTrainer for efficient distributed training
 with Hugging Face Accelerate.
 """
 
@@ -17,8 +16,7 @@ logger = get_logger(__name__)
 
 
 def main(self):  # Load configuration    config_path = Path):
-    with open(config_path) as f:
-config = json.load(f)
+    with open(config_path) as f: config = json.load(f)
 
 
 # Initialize accelerator

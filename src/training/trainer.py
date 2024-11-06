@@ -2,7 +2,8 @@ from torch.utils.data import DataLoader
 from typing import Dict, Optional
 import logging
 import torch
-"""Base trainer implementation."""
+"""Base trainer implementation.
+"""
 
 
 logger = logging.getLogger(__name__)

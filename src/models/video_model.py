@@ -32,11 +32,11 @@ head_dim: intmlp_dim: intchannels: int = 3
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
-    def __call__(self inputstraining: bool = True) -> None: b):
+    def __call__(self inputstraining: bool=True) -> None: b):
         t
         h
         w
-        c = inputs.shape: assert(t == self.video_size[0]            and h == self.video_size[1] and w == self.video_size[2]and c == self.channels)
+        c = inputs.shape: assert(t = = self.video_size[0]            and h == self.video_size[1] and w == self.video_size[2]and c == self.channels)
 
 x = VideoEmbedding(_hidden_dim=self.hidden_dim, _patch_size=self.patch_size, _dtype=self.dtype)(inputs)
 

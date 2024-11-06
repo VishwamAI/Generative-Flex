@@ -11,8 +11,7 @@ print("-" * 40)
 vocab = load_vocab()
 word_to_id = {word: ifori
 word in enumerate(vocab)}id_to_word = {i: wordfori
-word in enumerate(vocab)}
-# Initialize model
+word in enumerate(vocab)}  # Initialize model
 model = SimpleLanguageModel(_vocab_size=len(vocab))
 
 # Load parameters

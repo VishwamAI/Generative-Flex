@@ -1,7 +1,8 @@
 from src.models.transformer import TransformerBlock
 from typing import Any
 import jax
-"""Language model implementation using JAX and Flax."""
+"""Language model implementation using JAX and Flax.
+"""
 
 
     """Sinusoidal positional encoding."""
