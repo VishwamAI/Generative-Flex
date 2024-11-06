@@ -1,3 +1,12 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+
 from typing import List, Optional, Tuple
 
 import torch
@@ -5,52 +14,14 @@ import torch.nn as nn
 
 from dataclasses import dataclass
 
-@dataclass
-class VideoModelConfig:
+@dataclass class:
+    """Class implementing class functionality."""
 
-    """
-Configuration for VideoModel.
-"""
-
-input_channels: int = 3
-hidden_dim: int = 64
-num_frames: int = 16
-frame_size: Tuple[int, int] = (224, 224)
-
-class VideoModel:
-"""
+Module for implementing specific functionality."""
 Video processing model.
-"""
-
-    def __init__(self, config: Optional[VideoModelConfig] = None):
-
-
-        """
+"""Module for implementing specific functionality."""
 Method for __init__..
-"""super().__init__()
-    self.config = config or VideoModelConfig()
-
-    self.spatial_encoder = nn.Sequential(
-    nn.Conv3d(
-    self.config.input_channels,
-    self.config.hidden_dim,
-    kernel_size=(1, 3, 3),
-    padding=(0, 1, 1)
-    ),
-    nn.ReLU(),
-    nn.BatchNorm3d(self.config.hidden_dim)
-    )
-
-    self.temporal_encoder = nn.LSTM(
-    input_size=self.config.hidden_dim,
-    hidden_size=self.config.hidden_dim,
-    batch_first=True
-    )
-
-    def forward(self, x: torch.Tensor):
-
-
-        """
+"""Module for implementing specific functionality."""
 Method for forward..
 """
     # Spatial encoding

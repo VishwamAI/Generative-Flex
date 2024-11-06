@@ -7,24 +7,31 @@ import logging
 import os
 from pathlib import Path
 
-"""Module containing training-related implementations."""
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data from tqdm import tqdm import DataLoader
+import logging
+from pathlib import Path import os
+
+"""Module for implementing specific functionality."""
 
 
-from dataclasses from src.models from src.utils.training_utils
+from dataclasses import src.models from src.utils.training_utils
 @dataclass class:
-    """Class for class functionality."""
+    """Class implementing class functionality."""
 
 JAX-based trainer implementation."""
 JAX-based model trainer..
-"""Module containing training-related implementations."""
+"""Module for implementing specific functionality."""
 Method for __init__..
-"""Module containing training-related implementations."""
+"""Module for implementing specific functionality."""
 Method for train_step..
-"""Module containing training-related implementations."""
+"""Module for implementing specific functionality."""
 Method for loss_fn..
-"""Module containing training-related implementations."""
+"""Module for implementing specific functionality."""
 Method for train..
-"""Module containing training-related implementations."""
+"""Module for implementing specific functionality."""
 Method for train..
 """
     for batch in self.utils.get_batches(

@@ -1,40 +1,27 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+
 import torch
 import torch.nn as nn
 
-from src.config.config import ModelConfig
-from src.models.transformer import TransformerModel
+from src.config.config from src.models.transformer import TransformerModel import ModelConfig
 import unittest
 
 
 class TestModels:
+    """Class implementing TestModels functionality."""
 
-
-    """
-Class for TestModels..
-"""def setUp(self):
-    """
+Module for implementing specific functionality."""
 Method for setUp..
-"""
-    self.config = ModelConfig(
-    hidden_size=64,
-    num_attention_heads=4,
-    num_hidden_layers=2,
-    intermediate_size=128
-    )
-
-    def test_transformer_model(self):
-
-
-        """
+"""Module for implementing specific functionality."""
 Method for test_transformer_model..
-"""
-    model = TransformerModel(self.config)
-    self.assertIsInstance(model, nn.Module)
-
-    def test_model_forward(self):
-
-
-        """
+"""Module for implementing specific functionality."""
 Method for test_model_forward..
 """
     model = TransformerModel(self.config)
