@@ -1,16 +1,17 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
+import unittest
 import torch
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
-from pathlib import Path
-from dataclasses import dataclass, field
 
-from typing import List, Dict
 
-import jax
-from src.models.language_model import LanguageModel
+class TestTestChatbot(unittest.TestCase):
+    """Test suite for module functionality."""
 
-'Tests for the language model chatbot implementation.'
+    def setUp(self):
+        """Set up test fixtures."""
+        pass
+
+
+
+
+if __name__ == "__main__":
+    unittest.main()

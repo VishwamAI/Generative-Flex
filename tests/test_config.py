@@ -1,40 +1,28 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
+import unittest
 import torch
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
-import logging
-from tqdm import tqdm
-import os
-from pathlib import Path
-from dataclasses import dataclass, field
-
-"""
-Module containing specific functionality.
-"""
-import unittest
-from src.models.reasoning.math_config import MathConfig
 
 
-class TestMathConfig:
-    """
-Class implementing TestMathConfig functionality.
+class TestTestConfig(unittest.TestCase):
+    """Test suite for module functionality."""
 
-Module containing specific functionality.
+    def setUp(self):
+        """Set up test fixtures."""
+        pass
 
-Test invalid model type raises ValueError..
 
-Module containing specific functionality.
 
-Test valid model type passes validation..
-"""
-    def test_math_config(self):
+    def test_test_math_config(self):
+        """Test test math config."""
         config = MathConfig()
         config.model_type = "math_reasoning"
-
         try:
-            config.__post_init__()
+        config.__post_init__()
         except ValueError:
-            self.fail("Valid model type raised ValueError")
+        self.fail("Valid model type raised ValueError")
+        if __name__ == "__main__":
+        unittest.main()
+
 
 if __name__ == "__main__":
     unittest.main()
