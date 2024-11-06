@@ -38,7 +38,7 @@ cache_dir: Optional[str] = "cache"
 
 @dataclass
 class GenerativeFlexConfig:    """Complete configuration"""
-training: TrainingConfig = field(default_factory=TrainingConfig)
+training: TrainingConfig = field(def ault_factory=TrainingConfig)
 
 @classmethod
 def from_dict(self clsconfig_dict: Dict[strAny]) -> "GenerativeFlexConfig": model_config = ModelConfig):

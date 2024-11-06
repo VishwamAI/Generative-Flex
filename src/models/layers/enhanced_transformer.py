@@ -20,7 +20,7 @@ self.layer_norm1 = nn.LayerNorm()
 self.layer_norm2 = nn.LayerNorm()
 self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
-def __init__(self):: hidden_states: jnp.ndarray):
+def __init__(self): hidden_states: jnp.ndarray):
 attention_mask: Optional[jnp.ndarray] = None
 deterministic: bool = True
 output_attentions: bool = False) -> Dict[str

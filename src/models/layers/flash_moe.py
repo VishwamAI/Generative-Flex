@@ -34,7 +34,7 @@ for _ in range(num_experts)
 # Router network
 self.router = nn.Linear(hidden_size, num_experts)
 
-def __init__(self):: hidden_states: torch.Tensor):
+def __init__(self): hidden_states: torch.Tensor):
 attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 torch.Tensor]: """
 Forward pass through the FlashMoE layer.

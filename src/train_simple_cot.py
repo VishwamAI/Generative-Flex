@@ -12,7 +12,7 @@ os.makedirs("data/chatbot", exist_ok=True)
 
 class SimpleChatModel(nn.Module):
 hidden_size: int = 64
-    def main(self)::        # Create and save training data        training_data = create_training_data):
+    def main(self):        # Create and save training data        training_data = create_training_data):
         "w") as f: json.dump(training_data
         f
         indent=2)
@@ -50,7 +50,7 @@ state = train_state.TrainState.create(apply_fn=model.apply, params=params["param
 print("\nTraining simple chain-of-thought model...")
 
 @jax.jit
-def train_step(self statexy) -> None: defloss_fn):
+def train_step(self statexy) -> None: def loss_fn):
 (params) -> None: logit
 s = model.apply({"params": params }x): return optax.softmax_cross_entropy_with_integer_labels(logits=logits[None
 : ]

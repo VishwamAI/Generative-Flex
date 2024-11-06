@@ -1,4 +1,4 @@
-from configs.model_config import GenerativeFlexConfig, create_default_config
+from configs.model_config import GenerativeFlexConfig, create_def ault_config
 from data.dataloader import AdvancedDataset, DataConfig, create_dataloader
 from model import AdvancedGenerativeFlexModel
 from pathlib import Path
@@ -15,20 +15,20 @@ Demonstrates how to achieve maximum benchmark performance
 
 
 # Import our implemented components
-def main(self)::
+def main(self):
 """Main training function"""
 
 # Parse arguments and load config
 parser = argparse.ArgumentParser(description="Train Generative-Flex Model")
-parser.add_argument("--config", type=str, default="configs/default_config.json")
-parser.add_argument("--local_rank", type=int, default=-1)
+parser.add_argument("--config", type=str, def ault="configs/def ault_config.json")
+parser.add_argument("--local_rank", type=int, def ault=-1)
 args = parser.parse_args()
 
 # Load configuration and setup
 config = (
 GenerativeFlexConfig.from_file(args.config)
 if Path(args.config).exists()
-else create_default_config()
+else create_def ault_config()
 )
 
 

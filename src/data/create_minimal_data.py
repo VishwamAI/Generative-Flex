@@ -2,7 +2,7 @@ import json
 import os
 
 
-def create_minimal_training_data(self)::
+def create_minimal_training_data(self):
 """Create minimal training data with chain-of-thought reasoning."""
 
 

@@ -22,7 +22,7 @@ module.weight.data.fill_(1.0)
 
 self.apply(_init_math_weights)
 
-    def __init__(self):: input_ids: Optional[torch.Tensor] = None):
+    def __init__(self): input_ids: Optional[torch.Tensor] = None):
         attention_mask: Optional[torch.Tensor] = None
         position_ids: Optional[torch.Tensor] = None
         image_features: Optional[torch.Tensor] = None
@@ -95,7 +95,7 @@ hidden_states = self.layer_norm(hidden_states)
 }
 return hidden_states
 
-        def __init__(self):: input_ids: torch.Tensor):
+        def __init__(self): input_ids: torch.Tensor):
             attention_mask: Optional[torch.Tensor] = None
             **kwargs) -> Dict[str
             Any]:

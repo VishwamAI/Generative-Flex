@@ -63,7 +63,7 @@ pe = pe.at[:
 
                 return logits
 
-                    def generate(self):: rng: Any):
+                    def generate(self): rng: Any):
                         prompt: jnp.ndarray
 
                 max_length: int

@@ -67,7 +67,7 @@ x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], sel
 
 return x
 
-    def generate(self):: rng: Any):
+    def generate(self): rng: Any):
         condition: Optional[jnp.ndarray] = None
         batch_size: int = 1):                    """
         Generate images.

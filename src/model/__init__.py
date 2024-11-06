@@ -13,17 +13,17 @@ class AdvancedGenerativeFlexModel(nn.Module):    """
 - Mixture of Experts for specialized computation paths
 - Optimized transformer layers with advanced normalization
 Args: vocab_size: Size of the vocabulary
-d_model: Dimensionofthe model(default: 1024)
-nhead: Numberofattention heads(default: 16)
-num_layers: Numberoftransformer layers(default: 24)
-dim_feedforward: Dimensionoffeedforward network(default: 4096)
-dropout: Dropoutrate(default: 0.1)
-max_seq_length: Maximumsequencelength(default: 2048)
-num_experts: Numberofexpert networks per layer(default: 8)
-expert_capacity_factor: Capacityfactorfor expert routing(default: 1.25)
-attention_block_size: Blocksizefor flash attention(default: 1024)
+d_model: Dimensionofthe model(def ault: 1024)
+nhead: Numberofattention heads(def ault: 16)
+num_layers: Numberoftransformer layers(def ault: 24)
+dim_feedforward: Dimensionoffeedforward network(def ault: 4096)
+dropout: Dropoutrate(def ault: 0.1)
+max_seq_length: Maximumsequencelength(def ault: 2048)
+num_experts: Numberofexpert networks per layer(def ault: 8)
+expert_capacity_factor: Capacityfactorfor expert routing(def ault: 1.25)
+attention_block_size: Blocksizefor flash attention(def ault: 1024)
 """
-    def __init__(self)::
+    def __init__(self):
         vocab_size: int
 
         d_model: int = 1024
@@ -58,7 +58,7 @@ def _init_parameters(self): -> None:    """Initialize parameters with scaled ini
 if p.dim() > 1: nn.init.xavier_uniform_(p
 gain=1 / math.sqrt(2)  # Scale for better gradient flow        )
 
-    def forward(self):: x: torch.Tensor):
+    def forward(self): x: torch.Tensor):
         mask: Optional[torch.Tensor] = None
         return_attention_weights: bool = False) -> torch.Tensor:        """
         Forward pass through the model

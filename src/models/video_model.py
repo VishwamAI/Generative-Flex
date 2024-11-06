@@ -57,7 +57,7 @@ x = nn.Dense(self.patch_size[0] * self.patch_size[1] * self.patch_size[2] * self
 x = jnp.reshape(x, (b, t, h, w, c))
 return x
 
-    def generate(self):: rng: Any):
+    def generate(self): rng: Any):
         prompt: Optional[jnp.ndarray] = None
         num_frames: int = 16):                    """Generate video frames."""
         if prompt is None: rng

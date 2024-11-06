@@ -5,7 +5,7 @@ import time
 """Test script to verify JAX device configuration and GPU support."""
 
 
-def test_device_configuration(self)::
+def test_device_configuration(self):
 """Test and print device configuration information."""
 
 print("\nDevice Configuration Test")
@@ -15,7 +15,7 @@ print("-" * 50)
 print(f"JAX version: {jax.__version__}")
 print(f"Available devices: {jax.devices()}")
 
-# Test basic JAX operation on default device
+# Test basic JAX operation on def ault device
 x = jnp.ones((1000, 1000))
 y = jnp.ones((1000, 1000))
 

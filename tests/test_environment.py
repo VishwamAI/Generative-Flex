@@ -38,7 +38,7 @@ class TestEnvironment(unittest.TestCase):
         y = tf.matmul(x, x, transpose_b=True)
         self.assertEqual(y.shape, (5, 5), "TensorFlow basic operations failed")
 
-        def test_model_loading(self)::    ) -> None: """Test if environment can load and initialize models"""    try):
+        def test_model_loading(self):    ) -> None: """Test if environment can load and initialize models"""    try):
         # Use a small, publicly available model
         model_name = "gpt2"  # Using smallest GPT-2 for testing
         tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -56,7 +56,7 @@ class TestEnvironment(unittest.TestCase):
                 self.assertTrue(len(generated_text) > 0, "Model failed to generate text")
                 except Exception as e: self.fail(f"Failed to load model components: {str(e)}")
 
-                def test_mmlu_dataset_access(self)::    ) -> None: """Test if environment can access MMLU dataset"""    try):
+                def test_mmlu_dataset_access(self):    ) -> None: """Test if environment can access MMLU dataset"""    try):
                 # Try loading high school mathematics dataset
                 dataset_hs = load_dataset("cais/mmlu"                     "high_school_mathematics"                    split="validation[: 10]")        self.assertIsNotNone(dataset_hs
                 "Failed to load high school mathematics dataset")
@@ -75,14 +75,14 @@ class TestEnvironment(unittest.TestCase):
                 for key in required_keys: self.assertIn(key                 example                f"Dataset missing required key: {key}")
                 except Exception as e: self.fail(f"Failed to access MMLU dataset: {str(e)}")
 
-                def test_flax_functionality(self)::    ) -> None: """Test Flax functionality"""    try):
+                def test_flax_functionality(self):    ) -> None: """Test Flax functionality"""    try):
                 # Test basic Flax operations
                 key = jax.random.PRNGKey(0)
                 x = jax.random.normal(key, (5, 5))
                 self.assertEqual(x.shape, (5, 5), "Flax array operations not working")
 
                 # Test basic model operations
-                    def model_fn(self)::        ) -> None: returnjnp.mean):
+                    def model_fn(self):        ) -> None: returnjnp.mean):
                         grad_fn = jax.grad(model_fn)
                         grad = grad_fn(x)
                         self.assertEqual(grad.shape, (5, 5), "Flax gradient computation not working"

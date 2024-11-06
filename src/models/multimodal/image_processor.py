@@ -38,7 +38,7 @@ nn.AdaptiveAvgPool2d((1, 1)))
 
 self.dropout = nn.Dropout(dropout_rate)
 
-def forward(self):: images: torch.Tensor):
+def forward(self): images: torch.Tensor):
 attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
 Optional[torch.Tensor]]: """
 Process images for multimodal input.

@@ -23,20 +23,20 @@ Implements: - Block-wise int4 quantization
 @dataclass
 class OptimizationConfig: """Configuration for Apple-style optimizations.
 # Model architecture
-hidden_size: int = field(default=512)num_attention_heads: int = field(default=8)head_dim: int = field(default=64)dropout_rate: float = field(default=0.1)layer_norm_eps: float = field(default=1e-12)vocab_size: int = field(default=32000)
+hidden_size: int = field(def ault=512)num_attention_heads: int = field(def ault=8)head_dim: int = field(def ault=64)dropout_rate: float = field(def ault=0.1)layer_norm_eps: float = field(def ault=1e-12)vocab_size: int = field(def ault=32000)
 # Sequence parameters
-min_sequence_length: int = field(default=1)max_sequence_length: int = field(default=2048)default_sequence_length: int = field(default=512)
+min_sequence_length: int = field(def ault=1)max_sequence_length: int = field(def ault=2048)def ault_sequence_length: int = field(def ault=512)
 # Quantization parameters
-use_int4_quantization: bool = field(default=True)block_size: int = field(default=32)num_bits: int = field(default=4)quantization_mode: str = field(default="linear_symmetric")...]] = field(default=None)
+use_int4_quantization: bool = field(def ault=True)block_size: int = field(def ault=32)num_bits: int = field(def ault=4)quantization_mode: str = field(def ault="linear_symmetric")...]] = field(def ault=None)
 
 # Cache parameters
-use_kv_cache: bool = field(default=True)num_key_value_heads: int = field(default=8)max_cache_size: int = field(default=2048)cache_dtype: str = field(default="float16")cache_size_multiplier: float = field(default=1.5)
+use_kv_cache: bool = field(def ault=True)num_key_value_heads: int = field(def ault=8)max_cache_size: int = field(def ault=2048)cache_dtype: str = field(def ault="float16")cache_size_multiplier: float = field(def ault=1.5)
 # Privacy parameters
-use_privacy_preserving: bool = field(default=True)noise_multiplier: float = field(default=0.1)l2_norm_clip: float = field(default=1.0)
+use_privacy_preserving: bool = field(def ault=True)noise_multiplier: float = field(def ault=0.1)l2_norm_clip: float = field(def ault=1.0)
 # Training parameters
-deterministic: bool = field(default=False)
+deterministic: bool = field(def ault=False)
 # Hardware settings
-use_metal: bool = field(default=True)use_neural_engine: bool = field(default=True)
+use_metal: bool = field(def ault=True)use_neural_engine: bool = field(def ault=True)
 class BlockWiseQuantization(nn.Module):    """
 Implements block-wise int4 quantization.
 """
@@ -149,7 +149,7 @@ cache_size_multiplier: float1.5
         class PrivacyPreservingLayer(nn.Module):                                """
         Implements differential privacy for model outputs.
         """
-        hidden_size: intdefself(self) -> None: """
+        hidden_size: intdef self(self) -> None: """
         Initialize privacy components.
         """): self.dropout  nn.Dropout(rate=0.1)  # Default dropout rate
         self.dense = nn.Dense(self.hidden_size)
@@ -227,7 +227,7 @@ cache_size_multiplier: float1.5
         class AppleOptimizedTransformer(nn.Module):                                                """
         Transformer with Apple-style optimizations.
         """
-        config: OptimizationConfigdefself(self) -> None: """
+        config: OptimizationConfigdef self(self) -> None: """
         Initialize components.
                         """):
         # Core components

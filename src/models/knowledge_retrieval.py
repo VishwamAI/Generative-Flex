@@ -88,7 +88,7 @@ Integrates retrieved knowledge with input embeddings.
             }
 
 @nn.compact
-        def __init__(self):: inputs: Union[Dict[str):
+        def __init__(self): inputs: Union[Dict[str):
             jnp.ndarray]
 jnp.ndarray]
 modality: str = "text"

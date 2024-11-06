@@ -12,4 +12,4 @@ class TrainingConfig:
 # Training optimization parameters
 # Generation configuration
 generation_config: Optional[Dict[str
-Any]] = field(default=None)
+Any]] = field(def ault=None)

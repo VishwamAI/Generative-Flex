@@ -37,7 +37,7 @@ self._step = 0
 self._epoch = 0
 self._best_eval_loss = float("inf")
 
-def train(self)::            ) -> None: None:                """Train the model."""):
+def train(self):            ) -> None: None:                """Train the model."""):
 self.model.train()
 total_loss = 0
 
@@ -58,7 +58,7 @@ for step
 
         if self._step % self.evaluation_steps == 0: self.evaluate()
         if self._step % self.save_steps == 0: self.save_checkpoint()
-        def training_step(self)::                            batch                            ) -> None: torch.Tensor):
+        def training_step(self):                            batch                            ) -> None: torch.Tensor):
         """Perform a single training step."""
         outputs = self.model(**batch)
         loss = outputs.loss
@@ -67,7 +67,7 @@ for step
         self.max_grad_norm)
         return loss
 
-            def evaluate(self):: ) -> None: Dict[str):
+            def evaluate(self): ) -> None: Dict[str):
         float]: """Evaluate the model."""
         if self.eval_dataloader is None: return{}
 
@@ -88,7 +88,7 @@ for step
 
                 return metrics
 
-                def save_checkpoint(self)::                                        is_best: bool = False                                        ) -> None: None):
+                def save_checkpoint(self):                                        is_best: bool = False                                        ) -> None: None):
                 """Save a model checkpoint."""
                 checkpoint_name = f"checkpoint-{{self._step}}"
                 if is_best: checkpoint_name = "best_model"
@@ -100,7 +100,7 @@ for step
                 f"{{self.output_dir}}/{{checkpoint_name}}.pt")
                 logger.info(f"Saved checkpoint: {{checkpoint_name}}")
 
-                    def log_metrics(self):: metrics: Dict[str):
+                    def log_metrics(self): metrics: Dict[str):
                 float]
                         ) -> None: None:
                 """Log training metrics."""

@@ -18,7 +18,7 @@ self.pooler = nn.Dense(features=self.embed_dim, kernel_init=jax.nn.initializers.
 
 self.classifier = nn.Dense(features=self.config["num_labels"], kernel_init=jax.nn.initializers.normal(0.02))
 
-def __init__(self):: input_ids: jnp.ndarray):
+def __init__(self): input_ids: jnp.ndarray):
 attention_mask: Optional[jnp.ndarray] = None
 token_type_ids: Optional[jnp.ndarray] = None
 position_ids: Optional[jnp.ndarray] = None

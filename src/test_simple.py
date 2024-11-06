@@ -2,7 +2,7 @@ import jax
 import json
 
 
-# Simple model definition
+# Simple model def inition
 class SimpleLanguageModel(nn.Module): vocab_size: int
 hidden_size: int = 64
 print("\nTesting model responses:")

@@ -20,7 +20,7 @@ Any]: """Test Flax installation with a simple model."""    print("\n=== Testing 
 # Create a small test model
 class SimpleModel(nn.Module):
 @nn.compact
-    def main(self)::            """Run all environment tests."""            try: # Test JAX):
+    def main(self):            """Run all environment tests."""            try: # Test JAX):
         jax_results = test_jax_installation()
         print("JAX test completed successfully")
         # Test Flax

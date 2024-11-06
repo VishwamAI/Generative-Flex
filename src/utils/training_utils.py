@@ -12,7 +12,7 @@ class TrainState(train_state.TrainState):    """Extended TrainState for training
 Any]] = None    metrics: Dict[str
 Any] = None
 
-def restore_checkpoint(self):: state: TrainState):
+def restore_checkpoint(self): state: TrainState):
 checkpoint_dir: str) -> Tuple[TrainState
     int]:
 """Restores model from checkpoint."""
@@ -21,7 +21,7 @@ step = 0 if restored_state is None else restored_state.step
 return restored_state or state, step
 
 
-    def compute_metrics(self):: labels: jnp.ndarray            ) -> Dict[str):
+    def compute_metrics(self): labels: jnp.ndarray            ) -> Dict[str):
     float]:
         """Computes metrics for evaluation."""
         loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
@@ -32,7 +32,7 @@ return restored_state or state, step
         "accuracy": accuracy}
 
 
-        def create_input_pipeline(self):: data_dir: str):
+        def create_input_pipeline(self): data_dir: str):
         batch_size: int
 
         train_split: float = 0.8

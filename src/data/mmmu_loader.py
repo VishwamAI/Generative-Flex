@@ -76,7 +76,7 @@ image = tf.cast(image, tf.float32) / 255.0
 return torch.from_numpy(image.numpy())
 
 
-def create_dataloader(self):: dataset: MMMUDataset):
+def create_dataloader(self): dataset: MMMUDataset):
 batch_size: int = 32
 shuffle: bool = True
 num_workers: int = 4) -> DataLoader: """Create a DataLoader for the dataset.

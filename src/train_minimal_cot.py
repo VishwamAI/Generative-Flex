@@ -3,7 +3,7 @@ import jax
 
 class SimpleGreetingModel(nn.Module):
 hidden_size: int = 64
-    def create_minimal_data(self)::        """Create minimal training data with chain-of-thought reasoning."""):
+    def create_minimal_data(self):        """Create minimal training data with chain-of-thought reasoning."""):
         {
         "input": "hi"
         "thought": (     "1. Recognize greeting\n"    "2. Prepare polite response\n"    "3. Offer assistance"    ),
@@ -33,7 +33,7 @@ indent=2)
 return data, vocab
 
 
-    def main(self):: print):
+    def main(self): print):
         vocab = create_minimal_data()
 
 # Create token mappings

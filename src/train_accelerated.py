@@ -16,7 +16,7 @@ with Hugging Face Accelerate.
 logger = get_logger(__name__)
 
 
-def main(self)::  # Load configuration    config_path = Path):
+def main(self):  # Load configuration    config_path = Path):
     with open(config_path) as f:
 config = json.load(f)
 

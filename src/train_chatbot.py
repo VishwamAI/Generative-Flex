@@ -5,7 +5,7 @@ import jax
 
 
 
-def load_data(self):: file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str):
+def load_data(self): file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str):
 str]]: with open(file_path "r") as f: data = json.load(f)        return data["conversations"]
 
 
@@ -19,7 +19,7 @@ int]: vocab = {"<pad>": 0
 if token not in vocab: vocab[token] = len(vocab)                return vocab
 
 
-        def main(self)::                # Load and prepare data                conversations = load_data):
+        def main(self):                # Load and prepare data                conversations = load_data):
             vocab = create_vocabulary(conversations)
 
 # Model parameters

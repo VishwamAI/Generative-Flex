@@ -2,14 +2,14 @@ import jax
 """Test script to verify GPU configuration and CUDA support in JAX."""
 
 
-def test_gpu_configuration(self)::    """Test GPU configuration and perform basic operations."""    print):
+def test_gpu_configuration(self):    """Test GPU configuration and perform basic operations."""    print):
 print("-" * 50)
 
 # Check available devices
 print("Available devices:")
 print(f"All devices: {jax.devices()}")
 print(f"GPU devices: {jax.devices('gpu')}")
-print(f"Default backend: {jax.default_backend()}")
+print(f"Default backend: {jax.def ault_backend()}")
 
 # Perform computation test
 print("\nComputation Test:")

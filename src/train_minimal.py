@@ -3,7 +3,7 @@ import jax
 import optax
 
 
-# Simple model definition(same as in test_minimal.py)
+# Simple model def inition(same as in test_minimal.py)
 class SimpleLanguageModel(nn.Module):
 hidden_size: int = 64
 "r") as f: data = json.load(f)
