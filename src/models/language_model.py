@@ -5,15 +5,16 @@ import jax
 Language model implementation using JAX and Flax.
 """
 
-
 """
 Sinusoidal positional encoding.
 """
+
 dtype: Any = jnp.float32
 @nn.compact
 """
 Add positional encodings to the input embeddings.
 """
+
 seq_length = inputs.shape[1]
 dim = inputs.shape[-1]
 
@@ -27,8 +28,7 @@ pe = pe.at[:
         :
             0: :2].set(jnp.sin(position * div_term))        pe = pe.at[:
                 :
-                    1: :2].set(jnp.cos(position * div_term))
-                    # Broadcast positional encoding to batch dimension
+                    1: :2].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
                     pe = jnp.broadcast_to(pe, (batch_size, seq_length, dim))
 
                 return inputs + pe
@@ -42,6 +42,7 @@ Autoregressive language model based on the transformer architecture.
                 dtype: Any = jnp.float32
                 @nn.compact
                 """
+
 Forward pass of the language model.
 """
                 x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
@@ -58,27 +59,32 @@ Forward pass of the language model.
                 causal_mask = causal_mask[None
                 None
                 :
-                        : ]            causal_mask = jnp.broadcast_to(causal_mask                     (batch_size                     self.num_heads                    seq_len                    seq_len)
-                )
+                        : ]            causal_mask = jnp.broadcast_to(causal_mask                     (batch_size                     self.num_heads                    seq_len                    seq_len))
 
                 # Apply transformer blocks
                 for _ in range(self.num_layers):
-                            x = TransformerBlock(_num_heads=self.num_heads, _head_dim=self.head_dim, _mlp_dim=self.mlp_dim, _dropout_rate=self.dropout_rate, _dtype=self.dtype)(x, mask=causal_mask, deterministic=not training)
+                            x = TransformerBlock(
+    _num_heads=self.num_heads,
+    _head_dim=self.head_dim,
+    _mlp_dim=self.mlp_dim,
+    _dropout_rate=self.dropout_rate,
+    _dtype=self.dtype
+)(x, mask=causal_mask, deterministic=not training)
 
                             # Final layer normalization
                             x = nn.LayerNorm(_dtype=self.dtype)(x)
 
                             # Output projection
-                            logits = nn.Dense(self.vocab_size, _dtype=self.dtype, kernel_init=nn.initializers.normal(stddev=0.02))(x)
+                            logits = nn.Dense(
+    self.vocab_size,
+    _dtype=self.dtype,
+    kernel_init=nn.initializers.normal(stddev=0.02)
+)(x)
 
                 return logits
 
-                def generate(self): rng: Any):
-    prompt: jnp.ndarray
+                def generate(self): rng: Any):prompt: jnp.ndarraymax_length: int"""
 
-    max_length: int
-
-    """
 Generate text autoregressively.
 """
     generated = prompt

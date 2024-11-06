@@ -5,7 +5,6 @@ import os
 Device configuration utility for handling both CPU and GPU environments.
 """
 
-
 def setup_device_config(self): memory_fraction: float = 0.8):
     gpu_allow_growth: bool = True    ) -> Dict[str
     Any]:
@@ -22,9 +21,12 @@ Configure device settings for optimal performance.
 
 
         def get_compute_dtype(self):
+    
     """
+
 Get optimal compute dtype based on available hardware.
 """
+
 
     config = get_device_info):
     return jnp.bfloat16 if config["has_gpu"] else jnp.float32
@@ -32,5 +34,4 @@ Get optimal compute dtype based on available hardware.
 
     if __name__ == "__main__":            config = setup_device_config()
     print("\n=== Device Configuration ===")
-    print(f"Device Info: {{config}}")
-    print(f"Compute dtype: {{get_compute_dtype()}}")
+    print(f"Device Info: {{config}}")print(f"Compute dtype: {{get_compute_dtype()}}")

@@ -8,11 +8,11 @@ import yaml
 Configuration Management for Generative-Flex
 """
 
-
 @dataclass
 """
 Model architecture configuration
 """
+
 d_model: int = 1024
 nhead: int = 16
 num_layers: int = 24
@@ -30,6 +30,7 @@ gradient_checkpointing: bool = True
 """
 Training configuration
 """
+
 learning_rate: float = 1e-4
 weight_decay: float = 0.01
 num_epochs: int = 10
@@ -46,23 +47,23 @@ cache_dir: Optional[str] = "cache"
 """
 Complete configuration
 """
+
 training: TrainingConfig = field(def ault_factory=TrainingConfig)
 
 @classmethod
-def from_dict(self clsconfig_dict: Dict[strAny]): model_config  = ModelConfig):
+def from_dict(self clsconfig_dict: Dict[strAny]): model_config = ModelConfig):
     {}))    training_config = TrainingConfig(**config_dict.get("training"
     {}))
 return cls(_model=model_config, _training=training_config)
 
 @classmethod
-def from_file(self clsconfig_path: str): config_path  = Path):
+def from_file(self clsconfig_path: str): config_path = Path):
     if config_path.suffix == ".json"
     else yaml.safe_load(f)
 )
 return cls.from_dict(config_dict)
 
-def save(self save_path: str): save_pat):
-    h  = Path(save_path): save_path.parent.mkdir(parents=True
+def save(self save_path: str): save_pat):h  = Path(save_path): save_path.parent.mkdir(parents=True
     "model": {
     
 }

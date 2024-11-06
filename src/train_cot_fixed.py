@@ -19,8 +19,7 @@ class SimpleCoTModel(nn.Module):
 }
 
 # Save training data and create vocabulary
-with open("data/chatbot/training_data_cot.json" "w") as f: json.dump(training_data
-f
+with open("data/chatbot/training_data_cot.json" "w") as f: json.dump(training_dataf
 indent=2)
 # Create and save vocabulary
 words = set(["<unk>", "<pad>"])
@@ -29,8 +28,7 @@ for conv in training_data["conversations"]:
         words.update(conv["response"].split())
         vocab = sorted(list(words))
 
-        with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocab
-        f
+        with open("data/chatbot/vocab.json"     "w") as f: json.dump(vocabf
         indent=2)
         # Convert to tokens and train
         [
@@ -54,7 +52,7 @@ key = jax.random.PRNGKey(0)
 x = jnp.array([input_tokens[0]])
 variables = model.init(key, x)
 
-state = train_state.TrainState.create( apply_fn=model.apply, params=variables["params"], tx=optimizer)
+state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer)
 
 # Training loop
 print("\nTraining with chain-of-thought reasoning...")
@@ -69,14 +67,9 @@ for epoch in range(100):
                 loss, grads = jax.value_and_grad(loss_fn)(state.params)
                 state = state.apply_gradients(grads=grads)
 
-                if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}
-                Loss: {{loss}}")
-
-                # Save model parameters
-                params_dict = jax.tree_util.tree_map(lambda x: x.tolist()
-                state.params)                with open("model_params.json"
-                "w") as f: json.dump(params_dict
-                f)
+                if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}Loss: {{loss}}")# Save model parameters
+                params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.params)                with open("model_params.json"
+                "w") as f: json.dump(params_dictf)
                 print("\nTraining completed! Model saved.")
 
                 if __name__ == "__main__":                    main()

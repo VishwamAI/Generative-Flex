@@ -8,12 +8,13 @@ logger = logging.getLogger(__name__)
 """
 Mathematical reasoning head with mixture of experts for enhanced capabilities
 """
+
 attention_mask: Optional[torch.Tensor] = None) -> Dict[str
 """
 Forward pass with expert routing and mathematical operation detection
 """
-try: batch_size
-seq_length
+
+try: batch_sizeseq_length
 _hidden_size  = hidden_states.shape
 # Apply layer norm
 hidden_states = self.layer_norm(hidden_states)
@@ -64,5 +65,4 @@ expert in enumerate(self.experts):
 }
 
     return outputs
-    except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")
-raise
+    except Exception as e: logger.error(f"Error in MathReasoningHead forward pass: {{str(e)}}")raise

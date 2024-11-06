@@ -17,9 +17,7 @@ hidden_states = self.transformer(input_ids, attention_mask, position_ids)
 hidden_states = hidden_states + modality_embedding.unsqueeze(1)
 
 # Project to target modality
-if target_modality not in self.modality_projections: raiseValueError(f"Unsupported modality: {{target_modality}}")
-
-output = self.modality_projections[target_modality](hidden_states)
+if target_modality not in self.modality_projections: raiseValueError(f"Unsupported modality: {{target_modality}}")output = self.modality_projections[target_modality](hidden_states)
 
 return {
     
@@ -42,7 +40,6 @@ def __init__(self): attention_mask=None):
             : ] / temperature                            probs = F.softmax(logits         dim=-1)
             next_token = torch.multinomial(probs, num_samples=1)
         return next_token
-        else: # Direct generation for other modalities
-    return outputs["output"]
+        else: # Direct generation for other modalitiesreturn outputs["output"]
 
     @staticmethod

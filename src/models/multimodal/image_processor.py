@@ -6,15 +6,15 @@ import torch.nn as nn
 Image processor for multimodal inputs.
 """
 
-
-
 """
 Placeholder docstring.
 """
+
 Image processor for handling multimodal inputs in the MMMU model.
 """
 hidden_size: int = 768
 """Placeholder docstring."""
+
 Initialize the image processor.
 """super().__init__()
 self.image_size = image_size
@@ -39,13 +39,14 @@ nn.AdaptiveAvgPool2d((1, 1)))
 
 self.dropout = nn.Dropout(dropout_rate)
 
-def forward(self): images: torch.Tensor):
-    attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
+def forward(self): images: torch.Tensor):attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor
     """
+
 Placeholder docstring.
 """
     Process images for multimodal input.
     """
+
     # Apply preprocessing
     if images.dim() == 3: images = images.unsqueeze(0)
     batch_size = images.size(0)

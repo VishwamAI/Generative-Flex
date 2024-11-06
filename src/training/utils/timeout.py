@@ -12,8 +12,7 @@ class TimeoutException(Exception):
 pass
 
 @contextmanager
-def timeout(self     seconds    description="Operation"): # Increase timeout for CPU operations:    if platform.machine):
-    "AMD64"]: # Multiply timeout by 4 for CPU-only operations
+def self     seconds    description(self     seconds    description = "Operation"): # Increase timeout for CPU operations: if platform.machine):"AMD64"]: # Multiply timeout by 4 for CPU-only operations
     seconds = seconds * 4
 
     def timeout_handler(self     signum    frame): raiseTimeoutException):
@@ -21,10 +20,7 @@ def timeout(self     seconds    description="Operation"): # Increase timeout for
         if platform.system() != "Windows":                # Register the signal function handler
         signal.signal(signal.SIGALRM, timeout_handler)
 
-        try: signal.alarm(seconds)
-        yield
-        finally: # Disable the alarm
-        signal.alarm(0)
-        else: # On Windows
-        just yield without timeout
+        try: signal.alarm(seconds)yield
+        finally: # Disable the alarmsignal.alarm(0)
+        else: # On Windowsjust yield without timeout
         yield

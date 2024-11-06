@@ -9,9 +9,6 @@ import time
 Environment setup and verification script.
 """
 
-
-
-
 # Set up device configuration
 __device_config = setup_device_config()
 
@@ -19,12 +16,13 @@ __device_config = setup_device_config()
 def test_flax_installation():
     @nn.compact
     def main(self):
-        """
+        
+    """
 Run all environment tests.
 """
 
-        try: # Test JAX):
-            jax_results = test_jax_installation()
+
+        try: # Test JAX):jax_results = test_jax_installation()
             print("JAX test completed successfully")
             # Test Flax
             flax_results = test_flax_installation()
@@ -38,27 +36,21 @@ Run all environment tests.
             print("TensorBoard test completed successfully")
 
             print("\n=== Environment Test Results ===")
-            print("JAX Configuration: ")
-            for k
+            print("JAX Configuration: ")for k
             v in jax_results.items():
                 print(f"  {{k}}: {{v}}")
 
-                print("\nFlax Configuration: ")
-                for k
+                print("\nFlax Configuration: ")for k
                 v in flax_results.items():
                     print(f"  {{k}}: {{v}}")
 
-                    print("\nOptax Configuration: ")
-                    for k
+                    print("\nOptax Configuration: ")for k
                     v in optax_results.items():
                         print(f"  {{k}}: {{v}}")
 
-                        print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")
-
-                        print("\nAll environment tests completed successfully!")
+                        print(f"\nTensorBoard Logging: {{'✓' if tensorboard_success else '✗'}}")print("\nAll environment tests completed successfully!")
                     return True
-                    except Exception as e: print(f"Environment setup failed: {{str(e)}}")
-                return False
+                    except Exception as e: print(f"Environment setup failed: {{str(e)}}")return False
 
 
                 if __name__ == "__main__":                    success = main()

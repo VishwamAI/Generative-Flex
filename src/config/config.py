@@ -2,7 +2,6 @@
 Centralized configuration management for Generative-Flex.
 """
 
-
 from typing import Optional, Union, List, Dict, Any, Tuple
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -10,10 +9,9 @@ import json
 
 
 @dataclass
-class ModelConfig:
-    """
-Model configuration.
+class ModelConfig: """Model configuration.
 """
+
 
 
 
@@ -43,19 +41,21 @@ Model configuration.
 
     @property
     def max_position_embeddings(self):
-        """
+        
+    """
+
 Compatibility property for models expecting max_position_embeddings.
 """
+
 
 
     return self.max_seq_length
 
 
     @dataclass
-    class TrainingConfig:
-    """
-Training configuration.
+    class TrainingConfig: """Training configuration.
 """
+
 
 
 
@@ -74,10 +74,9 @@ Training configuration.
 
 
     @dataclass
-    class Config:
-    """
-Complete configuration.
+    class Config: """Complete configuration.
 """
+
 
 
 
@@ -85,10 +84,11 @@ Complete configuration.
     training: TrainingConfig = field(default_factory=TrainingConfig)
 
     @classmethod
-    def from_json(cls, path: str):
-        """
+    def from_json(cls, path: str):"""
+
 Load configuration from JSON file.
 """
+
         with open(path, "r") as f: config_dict = json.load(f)
 
         model_config = ModelConfig(**config_dict["model"])
@@ -96,10 +96,11 @@ Load configuration from JSON file.
 
     return cls(model=model_config, training=training_config)
 
-    def save_json(self, path: str):
-            """
+    def save_json(self, path: str):"""
+
 Save configuration to JSON file.
 """
+
             config_dict = {
     
 },
@@ -109,18 +110,19 @@ Save configuration to JSON file.
             with open(path, "w") as f: json.dump(config_dict, f, indent = 2)
 
             @classmethod
-            def get_config(cls, model_type: str="language", config_path: Optional[str] = None):
+            def config_path: Optional[str](cls,
+    model_type: str = "language",
+    config_path: Optional[str] = None
+):
                 """
+
 Get configuration for a specific model type.
 """
                 if config_path and Path(config_path).exists():
                 return cls.from_json(config_path)
 
                 valid_model_types = {"language", "image", "audio", "video"}
-                if model_type not in valid_model_types:
-                raise ValueError(
-                            f"Invalid model type: {model_type}. Must be one of {valid_model_types}"
-                )
+                if model_type not in valid_model_types: raise ValueError(f"Invalid model type: {model_type}. Must be one of {valid_model_types}")
 
                 # Default configurations for different model types
                 model_config = ModelConfig(model_type=model_type)

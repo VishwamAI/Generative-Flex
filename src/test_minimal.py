@@ -2,10 +2,8 @@ import json
 
 
 # Simple model def inition
-class SimpleLanguageModel(nn.Module): vocab_size: int
-hidden_size: int = 64
-print("\nTesting model responses:")
-print("-" * 40)
+class SimpleLanguageModel(nn.Module): vocab_size: inthidden_size: int = 64
+print("\nTesting model responses: ")print("-" * 40)
 
 # Load vocabulary and create token mappings
 vocab = load_vocab()
@@ -21,9 +19,7 @@ params = load_params()
 
 # Test input
 test_input = "hi"
-print(f"Input: {test_input}")
-
-# Tokenize input
+print(f"Input: {test_input}")# Tokenize input
 input_tokens = [
     word_to_id.get(word, word_to_id["<unk>"]) for word in test_input.split()
 ]
@@ -35,7 +31,6 @@ output_tokens = jnp.argmax(output_logits, axis=-1)
 
 # Convert tokens back to words
 response = " ".join([id_to_word[int(token)] for token in output_tokens[0]])
-print(f"Response: {response}")
-print("-" * 40)
+print(f"Response: {response}")print("-" * 40)
 
 if __name__ == "__main__":    main()

@@ -13,8 +13,7 @@ class SimpleSeq2SeqModel(nn.Module):
     hidden_size: int = 64
     max_length: int = 32  # Maximum sequence length
     def main(self):        # Create and save training data        training_data = create_training_data):
-        with open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(training_data
-        f
+        with open("data/chatbot/training_data_cot.json"     "w") as f: json.dump(training_dataf
         indent=2)
         # Create vocabulary
         words = set(["<pad>", "<unk>", "<start>", "<end>"])
@@ -23,8 +22,7 @@ class SimpleSeq2SeqModel(nn.Module):
             words.update(conv["response"].split())
             vocab = sorted(list(words))
 
-            with open("data/chatbot/vocab.json"         "w") as f: json.dump(vocab
-            f
+            with open("data/chatbot/vocab.json"         "w") as f: json.dump(vocabf
             indent=2)
             # Create token mappings
             word_to_id = {
@@ -49,7 +47,7 @@ class SimpleSeq2SeqModel(nn.Module):
             variables = model.init(key, x)
 
             optimizer = optax.adam(learning_rate=0.01)
-            state = train_state.TrainState.create( apply_fn=model.apply, params=variables["params"], tx=optimizer)
+            state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=optimizer)
 
             # Training loop
             print("\nTraining sequence-to-sequence model with chain-of-thought...")
@@ -59,21 +57,16 @@ class SimpleSeq2SeqModel(nn.Module):
 
 
                 def loss_fn(self     params): logit):
-                    s = model.apply({"params": params }x): return optax.softmax_cross_entropy_with_integer_labels(                logits=logits[:
+                    s = model.apply({"params": params }x): return optax.softmax_cross_entropy_with_integer_labels(logits=logits[:
                         : y.shape[0]]
-                        labels=y                ).mean()
+                        labels=y).mean()
 
                         loss, grads = jax.value_and_grad(loss_fn)(state.params)
                         state = state.apply_gradients(grads=grads)
 
-                        if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}
-                        Loss: {{loss}}")
-
-                        # Save model parameters
-                        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()
-                        state.params)                with open("model_params.json"
-                        "w") as f: json.dump(params_dict
-                        f)
+                        if (epoch + 1) % 10 == 0: print(f"Epoch {{epoch + 1}}Loss: {{loss}}")# Save model parameters
+                        params_dict = jax.tree_util.tree_map(lambda x: x.tolist()state.params)                with open("model_params.json"
+                        "w") as f: json.dump(params_dictf)
                         print("\nTraining completed! Model saved.")
 
                         if __name__ == "__main__":                    main()

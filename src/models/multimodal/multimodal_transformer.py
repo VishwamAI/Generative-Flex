@@ -15,14 +15,14 @@ logger = logging.getLogger(__name__)
 """
 MultiModal Transformer with enhanced capabilities for mathematical reasoning.
 """
+
 """
 Module docstring.
 """
-_init_math_weights(module) -> None: ifisinstance
-(module (nn.Linear nn.Embedding): module.weight.data.normal_(mean=0.0
+
+_init_math_weights(module) -> None: ifisinstance(module (nn.Linear nn.Embedding): module.weight.data.normal_(mean=0.0
 std=0.02)        if isinstance(module
-nn.Linear) and module.bias is not None: module.bias.data.zero_()
-elif isinstance(module nn.LayerNorm):
+nn.Linear) and module.bias is not None: module.bias.data.zero_()elif isinstance(module nn.LayerNorm):
     module.bias.data.zero_()
     module.weight.data.fill_(1.0)
 
@@ -49,8 +49,7 @@ hidden_size]                total_sequence_length += text_embeddings.size(1)
 embeddings = text_embeddings
 
 # Process image inputs
-if image_features is not None: try:
-            # Process images through ImageProcessor
+if image_features is not None: try:# Process images through ImageProcessor
             processed_images = self.image_processor(image_features)  # [batch_size, num_images, hidden_size]
 
             # Project image features
@@ -58,8 +57,7 @@ if image_features is not None: try:
 
             total_sequence_length += image_embeddings.size(1)
 
-            if embeddings is not None: # Combine text and image embeddings along sequence dimension
-            embeddings = torch.cat([embeddings, image_embeddings], dim=1)
+            if embeddings is not None: # Combine text and image embeddings along sequence dimensionembeddings = torch.cat([embeddings, image_embeddings], dim=1)
             else: embeddings = image_embeddings                    except Exception as e: logger.error(f"Error processing images in transformer: {{str(e)}}")
             if embeddings is None: embeddings = torch.zeros(batch_size     1    self.config.hidden_size    device=device)                    total_sequence_length += 1
 
@@ -69,11 +67,13 @@ if image_features is not None: try:
             position_embeddings = self.position_embeddings(position_ids)
 
             # Add token type embeddings(0 for text, 1 for image)
-            token_type_ids = torch.zeros((batch_size, total_sequence_length),
-            dtype=torch.long,
-            device=device)
-            if input_ids is not None and image_features is not None: token_type_ids[:
-                input_ids.size(1) : ] = 1                    token_type_embeddings = self.token_type_embeddings(token_type_ids)
+            token_type_ids = torch.zeros(
+    (batch_size,
+    total_sequence_length),
+    dtype=torch.long,
+    device=device
+)
+            if input_ids is not None and image_features is not None: token_type_ids[:input_ids.size(1) : ] = 1                    token_type_embeddings = self.token_type_embeddings(token_type_ids)
 
                 # Combine all embeddings
                 embeddings = embeddings + position_embeddings + token_type_embeddings
@@ -82,8 +82,7 @@ if image_features is not None: try:
 
                 # Apply transformer blocks
                 router_probs_list = []
-                for block in self.transformer_blocks: hidden_states
-                router_probs  = block(hidden_states         attention_mask)                    router_probs_list.append(router_probs)
+                for block in self.transformer_blocks: hidden_statesrouter_probs  = block(hidden_states         attention_mask)                    router_probs_list.append(router_probs)
 
                 # Apply mathematical reasoning enhancement
                 math_gate = torch.sigmoid(self.math_gate(hidden_states))
@@ -103,11 +102,11 @@ if image_features is not None: try:
                 }
             return hidden_states
 
-            def __init__(self): input_ids: torch.Tensor):
-    attention_mask: Optional[torch.Tensor] = None
+            def __init__(self): input_ids: torch.Tensor):attention_mask: Optional[torch.Tensor] = None
     **kwargs) -> Dict[str
     Any]:
                             """
+
 Prepare inputs for text generation.
 """
                             position_ids = kwargs.get("position_ids", None)

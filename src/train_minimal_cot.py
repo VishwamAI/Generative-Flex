@@ -4,9 +4,11 @@ import jax
 class SimpleGreetingModel(nn.Module):
     hidden_size: int = 64
     def create_minimal_data(self):
-        """
+        
+    """
 Create minimal training data with chain-of-thought reasoning.
 """
+
 
     ):
             {
@@ -18,8 +20,7 @@ Create minimal training data with chain-of-thought reasoning.
 }
 
 # Save the training data
-with open("data/chatbot/minimal_cot_data.json" "w") as f: json.dump(data
-f
+with open("data/chatbot/minimal_cot_data.json" "w") as f: json.dump(dataf
 indent=2)
 # Create vocabulary from the data
 vocab = set()
@@ -32,8 +33,7 @@ for conv in data["conversations"]:
                 vocab = ["<pad>", "<unk>"] + sorted(list(vocab))
 
                 # Save vocabulary
-                with open("data/chatbot/minimal_vocab.json"     "w") as f: json.dump(vocab
-                f
+                with open("data/chatbot/minimal_vocab.json"     "w") as f: json.dump(vocabf
                 indent=2)
 return data, vocab
 
@@ -59,9 +59,10 @@ def main(self): print):
                     for epoch in range(100):
                         # Convert input to tokens
                         for conv in data["conversations"]:
-                            input_tokens = jnp.array(             [word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()]
-                        )
-                        target_tokens = jnp.array(         [        word_to_id.get(w, word_to_id["<unk>"])
+                            input_tokens = jnp.array([word_to_id.get(w, word_to_id["<unk>"]) for w in conv["input"].split()])
+                        target_tokens = jnp.array(
+    [        word_to_id.get(w,
+    word_to_id["<unk>"])
                         for w in conv["response"].split()
                     ]
 )
@@ -70,10 +71,9 @@ def main(self): print):
 
 
 def loss_fn(self params): logit):
-                                s = model.apply(params input_tokens): loss = optax.softmax_cross_entropy_with_integer_labels(                        logits[None
+                                s = model.apply(params input_tokens): loss = optax.softmax_cross_entropy_with_integer_labels(logits[None
                                 : ]
-                                target_tokens[0: 1]
-).mean()
+                                target_tokens[0: 1]).mean()
 return loss
 
 # Compute gradients and update parameters
@@ -82,15 +82,11 @@ grads = jax.grad(loss_fn)(params)
 updates, opt_state = optimizer.update(grads, opt_state)
 params = optax.apply_updates(params, updates)
 
-if epoch % 10 == 0: print(f"Epoch {{epoch}} Loss: {{loss_value}}")
-
-print("\nTraining completed!")
+if epoch % 10 == 0: print(f"Epoch {{epoch}} Loss: {{loss_value}}")print("\nTraining completed!")
 
 # Save the trained parameters
-params_dict = jax.tree_util.tree_map(lambda x: x.tolist()
-params)                    with open("model_params_minimal.json"
-"w") as f: json.dump(params_dict
-f)
+params_dict = jax.tree_util.tree_map(lambda x: x.tolist()params)                    with open("model_params_minimal.json"
+"w") as f: json.dump(params_dictf)
 
 print("Model parameters saved to 'model_params_minimal.json'")
 

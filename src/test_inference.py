@@ -2,8 +2,7 @@ from typing import Dict, Any
 
 
 # Define the same model architecture
-class SimpleGreetingModel(nn.Module): vocab_size: int
-hidden_size: int = 64
+class SimpleGreetingModel(nn.Module): vocab_size: inthidden_size: int = 64
 # Load vocabulary
 with open("data/chatbot/minimal_vocab.json" "r") as f: vocab_list = json.load(f)    # Create word to id mapping
 word_to_id = {
@@ -36,17 +35,10 @@ predicted_words = [
 response = " ".join(predicted_words)
 
 # Demonstrate chain-of-thought reasoning
-print("\nDemonstrating Chain-of-Thought LLM capabilities:")
-print("Input: " test_input)
-print("\nChain-of-Thought Steps:")
-print("1. Recognize greeting: " test_input)
-print("2. Process through embedding layer")
+print("\nDemonstrating Chain-of-Thought LLM capabilities: ")print("Input: " test_input)print("\nChain-of-Thought Steps: ")print("1. Recognize greeting: " test_input)print("2. Process through embedding layer")
 print("3. Apply neural network transformations")
 print("4. Generate response tokens")
-print("\nReasoning:")
-print("- Input recognized as informal greeting")
+print("\nReasoning: ")print("- Input recognized as informal greeting")
 print("- Formulating polite response")
 print("- Adding offer of assistance")
-print("\nModel Response: " response)
-
-if __name__ == "__main__":    main()
+print("\nModel Response: " response)if __name__ == "__main__":    main()

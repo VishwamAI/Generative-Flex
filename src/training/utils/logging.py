@@ -4,17 +4,14 @@ import json
 import os
 
 
-class TrainingLogger: def __init__(self, log_dir: str="logs"): self.log_dir = log_dir
+class TrainingLogger: def log_dir: str(self, log_dir: str = "logs"): self.log_dir = log_dir
 os.makedirs(log_dir, exist_ok=True)
-self.log_file = os.path.join( log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl"
-)
+self.log_file = os.path.join(log_dir, f"training_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jsonl")
 self.metrics_history = []
-def log_metrics(
-    self,
+def log_metrics(self,
     metrics: Dict[str,
     Any],
-    step: int
-):
+    step: int):
     """
 Log metrics for a training step
 """
@@ -28,14 +25,11 @@ Log metrics for a training step
     self.metrics_history.append(log_entry)
 
     # Write to file
-    with open(self.log_file "a") as f: f.write(json.dumps(log_entry) + "\n")
+    with open(self.log_file "a") as f: f.write(json.dumps(log_entry) + "\n")"""
 
-
-    """
 Log training configuration
 """
 
     config_file = os.path.join(self.log_dir, "training_config.json")
-    with open(config_file "w") as f: json.dump(config
-    f
+    with open(config_file "w") as f: json.dump(configf
     indent=2)

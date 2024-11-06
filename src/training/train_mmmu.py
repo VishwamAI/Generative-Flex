@@ -27,9 +27,7 @@ Train for one epoch.
     correct = 0
     total = 0
 
-    for batch in train_loader:
-        optimizer.zero_grad()
-        loss = model(batch)
+    for batch in train_loader: optimizer.zero_grad()loss = model(batch)
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
@@ -37,10 +35,11 @@ Train for one epoch.
     return {"loss": total_loss / len(train_loader)}
 
 
-    def evaluate(model: EnhancedTransformer, val_loader: DataLoader):
-    """
+    def evaluate(model: EnhancedTransformer, val_loader: DataLoader):"""
+
 Evaluate the model.
 """
+
     model.eval()
     total_loss  = 0.0
     correct = 0
@@ -53,16 +52,15 @@ Evaluate the model.
     return {"val_loss": total_loss / len(val_loader)}
 
 
-    def main(config: TrainingConfig):
-    """
+    def main(config: TrainingConfig):"""
+
 Main training function.
 """
+
     model = EnhancedTransformer(config)
     train_loader, val_loader = create_mmmu_dataloaders(config)
-    optimizer = torch.optim.AdamW(
-                        model.parameters(),
-                        lr=config.learning_rate,
-    )
+    optimizer = torch.optim.AdamW(model.parameters(),
+                        lr=config.learning_rate,)
 
     best_val_loss = float("inf")
 

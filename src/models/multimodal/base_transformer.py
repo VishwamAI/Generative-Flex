@@ -5,14 +5,14 @@ import torch.nn as nn
 Base transformer implementation for multimodal processing.
 """
 
-
-
 """
 Base transformer model for multimodal processing.
 """
+
 """
 Forward pass through the base transformer.
 """
+
 hidden_states = self.embeddings(hidden_states)
 hidden_states = self.dropout(hidden_states)
 
@@ -24,9 +24,11 @@ return hidden_states
 """
 Single transformer layer implementation.
 """
+
 """
 Forward pass through the transformer layer.
 """
+
 attention_mask)
 hidden_states = self.norm1(hidden_states + attention_output)
 

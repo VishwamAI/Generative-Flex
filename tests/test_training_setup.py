@@ -6,9 +6,10 @@ import unittest
 Test cases for training setup and configuration.
 """
 
-
 class TestTrainingSetup(unittest.TestCase):
+    
     """
 Test suite for training setup.
 """
+
 

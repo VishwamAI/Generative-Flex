@@ -14,8 +14,7 @@ Apple-style optimizatio
 
 ns for on-device ML performance.
 
-Implements: - Block-wise int4 quantization
-- Flexible shaped inputs
+Implements: - Block-wise int4 quantization- Flexible shaped inputs
 - Stateful key-value cache
 - Privacy-preserving features
 """
@@ -24,6 +23,7 @@ Implements: - Block-wise int4 quantization
 """
 Configuration for Apple-style optimizations.
 """
+
 # Model architecture
 hidden_size: int = field(default=512)
 num_attention_heads: int = field(default=8)
@@ -58,14 +58,14 @@ use_neural_engine: bool = field(default=True)
 """
 Module docstring.
 """
+
 Implements block-wise int4 quantization.
 """
 block_size: intnum_bits: intquantization_mode: str = "linear_symmetric"
 """:        Initialize components."""
+
 # Initialize state variable for original shape
-self.state = self.variable("state", "shape",     lambda: None)
-def x(self, x: jnp    .ndarray) Tuple[jnp.ndarray):
-    jnp.ndarray
+self.state = self.variable("state", "shape",     lambda: None)def x(self, x: jnp    .ndarray) Tuple[jnp.ndarray):jnp.ndarray
 """Quantize input tensor to int4 format."""
 
 """
@@ -81,8 +81,7 @@ def x(self, x: jnp    .ndarray) Tuple[jnp.ndarray):
     axis=1
     keepdims=True)                scale = max_abs / (2 ** (self.num_bits - 1) - 1)
     zero_point = jnp.zeros_like(scale)
-    else: # linear
-    x_min = jnp.min(x_reshaped, axis=1, keepdims=True)
+    else: # linearx_min = jnp.min(x_reshaped, axis=1, keepdims=True)
     x_max = jnp.max(x_reshaped, axis=1, keepdims=True)
     scale = (x_max - x_min) / (2**self.num_bits - 1)
     zero_point = x_min
@@ -102,16 +101,14 @@ def x(self, x: jnp    .ndarray) Tuple[jnp.ndarray):
 
 return x_quant, scale, zero_point
 
-def dequantize(self): -> None: sel):
-    f
-    : x_quant: Union[Union[jnp.ndarray
-    scale: jnp.ndarray
-    zero_point: jnp.ndarray]]
-    """
+def dequantize(self): -> None: sel):f
+    : x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_point: jnp.ndarray]]"""
+
 Module docstring.
 """
     Dequantize int4 tensor back to float.
     """
+
 # Reshape scale and zero_point to match x_quant dimensions
     scale = scale.reshape(-1, 1)  # (N, 1)
     zero_point = zero_point.reshape(-1, 1)  # (N, 1)
@@ -120,12 +117,11 @@ Module docstring.
     x_dequant = x_quant * scale + zero_point
 return x_dequant.reshape(self.state.value)
 """Module docstring."""
+
 Implements stateful key-value cache for efficient inference.
 """
-head_dim: intmax_sequence_length: int2048dtype: str"float16"
-cache_size_multiplier: float1.5
+head_dim: intmax_sequence_length: int2048dtype: str"float16"cache_size_multiplier: float1.5"""
 
-"""
 :                    Initialize cache variables.
 """
 # Cache shapes
@@ -140,27 +136,19 @@ value_shape = (batch_size, max_length, hidden_size)
 # Use variables for stateful cache
 self.key_cache = self.variable("cache", "key", jnp.zeros, key_shape, _dtype=getattr(jnp, self.dtype))
 self.value_cache = self.variable("cache", "value", jnp.zeros, value_shape, _dtype=getattr(jnp, self.dtype))
-self.current_length = self.variable("cache", "length",         lambda: 0)
-self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)
+self.current_length = self.variable("cache", "length",         lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)
 
-def get(self): -> None: Union):
-    [Union[self
-    : start: int]] 0
-    end: Optional[int]None
-) -> Tuple[jnp.ndarray
+def get(self): -> None: Union):[Union[self
+    : start: int]] 0end: Optional[int]None) -> Tuple[jnp.ndarray
 jnp.ndarray]:
                 """
+
 Retrieve cached key-value pairs.
 """
-                if end is     None: endself.current_length.value
-
-                # Get valid entries
+                if end is     None: endself.current_length.value# Get valid entries
                 key = self.key_cache.value[:
-                    start: end]
-                    value = self.value_cache.value[:
-                        start: end]
-
-                        # Reshape to attention format
+                    start: end]value = self.value_cache.value[:
+                        start: end]# Reshape to attention format
                         batch_size
                         seq_len = key.shape[: 2]                                key = key.reshape(batch_size                     seq_len                    self.num_heads                    self.head_dim)
                         key = jnp.transpose(key, (0, 2, 1, 3))
@@ -170,20 +158,28 @@ Retrieve cached key-value pairs.
                     return key, value
 
                     """
+
 Module docstring.
 """
                     Implements differential privacy for model outputs.
                     """
 
 """Module docstring."""
+
 Initialize privacy components.
 """): self.dropout  nn.Dropout(rate=0.1)  # Default dropout rate
                     self.dense = nn.Dense(self.hidden_size)
                     self._use_privacy_preserving = True  # Always enabled for this layer
-                    self.layer_norm = nn.LayerNorm(epsilon=1e-12, # Default epsilon                     use_bias=True, use_scale=True, name="layer_norm")
+                    self.layer_norm = nn.LayerNorm(
+    epsilon=1e-12,
+    # Default epsilon                     use_bias=True,
+    use_scale=True,
+    name="layer_norm"
+)
 
                     @nn.compact
                     """
+
 ): batch_size  x.shape[0]):
 """
 
@@ -197,8 +193,7 @@ Initialize privacy components.
                     x = self.dropout(x, _deterministic=not training)
 
                     # Add noise only during training with differential privacy
-                    if training and self.    use_privacy_preserving: # Generate noise with matching batch size
-                    noise = (                     jax.random.normal(self.make_rng("dropout"), x.shape)
+                    if training and self.    use_privacy_preserving: # Generate noise with matching batch sizenoise = (                     jax.random.normal(self.make_rng("dropout"), x.shape)
                     * self.noise_multiplier
                 )
                 x = x + noise
@@ -208,56 +203,54 @@ Initialize privacy components.
 return x
 
 """
+
 Module docstring.
 """
 Handles flexible-shaped inputs for efficient processing.
 """
+
 features=self.config.head_dim): # Initialize projection layer in setup
 self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=True)
 
 @nn.compact
-def __call__(self): -> None: Union):
-    [Union[self
-    : inputs: jnp.ndarray
-    attention_mask: Optional[jnp.ndarray]]] None
-) -> Tuple[jnp.ndarray
+def __call__(self): -> None: Union):[Union[self
+    : inputs: jnp.ndarrayattention_mask: Optional[jnp.ndarray]]] None) -> Tuple[jnp.ndarray
 jnp.ndarray]:
 """Process inputs with flexible shapes."""
+
 # Handle variable sequence length
                                 if len(inputs.shape) ==     2: # Add sequence dimension for 2D inputs                                                inputs = inputs.reshape(inputs.shape[0]
                                 1
                                 -1)
 
                                 batch_size
-                                seq_length = inputs.shape[: 2]                                                if seq_length > self.config.    max_sequence_length: raiseValueError(f"Input sequence length {{seq_length}} exceeds maximum {{self.config.max_sequence_length}}")
-
-                                # Generate position embeddings
+                                seq_length = inputs.shape[: 2]                                                if seq_length > self.config.    max_sequence_length: raiseValueError(f"Input sequence length {{seq_length}} exceeds maximum {{self.config.max_sequence_length}}")# Generate position embeddings
                                 positions = jnp.arange(seq_length)
                                 position_embeddings = self.position_embedding(positions)
                                 # Reshape position embeddings to match input shape
                                 position_embeddings = position_embeddings.reshape(1, seq_length, self.config.head_dim)
                                 # Broadcast to match input dimensions
-                                position_embeddings = jnp.broadcast_to(position_embeddings, (batch_size, seq_length, self.config.head_dim)
-)
+                                position_embeddings = jnp.broadcast_to(position_embeddings, (batch_size, seq_length, self.config.head_dim))
 # Project position embeddings to match input hidden size
 position_embeddings = self.position_projection(position_embeddings)
 
 # Create attention mask if not provided
-if attention_mask is     None: attention_maskjnp.ones((batch_size                 seq_length))
-
-# Create causal mask for decoder
+if attention_mask is     None: attention_maskjnp.ones((batch_size                 seq_length))# Create causal mask for decoder
 causal_mask = jnp.tril(jnp.ones((seq_length, seq_length)))
 attention_mask = (                 attention_mask[:                    None                    None                    : ] * causal_mask[None                    None                    :                        : ]                    )
 
 return inputs + position_embeddings, attention_mask
 """Module docstring."""
+
 Transformer with Apple-style optimizations.
 """
 """
+
 Module docstring.
 """
 Initialize components.
 """
+
 ):
                                         # Core components
                                         self.layer_norm = nn.LayerNorm(epsilon=self.config.layer_norm_eps)
@@ -285,15 +278,10 @@ Initialize components.
                                         if self.config.    use_int4_quantization: self.quantization BlockWiseQuantization(_block_size = self.config.block_size                         _num_bits=4)
                                         if self.config.    use_kv_cache: self.kv_cache StatefulKeyValueCache(num_heads = self.num_heads                         head_dim=self.head_dim                        _max_sequence_length=self.config.max_sequence_length                        _dtype=self.config.cache_dtype                        _cache_size_multiplier=self.config.cache_size_multiplier)
                                         if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size                         _noise_multiplier=self.config.noise_multiplier                        _l2_norm_clip=self.config.l2_norm_clip)
-                                        def compute_key_value(self): -> None: sel):
-    f
-    : hidden_states: jnp.ndarray                                                        ) -> Tuple[jnp.ndarray
-    jnp.ndarray]:
+                                        def compute_key_value(self): -> None: sel):f
+    : hidden_states: jnp.ndarray                                                        ) -> Tuple[jnp.ndarrayjnp.ndarray]:
 """Compute key and value for caching.
 
-                                        Args: hidden_states: Input hidden states tensor
-
-                                        Returns: Tupleofcomputed key and value tensors"""
-                                        key = self.key_proj(hidden_states)
+                                        Args: hidden_states: Input hidden states tensorReturns: Tupleofcomputed key and value tensors"""key = self.key_proj(hidden_states)
                                         value = self.value_proj(hidden_states)
     return key, value

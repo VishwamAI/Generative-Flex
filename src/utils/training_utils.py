@@ -9,16 +9,13 @@ import os
 Utility functions for model training.
 """
 
-
 """
 Extended TrainState for training.
 """
-Any]] = None    metrics: Dict[str
-Any] = None
 
-def restore_checkpoint(self): state: TrainState):
-    checkpoint_dir: str) -> Tuple[TrainState
-    int]:
+Any]] = None    metrics: Dict[strAny] = None
+
+def restore_checkpoint(self): state: TrainState):checkpoint_dir: str) -> Tuple[TrainStateint]:
         """
 Restores model from checkpoint.
 """
@@ -27,9 +24,9 @@ Restores model from checkpoint.
     return restored_state or state, step
 
 
-    def compute_metrics(self): labels: jnp.ndarray            ) -> Dict[str):
-    float]:
+    def compute_metrics(self): labels: jnp.ndarray            ) -> Dict[str):float]:
                 """
+
 Computes metrics for evaluation.
 """
                 loss = optax.softmax_cross_entropy_with_integer_labels(logits=logits, labels=labels).mean()
@@ -41,19 +38,18 @@ Computes metrics for evaluation.
 }
 
 
-    def create_input_pipeline(self): data_dir: str):
-    batch_size: int
-
-    train_split: float = 0.8
+    def create_input_pipeline(self): data_dir: str):batch_size: inttrain_split: float = 0.8
     val_split: float = 0.1
     test_split: float = 0.1
     shuffle_buffer_size: int = 10000
     seed: Optional[int] = None) -> Tuple[Iterator
     Iterator
     """
+
 Creates input pipeline for training
 """
     """
+
 Placeholder docstring.
 """
     # This is a placeholder - implement actual data loading logic
