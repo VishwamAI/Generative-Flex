@@ -6,17 +6,32 @@ import unittest
 
 
 
-class TestTestConfig(unittest.TestCase):
-    """Test suite for module functionality."""
+
+class TestTestConfig:
+    """
+    
+
+        Test suite for module functionality.
+
+    
+    """
 
     def setUp(self):
-        """Set up test fixtures."""
+        """
+
+            Set up test fixtures.
+
+        """
         pass
 
 
 
     def test_test_math_config(self):
-        """Test test math config."""
+        """
+
+            Test test math config.
+
+        """
         config = MathConfig()
         config.model_type = "math_reasoning"
         try:

@@ -1,8 +1,3 @@
-"""
-Module containing specific functionality.
-"""
-
-Class implementing import functionality.
 from dataclasses import dataclass
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -11,11 +6,22 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 from typing import Dict, Optional
 import logging
 import os
-
 from torch.utils.data import DataLoader, Dataset
 import numpy as np
 import torch
 
+"""
+
+
+    \1
+
+
+
+"""
+
+Class implementing import functionality.
+
+
 
 
 
@@ -27,9 +33,40 @@ import torch
 
 
 """
-Module containing specific functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    \1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 """
+
+    \1
+
+
 """
 Module containing specific functionality.
 Utility functions for training..
@@ -48,4 +85,8 @@ optimizer: PyTorch optimizer
 Returns:
 Learning rate scheduler
 """
+
+    \1
+
+
 """

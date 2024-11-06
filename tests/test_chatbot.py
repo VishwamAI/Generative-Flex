@@ -6,11 +6,22 @@ import unittest
 
 
 
-class TestTestChatbot(unittest.TestCase):
-    """Test suite for module functionality."""
+
+class TestTestChatbot:
+    """
+    
+
+        Test suite for module functionality.
+
+    
+    """
 
     def setUp(self):
-        """Set up test fixtures."""
+        """
+
+            Set up test fixtures.
+
+        """
         pass
 
 

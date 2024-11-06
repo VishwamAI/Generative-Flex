@@ -6,17 +6,32 @@ import unittest
 
 
 
-class TestEnvironment(unittest.TestCase):
-    """Test suite for module functionality."""
+
+class TestEnvironment:
+    """
+    
+
+        Test suite for module functionality.
+
+    
+    """
 
     def setUp(self):
-        """Set up test fixtures."""
+        """
+
+            Set up test fixtures.
+
+        """
         pass
 
 
 
     def test_test_cuda_availability(self):
-        """Test test cuda availability."""
+        """
+
+            Test test cuda availability.
+
+        """
         if torch.cuda.is_available():
             device = torch.device("cuda")
         else:

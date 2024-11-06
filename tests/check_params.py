@@ -6,17 +6,32 @@ import unittest
 
 
 
-class TestParameters(unittest.TestCase):
-    """Test suite for module functionality."""
+
+class TestParameters:
+    """
+    
+
+        Test suite for module functionality.
+
+    
+    """
 
     def setUp(self):
-        """Set up test fixtures."""
+        """
+
+            Set up test fixtures.
+
+        """
         pass
 
 
 
     def test_test_parameter_validation(self):
-        """Test test parameter validation."""
+        """
+
+            Test test parameter validation.
+
+        """
         params = {
         "batch_size": 16,
         "learning_rate": 0.001

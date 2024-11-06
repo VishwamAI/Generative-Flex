@@ -6,17 +6,32 @@ import unittest
 
 
 
-class TestTestCotResponse(unittest.TestCase):
-    """Test suite for module functionality."""
+
+class TestTestCotResponse:
+    """
+    
+
+        Test suite for module functionality.
+
+    
+    """
 
     def setUp(self):
-        """Set up test fixtures."""
+        """
+
+            Set up test fixtures.
+
+        """
         pass
 
 
 
     def test_test_batch_size(self):
-        """Test test batch size."""
+        """
+
+            Test test batch size.
+
+        """
             batch_size = 16
         input_tensor = torch.randint(0, 1000, (batch_size, 32))
         output = self.model(input_tensor)
