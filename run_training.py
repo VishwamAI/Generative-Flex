@@ -2,14 +2,16 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from accelerate from datasets import load_dataset import Accelerator
-from src.data.mmmu_loader from src.training.train_mmmu import MMUTrainer import create_mmmu_dataloaders
+from accelerate import Accelerator
+from datasets import load_dataset
+from src.data.mmmu_loader import create_mmmu_dataloaders
+from src.training.train_mmmu import MMUTrainer
 from transformers import AutoTokenizer
     AutoConfig
 import logging

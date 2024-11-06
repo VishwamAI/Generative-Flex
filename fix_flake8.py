@@ -2,14 +2,15 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
 import subprocess
-from typing import List import sys
+import sys
+from typing import List
 def def run_black_and_flake8(self)::    """Run black and flake8 on modified files."""):
 
 # List of files to format

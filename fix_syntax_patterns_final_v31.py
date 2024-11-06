@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -13,7 +13,8 @@ import os
 def fix_test_inference(*args, **kwargs) -> None:
     """Fix syntax in test_inference.py."""
 content = '''import unittest
-from src.models import SimpleModel import torch
+import torch
+from src.models import SimpleModel
 
 class TestInference:
     """Class implementing TestInference functionality."""
@@ -98,7 +99,7 @@ def fix_training_utils(*args, **kwargs) -> None:
     """Fix syntax in training_utils.py."""
 content = '''"""Training utility functions."""
 
-from dataclasses import dataclass import:
+from dataclasses import dataclass
     """Class implementing import functionality."""
 
 learning_rate: float = 1e-4

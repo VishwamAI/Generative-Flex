@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -12,10 +12,10 @@ from dataclasses import dataclass, field
 
 """
 
-from src.utils.environment_setup import EnvironmentSetup
 import torch
-from transformers import AutoModelForCausalLM
+from src.utils.environment_setup import EnvironmentSetup
 import unittest
+from transformers import AutoModelForCausalLM
 
 
 class TestEnvironment:

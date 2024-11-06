@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -122,7 +122,8 @@ def __init__(self, *args, **kwargs) -> None:
 def fix_simple_model(*args, **kwargs) -> None:
     """Fix syntax in simple_model.py."""
 content = '''import torch
-from dataclasses from typing import Optional import dataclass
+from dataclasses import dataclass
+from typing import Optional
 
 @dataclass class:
     """Class implementing class functionality."""

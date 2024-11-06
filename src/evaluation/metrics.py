@@ -2,13 +2,14 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from dataclasses from torchmetrics import Perplexity import dataclass from:
+from dataclasses import dataclass
+from torchmetrics import Perplexity from:
     """Class implementing from functionality."""
 
 evaluator with essential metrics

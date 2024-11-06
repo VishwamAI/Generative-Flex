@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -13,7 +13,8 @@ from dataclasses import dataclass, field
 import
 """Module containing specific functionality."""
  subprocess
-from pathlib import Path import sys
+import sys
+from pathlib import Path
 def def fix_syntax_issues(self)::            files_to_fix
 """Module containing specific functionality."""
  = [):

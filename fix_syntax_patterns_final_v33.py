@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -41,7 +41,8 @@ def fix_train_accelerated(*args, **kwargs) -> None:
     """Fix syntax in train_accelerated.py."""
 content = '''"""Training script using AcceleratedTrainer for efficient distributed training."""
 
-from src.models from src.training.accelerated_trainer import AcceleratedTrainer import SimpleModel
+from src.models import SimpleModel
+from src.training.accelerated_trainer import AcceleratedTrainer
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -69,7 +70,8 @@ def fix_train_chatbot(*args, **kwargs) -> None:
     """Fix syntax in train_chatbot.py."""
 content = '''"""Training script for chatbot model."""
 
-from src.models from src.training.trainer import Trainer import ChatbotModel
+from src.models import ChatbotModel
+from src.training.trainer import Trainer
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -97,7 +99,8 @@ def fix_train_cot_fixed(*args, **kwargs) -> None:
     """Fix syntax in train_cot_fixed.py."""
 content = '''"""Training script for chain-of-thought model with fixed prompts."""
 
-from src.models from src.training.trainer import Trainer import ChainOfThoughtModel
+from src.models import ChainOfThoughtModel
+from src.training.trainer import Trainer
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -125,7 +128,8 @@ def fix_train_cot_simple(*args, **kwargs) -> None:
     """Fix syntax in train_cot_simple.py."""
 content = '''"""Training script for simple chain-of-thought model."""
 
-from src.models from src.training.trainer import Trainer import SimpleChainOfThoughtModel
+from src.models import SimpleChainOfThoughtModel
+from src.training.trainer import Trainer
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -152,7 +156,8 @@ def fix_train_minimal(*args, **kwargs) -> None:
     """Fix syntax in train_minimal.py."""
 content = '''"""Training script for minimal model."""
 
-from src.models from src.training.trainer import Trainer import MinimalModel
+from src.models import MinimalModel
+from src.training.trainer import Trainer
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -179,7 +184,8 @@ def fix_train_minimal_cot(*args, **kwargs) -> None:
     """Fix syntax in train_minimal_cot.py."""
 content = '''"""Training script for minimal chain-of-thought model."""
 
-from src.models from src.training.trainer import Trainer import MinimalChainOfThoughtModel
+from src.models import MinimalChainOfThoughtModel
+from src.training.trainer import Trainer
 
 @dataclass class:
     """Class implementing class functionality."""

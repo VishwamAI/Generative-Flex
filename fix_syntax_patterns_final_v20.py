@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -15,7 +15,8 @@ def fix_model_imports(*args, **kwargs) -> None:
     """Fix import statements in model files."""
 # Fix transformers import
     content = re.sub(
-        r'from transformers import PreTrainedModel import GenerationMixin',
+        r'import GenerationMixin',
+from transformers import PreTrainedModel
         'from transformers import PreTrainedModel, GenerationMixin',
         content
     )

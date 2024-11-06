@@ -2,16 +2,18 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from collections from pathlib import Path import defaultdict
-from src.config.config from src.data.mmmu_loader import MMUDataset import ModelConfig
-from src.models.enhanced_transformer import EnhancedTransformer
+from collections import defaultdict
+from pathlib import Path
+from src.config.config import ModelConfig
+from src.data.mmmu_loader import MMUDataset
 import json
+from src.models.enhanced_transformer import EnhancedTransformer
 import logging
 import matplotlib.pyplot as plt
 import os

@@ -2,15 +2,17 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from src.models.transformer from typing import AnyOptionalTuple import TransformerBlock
+from src.models.transformer import TransformerBlock
+from typing import AnyOptionalTuple
 from typing import Tuple
-from typing import Optional import jax
+import jax
+from typing import Optional
 
 Placeholder
 """Module containing specific functionality.""""""docstring.Convert...."""

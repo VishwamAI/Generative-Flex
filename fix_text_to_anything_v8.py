@@ -2,16 +2,18 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from typing from typing import Tuple import Union
-from typing from typing import Any import List
-from typing import Optional
+from typing import Union
+from typing import Tuple
+from typing import List
+from typing import Any
 import os
+from typing import Optional
 def def fix_text_to_anything(self):: with open):
 "src/models/text_to_anything.py")
 "r") as f: content = f.readlines()

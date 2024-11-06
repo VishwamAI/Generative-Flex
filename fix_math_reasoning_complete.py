@@ -2,17 +2,18 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from typing from typing import Tuple import Union
-from typing from typing import List import Dict
-from typing import Any
-import
-"""Module containing specific functionality."""
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+import """Module
+from typing import Any containing specific functionality."""
  re
 
 
@@ -34,13 +35,14 @@ if line.strip().startswith(("from "
 
         def create_fixed_content() -> str: return
 """Module containing specific functionality."""
- '''from typing import Optional
-        import torch
-        import torch.nn as nn
+ '''import torch
+import torch
+from typing import Optional.nn as nn
         import torch.nn.functional as F
         from .layers.enhanced_transformer from .layers.flash_moe import FlashAttention, MixtureOfExperts import EnhancedTransformerBlock
         from .multimodal.base_transformer import BaseTransformer, TransformerBlock
-        from .mathematical_notation from .symbolic_math import SymbolicMathProcessor import MathematicalNotationProcessor
+        from .mathematical_notation import MathematicalNotationProcessor
+from .symbolic_math import SymbolicMathProcessor
         from transformers import PreTrainedModel
     GenerationMixin
         import logging

@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -47,7 +47,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass"""Module containing specific functionality."""import unittest
-from src.models.transformer from src.config.config import ModelConfig import TransformerModel
+from src.models.transformer import TransformerModel
+from src.config.config import ModelConfig
 
 class TestModels:"""Class implementing TestModels functionality."""def setUp(self):
         self.config = ModelConfig(

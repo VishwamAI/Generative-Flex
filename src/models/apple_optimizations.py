@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -91,11 +91,11 @@ x_quant
 
     # Quantize"""= jnp.clip(jnp.round((x_reshaped - zero_point) / scale),2"""-(2 ** (self.num_bits - 1)),...."""** (self.num_bits - 1) - 1)
 
-return"""x_quant = x_quant.astype(jnp.int8)....""""""x_quantscalezero_pointMethod..""""""
-
-
+return"""
+x_quant = x_quant.astype(jnp.int8)....
+x_quantscalezero_pointMethod..
 def def(*args, **kwargs) -> None:
-    """...."""
+"""...."""
 with parameters.
 
     Module

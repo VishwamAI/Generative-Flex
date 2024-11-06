@@ -2,14 +2,14 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from pathlib import Path
 import subprocess
+from pathlib import Path
 import sys
 def def run_black_format(self)::    # Ensure we're using Python 3.12.4 settings    files_to_format = [):
 "src/models/text_to_anything.py",

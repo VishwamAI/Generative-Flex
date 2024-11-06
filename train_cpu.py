@@ -2,15 +2,16 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from accelerate from src.config.training_config import TrainingConfig import Accelerator
-from src.training.train_mmmu import MMUTrainer
+from accelerate import Accelerator
+from src.config.training_config import TrainingConfig
 import logging
+from src.training.train_mmmu import MMUTrainer
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

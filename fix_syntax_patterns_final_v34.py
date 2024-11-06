@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -43,7 +43,8 @@ def fix_train_simple_cot(*args, **kwargs) -> None:
     """Fix syntax in train_simple_cot.py."""
 content = '''"""Training script for simple chain-of-thought model."""
 
-from src.models from src.training.trainer import Trainer import SimpleChainOfThoughtModel
+from src.models import SimpleChainOfThoughtModel
+from src.training.trainer import Trainer
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -72,7 +73,8 @@ def fix_test_training_setup(*args, **kwargs) -> None:
 content = '''"""Test training setup functionality."""
 
 import unittest
-from src.training.trainer import Trainer import torch
+import torch
+from src.training.trainer import Trainer
 from src.models import SimpleModel
 
 class TestTrainingSetup:
@@ -101,7 +103,8 @@ def fix_test_environment(*args, **kwargs) -> None:
     """Fix syntax in test_environment.py."""
 content = '''"""Test environment setup functionality."""
 
-from transformers import AutoModelForCausalLM import torch
+import torch
+from transformers import AutoModelForCausalLM
 from src.utils.environment_setup import EnvironmentSetup
 
 class TestEnvironment:

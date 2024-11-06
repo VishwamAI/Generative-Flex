@@ -2,23 +2,24 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from typing from typing import List import Dict
-from typing from typing import Optional import Any
+from typing import Dict
+from typing import List
+from typing import Any
+from typing import Optional
 from flax import linen as nn
 from torch.utils.data import Dataset, DataLoader
 from typing import Dict,
     ,
     Iterator,
     Optional
-from typing import Optional,
-
 import jax
+from typing import Optional,
 import jax.numpy as jnp
 import json
 import os

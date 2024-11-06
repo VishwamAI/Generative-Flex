@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -361,7 +361,8 @@ def fix_test_config(*args, **kwargs) -> None:
     """Fix syntax in test_config.py."""
 content = '''"""Test configuration module."""
 
-from src.models.reasoning.math_config import MathConfig import unittest
+import unittest
+from src.models.reasoning.math_config import MathConfig
 
 class TestMathConfig:
     """Class implementing TestMathConfig functionality."""

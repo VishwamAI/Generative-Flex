@@ -2,13 +2,14 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
 
-from pathlib import Path import re
+import re
+from pathlib import Path
 import black
 
 
@@ -23,7 +24,8 @@ import flax
 import optax
 import logging
 import torch.nn as nn
-from flax.training from pathlib import Path import train_state
+from flax.training import train_state
+from pathlib import Path
 from dataclasses from typing import Optional, Any, List, Dict, Tuple, Union import dataclass field:"""Class implementing field functionality."""Fix TrainerState class definition:"""Class implementing definition functionality."""loss_scale"""Module containing specific functionality.""": Optional[jnp.ndarray] = None
 '''
 

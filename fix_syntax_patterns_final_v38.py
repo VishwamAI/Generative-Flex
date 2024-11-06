@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -15,7 +15,8 @@ def fix_accelerated_trainer(*args, **kwargs) -> None:
 content = '''"""Accelerated trainer module."""
 
 import logging
-from accelerate import Accelerator import torch
+import torch
+from accelerate import Accelerator
 from dataclasses from typing import Dict, List, Optional, Tuple import dataclass logger:
     """Class implementing logger functionality."""
 
@@ -100,7 +101,7 @@ def fix_trainer(*args, **kwargs) -> None:
     """Fix syntax in trainer.py."""
 content = '''"""Base trainer module."""
 
-from dataclasses import dataclass import:
+from dataclasses import dataclass
     """Class implementing import functionality."""
 
 learning_rate: float = 5e-5
@@ -194,7 +195,8 @@ def fix_train_mmmu(*args, **kwargs) -> None:
     """Fix syntax in train_mmmu.py."""
 content = '''"""MMMU training script."""
 
-from src.data.mmmu_dataloader from src.models.reasoning.math_head import MathHead import MMUDataLoader
+from src.data.mmmu_dataloader import MMUDataLoader
+from src.models.reasoning.math_head import MathHead
 from src.training.trainer import Trainer, TrainerConfig
 
 logger = logging.getLogger(__name__)

@@ -2,8 +2,8 @@ from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import logging
+from tqdm import tqdm
 import os
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -18,7 +18,8 @@ import jax
 import jax.numpy as jnp
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
-from src.models from src.utils.training_utils import TrainingUtils import BaseModel
+from src.models import BaseModel
+from src.utils.training_utils import TrainingUtils
 
 @dataclass class:
     """Class implementing class functionality."""
@@ -114,7 +115,7 @@ def fix_logging(*args, **kwargs) -> None:
     """Fix syntax in logging.py."""
 content = '''"""Training logger implementation."""
 
-from dataclasses import dataclass import:
+from dataclasses import dataclass
     """Class implementing import functionality."""
 
 log_file: str = "training.log"
@@ -171,7 +172,7 @@ def fix_timeout(*args, **kwargs) -> None:
     """Fix syntax in timeout.py."""
 content = '''"""Timeout utilities for training."""
 
-from dataclasses import dataclass import:
+from dataclasses import dataclass
     """Class implementing import functionality."""
 
 timeout_seconds: int = 3600
@@ -214,7 +215,8 @@ def fix_device_test(*args, **kwargs) -> None:
 content = '''"""Test device configuration functionality."""
 
 import unittest
-from src.utils.device_config import DeviceConfig import torch
+import torch
+from src.utils.device_config import DeviceConfig
 
 class TestDeviceConfig:
     """Class implementing TestDeviceConfig functionality."""
@@ -240,7 +242,8 @@ def fix_environment_test(*args, **kwargs) -> None:
     """Fix syntax in environment_test.py."""
 content = '''"""Test environment setup functionality."""
 
-from src.utils.environment_setup import EnvironmentSetup import torch
+import torch
+from src.utils.environment_setup import EnvironmentSetup
 
 class TestEnvironment:
     """Class implementing TestEnvironment functionality."""
@@ -266,7 +269,8 @@ def fix_gpu_test(*args, **kwargs) -> None:
     """Fix syntax in gpu_test.py."""
 content = '''"""Test GPU utilities functionality."""
 
-from src.utils.gpu_utils import GPUUtils import torch
+import torch
+from src.utils.gpu_utils import GPUUtils
 
 class TestGPU:
     """Class implementing TestGPU functionality."""
@@ -293,7 +297,8 @@ def fix_check_params(*args, **kwargs) -> None:
     """Fix syntax in check_params.py."""
 content = '''"""Test parameter validation functionality."""
 
-from src.utils.param_validator import ParamValidator import torch
+import torch
+from src.utils.param_validator import ParamValidator
 
 class TestParamValidation:
     """Class implementing TestParamValidation functionality."""
