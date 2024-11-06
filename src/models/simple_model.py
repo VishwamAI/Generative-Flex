@@ -9,10 +9,12 @@ import os
 import torch
 
 
+
 from dataclasses import dataclass
 from typing import Optional
 import torch
 import torch.nn as nn
+
 
 @dataclass
 class ModelConfig:
@@ -20,9 +22,9 @@ class ModelConfig:
     Class implementing class functionality.
     """
 
-    Module containing specific functionality."""
+    Module containing specific functionality.
     A simple neural network model..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Forward pass through the model.
     
     Args:

@@ -9,17 +9,21 @@ import os
 import torch
 
 
+
 """
 Module containing specific functionality.
 """
 from typing import Dict, List, Optional, Tuple
 
 
+
 import torch
 import torch.nn as nn
 
 
+
 from dataclasses import dataclass
+
 
 
 @dataclass
@@ -28,15 +32,15 @@ class ModelConfig:
     Class implementing class functionality.
     """
 
-    Module containing specific functionality."""
+    Module containing specific functionality.
     Configuration for mathematical reasoning..
     
     Class for MathReasoning..
     
     Mathematical reasoning module..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Method for __init__..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Method for forward..
     """
         # Route input to experts

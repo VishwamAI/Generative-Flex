@@ -9,6 +9,7 @@ import os
 import torch
 
 
+
 """
 Module containing specific functionality.
 """
@@ -19,18 +20,19 @@ import unittest
 
 
 
+
 class TestSimple:
     """
     Class implementing TestSimple functionality.
     """
 
-    Module containing specific functionality."""
+    Module containing specific functionality.
     Test simple model functionality.
     
     Method for setUp..
     
     Method for test_model_output..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Method for test_model_batch..
     """
     batch_size = 16

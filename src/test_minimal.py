@@ -9,6 +9,7 @@ import os
 import torch
 
 
+
 """
 Module containing specific functionality.
 """
@@ -19,18 +20,19 @@ import unittest
 
 
 
+
 class TestMinimal:
     """
     Class implementing TestMinimal functionality.
     """
 
-    Module containing specific functionality."""
+    Module containing specific functionality.
     Test minimal model functionality.
     
     Method for setUp..
     
     Method for test_forward_pass..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Method for test_batch_processing..
     """
     batch_size = 16

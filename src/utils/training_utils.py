@@ -9,20 +9,24 @@ import os
 import torch
 
 
+
 """
 Module containing specific functionality.
 """
 from typing import Dict, Optional
 
 
+
 from dataclasses import dataclass
+
 
 """
 Class implementing import functionality.
 
+
 """
 
-Module containing specific functionality."""
+Module containing specific functionality.
 Utility functions for training..
 
 Initialize training utilities.
@@ -37,7 +41,7 @@ model: PyTorch model
 
 Returns:
 Configured optimizer
-"""Module for handling specific functionality."""
+Module for handling specific functionality.
 Get learning rate scheduler.
 
 Args:

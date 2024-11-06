@@ -9,11 +9,13 @@ import os
 import torch
 
 
+
 """
 Module containing specific functionality.
 """
 from dataclasses import dataclass
 from typing import List, Optional
+
 
 @dataclass
 class ModelConfig:

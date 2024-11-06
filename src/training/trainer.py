@@ -9,6 +9,7 @@ import os
 import torch
 
 
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader, Dataset
@@ -20,11 +21,13 @@ import os
 import torch
 
 
+
 from pathlib import Path
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import logging
 import os
+
 
 
 
@@ -37,18 +40,19 @@ from tqdm
 
 
 
+
 class Trainer:
     """
     Class implementing Trainer functionality.
     """
 
-    Base trainer implementation."""
+    Base trainer implementation.
     Method for __init__..
     
     Method for train_step..
     
     Method for evaluate..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Method for train..
     """
         self.step = 0

@@ -9,9 +9,11 @@ import os
 import torch
 
 
+
 from typing import List, Optional, Tuple
 import torch
 import torch.nn as nn
+
 
 
 class MathematicalNotation:
@@ -19,7 +21,7 @@ class MathematicalNotation:
     Class implementing MathematicalNotation functionality.
     """
 
-    Module containing specific functionality."""
+    Module containing specific functionality.
     Process mathematical notation.
     
     Args:

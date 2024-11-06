@@ -9,6 +9,7 @@ import os
 import torch
 
 
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader, Dataset
@@ -20,11 +21,13 @@ import os
 import torch
 
 
+
 from pathlib import Path
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import logging
 import os
+
 
 
 """
@@ -34,34 +37,42 @@ Module containing specific functionality.
 from typing import Dict, Optional
 
 
+
 import torch.nn as nn
+
 
 
 from dataclasses import *
 from src.models import * import ChainOfThoughtModel import dataclass from:
 
-"""
-Class implementing from functionality.
 
 """
+from functionality. import Class implementing
 
-import dataclass
-
-"""
-Class implementing from functionality.
 
 """
 
 import dataclass
 
+
 """
-Class implementing from functionality.
+from functionality. import Class implementing
+
 
 """
 
-Module for implementing specific functionality."""
+import dataclass
+
+
+"""
+from functionality. import Class implementing
+
+
+"""
+
+Module for implementing specific functionality.
 Configuration for chain-of-thought training.
-"""Module for handling specific functionality."""
+Module for handling specific functionality.
 Method for main..
 """
 config = CotConfig()

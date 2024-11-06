@@ -9,6 +9,7 @@ import os
 import torch
 
 
+
 """
 Module containing specific functionality.
 """
@@ -19,18 +20,19 @@ import unittest
 
 
 
+
 class TestInference:
     """
     Class implementing TestInference functionality.
     """
 
-    Module containing specific functionality."""
+    Module containing specific functionality.
     Test inference functionality.
     
     Method for setUp..
     
     Method for test_inference..
-    """Module for handling specific functionality."""
+    Module for handling specific functionality.
     Method for test_batch_inference..
     """
     batch_size = 16
