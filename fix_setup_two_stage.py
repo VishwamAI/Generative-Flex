@@ -1,3 +1,8 @@
+import re
+
+def fix_setup_py():
+    """Fix setup.py to use a two-stage installation process."""
+    setup_content = '''
 import os
 from setuptools import setup, find_packages
 
@@ -73,3 +78,10 @@ setup(
         "Programming Language :: Python :: 3.12",
     ],
 )
+'''
+
+    with open('setup.py', 'w') as f:
+        f.write(setup_content.strip() + '\n')
+
+if __name__ == '__main__':
+    fix_setup_py()
