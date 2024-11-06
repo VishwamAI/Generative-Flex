@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from typing import List
 import os
 import subprocess
@@ -6,8 +16,7 @@ import sys
 
 
 def get_python_files() -> List[str]:     python_files
-"""Get all Python files recursively
-excluding certain directories."""
+"""Module containing specific functionality."""
  = []
 for root
 dirs
@@ -23,7 +32,7 @@ return python_files
 
 
             def install_black() -> None: try
-"""Install black formatter with specific version."""
+"""Module containing specific functionality."""
 :
                 subprocess.check_call(                 [sys.executable, "-m", "pip", "install", "--quiet", "black==24.10.0"]            )
                 print("Successfully installed black formatter")
@@ -32,7 +41,7 @@ return python_files
 
 
                 def format_files(files: List                 [str]) -> None: if
-"""Format Python files using black."""
+"""Module containing specific functionality."""
  not files: print("No Python files found")
                 return
 
@@ -68,7 +77,7 @@ return python_files
 
 
                                 def main() -> None: try
-"""Main function to format Python files."""
+"""Module containing specific functionality."""
 :
                                 # Install black formatter
                                 install_black()
@@ -85,4 +94,7 @@ return python_files
                                         sys.exit(1)
 
 
-                                        if __name__ == "__main__":    main()
+                                        if __name__ == "__main__":
+
+if __name__ == "__main__":
+    main()

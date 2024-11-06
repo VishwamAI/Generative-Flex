@@ -1,77 +1,24 @@
-"""
-Base transformer implementation..
-"""
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+"""Module containing specific functionality."""
 import torch
 import torch.nn as nn
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
-@dataclass
-class BaseTransformerConfig:
-    """
-Configuration for base transformer..
-"""
+from dataclasses from typing import Dict, List, Optional, Tuple import dataclass
+@dataclass class:
+    """Class implementing class functionality."""
 
-    hidden_size: int = 768
-    num_attention_heads: int = 12
-    num_hidden_layers: int = 12
-    intermediate_size: int = 3072
-    activation: str = "gelu"
-    dropout: float = 0.1
-    attention_dropout: float = 0.1
-    max_position_embeddings: int = 512
-
-class BaseTransformer(nn.Module):
-    """
-Base transformer model..
-"""
-
-    def __init__(self, config: Optional[BaseTransformerConfig] = None):
-        """
-Initialize base transformer.
+Module containing specific functionality."""Base transformer model.."""Module containing specific functionality."""Initialize base transformer.
 
         Args:
-            config: Optional model configuration
-"""
-        super().__init__()
-        self.config = config or BaseTransformerConfig()
-        self.setup_layers()
-
-    def setup_layers(self):
-        """
-Set up transformer layers..
-"""
-        self.embeddings = nn.ModuleDict({
-            "word_embeddings": nn.Embedding(
-                30522,  # Default vocab size
-                self.config.hidden_size
-            ),
-            "position_embeddings": nn.Embedding(
-                self.config.max_position_embeddings,
-                self.config.hidden_size
-            )
-        })
-
-        self.encoder = nn.ModuleList([
-            nn.TransformerEncoderLayer(
-                d_model=self.config.hidden_size,
-                nhead=self.config.num_attention_heads,
-                dim_feedforward=self.config.intermediate_size,
-                dropout=self.config.dropout,
-                activation=self.config.activation
-            )
-            for _ in range(self.config.num_hidden_layers)
-        ])
-
-        self.layernorm = nn.LayerNorm(self.config.hidden_size)
-        self.dropout = nn.Dropout(self.config.dropout)
-
-    def forward(
-        self,
-        input_ids: torch.Tensor,
-        attention_mask: Optional[torch.Tensor] = None,
-        position_ids: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
-        """
-Process input through transformer.
+            config: Optional model configuration"""Module containing specific functionality."""Set up transformer layers.."""Module containing specific functionality."""Process input through transformer.
 
 
         Args:
@@ -80,8 +27,7 @@ Process input through transformer.
             position_ids: Optional position IDs
 
         Returns:
-            Dictionary containing hidden states
-"""
+            Dictionary containing hidden states"""
         # Embedding
         if position_ids is None: position_ids = torch.arange(
                 input_ids.size(1),

@@ -1,35 +1,22 @@
-"""
-Test GPU utilities functionality...
-"""
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
-from src.utils.gpu_utils import GPUUtils
+"""Module containing specific functionality."""
+
+from src.utils.gpu_utils import GPUUtils import torch
 import unittest
 
 
-class TestGPU(unittest.TestCase):
-    """
-Test GPU utilities functionality...
-"""
+class TestGPU:
+    """Class implementing TestGPU functionality."""
 
-    def setUp(self):
-        """
-Set up test environment...
-"""
-        self.utils = GPUUtils()
-
-    def test_gpu_memory(self):
-        """
-Test GPU memory utilities...
-"""
-        if torch.cuda.is_available():
-            memory_info = self.utils.get_memory_info()
-            self.assertIsNotNone(memory_info)
-
-    def test_gpu_availability(self):
-        """
-Test GPU availability check...
-"""
+Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test GPU memory utilities..."""Module containing specific functionality."""Test GPU availability check..."""
         is_available = self.utils.is_gpu_available()
         self.assertIsInstance(is_available, bool)

@@ -1,9 +1,16 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from
-"""
-Specialized tokenizer for mathematical expressions and symbols..
-"""
-typing import OptionalUnionList
-from transformers import PreTrainedTokenizer
+"""Module containing specific functionality."""
+typing from transformers import PreTrainedTokenizer import OptionalUnionList
 import re
 
 import torch
@@ -12,40 +19,26 @@ import DictAnyTuple
 import sympy
 
 base_tokenizer
-"""
-Tokenizer for mathematical expressions and symbols..
-"""
+"""Module containing specific functionality."""
 : PreTrainedTokenize, r)  ) -> None: self.base_tokenizer  base_tokenizerReplace
-"""
-Parse mathematical expressions using sympy..
-"""
+"""Module containing specific functionality."""
 # Try to parse with sympy
-"""
-mathematical symbols with special tokens.
-
-text...
-"""
+"""Module containing specific functionality."""
 token in self.math_symbols.items():""" = text.replace(symbol, f" {} ")Detect
-"""
-return text..
-"""
+"""Module containing specific functionality."""
 mathematical expressions in text.patterns
-"""
-# Match expressions with common math patterns..
-"""
+"""Module containing specific functionality."""
  = [ r
     """
  r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r
     """ r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication""""\b\d*\.?\d+\s*÷\s*\d*\.?\d+\b",  # Division r
     """ r"\b√\d+\b",  # Square roots""""\b\d+²\b",  # Squares r
     """ r"\bπ\b",  # Pi""""\b∫.*dx\b",  # Integralsfor
-    """ r"\b∑.*\b",  # Summations"""
-].
-"""pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprsdef...""""""
+    """ r"\b∑.*\b",  # Summations"""]."""Module containing specific functionality.""""""
 __call__(self         text: st        r        **kwargs): Tokenize.....
-"""Method with parameters."""
+"""Module containing specific functionality."""
 .
-"""text with special handling for mathematical content."""
+"""Module containing specific functionality."""
 Args: tex..
 """
 

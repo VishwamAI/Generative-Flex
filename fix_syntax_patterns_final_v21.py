@@ -1,44 +1,42 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_imports_and_docstrings(content):
+def fix_imports_and_docstrings(*args, **kwargs) -> None:
     """Fix import statements and docstrings."""
-    # Fix transformers import with GenerationMixin
+# Fix transformers import with GenerationMixin
     content = re.sub(
         r'from transformers import PreTrainedModel import GenerationMixin',
         'from transformers import PreTrainedModel, GenerationMixin',
         content
     )
 
-    # Fix dataclass imports with docstring
-    content = re.sub(
-        r'from """[^"]+""" import dataclasses import dataclass, field',
-        '"""Configuration for text-to-anything generation."""\nfrom dataclasses import dataclass, field',
-        content
-    )
+    # Fix dataclass imports:
+    """Class implementing imports functionality."""
 
-    # Fix enhanced_transformer import with logger
-    content = re.sub(
-        r'from src\.models\.enhanced_transformer import EnhancedTransformer import logger',
-        'from src.models.enhanced_transformer import EnhancedTransformer\nfrom src.utils.logging import logger',
-        content
-    )
+',
+        'import json\n\nclass SimpleModel:
+    """Class implementing SimpleModel functionality."""
 
-    # Fix json import with nn.Module
-    content = re.sub(
-        r'import json\(nn\.Module\):',
-        'import json\n\nclass SimpleModel(nn.Module):\n    """Simple model class."""',
+\n    """Simple model class."""',
         content
     )
 
     return content
 
-def fix_class_definitions(content):
-    """Fix class definitions and inheritance."""
-    # Fix nn.Module inheritance with docstring
-    content = re.sub(
-        r'\(nn\.Module\):\s*$',
-        '(nn.Module):\n    """Base model class."""\n\n    def __init__(self):\n        super().__init__()',
+def fix_class_definitions(*args, **kwargs) -> None:
+    """Fix class definitions:"""
+Class implementing definitions functionality."""\s*$',
+        '(nn.Module):\n"""Base model class."""\n\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
         content,
         flags=re.MULTILINE
     )
@@ -46,16 +44,14 @@ def fix_class_definitions(content):
     # Fix unittest.TestCase inheritance
     content = re.sub(
         r'\(unittest\.TestCase\):\s*$',
-        '(unittest.TestCase):\n    """Test case class."""\n\n    def setUp(self):\n        super().setUp()',
+        '(unittest.TestCase):\n"""Test case class."""\n\n    def setUp(self):\n        super().setUp()',
         content,
         flags=re.MULTILINE
     )
 
     return content
 
-def fix_method_definitions(content):
-    """Fix method definitions and parameters."""
-    # Fix parameter definitions
+def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions and parameters."""# Fix parameter definitions
     content = re.sub(
         r'(\w+):\s*(\w+)\s*=\s*(\d+)',
         r'\1: \2 = \3',
@@ -65,7 +61,7 @@ def fix_method_definitions(content):
     # Fix docstring placement
     content = re.sub(
         r'^\s*"""([^"]+)"""',
-        lambda m: f'    """{m.group(1).strip()}."""',
+        lambda m: f'"""{m.group(1).strip()}."""',
         content,
         flags=re.MULTILINE
     )
@@ -73,26 +69,14 @@ def fix_method_definitions(content):
     # Fix method definitions with type hints
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*([^)]*)\)\s*->\s*None:\s*([^:]+)',
-        lambda m: f'def {m.group(1)}({m.group(2).strip()}) -> None:\n    """{m.group(3).strip()}."""',
+        lambda m: f'def {m.group(1)}({m.group(2).strip()}) -> None:\n"""{m.group(3).strip()}."""',
         content,
         flags=re.MULTILINE
     )
 
     return content
 
-def fix_indentation_and_spacing(content):
-    """Fix indentation and spacing issues."""
-    # Fix indentation of class methods
-    content = re.sub(
-        r'^(\s*)def\s+',
-        r'    \1def ',
-        content,
-        flags=re.MULTILINE
-    )
-
-    # Fix spacing around type hints
-    content = re.sub(
-        r'(\w+)\s*:\s*(\w+)',
+def fix_indentation_and_spacing(*args, **kwargs) -> None:"""Fix indentation and spacing issues."""# Fix indentation of class methods:"""Class implementing methods functionality."""\s*(\w+)',
         r'\1: \2',
         content
     )
@@ -107,9 +91,8 @@ def fix_indentation_and_spacing(content):
 
     return content
 
-def process_file(filepath):
-    """Process a single file."""
-    print(f"Processing {filepath}")
+def process_file(*args, **kwargs) -> None:"""Process a single file."""
+print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -132,9 +115,9 @@ def process_file(filepath):
     except Exception as e:
         print(f"Error processing {filepath}: {str(e)}")
 
-def main():
+def main(*args, **kwargs) -> None:
     """Process files with syntax errors."""
-    problem_files = [
+problem_files = [
         'src/models/reasoning/mathematical_notation.py',
         'src/models/reasoning/symbolic_math.py',
         'src/models/reasoning/math_reasoning.py',

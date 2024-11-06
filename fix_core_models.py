@@ -1,8 +1,18 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from pathlib import Path
 import os
 import re
 def def fix_method_bodies(self content):         lines
-"""Fix method bodies and their indentation."""
+"""Module containing specific functionality."""
  = content.split):
 fixed_lines = []
 in_method = False
@@ -28,7 +38,7 @@ method_indent = current_indent
 
 
             def def fix_docstrings_and_comments(self             content):         lines
-"""Fix docstrings and comments formatting."""
+"""Module containing specific functionality."""
  = content.split):
                 fixed_lines = []
                 in_docstring = False
@@ -37,8 +47,7 @@ method_indent = current_indent
         for line in lines: stripped = line.lstrip()            current_indent = len(line) - len(stripped)
 
         if 'Process
-"""' in stripped: ifnotin_docstring: in_docstring = True                    docstring_indent = current_indent
-            if not stripped.endswith('"""
+"""Module containing specific functionality."""
 '):
                 # Multi-line docstring start
                 fixed_lines.append(line)
@@ -52,7 +61,7 @@ method_indent = current_indent
                 return "\n".join(fixed_lines)
 
 
-                    def def main(self)::                    """ core model files."""        core_files = [):
+                    def def main(self)::                    """core model files."""        core_files = [):
                         "src/models/base_model.py",
                         "src/models/enhanced_transformer.py",
                         "src/models/transformer.py",

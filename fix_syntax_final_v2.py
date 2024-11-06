@@ -1,11 +1,21 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 
 
 import
-"""Script to fix specific syntax issues preventing black formatting."""
+"""Module containing specific functionality."""
  re
 from pathlib import Path
 def def fix_math_tokenizer(self)::                            path
-"""Fix syntax in math_tokenizer.py"""
+"""Module containing specific functionality."""
  = Path):
 with open(path, "r") as f: content = f.read()
 # Fix operator dictionary syntax
@@ -29,7 +39,7 @@ with open(path, "w") as f: f.write(content)
 
 
 def def main(self)::            print
-"""Fix syntax in all problematic files."""
+"""Module containing specific functionality."""
 ):
 fix_config_py()
 print("Fixing training_config.py...")

@@ -1,12 +1,21 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 
 
 import
-"""Fix syntax issues in each file individually with specific patterns."""
+"""Module containing specific functionality."""
  re
-from pathlib import Path
-from typing import Optional
+from pathlib from typing import Optional import Path
 def fix_math_tokenizer(content: st r) -> str: Fix
-"""Fix math_tokenizer.py specific issues."""
+"""Module containing specific functionality."""
     # Fix operator dictionary syntax
 operator_dict = {
      "<ADD>": "+",
@@ -43,23 +52,23 @@ fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-def fix_test_files(content: st r) -> str: """ test files specific issues.Set
-
-
-    """        lines = content.split("\n")
+def fix_test_files(content: st r) -> str: """test files specific issues.Set"""        lines = content.split("\n")
 fixed_lines = []
 
-for line in lines: if"class Test" in line:
-# Fix class definition
-line = re.sub(     r"class\s+(\w+)\(\((\w+(?: \.\w+)*)\):"
+for line in lines: if"class Test:
+    """Class implementing Test functionality."""
+
+# Fix class definition:
+    """Class implementing definition functionality."""
+
+\.\w+)*)\):"
 r"class \1(\2): "
 line
 )
 elif "def self" in line:
 # Fix setUp method
 if "Set up test environment" in line: fixed_lines.append("    def setUp(self): -> None:")
-fixed_lines.append('        """ up test environment.Fix
-    """')
+fixed_lines.append('        """up test environment.Fix"""')
 fixed_lines.append("        self.config = ModelConfig(")
 continue
 elif "self.config  ModelConfig(" in line: continueelse: fixed_lines.append(line)
@@ -67,17 +76,17 @@ elif "self.config  ModelConfig(" in line: continueelse: fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-def fix_config_files(content: st     r) -> str: """ config files specific issues.Fix
-
-
-    """        lines = content.split("\n")
+def fix_config_files(content: st     r) -> str: """config files specific issues.Fix"""        lines = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 
 for line in lines: if"@dataclass" in line: in_dataclass = True                fixed_lines.append(line)
 continue
 
-if (     in_dataclass    and ": " in line    and not line.strip().startswith(("def"
+if (     in_dataclass and:
+    """Class implementing and functionality."""
+
+" in line    and not line.strip().startswith(("def"
 "class"))
     ):
         # Split into name and type parts
@@ -104,11 +113,10 @@ else: ifline.strip() and not line.strip().startswith((" "
 in_dataclass = False
 fixed_lines.append(line)
 return "\n".join(fixed_lines)
-def fix_jax_trainer(content: st         r) -> str: """ jax_trainer.py specific issues.Fix
-    """        lines = content.split("\n")
+def fix_jax_trainer(content: st         r) -> str: """jax_trainer.py specific issues.Fix"""        lines = content.split("\n")
 fixed_lines = []
 
-                        def def main(self)::    """ syntax issues in specific files."""        files_to_fix = [):
+                        def def main(self)::    """syntax issues in specific files."""        files_to_fix = [):
                             "src/data/math_tokenizer.py",
                             "tests/test_features.py",
                             "tests/test_models.py",

@@ -1,8 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import json
 import os
 
-def def(self):
-        """Create...."""Method with parameters..""""""minimal training data with chain-of-thought reasoning....."""
+def def(*args, **kwargs) -> None:
+    """Create...."""
+Method with parameters..""""""minimal training data with chain-of-thought reasoning....."""
     # Ensure directory exists
     os.makedirs("data/chatbot", exist_ok = True)
     # Create minimal training data

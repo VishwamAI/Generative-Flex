@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 import os
 
-def fix_file_syntax(file_path):
+def fix_file_syntax(*args, **kwargs) -> None:
     """Fix syntax issues in a specific file."""
-    print(f"Processing {file_path}...")
+print(f"Processing {file_path}...")
 
     with open(file_path, 'r') as f:
         content = f.read()
@@ -16,9 +26,7 @@ def fix_file_syntax(file_path):
         flags=re.DOTALL
     )
 
-    # Fix class inheritance
-    content = re.sub(
-        r'class\s+(\w+)\s*\(\s*\):',
+    # Fix class inheritance:"""Class implementing inheritance functionality."""',
         r'class \1(object):',
         content
     )
@@ -48,9 +56,8 @@ def fix_file_syntax(file_path):
     with open(file_path, 'w') as f:
         f.write(content)
 
-def process_failing_files():
-    """Process files that are failing to reformat."""
-    failing_files = [
+def process_failing_files(*args, **kwargs) -> None:"""Process files that are failing to reformat."""
+failing_files = [
         "src/models/layers/enhanced_transformer.py",
         "src/models/multimodal/multimodal_transformer.py",
         "src/training/trainer.py",

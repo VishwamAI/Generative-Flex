@@ -1,46 +1,23 @@
-"""
-Test inference functionality.
-"""
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
-from src.models import SimpleModel
+"""Module containing specific functionality."""
+
+from src.models import SimpleModel import torch
 import unittest
 
 
 class TestInference:
+    """Class implementing TestInference functionality."""
 
-
-    """
-Class for TestInference..
-""""""
-Test inference functionality.
-"""
-
-    def setUp(self):
-
-
-        """
-Method for setUp..
-"""
-    self.model = SimpleModel()
-
-    def test_inference(self):
-
-
-        """
-Method for test_inference..
-"""
-    input_tensor = torch.randn(1, 32)
-    output = self.model(input_tensor)
-    self.assertEqual(output.shape[-1], 32)
-
-    def test_batch_inference(self):
-
-
-        """
-Method for test_batch_inference..
-"""
+Module containing specific functionality."""Test inference functionality."""Module containing specific functionality."""Method for setUp.."""Module containing specific functionality."""Method for test_inference.."""Module containing specific functionality."""Method for test_batch_inference.."""
     batch_size = 16
     input_tensor = torch.randn(batch_size, 32)
     output = self.model(input_tensor)

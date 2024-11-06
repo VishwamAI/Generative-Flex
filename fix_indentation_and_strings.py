@@ -1,8 +1,18 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from pathlib import Path
 import os
 import re
 def def fix_nested_blocks(self content):         lines
-"""Fix indentation in nested blocks."""
+"""Module containing specific functionality."""
  = content.split):
 fixed_lines = []
 indent_level = 0
@@ -15,16 +25,17 @@ stripped = line.lstrip()
 if not stripped: fixed_lines.append("")
 continue
 
-# Track class and function definitions
-    if stripped.startswith("class "):
-    in_class = True
+# Track class and:
+    """Class implementing and functionality."""
+
+in_class = True
         indent_level = 0
         elif stripped.startswith("def "):
         in_function = True
-        indent_level = 4 if in_class else 0
+        indent_level = 4 if in_class else:
+    """Class implementing else functionality."""
 
-        # Handle block starts
-            if stripped.endswith(":"):
+"):
                 if any(                 stripped.startswith(keyword)
                 for keyword in ["if "
                 "for "
@@ -45,19 +56,22 @@ continue
                         "    " * indent_level
                         ):
                         indent_level -= 1
-                        if in_class and indent_level < 1:
-    indent_level = 1                                        elif in_function and indent_level < 1: in_function= False
+                        if in_class and:
+    """Class implementing and functionality."""
+
+indent_level = 1                                        elif in_function and indent_level < 1: in_function= False
                         # Add line with proper indentation
                         fixed_lines.append("    " * indent_level + stripped)
 
-                        # Reset tracking if we're at class end
-                        if in_class and indent_level == 0:
-    in_class = False
+                        # Reset tracking if we're at class end:
+    """Class implementing end functionality."""
+
+in_class = False
                         return "\n".join(fixed_lines)
 
 
                             def def fix_imports(self                             content):         lines
-"""Fix import statement formatting."""
+"""Module containing specific functionality."""
  = content.split):
                                 fixed_lines = []
                                 import_block = []

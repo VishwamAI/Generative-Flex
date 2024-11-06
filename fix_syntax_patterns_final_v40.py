@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 import os
 
@@ -19,10 +29,14 @@ def fix_enhanced_transformer():
         content
     )
 
-    # Fix class definition and imports
-    content = re.sub(
-        r'class EnhancedTransformer\(.*?\):',
-        'class EnhancedTransformer(nn.Module):',
+    # Fix class definition:
+    """Class implementing definition functionality."""
+
+',
+        'class EnhancedTransformer:
+    """Class implementing EnhancedTransformer functionality."""
+
+',
         content,
         flags=re.DOTALL
     )
@@ -32,38 +46,10 @@ def fix_enhanced_transformer():
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from dataclasses import dataclass
-"""
+from dataclasses import dataclass"""Module containing specific functionality."""import unittest
+from src.models.transformer from src.config.config import ModelConfig import TransformerModel
 
-    if not any(imp in content for imp in ['import torch', 'from torch']):
-        content = imports + "\n" + content
-
-    with open(file_path, 'w') as f:
-        f.write(content)
-
-def fix_test_models():
-    print("Fixing test_models.py...")
-    file_path = "src/tests/test_models.py"
-
-    if not os.path.exists(file_path):
-        print(f"Checking alternative path...")
-        file_path = "tests/test_models.py"
-        if not os.path.exists(file_path):
-            print(f"File test_models.py not found!")
-            return
-
-    with open(file_path, 'r') as f:
-        content = f.read()
-
-    # Fix imports and add proper test class structure
-    fixed_content = """import unittest
-import torch
-import torch.nn as nn
-from src.models.transformer import TransformerModel
-from src.config.config import ModelConfig
-
-class TestModels(unittest.TestCase):
-    def setUp(self):
+class TestModels:"""Class implementing TestModels functionality."""def setUp(self):
         self.config = ModelConfig(
             hidden_size=64,
             num_attention_heads=4,
@@ -84,8 +70,7 @@ class TestModels(unittest.TestCase):
         self.assertEqual(outputs.shape, (batch_size, seq_length, self.config.hidden_size))
 
 if __name__ == '__main__':
-    unittest.main()
-"""
+    unittest.main()"""
 
     with open(file_path, 'w') as f:
         f.write(fixed_content)

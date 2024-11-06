@@ -1,12 +1,22 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_utils_syntax(content):
+def fix_utils_syntax(*args, **kwargs) -> None:
     """Fix syntax issues specific to utils files."""
-    # Fix device config class
-    content = re.sub(
-        r'def\s*$',
-        r'def __init__(self):\n        """Initialize device configuration."""\n        pass',
+# Fix device config class content:
+    """Class implementing content functionality."""
+
+\n        """Initialize device configuration."""\n        pass',
         content,
         flags=re.MULTILINE
     )
@@ -14,7 +24,7 @@ def fix_utils_syntax(content):
     # Fix environment setup
     content = re.sub(
         r'__device_config\s*=\s*setup_device_config\(\)',
-        r'def __init__(self):\n        """Initialize environment setup."""\n        self.__device_config = self.setup_device_config()',
+        r'def __init__(self, *args, **kwargs) -> None:\n        """Initialize environment setup."""\n        self.__device_config = self.setup_device_config()',
         content,
         flags=re.MULTILINE
     )
@@ -29,9 +39,9 @@ def fix_utils_syntax(content):
 
     return content
 
-def fix_test_syntax(content):
+def fix_test_syntax(*args, **kwargs) -> None:
     """Fix syntax issues specific to test files."""
-    # Fix pytest fixture
+# Fix pytest fixture
     content = re.sub(
         r'@pytest\.fixture\s*$',
         r'@pytest.fixture\ndef setup():\n    """Test setup fixture."""\n    return None',
@@ -39,10 +49,11 @@ def fix_test_syntax(content):
         flags=re.MULTILINE
     )
 
-    # Fix test class inheritance
-    content = re.sub(
-        r'\(nn\.Module\):\s*$',
-        r'(nn.Module):\n    """Test module class."""\n    def __init__(self):\n        super().__init__()',
+    # Fix test class inheritance:
+    """Class implementing inheritance functionality."""
+
+\s*$',
+        r'(nn.Module):\n    """Test module class."""\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
         content,
         flags=re.MULTILINE
     )
@@ -65,9 +76,9 @@ def fix_test_syntax(content):
 
     return content
 
-def fix_timeout_syntax(content):
+def fix_timeout_syntax(*args, **kwargs) -> None:
     """Fix syntax issues in timeout.py."""
-    # Fix Exception syntax
+# Fix Exception syntax
     content = re.sub(
         r'\(Exception\):\s*pas,\s*s',
         r'(Exception):\n    """Timeout exception."""\n    pass',
@@ -75,9 +86,9 @@ def fix_timeout_syntax(content):
     )
     return content
 
-def process_file(filepath):
+def process_file(*args, **kwargs) -> None:
     """Process a single file."""
-    print(f"Processing {filepath}")
+print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -101,9 +112,9 @@ def process_file(filepath):
     except Exception as e:
         print(f"Error processing {filepath}: {str(e)}")
 
-def main():
+def main(*args, **kwargs) -> None:
     """Process specific files that are failing Black formatting."""
-    target_files = [
+target_files = [
         'src/utils/device_config.py',
         'src/utils/device_test.py',
         'src/utils/environment_test.py',

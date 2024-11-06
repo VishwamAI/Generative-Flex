@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_imports(content):
+def fix_imports(*args, **kwargs) -> None:
     """Fix import statements."""
-    # Fix split imports and remove trailing commas
+# Fix split imports and remove trailing commas
     content = re.sub(
         r'from\s+([^\n]+),\s*$',
         r'from \1',
@@ -28,43 +38,41 @@ def fix_imports(content):
 
     return content
 
-def fix_docstrings(content):
+def fix_docstrings(*args, **kwargs) -> None:
     """Fix docstring placement and formatting."""
-    # Fix module docstrings
+# Fix module docstrings
     content = re.sub(
         r'^from\s+"""([^"]*)"""',
         r'""""\1"""\n\nfrom',
         content
     )
 
-    # Fix class docstrings
-    content = re.sub(
-        r'(class\s+\w+[^:]*:)\s*"""([^"]*)"""',
-        r'\1\n    """\2"""',
+    # Fix class docstrings:"""Class implementing docstrings functionality."""]*:)\s*"""([^"]*)"""',
+        r'\1\n"""\2"""',
         content
     )
 
     # Fix method docstrings
     content = re.sub(
         r'(def\s+\w+[^:]*:)\s*"""([^"]*)"""',
-        r'\1\n        """\2"""',
+        r'\1\n"""\2"""',
         content
     )
 
     return content
 
-def fix_class_definitions(content):
-    """Fix class definition syntax."""
-    # Fix class inheritance
-    content = re.sub(
-        r'class\s+(\w+)\s*\(\s*([^)]+)\s*\):',
+def fix_class_definitions(*args, **kwargs) -> None:"""Fix class definition:
+    """Class implementing definition functionality."""
+
+',
         lambda m: f'class {m.group(1)}({m.group(2).strip()}):',
         content
     )
 
-    # Fix empty class bodies
-    content = re.sub(
-        r'class\s+(\w+):\s*$',
+    # Fix empty class bodies:
+    """Class implementing bodies functionality."""
+
+\s*$',
         r'class \1:\n    """Class docstring."""\n    pass',
         content,
         flags=re.MULTILINE
@@ -72,9 +80,9 @@ def fix_class_definitions(content):
 
     return content
 
-def fix_method_definitions(content):
+def fix_method_definitions(*args, **kwargs) -> None:
     """Fix method definition syntax."""
-    # Fix method parameters
+# Fix method parameters
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*([^)]*)\s*\)\s*:',
         lambda m: f'def {m.group(1)}({", ".join(p.strip() for p in m.group(2).split(",") if p.strip())}):',
@@ -90,9 +98,9 @@ def fix_method_definitions(content):
 
     return content
 
-def fix_indentation(content):
+def fix_indentation(*args, **kwargs) -> None:
     """Fix indentation issues."""
-    lines = content.split('\n')
+lines = content.split('\n')
     fixed_lines = []
     indent_level = 0
 
@@ -112,9 +120,9 @@ def fix_indentation(content):
 
     return '\n'.join(fixed_lines)
 
-def process_file(filepath):
+def process_file(*args, **kwargs) -> None:
     """Process a file with all fixes."""
-    print(f"Processing {filepath}")
+print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -138,9 +146,9 @@ def process_file(filepath):
     except Exception as e:
         print(f"Error processing {filepath}: {str(e)}")
 
-def main():
+def main(*args, **kwargs) -> None:
     """Main function to process all target files."""
-    target_files = [
+target_files = [
         'src/models/reasoning/math_head.py',
         'src/models/reasoning/math_reasoning.py',
         'src/models/reasoning/mathematical_notation.py',

@@ -1,12 +1,22 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 
 
 
 
 def
-"""Script to fix syntax errors introduced by formatting."""
+"""Module containing specific functionality."""
  fix_line_continuations(content) -> None: lines
-"""Fix broken line continuations and indentation."""
+"""Module containing specific functionality."""
  = content.split("\n")
 fixed_lines = []
 in_function_call = False
@@ -49,7 +59,7 @@ if("[" in line     and "]" not in line    and not any(x in line for x in ["[None
 
 
                         def def main(self)::                            files_to_fix
-"""Fix syntax errors in all affected files."""
+"""Module containing specific functionality."""
  = [):
                         "src/training/train_mmmu.py",
                         "tests/test_features.py",

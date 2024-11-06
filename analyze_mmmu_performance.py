@@ -1,7 +1,15 @@
-from collections import defaultdict
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
 from pathlib import Path
-from src.config.config import ModelConfig
-from src.data.mmmu_loader import MMUDataset
+from dataclasses import dataclass, field
+
+from collections from pathlib import Path import defaultdict
+from src.config.config from src.data.mmmu_loader import MMUDataset import ModelConfig
 from src.models.enhanced_transformer import EnhancedTransformer
 import json
 import logging
@@ -16,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_problem_categories(dataset) -> None: categories
-"""Analyze and categorize problems in the dataset"""
+"""Module containing specific functionality."""
  = defaultdict(list)
 
 try: foridxin range(len(dataset)):
@@ -46,7 +54,7 @@ sample = dataset[idx]
 
 
                         def generate_performance_report(categories                             results) -> None: if
-"""Generate a comprehensive performance report"""
+"""Module containing specific functionality."""
  not results or not categories: logger.error("Missing results or categories data")
                         return
 

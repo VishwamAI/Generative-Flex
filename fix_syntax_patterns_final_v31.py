@@ -1,89 +1,92 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 
-def fix_test_inference():
+def fix_test_inference(*args, **kwargs) -> None:
     """Fix syntax in test_inference.py."""
-    content = '''import unittest
-import torch
-from src.models import SimpleModel
+content = '''import unittest
+from src.models import SimpleModel import torch
 
-class TestInference(unittest.TestCase):
-    """Test inference functionality."""
+class TestInference:
+    """Class implementing TestInference functionality."""
 
-    def setUp(self):
-        """Set up test environment."""
-        self.model = SimpleModel()
+def setUp(*args, **kwargs) -> None:
+    """Set up test environment."""
+self.model = SimpleModel()
 
-    def test_inference(self):
-        """Test basic inference."""
-        input_tensor = torch.randn(1, 32)
+    def test_inference(*args, **kwargs) -> None:
+    """Test basic inference."""
+input_tensor = torch.randn(1, 32)
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
 '''
     with open('src/test_inference.py', 'w') as f:
         f.write(content)
 
-def fix_test_minimal():
+def fix_test_minimal(*args, **kwargs) -> None:
     """Fix syntax in test_minimal.py."""
-    content = '''import unittest
-import torch
-from src.models import SimpleModel
+content = '''import unittest
 
-class TestMinimal(unittest.TestCase):
-    """Test minimal model functionality."""
+class TestMinimal:
+    """Class implementing TestMinimal functionality."""
 
-    def setUp(self):
-        """Set up test environment."""
-        self.model = SimpleModel()
+def setUp(*args, **kwargs) -> None:
+    """Set up test environment."""
+self.model = SimpleModel()
         self.vocab_size = 1000
 
-    def test_forward_pass(self):
-        """Test forward pass through the model."""
-        input_tensor = torch.randint(0, self.vocab_size, (1, 32))
+    def test_forward_pass(*args, **kwargs) -> None:
+    """Test forward pass through the model."""
+input_tensor = torch.randint(0, self.vocab_size, (1, 32))
         output = self.model(input_tensor)
         self.assertEqual(output.shape[0], 1)
 '''
     with open('src/test_minimal.py', 'w') as f:
         f.write(content)
 
-def fix_test_simple():
+def fix_test_simple(*args, **kwargs) -> None:
     """Fix syntax in test_simple.py."""
-    content = '''import unittest
-import torch
-from src.models import SimpleModel
+content = '''import unittest
 
-class TestSimple(unittest.TestCase):
-    """Test simple model functionality."""
+class TestSimple:
+    """Class implementing TestSimple functionality."""
 
-    def setUp(self):
-        """Set up test environment."""
-        self.model = SimpleModel()
+def setUp(*args, **kwargs) -> None:
+    """Set up test environment."""
+self.model = SimpleModel()
         self.vocab_size = 1000
 
-    def test_model_output(self):
-        """Test model output dimensions."""
-        input_tensor = torch.randint(0, self.vocab_size, (1, 32))
+    def test_model_output(*args, **kwargs) -> None:
+    """Test model output dimensions."""
+input_tensor = torch.randint(0, self.vocab_size, (1, 32))
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
 '''
     with open('src/test_simple.py', 'w') as f:
         f.write(content)
 
-def fix_test_simple_cot():
+def fix_test_simple_cot(*args, **kwargs) -> None:
     """Fix syntax in test_simple_cot.py."""
-    content = '''import unittest
-import torch
-from src.models import SimpleModel
+content = '''import unittest
 
-class TestSimpleCot(unittest.TestCase):
-    """Test simple chain-of-thought model."""
+class TestSimpleCot:
+    """Class implementing TestSimpleCot functionality."""
 
-    def setUp(self):
-        """Set up test environment."""
-        self.model = SimpleModel()
+def setUp(*args, **kwargs) -> None:
+    """Set up test environment."""
+self.model = SimpleModel()
 
-    def test_cot_generation(self):
-        """Test chain-of-thought generation."""
-        input_text = "What is 2+2?"
+    def test_cot_generation(*args, **kwargs) -> None:
+    """Test chain-of-thought generation."""
+input_text = "What is 2+2?"
         input_tensor = torch.randint(0, 1000, (1, 32))
         output = self.model(input_tensor)
         self.assertEqual(output.shape[-1], 32)
@@ -91,34 +94,28 @@ class TestSimpleCot(unittest.TestCase):
     with open('src/test_simple_cot.py', 'w') as f:
         f.write(content)
 
-def fix_training_utils():
+def fix_training_utils(*args, **kwargs) -> None:
     """Fix syntax in training_utils.py."""
-    content = '''"""Training utility functions."""
+content = '''"""Training utility functions."""
 
-import torch
-from dataclasses import dataclass
-from typing import Dict, Optional
+from dataclasses import dataclass import:
+    """Class implementing import functionality."""
 
-@dataclass
-class TrainingParams:
-    """Training parameters configuration."""
-
-    learning_rate: float = 1e-4
+learning_rate: float = 1e-4
     batch_size: int = 32
     num_epochs: int = 10
     gradient_clip_val: float = 1.0
     weight_decay: float = 0.01
 
 class TrainingUtils:
-    """Utility functions for training."""
+    """Class implementing TrainingUtils functionality."""
 
-    def __init__(self, params: Optional[TrainingParams] = None):
-        """Initialize training utilities.
+def __init__(*args, **kwargs) -> None:
+    """Initialize training utilities.
 
         Args:
-            params: Optional training parameters
-        """
-        self.params = params or TrainingParams()
+            params: Optional training parameters"""
+self.params = params or TrainingParams()
 
     def get_optimizer(self, model: torch.nn.Module) -> torch.optim.Optimizer:
         """Get optimizer for model.
@@ -127,8 +124,7 @@ class TrainingUtils:
             model: PyTorch model
 
         Returns:
-            Configured optimizer
-        """
+            Configured optimizer"""
         return torch.optim.AdamW(
             model.parameters(),
             lr=self.params.learning_rate,
@@ -145,8 +141,7 @@ class TrainingUtils:
             optimizer: PyTorch optimizer
 
         Returns:
-            Learning rate scheduler
-        """
+            Learning rate scheduler"""
         return torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer,
             T_max=self.params.num_epochs
@@ -155,40 +150,35 @@ class TrainingUtils:
     with open('src/utils/training_utils.py', 'w') as f:
         f.write(content)
 
-def fix_device_config():
+def fix_device_config(*args, **kwargs) -> None:
     """Fix syntax in device_config.py."""
-    content = '''"""Device configuration utilities."""
+content = '''"""Device configuration utilities."""
 
-import torch
-from dataclasses import dataclass
 from typing import Optional
 
-@dataclass
-class DeviceConfig:
-    """Device configuration parameters."""
+@dataclass class:
+    """Class implementing class functionality."""
 
-    use_cuda: bool = True
+use_cuda: bool = True
     device_id: int = 0
     use_amp: bool = True
 
 class DeviceManager:
-    """Manage device configuration and placement."""
+    """Class implementing DeviceManager functionality."""
 
-    def __init__(self, config: Optional[DeviceConfig] = None):
-        """Initialize device manager.
+def __init__(*args, **kwargs) -> None:
+    """Initialize device manager.
 
         Args:
-            config: Optional device configuration
-        """
-        self.config = config or DeviceConfig()
+            config: Optional device configuration"""
+self.config = config or DeviceConfig()
         self.device = self._setup_device()
 
     def _setup_device(self) -> torch.device:
         """Set up compute device.
 
         Returns:
-            Configured device
-        """
+            Configured device"""
         if self.config.use_cuda and torch.cuda.is_available():
             return torch.device(f"cuda:{self.config.device_id}")
         return torch.device("cpu")
@@ -200,40 +190,33 @@ class DeviceManager:
             tensor: Input tensor
 
         Returns:
-            Tensor on configured device
-        """
+            Tensor on configured device"""
         return tensor.to(self.device)
 '''
     with open('src/utils/device_config.py', 'w') as f:
         f.write(content)
 
-def fix_environment_setup():
+def fix_environment_setup(*args, **kwargs) -> None:
     """Fix syntax in environment_setup.py."""
-    content = '''"""Environment setup utilities."""
+content = '''"""Environment setup utilities."""
 
-import os
-import torch
-from dataclasses import dataclass
-from typing import Dict, Optional
 
-@dataclass
-class EnvironmentConfig:
-    """Environment configuration parameters."""
+@dataclass class:
+    """Class implementing class functionality."""
 
-    seed: int = 42
+seed: int = 42
     num_workers: int = 4
     pin_memory: bool = True
 
 class EnvironmentSetup:
-    """Set up training environment."""
+    """Class implementing EnvironmentSetup functionality."""
 
-    def __init__(self, config: Optional[EnvironmentConfig] = None):
-        """Initialize environment setup.
+def __init__(*args, **kwargs) -> None:
+    """Initialize environment setup.
 
         Args:
-            config: Optional environment configuration
-        """
-        self.config = config or EnvironmentConfig()
+            config: Optional environment configuration"""
+self.config = config or EnvironmentConfig()
 
     def setup(self) -> None:
         """Set up training environment."""
@@ -255,8 +238,7 @@ class EnvironmentSetup:
         """Get kwargs for DataLoader.
 
         Returns:
-            DataLoader configuration
-        """
+            DataLoader configuration"""
         return {
             "num_workers": self.config.num_workers,
             "pin_memory": self.config.pin_memory
@@ -265,9 +247,9 @@ class EnvironmentSetup:
     with open('src/utils/environment_setup.py', 'w') as f:
         f.write(content)
 
-def main():
+def main(*args, **kwargs) -> None:
     """Fix syntax in test and utility files."""
-    print("Fixing test_inference.py...")
+print("Fixing test_inference.py...")
     fix_test_inference()
 
     print("Fixing test_minimal.py...")

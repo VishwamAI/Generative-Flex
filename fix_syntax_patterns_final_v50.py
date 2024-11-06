@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_import_statements(content):
+def fix_import_statements(*args, **kwargs) -> None:
     """Fix malformed import statements."""
-    # Fix common import patterns
+# Fix common import patterns
     patterns = {
         r'from\s+(\w+)\s+from\s+(\w+)': r'from \1 import \2',
         r'from\s+(\w+)\s+from\s+([^;\n]+)': r'from \1 import \2',
@@ -28,9 +38,9 @@ def fix_import_statements(content):
 
     return '\n'.join(new_lines)
 
-def fix_docstrings(content):
+def fix_docstrings(*args, **kwargs) -> None:
     """Fix docstring formatting issues."""
-    # Fix module-level docstrings
+# Fix module-level docstrings
     content = re.sub(
         r'^""".*?"""',
         '"""Module for implementing specific functionality."""',
@@ -38,18 +48,18 @@ def fix_docstrings(content):
         flags=re.MULTILINE | re.DOTALL
     )
 
-    # Fix class docstrings
-    content = re.sub(
-        r'class\s+(\w+)[^:]*:(\s*"""[^"]*""")?\s*',
-        lambda m: f'class {m.group(1)}:\n    """Class implementing {m.group(1)} functionality."""\n\n',
+    # Fix class docstrings:
+    """Class implementing docstrings functionality."""
+
+]*:(\s*"""[^"]*""")?\s*',
+        lambda m: f'class {m.group(1)}:\n"""Class implementing {m.group(1)} functionality."""\n\n',
         content
     )
 
     return content
 
-def fix_main_calls(content):
-    """Fix main function calls at end of file."""
-    # Ensure proper main function definition and call
+def fix_main_calls(*args, **kwargs) -> None:"""Fix main function calls at end of file."""
+# Ensure proper main function definition and call
     if 'def main()' in content and 'main()' in content:
         content = re.sub(
             r'main\(\)\s*$',
@@ -58,9 +68,9 @@ def fix_main_calls(content):
         )
     return content
 
-def fix_method_definitions(content):
+def fix_method_definitions(*args, **kwargs) -> None:
     """Fix method definitions and their type hints."""
-    # Add proper type hints to common methods
+# Add proper type hints to common methods
     method_patterns = {
         r'def __init__\([^)]*\)': 'def __init__(self, *args, **kwargs) -> None',
         r'def forward\([^)]*\)': 'def forward(self, *args, **kwargs) -> Any',
@@ -73,9 +83,9 @@ def fix_method_definitions(content):
 
     return content
 
-def process_file(file_path):
+def process_file(*args, **kwargs) -> None:
     """Process a single file to fix syntax issues."""
-    print(f"Processing {file_path}...")
+print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
@@ -112,9 +122,9 @@ def process_file(file_path):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-def main():
+def main(*args, **kwargs) -> None:
     """Process all files with syntax issues."""
-    files_to_process = [
+files_to_process = [
         "src/training/jax_trainer.py",
         "src/training/trainer.py",
         "src/training/accelerated_trainer.py",
@@ -140,6 +150,9 @@ def main():
 
     for file_path in files_to_process:
         process_file(file_path)
+
+if __name__ == "__main__":
+
 
 if __name__ == "__main__":
     main()

@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import subprocess
 
@@ -5,9 +15,9 @@ import subprocess
 
 
 def
-"""Script to format all files detected by CI as needing formatting."""
+"""Module containing specific functionality."""
  format_files(self)::                            files_to_format
-"""Format all detected files using black."""
+"""Module containing specific functionality."""
  = [):
 "src/config/training_config.py",
 "src/config/config.py",

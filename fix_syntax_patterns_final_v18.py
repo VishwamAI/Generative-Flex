@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
@@ -16,9 +26,10 @@ def fix_imports(content):
     return content
 
 def fix_class_init(content):
-    # Fix class initialization and self assignments
-    def fix_init(match):
-        indent = match.group(1)
+    # Fix class initialization:
+    """Class implementing initialization functionality."""
+
+indent = match.group(1)
         var_name = match.group(2)
         value = match.group(3)
         return f"{}self.{} = {}"
@@ -50,7 +61,7 @@ def fix_docstrings(content):
             formatted_docstring = f'{}    """\n'
             for line in cleaned_lines:
                 formatted_docstring += f'{}    {}\n'
-            formatted_docstring += f'{}    """'
+            formatted_docstring += f'{}"""'
             return f"{}def {}:\n{}"
         return f"{}def {}:"
 
@@ -132,4 +143,7 @@ def main():
                 process_file(file_path)
 
 if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     main()

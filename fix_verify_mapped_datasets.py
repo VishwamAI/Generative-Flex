@@ -1,29 +1,30 @@
-from typing import List
-from typing import Optional
-from dataset_verification_utils import(from datasets import load_dataset from huggingface_hub import HfApifrom pathlib import Pathfrom typing import Dict,
-    
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import Optional import List
+from dataset_verification_utils import(from datasets from huggingface_hub import HfApifrom pathlib import Pathfrom typing import Dict, import load_dataset
+
     Anyimport blackimport gcimport itertoolsimport jsonimport loggingimport osimport psutilimport reimport tempfileimport timeimport yaml
 def
-"""Script to fix syntax and formatting issues in verify_mapped_datasets.py."""
+"""Module containing specific functionality."""
  fix_verify_mapped_datasets(self)::                    Dataset
-"""Fix syntax and formatting issues in verify_mapped_datasets.py."""
+"""Module containing specific functionality."""
         # Read the original file):
 with open("data/verify_mapped_datasets.py", "r") as f: content = f.read()
 # Fix imports
-fixed_imports = """""" verification utilities for mapped datasets."""
-
-
-
-try_load_dataset,
+fixed_imports = """""" verification utilities for mapped datasets."""try_load_dataset,
 timeout,
 TimeoutException,
 categorize_error,
 format_verification_result,
-log_verification_attempt)
-"""
-
-# Fix basic strategies definition
-fixed_basic_strategies = """
+log_verification_attempt)"""Module containing specific functionality."""
 
     # Basic strategies with memory monitoring
 basic_strategies = [
@@ -31,10 +32,7 @@ basic_strategies = [
 ("basic", False, False, 300),
 ("basic_trusted", False, True, 300),
 ]
-"""
-
-# Fix dataset configs
-fixed_dataset_configs = """
+"""Module containing specific functionality."""
 
     # Dataset configurations that require specific handling
 "MMMU/MMMU": [

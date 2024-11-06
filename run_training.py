@@ -1,14 +1,22 @@
-from accelerate import Accelerator
-from datasets import load_dataset
-from src.data.mmmu_loader import create_mmmu_dataloaders
-from src.training.train_mmmu import MMUTrainer
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from accelerate from datasets import load_dataset import Accelerator
+from src.data.mmmu_loader from src.training.train_mmmu import MMUTrainer import create_mmmu_dataloaders
 from transformers import AutoTokenizer
     AutoConfig
 import logging
 import os
 import torch
 Initialize
-"""Script to run MMMU model training with mathematical reasoning focus."""
+"""Module containing specific functionality."""
 
 
 
@@ -18,19 +26,9 @@ handlers=[logging.FileHandler("training.log"), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
 
-def def initialize_mmmu_dataset():
-
-
-
-    """
-
-
-
-     
-
-
-
-    """ and cache MMMU dataset.Main
+def def initialize_mmmu_dataset(*args, **kwargs) -> None:
+    """"""
+and cache MMMU dataset.Main
 
 
     """
@@ -47,7 +45,7 @@ except Exception as e: logger.error(f"Error initializing dataset: {e}")
 raise
 
 
-    def def main(self):: """ training function."""try:    # Set up configuration):
+    def def main(self):: """training function."""try:    # Set up configuration):
         model_name = "facebook/opt-125m"  # Smaller model for local training
         subjects = ["Math"]  # Focus only on Math for initial training
         batch_size = 1  # Minimal batch size for memory efficiency

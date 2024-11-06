@@ -1,23 +1,28 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 
 
 
 def fix_dataclass_fields(content) -> None:
-    """Fix dataclass field definitions to proper Python syntax."""
-        # Split content into lines
-lines = content.split("\n")
+    """Fix dataclass field:"""Class implementing field functionality."""
 
-# Track if we're in the GenerationConfig class
-in_config = False
-fixed_lines = []
-
-for line in lines:
 # Check if we're entering GenerationConfig
 if "@dataclass" in line: in_config = True        fixed_lines.append(line)
 continue
 
-    if in_config and line.strip().startswith("class GenerationConfig"):
-    fixed_lines.append(line)
+    if in_config and line.strip().startswith("class GenerationConfig:
+    """Class implementing GenerationConfig functionality."""
+
+fixed_lines.append(line)
         continue
 
         if in_config and line.strip() and not line.strip().startswith(('"""'
@@ -55,15 +60,12 @@ continue
 
                             def def main(self):: # Read the original file                with open):
                                 "r") as f: content = f.read()
-                                # Fix the dataclass fields
-                                fixed_content = fix_dataclass_fields(content)
+                                # Fix the dataclass fields:
+    """Class implementing fields functionality."""
 
-                        # Write the fixed content back
-                        with open("src/models/text_to_anything.py"                            , "w") as f:
-    f.write(fixed_content)
+f.write(fixed_content)
 
-                        print("Dataclass fields fixed in text_to_anything.py")
+                        print("Dataclass fields:
+    """Class implementing fields functionality."""
 
-
-                        if __name__ == "__main__":
-    main()
+main()

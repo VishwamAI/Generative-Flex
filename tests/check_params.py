@@ -1,38 +1,23 @@
-"""
-Test parameter validation functionality...
-"""
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
-from src.utils.param_validator import ParamValidator
+"""Module containing specific functionality."""
+
+from src.utils.param_validator import ParamValidator import torch
 import unittest
 
 
-class TestParamValidation(unittest.TestCase):
-    """
-Test parameter validation functionality...
-"""
+class TestParamValidation:
+    """Class implementing TestParamValidation functionality."""
 
-    def setUp(self):
-        """
-Set up test environment...
-"""
-        self.validator = ParamValidator()
-
-    def test_param_validation(self):
-        """
-Test parameter validation...
-"""
-        params = {
-            "learning_rate": 1e-4,
-            "batch_size": 32
-        }
-        self.assertTrue(self.validator.validate(params))
-
-    def test_invalid_params(self):
-        """
-Test invalid parameter detection...
-"""
+Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test parameter validation..."""Module containing specific functionality."""Test invalid parameter detection..."""
         params = {
             "learning_rate": -1,
             "batch_size": 0

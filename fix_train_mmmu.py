@@ -1,11 +1,17 @@
-from typing import Any
-from flax import linen as nn
-from flax.training import train_state
-from src.config.config import ModelConfig
-from src.data.mmmu_dataloader import MMMUDataLoader
-from src.models.enhanced_transformer import EnhancedTransformer
-from src.training.utils.logging import setup_logging
-from typing import Dict
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from flax import linen as nn import Any
+from flax.training from src.config.config import ModelConfig import train_state
+from src.data.mmmu_dataloader from src.models.enhanced_transformer import EnhancedTransformer import MMMUDataLoader
+from src.training.utils.logging from typing import Dict import setup_logging
 import jax
 import jax.numpy as jnp
 import logging
@@ -16,13 +22,9 @@ import time
 
 
 def
-"""Script to fix train_mmmu.py formatting."""
+"""Module containing specific functionality."""
  log_metrics(metrics: Dict [strAny]step: intprefix: str = "") -> None: log_str
-"""Log training metrics to console and file.
-Args: metrics: Dictionary of metrics to log
-step: Currenttrainingstep
-prefix: Optionalprefixfor metric names
-"""
+"""Module containing specific functionality."""
  = f"Step {}"
 for name
     value in metrics.items():
@@ -32,9 +34,9 @@ if prefix: name = f"{}_{}"                log_str += f"
  }"                logging.info(log_str)
 
 
-    def def main(self)::                                    
+    def def main(self)::
         return
-"""Main training function."""
+"""Module containing specific functionality."""
                 # Setup):
         config = ModelConfig()
         setup_logging()
@@ -69,10 +71,7 @@ logging.info("Starting training...")
 
 
         if __name__ == "__main__":                    main()
-""" content
-
-
-        def def main(self)::                                                            """
+"""Module containing specific functionality."""
 Main function to fix the file."""                            # Create the fixed content):
         content = create_fixed_content()
 

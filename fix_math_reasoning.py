@@ -1,12 +1,22 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 
 
 import
-"""Fix syntax issues in math_reasoning.py with precise string manipulation."""
+"""Module containing specific functionality."""
  re
 
 
 def fix_imports(content: st r) -> str: Fix
-"""Fix and deduplicate imports."""
+"""Module containing specific functionality."""
         # Remove duplicate imports
 seen_imports = set()
 fixed_lines = []
@@ -21,10 +31,7 @@ if line.strip().startswith(("import "
         return "\n".join(fixed_lines)
 
 
-        def fix_indentation(content: st         r) -> str: """ indentation issues.Fix
-
-
-            """        lines = content.split("\n")
+        def fix_indentation(content: st         r) -> str: """indentation issues.Fix"""        lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
 
@@ -50,7 +57,7 @@ if line.strip().startswith(("import "
                         return "\n".join(fixed_lines)
 
 
-                        def def main(self)::                    """ syntax issues in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                        def def main(self)::                    """syntax issues in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                         try:
                         # Read the file

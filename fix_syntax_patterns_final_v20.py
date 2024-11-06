@@ -1,30 +1,32 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_model_imports(content):
+def fix_model_imports(*args, **kwargs) -> None:
     """Fix import statements in model files."""
-    # Fix transformers import
+# Fix transformers import
     content = re.sub(
         r'from transformers import PreTrainedModel import GenerationMixin',
         'from transformers import PreTrainedModel, GenerationMixin',
         content
     )
 
-    # Fix dataclass imports
-    content = re.sub(
-        r'from """[^"]+""" import dataclasses import dataclass, field',
-        'from dataclasses import dataclass, field',
-        content
-    )
+    # Fix dataclass imports:
+    """Class implementing imports functionality."""
 
-    return content
-
-def fix_class_definitions(content):
-    """Fix class definitions and inheritance."""
-    # Fix nn.Module inheritance
+# Fix nn.Module inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:\s*$',
-        lambda m: f'class {m.group(1)}(nn.Module):\n    """Class for {m.group(1)}."""\n\n    def __init__(self):\n        super().__init__()',
+        lambda m: f'class {m.group(1)}(nn.Module):\n    """Class for {m.group(1)}."""\n\n    def __init__(self, *args, **kwargs) -> None:\n        super().__init__()',
         content,
         flags=re.MULTILINE
     )
@@ -39,9 +41,9 @@ def fix_class_definitions(content):
 
     return content
 
-def fix_docstrings(content):
+def fix_docstrings(*args, **kwargs) -> None:
     """Fix docstring formatting and placement."""
-    # Fix misplaced docstrings
+# Fix misplaced docstrings
     content = re.sub(
         r'^\s*"""[^"]+"""\s*$',
         lambda m: '    ' + m.group(0),
@@ -58,9 +60,7 @@ def fix_docstrings(content):
 
     return content
 
-def fix_method_definitions(content):
-    """Fix method definitions and parameters."""
-    # Fix parameter definitions
+def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definitions and parameters."""# Fix parameter definitions
     content = re.sub(
         r'(\w+)\s*:\s*(\w+)\s*=\s*(\d+)',
         r'\1: \2 = \3',
@@ -70,25 +70,22 @@ def fix_method_definitions(content):
     # Fix method definitions
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*self\s*\)\s*:\s*$',
-        lambda m: f'def {m.group(1)}(self):\n        """Implementation of {m.group(1)}."""',
+        lambda m: f'def {m.group(1)}(self):\n"""Implementation of {m.group(1)}."""',
         content,
         flags=re.MULTILINE
     )
 
     return content
 
-def fix_logger_initialization(content):
-    """Fix logger initialization."""
-    content = re.sub(
+def fix_logger_initialization(*args, **kwargs) -> None:"""Fix logger initialization."""content = re.sub(
         r'self\.logger\s*=\s*logging\.getLogger\(__name__\)',
-        'def __init__(self):\n        """Initialize logger."""\n        super().__init__()\n        self.logger = logging.getLogger(__name__)',
+        'def __init__(self, *args, **kwargs) -> None:\n"""Initialize logger."""\n        super().__init__()\n        self.logger = logging.getLogger(__name__)',
         content
     )
     return content
 
-def process_file(filepath):
-    """Process a single file."""
-    print(f"Processing {filepath}")
+def process_file(*args, **kwargs) -> None:"""Process a single file."""
+print(f"Processing {filepath}")
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -112,9 +109,9 @@ def process_file(filepath):
     except Exception as e:
         print(f"Error processing {filepath}: {str(e)}")
 
-def main():
+def main(*args, **kwargs) -> None:
     """Process files with syntax errors."""
-    problem_files = [
+problem_files = [
         'src/models/reasoning/mathematical_notation.py',
         'src/models/reasoning/symbolic_math.py',
         'src/models/reasoning/math_reasoning.py',

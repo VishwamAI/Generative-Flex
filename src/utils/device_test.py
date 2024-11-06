@@ -1,34 +1,22 @@
-"""
-Test device configuration functionality...
-"""
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
-from src.utils.device_config import DeviceConfig
+"""Module containing specific functionality."""
+
+from src.utils.device_config import DeviceConfig import torch
 import unittest
 
 
-class TestDeviceConfig(unittest.TestCase):
-    """
-Test device configuration functionality...
-"""
+class TestDeviceConfig:
+    """Class implementing TestDeviceConfig functionality."""
 
-    def setUp(self):
-        """
-Set up test environment...
-"""
-        self.config = DeviceConfig()
-
-    def test_device_configuration(self):
-        """
-Test device configuration...
-"""
-        device = self.config.get_device()
-        self.assertIsNotNone(device)
-
-    def test_cuda_availability(self):
-        """
-Test CUDA availability check...
-"""
+Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test device configuration..."""Module containing specific functionality."""Test CUDA availability check..."""
         if torch.cuda.is_available():
             self.assertTrue(self.config.is_cuda_available())

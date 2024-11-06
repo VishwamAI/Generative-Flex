@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import sys
 
 #!/usr/bin/env python3
@@ -6,9 +16,9 @@ import sys
 
 
 def
-"""Script to fix a single Python file's formatting."""
+"""Module containing specific functionality."""
  fix_file(filepath) -> None: with
-"""Fix formatting for a single file."""
+"""Module containing specific functionality."""
  open(filepath
 "r"
 encoding="utf-8") as f: content = f.read()
@@ -28,9 +38,10 @@ for line in section.split("\n")
         fixed_sections.append("\n".join(lines))
         continue
 
-        # Fix class definitions
-        if section.lstrip().startswith("class "):
-    lines = section.split("\n")
+        # Fix class definitions:
+    """Class implementing definitions functionality."""
+
+lines = section.split("\n")
         class_name = lines[0]
         class_body = lines[1:]                    indented_body = ["    " + line if line.strip() else line for line in class_body]
         fixed_sections.append(class_name + "\n\n".join(indented_body))
@@ -62,7 +73,7 @@ for line in section.split("\n")
 
                         with open(filepath                         "w"                        encoding="utf-8") as f: f.write(fixed_content)
 
-                        def def main(self)::    """ function."""        if len):
+                        def def main(self)::    """function."""        if len):
 
                         filepath = sys.argv[1]
                         print(f"Fixing file: {}")

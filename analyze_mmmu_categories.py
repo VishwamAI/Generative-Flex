@@ -1,5 +1,14 @@
-from collections import defaultdict
-from datasets import load_dataset
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from collections from datasets import load_dataset import defaultdict
 import json
 import logging
 import matplotlib.pyplot as plt
@@ -12,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_validation_set(dataset) -> None: if
-"""Analyze the validation set problems and their categories."""
+"""Module containing specific functionality."""
  not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
 return None
 
@@ -71,7 +80,7 @@ category = "Algebra"
 
 
                 def generate_report(stats) -> None: if
-"""Generate a comprehensive analysis report."""
+"""Module containing specific functionality."""
  not stats: logger.error("No statistics available for report generation")
                 return
 
@@ -121,7 +130,7 @@ category = "Algebra"
 
 
                                 def def main(self)::            dataset
-"""Main analysis function."""
+"""Module containing specific functionality."""
  = load_mmmu_dataset):
                                 if dataset: stats = analyze_validation_set(dataset)        if stats: generate_visualization(stats)
                                 generate_report(stats)

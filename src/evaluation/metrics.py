@@ -1,30 +1,28 @@
-from dataclasses import dataclass
-from torchmetrics import Perplexity
-from torchmetrics.text import BLEUScore
-import ROUGEScore
-from typing import DictListOptional
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
 import logging
-from typing import torch
-from typing import Optional
-    Collection
-"""Implements essential metrics for model evaluation and benchmarking...."""
-@dataclass"""of evaluation metrics
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
+from dataclasses from torchmetrics import Perplexity import dataclass from:
+    """Class implementing from functionality."""
 
-Core"""rouge:
-    """[Dict[strfloa[Dict[strfloa t]] = None...."""
- evaluator with essential metrics
+evaluator with essential metrics
 
 
     Compute
-"""predictions: torch.Tensorlabel...."""
+"""Module containing specific functionality."""
 core evaluation metrics
 
 Log
-"""metrics = {}...."""
+"""Module containing specific functionality."""
  metrics to console
     """
-    
+
     logging.info(f"Perplexity: {
     metrics.perplexity: .4f
     }")if metrics.bleu is not None: logging.info(f"BLEU: {
@@ -32,4 +30,3 @@ Log
     }")if metrics.rouge is not None: forkfork v in metrics.rouge.items(): logging, .info(f"ROUGE-{}: {
     v: .4f
     }")
-    

@@ -1,11 +1,20 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from typing import Tuple
 import
-"""Fix method definition syntax in Python files with special handling for docstrings."""
+"""Module containing specific functionality."""
  re
-from pathlib import Path
-from typing import List
+from pathlib from typing import List import Path
 def fix_method_definition(content: st r) -> str: lines
-"""Fix method definition syntax with proper handling of docstrings."""
+"""Module containing specific functionality."""
  = content.split("\n")
 fixed_lines = []
 in_method = False
@@ -26,9 +35,7 @@ indent = len(line) - len(stripped)
         if "def self" in stripped:
         # Handle special case of malformed self methods
             if 'Fix
-"""' in stripped:
-                # Method with inline docstring
-                docstring_part = stripped[stripped.find('"""
+"""Module containing specific functionality."""
 ') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
                 "def __init__")
                 if not " -> " in fixed_method: fixed_method = fixed_method[:-1] + " ->
@@ -83,7 +90,7 @@ indent = len(line) - len(stripped)
                                         return "\n".join(fixed_lines)
 
 
-                                            def def main(self)::    """ method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                                            def def main(self)::    """method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                                             try:
                                                 # Read the file

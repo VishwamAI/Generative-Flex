@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_module_docstrings(content):
+def fix_module_docstrings(*args, **kwargs) -> None:
     """Fix module-level docstring formatting."""
-    # Fix module docstrings with extra dots
+# Fix module docstrings with extra dots
     content = re.sub(
         r'^"""(.+?)\.+"""$',
         lambda m: f'"""{"".join(m.group(1).strip().rstrip("."))}."""',
@@ -21,17 +31,14 @@ def fix_module_docstrings(content):
 
     return content
 
-def fix_class_docstrings(content):
-    """Fix class-level docstring formatting."""
-    def format_class_docstring(match):
+def fix_class_docstrings(*args, **kwargs) -> None:"""Fix class-level docstring formatting."""
+def format_class_docstring(match):
         indent = match.group(1)
         class_name = match.group(2)
         docstring = match.group(3) if match.group(3) else f"Class for {class_name}."
         return f'{indent}class {class_name}:\n{indent}    """{docstring.strip().rstrip(".")}."""'
 
-    # Fix class definitions and their docstrings
-    content = re.sub(
-        r'(\s*)class\s+(\w+)(?:\([^)]*\))?\s*:\s*(?:"""(.+?)\.+""")?\s*',
+    # Fix class definitions:"""Class implementing definitions functionality."""\([^)]*\))?\s*:\s*(?:"""(.+?)\.+""")?\s*',
         format_class_docstring,
         content,
         flags=re.DOTALL
@@ -39,9 +46,8 @@ def fix_class_docstrings(content):
 
     return content
 
-def fix_method_docstrings(content):
-    """Fix method-level docstring formatting."""
-    def format_method_docstring(match):
+def fix_method_docstrings(*args, **kwargs) -> None:"""Fix method-level docstring formatting."""
+def format_method_docstring(match):
         indent = match.group(1)
         method_name = match.group(2)
         params = match.group(3)
@@ -68,9 +74,9 @@ def fix_method_docstrings(content):
 
     return content
 
-def fix_file(file_path):
+def fix_file(*args, **kwargs) -> None:
     """Process a single file to fix syntax issues."""
-    print(f"Processing {file_path}...")
+print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
@@ -91,9 +97,9 @@ def fix_file(file_path):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-def main():
+def main(*args, **kwargs) -> None:
     """Process all files that need fixing."""
-    files_to_fix = [
+files_to_fix = [
         "src/test_simple.py",
         "src/test_simple_cot.py",
         "src/tests/test_models.py",

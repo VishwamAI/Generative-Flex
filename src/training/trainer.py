@@ -11,11 +11,15 @@ from dataclasses import dataclass, field
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
-from torch.utils.data from tqdm import tqdm import DataLoader
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
 import logging
 from pathlib import Path import os
+from dataclasses import dataclass, field
 
+from torch.utils.data from tqdm import tqdm import DataLoader
 from pathlib import Path import os import logging
+
 
 """Module containing specific functionality."""
 
@@ -26,15 +30,7 @@ from tqdm
 class Trainer:
     """Class implementing Trainer functionality."""
 
-Base trainer implementation."""
-Method for __init__..
-"""Module containing specific functionality."""
-Method for train_step..
-"""Module containing specific functionality."""
-Method for evaluate..
-"""Module containing specific functionality."""
-Method for train..
-"""
+Base trainer implementation."""Method for __init__.."""Module containing specific functionality."""Method for train_step.."""Module containing specific functionality."""Method for evaluate.."""Module containing specific functionality."""Method for train.."""
         self.step = 0
         best_val_loss = float("inf")
 

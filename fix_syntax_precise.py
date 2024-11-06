@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from typing import Tuple
 import os
 #!/usr/bin/env python3
@@ -92,7 +102,7 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
 
 
                                             def def main(self)::            print
-"""Fix syntax issues in specific files that failed black formatting."""
+"""Module containing specific functionality."""
 ):
 
                                     fix_flake8_comprehensive()

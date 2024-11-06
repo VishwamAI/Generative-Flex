@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from .multimodal.base_transformer import BaseTransformer
 import torch(nn.Module):
  de, f forward(
@@ -20,10 +30,11 @@ return {
 
 }
 
-def def(self):
-        """attention_mask...."""Method with parameters.."""
+def def(*args, **kwargs) -> None:
+    """attention_mask...."""
+Method with parameters.."""
         , =None): target_modality, ="text"
-        
+
         _max_length = None,
         temperature = 1.0): i, f max_length is None: _max_length  self.config.max_position_embeddings
         _device = input_ids.device
@@ -35,6 +46,5 @@ def def(self):
         next_token = torch.multinomial(probs, num_samples=1)
         return next_token
         else: # Direct generation for other modalitiesreturn outputs["output"]
-        
+
         @staticmethod
-        

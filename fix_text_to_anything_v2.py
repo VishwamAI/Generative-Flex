@@ -1,7 +1,15 @@
-from typing import Union
-from typing import Tuple
-from typing import List
-from typing import Optional
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import Tuple import Union
+from typing from typing import Optional import List
 def def fix_text_to_anything(self):: with open):
 "r") as f: content = f.readlines()
 # Add missing imports
@@ -9,11 +17,11 @@ imports = [
 "import jax.numpy as jnp\n",
 "from typing import Dict,
     ,
-    
+
     \n",
-    
+
 "from flax import linen as nn\n",
-    
+
 ]
 
 # Find where to insert imports

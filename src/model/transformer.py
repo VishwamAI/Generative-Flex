@@ -1,13 +1,19 @@
-from attention import FlashAttention
-from experts import MixtureOfExperts
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from attention from experts import MixtureOfExperts import FlashAttention
 from typing import Optional
 import torch
     Placeholder
-"""Combines Flash Attention and Mixture of Experts for optimal performance...."""
-"""docstring.
-
-
-num_experts.."""Advanced transformer layer combining Flash Attention and Mixture of Experts.""": int = 8
+"""Module containing specific functionality."""
+"""Module containing specific functionality."""Advanced transformer layer combining Flash Attention and Mixture of Experts.""": int = 8
 
 block_size"""expert_capacity_factor: float = 1.25....""": int = 1024): super, ().__init__()
 self"""self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)
@@ -31,4 +37,3 @@ d_model]"""
     x = self.moe(x, mask)
     x = residual + self.dropout(x)
     return x
-    

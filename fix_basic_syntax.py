@@ -1,18 +1,25 @@
-from typing import Tuple
-from typing import Dict
-from typing import Any
-from typing import Optional
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import Dict import Tuple
+from typing from typing import Optional import Any
 
 
 import
-"""Fix basic Python syntax issues before applying black formatting."""
+"""Module containing specific functionality."""
  re
-from pathlib import Path
-from typing import List,
+from pathlib from typing import List, import Path
     ,
     ,
     ,
-    
+
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -29,7 +36,7 @@ CORE_FILES = [
 
 
 def fix_indentation(content: st r) -> str: lines
-"""Fix basic indentation issues."""
+"""Module containing specific functionality."""
  = content.split("\n")
 fixed_lines = []
 indent_level = 0
@@ -61,20 +68,17 @@ continue
 
 
                 def fix_dataclass_syntax(content: st                 r) -> str: Fix
-"""Fix basic dataclass syntax."""
-        # Fix dataclass decorator
-                content = re.sub(r"@\s*struct\s*\.\s*dataclass", r"@dataclass", content)
+"""Module containing specific functionality."""
+        # Fix dataclass decorator:
+    """Class implementing decorator functionality."""
 
-                # Fix field definitions
-                lines = content.split("\n")
-                fixed_lines = []
-                in_dataclass = False
-
-                for line in lines:
-    if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
+if"@dataclass" in line: in_dataclass = True        fixed_lines.append(line)
                 continue
 
-                if in_dataclass and ":" in line:
+                if in_dataclass and:
+    """Class implementing and functionality."""
+
+" in line:
                 # Fix field definition
                 parts = line.split(": "                     1)    if len(parts) == 2: name = parts[0].strip()        type_hint = parts[1].strip()
                 fixed_lines.append(f"    {name}: {type_hint}")
@@ -89,7 +93,7 @@ continue
 
 
                         def main() -> None:
-    """ basic syntax issues in core files."""
+    """basic syntax issues in core files."""
         print("Starting to process core files...")
                         successful = 0
                         failed = 0
@@ -102,4 +106,7 @@ continue
                         print(                             f"\nProcessing complete: {successful} files successful                            {failed} files failed"                        )
 
 
-                        if __name__ == "__main__":        main()
+                        if __name__ == "__main__":
+
+if __name__ == "__main__":
+    main()

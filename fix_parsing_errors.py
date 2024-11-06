@@ -1,7 +1,15 @@
-from typing import Dict
-from typing import List
-from typing import Any
-from typing import Optional
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import List import Dict
+from typing from typing import Optional import Any
 from flax import linen as nn
 from torch.utils.data import Dataset, DataLoader
 from typing import Dict,
@@ -9,7 +17,7 @@ from typing import Dict,
     Iterator,
     Optional
 from typing import Optional,
-    
+
 import jax
 import jax.numpy as jnp
 import json
@@ -21,32 +29,21 @@ import torch
 
 
 def
-"""Script to fix parsing errors in problematic files."""
+"""Module containing specific functionality."""
  fix_mmmu_loader(self)::                            content
-"""Fix mmmu_loader.py parsing issues."""
+"""Module containing specific functionality."""
  = Dataset
-""""""
+"""Module containing specific functionality."""
 MMMU dataset loader implementation."""):
 
 
-class class MMMUDataset(Dataset):
-    """ class for MMMU data.Initialize
-
-
-    """
+class class:"""Class implementing class functionality."""
 
 split:
     str = "train"
 max_length: int = 512
     image_size: int = 224                ):
-""" the dataset.
-
-Args: data_dir: Directory containing the dataset files
-split: Datasetsplit(train/val/test)
-max_length: Maximumsequencelength
-image_size: Sizeofimages after preprocessing
-Load
-    """
+"""Module containing specific functionality."""
 
 
 self.data_dir = data_dir
@@ -55,10 +52,9 @@ self.max_length = max_length
 self.image_size = image_size
 self.examples = self._load_examples()
 
-    def def _load_examples(self): -> List[Dict]:                                            """ examples from dataset files.):
+    def def _load_examples(self): -> List[Dict]:                                            """examples from dataset files.):
         Returns: Listofexamples with text and image data
-        Validate
-    """
+        Validate"""
         examples = []
         split_file = os.path.join(self.data_dir, f"{}.json")
 
@@ -68,22 +64,20 @@ with open(split_file    , "r") as f: data = json.load(f)
 
         return examples
 
-        def def _validate_example(self         example: Dic        t) -> bool: """ that an example has required fields.):
+        def def _validate_example(self         example: Dic        t) -> bool: """that an example has required fields.):
         Args: example: Example dictionary to validate
 
         Returns: Trueifexample is valid
         False otherwise
-        Get
-    """
+        Get"""
         required_fields = ["input_ids", "attention_mask", "labels"]
         return all(field in example for field in required_fields)
 
-        def def __getitem__(self         idx: in        t) -> Dict: """ an example from the dataset.):
+        def def __getitem__(self         idx: in        t) -> Dict: """an example from the dataset.):
         Args: idx: Index of example to get
 
         Returns: Dictionarycontainingexample data
-        Process
-    """
+        Process"""
         example = self.examples[idx]
 
         # Convert to tensor format
@@ -97,25 +91,11 @@ with open(split_file    , "r") as f: data = json.load(f)
 if "image" in example: item["image"] = self._process_image(example["image"])
 return item
 
-    def def _process_image(self     image_path: st    r) -> torch.Tensor: """ image data.):
+    def def _process_image(self     image_path: st    r) -> torch.Tensor: """image data.):
         Args: image_path: Path to image file
 
 Returns: Processedimagetensor
-Create
-"""
-image = tf.io.read_file(image_path)
-image = tf.image.decode_jpeg(image, channels=3)
-image = tf.image.resize(image, [self.image_size, self.image_size])
-image = tf.cast(image, tf.float32) / 255.0
-return torch.from_numpy(image.numpy())
-
-
-    def def create_dataloader(self):: dataset: MMMUDataset):
-        batch_size: int = 32
-        shuffle: bool = True
-        num_workers: int = 4    ) -> DataLoader:
-    """
- a DataLoader for the dataset.
+Create"""Module containing specific functionality."""a DataLoader for the dataset.
 
         Args: dataset: Dataset to create loader for
         batch_size: Batchsizefor loading data
@@ -123,27 +103,18 @@ return torch.from_numpy(image.numpy())
         num_workers: Numberofworker processes
 
         Returns: DataLoaderinstance
-        with
-"""
-        return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=True)
-        """
+        with"""Module containing specific functionality."""
  open("src/data/mmmu_loader.py"        , "w") as f: f.write(content)
 
 
         def def fix_enhanced_transformer(self)::    content
-"""Fix enhanced_transformer.py parsing issues."""
+"""Module containing specific functionality."""
  = Enhanced
-""""""
+"""Module containing specific functionality."""
 Enhanced transformer implementation with advanced features."""):
 
 
-        class class EnhancedTransformer(nn.Module):
-    """ transformer with advanced attention mechanisms.Initialize
-    """
-
-            ]def setup(self): -> None:
-""" model components.Forward
-    """
+        class class:"""Class implementing class functionality."""]def setup(self): -> None:"""Module containing specific functionality."""
 
         self.embed_dim = self.config["hidden_size"]
         self.num_heads = self.config["num_attention_heads"]
@@ -166,7 +137,7 @@ Enhanced transformer implementation with advanced features."""):
         deterministic: bool = True
         output_attentions: bool = False
         output_hidden_states: bool = False) -> Dict[str
-        jnp.ndarray]: """ pass of the model.
+        jnp.ndarray]: """pass of the model.
 
 Args: input_ids: Input token IDs
 attention_mask: Attentionmasktoken_type_ids: TokentypeIDs
@@ -176,8 +147,7 @@ output_hidden_states: Whethertooutput hidden states
 
 Returns: Dictionarycontainingmodel outputs
 
-with
-    """
+with"""
 # Get embeddings
 hidden_states = self.embeddings(input_ids)
 
@@ -196,23 +166,14 @@ outputs = {
 if output_attentions: outputs["attentions"] = encoder_outputs["attentions"]
 if output_hidden_states: outputs["hidden_states"]= encoder_outputs["hidden_states"]
 return outputs
-""" open("src/models/enhanced_transformer.py"    , "w") as f: f.write(content)
+"""Module containing specific functionality."""Fix layers/enhanced_transformer.py parsing issues."""= Enhanced"""Module containing specific functionality."""Enhanced transformer layer implementations."""):
 
 
-    def def fix_layers_enhanced_transformer(self)::    content
-"""Fix layers/enhanced_transformer.py parsing issues."""
- = Enhanced
-""""""
-Enhanced transformer layer implementations."""):
+class class:
+    """Class implementing class functionality."""
 
-
-class class EnhancedTransformerLayer(nn.Module):
-    """ transformer layer with advanced features.Initialize
-    """
-
-        ]def setup(self): -> None:
-""" layer components.Forward
-    """
+]def setup(self): -> None:
+"""Module containing specific functionality."""
 
 
 self.attention = nn.MultiHeadDotProductAttention(num_heads=self.config["num_attention_heads"], dropout_rate=self.config["attention_dropout_rate"])
@@ -229,16 +190,7 @@ self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
         deterministic: bool = True
         output_attentions: bool = False                ) -> Dict[str
         jnp.ndarray]:
-""" pass of the layer.
-
-        Args: hidden_states: Input hidden states
-        attention_mask: Attentionmaskdeterministic: Whethertouse deterministic behavior
-        output_attentions: Whethertooutput attention weights
-
-        Returns: Dictionarycontaininglayer outputs
-        
-        with
-    """
+"""Module containing specific functionality."""
 
         # Self attention
         normed_hidden_states = self.layer_norm1(hidden_states)
@@ -259,7 +211,7 @@ self.dropout = nn.Dropout(rate=self.config["dropout_rate"])
 
 
         def def main(self)::            print
-"""Fix all files with parsing errors."""
+"""Module containing specific functionality."""
 ):
 
         fix_mmmu_loader()

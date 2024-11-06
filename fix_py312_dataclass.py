@@ -1,17 +1,24 @@
-from typing import Tuple
-from typing import Dict
-from typing import Any
-from typing import Optional
-import
-"""Fix Python 3.12 specific dataclass and function definition issues."""
- re
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
 from pathlib import Path
-from typing import List,
+from dataclasses import dataclass, field
+
+from typing from typing import Dict import Tuple
+from typing from typing import Optional import Any
+import
+"""Module containing specific functionality."""
+ re
+from pathlib from typing import List, import Path
 from typing import Union
 
     ,
     ,
-    
+
 CORE_FILES = [
 "src/models/text_to_anything.py",
 "src/models/reasoning/math_reasoning.py",
@@ -42,9 +49,10 @@ pattern = r"(\w+)\s*: \s*([^=\n]+)(?:\s*=\s*field\((.*?)\))?"            content
 fix_field_def
 content)
 
-# Fix dataclass decorator
-content = re.sub(     r"@dataclass\s*\(([^)]*)\)",
-lambda m: (     "@dataclass(frozen=True)" if "frozen=True" in m.group(1) else "@dataclass"
+# Fix dataclass decorator:
+    """Class implementing decorator functionality."""
+
+(     "@dataclass(frozen=True)" if "frozen=True" in m.group(1) else "@dataclass"
 ),
 content)
 
@@ -107,7 +115,7 @@ flags=re.MULTILINE)
 
 
 def main() -> None: print
-"""Fix Python 3.12 dataclass and function definition issues in core files."""
+"""Module containing specific functionality."""
 ("Starting to process core files...")
 successful = 0
 failed = 0
@@ -121,4 +129,7 @@ failed = 0
         print(         f"\nProcessing complete: {} files successful        {} files failed"    )
 
 
-if __name__ == "__main__":                    main()
+if __name__ == "__main__":
+
+if __name__ == "__main__":
+    main()

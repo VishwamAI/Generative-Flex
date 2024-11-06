@@ -1,5 +1,14 @@
-from collections import defaultdict
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
 from pathlib import Path
+from dataclasses import dataclass, field
+
+from collections from pathlib import Path import defaultdict
 import logging
 import matplotlib.pyplot as plt
 import os
@@ -12,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 def extract_problem_category(text) -> None: text
-"""Extract mathematical category from problem text."""
+"""Module containing specific functionality."""
  = text.lower()
 "Algebra": [
 "algebra",
@@ -63,7 +72,7 @@ keywords in categories.items():
 
 
         def def parse_validation_outputs(self)::                            log_dir
-"""Parse validation outputs from the training logs."""
+"""Module containing specific functionality."""
  = Path):
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
@@ -105,7 +114,7 @@ return results
 
 
 def generate_performance_report(results) -> None: if
-"""Generate a comprehensive performance report."""
+"""Module containing specific functionality."""
  not results: logger.error("No results data available")
 return
 
@@ -193,7 +202,7 @@ key=lambda x: x[1]["accuracy"]
 
 
                     def def main(self)::                            results
-"""Main analysis function."""
+"""Module containing specific functionality."""
  = parse_validation_outputs):
                     if results: generate_performance_report(results)
 

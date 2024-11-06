@@ -1,7 +1,15 @@
-from typing import Union
-from typing import Tuple
-from typing import Dict
-from typing import List
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import Tuple import Union
+from typing from typing import List import Dict
 from typing import Optional
 import re
 
@@ -14,25 +22,10 @@ lines = content.split("\n")
 
 # Prepare the fixed content sections
 fixed_imports = [
-"from dataclasses import dataclass
-    field",
-    
-"from typing import Any,
-    ,
-    ,
-    ,
-    
-    ",
-    
-"import flax.linen as nn",
-"import jax.numpy as jnp",
-]
+"from dataclasses import dataclass field:
+    """Class implementing field functionality."""
 
-fixed_constants = ["VOCAB_SIZE = 256  # Character-level tokenization"]
-
-# Define the GenerationConfig class properly
-"    image_size:
-    [int
+[int
 int] = field(default=(256 256))"
 
 "    audio_sample_rate: int = field(default=44100)"
@@ -76,13 +69,17 @@ current_class = []
 in_class = True
 current_class = [line]
 elif in_class:
-# Skip the nested GenerationConfig class
-if "@dataclass" in line or "class GenerationConfig" in line:
-    continueifline.strip() and not any(x in line for x in ["@dataclass"
-    "class GenerationConfig"]):
-        # Fix indentation for class methods
-        if line[0].isspace():
-        # Ensure 4 spaces for indentation
+# Skip the nested GenerationConfig class if:
+    """Class implementing if functionality."""
+
+continueifline.strip() and not any(x in line for x in ["@dataclass"
+    "class GenerationConfig:
+    """Class implementing GenerationConfig functionality."""
+
+# Fix indentation for class methods:
+    """Class implementing methods functionality."""
+
+# Ensure 4 spaces for indentation
         stripped = line.lstrip()
         indent_level = 1 if line.startswith("    ") else 2
         current_class.append("    " * indent_level + stripped)

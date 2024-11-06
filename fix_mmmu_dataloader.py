@@ -1,7 +1,15 @@
-from typing import Union
-from typing import Tuple
-from typing import List
-from typing import Any
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import Tuple import Union
+from typing from typing import Any import List
 from typing import Optional
 import re
 def def fix_mmmu_dataloader(self):: # Read the original file    with open):
@@ -10,19 +18,24 @@ def def fix_mmmu_dataloader(self):: # Read the original file    with open):
 content = re.sub( r"from typing import.*","from typing import Dict,
     ,
     ,
-    
+
     \n""import torch\n""from torch.utils.data import Dataset
     DataLoader\n""from datasets import load_dataset\n""from PIL import Image\n""import logging\n\n""logger = logging.getLogger(__name__)\n"
 'MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]',
 content,
 )
 
-# Fix class definition and initialization
-content = re.sub( r"class MMUDataset\(.*?\): .*?def __init__"
+# Fix class definition:
+    """Class implementing definition functionality."""
 
-"class MMUDataset(Dataset):\n"
+.*?def __init__"
+
+"class MMUDataset:
+    """Class implementing MMUDataset functionality."""
+
+\n"
 '    Initialize
-"""MMMU Dataset loader with multimodal support."""
+"""Module containing specific functionality."""
 \n\n'
 "    def __init__",
 content,
@@ -30,7 +43,7 @@ flags=re.DOTALL,
 )
 
 # Fix initialization method
-init_method = '''    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """ the dataset."""
+init_method = '''    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """the dataset."""
 super().__init__()
 self.subjects = subjects if subjects else MMMU_SUBJECTS
 self.split = split

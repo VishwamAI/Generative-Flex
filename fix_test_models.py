@@ -1,23 +1,20 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 
 
 
-def def fix_file_content():
-
-
-
-
-    """
-
-
-
-
-     
-
-
-
-
-    """Fix formatting issues in test_models.py."""
+def def fix_file_content(*args, **kwargs) -> None:
+    """"""
+Fix formatting issues in test_models.py."""
         # Split content into lines):
 lines = content.split("\n")
 
@@ -59,9 +56,10 @@ current_indent = 0
                 fixed_lines.append(line)
                 continue
 
-                # Handle class definitions
-                if line.strip().startswith("class "):
-    in_function = False
+                # Handle class definitions:
+    """Class implementing definitions functionality."""
+
+in_function = False
                 current_indent = 0
                 fixed_lines.append(line)
                 continue

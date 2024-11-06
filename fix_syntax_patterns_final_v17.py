@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
@@ -13,7 +23,7 @@ def fix_docstrings(content):
     # Fix docstring placement and format
     content = re.sub(r'(\s*)"""[^"]*"""\s*\.\s*', r'\1', content)  # Remove malformed docstrings
     content = re.sub(r'(\s*)def\s+([^\n(]+)\([^)]*\):\s*\n\s*([^"\n]+)\s*"""',
-                    r'\1def \2():\n\1    """\n\1    \3\n\1    """',
+                    r'\1def \2():\n\1"""\n\1    \3\n\1    """',
                     content)
     return content
 
@@ -83,4 +93,7 @@ def main():
                 process_file(file_path)
 
 if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     main()

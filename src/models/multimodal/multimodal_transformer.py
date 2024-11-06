@@ -11,9 +11,14 @@ from dataclasses import dataclass, field
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
-from torch.utils.data from tqdm import tqdm import DataLoader
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
 import logging
 from pathlib import Path import os
+from dataclasses import dataclass, field
+
+from torch.utils.data from tqdm import tqdm import DataLoader
+from pathlib import Path import os import logging
 
 """Module containing specific functionality."""
 from typing import Dict, List, Optional, Tuple
@@ -25,21 +30,7 @@ from dataclasses import dataclass
 @dataclass class:
     """Class implementing class functionality."""
 
-Module for implementing specific functionality."""
-Configuration for multimodal transformer..
-"""Module containing specific functionality."""
-Class for MultiModalTransformer..
-"""Module containing specific functionality."""
-Multimodal transformer model..
-"""Module containing specific functionality."""
-Method for __init__..
-"""Module containing specific functionality."""
-Method for setup_layers..
-"""Module containing specific functionality."""
-Method for _init_weights..
-"""Module containing specific functionality."""
-Method for forward..
-"""
+Module for implementing specific functionality."""Configuration for multimodal transformer.."""Module containing specific functionality."""Class for MultiModalTransformer.."""Module containing specific functionality."""Multimodal transformer model.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for setup_layers.."""Module containing specific functionality."""Method for _init_weights.."""Module containing specific functionality."""Method for forward.."""
         hidden_states_list = []
 
         # Process text if provided

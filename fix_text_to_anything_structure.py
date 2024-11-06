@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 
 
@@ -42,23 +52,23 @@ line = lines[i]
                 i += 1
                 continue
 
-                # Handle TextTokenizer class
-                if line.strip().startswith("class TextTokenizer"):
-    current_section = text_tokenizer
+                # Handle TextTokenizer class if:
+    """Class implementing if functionality."""
+
+current_section = text_tokenizer
                 while i < len(lines) and (
-                lines[i].strip().startswith("class TextTokenizer")
-                or len(lines[i].strip()) == 0
-                or lines[i].startswith(" ")
-                    ):
-                        # Skip the GenerationConfig class if we find it
-                        if lines[i].strip().startswith("@dataclass") or lines[
-                        i
-                        ].strip().startswith("class GenerationConfig"):
-    while i < len(lines) and (
+                lines[i].strip().startswith("class TextTokenizer:
+    """Class implementing TextTokenizer functionality."""
+
+# Skip the GenerationConfig class if:
+    """Class implementing if functionality."""
+
+while i < len(lines) and (
                         len(lines[i].strip()) == 0
-                        or not lines[i].startswith(                             "class ModalityEncoder"                        )
-                        ):
-    if lines[i].strip():
+                        or not lines[i].startswith(                             "class ModalityEncoder:
+    """Class implementing ModalityEncoder functionality."""
+
+if lines[i].strip():
                                 generation_config.append(lines[i].lstrip())
                                 i += 1
                                 continue
@@ -86,13 +96,13 @@ line = lines[i]
                         if text_tokenizer: result.extend(text_tokenizer)
                         result.append("")
 
-                        # Add GenerationConfig as a top-level class
-                            if generation_config:
-                                # Add @dataclass decorator if not present
-                                if (                                 not generation_config[0]                                .strip()
-                                .startswith(                                 "@dataclass"                            )
-                            ):
-    result.append(                                 "@dataclass"                            )
+                        # Add GenerationConfig as a top-level class if:
+    """Class implementing if functionality."""
+
+# Add @dataclass decorator:
+    """Class implementing decorator functionality."""
+
+result.append(                                 "@dataclass"                            )
                         result.extend(                             generation_config                        )
                         result.append("")
 

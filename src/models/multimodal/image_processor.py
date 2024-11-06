@@ -1,16 +1,21 @@
-"""Image processor for multimodal transformer.."""
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+"""Module containing specific functionality."""
 
 import torch
 import torch.nn as nn
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
-from transformers import AutoImageProcessor
+from dataclasses from typing import Dict, List, Optional, Tuple import dataclass from:
+    """Class implementing from functionality."""
 
-@dataclass
-class ImageProcessorConfig:
-    """Configuration for image processor.."""
-
-    image_size: int = 224
+image_size: int = 224
     patch_size: int = 16
     num_channels: int = 3
     hidden_size: int = 768
@@ -18,22 +23,22 @@ class ImageProcessorConfig:
     num_attention_heads: int = 12
     dropout: float = 0.1
 
-class ImageProcessor(nn.Module):
-    """Image processor module.."""
+class ImageProcessor:
+    """Class implementing ImageProcessor functionality."""
 
-    def __init__(self, config: Optional[ImageProcessorConfig] = None):
-        """Initialize image processor.
+def __init__(*args, **kwargs) -> None:
+    """Initialize image processor.
 
         Args:
             config: Optional processor configuration"""
-        super().__init__()
+super().__init__()
         self.config = config or ImageProcessorConfig()
         self.processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
         self.setup_layers()
 
-    def setup_layers(self):
-        """Set up neural network layers.."""
-        self.patch_embed = nn.Conv2d(
+    def setup_layers(*args, **kwargs) -> None:
+    """Set up neural network layers.."""
+self.patch_embed = nn.Conv2d(
             self.config.num_channels,
             self.config.hidden_size,
             kernel_size=self.config.patch_size,

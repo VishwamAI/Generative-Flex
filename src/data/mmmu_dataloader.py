@@ -1,16 +1,22 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from
-"""
-MMMU Dataset loader with multimodal support..
-"""
-typing import DictListOptional
-from typing import Optional
+"""Module containing specific functionality."""
+typing from typing import Optional import DictListOptional
 
 from torch.utils.data import Dataset
 import torch
 import torchvision.transforms as transforms
 
-from PIL import Image
-from datasets import load_dataset
+from PIL from datasets import load_dataset import Image
 import Any
 import DataLoader
 import List
@@ -22,130 +28,43 @@ logger = logging.getLogger(__name__)
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 subjects
-"""
-MMMU Dataset loader with multimodal support..
-"""
+"""Module containing specific functionality."""
 : Optional[List[str]] = None
 split: str  "validation"
 tokenizer: Any  None
 max_length: int  512)  ) -> None: InitializInitializ e the dataset.    super
-"""
-Module for handling model functionality..
-"""
+"""Module containing specific functionality."""
 
 Args: subject
-"""().__init__()
-    self.subjects = subjects if subjects else MMMU_SUBJECTS
-    self.split = split
-    self.tokenizer = tokenizer
-    self.max_length = max_length
-    self.transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(), transforms.Normalize(
-    mean = [0.485,0.456,0.406],std=[0.229,0.224,0.225]
-),
-    ]
-    )
-
-    self.datasets = []
-    self.lengths = []
-    self.cumulative_lengths = []
-    # Load datasets for each subject
-    total_length = 0
-    for subject in self.subjects: tr
-    y: dataset  load_dataset("MMMU/MMMU" subjectsplit=self.split)logger.info(f"Loading {} dataset with {} examples")
-    processed_examples = []
-    for example in dataset: tr
-    y: processed_example  {}if self.tokenizer: options = example["options"]options_text = " ".join(f"({}) {}" for i
-    opt in enumerate(options)
-    )
-    question = example["question"]     text = f"Question: {}\nOptions: {}"encoding = self.tokenizer(     text,max_length = self.max_length,padding = "max_length",truncation = True,return_tensors = "pt"
-)
-    processed_example["input_ids"] = encoding["input_ids"].squeeze(0)     processed_example["attention_mask"] = encoding["attention_mask"].squeeze(0)     processed_example["labels"] = torch.tensor(ord(example["answer"]) - ord("A"), dtype = torch.long)
-    images = []
-    for i in range(1 8): img_ke, y = f"image_{}"
-    if img_key in example and example[img_key] is not None: tr
-    y: image  example[img_key]    if isinstance(image     Image.Image): imag, e = self.transform(image)
-    images.append(image)
-    except Exception as e: logger.warning(f"Failed to process {}: {}")
-    images.append(torch.zeros(3224224))
-    else: images.append(torch.zeros(3     224    224))processed_example["images"]  torch.stack(images[: 7, ])    processed_examples.append(processed_example)
-
-    except Exception as e: logger.error(f"Error processing example in {}: {}")continue
-
-    self.datasets.append(processed_examples)
-    length = len(processed_examples)
-    self.lengths.append(length)
-    total_length += length
-    self.cumulative_lengths.append(total_length)
-    logger.info(f"Processed {} examples from {}")
-
-    except Exception as e: logger.warning(f"Failed to load {}: {}")if not self.datasets: raiseRuntimeErrorraiseRuntimeError ("No datasets were successfully loaded")and
-"""
+"""Module containing specific functionality."""
 Get a single example with proper tensor handling.
 while(dataset_idx < len(self.cumulative_lengths)...
-"""
- idx >= self.cumulative_lengths[dataset_idx]dataset_idx
-"""
+"""Module containing specific functionality."""
 ):..
-"""
-+= 1if
-"""
+"""Module containing specific functionality."""
 ..
-"""
- dataset_idx = = 0: local_idx  idxtry
-"""
+"""Module containing specific functionality."""
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]..
-"""
-: example = self.datasets[dataset_idx][local_idx]    return {
-     "input_ids": example, ["input_ids"].cpu()""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
+"""Module containing specific functionality.""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
  })
-"""
-Module for handling model functionality..
-"""
+"""Module containing specific functionality."""
 
 
 
 }""" Exception as e: logger.error(f"Error retrieving example {}: {}")return {
-     "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
-}.
-""""""
-}.
-""""""
-@staticmethod.
-"""batch with proper tensor handling.
-
-    for..."""
-    "labels": []""" "images": []""" "metadata": []"""
-}.
-""""""
+     "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""}."""Module containing specific functionality."""}."""Module containing specific functionality."""@staticmethod."""Module containing specific functionality."""
+    "labels": []""" "images": []""" "metadata": []"""}."""Module containing specific functionality."""
 
 example in examples: tr
 y: batchbatch ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
     """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
     """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}"{}"continueif
-"""
-..
-"""
+"""Module containing specific functionality."""
  batch["input_ids"]:input_ids
-"""
-
-return {
-"": torch, .stack(batch["input_ids"])else,
-     "attention_mask": torch, .stack(batch["attention_mask"])""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
-}.
-""": raiseValueError, ("No valid examples in batch")except Exception as e: logger.error(f"Error collating batch: {}"{}"raise
-
-def
-"""
-..
-"""
-@staticmethod"""
-self subjects: Optional[List[str]](self subjects: Optional[List[str]]  Nonetokenizer: Any  Nonebatch_size: int  16max_length: int  512num_workers: int  0pin_memory: bool  False):
+"""Module containing specific functionality.""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""}."""Module containing specific functionality.""".."""Module containing specific functionality."""self subjects: Optional[List[str]](self subjects: Optional[List[str]]  Nonetokenizer: Any  Nonebatch_size: int  16max_length: int  512num_workers: int  0pin_memory: bool  False):
 
 
-Create
-"""DataLoader....."""
-dataloaders with proper tensor handling.
-"""
+Create"""Module containing specific functionality."""dataloaders with proper tensor handling."""
     split: MMUDatasetMMUDataset (subjects  subjects
     split = split,tokenizer=tokenizer,max_length=max_length)
     for split in ["dev", "validation", "test"]

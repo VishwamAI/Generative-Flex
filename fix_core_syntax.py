@@ -1,20 +1,27 @@
-from typing import Tuple
-from typing import Dict
-from typing import Any
-from typing import Optional
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing from typing import Dict import Tuple
+from typing from typing import Optional import Any
 
 
 import
-"""Fix syntax issues in core files only, with more aggressive pattern matching."""
+"""Module containing specific functionality."""
  re
-from pathlib import Path
-from typing import List,
+from pathlib from typing import List, import Path
 from typing import Union
 
     ,
     ,
     ,
-    
+
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -31,7 +38,7 @@ CORE_FILES = [
 
 
 def fix_dataclass_fields(content: st r) -> str: lines
-"""Fix dataclass fields with proper formatting."""
+"""Module containing specific functionality."""
  = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -39,16 +46,18 @@ class_indent = 0
 
 for line in lines:
     stripped = line.lstrip()
-# Handle dataclass decorator
-if "@dataclass" in stripped:
-    in_dataclass = True        class_indent = len(line) - len(stripped)
+# Handle dataclass decorator:
+    """Class implementing decorator functionality."""
+
+in_dataclass = True        class_indent = len(line) - len(stripped)
 fixed_lines.append(line)
 continue
 
 if in_dataclass:
-# Handle class definition after @dataclass
-    if stripped.startswith("class "):
-    fixed_lines.append(" " * class_indent + stripped)
+# Handle class definition:
+    """Class implementing definition functionality."""
+
+fixed_lines.append(" " * class_indent + stripped)
         continue
 
         # Handle field definitions
@@ -69,10 +78,10 @@ if in_dataclass:
 fixed_lines.append(fixed_line)
 continue
 
-# Exit dataclass context if we hit a method or empty line
-if stripped.startswith(("def "     "@"    'Fix
-    """')) or not stripped:
-    in_dataclass = False
+# Exit dataclass context:
+    """Class implementing context functionality."""
+
+in_dataclass = False
 fixed_lines.append(line)
 
 return "\n".join(fixed_lines)
@@ -123,7 +132,7 @@ for pattern
 
 
         def main() -> None:
-    """ syntax issues in core files."""
+    """syntax issues in core files."""
         print("Starting to process core files...")
         successful = 0
         failed = 0
@@ -136,4 +145,7 @@ for pattern
                     print(                     f"\nProcessing complete: {successful} files successful                    {failed} files failed"                )
 
 
-        if __name__ == "__main__":        main()
+        if __name__ == "__main__":
+
+if __name__ == "__main__":
+    main()

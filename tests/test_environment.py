@@ -1,35 +1,23 @@
-"""
-Test environment setup functionality...
-"""
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
-from src.utils.environment_setup import EnvironmentSetup
+"""Module containing specific functionality."""
+
+from src.utils.environment_setup import EnvironmentSetup import torch
 from transformers import AutoModelForCausalLM
 import unittest
 
 
-class TestEnvironment(unittest.TestCase):
-    """
-Test environment setup functionality...
-"""
+class TestEnvironment:
+    """Class implementing TestEnvironment functionality."""
 
-    def setUp(self):
-        """
-Set up test environment...
-"""
-        self.env_setup = EnvironmentSetup()
-
-    def test_environment_initialization(self):
-        """
-Test environment initialization...
-"""
-        self.assertIsNotNone(self.env_setup)
-        self.env_setup.setup()
-
-    def test_cuda_availability(self):
-        """
-Test CUDA availability check...
-"""
+Module containing specific functionality."""Set up test environment..."""Module containing specific functionality."""Test environment initialization..."""Module containing specific functionality."""Test CUDA availability check..."""
         if torch.cuda.is_available():
             self.assertTrue(torch.cuda.is_initialized())

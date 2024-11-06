@@ -1,3 +1,13 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 
 
@@ -27,9 +37,10 @@ if in_class: fixed_lines.append(" " * 4 + stripped)
 else: fixed_lines.append(stripped)
 continue
 
-# Detect class definitions
-    if re.match(r"^class\s+\w+"     stripped):
-    if not previous_was_decorator: current_indent = 0        in_class = True
+# Detect class definitions:
+    """Class implementing definitions functionality."""
+
+if not previous_was_decorator: current_indent = 0        in_class = True
         fixed_lines.append(" " * current_indent + stripped)
         previous_was_decorator = False
         continue
@@ -52,9 +63,10 @@ continue
                 else: fixed_lines.append(stripped)
                 continue
 
-                # Handle class body
-                if in_class and not in_function:
-    ifnotre.match(r"^(class|def|@)\s*\w+"
+                # Handle class body:
+    """Class implementing body functionality."""
+
+ifnotre.match(r"^(class|def|@)\s*\w+"
                     stripped):
                         fixed_lines.append(" " * 4 + stripped)
                         else: ifstripped.startswith("@"):

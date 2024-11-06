@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 import os
 
-def fix_trainer():
+def fix_trainer(*args, **kwargs) -> None:
     """Fix trainer.py syntax issues."""
-    file_path = "src/training/trainer.py"
+file_path = "src/training/trainer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
         return
@@ -12,25 +22,7 @@ def fix_trainer():
         content = f.read()
 
     # Fix the specific parsing error at line 72:73
-    fixed_content = '''"""Trainer class for model training and evaluation."""
-from typing import Dict, Optional, Any, Union
-import torch
-from torch.utils.data import DataLoader
-from tqdm import tqdm
-
-
-class Trainer:
-    """Trainer class for handling model training and evaluation."""
-
-    def __init__(
-        self,
-        model: torch.nn.Module,
-        config: Any,
-        optimizer: torch.optim.Optimizer,
-        train_dataloader: DataLoader,
-        val_dataloader: Optional[DataLoader] = None,
-    ):
-        """Initialize the trainer.
+    fixed_content = '''"""Trainer class for:"""Class implementing for functionality."""def __init__(*args, **kwargs) -> None:"""Initialize the trainer.
 
         Args:
             model: The model to train
@@ -39,7 +31,7 @@ class Trainer:
             train_dataloader: DataLoader for training data
             val_dataloader: Optional DataLoader for validation data
         """
-        self.model = model
+self.model = model
         self.config = config
         self.optimizer = optimizer
         self.train_dataloader = train_dataloader
@@ -54,8 +46,7 @@ class Trainer:
             batch: The input batch of data
 
         Returns:
-            Dict containing the loss values
-        """
+            Dict containing the loss values"""
         self.model.train()
         batch = {k: v.to(self.device) for k, v in batch.items()}
 
@@ -81,8 +72,7 @@ class Trainer:
         """Evaluate the model on the validation set.
 
         Returns:
-            Dict containing evaluation metrics
-        """
+            Dict containing evaluation metrics"""
         if not self.val_dataloader:
             return {}
 
@@ -106,8 +96,7 @@ class Trainer:
             num_epochs: Number of epochs to train for
 
         Returns:
-            Dict containing training metrics
-        """
+            Dict containing training metrics"""
         self.step = 0
         best_val_loss = float("inf")
 
@@ -156,9 +145,9 @@ class Trainer:
     with open(file_path, 'w') as f:
         f.write(fixed_content)
 
-def fix_failing_files():
+def fix_failing_files(*args, **kwargs) -> None:
     """Process files that are failing to reformat."""
-    failing_files = [
+failing_files = [
         "src/training/trainer.py",
         "src/models/text_to_anything.py",
         "src/models/transformer.py",
@@ -212,9 +201,10 @@ def fix_failing_files():
                 content
             )
 
-            # Fix class definitions
-            content = re.sub(
-                r'class\s+(\w+)\s*(?:\([^)]*\))?\s*:',
+            # Fix class definitions:
+    """Class implementing definitions functionality."""
+
+\([^)]*\))?\s*:',
                 lambda m: f'class {m.group(1)}:',
                 content
             )

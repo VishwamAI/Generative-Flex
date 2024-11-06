@@ -1,47 +1,23 @@
-"""
-Test simple model functionality.
-"""
-
+from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
-from src.models import SimpleModel
+"""Module containing specific functionality."""
+
+from src.models import SimpleModel import torch
 import unittest
 
 
 class TestSimple:
+    """Class implementing TestSimple functionality."""
 
-
-    """
-Class for TestSimple..
-""""""
-Test simple model functionality.
-"""
-
-    def setUp(self):
-
-
-        """
-Method for setUp..
-"""
-    self.model = SimpleModel()
-    self.vocab_size = 1000
-
-    def test_model_output(self):
-
-
-        """
-Method for test_model_output..
-"""
-    input_tensor = torch.randint(0, self.vocab_size, (1, 32))
-    output = self.model(input_tensor)
-    self.assertEqual(output.shape[-1], 32)
-
-    def test_model_batch(self):
-
-
-        """
-Method for test_model_batch..
-"""
+Module containing specific functionality."""Test simple model functionality."""Module containing specific functionality."""Method for setUp.."""Module containing specific functionality."""Method for test_model_output.."""Module containing specific functionality."""Method for test_model_batch.."""
     batch_size = 16
     input_tensor = torch.randint(0, self.vocab_size, (batch_size, 32))
     output = self.model(input_tensor)

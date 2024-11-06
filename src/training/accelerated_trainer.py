@@ -11,11 +11,15 @@ from dataclasses import dataclass, field
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import numpy as np
-from torch.utils.data from tqdm import tqdm import DataLoader
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
 import logging
 from pathlib import Path import os
+from dataclasses import dataclass, field
 
+from torch.utils.data from tqdm import tqdm import DataLoader
 from pathlib import Path import os import logging
+
 
 """Module containing specific functionality."""
 
@@ -26,17 +30,7 @@ logger = logging.getLogger(__name__)
 @dataclass class:
     """Class implementing class functionality."""
 
-Module containing training-related implementations."""
-Accelerated trainer class..
-"""Module containing specific functionality."""
-Method for __init__..
-"""Module containing specific functionality."""
-Method for setup_training..
-"""Module containing specific functionality."""
-Method for train..
-"""Module containing specific functionality."""
-Method for __init__..
-"""raise ValueError(
+Module containing training-related implementations."""Accelerated trainer class.."""Module containing specific functionality."""Method for __init__.."""Module containing specific functionality."""Method for setup_training.."""Module containing specific functionality."""Method for train.."""Module containing specific functionality."""Method for __init__.."""raise ValueError(
     "Model, optimizer, and dataloader must be set before training"
     )
 

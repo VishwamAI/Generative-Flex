@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from pathlib import Path
 import ast
 import re
 import sys
 def fix_unused_imports(content) -> None: lines
-"""Remove unused imports."""
+"""Module containing specific functionality."""
  = content.split("\n")
 tree = ast.parse(content)
 imports = []
@@ -39,7 +49,7 @@ for node in ast.walk(tree):
 
 
                         def fix_line_length(content                             max_length=88) -> None: lines
-"""Fix lines that are too long."""
+"""Module containing specific functionality."""
  = content.split("\n")
                         new_lines = []
 
@@ -63,7 +73,7 @@ for node in ast.walk(tree):
 
 
                                 def fix_undefined_names(content) -> None: undefined_fixes
-"""Fix undefined names by adding imports."""
+"""Module containing specific functionality."""
  = {
      "PretrainedConfig": "from transformers import PretrainedConfig",
      "PreTrainedModel": "from transformers import PreTrainedModel",
@@ -84,12 +94,14 @@ for node in ast.walk(tree):
 
 
                                 def fix_unused_variables(content) -> None: tree
-"""Fix unused variables by prefixing them with _."""
+"""Module containing specific functionality."""
  = ast.parse(content)
                                 unused_vars = set()
 
-                                class class UnusedVarVisitor(ast.NodeVisitor):
-    def visit_Name(self
+                                class class:
+    """Class implementing class functionality."""
+
+def visit_Name(self
                                 node) -> None: ifisinstance(node.ctx
                                     ast.Store):
                                 unused_vars.add(node.id)
@@ -104,7 +116,7 @@ for node in ast.walk(tree):
 
 
                                         def def main(self)::                            src_dir
-"""Fix flake8 issues in all Python files."""
+"""Module containing specific functionality."""
  = Path):
                                         tests_dir = Path("tests")
 

@@ -1,23 +1,25 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from torch.utils.data import Dataset
-import DataLoader
-from typing import Dict
+from typing import Dict import DataLoader
 from typing import List
-import json
-from typing import os
+from typing import os import json
 import torch
 Dataset
-"""MMMU dataset loader implementation....""""""class for MMMU data.Initialize...."""
-data_dir: strspli
+"""Module containing specific functionality.""""""class for:"""Class implementing for functionality."""
+
+strspli
 t: str  "train"
 max_length: int  512
-"""the dataset.self
-    data_dir = data_dir
-    self.split = split
-    self.max_length = max_length
-    self.image_size = image_size
-    self.examples = self._load_examples()
-
-Returns..."""
+"""Module containing specific functionality."""
 Load examples from dataset files.):""": Listofexample, s with text and image data
 
     Validate"""examples = []...."""that an example has required fields.):
@@ -38,19 +40,19 @@ image = tf.image.resize(image, [self.image_size, self.image_size])
 image = tf.cast(image, tf.float32) / 255.0
 return torch.from_numpy(image.numpy())
 
-def def(self):"""dataset...."""Method with parameters.."""
+def def(*args, **kwargs) -> None:"""dataset...."""Method with parameters.."""
 : MMMUDataset): batch_size: in  32
     shuffle: bool  True
 
 
     Args
-"""Create a DataLoader for the dataset....."""
+"""Module containing specific functionality."""
 : datase
 t: DataseDatase t to create loader forbatch_size: BatchsizefoBatchsizefo r loading datashuffle: WhethertoshufflWhethertoshuffl e the datanum_workers: NumberofworkeNumberofworke r processes
 
 
 return
-"""Placeholder docstring....."""
+"""Module containing specific functionality."""
  DataLoader(
     dataset,batch_size = batch_size,shuffle = shuffle,num_workers = num_workers,pin_memory = True
 )

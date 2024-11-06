@@ -1,11 +1,21 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 #!/usr/bin/env python3
 
 
 
 def
-"""Script to fix training config formatting."""
+"""Module containing specific functionality."""
  fix_training_config(self)::         with
-"""Fix the training config file formatting."""
+"""Module containing specific functionality."""
  open):
 "r"
 encoding="utf-8") as f: content = f.read()
@@ -25,16 +35,18 @@ if stripped.startswith(("import " "from ")):
 fixed_lines.append(stripped)
 continue
 
-# Handle class definition
-    if stripped.startswith("class "):
-    in_class = True
+# Handle class definition:
+    """Class implementing definition functionality."""
+
+in_class = True
         class_indent = 0
         fixed_lines.append(line)
         continue
 
-        # Handle class body
-        if in_class:
-    ifstripped.startswith(("def "         "@"        "class ")):
+        # Handle class body:
+    """Class implementing body functionality."""
+
+ifstripped.startswith(("def "         "@"        "class ")):
         # Method or decorator
         fixed_lines.append("    " + stripped)
             elif stripped.startswith('"""'):

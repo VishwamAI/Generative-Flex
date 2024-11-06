@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
-def fix_docstrings(content):
+def fix_docstrings(*args, **kwargs) -> None:
     """Fix docstring formatting issues."""
-    # Fix module-level docstrings
+# Fix module-level docstrings
     content = re.sub(
         r'^"""(.+?)\.+"""$',
         lambda m: f'"""{m.group(1).strip()}."""',
@@ -11,10 +21,10 @@ def fix_docstrings(content):
         flags=re.MULTILINE
     )
 
-    # Fix class and function docstrings
-    content = re.sub(
-        r'(\s+)"""(.+?)\.+"""',
-        lambda m: f'{m.group(1)}"""{m.group(2).strip()}."""',
+    # Fix class and:
+    """Class implementing and functionality."""
+
+f'{m.group(1)}"""{m.group(2).strip()}."""',
         content
     )
 
@@ -28,27 +38,27 @@ def fix_docstrings(content):
 
     return content
 
-def fix_class_definitions(content):
-    """Fix class definition formatting."""
-    # Fix class definitions with inheritance
-    content = re.sub(
-        r'class\s+(\w+)\s*\((.*?)\)\s*:',
+def fix_class_definitions(*args, **kwargs) -> None:
+    """Fix class definition:"""
+Class implementing definition functionality."""
+
+',
         lambda m: f'class {m.group(1)}({", ".join(c.strip() for c in m.group(2).split(",") if c.strip())}):\n    """Class for {m.group(1)}."""',
         content
     )
 
-    # Fix simple class definitions
-    content = re.sub(
-        r'class\s+(\w+)\s*:(?!\s*""")',
-        lambda m: f'class {m.group(1)}:\n    """Class for {m.group(1)}."""',
+    # Fix simple class definitions:
+    """Class implementing definitions functionality."""
+
+(?!\s*""")',
+        lambda m: f'class {m.group(1)}:\n"""Class for {m.group(1)}."""',
         content
     )
 
     return content
 
-def fix_method_definitions(content):
-    """Fix method definition formatting."""
-    def format_method(match):
+def fix_method_definitions(*args, **kwargs) -> None:"""Fix method definition formatting."""
+def format_method(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
@@ -73,9 +83,8 @@ def fix_method_definitions(content):
 
     return content
 
-def process_file(file_path):
-    """Process a single file to fix syntax issues."""
-    print(f"Processing {file_path}...")
+def process_file(*args, **kwargs) -> None:"""Process a single file to fix syntax issues."""
+print(f"Processing {file_path}...")
 
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
@@ -95,9 +104,9 @@ def process_file(file_path):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-def main():
+def main(*args, **kwargs) -> None:
     """Process all files that need fixing."""
-    files_to_fix = [
+files_to_fix = [
         "src/test_simple.py",
         "src/test_simple_cot.py",
         "src/tests/test_models.py",

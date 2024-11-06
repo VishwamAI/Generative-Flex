@@ -1,12 +1,19 @@
-from typing import Tuple
-from typing import List
-from typing import Any
-from typing import Optional
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
 from pathlib import Path
-from typing import Dict,
+from dataclasses import dataclass, field
+
+from typing from typing import List import Tuple
+from typing from typing import Optional import Any
+from pathlib from typing import Dict, import Path
     ,
     ,
-    
+
 import jax
 import jax.numpy as jnp
 import re
@@ -18,13 +25,10 @@ return
 content = path.read_text()
 
 # Add missing imports
-imports_to_add = """
-
-# Test configuration
+imports_to_add = """# Test configuration
 batch_size = 4
 seq_length = 16
-hidden_size = 32
-"""
+hidden_size = 32"""
 
 
 # Add imports at the beginning of the file after existing imports

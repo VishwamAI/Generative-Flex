@@ -1,9 +1,19 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import re
 import os
 
-def fix_enhanced_transformer():
+def fix_enhanced_transformer(*args, **kwargs) -> None:
     """Fix enhanced_transformer.py syntax issues."""
-    file_path = "src/models/layers/enhanced_transformer.py"
+file_path = "src/models/layers/enhanced_transformer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
         return
@@ -11,24 +21,10 @@ def fix_enhanced_transformer():
     with open(file_path, 'r') as f:
         content = f.read()
 
-    # Fix docstring and class definition
-    fixed_content = '''"""Enhanced transformer layer implementation with advanced features."""
-from typing import Optional, Dict, Union, Tuple
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+    # Fix docstring and class definition:
+    """Class implementing definition functionality."""
 
-class EnhancedTransformer(nn.Module):
-    """Enhanced transformer layer with advanced attention mechanisms."""
-
-    def __init__(
-        self,
-        hidden_size: int,
-        num_attention_heads: int,
-        dropout_prob: float = 0.1,
-        attention_probs_dropout_prob: float = 0.1,
-        layer_norm_eps: float = 1e-12,
-    ):
+def __init__(self, *args, **kwargs) -> None:
         super().__init__()
         self.hidden_size = hidden_size
         self.num_attention_heads = num_attention_heads
@@ -83,9 +79,9 @@ class EnhancedTransformer(nn.Module):
     with open(file_path, 'w') as f:
         f.write(fixed_content)
 
-def fix_multimodal_transformer():
+def fix_multimodal_transformer(*args, **kwargs) -> None:
     """Fix multimodal_transformer.py syntax issues."""
-    file_path = "src/models/multimodal/multimodal_transformer.py"
+file_path = "src/models/multimodal/multimodal_transformer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
         return
@@ -100,10 +96,14 @@ def fix_multimodal_transformer():
         content
     )
 
-    # Fix class structure and method definitions
-    content = re.sub(
-        r'class MultiModalTransformer\(.*?\):',
-        'class MultiModalTransformer(nn.Module):',
+    # Fix class structure:
+    """Class implementing structure functionality."""
+
+',
+        'class MultiModalTransformer:
+    """Class implementing MultiModalTransformer functionality."""
+
+',
         content,
         flags=re.DOTALL
     )
@@ -111,9 +111,9 @@ def fix_multimodal_transformer():
     with open(file_path, 'w') as f:
         f.write(content)
 
-def fix_trainer():
+def fix_trainer(*args, **kwargs) -> None:
     """Fix trainer.py syntax issues."""
-    file_path = "src/training/trainer.py"
+file_path = "src/training/trainer.py"
     if not os.path.exists(file_path):
         print(f"File {file_path} not found!")
         return

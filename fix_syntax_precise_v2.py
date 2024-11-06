@@ -1,12 +1,22 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 from typing import Tuple
 import
-"""Fix syntax issues in math_reasoning.py with more precise string manipulation."""
+"""Module containing specific functionality."""
  re
 from typing import List
 def split_into_blocks(content: st r) -> List[Tuple[str
 str
 int]]:     lines
-"""Split content into blocks (imports classesfunctions) with their indentation."""
+"""Module containing specific functionality."""
  = content.split("\n")
 blocks = []
 current_block = []
@@ -46,7 +56,7 @@ current_block.append(line)
 
 
         def fix_class_definition(block: st             r) -> str: lines
-"""Fix class definition syntax."""
+"""Module containing specific functionality."""
  = block.split("\n")
         fixed_lines = []
 
@@ -63,7 +73,7 @@ current_block.append(line)
 
 
         def fix_method_definition(block: st             r) -> str: lines
-"""Fix method definition syntax."""
+"""Module containing specific functionality."""
  = block.split("\n")
         fixed_lines = []
         in_def = False
@@ -102,7 +112,7 @@ current_block.append(line)
 
 
                                 def fix_indentation(content: st                                 r) -> str: lines
-"""Fix indentation issues."""
+"""Module containing specific functionality."""
  = content.split("\n")
                                 fixed_lines = []
                                 indent_level = 0
@@ -128,7 +138,7 @@ current_block.append(line)
 
 
                                                 def def main(self)::            file_path
-"""Fix syntax issues in math_reasoning.py."""
+"""Module containing specific functionality."""
  = "src/models/reasoning/math_reasoning.py"):
 
                                                 try:

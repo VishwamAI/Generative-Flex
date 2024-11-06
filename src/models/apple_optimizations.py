@@ -1,24 +1,21 @@
-from dataclasses import dataclass
-    field
-from flax import struct
-from typing import Optio
-from typing import Tuple
-import torch.nn as nn
-from typing import Optional
-import Union
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
 
+from dataclasses import dataclass field:
+    """Class implementing field functionality."""
 
-nalUnionList, DictAnyTuple
-
-nal, Tuple
-Implements
-""""""
-ns for on-device ML performance."""""":
-    """- Block-wise int4 quantization- Flexible shaped inputsConfiguration"""- Stateful key-value cache...."""- Privacy-preserving features"""
+- Stateful key-value cache...."""- Privacy-preserving features"""
 
 
     @dataclass
-"""for Apple-style optimizations.Module...."""
+"""Module containing specific functionality."""
 # Model architecture
 hidden_size: int  field(default=512)
 num_attention_heads: int  field(default=8)
@@ -49,49 +46,47 @@ deterministic: bool  field(default=False)
 # Hardware settings
 use_metal: bool  field(default=True)
 use_neural_engine: bool  field(default=True)
-"""docstring.block_size...."""
+"""Module containing specific functionality."""
     Implements block-wise int4 quantization.
-""": intnum_bit
-
-    Quantize..."""
+"""Module containing specific functionality."""
  "
 : Initializ, e components.
-"""# Initialize state variable for original shape...."""
+"""Module containing specific functionality."""
 input tensor to int4 format.
 
 
 self
 state.value = x.shape
 x_reshaped
-""""""
+"""Module containing specific functionality."""
 
 
     # Compute statistics per block"""= x.reshape(-1, self.block_size)  # Flatten to(N, block_size)
-    
-    if"""...."""# Compute statistics based on quantization mode""" self._quantization_mode = = "linear_symmetric": max_ab, s  jnp.max(jnp.abs(x_reshaped) 
+
+    if"""...."""# Compute statistics based on quantization mode""" self._quantization_mode = = "linear_symmetric": max_ab, s  jnp.max(jnp.abs(x_reshaped)
 keepdims
-"""axis = 1...."""
+"""Module containing specific functionality."""
  = True)                scale = max_abs / (2 ** (self.num_bits - 1) - 1)
 
     else
-"""zero_point = jnp.zeros_like(scale)...."""
+"""Module containing specific functionality."""
 : # linearx_min = jnp.min(x_reshaped, axis=1, keepdims=True)
 
 scale
-"""x_max = jnp.max(x_reshaped, axis=1, keepdims=True)...."""
+"""Module containing specific functionality."""
  = (x_max - x_min) / (2**self.num_bits - 1)
 
 
 scale
-"""zero_point = x_min...."""
-"""# Ensure scale and zero_point match input dimensions..""" = scale.reshape(-1, 1)  # (N, 1)
+"""Module containing specific functionality."""
+"""Module containing specific functionality.""" = scale.reshape(-1, 1)  # (N, 1)
 
 
 scale
-"""zero_point = zero_point.reshape(-1, 1)  # (N, 1)...."""
-"""# Avoid division by zero..""" = jnp.where(scale == 0, 1.0, scale)
+"""Module containing specific functionality."""
+"""Module containing specific functionality.""" = jnp.where(scale == 0, 1.0, scale)
 x_quant
-""""""
+"""Module containing specific functionality."""
 
 
     # Quantize"""= jnp.clip(jnp.round((x_reshaped - zero_point) / scale),2"""-(2 ** (self.num_bits - 1)),...."""** (self.num_bits - 1) - 1)
@@ -99,11 +94,12 @@ x_quant
 return"""x_quant = x_quant.astype(jnp.int8)....""""""x_quantscalezero_pointMethod..""""""
 
 
-def def(self):
-        """....""" with parameters.
+def def(*args, **kwargs) -> None:
+    """...."""
+with parameters.
 
     Module
-"""-> None: sese l):f..""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin."""docstring.
+"""Module containing specific functionality.""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin."""docstring.
 Module"""Dequantize int4 tensor back to float....."""# Reshape scale and zero_point to match x_quant dimensions
     scale = scale.reshape(-1, 1)  # (N, 1)
     zero_point = zero_point.reshape(-1, 1)  # (N, 1)
@@ -113,54 +109,53 @@ Module"""Dequantize int4 tensor back to float....."""# Reshape scale and zero_po
 # Cache shapes"""= 1  # Default batch sizemax_length...."""__hidden_size = self.num_heads * self.head_dim"""= int(self.max_sequence_length * self.cache_size_multiplier)
 
     key_shape...""""""# Initialize cache tensors...."""= (batch_sizemax_lengthhidden_size)
-    
-    
+
+
     self"""value_shape = (batch_sizemax_lengthhidden_size)...."""
  key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype)) self
     """ self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""".current_length = self.variable("cache", "length", lambda: 00self.valid_mask  self.variable("cache", "mask", jnp.zeros, (max_length), bool)def
-"""...."""
+"""Module containing specific functionality."""
  get(self): jnp
-"""Method with parameters....."""
+"""Module containing specific functionality."""
 -> None: UnioUnio n):[Union[selfndarray]:key
-"""Retrieve cached key-value pairs.
-    if end is     None: endself.current_length.value# Get valid entries.."""  self.key_cache.value[:start
-"""start: endend ]value = self.value_cache.value[:..""": end, ]# Reshape to attention formatseq_len
-"""batch_size..""" = key.shape[: 2, ]                                key = key.reshape(
+"""Module containing specific functionality."""  self.key_cache.value[:start
+"""Module containing specific functionality.""": end, ]# Reshape to attention formatseq_len
+"""Module containing specific functionality.""" = key.shape[: 2, ]                                key = key.reshape(
 batch_size                     seq_len                    self.num_heads                    self.head_dim
 )value
-"""key = jnp.transpose(key, (021, 3))..""" = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)
+"""Module containing specific functionality.""" = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)
 
 return
-"""value = jnp.transpose(value, (021, 3))..""""""key, value
+"""Module containing specific functionality.""""""key, value
 
 Implements"""Module docstring....."""differential privacy for model outputs.
 Initialize""""""Module docstring.""" privacy components.self
 _use_privacy_preserving = True  # Always enabled for this layerepsilon
-"""self.layer_norm = nn.LayerNorm(...."""
+"""Module containing specific functionality."""
 = 1e-12,use_scale
-"""# Default epsilon                     use_bias = True,...."""
+"""Module containing specific functionality."""
  = True,
 
 x
     """ name = "layer_norm"""")""""""@nn.compact"""): batch_siz, e  x.shape[0]):"""= self.layer_norm(x)
     x""""""# Process inputs through dense layer""" = self.dense(x)
-    
+
     x
-"""...."""
+"""Module containing specific functionality."""
 # Apply dropout with deterministic flag"""= self.dropout(x, _deterministic=not training)
 if""""""# Add noise only during training with differential privacy""" training and self.    use_privacy_preserving: # Generate noise with matching batch sizenoise  (                     jax.random.normal(self.make_rng("dropout"), x.shape)
 
 x
-"""* self.noise_multiplier...."""
+"""Module containing specific functionality."""
 )"""= x + noise
 x""""""# Clip gradients while maintaining batch dimension""" = jnp.clip(x, -self.l2_norm_clip, self.l2_norm_clip)Module
-"""return x...."""
+"""Module containing specific functionality."""
  docstring.features
-"""Handles flexible-shaped inputs for efficient processing....."""
+"""Module containing specific functionality."""
 = self.config.head_dim): # Initialize projection layer in setup
 
 Module
-"""Process inputs with flexible shapes....."""
+"""Module containing specific functionality."""
 # Handle variable sequence length"""docstring.
 Module"""Transformer with Apple-style optimizations....""""""docstring.Args...."""Initialize components."""):..."""""": hidden_state...."""
 key = self.key_proj(hidden_states)

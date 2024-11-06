@@ -1,38 +1,48 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
 import os
 import re
 
 def fix_math_head(content):
     # Fix math_head.py specific issues
     content = re.sub(r'(\s*)attention_mask\s*$', r'\1attention_mask: torch.Tensor', content)
-    content = re.sub(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*"""([^"]*)"""', r'class \1(nn.Module):\n    """\2"""', content)
+    content = re.sub(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*"""([^"]*)"""', r'class \1(nn.Module):\n"""\2"""', content)
     return content
 
 def fix_math_reasoning(content):
     # Fix math_reasoning.py specific issues
     content = re.sub(r'from\s+([^,]+),\s*$', r'from \1', content, flags=re.MULTILINE)
-    content = re.sub(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*"""([^"]*)"""', r'class \1(nn.Module):\n    """\2"""', content)
+    content = re.sub(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*"""([^"]*)"""', r'class \1(nn.Module):\n"""\2"""', content)
     return content
 
 def fix_mathematical_notation(content):
     # Fix mathematical_notation.py specific issues
-    content = re.sub(r'\(nn\.Module\):\s*$', r'(nn.Module):\n    """Mathematical notation processing module."""', content)
+    content = re.sub(r'\(nn\.Module\):\s*$', r'(nn.Module):\n"""Mathematical notation processing module."""', content)
     return content
 
 def fix_symbolic_math(content):
     # Fix symbolic_math.py specific issues
-    content = re.sub(r'\(nn\.Module\):\s*$', r'(nn.Module):\n    """Symbolic mathematics processing module."""', content)
+    content = re.sub(r'\(nn\.Module\):\s*$', r'(nn.Module):\n"""Symbolic mathematics processing module."""', content)
     return content
 
 def fix_text_to_anything(content):
     # Fix text_to_anything.py specific issues
     content = re.sub(r'from\s+([^,]+),\s*$', r'from \1', content, flags=re.MULTILINE)
-    content = re.sub(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*"""([^"]*)"""', r'class \1(nn.Module):\n    """\2"""', content)
+    content = re.sub(r'class\s+(\w+)\s*\(\s*nn\.Module\s*\):\s*"""([^"]*)"""', r'class \1(nn.Module):\n"""\2"""', content)
     return content
 
 def fix_jax_trainer(content):
     # Fix jax_trainer.py specific issues
     content = re.sub(r'from\s+([^,]+),\s*$', r'from \1', content, flags=re.MULTILINE)
-    content = re.sub(r'class\s+(\w+):\s*"""([^"]*)"""', r'class \1:\n    """\2"""', content)
+    content = re.sub(r'class\s+(\w+):\s*"""([^"]*)"""', r'class \1:\n"""\2"""', content)
     return content
 
 def fix_train_mmmu(content):
@@ -99,4 +109,7 @@ def main():
             print(f"Warning: {filepath} does not exist")
 
 if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     main()

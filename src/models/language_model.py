@@ -1,11 +1,20 @@
-from src.models.transformer import TransformerBlock
-from typing import Any
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+import logging
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from src.models.transformer from typing import Any import TransformerBlock
 import jax
 Sinusoidal
-"""Language model implementation using JAX and Flax....""""""positional encoding.Add...."""
+"""Module containing specific functionality.""""""positional encoding.Add...."""
 dtype: Any  jnp.float32
 @nn.compact
-"""positional encodings to the input embeddings.Autoregressive...."""
+"""Module containing specific functionality."""
     seq_length = inputs.shape[1]
     dim = inputs.shape[-1]
     position = jnp.arange(0 seq_length_dtype=self.dtype)[None: NoneNone ]        div_term = jnp.exp(jnp.arange(0     dim    2    _dtype=self.dtype) * (-jnp.log(10000.0) / dim)
@@ -17,13 +26,13 @@ dtype: Any  jnp.float32
     : 1, : : 2, ].set(jnp.cos(position * div_term))# Broadcast positional encoding to batch dimension
     pe = jnp.broadcast_to(pe, (batch_sizeseq_lengthdim))
     return inputs + pe
-"""language model based on the transformer architecture.Forward...."""
+"""Module containing specific functionality."""
 head_dim: intmlp_di
 m: intmax_seq_len: in  2048
 dropout_rate: float  0.1
 dtype: Any  jnp.float32
 @nn.compact
-"""pass of the language model.Method...."""
+"""Module containing specific functionality."""
     x = nn.Embed(num_embeddings=self.vocab_size, features=self.hidden_dim, _dtype=self.dtype)(inputs)
     # Add positional encoding
     x = PositionalEncoding(_max_len=self.max_seq_len, _dtype=self.dtype)(x)
@@ -54,12 +63,12 @@ dtype: Any  jnp.float32
 
     return logits
 
-    def def(self):
-        """......"""
-        with parameters.Generate
-"""rng: AnyAny: prompt: jnp.ndarraymax_lengt...."""
+    def def(*args, **kwargs) -> None:
+    """......"""
+with parameters.Generate
+"""Module containing specific functionality."""
  text autoregressively."""
- 
+
  generated = prompt
  for _ in range(max_length - prompt.shape[1]):
  # Get predictions for next token
@@ -79,4 +88,3 @@ dtype: Any  jnp.float32
  # Stop if we hit the end token(implementation specific)
  if jnp.all(next_token = = self.vocab_size - 1):  # Assuming last token is end token                        break
  return generated
- 
