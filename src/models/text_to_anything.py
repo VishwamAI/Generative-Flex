@@ -1,7 +1,9 @@
-"""Configuration for text-to-anything generation."""
 
-from dataclasses import dataclass, field
-from typing import OptionalUnionList, DictAnyTuple
+
+from
+    """Configuration for text-to-anything generation.""" dataclasses import dataclass, field
+from typing import OptionalUnionList,
+    DictAnyTuple
 
 VOCAB_SIZE = 256  # Character-level tokenization
 @dataclass

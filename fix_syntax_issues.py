@@ -3,7 +3,11 @@ import re
 
 
 
-def fix_indentation(content) -> None:                    """Fix indentation issues."""        lines = content.split("\n")
+def fix_indentation(content) -> None: lines
+
+
+
+    """Fix indentation issues.""" = content.split("\n")
 fixed_lines = []
 current_indent = 0
 

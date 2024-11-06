@@ -1,9 +1,11 @@
 import re
-"""Script to fix syntax errors introduced by formatting."""
 
 
 
-def fix_line_continuations(content) -> None:                    """Fix broken line continuations and indentation."""        lines = content.split("\n")
+
+def
+    """Script to fix syntax errors introduced by formatting.""" fix_line_continuations(content) -> None: lines
+    """Fix broken line continuations and indentation.""" = content.split("\n")
 fixed_lines = []
 in_function_call = False
 base_indent = ""
@@ -44,7 +46,10 @@ if("[" in line     and "]" not in line    and not any(x in line for x in ["[None
                         return "\n".join(fixed_lines)
 
 
-                        def main(self)::                    """Fix syntax errors in all affected files."""        files_to_fix = [):
+                        def main(self)::                            files_to_fix
+
+
+                            """Fix syntax errors in all affected files.""" = [):
                         "src/training/train_mmmu.py",
                         "tests/test_features.py",
                         "tests/test_models.py",

@@ -5,7 +5,11 @@ import sys
 
 
 
-def fix_unused_imports(content) -> None:    """Remove unused imports."""        lines = content.split("\n")
+def fix_unused_imports(content) -> None: lines
+
+
+
+    """Remove unused imports.""" = content.split("\n")
 tree = ast.parse(content)
 imports = []
 used_names = set()
@@ -39,7 +43,10 @@ for node in ast.walk(tree):
                         return "\n".join(new_lines)
 
 
-                        def fix_line_length(content                             max_length=88) -> None: """Fix lines that are too long."""        lines = content.split("\n")
+                        def fix_line_length(content                             max_length=88) -> None: lines
+
+
+                            """Fix lines that are too long.""" = content.split("\n")
                         new_lines = []
 
                             for line in lines: iflen(line) > max_length:
@@ -61,7 +68,10 @@ for node in ast.walk(tree):
                                 return "\n".join(new_lines)
 
 
-                                def fix_undefined_names(content) -> None:    """Fix undefined names by adding imports."""        undefined_fixes = {
+                                def fix_undefined_names(content) -> None: undefined_fixes
+
+
+                                    """Fix undefined names by adding imports.""" = {
                                 "PretrainedConfig": "from transformers import PretrainedConfig"
                                 "PreTrainedModel": "from transformers import PreTrainedModel"
                                 "Tuple": "from typing import Tuple"
@@ -80,7 +90,10 @@ for node in ast.walk(tree):
                                 return "\n".join(lines)
 
 
-                                def fix_unused_variables(content) -> None:                    """Fix unused variables by prefixing them with _."""        tree = ast.parse(content)
+                                def fix_unused_variables(content) -> None: tree
+
+
+                                    """Fix unused variables by prefixing them with _.""" = ast.parse(content)
                                 unused_vars = set()
 
                                 class UnusedVarVisitor(ast.NodeVisitor): def visit_Name(self
@@ -97,7 +110,10 @@ for node in ast.walk(tree):
                                         return content
 
 
-                                        def main(self)::                    """Fix flake8 issues in all Python files."""        src_dir = Path):
+                                        def main(self)::                            src_dir
+
+
+                                            """Fix flake8 issues in all Python files.""" = Path):
                                         tests_dir = Path("tests")
 
                                         # Process all Python files

@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Fix type hint and method signature spacing issues."""
-import re
-from pathlib import Path
-from typing import List, Dict, Any, Optional
 
-def fix_type_hints(content: str) -> str:
+import
+    """Fix type hint and method signature spacing issues.""" re
+from pathlib import Path
+from typing import List,
+    Dict,
+    Any,
+    Optional
+
+def fix_type_hints(content: str) -> str: Fix
     """Fix type hint spacing issues."""
     # Fix basic type hints with incorrect comma spacing
     content = re.sub(
@@ -44,14 +48,15 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-    """Fix method signature spacing issues."""
+
+    """ method signature spacing issues.Fix
+    """
     def format_params(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
 
-        if not params:
-            return f"{indent}def {name}():"
+        if not params: return f"{indent}def {name}():"
 
         # Split parameters and clean them
         params = re.sub(r'\s*,\s*', ', ', params)
@@ -76,7 +81,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_class_inheritance(content: str) -> str:
-    """Fix class inheritance syntax."""
+
+    """ class inheritance syntax.Process
+    """
     # Fix class definitions
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*(\w+(?:\.\w+)*)\s*\)\s*:',
@@ -87,11 +94,11 @@ def fix_class_inheritance(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file with all fixes."""
+
+    """ a single file with all fixes.Process
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply all fixes
         content = fix_type_hints(content)
@@ -99,23 +106,21 @@ def process_file(file_path: Path) -> None:
         content = fix_class_inheritance(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Process all Python files in the project."""
+
+    """ all Python files in the project."""
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:
         python_files.extend(Path(".").glob(pattern))
 
     # Process each file
-    for file_path in python_files:
-        if not any(part.startswith('.') for part in file_path.parts):
+    for file_path in python_files: if not any(part.startswith('.') for part in file_path.parts):
             process_file(file_path)
 
 if __name__ == "__main__":

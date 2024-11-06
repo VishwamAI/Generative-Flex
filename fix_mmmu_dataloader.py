@@ -4,7 +4,13 @@ import re
 def fix_mmmu_dataloader(self):: # Read the original file    with open):
 "r") as f: content = f.read()
 # Fix imports
-content = re.sub( r"from typing import.*","from typing import Dict, List, Optional, Tuple, Any, Union\n""import torch\n""from torch.utils.data import Dataset, DataLoader\n""from datasets import load_dataset\n""from PIL import Image\n""import logging\n\n""logger = logging.getLogger(__name__)\n"
+content = re.sub( r"from typing import.*","from typing import Dict,
+    List,
+    Optional,
+    Tuple,
+    Any,
+    Union\n""import torch\n""from torch.utils.data import Dataset,
+    DataLoader\n""from datasets import load_dataset\n""from PIL import Image\n""import logging\n\n""logger = logging.getLogger(__name__)\n"
 'MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]',
 content,
 )
@@ -13,14 +19,15 @@ content,
 content = re.sub( r"class MMUDataset\(.*?\): .*?def __init__"
 
 "class MMUDataset(Dataset):\n"
-'    """MMMU Dataset loader with multimodal support."""\n\n'
+'    Initialize
+    """MMMU Dataset loader with multimodal support."""\n\n'
 "    def __init__",
 content,
 flags=re.DOTALL,
 )
 
 # Fix initialization method
-init_method = '''    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """Initialize the dataset."""
+init_method = '''    def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """ the dataset."""
 super().__init__()
 self.subjects = subjects if subjects else MMMU_SUBJECTS
 self.split = split

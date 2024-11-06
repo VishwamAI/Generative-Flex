@@ -3,9 +3,8 @@ import jax
 import optax
 
 # Simple model def inition(same as in test_minimal.py)
-(nn.Module) -> None:
-    """Method with parameters."""
-    hidden_size: int = 64
+(nn.Module) -> None: hidden_size
+    """Method with parameters.""": int = 64
     "r") as f: data = json.load(f)
     # Prepare training examples
     input_text = [conv["input"] for conv in data["conversations"]]     output_text = [conv["response"] for conv in data["conversations"]]
@@ -42,8 +41,9 @@ import optax
     x = jnp.array([input_tokens[i]])
     y = jnp.array([output_tokens[i]])
     def loss_fn(self         params):
-"""Method with parameters."""
-    logi, t):
+
+    logi
+    """Method with parameters.""", t):
     s = model.apply(params         x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits
     y

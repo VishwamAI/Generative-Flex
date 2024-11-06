@@ -1,12 +1,16 @@
-"""Fix fundamental syntax issues in Python files."""
-import re
+
+import
+    """Fix fundamental syntax issues in Python files.""" re
 import os
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List,
+    Dict,
+    Any,
+    Optional
 
 
-def fix_method_definition_syntax(line: str) -> str:
-"""Fix basic method definition syntax issues."""
+def fix_method_definition_syntax(line: str) -> str: Fix
+    """Fix basic method definition syntax issues."""
 # Fix method with self parameter on wrong line
     if re.match(r'\s*def\s+\w+\s*\(\s*$', line):
         return line.rstrip() + 'self):'
@@ -22,20 +26,20 @@ return line
 
 
 def fix_multiline_statement(content: str) -> str:
-"""Fix multiline statement syntax."""
+
+
+    """ multiline statement syntax.Fix
+    """
 lines = content.splitlines()
 fixed_lines = []
 current_indent = 0
 in_multiline = False
 multiline_buffer = []
 
-    for line in lines:
-        stripped = line.strip()
+    for line in lines: stripped = line.strip()
 
         # Skip empty lines
-        if not stripped:
-            if not in_multiline:
-                fixed_lines.append(line)
+        if not stripped: if not in_multiline: fixed_lines.append(line)
         continue
 
         # Check if we're starting a multiline statement
@@ -52,8 +56,7 @@ multiline_buffer = []
         # Fix indentation for continuation
             if stripped.startswith((')', ']', '}')):
                 fixed_line = ' ' * current_indent + stripped
-            else:
-                fixed_line = ' ' * (current_indent + 4) + stripped
+            else: fixed_line = ' ' * (current_indent + 4) + stripped
         multiline_buffer.append(fixed_line)
 
         # Check if multiline statement ends
@@ -62,14 +65,16 @@ multiline_buffer = []
         fixed_lines.extend(multiline_buffer)
         multiline_buffer = []
         in_multiline = False
-        else:
-        fixed_lines.append(line)
+        else: fixed_lines.append(line)
 
 return '\n'.join(fixed_lines)
 
 
 def fix_line_continuation(content: str) -> str:
-"""Fix line continuation syntax."""
+
+
+    """ line continuation syntax.Fix
+    """
 lines = content.splitlines()
 fixed_lines = []
 
@@ -114,17 +119,18 @@ return '\n'.join(fixed_lines)
 
 
 def fix_indentation(content: str) -> str:
-"""Fix basic indentation issues."""
+
+
+    """ basic indentation issues.Process
+    """
 lines = content.splitlines()
 fixed_lines = []
 indent_stack = [0]
 
-    for line in lines:
-        stripped = line.strip()
+    for line in lines: stripped = line.strip()
 
         # Skip empty lines
-        if not stripped:
-        fixed_lines.append('')
+        if not stripped: fixed_lines.append('')
         continue
 
         # Calculate current indentation
@@ -142,25 +148,23 @@ indent_stack = [0]
         continue
 
         # Use current indentation level
-        if indent_stack:
-        fixed_lines.append(' ' * indent_stack[-1] + stripped)
-        else:
-        fixed_lines.append(stripped)
+        if indent_stack: fixed_lines.append(' ' * indent_stack[-1] + stripped)
+        else: fixed_lines.append(stripped)
 
 return '\n'.join(fixed_lines)
 
 
 def process_file(file_path: str) -> bool:
-"""Process a single file with robust error handling."""
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+
+
+    """ a single file with robust error handling.Fix
+    """
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Fix basic syntax issues
         lines = content.splitlines()
         fixed_lines = []
-        for line in lines:
-        fixed_line = fix_method_definition_syntax(line)
+        for line in lines: fixed_line = fix_method_definition_syntax(line)
         fixed_lines.append(fixed_line)
 
         content = '\n'.join(fixed_lines)
@@ -169,30 +173,27 @@ def process_file(file_path: str) -> bool:
         content = fix_indentation(content)
 
         # Write back only if changes were made
-        with open(file_path, 'w', encoding='utf-8') as f:
-        f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         return True
-    except Exception as e:
-        print(f"Error processing {file_path}: {str(e)}")
+    except Exception as e: print(f"Error processing {file_path}: {str(e)}")
         return False
 
 
 def main():
-"""Fix fundamental syntax issues in all Python files."""
+
+
+    """ fundamental syntax issues in all Python files."""
 # Get all Python files
 python_files = []
     for root, _, files in os.walk('.'):
-        if '.git' in root:
-        continue
-        for file in files:
-            if file.endswith('.py'):
+        if '.git' in root: continue
+        for file in files: if file.endswith('.py'):
                 python_files.append(os.path.join(root, file))
 
 # Process files
 success_count = 0
-    for file_path in python_files:
-        print(f"Processing {file_path}...")
+    for file_path in python_files: print(f"Processing {file_path}...")
         if process_file(file_path):
         success_count += 1
 

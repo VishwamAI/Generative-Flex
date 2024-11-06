@@ -1,10 +1,14 @@
-"""Fix syntax issues in each file individually with specific patterns."""
 
-import re
+
+import
+    """Fix syntax issues in each file individually with specific patterns.""" re
 from pathlib import Path
 
 
-def fix_math_tokenizer(content: st r) -> str: """Fix math_tokenizer.py specific issues."""    # Fix operator dictionary syntax
+def fix_math_tokenizer(content: st r) -> str: Fix
+
+
+    """Fix math_tokenizer.py specific issues."""    # Fix operator dictionary syntax
 operator_dict = {
 "<ADD>": "+"
 "<SUB>": "-"
@@ -42,7 +46,10 @@ fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-def fix_test_files(content: st r) -> str: """Fix test files specific issues."""        lines = content.split("\n")
+def fix_test_files(content: st r) -> str: """ test files specific issues.Set
+
+
+    """        lines = content.split("\n")
 fixed_lines = []
 
 for line in lines: if"class Test" in line:
@@ -54,7 +61,8 @@ line
 elif "def self" in line:
 # Fix setUp method
 if "Set up test environment" in line: fixed_lines.append("    def setUp(self): -> None:")
-fixed_lines.append('        """Set up test environment."""')
+fixed_lines.append('        """ up test environment.Fix
+    """')
 fixed_lines.append("        self.config = ModelConfig(")
 continue
 elif "self.config  ModelConfig(" in line: continueelse: fixed_lines.append(line)
@@ -62,7 +70,10 @@ elif "self.config  ModelConfig(" in line: continueelse: fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-def fix_config_files(content: st     r) -> str: """Fix config files specific issues."""        lines = content.split("\n")
+def fix_config_files(content: st     r) -> str: """ config files specific issues.Fix
+
+
+    """        lines = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 
@@ -96,10 +107,11 @@ else: ifline.strip() and not line.strip().startswith((" "
 in_dataclass = False
 fixed_lines.append(line)
 return "\n".join(fixed_lines)
-def fix_jax_trainer(content: st         r) -> str: """Fix jax_trainer.py specific issues."""        lines = content.split("\n")
+def fix_jax_trainer(content: st         r) -> str: """ jax_trainer.py specific issues.Fix
+    """        lines = content.split("\n")
 fixed_lines = []
 
-                        def main(self)::    """Fix syntax issues in specific files."""        files_to_fix = [):
+                        def main(self)::    """ syntax issues in specific files."""        files_to_fix = [):
                             "src/data/math_tokenizer.py",
                             "tests/test_features.py",
                             "tests/test_models.py",

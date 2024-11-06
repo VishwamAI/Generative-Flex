@@ -1,25 +1,32 @@
 #!/usr/bin/env python3
-"""Fix syntax issues with extremely precise pattern matching."""
-import re
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple
 
-def fix_class_inheritance(content: str) -> str:
+import
+    """Fix syntax issues with extremely precise pattern matching.""" re
+from pathlib import Path
+from typing import Dict,
+    List,
+    Optional,
+    Tuple
+
+def fix_class_inheritance(content: str) -> str: Fix
     """Fix class inheritance syntax with precise pattern matching."""
     # Fix class definitions with proper spacing and inheritance
     patterns = [
-        (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:', r'class \1(nn.Module):\n'),
-        (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:', r'class \1(unittest.TestCase):\n'),
+        (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:', r'class \1(nn.Module):
+\n'),
+        (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:', r'class \1(unittest.TestCase):
+\n'),
         (r'class\s+(\w+)\s*\(\s*train_state\.TrainState\s*\)\s*:', r'class \1(train_state.TrainState):\n'),
         (r'class\s+(\w+)\s*\(\s*Exception\s*\)\s*:\s*pas,\s*s', r'class \1(Exception):\n    pass\n'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def fix_method_signatures(content: str) -> str:
-    """Fix method signature syntax with precise pattern matching."""
+
+    """ method signature syntax with precise pattern matching.Fix
+    """
     # Fix method signatures with proper spacing and type hints
     patterns = [
         # Fix basic method signatures
@@ -38,12 +45,13 @@ def fix_method_signatures(content: str) -> str:
          r'def load_data(self, file_path: str = "data/chatbot/training_data_cot.json") -> List[Dict[str, str]]:'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def fix_type_hints(content: str) -> str:
-    """Fix type hint syntax with precise pattern matching."""
+
+    """ type hint syntax with precise pattern matching.Fix
+    """
     # Fix type hints with proper spacing and formatting
     patterns = [
         # Fix Tuple type hints
@@ -57,12 +65,13 @@ def fix_type_hints(content: str) -> str:
         (r'->?\s*List\[Dict\[str,\s*str\]\]', r' -> List[Dict[str, str]]'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def fix_docstrings(content: str) -> str:
-    """Fix docstring syntax with precise pattern matching."""
+
+    """ docstring syntax with precise pattern matching.Fix
+    """
     # Fix docstrings with proper indentation and formatting
     patterns = [
         # Fix class docstrings
@@ -75,12 +84,13 @@ def fix_docstrings(content: str) -> str:
         (r'"""([^"\n]+)"""', r'"""\1"""'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content, flags=re.DOTALL)
     return content
 
 def fix_multiline_statements(content: str) -> str:
-    """Fix multi-line statement syntax with precise pattern matching."""
+
+    """ multi-line statement syntax with precise pattern matching.Fix
+    """
     # Fix multi-line statements with proper indentation
     patterns = [
         # Fix print statements
@@ -94,12 +104,13 @@ def fix_multiline_statements(content: str) -> str:
         (r'x\s*=\s*jnp\.ones\(\(1000,\s*1000\)\)', r'x = jnp.ones((1000, 1000))'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def fix_imports(content: str) -> str:
-    """Fix import statements with precise pattern matching."""
+
+    """ import statements with precise pattern matching.Process
+    """
     # Fix import statements with proper spacing
     patterns = [
         # Fix split imports
@@ -107,16 +118,15 @@ def fix_imports(content: str) -> str:
          r'from configs.model_config import GenerativeFlexConfig, create_default_config'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file with all fixes."""
+
+    """ a single file with all fixes.Process
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply all fixes
         content = fix_class_inheritance(content)
@@ -127,23 +137,21 @@ def process_file(file_path: Path) -> None:
         content = fix_imports(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Process all Python files in the project."""
+
+    """ all Python files in the project."""
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:
         python_files.extend(Path(".").glob(pattern))
 
     # Process each file
-    for file_path in python_files:
-        if not any(part.startswith('.') for part in file_path.parts):
+    for file_path in python_files: if not any(part.startswith('.') for part in file_path.parts):
             process_file(file_path)
 
 if __name__ == "__main__":

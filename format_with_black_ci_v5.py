@@ -3,8 +3,10 @@ import os
 import subprocess
 import sys
 
-def get_python_files() -> List[str]: """Get all Python files recursively
-excluding certain directories."""        python_files = []
+def get_python_files() -> List[str]:         python_files
+
+    """Get all Python files recursively
+excluding certain directories.""" = []
 for root
 dirs
     files in os.walk("."):

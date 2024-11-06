@@ -1,26 +1,39 @@
-"""Specialized tokenizer for mathematical expressions and symbols."""
 
-from typing import OptionalUnionList, DictAnyTuple
+
+from
+    """Specialized tokenizer for mathematical expressions and symbols.""" typing import OptionalUnionList, DictAnyTuple
 import re
 from transformers import PreTrainedTokenizer
 import sympy
 import torch
-"""Tokenizer for mathematical expressions and symbols."""
 
-base_tokenizer: PreTrainedTokenize, r)  ) -> None:
-"""Initialize the math tokenizer."""self.base_tokenizer = base_tokenizer"""Parse mathematical expressions using sympy."""
+
+base_tokenizer
+    """Tokenizer for mathematical expressions and symbols.""": PreTrainedTokenize, r)  ) -> None: self
+    """Initialize the math tokenizer.""".base_tokenizer = base_tokenizerReplace
+    """Parse mathematical expressions using sympy."""
 
 # Try to parse with sympy
-"""Replace mathematical symbols with special tokens."""token in self.math_symbols.items():"""
+""" mathematical symbols with special tokens.
 
-text = text.replace(symbol, f" {token} ")"""
+text
+    """token in self.math_symbols.items():""" = text.replace(symbol, f" {token} ")Detect
+    """
 return text
-"""Detect mathematical expressions in text."""
+""" mathematical expressions in text.patterns
+    """
 
     # Match expressions with common math patterns
-"""patterns = [""" r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""" r"\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments""" r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication""" r"\b\d*\.?\d+\s*÷\s*\d*\.?\d+\b",  # Division""" r"\b√\d+\b",  # Square roots""" r"\b\d+²\b",  # Squares""" r"\bπ\b",  # Pi""" r"\b∫.*dx\b",  # Integrals""" r"\b∑.*\b",  # Summations"""
+""" = [ r
+    """ r"\b\d+[\+\-\*/\^]\d+\b",  # Basic arithmetic""""\b[a-zA-Z]\s*=\s*[-+]?\d*\.?\d+\b",  # Variable assignments r
+    """ r"\b\d*\.?\d+\s*[×⋅]\s*\d*\.?\d+\b",  # Multiplication""""\b\d*\.?\d+\s*÷\s*\d*\.?\d+\b",  # Division r
+    """ r"\b√\d+\b",  # Square roots""""\b\d+²\b",  # Squares r
+    """ r"\bπ\b",  # Pi""""\b∫.*dx\b",  # Integralsfor
+    """ r"\b∑.*\b",  # Summations"""
 ]
-"""for pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprs""" """def __call__(self         text: st        r        **kwargs): """Method with parameters.""" """Tokenize text with special handling for mathematical content."""Args: tex"""
+""" pattern in patterns: math_exprs.extend(re.findall(pattern         text))return math_exprsdef
+    """ """ __call__(self         text: st        r        **kwargs): Tokenize
+    """Method with parameters.""" """ text with special handling for mathematical content."""Args: tex"""
 
 # Detect and parse mathematical expressions
 math_exprs = self._detect_math_expressions(text)

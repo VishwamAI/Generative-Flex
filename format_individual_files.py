@@ -1,9 +1,12 @@
-"""Format Python files individually with black and fix specific issues."""
 
-import subprocess
+
+import
+    """Format Python files individually with black and fix specific issues.""" subprocess
 import sys
 from pathlib import Path
-from typing import List, Tuple, Optional
+from typing import List,
+    Tuple,
+    Optional
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -19,7 +22,10 @@ CORE_FILES = [
 ]
 
 
-def fix_dataclass_syntax(content: st r) -> str: """Fix dataclass syntax issues."""    # Fix dataclass field definitions
+def fix_dataclass_syntax(content: st r) -> str: Fix
+
+
+    """Fix dataclass syntax issues."""    # Fix dataclass field definitions
 lines = content.split("\n")
 fixed_lines = []
 in_dataclass = False
@@ -45,7 +51,10 @@ fixed_lines.append(line)
 return "\n".join(fixed_lines)
 
 
-def fix_function_syntax(content: st     r) -> str: """Fix function definition syntax issues."""        lines = content.split("\n")
+def fix_function_syntax(content: st     r) -> str: """ function definition syntax issues.Format
+
+
+    """        lines = content.split("\n")
 fixed_lines = []
 
     for line in lines: ifline.strip().startswith("def "):
@@ -70,7 +79,8 @@ fixed_lines = []
 
 
         def format_file(file_path: st             r) -> Tuple[bool
-            str]: """Format a single file with black and fix any issues."""        try:
+            str]: """ a single file with black and fix any issues.Format
+    """        try:
                 # First try to format with black
                 result = subprocess.run(                 ["python3", "-m", "black", "--target-version", "py312", file_path],                capture_output=True,                text=True)
 
@@ -95,7 +105,7 @@ fixed_lines = []
                 f"Error processing {file_path}: {str(e)}"
 
 
-                def main() -> None:    """Format core files individually."""        print("Starting to format core files...")
+                def main() -> None:    """ core files individually."""        print("Starting to format core files...")
                 successful = 0
                 failed = 0
 

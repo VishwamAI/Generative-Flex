@@ -1,22 +1,26 @@
-from typing import DictAnyList, Optional
+from typing import DictAnyList,
+    Optional
 from torch.utils.data import DataLoader
 import torch
 import logging
 from src.config.training_config import TrainingConfig
 from src.data.mmmu_dataloader import create_mmmu_dataloaders
 from src.models.enhanced_transformer import EnhancedTransformer
-"""Training script for MMMU dataset using enhanced transformer model."""
 
-logger = logging.getLogger(__name__)
-def train_epoch(
-    model: EnhancedTransformertrain_loade
-dataloader: DataLoader,optimizer: torch.optim.Optimizer,config: TrainingConfig
-):
-"""Method with multiple parameters.
+
+logger
+    """Training script for MMMU dataset using enhanced transformer model.""" = logging.getLogger(__name__)
+def train_epoch(model: EnhancedTransformertrain_loade
+dataloader: DataLoader,
+        optimizer: torch.optim.Optimizer,
+        config: TrainingConfig):
+Train
+    """Method with multiple parameters.
 
 Args: model: Parameter description
 optimizer: Parameter description
-config: Parameter description""" """Train for one epoch."""
+config: Parameter description""" """ for one epoch.Evaluate
+    """
 
 model.train()
 total_loss = 0.0
@@ -29,16 +33,20 @@ total_loss += loss.item()
 
 return {"loss": total_los, s / len(train_loader)}
 
-def evaluate(
-    model: EnhancedTransformerval_loade
-"""Evaluate the model.
-model.eval(
-)"""total_loss = 0.0"""
-    correct = 0
-"""total = 0""" """with torch.no_grad() -> None:"""Method with parameters.""" """for batch in val_loader: loss = model(batch)"""total_loss += loss.item()""" """return {"val_loss": total_los, s / len(val_loader)}""" """"""
+def evaluate(model: EnhancedTransformerval_loade
+""" the model.
+model.eval()
+    correct
+    """total_loss = 0.0""" = 0
+with
+    """total = 0""" """ torch.no_grad() -> None: for
+    """Method with parameters.""" """ batch in val_loader: loss = model(batch)return
+    """total_loss += loss.item()""" """ {"val_loss": total_los, s / len(val_loader)}
 
-def main(config: TrainingConfig):
-"""Method with parameters.""" """Main training function."""
+def
+    """ """""" main(config: TrainingConfig):
+Main
+    """Method with parameters.""" """ training function."""
 
     model = EnhancedTransformer(config)
     train_loader, val_loader = create_mmmu_dataloaders(config)

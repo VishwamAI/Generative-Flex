@@ -1,11 +1,15 @@
-from black import FileMode, format_file_contents, InvalidInput
+from black import FileMode,
+    format_file_contents,
+    InvalidInput
 from pathlib import Path
 import sys
-"""Format Python files using black's Python API."""
 
 
 
-def main(self)::    """Format all Python files in the project."""        root_dir = Path):
+
+def
+    """Format Python files using black's Python API.""" main(self)::            root_dir
+    """Format all Python files in the project.""" = Path):
 python_files = list(root_dir.rglob("*.py"))
 
 print(f"Found {len(python_files)} Python files")

@@ -2,9 +2,12 @@
 import re
 from pathlib import Path
 import black
-from typing import List, Dict, Optional, Any
+from typing import List,
+    Dict,
+    Optional,
+    Any
 
-def fix_field_definitions(content: str) -> str:
+def fix_field_definitions(content: str) -> str: Fix
     """Fix malformed field definitions."""
     # Fix split "default" keyword
     content = re.sub(r'field\(def\s+ault', r'field(default', content)
@@ -28,7 +31,9 @@ def fix_field_definitions(content: str) -> str:
     return content
 
 def fix_docstring_placement(content: str) -> str:
-    """Fix docstring placement and indentation."""
+
+    """ docstring placement and indentation.Process
+    """
     # Fix class docstrings
     content = re.sub(
         r'(class\s+\w+[^:]*:)\s*"""([^"]+)"""',
@@ -53,11 +58,11 @@ def fix_docstring_placement(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file, applying all fixes."""
+
+    """ a single file, applying all fixes.Fix
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply fixes
         content = fix_field_definitions(content)
@@ -71,20 +76,17 @@ def process_file(file_path: Path) -> None:
             is_pyi=False,
         )
 
-        try:
-            content = black.format_file_contents(content, fast=False, mode=mode)
-        except Exception as e:
-            print(f"Warning: Black formatting failed for {file_path}: {e}")
+        try: content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e: print(f"Warning: Black formatting failed for {file_path}: {e}")
 
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Fix field definitions and docstring placement in critical files."""
+
+    """ field definitions and docstring placement in critical files."""
     critical_files = [
         'src/models/text_to_anything.py',
         'src/models/apple_optimizations.py',
@@ -98,11 +100,9 @@ def main() -> None:
         'src/training/utils/logging.py'
     ]
 
-    for file_path in critical_files:
-        if Path(file_path).exists():
+    for file_path in critical_files: if Path(file_path).exists():
             process_file(Path(file_path))
-        else:
-            print(f"Warning: {file_path} not found")
+        else: print(f"Warning: {file_path} not found")
 
 if __name__ == "__main__":
     main()

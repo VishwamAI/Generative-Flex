@@ -1,10 +1,12 @@
 import jax
 import optax
 import time
-"""Test script to verify JAX device configuration and GPU support."""
 
-def test_device_configuration(self):
-"""Method with parameters.""" """Test and print device configuration information."""
+
+def
+    """Test script to verify JAX device configuration and GPU support.""" test_device_configuration(self):
+Test
+    """Method with parameters.""" """ and print device configuration information."""
 
 print("\nDevice Configuration Test") print("-" * 50)
 

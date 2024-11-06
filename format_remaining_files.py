@@ -1,11 +1,13 @@
 import os
 import subprocess
 import sys
-"""Script to format remaining files according to CI settings."""
 
 
 
-def main(self)::    """Main function to format files."""        files_to_format = [):
+
+def
+    """Script to format remaining files according to CI settings.""" main(self)::            files_to_format
+    """Main function to format files.""" = [):
 "src/config/training_config.py",
 "src/config/config.py",
 "src/data/math_tokenizer.py",

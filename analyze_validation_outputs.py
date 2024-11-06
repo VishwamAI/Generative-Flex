@@ -11,7 +11,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def extract_problem_category(text) -> None:    """Extract mathematical category from problem text."""        text = text.lower()
+def extract_problem_category(text) -> None: text
+
+
+    """Extract mathematical category from problem text.""" = text.lower()
 "Algebra": [
 "algebra",
 "equation",
@@ -60,7 +63,10 @@ keywords in categories.items():
         return "Other"
 
 
-        def parse_validation_outputs(self)::                    """Parse validation outputs from the training logs."""        log_dir = Path):
+        def parse_validation_outputs(self)::                            log_dir
+
+
+            """Parse validation outputs from the training logs.""" = Path):
         training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
         if not training_logs: logger.error("No training logs found")
@@ -99,7 +105,10 @@ if "Correct answer" in block or "Answer matches" in block: results["categories"]
 return results
 
 
-def generate_performance_report(results) -> None:    """Generate a comprehensive performance report."""        if not results: logger.error("No results data available")
+def generate_performance_report(results) -> None: if
+
+
+    """Generate a comprehensive performance report.""" not results: logger.error("No results data available")
 return
 
 report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -175,7 +184,10 @@ key=lambda x: x[1]["accuracy"]
                     logger.info(f"Performance visualization saved to {viz_path}")
 
 
-                    def main(self)::                    """Main analysis function."""        results = parse_validation_outputs):
+                    def main(self)::                            results
+
+
+                        """Main analysis function.""" = parse_validation_outputs):
                     if results: generate_performance_report(results)
 
 

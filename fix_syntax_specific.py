@@ -1,10 +1,14 @@
-"""Fix specific syntax patterns that are causing issues with black formatting."""
 
-import re
+
+import
+    """Fix specific syntax patterns that are causing issues with black formatting.""" re
 from pathlib import Path
 
 
-def fix_indentation(content: st r) -> str: """Fix common indentation issues."""    # Fix inconsistent indentation in class methods
+def fix_indentation(content: st r) -> str: Fix
+
+
+    """Fix common indentation issues."""    # Fix inconsistent indentation in class methods
 lines = content.split("\n")
 fixed_lines = []
 current_indent = 0
@@ -21,7 +25,10 @@ current_indent = 0
         return "\n".join(fixed_lines)
 
 
-        def fix_try_except(content: st             r) -> str: """Fix try-except block formatting."""        lines = content.split("\n")
+        def fix_try_except(content: st             r) -> str: """ try-except block formatting.Fix
+
+
+            """        lines = content.split("\n")
         fixed_lines = []
         in_try_block = False
         try_indent = 0
@@ -39,7 +46,7 @@ current_indent = 0
                 return "\n".join(fixed_lines)
 
 
-                def main() -> None:                    """Fix syntax patterns in all Python files."""        root_dir = Path(".")
+                def main() -> None:                    """ syntax patterns in all Python files."""        root_dir = Path(".")
                 python_files = list(root_dir.rglob("*.py"))
 
                 print(f"Found {len(python_files)} Python files")

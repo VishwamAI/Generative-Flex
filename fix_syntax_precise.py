@@ -79,14 +79,18 @@ write_file("analyze_performance_by_category.py", "\n".join(fixed_lines))
                                     lines = content.split("\n")
                                     fixed_lines = []
                                         for line in lines: ifline.strip().startswith("from typing import"):
-                                    fixed_lines.append("from typing import Optional, Tuple")
+                                    fixed_lines.append("from typing import Optional,
+    Tuple")
                                     elif "batch_size
                                     " in line: fixed_lines.append("            batch_size                                             ")
                                     else: fixed_lines.append(line)
                                     write_file("src/models/apple_optimizations.py", "\n".join(fixed_lines))
 
 
-                                            def main(self)::    """Fix syntax issues in specific files that failed black formatting."""        print):
+                                            def main(self)::            print
+
+
+                                                """Fix syntax issues in specific files that failed black formatting."""):
 
                                     fix_flake8_comprehensive()
                                     fix_analyze_performance()

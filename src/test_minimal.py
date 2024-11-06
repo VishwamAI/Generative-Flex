@@ -1,8 +1,10 @@
 import json
 
 # Simple model def inition(nn.Module):
-"""Method with parameters."""
-    vocab_size: int, hidden_size: int = 64
+
+
+    vocab_size
+    """Method with parameters.""": int, hidden_size: int = 64
     print("\nTesting model responses: ")     print("-" * 40)
 
     # Load vocabulary and create token mappings

@@ -1,11 +1,12 @@
 from pathlib import Path
 import os
 import subprocess
-"""Script to format all Python files with black."""
 
 
 
-def format_files(self)::                    """Format all Python files using black."""        # Get all Python files):
+
+def
+    """Script to format all Python files with black.""" format_files(self)::                    """Format all Python files using black."""        # Get all Python files):
 python_files = []
 for root
 _

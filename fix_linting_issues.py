@@ -1,5 +1,9 @@
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict,
+    List,
+    Optional,
+    Tuple,
+    Any
 import jax
 import jax.numpy as jnp
 import re

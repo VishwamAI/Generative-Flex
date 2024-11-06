@@ -2,36 +2,46 @@ from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
-"""Image generation model implementation using JAX and Flax.""" """Placeholder docstring."""
+Placeholder
+    """Image generation model implementation using JAX and Flax.""" """ docstring.Convert
+    """
 
 Image to patch embedding.
 patch_size: int
-"""@nn.compact"""Convert images to patch embeddings."""
+"""@nn.compact""" images to patch embeddings.patches
+    """
 
     batch_sizeheightwidth, channels = images.shape
 """"""
 
-# Reshape image into patches"""patches = jnp.reshape(     """     images,"""( batch_size,"""
+# Reshape image into patches""" = jnp.reshape(     
 
-height // self.patch_size,"""width // self.patch_size,"""
+height
+    """     images,"""( batch_size,""" // self.patch_size,
 
-    self.patch_size,"""self.patch_size,"""
+    self
+    """width // self.patch_size,""".patch_size,
 
 channels
+    """self.patch_size,"""
 )
-""")"""
+patches
+    """)"""
 
     # Reshape patches into sequence
-"""patches = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))""" """# Project patches to hidden dimension"""
+""" = jnp.reshape(patches, (batch_size, -1, self.patch_size * self.patch_size * channels))
 
-    return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
-"""Placeholder docstring."""
+    return
+    """ """# Project patches to hidden dimension""" nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
 
-Transformer-based image generation model.
-"""int]# (height width)"""
 
-    Forward pass of the image generation model.) -> None:
-""""""
+Transformer
+    """Placeholder docstring."""-based image generation model.
+
+
+    Forward
+    """int]# (height width)""" pass of the image generation model.) -> None: Method
+    """"""
 
 # Input shape validation
 batch_sizeheightwidth, channels = inputs.shape
@@ -67,9 +77,11 @@ x = jnp.reshape(x, (     batch_size, self.image_size[0], self.image_size[1], sel
 return x
 
 def generate(self):
-"""Method with parameters."""
+
+    """ with parameters.Placeholder
+    """
     rng: Any): condition: Optional[jnp.ndarray] = None
-"""Placeholder docstring."""
+""" docstring."""
 
     Generate images.
     """

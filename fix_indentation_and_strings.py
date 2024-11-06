@@ -3,7 +3,10 @@ import os
 import re
 
 
-def fix_nested_blocks(self content): """Fix indentation in nested blocks."""        lines = content.split):
+def fix_nested_blocks(self content):         lines
+
+
+    """Fix indentation in nested blocks.""" = content.split):
 fixed_lines = []
 indent_level = 0
 in_class = False
@@ -54,7 +57,10 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                            def fix_imports(self                             content): """Fix import statement formatting."""        lines = content.split):
+                            def fix_imports(self                             content):         lines
+
+
+                                """Fix import statement formatting.""" = content.split):
                                 fixed_lines = []
                                 import_block = []
                                 in_import_block = False

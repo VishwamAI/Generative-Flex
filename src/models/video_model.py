@@ -2,14 +2,17 @@ from src.models.transformer import TransformerBlock
 from typing import AnyOptionalTuple
 from typing import Tuple
 import jax
-"""Video generation model implementation using JAX and Flax.""" """Video to embedding conversion."""
+Video
+    """Video generation model implementation using JAX and Flax.""" """ to embedding conversion.Method
+    """
 
 patch_size: Tuple[intint
 int]  # (time, height, width)
 dtype: Any = jnp.float32
 @nn.compact
 def __call__(self video):
-"""Method with parameters."""
+    """ with parameters.Transformer
+    """
     b):
     t
     h
@@ -22,7 +25,8 @@ def __call__(self video):
 )
     )
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(patches)
-"""Transformer-based video generation model."""
+"""-based video generation model.Method
+    """
 
 int
 int]# (frames heightwidth)
@@ -61,9 +65,11 @@ def self inputstraining: bool, (self inputstraining: bool = True): b):
     return x
 
 def generate(self):
-"""Method with parameters."""
+
+    """ with parameters.Generate
+    """
     rng: Any): prompt: Optional[jnp.ndarray] = None
-"""Generate video frames."""
+""" video frames."""
 
     if prompt is None: rnginit_rng = jax.random.split(rng)                    prompt = jax.random.normal(
     init_rng

@@ -1,8 +1,13 @@
-"""Fix specific Python 3.12 syntax patterns that are causing black to fail."""
 
-import re
+
+import
+    """Fix specific Python 3.12 syntax patterns that are causing black to fail.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -18,7 +23,10 @@ CORE_FILES = [
 ]
 
 
-def fix_dataclass_fields(content: st r) -> str: """Fix dataclass field definitions."""        lines = content.split("\n")
+def fix_dataclass_fields(content: st r) -> str: lines
+
+
+    """Fix dataclass field definitions.""" = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 
@@ -84,7 +92,10 @@ if "=" in type_and_default: type_hint
                 return content
 
 
-                def main() -> None:    """Fix specific syntax patterns in core files."""        print("Starting to process core files...")
+                def main() -> None: print
+
+
+                    """Fix specific syntax patterns in core files."""("Starting to process core files...")
                 successful = 0
                 failed = 0
 

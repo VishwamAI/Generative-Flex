@@ -1,9 +1,13 @@
-"""Complete reconstruction of math_reasoning.py with proper syntax."""
-
-import re
 
 
-def fix_imports(content: st r) -> str: """Fix and deduplicate imports."""    imports = []
+import
+    """Complete reconstruction of math_reasoning.py with proper syntax.""" re
+
+
+def fix_imports(content: st r) -> str: imports
+
+
+    """Fix and deduplicate imports.""" = []
 seen = set()
 
 # Extract all imports from the content
@@ -17,7 +21,10 @@ if line.strip().startswith(("from "
         return "\n".join(imports) + "\n\n"
 
 
-        def create_fixed_content() -> str: """Create properly formatted content for math_reasoning.py."""        return '''from typing import Optional
+        def create_fixed_content() -> str: return
+
+
+            """Create properly formatted content for math_reasoning.py.""" '''from typing import Optional
         Union
         List
         Dict
@@ -31,20 +38,24 @@ if line.strip().startswith(("from "
         from .multimodal.base_transformer import BaseTransformer, TransformerBlock
         from .mathematical_notation import MathematicalNotationProcessor
         from .symbolic_math import SymbolicMathProcessor
-        from transformers import PreTrainedModel, GenerationMixin
+        from transformers import PreTrainedModel,
+    GenerationMixin
         import logging
 
         logger = logging.getLogger(__name__)
 
-        class MathReasoningHead(nn.Module):    """Math reasoning module for enhanced transformer model."""
-        hidden_states: torch
+        class MathReasoningHead(nn.Module):
+    
+        hidden_states
+    """Math reasoning module for enhanced transformer model.""": torch
         .Tensor
         attention_mask: Optional
         [torch.Tensor] = None
         expressions: Optional
         [List[str]] = None
         **kwargs) -> Dict[str
-        torch.Tensor]: """Forward pass of the math reasoning head.
+        torch.Tensor]: Enable
+    """Forward pass of the math reasoning head.
         Args: hidden_states: Input tensor
         attention_mask: Optionalattentionmask
         expressions: Optionallistof mathematical expressions
@@ -165,14 +176,15 @@ if line.strip().startswith(("from "
         **aux_info,
         }
 
-            def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """Enable or disable gradient checkpointing for a module.):
+            def _set_gradient_checkpointing(self             module: nn            .Module            value: boo            l = False) -> None: """ or disable gradient checkpointing for a module.):
                 Args: module: PyTorch module
                 value: Whethertoenable gradient checkpointing
-                """
+                Fix
+    """
                 if isinstance(module             (BaseTransformer             TransformerBlock)):
                 module.gradient_checkpointing = value
 
-                def main(self)::                    """Fix math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                def main(self)::                    """ math_reasoning.py with complete reconstruction."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                 try:
                 # Create new content

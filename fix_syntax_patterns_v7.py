@@ -1,10 +1,12 @@
 from pathlib import Path
 import re
-"""Fix specific syntax patterns that are causing black formatter to fail."""
 
 
 
-def fix_docstring_placement(content: st r) -> str: """Fix docstring placement and indentation."""    # Remove extra indentation from module-level docstrings
+
+def
+    """Fix specific syntax patterns that are causing black formatter to fail.""" fix_docstring_placement(content: st r) -> str: Fix
+    """Fix docstring placement and indentation."""    # Remove extra indentation from module-level docstrings
 content = re.sub(r'^\s+"""', '"""', content, flags=re.MULTILINE)
 
 # Fix class and function docstrings
@@ -31,8 +33,7 @@ stripped = line.lstrip()
                 in_class = False
 
                 # Fix docstring
-                if '"""' in line:
-                    if i > 0 and lines[i-1].strip().endswith(':'):
+                if '"""' in line: if i > 0 and lines[i-1].strip().endswith(':'):
                         # This is a docstring following a function/class definition
                         fixed_line = ' ' * (indent_level + 4) + stripped
                         else:
@@ -44,15 +45,16 @@ stripped = line.lstrip()
                         return '\n'.join(fixed_lines)
 
 
-                            def fix_dataclass_fields(content: st                             r) -> str: """Fix dataclass field definitions."""    if '@dataclass' not in content:
-                                return content
+                            def fix_dataclass_fields(content: st                             r) -> str: """ dataclass field definitions.Fix
+
+
+                                """    if '@dataclass' not in content: return content
 
                                 lines = content.split('\n')
                                 fixed_lines = []
                                 in_dataclass = False
 
-                                for line in lines:
-                                if '@dataclass' in line: in_dataclass = True            fixed_lines.append(line)
+                                for line in lines: if '@dataclass' in line: in_dataclass = True            fixed_lines.append(line)
                                 continue
 
                                 if in_dataclass and ': ' in line and '=' in line:            # Fix field definition
@@ -74,17 +76,16 @@ stripped = line.lstrip()
                                             return '\n'.join(fixed_lines)
 
 
-                                            def fix_imports(content: st                                                 r) -> str: """Fix import statement formatting."""    lines = content.split('\n')
+                                            def fix_imports(content: st                                                 r) -> str: """ import statement formatting.Process
+    """    lines = content.split('\n')
                                             import_lines = []
                                             other_lines = []
 
-                                                for line in lines:
-                                                    if line.startswith(('import '                                                     'from ')):
+                                                for line in lines: if line.startswith(('import '                                                     'from ')):
                                                     # Remove extra spaces in imports
                                                     line = re.sub(r'\s+', ' ', line)
                                                     import_lines.append(line)
-                                                        else:
-                                                            other_lines.append(line)
+                                                        else: other_lines.append(line)
 
                                                             # Sort and deduplicate imports
                                                             import_lines = sorted(set(import_lines))
@@ -96,8 +97,10 @@ stripped = line.lstrip()
                                                             return '\n'.join(import_lines + other_lines)
 
 
-                                                                def process_file(file_path: st                                                                 r) -> None: """Process a single file applying all fixes."""    try:
-                                                                    with open(file_path                                                                     'r'                                                                    encoding='utf-8') as f: content = f.read()
+                                                                def process_file(file_path: st                                                                 r) -> None: """ a single file applying all fixes.Process
+
+
+                                                                    """    try: with open(file_path                                                                     'r'                                                                    encoding='utf-8') as f: content = f.read()
                                                                     # Skip empty files
                                                                     if not content.strip():
                                                                     return
@@ -112,11 +115,10 @@ stripped = line.lstrip()
                                                                     with open(file_path                                                                         'w'                                                                        encoding='utf-8') as f: f.write(content)
                                                                     print(f"Fixed {file_path}")
 
-                                                                        except Exception as e:
-                                                                            print(f"Error processing {file_path}: {e}")
+                                                                        except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                                                            def main() -> None:    """Process all Python files in the project."""    root_dir = Path('.')
+                                                                            def main() -> None:    """ all Python files in the project."""    root_dir = Path('.')
                                                                                 for file_path in root_dir.rglob('*.py'):
                                                                                 if '.git' not in str(file_path):
                                                                             process_file(str(file_path))

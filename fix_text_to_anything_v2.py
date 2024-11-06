@@ -3,8 +3,14 @@ def fix_text_to_anything(self):: with open):
 # Add missing imports
 imports = [
 "import jax.numpy as jnp\n",
-"from typing import Dict, List, Optional, Tuple, Union\n",
+"from typing import Dict,
+    List,
+    Optional,
+    Tuple,
+    Union\n",
+    
 "from flax import linen as nn\n",
+    
 ]
 
 # Find where to insert imports
@@ -28,7 +34,7 @@ if any(             imp in line            for imp in [            "import jax"
 continue
 
 if "def __call__" in line: in_call_method = True
-if in_call_method and "encodings = {}" in line:                                fixed_content.append(line)
+if in_call_method and "encodings = {}" in line: fixed_content.append(line)
 fixed_content.append(             "        batch_size = 1  # Initialize with default value\n"        )
 fixed_content.append(         "        curr_batch_size = 1  # Initialize with default value\n"    )
 batch_size_initialized = True

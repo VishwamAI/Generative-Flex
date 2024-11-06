@@ -1,8 +1,13 @@
-"""Fix syntax issues in core files only, with more aggressive pattern matching."""
 
-import re
+
+import
+    """Fix syntax issues in core files only, with more aggressive pattern matching.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -18,7 +23,10 @@ CORE_FILES = [
 ]
 
 
-def fix_dataclass_fields(content: st r) -> str: """Fix dataclass fields with proper formatting."""        lines = content.split("\n")
+def fix_dataclass_fields(content: st r) -> str: lines
+
+
+    """Fix dataclass fields with proper formatting.""" = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 class_indent = 0
@@ -54,7 +62,8 @@ fixed_lines.append(fixed_line)
 continue
 
 # Exit dataclass context if we hit a method or empty line
-if stripped.startswith(("def "     "@"    '"""')) or not stripped: in_dataclass = False
+if stripped.startswith(("def "     "@"    'Fix
+    """')) or not stripped: in_dataclass = False
 fixed_lines.append(line)
 
 return "\n".join(fixed_lines)
@@ -104,7 +113,7 @@ for pattern
         return content
 
 
-        def main() -> None:    """Fix syntax issues in core files."""        print("Starting to process core files...")
+        def main() -> None:    """ syntax issues in core files."""        print("Starting to process core files...")
         successful = 0
         failed = 0
 

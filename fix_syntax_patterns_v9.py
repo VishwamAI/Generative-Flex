@@ -1,27 +1,30 @@
-"""Fix specific syntax patterns that are causing black formatter to fail."""
 
-import re
+
+import
+    """Fix specific syntax patterns that are causing black formatter to fail.""" re
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List,
+    Dict,
+    Any
 import ast
 
 
-def fix_indentation(content: st r) -> str: """Fix indentation issues in the file."""    lines = content.split("\n")
+def fix_indentation(content: st r) -> str: lines
+
+
+    """Fix indentation issues in the file.""" = content.split("\n")
 fixed_lines = []
 indent_level = 0
 
-for line in lines:
-stripped = line.lstrip()
+for line in lines: stripped = line.lstrip()
 
 # Skip empty lines
-    if not stripped:
-        fixed_lines.append("")
+    if not stripped: fixed_lines.append("")
         continue
 
         # Adjust indent level based on content
         if stripped.startswith(("class "         "def ")):
-            if ":" in stripped:
-                indent_level += 1
+            if ":" in stripped: indent_level += 1
                 elif stripped.startswith(("return"                 "pass"                "raise"                "break"                "continue")):
                 indent_level = max(0, indent_level - 1)
 
@@ -35,8 +38,9 @@ stripped = line.lstrip()
                 return "\n".join(fixed_lines)
 
 
-                def fix_function_definition(content: st                     r) -> str: """Fix function definition formatting."""
-                def fix_params(match: re                     .Match) -> str: """Fix parameter formatting within a function definition."""        func_name = match.group(1)
+                def fix_function_definition(content: st                     r) -> str: def
+    """Fix function definition formatting.""" fix_params(match: re                     .Match) -> str: func_name
+    """Fix parameter formatting within a function definition.""" = match.group(1)
                 params = match.group(2)
                 return_type = match.group(3) if match.group(3) else ""
 
@@ -45,23 +49,18 @@ stripped = line.lstrip()
                         param_list = [p.strip() for p in params.split(", ")]
                         fixed_params = []
 
-                        for param in param_list:
-                        if ": " in param and "=" in param:                    name
+                        for param in param_list: if ": " in param and "=" in param: name
                         rest = param.split(": "                             1)                    type_and_default = rest.split("="
                         1)
-                            fixed_param = f"{name.strip()}: {type_and_default[0].strip()} = {type_and_default[1].strip()}"                elif ":" in param:
-                                name
-                                type_hint = param.split(": "                                 1)                    fixed_param = f"{name.strip()}: {type_hint.strip()}"                else:
-                                fixed_param = param
+                            fixed_param = f"{name.strip()}: {type_and_default[0].strip()} = {type_and_default[1].strip()}"                elif ":" in param: name
+                                type_hint = param.split(": "                                 1)                    fixed_param = f"{name.strip()}: {type_hint.strip()}"                else: fixed_param = param
                                 fixed_params.append(fixed_param)
 
                                 params = ", ".join(fixed_params)
 
                                 # Format return type if present
-                                    if return_type:
-                                        return f"def {func_name}({params}) -> {return_type.strip()}:"
-                                        else:
-                                        return f"def {func_name}({params}):"
+                                    if return_type: return f"def {func_name}({params}) -> {return_type.strip()}:"
+                                        else: return f"def {func_name}({params}):"
 
                                         # Fix function definitions
                                         pattern = r"def\s+(\w+)\s*\((.*?)\)\s*(?: ->\s*(.*?))?\s*:"    content = re.sub(pattern
@@ -72,8 +71,9 @@ stripped = line.lstrip()
                                         return content
 
 
-                                        def fix_class_definition(content: st                                             r) -> str: """Fix class definition formatting."""
-                                        def fix_class_def(match: re                                             .Match) -> str: """Fix class definition formatting."""        class_name = match.group(1)
+                                        def fix_class_definition(content: st                                             r) -> str: def
+    """Fix class definition formatting.""" fix_class_def(match: re                                             .Match) -> str: class_name
+    """Fix class definition formatting.""" = match.group(1)
                                         inheritance = match.group(2)
 
                                             if inheritance:
@@ -89,16 +89,16 @@ stripped = line.lstrip()
                                                 return content
 
 
-                                                def fix_dataclass_fields(content: st                                                 r) -> str: """Fix dataclass field definitions."""    if "@dataclass" not in content:
-                                                return content
+                                                def fix_dataclass_fields(content: st                                                 r) -> str: if
+
+
+                                                    """Fix dataclass field definitions.""" "@dataclass" not in content: return content
 
                                                 lines = content.split("\n")
                                                 fixed_lines = []
                                                 in_dataclass = False
 
-                                                    for line in lines:
-                                                        if "@dataclass" in line:
-                                                        in_dataclass = True
+                                                    for line in lines: if "@dataclass" in line: in_dataclass = True
                                                         fixed_lines.append(line)
                                                         continue
 
@@ -113,20 +113,21 @@ field_part = type_and_default.split("=", 1)[1].strip()
                                                                     # Handle regular assignment
                                                                     fixed_line = f"    {field_name}: {type_and_default}"
                                                                     fixed_lines.append(fixed_line)
-                                                                    else:
-                                                                    fixed_lines.append(line)
+                                                                    else: fixed_lines.append(line)
                                                                         if line.strip() and not line.startswith(" "):
                                                                             in_dataclass = False
 
                                                                             return "\n".join(fixed_lines)
 
 
-                                                                            def fix_imports(content: st                                                                             r) -> str: """Fix import statement formatting."""    lines = content.split("\n")
+                                                                            def fix_imports(content: st                                                                             r) -> str: lines
+
+
+                                                                                """Fix import statement formatting.""" = content.split("\n")
                                                                             import_lines = []
                                                                             other_lines = []
 
-                                                                            for line in lines:
-                                                                            if line.strip().startswith(("import "
+                                                                            for line in lines: if line.strip().startswith(("import "
                                                                                 "from ")):
                                                                                     # Clean up import statement
                                                                                     parts = line.strip().split()
@@ -137,8 +138,7 @@ field_part = type_and_default.split("=", 1)[1].strip()
                                                                                     # Handle 'import ...'
                                                                                     fixed_line = " ".join(parts)
                                                                                     import_lines.append(fixed_line)
-                                                                                        else:
-                                                                                            other_lines.append(line)
+                                                                                        else: other_lines.append(line)
 
                                                                                             # Sort imports
                                                                                             import_lines.sort()
@@ -150,7 +150,10 @@ field_part = type_and_default.split("=", 1)[1].strip()
                                                                                             return "\n".join(import_lines + other_lines)
 
 
-                                                                                                def process_file(file_path: st                                                                                                 r) -> None: """Process a single file applying all fixes."""    try:
+                                                                                                def process_file(file_path: st                                                                                                 r) -> None: try
+
+
+                                                                                                    """Process a single file applying all fixes.""":
                                                                                                     with open(file_path                                                                                                     "r"                                                                                                    encoding="utf-8") as f: content = f.read()
 
                                                                                                     # Skip empty files
@@ -165,21 +168,21 @@ field_part = type_and_default.split("=", 1)[1].strip()
                                                                                                     content = fix_dataclass_fields(content)
 
                                                                                                     # Validate syntax
-                                                                                                        try:
-                                                                                                            ast.parse(content)
-                                                                                                            except SyntaxError as e:
-                                                                                                            print(f"Syntax error in {file_path}: {e}")
+                                                                                                        try: ast.parse(content)
+                                                                                                            except SyntaxError as e: print(f"Syntax error in {file_path}: {e}")
                                                                                                             return
 
                                                                                                             # Write back the fixed content
                                                                                                             with open(file_path                                                                                                                 "w"                                                                                                                encoding="utf-8") as f: f.write(content)
                                                                                                             print(f"Fixed {file_path}")
 
-                                                                                                                except Exception as e:
-                                                                                                                    print(f"Error processing {file_path}: {e}")
+                                                                                                                except Exception as e: print(f"Error processing {file_path}: {e}")
 
 
-                                                                                                                    def process_files_in_order() -> None:    """Process files in a specific order to handle dependencies."""    root_dir = Path(".")
+                                                                                                                    def process_files_in_order() -> None: root_dir
+
+
+                                                                                                                        """Process files in a specific order to handle dependencies.""" = Path(".")
 
                                                                                                                     # Define processing order
                                                                                                                     order = [
@@ -204,8 +207,7 @@ field_part = type_and_default.split("=", 1)[1].strip()
                                                                                                                     ]
 
                                                                                                             # Process files in order
-                                                                                                                for file_path in order:
-                                                                                                                    if(root_dir / file_path).exists():
+                                                                                                                for file_path in order: if(root_dir / file_path).exists():
                                                                                                                     process_file(str(root_dir / file_path))
 
                                                                                                                     # Process remaining Python files

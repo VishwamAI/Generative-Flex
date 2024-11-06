@@ -5,15 +5,19 @@ import matplotlib.pyplot as plt
 import os
 import re
 import seaborn as sns
-"""Script to analyze performance across mathematical categories."""
 
 
 
-logging.basicConfig(level=logging.INFO)
+
+logging
+    """Script to analyze performance across mathematical categories.""".basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def analyze_performance(self)::                    """Analyze performance across mathematical categories."""        metrics = extract_validation_metrics):
+def analyze_performance(self)::                            metrics
+
+
+    """Analyze performance across mathematical categories.""" = extract_validation_metrics):
 category_stats = load_category_distribution()
 
 if not category_stats: logger.error("Required data not available")
@@ -50,7 +54,10 @@ analysis["category_analysis"][category] = {
 return analysis
 
 
-def generate_report(analysis) -> None:                    """Generate comprehensive performance report."""        if not analysis: logger.error("No analysis data available")
+def generate_report(analysis) -> None: if
+
+
+    """Generate comprehensive performance report.""" not analysis: logger.error("No analysis data available")
 return
 
 report = ["MMMU Mathematical Performance Analysis\n"]
@@ -103,7 +110,9 @@ for diff
         with open(report_path         "w") as f: f.write("\n".join(report))
         logger.info(f"Performance analysis saved to {report_path}")
 
-        def main(self)::    """Main analysis function."""        analysis = analyze_performance):
+        def main(self)::            analysis
+
+            """Main analysis function.""" = analyze_performance):
         if analysis: generate_visualization(analysis)
         generate_report(analysis)
 

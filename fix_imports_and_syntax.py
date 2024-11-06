@@ -1,8 +1,14 @@
-"""Fix imports and specific syntax patterns in core files."""
 
-import re
+
+import
+    """Fix imports and specific syntax patterns in core files.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple, Set
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple,
+    Set
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -62,7 +68,8 @@ for line in content.split("\n"):
                 if (                 "PreTrainedTokenizer" in content                and "from transformers import PreTrainedTokenizer" not in existing_imports                ):
                 new_imports.append("from transformers import PreTrainedTokenizer")
 
-                    if new_imports: import_block = "\n".join(new_imports)if content.startswith('"""'):
+                    if new_imports: import_block = "\n".join(new_imports)if content.startswith('Fix
+    """'):
                         # Find the end of the docstring
                         docstring_end = content.find('"""', 3) + 3
                         content = (                         content[:docstring_end]                        + "\n\n"                        + import_block                        + "\n"                        + content[docstring_end:]                    )
@@ -70,7 +77,10 @@ for line in content.split("\n"):
                 return content
 
 
-                def fix_dataclass_fields(content: st                     r) -> str: """Fix dataclass field patterns."""        lines = content.split("\n")
+                def fix_dataclass_fields(content: st                     r) -> str: """ dataclass field patterns.Fix
+
+
+                    """        lines = content.split("\n")
                 fixed_lines = []
                 in_dataclass = False
                 class_indent = 0
@@ -135,7 +145,7 @@ return_type = match.group(4) if match.group(4) else ""
                             return content
 
 
-                            def main() -> None:    """Fix imports and syntax issues in core files."""        print("Starting to process core files...")
+                            def main() -> None:    """ imports and syntax issues in core files."""        print("Starting to process core files...")
                             successful = 0
                             failed = 0
 

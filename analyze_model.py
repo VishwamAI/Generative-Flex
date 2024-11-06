@@ -1,5 +1,6 @@
 from src.config.config import ModelConfig
-from src.models.reasoning.math_reasoning import(from tqdm import tqdm from transformers import AutoModel, AutoConfigimport gcimport osimport psutilimport sysimport torch
+from src.models.reasoning.math_reasoning import(from tqdm import tqdm from transformers import AutoModel,
+    AutoConfigimport gcimport osimport psutilimport sysimport torch
 MathReasoningModel, MathReasoningHead)
 
 # Configure transformers to use local cache only
@@ -7,7 +8,10 @@ os.environ["TRANSFORMERS_OFFLINE"] = "1"
 os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 
-def format_size(size_bytes) -> None: """Format size in bytes to human readable string"""        for unit in ["B"
+def format_size(size_bytes) -> None: for
+
+
+    """Format size in bytes to human readable string""" unit in ["B"
 "KB"
 "MB"
 "GB"

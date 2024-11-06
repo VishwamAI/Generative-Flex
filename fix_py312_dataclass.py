@@ -1,8 +1,13 @@
-"""Fix Python 3.12 specific dataclass and function definition issues."""
 
-import re
+
+import
+    """Fix Python 3.12 specific dataclass and function definition issues.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -97,7 +102,10 @@ content
 flags=re.MULTILINE)
 
 
-def main() -> None:                    """Fix Python 3.12 dataclass and function definition issues in core files."""        print("Starting to process core files...")
+def main() -> None: print
+
+
+    """Fix Python 3.12 dataclass and function definition issues in core files."""("Starting to process core files...")
 successful = 0
 failed = 0
 

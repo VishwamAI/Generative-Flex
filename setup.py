@@ -1,8 +1,10 @@
-from setuptools import setup, find_packages
+from setuptools import setup,
+    find_packages
 
-"""Setup script for Generative-Flex."""
 
-setup(
+
+setup
+    """Setup script for Generative-Flex."""(
     name="generative_flex",
     version="0.1.0",
     description="A flexible generative AI framework",

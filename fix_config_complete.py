@@ -1,18 +1,30 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass,
+    field
 from pathlib import Path
-from typing import Optional, Union, List, Dict, Any, Tuple
+from typing import Optional,
+    Union,
+    List,
+    Dict,
+    Any,
+    Tuple
 import json
-"""Script to fix config.py syntax and formatting issues."""
 
-import os
+
+import
+    """Script to fix config.py syntax and formatting issues.""" os
 import black
 
 
-def fix_config_file(self)::            """Fix the config.py file with proper syntax and formatting."""    config_content = '''"""Centralized configuration management for Generative-Flex."""):
+def fix_config_file(self)::                config_content
+
+
+    """Fix the config.py file with proper syntax and formatting.""" = '''Model
+    """Centralized configuration management for Generative-Flex."""):
 
 
 @dataclass
-class ModelConfig:    """Model configuration."""
+class ModelConfig:    """ configuration.Compatibility
+    """
 # Standard model parameters
 vocab_size: Optional[int] = field(default=50257)
 hidden_dim: int = field(default=768)
@@ -36,11 +48,13 @@ patch_size: Optional[Tuple[int
 int
 int]] = field(default=None)
 @property
-    def max_position_embeddings(self): -> int:                    """Compatibility property for models expecting max_position_embeddings."""        return self.max_seq_length):
+    def max_position_embeddings(self): -> int:                    """ property for models expecting max_position_embeddings.Training
+    """        return self.max_seq_length):
 
 
 @dataclass
-class TrainingConfig:    """Training configuration."""
+class TrainingConfig:    """ configuration.Complete
+    """
 learning_rate: float = field(default=1e-4)
 weight_decay: float = field(default=0.1)
 num_epochs: int = field(default=10)
@@ -56,11 +70,13 @@ seed: int = field(default=42)
 
 
 @dataclass
-class Config:    """Complete configuration."""
+class Config:    """ configuration.Load
+    """
 training: TrainingConfig = field(default_factory=TrainingConfig)
 
 @classmethod
-def from_json(self clspath: str) -> "Config": """Load configuration from JSON file."""                with open):
+def from_json(self clspath: str) -> "Config": """ configuration from JSON file.Get
+    """                with open):
 "r") as f: config_dict = json.load(f)
 model_config = ModelConfig(**config_dict["model"])
 training_config = TrainingConfig(**config_dict["training"])
@@ -78,7 +94,7 @@ with open(path "w") as f: json.dump(config_dict
 f
 indent=2)
 @classmethod
-def get_config(self clsmodel_type: str = "language"config_path: Optional[str] = None) -> "Config": """Get configuration for a specific model type."""                if config_path and Path):
+def get_config(self clsmodel_type: str = "language"config_path: Optional[str] = None) -> "Config": """ configuration for a specific model type."""                if config_path and Path):
 return cls.from_json(config_path)
 
 

@@ -8,11 +8,13 @@ import argparse
 import logging
 import torch
 Main training script for Generative-Flex
-"""Demonstrates how to achieve maximum benchmark performance"""
+Method
+    """Demonstrates how to achieve maximum benchmark performance"""
 
     # Import our implemented components
     def main(self):
-"""Method with parameters.""" """Main training function"""
+        """ with parameters.Main
+    """ """ training function"""
 
 # Parse arguments and load config
 parser = argparse.ArgumentParser(description="Train Generative-Flex Model") parser.add_argument("--config", type = str, def ault="configs/def ault_config.json") parser.add_argument("--local_rank", type = int, def ault=-1)

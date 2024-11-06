@@ -1,8 +1,13 @@
-from typing import List, Dict, Tuple, Optional
+from typing import List,
+    Dict,
+    Tuple,
+    Optional
 import os
 import re
 
-def fix_docstring_indentation(content: st r) -> str: """Fix docstring indentation and formatting."""        lines = content.split('\n')
+def fix_docstring_indentation(content: st r) -> str: lines
+
+    """Fix docstring indentation and formatting.""" = content.split('\n')
 fixed_lines = []
 in_docstring = False
 docstring_indent = 0
@@ -12,7 +17,8 @@ line in enumerate(lines):
 stripped = line.lstrip()
 current_indent = len(line) - len(stripped)
 
-    if stripped.startswith('"""'):
+    if stripped.startswith('Process
+    """'):
         if not in_docstring:
         # Start of docstring
         in_docstring = True
@@ -31,8 +37,9 @@ current_indent = len(line) - len(stripped)
 
                         return '\n'.join(fixed_lines)
 
-                        def process_file(file_path: st                         r) -> None: """Process a single Python file."""            try:
-                        with open(file_path                             'r'                            encoding='utf-8') as f: content = f.read()
+                        def process_file(file_path: st                         r) -> None: """ a single Python file.Process
+
+                            """            try: with open(file_path                             'r'                            encoding='utf-8') as f: content = f.read()
                         # Apply fixes in specific order
                         content = fix_parameter_type_hints(content)
                         content = fix_method_definitions(content)
@@ -42,10 +49,9 @@ current_indent = len(line) - len(stripped)
 
                         with open(file_path                             'w'                            encoding='utf-8') as f: f.write(content)
                         print(f"Processed {file_path}")
-                            except Exception as e:
-                                print(f"Error processing {file_path}: {e}")
+                            except Exception as e: print(f"Error processing {file_path}: {e}")
 
-                                def main():    """Process all Python files in the project."""        # Process core files first
+                                def main():    """ all Python files in the project."""        # Process core files first
                                 core_files = [
                                 'src/models/transformer.py',
                                 'src/models/reasoning/math_reasoning.py',
@@ -58,8 +64,7 @@ current_indent = len(line) - len(stripped)
                                 'src/utils/training_utils.py'
                                 ]
 
-                            for file_path in core_files:
-                                if os.path.exists(file_path):
+                            for file_path in core_files: if os.path.exists(file_path):
                                 process_file(file_path)
 
                                 # Process remaining files
@@ -69,10 +74,8 @@ current_indent = len(line) - len(stripped)
                                         if any(skip in root for skip in ['.git'                                         'venv'                                        '__pycache__']):
                                         continue
 
-                                            for file in files:
-                                                if file.endswith('.py'):
+                                            for file in files: if file.endswith('.py'):
                                                 file_path = os.path.join(root, file)
-                                                    if file_path not in core_files:
-                                                        process_file(file_path)
+                                                    if file_path not in core_files: process_file(file_path)
 
                                                         if __name__ == '__main__':        main()

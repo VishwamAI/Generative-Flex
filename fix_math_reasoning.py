@@ -1,9 +1,13 @@
-"""Fix syntax issues in math_reasoning.py with precise string manipulation."""
-
-import re
 
 
-def fix_imports(content: st r) -> str: """Fix and deduplicate imports."""        # Remove duplicate imports
+import
+    """Fix syntax issues in math_reasoning.py with precise string manipulation.""" re
+
+
+def fix_imports(content: st r) -> str: Fix
+
+
+    """Fix and deduplicate imports."""        # Remove duplicate imports
 seen_imports = set()
 fixed_lines = []
 
@@ -17,7 +21,10 @@ if line.strip().startswith(("import "
         return "\n".join(fixed_lines)
 
 
-        def fix_indentation(content: st         r) -> str: """Fix indentation issues."""        lines = content.split("\n")
+        def fix_indentation(content: st         r) -> str: """ indentation issues.Fix
+
+
+            """        lines = content.split("\n")
         fixed_lines = []
         current_indent = 0
 
@@ -43,7 +50,7 @@ if line.strip().startswith(("import "
                         return "\n".join(fixed_lines)
 
 
-                        def main(self)::                    """Fix syntax issues in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                        def main(self)::                    """ syntax issues in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                         try:
                         # Read the file

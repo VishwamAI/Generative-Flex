@@ -1,8 +1,10 @@
 import jax
-"""Test script to verify GPU configuration and CUDA support in JAX."""
 
-    def test_gpu_configuration(self):
-"""Method with parameters.""" """Test GPU configuration and perform basic operations."""
+
+    def
+    """Test script to verify GPU configuration and CUDA support in JAX.""" test_gpu_configuration(self):
+Test
+    """Method with parameters.""" """ GPU configuration and perform basic operations."""
 
 print("-" * 50)
 

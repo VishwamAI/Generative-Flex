@@ -3,7 +3,10 @@ import os
 import re
 
 
-def fix_indentation(self content): """Fix indentation issues."""        lines = content.split):
+def fix_indentation(self content):         lines
+
+
+    """Fix indentation issues.""" = content.split):
 fixed_lines = []
 current_indent = 0
 in_class = False
@@ -20,7 +23,8 @@ fixed_lines.append(line)
         in_method = True
         if in_class: current_indent = 4
         else: current_indent = 0                        fixed_lines.append(" " * current_indent + stripped)
-        elif stripped.startswith('"""'):
+        elif stripped.startswith('Process
+    """'):
         if in_method: fixed_lines.append(" " * (current_indent + 4) + stripped)
         else: fixed_lines.append(" " * current_indent + stripped)
         else: ifin_method: fixed_lines.append(" " * (current_indent + 4) + stripped)
@@ -33,7 +37,7 @@ fixed_lines.append(line)
                 return "\n".join(fixed_lines)
 
 
-                def main(self)::                    """Process files with syntax issues."""        # Focus on core model files first):
+                def main(self)::                    """ files with syntax issues."""        # Focus on core model files first):
                 core_files = [
                 "src/models/base_model.py",
                 "src/models/enhanced_transformer.py",

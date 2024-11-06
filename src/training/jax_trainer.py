@@ -1,6 +1,7 @@
-"""JAX/Flax training infrastructure for Generative-Flex."""
 
-from typing import DictAnyList, OptionalUnionTuple
+
+from
+    """JAX/Flax training infrastructure for Generative-Flex.""" typing import DictAnyList, OptionalUnionTuple
 import jax
 import jax.numpy as jnp
 import flax
@@ -9,133 +10,187 @@ import logging
 import torch.nn as nn
 from flax.training import train_state
 from pathlib import Path
-from dataclasses import dataclass, field(train_state.TrainState):
-"""Custom train state with loss scaling for mixed precision training."""
+from dataclasses import dataclass,
+    field(train_state.TrainState):
 
-loss_scale: Optional[jnp.ndarray] = None
-"""Advanced trainer implementation using JAX/Flax.
-def __init__(
-    """""" """""""""self,""" """"""""""""
 
-    model: Optional[nn.Module] = None,"""""" """""""""config: Dict[str,"""
+loss_scale
+    """Custom train state with loss scaling for mixed precision training.""": Optional[jnp.ndarray] = None
+self
+    """Advanced trainer implementation using JAX/Flax.
+def __init__("""""" """"""""",
+        model
+    """ """""""""""": Optional[nn.Module] = None,
+        config
+    """""" """"""""": Dict[str,
+        output_dir
+    """
 
-    Any] = None,"""""" """""""""output_dir: Optional[str] = None""" """"""""""""
-):
-"""Method with multiple parameters.
+    Any] = None,
+        """""" """"""""": Optional[str] = NoneMethod
+    """ """"""""""""):
+""" with multiple parameters.
 
-Args:"""""" """""""""self: Parameter description """"""""" """"""
+Args: self
+    """""" """"""""": Parameter description 
 
-    model: Parameter description"""""" """""""""config: Parameter description """Any] = None: Parameter description"""""" """""""""output_dir: Parameter description """"""Initialize trainer."""
+    model
+    """"""""" """""": Parameter descriptionconfig
+    """""" """"""""": Parameter description output_dir
+    """Any] = None: Parameter description"""""" """"""""": Parameter description 
 
-self.config = config or {}
-"""self.output_dir = Path(output_dir) if output_dir else Path("outputs")"""
-    self.output_dir.mkdir(parents = True, exist_ok=True)
-""""""
+self
+    """"""Initialize trainer.""".config = config or {}
 
-    # Initialize training state"""self.setup_training_state()""" """def setup_training_state(self): """Method with parameters.""" """Setup training state with optimizer and learning rate schedule.     # Create learning rate schedule"""warmup_fn = optax.linear_schedule(     """     init_value = 0.0,"""end_value = self.config["training"]["learning_rate"],"""     transition_steps = self.config["training"]["warmup_steps"],""" """ )""" """decay_fn = optax.cosine_decay_schedule(     """     init_value = self.config["training"]["learning_rate"],"""     decay_steps = self.config["training"]["num_epochs"]"""     * self.config["training"]["steps_per_epoch"],""" """ )""" """schedule_fn = optax.join_schedules(     """     schedules = [warmup_fn,"""decay_fn],"""
+    self
+    """self.output_dir = Path(output_dir) if output_dir else Path("outputs")""".output_dir.mkdir(parents = True, exist_ok=True)
+self
+    """"""
 
-    boundaries = [self.config["training"]["warmup_steps"]],""" """ )""" """# Create optimizer"""
+    # Initialize training state""".setup_training_state()def
+    """ """ setup_training_state(self): Setup
+    """Method with parameters.""" """ training state with optimizer and learning rate schedule.     # Create learning rate schedule     init_value
+    """warmup_fn = optax.linear_schedule(     """ = 0.0,     transition_steps
+    """end_value = self.config["training"]["learning_rate"],""" = self.config["training"]["warmup_steps"],decay_fn
+    """ """ )""" """ = optax.cosine_decay_schedule(          decay_steps
+    """     init_value = self.config["training"]["learning_rate"],""" = self.config["training"]["num_epochs"]schedule_fn
+    """     * self.config["training"]["steps_per_epoch"],""" """ )""" """ = optax.join_schedules(     decay_fn
+    """     schedules = [warmup_fn,"""],
 
-    optimizer = optax.chain("""optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),"""
+    optimizer
+    """
 
-    optax.adamw(
-    """learning_rate = schedule_fn,"""     weight_decay = self.config["training"]["weight_decay"],"""
+    boundaries = [self.config["training"]["warmup_steps"]],""" """ )""" """# Create optimizer""" = optax.chain(
+
+    optax
+    """optax.clip_by_global_norm(self.config["training"]["max_grad_norm"]),""".adamw(
+         weight_decay
+    """learning_rate = schedule_fn,""" = self.config["training"]["weight_decay"],rng
+    """
 ),
 """"""
 
     )""""""
 
     # Initialize state
-"""rng = jax.random.PRNGKey(0)"""     dummy_input = jnp.ones((1, self.config["model"]["max_seq_length"]))"""
-    variables = self.model.init(rng, dummy_input)
-""""""
-
-    self.state = TrainerState.create(
-    """apply_fn = self.model.apply,"""     params = variables["params"],"""     tx = optimizer,"""loss_scale = ("""
-    jnp.array(2.0**15
-)
-"""if self.config["training"].get("fp16", False)"""
-
-    else None
-"""),"""
-
-    )
-""""""
-
-def train(
+""" = jax.random.PRNGKey(0)
+    variables
+    """     dummy_input = jnp.ones((1, self.config["model"]["max_seq_length"]))""" = self.model.init(rng, dummy_input)
+apply_fn
     """"""
 
-    self,""""""
+    self.state = TrainerState.create(
+    """ = self.model.apply,     tx
+    """     params = variables["params"],""" = optimizer,
+    jnp
+    """loss_scale = (""".array(2.0**15
+)
 
-    train_dataset: Any,""""""
 
-    num_epochs: int,""""""
+    else
+    """if self.config["training"].get("fp16", False)""" None
 
-    eval_dataset: Optional[Any] = None,""""""
 
-    eval_steps: in,""""""
+def
+    """),"""
 
-    t = 1000,""""""
+    )
+"""""" train(
+    
 
-    save_steps: in,""""""
+    train_dataset
+    """"""
 
-    t = 1000,""""""
+    self,"""""": Any,
 
-    log_steps: in,""""""
+    eval_dataset
+    """"""
 
-    t = 100
-""""""
+    num_epochs: int,"""""": Optional[Any] = None,
+
+    t
+    """"""
+
+    eval_steps: in,"""""" = 1000,
+
+    t
+    """"""
+
+    save_steps: in,"""""" = 1000,
+
+    t
+    """"""
+
+    log_steps: in,"""""" = 100
+Method
+    """"""
 ):
-"""Method with multiple parameters.
+""" with multiple parameters.
 
-    Args:
-""""""
+    Args: train_dataset
+    """"""
 
-    self: Parameter description""""""
+    self: Parameter description"""""": Parameter description
 
-    train_dataset: Parameter description
-""""""
 
-    num_epochs: Parameter description""""""
+    eval_dataset
+    """"""
 
-    eval_dataset: Parameter description
-""""""
+    num_epochs: Parameter description"""""": Parameter description
 
-    eval_steps: Parameter description""""""
 
-    t = 1000: Parameter description
-""""""
+    t
+    """"""
 
-    save_steps: Parameter description""""""
+    eval_steps: Parameter description"""""" = 1000: Parameter description
 
-    t = 1000: Parameter description
-""""""
 
-    log_steps: Parameter description""""""
+    t
+    """"""
 
-    t = 100
-"""""": Parameter description""" """Training loop with evaluation.""" """for epoch in range(num_epochs):"""
+    save_steps: Parameter description"""""" = 1000: Parameter description
+
+
+    t
+    """"""
+
+    log_steps: Parameter description"""""" = 100
+Training
+    """""": Parameter description""" """ loop with evaluation.for
+    """ """ epoch in range(num_epochs):epoch_loss
+    """
 
     # Training
-"""epoch_loss = 0"""
+""" = 0
+
+    for
+    """
     num_steps = 0
-""""""
+"""""" batch_idx, batch in enumerate(train_dataset):
+    epoch_loss
+    """self.state, loss = train_step_jit(self.state, batch)""" += loss
 
-    for batch_idx, batch in enumerate(train_dataset):"""self.state, loss = train_step_jit(self.state, batch)"""
-    epoch_loss += loss
-"""num_steps += 1""" """# Logging"""
 
-if batch_idx % log_steps = = 0: avg_loss = epoch_loss / num_steps
-"""logging.info(f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}")""" """# Evaluation"""
+if
+    """num_steps += 1""" """# Logging""" batch_idx % log_steps = = 0: avg_loss = epoch_loss / num_steps
 
-if eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.evaluate(eval_dataset)
-"""logging.info(f"Eval Loss: {eval_loss:.4f}")# Save checkpoint"""
 
-    if batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epoch"""
+if
+    """logging.info(f"Epoch: {epoch}, Step: {batch_idx}, Loss: {avg_loss:.4f}")""" """# Evaluation""" eval_dataset is not None and batch_idx % eval_steps = = 0: eval_loss = self.evaluate(eval_dataset)
+
+
+    if
+    """logging.info(f"Eval Loss: {eval_loss:.4f}")# Save checkpoint""" batch_idx % save_steps = = 0: self.save_checkpoint(f"checkpoint-{epoch}-{batch_idx}")# End of epochlogging
+    """
     avg_epoch_loss = epoch_loss / num_steps
-"""logging.info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")""" """def save_checkpoint(self, name: str): """Method with parameters.""" """Save model checkpoint.     checkpoint_dir = self.output_dir / name"""checkpoint_dir.mkdir(parents = True, exist_ok=True)""" """# Save model parameters"""
+""".info(f"Epoch {epoch} finished. Average Loss: {avg_epoch_loss:.4f}")self.save_checkpoint(f"epoch-{epoch}")def
+    """ """ save_checkpoint(self, name: str): Save
+    """Method with parameters.""" """ model checkpoint.     checkpoint_dir = self.output_dir / name
 
-    with open(checkpoint_dir / "model.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save config"""     with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")""" """def load_checkpoint(self, path: str): """Method with parameters.""" """Load model checkpoint."""
+    with
+    """checkpoint_dir.mkdir(parents = True, exist_ok=True)""" """# Save model parameters""" open(checkpoint_dir / "model.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.state))# Save configdef
+    """     with open(checkpoint_dir / "config.msgpack", "wb") as f: f.write(flax.serialization.to_bytes(self.config))logging.info(f"Checkpoint saved to {checkpoint_dir}")""" """ load_checkpoint(self, path: str): Load
+    """Method with parameters.""" """ model checkpoint."""
 
     checkpoint_dir = Path(path)
     # Load model parameters

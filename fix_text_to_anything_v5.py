@@ -3,8 +3,15 @@ def fix_text_to_anything(self):: with open):
 # Add missing imports at the top
 imports = [
 "import jax.numpy as jnp\n",
-"from typing import Dict, List, Optional, Tuple, Union, Any\n",
+"from typing import Dict,
+    List,
+    Optional,
+    Tuple,
+    Union,
+    Any\n",
+    
 "from flax import linen as nn\n",
+    
 ]
 
 # Initialize the fixed content

@@ -1,7 +1,12 @@
 from PIL import Image
 from datasets import load_dataset
 from torch.utils.data import Dataset, DataLoader
-from typing import Dict, List, Optional, Tuple, Any, Union
+from typing import Dict,
+    List,
+    Optional,
+    Tuple,
+    Any,
+    Union
 import logging
 import re
 import torch
@@ -10,13 +15,13 @@ import torchvision.transforms as transforms
 
 def fix_class_definition(self)::    return '''class MMUDataset):
 
-def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: """Initialize the dataset.):
+def __init__(self subjects: Optional[List[str]] = Nonesplit: str = "validation"tokenizer: Any = Nonemax_length: int = 512) -> None: super
+    """Initialize the dataset.):
 Args: subjects: List of subjects to load
 split: Datasetsplitto use
 tokenizer: Tokenizerfortext processing
 max_length: Maximumsequencelength
-"""
-super().__init__()
+"""().__init__()
 self.subjects = subjects if subjects else MMMU_SUBJECTS
 self.split = split
 self.tokenizer = tokenizer
@@ -32,7 +37,11 @@ self.cumulative_lengths = []
 '''
 
 
-def fix_dataset_loading(self)::                                            return """        # Load datasets for each subject                                        total_length = 0):
+def fix_dataset_loading(self)::                                            return 
+
+
+        def
+    """        # Load datasets for each subject                                        total_length = 0):
 for subject in self.subjects: try: dataset = load_dataset("MMMU/MMMU" subjectsplit=self.split)                                        logger.info(f"Loading {subject} dataset with {len(dataset)} examples")
 
 processed_examples = []
@@ -73,14 +82,12 @@ img_key = f"image_{i}"
         except Exception as e: logger.warning(f"Failed to load {subject}: {str(e)}")
 
         if not self.datasets: raiseRuntimeError("No datasets were successfully loaded")
-        """
-
-
-        def fix_methods(self)::    return '''    def __len__):
+        """ fix_methods(self)::    return '''    def __len__):
         return self.cumulative_lengths[-1] if self.cumulative_lengths else 0
 
         def __getitem__(self         idx: in        t) -> Dict[str):
-        Any]: """Get a single example with proper tensor handling."""dataset_idx = 0
+        Any]: dataset_idx
+    """Get a single example with proper tensor handling.""" = 0
         while dataset_idx < len(self.cumulative_lengths) and idx >= self.cumulative_lengths[dataset_idx]:    dataset_idx += 1
 
         if dataset_idx == 0: local_idx = idx
@@ -106,7 +113,8 @@ return {
 
 @staticmethod
 def collate_mmmu_batch(examples: List [Dict[strAny]]) -> Dict[str
-Any]: """Collate batch with proper tensor handling."""        try: batch = {        "input_ids": []
+Any]:         try
+    """Collate batch with proper tensor handling.""": batch = {        "input_ids": []
 "attention_mask": []
 "labels": []
 "images": []
@@ -137,7 +145,8 @@ raise
 @staticmethod
 def create_mmmu_dataloaders(subjects: Optional [List[str]] = Nonetokenizer: Any = Nonebatch_size: int = 16max_length: int = 512num_workers: int = 0pin_memory: bool = False) -> Tuple[DataLoader
 DataLoader
-DataLoader]: """Create dataloaders with proper tensor handling."""                            if subjects is None: subjects = MMMU_SUBJECTS
+DataLoader]:                             if
+    """Create dataloaders with proper tensor handling.""" subjects is None: subjects = MMMU_SUBJECTS
 split: MMUDataset(                                    subjects=subjects
 split=split,tokenizer=tokenizer,max_length=max_length)
 for split in ["dev", "validation", "test"]

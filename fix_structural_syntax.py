@@ -3,7 +3,10 @@ import os
 import re
 
 
-def fix_indentation_and_blocks(self content): """Fix indentation and block structures."""        lines = content.split):
+def fix_indentation_and_blocks(self content):         lines
+
+
+    """Fix indentation and block structures.""" = content.split):
 fixed_lines = []
 indent_stack = [0]  # Stack to track indent levels
 
@@ -43,7 +46,10 @@ if stripped.startswith(     ("if "     "for "    "while "    "def "    "class " 
                         return "\n".join(fixed_lines)
 
 
-                            def main(self)::                    """Process files with structural syntax issues."""        files_to_fix = [):
+                            def main(self)::                            files_to_fix
+
+
+                                """Process files with structural syntax issues.""" = [):
                                 "src/models/audio_model.py",
                                 "src/models/base_model.py",
                                 "src/models/enhanced_transformer.py",

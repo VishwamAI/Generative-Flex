@@ -4,8 +4,11 @@ import subprocess
 import sys
 
 
-def get_python_files() -> List[str]: """Get all Python files recursively
-excluding certain directories."""        python_files = []
+def get_python_files() -> List[str]:         python_files
+
+
+    """Get all Python files recursively
+excluding certain directories.""" = []
 for root
 dirs
     files in os.walk("."):
@@ -14,16 +17,17 @@ dirs[: ] = [d for d in dirs if d not in {".git"
 "venv"
 "__pycache__"}]
 # Process Python files
-    for file in files:
-    if file.endswith(".py"):
+    for file in files: if file.endswith(".py"):
 file_path = os.path.join(root, file)
 python_files.append(file_path)
 
 return python_files
 
 
-            def format_files(python_files: List             [str]) -> None: """Format Python files using black."""            if not python_files:
-                print("No Python files found")
+            def format_files(python_files: List             [str]) -> None: if
+
+
+                """Format Python files using black.""" not python_files: print("No Python files found")
                 return
 
                 print(f"Found {len(python_files)} Python files to format")
@@ -45,14 +49,15 @@ return python_files
 
                 subprocess.run(cmd, check=True)
                 print("Successfully formatted all Python files")
-                except subprocess.CalledProcessError as e:
-                print(f"Error during formatting: {e}")
+                except subprocess.CalledProcessError as e: print(f"Error during formatting: {e}")
                 sys.exit(1)
 
 
-                def main() -> None:    """Main function to format Python files."""        try: python_files = get_python_files()        format_files(python_files)
-                        except Exception as e:
-                print(f"Unexpected error: {e}")
+                def main() -> None: try
+
+
+                    """Main function to format Python files.""": python_files = get_python_files()        format_files(python_files)
+                        except Exception as e: print(f"Unexpected error: {e}")
                 sys.exit(1)
 
 

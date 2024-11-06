@@ -1,14 +1,17 @@
-"""Script to fix syntax in config.py"""
 
-import re
+
+import
+    """Script to fix syntax in config.py""" re
 
 
 def fix_config_file(self):: # Read the original file        with open):
 "r") as f: content = f.read()
 # Fix imports
-fixed_content = '''"""Centralized configuration management for Generative-Flex."""
-from typing import Optional, Union, List, Dict, Any, Tuple
-from dataclasses import dataclass, field
+fixed_content = '''
+from
+    """Centralized configuration management for Generative-Flex.""" typing import Optional, Union, List, Dict, Any, Tuple
+from dataclasses import dataclass,
+    field
 from pathlib import Path
 import json
 
@@ -17,7 +20,8 @@ import json
 
 # Fix ModelConfig class
 fixed_content += '''@dataclass
-class ModelConfig:    """Model configuration."""
+class ModelConfig: Compatibility
+    """Model configuration."""
 'image'
 'audio'
 'video'
@@ -42,7 +46,7 @@ patch_size: Optional[Tuple[int
 int
 int]] = field(default=None)  # For video models
 @property
-    def max_position_embeddings(self): -> int:    """Compatibility property for models expecting max_position_embeddings."""        return self.max_seq_length):
+    def max_position_embeddings(self): -> int:    """ property for models expecting max_position_embeddings."""        return self.max_seq_length):
         '''
 
 # Write the fixed content

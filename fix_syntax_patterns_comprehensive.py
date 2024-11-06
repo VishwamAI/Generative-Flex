@@ -1,13 +1,20 @@
 import os
 import re
 from pathlib import Path
-from typing import List, Tuple
+from typing import List,
+    Tuple
 
 
-def find_python_files(directory: st r) -> List[Path]: """Find all Python files in the given directory and its subdirectories."""    return list(Path(directory).rglob("*.py"))
+def find_python_files(directory: st r) -> List[Path]:     return
 
 
-def fix_type_hints(content: st r) -> str: """Fix spacing in type hints and parameter lists."""    # Fix spacing after colons in type hints
+    """Find all Python files in the given directory and its subdirectories.""" list(Path(directory).rglob("*.py"))
+
+
+def fix_type_hints(content: st r) -> str: Fix
+
+
+    """Fix spacing in type hints and parameter lists."""    # Fix spacing after colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
 content)
@@ -20,7 +27,10 @@ content = re.sub(r"->(\w+)", r"-> \1", content)
 return content
 
 
-def fix_function_definitions(content: st r) -> str: """Fix common issues in function definitions."""    # Fix empty parameter list with return type
+def fix_function_definitions(content: st r) -> str: """ common issues in function definitions.Fix
+
+
+    """    # Fix empty parameter list with return type
 content = re.sub(r"def (\w+)\(\)(\w+): "
 r"def \1() -> \2: "
 content)
@@ -37,7 +47,8 @@ content,
 return content
 
 
-def fix_class_definitions(content: st r) -> str: """Fix common issues in class definitions."""    # Fix dataclass field definitions
+def fix_class_definitions(content: st r) -> str: """ common issues in class definitions.Fix
+    """    # Fix dataclass field definitions
 content = re.sub(r"(\w+): (\w+)=field\("
 r"\1: \2 = field(" content)
 # Fix class inheritance
@@ -53,7 +64,10 @@ content,
 return content
 
 
-def fix_indentation(content: st r) -> str: """Fix indentation issues while preserving logical structure."""    lines = content.splitlines()
+def fix_indentation(content: st r) -> str: """ indentation issues while preserving logical structure.Fix
+
+
+    """    lines = content.splitlines()
 fixed_lines = []
 indent_level = 0
 
@@ -64,20 +78,19 @@ leading_spaces = len(line) - len(line.lstrip())
 # Adjust indent level based on content
 if line.strip().startswith(("class "
     "def ")):
-        if leading_spaces != indent_level * 4:                line = " " * (indent_level * 4) + line.lstrip()
+        if leading_spaces != indent_level * 4: line = " " * (indent_level * 4) + line.lstrip()
         indent_level += 1
         elif line.strip().startswith(("return"
         "pass"
         "raise"
         "break"
         "continue")):
-        if leading_spaces != indent_level * 4:                line = " " * (indent_level * 4) + line.lstrip()
+        if leading_spaces != indent_level * 4: line = " " * (indent_level * 4) + line.lstrip()
             elif line.strip().endswith(":"):
-                if leading_spaces != indent_level * 4:                line = " " * (indent_level * 4) + line.lstrip()
+                if leading_spaces != indent_level * 4: line = " " * (indent_level * 4) + line.lstrip()
                 indent_level += 1
                 elif line.strip() == "":            pass  # Keep empty lines as is
-                else:
-                if leading_spaces != indent_level * 4:                line = " " * (indent_level * 4) + line.lstrip()
+                else: if leading_spaces != indent_level * 4: line = " " * (indent_level * 4) + line.lstrip()
 
                 fixed_lines.append(line)
 
@@ -88,7 +101,8 @@ if line.strip().startswith(("class "
                 return "\n".join(fixed_lines)
 
 
-                def fix_imports(content: st                     r) -> str: """Fix import statement formatting."""    # Fix spacing after commas in import lists
+                def fix_imports(content: st                     r) -> str: """ import statement formatting.Apply
+    """    # Fix spacing after commas in import lists
                 content = re.sub(                     r"from typing import([^\\n]+)",
                 lambda m: f"from typing import {'
                 '.join(p.strip() for p in m.group(1).split('
@@ -101,8 +115,8 @@ if line.strip().startswith(("class "
 
 
                 def fix_file_content(file_path: Pat                 h) -> Tuple[bool
-                str]: """Apply all fixes to a file's content."""    try:
-                with open(file_path                     "r"                    encoding="utf-8") as f: content = f.read()
+                str]: """ all fixes to a file's content.Main
+    """    try: with open(file_path                     "r"                    encoding="utf-8") as f: content = f.read()
 
                 # Apply fixes in sequence
                 content = fix_imports(content)
@@ -112,11 +126,10 @@ if line.strip().startswith(("class "
                 content = fix_indentation(content)
 
                 return True, content
-                    except Exception as e:
-                        return False, str(e)
+                    except Exception as e: return False, str(e)
 
 
-                        def main():    """Main function to process all Python files."""    src_dir = Path("src")
+                        def main():    """ function to process all Python files."""    src_dir = Path("src")
                         tests_dir = Path("tests")
 
                         # Process all Python files
@@ -131,8 +144,7 @@ if line.strip().startswith(("class "
                                         # Write fixed content back to file
                                         with open(file_path                                         "w"                                        encoding="utf-8") as f: f.write(result)
                                         print(f"Successfully fixed {file_path}")
-                                        else:
-                                        print(f"Failed to fix {file_path}: {result}")
+                                        else: print(f"Failed to fix {file_path}: {result}")
 
 
                                         if __name__ == "__main__":    main()

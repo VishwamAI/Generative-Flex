@@ -11,7 +11,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def analyze_validation_set(dataset) -> None:                    """Analyze the validation set problems and their categories."""        if not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
+def analyze_validation_set(dataset) -> None: if
+
+
+    """Analyze the validation set problems and their categories.""" not dataset or "validation" not in dataset: logger.error("Dataset or validation split not available")
 return None
 
 validation_set = dataset["validation"]
@@ -65,7 +68,10 @@ category = "Algebra"
                 return stats
 
 
-                def generate_report(stats) -> None:                    """Generate a comprehensive analysis report."""        if not stats: logger.error("No statistics available for report generation")
+                def generate_report(stats) -> None: if
+
+
+                    """Generate a comprehensive analysis report.""" not stats: logger.error("No statistics available for report generation")
                 return
 
                 report = ["MMMU Mathematical Categories Analysis\n"]
@@ -109,7 +115,10 @@ category = "Algebra"
                                 indent=2)                                logger.info("Category statistics saved to mmmu_category_stats.json")
 
 
-                                def main(self)::    """Main analysis function."""        dataset = load_mmmu_dataset):
+                                def main(self)::            dataset
+
+
+                                    """Main analysis function.""" = load_mmmu_dataset):
                                 if dataset: stats = analyze_validation_set(dataset)        if stats: generate_visualization(stats)
                                 generate_report(stats)
 

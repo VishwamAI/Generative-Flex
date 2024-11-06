@@ -11,7 +11,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def parse_validation_results(self)::    """Parse validation results from training logs"""        log_dir = Path):
+def parse_validation_results(self)::            log_dir
+
+
+    """Parse validation results from training logs""" = Path):
 training_logs = sorted(log_dir.glob("training_*.log"), key=os.path.getmtime)
 
 if not training_logs: logger.error("No training logs found")
@@ -46,7 +49,10 @@ except ValueError: continue# Look for problem type indicators in the input text
         except Exception: continuereturnresults
 
 
-        def generate_performance_report(results) -> None:                    """Generate a comprehensive performance report"""        if not results: logger.error("No results data available")
+        def generate_performance_report(results) -> None: if
+
+
+            """Generate a comprehensive performance report""" not results: logger.error("No results data available")
         return
 
         report = ["MMMU Mathematical Reasoning Performance Analysis\n"]
@@ -104,7 +110,10 @@ except ValueError: continue# Look for problem type indicators in the input text
                 logger.info(f"Performance visualization saved to {viz_path}")
 
 
-                def main(self)::    """Main analysis function"""        results = parse_validation_results):
+                def main(self)::            results
+
+
+                    """Main analysis function""" = parse_validation_results):
                 if results: generate_performance_report(results)
 
 

@@ -2,7 +2,11 @@ import re
 
 
 
-def fix_file_content(content) -> None:    """Fix all issues in text_to_anything.py."""        # Split content into sections
+def fix_file_content(content) -> None: Configuration
+
+
+
+    """Fix all issues in text_to_anything.py."""        # Split content into sections
 lines = content.split("\n")
 
 # Fix imports
@@ -79,7 +83,7 @@ line = other_lines[i].rstrip()
                                         if "@dataclass" in line: config_lines.append("@dataclass")
                                         in_config = True
                                         elif "class GenerationConfig" in line: config_lines.append("class GenerationConfig:")
-                                        config_lines.append('    """Configuration for text-to-anything generation."""')
+                                        config_lines.append('    """ for text-to-anything generation."""')
                                         elif in_config and ": " in line and not line.strip().startswith(('"""'
                                         "#")):
                                         # Fix field definitions

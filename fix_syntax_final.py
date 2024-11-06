@@ -2,15 +2,16 @@
 import re
 from pathlib import Path
 import black
-from typing import List, Dict, Optional, Any
+from typing import List,
+    Dict,
+    Optional,
+    Any
 
-def fix_string_literals(content: str) -> str:
-    """Fix string literal formatting in field definitions."""
-    def format_string(match):
+def fix_string_literals(content: str) -> str: def
+    """Fix string literal formatting in field definitions.""" format_string(match):
         items = re.findall(r'"[^"]*"|\S+', match.group(1))
         formatted_items = []
-        for item in items:
-            cleaned = item.strip().replace('"', '')
+        for item in items: cleaned = item.strip().replace('"', '')
             formatted_items.append(f'"{cleaned}"')
         return 'default_factory=lambda: [' + ', '.join(formatted_items) + ']'
 
@@ -22,7 +23,7 @@ def fix_string_literals(content: str) -> str:
     )
     return content
 
-def fix_class_method_syntax(content: str) -> str:
+def fix_class_method_syntax(content: str) -> str: Fix
     """Fix class method decorator and spacing."""
     # Fix @classmethod spacing
     content = re.sub(r'@class\s+method', r'@classmethod', content)
@@ -36,7 +37,9 @@ def fix_class_method_syntax(content: str) -> str:
     return content
 
 def fix_function_definitions(content: str) -> str:
-    """Fix function definition formatting."""
+
+    """ function definition formatting.Fix
+    """
     # Fix method definitions with multiple spaces
     content = re.sub(
         r'def\s+(\w+)\s*\(\s*self\s*,?\s*([^)]*)\)\s*->\s*([^:]+):',
@@ -53,7 +56,9 @@ def fix_function_definitions(content: str) -> str:
     return content
 
 def fix_type_annotations(content: str) -> str:
-    """Fix type annotation syntax."""
+
+    """ type annotation syntax.Process
+    """
     # Fix nested type annotations
     content = re.sub(
         r'(\w+):\s*Optional\[([^]]+)\]\s*=\s*field\(([^)]+)\)',
@@ -70,11 +75,11 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file, applying all fixes."""
+
+    """ a single file, applying all fixes.Fix
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply fixes
         content = fix_string_literals(content)
@@ -90,20 +95,17 @@ def process_file(file_path: Path) -> None:
             is_pyi=False,
         )
 
-        try:
-            content = black.format_file_contents(content, fast=False, mode=mode)
-        except Exception as e:
-            print(f"Warning: Black formatting failed for {file_path}: {e}")
+        try: content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e: print(f"Warning: Black formatting failed for {file_path}: {e}")
 
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Fix final syntax issues in critical files."""
+
+    """ final syntax issues in critical files."""
     critical_files = [
         'src/models/text_to_anything.py',
         'src/config/config.py',
@@ -117,11 +119,9 @@ def main() -> None:
         'src/training/utils/logging.py'
     ]
 
-    for file_path in critical_files:
-        if Path(file_path).exists():
+    for file_path in critical_files: if Path(file_path).exists():
             process_file(Path(file_path))
-        else:
-            print(f"Warning: {file_path} not found")
+        else: print(f"Warning: {file_path} not found")
 
 if __name__ == "__main__":
     main()

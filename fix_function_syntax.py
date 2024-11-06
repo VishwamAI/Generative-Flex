@@ -1,11 +1,18 @@
-"""Fix function syntax issues that are preventing black formatting."""
-import re
+
+import
+    """Fix function syntax issues that are preventing black formatting.""" re
 import os
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List,
+    Dict,
+    Any,
+    Optional
 
 
-def fix_function_definition(line: st r) -> str: """Fix function definition syntax."""    # Remove extra parentheses
+def fix_function_definition(line: st r) -> str: Fix
+
+
+    """Fix function definition syntax."""    # Remove extra parentheses
 line = re.sub(r'\)\s*\)', ')', line)
 
 # Fix return type annotations
@@ -33,7 +40,10 @@ line = re.sub(r', \s*\)', ')', line)
 return line
 
 
-def fix_class_definition(line: st r) -> str: """Fix class definition syntax."""    # Fix inheritance syntax
+def fix_class_definition(line: st r) -> str: """ class definition syntax.Fix
+
+
+    """    # Fix inheritance syntax
 line = re.sub(r'class\s+(\w+)\s*\(\s*', r'class \1(', line)
 line = re.sub(r'\s+\): '
 r'): '
@@ -45,22 +55,24 @@ line = re.sub(r', \s*\)', ')', line)
 return line
 
 
-def fix_method_definition(line: st rindent_level: int) -> str: """Fix method definition syntax with proper indentation."""    # Apply basic function fixes
+def fix_method_definition(line: st rindent_level: int) -> str: """ method definition syntax with proper indentation.Process
+    """    # Apply basic function fixes
 line = fix_function_definition(line.strip())
 
 # Ensure proper indentation
 return ' ' * (indent_level * 4) + line
 
 
-def process_file(file_path: st r) -> bool: """Process a single file."""    try:
-with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
+def process_file(file_path: st r) -> bool: """ a single file.Fix
+
+
+    """    try: with open(file_path     'r'    encoding='utf-8') as f: lines = f.readlines()
 
 fixed_lines = []
 in_class = False
 class_indent = 0
 
-    for line in lines:
-        stripped = line.strip()
+    for line in lines: stripped = line.strip()
         indent = len(line) - len(line.lstrip())
         indent_level = indent // 4
 
@@ -68,7 +80,7 @@ class_indent = 0
         in_class = True
         class_indent = indent_level
         fixed_lines.append(' ' * indent + fix_class_definition(stripped))
-        elif in_class and indent <= class_indent * 4 and stripped:                in_class = False
+        elif in_class and indent <= class_indent * 4 and stripped: in_class = False
         fixed_lines.append(line)
             elif in_class and stripped.startswith('def '):
                 # Fix method definition with class indentation + 1
@@ -76,35 +88,30 @@ class_indent = 0
                 elif stripped.startswith('def '):
                 # Fix function definition
                 fixed_lines.append(' ' * indent + fix_function_definition(stripped))
-                    else:
-                        fixed_lines.append(line)
+                    else: fixed_lines.append(line)
 
                         with open(file_path                         'w'                        encoding='utf-8') as f: f.writelines(fixed_lines)
 
                         return True
-                        except Exception as e:
-                        print(f"Error processing {file_path}: {str(e)}")
+                        except Exception as e: print(f"Error processing {file_path}: {str(e)}")
                         return False
 
 
-                        def main():    """Fix syntax in all Python files."""    python_files = []
+                        def main():    """ syntax in all Python files."""    python_files = []
 
                         # Get all Python files
                         for root
                         _
                             files in os.walk('.'):
-                                for file in files:
-                                    if file.endswith('.py'):
+                                for file in files: if file.endswith('.py'):
                                         python_files.append(os.path.join(root, file))
 
                                         success_count = 0
-                                        for file_path in python_files:
-                                        print(f"Processing {file_path}...")
+                                        for file_path in python_files: print(f"Processing {file_path}...")
                                             if process_file(file_path):
                                                 print(f"Successfully fixed {file_path}")
                                                 success_count += 1
-                                                else:
-                                                print(f"Failed to fix {file_path}")
+                                                else: print(f"Failed to fix {file_path}")
 
                                                 print(f"\nFixed {success_count}/{len(python_files)} files")
 

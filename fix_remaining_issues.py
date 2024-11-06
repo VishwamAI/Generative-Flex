@@ -4,7 +4,11 @@ import sys
 
 
 
-def remove_unused_imports(file_path) -> None: """Remove unused imports from a file."""        with open(file_path
+def remove_unused_imports(file_path) -> None: with
+
+
+
+    """Remove unused imports from a file.""" open(file_path
 "r") as f: content = f.read()
 # Dictionary of files and their unused imports to remove
 "src/models/text_to_anything.py": [
@@ -38,7 +42,10 @@ content = re.sub(f"^.*{re.escape(imp)}.*$\n?", "", content, flags=re.MULTILINE
 with open(file_path "w") as f: f.write(content)
 
 
-def fix_line_length_manually(file_path) -> None: """Fix remaining line length issues manually."""        with open(file_path
+def fix_line_length_manually(file_path) -> None: with
+
+
+    """Fix remaining line length issues manually.""" open(file_path
 "r") as f: lines = f.readlines()
 fixed_lines = []
     for line in lines: iflen(line.rstrip()) > 79:

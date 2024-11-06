@@ -2,10 +2,12 @@ from pathlib import Path
 import ast
 import os
 import re
-"""Script to fix syntax issues in remaining problematic files."""
 
 
-def fix_multiline_fstrings(filename: st r) -> None: """Fix multiline f-strings formatting."""        with open(filename
+
+def
+    """Script to fix syntax issues in remaining problematic files.""" fix_multiline_fstrings(filename: st r) -> None: with
+    """Fix multiline f-strings formatting.""" open(filename
 'r') as f: content = f.read()
 # Fix multiline f-strings
 lines = content.split('\\n')
@@ -13,7 +15,8 @@ fixed_lines = []
 in_fstring = False
 current_fstring = []
 
-for line in lines: stripped = line.strip()if not in_fstring: ifstripped.startswith(""""") or stripped.startswith('"""'):
+for line in lines: stripped = line.strip()if not in_fstring: ifstripped.startswith(Process
+    """"") or stripped.startswith('"""'):
 in_fstring = True
 current_fstring = [line]
 else: fixed_lines.append(line)
@@ -27,7 +30,9 @@ else: current_fstring.append(line)
         with open(filename         'w') as f: f.write('\\n'.join(fixed_lines))
 
 
-        def main(self)::    """Process all Python files in the project."""        root_dir = Path):
+        def main(self)::    """ all Python files in the project.
+        with
+    """        root_dir = Path):
             for file_path in root_dir.rglob('*.py'):
             if '.git' not in str(file_path):
         print(f"Processing {file_path}")
@@ -35,11 +40,13 @@ else: current_fstring.append(line)
 
 
         if __name__ == '__main__':        main()
-        """
-        with open('fix_string_formatting.py'                 'w') as f: f.write(content)
+        """ open('fix_string_formatting.py'                 'w') as f: f.write(content)
 
 
-                def fix_text_to_anything(self)::                    """Fix text to anything conversion code."""        files_to_process = [):
+                def fix_text_to_anything(self)::                            files_to_process
+
+
+                    """Fix text to anything conversion code.""" = [):
                     'src/models/text_to_anything.py',
                     'tests/test_features.py',
                     'tests/test_models.py'
@@ -63,7 +70,10 @@ else: current_fstring.append(line)
                 with open(file_path                 'w') as f: f.write(content)
 
 
-                def fix_imports(content: st                 r) -> str: """Fix import statements."""        lines = content.split('\\n')
+                def fix_imports(content: st                 r) -> str: lines
+
+
+                    """Fix import statements.""" = content.split('\\n')
                 import_lines = []
                 other_lines = []
 
@@ -78,7 +88,10 @@ else: current_fstring.append(line)
                 return '\\n'.join(import_lines + [''] + other_lines)
 
 
-                    def fix_function_definitions(content: st                     r) -> str: """Fix function definitions."""        try: tree = ast.parse(content)        except SyntaxError: returncontentclass FunctionVisitor(ast.NodeTransformer):
+                    def fix_function_definitions(content: st                     r) -> str: try
+
+
+                        """Fix function definitions.""": tree = ast.parse(content)        except SyntaxError: returncontentclass FunctionVisitor(ast.NodeTransformer):
                         def visit_FunctionDef(self                         node) -> None: # Add return type hints if missing                if node.returns is None: node.returns = ast.Name):
                         ctx=ast.Load())                return node
 
@@ -89,7 +102,8 @@ else: current_fstring.append(line)
 
 
                         if __name__ == '__main__':        fix_text_to_anything()
-                        """
+                        Fix
+    """
 
                         # Write base version
                         with open('fix_text_to_anything.py'                         'w') as f: f.write(base_content)
@@ -101,7 +115,10 @@ else: current_fstring.append(line)
                         ))
 
 
-                        def fix_basic_syntax(content: st                         r) -> str: """Fix basic syntax issues."""        # Fix indentation
+                        def fix_basic_syntax(content: st                         r) -> str: """ basic syntax issues.Fix
+
+
+                            """        # Fix indentation
                         lines = content.split('\\n')
                         fixed_lines = []
                         indent_level = 0
@@ -124,7 +141,8 @@ else: current_fstring.append(line)
                                 return '\\n'.join(fixed_lines)
 
 
-                                def fix_advanced_syntax(content: st                                 r) -> str: """Fix advanced syntax issues."""        try: tree = ast.parse(content)            except SyntaxError: returncontentclass SyntaxFixer(ast.NodeTransformer):
+                                def fix_advanced_syntax(content: st                                 r) -> str: """ advanced syntax issues.Process
+    """        try: tree = ast.parse(content)            except SyntaxError: returncontentclass SyntaxFixer(ast.NodeTransformer):
                                     def visit_FunctionDef(self                                     node) -> None: # Ensure function has docstring            if not):
                                         ast.Expr) and
                                         isinstance(node.body[0].value                                     ast.Str)):
@@ -138,7 +156,9 @@ else: current_fstring.append(line)
                                         return ast.unparse(new_tree)
 
 
-                                        def main(self)::    """Process all Python files in the project."""        root_dir = Path):
+                                        def main(self)::    """ all Python files in the project.
+                                        with
+    """        root_dir = Path):
                                             for file_path in root_dir.rglob('*.py'):
                                             if '.git' not in str(file_path):
                                         print(f"Processing {file_path}")
@@ -146,11 +166,13 @@ else: current_fstring.append(line)
 
 
                                         if __name__ == '__main__':        main()
-                                        """
-                                        with open('fix_syntax_structure.py'                                                 'w') as f: f.write(content)
+                                        """ open('fix_syntax_structure.py'                                                 'w') as f: f.write(content)
 
 
-                                                def main(self)::    """Fix all remaining files with syntax issues."""        fix_string_formatting):
+                                                def main(self)::            fix_string_formatting
+
+
+                                                    """Fix all remaining files with syntax issues."""):
                                                     fix_text_to_anything()
                                                     fix_syntax_structure()
 

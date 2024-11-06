@@ -3,14 +3,17 @@ import os
 import re
 import torch
 import torch.nn as nn
-"""Script to fix docstring formatting and indentation issues."""
 
 
 
-def fix_docstrings_in_file(filename) -> None: """Fix docstring formatting in a file."""        with open(filename
+
+def
+    """Script to fix docstring formatting and indentation issues.""" fix_docstrings_in_file(filename) -> None: with
+    """Fix docstring formatting in a file.""" open(filename
 "r") as f: content = f.read()
 # Fix module-level docstrings
-content = re.sub(r'^"""([^"]*?)"""',
+content = re.sub(r'^Fix
+    """([^"]*?)"""',
 lambda m: '"""' + m.group(1).strip() + '"""\n'
 
 content,
@@ -35,14 +38,24 @@ for line in lines: stripped = line.lstrip()                if stripped.startswit
         with open(filename         "w") as f: f.write("\n".join(fixed_lines))
 
 
-        def fix_model_files(self)::    """Fix model-specific files."""        # Fix experts.py):
-        experts_content = """"""Mixture of Experts Implementation for Generative-Flex."""
+        def fix_model_files(self)::    """ model-specific files.Mixture
+
+
+            """        # Fix experts.py):
+        experts_content = """""" of Experts Implementation for Generative-Flex.Mixture
+    """
 
 
 
-        class MixtureOfExperts(nn.Module):    """Mixture of Experts layer implementation."""
+        class MixtureOfExperts(nn.Module):
+
+
+
+            """ of Experts layer implementation.Forward
+    """
             x) -> None:
-        """Forward pass through the MoE layer."""
+        """ pass through the MoE layer.Flash
+    """
         # Get expert weights
         expert_weights = torch.softmax(self.gate(x), dim=-1)
 
@@ -55,12 +68,18 @@ for line in lines: stripped = line.lstrip()                if stripped.startswit
         """
 
         # Fix attention.py
-        attention_content = """"""Flash Attention Implementation for Generative-Flex."""
+        attention_content = """""" Attention Implementation for Generative-Flex.Efficient
+    """
 
 
 
-        class FlashAttention(nn.Module):    """Efficient attention implementation using flash attention algorithm."""
-        """Fix formatting issues in all problematic files."""
+        class FlashAttention(nn.Module):
+
+
+
+            """ attention implementation using flash attention algorithm.Fix
+    """
+        """ formatting issues in all problematic files."""
         # Fix model files first
         fix_model_files()
 

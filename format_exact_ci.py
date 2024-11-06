@@ -4,7 +4,11 @@ import sys
 
 
 
-def format_with_exact_ci_settings(self)::    """Format files using exact CI command and settings."""        try):
+def format_with_exact_ci_settings(self)::            try
+
+
+
+    """Format files using exact CI command and settings."""):
 # Install black with specific version to match CI
 subprocess.run([     sys.executable, "-m", "pip", "install", "--force-reinstall", "black==23.11.0", ], check=True)
 

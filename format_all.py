@@ -4,7 +4,11 @@ import sys
 
 
 
-def format_files(self)::    """Format all Python files in the project using black."""        files_to_format = [):
+def format_files(self)::            files_to_format
+
+
+
+    """Format all Python files in the project using black.""" = [):
 "src/config/training_config.py",
 "src/config/config.py",
 "src/data/math_tokenizer.py",

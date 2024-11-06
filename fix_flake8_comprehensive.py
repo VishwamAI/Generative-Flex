@@ -6,11 +6,8 @@ import re
 
 
 
-def fix_line_length(content) -> None:    """Break long lines into multiple lines."""
-
-
-
-lines = content.split('\n')
+def fix_line_length(content) -> None: lines
+    """Break long lines into multiple lines.""" = content.split('\n')
 fixed_lines = []
 for line in lines: iflen(line) > 79:
 # Handle function calls with multiple arguments
@@ -38,11 +35,8 @@ fixed_line = parts[0].strip()
         fixed_lines.append(line)
         return '\n'.join(fixed_lines)
 
-        def remove_unused_imports(content) -> None:                    """Remove unused imports identified by flake8."""
-
-
-
-        lines = content.split('\n')
+        def remove_unused_imports(content) -> None: lines
+    """Remove unused imports identified by flake8.""" = content.split('\n')
         # Create a set of imports to remove based on flake8 output
         imports_to_remove = set()
         for line in lines: ifline.startswith('import ') or line.startswith('from '):
@@ -51,11 +45,8 @@ fixed_line = parts[0].strip()
         # Filter out the unused imports
         return '\n'.join(line for line in lines if line.strip() not in imports_to_remove)
 
-        def remove_unused_variables(content) -> None:                    """Remove unused variable assignments."""
-
-
-
-        lines = content.split('\n')
+        def remove_unused_variables(content) -> None: lines
+    """Remove unused variable assignments.""" = content.split('\n')
         fixed_lines = []
         skip_next = False
         for i

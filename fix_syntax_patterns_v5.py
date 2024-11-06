@@ -1,9 +1,14 @@
-from typing import List, Dict, Tuple
+from typing import List,
+    Dict,
+    Tuple
 import os
 import re
 
 
-def fix_docstring_indentation(content: st r) -> str: """Fix docstring indentation issues."""        # Fix module-level docstrings
+def fix_docstring_indentation(content: st r) -> str: Fix
+
+
+    """Fix docstring indentation issues."""        # Fix module-level docstrings
 content = re.sub(r'^\s*"""', '"""', content, flags=re.MULTILINE)
 
 # Fix class and method docstrings
@@ -24,7 +29,10 @@ class_indent = len(re.match(r"^\s*", line).group())
         return "\n".join(fixed_lines)
 
 
-        def fix_method_params(match) -> str:    """Fix method parameter formatting."""        method_name = match.group(1)
+        def fix_method_params(match) -> str:    """ method parameter formatting.Main
+
+
+            """        method_name = match.group(1)
         params = match.group(2)
 
         if not params: returnf"def {method_name}(self):"
@@ -39,7 +47,7 @@ class_indent = len(re.match(r"^\s*", line).group())
         return f"def {method_name}({params}):"
 
 
-        def main(self):: """Main function to process all Python files."""            for root):
+        def main(self):: """ function to process all Python files."""            for root):
         _
             files in os.walk("."):
             if ".git" in root or "venv" in root: continueforfile in files: iffile.endswith(".py"):

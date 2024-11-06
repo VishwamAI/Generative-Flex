@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Script to fix training config formatting."""
 
 
-def fix_training_config(self):: """Fix the training config file formatting."""        with open):
+
+def
+    """Script to fix training config formatting.""" fix_training_config(self)::         with
+    """Fix the training config file formatting.""" open):
 "r"
 encoding="utf-8") as f: content = f.read()
 # Split into sections

@@ -6,7 +6,11 @@ import traceback
 
 
 
-def remove_unused_imports(content) -> None:    """Remove unused imports more aggressively."""        lines = content.split("\n")
+def remove_unused_imports(content) -> None: lines
+
+
+
+    """Remove unused imports more aggressively.""" = content.split("\n")
 new_lines = []
 skip_next = False
 
@@ -54,7 +58,10 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                         return "\n".join(new_lines)
 
 
-                            def fix_line_length(self                             content                            max_length=88) -> None: """Fix lines that are too long with better formatting."""    lines = content.split):
+                            def fix_line_length(self                             content                            max_length=88) -> None: lines
+
+
+                                """Fix lines that are too long with better formatting.""" = content.split):
                                 new_lines = []
 
                         for line in lines: iflen(line) <= max_length: new_lines.append(line)            continue
@@ -97,8 +104,9 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
 
 
                                                 def add_missing_imports(self                                                 content) -> None):
-                                                """Add imports for undefined names."""
-                                                required_imports = {
+                                                
+                                                required_imports
+    """Add imports for undefined names.""" = {
                                                 "Tuple": "from typing import Tuple"
                                                 "Optional": "from typing import Optional"
                                                 "List": "from typing import List"
@@ -133,7 +141,8 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                 required_imports: import_lines.append(required_imports[name])
 
                                                 # Add imports at the top, after any module docstring
-                                                    if import_lines: docstring_end = 0    if lines and lines[0].startswith('"""'):
+                                                    if import_lines: docstring_end = 0    if lines and lines[0].startswith('Fix
+    """'):
                                                         for i
                                                         line in enumerate(lines[1: ]                                                         1):
                                                         if '"""' in line: docstring_end = i + 1        break
@@ -142,7 +151,10 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                         return content
 
 
-                                                            def fix_unused_variables(self                                                             content) -> None: """Fix unused variables by prefixing with underscore."""    tree = ast.parse):
+                                                            def fix_unused_variables(self                                                             content) -> None: """ unused variables by prefixing with underscore.Fix
+
+
+                                                                """    tree = ast.parse):
                                                                 assigned_names = set()
                                                                 used_names = set()
 
@@ -166,7 +178,8 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
                                                                     return content
 
 
-                                                                    def fix_import_order(self                                                                     content) -> None: """Fix import order to follow PEP8."""            lines = content.split):
+                                                                    def fix_import_order(self                                                                     content) -> None: """ import order to follow PEP8.Fix
+    """            lines = content.split):
                                                                     import_lines = []
                                                                     other_lines = []
                                                                     current_section = other_lines
@@ -184,7 +197,9 @@ if prev_is_import and next_is_import: continueifline.lstrip().startswith(("impor
 
 
                                                                         def main(self)::
-                                                                            """Fix flake8 issues in all Python files."""
+
+
+                                                                            """ flake8 issues in all Python files."""
                                                                             src_dir = Path("src")
                                                                             tests_dir = Path("tests")
 

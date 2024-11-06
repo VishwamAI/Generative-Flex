@@ -1,10 +1,12 @@
 import re
 import sys
-"""Script to fix flake8 issues in Python files."""
 
 
 
-def fix_unused_imports(content) -> None:                    """Remove unused imports."""        lines = content.split("\n")
+
+def
+    """Script to fix flake8 issues in Python files.""" fix_unused_imports(content) -> None: lines
+    """Remove unused imports.""" = content.split("\n")
 imports_to_remove = [
 "typing.Dict",
 "typing.List",
@@ -28,8 +30,7 @@ imports_to_remove = [
 
 # Filter out lines that match unused imports
 filtered_lines = []
-for line in lines: should_keep = True            for unused_import in imports_to_remove:
-    if unused_import in line and("import " in line or "from " in line):
+for line in lines: should_keep = True            for unused_import in imports_to_remove: if unused_import in line and("import " in line or "from " in line):
         should_keep = False
         break
         if should_keep: filtered_lines.append(line)
@@ -37,7 +38,10 @@ for line in lines: should_keep = True            for unused_import in imports_to
         return "\n".join(filtered_lines)
 
 
-        def fix_line_length(content) -> None:    """Break long lines to comply with 79 character limit."""        lines = content.split("\n")
+        def fix_line_length(content) -> None: lines
+
+
+            """Break long lines to comply with 79 character limit.""" = content.split("\n")
         fixed_lines = []
 
         for line in lines: iflen(line.rstrip()) > 79:
@@ -86,13 +90,19 @@ for line in lines: should_keep = True            for unused_import in imports_to
                         return "\n".join(fixed_lines)
 
 
-                        def fix_bare_except(content) -> None:    """Fix bare except clauses."""        lines = content.split("\n")
+                        def fix_bare_except(content) -> None: lines
+
+
+                            """Fix bare except clauses.""" = content.split("\n")
                         for i
                             line in enumerate(lines):
                         if "except: " in line: lines[i] = line.replace("except:"                             "except Exception: ")        return "\n".join(lines)
 
 
-                            def main(self)::                    """Main function to process all files."""        files_to_process = [):
+                            def main(self)::                            files_to_process
+
+
+                                """Main function to process all files.""" = [):
                                 "tests/test_features.py",
                                 "tests/test_models.py",
                                 "src/config/training_config.py",

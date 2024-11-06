@@ -1,11 +1,15 @@
-"""Fix syntax issues and apply black formatting to all remaining files."""
 
-import subprocess
+
+import
+    """Fix syntax issues and apply black formatting to all remaining files.""" subprocess
 import sys
 from pathlib import Path
 
 
-def fix_syntax_issues(self)::    """Fix common syntax issues in Python files."""        files_to_fix = [):
+def fix_syntax_issues(self)::            files_to_fix
+
+
+    """Fix common syntax issues in Python files.""" = [):
 "src/config/config.py",
 "src/config/training_config.py",
 "src/data/mmmu_dataloader.py",

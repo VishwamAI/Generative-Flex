@@ -1,8 +1,11 @@
-"""Fix syntax issues in core files that black identified as needing reformatting."""
 
-import re
+
+import
+    """Fix syntax issues in core files that black identified as needing reformatting.""" re
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List,
+    Dict,
+    Any
 
 # List of files that black reported as needing reformatting
 CORE_FILES = [
@@ -55,7 +58,10 @@ content
 flags=re.DOTALL)
 
 
-def fix_indentation(content: st     r) -> str: """Fix indentation issues."""        lines = content.split("\n")
+def fix_indentation(content: st     r) -> str: lines
+
+
+    """Fix indentation issues.""" = content.split("\n")
 fixed_lines = []
 indent_stack = [0]
 
@@ -102,7 +108,10 @@ continue
                 return re.sub(r"\{([^{}]*((\{[^{}]*\})[^{}]*)*)\}", fix_dict, content)
 
 
-                def main() -> None:                    """Process core files that need reformatting."""        print("Starting to process core files...")
+                def main() -> None: print
+
+
+                    """Process core files that need reformatting."""("Starting to process core files...")
                         for file_path in CORE_FILES: ifPath(file_path).exists():
                 print(f"\nProcessing {file_path}")
                 process_file(file_path)

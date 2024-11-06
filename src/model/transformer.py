@@ -2,26 +2,37 @@ from attention import FlashAttention
 from experts import MixtureOfExperts
 from typing import Optional
 import torch
-"""Combines Flash Attention and Mixture of Experts for optimal performance""""""
 
-    Placeholder docstring.
-"""Advanced transformer layer combining Flash Attention and Mixture of Experts"""
 
-num_experts: int = 8
-"""expert_capacity_factor: float = 1.25"""
-    block_size: int = 1024): super, ().__init__()
-""""""
+    Placeholder
+    """Combines Flash Attention and Mixture of Experts for optimal performance"""""" docstring.
 
-# Flash Attention for efficient self-attention"""self.self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)""" """# Mixture of Experts for specialized computation"""
 
-self.moe = MixtureOfExperts(
-    """d_model = d_model,"""     d_ff = dim_feedforward,"""num_experts = num_experts,""" capacity_factor = expert_capacity_factor,"""dropout = dropout"""
+num_experts
+    """Advanced transformer layer combining Flash Attention and Mixture of Experts""": int = 8
+
+    block_size
+    """expert_capacity_factor: float = 1.25""": int = 1024): super, ().__init__()
+self
+    """"""
+
+# Flash Attention for efficient self-attention""".self_attn = FlashAttention(d_model=d_model, n_heads=nhead, dropout=dropout, block_size=block_size)
+
+self
+    """ """# Mixture of Experts for specialized computation""".moe = MixtureOfExperts(
+         d_ff
+    """d_model = d_model,""" = dim_feedforward, capacity_factor
+    """num_experts = num_experts,""" = expert_capacity_factor,self
+    """dropout = dropout"""
 )
 """"""
 
-# Layer normalization and dropout"""self.norm1 = nn.LayerNorm(d_model)"""
+# Layer normalization and dropout""".norm1 = nn.LayerNorm(d_model)self
+    """
     self.norm2 = nn.LayerNorm(d_model)
-"""self.dropout = nn.Dropout(dropout)""" """def forward(self): """Method with parameters.""" x: torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""
+""".dropout = nn.Dropout(dropout)def
+    """ """ forward(self):  x
+    """Method with parameters.""": torch.Tensor): mask: Optional[torch.Tensor] = None    ) -> torch.Tensor:"""
 
 Forward pass combining attention and expert computation
 Args: x: Input tensor of shape [batch_sizeseq_len

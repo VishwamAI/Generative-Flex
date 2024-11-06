@@ -1,10 +1,14 @@
 import os
 import re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 
-class SyntaxFixer:    def __init__(self)::        self.failed_files = [
+class SyntaxFixer: def __init__(self)::        self.failed_files = [
 "src/models/multimodal/image_processor.py",
 "src/models/multimodal/base_transformer.py",
 "src/models/reasoning/math_config.py",
@@ -40,7 +44,8 @@ class SyntaxFixer:    def __init__(self)::        self.failed_files = [
 "src/models/layers/flash_moe.py",
 ]
 content: st
-r) -> str: """Fix type hint syntax issues."""        # Fix missing spaces after colons in type hints
+r) -> str: Fix
+    """Fix type hint syntax issues."""        # Fix missing spaces after colons in type hints
 content = re.sub(r"(\w+): (\w+)"
 r"\1: \2"
 content)
@@ -62,34 +67,32 @@ content = re.sub(r"List\[(\w+)\]", r"List[\1]", content)
 
 return content
 
-def fix_function_definitions(self content: str) -> str: """Fix function definition syntax."""        lines = []):
+def fix_function_definitions(self content: str) -> str: """ function definition syntax.Fix
+
+    """        lines = []):
 current_function = []
 in_function = False
 
 for line in content.splitlines():
     if line.strip().startswith("def "):
-        if current_function:
-        lines.extend(self._fix_function_block(current_function))
+        if current_function: lines.extend(self._fix_function_block(current_function))
         current_function = []
         in_function = True
         current_function.append(line)
             elif in_function and line.strip():
                 current_function.append(line)
-                else:
-                    if current_function:
-                        lines.extend(self._fix_function_block(current_function))
+                else: if current_function: lines.extend(self._fix_function_block(current_function))
                         current_function = []
                         in_function = False
                         lines.append(line)
 
-                        if current_function:
-                        lines.extend(self._fix_function_block(current_function))
+                        if current_function: lines.extend(self._fix_function_block(current_function))
 
                         return "\n".join(lines)
 
-                            def _fix_function_block(self                             lines: List                            [str]) -> List[str]: """Fix a single function block."""        def_line = lines[0]):
-                                if "(" not in def_line or ")" not in def_line:
-                                return lines
+                            def _fix_function_block(self                             lines: List                            [str]) -> List[str]: """ a single function block.Fix
+    """        def_line = lines[0]):
+                                if "(" not in def_line or ")" not in def_line: return lines
 
                                 # Extract function components
                                 name_part = def_line[: def_line.find("(")]        params_part = def_line[def_line.find("(") + 1 : def_line.rfind(")")]        return_part = def_line[def_line.rfind(")") :]
@@ -97,45 +100,39 @@ for line in content.splitlines():
                                 params = []
                                 for param in params_part.split("                                 "):
                                 param = param.strip()
-                                    if ":" in param:
-                                        name
+                                    if ":" in param: name
                                         type_hint = param.split(": "                                         1)                params.append(f"{name.strip()}: {type_hint.strip()}")
-                                        else:
-                                        params.append(param)
+                                        else: params.append(param)
 
                                         # Fix return type
-                                            if "->" in return_part:
-                                                return_type = return_part[return_part.find("->") + 2 :].strip()            if return_type.endswith(":"):
-                                                    return_type = return_type[:-1]            return_part = f") -> {return_type}:"        else:
-                                                        return_part = "):"
+                                            if "->" in return_part: return_type = return_part[return_part.find("->") + 2 :].strip()            if return_type.endswith(":"):
+                                                    return_type = return_type[:-1]            return_part = f") -> {return_type}:"        else: return_part = "):"
                                                         # Reconstruct function definition
                                                         fixed_def = f"{name_part}({', '.join(params)}{return_part}"
                                                         return [fixed_def] + lines[1:]
 
-                                                        def fix_dataclass_fields(self                                                         content: st                                                        r) -> str: """Fix dataclass field definitions."""        lines = []):
+                                                        def fix_dataclass_fields(self                                                         content: st                                                        r) -> str: """ dataclass field definitions.Fix
+
+                                                            """        lines = []):
                                                             for line in content.splitlines():
                                                         if "field(" in line:                                                                 # Split multiple field definitions on the same line                                                                if "                                                                " in line and "=" in line: parts = line.split("                                                                 ")
                                                         fixed_parts = []
-                                                            for part in parts:
-                                                        if "field(" in part:                                                                         name_type, field_def = part.split("=", 1)
-                                                            if ":" in name_type:
-                                                        name
+                                                            for part in parts: if "field(" in part: name_type, field_def = part.split("=", 1)
+                                                            if ":" in name_type: name
                                                         type_hint = name_type.split(": "                                                                             1)                                fixed_parts.append(
                                                         f"{name.strip()}: {type_hint.strip()} = {field_def.strip()}"                                )
-                                                            else:
-                                                        fixed_parts.append(part.strip())
+                                                            else: fixed_parts.append(part.strip())
                                                         line = "\n".join(fixed_parts)
                                                         lines.append(line)
                                                         return "\n".join(lines)
 
-                                                                                def fix_indentation(self                                                                                 content: st                                                                                r) -> str: """Fix indentation while preserving logical structure."""        lines = content.splitlines):
+                                                                                def fix_indentation(self                                                                                 content: st                                                                                r) -> str: """ indentation while preserving logical structure.Process
+    """        lines = content.splitlines):
                                                                                     fixed_lines = []
                                                                                     indent_level = 0
 
-                                                                                for line in lines:
-                                                                                    stripped = line.strip()
-                                                                                    if not stripped:
-                                                                                    fixed_lines.append("")
+                                                                                for line in lines: stripped = line.strip()
+                                                                                    if not stripped: fixed_lines.append("")
                                                                                     continue
 
                                                                                     # Adjust indent level
@@ -153,8 +150,7 @@ for line in content.splitlines():
                                                                                                             for kw in ("return ", "raise ", "break ", "continue ")
                                                                                                             ):
                                                                                                             line = " " * (4 * indent_level) + stripped
-                                                                                                                else:
-                                                                                                                    line = " " * (4 * indent_level) + stripped
+                                                                                                                else: line = " " * (4 * indent_level) + stripped
 
                                                                                                                     fixed_lines.append(line)
 
@@ -163,12 +159,13 @@ for line in content.splitlines():
                                                                                                                     stripped.startswith(kw)
                                                                                                                     for kw in ("return ", "raise ", "break ", "continue ")
                                                                                                                     ):
-                                                                                                                        if indent_level > 0:
-                                                                                                                            indent_level -= 1
+                                                                                                                        if indent_level > 0: indent_level -= 1
 
                                                                                                                             return "\n".join(fixed_lines)
 
-                                                                                                                            def process_file(self                                                                                                                             file_path: st                                                                                                                            r) -> bool: """Process a single file with all fixes."""        try):
+                                                                                                                            def process_file(self                                                                                                                             file_path: st                                                                                                                            r) -> bool: """ a single file with all fixes.Process
+
+                                                                                                                                """        try):
                                                                                                                             with open(file_path                                                                                                                                 "r"                                                                                                                                encoding="utf-8") as f: content = f.read()
 
                                                                                                                             # Apply fixes
@@ -181,19 +178,16 @@ for line in content.splitlines():
                                                                                                                             with open(file_path                                                                                                                                 "w"                                                                                                                                encoding="utf-8") as f: f.write(content)
 
                                                                                                                             return True
-                                                                                                                                except Exception as e:
-                                                                                                                                    print(f"Error processing {file_path}: {str(e)}")
+                                                                                                                                except Exception as e: print(f"Error processing {file_path}: {str(e)}")
                                                                                                                                     return False
 
-                                                                                                                                    def run(self)::        """Process all failed files."""        success_count = 0):
-                                                                                                                                        for file_path in self.failed_files:
-                                                                                                                                        if os.path.exists(file_path):
+                                                                                                                                    def run(self)::        """ all failed files."""        success_count = 0):
+                                                                                                                                        for file_path in self.failed_files: if os.path.exists(file_path):
                                                                                                                                     print(f"Processing {file_path}...")
                                                                                                                                         if self.process_file(file_path):
                                                                                                                                     print(f"Successfully fixed {file_path}")
                                                                                                                                     success_count += 1
-                                                                                                                                        else:
-                                                                                                                                    print(f"Failed to fix {file_path}")
+                                                                                                                                        else: print(f"Failed to fix {file_path}")
 
                                                                                                                                     print(                                                                                                                                                     f"\nProcessed {success_count}/{len(self.failed_files)} files successfully"
                                                                                                                                     )

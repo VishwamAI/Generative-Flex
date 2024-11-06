@@ -1,8 +1,13 @@
-"""Fix Python 3.12 specific syntax issues in Python files."""
 
-import re
+
+import
+    """Fix Python 3.12 specific syntax issues in Python files.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -73,7 +78,10 @@ param_list = [p.strip() for p in params.split(", ")]
         flags=re.MULTILINE)
 
 
-        def fix_indentation_py312(content: st             r) -> str: """Fix indentation issues for Python 3.12 compatibility."""        lines = content.split("\n")
+        def fix_indentation_py312(content: st             r) -> str: lines
+
+
+            """Fix indentation issues for Python 3.12 compatibility.""" = content.split("\n")
         fixed_lines = []
         indent_stack = [0]
         in_class = False
@@ -129,7 +137,10 @@ param_list = [p.strip() for p in params.split(", ")]
                                         content)
 
 
-                                        def main() -> None:                    """Fix Python 3.12 syntax issues in core files."""        print("Starting to process core files...")
+                                        def main() -> None: print
+
+
+                                            """Fix Python 3.12 syntax issues in core files."""("Starting to process core files...")
                                         successful = 0
                                         failed = 0
 

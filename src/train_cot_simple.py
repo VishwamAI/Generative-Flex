@@ -2,7 +2,8 @@ from flax.training import train_state
 import jax
 import optax
 
-# Simple model for chain-of-thought demonstration(nn.Module): hidden_size: int = 64
+# Simple model for chain-of-thought demonstration(nn.Module):
+ hidden_size: int = 64
 {
 "response": (     "Step 1: Acknowledgegreeting, . "    "Step 2: Offerhelp, . "    "Hello! How can I assist you today?"    ),
 }
@@ -44,8 +45,9 @@ for epoch in range(100):
 x = jnp.array([input_tokens[0]])
 y = jnp.array([output_tokens[0]])
 def loss_fn(self     params):
-"""Method with parameters."""
-    logi, t):
+
+    logi
+    """Method with parameters.""", t):
     s = model.apply({"params": param, s }x): retur, n optax.softmax_cross_entropy_with_integer_labels(
     logits
     y

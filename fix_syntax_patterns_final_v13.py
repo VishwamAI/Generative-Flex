@@ -1,0 +1,57 @@
+import os
+import re
+
+def fix_class_inheritance(content):
+    # Fix nn.Module inheritance
+    content = re.sub(r'(\s*)\(nn\.Module\):(\s*)', r'\1(nn.Module):
+\n\2', content)
+    # Fix unittest.TestCase inheritance
+    content = re.sub(r'(\s*)\(unittest\.TestCase\):(\s*)', r'\1(unittest.TestCase):
+\n\2', content)
+    return content
+
+def fix_docstrings(content):
+    # Fix docstring placement
+    content = re.sub(r'(""".+?""")(\s*)(\w+)', r'\2\3\n    \1', content, flags=re.DOTALL)
+    # Fix docstring indentation
+    content = re.sub(r'^(\s*)(class|def)([^\n]+)\n\s*(""".+?""")', r'\1\2\3\n\1    \4', content, flags=re.MULTILINE | re.DOTALL)
+    return content
+
+def fix_method_signatures(content):
+    # Fix method parameter formatting
+    content = re.sub(r'(\s*def\s+\w+\s*\()([^)]+)(\))', lambda m: m.group(1) + ', '.join(p.strip() for p in m.group(2).split(',')) + m.group(3), content)
+    # Fix type hints
+    content = re.sub(r'(\w+):\s*([A-Za-z][A-Za-z0-9_\.]*(?:\[[^\]]+\])?)', r'\1: \2', content)
+    return content
+
+def fix_multiline_statements(content):
+    # Fix multiline function definitions
+    content = re.sub(r'(\s*def\s+\w+\s*\()([^)]+)(\):)', lambda m: m.group(1) + ',\n        '.join(p.strip() for p in m.group(2).split(',')) + m.group(3), content)
+    # Fix multiline imports
+    content = re.sub(r'(from\s+\w+\s+import\s+)([^;\n]+)(;|\n)', lambda m: m.group(1) + ',\n    '.join(i.strip() for i in m.group(2).split(',')) + m.group(3), content)
+    return content
+
+def fix_file(file_path):
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
+
+        # Apply fixes
+        content = fix_class_inheritance(content)
+        content = fix_docstrings(content)
+        content = fix_method_signatures(content)
+        content = fix_multiline_statements(content)
+
+        # Write back
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
+        print(f"Successfully processed {file_path}")
+    except Exception as e: print(f"Error processing {file_path}: {str(e)}")
+
+def main():
+    # Process Python files
+    for root, _, files in os.walk('.'):
+        for file in files: if file.endswith('.py'):
+                file_path = os.path.join(root, file)
+                print(f"Processing {file_path}")
+                fix_file(file_path)
+
+if __name__ == '__main__':
+    main()

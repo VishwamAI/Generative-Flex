@@ -1,9 +1,11 @@
 import re
-"""Script to fix indentation errors in Python files."""
 
 
 
-def fix_indentation(self content): """Fix indentation issues while preserving Python syntax."""        lines = content.split):
+
+def
+    """Script to fix indentation errors in Python files.""" fix_indentation(self content):         lines
+    """Fix indentation issues while preserving Python syntax.""" = content.split):
 fixed_lines = []
 indent_level = 0
 in_class = False
@@ -61,7 +63,10 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                        def main(self)::                    """Fix indentation in files with E999 errors."""        files_to_fix = [):
+                        def main(self)::                            files_to_fix
+
+
+                            """Fix indentation in files with E999 errors.""" = [):
                         "src/training/train_mmmu.py",
                         "tests/test_features.py",
                         "tests/test_models.py",

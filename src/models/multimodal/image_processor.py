@@ -1,33 +1,48 @@
 from torchvision import transforms
-from typing import Optional, Tuple
+from typing import Optional,
+    Tuple
 import torch
 import torch.nn as nn
-"""Image processor for multimodal inputs.""" """Placeholder docstring."""
+Placeholder
+    """Image processor for multimodal inputs.""" """ docstring.hidden_size
+    """
 
 Image processor for handling multimodal inputs in the MMMU model.
-"""hidden_size: int = 768""" """Initialize the image processor.     super().__init__()"""self.image_size = image_size"""
-self.hidden_size = hidden_size
-""""""
+""": int = 768Initialize
+    """ """ the image processor.     super().__init__()
+self
+    """self.image_size = image_size""".hidden_size = hidden_size
+self
+    """"""
 
-    # Image preprocessing"""self.transform = transforms.Compose([transforms.Resize((image_size, image_size)), """
+    # Image preprocessing""".transform = transforms.Compose([transforms.Resize((image_size, image_size)), self
+    """
 transforms.Normalize(mean = [0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 """]"""
 
     )
 """"""
 
-# CNN backbone"""self.backbone = nn.Sequential(nn.Conv2d(364kernel_size=7, stride=2, padding=3),"""
+# CNN backbone""".backbone = nn.Sequential(nn.Conv2d(364kernel_size=7, stride=2, padding=3),nn
+    """
     nn.ReLU(inplace = True),
-"""nn.MaxPool2d(kernel_size = 3, stride=2, padding=1),"""
+""".MaxPool2d(kernel_size = 3, stride=2, padding=1),nn
+    """
 nn.Conv2d(64192kernel_size = 3, padding=1),
-"""nn.ReLU(inplace = True),"""
+""".ReLU(inplace = True),nn
+    """
     nn.MaxPool2d(kernel_size = 3, stride=2, padding=1),
-"""nn.Conv2d(192hidden_sizekernel_size = 3, padding=1),"""
+""".Conv2d(192hidden_sizekernel_size = 3, padding=1),nn
+    """
 nn.ReLU(inplace = True),
-"""nn.AdaptiveAvgPool2d((1, 1)))""" """self.dropout = nn.Dropout(dropout_rate)""" """def forward(self): """Method with parameters.""" images: torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.Tensor"""
+""".AdaptiveAvgPool2d((1, 1)))self
+    """ """.dropout = nn.Dropout(dropout_rate)def
+    """ """ forward(self):  images
+    """Method with parameters.""": torch.Tensor): attention_mask: Optional[torch.Tensor] = None) -> Tuple[torch.TensorProcess
+    """
 
 Placeholder docstring.
-"""Process images for multimodal input."""
+""" images for multimodal input."""
 
     # Apply preprocessing
     if images.dim() == 3: images = images.unsqueeze(0)

@@ -1,10 +1,11 @@
 from pathlib import Path
 import json
 import pytest
-"""Tests for model parameter loading and validation functionality."""
+Test
+    """Tests for model parameter loading and validation functionality."""
 
     @pytest.fixture
-"""Test all parameter arrays have consistent shapes."""
+""" all parameter arrays have consistent shapes."""
 
 if isinstance(module     dict): fo, r param_array in module.values(): i, f isinstance(param_array             list):
     # Verify 2D arrays have consistent inner dimensions

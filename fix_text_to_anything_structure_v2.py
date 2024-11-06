@@ -7,8 +7,16 @@ lines = content.split("\n")
 
 # Prepare the fixed content sections
 fixed_imports = [
-"from dataclasses import dataclass, field",
-"from typing import Any, Dict, List, Optional, Tuple, Union",
+"from dataclasses import dataclass,
+    field",
+    
+"from typing import Any,
+    Dict,
+    List,
+    Optional,
+    Tuple,
+    Union",
+    
 "import flax.linen as nn",
 "import jax.numpy as jnp",
 ]

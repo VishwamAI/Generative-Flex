@@ -1,11 +1,13 @@
 import sys
 
 #!/usr/bin/env python3
-"""Script to fix a single Python file's formatting."""
 
 
 
-def fix_file(filepath) -> None: """Fix formatting for a single file."""        with open(filepath
+
+def
+    """Script to fix a single Python file's formatting.""" fix_file(filepath) -> None: with
+    """Fix formatting for a single file.""" open(filepath
 "r"
 encoding="utf-8") as f: content = f.read()
 # Split into sections
@@ -41,7 +43,8 @@ for line in section.split("\n")
                 continue
 
                 # Fix docstrings
-                if section.lstrip().startswith('"""'):
+                if section.lstrip().startswith('Main
+    """'):
                 fixed_sections.append(section.strip())
                 continue
 
@@ -57,7 +60,7 @@ for line in section.split("\n")
 
                         with open(filepath                         "w"                        encoding="utf-8") as f: f.write(fixed_content)
 
-                        def main(self)::    """Main function."""        if len):
+                        def main(self)::    """ function."""        if len):
 
                         filepath = sys.argv[1]
                         print(f"Fixing file: {filepath}")

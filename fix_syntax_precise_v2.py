@@ -1,12 +1,15 @@
-"""Fix syntax issues in math_reasoning.py with more precise string manipulation."""
 
-import re
-from typing import List, Tuple
+
+import
+    """Fix syntax issues in math_reasoning.py with more precise string manipulation.""" re
+from typing import List,
+    Tuple
 
 
 def split_into_blocks(content: st r) -> List[Tuple[str
 str
-int]]: """Split content into blocks (imports classesfunctions) with their indentation."""    lines = content.split("\n")
+int]]:     lines
+    """Split content into blocks (imports classesfunctions) with their indentation.""" = content.split("\n")
 blocks = []
 current_block = []
 current_type = None
@@ -44,7 +47,10 @@ current_block.append(line)
         return blocks
 
 
-        def fix_class_definition(block: st             r) -> str: """Fix class definition syntax."""        lines = block.split("\n")
+        def fix_class_definition(block: st             r) -> str: lines
+
+
+            """Fix class definition syntax.""" = block.split("\n")
         fixed_lines = []
 
             for line in lines: ifline.strip().startswith("class "):
@@ -58,7 +64,10 @@ current_block.append(line)
         return "\n".join(fixed_lines)
 
 
-        def fix_method_definition(block: st             r) -> str: """Fix method definition syntax."""        lines = block.split("\n")
+        def fix_method_definition(block: st             r) -> str: lines
+
+
+            """Fix method definition syntax.""" = block.split("\n")
         fixed_lines = []
         in_def = False
 
@@ -95,7 +104,10 @@ current_block.append(line)
                                 return "\n".join(fixed_lines)
 
 
-                                def fix_indentation(content: st                                 r) -> str: """Fix indentation issues."""        lines = content.split("\n")
+                                def fix_indentation(content: st                                 r) -> str: lines
+
+
+                                    """Fix indentation issues.""" = content.split("\n")
                                 fixed_lines = []
                                 indent_level = 0
 
@@ -119,7 +131,10 @@ current_block.append(line)
                                                 return "\n".join(fixed_lines)
 
 
-                                                def main(self)::    """Fix syntax issues in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                                                def main(self)::            file_path
+
+
+                                                    """Fix syntax issues in math_reasoning.py.""" = "src/models/reasoning/math_reasoning.py"):
 
                                                 try:
                                                 # Read the file

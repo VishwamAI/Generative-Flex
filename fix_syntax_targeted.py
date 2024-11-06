@@ -2,11 +2,13 @@
 import re
 from pathlib import Path
 import black
-from typing import List, Dict, Optional, Any
+from typing import List,
+    Dict,
+    Optional,
+    Any
 
-def fix_string_literals_in_default_factory(content: str) -> str:
-    """Fix string literals in default_factory lambda functions."""
-    def fix_string_list(match):
+def fix_string_literals_in_default_factory(content: str) -> str: def
+    """Fix string literals in default_factory lambda functions.""" fix_string_list(match):
         # Extract the string list content
         content = match.group(1)
         # Split by commas and clean each item
@@ -23,7 +25,7 @@ def fix_string_literals_in_default_factory(content: str) -> str:
     )
     return content
 
-def fix_docstring_placement(content: str) -> str:
+def fix_docstring_placement(content: str) -> str: Fix
     """Fix docstring placement and indentation."""
     # Fix class docstrings
     content = re.sub(
@@ -41,7 +43,9 @@ def fix_docstring_placement(content: str) -> str:
     return content
 
 def fix_class_definitions(content: str) -> str:
-    """Fix class and method definitions."""
+
+    """ class and method definitions.Fix
+    """
     # Fix class method definitions
     content = re.sub(
         r'class\s+(\w+):\s*def',
@@ -58,7 +62,9 @@ def fix_class_definitions(content: str) -> str:
     return content
 
 def fix_type_annotations(content: str) -> str:
-    """Fix type annotation syntax."""
+
+    """ type annotation syntax.Process
+    """
     # Fix field type annotations
     content = re.sub(
         r'(\w+):\s*([^=\n]+)\s*=\s*field\(([^)]+)\)',
@@ -75,11 +81,11 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file, applying all fixes."""
+
+    """ a single file, applying all fixes.Fix
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply fixes in specific order
         content = fix_string_literals_in_default_factory(content)
@@ -95,21 +101,18 @@ def process_file(file_path: Path) -> None:
             is_pyi=False,
         )
 
-        try:
-            content = black.format_file_contents(content, fast=False, mode=mode)
-        except Exception as e:
-            print(f"Warning: Black formatting failed for {file_path}: {e}")
+        try: content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e: print(f"Warning: Black formatting failed for {file_path}: {e}")
 
         # Write the fixed content back
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main():
-    """Fix syntax issues in critical files."""
+
+    """ syntax issues in critical files."""
     critical_files = [
         'src/models/text_to_anything.py',
         'src/config/training_config.py',
@@ -122,11 +125,9 @@ def main():
         'src/training/utils/logging.py'
     ]
 
-    for file_path in critical_files:
-        if Path(file_path).exists():
+    for file_path in critical_files: if Path(file_path).exists():
             process_file(Path(file_path))
-        else:
-            print(f"Warning: {file_path} not found")
+        else: print(f"Warning: {file_path} not found")
 
 if __name__ == "__main__":
     main()

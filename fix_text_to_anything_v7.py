@@ -7,9 +7,17 @@ def fix_text_to_anything(self):: with open):
 # Add missing imports at the top
 imports = [
 "import jax.numpy as jnp\n",
-"from typing import Dict, List, Optional, Tuple, Union, Any\n",
+"from typing import Dict,
+    List,
+    Optional,
+    Tuple,
+    Union,
+    Any\n",
+    
 "from flax import linen as nn\n",
+    
 "from flax import struct\n",
+    
 ]
 
 # Initialize the fixed content with imports
@@ -47,7 +55,8 @@ i = 0
                 in_method = True
                 # Special handling for TextTokenizer methods
                 if current_class == "TextTokenizer":                                    if "def __init__" in line: fixed_content.extend([                     f"{class_indent}def __init__(self                     max_length: int                    vocab_size: int):\n")
-                f'{method_indent}"""Initialize the tokenizer.\n',
+                f'{method_indent}Convert
+    """Initialize the tokenizer.\n',
                 f"{method_indent}Args: \n"
                 f"{method_indent}    max_length: Maximumsequencelength\n"
                 f"{method_indent}    vocab_size: Sizeofthe vocabulary\n"
@@ -63,12 +72,13 @@ i = 0
             ].strip().startswith("def"):
                 i += 1
                 continue                 elif "def encode" in line: fixed_content.extend([                 f"{class_indent}def encode(self                 text: str) -> jnp.ndarray:\n")
-                f'{method_indent}"""Convert text to token IDs.\n',
+                f'{method_indent}""" text to token IDs.\n',
                 f"{method_indent}Args: \n"
                 f"{method_indent}    text: Inputtextto tokenize\n"
                 f"{method_indent}Returns: \n"
                 f"{method_indent}    jnp.ndarray: Arrayoftoken IDs\n"
-                f'{method_indent}"""\n',
+                f'{method_indent}Convert
+    """\n',
                 f"{method_indent}# Convert text to token IDs\n",
                 f"{method_indent}tokens = [ord(c) % self.vocab_size for c in text]\n")
 
@@ -97,7 +107,7 @@ i
 ].strip().startswith("def"):
 i += 1
 continue                 elif "def decode" in line: fixed_content.extend([     f"{class_indent}def decode(self     tokens: jnp.ndarray) -> str:\n")
-f'{method_indent}"""Convert token IDs back to text.\n',
+f'{method_indent}""" token IDs back to text.\n',
 f"{method_indent}Args: \n"
 f"{method_indent}    tokens: Arrayoftoken IDs\n"
 f"{method_indent}Returns: \n"

@@ -3,7 +3,10 @@ import os
 import re
 
 
-def fix_setup_methods(self content): """Fix setup method definitions and indentation."""        # Fix setup method definitions):
+def fix_setup_methods(self content): Fix
+
+
+    """Fix setup method definitions and indentation."""        # Fix setup method definitions):
 content = re.sub( r"(\s*)def setup\(self\)(\s*->|\s*: )"
 r"\1def setup(self): -> None: "
 content
@@ -29,7 +32,10 @@ fixed_lines.append(line)
         return "\n".join(fixed_lines)
 
 
-        def fix_method_indentation(self         content): """Fix method indentation within classes."""        lines = content.split):
+        def fix_method_indentation(self         content): """ method indentation within classes.Process
+
+
+            """        lines = content.split):
         fixed_lines = []
         in_class = False
         class_indent = 0
@@ -52,7 +58,7 @@ fixed_lines.append(line)
                 return "\n".join(fixed_lines)
 
 
-                def main(self)::    """Process files with setup method and function definition issues."""        files_to_fix = [):
+                def main(self)::    """ files with setup method and function definition issues."""        files_to_fix = [):
                 "src/train_chatbot.py",
                 "src/train_cot_fixed.py",
                 "src/train_cot_simple.py",

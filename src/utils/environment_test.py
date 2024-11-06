@@ -1,10 +1,12 @@
 import jax
 import optax
 import transformers
-"""Test script to verify JAX/Flax/Optax installation."""
 
-def test_environment(self):
-"""Method with parameters.""" """Verify JAX installation and GPU availability."""
+
+def
+    """Test script to verify JAX/Flax/Optax installation.""" test_environment(self):
+Verify
+    """Method with parameters.""" """ JAX installation and GPU availability."""
 
 print("\nEnvironment Test Results: ") print("-" * 50)
 

@@ -1,32 +1,38 @@
 #!/usr/bin/env python3
-"""Fix syntax issues with precise pattern matching for specific error cases."""
-import re
-from pathlib import Path
-from typing import List, Dict, Any, Optional
 
-def fix_class_inheritance(content: str) -> str:
+import
+    """Fix syntax issues with precise pattern matching for specific error cases.""" re
+from pathlib import Path
+from typing import List,
+    Dict,
+    Any,
+    Optional
+
+def fix_class_inheritance(content: str) -> str: Fix
     """Fix class inheritance syntax issues."""
     # Fix class definitions with proper spacing
     patterns = [
-        (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:', r'class \1(nn.Module):'),
-        (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:', r'class \1(unittest.TestCase):'),
+        (r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:', r'class \1(nn.Module):
+'),
+        (r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:', r'class \1(unittest.TestCase):
+'),
         (r'class\s+(\w+)\s*\(\s*train_state\.TrainState\s*\)\s*:', r'class \1(train_state.TrainState):'),
         (r'class\s+(\w+)\s*\(\s*Exception\s*\)\s*:', r'class \1(Exception):'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def fix_method_signatures(content: str) -> str:
-    """Fix method signature syntax issues."""
+
+    """ method signature syntax issues.Fix
+    """
     def format_signature(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
 
-        if not params:
-            return f"{indent}def {name}():"
+        if not params: return f"{indent}def {name}():"
 
         # Split parameters and clean them
         params = [p.strip() for p in params.split(',') if p.strip()]
@@ -58,7 +64,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_type_hints(content: str) -> str:
-    """Fix type hint syntax issues."""
+
+    """ type hint syntax issues.Fix
+    """
     # Fix basic type hints
     patterns = [
         # Fix merged type hints
@@ -73,12 +81,13 @@ def fix_type_hints(content: str) -> str:
         (r'(\w+)\s*:\s*(\w+(?:\.\w+)*)\s*(\w+)\s*:\s*(\w+(?:\.\w+)*)', r'\1: \2\n\3: \4'),
     ]
 
-    for pattern, replacement in patterns:
-        content = re.sub(pattern, replacement, content)
+    for pattern, replacement in patterns: content = re.sub(pattern, replacement, content)
     return content
 
 def fix_docstrings(content: str) -> str:
-    """Fix docstring formatting issues."""
+
+    """ docstring formatting issues.Fix
+    """
     # Fix docstring indentation and formatting
     def format_docstring(match):
         indent = match.group(1)
@@ -101,7 +110,9 @@ def fix_docstrings(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-    """Fix multi-line statement formatting issues."""
+
+    """ multi-line statement formatting issues.Process
+    """
     # Fix print statements
     content = re.sub(
         r'print\((.*?)\)print\(',
@@ -119,11 +130,11 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file with all fixes."""
+
+    """ a single file with all fixes.Process
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply all fixes
         content = fix_class_inheritance(content)
@@ -133,23 +144,21 @@ def process_file(file_path: Path) -> None:
         content = fix_multiline_statements(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Process all Python files in the project."""
+
+    """ all Python files in the project."""
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:
         python_files.extend(Path(".").glob(pattern))
 
     # Process each file
-    for file_path in python_files:
-        if not any(part.startswith('.') for part in file_path.parts):
+    for file_path in python_files: if not any(part.startswith('.') for part in file_path.parts):
             process_file(file_path)
 
 if __name__ == "__main__":

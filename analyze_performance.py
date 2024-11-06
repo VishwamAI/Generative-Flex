@@ -12,7 +12,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def analyze_performance(self)::                    """Analyze model performance by problem category"""        try: results = load_validation_results):
+def analyze_performance(self)::                            try
+
+
+    """Analyze model performance by problem category""": results = load_validation_results):
 # Calculate statistics per category
 stats = {}
 for category

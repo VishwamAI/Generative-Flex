@@ -1,11 +1,15 @@
 from src.models.transformer import TransformerBlock
-from typing import Any, Optional
-"""Audio generation model implementation using JAX and Flax.""" """Audio signal to embedding."""
+from typing import Any,
+    Optional
+Audio
+    """Audio generation model implementation using JAX and Flax.""" """ signal to embedding.Convert
+    """
 
 hop_length: int = 256
 dtype: Any = jnp.float32
 @nn.compact
-"""Convert audio signal to embeddings."""
+""" audio signal to embeddings.Transformer
+    """
 
     signal_length = audio.shape
     # Frame the audio signal
@@ -20,7 +24,8 @@ dtype: Any = jnp.float32
     :]
     # Project to hidden dimension
     return nn.Dense(self.hidden_dim, _dtype = self.dtype)(frames)
-"""Transformer-based audio generation model."""
+"""-based audio generation model.Forward
+    """
 
 head_dim: intmlp_di
 m: intframe_size: in = 1024
@@ -29,7 +34,7 @@ max_length: int = 65536  # Maximum audio length in samples
 dropout_rate: float = 0.1
 dtype: Any = jnp.float32
 @nn.compact
-"""Forward pass of the audio generation model."""
+""" pass of the audio generation model."""
 
     signal_length = inputs.shape
     assert(signal_length <= self.max_length), f"Audio length {{signal_length}} exceeds maximum {{self.max_length}}"

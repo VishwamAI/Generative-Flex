@@ -1,9 +1,15 @@
-from typing import List, Dict, Tuple, Optional
+from typing import List,
+    Dict,
+    Tuple,
+    Optional
 import os
 import re
 
 
-def fix_docstrings(content: st r) -> str: """Fix docstring formatting and placement."""        lines = content.split("\n")
+def fix_docstrings(content: st r) -> str: lines
+
+
+    """Fix docstring formatting and placement.""" = content.split("\n")
 fixed_lines = []
 in_class = False
 class_indent = 0
@@ -16,7 +22,8 @@ line in enumerate(lines):
         class_indent = len(re.match(r"^\s*", line).group())
 
         # Fix docstring indentation
-        if line.strip().startswith('"""'):
+        if line.strip().startswith('Process
+    """'):
         # Get the context(previous non-empty line)
         prev_line = ""
             for j in range(i - 1             -1            -1):
@@ -38,7 +45,7 @@ line in enumerate(lines):
                         return "\n".join(fixed_lines)
 
 
-                        def main(): """Process all Python files in the project."""            for root
+                        def main(): """ all Python files in the project."""            for root
                         _
                                 files in os.walk("."):
                                 if ".git" in root or "venv" in root or "__pycache__" in root: continueforfile in files: iffile.endswith(".py"):

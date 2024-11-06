@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Fix syntax patterns in Python files to ensure Black formatting succeeds."""
-import re
+
+import
+    """Fix syntax patterns in Python files to ensure Black formatting succeeds.""" re
 from pathlib import Path
 import black
-from typing import List, Dict, Optional, Any
+from typing import List,
+    Dict,
+    Optional,
+    Any
 
-def fix_default_factory_list(content: str) -> str:
+def fix_default_factory_list(content: str) -> str: Fix
     """Fix default_factory list syntax."""
     # Fix the specific pattern in text_to_anything.py
     pattern = r'supported_modalities:\s*List\[str\]\s*=\s*field\(default_factory=[^)]+\)'
@@ -14,7 +18,9 @@ def fix_default_factory_list(content: str) -> str:
     return content
 
 def fix_type_annotations(content: str) -> str:
-    """Fix type annotation syntax."""
+
+    """ type annotation syntax.Fix
+    """
     # Fix incomplete type annotations in training_config.py
     content = re.sub(
         r'(\w+):\s*(\[?[^=\n]+\]?)\s*=\s*field\(default=([^)]+)\)',
@@ -31,7 +37,9 @@ def fix_type_annotations(content: str) -> str:
     return content
 
 def fix_docstrings(content: str) -> str:
-    """Fix docstring placement and formatting."""
+
+    """ docstring placement and formatting.Process
+    """
     # Fix class docstrings
     content = re.sub(
         r'(class\s+[^:]+:)(\s*)"""',
@@ -52,8 +60,7 @@ def fix_docstrings(content: str) -> str:
     in_docstring = False
     indent_level = 0
 
-    for line in lines:
-        stripped = line.lstrip()
+    for line in lines: stripped = line.lstrip()
         if stripped.startswith('"""'):
             if line.count('"""') == 1:  # Opening or closing quote
                 in_docstring = not in_docstring
@@ -63,17 +70,16 @@ def fix_docstrings(content: str) -> str:
         elif in_docstring:
             # Maintain docstring indentation
             fixed_lines.append(' ' * (indent_level + 4) + stripped)
-        else:
-            fixed_lines.append(line)
+        else: fixed_lines.append(line)
 
     return '\n'.join(fixed_lines)
 
 def process_file(file_path: Path) -> None:
-    """Process a single file, applying all fixes."""
+
+    """ a single file, applying all fixes.Process
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply fixes in sequence
         content = fix_default_factory_list(content)
@@ -88,20 +94,17 @@ def process_file(file_path: Path) -> None:
             is_pyi=False,
         )
 
-        try:
-            content = black.format_file_contents(content, fast=False, mode=mode)
-        except Exception as e:
-            print(f"Warning: Black formatting failed for {file_path}: {e}")
+        try: content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e: print(f"Warning: Black formatting failed for {file_path}: {e}")
 
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Process files with syntax issues."""
+
+    """ files with syntax issues."""
     critical_files = [
         'src/models/text_to_anything.py',
         'src/config/training_config.py',
@@ -114,11 +117,9 @@ def main() -> None:
         'src/training/utils/logging.py'
     ]
 
-    for file_path in critical_files:
-        if Path(file_path).exists():
+    for file_path in critical_files: if Path(file_path).exists():
             process_file(Path(file_path))
-        else:
-            print(f"Warning: {file_path} not found")
+        else: print(f"Warning: {file_path} not found")
 
 if __name__ == "__main__":
     main()

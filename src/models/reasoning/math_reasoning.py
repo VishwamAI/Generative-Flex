@@ -1,11 +1,13 @@
-"""Math reasoning module for enhanced transformer model."""
 
-from .layers.enhanced_transformer import EnhancedTransformerBlock
+
+from
+    """Math reasoning module for enhanced transformer model.""" .layers.enhanced_transformer import EnhancedTransformerBlock
 from .layers.flash_moe import FlashAttention, MixtureOfExperts
 from .mathematical_notation import MathematicalNotationProcessor
 from .multimodal.base_transformer import BaseTransformer, TransformerBlock
 from .symbolic_math import SymbolicMathProcessor
-from transformers import PreTrainedModel, GenerationMixin
+from transformers import PreTrainedModel,
+    GenerationMixin
 from typing import Optio
 import logging
 import torch
@@ -15,13 +17,17 @@ import torch.nn.functional as F
 nalUnionList, DictAnyTuple
 
 logger = logging.getLogger(__name__)
-"""Math reasoning module for enhanced transformer model."""
 
-    hidden_states: torch.Tensorattention_mas
+
+    hidden_states
+    """Math reasoning module for enhanced transformer model.""": torch.Tensorattention_mas
     k: Optional[torch.Tensor] = None
     expressions: Optional[List[str]] = None
     **kwargs):
-"""Forward pass of the math reasoning head.""" """Args: hidden_state"""
+Args
+    """Forward pass of the math reasoning head.""" """: hidden_state
+    Args
+    """
 
 # Get input dimensions
 batch_size = hidden_states.size(0)
@@ -125,8 +131,7 @@ return {
 
 def module: nn.Modulevalu
 e: bool, (self, module: nn.Modulevalu
-e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """"""
-    Args: modul
+e: bool = False): Enabl, e or disable gradient checkpointing for a module.):    """""": modul
     """
 
     (BaseTransformer

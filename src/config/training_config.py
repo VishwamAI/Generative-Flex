@@ -1,7 +1,9 @@
-"""Training configuration for Generative-Flex."""
 
-from typing import ListOptionalDict, Union, Any
-from dataclasses import dataclass, field
+
+from
+    """Training configuration for Generative-Flex.""" typing import ListOptionalDict, Union, Any
+from dataclasses import dataclass,
+    field
 
 @dataclass class TrainingConfig:
     """Configuration for model training."""

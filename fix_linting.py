@@ -17,17 +17,27 @@ imports_to_remove = [
 "import numpy as np",
 "import flax",
 "from typing import Dict",
+    
 "from typing import Optional",
+    
 "from typing import List",
+    
 "from typing import Tuple",
+    
 "from typing import Union",
+    
 "from torch.optim.lr_scheduler import CosineAnnealingLR",
 "from torch.utils.checkpoint import checkpoint",
 "from datasets import load_dataset",
+    
 "import os",
 "from flax import linen as nn",
-"from sympy import sympify, solve",
+    
+"from sympy import sympify,
+    solve",
+    
 "from transformers import PretrainedConfig",
+    
 ]
 
 for line in lines: ifany(imp in line for imp in imports_to_remove):

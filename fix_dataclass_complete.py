@@ -16,7 +16,8 @@ else: other_lines.append(line)
 
 # Ensure we have the field import
     if not any("from dataclasses import" in imp and "field" in imp for imp in imports):
-        imports.append("from dataclasses import dataclass, field")
+        imports.append("from dataclasses import dataclass,
+    field")
 
         # Fix dataclass definition
         in_config = False

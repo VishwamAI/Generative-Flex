@@ -1,8 +1,13 @@
-"""Fix basic Python syntax issues before applying black formatting."""
 
-import re
+
+import
+    """Fix basic Python syntax issues before applying black formatting.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -18,7 +23,10 @@ CORE_FILES = [
 ]
 
 
-def fix_indentation(content: st r) -> str: """Fix basic indentation issues."""        lines = content.split("\n")
+def fix_indentation(content: st r) -> str: lines
+
+
+    """Fix basic indentation issues.""" = content.split("\n")
 fixed_lines = []
 indent_level = 0
 
@@ -48,7 +56,10 @@ continue
                 return "\n".join(fixed_lines)
 
 
-                def fix_dataclass_syntax(content: st                 r) -> str: """Fix basic dataclass syntax."""        # Fix dataclass decorator
+                def fix_dataclass_syntax(content: st                 r) -> str: Fix
+
+
+                    """Fix basic dataclass syntax."""        # Fix dataclass decorator
                 content = re.sub(r"@\s*struct\s*\.\s*dataclass", r"@dataclass", content)
 
                 # Fix field definitions
@@ -73,7 +84,7 @@ continue
                         return "\n".join(fixed_lines)
 
 
-                        def main() -> None:    """Fix basic syntax issues in core files."""        print("Starting to process core files...")
+                        def main() -> None:    """ basic syntax issues in core files."""        print("Starting to process core files...")
                         successful = 0
                         failed = 0
 

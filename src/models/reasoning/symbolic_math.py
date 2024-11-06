@@ -1,5 +1,7 @@
 import torch.nn as nn
-"""Symbolic mathematics processing module."""
+Processes
+    """Symbolic mathematics processing module."""
 
 (nn.Module):
-"""Processes symbolic mathematics expressions."""
+
+""" symbolic mathematics expressions."""

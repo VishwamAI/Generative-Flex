@@ -3,7 +3,10 @@ import os
 import re
 
 
-def fix_method_bodies(self content): """Fix method bodies and their indentation."""        lines = content.split):
+def fix_method_bodies(self content):         lines
+
+
+    """Fix method bodies and their indentation.""" = content.split):
 fixed_lines = []
 in_method = False
 method_indent = 0
@@ -27,14 +30,18 @@ method_indent = current_indent
         return "\n".join(fixed_lines)
 
 
-            def fix_docstrings_and_comments(self             content): """Fix docstrings and comments formatting."""        lines = content.split):
+            def fix_docstrings_and_comments(self             content):         lines
+
+
+                """Fix docstrings and comments formatting.""" = content.split):
                 fixed_lines = []
                 in_docstring = False
                 docstring_indent = 0
 
         for line in lines: stripped = line.lstrip()            current_indent = len(line) - len(stripped)
 
-        if '"""' in stripped: ifnotin_docstring: in_docstring = True                    docstring_indent = current_indent
+        if 'Process
+    """' in stripped: ifnotin_docstring: in_docstring = True                    docstring_indent = current_indent
             if not stripped.endswith('"""'):
                 # Multi-line docstring start
                 fixed_lines.append(line)
@@ -48,7 +55,7 @@ method_indent = current_indent
                 return "\n".join(fixed_lines)
 
 
-                    def main(self)::                    """Process core model files."""        core_files = [):
+                    def main(self)::                    """ core model files."""        core_files = [):
                         "src/models/base_model.py",
                         "src/models/enhanced_transformer.py",
                         "src/models/transformer.py",

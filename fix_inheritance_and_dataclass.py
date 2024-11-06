@@ -1,8 +1,13 @@
-"""Fix class inheritance and dataclass field patterns that are causing black to fail."""
 
-import re
+
+import
+    """Fix class inheritance and dataclass field patterns that are causing black to fail.""" re
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List,
+    Dict,
+    Any,
+    Optional,
+    Tuple
 
 CORE_FILES = [
 "src/models/text_to_anything.py",
@@ -18,7 +23,10 @@ CORE_FILES = [
 ]
 
 
-def fix_dataclass_fields(content: st r) -> str: """Fix dataclass field patterns."""        lines = content.split("\n")
+def fix_dataclass_fields(content: st r) -> str: lines
+
+
+    """Fix dataclass field patterns.""" = content.split("\n")
 fixed_lines = []
 in_dataclass = False
 class_indent = 0
@@ -52,13 +60,14 @@ continue
         continue
 
         # Exit dataclass context if we hit a method or empty line
-        if stripped.startswith(("def "         "async def "        "@"        '"""')) or not stripped: in_dataclass = False
+        if stripped.startswith(("def "         "async def "        "@"        'Fix
+    """')) or not stripped: in_dataclass = False
         fixed_lines.append(line)
 
         return "\n".join(fixed_lines)
 
 
-        def main() -> None:                    """Fix inheritance and dataclass patterns in core files."""        print("Starting to process core files...")
+        def main() -> None:                    """ inheritance and dataclass patterns in core files."""        print("Starting to process core files...")
         successful = 0
         failed = 0
 

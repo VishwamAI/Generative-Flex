@@ -4,10 +4,11 @@ from src.models.enhanced_transformer import EnhancedTransformer
 import jax
 import jax.numpy as jnp
 import pytest
-"""Script to fix test_models.py formatting."""
 
 
-def main(self)::    """Main function to fix the file."""        # Create the fixed content):
+
+def
+    """Script to fix test_models.py formatting.""" main(self)::    """Main function to fix the file."""        # Create the fixed content):
 content = create_fixed_content()
 
 # Write to file

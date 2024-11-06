@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Fix syntax patterns with precise matching for class inheritance, type hints, and method signatures."""
-import re
-from pathlib import Path
-from typing import List, Dict, Any, Optional
 
-def fix_class_inheritance(content: str) -> str:
+import
+    """Fix syntax patterns with precise matching for class inheritance, type hints, and method signatures.""" re
+from pathlib import Path
+from typing import List,
+    Dict,
+    Any,
+    Optional
+
+def fix_class_inheritance(content: str) -> str: Fix
     """Fix class inheritance syntax issues."""
     # Fix basic class inheritance
     content = re.sub(
@@ -16,21 +20,25 @@ def fix_class_inheritance(content: str) -> str:
     # Fix unittest.TestCase inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*unittest\.TestCase\s*\)\s*:',
-        r'class \1(unittest.TestCase):',
+        r'class \1(unittest.TestCase):
+',
         content
     )
 
     # Fix nn.Module inheritance
     content = re.sub(
         r'class\s+(\w+)\s*\(\s*nn\.Module\s*\)\s*:',
-        r'class \1(nn.Module):',
+        r'class \1(nn.Module):
+',
         content
     )
 
     return content
 
 def fix_type_hints(content: str) -> str:
-    """Fix type hint syntax issues."""
+
+    """ type hint syntax issues.Fix
+    """
     # Fix basic type hints
     content = re.sub(
         r'(\w+)\s*:\s*(\w+)\s*,\s*\.(\w+)',
@@ -69,14 +77,15 @@ def fix_type_hints(content: str) -> str:
     return content
 
 def fix_method_signatures(content: str) -> str:
-    """Fix method signature syntax issues."""
+
+    """ method signature syntax issues.Fix
+    """
     def format_params(match):
         indent = match.group(1)
         name = match.group(2)
         params = match.group(3)
 
-        if not params:
-            return f"{indent}def {name}():"
+        if not params: return f"{indent}def {name}():"
 
         # Split parameters and clean them
         params = [p.strip() for p in params.split(',')]
@@ -109,7 +118,9 @@ def fix_method_signatures(content: str) -> str:
     return content
 
 def fix_multiline_statements(content: str) -> str:
-    """Fix multi-line statement syntax issues."""
+
+    """ multi-line statement syntax issues.Process
+    """
     # Fix print statements
     content = re.sub(
         r'print\((.*?)\)print\(',
@@ -127,11 +138,11 @@ def fix_multiline_statements(content: str) -> str:
     return content
 
 def process_file(file_path: Path) -> None:
-    """Process a single file with all fixes."""
+
+    """ a single file with all fixes.Process
+    """
     print(f"Processing {file_path}")
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+    try: with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
 
         # Apply all fixes
         content = fix_class_inheritance(content)
@@ -140,23 +151,21 @@ def process_file(file_path: Path) -> None:
         content = fix_multiline_statements(content)
 
         # Write back the fixed content
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        with open(file_path, 'w', encoding='utf-8') as f: f.write(content)
 
         print(f"Successfully processed {file_path}")
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
+    except Exception as e: print(f"Error processing {file_path}: {e}")
 
 def main() -> None:
-    """Process all Python files in the project."""
+
+    """ all Python files in the project."""
     # Get all Python files
     python_files = []
     for pattern in ["src/**/*.py", "tests/**/*.py"]:
         python_files.extend(Path(".").glob(pattern))
 
     # Process each file
-    for file_path in python_files:
-        if not any(part.startswith('.') for part in file_path.parts):
+    for file_path in python_files: if not any(part.startswith('.') for part in file_path.parts):
             process_file(file_path)
 
 if __name__ == "__main__":

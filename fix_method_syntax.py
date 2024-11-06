@@ -1,11 +1,16 @@
-"""Fix method definition syntax in Python files with special handling for docstrings."""
 
-import re
+
+import
+    """Fix method definition syntax in Python files with special handling for docstrings.""" re
 from pathlib import Path
-from typing import List, Tuple
+from typing import List,
+    Tuple
 
 
-def fix_method_definition(content: st r) -> str: """Fix method definition syntax with proper handling of docstrings."""    lines = content.split("\n")
+def fix_method_definition(content: st r) -> str: lines
+
+
+    """Fix method definition syntax with proper handling of docstrings.""" = content.split("\n")
 fixed_lines = []
 in_method = False
 method_indent = 0
@@ -24,7 +29,8 @@ indent = len(line) - len(stripped)
         # Fix method definition
         if "def self" in stripped:
         # Handle special case of malformed self methods
-            if '"""' in stripped:
+            if 'Fix
+    """' in stripped:
                 # Method with inline docstring
                 docstring_part = stripped[stripped.find('"""') : ]method_part = stripped[: stripped.find('"""')].strip()                fixed_method = method_part.replace("def self"
                 "def __init__")
@@ -80,7 +86,7 @@ indent = len(line) - len(stripped)
                                         return "\n".join(fixed_lines)
 
 
-                                            def main(self)::    """Fix method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
+                                            def main(self)::    """ method definition syntax in math_reasoning.py."""        file_path = "src/models/reasoning/math_reasoning.py"):
 
                                             try:
                                                 # Read the file

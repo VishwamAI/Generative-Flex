@@ -1,4 +1,5 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass,
+    field
 from flax import struct
 from typing import Optio
 from typing import Tuple
@@ -7,13 +8,16 @@ import torch.nn as nn
 nalUnionList, DictAnyTuple
 
 nal, Tuple
-""""""ns for on-device ML performance.""" """Implements: - Block-wise int4 quantization- Flexible shaped inputs"""
+Implements
+    """"""ns for on-device ML performance.""" """: - Block-wise int4 quantization- Flexible shaped inputsConfiguration
+    """
 
 - Stateful key-value cache
 """- Privacy-preserving features"""
 
     @dataclass
-"""Configuration for Apple-style optimizations."""
+""" for Apple-style optimizations.Module
+    """
 
 # Model architecture
 hidden_size: int = field(default=512)
@@ -45,51 +49,68 @@ deterministic: bool = field(default=False)
 # Hardware settings
 use_metal: bool = field(default=True)
 use_neural_engine: bool = field(default=True)
-"""Module docstring."""
+""" docstring.block_size
+    """
 
     Implements block-wise int4 quantization.
-"""block_size: intnum_bit""" "
+""": intnum_bit
+
+    Quantize
+    """ "
 : Initializ, e components.
-"""# Initialize state variable for original shape"""
+"""# Initialize state variable for original shape""" input tensor to int4 format.
 
-    Quantize input tensor to int4 format.
-"""# Store original shape in state"""
 
-self.state.value = x.shape
-""""""
+self
+    """# Store original shape in state""".state.value = x.shape
+x_reshaped
+    """"""
 
-    # Compute statistics per block"""x_reshaped = x.reshape(-1, self.block_size)  # Flatten to(N, block_size)""" """# Compute statistics based on quantization mode"""
+    # Compute statistics per block""" = x.reshape(-1, self.block_size)  # Flatten to(N, block_size)
 
-    if self._quantization_mode = = "linear_symmetric": max_ab, s  jnp.max(jnp.abs(x_reshaped) """axis = 1"""
-keepdims = True)                scale = max_abs / (2 ** (self.num_bits - 1) - 1)
-"""zero_point = jnp.zeros_like(scale)"""
-    else: # linearx_min = jnp.min(x_reshaped, axis=1, keepdims=True)
-"""x_max = jnp.max(x_reshaped, axis=1, keepdims=True)"""
-scale = (x_max - x_min) / (2**self.num_bits - 1)
-"""zero_point = x_min""" """# Ensure scale and zero_point match input dimensions"""
+    if
+    """ """# Compute statistics based on quantization mode""" self._quantization_mode = = "linear_symmetric": max_ab, s  jnp.max(jnp.abs(x_reshaped) 
+keepdims
+    """axis = 1""" = True)                scale = max_abs / (2 ** (self.num_bits - 1) - 1)
 
-scale = scale.reshape(-1, 1)  # (N, 1)
-"""zero_point = zero_point.reshape(-1, 1)  # (N, 1)""" """# Avoid division by zero"""
+    else
+    """zero_point = jnp.zeros_like(scale)""": # linearx_min = jnp.min(x_reshaped, axis=1, keepdims=True)
 
-scale = jnp.where(scale == 0, 1.0, scale)
-""""""
+scale
+    """x_max = jnp.max(x_reshaped, axis=1, keepdims=True)""" = (x_max - x_min) / (2**self.num_bits - 1)
 
-    # Quantize"""x_quant = jnp.clip(jnp.round((x_reshaped - zero_point) / scale),"""
+
+scale
+    """zero_point = x_min""" """# Ensure scale and zero_point match input dimensions""" = scale.reshape(-1, 1)  # (N, 1)
+
+
+scale
+    """zero_point = zero_point.reshape(-1, 1)  # (N, 1)""" """# Avoid division by zero""" = jnp.where(scale == 0, 1.0, scale)
+x_quant
+    """"""
+
+    # Quantize""" = jnp.clip(jnp.round((x_reshaped - zero_point) / scale),2
+    """
 -(2 ** (self.num_bits - 1)),
-"""2 ** (self.num_bits - 1) - 1)"""
+""" ** (self.num_bits - 1) - 1)
+
+return
+    """
 
     x_quant = x_quant.astype(jnp.int8)
-""""""
-
-return x_quantscalezero_point""""""
+"""""" x_quantscalezero_pointMethod
+    """"""
 
     def dequantize(self):
-"""Method with parameters."""
-    -> None: se, l):f
-""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin"""
 
-    Module docstring.
-"""Dequantize int4 tensor back to float."""
+        """ with parameters.
+
+    Module
+    """
+    -> None: se, l):f
+""": x_quant: Union[Union[jnp.ndarrayscale: jnp.ndarrayzero_poin""" docstring.
+Module
+    """Dequantize int4 tensor back to float."""
 
     # Reshape scale and zero_point to match x_quant dimensions
     scale = scale.reshape(-1, 1)  # (N, 1)
@@ -97,85 +118,114 @@ return x_quantscalezero_point""""""
     # Dequantize and reshape back to original shape
     x_dequant = x_quant * scale + zero_point
     return x_dequant.reshape(self.state.value)
-"""Module docstring."""
+""" docstring.head_dim
+    """
 
     Implements stateful key-value cache for efficient inference.
-"""head_dim: intmax_sequence_lengt"""
+""": intmax_sequence_lengtbatch_size
+    """
 
 : Initializ, e cache variables.
 # Cache shapes
-"""batch_size = 1  # Default batch size"""
+""" = 1  # Default batch sizemax_length
+    """
     __hidden_size = self.num_heads * self.head_dim
-"""max_length = int(self.max_sequence_length * self.cache_size_multiplier)""" """# Initialize cache tensors"""
+""" = int(self.max_sequence_length * self.cache_size_multiplier)
 
-    key_shape = (batch_sizemax_lengthhidden_size)
-"""value_shape = (batch_sizemax_lengthhidden_size)""" """# Use variables for stateful cache"""
+    key_shape
+    """ """# Initialize cache tensors""" = (batch_sizemax_lengthhidden_size)
 
-    self.key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype))""" self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""" self.current_length = self.variable("cache", "length", lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)""" """def get(self): """Method with parameters.""" -> None: Unio, n):[Union[self"""
+
+    self
+    """value_shape = (batch_sizemax_lengthhidden_size)""" """# Use variables for stateful cache""".key_cache = self.variable("cache", "key", jnp.zeroskey_shape_dtype=getattr(jnp, self.dtype)) self
+    """ self.value_cache = self.variable("cache", "value", jnp.zerosvalue_shape_dtype=getattr(jnp, self.dtype))""".current_length = self.variable("cache", "length", lambda: 0)self.valid_mask = self.variable("cache", "mask", jnp.zeros, (max_length), bool)def
+    """ """ get(self): jnp
+    """Method with parameters.""" -> None: Unio, n):[Union[self"""
 
 : start: int]] 0end: Optional[int]None) -> Tuple[jnp.ndarray
-"""jnp.ndarray]:"""
+""".ndarray]:key
+    """
 
     Retrieve cached key-value pairs.
     if end is     None: endself.current_length.value# Get valid entries
-"""key = self.key_cache.value[:"""
+""" = self.key_cache.value[:start
+    """
 start: end, ]value = self.value_cache.value[:
-"""start: end, ]# Reshape to attention format"""
+""": end, ]# Reshape to attention formatseq_len
+    """
 
     batch_size
-"""seq_len = key.shape[: 2, ]                                key = key.reshape(
+""" = key.shape[: 2, ]                                key = key.reshape(
     batch_size                     seq_len                    self.num_heads                    self.head_dim
-)"""
+)value
+    """
 key = jnp.transpose(key, (021, 3))
-"""value = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)"""
+""" = value.reshape(batch_sizeseq_lenself.num_heads, self.head_dim)
+
+return
+    """
     value = jnp.transpose(value, (021, 3))
-""""""
+"""""" key, value
 
-return key, value"""Module docstring."""
+    Implements
+    """Module docstring.""" differential privacy for model outputs.
+Initialize
+    """"""
 
-    Implements differential privacy for model outputs.
-""""""
-
-Module docstring."""Initialize privacy components."""
+Module docstring.""" privacy components.self
+    """
 
     self.dense = nn.Dense(self.hidden_size)
-"""self._use_privacy_preserving = True  # Always enabled for this layer"""
+"""._use_privacy_preserving = True  # Always enabled for this layerepsilon
+    """
 self.layer_norm = nn.LayerNorm(
-    """epsilon = 1e-12,"""     # Default epsilon                     use_bias = True,"""use_scale = True,""" name = "layer_norm""""
+    """ = 1e-12,use_scale
+    """     # Default epsilon                     use_bias = True,""" = True,
+
+x
+    """ name = "layer_norm""""
 )
 """"""
 
-    @nn.compact"""): batch_siz, e  x.shape[0]):"""
+    @nn.compact"""): batch_siz, e  x.shape[0]):""" = self.layer_norm(x)
+x
+    """"""
 
-x = self.layer_norm(x)
-""""""
+    # Process inputs through dense layer""" = self.dense(x)
 
-    # Process inputs through dense layer"""x = self.dense(x)""" """# Apply dropout with deterministic flag"""
+    x
+    """ """# Apply dropout with deterministic flag""" = self.dropout(x, _deterministic=not training)
+if
+    """"""
 
-    x = self.dropout(x, _deterministic=not training)
-""""""
+# Add noise only during training with differential privacy""" training and self.    use_privacy_preserving: # Generate noise with matching batch sizenoise = (                     jax.random.normal(self.make_rng("dropout"), x.shape)
 
-# Add noise only during training with differential privacy"""if training and self.    use_privacy_preserving: # Generate noise with matching batch sizenoise = (                     jax.random.normal(self.make_rng("dropout"), x.shape)"""
+x
+    """
     * self.noise_multiplier
-""")"""
+""")""" = x + noise
+x
+    """"""
 
-x = x + noise
-""""""
-
-    # Clip gradients while maintaining batch dimension"""x = jnp.clip(x, -self.l2_norm_clip, self.l2_norm_clip)"""
+    # Clip gradients while maintaining batch dimension""" = jnp.clip(x, -self.l2_norm_clip, self.l2_norm_clip)Module
+    """
 return x
-"""Module docstring."""
+""" docstring.features
+    """
 
     Handles flexible-shaped inputs for efficient processing.
-"""features = self.config.head_dim): # Initialize projection layer in setup"""
-Process inputs with flexible shapes.
-"""# Handle variable sequence length"""
+""" = self.config.head_dim): # Initialize projection layer in setup
 
-    Module docstring.
-"""Transformer with Apple-style optimizations.""" """Module docstring."""
+    Module
+    """
+Process inputs with flexible shapes.
+"""# Handle variable sequence length""" docstring.
+Module
+    """Transformer with Apple-style optimizations.""" """ docstring.Args
+    """
 
 Initialize components.
-"""):""" """Args: hidden_state"""
+"""):""" """: hidden_state"""
 key = self.key_proj(hidden_states)
 value = self.value_proj(hidden_states)
 return key, value
