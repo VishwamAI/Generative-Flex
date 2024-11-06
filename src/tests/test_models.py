@@ -1,14 +1,20 @@
-import unittest
 import torch
 import torch.nn as nn
-from src.models.transformer import TransformerModel
+
 from src.config.config import ModelConfig
+from src.models.transformer import TransformerModel
+import unittest
+
 
 class TestModels:
 
 
-    """Class for TestModels."""def setUp(self):
-    """Method for setUp."""
+    """
+Class for TestModels..
+"""def setUp(self):
+    """
+Method for setUp..
+"""
     self.config = ModelConfig(
     hidden_size=64,
     num_attention_heads=4,
@@ -19,14 +25,18 @@ class TestModels:
     def test_transformer_model(self):
 
 
-        """Method for test_transformer_model."""
+        """
+Method for test_transformer_model..
+"""
     model = TransformerModel(self.config)
     self.assertIsInstance(model, nn.Module)
 
     def test_model_forward(self):
 
 
-        """Method for test_model_forward."""
+        """
+Method for test_model_forward..
+"""
     model = TransformerModel(self.config)
     batch_size = 2
     seq_length = 10

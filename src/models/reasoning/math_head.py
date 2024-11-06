@@ -1,14 +1,19 @@
 """
 Mathematical reasoning head module..
 """
+from typing import Dict, List, Optional, Tuple
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+
 @dataclass
 class MathHeadConfig:
 
-    """Class for MathHeadConfig.""""""
+    """
+Class for MathHeadConfig..
+""""""
 Configuration for mathematical reasoning head..
 """
 
@@ -21,14 +26,18 @@ Configuration for mathematical reasoning head..
 class MathHead:
 
 
-    """Class for MathHead.""""""
+    """
+Class for MathHead..
+""""""
 Mathematical reasoning head module..
 """
 
     def __init__(self, config: Optional[MathHeadConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
         super().__init__()
         self.config = config or MathHeadConfig()
         self.setup_layers()
@@ -36,7 +45,9 @@ Mathematical reasoning head module..
     def setup_layers(self):
 
 
-        """Method for setup_layers."""
+        """
+Method for setup_layers..
+"""
         self.attention = nn.MultiheadAttention(
             embed_dim=self.config.hidden_size,
             num_heads=self.config.num_attention_heads,
@@ -56,7 +67,9 @@ Mathematical reasoning head module..
     def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
 
-        """Method for forward."""
+        """
+Method for forward..
+"""
         # Self-attention
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)

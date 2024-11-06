@@ -1,16 +1,25 @@
-"""Trainer class for model training and evaluation."""
+"""
+Trainer class for model training and evaluation..
+"""
 from typing import Dict, Optional, Any, Union
-import torch
+
 from torch.utils.data import DataLoader
+import torch
+
 from tqdm import tqdm
+
 
 
 class Trainer:
 
 
 
-    """Trainer class for handling model training and evaluation."""def __init__(self, model: torch.nn.Module, config: Any, optimizer: torch.optim.Optimizer, train_dataloader: DataLoader, val_dataloader: Optional[DataLoader] = None):
-    """Method for __init__."""
+    """
+Trainer class for handling model training and evaluation..
+"""def __init__(self, model: torch.nn.Module, config: Any, optimizer: torch.optim.Optimizer, train_dataloader: DataLoader, val_dataloader: Optional[DataLoader] = None):
+    """
+Method for __init__..
+"""
         self.model = model
         self.config = config
         self.optimizer = optimizer
@@ -22,7 +31,9 @@ class Trainer:
     def train_step(self, batch: Dict[str, torch.Tensor]):
 
 
-        """Method for train_step."""
+        """
+Method for train_step..
+"""
         self.model.train()
         batch = {k: v.to(self.device) for k, v in batch.items()}
 
@@ -47,7 +58,9 @@ class Trainer:
     def evaluate(self):
 
 
-        """Method for evaluate."""
+        """
+Method for evaluate..
+"""
         if not self.val_dataloader:
             return {}
 
@@ -67,7 +80,9 @@ class Trainer:
     def train(self, num_epochs: int):
 
 
-        """Method for train."""
+        """
+Method for train..
+"""
         self.step = 0
         best_val_loss = float("inf")
 

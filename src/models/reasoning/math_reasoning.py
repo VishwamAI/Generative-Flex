@@ -1,14 +1,19 @@
 """
 Mathematical reasoning module..
 """
+from typing import Dict, List, Optional, Tuple
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+
 @dataclass
 class MathReasoningConfig:
 
-    """Class for MathReasoningConfig.""""""
+    """
+Class for MathReasoningConfig..
+""""""
 Configuration for mathematical reasoning..
 """
 
@@ -22,14 +27,18 @@ Configuration for mathematical reasoning..
 class MathReasoning:
 
 
-    """Class for MathReasoning.""""""
+    """
+Class for MathReasoning..
+""""""
 Mathematical reasoning module..
 """
 
     def __init__(self, config: Optional[MathReasoningConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
         super().__init__()
         self.config = config or MathReasoningConfig()
 
@@ -49,7 +58,9 @@ Mathematical reasoning module..
     def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
 
-        """Method for forward."""
+        """
+Method for forward..
+"""
         # Route input to experts
         router_logits = self.router(hidden_states)
         routing_weights = torch.softmax(router_logits, dim=-1)

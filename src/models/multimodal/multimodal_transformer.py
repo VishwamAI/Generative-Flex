@@ -1,14 +1,19 @@
 """
 Multimodal transformer implementation..
 """
+from typing import Dict, List, Optional, Tuple
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+
 @dataclass
 class MultiModalTransformerConfig:
 
-    """Class for MultiModalTransformerConfig.""""""
+    """
+Class for MultiModalTransformerConfig..
+""""""
 Configuration for multimodal transformer..
 """
 
@@ -27,14 +32,18 @@ Configuration for multimodal transformer..
 class MultiModalTransformer:
 
 
-    """Class for MultiModalTransformer.""""""
+    """
+Class for MultiModalTransformer..
+""""""
 Multimodal transformer model..
 """
 
     def __init__(self, config: Optional[MultiModalTransformerConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
         super().__init__()
         self.config = config or MultiModalTransformerConfig()
         self.setup_layers()
@@ -42,7 +51,9 @@ Multimodal transformer model..
     def setup_layers(self):
 
 
-        """Method for setup_layers."""
+        """
+Method for setup_layers..
+"""
         # Text embeddings
         self.text_embeddings = nn.ModuleDict({
             "word_embeddings": nn.Embedding(
@@ -85,7 +96,9 @@ Multimodal transformer model..
     def _init_weights(self, module: nn.Module) -> None:
 
 
-        """Method for _init_weights."""
+        """
+Method for _init_weights..
+"""
         if isinstance(module, (nn.Linear, nn.Embedding)):
             module.weight.data.normal_(mean=0.0, std=0.02)
         if isinstance(module, nn.Linear) and module.bias is not None:
@@ -94,7 +107,9 @@ Multimodal transformer model..
     def forward(self, input_ids: Optional[torch.Tensor] = None, attention_mask: Optional[torch.Tensor] = None, pixel_values: Optional[torch.Tensor] = None, pixel_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
 
-        """Method for forward."""
+        """
+Method for forward..
+"""
         hidden_states_list = []
 
         # Process text if provided

@@ -1,12 +1,15 @@
 """
 Configuration for text-to-anything generation.
 """
-from dataclasses import dataclass
 from typing import List, Optional, Dict
+
+from dataclasses import dataclass
+
 @dataclass
 class GenerationConfig:
 
-    """Configuration for text-to-anything generation.
+    """
+Configuration for text-to-anything generation.
 """
 
 max_length: int = 1024
@@ -27,11 +30,15 @@ Text-to-anything generation model.
     def __init__(self, config: Optional[GenerationConfig] = None):
 
 
-        """Method for __init__."""self.config = config or GenerationConfig()
+        """
+Method for __init__..
+"""self.config = config or GenerationConfig()
 
     def generate(self, text: str, target_modality: str, **kwargs: Dict):
 
 
-        """Method for generate."""
+        """
+Method for generate..
+"""
     # Implementation details
     return []

@@ -1,14 +1,19 @@
 """
 Flash Mixture of Experts layer implementation..
 """
+from typing import Dict, List, Optional, Tuple
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+
 @dataclass
 class FlashMoEConfig:
 
-    """Class for FlashMoEConfig.""""""
+    """
+Class for FlashMoEConfig..
+""""""
 Configuration for Flash MoE layer..
 """
 
@@ -21,14 +26,18 @@ Configuration for Flash MoE layer..
 class FlashMoE:
 
 
-    """Class for FlashMoE.""""""
+    """
+Class for FlashMoE..
+""""""
 Flash Mixture of Experts layer..
 """
 
     def __init__(self, config: Optional[FlashMoEConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
         super().__init__()
         self.config = config or FlashMoEConfig()
         self.setup_experts()
@@ -36,7 +45,9 @@ Flash Mixture of Experts layer..
     def setup_experts(self):
 
 
-        """Method for setup_experts."""
+        """
+Method for setup_experts..
+"""
         self.gate = nn.Linear(self.config.hidden_size, self.config.num_experts)
         self.experts = nn.ModuleList([
             nn.Sequential(
@@ -51,7 +62,9 @@ Flash Mixture of Experts layer..
     def forward(self, hidden_states: torch.Tensor, attention_mask: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
 
 
-        """Method for forward."""
+        """
+Method for forward..
+"""
         # Gate computation
         gate_logits = self.gate(hidden_states)
         expert_weights = torch.softmax(gate_logits, dim=-1)

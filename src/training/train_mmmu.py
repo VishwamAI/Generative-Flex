@@ -1,19 +1,24 @@
 """
 MMMU training script..
 """
-import logging
-import torch
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
-from src.data.mmmu_dataloader import MMUDataLoader
 from src.models.reasoning.math_head import MathHead
+from typing import Dict, List, Optional, Tuple
+
+import torch
+
+from dataclasses import dataclass
+from src.data.mmmu_dataloader import MMUDataLoader
 from src.training.trainer import Trainer, TrainerConfig
+import logging
+
 
 logger = logging.getLogger(__name__)
 @dataclass
 class MMUTrainingConfig:
 
-    """Class for MMUTrainingConfig.""""""
+    """
+Class for MMUTrainingConfig..
+""""""
 Configuration for MMMU training..
 """
 
@@ -26,7 +31,9 @@ math_head_hidden_size: int = 768
 def main():
 
 
-    """Method for main."""
+    """
+Method for main..
+"""
 # Setup logging
 logging.basicConfig(
 format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",

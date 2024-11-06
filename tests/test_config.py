@@ -1,8 +1,10 @@
 """
 Test configuration module..
 """
-import unittest
 from src.models.reasoning.math_config import MathConfig
+
+import unittest
+
 
 class TestMathConfig(unittest.TestCase):
     """

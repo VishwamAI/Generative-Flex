@@ -1,9 +1,12 @@
 """
 Training utility functions..
 """
-import torch
-from dataclasses import dataclass
 from typing import Dict, Optional
+
+import torch
+
+from dataclasses import dataclass
+
 @dataclass
 class TrainingParams:
     """

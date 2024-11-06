@@ -2,17 +2,22 @@
 Training script for chatbot model.
 """
 
+from typing import Dict, Optional
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, Optional
 from src.models import ChatbotModel
 from src.training.trainer import Trainer
+
 
 @dataclass
 class ChatbotConfig:
 
-    """Class for ChatbotConfig.""""""
+    """
+Class for ChatbotConfig..
+""""""
 Configuration for chatbot training.
 """
 
@@ -25,7 +30,9 @@ file_path: str = "data/chatbot/training_data_cot.json"
 def main():
 
 
-    """Method for main."""
+    """
+Method for main..
+"""
 config = ChatbotConfig()
 model = ChatbotModel()
 trainer = Trainer(model, config)

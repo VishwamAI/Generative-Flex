@@ -2,17 +2,22 @@
 Training script for minimal model.
 """
 
+from typing import Dict, Optional
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, Optional
 from src.models import MinimalModel
 from src.training.trainer import Trainer
+
 
 @dataclass
 class MinimalConfig:
 
-    """Class for MinimalConfig.""""""
+    """
+Class for MinimalConfig..
+""""""
 Configuration for minimal model training.
 """
 
@@ -24,7 +29,9 @@ num_epochs: int = 5
 def main():
 
 
-    """Method for main."""
+    """
+Method for main..
+"""
 config = MinimalConfig()
 model = MinimalModel(config.hidden_size)
 trainer = Trainer(model, config)

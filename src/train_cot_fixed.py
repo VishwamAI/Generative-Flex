@@ -2,17 +2,22 @@
 Training script for chain-of-thought model with fixed prompts.
 """
 
+from typing import Dict, Optional
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, Optional
 from src.models import ChainOfThoughtModel
 from src.training.trainer import Trainer
+
 
 @dataclass
 class CotConfig:
 
-    """Class for CotConfig.""""""
+    """
+Class for CotConfig..
+""""""
 Configuration for chain-of-thought training.
 """
 
@@ -25,7 +30,9 @@ prompt_template: str = "Let's solve this step by step:"
 def main():
 
 
-    """Method for main."""
+    """
+Method for main..
+"""
 config = CotConfig()
 model = ChainOfThoughtModel()
 trainer = Trainer(model, config)

@@ -1,16 +1,20 @@
 """
 JAX-based trainer implementation..
 """
+from typing import Dict, List, Optional, Tuple
+
 import jax
 import jax.numpy as jnp
+
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
 from src.models import BaseModel
 from src.utils.training_utils import TrainingUtils
+
 @dataclass
 class JaxTrainerConfig:
 
-    """Configuration for JAX trainer..
+    """
+Configuration for JAX trainer..
 """
 
 learning_rate: float = 1e-4
@@ -29,7 +33,9 @@ JAX-based model trainer..
     def __init__(self, model: BaseModel, config: Optional[JaxTrainerConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
     self.model = model
     self.config = config or JaxTrainerConfig()
     self.utils = TrainingUtils()
@@ -37,10 +43,14 @@ JAX-based model trainer..
     def train_step(self, state: Dict, batch: Dict):
 
 
-        """Method for train_step."""
+        """
+Method for train_step..
+"""
         def loss_fn(params):
 
-            """Method for loss_fn."""logits = self.model.apply(params, batch["input_ids"])
+            """
+Method for loss_fn..
+"""logits = self.model.apply(params, batch["input_ids"])
         loss = jnp.mean(
         self.utils.compute_loss(logits, batch["labels"])
         )
@@ -67,7 +77,9 @@ JAX-based model trainer..
     def train(self, train_data: Dict):
 
 
-        """Method for train."""
+        """
+Method for train..
+"""
     state = self.utils.init_training_state(
     self.model, self.config
     )
@@ -75,7 +87,9 @@ JAX-based model trainer..
     for epoch in range(self.config.num_epochs):
 
 
-        """Method for train."""
+        """
+Method for train..
+"""
     for batch in self.utils.get_batches(
     train_data,
     self.config.batch_size

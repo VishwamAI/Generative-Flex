@@ -2,18 +2,23 @@
 Training script using AcceleratedTrainer for efficient distributed training.
 """
 
+from typing import Dict, Optional
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, Optional
 from src.models import SimpleModel
 from src.training.accelerated_trainer import AcceleratedTrainer
 from src.utils.training_utils import TrainingUtils
 
+
 @dataclass
 class AcceleratedConfig:
 
-    """Class for AcceleratedConfig.""""""
+    """
+Class for AcceleratedConfig..
+""""""
 Configuration for accelerated training.
 """
 
@@ -26,7 +31,9 @@ mixed_precision: bool = True
 def main():
 
 
-    """Method for main."""
+    """
+Method for main..
+"""
 config = AcceleratedConfig()
 model = SimpleModel()
 trainer = AcceleratedTrainer(model, config)

@@ -2,17 +2,22 @@
 Training script for simple chain-of-thought model.
 """
 
+from typing import Dict, Optional
+
 import torch
 import torch.nn as nn
+
 from dataclasses import dataclass
-from typing import Dict, Optional
 from src.models import SimpleChainOfThoughtModel
 from src.training.trainer import Trainer
+
 
 @dataclass
 class SimpleChainOfThoughtConfig:
 
-    """Class for SimpleChainOfThoughtConfig.""""""
+    """
+Class for SimpleChainOfThoughtConfig..
+""""""
 Configuration for simple chain-of-thought training.
 """
 
@@ -25,7 +30,9 @@ hidden_size: int = 768
 def main():
 
 
-    """Method for main."""
+    """
+Method for main..
+"""
 config = SimpleChainOfThoughtConfig()
 model = SimpleChainOfThoughtModel()
 trainer = Trainer(model, config)

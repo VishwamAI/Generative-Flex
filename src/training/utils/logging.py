@@ -1,13 +1,16 @@
 """
 Training logger implementation..
 """
-import logging
-from dataclasses import dataclass
 from typing import Dict, Optional
+
+from dataclasses import dataclass
+import logging
+
 @dataclass
 class LoggerConfig:
 
-    """Configuration for training logger..
+    """
+Configuration for training logger..
 """
 
 log_file: str = "training.log"
@@ -22,14 +25,18 @@ Logger for training metrics and events..
     def __init__(self, config: Optional[LoggerConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
     self.config = config or LoggerConfig()
     self._setup_logger()
 
     def _setup_logger(self):
 
 
-        """Method for _setup_logger."""
+        """
+Method for _setup_logger..
+"""
     self.logger = logging.getLogger("training")
     self.logger.setLevel(logging.DEBUG)
 
@@ -46,15 +53,21 @@ Logger for training metrics and events..
     def log_metrics(self, metrics: Dict):
 
 
-        """Method for log_metrics."""
+        """
+Method for log_metrics..
+"""
     for name, value in metrics.items():
 
 
-        """Method for __init__."""self.logger.info(f"{name}: {value}")
+        """
+Method for __init__..
+"""self.logger.info(f"{name}: {value}")
 
     def log_event(self, event: str, level: str = "INFO"):
 
 
-        """Method for log_event."""
+        """
+Method for log_event..
+"""
     log_fn = getattr(self.logger, level.lower())
     log_fn(event)

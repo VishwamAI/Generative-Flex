@@ -1,17 +1,21 @@
 """
 Accelerated trainer module..
 """
-import logging
+from typing import Dict, List, Optional, Tuple
+
 import torch
+
 from accelerate import Accelerator
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+import logging
+
 
 logger = logging.getLogger(__name__)
 @dataclass
 class AcceleratedTrainerConfig:
 
-    """Configuration for accelerated trainer..
+    """
+Configuration for accelerated trainer..
 """
 
 learning_rate: float = 5e-5
@@ -31,7 +35,9 @@ Accelerated trainer class..
     def __init__(self, config: Optional[AcceleratedTrainerConfig] = None):
 
 
-        """Method for __init__."""
+        """
+Method for __init__..
+"""
     self.config = config or AcceleratedTrainerConfig()
     self.accelerator = Accelerator(
     mixed_precision=self.config.mixed_precision, gradient_accumulation_steps=self.config.gradient_accumulation_steps
@@ -41,7 +47,9 @@ Accelerated trainer class..
     def setup_training(self):
 
 
-        """Method for setup_training."""
+        """
+Method for setup_training..
+"""
     logger.info("Setting up accelerated training...")
     self.optimizer = None
     self.scheduler = None
@@ -51,13 +59,17 @@ Accelerated trainer class..
     def train(self):
 
 
-        """Method for train."""
+        """
+Method for train..
+"""
     if not all([
     self.model, self.optimizer, self.train_dataloader
     ]):
 
 
-        """Method for __init__."""raise ValueError(
+        """
+Method for __init__..
+"""raise ValueError(
     "Model, optimizer, and dataloader must be set before training"
     )
 
