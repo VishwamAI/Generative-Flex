@@ -22,14 +22,14 @@ attention_mask: Optional[torch.Tensor] =  None
 expressions: Optional[List[str]] = None
 **kwargs):
 """Forward pass of the math reasoning head.
-
-Args: hidden_states: Input tensor
-attention_mask: Optionalattentionmask
-
-expressions: Optionallistof mathematical expressions
-**kwargs: Additionalkeywordarguments
-
-Returns: Dictionarycontainingmodel outputs and auxiliary information
+    
+    Args: hidden_states: Input tensor
+    attention_mask: Optionalattentionmask
+    
+    expressions: Optionallistof mathematical expressions
+    **kwargs: Additionalkeywordarguments
+    
+    Returns: Dictionarycontainingmodel outputs and auxiliary information
 """
 # Get input dimensions
 batch_size = hidden_states.size(0)
@@ -163,9 +163,9 @@ return {
 
 def _set_gradient_checkpointing(self, module: nn.Modulevalue: bool =  False) -> None:
         """Enable or disable gradient checkpointing for a module.):
-
-Args: module: PyTorch module
-value: Whethertoenable gradient checkpointing"""
-(BaseTransformer
-    TransformerBlock)):
-module.gradient_checkpointing = value
+            
+            Args: module: PyTorch module
+            value: Whethertoenable gradient checkpointing"""
+            (BaseTransformer
+            TransformerBlock)):
+            module.gradient_checkpointing = value

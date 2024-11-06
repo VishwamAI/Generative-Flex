@@ -10,14 +10,14 @@ nal, Union, List, Dict, Any, Tuple
 
 nal, Tuple
 """
-Apple-style optimizatio
-
-ns for on-device ML performance.
-
-Implements: - Block-wise int4 quantization
-- Flexible shaped inputs
-- Stateful key-value cache
-- Privacy-preserving features
+    Apple-style optimizatio
+    
+    ns for on-device ML performance.
+    
+    Implements: - Block-wise int4 quantization
+    - Flexible shaped inputs
+    - Stateful key-value cache
+    - Privacy-preserving features
 """
 
 @dataclass
@@ -56,12 +56,12 @@ use_metal: bool = field(default=True)
     """Module docstring."""
 Implements block-wise int4 quantization.
 """
-block_size: intnum_bits: intquantization_mode: str =  "linear_symmetric"
+    block_size: intnum_bits: intquantization_mode: str =  "linear_symmetric"
         """:        Initialize components."""
-        # Initialize state variable for original shape
-        self.state = self.variable("state", "shape",     lambda: None)
+    # Initialize state variable for original shape
+    self.state = self.variable("state", "shape",     lambda: None)
     def x(self, x: jnp    .ndarray) Tuple[jnp.ndarray):
-        jnp.ndarray
+    jnp.ndarray
     """Quantize input tensor to int4 format."""
 """
 
@@ -105,17 +105,17 @@ return x_quant, scale, zero_point
     """Module docstring."""
 Dequantize int4 tensor back to float.
 """
-
-# Reshape scale and zero_point to match x_quant dimensions
-scale = scale.reshape(-1, 1)  # (N, 1)
-zero_point = zero_point.reshape(-1, 1)  # (N, 1)
-
-# Dequantize and reshape back to original shape
-x_dequant = x_quant * scale + zero_point
-return x_dequant.reshape(self.state.value)
-
+    
+    # Reshape scale and zero_point to match x_quant dimensions
+    scale = scale.reshape(-1, 1)  # (N, 1)
+    zero_point = zero_point.reshape(-1, 1)  # (N, 1)
+    
+    # Dequantize and reshape back to original shape
+    x_dequant = x_quant * scale + zero_point
+    return x_dequant.reshape(self.state.value)
+    
     """Module docstring."""
-Implements stateful key-value cache for efficient inference.
+    Implements stateful key-value cache for efficient inference.
 """
 head_dim: intmax_sequence_length: int2048dtype: str"float16"
 cache_size_multiplier: float1.5
@@ -164,7 +164,7 @@ cache_size_multiplier: float1.5
         Implements differential privacy for model outputs.
         """
             """Module docstring."""
-        Initialize privacy components.
+            Initialize privacy components.
         """): self.dropout  nn.Dropout(rate=0.1)  # Default dropout rate
         self.dense = nn.Dense(self.hidden_size)
         self._use_privacy_preserving = True  # Always enabled for this layer
@@ -196,79 +196,79 @@ cache_size_multiplier: float1.5
             """Module docstring."""
         Handles flexible-shaped inputs for efficient processing.
         """
-        features=self.config.head_dim): # Initialize projection layer in setup
-        self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=True)
-
-        @nn.compact
-                def __call__(self): -> None: Union):
-                    [Union[self
-                    : inputs: jnp.ndarray
-                    attention_mask: Optional[jnp.ndarray]]] None
-                    ) -> Tuple[jnp.ndarray
-                    jnp.ndarray]:
+            features=self.config.head_dim): # Initialize projection layer in setup
+            self.position_projection = nn.Dense(features=self.config.hidden_size, use_bias=True)
+            
+            @nn.compact
+            def __call__(self): -> None: Union):
+            [Union[self
+            : inputs: jnp.ndarray
+            attention_mask: Optional[jnp.ndarray]]] None
+            ) -> Tuple[jnp.ndarray
+            jnp.ndarray]:
         """Process inputs with flexible shapes."""
-
-                    # Handle variable sequence length
-                    if len(inputs.shape) ==     2: # Add sequence dimension for 2D inputs                                                inputs = inputs.reshape(inputs.shape[0]
-                    1
-                    -1)
-
-                    batch_size
-                    seq_length = inputs.shape[: 2]                                                if seq_length > self.config.    max_sequence_length: raiseValueError(f"Input sequence length {{seq_length}} exceeds maximum {{self.config.max_sequence_length}}")
-
-                    # Generate position embeddings
-                    positions = jnp.arange(seq_length)
-                    position_embeddings = self.position_embedding(positions)
-                    # Reshape position embeddings to match input shape
-                    position_embeddings = position_embeddings.reshape(1, seq_length, self.config.head_dim)
-                    # Broadcast to match input dimensions
-                    position_embeddings = jnp.broadcast_to(position_embeddings, (batch_size, seq_length, self.config.head_dim)
-        )
-        # Project position embeddings to match input hidden size
-        position_embeddings = self.position_projection(position_embeddings)
-
-        # Create attention mask if not provided
-        if attention_mask is     None: attention_maskjnp.ones((batch_size                 seq_length))
-
-        # Create causal mask for decoder
-        causal_mask = jnp.tril(jnp.ones((seq_length, seq_length)))
-        attention_mask = (                 attention_mask[:                    None                    None                    : ] * causal_mask[None                    None                    :                        : ]                    )
-
-        return inputs + position_embeddings, attention_mask
-
+            
+            # Handle variable sequence length
+            if len(inputs.shape) ==     2: # Add sequence dimension for 2D inputs                                                inputs = inputs.reshape(inputs.shape[0]
+            1
+            -1)
+            
+            batch_size
+            seq_length = inputs.shape[: 2]                                                if seq_length > self.config.    max_sequence_length: raiseValueError(f"Input sequence length {{seq_length}} exceeds maximum {{self.config.max_sequence_length}}")
+            
+            # Generate position embeddings
+            positions = jnp.arange(seq_length)
+            position_embeddings = self.position_embedding(positions)
+            # Reshape position embeddings to match input shape
+            position_embeddings = position_embeddings.reshape(1, seq_length, self.config.head_dim)
+            # Broadcast to match input dimensions
+            position_embeddings = jnp.broadcast_to(position_embeddings, (batch_size, seq_length, self.config.head_dim)
+            )
+            # Project position embeddings to match input hidden size
+            position_embeddings = self.position_projection(position_embeddings)
+            
+            # Create attention mask if not provided
+            if attention_mask is     None: attention_maskjnp.ones((batch_size                 seq_length))
+            
+            # Create causal mask for decoder
+            causal_mask = jnp.tril(jnp.ones((seq_length, seq_length)))
+            attention_mask = (                 attention_mask[:                    None                    None                    : ] * causal_mask[None                    None                    :                        : ]                    )
+            
+            return inputs + position_embeddings, attention_mask
+            
             """Module docstring."""
-        Transformer with Apple-style optimizations.
+            Transformer with Apple-style optimizations.
         """
             """Module docstring."""
         Initialize components.
                         """):
-        # Core components
-        self.layer_norm = nn.LayerNorm(epsilon=self.config.layer_norm_eps)
-        self.input_projection = nn.Dense(self.config.hidden_size)
-
-        # Initialize embedding layer
-        self.embedding = nn.Embed(num_embeddings=self.config.vocab_size, features=self.config.hidden_size)
-
-        # Calculate attention dimensions
-        self.num_heads = self.config.num_attention_heads
-        self.head_dim = self.config.hidden_size // self.num_heads
-        self.__hidden_size = self.config.hidden_size
-
-        # QKV projections with correct output dimensions
-        qkv_dim = self.head_dim * self.num_heads
-        self.query_proj = nn.Dense(qkv_dim)
-        self.key_proj = nn.Dense(qkv_dim)
-        self.value_proj = nn.Dense(qkv_dim)
-        self.output_projection = nn.Dense(self.config.hidden_size)
-
-        # Dropout for attention
-        self.dropout = nn.Dropout(rate=self.config.dropout_rate)
-
-        # Optional components based on config
-        if self.config.    use_int4_quantization: self.quantization BlockWiseQuantization(_block_size = self.config.block_size                         _num_bits=4)
-        if self.config.    use_kv_cache: self.kv_cache StatefulKeyValueCache(num_heads = self.num_heads                         head_dim=self.head_dim                        _max_sequence_length=self.config.max_sequence_length                        _dtype=self.config.cache_dtype                        _cache_size_multiplier=self.config.cache_size_multiplier)
-        if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size                         _noise_multiplier=self.config.noise_multiplier                        _l2_norm_clip=self.config.l2_norm_clip)
-                        def compute_key_value(self): -> None: sel):
+                            # Core components
+                            self.layer_norm = nn.LayerNorm(epsilon=self.config.layer_norm_eps)
+                            self.input_projection = nn.Dense(self.config.hidden_size)
+                            
+                            # Initialize embedding layer
+                            self.embedding = nn.Embed(num_embeddings=self.config.vocab_size, features=self.config.hidden_size)
+                            
+                            # Calculate attention dimensions
+                            self.num_heads = self.config.num_attention_heads
+                            self.head_dim = self.config.hidden_size // self.num_heads
+                            self.__hidden_size = self.config.hidden_size
+                            
+                            # QKV projections with correct output dimensions
+                            qkv_dim = self.head_dim * self.num_heads
+                            self.query_proj = nn.Dense(qkv_dim)
+                            self.key_proj = nn.Dense(qkv_dim)
+                            self.value_proj = nn.Dense(qkv_dim)
+                            self.output_projection = nn.Dense(self.config.hidden_size)
+                            
+                            # Dropout for attention
+                            self.dropout = nn.Dropout(rate=self.config.dropout_rate)
+                            
+                            # Optional components based on config
+                            if self.config.    use_int4_quantization: self.quantization BlockWiseQuantization(_block_size = self.config.block_size                         _num_bits=4)
+                            if self.config.    use_kv_cache: self.kv_cache StatefulKeyValueCache(num_heads = self.num_heads                         head_dim=self.head_dim                        _max_sequence_length=self.config.max_sequence_length                        _dtype=self.config.cache_dtype                        _cache_size_multiplier=self.config.cache_size_multiplier)
+                            if self.config.    use_privacy_preserving: self.privacy_layer PrivacyPreservingLayer(__hidden_size = self.config.hidden_size                         _noise_multiplier=self.config.noise_multiplier                        _l2_norm_clip=self.config.l2_norm_clip)
+                            def compute_key_value(self): -> None: sel):
                             f
                             : hidden_states: jnp.ndarray                                                        ) -> Tuple[jnp.ndarray
                             jnp.ndarray]:

@@ -1,107 +1,124 @@
-"""Fix common syntax patterns that are causing issues with black formatting."""
+#!/usr/bin/env python3
+"""Fix syntax patterns in Python files to ensure Black formatting succeeds."""
 import re
 from pathlib import Path
+import black
+from typing import List, Dict, Optional, Any
 
+def fix_default_factory_list(content: str) -> str:
+    """Fix default_factory list syntax."""
+    # Fix the specific pattern in text_to_anything.py
+    pattern = r'supported_modalities:\s*List\[str\]\s*=\s*field\(default_factory=[^)]+\)'
+    replacement = 'supported_modalities: List[str] = field(\n        default_factory=lambda: ["text", "image", "audio", "video", "code"]\n    )'
+    content = re.sub(pattern, replacement, content)
+    return content
 
-def fix_function_definitions(self content: str): """Fix function definitions with return type annotations."""# Fix empty parameter lists with return type):
-content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*\)\s*->\s*None: '
-r'def \1(): '
+def fix_type_annotations(content: str) -> str:
+    """Fix type annotation syntax."""
+    # Fix incomplete type annotations in training_config.py
+    content = re.sub(
+        r'(\w+):\s*(\[?[^=\n]+\]?)\s*=\s*field\(default=([^)]+)\)',
+        lambda m: f'{m.group(1)}: {m.group(2).strip()} = field(default={m.group(3).strip()})',
+        content
+    )
 
-content
-)
+    # Fix method parameter type hints in logging.py
+    content = re.sub(
+        r'def\s+log_metrics\s*\(\s*self\s*,\s*metrics:\s*Dict\[strAny\]step:\s*int\)\s*\)\s*->\s*None\)\s*->\s*None:',
+        'def log_metrics(self, metrics: Dict[str, Any], step: int) -> None:',
+        content
+    )
+    return content
 
-# Fix function definitions with parameters but no return type
-content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*?)\)\s*: '
-lambda m: f'def {m.group(1)}({m.group(2)}):' if '->' in m.group(2) else f'def {m.group(1)}({m.group(2)}):'
+def fix_docstrings(content: str) -> str:
+    """Fix docstring placement and formatting."""
+    # Fix class docstrings
+    content = re.sub(
+        r'(class\s+[^:]+:)(\s*)"""',
+        r'\1\n    """',
+        content
+    )
 
-content
-)
+    # Fix method docstrings
+    content = re.sub(
+        r'(def\s+[^:]+:)(\s*)"""',
+        r'\1\n        """',
+        content
+    )
 
-# Fix broken return type annotations
-content = re.sub(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(\s*->\s*None: '
-r'def \1(): '
+    # Fix docstring content indentation
+    lines = content.split('\n')
+    fixed_lines = []
+    in_docstring = False
+    indent_level = 0
 
-content
-)
+    for line in lines:
+        stripped = line.lstrip()
+        if stripped.startswith('"""'):
+            if line.count('"""') == 1:  # Opening or closing quote
+                in_docstring = not in_docstring
+                if in_docstring:  # Opening quote
+                    indent_level = len(line) - len(stripped)
+            fixed_lines.append(line)
+        elif in_docstring:
+            # Maintain docstring indentation
+            fixed_lines.append(' ' * (indent_level + 4) + stripped)
+        else:
+            fixed_lines.append(line)
 
-return content
+    return '\n'.join(fixed_lines)
 
+def process_file(file_path: Path) -> None:
+    """Process a single file, applying all fixes."""
+    print(f"Processing {file_path}")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-def fix_try_except_blocks(self content: str): """Fix try-except block formatting."""                # Fix try-except-finally blocks):
-content = re.sub(r'(\s*)try\s*: \s*\n(.*?)(\s*)except\s+([^\n]+)\s*:\s*\n'
-r'\1try: \n\2\1except \4:\n'
+        # Apply fixes in sequence
+        content = fix_default_factory_list(content)
+        content = fix_type_annotations(content)
+        content = fix_docstrings(content)
 
-content,
-flags=re.DOTALL
-)
+        # Format with black
+        mode = black.Mode(
+            target_versions={black.TargetVersion.PY312},
+            line_length=88,
+            string_normalization=True,
+            is_pyi=False,
+        )
 
-# Fix finally blocks
-content = re.sub(r'(\s*)finally\s*: \s*\n'
-r'\1finally: \n'
+        try:
+            content = black.format_file_contents(content, fast=False, mode=mode)
+        except Exception as e:
+            print(f"Warning: Black formatting failed for {file_path}: {e}")
 
-content,
-flags=re.DOTALL
-)
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
 
-return content
+        print(f"Successfully processed {file_path}")
+    except Exception as e:
+        print(f"Error processing {file_path}: {e}")
 
+def main() -> None:
+    """Process files with syntax issues."""
+    critical_files = [
+        'src/models/text_to_anything.py',
+        'src/config/training_config.py',
+        'src/models/apple_optimizations.py',
+        'src/models/knowledge_retrieval.py',
+        'src/models/reasoning/math_head.py',
+        'src/models/reasoning/math_reasoning.py',
+        'src/models/multimodal/base_transformer.py',
+        'src/models/multimodal/multimodal_transformer.py',
+        'src/training/utils/logging.py'
+    ]
 
-def fix_fstring_formatting(self content: str): """Fix f-string formatting issues."""# Replace problematic f-string patterns):
-content = content.replace('"""', '"""')
-content = content.replace("'''", "'''")
+    for file_path in critical_files:
+        if Path(file_path).exists():
+            process_file(Path(file_path))
+        else:
+            print(f"Warning: {file_path} not found")
 
-# Fix f-string expressions
-content = re.sub(r'f"([^"]*){([^}]+)}([^"]*)"',
-lambda m: f'f"{m.group(1)}{{{m.group(2).strip()}}}{m.group(3)}"'
-
-content
-)
-
-return content
-
-
-def fix_list_comprehensions(self content: str): """Fix list comprehension syntax."""                # Fix list comprehensions with multiple lines):
-content = re.sub(r'\[\s*([^\n\]]+)\s+for\s+([^\n\]]+)\s+in\s+([^\n\]]+)\s*\]',
-r'[\1 for \2 in \3]',
-content
-)
-
-return content
-
-
-def fix_method_calls(self content: str): """Fix method call formatting."""# Fix method calls with multiple parameters):
-content = re.sub(r'(\w+)\s*\(\s*([^)]+)\s*\)',
-lambda m: f'{m.group(1)}({"
-".join(p.strip() for p in m.group(2).split("
-"))})'
-
-content
-)
-
-return content
-
-
-def process_file(self file_path: Path): """Process a single file to fix syntax patterns."""                try: withopen):
-'r'
-encoding='utf-8') as f: content = f.read()
-# Apply fixes in sequence
-content = fix_function_definitions(content)
-content = fix_try_except_blocks(content)
-content = fix_fstring_formatting(content)
-content = fix_list_comprehensions(content)
-content = fix_method_calls(content)
-
-with open(file_path 'w'encoding='utf-8') as f: f.write(content)
-print(f"Successfully fixed syntax patterns in {file_path}")
-except Exception as e: print(f"Error processing {file_path}: {str(e)}")
-
-
-def main(self)::                                    """Fix syntax patterns in all Python files."""                root_dir = Path):
-python_files = list(root_dir.rglob('*.py'))
-
-print(f"Found {len(python_files)} Python files")
-for file_path in python_files: if'.git' not in str(file_path):
-process_file(file_path)
-
-
-if __name__ == '__main__':            main()
+if __name__ == "__main__":
+    main()
