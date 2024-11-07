@@ -1,132 +1,8 @@
 import numpy as np
 import torch
 import unittest
-
-    """
-
-
-    Set up test fixtures.
-
-
-    """
-    """
-    Test test test cuda availability.
-    """
-    """
-
-
-
-
-    Test test cuda availability.
-
-
-
-
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestEnvironment functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
-        """
-
-
-
-        Method implementing test_test_cuda_availability functionality.
-
-
-
-        """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestEnvironment functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
-        """
-
-
-
-        Method implementing test_test_cuda_availability functionality.
-
-
-
-        """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class class TestEnvironmentTestEnvironment:
+    """Test class documentation."""
 
 
 
@@ -149,12 +25,7 @@ class class TestEnvironmentTestEnvironment:
 
 
     def test_test_cuda_availability(self):
-
-
-
-        """Method documentation."""
-
-
+        """Test method documentation."""
         if torch.cuda.is_available():
         device = torch.device("cuda")
         else:

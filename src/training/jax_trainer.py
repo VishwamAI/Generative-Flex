@@ -1,3 +1,5 @@
+"""Training module documentation."""
+
 from dataclasses import dataclass
 from dataclasses import dataclass, field
 from dataclasses import dataclass, field
@@ -22,24 +24,6 @@ import os
 import os
 import torch
 import torch
-
-"""Module documentation."""
-
-"""
-
-
-
-
-"""
-
-
-
-
-
-
-
-
-
 JAX-based trainer implementation.
 JAX-based model trainer..
 Method for __init__..

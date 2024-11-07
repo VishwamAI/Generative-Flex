@@ -1,132 +1,8 @@
 import numpy as np
 import torch
 import unittest
-
-    """
-
-
-    Set up test fixtures.
-
-
-    """
-    """
-    Test test test batch size.
-    """
-    """
-
-
-
-
-    Test test batch size.
-
-
-
-
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestTestCotResponse functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
-        """
-
-
-
-        Method implementing test_test_batch_size functionality.
-
-
-
-        """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestTestCotResponse functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
-        """
-
-
-
-        Method implementing test_test_batch_size functionality.
-
-
-
-        """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class class TestTestCotResponseTestTestCotResponse:
+    """Test class documentation."""
 
 
 
@@ -149,12 +25,7 @@ class class TestTestCotResponseTestTestCotResponse:
 
 
     def test_test_batch_size(self):
-
-
-
-        """Method documentation."""
-
-
+        """Test method documentation."""
         batch_size = 16
         input_tensor = torch.randint(0, 1000, (batch_size, 32))
         output = self.model(input_tensor)

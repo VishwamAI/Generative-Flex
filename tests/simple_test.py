@@ -11,54 +11,6 @@ import torch
 import torch
 import torch.nn as nn
 import unittest
-
-    """
-    \1
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class class TestSimpleModelTestSimpleModel:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
     """
 
 

@@ -1,45 +1,4 @@
-"""Module implementing math_reasoning functionality."""
-
-
-    """
-    Class implementing class functionality.
-    """
-    """
-    """
-    """
-    Class implementing ModelConfig functionality.
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class ModelConfig functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
+"""Model module documentation."""
 
 from dataclasses import dataclass
 from dataclasses import dataclass, field

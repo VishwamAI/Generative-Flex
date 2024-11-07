@@ -1,3 +1,5 @@
+"""Training module documentation."""
+
 from dataclasses import dataclass, field
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -24,88 +26,6 @@ import os
 import os
 import torch
 import torch
-
-"""Module documentation."""
-
-    """
-
-
-
-    Class implementing class functionality.
-
-
-
-    """
-    """
-
-
-
-
-    """
-    """
-    Class implementing TrainConfig functionality.
-    """
-    """
-    Class implementing class TrainConfig functionality.
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 logger = logging.getLogger(__name__)
 @dataclass
 class class TrainConfigTrainConfig:

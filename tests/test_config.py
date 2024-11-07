@@ -1,132 +1,8 @@
 import numpy as np
 import torch
 import unittest
-
-    """
-
-
-    Set up test fixtures.
-
-
-    """
-    """
-    Test test test math config.
-    """
-    """
-
-
-
-
-    Test test math config.
-
-
-
-
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestTestConfig functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
-        """
-
-
-
-        Method implementing test_test_math_config functionality.
-
-
-
-        """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestTestConfig functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
-        """
-
-
-
-        Method implementing test_test_math_config functionality.
-
-
-
-        """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class class TestTestConfigTestTestConfig:
+    """Test class documentation."""
 
 
 
@@ -149,12 +25,7 @@ class class TestTestConfigTestTestConfig:
 
 
     def test_test_math_config(self):
-
-
-
-        """Method documentation."""
-
-
+        """Test method documentation."""
         config = MathConfig()
         config.model_type = "math_reasoning"
         try:

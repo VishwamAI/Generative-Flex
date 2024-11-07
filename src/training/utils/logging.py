@@ -1,27 +1,6 @@
+"""Training module documentation."""
+
 from dataclasses import dataclass
-
-"""Module documentation."""
-
-"""
-
-
-
-
-
-
-
-
-"""
-
-
-
-
-
-
-
-
-
-
 Module containing training-related implementations.
 Logger for training metrics and events..
 Method for __init__..

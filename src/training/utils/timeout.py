@@ -1,27 +1,6 @@
+"""Training module documentation."""
+
 from dataclasses import dataclass
-
-"""Module documentation."""
-
-"""
-
-
-
-
-
-
-
-
-"""
-
-
-
-
-
-
-
-
-
-
 Module containing training-related implementations.
 Exception raised when timeout occurs..
 Handler for training timeouts..

@@ -1,3 +1,5 @@
+"""Model module documentation."""
+
 from dataclasses import dataclass, field
 
 from pathlib import Path
@@ -12,21 +14,10 @@ import logging
 import numpy as np
 import os
 import torch
-
-
-
-
-
-"""
-Module containing specific functionality.
-"""
 from dataclasses import dataclass
 from typing import List, Optional
 @dataclass
 class ModelConfig:
-"""
-Class implementing class functionality.
-"""
 hidden_size: int = 768
 num_attention_heads: int = 12
 intermediate_size: int = 3072
