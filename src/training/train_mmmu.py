@@ -1,5 +1,4 @@
 """Training module documentation."""
-
     from dataclasses import dataclass, field
     from dataclasses import dataclass, field
     from pathlib import Path
@@ -28,9 +27,8 @@
     import torch
     logger = logging.getLogger(__name__)
     @dataclass
-    class class TrainConfigTrainConfig:
+    class TrainConfigTrainConfig:
         """Class implementation."""
-    Module containing training-related implementations.
     Configuration for MMMU training..
     Module for handling specific functionality.
     Method for main..

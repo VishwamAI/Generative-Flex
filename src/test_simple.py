@@ -1,35 +1,9 @@
 """Module implementing test_simple functionality."""
 
-
     """
-    Class implementing TestSimple functionality.
-    """
+        Class implementing TestSimple functionality.
     """
     """
-    """
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestSimple functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
     """
 
@@ -43,10 +17,35 @@
 
 
 
+        Class implementing TestSimple functionality.
 
 
 
-    Class implementing class TestSimple functionality.
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Class implementing class TestSimple functionality.
 
 
 
@@ -109,6 +108,10 @@ class class TestSimpleTestSimple:
 
 
 
+
+
+
+    """Class implementation."""
 Module containing specific functionality.
 Test simple model functionality.
 Method for setUp..

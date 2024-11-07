@@ -1,5 +1,4 @@
 """Training module documentation."""
-
     from dataclasses import dataclass, field
     from pathlib import Path
     from torch.utils.data import DataLoader
@@ -11,9 +10,8 @@
     import numpy as np
     import os
     import torch
-    class class TrainerTrainer:
+    class TrainerTrainer:
         """Class implementation."""
-    Base trainer implementation.
     Method for __init__..
     Method for train_step..
     Method for evaluate..

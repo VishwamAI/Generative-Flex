@@ -1,6 +1,5 @@
 """Module implementing test_models functionality."""
 
-
     """
     """
     """
@@ -46,7 +45,7 @@
 
 
 
-    Class implementing TestModels functionality.
+        Class implementing TestModels functionality.
 
 
 
@@ -136,7 +135,7 @@
 
 
 
-    Class implementing class TestModels functionality.
+        Class implementing class TestModels functionality.
 
 
 
@@ -260,7 +259,7 @@ import unittest
 
 
 
-class class TestModels:
+class TestModels:
 
 
 
@@ -311,7 +310,6 @@ class class TestModels:
 
 
     """Test class implementation."""
-    Module for implementing specific functionality.
     Method for setUp..
     Method for test_transformer_model..
     Method for test_model_forward..

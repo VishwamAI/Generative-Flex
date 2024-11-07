@@ -1,5 +1,4 @@
 """Training module documentation."""
-
     from dataclasses import dataclass
     from dataclasses import dataclass, field
     from dataclasses import dataclass, field

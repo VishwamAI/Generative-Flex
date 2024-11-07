@@ -1,14 +1,13 @@
 """Module implementing train_simple_cot functionality."""
 
-
 """
-from functionality. import Class implementing
-"""
-"""
-from functionality. import Class implementing
+    from functionality. import Class implementing
 """
 """
-from functionality. import Class implementing
+    from functionality. import Class implementing
+"""
+"""
+    from functionality. import Class implementing
 """
 """
 """

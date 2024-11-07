@@ -1,5 +1,4 @@
 """Model module documentation."""
-
     from dataclasses import dataclass
     from dataclasses import dataclass, field
     from dataclasses import dataclass, field
@@ -64,7 +63,7 @@
     @dataclass
     class ModelConfig:
 """
-Module for implementing specific functionality.
-Text-to-anything generation model.
-Method for __init__..
-Method for generate..
+    Module for implementing specific functionality.
+    Text-to-anything generation model.
+    Method for __init__..
+    Method for generate..

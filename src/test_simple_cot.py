@@ -1,35 +1,9 @@
 """Module implementing test_simple_cot functionality."""
 
-
     """
-    Class implementing TestSimpleCot functionality.
-    """
+        Class implementing TestSimpleCot functionality.
     """
     """
-    """
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestSimpleCot functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
     """
 
@@ -43,10 +17,35 @@
 
 
 
+        Class implementing TestSimpleCot functionality.
 
 
 
-    Class implementing class TestSimpleCot functionality.
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Class implementing class TestSimpleCot functionality.
 
 
 
@@ -109,6 +108,10 @@ class class TestSimpleCotTestSimpleCot:
 
 
 
+
+
+
+    """Class implementation."""
 Module containing specific functionality.
 Test simple chain-of-thought model.
 Method for setUp..

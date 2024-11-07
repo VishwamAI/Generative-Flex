@@ -1,35 +1,9 @@
 """Module implementing test_minimal functionality."""
 
-
     """
-    Class implementing TestMinimal functionality.
-    """
+        Class implementing TestMinimal functionality.
     """
     """
-    """
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestMinimal functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
     """
 
@@ -43,10 +17,35 @@
 
 
 
+        Class implementing TestMinimal functionality.
 
 
 
-    Class implementing class TestMinimal functionality.
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Class implementing class TestMinimal functionality.
 
 
 
@@ -109,6 +108,10 @@ class class TestMinimalTestMinimal:
 
 
 
+
+
+
+    """Class implementation."""
 Module containing specific functionality.
 Test minimal model functionality.
 Method for setUp..

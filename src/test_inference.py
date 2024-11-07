@@ -1,35 +1,9 @@
 """Module implementing test_inference functionality."""
 
-
     """
-    Class implementing TestInference functionality.
-    """
+        Class implementing TestInference functionality.
     """
     """
-    """
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing TestInference functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
     """
 
@@ -43,10 +17,35 @@
 
 
 
+        Class implementing TestInference functionality.
 
 
 
-    Class implementing class TestInference functionality.
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Class implementing class TestInference functionality.
 
 
 
@@ -109,6 +108,10 @@ class class TestInferenceTestInference:
 
 
 
+
+
+
+    """Class implementation."""
 Module containing specific functionality.
 Test inference functionality.
 Method for setUp..
