@@ -25,6 +25,8 @@ class ModelConfig:
     pass
     pass
     pass
+    pass
+    pass
     hidden_size: int = 768
     num_attention_heads: int = 12
     intermediate_size: int = 3072
