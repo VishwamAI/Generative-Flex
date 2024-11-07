@@ -10,6 +10,7 @@ class TestTestCotResponse:
         """Test."""
         pass
         pass
+        pass
     batch_size = 16
     input_tensor = torch.randint(0, 1000, (batch_size, 32))
     output = self.model(input_tensor)
@@ -19,6 +20,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -28,11 +36,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -43,6 +46,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -52,11 +62,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()

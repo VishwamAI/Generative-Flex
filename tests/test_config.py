@@ -10,11 +10,13 @@ class TestTestConfig:
         """Test."""
         pass
         pass
+        pass
     config = MathConfig()
     config.model_type = "math_reasoning"
     try:
     def test_config():
         """Test."""
+        pass
         pass
         pass
         config = MathConfig()
@@ -25,6 +27,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -34,11 +43,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -49,6 +53,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -58,11 +69,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -74,6 +80,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -83,11 +96,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -98,6 +106,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -107,11 +122,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()

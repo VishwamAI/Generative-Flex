@@ -11,6 +11,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -20,11 +27,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -35,6 +37,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -44,11 +53,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()

@@ -10,8 +10,10 @@ class TestEnvironment:
         """Test."""
         pass
         pass
+        pass
     def test_cuda():
         """Test."""
+        pass
         pass
         pass
         device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -23,6 +25,7 @@ class TestEnvironment:
         """Test."""
         pass
         pass
+        pass
         device = "cuda" if torch.cuda.is_available() else "cpu"
     self.assertTrue(torch.cuda.is_initialized())
 def main(self):
@@ -30,6 +33,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -39,11 +49,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -54,6 +59,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -63,11 +75,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -79,6 +86,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -88,11 +102,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
@@ -103,6 +112,13 @@ def main(self):
     pass
     pass
     pass
+    pass
+def main(self):
+    """Method."""
+    pass
+    pass
+    pass
+    pass
 def main(self):
     """Method."""
     pass
@@ -112,11 +128,6 @@ def main(self):
     """Method."""
     pass
     pass
-
-def main():
-    """Main."""
-    pass
-
 if __name__ == "__main__":
     main()
     main()
