@@ -14,25 +14,27 @@ import torch
 
 
 class TestEnvironment:
-        """
-        Test suite for module functionality.
-        """
-
-    def setUp(self):
+"""
+    Test suite for module functionality.
+"""
 
 
-        """
+
+    """
 
 
         Set up test fixtures.
 
 
-        """
-        pass
+    """
+    pass
 
 
 
     def test_test_cuda_availability(self):
+    """
+        Test test test cuda availability.
+    """
 
 
 
@@ -42,34 +44,34 @@ class TestEnvironment:
 
 
 
-        Test test cuda availability.
+            Test test cuda availability.
 
 
 
 
         """
         if torch.cuda.is_available():
-            device = torch.device("cuda")
+        device = torch.device("cuda")
         else:
-            device = torch.device("cpu")
+        device = torch.device("cpu")
         self.assertIsNotNone(device)
         if torch.cuda.is_available():
         self.assertTrue(torch.cuda.is_initialized())
 
 
-if __name__ == "__main__":
+        if __name__ == "__main__":
 
 
 
-if __name__ == "__main__":
-    unittest.main()
+        if __name__ == "__main__":
+        unittest.main()
 
 
 
 
-if __name__ == "__main__":
+        if __name__ == "__main__":
 
 
 
-if __name__ == "__main__":
-    unittest.main()
+        if __name__ == "__main__":
+        unittest.main()

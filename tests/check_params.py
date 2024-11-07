@@ -10,25 +10,27 @@ import torch
 
 
 class TestParameters:
-    """
+"""
     Test suite for module functionality.
+"""
+
+
+
     """
-
-    def setUp(self):
-
-
-        """
 
 
         Set up test fixtures.
 
 
-        """
-        pass
+    """
+    pass
 
 
 
     def test_test_parameter_validation(self):
+    """
+        Test test test parameter validation.
+    """
 
 
 
@@ -38,7 +40,7 @@ class TestParameters:
 
 
 
-        Test test parameter validation.
+            Test test parameter validation.
 
 
 
@@ -49,17 +51,17 @@ class TestParameters:
         "learning_rate": 0.001
         }
         self.assertIsInstance(params, dict)
-            "learning_rate": 0.001,
+        "learning_rate": 0.001,
         "batch_size": 0
         }
         self.assertFalse(self.validator.validate(params))
         if __name__ == "__main__":
 
-if __name__ == "__main__":
-    unittest.main()
+        if __name__ == "__main__":
+        unittest.main()
 
 
         if __name__ == "__main__":
 
-if __name__ == "__main__":
-    unittest.main()
+        if __name__ == "__main__":
+        unittest.main()

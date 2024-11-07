@@ -14,30 +14,29 @@ import torch
 
 
 class TestTestModels:
-        """
-        Test suite for module functionality.
-        """
-
-    def setUp(self):
+"""
+    Test suite for module functionality.
+"""
 
 
-        """
+
+    """
 
 
         Set up test fixtures.
 
 
-        """
-        pass
+    """
+    pass
 
 
 
 
 
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
 
 
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
     unittest.main()

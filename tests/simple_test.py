@@ -30,15 +30,15 @@ from src.models import SimpleModel
 
 
 """
-\1
+    \1
 """
 
 class TestSimpleModel:
-    """
-    \1
-    """
-        batch_size = 16
-input_tensor = torch.randn(batch_size, 32)
-output = self.model(input_tensor)
-self.assertEqual(output.shape[0], batch_size)
 """
+    \1
+"""
+    batch_size = 16
+    input_tensor = torch.randn(batch_size, 32)
+    output = self.model(input_tensor)
+    self.assertEqual(output.shape[0], batch_size)
+    """
