@@ -12,35 +12,17 @@ import unittest
 
 class Test_Minimalfunctionality:
     """
-        Class implementing TestMinimal functionality.
+    Class implementing TestMinimal functionality.
+    """
+    Class implementing TestMinimal functionality.
     """
     """
     """
     """
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing TestMinimal functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
+    """
+    """
+    Class implementing TestMinimal functionality.
     """
 
 
@@ -53,11 +35,7 @@ class Test_Minimalfunctionality:
 
 
 
-
-
-
-        Class implementing class TestMinimal functionality.
-
+    Class implementing TestMinimal functionality.
 
 
 
@@ -69,8 +47,42 @@ class Test_Minimalfunctionality:
 
 
 
+    """
+    """
+    """
+    Class implementing class TestMinimal functionality.
+    """
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestMinimal functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+        class TestMinimalTestMinimal:
     """
 class TestMinimalTestMinimal:
 

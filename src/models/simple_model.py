@@ -15,9 +15,16 @@ class Simple_Modelfunctionality:
     """
     """
     """
-        Class implementing ModelConfig functionality.
     """
     """
+    Class implementing ModelConfig functionality.
+    """
+    Class implementing ModelConfig functionality.
+    """
+    """
+    """
+    Class implementing class ModelConfig functionality.
+    """
 
 
 
@@ -38,7 +45,7 @@ class Simple_Modelfunctionality:
 
 
 
-        Class implementing class ModelConfig functionality.
+    Class implementing class ModelConfig functionality.
 
 
 
@@ -59,6 +66,9 @@ class Simple_Modelfunctionality:
 
 
 
+    """
+    @dataclass
+        class ModelConfig:
     """
 
 
@@ -88,11 +98,19 @@ class Simple_Modelfunctionality:
     @dataclass
 class ModelConfig:
     """
-        Module containing specific functionality.
-        A simple neural network model..
-        Module for handling specific functionality.
-        Forward pass through the model.
-        Args:
-        x: Input tensor
-        Returns:
-        Output tensor
+    Module containing specific functionality.
+    A simple neural network model..
+    Module for handling specific functionality.
+    Forward pass through the model.
+    Args:
+    x: Input tensor
+    Returns:
+    Output tensor
+    Module containing specific functionality.
+    A simple neural network model..
+    Module for handling specific functionality.
+    Forward pass through the model.
+    Args:
+    x: Input tensor
+    Returns:
+    Output tensor

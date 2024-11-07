@@ -61,7 +61,11 @@ class SymbolicMath:
 
 
     """
-        Module for implementing specific functionality.
-        Handles symbolic mathematics operations..
-        Method for __init__..
-        Method for forward..
+    Module for implementing specific functionality.
+    Handles symbolic mathematics operations..
+    Method for __init__..
+    Method for forward..
+    Module for implementing specific functionality.
+    Handles symbolic mathematics operations..
+    Method for __init__..
+    Method for forward..

@@ -12,35 +12,17 @@ import unittest
 
 class Test_Inferencefunctionality:
     """
-        Class implementing TestInference functionality.
+    Class implementing TestInference functionality.
+    """
+    Class implementing TestInference functionality.
     """
     """
     """
     """
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing TestInference functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
+    """
+    """
+    Class implementing TestInference functionality.
     """
 
 
@@ -53,11 +35,7 @@ class Test_Inferencefunctionality:
 
 
 
-
-
-
-        Class implementing class TestInference functionality.
-
+    Class implementing TestInference functionality.
 
 
 
@@ -69,8 +47,42 @@ class Test_Inferencefunctionality:
 
 
 
+    """
+    """
+    """
+    Class implementing class TestInference functionality.
+    """
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestInference functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+        class TestInferenceTestInference:
     """
 class TestInferenceTestInference:
 

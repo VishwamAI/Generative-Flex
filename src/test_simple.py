@@ -12,35 +12,17 @@ import unittest
 
 class Test_Simplefunctionality:
     """
-        Class implementing TestSimple functionality.
+    Class implementing TestSimple functionality.
+    """
+    Class implementing TestSimple functionality.
     """
     """
     """
     """
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing TestSimple functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
+    """
+    """
+    Class implementing TestSimple functionality.
     """
 
 
@@ -53,11 +35,7 @@ class Test_Simplefunctionality:
 
 
 
-
-
-
-        Class implementing class TestSimple functionality.
-
+    Class implementing TestSimple functionality.
 
 
 
@@ -69,8 +47,42 @@ class Test_Simplefunctionality:
 
 
 
+    """
+    """
+    """
+    Class implementing class TestSimple functionality.
+    """
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestSimple functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+        class TestSimpleTestSimple:
     """
 class TestSimpleTestSimple:
 

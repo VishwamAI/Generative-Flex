@@ -18,16 +18,27 @@ import torch.nn as nn
 
 class Train_Cot_Simplefunctionality:
     """
-
-    """
-    """
-
-    """
     """
 
     """
     """
     """
+    """
+
+    """
+    """
+    """
+    """
+
+    """
+    """
+    """
+    """
+    """
+    Module for implementing specific functionality.
+    Configuration for simple chain-of-thought training.
+    Module for handling specific functionality.
+    Method for main..
 
 
 

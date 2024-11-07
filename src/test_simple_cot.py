@@ -12,35 +12,17 @@ import unittest
 
 class Test_Simple_Cotfunctionality:
     """
-        Class implementing TestSimpleCot functionality.
+    Class implementing TestSimpleCot functionality.
+    """
+    Class implementing TestSimpleCot functionality.
     """
     """
     """
     """
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing TestSimpleCot functionality.
-
-
-
-
-
-
-
-
-
-
-
     """
+    """
+    """
+    Class implementing TestSimpleCot functionality.
     """
 
 
@@ -53,11 +35,7 @@ class Test_Simple_Cotfunctionality:
 
 
 
-
-
-
-        Class implementing class TestSimpleCot functionality.
-
+    Class implementing TestSimpleCot functionality.
 
 
 
@@ -69,8 +47,42 @@ class Test_Simple_Cotfunctionality:
 
 
 
+    """
+    """
+    """
+    Class implementing class TestSimpleCot functionality.
+    """
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestSimpleCot functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+        class TestSimpleCotTestSimpleCot:
     """
 class TestSimpleCotTestSimpleCot:
 

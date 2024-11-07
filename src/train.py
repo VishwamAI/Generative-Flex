@@ -18,16 +18,27 @@ import torch.nn as nn
 
 class Trainfunctionality:
     """
-
-    """
-    """
-
-    """
     """
 
     """
     """
     """
+    """
+
+    """
+    """
+    """
+    """
+
+    """
+    """
+    """
+    """
+    """
+    Module for implementing specific functionality.
+    Training configuration.
+    Module for handling specific functionality.
+    Method for main..
 
 
 

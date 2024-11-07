@@ -36,9 +36,15 @@ class MathematicalNotation:
 
 
     """
-        Module containing specific functionality.
-        Process mathematical notation.
-        Args:
-        notation_ids: Tensor of notation token IDs
-        Returns:
-        Processed notation embeddings
+    Module containing specific functionality.
+    Process mathematical notation.
+    Args:
+    notation_ids: Tensor of notation token IDs
+    Returns:
+    Processed notation embeddings
+    Module containing specific functionality.
+    Process mathematical notation.
+    Args:
+    notation_ids: Tensor of notation token IDs
+    Returns:
+    Processed notation embeddings

@@ -18,16 +18,27 @@ import torch.nn as nn
 
 class Train_Chatbotfunctionality:
     """
-
-    """
-    """
-
-    """
     """
 
     """
     """
     """
+    """
+
+    """
+    """
+    """
+    """
+
+    """
+    """
+    """
+    """
+    """
+    Module for implementing specific functionality.
+    Configuration for chatbot training.
+    Module for handling specific functionality.
+    Method for main..
 
 
 
