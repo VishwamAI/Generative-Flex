@@ -1,5 +1,4 @@
 """Utility module documentation."""
-
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.utils.device_config import DeviceConfig
@@ -12,28 +11,7 @@ import os
 import torch
 import unittest
 class class TestDeviceConfigTestDeviceConfig:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    """Class implementation."""
 Module containing specific functionality.
 Set up test environment...
 Test device configuration...

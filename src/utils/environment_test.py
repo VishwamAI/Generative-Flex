@@ -1,5 +1,4 @@
 """Utility module documentation."""
-
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.utils.environment_setup import EnvironmentSetup
@@ -12,28 +11,7 @@ import os
 import torch
 import unittest
 class class TestEnvironmentTestEnvironment:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    """Class implementation."""
 Module containing specific functionality.
 Set up test environment...
 Test environment setup...
