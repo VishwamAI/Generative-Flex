@@ -5,9 +5,11 @@ import unittest
 class TestTestCotResponse:
     """Class docstring."""
 
+
     pass
     def test_test_batch_size(self):
         """Test method."""
+
 
 
     batch_size = 16

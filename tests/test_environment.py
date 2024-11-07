@@ -5,9 +5,11 @@ import unittest
 class TestEnvironment:
     """Class docstring."""
 
+
     pass
     def test_test_cuda_availability(self):
         """Test method."""
+
 
 
     if torch.cuda.is_available():

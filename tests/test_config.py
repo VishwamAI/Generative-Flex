@@ -5,9 +5,11 @@ import unittest
 class TestTestConfig:
     """Class docstring."""
 
+
     pass
     def test_test_math_config(self):
         """Test method."""
+
 
 
     config = MathConfig()

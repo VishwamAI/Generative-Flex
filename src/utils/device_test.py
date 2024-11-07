@@ -13,6 +13,7 @@ import unittest
 class TestDeviceConfigTestDeviceConfig:
     """Class docstring."""
 
+
     Module containing specific functionality.
     Set up test environment...
     Test device configuration...
