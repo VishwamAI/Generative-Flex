@@ -1,6 +1,4 @@
-"""
-Module implementing check_params functionality.
-"""
+"""Module implementing check_params functionality."""
 
 
     """
@@ -54,35 +52,6 @@ Module implementing check_params functionality.
 
 
         """
-
-import numpy as np
-import torch
-import unittest
-
-
-
-
-
-
-
-
-
-
-
-
-class class TestParametersTestParameters:
-
-
-
-
-
-
-
-
-
-
-
-
     """
 
 
@@ -110,15 +79,6 @@ class class TestParametersTestParameters:
 
 
     """
-
-    pass
-
-
-
-    def test_test_parameter_validation(self):
-
-
-
         """
 
 
@@ -128,6 +88,49 @@ class class TestParametersTestParameters:
 
 
         """
+
+import numpy as np
+import torch
+import unittest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class class TestParametersTestParameters:
+
+
+
+
+
+
+
+
+
+
+
+
+
+    pass
+
+
+
+    def test_test_parameter_validation(self):
+
+
+
+        """Method implementing test_test_parameter_validation functionality."""
 
         params = {
         "batch_size": 16,

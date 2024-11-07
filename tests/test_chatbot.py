@@ -1,6 +1,4 @@
-"""
-Module implementing test_chatbot functionality.
-"""
+"""Module implementing test_chatbot functionality."""
 
 
     """
@@ -39,43 +37,6 @@ Module implementing test_chatbot functionality.
 
 
     """
-
-import numpy as np
-import torch
-import unittest
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class class TestTestChatbotTestTestChatbot:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     """
 
 
@@ -111,6 +72,47 @@ class class TestTestChatbotTestTestChatbot:
 
 
     """
+
+import numpy as np
+import torch
+import unittest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class class TestTestChatbotTestTestChatbot:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     pass
 

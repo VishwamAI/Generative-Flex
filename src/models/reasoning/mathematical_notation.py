@@ -1,6 +1,4 @@
-"""
-Module implementing mathematical_notation functionality.
-"""
+"""Module implementing mathematical_notation functionality."""
 
 
     """
@@ -24,6 +22,49 @@ Module implementing mathematical_notation functionality.
 
 
     Class implementing MathematicalNotation functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class MathematicalNotation functionality.
+
+
+
 
 
 
@@ -75,6 +116,10 @@ import torch.nn as nn
 
 
 
+
+
+
+
 class class MathematicalNotationMathematicalNotation:
 
 
@@ -96,49 +141,6 @@ class class MathematicalNotationMathematicalNotation:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class MathematicalNotation functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
     Module containing specific functionality.
     Process mathematical notation.

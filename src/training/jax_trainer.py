@@ -1,6 +1,4 @@
-"""
-Module implementing jax_trainer functionality.
-"""
+"""Module implementing jax_trainer functionality."""
 
 
 """
@@ -34,6 +32,10 @@ import os
 import os
 import torch
 import torch
+
+
+
+
 
 
 

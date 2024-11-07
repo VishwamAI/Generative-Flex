@@ -1,6 +1,4 @@
-"""
-Module implementing test_simple functionality.
-"""
+"""Module implementing test_simple functionality."""
 
 
     """
@@ -21,6 +19,37 @@ Module implementing test_simple functionality.
 
 
     Class implementing TestSimple functionality.
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestSimple functionality.
+
+
+
 
 
 
@@ -60,6 +89,10 @@ import unittest
 
 
 
+
+
+
+
 class class TestSimpleTestSimple:
 
 
@@ -75,37 +108,6 @@ class class TestSimpleTestSimple:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestSimple functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
 Module containing specific functionality.
 Test simple model functionality.

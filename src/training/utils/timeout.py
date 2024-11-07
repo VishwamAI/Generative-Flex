@@ -1,6 +1,4 @@
-"""
-Module implementing timeout functionality.
-"""
+"""Module implementing timeout functionality."""
 
 
 """
@@ -15,6 +13,10 @@ Module implementing timeout functionality.
 """
 
 from dataclasses import dataclass
+
+
+
+
 
 
 

@@ -1,6 +1,4 @@
-"""
-Module implementing test_minimal functionality.
-"""
+"""Module implementing test_minimal functionality."""
 
 
     """
@@ -21,6 +19,37 @@ Module implementing test_minimal functionality.
 
 
     Class implementing TestMinimal functionality.
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestMinimal functionality.
+
+
+
 
 
 
@@ -60,6 +89,10 @@ import unittest
 
 
 
+
+
+
+
 class class TestMinimalTestMinimal:
 
 
@@ -75,37 +108,6 @@ class class TestMinimalTestMinimal:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestMinimal functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
 Module containing specific functionality.
 Test minimal model functionality.

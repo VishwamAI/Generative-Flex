@@ -1,6 +1,4 @@
-"""
-Module implementing test_models functionality.
-"""
+"""Module implementing test_models functionality."""
 
 
     """
@@ -49,6 +47,99 @@ Module implementing test_models functionality.
 
 
     Class implementing TestModels functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestModels functionality.
+
+
+
 
 
 
@@ -165,6 +256,10 @@ import unittest
 
 
 
+
+
+
+
 class class TestModelsTestModels:
 
 
@@ -211,99 +306,6 @@ class class TestModelsTestModels:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestModels functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
     Module for implementing specific functionality.
     Method for setUp..

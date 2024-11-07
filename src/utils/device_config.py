@@ -1,6 +1,4 @@
-"""
-Module implementing device_config functionality.
-"""
+"""Module implementing device_config functionality."""
 
 
 """
@@ -24,6 +22,10 @@ import logging
 import numpy as np
 import os
 import torch
+
+
+
+
 
 
 

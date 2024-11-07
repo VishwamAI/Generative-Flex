@@ -1,6 +1,4 @@
-"""
-Module implementing test_simple_cot functionality.
-"""
+"""Module implementing test_simple_cot functionality."""
 
 
     """
@@ -21,6 +19,37 @@ Module implementing test_simple_cot functionality.
 
 
     Class implementing TestSimpleCot functionality.
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestSimpleCot functionality.
+
+
+
 
 
 
@@ -60,6 +89,10 @@ import unittest
 
 
 
+
+
+
+
 class class TestSimpleCotTestSimpleCot:
 
 
@@ -75,37 +108,6 @@ class class TestSimpleCotTestSimpleCot:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestSimpleCot functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
 Module containing specific functionality.
 Test simple chain-of-thought model.

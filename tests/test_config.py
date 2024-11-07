@@ -1,6 +1,4 @@
-"""
-Module implementing test_config functionality.
-"""
+"""Module implementing test_config functionality."""
 
 
     """
@@ -62,43 +60,6 @@ Module implementing test_config functionality.
 
 
         """
-
-import numpy as np
-import torch
-import unittest
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class class TestTestConfigTestTestConfig:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     """
 
 
@@ -134,15 +95,6 @@ class class TestTestConfigTestTestConfig:
 
 
     """
-
-    pass
-
-
-
-    def test_test_math_config(self):
-
-
-
         """
 
 
@@ -152,6 +104,57 @@ class class TestTestConfigTestTestConfig:
 
 
         """
+
+import numpy as np
+import torch
+import unittest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class class TestTestConfigTestTestConfig:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    pass
+
+
+
+    def test_test_math_config(self):
+
+
+
+        """Method implementing test_test_math_config functionality."""
 
         config = MathConfig()
         config.model_type = "math_reasoning"

@@ -1,6 +1,4 @@
-"""
-Module implementing accelerated_trainer functionality.
-"""
+"""Module implementing accelerated_trainer functionality."""
 
 
     """
@@ -71,5 +69,9 @@ import torch
 logger = logging.getLogger(__name__)
 @dataclass
 class
+
+
+
+
 
 

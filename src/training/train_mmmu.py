@@ -1,6 +1,4 @@
-"""
-Module implementing train_mmmu functionality.
-"""
+"""Module implementing train_mmmu functionality."""
 
 
     """
@@ -20,6 +18,9 @@ Module implementing train_mmmu functionality.
     """
     """
     Class implementing TrainConfig functionality.
+    """
+    """
+    Class implementing class TrainConfig functionality.
     """
 
 from dataclasses import dataclass, field
@@ -101,12 +102,13 @@ import torch
 
 
 
+
+
+
+
 logger = logging.getLogger(__name__)
 @dataclass
 class class TrainConfigTrainConfig:
-    """
-    Class implementing class TrainConfig functionality.
-    """
 
 Module containing training-related implementations.
 Configuration for MMMU training..

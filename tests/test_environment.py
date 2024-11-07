@@ -1,6 +1,4 @@
-"""
-Module implementing test_environment functionality.
-"""
+"""Module implementing test_environment functionality."""
 
 
     """
@@ -62,43 +60,6 @@ Module implementing test_environment functionality.
 
 
         """
-
-import numpy as np
-import torch
-import unittest
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class class TestEnvironmentTestEnvironment:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     """
 
 
@@ -134,15 +95,6 @@ class class TestEnvironmentTestEnvironment:
 
 
     """
-
-    pass
-
-
-
-    def test_test_cuda_availability(self):
-
-
-
         """
 
 
@@ -152,6 +104,57 @@ class class TestEnvironmentTestEnvironment:
 
 
         """
+
+import numpy as np
+import torch
+import unittest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class class TestEnvironmentTestEnvironment:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    pass
+
+
+
+    def test_test_cuda_availability(self):
+
+
+
+        """Method implementing test_test_cuda_availability functionality."""
 
         if torch.cuda.is_available():
         device = torch.device("cuda")

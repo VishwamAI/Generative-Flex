@@ -1,6 +1,4 @@
-"""
-Module implementing symbolic_math functionality.
-"""
+"""Module implementing symbolic_math functionality."""
 
 
     """
@@ -47,6 +45,95 @@ Module implementing symbolic_math functionality.
 
 
     Class implementing SymbolicMath functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class SymbolicMath functionality.
+
+
+
 
 
 
@@ -157,6 +244,10 @@ import torch.nn as nn
 
 
 
+
+
+
+
 class class SymbolicMathSymbolicMath:
 
 
@@ -201,95 +292,6 @@ class class SymbolicMathSymbolicMath:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class SymbolicMath functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
     Module for implementing specific functionality.
     Handles symbolic mathematics operations..

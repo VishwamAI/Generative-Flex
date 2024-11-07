@@ -1,6 +1,4 @@
-"""
-Module implementing simple_test functionality.
-"""
+"""Module implementing simple_test functionality."""
 
 
     """
@@ -63,47 +61,6 @@ class class TestSimpleModelTestSimpleModel:
 
 
     """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestSimpleModel functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     """
 
 
@@ -135,6 +92,51 @@ class class TestSimpleModelTestSimpleModel:
 
 
     Class implementing TestSimpleModel functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestSimpleModel functionality.
 
 
 

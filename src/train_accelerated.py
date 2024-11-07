@@ -1,6 +1,4 @@
-"""
-Module implementing train_accelerated functionality.
-"""
+"""Module implementing train_accelerated functionality."""
 
 
 """
@@ -45,6 +43,10 @@ import os
 import torch
 import torch
 import torch.nn as nn
+
+
+
+
 
 
 

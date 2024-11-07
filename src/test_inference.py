@@ -1,6 +1,4 @@
-"""
-Module implementing test_inference functionality.
-"""
+"""Module implementing test_inference functionality."""
 
 
     """
@@ -21,6 +19,37 @@ Module implementing test_inference functionality.
 
 
     Class implementing TestInference functionality.
+
+
+
+
+
+
+
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class TestInference functionality.
+
+
+
 
 
 
@@ -60,6 +89,10 @@ import unittest
 
 
 
+
+
+
+
 class class TestInferenceTestInference:
 
 
@@ -75,37 +108,6 @@ class class TestInferenceTestInference:
 
 
 
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestInference functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    """
 
 Module containing specific functionality.
 Test inference functionality.
