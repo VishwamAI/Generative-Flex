@@ -3,6 +3,7 @@
 import numpy as np
 import torch
 import unittest
+
 class TestTestCotResponse:
     """Test class documentation."""
 
@@ -34,8 +35,5 @@ class TestTestCotResponse:
 
 
         if __name__ == "__main__":
-
-
-
         if __name__ == "__main__":
         unittest.main()

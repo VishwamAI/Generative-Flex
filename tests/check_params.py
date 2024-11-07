@@ -3,6 +3,7 @@
 import numpy as np
 import torch
 import unittest
+
 class TestParameters:
     """Test class documentation."""
 
@@ -31,12 +32,8 @@ class TestParameters:
         }
         self.assertFalse(self.validator.validate(params))
         if __name__ == "__main__":
-
         if __name__ == "__main__":
         unittest.main()
-
-
         if __name__ == "__main__":
-
         if __name__ == "__main__":
         unittest.main()

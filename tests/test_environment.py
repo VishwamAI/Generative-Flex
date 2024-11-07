@@ -3,6 +3,7 @@
 import numpy as np
 import torch
 import unittest
+
 class TestEnvironment:
     """Test class documentation."""
 
@@ -32,12 +33,7 @@ class TestEnvironment:
         self.assertIsNotNone(device)
         if torch.cuda.is_available():
         self.assertTrue(torch.cuda.is_initialized())
-
-
         if __name__ == "__main__":
-
-
-
         if __name__ == "__main__":
         unittest.main()
 
@@ -45,8 +41,5 @@ class TestEnvironment:
 
 
         if __name__ == "__main__":
-
-
-
         if __name__ == "__main__":
         unittest.main()

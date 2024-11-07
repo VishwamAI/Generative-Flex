@@ -3,6 +3,7 @@
 import numpy as np
 import torch
 import unittest
+
 class TestTestConfig:
     """Test class documentation."""
 
@@ -31,12 +32,7 @@ class TestTestConfig:
         config.__post_init__()
         except ValueError:
         self.fail("Valid model type raised ValueError")
-
-
         if __name__ == "__main__":
-
-
-
         if __name__ == "__main__":
         unittest.main()
 
@@ -44,8 +40,5 @@ class TestTestConfig:
 
 
         if __name__ == "__main__":
-
-
-
         if __name__ == "__main__":
         unittest.main()
