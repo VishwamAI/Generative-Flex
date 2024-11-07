@@ -177,8 +177,8 @@ from src.models.reasoning.math_head import MathHead
 
 logger = logging.getLogger(__name__)
 @dataclass
-class :
-"""
+class TrainConfig:
+        """
 
 
 
