@@ -21,7 +21,8 @@ import torch
 @dataclass()
 class ModelConfig:
     pass
-    """."""
+    pass
+    pass
     pass
     pass
     pass
