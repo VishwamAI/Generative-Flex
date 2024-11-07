@@ -4,6 +4,7 @@ import unittest
 
 class TestTestModels:
     """Class docstring."""
+
     pass
 
 if __name__ == "__main__":
