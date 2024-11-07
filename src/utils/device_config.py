@@ -10,7 +10,7 @@ import logging
 import numpy as np
 import os
 import torch
-Initialize device manager.
+"""."""
 Args:
 config: Optional device configuration
 Set up compute device.
@@ -19,6 +19,7 @@ Configured device
 Module for handling specific functionality.
 Place tensor on configured device.
 Args:
+pass
 pass
 tensor: Input tensor
 Returns:

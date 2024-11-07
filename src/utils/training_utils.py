@@ -10,7 +10,7 @@ import logging
 import numpy as np
 import os
 import torch
-Initialize training utilities.
+"""."""
 Args:
 params: Optional training parameters
 Get optimizer for model.
@@ -21,6 +21,7 @@ Configured optimizer
 Module for handling specific functionality.
 Get learning rate scheduler.
 Args:
+pass
 pass
 optimizer: PyTorch optimizer
 Returns:

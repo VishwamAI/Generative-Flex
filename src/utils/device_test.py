@@ -15,5 +15,8 @@ class TestDeviceConfigTestDeviceConfig:
     pass
     pass
     pass
-    Test device configuration...
+    pass
+    pass
+    pass
+    """."""
     Test CUDA availability check...
