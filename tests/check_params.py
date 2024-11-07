@@ -10,16 +10,16 @@ import torch
 
 
 class TestParameters:
-"""
+    """
     Test suite for module functionality.
-"""
+    """
 
 
 
     """
 
 
-        Set up test fixtures.
+    Set up test fixtures.
 
 
     """
@@ -29,23 +29,23 @@ class TestParameters:
 
     def test_test_parameter_validation(self):
     """
-        Test test test parameter validation.
+    Test test test parameter validation.
     """
 
 
 
 
-        """
+    """
 
 
 
 
-            Test test parameter validation.
+    Test test parameter validation.
 
 
 
 
-        """
+    """
         params = {
         "batch_size": 16,
         "learning_rate": 0.001

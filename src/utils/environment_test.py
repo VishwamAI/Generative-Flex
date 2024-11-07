@@ -14,7 +14,7 @@ from src.utils.environment_setup import EnvironmentSetup
 
 
 """
-\1
+    \1
 """
 
 
@@ -42,7 +42,7 @@ Test environment setup...
 Test CUDA setup...
     """
 
-        
-    
+
+
 
     """

@@ -178,7 +178,7 @@ from src.models.reasoning.math_head import MathHead
 logger = logging.getLogger(__name__)
 @dataclass
 class TrainConfig:
-        """
+    """
 
 
 
@@ -186,14 +186,14 @@ class TrainConfig:
 
 
 
-"""
+    """
 Module containing training-related implementations.
 Configuration for MMMU training..
 Module for handling specific functionality.
 Method for main..
-"""
+    """
 
 
 
 
-"""
+    """

@@ -50,18 +50,18 @@ import os
 
 
 """
-Module containing specific functionality.
+    Module containing specific functionality.
 """
 from typing import List, Optional, Dict
 from dataclasses import dataclass
 @dataclass
 class ModelConfig:
-"""
-Class implementing class functionality.
-"""
+    """
+    Class implementing class functionality.
+    """
 Module for implementing specific functionality.
 Text-to-anything generation model.
 Method for __init__..
 Method for generate..
-"""
-"""
+    """
+    """

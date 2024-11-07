@@ -14,7 +14,7 @@ from src.utils.device_config import DeviceConfig
 
 
 """
-\1
+    \1
 """
 
 
@@ -42,7 +42,7 @@ Test device configuration...
 Test CUDA availability check...
     """
 
-        
-    
+
+
 
     """

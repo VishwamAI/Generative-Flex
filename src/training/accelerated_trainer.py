@@ -119,7 +119,8 @@ from accelerate import dataclasses
 
 """
 logger = logging.getLogger(__name__)
-@dataclass class:
+@dataclass
+class
     """
     
 

@@ -14,7 +14,7 @@ from src.utils.gpu_utils import GPUUtils
 
 
 """
-\1
+    \1
 """
 
 
@@ -42,7 +42,7 @@ Test GPU memory utilities...
 Test GPU availability check...
     """
 
-        
-    
+
+
 
     """

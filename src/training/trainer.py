@@ -130,7 +130,7 @@ import torch
 
 """
 class Trainer:
-        """
+    """
 
 
 
@@ -138,16 +138,16 @@ class Trainer:
 
 
 
-"""
+    """
 Base trainer implementation.
 Method for __init__..
 Method for train_step..
 Method for evaluate..
 Module for handling specific functionality.
 Method for train..
-"""
+    """
 
 
 
 
-"""
+    """

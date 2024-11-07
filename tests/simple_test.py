@@ -34,9 +34,9 @@ from src.models import SimpleModel
 """
 
 class TestSimpleModel:
-"""
+    """
     \1
-"""
+    """
     batch_size = 16
     input_tensor = torch.randn(batch_size, 32)
     output = self.model(input_tensor)

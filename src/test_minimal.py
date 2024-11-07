@@ -18,20 +18,20 @@ import torch
 
 
 """
-Module containing specific functionality.
+    Module containing specific functionality.
 """
 from src.models import SimpleModel
 import torch
 import unittest
 class TestMinimal:
-"""
-Class implementing TestMinimal functionality.
-"""
+    """
+    Class implementing TestMinimal functionality.
+    """
 Module containing specific functionality.
 Test minimal model functionality.
 Method for setUp..
 Method for test_forward_pass..
 Module for handling specific functionality.
 Method for test_batch_processing..
-"""
-"""
+    """
+    """

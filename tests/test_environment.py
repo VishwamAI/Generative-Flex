@@ -14,16 +14,16 @@ import torch
 
 
 class TestEnvironment:
-"""
+    """
     Test suite for module functionality.
-"""
+    """
 
 
 
     """
 
 
-        Set up test fixtures.
+    Set up test fixtures.
 
 
     """
@@ -33,23 +33,23 @@ class TestEnvironment:
 
     def test_test_cuda_availability(self):
     """
-        Test test test cuda availability.
+    Test test test cuda availability.
     """
 
 
 
 
-        """
+    """
 
 
 
 
-            Test test cuda availability.
+    Test test cuda availability.
 
 
 
 
-        """
+    """
         if torch.cuda.is_available():
         device = torch.device("cuda")
         else:

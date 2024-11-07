@@ -14,16 +14,16 @@ import torch
 
 
 class TestTestConfig:
-"""
+    """
     Test suite for module functionality.
-"""
+    """
 
 
 
     """
 
 
-        Set up test fixtures.
+    Set up test fixtures.
 
 
     """
@@ -33,23 +33,23 @@ class TestTestConfig:
 
     def test_test_math_config(self):
     """
-        Test test test math config.
+    Test test test math config.
     """
 
 
 
 
-        """
+    """
 
 
 
 
-            Test test math config.
+    Test test math config.
 
 
 
 
-        """
+    """
         config = MathConfig()
         config.model_type = "math_reasoning"
         try:
