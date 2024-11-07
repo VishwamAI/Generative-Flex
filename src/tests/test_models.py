@@ -14,9 +14,9 @@ import torch.nn as nn
 import unittest
 
 class Test_Modelsfunctionality:
-"""
-"""
-"""
+    """
+    """
+    """
 
 
 
@@ -59,7 +59,7 @@ class Test_Modelsfunctionality:
 
 
 
-    Class implementing TestModels functionality.
+        Class implementing TestModels functionality.
 
 
 
@@ -102,8 +102,8 @@ class Test_Modelsfunctionality:
 
 
 
-"""
-"""
+    """
+    """
 
 
 
@@ -149,7 +149,7 @@ class Test_Modelsfunctionality:
 
 
 
-    Class implementing class TestModels functionality.
+        Class implementing class TestModels functionality.
 
 
 
@@ -195,7 +195,7 @@ class Test_Modelsfunctionality:
 
 
 
-"""
+    """
 class TestModels:
 
 

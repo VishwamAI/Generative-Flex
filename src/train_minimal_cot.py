@@ -17,19 +17,17 @@ import torch
 import torch.nn as nn
 
 class Train_Minimal_Cotfunctionality:
-"""
+    """
 
-"""
-"""
+    """
+    """
 
-"""
-"""
+    """
+    """
 
-"""
-"""
-"""
-
-
+    """
+    """
+    """
 
 
 
@@ -65,7 +63,9 @@ class Train_Minimal_Cotfunctionality:
 
 
 
-Module for implementing specific functionality.
-Configuration for minimal chain-of-thought training.
-Module for handling specific functionality.
-Method for main..
+
+
+    Module for implementing specific functionality.
+    Configuration for minimal chain-of-thought training.
+    Module for handling specific functionality.
+    Method for main..

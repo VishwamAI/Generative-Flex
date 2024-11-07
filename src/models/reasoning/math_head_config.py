@@ -27,4 +27,4 @@ class ModelConfig:
     max_position_embeddings: int = 512
     num_experts: int = 8
     num_math_tokens: int = 1000
-"""
+    """

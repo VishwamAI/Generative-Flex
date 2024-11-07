@@ -11,12 +11,12 @@ import torch
 import unittest
 
 class Test_Simplefunctionality:
-"""
-    Class implementing TestSimple functionality.
-"""
-"""
-"""
-"""
+    """
+        Class implementing TestSimple functionality.
+    """
+    """
+    """
+    """
 
 
 
@@ -28,7 +28,7 @@ class Test_Simplefunctionality:
 
 
 
-    Class implementing TestSimple functionality.
+        Class implementing TestSimple functionality.
 
 
 
@@ -40,23 +40,8 @@ class Test_Simplefunctionality:
 
 
 
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestSimple functionality.
+    """
+    """
 
 
 
@@ -71,7 +56,22 @@ class Test_Simplefunctionality:
 
 
 
-"""
+        Class implementing class TestSimple functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
 class TestSimpleTestSimple:
 
 
@@ -92,8 +92,8 @@ class TestSimpleTestSimple:
 
 
     """Class implementation."""
-Test simple model functionality.
-Method for setUp..
-Method for test_model_output..
-Module for handling specific functionality.
-Method for test_model_batch..
+    Test simple model functionality.
+    Method for setUp..
+    Method for test_model_output..
+    Module for handling specific functionality.
+    Method for test_model_batch..

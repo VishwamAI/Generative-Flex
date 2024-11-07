@@ -17,19 +17,17 @@ import torch
 import torch.nn as nn
 
 class Train_Cot_Fixedfunctionality:
-"""
+    """
 
-"""
-"""
+    """
+    """
 
-"""
-"""
+    """
+    """
 
-"""
-"""
-"""
-
-
+    """
+    """
+    """
 
 
 
@@ -65,7 +63,9 @@ class Train_Cot_Fixedfunctionality:
 
 
 
-Module for implementing specific functionality.
-Configuration for chain-of-thought training.
-Module for handling specific functionality.
-Method for main..
+
+
+    Module for implementing specific functionality.
+    Configuration for chain-of-thought training.
+    Module for handling specific functionality.
+    Method for main..

@@ -11,12 +11,12 @@ import torch
 import unittest
 
 class Test_Inferencefunctionality:
-"""
-    Class implementing TestInference functionality.
-"""
-"""
-"""
-"""
+    """
+        Class implementing TestInference functionality.
+    """
+    """
+    """
+    """
 
 
 
@@ -28,7 +28,7 @@ class Test_Inferencefunctionality:
 
 
 
-    Class implementing TestInference functionality.
+        Class implementing TestInference functionality.
 
 
 
@@ -40,23 +40,8 @@ class Test_Inferencefunctionality:
 
 
 
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestInference functionality.
+    """
+    """
 
 
 
@@ -71,7 +56,22 @@ class Test_Inferencefunctionality:
 
 
 
-"""
+        Class implementing class TestInference functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
 class TestInferenceTestInference:
 
 
@@ -92,8 +92,8 @@ class TestInferenceTestInference:
 
 
     """Class implementation."""
-Test inference functionality.
-Method for setUp..
-Method for test_inference..
-Module for handling specific functionality.
-Method for test_batch_inference..
+    Test inference functionality.
+    Method for setUp..
+    Method for test_inference..
+    Module for handling specific functionality.
+    Method for test_batch_inference..

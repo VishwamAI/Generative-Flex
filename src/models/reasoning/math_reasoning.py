@@ -32,10 +32,10 @@ import torch.nn as nn
 @dataclass
 class ModelConfigModelConfig:
     """Class implementation."""
-Configuration for mathematical reasoning..
-Class for MathReasoning..
-Mathematical reasoning module..
-Module for handling specific functionality.
-Method for __init__..
-Module for handling specific functionality.
-Method for forward..
+    Configuration for mathematical reasoning..
+    Class for MathReasoning..
+    Mathematical reasoning module..
+    Module for handling specific functionality.
+    Method for __init__..
+    Module for handling specific functionality.
+    Method for forward..

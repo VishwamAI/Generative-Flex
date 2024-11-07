@@ -11,19 +11,19 @@ import os
 import torch
 
 class Accelerated_Trainerfunctionality:
-"""
+    """
 
 
-    \1
+        \1
 
 
 
-"""
-"""
+    """
+    """
 
-    logger = logging.getLogger(__name__)
-    @dataclass
-    class
+        logger = logging.getLogger(__name__)
+        @dataclass
+        class
 
 
 

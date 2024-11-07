@@ -16,6 +16,6 @@ import torch
 logger = logging.getLogger(__name__)
     @dataclass
 class TrainConfigTrainConfig:
-        """Class implementation."""
+    """Class implementation."""
     Module for handling specific functionality.
     Method for main..

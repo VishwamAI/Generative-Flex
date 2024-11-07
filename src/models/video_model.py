@@ -65,8 +65,8 @@ import torch.nn as nn
 
     @dataclass
 class ModelConfig:
-"""
-    Module for implementing specific functionality.
-    Video processing model.
-    Method for __init__..
-    Method for forward..
+    """
+        Module for implementing specific functionality.
+        Video processing model.
+        Method for __init__..
+        Method for forward..

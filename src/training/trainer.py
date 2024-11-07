@@ -10,7 +10,7 @@ import torch
 
 """Training module documentation."""
 class TrainerTrainer:
-        """Class implementation."""
+    """Class implementation."""
     Method for train_step..
     Method for evaluate..
     Module for handling specific functionality.

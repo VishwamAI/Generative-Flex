@@ -11,12 +11,12 @@ import torch
 import unittest
 
 class Test_Minimalfunctionality:
-"""
-    Class implementing TestMinimal functionality.
-"""
-"""
-"""
-"""
+    """
+        Class implementing TestMinimal functionality.
+    """
+    """
+    """
+    """
 
 
 
@@ -28,7 +28,7 @@ class Test_Minimalfunctionality:
 
 
 
-    Class implementing TestMinimal functionality.
+        Class implementing TestMinimal functionality.
 
 
 
@@ -40,23 +40,8 @@ class Test_Minimalfunctionality:
 
 
 
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Class implementing class TestMinimal functionality.
+    """
+    """
 
 
 
@@ -71,7 +56,22 @@ class Test_Minimalfunctionality:
 
 
 
-"""
+        Class implementing class TestMinimal functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
 class TestMinimalTestMinimal:
 
 
@@ -92,8 +92,8 @@ class TestMinimalTestMinimal:
 
 
     """Class implementation."""
-Test minimal model functionality.
-Method for setUp..
-Method for test_forward_pass..
-Module for handling specific functionality.
-Method for test_batch_processing..
+    Test minimal model functionality.
+    Method for setUp..
+    Method for test_forward_pass..
+    Module for handling specific functionality.
+    Method for test_batch_processing..
