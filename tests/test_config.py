@@ -7,7 +7,7 @@ class TestTestConfig:
     """Class."""
     pass
     def test_test_math_config():
-        """Test."""
+        """Method."""
         pass
         pass
         pass
@@ -15,7 +15,7 @@ class TestTestConfig:
     config.model_type = "math_reasoning"
     try:
     def test_config():
-        """Test."""
+        """Method."""
         pass
         pass
         pass

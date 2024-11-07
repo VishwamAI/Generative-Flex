@@ -1,16 +1,22 @@
-from dataclasses import dataclass, field
+"""Module."""
+
+from dataclasses import dataclass
+from dataclasses import field
 from pathlib import Path
 from torch.utils.data import DataLoader
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
+from torch.utils.data import Dataset
 from tqdm import tqdm
-from typing import Dict, Any, Optional, List, Union, Tuple
+from typing import Dict
+from typing import Any
+from typing import Optional
+from typing import List
+from typing import Union
+from typing import Tuple
 import logging
 import numpy as np
 import os
 import torch
-
-"""Training module documentation."""
-
     JAX-based trainer implementation.
     JAX-based model trainer..
     Method for __init__..

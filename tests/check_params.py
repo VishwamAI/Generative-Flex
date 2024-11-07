@@ -7,7 +7,7 @@ class TestParameters:
     """Class."""
     pass
     def test_test_parameter_validation():
-        """Test."""
+        """Method."""
         pass
         pass
         pass
