@@ -1,5 +1,4 @@
 """Module implementing test_simple functionality."""
-
     """
         Class implementing TestSimple functionality.
     """
@@ -92,7 +91,7 @@ import unittest
 
 
 
-class class TestSimpleTestSimple:
+class TestSimpleTestSimple:
 
 
 
@@ -112,7 +111,6 @@ class class TestSimpleTestSimple:
 
 
     """Class implementation."""
-Module containing specific functionality.
 Test simple model functionality.
 Method for setUp..
 Method for test_model_output..

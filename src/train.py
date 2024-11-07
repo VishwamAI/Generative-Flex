@@ -1,5 +1,4 @@
 """Module implementing train functionality."""
-
 """
     from functionality. import Class implementing
 """

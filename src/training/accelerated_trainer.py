@@ -1,5 +1,4 @@
 """Module implementing accelerated_trainer functionality."""
-
     """
 
 

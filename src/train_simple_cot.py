@@ -1,5 +1,4 @@
 """Module implementing train_simple_cot functionality."""
-
 """
     from functionality. import Class implementing
 """

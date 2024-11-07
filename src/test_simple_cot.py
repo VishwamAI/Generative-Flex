@@ -1,5 +1,4 @@
 """Module implementing test_simple_cot functionality."""
-
     """
         Class implementing TestSimpleCot functionality.
     """
@@ -92,7 +91,7 @@ import unittest
 
 
 
-class class TestSimpleCotTestSimpleCot:
+class TestSimpleCotTestSimpleCot:
 
 
 
@@ -112,7 +111,6 @@ class class TestSimpleCotTestSimpleCot:
 
 
     """Class implementation."""
-Module containing specific functionality.
 Test simple chain-of-thought model.
 Method for setUp..
 Method for test_cot_generation..

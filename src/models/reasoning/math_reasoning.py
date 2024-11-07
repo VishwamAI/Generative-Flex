@@ -1,5 +1,4 @@
 """Model module documentation."""
-from dataclasses import dataclass
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader, Dataset
@@ -31,9 +30,8 @@ import torch.nn as nn
 
 
 @dataclass
-class class ModelConfigModelConfig:
+class ModelConfigModelConfig:
     """Class implementation."""
-Module containing specific functionality.
 Configuration for mathematical reasoning..
 Class for MathReasoning..
 Mathematical reasoning module..

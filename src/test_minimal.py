@@ -1,5 +1,4 @@
 """Module implementing test_minimal functionality."""
-
     """
         Class implementing TestMinimal functionality.
     """
@@ -92,7 +91,7 @@ import unittest
 
 
 
-class class TestMinimalTestMinimal:
+class TestMinimalTestMinimal:
 
 
 
@@ -112,7 +111,6 @@ class class TestMinimalTestMinimal:
 
 
     """Class implementation."""
-Module containing specific functionality.
 Test minimal model functionality.
 Method for setUp..
 Method for test_forward_pass..

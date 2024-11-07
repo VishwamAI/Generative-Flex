@@ -1,5 +1,4 @@
 """Module implementing test_inference functionality."""
-
     """
         Class implementing TestInference functionality.
     """
@@ -92,7 +91,7 @@ import unittest
 
 
 
-class class TestInferenceTestInference:
+class TestInferenceTestInference:
 
 
 
@@ -112,7 +111,6 @@ class class TestInferenceTestInference:
 
 
     """Class implementation."""
-Module containing specific functionality.
 Test inference functionality.
 Method for setUp..
 Method for test_inference..

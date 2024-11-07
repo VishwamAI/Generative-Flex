@@ -1,6 +1,5 @@
 """Training module documentation."""
     from dataclasses import dataclass, field
-    from dataclasses import dataclass, field
     from pathlib import Path
     from pathlib import Path
     from pathlib import Path
@@ -29,6 +28,5 @@
     @dataclass
     class TrainConfigTrainConfig:
         """Class implementation."""
-    Configuration for MMMU training..
     Module for handling specific functionality.
     Method for main..

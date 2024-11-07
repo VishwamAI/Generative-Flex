@@ -1,5 +1,4 @@
 """Training module documentation."""
-    from dataclasses import dataclass, field
     from pathlib import Path
     from torch.utils.data import DataLoader
     from torch.utils.data import DataLoader, Dataset
@@ -12,7 +11,6 @@
     import torch
     class TrainerTrainer:
         """Class implementation."""
-    Method for __init__..
     Method for train_step..
     Method for evaluate..
     Module for handling specific functionality.

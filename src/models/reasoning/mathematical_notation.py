@@ -1,5 +1,4 @@
 """Model module documentation."""
-    from dataclasses import dataclass, field
     from pathlib import Path
     from torch.utils.data import DataLoader, Dataset
     from tqdm import tqdm

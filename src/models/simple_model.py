@@ -1,5 +1,4 @@
 """Module implementing simple_model functionality."""
-
 """
 """
     """

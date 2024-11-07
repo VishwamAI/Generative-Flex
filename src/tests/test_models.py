@@ -1,5 +1,4 @@
 """Module implementing test_models functionality."""
-
     """
     """
     """
@@ -310,6 +309,5 @@ class TestModels:
 
 
     """Test class implementation."""
-    Method for setUp..
     Method for test_transformer_model..
     Method for test_model_forward..
