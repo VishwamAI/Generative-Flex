@@ -72,7 +72,7 @@ import torch.nn as nn
 
 
 
-class class SymbolicMathSymbolicMath:
+class class SymbolicMath:
 
 
 
@@ -117,6 +117,10 @@ class class SymbolicMathSymbolicMath:
 
 
 
+
+
+
+    """Model class implementation."""
     Module for implementing specific functionality.
     Handles symbolic mathematics operations..
     Method for __init__..

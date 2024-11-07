@@ -1,3 +1,5 @@
+"""Test module implementation."""
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel

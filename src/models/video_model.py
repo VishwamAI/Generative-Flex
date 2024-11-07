@@ -78,55 +78,8 @@ import torch.nn as nn
 
 
 @dataclass
-class class ModelConfigModelConfig:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class class ModelConfig:
+    """Model class implementation."""
     Module for implementing specific functionality.
     Video processing model.
     Method for __init__..

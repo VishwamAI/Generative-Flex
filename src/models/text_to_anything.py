@@ -62,40 +62,8 @@ import torch
 
 
 @dataclass
-class class ModelConfigModelConfig:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class class ModelConfig:
+    """Model class implementation."""
 Module for implementing specific functionality.
 Text-to-anything generation model.
 Method for __init__..

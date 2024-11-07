@@ -36,7 +36,7 @@ import torch.nn as nn
 
 
 
-class class MathematicalNotationMathematicalNotation:
+class class MathematicalNotation:
 
 
 
@@ -58,6 +58,10 @@ class class MathematicalNotationMathematicalNotation:
 
 
 
+
+
+
+    """Model class implementation."""
     Module containing specific functionality.
     Process mathematical notation.
     Args:

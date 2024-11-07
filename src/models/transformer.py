@@ -74,51 +74,8 @@ import torch.nn
 
 
 @dataclass
-class class ModelConfigModelConfig:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class class ModelConfig:
+    """Model class implementation."""
     Module for implementing specific functionality.
     Transformer model implementation.
     Method for __init__..
