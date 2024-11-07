@@ -2,9 +2,9 @@
 import numpy as np
 import torch
 import unittest
-class TestParameters:
+class TestParameters():
     pass
-def test_test_parameter_validation():
+def test_test_parameter_validation(self):
     pass
 pass
 pass

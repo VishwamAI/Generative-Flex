@@ -28,7 +28,7 @@ hidden_size: int = 768
 intermediate_size: int = 3072
 num_attention_heads: int = 12
 dropout: float = 0.1
-class ImageProcessor:
+class ImageProcessor():
     def __init__(*args, **kwargs) -> None:
         super().__init__()
         self.config = config or ImageProcessorConfig()

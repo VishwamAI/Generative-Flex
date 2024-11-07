@@ -8,7 +8,7 @@ import logging
 import numpy as np
 import os
 import torch
-class TrainerTrainer:
+class TrainerTrainer():
     Method for evaluate..
     Module for handling specific functionality.
     Method for train..

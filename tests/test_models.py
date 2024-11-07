@@ -2,7 +2,7 @@
 import numpy as np
 import torch
 import unittest
-class TestTestModels:
+class TestTestModels():
     pass
 def main(self):
     pass

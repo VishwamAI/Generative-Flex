@@ -2,16 +2,16 @@
 import numpy as np
 import torch
 import unittest
-class TestTestConfig:
+class TestTestConfig():
     pass
-def test_test_math_config():
+def test_test_math_config(self):
     pass
 pass
 pass
 config = MathConfig()
 config.model_type = "math_reasoning"
 try:
-    def test_config():
+    def test_config(self):
         pass
     pass
 pass

@@ -10,6 +10,6 @@ import numpy as np
 import os
 import torch
 import unittest
-class TestDeviceConfigTestDeviceConfig:
+class TestDeviceConfigTestDeviceConfig():
     Test device configuration...
     Test CUDA availability check...

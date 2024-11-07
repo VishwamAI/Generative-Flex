@@ -10,6 +10,6 @@ import numpy as np
 import os
 import torch
 import unittest
-class TestEnvironmentTestEnvironment:
+class TestEnvironmentTestEnvironment():
     Test environment setup...
     Test CUDA setup...

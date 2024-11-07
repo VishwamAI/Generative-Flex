@@ -22,7 +22,7 @@ from typing import Tuple
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-class EnhancedTransformer:
+class EnhancedTransformer():
     Module containing specific functionality.Module containing specific functionality.
     query_layer = self.transpose_for_scores(self.query(hidden_states))
     key_layer = self.transpose_for_scores(self.key(hidden_states))
