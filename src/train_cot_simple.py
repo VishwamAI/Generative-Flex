@@ -56,7 +56,7 @@ from typing import Dict, Optional
 import torch.nn as nn
 from dataclasses import *
 from src.models import *
-from src.models.dataclass from: import dataclass from:
+from dataclasses import dataclass
 """
 from functionality. import Class implementing
 """
