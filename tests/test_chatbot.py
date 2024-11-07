@@ -3,7 +3,8 @@ import torch
 import unittest
 
 class TestTestChatbot:
-    """Class docstring."""
+    """Class."""
+
 
 
     pass

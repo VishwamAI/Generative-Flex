@@ -11,7 +11,8 @@ import torch
 import unittest
 
 class TestEnvironmentTestEnvironment:
-    """Class docstring."""
+    """Class."""
+
 
 
     Module containing specific functionality.

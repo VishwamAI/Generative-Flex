@@ -3,12 +3,14 @@ import torch
 import unittest
 
 class TestEnvironment:
-    """Class docstring."""
+    """Class."""
+
 
 
     pass
     def test_test_cuda_availability(self):
-        """Test method."""
+        """Function."""
+
 
 
 

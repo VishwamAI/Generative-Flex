@@ -11,7 +11,8 @@ import torch
 import unittest
 
 class TestGPUTestGPU:
-    """Class docstring."""
+    """Class."""
+
 
 
     Module containing specific functionality.

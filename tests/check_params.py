@@ -3,12 +3,14 @@ import torch
 import unittest
 
 class TestParameters:
-    """Class docstring."""
+    """Class."""
+
 
 
     pass
     def test_test_parameter_validation(self):
-        """Test method."""
+        """Function."""
+
 
 
 

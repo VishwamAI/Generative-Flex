@@ -3,7 +3,8 @@ import torch
 import unittest
 
 class TestTestModels:
-    """Class docstring."""
+    """Class."""
+
 
 
     pass

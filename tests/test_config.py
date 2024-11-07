@@ -3,12 +3,14 @@ import torch
 import unittest
 
 class TestTestConfig:
-    """Class docstring."""
+    """Class."""
+
 
 
     pass
     def test_test_math_config(self):
-        """Test method."""
+        """Function."""
+
 
 
 
