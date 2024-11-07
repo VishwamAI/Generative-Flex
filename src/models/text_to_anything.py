@@ -62,7 +62,7 @@ import torch
 
 
 @dataclass
-class class ModelConfig:
+class ModelConfig:
     """Model class implementation."""
 Module for implementing specific functionality.
 Text-to-anything generation model.

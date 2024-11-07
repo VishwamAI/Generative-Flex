@@ -36,7 +36,7 @@ import torch.nn as nn
 
 
 
-class class MathematicalNotation:
+class MathematicalNotation:
 
 
 

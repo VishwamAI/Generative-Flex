@@ -88,28 +88,8 @@ import torch.nn as nn
 
 
 @dataclass
-class class ModelConfigModelConfig:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class class ModelConfig:
+    """Model class implementation."""
     Module containing specific functionality.
     A simple neural network model..
     Module for handling specific functionality.

@@ -72,7 +72,7 @@ import torch.nn as nn
 
 
 
-class class SymbolicMath:
+class SymbolicMath:
 
 
 

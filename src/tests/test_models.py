@@ -260,7 +260,7 @@ import unittest
 
 
 
-class class TestModelsTestModels:
+class class TestModels:
 
 
 
@@ -307,6 +307,10 @@ class class TestModelsTestModels:
 
 
 
+
+
+
+    """Test class implementation."""
     Module for implementing specific functionality.
     Method for setUp..
     Method for test_transformer_model..
