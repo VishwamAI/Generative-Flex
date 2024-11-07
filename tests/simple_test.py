@@ -1,5 +1,3 @@
-"""."""
-
 from dataclasses import dataclass
 from pathlib import Path
 from src.models import SimpleModel

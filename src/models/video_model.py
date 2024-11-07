@@ -1,5 +1,3 @@
-"""."""
-
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path

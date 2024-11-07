@@ -1,5 +1,3 @@
-"""."""
-
 from typing import Dict
 from typing import Any
 from typing import Optional
@@ -25,7 +23,6 @@ import torch.nn as nn
 from dataclasses import dataclass
 @dataclass
 class :
-    """."""
 Module containing specific functionality.Module containing specific functionality.
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)

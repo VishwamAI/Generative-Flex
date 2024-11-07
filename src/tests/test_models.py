@@ -1,5 +1,3 @@
-"""."""
-
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
@@ -22,10 +20,8 @@ import torch
 import torch.nn as nn
 import unittest
 class Test_Modelsfunctionality:
-    """."""
     Class implementing TestModels functionality.
     Class implementing class TestModels functionality.
 class TestModels:
-    """."""
     Method for test_transformer_model..
     Method for test_model_forward..
