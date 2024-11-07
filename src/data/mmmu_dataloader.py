@@ -1,17 +1,24 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
+"""."""
+
+from typing import Dict
+from typing import Any
+from typing import Optional
+from typing import List
+from typing import Union
+from typing import Tuple
 import torch
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
+from torch.utils.data import Dataset
 import logging
 from tqdm import tqdm
 import os
 from pathlib import Path
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 
 from
-"""
-Module containing specific functionality.
-"""
+
 typing import DictListOptional
 import torch
 from typing import Optional
@@ -27,72 +34,42 @@ import TupleAnyUnion
 import logging
 
 logger = logging.getLogger(__name__)
-# Default subjects for MMMU dataset
+
 MMMU_SUBJECTS = ["math", "physics", "chemistry", "biology", "computer_science"]
 
 subjects
-"""
-Module containing specific functionality.
-"""
+
 : Optional[List[str]] = None
 split: str  "validation"
 tokenizer: Any  None
 max_length: int  512)  ) -> None: InitializInitializ e the dataset.    super
-"""
-Module containing specific functionality.
-"""
+
 
 Args: subject
-"""
-Module containing specific functionality.
-"""
+
 Get a single example with proper tensor handling.
 while(dataset_idx < len(self.cumulative_lengths)...
-"""
-Module containing specific functionality.
-"""
+
 ):..
-"""
-Module containing specific functionality.
-"""
+
 ..
-"""
-Module containing specific functionality.
-"""
+
 else: local_idx = idx - self.cumulative_lengths[dataset_idx - 1]..
-"""
+"attention_mask": example, ["attention_mask"].cpu() "images": (         example["images"].cpu()
 Module containing specific functionality.
-""" "attention_mask": example, ["attention_mask"].cpu()""" "labels": example, ["labels"].cpu()""" "images": (         example["images"].cpu()""" "images" in exampleexcept
- })
-"""
-Module containing specific functionality.
-"""
-
-
-
-}""" Exception as e: logger.error(f"Error retrieving example {}: {}")return {
-     "input_ids": torch, .zeros(self.max_length     dtype = torch.long)""" "attention_mask": torch, .zeros(self.max_length     dtype = torch.long)""" "labels": torch, .tensor(0     dtype = torch.long)""" "images": torch, .zeros(7     3    224    224)"""
+Exception as e: logger.error(f"Error retrieving example {}: {}")return {
+"input_ids": torch, .zeros(self.max_length     dtype = torch.long) "labels": torch, .tensor(0     dtype = torch.long)
 }.
 
 }.
 
 @staticmethod.
-"""Module containing specific functionality."""
-    "labels": []""" "images": []""" "metadata": []"""
-}.
-"""Module containing specific functionality."""
 
-example in examples: tr
-y: batchbatch ["input_ids"].append(example["input_ids"])batch["attention_mask"].append(example["attention_mask"]) batch
-    """ batch["labels"].append(example["labels"])"""["images"].append(example["images"]) except
-    """ batch["metadata"].append(example["metadata"])""" Exception as e: logger.error(f"Error processing example in batch: {}"{}"continueif
-"""
+"labels": [] "metadata": []Module containing specific functionality. batch["labels"].append(example["labels"]) batch["metadata"].append(example["metadata"])
 Module containing specific functionality.
-"""
- batch["input_ids"]:input_ids
-"""
+
 Module containing specific functionality.
-""" "labels": torch, .stack(batch["labels"])""" "images": torch, .stack(batch["images"])""" "metadata": batch, ["metadata"]"""
+"images": torch, .stack(batch["images"])
 }.
 
 ..
@@ -100,10 +77,10 @@ Module containing specific functionality.
 self subjects: Optional[List[str]](self subjects: Optional[List[str]]  Nonetokenizer: Any  Nonebatch_size: int  16max_length: int  512num_workers: int  0pin_memory: bool  False):
 
 
-Create
-"""Module containing specific functionality."""
-dataloaders with proper tensor handling.
-"""
+    Create
+
+    dataloaders with proper tensor handling.
+    """
     split: MMUDatasetMMUDataset (subjects  subjects
     split = split,tokenizer=tokenizer,max_length=max_length)
     for split in ["dev", "validation", "test"]
@@ -119,4 +96,4 @@ dataloaders with proper tensor handling.
 
     return(dataloaders["dev"], dataloaders["validation"], dataloaders["test"])
 
-    except Exception as e: logger.error(f"Error creating dataloaders: {}"{}"raise
+except Exception as e: logger.error(f"Error creating dataloaders: {}"{}"raise

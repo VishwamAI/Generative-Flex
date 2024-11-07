@@ -1,4 +1,5 @@
 """."""
+
 from dataclasses import dataclass
 from pathlib import Path
 from src.utils.device_config import DeviceConfig

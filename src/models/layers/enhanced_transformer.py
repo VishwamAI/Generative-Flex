@@ -1,17 +1,27 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
+"""."""
+
+from typing import Dict
+from typing import Any
+from typing import Optional
+from typing import List
+from typing import Union
+from typing import Tuple
 import torch
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
+from torch.utils.data import Dataset
 import logging
 from tqdm import tqdm
 import os
 from pathlib import Path
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 
-"""
-Module containing specific functionality.
-"""
-from typing import Optional, Dict, Union, Tuple
+
+from typing import Optional
+from typing import Dict
+from typing import Union
+from typing import Tuple
 
 import torch
 import torch.nn as nn
@@ -19,30 +29,20 @@ import torch.nn.functional as F
 
 
 class EnhancedTransformer:
-    """
-Class implementing EnhancedTransformer functionality.
-"""
 
-Module containing specific functionality."""
-Enhanced transformer layer with advanced attention mechanisms.
 
-Method for __init__..
+    Module containing specific functionality.Module containing specific functionality.
+    query_layer = self.transpose_for_scores(self.query(hidden_states))
+    key_layer = self.transpose_for_scores(self.key(hidden_states))
+    value_layer = self.transpose_for_scores(self.value(hidden_states))
 
-Method for transpose_for_scores..
-"""Module containing specific functionality."""
-Method for forward..
-"""
-        query_layer = self.transpose_for_scores(self.query(hidden_states))
-        key_layer = self.transpose_for_scores(self.key(hidden_states))
-        value_layer = self.transpose_for_scores(self.value(hidden_states))
+    attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
+    attention_scores = attention_scores / torch.sqrt(
+    torch.tensor(self.attention_head_size, dtype=attention_scores.dtype)
+    )
 
-        attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
-        attention_scores = attention_scores / torch.sqrt(
-            torch.tensor(self.attention_head_size, dtype=attention_scores.dtype)
-        )
-
-        if attention_mask is not None:
-            attention_scores = attention_scores + attention_mask
+    if attention_mask is not None:
+        attention_scores = attention_scores + attention_mask
 
         attention_probs = F.softmax(attention_scores, dim=-1)
         attention_probs = self.attention_dropout(attention_probs)

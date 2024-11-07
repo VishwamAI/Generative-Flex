@@ -1,4 +1,5 @@
 """."""
+
 from typing import Dict
 from typing import Any
 from typing import Optional
@@ -24,19 +25,19 @@ import torch.nn as nn
 from dataclasses import dataclass
 @dataclass
 class :
-Module containing specific functionality.Module containing specific functionality.
-        residual = hidden_states
-        hidden_states = self.layer_norm1(hidden_states)
-        hidden_states, _ = self.attention(
-            hidden_states,
-            hidden_states,
-            hidden_states,
-            key_padding_mask=attention_mask
-        )
-        hidden_states = self.dropout(hidden_states)
-        hidden_states = residual + hidden_states
-        residual = hidden_states
-        hidden_states = self.layer_norm2(hidden_states)
-        hidden_states = self.feed_forward(hidden_states)
-        hidden_states = residual + hidden_states
-        return {"hidden_states": hidden_states}
+    Module containing specific functionality.Module containing specific functionality.
+    residual = hidden_states
+    hidden_states = self.layer_norm1(hidden_states)
+    hidden_states, _ = self.attention(
+    hidden_states,
+    hidden_states,
+    hidden_states,
+    key_padding_mask=attention_mask
+    )
+    hidden_states = self.dropout(hidden_states)
+    hidden_states = residual + hidden_states
+    residual = hidden_states
+    hidden_states = self.layer_norm2(hidden_states)
+    hidden_states = self.feed_forward(hidden_states)
+    hidden_states = residual + hidden_states
+    return {"hidden_states": hidden_states}

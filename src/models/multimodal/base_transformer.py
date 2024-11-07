@@ -1,61 +1,49 @@
-from typing import Dict, Any, Optional, List, Union, Tuple
+"""."""
+
+from typing import Dict
+from typing import Any
+from typing import Optional
+from typing import List
+from typing import Union
+from typing import Tuple
 import torch
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
+from torch.utils.data import Dataset
 import logging
 from tqdm import tqdm
 import os
 from pathlib import Path
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 
-"""
-Module containing specific functionality.
-"""
+
 import torch
 import torch.nn as nn
-from dataclasses from typing import Dict, List, Optional, Tuple import dataclass
-@dataclass class:
-    """
-Class implementing class functionality.
-"""
-
-Module containing specific functionality."""
-Base transformer model..
-
-Initialize base transformer.
-
-        Args:
-            config: Optional model configuration
-
-Set up transformer layers..
-"""Module containing specific functionality."""
-Process input through transformer.
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Tuple
+@dataclass class
 
 
-        Args:
-            input_ids: Input token IDs
-            attention_mask: Optional attention mask
-            position_ids: Optional position IDs
+Module containing specific functionality.Module containing specific functionality.
 
-        Returns:
-            Dictionary containing hidden states
-"""
-        # Embedding
-        if position_ids is None: position_ids = torch.arange(
-                input_ids.size(1),
-                device=input_ids.device
-            ).unsqueeze(0)
+if position_ids is None: position_ids = torch.arange(
+input_ids.size(1),
+device=input_ids.device
+).unsqueeze(0)
 
-        word_embeds = self.embeddings["word_embeddings"](input_ids)
-        position_embeds = self.embeddings["position_embeddings"](position_ids)
+word_embeds = self.embeddings["word_embeddings"](input_ids)
+position_embeds = self.embeddings["position_embeddings"](position_ids)
 
-        hidden_states = word_embeds + position_embeds
-        hidden_states = self.layernorm(hidden_states)
-        hidden_states = self.dropout(hidden_states)
+hidden_states = word_embeds + position_embeds
+hidden_states = self.layernorm(hidden_states)
+hidden_states = self.dropout(hidden_states)
 
-        # Transformer layers
-        for layer in self.encoder: hidden_states = layer(
-                hidden_states,
-                src_key_padding_mask=attention_mask
-            )
-        return {"hidden_states": hidden_states}
+
+for layer in self.encoder: hidden_states = layer(
+hidden_states,
+src_key_padding_mask=attention_mask
+)
+return {"hidden_states": hidden_states}
