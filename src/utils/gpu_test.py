@@ -10,6 +10,6 @@ import numpy as np
 import os
 import torch
 import unittest
-class TestGPUTestGPU():
+class TestGPUTestGPU:
     Test GPU memory utilities...
     Test GPU availability check...

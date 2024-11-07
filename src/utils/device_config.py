@@ -12,13 +12,13 @@ import os
 import torch
 Initialize device manager.
 Args:
-    config: Optional device configuration
-    Set up compute device.
-    Returns:
-        Configured device
-        Module for handling specific functionality.
-        Place tensor on configured device.
-        Args:
-            tensor: Input tensor
-            Returns:
-                Tensor on configured device
+config: Optional device configuration
+Set up compute device.
+Returns:
+Configured device
+Module for handling specific functionality.
+Place tensor on configured device.
+Args:
+tensor: Input tensor
+Returns:
+Tensor on configured device
