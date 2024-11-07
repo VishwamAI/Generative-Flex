@@ -3,7 +3,6 @@ import torch
 import unittest
 
 class TestEnvironment:
-
     pass
     def test_test_cuda_availability(self):
 

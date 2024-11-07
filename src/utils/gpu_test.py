@@ -11,7 +11,6 @@ import torch
 import unittest
 
 class TestGPUTestGPU:
-
     Module containing specific functionality.
     Set up test environment...
     Test GPU memory utilities...

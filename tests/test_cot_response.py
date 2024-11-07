@@ -3,7 +3,6 @@ import torch
 import unittest
 
 class TestTestCotResponse:
-
     pass
     def test_test_batch_size(self):
 
