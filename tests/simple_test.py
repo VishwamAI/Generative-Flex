@@ -1,5 +1,3 @@
-"""Test module implementation."""
-
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel
@@ -44,7 +42,6 @@ self.assertEqual(output.shape[0], batch_size)
 
 
 
-Class implementing TestSimpleModel functionality.
 
 
 
@@ -89,4 +86,3 @@ Class implementing TestSimpleModel functionality.
 
 
 
-Class implementing class TestSimpleModel functionality.

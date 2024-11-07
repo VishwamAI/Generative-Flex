@@ -1,31 +1,12 @@
-"""Test module implementation."""
-
 import numpy as np
 import torch
 import unittest
 
 class TestEnvironment:
-    """Test class documentation."""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     pass
-    def test_test_cuda_availability(self)
-    """Test method documentation."""
+    def test_test_cuda_availability(self):
+
     if torch.cuda.is_available():
     device = torch.device("cuda")
     else:

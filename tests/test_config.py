@@ -1,31 +1,12 @@
-"""Test module implementation."""
-
 import numpy as np
 import torch
 import unittest
 
 class TestTestConfig:
-    """Test class documentation."""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     pass
-    def test_test_math_config(self)
-    """Test method documentation."""
+    def test_test_math_config(self):
+
     config = MathConfig()
     config.model_type = "math_reasoning"
     try:

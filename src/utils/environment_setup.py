@@ -10,9 +10,6 @@ import numpy as np
 import os
 import torch
 
-"""Utility module documentation."""
-
-Class implementing import functionality.
 
 
 

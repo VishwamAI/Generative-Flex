@@ -10,10 +10,8 @@ import os
 import torch
 import unittest
 
-"""Utility module documentation."""
-
 class TestEnvironmentTestEnvironment:
-    """Class implementation."""
+
     Module containing specific functionality.
     Set up test environment...
     Test environment setup...
