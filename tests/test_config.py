@@ -24,7 +24,7 @@ class TestTestConfig:
 
 
     pass
-    def test_test_math_config(self):
+    def test_test_math_config(self)
         """Test method documentation."""
         config = MathConfig()
         config.model_type = "math_reasoning"

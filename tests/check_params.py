@@ -20,7 +20,7 @@ class TestParameters:
 
 
     pass
-    def test_test_parameter_validation(self):
+    def test_test_parameter_validation(self)
         """Test method documentation."""
         params = {
         "batch_size": 16,

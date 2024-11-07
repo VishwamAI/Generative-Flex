@@ -24,7 +24,7 @@ class TestEnvironment:
 
 
     pass
-    def test_test_cuda_availability(self):
+    def test_test_cuda_availability(self)
         """Test method documentation."""
         if torch.cuda.is_available():
         device = torch.device("cuda")

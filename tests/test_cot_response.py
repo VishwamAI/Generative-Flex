@@ -24,7 +24,7 @@ class TestTestCotResponse:
 
 
     pass
-    def test_test_batch_size(self):
+    def test_test_batch_size(self)
         """Test method documentation."""
         batch_size = 16
         input_tensor = torch.randint(0, 1000, (batch_size, 32))
