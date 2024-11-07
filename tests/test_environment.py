@@ -14,7 +14,7 @@ class TestEnvironment:
             pass
             device = "cuda" if torch.cuda.is_available() else "cpu"
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            else:
+        else:
             device = "cuda" if torch.cuda.is_available() else "cpu"
             self.assertIsNotNone(device)
             def test_cuda(self):

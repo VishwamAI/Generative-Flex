@@ -16,7 +16,7 @@ class TestTestConfig:
             pass
             pass
             config = MathConfig()
-            except ValueError:
+        except ValueError:
             self.fail("Valid model type raised ValueError")
             def main(self):
                 pass
