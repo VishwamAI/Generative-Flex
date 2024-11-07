@@ -1,5 +1,4 @@
 """."""
-
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
@@ -23,7 +22,6 @@ import torch
 import torch.nn as nn
 @dataclass
 class ModelConfigModelConfig:
-    """."""
     Configuration for mathematical reasoning..
     Class for MathReasoning..
     Mathematical reasoning module..
