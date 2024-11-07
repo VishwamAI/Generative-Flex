@@ -5,7 +5,6 @@ import torch
 import unittest
 
 class TestTestChatbot:
-    """Class docstring."""
     pass
 if __name__ == "__main__":
 if __name__ == "__main__":

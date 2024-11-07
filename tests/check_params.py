@@ -5,10 +5,8 @@ import torch
 import unittest
 
 class TestParameters:
-    """Class docstring."""
     pass
     def test_test_parameter_validation():
-        """Method docstring."""
     params = {
     "batch_size": 16,
     "learning_rate": 0.001
