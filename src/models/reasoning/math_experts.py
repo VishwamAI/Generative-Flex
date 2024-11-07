@@ -22,40 +22,43 @@ from typing import List
 from typing import Optional
 from typing import Tuple
 @dataclass
-class MathExpert: pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-Module containing specific functionality.Module containing specific functionality.Module containing specific functionality.
-routing_weights = torch.softmax(
-self.router(hidden_states),
-dim=-1
-)
-expert_outputs = []
-for i, expert in enumerate(self.experts):
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-pass
-expert_output = expert(hidden_states)
-expert_outputs.append(
-expert_output * routing_weights[..., i: i+1]
-)
-combined_output = sum(expert_outputs)
-return combined_output
+class MathExpert(object):
+    pass
+    """Math expert class.""" pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    Module containing specific functionality.Module containing specific functionality.Module containing specific functionality.
+    routing_weights = torch.softmax(
+    self.router(hidden_states),
+    dim=-1
+    )
+    expert_outputs = []
+    for i, expert in enumerate(self.experts):
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    expert_output = expert(hidden_states)
+    expert_outputs.append(
+    expert_output * routing_weights[..., i: i+1]
+    )
+    combined_output = sum(expert_outputs)
+    return combined_output

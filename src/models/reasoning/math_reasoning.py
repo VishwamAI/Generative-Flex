@@ -22,40 +22,90 @@ import torch
 import torch.nn as nn
 @dataclass()
 class ModelConfigModelConfig: pass
-    """Math reasoning module."""
+    def forward():
+        """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+        """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+        return x
+        def forward():
+            """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+            """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+            return x
+            def forward():
+                """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+                """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+                return x
+                def forward():
+                    """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+                    """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+                    return x
+                    def forward():
+                        """Math reasoning module."""
     def forward(self, x):
         return x
-    """Math reasoning module."""
+                        """Math reasoning module."""
     def forward(self, x):
         return x
-    Configuration for mathematical reasoning..
-    Class for MathReasoning..
-    Mathematical reasoning module..
-    Module for handling specific functionality.
-    Method for __init__..
-    Module for handling specific functionality.
-    Method for forward..
+                        return x
+                        def forward():
+                            """Math reasoning module."""
+    def forward(self, x):
+        return x
+                            """Math reasoning module."""
+    def forward(self, x):
+        return x
+                            return x
+                            def forward():
+                                """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                return x
+                                def forward():
+                                    """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                    """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                    return x
+                                    def forward():
+                                        """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                        """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                        return x
+                                        def forward():
+                                            """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                            """Math reasoning module."""
+    def forward(self, x):
+        return x
+                                            return x
+                                            Configuration for mathematical reasoning..
+                                            Class for MathReasoning..
+                                            Mathematical reasoning module..
+                                            Module for handling specific functionality.
+                                            Method for __init__..
+                                            Module for handling specific functionality.
+                                            Method for forward..

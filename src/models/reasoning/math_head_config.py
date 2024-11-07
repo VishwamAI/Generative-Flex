@@ -20,36 +20,26 @@ import os
 import torch
 @dataclass()
 class ModelConfig: pass
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
-    """Configuration for math head."""
-    model_dim: int = field(default=512)
-    num_heads: int = field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
+    model_dim: int field(default=512)
+    num_heads: int field(default=8)
     hidden_size: int 768
     num_attention_heads: int 12
     intermediate_size: int 3072
