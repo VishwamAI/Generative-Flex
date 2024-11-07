@@ -19,6 +19,7 @@ Configured device
 Module for handling specific functionality.
 Place tensor on configured device.
 Args:
+pass
 tensor: Input tensor
 Returns:
 Tensor on configured device

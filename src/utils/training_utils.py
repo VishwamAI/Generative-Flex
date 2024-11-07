@@ -21,6 +21,7 @@ Configured optimizer
 Module for handling specific functionality.
 Get learning rate scheduler.
 Args:
+pass
 optimizer: PyTorch optimizer
 Returns:
 Learning rate scheduler
