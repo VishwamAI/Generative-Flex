@@ -1,4 +1,4 @@
-"""."""
+"""Module docstring."""
 from typing import Dict
 from typing import Any
 from typing import Optional

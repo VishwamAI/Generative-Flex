@@ -1,4 +1,4 @@
-"""."""
+"""Module docstring."""
 from typing import Dict
 from typing import Any
 from typing import Optional
@@ -39,6 +39,7 @@ dim=-1
 )
 expert_outputs = []
 for i, expert in enumerate(self.experts):
+pass
 pass
 pass
 pass
