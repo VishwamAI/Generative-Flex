@@ -24,5 +24,7 @@ class TestGPUTestGPU:
     pass
     pass
     pass
+    pass
+    pass
     """."""
     """."""

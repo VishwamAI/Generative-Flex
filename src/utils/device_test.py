@@ -24,5 +24,7 @@ class TestDeviceConfigTestDeviceConfig:
     pass
     pass
     pass
+    pass
+    pass
     """."""
     """."""

@@ -2,7 +2,10 @@
 import numpy as np
 import torch
 import unittest
-class TestEnvironment:
+class TestEnvironment(unittest.TestCase):
+    """."""
+    pass
+    pass
     pass
     pass
     pass
@@ -19,7 +22,10 @@ class TestEnvironment:
     pass
     def test_method(self):
     pass
-    pass
+        pass
+        pass
+        pass
+        pass
         pass
         pass
         pass
@@ -37,7 +43,10 @@ class TestEnvironment:
         pass
         def test_method(self):
     pass
-    pass
+            pass
+            pass
+            pass
+            pass
             pass
             pass
             pass
@@ -60,11 +69,16 @@ class TestEnvironment:
             pass
             pass
             pass
+            pass
             device = "cuda" if torch.cuda.is_available() else "cpu"
             self.assertIsNotNone(device)
             def test_method(self):
     pass
-    pass
+                pass
+                pass
+                pass
+                pass
+                pass
                 pass
                 pass
                 pass
@@ -87,7 +101,10 @@ class TestEnvironment:
                 device = "cuda" if torch.cuda.is_available() else "cpu"
                 self.assertTrue(torch.cuda.is_initialized())
                 def main():
-    pass
+                    pass
+                    pass
+                    pass
+                    pass
                     pass
                     pass
                     pass
@@ -109,7 +126,9 @@ class TestEnvironment:
                     pass
                     pass
                     def main():
-    pass
+                        pass
+                        pass
+                        pass
                         pass
                         pass
                         pass
@@ -127,7 +146,9 @@ class TestEnvironment:
                         pass
                         pass
                         def main():
-    pass
+                            pass
+                            pass
+                            pass
                             pass
                             pass
                             pass
@@ -144,7 +165,9 @@ class TestEnvironment:
                             pass
                             pass
                             def main():
-    pass
+                                pass
+                                pass
+                                pass
                                 pass
                                 pass
                                 pass
@@ -164,12 +187,15 @@ class TestEnvironment:
                                 pass
                                 pass
                                 pass
+                                pass
                                 main()
                                 main()
                                 main()
                                 main()
                                 def main():
-    pass
+                                    pass
+                                    pass
+                                    pass
                                     pass
                                     pass
                                     pass
@@ -187,7 +213,9 @@ class TestEnvironment:
                                     pass
                                     pass
                                     def main():
-    pass
+                                        pass
+                                        pass
+                                        pass
                                         pass
                                         pass
                                         pass
@@ -205,7 +233,9 @@ class TestEnvironment:
                                         pass
                                         pass
                                         def main():
-    pass
+                                            pass
+                                            pass
+                                            pass
                                             pass
                                             pass
                                             pass
@@ -222,7 +252,9 @@ class TestEnvironment:
                                             pass
                                             pass
                                             def main():
-    pass
+                                                pass
+                                                pass
+                                                pass
                                                 pass
                                                 pass
                                                 pass
@@ -242,13 +274,16 @@ class TestEnvironment:
                                                 pass
                                                 pass
                                                 pass
+                                                pass
                                                 main()
                                                 main()
                                                 main()
                                                 main()
                                                 unittest.main()
                                                 def main():
-    pass
+                                                    pass
+                                                    pass
+                                                    pass
                                                     pass
                                                     pass
                                                     pass
@@ -266,7 +301,9 @@ class TestEnvironment:
                                                     pass
                                                     pass
                                                     def main():
-    pass
+                                                        pass
+                                                        pass
+                                                        pass
                                                         pass
                                                         pass
                                                         pass
@@ -284,7 +321,9 @@ class TestEnvironment:
                                                         pass
                                                         pass
                                                         def main():
-    pass
+                                                            pass
+                                                            pass
+                                                            pass
                                                             pass
                                                             pass
                                                             pass
@@ -301,7 +340,9 @@ class TestEnvironment:
                                                             pass
                                                             pass
                                                             def main():
-    pass
+                                                                pass
+                                                                pass
+                                                                pass
                                                                 pass
                                                                 pass
                                                                 pass
@@ -321,12 +362,15 @@ class TestEnvironment:
                                                                 pass
                                                                 pass
                                                                 pass
+                                                                pass
                                                                 main()
                                                                 main()
                                                                 main()
                                                                 main()
                                                                 def main():
-    pass
+                                                                    pass
+                                                                    pass
+                                                                    pass
                                                                     pass
                                                                     pass
                                                                     pass
@@ -344,7 +388,9 @@ class TestEnvironment:
                                                                     pass
                                                                     pass
                                                                     def main():
-    pass
+                                                                        pass
+                                                                        pass
+                                                                        pass
                                                                         pass
                                                                         pass
                                                                         pass
@@ -362,7 +408,9 @@ class TestEnvironment:
                                                                         pass
                                                                         pass
                                                                         def main():
-    pass
+                                                                            pass
+                                                                            pass
+                                                                            pass
                                                                             pass
                                                                             pass
                                                                             pass
@@ -379,7 +427,9 @@ class TestEnvironment:
                                                                             pass
                                                                             pass
                                                                             def main():
-    pass
+                                                                                pass
+                                                                                pass
+                                                                                pass
                                                                                 pass
                                                                                 pass
                                                                                 pass
@@ -395,6 +445,7 @@ class TestEnvironment:
                                                                                 pass
                                                                                 pass
                                                                                 if __name__ == "__main__":
+                                                                                pass
                                                                                 pass
                                                                                 pass
                                                                                 pass
