@@ -1,3 +1,5 @@
+"""Module docstring."""
+
 from dataclasses import dataclass
 from pathlib import Path
 from src.utils.gpu_utils import GPUUtils
@@ -11,6 +13,7 @@ import torch
 import unittest
 
 class TestGPUTestGPU:
+    """Class TestGPUTestGPU."""
     Module containing specific functionality.
     Set up test environment...
     Test GPU memory utilities...

@@ -1,3 +1,5 @@
+"""Module docstring."""
+
 from dataclasses import dataclass
 from pathlib import Path
 from src.utils.environment_setup import EnvironmentSetup
@@ -11,6 +13,7 @@ import torch
 import unittest
 
 class TestEnvironmentTestEnvironment:
+    """Class TestEnvironmentTestEnvironment."""
     Module containing specific functionality.
     Set up test environment...
     Test environment setup...

@@ -1,10 +1,14 @@
+"""Module docstring."""
+
 import numpy as np
 import torch
 import unittest
 
 class TestEnvironment:
+    """Class TestEnvironment."""
     pass
     def test_test_cuda_availability(self):
+        """Method test_test_cuda_availability."""
     if torch.cuda.is_available():
     device = torch.device("cuda")
     else:

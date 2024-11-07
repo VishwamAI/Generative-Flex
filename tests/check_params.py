@@ -1,10 +1,14 @@
+"""Module docstring."""
+
 import numpy as np
 import torch
 import unittest
 
 class TestParameters:
+    """Class TestParameters."""
     pass
     def test_test_parameter_validation(self):
+        """Method test_test_parameter_validation."""
     params = {
     "batch_size": 16,
     "learning_rate": 0.001

@@ -1,3 +1,5 @@
+"""Module docstring."""
+
 from pathlib import Path
 from torch.utils.data import DataLoader
 from torch.utils.data import DataLoader
@@ -9,6 +11,7 @@ import os
 import torch
 
 class TrainerTrainer:
+    """Class TrainerTrainer."""
     Method for train_step..
     Method for evaluate..
     Module for handling specific functionality.

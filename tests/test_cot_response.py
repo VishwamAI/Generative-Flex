@@ -1,10 +1,14 @@
+"""Module docstring."""
+
 import numpy as np
 import torch
 import unittest
 
 class TestTestCotResponse:
+    """Class TestTestCotResponse."""
     pass
     def test_test_batch_size(self):
+        """Method test_test_batch_size."""
     batch_size = 16
     input_tensor = torch.randint(0, 1000, (batch_size, 32))
     output = self.model(input_tensor)

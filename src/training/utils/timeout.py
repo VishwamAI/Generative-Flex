@@ -1,3 +1,5 @@
+"""Module docstring."""
+
 
 Module containing training-related implementations.
     Exception raised when timeout occurs..
