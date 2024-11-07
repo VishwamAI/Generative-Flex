@@ -1,4 +1,4 @@
-"""Module docstring."""
+"""Module."""
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,6 +12,6 @@ import os
 import torch
 import unittest
 class TestDeviceConfigTestDeviceConfig:
-    """Class docstring."""
+    """Class."""
     Test device configuration...
     Test CUDA availability check...

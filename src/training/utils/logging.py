@@ -1,4 +1,4 @@
-"""Module docstring."""
+"""Module."""
 
     Logger for training metrics and events..
     Method for __init__..

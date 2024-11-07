@@ -1,4 +1,4 @@
-"""Module docstring."""
+"""Module."""
 
     Handler for training timeouts..
     Method for __init__..
