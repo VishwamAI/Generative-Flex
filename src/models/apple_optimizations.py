@@ -50,7 +50,7 @@ from dataclasses import dataclass field:
     x_reshaped
     keepdims
     = True)                scale = max_abs / (2 ** (self.num_bits - 1) - 1)
-    else
+else:
     :
         scale
         = (x_max - x_min) / (2**self.num_bits - 1)

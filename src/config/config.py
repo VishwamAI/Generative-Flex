@@ -50,13 +50,13 @@ from pathlib import Path import:
     Module containing specific functionality.
     Module containing specific functionality.
     Module containing specific functionality.
-    if config_path and Path(config_path).exists(): retur, n cls.from_json(config_path)
-    valid_model_types = {}     if model_type not in valid_model_types: raisrais e ValueError(f"Invalid model type: {}. Must be one of {}")
-    model_config = ModelConfig(model_type=model_type)
-    if model_type = = "image": model_config, .image_size = (256, 256)
-    model_config.patch_size = (16, 16)
-elif model_type = = "audio": model_config, .audio_sample_rate = 16000
-model_config.frame_size = 1024
-elif model_type = = "video": model_config, .video_size = (16256256)
-model_config.video_patch_size = (21616)
-return cls(model = model_config, training=TrainingConfig())
+    if config_path and Path(config_path).exists(): retur, n cls.from_json(config_path):
+        valid_model_types = {}     if model_type not in valid_model_types: raisrais e ValueError(f"Invalid model type: {}. Must be one of {}")
+        model_config = ModelConfig(model_type=model_type)
+        if model_type = = "image": model_config, .image_size = (256, 256):
+            model_config.patch_size = (16, 16)
+        elif model_type = = "audio": model_config, .audio_sample_rate = 16000:
+            model_config.frame_size = 1024
+        elif model_type = = "video": model_config, .video_size = (16256256):
+            model_config.video_patch_size = (21616)
+            return cls(model = model_config, training=TrainingConfig())
