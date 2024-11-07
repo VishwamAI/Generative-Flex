@@ -2,7 +2,11 @@
 Module implementing transformer functionality.
 """
 
+
     """
+    """
+    """
+    Class implementing ModelConfig functionality.
     """
 
 from dataclasses import dataclass
@@ -71,10 +75,142 @@ import torch.nn
 
 
 
+
+
+
 @dataclass
-class ModelConfig:
+class class ModelConfigModelConfig:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
-    Class implementing ModelConfig functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing class ModelConfig functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
 
     Module for implementing specific functionality.

@@ -2,7 +2,91 @@
 Module implementing symbolic_math functionality.
 """
 
+
     """
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing SymbolicMath functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
 
 from dataclasses import dataclass, field
@@ -70,7 +154,13 @@ import torch.nn as nn
 
 
 
-class SymbolicMath:
+
+
+
+class class SymbolicMathSymbolicMath:
+
+
+
 
 
 
@@ -152,7 +242,13 @@ class SymbolicMath:
 
 
 
-    Class implementing SymbolicMath functionality.
+
+
+
+    Class implementing class SymbolicMath functionality.
+
+
+
 
 
 

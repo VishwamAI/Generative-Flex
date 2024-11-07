@@ -2,7 +2,45 @@
 Module implementing mathematical_notation functionality.
 """
 
+
     """
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing MathematicalNotation functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
 
 from dataclasses import dataclass, field
@@ -34,7 +72,13 @@ import torch.nn as nn
 
 
 
-class MathematicalNotation:
+
+
+
+class class MathematicalNotationMathematicalNotation:
+
+
+
 
 
 
@@ -70,7 +114,13 @@ class MathematicalNotation:
 
 
 
-    Class implementing MathematicalNotation functionality.
+
+
+
+    Class implementing class MathematicalNotation functionality.
+
+
+
 
 
 

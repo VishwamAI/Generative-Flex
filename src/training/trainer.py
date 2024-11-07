@@ -2,6 +2,7 @@
 Module implementing trainer functionality.
 """
 
+
 """
 
 
@@ -93,6 +94,83 @@ Module implementing trainer functionality.
 
 
     """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing Trainer functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """
 
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -142,7 +220,13 @@ import torch
 
 
 
-class Trainer:
+
+
+
+class class TrainerTrainer:
+
+
+
 
 
 
@@ -218,7 +302,13 @@ class Trainer:
 
 
 
-    Class implementing Trainer functionality.
+
+
+
+    Class implementing class Trainer functionality.
+
+
+
 
 
 

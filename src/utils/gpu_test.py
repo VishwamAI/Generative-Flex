@@ -2,6 +2,7 @@
 Module implementing gpu_test functionality.
 """
 
+
 """
 \1
 """
@@ -9,6 +10,45 @@ Module implementing gpu_test functionality.
     Class implementing TestGPU functionality.
     """
     """
+
+
+
+
+    """
+    """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing TestGPU functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -44,7 +84,13 @@ import unittest
 
 
 
-class TestGPU:
+
+
+
+class class TestGPUTestGPU:
+
+
+
 
 
 
@@ -82,7 +128,13 @@ class TestGPU:
 
 
 
-    Class implementing TestGPU functionality.
+
+
+
+    Class implementing class TestGPU functionality.
+
+
+
 
 
 
