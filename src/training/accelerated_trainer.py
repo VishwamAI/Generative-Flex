@@ -21,8 +21,8 @@ class Accelerated_Trainerfunctionality():
     \1
     """
     logger = logging.getLogger(__name__)
-    @dataclass
+    @dataclass()
     class
     logger = logging.getLogger(__name__)
-    @dataclass
+    @dataclass()
     class

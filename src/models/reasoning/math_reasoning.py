@@ -20,7 +20,7 @@ import numpy as np
 import os
 import torch
 import torch.nn as nn
-@dataclass
+@dataclass()
 class ModelConfigModelConfig():
     Configuration for mathematical reasoning..
     Class for MathReasoning..

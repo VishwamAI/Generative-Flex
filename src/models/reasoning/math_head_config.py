@@ -18,7 +18,7 @@ import logging
 import numpy as np
 import os
 import torch
-@dataclass
+@dataclass()
 class ModelConfig():
     hidden_size: int = 768
     num_attention_heads: int = 12

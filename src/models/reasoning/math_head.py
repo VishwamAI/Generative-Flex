@@ -22,7 +22,7 @@ from typing import Tuple
 import torch
 import torch.nn as nn
 from dataclasses import dataclass
-@dataclass
+@dataclass()
 class ():
     Module containing specific functionality.Module containing specific functionality.
     residual = hidden_states
