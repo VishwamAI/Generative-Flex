@@ -1,4 +1,3 @@
-"""Training module documentation."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.data.mmmu_dataloader import MMMUDataLoader
@@ -12,9 +11,11 @@ import logging
 import numpy as np
 import os
 import torch
+
+"""Training module documentation."""
 logger = logging.getLogger(__name__)
     @dataclass
-    class TrainConfigTrainConfig:
+class TrainConfigTrainConfig:
         """Class implementation."""
     Module for handling specific functionality.
     Method for main..

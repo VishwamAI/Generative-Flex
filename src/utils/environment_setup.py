@@ -1,4 +1,3 @@
-"""Utility module documentation."""
 from dataclasses import dataclass
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -10,6 +9,8 @@ import logging
 import numpy as np
 import os
 import torch
+
+"""Utility module documentation."""
 
 Class implementing import functionality.
 

@@ -1,66 +1,3 @@
-class Test_Minimalfunctionality:
-"""
-Class implementing TestMinimal functionality.
-"""
-"""
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-Class implementing TestMinimal functionality.
-
-
-
-
-
-
-
-
-
-
-
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Class implementing class TestMinimal functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel
@@ -71,9 +8,40 @@ import logging
 import numpy as np
 import os
 import torch
-import torch
 import unittest
 
+class Test_Minimalfunctionality:
+"""
+    Class implementing TestMinimal functionality.
+"""
+"""
+"""
+"""
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing TestMinimal functionality.
+
+
+
+
+
+
+
+
+
+
+
+"""
+"""
 
 
 
@@ -88,9 +56,22 @@ import unittest
 
 
 
+    Class implementing class TestMinimal functionality.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+"""
 class TestMinimalTestMinimal:
 
 

@@ -1,4 +1,3 @@
-"""Model module documentation."""
 from pathlib import Path
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
@@ -10,30 +9,8 @@ import os
 import torch
 import torch.nn as nn
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    class MathematicalNotation:
+"""Model module documentation."""
+class MathematicalNotation:
 
 
 

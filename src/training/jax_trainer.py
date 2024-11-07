@@ -1,4 +1,3 @@
-"""Training module documentation."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader
@@ -9,6 +8,8 @@ import logging
 import numpy as np
 import os
 import torch
+
+"""Training module documentation."""
 
     JAX-based trainer implementation.
     JAX-based model trainer..

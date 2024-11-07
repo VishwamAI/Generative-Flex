@@ -1,4 +1,3 @@
-"""Utility module documentation."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.utils.device_config import DeviceConfig
@@ -10,6 +9,8 @@ import numpy as np
 import os
 import torch
 import unittest
+
+"""Utility module documentation."""
 
 class TestDeviceConfigTestDeviceConfig:
     """Class implementation."""

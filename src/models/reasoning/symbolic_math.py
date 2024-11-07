@@ -1,4 +1,3 @@
-"""Model module documentation."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader
@@ -12,53 +11,8 @@ import os
 import torch
 import torch.nn as nn
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    class SymbolicMath:
+"""Model module documentation."""
+class SymbolicMath:
 
 
 

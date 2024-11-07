@@ -1,4 +1,3 @@
-"""Model module documentation."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from torch.utils.data import DataLoader
@@ -11,6 +10,8 @@ import numpy as np
 import os
 import torch
 import torch.nn
+
+"""Model module documentation."""
 
 
 
@@ -59,54 +60,7 @@ import torch.nn
 
 
     @dataclass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    class ModelConfig:
+class ModelConfig:
 """
     Module for implementing specific functionality.
     Transformer model implementation.

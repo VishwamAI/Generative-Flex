@@ -1,66 +1,3 @@
-class Test_Simplefunctionality:
-"""
-Class implementing TestSimple functionality.
-"""
-"""
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-Class implementing TestSimple functionality.
-
-
-
-
-
-
-
-
-
-
-
-"""
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Class implementing class TestSimple functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel
@@ -71,9 +8,40 @@ import logging
 import numpy as np
 import os
 import torch
-import torch
 import unittest
 
+class Test_Simplefunctionality:
+"""
+    Class implementing TestSimple functionality.
+"""
+"""
+"""
+"""
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing TestSimple functionality.
+
+
+
+
+
+
+
+
+
+
+
+"""
+"""
 
 
 
@@ -88,9 +56,22 @@ import unittest
 
 
 
+    Class implementing class TestSimple functionality.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+"""
 class TestSimpleTestSimple:
 
 
