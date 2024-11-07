@@ -1,5 +1,4 @@
 """."""
-
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
@@ -18,15 +17,13 @@ import numpy as np
 import os
 import torch
 import unittest
-class Test_Simple_Cotfunctionality:
-    """."""
+class Test_Simple_Cotfunctionality():
     Class implementing TestSimpleCot functionality.
     Class implementing TestSimpleCot functionality.
     Class implementing class TestSimpleCot functionality.
-class TestSimpleCotTestSimpleCot:
-    """."""
-    Test simple chain-of-thought model.
-    Method for setUp..
-    Method for test_cot_generation..
-    Module for handling specific functionality.
-    Method for test_cot_batch..
+    class TestSimpleCotTestSimpleCot():
+        Test simple chain-of-thought model.
+        Method for setUp..
+        Method for test_cot_generation..
+        Module for handling specific functionality.
+        Method for test_cot_batch..

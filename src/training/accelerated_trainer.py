@@ -1,5 +1,4 @@
 """."""
-
 from accelerate import dataclasses
 from dataclasses import dataclass
 from dataclasses import field
@@ -18,8 +17,7 @@ import logging
 import numpy as np
 import os
 import torch
-class Accelerated_Trainerfunctionality:
-    """."""
+class Accelerated_Trainerfunctionality():
     \1
     """
     logger = logging.getLogger(__name__)

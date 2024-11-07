@@ -1,5 +1,4 @@
 """."""
-
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
@@ -18,15 +17,13 @@ import numpy as np
 import os
 import torch
 import unittest
-class Test_Inferencefunctionality:
-    """."""
+class Test_Inferencefunctionality():
     Class implementing TestInference functionality.
     Class implementing TestInference functionality.
     Class implementing class TestInference functionality.
-class TestInferenceTestInference:
-    """."""
-    Test inference functionality.
-    Method for setUp..
-    Method for test_inference..
-    Module for handling specific functionality.
-    Method for test_batch_inference..
+    class TestInferenceTestInference():
+        Test inference functionality.
+        Method for setUp..
+        Method for test_inference..
+        Module for handling specific functionality.
+        Method for test_batch_inference..
