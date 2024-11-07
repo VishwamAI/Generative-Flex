@@ -21,7 +21,7 @@ from typing import Dict
 from typing import List
 from typing import Optional
 from typing import Tuple
-@dataclass class:
+@dataclass class: pass
 pass
 pass
 pass
@@ -44,9 +44,10 @@ pass
 pass
 pass
 pass
+pass
 expert_output = expert(hidden_states)
 expert_outputs.append(
-expert_output * routing_weights[..., i:i+1]
+expert_output * routing_weights[..., i: i+1]
 )
 combined_output = sum(expert_outputs)
 return combined_output

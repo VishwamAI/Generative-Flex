@@ -21,7 +21,7 @@ import os
 import torch
 import torch.nn as nn
 @dataclass()
-class ModelConfigModelConfig:
+class ModelConfigModelConfig: pass
     pass
     pass
     pass
