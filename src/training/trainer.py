@@ -130,24 +130,24 @@ import torch
 
 """
 class Trainer:
-    """
-    
+        """
 
-        
-Class implementing Trainer functionality.
-    
 
-    
-    """
+
+    Class implementing Trainer functionality.
+
+
+
+"""
 Base trainer implementation.
 Method for __init__..
 Method for train_step..
 Method for evaluate..
 Module for handling specific functionality.
 Method for train..
-    """
+"""
 
-        
-    
 
-    """
+
+
+"""

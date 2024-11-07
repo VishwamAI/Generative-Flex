@@ -21,7 +21,8 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import logging
 import os
-from dataclasses import src.data.mmmu_dataloader from src.training.trainer
+from src.data.mmmu_dataloader import MMMUDataLoader
+from src.training.trainer import Trainer
 from src.models.reasoning.math_head import MathHead
 
 
@@ -175,23 +176,24 @@ from src.models.reasoning.math_head import MathHead
 """
 
 logger = logging.getLogger(__name__)
-@dataclass class:
-    """
-    
+@dataclass
+class :
+"""
 
-        
-Class implementing class functionality.
-    
 
-    
-    """
+
+    Class implementing class functionality.
+
+
+
+"""
 Module containing training-related implementations.
 Configuration for MMMU training..
 Module for handling specific functionality.
 Method for main..
-    """
+"""
 
-        
-    
 
-    """
+
+
+"""

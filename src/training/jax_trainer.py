@@ -21,16 +21,16 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import logging
 import os
-from dataclasses import dataclass from:
-    """
-    
+from dataclasses import dataclass
+"""
 
-        
-Class implementing class functionality.
-    
 
-    
-    """
+
+    Class implementing class functionality.
+
+
+
+"""
 JAX-based trainer implementation.
 JAX-based model trainer..
 Method for __init__..
@@ -39,9 +39,9 @@ Module for handling specific functionality.
 Method for loss_fn..
 Method for train..
 Method for train..
-    """
+"""
 
-        
-    
 
-    """
+
+
+"""
