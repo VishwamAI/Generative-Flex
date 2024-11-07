@@ -22,16 +22,36 @@ import torch
 import torch.nn as nn
 @dataclass()
 class ModelConfigModelConfig: pass
-    pass
-    pass
-    pass
-    pass
-    pass
-    pass
-    pass
-    pass
-    pass
-    pass
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
+    """Math reasoning module."""
+    def forward(self, x):
+        return x
     Configuration for mathematical reasoning..
     Class for MathReasoning..
     Mathematical reasoning module..
