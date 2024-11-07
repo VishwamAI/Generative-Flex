@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
 from dataclasses import dataclass
 from dataclasses import field
@@ -19,12 +19,12 @@ import os
 import torch
 import unittest
 class Test_Simplefunctionality:
-    """Class."""
+    """C."""
     Class implementing TestSimple functionality.
     Class implementing TestSimple functionality.
     Class implementing class TestSimple functionality.
 class TestSimpleTestSimple:
-    """Class."""
+    """C."""
     Test simple model functionality.
     Method for setUp..
     Method for test_model_output..

@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
     Handler for training timeouts..
     Method for __init__..

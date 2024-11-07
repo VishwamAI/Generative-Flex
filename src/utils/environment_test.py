@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,6 +12,6 @@ import os
 import torch
 import unittest
 class TestEnvironmentTestEnvironment:
-    """Class."""
+    """C."""
     Test environment setup...
     Test CUDA setup...

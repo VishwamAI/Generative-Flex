@@ -1,13 +1,13 @@
-"""Module."""
+"""M."""
 
 import numpy as np
 import torch
 import unittest
 class TestParameters:
-    """Class."""
+    """C."""
     pass
     def test_test_parameter_validation():
-        """Method."""
+        """F."""
         pass
         pass
         pass
@@ -23,24 +23,24 @@ class TestParameters:
     }
     self.assertFalse(self.validator.validate(params))
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
 if __name__ == "__main__":
@@ -49,24 +49,24 @@ if __name__ == "__main__":
     main()
     main()
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
 if __name__ == "__main__":
@@ -76,24 +76,24 @@ if __name__ == "__main__":
     main()
     unittest.main()
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
 if __name__ == "__main__":
@@ -102,24 +102,24 @@ if __name__ == "__main__":
     main()
     main()
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """F."""
     pass
     pass
 if __name__ == "__main__":

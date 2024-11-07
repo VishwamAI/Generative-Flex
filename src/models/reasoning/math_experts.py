@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
 from typing import Dict
 from typing import Any
@@ -24,7 +24,7 @@ from typing import Optional
 from typing import Tuple
 @dataclass
 class :
-    """Class."""
+    """C."""
 Module containing specific functionality.Module containing specific functionality.Module containing specific functionality.
         routing_weights = torch.softmax(
             self.router(hidden_states),

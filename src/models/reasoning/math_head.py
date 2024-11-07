@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
 from typing import Dict
 from typing import Any
@@ -25,7 +25,7 @@ import torch.nn as nn
 from dataclasses import dataclass
 @dataclass
 class :
-    """Class."""
+    """C."""
 Module containing specific functionality.Module containing specific functionality.
         residual = hidden_states
         hidden_states = self.layer_norm1(hidden_states)

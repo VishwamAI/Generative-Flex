@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,6 +12,6 @@ import os
 import torch
 import unittest
 class TestGPUTestGPU:
-    """Class."""
+    """C."""
     Test GPU memory utilities...
     Test GPU availability check...

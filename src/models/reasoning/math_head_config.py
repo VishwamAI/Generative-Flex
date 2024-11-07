@@ -1,4 +1,4 @@
-"""Module."""
+"""M."""
 
 from dataclasses import dataclass
 from dataclasses import dataclass
@@ -21,7 +21,7 @@ import os
 import torch
 @dataclass
 class ModelConfig:
-    """Class."""
+    """C."""
     hidden_size: int = 768
     num_attention_heads: int = 12
     intermediate_size: int = 3072
