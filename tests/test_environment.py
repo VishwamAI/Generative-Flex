@@ -2,8 +2,7 @@
 import numpy as np
 import torch
 import unittest
-class TestEnvironment(unittest.TestCase):
-    """."""
+class TestEnvironment:
     pass
     pass
     pass
@@ -20,29 +19,35 @@ class TestEnvironment(unittest.TestCase):
     pass
     pass
     pass
-    def test_method(self):
     pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        pass
-        def test_method(self):
     pass
+    def test_method():
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        pass
+        def test_method():
+            pass
+            pass
+            pass
             pass
             pass
             pass
@@ -70,10 +75,14 @@ class TestEnvironment(unittest.TestCase):
             pass
             pass
             pass
+            pass
             device = "cuda" if torch.cuda.is_available() else "cpu"
             self.assertIsNotNone(device)
-            def test_method(self):
-    pass
+            def test_method():
+                pass
+                pass
+                pass
+                pass
                 pass
                 pass
                 pass
@@ -125,7 +134,12 @@ class TestEnvironment(unittest.TestCase):
                     pass
                     pass
                     pass
+                    pass
+                    pass
+                    pass
                     def main():
+                        pass
+                        pass
                         pass
                         pass
                         pass
@@ -164,7 +178,11 @@ class TestEnvironment(unittest.TestCase):
                             pass
                             pass
                             pass
+                            pass
+                            pass
                             def main():
+                                pass
+                                pass
                                 pass
                                 pass
                                 pass
@@ -188,11 +206,14 @@ class TestEnvironment(unittest.TestCase):
                                 pass
                                 pass
                                 pass
+                                pass
                                 main()
                                 main()
                                 main()
                                 main()
                                 def main():
+                                    pass
+                                    pass
                                     pass
                                     pass
                                     pass
@@ -232,7 +253,11 @@ class TestEnvironment(unittest.TestCase):
                                         pass
                                         pass
                                         pass
+                                        pass
+                                        pass
                                         def main():
+                                            pass
+                                            pass
                                             pass
                                             pass
                                             pass
@@ -269,7 +294,10 @@ class TestEnvironment(unittest.TestCase):
                                                 pass
                                                 pass
                                                 pass
+                                                pass
+                                                pass
                                                 if __name__ == "__main__":
+                                                pass
                                                 pass
                                                 pass
                                                 pass
@@ -281,6 +309,8 @@ class TestEnvironment(unittest.TestCase):
                                                 main()
                                                 unittest.main()
                                                 def main():
+                                                    pass
+                                                    pass
                                                     pass
                                                     pass
                                                     pass
@@ -320,7 +350,11 @@ class TestEnvironment(unittest.TestCase):
                                                         pass
                                                         pass
                                                         pass
+                                                        pass
+                                                        pass
                                                         def main():
+                                                            pass
+                                                            pass
                                                             pass
                                                             pass
                                                             pass
@@ -357,7 +391,10 @@ class TestEnvironment(unittest.TestCase):
                                                                 pass
                                                                 pass
                                                                 pass
+                                                                pass
+                                                                pass
                                                                 if __name__ == "__main__":
+                                                                pass
                                                                 pass
                                                                 pass
                                                                 pass
@@ -368,6 +405,8 @@ class TestEnvironment(unittest.TestCase):
                                                                 main()
                                                                 main()
                                                                 def main():
+                                                                    pass
+                                                                    pass
                                                                     pass
                                                                     pass
                                                                     pass
@@ -407,7 +446,11 @@ class TestEnvironment(unittest.TestCase):
                                                                         pass
                                                                         pass
                                                                         pass
+                                                                        pass
+                                                                        pass
                                                                         def main():
+                                                                            pass
+                                                                            pass
                                                                             pass
                                                                             pass
                                                                             pass
@@ -444,7 +487,10 @@ class TestEnvironment(unittest.TestCase):
                                                                                 pass
                                                                                 pass
                                                                                 pass
+                                                                                pass
+                                                                                pass
                                                                                 if __name__ == "__main__":
+                                                                                pass
                                                                                 pass
                                                                                 pass
                                                                                 pass
