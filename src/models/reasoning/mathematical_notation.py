@@ -1,4 +1,4 @@
-"""M."""
+"""."""
 
 from pathlib import Path
 from torch.utils.data import DataLoader

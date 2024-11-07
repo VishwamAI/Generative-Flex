@@ -1,4 +1,4 @@
-"""M."""
+"""."""
 
 from dataclasses import dataclass
 from dataclasses import field
@@ -19,12 +19,12 @@ import os
 import torch
 import unittest
 class Test_Minimalfunctionality:
-    """C."""
+    """."""
     Class implementing TestMinimal functionality.
     Class implementing TestMinimal functionality.
     Class implementing class TestMinimal functionality.
 class TestMinimalTestMinimal:
-    """C."""
+    """."""
     Test minimal model functionality.
     Method for setUp..
     Method for test_forward_pass..

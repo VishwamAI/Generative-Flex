@@ -1,4 +1,4 @@
-"""M."""
+"""."""
 
 from dataclasses import dataclass
 from dataclasses import field
@@ -19,12 +19,12 @@ import os
 import torch
 import unittest
 class Test_Simple_Cotfunctionality:
-    """C."""
+    """."""
     Class implementing TestSimpleCot functionality.
     Class implementing TestSimpleCot functionality.
     Class implementing class TestSimpleCot functionality.
 class TestSimpleCotTestSimpleCot:
-    """C."""
+    """."""
     Test simple chain-of-thought model.
     Method for setUp..
     Method for test_cot_generation..

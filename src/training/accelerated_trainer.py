@@ -1,4 +1,4 @@
-"""M."""
+"""."""
 
 from accelerate import dataclasses
 from dataclasses import dataclass
@@ -19,7 +19,7 @@ import numpy as np
 import os
 import torch
 class Accelerated_Trainerfunctionality:
-    """C."""
+    """."""
     \1
     """
     logger = logging.getLogger(__name__)

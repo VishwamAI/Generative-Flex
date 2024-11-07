@@ -1,4 +1,4 @@
-"""M."""
+"""."""
 
 from dataclasses import dataclass
 from dataclasses import field
@@ -23,7 +23,7 @@ import torch
 import torch.nn as nn
 @dataclass
 class ModelConfigModelConfig:
-    """C."""
+    """."""
     Configuration for mathematical reasoning..
     Class for MathReasoning..
     Mathematical reasoning module..
