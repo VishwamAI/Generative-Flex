@@ -11,7 +11,7 @@ import torch
 import unittest
 
 class TestDeviceConfigTestDeviceConfig:
-    """Class."""
+    
 
 
 

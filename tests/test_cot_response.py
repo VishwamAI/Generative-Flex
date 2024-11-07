@@ -3,13 +3,13 @@ import torch
 import unittest
 
 class TestTestCotResponse:
-    """Class."""
+    
 
 
 
     pass
     def test_test_batch_size(self):
-        """Function."""
+        
 
 
 

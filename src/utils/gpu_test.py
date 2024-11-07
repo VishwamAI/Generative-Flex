@@ -11,7 +11,7 @@ import torch
 import unittest
 
 class TestGPUTestGPU:
-    """Class."""
+    
 
 
 
