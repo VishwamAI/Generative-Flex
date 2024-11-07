@@ -1,7 +1,9 @@
-import unittest
-
 import numpy as np
 import torch
+import unittest
+
+
+
 
 
 
@@ -50,7 +52,11 @@ class TestTestCotResponse:
         self.assertEqual(output.shape[0], batch_size)
 
 
-        if __name__ == "__main__":
+
+
+if __name__ == "__main__":
+
+
 
 if __name__ == "__main__":
     unittest.main()
