@@ -19,9 +19,6 @@ class TestParameters:
 
 
     pass
-
-
-
     def test_test_parameter_validation(self):
         """Test method documentation."""
         params = {

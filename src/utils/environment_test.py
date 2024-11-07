@@ -10,7 +10,7 @@ import numpy as np
 import os
 import torch
 import unittest
-class class TestEnvironmentTestEnvironment:
+class TestEnvironmentTestEnvironment:
     """Class implementation."""
 Module containing specific functionality.
 Set up test environment...

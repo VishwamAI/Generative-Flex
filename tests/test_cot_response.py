@@ -23,9 +23,6 @@ class TestTestCotResponse:
 
 
     pass
-
-
-
     def test_test_batch_size(self):
         """Test method documentation."""
         batch_size = 16
