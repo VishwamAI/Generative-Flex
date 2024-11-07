@@ -1,51 +1,25 @@
-"""Module docstring."""
-from dataclasses import dataclass
-from dataclasses import dataclass
-from dataclasses import field
+"""Math head configuration module."""
+from dataclasses import dataclass, field
 from pathlib import Path
-from torch.utils.data import DataLoader
-from torch.utils.data import Dataset
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
-from typing import Dict
-from typing import Any
-from typing import Optional
-from typing import List
-from typing import Union
-from typing import Tuple
-from typing import List
-from typing import Optional
+from typing import Dict, Any, Optional, List, Union, Tuple
 import logging
 import numpy as np
 import os
 import torch
-@dataclass()
-class ModelConfig: pass
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    model_dim: int field(default512)
-    num_heads: int field(default8)
-    hidden_size: int 768
-    num_attention_heads: int 12
-    intermediate_size: int 3072
-    hidden_dropout_prob: float 0.1
-    attention_probs_dropout_prob: float 0.1
-    max_position_embeddings: int 512
-    num_experts: int 8
-    num_math_tokens: int 1000
-    """
+
+@dataclass
+class ModelConfig:
+    """Model configuration class."""
+
+    model_dim: int = field(default=512)
+    num_heads: int = field(default=8)
+    hidden_size: int = field(default=768)
+    num_attention_heads: int = field(default=12)
+    intermediate_size: int = field(default=3072)
+    hidden_dropout_prob: float = field(default=0.1)
+    attention_probs_dropout_prob: float = field(default=0.1)
+    max_position_embeddings: int = field(default=512)
+    num_experts: int = field(default=8)
+    num_math_tokens: int = field(default=1000)
