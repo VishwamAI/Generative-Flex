@@ -19,7 +19,9 @@ import numpy as np
 import os
 import torch
 @dataclass()
-class ModelConfig():
+class ModelConfig:
+    pass
+    pass
     hidden_size: int = 768
     num_attention_heads: int = 12
     intermediate_size: int = 3072
