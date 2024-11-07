@@ -21,6 +21,7 @@ Place tensor on configured device.
 Args:
 pass
 pass
+pass
 tensor: Input tensor
 Returns:
 Tensor on configured device

@@ -1,5 +1,5 @@
 """."""
-Logger for training metrics and events..
+""".""".
 Method for __init__..
 Method for _setup_logger..
 Module for handling specific functionality.
