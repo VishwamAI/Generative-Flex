@@ -1,12 +1,15 @@
-"""Module implementing train_cot_fixed functionality."""
+class Train_Cot_Fixedfunctionality:
 """
     from functionality. import Class implementing
-"""
-"""
-    from functionality. import Class implementing
+
 """
 """
     from functionality. import Class implementing
+
+"""
+"""
+    from functionality. import Class implementing
+
 """
 """
 """

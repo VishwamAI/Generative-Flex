@@ -63,6 +63,57 @@ import torch.nn as nn
 
 
     @dataclass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     class ModelConfig:
 """
     Module for implementing specific functionality.

@@ -1,10 +1,10 @@
-"""Module implementing test_simple functionality."""
-    """
-        Class implementing TestSimple functionality.
-    """
-    """
-    """
-    """
+class Test_Simplefunctionality:
+"""
+Class implementing TestSimple functionality.
+"""
+"""
+"""
+"""
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-        Class implementing TestSimple functionality.
+Class implementing TestSimple functionality.
 
 
 
@@ -28,23 +28,8 @@
 
 
 
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing class TestSimple functionality.
+"""
+"""
 
 
 
@@ -59,7 +44,22 @@
 
 
 
-    """
+Class implementing class TestSimple functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 
 from dataclasses import dataclass, field
 from pathlib import Path

@@ -1,7 +1,7 @@
-"""Module implementing test_models functionality."""
-    """
-    """
-    """
+class Test_Modelsfunctionality:
+"""
+"""
+"""
 
 
 
@@ -44,7 +44,7 @@
 
 
 
-        Class implementing TestModels functionality.
+Class implementing TestModels functionality.
 
 
 
@@ -87,8 +87,8 @@
 
 
 
-    """
-    """
+"""
+"""
 
 
 
@@ -134,7 +134,7 @@
 
 
 
-        Class implementing class TestModels functionality.
+Class implementing class TestModels functionality.
 
 
 
@@ -180,7 +180,7 @@
 
 
 
-    """
+"""
 
 from dataclasses import dataclass, field
 from dataclasses import dataclass, field

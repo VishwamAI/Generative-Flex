@@ -1,10 +1,10 @@
-"""Module implementing test_inference functionality."""
-    """
-        Class implementing TestInference functionality.
-    """
-    """
-    """
-    """
+class Test_Inferencefunctionality:
+"""
+Class implementing TestInference functionality.
+"""
+"""
+"""
+"""
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-        Class implementing TestInference functionality.
+Class implementing TestInference functionality.
 
 
 
@@ -28,23 +28,8 @@
 
 
 
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing class TestInference functionality.
+"""
+"""
 
 
 
@@ -59,7 +44,22 @@
 
 
 
-    """
+Class implementing class TestInference functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 
 from dataclasses import dataclass, field
 from pathlib import Path

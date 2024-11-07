@@ -1,12 +1,15 @@
-"""Module implementing train_accelerated functionality."""
+class Train_Acceleratedfunctionality:
 """
     from functionality. import Class implementing
-"""
-"""
-    from functionality. import Class implementing
+
 """
 """
     from functionality. import Class implementing
+
+"""
+"""
+    from functionality. import Class implementing
+
 """
 """
 """

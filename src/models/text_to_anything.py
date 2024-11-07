@@ -47,6 +47,42 @@ import torch
 
 
     @dataclass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     class ModelConfig:
 """
     Module for implementing specific functionality.

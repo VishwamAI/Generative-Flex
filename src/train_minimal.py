@@ -1,12 +1,15 @@
-"""Module implementing train_minimal functionality."""
+class Train_Minimalfunctionality:
 """
     from functionality. import Class implementing
-"""
-"""
-    from functionality. import Class implementing
+
 """
 """
     from functionality. import Class implementing
+
+"""
+"""
+    from functionality. import Class implementing
+
 """
 """
 """

@@ -1,10 +1,10 @@
-"""Module implementing test_minimal functionality."""
-    """
-        Class implementing TestMinimal functionality.
-    """
-    """
-    """
-    """
+class Test_Minimalfunctionality:
+"""
+Class implementing TestMinimal functionality.
+"""
+"""
+"""
+"""
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-        Class implementing TestMinimal functionality.
+Class implementing TestMinimal functionality.
 
 
 
@@ -28,23 +28,8 @@
 
 
 
-    """
-    """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Class implementing class TestMinimal functionality.
+"""
+"""
 
 
 
@@ -59,7 +44,22 @@
 
 
 
-    """
+Class implementing class TestMinimal functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 
 from dataclasses import dataclass, field
 from pathlib import Path

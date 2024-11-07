@@ -1,12 +1,15 @@
-"""Module implementing train_chatbot functionality."""
+class Train_Chatbotfunctionality:
 """
     from functionality. import Class implementing
-"""
-"""
-    from functionality. import Class implementing
+
 """
 """
     from functionality. import Class implementing
+
+"""
+"""
+    from functionality. import Class implementing
+
 """
 """
 """

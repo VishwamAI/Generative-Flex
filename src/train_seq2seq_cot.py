@@ -1,12 +1,15 @@
-"""Module implementing train_seq2seq_cot functionality."""
+class Train_Seq2Seq_Cotfunctionality:
 """
     from functionality. import Class implementing
-"""
-"""
-    from functionality. import Class implementing
+
 """
 """
     from functionality. import Class implementing
+
+"""
+"""
+    from functionality. import Class implementing
+
 """
 """
 """

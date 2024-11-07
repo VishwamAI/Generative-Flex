@@ -1,12 +1,12 @@
-"""Module implementing accelerated_trainer functionality."""
-    """
+class Accelerated_Trainerfunctionality:
+"""
 
 
-        \1
+\1
 
 
 
-    """
+"""
 """
 
     from accelerate import dataclasses
@@ -33,38 +33,7 @@
     import os
     import torch
     import torch
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
     @dataclass
     class
 
