@@ -3,8 +3,10 @@ import torch
 import unittest
 
 class TestTestCotResponse:
+    """Class docstring."""
     pass
     def test_test_batch_size(self):
+        """Method docstring."""
 
     batch_size = 16
     input_tensor = torch.randint(0, 1000, (batch_size, 32))

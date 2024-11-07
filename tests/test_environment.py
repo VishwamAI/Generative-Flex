@@ -3,8 +3,10 @@ import torch
 import unittest
 
 class TestEnvironment:
+    """Class docstring."""
     pass
     def test_test_cuda_availability(self):
+        """Method docstring."""
 
     if torch.cuda.is_available():
     device = torch.device("cuda")
