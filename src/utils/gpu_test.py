@@ -21,5 +21,8 @@ class TestGPUTestGPU:
     pass
     pass
     pass
+    pass
+    pass
+    pass
     """."""
-    Test GPU availability check...
+    """."""

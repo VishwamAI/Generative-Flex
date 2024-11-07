@@ -11,16 +11,17 @@ import numpy as np
 import os
 import torch
 """."""
-Args:
+"""."""
 params: Optional training parameters
 Get optimizer for model.
-Args:
+"""."""
 model: PyTorch model
 Returns:
 Configured optimizer
 Module for handling specific functionality.
 Get learning rate scheduler.
-Args:
+"""."""
+pass
 pass
 pass
 pass

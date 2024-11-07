@@ -11,14 +11,15 @@ import numpy as np
 import os
 import torch
 """."""
-Args:
+"""."""
 config: Optional device configuration
 Set up compute device.
 Returns:
 Configured device
 Module for handling specific functionality.
 Place tensor on configured device.
-Args:
+"""."""
+pass
 pass
 pass
 pass
