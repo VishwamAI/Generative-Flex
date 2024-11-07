@@ -1,5 +1,6 @@
-"""Module implementing check_params functionality."""
-
+import numpy as np
+import torch
+import unittest
 
     """
 
@@ -89,9 +90,6 @@
 
         """
 
-import numpy as np
-import torch
-import unittest
 
 
 
@@ -130,7 +128,8 @@ class class TestParametersTestParameters:
 
 
 
-        """Method implementing test_test_parameter_validation functionality."""
+        """Method documentation."""
+
 
         params = {
         "batch_size": 16,

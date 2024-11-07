@@ -1,28 +1,3 @@
-"""Module implementing train_mmmu functionality."""
-
-
-    """
-
-
-
-    Class implementing class functionality.
-
-
-
-    """
-    """
-
-
-
-
-    """
-    """
-    Class implementing TrainConfig functionality.
-    """
-    """
-    Class implementing class TrainConfig functionality.
-    """
-
 from dataclasses import dataclass, field
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -49,6 +24,31 @@ import os
 import os
 import torch
 import torch
+
+"""Module documentation."""
+
+    """
+
+
+
+    Class implementing class functionality.
+
+
+
+    """
+    """
+
+
+
+
+    """
+    """
+    Class implementing TrainConfig functionality.
+    """
+    """
+    Class implementing class TrainConfig functionality.
+    """
+
 
 
 

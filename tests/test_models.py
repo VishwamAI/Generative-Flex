@@ -1,5 +1,6 @@
-"""Module implementing test_models functionality."""
-
+import numpy as np
+import torch
+import unittest
 
     """
 
@@ -73,9 +74,6 @@
 
     """
 
-import numpy as np
-import torch
-import unittest
 
 
 

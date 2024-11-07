@@ -1,11 +1,3 @@
-"""Module implementing simple_test functionality."""
-
-
-    """
-    \1
-    """
-    """
-
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel
@@ -19,6 +11,12 @@ import torch
 import torch
 import torch.nn as nn
 import unittest
+
+    """
+    \1
+    """
+    """
+
 
 
 
@@ -137,22 +135,3 @@ class class TestSimpleModelTestSimpleModel:
 
 
     Class implementing class TestSimpleModel functionality.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

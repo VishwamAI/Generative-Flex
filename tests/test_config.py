@@ -1,5 +1,6 @@
-"""Module implementing test_config functionality."""
-
+import numpy as np
+import torch
+import unittest
 
     """
 
@@ -105,9 +106,6 @@
 
         """
 
-import numpy as np
-import torch
-import unittest
 
 
 
@@ -154,7 +152,8 @@ class class TestTestConfigTestTestConfig:
 
 
 
-        """Method implementing test_test_math_config functionality."""
+        """Method documentation."""
+
 
         config = MathConfig()
         config.model_type = "math_reasoning"

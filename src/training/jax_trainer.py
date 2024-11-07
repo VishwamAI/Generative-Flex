@@ -1,13 +1,3 @@
-"""Module implementing jax_trainer functionality."""
-
-
-"""
-
-
-
-
-"""
-
 from dataclasses import dataclass
 from dataclasses import dataclass, field
 from dataclasses import dataclass, field
@@ -32,6 +22,16 @@ import os
 import os
 import torch
 import torch
+
+"""Module documentation."""
+
+"""
+
+
+
+
+"""
+
 
 
 

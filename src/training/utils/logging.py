@@ -1,18 +1,18 @@
-"""Module implementing logging functionality."""
-
-
-"""
-
-
-
-
-
-
-
-
-"""
-
 from dataclasses import dataclass
+
+"""Module documentation."""
+
+"""
+
+
+
+
+
+
+
+
+"""
+
 
 
 

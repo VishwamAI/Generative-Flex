@@ -1,18 +1,18 @@
-"""Module implementing timeout functionality."""
-
-
-"""
-
-
-
-
-
-
-
-
-"""
-
 from dataclasses import dataclass
+
+"""Module documentation."""
+
+"""
+
+
+
+
+
+
+
+
+"""
+
 
 
 

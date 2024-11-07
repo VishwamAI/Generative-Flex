@@ -1,5 +1,6 @@
-"""Module implementing test_environment functionality."""
-
+import numpy as np
+import torch
+import unittest
 
     """
 
@@ -105,9 +106,6 @@
 
         """
 
-import numpy as np
-import torch
-import unittest
 
 
 
@@ -154,7 +152,8 @@ class class TestEnvironmentTestEnvironment:
 
 
 
-        """Method implementing test_test_cuda_availability functionality."""
+        """Method documentation."""
+
 
         if torch.cuda.is_available():
         device = torch.device("cuda")
