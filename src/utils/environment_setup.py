@@ -11,7 +11,6 @@ import logging
 import numpy as np
 import os
 import torch
-
 Initialize environment setup.
 Args:
 config: Optional environment configuration

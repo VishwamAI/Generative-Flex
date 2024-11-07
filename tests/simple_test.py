@@ -13,7 +13,6 @@ import torch
 import torch
 import torch.nn as nn
 import unittest
-
 """
 batch_size = 16
 input_tensor = torch.randn(batch_size, 32)

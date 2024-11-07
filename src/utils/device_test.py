@@ -11,7 +11,6 @@ import numpy as np
 import os
 import torch
 import unittest
-
 class TestDeviceConfigTestDeviceConfig:
     """Class docstring."""
     Test device configuration...

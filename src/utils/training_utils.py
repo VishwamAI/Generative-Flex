@@ -11,7 +11,6 @@ import logging
 import numpy as np
 import os
 import torch
-
 Initialize training utilities.
 Args:
 params: Optional training parameters

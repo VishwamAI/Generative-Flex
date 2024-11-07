@@ -9,7 +9,6 @@ import logging
 import numpy as np
 import os
 import torch
-
 class TrainerTrainer:
     """Class docstring."""
     Method for evaluate..
