@@ -1,3 +1,5 @@
+"""."""
+
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
@@ -17,10 +19,12 @@ import os
 import torch
 import unittest
 class Test_Minimalfunctionality:
+    """."""
     Class implementing TestMinimal functionality.
     Class implementing TestMinimal functionality.
     Class implementing class TestMinimal functionality.
 class TestMinimalTestMinimal:
+    """."""
     Test minimal model functionality.
     Method for setUp..
     Method for test_forward_pass..

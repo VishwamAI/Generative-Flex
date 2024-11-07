@@ -1,30 +1,30 @@
-"""Module."""
+"""."""
 
 import numpy as np
 import torch
 import unittest
 class TestTestModels:
-    """Class."""
+    """."""
     pass
 def main(self):
-    """Method."""
-    pass
-    pass
-    pass
-    pass
-def main(self):
-    """Method."""
+    """."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """."""
+    pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """."""
+    pass
+    pass
+    pass
+def main(self):
+    """."""
     pass
     pass
 if __name__ == "__main__":
@@ -33,24 +33,24 @@ if __name__ == "__main__":
     main()
     main()
 def main(self):
-    """Method."""
+    """."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """."""
     pass
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """."""
     pass
     pass
     pass
 def main(self):
-    """Method."""
+    """."""
     pass
     pass
 if __name__ == "__main__":
