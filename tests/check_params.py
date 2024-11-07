@@ -3,17 +3,8 @@ import torch
 import unittest
 
 class TestParameters:
-    
-
-
-
     pass
     def test_test_parameter_validation(self):
-        
-
-
-
-
     params = {
     "batch_size": 16,
     "learning_rate": 0.001
@@ -23,13 +14,9 @@ class TestParameters:
     "batch_size": 0
     }
     self.assertFalse(self.validator.validate(params))
-
 if __name__ == "__main__":
-
 if __name__ == "__main__":
     unittest.main()
-
 if __name__ == "__main__":
-
 if __name__ == "__main__":
     unittest.main()

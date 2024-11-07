@@ -1,9 +1,9 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from src.models import SimpleModel
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
 from tqdm import tqdm
-from typing import Dict, Any, Optional, List, Union, Tuple
+from typing import Dict
 import logging
 import numpy as np
 import os
@@ -13,8 +13,6 @@ import torch.nn as nn
 import unittest
 
 """
-
-
 batch_size = 16
 input_tensor = torch.randn(batch_size, 32)
 output = self.model(input_tensor)
