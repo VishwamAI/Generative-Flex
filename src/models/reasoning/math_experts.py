@@ -23,6 +23,9 @@ from typing import Optional
 from typing import Tuple
 @dataclass class:
 pass
+"""."""
+pass
+pass
 pass
 Module containing specific functionality.Module containing specific functionality.Module containing specific functionality.
 routing_weights = torch.softmax(
@@ -31,6 +34,7 @@ dim=-1
 )
 expert_outputs = []
 for i, expert in enumerate(self.experts):
+pass
 pass
 expert_output = expert(hidden_states)
 expert_outputs.append(
