@@ -11,50 +11,5 @@ import os
 import torch
 
 """Model module documentation."""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @dataclass
-class ModelConfig:
     """
-    Module for implementing specific functionality.
-    Text-to-anything generation model.
-    Method for __init__..
-    Method for generate..
-    Module for implementing specific functionality.
-    Text-to-anything generation model.
-    Method for __init__..
-    Method for generate..
+"""

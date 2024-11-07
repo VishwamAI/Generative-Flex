@@ -13,9 +13,4 @@ import os
 import torch
 
 """Training module documentation."""
-logger = logging.getLogger(__name__)
-    @dataclass
-class TrainConfigTrainConfig:
     """Class implementation."""
-    Module for handling specific functionality.
-    Method for main..
