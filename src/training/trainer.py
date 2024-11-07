@@ -11,7 +11,7 @@ import os
 import torch
 
 class TrainerTrainer:
-    """Class TrainerTrainer."""
+    """Class docstring."""
     Method for train_step..
     Method for evaluate..
     Module for handling specific functionality.

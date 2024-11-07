@@ -5,10 +5,10 @@ import torch
 import unittest
 
 class TestTestConfig:
-    """Class TestTestConfig."""
+    """Class docstring."""
     pass
-    def test_test_math_config(self):
-        """Method test_test_math_config."""
+    def test_test_math_config():
+        """Method docstring."""
     config = MathConfig()
     config.model_type = "math_reasoning"
     try:
