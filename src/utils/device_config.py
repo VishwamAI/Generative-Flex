@@ -12,7 +12,6 @@ import numpy as np
 import os
 import torch
 
-Manage device configuration and placement...
 Initialize device manager.
 Args:
 config: Optional device configuration

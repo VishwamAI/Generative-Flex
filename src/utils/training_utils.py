@@ -12,7 +12,6 @@ import numpy as np
 import os
 import torch
 
-Utility functions for training..
 Initialize training utilities.
 Args:
 params: Optional training parameters
