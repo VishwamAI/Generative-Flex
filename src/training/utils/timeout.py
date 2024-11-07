@@ -1,8 +1,21 @@
-from dataclasses import dataclass
+"""
+Module implementing timeout functionality.
+"""
 
 """
-    Class implementing class functionality.
+
+
+
+
+
+
+
+
 """
+
+from dataclasses import dataclass
+
+
 Module containing training-related implementations.
 Exception raised when timeout occurs..
 Handler for training timeouts..
@@ -11,13 +24,3 @@ Module for handling specific functionality.
 Method for __enter__..
 Method for handler..
 Method for __exit__..
-"""
-
-
-
-
-
-
-
-
-"""

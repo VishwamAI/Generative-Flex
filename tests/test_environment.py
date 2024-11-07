@@ -1,7 +1,34 @@
-import unittest
+"""
+Module implementing test_environment functionality.
+"""
+
+    """
+
+
+    Set up test fixtures.
+
+
+    """
+    """
+    Test test test cuda availability.
+    """
+    """
+
+
+
+
+    Test test cuda availability.
+
+
+
+
+    """
 
 import numpy as np
 import torch
+import unittest
+
+
 
 
 
@@ -14,42 +41,67 @@ import torch
 
 
 class TestEnvironment:
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
-    Test suite for module functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Class implementing TestEnvironment functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
 
-
-
-    """
-
-
-    Set up test fixtures.
-
-
-    """
     pass
 
 
 
     def test_test_cuda_availability(self):
-    """
-    Test test test cuda availability.
-    """
 
 
 
-
-    """
-
+        """
 
 
 
-    Test test cuda availability.
+        Method implementing test_test_cuda_availability functionality.
 
 
 
+        """
 
-    """
         if torch.cuda.is_available():
         device = torch.device("cuda")
         else:

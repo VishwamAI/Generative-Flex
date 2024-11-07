@@ -1,76 +1,79 @@
-from dataclasses import dataclass, field
-
-from pathlib import Path
-
-from torch.utils.data import DataLoader, Dataset
-
-from tqdm import tqdm
-
-from typing import Dict, Any, Optional, List, Union, Tuple
-
-import logging
-import numpy as np
-import os
-import torch
-
-
-
-
-
-from dataclasses import dataclass, field
-
-from pathlib import Path
-
-from torch.utils.data import DataLoader, Dataset
-
-from tqdm import tqdm
-
-from typing import Dict, Any, Optional, List, Union, Tuple
-
-import logging
-import numpy as np
-import os
-import torch
-
-
-
-
-
-from pathlib import Path
-
-from torch.utils.data import DataLoader
-
-from tqdm import tqdm
-
-import logging
-import os
-
-
-
-
+"""
+Module implementing train_simple_cot functionality.
+"""
 
 """
-    Module containing specific functionality.
+from functionality. import Class implementing
 """
-from typing import Dict, Optional
-import torch.nn as nn
+"""
+from functionality. import Class implementing
+"""
+"""
+from functionality. import Class implementing
+"""
+"""
+"""
+
 from dataclasses import *
-from src.models import *
 from dataclasses import dataclass
-"""
-from functionality. import Class implementing
-"""
+from dataclasses import dataclass, field
+from dataclasses import dataclass, field
+from pathlib import Path
+from pathlib import Path
+from pathlib import Path
+from src.models import *
+from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from tqdm import tqdm
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+from typing import Dict, Any, Optional, List, Union, Tuple
+from typing import Dict, Optional
 import dataclass
-"""
-from functionality. import Class implementing
-"""
 import dataclass
-"""
-from functionality. import Class implementing
-"""
+import logging
+import logging
+import logging
+import numpy as np
+import numpy as np
+import os
+import os
+import os
+import torch
+import torch
+import torch.nn as nn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Module for implementing specific functionality.
 Configuration for simple chain-of-thought training.
 Module for handling specific functionality.
 Method for main..
-"""
-"""

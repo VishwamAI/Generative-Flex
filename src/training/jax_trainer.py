@@ -1,36 +1,39 @@
+"""
+Module implementing jax_trainer functionality.
+"""
+
+"""
+
+
+
+
+"""
+
+from dataclasses import dataclass
+from dataclasses import dataclass, field
 from dataclasses import dataclass, field
 from pathlib import Path
-from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
-from typing import Dict, Any, Optional, List, Union, Tuple
-import logging
-import os
-import numpy as np
-import torch
-from dataclasses import dataclass, field
 from pathlib import Path
-from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
-from typing import Dict, Any, Optional, List, Union, Tuple
-import logging
-import os
-import numpy as np
-import torch
 from pathlib import Path
 from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
+from tqdm import tqdm
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+from typing import Dict, Any, Optional, List, Union, Tuple
 import logging
+import logging
+import logging
+import numpy as np
+import numpy as np
 import os
-from dataclasses import dataclass
-"""
+import os
+import os
+import torch
+import torch
 
-
-
-    Class implementing class functionality.
-
-
-
-"""
 JAX-based trainer implementation.
 JAX-based model trainer..
 Method for __init__..
@@ -39,9 +42,3 @@ Module for handling specific functionality.
 Method for loss_fn..
 Method for train..
 Method for train..
-"""
-
-
-
-
-"""
