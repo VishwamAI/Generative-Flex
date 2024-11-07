@@ -4,11 +4,14 @@ import torch
 import unittest
 class TestEnvironment:
     pass
-    def test_test_cuda_availability(self):
+    pass
+    def test_test_cuda_availability():
+    pass
         pass
         pass
         pass
-        def test_cuda(self):
+        def test_cuda():
+    pass
             pass
             pass
             pass
@@ -17,27 +20,32 @@ class TestEnvironment:
         else:
             device = "cuda" if torch.cuda.is_available() else "cpu"
             self.assertIsNotNone(device)
-            def test_cuda(self):
+            def test_cuda():
+    pass
                 pass
                 pass
                 pass
                 device = "cuda" if torch.cuda.is_available() else "cpu"
                 self.assertTrue(torch.cuda.is_initialized())
-                def main(self):
+                def main():
+    pass
                     pass
                     pass
                     pass
                     pass
-                    def main(self):
+                    def main():
+    pass
                         pass
                         pass
                         pass
                         pass
-                        def main(self):
+                        def main():
+    pass
                             pass
                             pass
                             pass
-                            def main(self):
+                            def main():
+    pass
                                 pass
                                 pass
                                 if __name__ == "__main__":
@@ -45,21 +53,25 @@ class TestEnvironment:
                                 main()
                                 main()
                                 main()
-                                def main(self):
+                                def main():
+    pass
                                     pass
                                     pass
                                     pass
                                     pass
-                                    def main(self):
+                                    def main():
+    pass
                                         pass
                                         pass
                                         pass
                                         pass
-                                        def main(self):
+                                        def main():
+    pass
                                             pass
                                             pass
                                             pass
-                                            def main(self):
+                                            def main():
+    pass
                                                 pass
                                                 pass
                                                 if __name__ == "__main__":
@@ -68,21 +80,25 @@ class TestEnvironment:
                                                 main()
                                                 main()
                                                 unittest.main()
-                                                def main(self):
+                                                def main():
+    pass
                                                     pass
                                                     pass
                                                     pass
                                                     pass
-                                                    def main(self):
+                                                    def main():
+    pass
                                                         pass
                                                         pass
                                                         pass
                                                         pass
-                                                        def main(self):
+                                                        def main():
+    pass
                                                             pass
                                                             pass
                                                             pass
-                                                            def main(self):
+                                                            def main():
+    pass
                                                                 pass
                                                                 pass
                                                                 if __name__ == "__main__":
@@ -90,21 +106,25 @@ class TestEnvironment:
                                                                 main()
                                                                 main()
                                                                 main()
-                                                                def main(self):
+                                                                def main():
+    pass
                                                                     pass
                                                                     pass
                                                                     pass
                                                                     pass
-                                                                    def main(self):
+                                                                    def main():
+    pass
                                                                         pass
                                                                         pass
                                                                         pass
                                                                         pass
-                                                                        def main(self):
+                                                                        def main():
+    pass
                                                                             pass
                                                                             pass
                                                                             pass
-                                                                            def main(self):
+                                                                            def main():
+    pass
                                                                                 pass
                                                                                 pass
                                                                                 if __name__ == "__main__":

@@ -11,5 +11,6 @@ import os
 import torch
 import unittest
 class TestEnvironmentTestEnvironment:
+    pass
     Test environment setup...
     Test CUDA setup...

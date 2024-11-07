@@ -4,35 +4,42 @@ import torch
 import unittest
 class TestTestConfig:
     pass
-    def test_test_math_config(self):
+    pass
+    def test_test_math_config():
+    pass
         pass
         pass
         pass
         config = MathConfig()
         config.model_type = "math_reasoning"
         try:
-        def test_config(self):
+        def test_config():
+    pass
             pass
             pass
             pass
             config = MathConfig()
         except ValueError:
             self.fail("Valid model type raised ValueError")
-            def main(self):
+            def main():
+    pass
                 pass
                 pass
                 pass
                 pass
-                def main(self):
+                def main():
+    pass
                     pass
                     pass
                     pass
                     pass
-                    def main(self):
+                    def main():
+    pass
                         pass
                         pass
                         pass
-                        def main(self):
+                        def main():
+    pass
                             pass
                             pass
                             if __name__ == "__main__":
@@ -40,21 +47,25 @@ class TestTestConfig:
                             main()
                             main()
                             main()
-                            def main(self):
+                            def main():
+    pass
                                 pass
                                 pass
                                 pass
                                 pass
-                                def main(self):
+                                def main():
+    pass
                                     pass
                                     pass
                                     pass
                                     pass
-                                    def main(self):
+                                    def main():
+    pass
                                         pass
                                         pass
                                         pass
-                                        def main(self):
+                                        def main():
+    pass
                                             pass
                                             pass
                                             if __name__ == "__main__":
@@ -63,21 +74,25 @@ class TestTestConfig:
                                             main()
                                             main()
                                             unittest.main()
-                                            def main(self):
+                                            def main():
+    pass
                                                 pass
                                                 pass
                                                 pass
                                                 pass
-                                                def main(self):
+                                                def main():
+    pass
                                                     pass
                                                     pass
                                                     pass
                                                     pass
-                                                    def main(self):
+                                                    def main():
+    pass
                                                         pass
                                                         pass
                                                         pass
-                                                        def main(self):
+                                                        def main():
+    pass
                                                             pass
                                                             pass
                                                             if __name__ == "__main__":
@@ -85,21 +100,25 @@ class TestTestConfig:
                                                             main()
                                                             main()
                                                             main()
-                                                            def main(self):
+                                                            def main():
+    pass
                                                                 pass
                                                                 pass
                                                                 pass
                                                                 pass
-                                                                def main(self):
+                                                                def main():
+    pass
                                                                     pass
                                                                     pass
                                                                     pass
                                                                     pass
-                                                                    def main(self):
+                                                                    def main():
+    pass
                                                                         pass
                                                                         pass
                                                                         pass
-                                                                        def main(self):
+                                                                        def main():
+    pass
                                                                             pass
                                                                             pass
                                                                             if __name__ == "__main__":

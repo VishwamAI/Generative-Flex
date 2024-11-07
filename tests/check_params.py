@@ -4,7 +4,9 @@ import torch
 import unittest
 class TestParameters:
     pass
-    def test_test_parameter_validation(self):
+    pass
+    def test_test_parameter_validation():
+    pass
         pass
         pass
         pass
@@ -19,21 +21,25 @@ class TestParameters:
         "batch_size": 0,
         }
         self.assertFalse(self.validator.validate(params))
-        def main(self):
+        def main():
+    pass
             pass
             pass
             pass
             pass
-            def main(self):
+            def main():
+    pass
                 pass
                 pass
                 pass
                 pass
-                def main(self):
+                def main():
+    pass
                     pass
                     pass
                     pass
-                    def main(self):
+                    def main():
+    pass
                         pass
                         pass
                         if __name__ == "__main__":
@@ -41,21 +47,25 @@ class TestParameters:
                         main()
                         main()
                         main()
-                        def main(self):
+                        def main():
+    pass
                             pass
                             pass
                             pass
                             pass
-                            def main(self):
+                            def main():
+    pass
                                 pass
                                 pass
                                 pass
                                 pass
-                                def main(self):
+                                def main():
+    pass
                                     pass
                                     pass
                                     pass
-                                    def main(self):
+                                    def main():
+    pass
                                         pass
                                         pass
                                         if __name__ == "__main__":
@@ -64,21 +74,25 @@ class TestParameters:
                                         main()
                                         main()
                                         unittest.main()
-                                        def main(self):
+                                        def main():
+    pass
                                             pass
                                             pass
                                             pass
                                             pass
-                                            def main(self):
+                                            def main():
+    pass
                                                 pass
                                                 pass
                                                 pass
                                                 pass
-                                                def main(self):
+                                                def main():
+    pass
                                                     pass
                                                     pass
                                                     pass
-                                                    def main(self):
+                                                    def main():
+    pass
                                                         pass
                                                         pass
                                                         if __name__ == "__main__":
@@ -86,21 +100,25 @@ class TestParameters:
                                                         main()
                                                         main()
                                                         main()
-                                                        def main(self):
+                                                        def main():
+    pass
                                                             pass
                                                             pass
                                                             pass
                                                             pass
-                                                            def main(self):
+                                                            def main():
+    pass
                                                                 pass
                                                                 pass
                                                                 pass
                                                                 pass
-                                                                def main(self):
+                                                                def main():
+    pass
                                                                     pass
                                                                     pass
                                                                     pass
-                                                                    def main(self):
+                                                                    def main():
+    pass
                                                                         pass
                                                                         pass
                                                                         if __name__ == "__main__":

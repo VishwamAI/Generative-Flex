@@ -11,5 +11,6 @@ import os
 import torch
 import unittest
 class TestDeviceConfigTestDeviceConfig:
+    pass
     Test device configuration...
     Test CUDA availability check...
