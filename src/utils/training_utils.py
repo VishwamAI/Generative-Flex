@@ -12,7 +12,6 @@ import numpy as np
 import os
 import torch
 
-Module containing specific functionality.
 Utility functions for training..
 Initialize training utilities.
 Args:

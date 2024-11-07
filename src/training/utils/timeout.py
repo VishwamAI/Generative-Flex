@@ -1,7 +1,6 @@
 """Module docstring."""
 
 
-Module containing training-related implementations.
     Exception raised when timeout occurs..
     Handler for training timeouts..
     Method for __init__..

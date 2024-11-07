@@ -12,7 +12,6 @@ import numpy as np
 import os
 import torch
 
-Module containing specific functionality.
 Set up training environment...
 Initialize environment setup.
 Args:
