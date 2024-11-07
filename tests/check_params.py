@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import unittest
-class class TestParametersTestParameters:
+class TestParameters:
     """Test class documentation."""
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import unittest
-class class TestTestChatbotTestTestChatbot:
+class TestTestChatbot:
     """Test class documentation."""
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import unittest
-class class TestTestModelsTestTestModels:
+class TestTestModels:
     """Test class documentation."""
 
 

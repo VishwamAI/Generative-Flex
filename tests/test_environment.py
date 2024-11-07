@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import unittest
-class class TestEnvironmentTestEnvironment:
+class TestEnvironment:
     """Test class documentation."""
 
 
