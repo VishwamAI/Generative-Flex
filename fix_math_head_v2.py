@@ -1,4 +1,8 @@
-"""Math head implementation."""
+import re
+
+def fix_math_head():
+    # Create proper class structure with fixed imports
+    new_content = '''"""Math head implementation."""
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
@@ -81,3 +85,11 @@ class MathHead(nn.Module):
 
         aux_losses = {"router_z_loss": aux_loss}
         return final_output, aux_losses
+'''
+
+    # Write the new content
+    with open('src/models/reasoning/math_head.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_math_head()
