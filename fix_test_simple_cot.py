@@ -1,4 +1,8 @@
-"""Test simple chain-of-thought model functionality."""
+import re
+
+def fix_test_simple_cot():
+    # Create proper test class structure
+    new_content = '''"""Test simple chain-of-thought model functionality."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleCoTModel
@@ -30,3 +34,11 @@ class TestSimpleCot(unittest.TestCase):
         input_text = "What is 2 + 2?"
         output = self.model.generate_cot(input_text)
         self.assertIsNotNone(output)
+'''
+
+    # Write the new content
+    with open('src/test_simple_cot.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_test_simple_cot()
