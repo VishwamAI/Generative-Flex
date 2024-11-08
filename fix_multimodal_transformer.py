@@ -1,4 +1,8 @@
-"""Multimodal transformer implementation."""
+import re
+
+def fix_multimodal_transformer():
+    # Create proper class structure with fixed imports
+    new_content = '''"""Multimodal transformer implementation."""
 from pathlib import Path
 import logging
 import torch
@@ -55,3 +59,11 @@ class MultiModalTransformer(nn.Module):
         combined_features = torch.cat([text_features, image_features], dim=-1)
         fused_features = self.fusion_layer(combined_features)
         return fused_features
+'''
+
+    # Write the new content
+    with open('src/models/multimodal/multimodal_transformer.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_multimodal_transformer()
