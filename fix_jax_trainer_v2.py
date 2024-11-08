@@ -1,4 +1,8 @@
-"""JAX-based trainer implementation."""
+import re
+
+def fix_jax_trainer():
+    # Create proper class structure with fixed imports and docstrings
+    new_content = '''"""JAX-based trainer implementation."""
 import os
 from typing import Dict, Any, Optional, List, Union, Tuple
 import jax
@@ -133,3 +137,11 @@ class JaxTrainer:
             "eval_loss": loss,
         }
         return metrics
+'''
+
+    # Write the new content
+    with open('src/training/jax_trainer.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_jax_trainer()
