@@ -1,0 +1,31 @@
+MMMU Mathematical Categories Analysis
+
+==================================================
+
+
+
+Category Distribution:
+------------------------------
+
+Other:
+  Total Problems: 14
+  Percentage: 46.67%
+  Difficulty Distribution:
+    Medium: 7 problems
+    Hard: 4 problems
+    Easy: 3 problems
+
+Calculus:
+  Total Problems: 11
+  Percentage: 36.67%
+  Difficulty Distribution:
+    Easy: 5 problems
+    Medium: 5 problems
+    Hard: 1 problems
+
+Geometry:
+  Total Problems: 5
+  Percentage: 16.67%
+  Difficulty Distribution:
+    Easy: 2 problems
+    Medium: 3 problems

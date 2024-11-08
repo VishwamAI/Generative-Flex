@@ -1,0 +1,31 @@
+{
+  "overall": {},
+  "categories": {
+    "Calculus": {
+      "total_problems": 11,
+      "percentage": 36.666666666666664,
+      "difficulty_distribution": {
+        "Easy": 5,
+        "Medium": 5,
+        "Hard": 1
+      }
+    },
+    "Other": {
+      "total_problems": 14,
+      "percentage": 46.666666666666664,
+      "difficulty_distribution": {
+        "Medium": 7,
+        "Hard": 4,
+        "Easy": 3
+      }
+    },
+    "Geometry": {
+      "total_problems": 5,
+      "percentage": 16.666666666666664,
+      "difficulty_distribution": {
+        "Easy": 2,
+        "Medium": 3
+      }
+    }
+  }
+}

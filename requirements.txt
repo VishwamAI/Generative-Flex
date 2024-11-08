@@ -1,14 +1,29 @@
-jax[cuda]
-flax
-optax
-tensorflow-datasets
-numpy
-tensorboard
-pytest
-black
-isort
-pylint
-wandb  # for experiment tracking
-datasets  # for huggingface datasets
-transformers  # for model architectures reference
-einops  # for tensor operations
+# Core dependencies
+jax[cuda]>=0.4.13
+jaxlib>=0.4.13
+flax>=0.7.0
+optax>=0.1.7
+numpy>=1.24.0
+tensorflow-datasets>=4.9.2
+einops>=0.6.1  # for tensor operations
+torch>=2.1.0  # PyTorch for training
+accelerate>=0.28.0  # updated for compatibility
+Pillow>=10.0.0  # for image processing
+bitsandbytes>=0.39.0  # for 8-bit quantization
+
+# Training and evaluation
+wandb>=0.15.0  # for experiment tracking
+tensorboard>=2.13.0
+datasets>=2.14.0  # for huggingface datasets
+transformers>=4.38.0  # latest version for Gemma support
+sentencepiece>=0.1.99  # for tokenization
+protobuf>=4.25.0  # for model serialization
+torch-lr-finder>=0.2.1  # for learning rate finding
+psutil>=5.9.0  # for system monitoring
+
+# Development dependencies
+pytest>=7.3.1
+pytest-cov>=4.1.0
+black>=23.3.0
+isort>=5.12.0
+pylint>=2.17.4

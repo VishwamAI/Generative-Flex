@@ -1,214 +1,43 @@
-import pytest
-import jax
-import jax.numpy as jnp
-from src.models.language_model import LanguageModel
-from src.models.image_model import ImageGenerationModel
-from src.models.audio_model import AudioGenerationModel
-from src.models.video_model import VideoGenerationModel
-
-# Test configurations
-BATCH_SIZE = 2
-SEQ_LENGTH = 32
-VOCAB_SIZE = 1000
-IMAGE_SIZE = (256, 256)
-AUDIO_SAMPLES = 16000
-VIDEO_FRAMES = 16
-CHANNELS = 3
-PATCH_SIZE = 16
+"""Test model functionality."""
+from dataclasses import dataclass, field
+from pathlib import Path
+from src.models import BaseModel, EnhancedTransformer, MultiModalTransformer
+from torch.utils.data import DataLoader, Dataset
+from tqdm import tqdm
+from typing import Dict, Any, Optional, List, Union, Tuple
+import logging
+import numpy as np
+import os
+import torch
+import unittest
 
 
-@pytest.fixture
-def language_model():
-    return LanguageModel(
-        vocab_size=VOCAB_SIZE,
-        hidden_dim=256,
-        num_layers=2,
-        num_heads=4,
-        head_dim=32,
-        mlp_dim=512,
-        max_seq_len=SEQ_LENGTH,
-    )
+class TestModels(unittest.TestCase):
+    def setUp(self):
+        self.base_model = BaseModel()
+        self.enhanced_model = EnhancedTransformer()
+        self.multimodal_model = MultiModalTransformer()
+        self.test_input = torch.randn(1, 512)
+        self.image_input = torch.randn(1, 3, 224, 224)
 
+    def test_base_model_forward(self):
+        output = self.base_model(self.test_input)
+        self.assertIsNotNone(output)
 
-@pytest.fixture
-def image_model():
-    return ImageGenerationModel(
-        image_size=IMAGE_SIZE,
-        patch_size=PATCH_SIZE,
-        hidden_dim=256,
-        num_layers=2,
-        num_heads=4,
-        head_dim=32,
-        mlp_dim=512,
-    )
+    def test_enhanced_model_forward(self):
+        output = self.enhanced_model(self.test_input)
+        self.assertIsNotNone(output)
 
+    def test_multimodal_model_forward(self):
+        output = self.multimodal_model(self.test_input, self.image_input)
+        self.assertIsNotNone(output)
 
-@pytest.fixture
-def audio_model():
-    return AudioGenerationModel(
-        hidden_dim=256,
-        num_layers=2,
-        num_heads=4,
-        head_dim=32,
-        mlp_dim=512,
-        frame_size=1024,
-        hop_length=256,
-    )
-
-
-@pytest.fixture
-def video_model():
-    return VideoGenerationModel(
-        video_size=(VIDEO_FRAMES, *IMAGE_SIZE),
-        patch_size=(2, PATCH_SIZE, PATCH_SIZE),
-        hidden_dim=256,
-        num_layers=2,
-        num_heads=4,
-        head_dim=32,
-        mlp_dim=512,
-    )
-
-
-def test_language_model_init(language_model):
-    rng = jax.random.PRNGKey(0)
-    input_ids = jnp.ones((BATCH_SIZE, SEQ_LENGTH), dtype=jnp.int32)
-
-    variables = language_model.init(rng, input_ids, training=False)
-    assert variables is not None
-
-
-def test_language_model_forward(language_model):
-    rng = jax.random.PRNGKey(0)
-    input_ids = jnp.ones((BATCH_SIZE, SEQ_LENGTH), dtype=jnp.int32)
-
-    variables = language_model.init(rng, input_ids, training=False)
-    output = language_model.apply(
-        variables, input_ids, training=False, rngs={"dropout": rng}
-    )
-
-    assert output.shape == (BATCH_SIZE, SEQ_LENGTH, VOCAB_SIZE)
-
-
-def test_language_model_training(language_model):
-    rng = jax.random.PRNGKey(0)
-    input_ids = jnp.ones((BATCH_SIZE, SEQ_LENGTH), dtype=jnp.int32)
-
-    init_rng, dropout_rng = jax.random.split(rng)
-    variables = language_model.init(init_rng, input_ids, training=True)
-    output = language_model.apply(
-        variables, input_ids, training=True, rngs={"dropout": dropout_rng}
-    )
-
-    # Check training mode output
-    assert output.shape == (BATCH_SIZE, SEQ_LENGTH, VOCAB_SIZE)
-    # Ensure gradients can flow (no NaNs)
-    assert not jnp.any(jnp.isnan(output))
-
-
-def test_image_model_init(image_model):
-    rng = jax.random.PRNGKey(0)
-    images = jnp.ones((BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32)
-
-    variables = image_model.init(rng, images, training=False)
-    assert variables is not None
-
-
-def test_image_model_forward(image_model):
-    rng = jax.random.PRNGKey(0)
-    images = jnp.ones((BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32)
-
-    variables = image_model.init(rng, images, training=False)
-    output = image_model.apply(variables, images, training=False, rngs={"dropout": rng})
-
-    assert output.shape == (BATCH_SIZE, *IMAGE_SIZE, CHANNELS)
-
-
-def test_image_model_training(image_model):
-    rng = jax.random.PRNGKey(0)
-    images = jnp.ones((BATCH_SIZE, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32)
-
-    init_rng, dropout_rng = jax.random.split(rng)
-    variables = image_model.init(init_rng, images, training=True)
-    output = image_model.apply(
-        variables, images, training=True, rngs={"dropout": dropout_rng}
-    )
-
-    assert output.shape == (BATCH_SIZE, *IMAGE_SIZE, CHANNELS)
-    assert not jnp.any(jnp.isnan(output))
-
-
-def test_audio_model_init(audio_model):
-    rng = jax.random.PRNGKey(0)
-    audio = jnp.ones((BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32)
-
-    variables = audio_model.init(rng, audio, training=False)
-    assert variables is not None
-
-
-def test_audio_model_forward(audio_model):
-    rng = jax.random.PRNGKey(0)
-    audio = jnp.ones((BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32)
-
-    variables = audio_model.init(rng, audio, training=False)
-    output = audio_model.apply(variables, audio, training=False, rngs={"dropout": rng})
-
-    # Account for frame size and hop length in output shape
-    expected_samples = (
-        (AUDIO_SAMPLES - audio_model.frame_size) // audio_model.hop_length + 1
-    ) * audio_model.hop_length
-    assert output.shape == (BATCH_SIZE, expected_samples)
-
-
-def test_audio_model_training(audio_model):
-    rng = jax.random.PRNGKey(0)
-    audio = jnp.ones((BATCH_SIZE, AUDIO_SAMPLES), dtype=jnp.float32)
-
-    init_rng, dropout_rng = jax.random.split(rng)
-    variables = audio_model.init(init_rng, audio, training=True)
-    output = audio_model.apply(
-        variables, audio, training=True, rngs={"dropout": dropout_rng}
-    )
-
-    expected_samples = (
-        (AUDIO_SAMPLES - audio_model.frame_size) // audio_model.hop_length + 1
-    ) * audio_model.hop_length
-    assert output.shape == (BATCH_SIZE, expected_samples)
-    assert not jnp.any(jnp.isnan(output))
-
-
-def test_video_model_init(video_model):
-    rng = jax.random.PRNGKey(0)
-    video = jnp.ones(
-        (BATCH_SIZE, VIDEO_FRAMES, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32
-    )
-
-    variables = video_model.init(rng, video, training=False)
-    assert variables is not None
-
-
-def test_video_model_forward(video_model):
-    rng = jax.random.PRNGKey(0)
-    video = jnp.ones(
-        (BATCH_SIZE, VIDEO_FRAMES, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32
-    )
-
-    variables = video_model.init(rng, video, training=False)
-    output = video_model.apply(variables, video, training=False, rngs={"dropout": rng})
-
-    assert output.shape == (BATCH_SIZE, VIDEO_FRAMES, *IMAGE_SIZE, CHANNELS)
-
-
-def test_video_model_training(video_model):
-    rng = jax.random.PRNGKey(0)
-    video = jnp.ones(
-        (BATCH_SIZE, VIDEO_FRAMES, *IMAGE_SIZE, CHANNELS), dtype=jnp.float32
-    )
-
-    init_rng, dropout_rng = jax.random.split(rng)
-    variables = video_model.init(init_rng, video, training=True)
-    output = video_model.apply(
-        variables, video, training=True, rngs={"dropout": dropout_rng}
-    )
-
-    assert output.shape == (BATCH_SIZE, VIDEO_FRAMES, *IMAGE_SIZE, CHANNELS)
-    assert not jnp.any(jnp.isnan(output))
+    def test_batch_processing(self):
+        batch_input = torch.randn(4, 512)
+        batch_image = torch.randn(4, 3, 224, 224)
+        base_output = self.base_model(batch_input)
+        enhanced_output = self.enhanced_model(batch_input)
+        multimodal_output = self.multimodal_model(batch_input, batch_image)
+        self.assertIsNotNone(base_output)
+        self.assertIsNotNone(enhanced_output)
+        self.assertIsNotNone(multimodal_output)

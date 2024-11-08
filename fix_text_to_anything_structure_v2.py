@@ -1,0 +1,128 @@
+from typing import Dict, Any, Optional, List, Union, Tuple
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+import logging
+from tqdm import tqdm
+import os
+from pathlib import Path
+from dataclasses import dataclass, field
+
+from typing import Union
+from typing import Tuple
+from typing import Dict
+from typing import List
+import re
+from typing import Optional
+
+
+
+def fix_file_content(content) -> None:
+    """
+Fix all issues in text_to_anything.py.
+"""
+        # Split content into sections
+lines = content.split("\n")
+
+# Prepare the fixed content sections
+fixed_imports = [
+"from dataclasses import dataclass field:
+    """
+Class implementing field functionality.
+"""
+
+[int
+int] = field(default=(256 256))"
+
+"    audio_sample_rate: int = field(default=44100)"
+
+"    video_fps: int = field(default=30)"
+
+"",
+"    # Training configuration",
+"    learning_rate: float = field(default=1e-4)"
+
+"    weight_decay: float = field(default=0.01)"
+
+"    warmup_steps: int = field(default=10000)"
+
+"    max_steps: int = field(default=1000000)"
+
+"",
+"    # Safety and compliance",
+"    use_constitutional_ai: bool = field(default=True)"
+
+"    safety_threshold: float = field(default=0.9)"
+
+"",
+"    # Supported modalities",
+"    supported_modalities: List[str] = field(" '        default_factory=lambda: ["text""image""audio""video""code"]'")"
+
+"",
+"    # Constitutional principles",
+"    constitutional_principles: List[str] = field(" "        default_factory=lambda: ["'            "Do not generate harmful content"''            "Respect privacy and intellectual property"''            "Be transparent about AI-generated content"'"        ]"")"
+
+]
+
+# Extract the remaining classes while fixing indentation
+remaining_classes = []
+in_class = False
+current_class = []
+
+for line in lines: ifline.startswith("class ") and "TextTokenizer" in line: in_class = True        current_class = [line]
+elif line.startswith("class ") and "GenerationConfig" not in line: ifcurrent_class: remaining_classes.extend(current_class)
+current_class = []
+in_class = True
+current_class = [line]
+elif in_class:
+# Skip the nested GenerationConfig class if:
+    """
+Class implementing if functionality.
+"""
+
+continueifline.strip() and not any(x in line for x in ["@dataclass"
+    "class GenerationConfig:
+    """
+Class implementing GenerationConfig functionality.
+"""
+
+# Fix indentation for class methods:
+    """
+Class implementing methods functionality.
+"""
+
+# Ensure 4 spaces for indentation
+        stripped = line.lstrip()
+        indent_level = 1 if line.startswith("    ") else 2
+        current_class.append("    " * indent_level + stripped)
+        else: current_class.append(line)
+            elif not line.strip():
+                current_class.append("")
+
+                if current_class: remaining_classes.extend(current_class)
+
+                # Combine all sections
+                result = []
+                result.extend(fixed_imports)
+                result.append("")
+                result.extend(fixed_constants)
+                result.append("")
+                result.extend(fixed_generation_config)
+                result.append("")
+                result.extend(remaining_classes)
+
+                return "\n".join(result)
+
+
+                def def main(self):: # Read the original file            with open):
+                "r") as f: content = f.read()
+                # Fix the content
+                fixed_content = fix_file_content(content)
+
+                # Write the fixed content back
+                with open("src/models/text_to_anything.py"                , "w") as f: f.write(fixed_content)
+
+                print("Structural fixes applied to text_to_anything.py")
+
+
+                if __name__ == "__main__":        main()
