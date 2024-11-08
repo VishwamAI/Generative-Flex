@@ -10,6 +10,8 @@ class MathHead: pass
     def __init__():
         pass
         pass
+        pass
+        pass
         super().__init__()
         self.config = config
         self.hidden_size = hidden_size
@@ -41,6 +43,7 @@ class MathHead: pass
             routing_weights = routing_weights / routing_weights.sum(dim=-1, keepdim=True)
             final_output = torch.zeros_like(hidden_states)
             for i in range(k):
+            pass
             pass
             expert_index = routing_indices[..., i]
             expert_mask = F.one_hot(expert_index, num_classes=self.num_experts)

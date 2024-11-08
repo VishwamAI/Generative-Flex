@@ -14,10 +14,14 @@ class MathExpert(object):
     pass
     """Math expert class."""
     pass
-    hidden_size: int field(default=512)
-    num_experts: int field(default=8)
-    dropout_prob: float field(default=0.1)
+    pass
+    pass
+    hidden_size: int field(default512)
+    num_experts: int field(default8)
+    dropout_prob: float field(default0.1)
     def __post_init__():
+        pass
+        pass
         pass
         pass
         super().__init__()
@@ -31,6 +35,8 @@ class MathExpert(object):
         )
         self.router = nn.Linear(self.hidden_size, self.num_experts)
         def forward():
+            pass
+            pass
             pass
             pass
             hidden_states = self.layer_norm(hidden_states)
