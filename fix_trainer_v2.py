@@ -1,4 +1,8 @@
-"""Base trainer implementation."""
+import re
+
+def fix_trainer():
+    # Create proper class structure with fixed imports and docstrings
+    new_content = '''"""Base trainer implementation."""
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
 import torch.nn as nn
@@ -132,3 +136,11 @@ class Trainer:
         return {
             "eval_loss": total_loss / total_steps,
         }
+'''
+
+    # Write the new content
+    with open('src/training/trainer.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_trainer()
