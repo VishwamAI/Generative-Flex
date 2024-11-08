@@ -1,4 +1,8 @@
-"""Test model functionality."""
+import re
+
+def fix_test_models():
+    # Create proper test class structure
+    new_content = '''"""Test model functionality."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import BaseModel, EnhancedTransformer, MultiModalTransformer
@@ -41,3 +45,11 @@ class TestModels(unittest.TestCase):
         self.assertIsNotNone(base_output)
         self.assertIsNotNone(enhanced_output)
         self.assertIsNotNone(multimodal_output)
+'''
+
+    # Write the new content
+    with open('src/tests/test_models.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_test_models()
