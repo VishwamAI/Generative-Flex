@@ -1,4 +1,8 @@
-"""Test minimal model functionality."""
+import re
+
+def fix_test_minimal():
+    # Create proper test class structure
+    new_content = '''"""Test minimal model functionality."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import MinimalModel
@@ -25,3 +29,11 @@ class TestMinimal(unittest.TestCase):
         batch_input = torch.randn(4, 512)
         output = self.model(batch_input)
         self.assertIsNotNone(output)
+'''
+
+    # Write the new content
+    with open('src/test_minimal.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_test_minimal()
