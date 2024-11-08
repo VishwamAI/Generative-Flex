@@ -1,4 +1,8 @@
-"""Math configuration module."""
+import re
+
+def fix_math_config():
+    # Create proper dataclass structure
+    new_content = '''"""Math configuration module."""
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional, List, Union
 import torch
@@ -35,3 +39,11 @@ class MathConfig:
     max_rule_depth: int = 5
     use_rule_embeddings: bool = True
     rule_embedding_dim: int = 256
+'''
+
+    # Write the new content
+    with open('src/models/reasoning/math_config.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_math_config()
