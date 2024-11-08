@@ -1,4 +1,8 @@
-"""Accelerated trainer implementation."""
+import re
+
+def fix_accelerated_trainer():
+    # Create proper class structure with fixed imports and docstrings
+    new_content = '''"""Accelerated trainer implementation."""
 import os
 from typing import Dict, Any, Optional, List, Union, Tuple
 import torch
@@ -156,3 +160,11 @@ class AcceleratedTrainer:
         return {
             "eval_loss": total_loss / total_steps,
         }
+'''
+
+    # Write the new content
+    with open('src/training/accelerated_trainer.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_accelerated_trainer()
