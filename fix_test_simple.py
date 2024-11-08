@@ -1,4 +1,8 @@
-"""Test simple model functionality."""
+import re
+
+def fix_test_simple():
+    # Create proper test class structure
+    new_content = '''"""Test simple model functionality."""
 from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel
@@ -25,3 +29,11 @@ class TestSimple(unittest.TestCase):
         batch_input = torch.randn(4, 512)
         output = self.model(batch_input)
         self.assertIsNotNone(output)
+'''
+
+    # Write the new content
+    with open('src/test_simple.py', 'w') as f:
+        f.write(new_content)
+
+if __name__ == '__main__':
+    fix_test_simple()
