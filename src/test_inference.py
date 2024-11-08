@@ -1,29 +1,27 @@
-"""."""
-from dataclasses import dataclass
-from dataclasses import field
+"""Test inference functionality."""
+from dataclasses import dataclass, field
 from pathlib import Path
 from src.models import SimpleModel
-from torch.utils.data import DataLoader
-from torch.utils.data import Dataset
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
-from typing import Dict
-from typing import Any
-from typing import Optional
-from typing import List
-from typing import Union
-from typing import Tuple
+from typing import Dict, Any, Optional, List, Union, Tuple
 import logging
 import numpy as np
 import os
 import torch
 import unittest
-class Test_Inferencefunctionality():
-    Class implementing TestInference functionality.
-    Class implementing TestInference functionality.
-    Class implementing class TestInference functionality.
-    class TestInferenceTestInference():
-        Test inference functionality.
-        Method for setUp..
-        Method for test_inference..
-        Module for handling specific functionality.
-        Method for test_batch_inference..
+
+
+class TestInference(unittest.TestCase):
+    def setUp(self):
+        self.model = SimpleModel()
+        self.test_input = torch.randn(1, 512)
+
+    def test_inference(self):
+        output = self.model(self.test_input)
+        self.assertIsNotNone(output)
+
+    def test_batch_inference(self):
+        batch_input = torch.randn(4, 512)
+        output = self.model(batch_input)
+        self.assertIsNotNone(output)
